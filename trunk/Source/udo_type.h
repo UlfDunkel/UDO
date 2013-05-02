@@ -48,6 +48,8 @@
 *                - SHOW_VARAIABLE -> SHOW_VAR
 *    fd  Feb 19: LANG adjusted
 *    fd  May 19: new: LANG.degree
+*  2013:
+*    fd  May 02: LANG string arrays enlarged to 64 chars each (tribute to UTF)
 *
 ******************************************|************************************/
 
@@ -103,42 +105,42 @@ typedef struct _passflags                 /* several flags for pass1() and pass2
 
 typedef struct _lang                      /* language strings */
 {
-   char   preface[32];                    /* Vorwort */
-   char   chapter[32];                    /* Kapitel */
-   char   title[32];                      /* Titel */
-   char   appendix[32];                   /* Anhang */
-   char   contents[32];                   /* Inhaltsverzeichnis */
-   char   listfigure[32];                 /* Abbildungsverzeichnis */
-   char   listtable[32];                  /* Tabellenverzeichnis */
-   char   figure[32];                     /* Abbildung */
-   char   table[32];                      /* Tabelle */
-   char   index[32];                      /* Index */
-   char   page[32];                       /* Seite */
-   char   see[32];                        /* siehe */
-   char   also[32];                       /* siehe auch */
-   char   by[32];                         /* von */
-   char   fur[32];                        /* fuer  ("for" cannot be used -> C keyword) */
-   char   up[32];                         /* Hoch (WinHelp) */
-   char   exit[32];                       /* Beenden (WinHelp) */
-   char   unknown[32];                    /* Unbekannt, Unknown etc. */
+   char   preface[64];                    /* Vorwort */
+   char   chapter[64];                    /* Kapitel */
+   char   title[64];                      /* Titel */
+   char   appendix[64];                   /* Anhang */
+   char   contents[64];                   /* Inhaltsverzeichnis */
+   char   listfigure[64];                 /* Abbildungsverzeichnis */
+   char   listtable[64];                  /* Tabellenverzeichnis */
+   char   figure[64];                     /* Abbildung */
+   char   table[64];                      /* Tabelle */
+   char   index[64];                      /* Index */
+   char   page[64];                       /* Seite */
+   char   see[64];                        /* siehe */
+   char   also[64];                       /* siehe auch */
+   char   by[64];                         /* von */
+   char   fur[64];                        /* fuer  ("for" cannot be used -> C keyword) */
+   char   up[64];                         /* Hoch (WinHelp) */
+   char   exit[64];                       /* Beenden (WinHelp) */
+   char   unknown[64];                    /* Unbekannt, Unknown etc. */
    char   update[64];                     /* Last updated on (HTML) */
    char   lcid[64];                       /* LCID fuer WinHelp4 */
-   char   html_home[32];                  /* "Home" */
-   char   html_up[32];                    /* "Hoch" */
-   char   html_prev[32];                  /* "Zurueck" */
-   char   html_next[32];                  /* "Weiter" */
-   char   html_lang[16];                  /* Sprachenkuerzel */
-   char   html_start[32];                 /* "Start" */
-   char   translator[32];                 /* "Translator" */
-   char   distributor[32];                /* "Distributor" */
+   char   html_home[64];                  /* "Home" */
+   char   html_up[64];                    /* "Hoch" */
+   char   html_prev[64];                  /* "Zurueck" */
+   char   html_next[64];                  /* "Weiter" */
+   char   html_lang[64];                  /* Sprachenkuerzel */
+   char   html_start[64];                 /* "Start" */
+   char   translator[64];                 /* "Translator" */
+   char   distributor[64];                /* "Distributor" */
    
    /* --- these are filled in by UDO! --- */
    
-   char   today[32];                      /* 28. Februar 1995 */
-   char   short_today[32];                /* 28.02.1995 */
+   char   today[64];                      /* 28. Februar 1995 */
+   char   short_today[64];                /* 28.02.1995 */
 
    /* --- the following are not used in TITLEDATA so far! --- */
-   char   degree[32];                     /* "degree" */
+   char   degree[64];                     /* "degree" */
    
 }  LANG;
 
