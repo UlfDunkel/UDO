@@ -24,32 +24,42 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  May 25: only show the list here, no additional text
+# 2013:
+#   fd  May 02: !language: more languages added
 #
 ################################################################################
 
 !begin_blist
 !label czech
-!item [czech]   Tschechisch
+!item [czech]        Tschechisch
 !label danish
-!item [danish]  Dänisch
+!item [danish]       Dänisch
 !label dutch
-!item [dutch]   Holländisch
+!item [dutch]        Holländisch
 !label english
-!item [english] Englisch
+!item [english]      Englisch
+!label finnish
+!item [finnish]      Finnisch
 !label french
-!item [french]  Französisch
+!item [french]       Französisch
 !label german
-!item [german]  Deutsch
+!item [german]       Deutsch
 !label italian
-!item [italian] Italienisch
+!item [italian]      Italienisch
+!label japanese
+!item [japanese]     Japanisch
 !label latvian
-!item [latvian] Lettisch
+!item [latvian]      Lettisch
+!label norwegian
+!item [norwegian]    Norwegisch
 !label polish
-!item [polish]  Polnisch
+!item [polish]       Polnisch
+!label portuguese
+!item [portuguese]   Portugesisch
 !label spanish
-!item [spanish] Spanisch
+!item [spanish]      Spanisch
 !label swedish
-!item [swedish] Schwedisch
+!item [swedish]      Schwedisch
 !end_blist
 
 # === EOF ===
