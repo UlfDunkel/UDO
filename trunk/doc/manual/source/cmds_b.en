@@ -27,6 +27,8 @@
 #               - more links to "not_compressed"
 #   fd  May 26: (!url) enhanced for UDO v7.02
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2013:
+#   fd  May 02: !begin_enumerate enhanced (and localized)
 #
 ################################################################################
 
@@ -348,23 +350,14 @@ Start an enumeration.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_enumerate(!t)
+!item [(!SYNTAX)] (!T)!/begin_enumerate(!t) (!TEXT)
 
-(!red)
 !item [(!DESCRIPTION)]
-Leitet eine (weitere) enumerate-Umgebung ein. Diese
-Umgebung muss mit (!KW [end_enumerate]) beendet werden. Die
-(!nolink [enumerate-Umgebung]) können Sie mehrfach verschachtelt
-und auch mit anderen Umgebungen kombiniert benutzen.
-Aufzählungspunkte einer (!nolink [enumerate-Umgebung]) werden mit
-(!KW [item]) eingeleitet und mit alphanumerischen Zeichen
-markiert.
-(!coloff)
-!item [(!DESCRIPTION)]
-Starts a new enumerate environment that has to be finished with
-(!KW [end_enumerate]). You can use the enumerate environment inside
-other (enumerate) environments. The items of an enumerate environment
-will be marked with alphanumerical characters.
+Starts a(nother) enumerate environment. 
+This environment has to be finished with (!KW [end_enumerate]). 
+You can use (!nolink [enumerate environments]) within other environments.
+Items of an (!nolink [enumerate environment]) are introduced with the keyword (!KW [item]) and will be marked by alphanumerical characters.
+Use ""(!TEXT)"" to define another start value than~1.
 
 !item [(!SEEALSO)]
 (!KW [end_enumerate]), 

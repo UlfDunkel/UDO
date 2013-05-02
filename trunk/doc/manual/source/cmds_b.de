@@ -29,6 +29,8 @@
 #   fd  May 26: table adjustments
 #   fd  May 26: (!url) enhanced for UDO v7.02
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2013:
+#   fd  May 02: !begin_enumerate enhanced
 #
 ################################################################################
 
@@ -345,15 +347,14 @@ Neue Nummerierung einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_enumerate(!t)
+!item [(!SYNTAX)] (!T)!/begin_enumerate(!t) (!TEXT)
 
 !item [(!DESCRIPTION)]
-Leitet eine (weitere) enumerate-Umgebung ein. Diese
-Umgebung muss mit (!KW [end_enumerate]) beendet werden. Die
-(!nolink [enumerate-Umgebung]) können Sie mehrfach verschachtelt
-und auch mit anderen Umgebungen kombiniert benutzen.
-Aufzählungspunkte einer (!nolink [enumerate-Umgebung]) werden mit
-(!KW [item]) eingeleitet und mit alphanumerischen Zeichen markiert.
+Leitet eine (weitere) enumerate-Umgebung ein. 
+Diese Umgebung muss mit (!KW [end_enumerate]) beendet werden. 
+Die (!nolink [enumerate-Umgebung]) können Sie mehrfach verschachtelt und auch mit anderen Umgebungen kombiniert benutzen.
+Aufzählungspunkte einer (!nolink [enumerate-Umgebung]) werden mit (!KW [item]) eingeleitet und mit alphanumerischen Zeichen markiert.
+Mit ""(!TEXT)"" können Sie optional einen anderen Startwert als~1 angeben.
 
 !item [(!SEEALSO)]
 (!KW [end_enumerate]), 
