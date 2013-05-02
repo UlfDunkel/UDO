@@ -1,0 +1,360 @@
+############################################################
+# @(#) Gliederung, Dirk Hagedorn, 07.09.1995
+############################################################
+
+!subnode Gliederung
+
+In diesem Abschnitt werden Sie erfahren, welche Möglichkeiten Ihnen
+UDO bietet, um Ihren Text zu strukturieren.
+
+#-----------------------------------------------------------
+
+!subsubnode Titelseite
+
+!index !/maketitle
+Durch das Kommando (!I)!/maketitle(!i) erzeugt UDO in der Ausgabedatei eine
+Titelseite und greift bei der Erzeugung dieser Titelseite auf die
+Informationen zurück, die Sie im Vorspann Ihrer Quelldatei mit dem Kommando
+(!I)!/docinfo(!i) angegeben haben:
+
+!begin_ilist [!/docinfo !/programimage] !short
+!item	[!/docinfo !/title:]
+		Der Titel des Textes, z.B. ""Die Anleitung zu"", ""Das
+		Handbuch zu"" oder ""Die Einführung in"".
+!item	[!/docinfo !/program:]
+		Der Name des im Text behandelten Themas. Hier kann man den
+		beispielsweise den Namen des Programms angeben.
+!item	[!/docinfo !/programimage:]
+		Eine Grafik, die anstelle der durch (!I)!/program(!i)
+		gesetzten Information ausgegeben werden soll.
+!item	[!/docinfo !/version:]
+		Versionsinformationen, z.B. ""Version 47.11""
+!item	[!/docinfo !/date:]
+		Das Datum, an dem der Text verfaßt oder das Programm
+		geschrieben wurden.
+!item	[!/docinfo !/author:]
+		Der Name des Autors des vorliegenden Textes.
+!item	[!/docinfo !/authorimage:]
+		Eine Grafik, die zusätzlich oberhalb des Namen des Autors
+		ausgegeben werden soll.
+!item	[!/docinfo !/street:]
+		Die Straße, in der der Autor wohnt. Optional kann man
+		natürlich irgendetwas anderes angeben, was dann unterhalb des
+		Namens des Autors ausgegeben wird.
+!item	[!/docinfo !/town:]
+		Der Wohnort des Autors. Optional kann man
+		natürlich irgendetwas anderes angeben, was dann unterhalb des
+		Namens des Autors ausgegeben wird.
+!item	[!/docinfo !/country:]
+		Das land des Autors. Optional kann man
+		natürlich auch hier irgendetwas anderes angeben, was dann unterhalb des
+		Namens des Autors ausgegeben wird.
+!item	[!/docinfo !/email:]
+		Die eMail-Adresse(n) des Autors. Dieses Kommando kann bis zu
+		fünfmal benutzt werden, was sich dann anbietet, wenn Sie über
+		mehrere Email-Adressen verfügen.
+!end_ilist
+
+Diese Kommandos müssen nicht alle angegeben werden. Zumindest eine
+Titelseiteninformation sollte jedoch gesetzt werden, falls man das
+Kommando (!I)!/maketitle(!i) verwendet.
+
+(!I)!/maketitle(!i) sollte nur direkt hinter (!I)!/begin_document(!i)
+eingesetzt werden. UDO erlaubt zwar auch die Erzeugung der Titelseite an
+späterer Stelle, allerdings ist dies weder sinnvoll noch unproblematisch.
+
+Die Titelseite wird innerhalb des ST-Guide und WinHelp
+als eigene Seite angelegt. Von dieser aus läßt sich dann zum
+Inhaltsverzeichnis verzweigen. Dies ist besonders eine große Hilfe für
+Benutzer mit kleinen Monitoren, die sonst vor lauter Informationen das
+Inhaltsverzeichnis nicht wiederfinden würden.
+
+Bei (!TeX) hingegen wird aus den angegebenen Informationen eine eigene
+Titelseite mittels der titlepage-Umgebung erstellt.
+
+Um beim ST-Guide eine eigene Titelseite zu erstellen (sei es, falls einem
+die von UDO erzeugte Titelseite nicht gefällt), so muß man etwas tiefer in
+die Trickkiste greifen. Die UDO-Distribution enthält einen
+Beispiel-Quelltext, der zeigt, wie man eigene Titelseiten erstellen
+kann.
+
+
+#-----------------------------------------------------------
+!subsubnode Inhaltsverzeichnisse
+
+!index !/tableofcontents
+Durch das Kommando (!I)!/tableofcontents(!i) erzeugt UDO in der
+Ausgabedatei ein Inhaltsverzeichnis. In das Inhaltsverzeichnis gelangen alle
+Überschriften der Kapitel, Abschnitte und Unterabschnitte.
+
+(!I)!/tableofcontents(!i) sollte direkt nach (!I)!/maketitle(!i) bzw.
+direkt nach (!I)!/begin_document(!i) eingesetzt werden. UDO erlaubt
+zwar auch die Verwendung an anderer Stelle im Quelltext, jedoch ist
+dies nicht unproblematisch.
+
+!index !/no_toc_subnodes
+!index !/no_toc_subsubnodes
+!index !/no_toc_subsubsubnodes
+Der Umfang dieses Inhaltsverzeichnisses läßt sich durch die Schalter
+(!I)!/no_toc_subnodes(!i), (!I)!/no_toc_subsubnodes(!i) und
+(!I)!/no_toc_subsubsubnodes(!i) beeinflussen. Wird einer dieser
+Schalter im Vorspann mit dem jeweiligen Kürzel des betroffenen
+Ausgabeformats angegeben, so sorgt UDO dafür, daß ein entsprechend
+eingeschränktes Inhaltsverzeichnis ausgegeben wird.
+
+!index !/subtoc
+!index !/subsubtoc
+!index !/subsubsubtoc
+Neben (!I)!/tableofcontents(!i) gibt es die Befehle (!I)!/subtoc(!i),
+(!I)!/subsubtoc(!i) und (!I)!/subsubsubtoc(!i), mit denen Sie alle
+einem Kapitel zugehörigen Abschnitte bzw. alle einem Abschnitt
+zugehörigen Unterabschnitte etc. in der Form eines kleinen
+Inhaltsverzeichnisses angeben können. Sinn und Zweck dieser
+sogenannten ""Unterinhaltsverzeichnisse"" ist es, dem Leser eines
+Hypertextformates(!N)ST-Guide, Pure-C-Help, HTML, WinHelp(!n) das
+direkte Weiterlesen zu ermöglichen. Besonders beim Einsatz von
+(!I)!/no_toc_subnodes(!i) oder der verwandten Schalter empfiehlt sich
+der Gebrauch dieser Inhaltsverzeichnisse.
+
+!index !/use_auto_subtocs
+!index !/use_auto_subsubtocs
+!index !/use_auto_subsubsubtocs
+Die Ausgabe dieser Unterinhaltsverzeichnisse kann man auch
+automatisieren, indem man im Vorspann die Schalter
+(!I)!/use_auto_subtocs(!i), (!I)!/use_auto_subsubsubtocs(!i) und
+(!I)!/use_auto_subsubtocs(!i)
+verwendet. Dann werden von UDO bei jedem Kapitel und Abschnitt
+automatisch Unterinhaltsverzeichnisse angelegt, in denen man den
+Inhalt eines Kapitels oder Abschnitts erkennen kann.
+
+!index !/ignore_subtoc
+!index !/ignore_subsubtoc
+!index !/ignore_subsubsubtoc
+Jedoch kann es sein, daß Sie gerne im ganzen Text genau diese
+Unterinhaltsverzeichnisse erzeugt haben möchten, bei einigen Kapiteln
+jedoch lieber darauf verzichten würden. Für diesen Zweck gibt es die
+Befehle (!I)!/ignore_subtoc(!i), (!I)!/ignore_subsubtoc(!i)
+und (!I)!/ignore_subsubsubtoc(!i). Taucht
+in einem Kapitel (!I)!/ignore_subtoc(!i) auf, wird in diesem Kapitel
+kein Unterinhaltsverzeichnis ausgegeben. Analog gilt dies für
+Abschnitte und (!I)!/ignore_subsubtoc(!i).
+
+
+!subsubheading Zusammenfassung der Befehle und Schalter
+
+!begin_ilist [!/use_auto_subsubsubtocs] !short
+!item	[!/tableofcontents:]
+		Ausgabe des Inhaltsverzeichnisses auf einer eigenen Seite
+!item	[!/toc:]
+		Ausgabe des Inhaltsverzeichnisse im Text
+!item	[!/subtoc:]
+		Ausgabe aller Abschnitte eines Kapitels
+!item	[!/subsubtoc:]
+		Ausgabe aller Unterabschnitte eines Abschnitts
+!item	[!/subsubsubtoc:]
+		Ausgabe aller Paragraphen eines Unterabschnitts
+!item	[!/no_toc_subnodes:]
+		Im Inhaltsverzeichnis nur die Kapitel auflisten.
+!item	[!/no_toc_subsubnodes:]
+		Im Inhaltsverzeichnis nur die Kapitel und Abschnitte auflisten.
+!item	[!/no_toc_subsubsubnodes:]
+		Im Inhaltsverzeichnis nur die Kapitel, Abschnitte und
+		Unterabschnitte auflisten.
+!item	[!/use_auto_subtocs:]
+		Bei jedem Kapitel automatisch alle zugehörigen Abschnitte
+		auflisten
+!item	[!/use_auto_subsubtocs:]
+		Bei jedem Abschnitt automatisch alle zugehörigen
+		Unterabschnitte auflisten
+!item	[!/use_auto_subsubsubtocs:]
+		Bei jedem Unterabschnitt alle zugehörigen Paragraphen
+		auflisten
+!item	[!/ignore_subtoc:]
+		Im aktuellen Kapitel nicht die zugehörigen Abschnitte
+		auflisten
+!item	[!/ignore_subsubtoc:]
+		Im aktuellen Abschnitt nicht die zugehörigen Unterabschnitte
+		auflisten
+!item	[!/ignore_subsubsubtoc:]
+		Im aktuellen Unterabschnitt nicht die zugehörigen Paragraphen
+		auflisten
+!end_ilist
+
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Bei der Ausgabe in HTML erfolgt die Ausgabe der
+Titelseite und des Inhaltsverzeichnisses in die Datei, deren Name Sie
+UDO in der Kommandozeile übergeben.
+
+!item Bei der Ausgabe ins Rich Text Format wird kein Inhaltsverzeichnis
+ausgegeben! Dieses sollten Sie durch entsprechende Funktionen Ihrer
+bevorzugten Textverarbeitung, mit der Sie das RTF-File weiterbearbeiten,
+erzeugen.
+
+!end_enumerate
+
+#-----------------------------------------------------------
+
+!subsubnode Gliederungsebenen
+
+UDO bietet 4 Gliederungsebenen an, die im Folgenden als Kapitel,
+Abschnitte, Unterabschnitte und Paragraphen bezeichnet werden.
+
+!index !/node
+!index !/subnode
+!index !/subsubnode
+!index !/subsubsubnode
+
+Durch das Kommando (!I)!/node(!i) setzen Sie den Anfang für ein neues
+Kapitel und übergeben zugleich die Kapitelüberschrift. Genauso funktionieren
+die Kommandos
+(!I)!/subnode(!i) für einen Abschnitt
+(!I)!/subsubnode(!i) für einen Unterabschnitt und
+(!I)!/subsubsubnode(!i) für einen Paragraph.
+
+Da Bilder oft mehr sagen als tausend Worte, hier eine kleines Beispiel. Die
+(hier inhaltsleere) Befehlsfolge!..
+
+!begin_quote
+!begin_verbatim
+!node          Ein Kapitel
+!subnode       Ein Abschnitt
+!subsubnode    Ein Unterabschnitt
+!subsubsubnode Ein Paragraph
+!node          Ein neues Kapitel
+!end_verbatim
+!end_quote
+
+!..stellt UDO im Inhaltsverzeichnis folgendermaßen dar:
+
+!begin_quote
+!begin_verbatim
+1  Ein Kapitel
+   1.1  Ein Abschnitt
+        1.1.1  Ein Unterabschnitt
+               1.1.1.1  Ein Paragraph
+
+2  Ein neues Kapitel
+!end_verbatim
+!end_quote
+
+WinHelp und ST-Guide bieten die Möglichkeit, Texte auch in kleinen
+Dialogen, sogenannten Popups darzustellen. Möchten Sie, daß ein
+Kapitel, Abschnitt oder Unterabschnitt in einem Popup dargestellt
+wird, so benutzen Sie hierfür die Befehle
+
+!index !/pnode
+!index !/psubnode
+!index !/psubsubnode
+!index !/psubsubsubnode
+
+!begin_itemize !short
+!item (!I)!/pnode(!i) für Popup-Kapitel,
+!item (!I)!/psubnode(!i) für Popup-Abschnitte, 
+!item (!I)!/psubsubnode(!i) für Popup-Unterabschnitte und
+!item (!I)!/psubsubsubnode(!i) für Popup-Paragraphen
+!end_itemize
+
+
+Sie können auch Kapitel erstellen, die nicht in Inhaltsverzeichnissen
+aufgeführt werden. Dazu benutzen Sie die Befehle
+
+!index !/node*
+!index !/subnode*
+!index !/subsubnode*
+!index !/subsubsubnode*
+!index !/pnode*
+!index !/psubnode*
+!index !/psubsubnode*
+!index !/psubsubsubnode*
+
+!begin_itemize !short
+!item (!I)!/node*(!i) für Kapitel,
+!item (!I)!/subnode*(!i) für Abschnitte,
+!item (!I)!/subsubnode*(!i) für Unterabschnitte,
+!item (!I)!/subsubsubnode*(!i) für Paragraphen
+!item (!I)!/pnode*(!i) für Popup-Kapitel,
+!item (!I)!/psubnode*(!i) für Popup-Abschnitte,
+!item (!I)!/psubsubnode*(!i) für Popup-Unterabschnitte und
+!item (!I)!/psubsubsubnode*(!i) für Popup-Paragraphen.
+!end_itemize
+
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Kapitel, die nicht in Inhaltsverzeichnissen erscheinen, werden
+auch referenziert, werden aber nicht numeriert.
+
+!index !/no_numbers
+
+!item UDO numeriert Kapitel automatisch. Falls man auf die Angabe
+dieser Nummern verzichten möchte, so sollte man den Schalter
+(!I)!/no_numbers(!i) im Vorspann setzen.
+
+!end_enumerate
+
+#-----------------------------------------------------------
+
+!subsubnode Anhang
+
+!index !/begin_appendix
+!index !/end_appendix
+
+UDO kann auch einen(!) Anhang verwalten. Der Anhang steht
+innerhalb einer appendix-Umgebung, will meinen der Anhang wird durch das
+Kommando (!I)!/begin_appendix(!i) begonnen und mit (!I)!/end_appendix(!i)
+beendet.
+
+Kapitel, die im Anhang stehen, werden mit Großbuchstaben
+gekennzeichnet; Abschnitte und Unterabschnitte werden auch hier
+durchnumeriert. Auch hier zur Verdeutlichung ein kleines Beispiel:
+
+!begin_quote
+!begin_verbatim
+!node Ein Kapitel außerhalb des Anhangs
+!begin_appendix
+!node          Ein Kapitel
+!subnode       Ein Abschnitt
+!subsubnode    Ein Unterabschnitt
+!subsubsubnode Ein Paragraph
+!end_appendix
+!end_verbatim
+!end_quote
+
+Im Inhaltsverzeichnis werden Sie dann folgendes lesen können:
+
+!begin_quote
+!begin_verbatim
+5  Ein Kapitel außerhalb des Anhangs
+
+Anhang
+
+A  Ein Kapitel
+   A.1  Ein Abschnitt
+        A.1.1 Ein Unterabschnitt
+              A.1.1.1 Ein Paragraph
+!end_verbatim
+!end_quote
+
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Der Anhang sollte ganz am Ende des Quelltextes stehen, sprich
+(!I)!/end_appendix(!i) sollte das vorletzte Kommando vor
+(!I)!/end_document(!i) sein. Nach dem Ende des Anhangs sollte man
+keine weiteren Kapitel angeben, da die Kapitelnumerierung von UDO dann
+fürchterlich durcheinandergeraten könnte.
+
+!item Aufgrund der Tatsache, daß UDO die Kapitel des Anhangs mit
+Buchstaben numeriert, sollte man im Anhang nicht mehr als 26 Kapitel
+benutzen.
+
+!end_enumerate
+

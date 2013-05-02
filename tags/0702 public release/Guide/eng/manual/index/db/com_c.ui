@@ -1,0 +1,66 @@
+!subsubnode !/chapterimage
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/chapterimage <file>(!t)
+
+!item [Description:]
+	Converting to Windows Help, HTML or ST-Guide the image called         
+	''<file>'' is displayed instead of the chapter title if               
+	(!I)!/use_chapter_images(!i) is used inside the preamble.             
+
+!item [Example:] (!T)!/chapterimage udo(!t)
+
+!item [See:] Images, (!I)!/use_chapter_images(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/code
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble & main part
+
+!item [Syntax:]
+	(!T)!/code <charset>(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+!item [See:] Special characters
+
+!end_xlist
+#------------------------------
+!subsubnode (!/copyright)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	special character(s), preamble & main part
+
+!item [Syntax:]
+	(!T)(!/copyright)(!t)
+
+!item [Description:]
+	This placeholder will be replaced by a special copyright symbol if    
+	the destination format supports them. If it doesn't UDO will replace  
+	this placeholder by ""(!T)(c)(!t)"".                                  
+
+!item [Example:] (!T)(!/copyright)(!t) is converted to (!copyright)
+
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+

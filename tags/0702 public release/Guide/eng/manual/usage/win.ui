@@ -1,0 +1,13 @@
+############################################################
+# @(#) The Windows shell, 29.07.1996
+############################################################
+!subnode UDO Shell for Windows
+
+The UDO shell for Windows (""UDOSH"") makes it easier for you to use UDO
+with Windows.
+
+The shell can call UDO, editors and viewers and you can simple choose which
+destination format you want to use by clicking the mouse.
+
+The shell is distributed with the complete source code for Borland C++ and
+is described in a separate documentation.

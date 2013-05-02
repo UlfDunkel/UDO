@@ -1,0 +1,8 @@
+!begin_document
+!tableofcontents
+!ifset [AllChapters]
+!include chapter1.ui
+!include chapter2.ui
+!endif
+!include chapter3.ui
+!end_document

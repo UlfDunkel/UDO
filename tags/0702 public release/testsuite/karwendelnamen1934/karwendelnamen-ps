@@ -1,0 +1,4 @@
+#!/bin/sh
+export UDOINPUTPATH=/usr/share/udo/udoinput/
+# alt: udo614
+udo614 --ps --verbose --force-long --tree --check -o karwendelnamen1934.ps karwendelnamen1934.txt

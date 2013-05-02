@@ -1,0 +1,13 @@
+############################################################
+# @(#) Anleitung zur CLI-Version, 22.09.1995, Dirk Hagedorn
+############################################################
+!subnode Kommandozeilenversion
+
+Die Kommandozeilenversionen für die verschiedenen 
+Betriebssysteme lassen sich alle identisch bedienen(!N)was kein Wunder 
+ist, da alle mit demselben Sourcecode compiliert wurden(!n).
+
+Die Bedienung der Kommandozeilenversion wird nun im typischen
+Manualpage-Stil beschrieben:
+
+!include usage/cliusage.ui

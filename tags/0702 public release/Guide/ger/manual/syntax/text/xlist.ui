@@ -1,0 +1,193 @@
+!subsubnode Listen
+!alias xlist-Umgebung
+
+Die xlist-Umgebung eignet sich genau wie die description-Umgebung zur
+Erläuterung von Begriffen. Bei dieser Umgebung werden die
+Beschreibungen der Begriffe jedoch alle untereinander aufgeführt. Wie
+weit die Beschreibungen eingerückt wird, hängt von der Länge des bei
+(!I)!/begin_xlist~[<text>](!i) übergebenen Textes ab. Die beiden eckigen
+Klammern werden dabei nicht mitgezählt.
+
+Die Umgebung wird mit (!I)!/begin_xlist~[<text>](!i) eingeleitet und mit
+(!I)!/end_xlist(!i) beendet.
+Ein Aufzählungsbegriff wird wie bei der description-Umgebung durch
+(!I)!/item [<text>](!i) gekennzeichnet.
+
+Die Umgebungen können mehrfach verschachtelt benutzt werden und lassen
+sich auch mit anderen Umgebungen kombinieren.
+
+Aus!..
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+UDO stellt folgende Aufzählungsumgebungen zur Verfügung:
+!begin_xlist [description-Umgebung:]
+!item [itemize-Umgebung:]
+      für Aufzählungen
+!item [enumerate-Umgebung:]
+      für Numerierungen
+!item [description-Umgebung:]
+      für Beschreibungen
+!item [xlist-Umgebung:]
+      für Listen
+      (das ist die Umgebung, die in
+      diesem Abschnitt beschrieben wird)
+!end_xlist
+!end_verbatim
+!end_quote
+
+!.. wird:
+
+UDO stellt folgende Aufzählungsumgebungen zur Verfügung:
+!begin_xlist [description-Umgebung:]
+!item [itemize-Umgebung:]
+      für Aufzählungen
+!item [enumerate-Umgebung:]
+      für Numerierungen
+!item [description-Umgebung:]
+      für Beschreibungen
+!item [xlist-Umgebung:]
+      für Listen
+      (das ist die Umgebung, die in
+      diesem Abschnitt beschrieben wird)
+!end_xlist
+
+!autoref [on]
+
+!smallskip
+
+Der bereits in den vorherigen Kapiteln besprochene Schalter (!I)!/short(!i)
+läßt sich auch bei den Listen einsetzen. Um eine ""komprimierte"" Liste zu
+erzeugen, geben Sie einfach den Schalter am Ende der Zeile an. Auch hier ein
+Beispiel:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!begin_xlist [description:] !short
+!item [itemize:] Aufzählungen
+!item [enumerate:] Numerierungen
+!item [description:] Beschreibungen
+!item [xlist:] Listen
+!end_xlist
+!end_verbatim
+!end_quote
+
+!.. wird so ausgegeben:
+
+!begin_xlist [description:] !short
+!item [itemize:] Aufzählungen
+!item [enumerate:] Numerierungen
+!item [description:] Beschreibungen
+!item [xlist:] Listen
+!end_xlist
+
+!autoref [on]
+
+!smallskip
+
+!label blist-Umgebung
+!label ilist-Umgebung
+!label tlist-Umgebung
+
+Seit Release 6 gibt es drei weitere Umgebungen, die genauso
+funktionieren wie die hier gezeigte xlist-Umgebung. Bei diesen
+Umgebungen werden jedoch die Texte, die sich innerhalb der eckigen
+Klammern befinden, automatisch mit anderen Schriftarten
+ausgegeben.
+
+!begin_enumerate
+!item Bei der blist-Umgebung (bold list) werden die Items fett
+ausgegeben.
+Die blist-Umgebung wird mit (!I)!/begin_blist(!i) eingeleitet und mit
+(!I)!/end_blist(!i) beendet.
+
+!item Bei der ilist-Umgebung (italic list) werden die Items kursiv
+ausgegeben.
+Die ilist-Umgebung wird mit (!I)!/begin_ilist(!i) eingeleitet und mit
+(!I)!/end_ilist(!i) beendet.
+
+!item Bei der tlist-Ugebung (typewritered list) werden die Items
+nichtproportinal ausgegeben.
+Die tlist-Umgebung wird mit (!I)!/begin_tlist(!i) eingeleitet und mit
+(!I)!/end_tlist(!i) beendet.
+
+!end_enumerate
+
+
+!smallskip
+
+Das folgende Beispiel soll demonstrieren, wie das Ergebnis aussieht.
+Zunächst der UDO-Quelltext:
+
+!begin_quote
+!begin_verbatim
+!begin_xlist [typewritered:]
+!item [normal:] Hier steht sinnloser Text.
+!end_xlist
+
+!begin_blist [typewritered:]
+!item [bold:] Hier steht nochmal sinnloser Text.
+!end_blist
+
+!begin_ilist [typewritered:]
+!item [italic:] Hier steht auch sinnloser Text.
+!end_ilist
+
+!begin_tlist [typewritered:]
+!item [typewritered:] Hier steht wieder sinnloser Text.
+!end_tlist
+!end_verbatim
+!end_quote
+
+Das Ergebnis sieht dann so aus:
+
+!begin_xlist [typewritered:]
+!item [normal:] Hier steht sinnloser Text.
+!end_xlist
+
+!begin_blist [typewritered:]
+!item [bold:] Hier steht nochmal sinnloser Text.
+!end_blist
+
+!begin_ilist [typewritered:]
+!item [italic:] Hier steht auch sinnloser Text.
+!end_ilist
+
+!begin_tlist [typewritered:]
+!item [typewritered:] Hier steht wieder sinnloser Text.
+!end_tlist
+
+
+!smallskip
+
+Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
+
+!begin_enumerate
+
+!item Wenn der zu beschreibende Text eine schließende eckige Klammer
+beinhaltet, so muß man dieser Klammer ein Ausrufezeichen
+voranstellen, damit UDO erkennt, daß die folgende eckige Klammer noch
+zum ""linken Teil"" des Punktes zählt.
+
+!index !/use_xlist
+!item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte Unterstützung
+für Listen diesen Typs, daher werden Listen wie
+Beschreibungen behandelt. Benutzt man jedoch den Schalter
+(!I)!/use_xlist(!i) im Vorspann, werden diese Listen wie beim
+ASCII-Format ausgegeben, jedoch dann als vorformatierter Text,
+
+!index !/rtf_charwidth
+!index !/win_charwidth
+!item UDO kennt nicht die Schriftbreiten der benutzten Fonts für
+WinHelp und RTF. Falls die Einrückungen zu groß oder zu klein
+ausfallen, kann man die Tiefe durch die Schalter
+(!I)!/rtf_charwidth(!i) bzw. (!I)!/win_charwidth(!i) korrigieren.
+
+!item Eine ausführliche Erläuterung des Schalters (!I)!/short(!i) finden Sie
+in der Beschreibung zur itemize-Umgebung.
+
+!end_enumerate
+

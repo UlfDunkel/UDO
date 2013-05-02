@@ -1,0 +1,56 @@
+!subsubnode Left justified text
+!alias flushleft environment
+
+Lines that are part of a flushleft environment will be displayed left
+justified without justification.
+
+Er, do you understand that? No? OK, one more try. If you use the switch
+(!I)!/use_justified(!i) UDO adjusts the lines by inserting spaces between
+the words so that you have a proper right margin. But UDO won't insert
+spaces between words of a flushleft environment.
+
+You can use the flushleft environment inside other environments. You can also
+use it inside another flushleft environment, even this may be senseless.
+
+If you use other environments inside a flushleft environment they will be
+layouted like in all other cases. Only when the flushleft environment is the
+active one text will be printed without justification.
+
+This short example!..
+
+!begin_quote
+!begin_verbatim
+!begin_flushleft
+A left justified line.
+
+A left justified paragraph
+that will be printed
+without justification. This
+senseless sentence is added
+to demonstrate the missing
+justification.
+
+The Guide to (!nl)
+UDO
+!end_flushleft
+!end_verbatim
+!end_quote
+
+!.. will be printed in this way:
+
+!begin_flushleft
+A left justified line.
+
+A left justified paragraph
+that will be printed
+without justification. This
+senseless sentence is added
+to demonstrate the missing
+justification.
+
+The Guide to (!nl)
+UDO
+!end_flushleft
+
+You see that UDO layouts paragraphs of a flushleft environment, too. To
+insert a manual line break use the (!I)(!/nl)(!i) command.

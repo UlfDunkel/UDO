@@ -1,0 +1,20 @@
+!index Kürzel
+
+!begin_xlist [wwww:] !short
+!item [asc]		ASCII
+!item [aqv]		Apple-QuickView
+!item [htag]	HP-Helptag-SGML
+!item [html]	HTML
+!item [info]	Texinfo
+!item [ldoc]	Linuxdoc-SGML
+!item [lyx]		LyX
+!item [man]		Manualpage
+!item [pch]		Pure-C-Help
+!item [pdf]		PDF
+!item [rtf]		RTF
+!item [stg]		ST-Guide
+!item [tex]		(!LaTeX)
+!item [tvh]		Turbo-Vision-Help
+!item [win]		WinHelp
+!end_xlist
+

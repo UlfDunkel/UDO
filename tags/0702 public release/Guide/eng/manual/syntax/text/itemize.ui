@@ -1,0 +1,155 @@
+!subsubnode Itemizations
+!alias itemize environment
+
+You can use the itemize environment for itemizations where every
+single item is marked with a bullet, star, dash or point. The itemize
+environment is started with (!I)!/begin_itemize(!i) and finished with
+(!I)!/end_itemize(!i). Each item has to be marked with the
+(!I)!/item(!i) command.
+
+You can use the itemize environment inside other environments or inside
+another itemize environment.
+
+This short example shows how to write a simple itemize environment:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!begin_itemize
+!item This is the first item.
+!item This is the second item with a little bit
+      more text to demonstrate how UDO formats
+      an itemization.
+
+      This is the second paragraph of the
+      second item of the itemize environment.
+!item This is the last item.      
+!end_itemize
+!end_verbatim
+!end_quote
+
+!.. will be printed this way:
+
+!begin_itemize
+!item This is the first item.
+!item This is the second item with a little bit
+      more text to demonstrate how UDO formats
+      an itemization.
+
+      This is the second paragraph of the
+      second item of the itemize environment.
+!item This is the last item.      
+!end_itemize
+
+
+And this example, where an itemize environment is used inside another
+one !..
+
+!begin_quote
+!begin_verbatim
+!begin_itemize
+!item This is the first item of the outer
+      itemize environment.
+!item This is the second item of the outer
+      itemize environment.
+      !begin_itemize
+      !item This is the 1st item of the inner one.
+      !item This is the 2nd item of the inner one.
+      !end_itemize
+!item This is the third item of the outer
+      itemize environment.
+!end_itemize
+!end_verbatim
+!end_quote
+
+!.. will be printed this way:
+
+!begin_itemize
+!item This is the first item of the outer
+      itemize environment.
+!item This is the second item of the outer
+      itemize environment.
+      !begin_itemize
+      !item This is the 1st item of the inner one.
+      !item This is the 2nd item of the inner one.
+      !end_itemize
+!item This is the third item of the outer
+      itemize environment.
+!end_itemize
+
+!autoref [on]
+
+!smallskip
+
+!index !/short
+
+UDO separates the text of each item by an empty line. In some cases it's not
+a good idea to separate the items e.g. if an item contains only some text.
+In this case it would be better to suppress the empty lines to get a
+compressed environment.
+
+For printing compressed environment UDO offers you the command named
+(!I)!/short(!i) you can add to the (!I)!/begin_itemize(!i) command. If you
+add (!I)!/short(!i) UDO won't separate the items by inserting empty lines.
+Furthermore in all environments you use inside this itemize environment no
+empty lines will be printed.
+
+The following two examples show how to use the (!I)!/short(!i) command and
+which effects this command has. The first example doesn't, the second one
+uses (!I)!/short(!i):
+
+
+!autoref [off]
+Without (!I)!/short(!i)!..
+!begin_quote
+!begin_verbatim
+!begin_itemize
+!item Item 1
+!item Item 2
+!item Item 3
+!end_itemize
+!end_verbatim
+!end_quote
+!.. will be displayed this way:
+!begin_itemize
+!item Item 1
+!item Item 2
+!item Item 3
+!end_itemize
+
+With (!I)!/short(!i)!..
+!begin_quote
+!begin_verbatim
+!begin_itemize !short
+!item Item 1
+!item Item 2
+!item Item 3
+!end_itemize
+!end_verbatim
+!end_quote
+!.. will be displayed this way:
+!begin_itemize !short
+!item Item 1
+!item Item 2
+!item Item 3
+!end_itemize
+!autoref [on]
+
+If you can't see any difference the destination format doesn't allow it to
+suppress the item separation.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	The items of the first itemize environment will be marked with a
+bullet that is defined on different positions inside the character set of
+each operating system.
+
+!item	If you use the switch (!I)!/no_umlaute(!i) inside the preamble of
+the source file the items of the first itemize environment will be marked
+with an ''o'' instead of a bullet.
+
+!end_enumerate

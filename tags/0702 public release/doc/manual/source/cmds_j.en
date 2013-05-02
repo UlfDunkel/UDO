@@ -1,0 +1,32 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands J
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#
+################################################################################
+
+!begin_node J!..
+!html_name  cmds_j
+
+(no entries)
+
+!end_node
+
+# === EOF ===

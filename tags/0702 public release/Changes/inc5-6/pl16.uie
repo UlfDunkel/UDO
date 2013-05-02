@@ -1,0 +1,278 @@
+!subnode PL16, December 14th 1996
+!html_name r5_pl16
+
+!begin_description
+
+############################################################
+!item [(!ALL):] ~
+
+!begin_itemize
+
+!index !/ifos
+!index !/ifnos
+!item	New query command: (!I)!/ifos(!i), (!I)!/ifnos(!i). With this
+command you can test the current operating systems:
+
+	!begin_xlist [NeXTStep:] !short
+	!item	[TOS:]		(!I)!/ifos [tos](!i)
+	!item	[DOS:]		(!I)!/ifos [dos](!i)
+	!item	[Linux:]	(!I)!/ifos [linux](!i)
+	!item	[SunOS:]	(!I)!/ifos [sunos](!i)
+	!item	[BeOS:]		(!I)!/ifos [beos](!i)
+	!item	[SINIX:]	(!I)!/ifos [sinix](!i)
+	!item	[MacOS:]	(!I)!/ifos [macos](!i)
+	!item	[NeXTStep:]	(!I)!/ifos [nextstep](!i)
+	!item	[HP-UX:]	(!I)!/ifos [hpux](!i)
+	!end_xlist
+
+!item	Spanish
+!item	New: Spanish is available now.
+
+!index !/language
+!item	New switch: (!I)!/language(!i). This switch will replace the
+numerous switches like (!I)!/german(!i) or (!I)!/english(!i) soon. Please
+use only (!I)!/language(!i) from now on:
+
+!begin_table [ll]
+New !! Old
+!/language german !! !/german
+!/language english !! !/english
+!/language french !! !/french
+!/language italian !! !/italian
+!/language swedish !! !/swedisch
+!/language spanish !! !/spanish
+!end_table
+
+!index !/subsubsubheading
+!item	New: (!I)!/subsubsubheading(!i). Use this command like
+(!I)!/heading(!i), (!I)!/subheading(!i) and (!I)!/subsubheading(!i).
+
+!index C source code
+!index Pascal source code
+!index Sourcecode environment
+!index !/no_sourcecode
+!item	New: Formats ""C sourcecode"" and ""Pascal sourcecode"",
+sourcecode environment ((!I)!/begin_sourcecode(!i),
+(!I)!/end_sourcecode(!i)) and switch (!I)!/no_sourcecode~[~](!i) (idea:
+Patrick Jerchel). See below for additional information.
+
+!index !/autoref_items
+!item	New: switch (!I)!/autoref_items~[off|on](!i). Using this switch you
+can tell UDO whether to reference the items of descriptions and lists or not
+(ST-Guide not supported yet) (Martin Osieka).
+
+!index GEM version
+!index Pdomain
+!item	Changed: the GEM version was updated. It calls Pdomain(1) now
+(Wilfried Behne).
+
+!index Special characters !! Macros
+!index Special characters !! Links
+!item	Bug fix: Special characters inside paramters used in macros that
+contain links or indices where converted too often (Uwe Mindrup).
+
+!item	Bug fix: UDO converts special chars after a ""(!)"" now, too (Ulf
+Dunkel).
+
+!item	Bug fix: the error message (!V)please use...(!v) appears now only
+when converting to (!LaTeX).
+
+!item	Bug fix: if you don't use pairs of text style commands in the last
+chapter UDO will print an error message now.
+
+!index (--)quiet
+!item	Bug fix: the command line option (!V)(--)quiet(!v) works correctly
+now even if you don't use the option (!V)(--)no-logfile(!v).
+
+!end_itemize
+
+
+############################################################
+!item [ASCII:] ~
+
+!begin_itemize
+
+!index ASCII !/use_style_book
+!item	If you use the switch (!I)!/use_style_book(!i) UDO will print lines
+around the chapter titles now.
+
+!end_itemize
+
+############################################################
+!item [(!LaTeX):] ~
+
+!begin_itemize
+
+!index (!LaTeX) 2.09
+!index \verb
+!item	UDO doesn't break lines inside (!V)\verb(!v) when converting to
+(!LaTeX) 2.09.
+
+!end_itemize
+
+############################################################
+!item [Manpage:] ~
+
+!begin_itemize
+
+!index Manpage !! !/tableofcontents
+!item	No table of contents will be printed for manpages.
+
+!end_itemize
+
+############################################################
+!item [RTF:] ~
+
+!begin_itemize
+
+!index RTF !! !/subtoc
+!item	Bug fix: Even if UDO shouldn't do it it printed (sub-)tocs for RTF.
+These are suppressed now (Christian Goﬂlar).
+
+!end_itemize
+
+
+############################################################
+!item [ST-Guide:] ~
+
+!begin_itemize
+
+!index ST-Guide !! Images
+!item	Change: Because ST-Guide Release 15 can centre images on its own UDO
+supports this new feature with using X-offset 0.
+
+!index ST-Guide !! !/authorimage
+!item	Bug fix: the (!I)!/authorimage(!i) wasn't centred on the title page
+(Christian Goﬂlar).
+
+!index ST-Guide !! @
+!item	Bug fix: If you used ""@"" inside an item of an xlist environemt UDO
+calculated the indent wrongly (Martin Osieka).
+
+!index ST-Guide !! !/tableofcontents
+!index ST-Guide !! !/ignore_links
+!item	Bug fix: If a node used (!I)!/ignore_links(!i) the HCP didn't
+insert links in the table of contents. Now UDO generates these links.
+
+!index ST-Guide !! (!/idx!..)
+!item	Bug fix: in pass 1 the placeholder indices where still printed at
+the top of the output file and the index entry wasn't surrounded by quotes.
+
+!end_itemize
+
+############################################################
+!item [Sourcecode:] ~
+
+!index C source code
+!index Pascal source code
+!index Sourcecode environment
+Since patchlevel 16 (idea by Patrick Jerchel) UDO can output two additional
+formats: C and Pascal sourcecode and offers you a new environment, the
+so called sourcecode environment.
+
+What can you do with these formats? Simply said: you can manage the
+source code and its documentation inside a single source file.
+
+Chapter titles and text will be output into remarks/comments. The source
+code has to be written into a sourcecode environment. This environemt will
+be output without conversion (except the conversion of tabs according to
+(!I)!/tabwidth(!i)).
+
+!index -c
+!index -P
+!index (--)pascal
+Use the command line option (!V)-c(!v) to produce a C source code, use
+(!V)-P(!v) or (!V)(--)pascal(!v) for producing Pascal source code.
+
+!index !/verbatimsize
+!index !/no_verbatim_umlaute
+If you convert to another format the sourcecode environment will be handled
+like a verbatim environment that is used inside a quote environment. Thus
+all commands that affect verbatim environments affect sourcecode
+environments (like (!I)!/verbatimsize(!i)), too.
+
+A source file for ""Hello, world!"" can look like this:
+
+!begin_quote
+!begin_verbatim
+!program Hello, world!
+!author A. C. Hacker
+
+!begin_document
+!maketitle
+
+!node Preface
+This program is the one anybody has waited for.
+
+!node External prototypes
+!begin_sourcecode
+#include <stdio.h>
+!end_sourcecode
+
+!node main
+This function contains the sensationell new
+algorithms.
+!begin_sourcecode
+int main ( void )
+{
+	puts("Hello, world!");
+	
+	return 0;
+}
+!end_sourcecode
+
+!end_document
+!end_verbatim
+!end_quote
+
+
+!begin_itemize
+
+!item	If you don't want that source code is printed in other formats than
+C and Pascal use the switch (!I)!/no_sourcecode~[~](!i). Thus you can
+produce a special documentation without source code.
+
+!item	Nearly any UDO command is supported.
+
+!item	Text is output like in ASCII with 70 characters per line but
+indented by four blanks. At the moment each paragraph will be printed inside
+comments. It's for sure that it would be better if UDO will alle text inside
+one comment that is ended if source code is printed.
+
+!item	I think these two formats are only useful for smaller projects
+because UDO only saves one single source file. Nevertheless they are useful
+for libraries.
+
+!end_itemize
+
+############################################################
+!item [Texinfo:] ~
+
+!begin_itemize
+
+!index Texinfo !! !/no_umlaute
+!item	Bug fix: If you used (!I)!/no_umlaute(!i) but (!V)info(!v) wasn't
+used UDO didn't convert the 8-bit characters even this should be done by
+default.
+
+!end_itemize
+
+############################################################
+!item [WinHelp:] ~
+
+!begin_itemize
+
+!index WinHelp !! !/no_headlines
+!item	Change: if you use (!I)!/no_headlines(!i) UDO won't print headlines
+anymore instead of only suppressing the non-scrollin regions (Joachim
+Hurst).
+
+!index WinHelp !! Xlist environment
+!item	Bug fix: xlist environments in the third layer were indented wrongly
+when they weren't used inside other xlist environments.
+
+!end_itemize
+
+
+############################################################
+!end_description

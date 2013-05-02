@@ -1,0 +1,57 @@
+!begin_itemize
+
+!index HTML !! Images
+!item	Änderung: Neue, flachere Images im Win95-Look, die zudem die
+Win216-Palette verwenden.
+
+!index !/html_modern_layout
+!item	Änderung: Bei (!I)!/html_modern_layout(!i) wird nun im Header
+HTML 3.2 ausgegeben (Alexander Clauss).
+
+!index HTML !! border=0
+!item	Änderung: Alle Bilder werden nun mit ""(!T)border=0(!t)""
+ausgegeben. Ausnahme: Image-Links im Text.
+
+!index HTML-Frames
+!item	Neu: UDO kann Frames erzeugen. Das Layout entspricht dem durch (!I)!/html_modern_layout(!i)
+		erzeugten Tabellenlayout, allerdings wird das ""kleine"" Inhaltsverzeichnis in einem
+		Frame erzeugt. Wie beim ""modernen"" Layout werden auch hier
+		die sogenannten Chaptericons beachtet.
+		
+		!begin_itemize
+
+		!index !/html_frames_layout
+		!item (!I)!/html_frames_layout(!i): Wird dieses Kommando im
+		Vorspann benutzt, so werden Frames erzeugt.
+
+		!index !/html_frames_column_width
+		!item (!I)!/html_frames_column_width <wert>(!i): Gibt die Breite des
+		linken Frames an.
+
+		!index !/html_frames_column_color
+		!item (!I)!/html_frames_column_color <farbe>(!i): Gibt die
+		Hintergrundfarbe des linken Frames an.
+		!end_itemize
+		
+		UDO benutzt folgende Dateinamen, die man selber nicht benutzen
+		sollte: (!V)00con.htm[l](!v) und (!V)00toc.htm[l](!v).
+		
+		Externe Links werden immer mit (!V)target="_top"(!v) erzeugt.
+		Dies wird man auch in Zukunft nicht ändern können.
+		
+!item	Neu: In den Kopf-/Fußzeilen wird nun auch jeweils ein Bild
+ausgegeben, das auf die Hauptseite verweist.
+
+!index !/html_counter_command
+!item	Neu: Kommando (!I)!/html_counter_command~!..(!i). Es kann in
+jedem Node benutzt werden. Was dem Kommando folgt, wird 1:1 im Footer
+ausgegegen, so daß man den Counter optisch besser plazieren kann als
+früher. Beim ""modernen Layout"" wird der Counter dann also in der
+linken Spalte dargestellt.
+
+!index !/chaptericon
+!item	Bugfix: Bei den sogenannten Chaptericons wurden Backslashes
+nicht in Slashes umgewandelt(Uwe Mindrup, Thomas Much).
+
+!end_itemize
+

@@ -1,0 +1,819 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands T
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node T!..
+!html_name  cmds_t
+
+# = = = = =
+
+!begin_node (!kkkw [T] [t])
+!html_name  cmd_t()
+!label (!kk1 [/T])
+!label (!kk1 [/t])
+
+Text in Schreibmaschinenschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/T)(!TEXT)(!/t)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird in Schreibmaschinenschrift dargestellt, falls möglich. Diese Schriftart wird von fast allen Ausgabeformaten unterstützt.
+
+!item [(!SEEALSO)]
+Schriftarten, (!link [Textgestaltung] [Textgestaltung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""Schreibmaschinenschrift"" wird in 
+(!T)Schreibmaschinenschrift(!t) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""Schreibmaschinenschrift"" wird in 
+(!T)Schreibmaschinenschrift(!t) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [TeX])
+!html_name  cmd_tex()
+
+(!TeX)-Schriftzug ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/TeX)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird bei der Umwandlung ins
+(!LaTeX)-Format in (!code [\TeX{}]), ansonsten in ""TeX"" umgewandelt.
+
+!item [(!SEEALSO)]
+(!KKW [LaTeX]), (!KKW [LaTeXe]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!TeX)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!TeX)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [table_alignment])
+!html_name  cmd_table_alignment
+
+Ausrichtung für Tabellen bestimmen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/table_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+Im Vorspann eingesetzt, bestimmt es die Standard-Ausrichtung von
+(!link [Tabellen] [Tabellen]), die mit (!KW [begin_table]) eingebunden werden. Diese Ausrichtung
+wird genau dann benutzt, wenn eine Tabelle außerhalb einer center-,
+flushleft- oder flushright-Umgebung ausgegeben werden soll. Wird eine
+Tabelle innerhalb einer solchen Umgebung ausgegeben, wird sie genauso
+ausgerichtet wie der Text innerhalb der Umgebung, sprich eine Tabelle wird
+in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
+Sie bei (!KW [table_alignment]) gesetzt haben. Wollen Sie eine Tabelle in einer
+center-Umgebung rechtsbündig ausgeben, müssen Sie in dem Fall noch
+eine flushright-Umgebung um den (!KW [begin_table])-Befehl setzen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!table_alignment left
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [table_caption])
+!html_name  cmd_table_caption
+
+Titel der nächsten Tabelle setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/table_caption (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando wird der Titel der nächsten
+Tabelle gesetzt. Dieses Kommando muss außerhalb der
+table-Umgebung benutzt werden.
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [table_caption*])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!table_caption Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!table_caption Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [table_caption*])
+!html_name  cmd_table_caption_asterisk
+
+Titel der nächsten Tabelle setzen, ohne die Tabellennummer mit auszugeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/table_caption* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Der einzige Unterscheid zum Kommando (!KW [table_caption])
+ist, dass UDO dem Tabellentitel nicht ""Tabelle <nummer>:~"" voranstellt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [table_caption])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!table_caption* Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!table_caption* Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [table_counter])
+!html_name  cmd_table_counter
+
+Tabellenzähler setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/table_counter [(!VALUE)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie die Nummer festlegen,
+die bei der ersten Tabelle ausgegeben werden soll. Würde das Beispiel auch in diesem Handbuch verwendet, würde der Tabellentitel mit ""Tabelle 4711:~"" beginnen.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!table_counter 4711
+
+# Hauptteil
+!table_caption Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!table_caption Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tableofcontents])
+!html_name  cmd_tableofcontents
+
+Inhaltsverzeichnis ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tableofcontents !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando gibt ein komplettes Inhaltsverzeichnis aus, welches
+durch ausgabeformatspezifische Kommandos eingefasst und in Hypertexten
+auf einer eigenen Seite dargestellt wird. Dieses Kommando sollte direkt
+nach (!KW [begin_document]) bzw. nach (!KW [maketitle]) eingesetzt
+werden. Der Umfang des Inhaltsverzeichnis lässt sich durch den Schalter
+(!KW [use_compressed_tocs]) oder durch Angabe des Schalters
+(!KW [depth]) verkleinern.
+Das Beispiel zeigt, wie Sie ein Inhaltsverzeichnis ausgeben,
+das nur die Nodes (1.~Ebene) enthält.
+
+!item [(!SEEALSO)]
+(!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tableofcontents !depth 1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tabwidth])
+!html_name  cmd_tabwidth
+
+Tabulatorbreite für verbatim-Umgebungen setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tabwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Enthalten Zeilen einer verbatim-Umgebung Tabulatoren,
+so wandelt UDO diese entsprechend dem angegebenen
+(!VALUE) in Leerzeichen um. Wollen Sie beispielsweise
+Sourcecodes darstellen, die Sie mit einer
+Tabulatorweite von 4 erstellt haben, sollten Sie
+das folgende Beispiel vor der verbatim-Umgebung bzw.
+vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
+beliebig oft im Quelltext angegeben werden. (!VALUE)
+wird jeweils für die nächste verbatim-Umgebung
+verwendet. Standardmäßig benutzt UDO den Wert (!const [8]).
+Benutzen Sie 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!link [verbatim-Umgebung] [verbatim-Umgebung]), (!KW [vinclude])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!vinclude src_tab.ui
+!end_verbatim
+(!EXAMPLE_AFTER)
+!tabwidth 8
+!vinclude (!EXAMPLES)/src_tab.ui
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!tabwidth 4
+!vinclude src_tab.ui
+!end_verbatim
+(!EXAMPLE_AFTER)
+!tabwidth 4
+!vinclude (!EXAMPLES)/src_tab.ui
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [teal])
+!html_name  cmd_teal
+
+Setzt die Schriftfarbe Blaugrün.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/teal)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Blaugrün.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!teal)Blaugrün(!coloff) erscheint in der Farbe Blaugrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!teal)Blaugrün(!coloff) erscheint in der Farbe Blaugrün.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_209])
+!html_name  cmd_tex_209
+
+(!LaTeX)-2.09-Kommandos benutzen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_209(!t)
+
+!item [(!DESCRIPTION)]
+UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
+(!LaTeX)-2.09-Kommandos.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [tex_2e])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_2e])
+!html_name  cmd_tex_2e
+
+(!LaTeXe)-Kommandos benutzen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_2e(!t)
+
+!item [(!DESCRIPTION)]
+UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
+spezielle (!LaTeXe)-Kommandos, wie einen Vorspann für
+(!LaTeXe) oder (!code [\textbf{!..}]) anstelle von (!code [{\bf~!..}])
+bei der Umwandlung von (!KKW [B]).
+
+!item [(!SEEALSO)]
+(!KW [tex_209])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_dpi])
+!html_name  cmd_tex_dpi
+
+Grafikauflösung setzen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tex_dpi (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Auflösung, mit der Bilder in (!LaTeX)
+ausgegeben werden sollen. Beim Lindner-(!TeX) wird
+dieser Wert herangezogen, um den Header eines GEM-Images zu verändern.
+
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tex_dpi 100
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_emtex])
+!html_name  cmd_tex_emtex
+
+Grafikmakros für em(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_emtex(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, dass bei der Einbindung von Windows-Paintshop-Bildern ein (!TeX)-Makro für em(!TeX) erzeugt
+werden soll.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_lindner])
+!html_name  cmd_tex_lindner
+
+Grafikmakros für Lindner-(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_lindner(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, dass bei der Einbindung von Bildern ein (!TeX)-Makro für das Lindner-(!TeX) erzeugt werden soll.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_miktex])
+!html_name  cmd_tex_miktex
+
+Grafikmakros für MiK-(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_miktex(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, dass bei der Einbindung von Bildern ein (!TeX)-Makro für das MiK-(!TeX) erzeugt werden soll.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_lindner]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_strunk])
+!html_name  cmd_tex_strunk
+
+Grafikmakros für CS(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_strunk(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, dass bei der Einbindung von Bildern ein (!TeX)-Makro für das CS- oder Multi(!TeX) erzeugt werden soll.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_tetex])
+!html_name  cmd_tex_tetex
+
+Grafikmakros für te(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_tetex(!t)
+
+!item [(!DESCRIPTION)]
+Aktiviert Kommandos um EPS-Grafiken mittels usepackage{graphicx} einzubinden.
+
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [tex_verb])
+!html_name  cmd_tex_verb
+
+Verbatim-Zeichen für (!LaTeX) setzen (nur (!TeX))
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tex_verb (!CHAR)(!t)
+
+!item [(!DESCRIPTION)]
+""(!CHAR)"" wird als Klammerungszeichen für den
+(!LaTeX)-Befehl (!code [\verb]) verwendet. Bei der nächsten
+Umwandlung von (!KKW [V]) und (!KKW [v]) wird dann ""(!CHAR)""
+benutzt. Als Standardzeichen benutzt UDO ""(!code[+])"".
+
+!item [(!SEEALSO)]
+(!KKKW [V] [v])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tex_verb
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [tm])
+!html_name  cmd_tm()
+
+Trademark-Symbol ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/tm)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Trademark-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [trademark])"".
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!item [(!SEEALSO)]
+(!KKW [reg]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!tm)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!tm)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [toc])
+!html_name  cmd_toc
+
+Inhaltsverzeichnis ""alleine"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Gibt ein komplettes Inhaltsverzeichnis aus. Im
+Gegensatz zu (!KW [tableofcontents]) wird dabei bei
+Hypertextformaten keine eigene Seite erzeugt. Im
+Beispiel würde das Inhaltsverzeichnis bei der
+Umwandlung ins ST-Guide-Format ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_compressed_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!toc [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [toc_offset])
+!html_name  cmd_toc_offset
+
+Offset für die Kapitelnummerierung setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/toc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+das erste Kapitel mit der Nummer~10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!toc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [today])
+!html_name  cmd_today()
+
+Systemdatum in langer Schreibweise ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/today)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das bei der Umwandlung aktuelle Systemdatum in langer Form ersetzt.
+
+!item [(!SEEALSO)]
+(!KKW [short_today]), (!KW [language]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!today)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!today)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [toplink])
+!html_name  cmd_toplink
+
+Link auf Seitenanfang erzeugen (nur HTML und HTML-Help).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toplink(!t)
+
+!item [(!DESCRIPTION)]
+UDO sichert für HTML und HTML-Help eine Datei namens
+(!file [udo_tp.gif]). Mit diesem Kommando können Sie in sein Werk die
+Grafik einbinden. Zugleich wird ein Link auf den Seitenanfang erzeugt.
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!toplink
+!end_verbatim
+(!EXAMPLE_AFTER)
+!toplink
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

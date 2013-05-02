@@ -1,0 +1,22 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : header definitions
+# Language    : German
+# Initial Date: 2010-08-04
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Aug 04: localizable file introduced
+#
+################################################################################
+
+!docinfo [contact_name] Kontakt
+
+# === EOF ===

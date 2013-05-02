@@ -1,0 +1,257 @@
+# karwendelnamen1934.txt
+# Zeichensatz: ANSI
+# angelegt am 03.08.2003
+# letzte Änderungen: 23.11.2003 (10.12.2003 Aufbereitung als UDO-Testfall)
+
+# für korrekte Pfade
+!set ebene3
+# erst bei Einbindung von www.txt und counter.txt
+
+!docinfo [title] Was Karwendelnamen erzählen. Ein Geleitwort zur Alpenvereinskarte.
+!docinfo [htmltitle] Was Karwendelnamen erzählen
+!docinfo [author] Von Dr. Karl Finsterwalder, Innsbruck
+!docinfo [webmastername] http://www.bergruf.de/alpinhistorie/karwendelnamen1934/
+!docinfo [webmasterurl] ../../allgemeines.html
+# !docinfo [date] Letzte Aktualisierung am (!today)
+!code [iso]
+
+# !rtf_propfont Arial
+# !win_propfont Arial
+# !html_propfont_name Helvetica,Arial
+# !html_monofont_name Courier
+
+!html_backpage ../
+
+!image_alignment [left]
+!table_alignment [left]
+
+!html_backcolor white
+# !html_modern_layout
+# !html_modern_column_width 200
+# !html_frames_layout
+
+!no_numbers [html,win]
+!use_auto_subtocs [html,win] !depth 2
+!use_auto_subsubtocs [html,win] !depth 1
+!use_auto_subsubsubtocs [html,win] !depth 1
+!use_auto_toptocs [html,win]
+
+# !include ../mailto.txt
+# !include ../../www.txt
+# !include ../../gaestebuch.txt
+# !include ../../counter.txt
+
+# Befehle für Hoch- und Tiefstellung
+!include hochtief.ui
+# !input hochtief.ui
+
+# Headerzeilen für HTML einbinden
+!ifdest [html]
+!use_raw_header header.txt
+!endif
+
+#############################################################################################################
+!begin_document
+!autoref [off]
+!html_name index.html
+!html_keywords Karwendel, Namen, Etymologie
+!html_description Was Karwendelnamen erzählen. Ein Geleitwort zur Alpenvereinskarte.
+!maketitle
+
+# (!bergrufcounter [0848402] [08.08.2002] [www.bergruf.de/bergpano/])
+# <img src="/cgi-sys/Count.cgi?df=bergr-0848402&dd=B&ft=0&md=6">
+
+#############################################################################################################
+
+!begin_quote
+!begin_quote
+!begin_center
+Zu folgendem Aufsatz wurde besonders die tiefgründige "Politisch-Historische Landesbeschreibung Tirols" von O.~(!B)Stolz(!b), Archiv für österr. Geschichte, Bd.~107, benützt. Ferner (!B)Baader(!b), "Chronik von Mittenwald". Weitere urkundliche und fast alle literarischen Belege sind in der Arbeit von Dr. G.~(!B)Buchner(!b), "Die Namen des Karwendelgebietes" (Oberbayr. Archiv, München, Bd.~61 (Nachträge Bd.~62 und 66)) enthalten, von deren Namendeutungen indes auf Grund der Mundart- und Ortskenntnis hier vielfach abgegangen wird.
+(!nl) (!nl)
+Abkürzung: mhd. = mittelhochdeutsch; ma = mundartlich.
+!end_center
+!end_quote
+!end_quote
+
+
+# kommt ohne Text "Inhaltsverzeichnis"
+!toc [all] !depth 1
+
+#############################################################################################################
+!ifdest [html]
+!node [Quellen-Hinweis und Vorbemerkung zur Online-Ausgabe]
+!else
+!node [Quellen-Hinweis und Vorbemerkung]
+!endif
+!html_name vorbemerkung.html
+
+Der nachstehende Text ist entnommen den "Mitteilungen des Deutschen und Österreichischen Alpenvereins", Nr.~2/1934, S.~31-33 und Nr.3/1934, S.~54-56.
+
+!ifdest [html]
+Die Zwischenüberschriften wurden hier für die HTML-Aufbereitung hinzugefügt. Heutige geographische
+Bezeichnungen wurden fallweise in [eckigen Klammern] ergänzt.
+!else
+Die Zwischenüberschriften wurden zur besseren Lesbarkeit hinzugefügt. Heutige geographische
+Bezeichnungen wurden fallweise in [eckigen Klammern] ergänzt.
+!endif
+
+!ifdest [html]
+Durchblättern der HTML-Seiten durch Anklicken des Icons "Pfeil nach rechts".
+
+!hline
+!subsubheading Einige Links zum Thema
+!begin_itemize !short
+!item Heinz Pohl: (!www [Österreichische Bergnamen] [http://www.uni-klu.ac.at/groups/spw/oenf/name4.htm])
+# identisch: http://members.chello.at/heinz.pohl/Bergnamen.htm
+!end_itemize
+!endif
+
+#############################################################################################################
+!node Flur- und Bergnamen -- ein Beitrag zur Kulturgeschichte und Volkskunde
+!html_name flurnamen_bergnamen.html
+
+Die eben erschienene Karwendelkarte des Alpenvereins gibt zum Unterschied gegen die alte Karte auch die Paßtalung, die von Mittenwald bis Zirl das Gebirge umrahmt, meist in voller Breite wieder, während auf der bisherigen Karwendelkarte die Westgrenze mitten durch die Seefelder Gruppe lief. Nicht nur der Turist wird diese neue, vollständigere Darstellung der Gebirgslandschaft begrüßen, sondern auch der wissenschaftliche Betrachter und Benützer der Karte, denn mit dem Gebirge hängt dieses Quertal geographisch und geschichtlich untrennbar zusammen, es hat selbst die Schicksale entfernterer Landschaften noch entscheidend beeinflußt.
+Seit Römerzeiten bis weit in die Neuzeit herauf war es der begangenste, kürzeste Weg nach Tirol, ja selbst noch zu Goethes Zeit, der, schon ungeduldig den Süden suchend, hier doch seine Augen nicht ohne Wohlgefallen auf dieser hyperboreischen Bergwelt ruhen ließ.
+
+Seit alters haben die Menschen von dieser Talstraße aus sich den Weg ins Gebirge gebahnt, haben die Leute der einzelnen Talgemeinden dort ihre Nutzungsräume -- nach den Gesetzen der Alpensiedlung oft in seltsamem Gegensatz zu heute herkömmlichen Vorstellungen -- abgegrenzt und das Antlitz der Landschaft umgestaltet, soweit dies Menschen tun können. Außer den spärlichen Urkunden geben über diese älteste Siedlertätigkeit im Karwendel nur jene geschichtlichen Zeugen Aufschluß, die so eng dem Boden, der Landschaft verhaftet sind, daß eine Gebirgskarte an ihnen nicht vorbeigehen darf, zumal sie großenteils dem Bergsteiger vertraut sind, wenn er auch ihre Sprache nicht immer versteht: die Flur- und Bergnamen, die dichtverstreut uns von jedem Tal und Bergstock etwas zu sagen wissen, vom Alter menschlicher Anwesenheit im Gebirge, von der Herkunft der frühesten Siedler und ihrer Sprache. Bei der Wichtigkeit, die ihnen innewohnt, wurden sie mit der größten Sorgfalt gesammelt und tunlichst vollzählig auf die Karte übernommen. Um sie dabei in der bodenständigen Aussprache möglichst getreu zu überliefern, wurde jene Lautwiedergabe angewandt, die [in der] "Zeitschrift" 1928, S.~28, dargestellt ist und am Schlusse dieses Aufsatzes durch einige Nachträge ergänzt wird.
+Daß die ortsgebundenen Namen zur Kulturgeschichte und Volkskunde eines Gebietes manches beizusteuern vermögen, kann schon ein kurzer Überblick über jene Namen zeigen, die sich in das Geschichtsbild des von Westen her erschlossenen Karwendels einfügen und daran manchen Zug ergänzt.
+
+#############################################################################################################
+!node Aus illyrischer, romanischer und germanischer Zeit
+!html_name illyrisch_romanisch_germanisch.html
+
+Die Straße, die schon zur Römerzeit den Westfuß des Gebirges umsäumte, lief damals und noch lange durch die Ödlandschaft eines riesigen Urwaldgürtels, der sich zwischen dem heutigen Leithen im Süden und Walgau [Wallgau] im Norden dehnte und von den frühesten Anwohnern des Gebirges, den Illyrern, den Namen Scharnitzwald, (!I)Scarantia(!i), erhalten hatte, nach einem Wort (!I)skarantom(!i), das heute noch in venetischen Mundarten "Stein" bedeutet. So abschreckend war diese Wildnis, daß man nur an ihrem Nord- und Südrand Spuren dauernder menschlicher Anwesenheit in römischer und vorrömischer Zeit entdecken kann.
+Vom Partenkirchner Becken, wo sich geschlossene Romanenansiedlung bis lange ins 7.~Jahrhundert erhielt, wie der von der deutschen Lautverschiebung unberührte Namen (!I)Partanum(!i) (Partenkirchen) zeigt, strahlte romanische Wirtschaftsweise zum Norden des Karwendels herüber, wo ja auch der Ortsnamen (!B)Walgau(!b) [Wallgau] unbestreitbar für langes Fortleben der "Walchen" zeugt.
+
+Südlich davon biegt die Isar vor einem Seitenbach in scharfem Flußknie nach links aus, eine tiefe Bucht in den Uferhang schneidend; "Am Isarhorn" wird es heute genannt und daneben seit alter Zeit "Im Seins" ((!B)Anichs(!b) Karte hat ein gleich zu sprechendes "Zeunsbruck") zweifellos vom romanischen (!I)sinu(!i) (mit Ortsnamenendung -s) Busen, Bucht (vgl. Beseno, (!I)bi-sinu(!i), Doppelbucht bei Trient).
+Die lichten Auenwälder mochten hier zur Weide einladen, wie der schüttere, von Lawinen gelichtete Wald auf dem Sattel von (!B)Ferein(!b) (1536 Verrein, verballhorn zu Verreins, zuim ladinischen (!I)feréina(!i) "Muhr" oder (!I)mont verrina(!i) "Ebersberg"). Als romanisches Überlebsel muß wohl auch ein bisher unerklärtes (!I)fihrout(!i) als Bezeichnung für "Viehtrieb" in einer Urkunde aus Walgau von 1260 angesehen werden, das sich noch als Flurname "(!B)Viehruete(!b)" in der nahverwandten unteren Leutasch lebend vorfindet und auf romanisch (!I)rota(!i) "Weg" (Du Cange) zurückgeht, das erst im 9.~Jahrhundert eingedeutscht wurde (vgl. Familiennamen Fürrutter!).
+
+Die nächsten romanischen Namen begegnen uns erst wieder auf der Inntalseite des Gebirges, dort, wo zugleich die ältesten deutschen Namen Tirols vorkommen, um Zirl. Kein Zufall, daß sich vor der Ausmündung der im Altertum und Mittelalter meistbenützten Paßstraße nach Tirol ein Rest jener alten -ing-Orte (von Hötting bis Haiming) breitet, die in die baiwarische Landnahmezeit zurückreichen, hat doch der alte Römerweg die ersten germanischen Siedlerscharen ins Herz von Tirol geführt!
+
+An Alter reiht sich unter diese Orte (!B)Zirl(!b), dessen Name aus dem römischen (!I)Teriolis(!i) (Martinsbichl) in germanischem Mund durch die Lautverschiebung zu Cyreolu, Zirala umgeformt war. Wo nun die Zirler Almsiedlung seit alters ins Gebirgs hineingreift, da zeigen Flurnamen den Weg, die zwar auf vordeutsche Bevölkerung, aber auch auf eine ihnen folgende uralte deutsche Siedlung weisen.
+Der Bach, der in dieses Almgebiet führt, der (!B)Jenbach(!b), auch Eahnbach gesprochen, trägt, wenn er nicht auf einen Germanen Unono weist, einen vordeutschen Namen, der sich von dem bekannteren Jenbach im Unterinntal (urk. Üenbach) und dem Eahnbach, der dem Imbachhorn bei Zell am See den Namen gab (1416 Müenbach), nicht trennen läßt, vielmehr mit ihnen auf dieselbe illyrische Wurzel zurückzugehen scheint wie der Pustertaler Namen Onach, mundartlich Uina (Anay, Onai 1300). Die anschließenden Flurnamen "(!B)Mahrn(!b)" und "die (!B)Pleiner(!b)" erinnern an romanisch (!I)mara(!i) "Muhre" oder (!I)maceria(!i) "Steintrümmer" und an romanisch (!I)plagina(!i) "Halde", während sich im Jaufeneggtal (am Heechenberg) das romanische (!I)juvum(!i) "Bergjoch" in altdeutscher Einkleidung erhielt, nach dem 8.~Jahrhundert eingedeutscht, würde es heute Tschaufen gesprochen.
+
+Frühzeitig auch muß der nur schütter bewaldete Sattel von (!B)Eerl(!b) zur Almweide benützt worden sein, denn der Name, mundartlich (!I)earl(!i), der mit "Erle" keinesfalls zusammengebracht werden kann, wurde ihm von vordeutscher Bevölkerung (aus der gleichen Wurzel wie "Aurina" in den Dolomiten und Ahrntal) gegeben, und über ihn hinweg durch das 1509 genannte "Oerltal" dran der Fuß des Entdeckers mühelos ins Nachbartal, wo sich in der Folge auf ahornbestandenem Talgrund des Almdorf von (!B)Kristen(!b) (Zirler Kristen) breitete.
+Auch die frühesten (!B)germanischen(!b) Siedler von Zirl müssen im Gefolge romanischer Wirtschaftsweise früh ins Herz des Gebirges gedrungen sein (vgl. "Mitteilungen" 1930, S.~232, "Von Zemm und Tux"), sonst wäre nicht der romanische Ortsname (!I)Crista(!i) ähnlich wie der Ortsname (!I)Teriolis(!i) durch die deutsche Lautverschiebung noch umgewandelt worden.
+
+Ebenso hieß der Zirl gegenüberliegende langgestreckte Hügelkamm, in dem die Mittelgebirgsterrasse ausläuft, einst (!I)crista(!i) und wurde im germanischen Mund Kristen genannt, eine spätere Übernahme hätte Gresten ergeben. Als noch in dem einsamen Almtal germanische und romanischen Laute nebeneinander erklangen, haben sich die Siedler deutschen Stammes das fremde Wort verdolmetscht, denn kaum zufälligerweise heißt der von Felsrippen durchzogene Rücken zwischen Groß- und Klein-Kristen "Auf den (!B)Kämpen(!b)"!
+In der Nachbarschaft solch alter Siedlungszeugen ist es auch nicht zu gewagt, den Namen des Weiderückens über der Kristenalm (!B)Hipp(!b) oder (!B)Hippen(!b) auf die uns nicht mehr geläufige, weit kraftvollere Sprachumgestaltung jener deutschen Frühzeit zurückzuführen und ihn als eine j-Ableitung "Hüppen" zu dem in oberdeutschem Hubel, Hübel (auch Hüppel) steckenden Stamm (!I)hub(!i) = hoch, "erhaben" zu betrachten.
+Talauswärts, am Gleirschbach, stieß übrigens schon damals das Zirler Gemärk an das Almgebiet der Leute von "Arcelle" (Arzeler Kristen) und damit an den viel später eingedeutschten Siedlungsraum östlich von Innsbruck, dessen Namen (Gleirsch) in einen anderen Zusammenhang gehören.
+
+#############################################################################################################
+!node Aus dem Mittelalter; der Name "Karwendel"
+!html_name mittelalter.html
+
+Wenn zur Völkerwanderungszeit das Paßtal von Seefeld der Heerweg für germanische Volksscharen war, die den Grund legten zu gleichartiger Siedlung und gleichen Ortsnamen in und außerhalb der Alpen, so bildete es im Hochmittelalter die feste Klammer, die das Land im Gebirge mit dem Alpenvorland verband, so fest, daß auf Jahrhunderte hinaus die ganz auseinanderstrebenden Flußgebiete der Loisach und der oberen Isar mit dem oberen Inntal eine politische Einheit darstellten, das Herrschaftsgebiet der Grafen von Andechs, später der von Eschenlohe. Diese lange Verbundenheit war nicht ohne Einfluß auf Formung des Volkscharakters, der Volkssprache. Für die Mundart ist auch heute noch der Alpenrand keine Grenze, vielmehr stimmt diese vom Oberinntal bis zur Loisach längs des alten Paßweges in den wesentlichen Zügen überein und grenzt sich an einer gemeinsamen Nord-Süd-Linie gegen die östlichen Nachbarmundarten des Isarwinkels und des Inntales um Innsbruck ab. Diese innere Einheit kommt nicht zuletzt in den Ortsnamen unseres Gebietes noch gut zum Ausdruck, wenngleich die bodenständige Mundart von Osten her dort immer mehr zurückgedrängt wird.
+Wie man in unverfälschter Redeweise von Telfs bis Weilheim sagt "gloobe, koofe" für glauben, kaufen, so entstand nördlich Garmisch der Ortsname Ohlstatt aus älterem Aulstatt, Auwolfestetin (vom Personennamen Auwolf), und innerhalb der Alpen bei Scharnitz ein Flurnahme Loblehner aus älterem Laublehner (laubwaldreicher Hang). Heute wird allerdings schon wie im übrigen bayrisch-österreichischen Gebiet Lab(lehner) gesprochen, auch Labalehner (aus altem Loubin Lehner).
+Bei Inzing fällt auf der Karte ein sicher romanischer Name Ragges auf. Er wird noch 1730 Rogeß geschrieben und führt auf ein älteres Raugges, am ehesten rom. (!I)ravicos sc. agros(!i) "Graues Feld" zurück. Besser hat sich in dem Gebiet erhalten die vorschnell als schwäbisch bezeichnete Aussprache von -en als -a, also "Linda, Hitta" für "Linden, Hütten", die bisherige irrige Schreibung Linderspitz bei Mittenwald geht auf diese Aussprache zurück, sie müßte in Lindenspitz richtiggestellt werden, da man sonst selbst den Namen Mittenwald, der von den Einheimischen auch Mittawald gesprochen wird, so wiedergeben müßte und die vielen ähnlich auslautenden Namen im Tiroler Teil, wie Beiahäusla, Schemawand doch in der verständlicheren schriftdeutschen Form "Beienhäuslen" (= Bienenhäuslen), "Schemenwand" (nach einem Faschingsläufer, im Oberinntal = "Schemen") gegeben werden müßten. Selbst die Solenalm, die dem Solstein den Namen gab (mhd. (!I)sol(!i) = "Suhle, Wälzlache"), wird kurz als die Sola bezeichnet.
+
+Wer den Ortsnamen Garmisch ausspricht, denkt wohl nicht daran, daß er sich damit einer rein mundartlichen Aussprache anbequemt, über die man lächelt, wenn ihr zufolge ein Oberinntaler Bauer etwa "Barg", "Harz" für Berg, Herz spricht, die aber nach Norden hinaus bis gegen den Ammersee reicht und sich im Ortsnamen Garmisch, entstanden aus "Germareskowe" 803 =~"Gau eines Germar", zäh behauptet hat. (Die Endsilbe -ga (aus -gau) fiel hier ab, weil man sie nicht mehr verstand und für eine der besprochenen a-Endungen hielt.)
+In Tirol entstand auf gleiche Weise des Ortsname Bartlsgaden (bei Oberperfuß) aus Berchtesgaden, Scharmegg (s.~Karte) aus Scherm = "Viehunterstand"; u.a. vor allem ist es der ehrwürdige Name des Gebirges selbst, der auf die gleiche Weise aus der ursprünglichen Form Gerwendel (Gerbintla) des 13. und 14.~Jahrhunderts die entscheidende Umwandlung zu dem vom 15.~Jahrhundert ab vorherrschenden Garwendel erfuhr.(!^)1(!^^))
+
+!begin_quote
+(!^)1(!^^)) In Zusammensetzungen wie Germar wird ger (wegen der Konsonanz) auch sonst als kurze Silbe behandelt.
+!end_quote
+
+Es ist wohl das wichtigste Ergebnis der Flurnamenserhebung für die Karwendelkarte, daß heute noch die Aussprache "Garwentl" in der Gegend von Scharnitz noch als durchaus lebendig festgestellt werden konnte, die unbeeinflußt von gelehrten Entstellungen unmittelbar auf die älteren Urkundenformen zurückgehen muß und auf diese erst das rechte Licht wirft. Die heutige Schreibung und Aussprache Karwendel, die das Wort unrichtigerweise mit Kar zusammenbringt, scheint erst von der Karte Peter (!B)Anichs(!b) ausgegangen zu sein, die häufigen Erwähnungen in der Zeit vorher lauten meist Carbendl und wollen damit vielleicht noch eher der Volkssprache mit "g" Rechnung tragen. Erst in diesem späteren Abschnitt verstand man dann auch unter Karwendel das ganze riesige Gebirge zwischen Seefeld und dem Achensee (erst seit Hermann v. (!B)Barth(!b), 1870), während das Volk in seinem zähen Beharrungsvermögen und seinem Mangel an Überblick "Garwendl" nur als Bezeichnung für das Karwendeltal bei Scharnitz -- genau wie die Urkunden -- verwendet.
+
+Die richtige Kenntnis der Mundartform und ihrer Entwicklung aus dem älteren Sprachzustand ermöglicht es heute, aus dem vielfachen Hin und Her der Meinungen über die Herkunft des Gebirgsnamens heraus zu einem abschließenden Urteil zu kommen. Es ist nicht mehr statthaft, an einem von Alois (!B)Walde(!b) (1895) ohnehin bloß (!I)ad hoc(!i) gemutmaßten(!^)2(!^^)) illyrischen Wort (!I)caravant-lo-m(!i) festzuhalten, weil Walde seinerzeit die Mundartaussprache nicht kannte und die sprachgesetzliche Wandlung von -ger zu -gar nicht in Betracht gezogen hatte. Die alten Belege für Gerwendel haben sich dank unermüdlicher Forscherarbeit seit Walde auf sechs -- zwischen 1260 und 1436 -- vermehrt und lassen nicht mehr das illyrische (!I)Caravant(!i), sondern nur den altdeutschen Personennamen Gerwendil (rein orthographisch daneben auch Kerwentil) zur Namengebung zu. Dieser Name, der dem kriegerischen Sinn der alten Bayern alle Ehre macht -- er bedeutet Speerschüttler --, ist auch zu dem Ortsnamen Gerblingshausen bei Wolfratshausen (im 10.~Jahrhundert Kerwenteleshus) Pate gestanden und tritt, abgesehen von einer allerersten Nennung Gerwendelaur -- als Beinamen für einen Zeugen in der oben erwähnten Urkunde aus Walgau, 1260 --, zunächst als Bezeichnung für den Karwendelbach auf.
+
+!begin_quote
+(!^)2(!^^)) oder genauer gesagt, aus einer anderen "Unbekannten", (der Wurzel des Namens Karawanken) abgeleiteten. . . . Die Form Garwendel, auch Grawendl, kommt noch bis 1766 häufig vor.
+!end_quote
+
+Die Grenze der Grafschaft Werdenfels von 1305 "hebt sich an ze Gerbintla" und geht am Schlusse wieder "uncz (bis) in die Gerbintla"! Noch klarer wird der Bach 1433 die Gerwendelsach genannt. Das -a von Gerbintla ist dann ebenso wie bei Garmisch (siehe oben) abgefallen, da man fälschlich darin bloß eine Mundartendlung erblickte (Schreibung "Garmischen" 1599!). Wenn heute der Ton auf der zweiten Silbe von "Karwendel" ruht -- entgegen altgermanischer Art und Weise --, so beweisen die alten Schreibungen "Gerbintla" durch die abgeschwächten Nebensilben die Betonung der Anfangssilbe. In langen Zusammensetzungen mochte auch damals schon der Ton des besseren Gleichgewichtes halber auf die zweite Silbe gewandert sein, worauf die älteste Form Gerwendelaur = Gerwendel-auer (Bewohner der Gerwendelau am Unterlauf) hinweist, und sich schließlich dort festgesetzt haben. Früh wird dann der Name für die Alm und Berggegend, nicht bloß für den Bach verwendet. Auch sonst sind ja heute einstige deutsche Personennamen für Berge in Gebrauch. Am Wazmann [Watzmann], Guffert, Hilpold sind die Namen ursprünglicher Almbesitzer Wazamann, Gotfried, Hilpold haften geblieben und auch der (!B)Wörner(!b) bei Mittenwald, zugleich Name der Weidegegend am Fuß des Berges, ist von den deutschen Personennamen Werinher nicht zu trennen. (Ein Mittenwalder Familienname Wörndle geht ebenfalls auf ihn zurück.)
+
+Es ist vielleicht nicht ohne siedlungsgeschichtlichen Zusammenhang, daß sich die mit "ger" zusammengesetzten Namen an der Straße um das Karwendel wiederholen, zwischen Garmisch und Mittenwald ein Ort Gerold, am Südfuß der Paßstraße Kerschbuch (1305 Gersbuch, d.i. Buchenwald eines Gerhoh), gegenüber ein Geroldsbach (von einem Ortsnamen Gerhartspuint) anreiht; es sieht so aus wie ein immer neues Nachströmen von Siedlern aus jener Landschaft, in der dieser Namentypus seit alters zu Hause ist. Auf jeden Fall aber zog man von dort, aus dem Werdenfelsischen, allsommerlich auf die Almweiden an der Gerwendelache, Jahrhunderte bevor sich beim heutigen Scharnitz die ersten Häuser erhoben. Sind jene doch bis vor 100~Jahren ausschließlich im Mittenwalder Besitz verblieben und die Grenzziehung trug einst dem Rechnung.
+Trotz mannigfachen Grenzstreitigkeiten blieb das Karwendeltal bis zum Jahre 1806 ein Teil der Freisinger Grafschaft Werdenfels, wenn auch in den letzten Jahrhunderten bloß als Einsprengsel im tirolischen Gebiet. Kare und Fluren wie Vogelkar, Schlaucherkar (nicht Schlauchkar!), Neunerkar, Marxenkar, Karners Loch, Klotzenrib, tragen noch heute die Namen der einstigen Besitzer, der Mittenwalder Bürger Vogel, Schlaucher, Neuner, Marx, Karner, Klotz, und der in Grenzbeschreibungen oft genannte Laingraben und Marchgraben erinnert noch an die "March", dieses seltsam abgesprengten Stücks Freisinger Gebietes im Hochtal "zu Gerbintla".
+
+# Ende Teil 1 in Nr. 2/1934, Beginn Teil 2 in Nr. 3/1934
+
+#############################################################################################################
+!node Name und Ort Scharnitz
+!html_name scharnitz.html
+
+Wenn heute der Name Karwendel von einem einzigen Tal, dem Karwendeltal bei Scharnitz, auf die gesamte Gebirgsgruppe übertragen ist, so hat er hier im westlichen Teil das Erbe eines anderen Namens angetreten, mit dem es gerade umgekehrt ging. Der alte Name Scharnitz für die Gegend der Paßtalung und der dort ausmündenden Gebirgstäler ist auf den Namen des Grenzörtchens eingeschränkt, das genau in der Mitte der einstigen (!I)silva Scarince(!i) liegt, jenes breiten Waldgürtels, der in ältester Zeit den Grenzsaum bildete zwischen dem Siedlungsraum außer und inner der Alpen, dem bayrischen Huosigau und dem Inntalgau, einer Ödlandschaft, die erst herrenlos und dann Königsgut war, "(!I)saltus regalis(!i)" = "Reichswald", mit Schwarzwald, Thüringer- und Böhmerwald zugleich genannt wird. Die uralte Klostergründung Scharnitz (763) lag nicht in seiner Mitte, sondern an seinem Nordrande, wo außer verschiedenen Flurnamen und Bodenfunden der Name Klais, ma. kchloas, 1324 "in der chlos", an eine Klause, vielleicht die letzten Rest des schon 780 wegverlegten Gebirgsklösterleins erinnert. So menschenleer war die Wildnis des Schwarnitzwaldes, daß noch nach 1300 in dem weitem Raum zwischen Partenkirchen-Mittenwald und Axams (auf dem Innsbrucker Mittelgebirge) von keinem kirchlichen Mittelpunkt der Siedlung die Rede ist.
+
+In dem Maße, wie sich dann von den Rändern die Siedlung vortastet, 1080 "(!I)in media silva(!i)" = Mittenwald aufscheint, am Südrand der Paßhochfläche Leithen und Reith (= Reut, Rodung) durch Waldschenkungen an die Rodeklöster Benediktbeuren und Wessobrunn entstehen (12.~Jahrhundert), wird der Name Scharnitz zurückgedrängt, schließlich bis auf den einzigen geschlossenen Waldrest beim Austritt der Isar aus dem Hochgebirge, und endgültig blieb er dort haften, als hier "bei der oberen Bruggen", wo die Paßstraße zum letzten Mal (von Norden her) die Isar überschreitet, die jüngste Ortschaft des Gebietes -- nicht lange vor 1475 -- entstand. Bis zu dieser Zeit ungefähr war das weite Waldland bis zu den "Grenzsteinen auf dem Seefeld" -- der Partenkirchen-Mittenwalder Pfarrgrenze, der freisingischen Grafschafts- und Bistumsgrenze -- unbestrittener Nutzungsraum der Mittenwalder Gebirgsnachbar gewesen, wenn auch die Unwirtlichkeit des Gebietes zu keinem dauernden Verweilen gelockt hatte. Es ist bezeichnend für die Naturfeindlichkeit dieser Kalkalpenlandschaft, daß südlich von Scharnitz nicht ein einziger Name romanischen oder auch nur altertümlichen deutschen Gepräges an eine Besitzergreifung in ältester Zeit erinnert.(!^)3(!^^))
+
+!begin_quote
+(!^)3(!^^)) Die beiden Ortsteile von Scharnitz, Inrain und Eissack (nicht Eisack) tragen keine Namen von alter, vordeutscher Herkunft. Die erstgenannte Häusergruppe wird noch um 1700, 1800 abwechselnd am Rain, im Rain genannt; Eissack entpuppt sich als Vergleich einer abgeschlossenen Talform mit einem Sack, der öfters vorkommt und hier passend für eine Uferkonkave [Einbuchtung] der Isar gebraucht wird, in der sich wintersüber das Treibeis sammelt und zum Schaden der Fluren ringsum lange liegen bleibt. Der Name Isertal für ein Seitental des Gleirschbaches scheint mit einer früheren Annahme des Isarursprunges für Gleirschtal zusammenzuhängen.
+!end_quote
+
+Das einst ungeschmälerte Nutzungsrecht der nördlichen Gebirgsanwohner im Scharnitzwald, der zu Zeiten schwacher Reichsgewalt immer mehr wie herrenlos behandelt wurde, ward dagegen nachdrücklich angefochten, als sich eine tirolische Landeshoheit herausbildete und ihre Rechte auf den ganzen ehemaligen Reichswald geltend machte, wie aus den Berichten über die zahlreichen Zusammenstöße der freisingischen Untertanen von Mittenwald mit den tirolischen "Forstknechten" in der "Hindern Au", "Am Zwisel" (Zwisel heute Gleirschtal), im Haupttal um Scharnitz, "In der Fluderaw" (vgl. Hochfluder der Karte, Fluder = Sumpf!) und selbst nahe bei Mittenwald, "In der werd" (Wörd = Land am Wasser) hervorgeht.
+In mehrhundertjährigen Streitigkeiten bildete sich zwischen Freising-Werdenfels und Tirol aus den gegenseitig übergreifenden Gebietsansprüchen ein Gleichgewichtszustand um Scharnitz -- mit den Einsprengsel Karwendeltal -- heraus. Im Innern des Karwendels erinnern aber noch gar manche Namen an die merkwürdige Tatsache, daß der Siedlungsspielraum der nördlichen Nachbarn einst bis ins Herz des Gebirges reichte und sich mit dem Gebiet der Almleute aus dem Inntal berührte. Die Namen Heißenkopf und Karnberg im Hinterautal, Schnabelegg, Prantnerbichl, Lippenmahd, westlich von Scharnitz, leiten sich von altbezeugten Mittenwalder Bürgernamen Heiß, Karner, Schnabel, Prantner und Lipp her.(!^)4(!^^))
+Am äußeren Gleirschtal grenzte Mittenwalder Besitz anscheinend unmittelbar an Wald und Weide der Arzeler, denn die Namen Hupferklamml und Krapfenschlag weisen dort auf die Mittenwalder Familien Hupfer und Krapf, nahe daneben der Name Hafeleloch auf den Arzeler Hofnamen Hafele (Personenname Hevelîn), der auch zu dem viel bekannteren Hafelekar über Innsbruck, 1756 noch "Haveleschor", Pate gestanden ist. Auch die Zirler Almsiedlung hatte offenbar über das Großkristental hinausgegriffen, über den Sattel der Zirmalm hinweg in den benachbarten Talgrund. Denn wie sollte man sich dessen seltsamen Namen Weingertal = Weingarttal (1500 Weinrebtal) erklären, für ein verkarstetes, magere Weide bietendes Hochtal, wenn es nicht ein Zubehör zu dem im Zirl am sonnigen Bergfuß liegenden Hof Weingarten war, wo tatsächlich einst das edle Traubengewächs gezogen wurde?
+
+!begin_quote
+(!^)4(!^^)) Die Sippennamen Heiß, Lipp, Neuner, Nairz u.a. kommen auch früh in Hötting vor, wie überhaupt in der Richtung Mittenwald-Zirl-Hötting ein ziemlich reger Austausch der Sippennamen und damit der Bevölkerung festzustellen ist. (Bemerkung von Prof. O.~(!B)Stolz(!b).)
+!end_quote
+
+Zwischen diese ursprünglichen Almanrainer schiebt sich dann -- in den Namen erkennbar -- später auch die Bevölkerung von Scharnitz selbst ein, das aus Behausungen  von landesfürstlichen Waldhütern, Jägern und Grenzsoldaten zum Dörflein erwuchs. Namentlich die Befestigungswerke, deren Ausbau im 17.~Jahrhundert nach damaliger französischer Befestigungskunst noch in manchen Namen -- Porta Claudia, Rewelín (frz. (!I)ravelin(!i) = Graben) -- fortlebt, erforderten einen festen Bestand von "Kordonisten", ansäßigen Leuten als Besatzung, die zugleich als Besitzer von Waldanteilen in den damaligen Forstbeschreibungen auftreten.
+Solche Scharnitzer Familien Gaugg (ahd. Raggo), Zischg (Abkürzung für Franziskus) sind in "Gauggenkopf", "Raggenkopf", "Raggenklamm" und "Zischgenkopf" erhalten (vgl. auch Zischgelesspitz, Zischgenferner im Sellrain, nach einem dortigen Hof "Zischg").
+
+#############################################################################################################
+!node Flurnamen und Wirtschaftsweise (Land- und Forstwirtschaft, Jagd, Bergbau)
+!html_name scharnitz.html
+
+Noch mehr Bild und Farbe gewinnt unsere Anschauung von Land und Menschen, wenn wir den Flurnamen abzulauschen suchen, was sie uns von der (!B)Wirtschaftsweise(!b) erzählen, in der der Karwendelbewohner den natürlichen Ertrag des lange gemiedenen, sich selbst überlassenen Gebirgsbodens am zweckmäßigsten zu nutzen versteht. Für die dürftige Ausbeute an Futter, die die trockenen Galtmähder ("galt" = unfruchtbar) auf Kalkgrund liefern, muß ihm der Laubwald aushelfen, wo er das Laub von den Bäumen streift (Stroaftal, -wald, Streafe), oder er treibt das Jungvieh in den Buschwald (= Loach, Lohe, Loachboden) und hütet es in den "Halten", im Auengehölz, der Anhalte (halten = hüten, weiden, dazu Elmauer Halt u.a.). Die Schafe läßt er "in den Flecken", den höchsten, steilen Grasbändern in den Felsen, ihr Futter suchen (Larchetflecke); die gefürchteten Steilwände, in denen die Tiere allzu oft abstürzen, kennzeichnet er als die "Fleischbänke" (Fleischbankspitz), in jenem Hang zu drastisch übertreibender Bildersprache, in dem er üppigere Weideflecke mit gutem Milchfutterertrag nun gleich als "Schmalzgruben" (d.i. Schmalzkeller) benennt.
+
+Wo der Wind die mächtigen Urwaldstämme in wirrem Durcheinander gefällt hat, heißt er es "im Wurf" (Würfl), wo einzelne, entwurzelte Bäume, "Ronen", liegen, am "Runboden" (Rontal [Rohntal], Krün aus "Gerüne" = Windwurf); wenn sie mit der Axt niedergelegt sind (G'hack, Verhack) oder samt Wurzeln ausgehoben, geschwendet  (Gschwendt) sind, werden sie erst vom Geäst, den Reisern befreit (Reiserig) und in den Risen (= Rinnen, z.B. Grasris, Gerris zu gêr, auch = Keilform) zu Tal gezogen. War der Weg früher zu weit, so hat man den Holzanfall an den zahlreichen Kohlstattln, Kohlplatzln zu Kohle gebrannt oder wohl an Ort und Stelle geschnitten (Alte Sag, Sagkopf, Amtssäge des Salzbergamtes).
+Allzuoft sind es auf dem wasserlosen Karstboden die verheerenden Waldbrände, die, unter dem Gluthauch des Föhns anschwellend, klaffende Lücken ins Waldkleid reißen und nur mehr dürre Strünke (= Durren, Durrach) auf den nackten, braunroten Flächen der "Brünste" (Durrenbrünstl, Brandjoch) zurücklassen.
+
+Der Holzertrag wurde im Karwendel viel mehr noch als heute auf dem Rücken der Gebirgsbäche zur "Länd" nach Scharnitz und Mittenwald hinausgeflößt, davon berichten die vielen alten Klausen (Kläusl), in denen der Bach gestaut wurde zum "Klausenplumpf", dem Stauweiher, um dann, losgelassen, in mächtigem Schwall seine Trift hinauszutragen. Wo sich die Stämme an den felsigen "rauhen" Stellen im Bachbett ("Räuhe") und den vorstehenden Felszacken ("Rippen") verklemmen, oder wo sie an den engen Krümmungen einer Klamm, wie der Gleirschklamm, hängen bleiben, da hat oft jeder Winkel von den Holzflößern in urwüchsig anschaulicher Bildersprache seine Benennung bekommen: das "Zwisele" = eine kleine Bachteilung, der "hölzerne Schuß", eine künstliche Verschalung für das felsige Bachbett, in der die Stempel (Rundhölzer) pfeilschnell dahinschießen, die "Porten", eine natürlich überwölbte Felspforte, das "Sandg'sperr", eine Sperre gegen das Versanden des Bachbettes, die "Torggl", ein Wasserwirbel, in dem sich die Stämme im Kreis drehen wie der Drehbaum einer Weinpresse (= Torggl), bis sie, in schwerer Arbeit mit Stange und Zapin flottgemacht, ihren Weg mit der Strömung weiter nehmen.
+# Zapin: steht weder im Fremdwörterduden noch im Brockhaus
+
+Noch viel früher wird es aber Sprache und Anschauungsweise des (!B)Jägers(!b) gewesen sein, die den stillen Tälern und Bergen des Karwendels Namen verlieh, wie denn heute noch außer dem Pfeifen der Murmeltiere, der Uramenten (= Murmenten, "Uramentenloch"), jahrüber kaum ein anderer Laut die große Stille der einsamen Kare durchbricht als das Gekläfft des Jagdhundes, der das Wild im "Rigel" seinem Herrn zutreibt, es vom Lager aufscheucht, "aufrigelt" (zu rogel = beweglich, Rigelkar, fälschlich Riedelkar).
+Kommen doch viele unserer Karwendelnamen schon in jenem denkwürdigen Jagdbuch vor, in dem sich Kaiser Max seine tirolischen Jagden mit liebevoller Treue abschildern ließ, und dessen Angaben der Plätze für das "Hierssengejaide", für Windhatzen (= Jagden mit Windspielen) und Gamssulzen (= Salzlecken, davon Sulztal, Sulziklamm [Sulzlekamm]) wir auf unserer Karte wiederfinden, ebenso wie manch uralte Grenzpunkte und Vermarkungen im Karwendel.(!^)5(!^^))
+An das Revier des "großmechtigen Waidmanns", wie er sich verhüllend nennen ließ, erinnert auch der Kaiserstand ob Zirl, wie der Herzogstand am Walchensee an die bayrischen Herzöge, liegt er doch knapp über der vom letzten Ritter als Jagdsitz benützten Andechserburg Fragenstein, von der aus der Kaiser das "Gejaide am Örlspitz" "in Christem und Hippem" bejagte. Sicherlich war die hier unmittelbar anschließende "Freiung" im hintersten wilden Schloßbachtal (Freiungstürme) nichts anderes als ein Schongebiet für die Gemsen, wo sie vor Verfolgt gefreit, d.h. gesichert waren, wie deutlich aus einer Stelle des steirischen Jagdbuches über die Fölz hervorgeht: "die Velcz hat der Kayer als die mueter der gamss, davon alle umligunsten gebirg mit gamssen beseczt werden, (!B)gefreit(!b)." "Gamsfreiheit" auch in Vorarlberg.)
+
+!begin_quote
+(!^)5(!^^)) Nicht von "Gejaide" kommt der Name des sogenannten Gjaidsteiges, richtiger Glaidsteiges, bei der Fereinalm, ma. s'Gload, sondern von Gloat = schmaler Steig (zu "leiten").
+!end_quote
+
+Wie ein Überbleibsel unmittelbar aus der Zeit Maxens und den Erzählungen, die sich um ihn ranken, berührt es, daß am Fuß der sagenberühmten Martinswand noch heute der Name Stellwandl haftet. Bekanntlich pflegte man nach den uns etwas barbarisch berührenden Jagdsitten jener Zeit das Wild gegen eine unübersteigliche Wand, eine "Stellwand", zu treiben (vgl. "Zeitschrift" 1933, S.~184). Der Ort, wo das erlegte Wildpret "zerwirkt", ausgeweidet, wurde, ist uns offenbar im "Zwirchkopf" überliefert. Die Ausdrücke Richtstand und Richtstatt für den mit Laubdeckung versehenen Jägerstand in älteren Jagdbeschreibungen erklären uns die mehrfach im Karwendel vorkommenden "Richtstände", "Richtstattlen", wie auch den seltsamen Ausdruck "G'richt" in "Krein's G'richt" (vom Personennamen Kreis = Quirinus), Ameiseng'richt = Vorrichtung der Sammler von Ameiseneiern (G'richt schwäbisch für Fangvorrichtung gebraucht).
+Zweifellos der Auslug des Jägers ist mit "Hohe Warte", "Gamswart(-sattel)", "Spähköpfl", gemeint (warten = schauen, spähen), das Hahng'richt an der Pleisenspitze dagegen ist die Deckung des Jägers, der hier an der Waldgrenze dem Auer- oder Spielhahn nachstellt, wenn er in den schütteren Bäumen falzt, wie man ihm anderwärts auch am Hühneregg, beim Hühnerbichl und unter der Losfeichte (= -fichte) "auflost" (losen = lauschen), wenn er in die "Hahnzüge", d.i. in seinen gewohnten Strich einfällt.
+
+Zahllose Namen, wie Bärlahner, Bärfall, Bärengschoß (mhd. schoz = Steilrinne), erinnern daran, daß Meister Petz bis ins 17.~Jahrhundert im Karwendel seinen Schlupfwinkel hatte. Die "Bärenbad", "Wildbad" (Arnspitzen) kommen deshalb so häufig vor, weil sie dem Jäger wichtige Wildwechsel bezeichnen, wo er das Schwarz- und Rotwild "an seinen Lieblingaufenthalten, den Tränken," (Brehm) beschleichen kann, wo es "solt" = suhlt, die Suhle (oder "das sol") aufsucht, daher auch die Solen(alm), Solstein, Persal im Zillertal (1318 daz persol) ihren Namen bezogen. Dem Eber, der ähnlich lautend mhd. auch (!I)bêr(!i) heißt, wird das laubwaldarme Kalkgebirge selten seine Lebensbedingungen, Eichel- und Bucheckernmast, geboten haben. Dafür beherbergte es seltene Pelztiere, wie Lux [Luchs] und Hermelin, auf die man im "Luchstal", am "Luchsfallenschrofen" und im "Harmeleskar", am "Harmeler" Jagd machte.
+
+Von dem unruhigen Getriebe, das der (!B)Bergbau(!b) vor langer Zeit in die stillen Täler brachte, wissen wir zum großen Teil auch nur mehr durch die da und dort verstreuten Namen "Knappenlöcher", "Knappengruben" und ähnliche; liegen sie doch oft an Orten, wo wir heute kaum je die Möglichkeit eines Schurfes vermuteten, hätte nicht das Volk sie getreulich in seiner Erinnerung bewahrt. Ungleich ergiebiger wurden einst im Herzen der Seefelder Gruppe die ölhaltigen Bitumenschiefer gefördert und an Ort und Stelle verhüttet ("Ölbrenne"), aber noch früher mutete man, von viel Geologie nicht beschwert, bei Mittenwald Gold (Goldanders Hütte) und Silber am Ropfenvogel (Bergmannsname "Rupf den Vogel") und in Lafatsch. Der seltsame Name Reps beim Bergwerk "zum silbernen Hansl" ebendort und nochmals am Zischgenkopf in der Umgebung von verlassenen Bergwerksstollen auftretend, ist diesem verschollenen Knappenwesen zuzurechnen. Er dürfte zu dem altbayrischen Bergmannsausdruck "reben" = durch Rütteln über einem Sieb taubes Gestein vom Erz sondern, gehören (mit s-Suffix gebildet) und scheint demnach die Abraumhalden zu bezeichnen, die an beiden Orten vorkommen.
+
+#############################################################################################################
+!node Namenswiederholungen
+!html_name wiederholungen.html
+
+Noch viel mehr machen sich andere Flurnamen dem Bergwanderer im Karwendel durch ihr wiederholtes Auftauchen an verschiedenen, entfernten Orten bemerkbar. In allen diesen Namenswiederholungen spiegelt sich die Gleichartigkeit des Volkstums ums Westkarwendel herum, sowohl wenn es die gleichen Laut(!B)formen(!b) hervorbrachte, wie wenn es aus seinem Wortschatz immer wieder die gleichen Bezeichnungen für ähnliche Begriffe schöpft.
+Aus altem Rätererbe ist in die Mundart offenbar das Wort Pleis für einen steilen Grashang -- bis zum Engadin bekannt -- aufgenommen worden (Pleisenspitz, Stickle, d.i. steile Pleis); gleicher Verbreitung und Herkunft ist "Taje", auch "Toja" für Hütte (rom. (!I)attgia(!i)), vgl. Satteltaje, Kühtai, Langesthei auswärts.
+Eine enger begrenzte Mundarteigenheit um Loisach, Isar und Oberinn scheinen dagegen die Flurnamen darzustellen, die einen Sammelbegriff geben, wie Stickelt, Ort wo es steil ist, Zimpfl = Platz mit kleinen Sümpfen. Sümpfln, die man ähnlich wie hochdeutsch Röhricht, Dickicht oder mundartlich "Larchet", "Aichat", d.i. Lärchen-, Eichenwald, gebildet hat. Sogar Namen wie Gaistal, Trauchtal bei Trauchgau, Seestadel bei Scharnitz (1400 Seestal), werden als Goaslt (1747 Gaislet), Trauchlet, Seastlt ihnen angeglichen.
+Besonders beliebt scheint die Flurbezeichnung Bürzl in der bodenständigen Sprache gewesen zu sein, da sie --
+# im Original: Seilstück; offensichtlich ein Druckfehler!
+neben "Stich" = Steilstück (zu "stickel", steil) -- regelmäßig dort auftritt, wo ein Weg eine kurze Versteilung zu überwinden hat. Niemals benennt sie irgendeine selbständige Erhebung, einen Hügel, daher darf man nicht an einen Vergleich mit hd. "Bürzel", mhd. borz, "rundlich Hervorstehendes", denken, so wenig sonst derbe Bilder den volkstümlichen Namensgebern fremd sind. Hier soll aber bloß in etwas übertreibender Weise ein Wegstück hervorgehoben werden, auf dem man sich wegen seiner Steile fast überschlägt (= altbayrisch burzen, neben unserem "purzeln"). Man denkt bei dieser drastischen Benennung an die Namen Falle, die Gfaller (Gfallschneid, Gfallenspitze), die zumal in den Zillertalern geradezu einförmig immer dann auftreten, wo eine Versteilung (Trogrand) den gleichmäßig geböschten Hang durchbricht, oder an die Roßfalle (bei Zirl und Innsbruck), wo der Volksmund weidende Pferde abgestürzt sein läßt.
+
+Ein ähnlich wie Falle gebildetes Wort ist "die Reise", Geröllhalde, mit hd. "Reise", ma. "Roase" ebensowenig verwandt wie mit "reißen", sondern zum Mundartwort "reisen" = gleiten, rieseln, kollern, gebildet, das noch in Reisende Lahn, Ris, fortlebt und mit Rise = "Rinne, in der Steine oder Holzstämme zu Tal rutschen" auf eine und dieselbe Wurzel zurückgeht. Ein mit Reise verwandter Begriff rom. (!I)labina(!i), eigentlich "das Gleiten", hat, in unserem Gebiet uralteingedeutscht, eine seltsam zwiespältige Ausbildung erfahren. Von Osten reicht die meist bekannte Mundartform "Lahn" herein, die bodenständige ist aber im Oberinntal allein "Lehn", dem alemannischen Wort Löuwin (Schiller, "die schlafende Löwin") näher verwandt.
+Im Alpenvorland und um Mittenwald kennt man daneben noch ein Wort "die Laine" und meint damit dem Wildbach (Gassellahn, Laingräben), ganz ursprünglich wohl die Mur, die im Wildbachbett als Schlamm- und Stein(!B)lawine(!b) verheerend zu Tal braust; solchen Reichtum an Formen und Begriffen vermochte die lebensvolle, ältere Sprache aus (!B)einem(!b) Wort hervorzuzaubern, um unserem formenreichen Bergen die bunte Pracht ihres edelsten Prunkgewandes, der Berg- und Flurnamen auf den Leib zu passen!
+Von der knorrigen und ehrwürdigen Erscheinung unserer Berge ist der ehrwürdige, aus Jahrhunderten herauftönende Klang ihrer Namen nicht wegzudenken; am wenigsten dem Wissenden, dem sie längstverschollene Kunde über unsere Alpen zu bringen vermögen.
+
+#############################################################################################################
+
+!hline
+!begin_quote
+!begin_quote
+!begin_center
+Die Namen wurden für die Karwendelkarte gesammelt vom Verfasser mit Benützung einer von Herrn Professor O.~(!B)Stolz(!b) hergestellten Sammlung der Flurnamen um Innsbruck und unter bereitwilliger Unterstützung durch die hierfür in Betracht kommende bodenständige Bevölkerung, besonders durch Jagd- und Forstorgane, denen allen hiemit der wohlverdiente Dank abgestattet sei.
+!end_center
+!end_quote
+
+Zur Ergänzung der Lautübersicht in "Zeitschrift" 1928 dienen als maßgebend für die lautgerechte Aussprache der reinen Mundartnamen auf der Alpenvereinskarte noch folgende Richtsätze:
+!begin_xlist [AAA] !short
+!item [1.] Für den ma. Laut ea, z.B. in tirolisch sea, heache, neader =~See, Höhe, Nörder-(Schatt-)Seite vorkommend, wird ee geschrieben, z.B. Needer, Heechenberg, Eerlspitze.
+!item [2.] Die Wiedergabe des geschlossenen e der Mundart durch ö kann wegen seines häufigen Vorkommens nicht durchgeführt werden, da eine Reihe eingebürgerter Namen mit e abgeändert werden müßten; es wird daher gewöhnlich mit e wiedergegeben, bloß vor r und l, wo es besonders ö-haltig ist, durch ö. (!nl)
+Das offene e -- selten vorkommend -- wird durch ë bezeichnet (Rëps, Grëßl).
+!item [3.] Zur Worttrennung: Wenn ein zusammengesetzter Alm- oder Bergname mit einem selbständig vorkommenden Flurnamen gebildet ist, (Eerl~A., zu Eerl), dann werden die beiden Bestandteile getrennt geschrieben: Eerl~A., Kristen~A. zu Kristen, Kirchl~Sp. zu Flurnamen Kirchl. Wenn der Namen dagegen ein untrennbarer Begriff ist, Galtalm (Alm für Galtvieh), Katzenkopf, Zischgenkopf, so werden die Bestandteile zusammengeschrieben.
+!end_xlist
+
+!end_quote
+
+# !autoref [on]
+!end_document

@@ -1,0 +1,396 @@
+!subsubnode !/universal_charset
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble & main part
+
+!item [Syntax:]
+	(!T)!/universal_charset [ on | off ](!t)
+
+!item [Description:]
+	''(!I)!/universal_charset~[on](!i)'' switches on the usage of the     
+	universal charset, ''(!I)!/universal_charset~[off](!i)'' switches it  
+	off. UDO won't use the universal charset by default because it takes  
+	some time to look for and convert these special characters.           
+
+!item [Example:] (!T)!/universal_charset [on](!t)
+
+!item [See:] Universal charset
+
+!end_xlist
+#------------------------------
+!subsubnode !/unset
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/unset <text>(!t)
+
+!item [Description:]
+	With this command you can delete a symbol that was set with           
+	(!I)!/set(!i) or with the command line option (!T)-D(!t).             
+
+
+!item [See:] (!I)!/set(!i), (!I)!/ifset(!i), (!I)!/ifnset(!i), Symbols
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_about_udo
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_about_udo [<abbreviations>](!t)
+
+!item [Description:]
+	This command switches on the usage of a page with information about   
+	UDO. This page doesn't appear in tables of contents. If you want to   
+	tell anybody else about UDO please add this switch to your preamble   
+	and insert ''UDO5'' somewhere in your source file. The example shows  
+	how to add this information page in Windows Help, ST-Guide and Pure C 
+	Help.                                                                 
+
+!item [Example:] (!T)!/use_about_udo [stg,win,pch](!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_alias_inside_index
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_alias_inside_index [<abbreviations>](!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your source file all    
+	aliases will be printed in the index of the given destination formats.
+
+!item [Example:] (!T)!/use_alias_inside_index [win,stg](!t)
+
+!item [See:] Indices, (!I)!/no_index(!i), (!I)!/index(!i), (!I)!/alias(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_ansi_tables
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_ansi_tables [<abbreviations>](!t)
+
+!item [Description:]
+	If you use this switch inside the preamble tables will be printed     
+	with graphic chars from the DOS characterset. This switch has no      
+	function when converting into (!LaTeX), WinHelp or HTML.              
+
+!item [Example:] (!T)!/use_ansi_tables [stg](!t)
+
+!item [See:] (!I)!/begin_table(!i), Tables
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_auto_subsubsubtocs
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_auto_subsubsubtocs [<abbreviations>](!t)
+
+!item [Description:]
+	Tells UDO to use the !/subsubsubtoc command automatically in every    
+	subsection. The example shows how to use them inside the hypertext    
+	formats.                                                              
+
+!item [Example:] (!T)!/use_auto_subsubsubtocs [html,pch,stg,win](!t)
+
+!item [See:] (!I)!/subsubsubtoc(!i), (!I)!/ignore_subsubsubtoc(!i), Tables of contents
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_auto_subsubtocs
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_auto_subsubtocs [<abbreviations>](!t)
+
+!item [Description:]
+	Tells UDO to use the !/subsubtoc command automatically in every       
+	section. The example shows how to use them inside the hypertext       
+	formats.                                                              
+
+!item [Example:] (!T)!/use_auto_subsubtocs [html,pch,stg,win](!t)
+
+!item [See:] (!I)!/subsubtoc(!i), (!I)!/ignore_subsubtoc(!i), Tables of contents
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_auto_subtocs
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_auto_subtocs [<abbreviations>](!t)
+
+!item [Description:]
+	Tells UDO to use the !/subtoc command automatically in every chapter. 
+	The example shows how to use them inside the hypertext formats.       
+
+!item [Example:] (!T)!/use_auto_subtocs [html,pch,stg,win](!t)
+
+!item [See:] (!I)!/subtoc(!i), (!I)!/ignore_subtoc(!i), Tables of contents
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_chapter_images
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_chapter_images [<abbreviations>](!t)
+
+!item [Description:]
+	This command switches on the usage of chapter images instead of       
+	chapter titles. Chapters that use the !/chapterimage command will use 
+	an image instead. The example demonstrates this for Windows Help,     
+	HTML and ST-Guide).                                                   
+
+!item [Example:] (!T)!/use_chapter_images [html,win,stg](!t)
+
+!item [See:] (!I)!/chapterimage(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_formfeed
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_formfeed [<abbreviations>](!t)
+
+!item [Description:]
+	With this switch you can tell UDO to output a form feed (ASCII~12)    
+	when handling the !/newpage-command.                                  
+
+!item [Example:] (!T)!/use_formfeed [asc](!t)
+
+!item [See:] (!I)!/man_lpp(!i), !/newpage
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_justification
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_justification [<abbreviations>](!t)
+
+!item [Description:]
+	If you use this switch inside the preamble UDO will print text with   
+	justification if the destination format supports it. RTF and (!LaTeX) 
+	will use justification by default, Windows Help and HTML don't        
+	support justification.                                                
+
+!item [Example:] (!T)!/use_justification [asc](!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_label_inside_index
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_label_inside_index [<abbreviations>](!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your source file all    
+	labels will be printed in the index of the given destination formats. 
+
+!item [Example:] (!T)!/use_label_inside_index [win,stg](!t)
+
+!item [See:] Indices, (!I)!/no_index(!i), (!I)!/index(!i), (!I)!/label(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_nodes_inside_index
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_nodes_inside_index [<abbreviations>](!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your source file all    
+	chapter titles will be printed in the index of the given destination  
+	formats.                                                              
+
+!item [Example:] (!T)!/use_nodes_inside_index [win,stg](!t)
+
+!item [See:] Indices, (!I)!/no_index(!i), (!I)!/index(!i), (!I)!/node(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_output_buffer
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_output_buffer [<abbreviations>](!t)
+
+!item [Description:]
+	For all destination formats UDO breaks lines after the amount of      
+	characters you set with (!I)!/parwidth(!i). When converting to        
+	Windows Help or HTML it can happen that UDO makes mistakes when       
+	inserting links. If you use this switch UDO will print a complete     
+	paragraph into the output buffer, it will then insert the links and   
+	in the final step it will break the lines. Because this method slows  
+	down the conversion of the source file UDO doesn't use the output     
+	buffer by default.                                                    
+
+!item [Example:] (!T)!/use_output_buffer [win,html](!t)
+
+!item [See:] (!I)!/parwidth(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_short_envs
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_short_envs [<abbreviations>](!t)
+
+!item [Description:]
+	If you use this swicth inside the preamble of your source file UDO    
+	will print all environments (without the verbatim environment)        
+	without additional horizontal space. The example shows how to use     
+	""compressed"" environments by default for the ASCII format.          
+
+!item [Example:] (!T)!/use_short_envs [asc](!t)
+
+!item [See:] (!I)!/begin_itemize(!i), (!I)!/begin_enumerate(!i), (!I)!/begin_description(!i), (!I)!/begin_xlist(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_short_toc
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_short_toc [<abbreviations>](!t)
+
+!item [Description:]
+	Tells UDO to output short tables of contents. In the main table of    
+	contents only the names of the chapters and in chapters only the      
+	names of sections will be printed.                                    
+
+!item [Example:] (!T)!/use_short_toc [all](!t)
+
+!item [See:] (!I)!/tableofcontents(!i), Tables of contents
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_style_book
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/use_style_book [<abbreviations>](!t)
+
+!item [Description:]
+	When converting into (!LaTeX) UDO outputs (!V)\chapter(!v) instead of 
+	(!V)\section(!v), (!V)\section(!v) instead of (!V)\subsection(!v) and 
+	(!V)\subsection(!v) instead of (!V)\subsubsection(!v). When           
+	converting to other formats a booklike output will be made, that      
+	means that chapters will be printed as ""Chapter~#"".                 
+
+!item [Example:] (!T)!/use_style_book [tex](!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode (!/U)...(!/u)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	placeholder, preamble & main part
+
+!item [Syntax:]
+	(!T)(!/U)<text>(!/u)(!t)
+
+!item [Description:]
+	""<text>"" will be displayed underlined if possible.                  
+
+!item [Example:] (!T)(!/U)underlined(!/u)(!t)
+
+!item [See:] Emphasizing text
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

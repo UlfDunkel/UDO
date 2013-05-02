@@ -1,0 +1,462 @@
+!subsubnode !/universal_charset
+
+Universellen Zeichensatz einschalten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/universal_charset [ on | off ](!t)
+
+!item [Beschreibung:] 
+	''(!I)!/universal_charset [on](!i)'' schaltet die Verwendung des      
+	universellen Zeichensatzes ein, ''(!I)!/universal_charset~[off](!i)'' 
+	wieder aus. Standardmäßig wird der universelle Zeichensatz von UDO    
+	nicht verwendet, da die Umwandlung der universellen Zeichen eine      
+	zeitaufwendige Angelegenheit ist.                                     
+
+!item [Beispiel:] (!T)!/universal_charset [on](!t)
+
+!item [Siehe auch:] Universeller Zeichensatz
+
+!end_xlist
+#------------------------------
+!subsubnode !/unset
+
+Symbol entfernen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/unset <text>(!t)
+
+!item [Beschreibung:] 
+	Mit diesem Kommando können Symbole, die Sie mit (!I)!/set(!i) oder    
+	der Kommandozeilenoption (!V)-D(!v) gesetzt haben, wieder entfernen.  
+	Dieses Kommando darf überall im Quelltext verwendet werden.           
+
+
+!item [Siehe auch:] (!I)!/set(!i), (!I)!/ifset(!i), (!I)!/ifnset(!i), Symbole
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_about_udo
+
+Informationsseite einbauen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_about_udo [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Die Benutzung dieses Schalters erzeugt am Ende der erzeugten Datei    
+	(sofern das zugehörige Format als Kürzel übergeben wurde) eine kleine 
+	Seite mit Informationen zu UDO. Wer ein bißchen Werbung für UDO       
+	machen möchte, sollte dieses Kommando im Vorspann einsetzen und im    
+	Quelltext das Wort ""UDO6"" einmal unterbringen, da diese Werbeseite  
+	nicht im Inhaltsverzeichnis aufgeführt wird. Danke!                   
+
+!item [Beispiel:] (!T)!/use_about_udo [stg,win](!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_alias_inside_index
+
+Aliase automatisch in den Index übernehmen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_alias_inside_index [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter im Vorspann angegeben, so werden automatisch     
+	alle Aliase im Index der angegebenen Formate angezeigt.               
+
+!item [Beispiel:] (!T)!/use_alias_inside_index [win,stg](!t)
+
+!item [Siehe auch:] Indizes, (!I)!/no_index(!i), (!I)!/index(!i), (!I)!/alias(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_ansi_tables
+
+Tabellen mit ANSI-Grafikzeichen erzeugen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_ansi_tables [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter im Vorspann eingesetzt, so werden bei den        
+	angegebenen Formaten die Tabellen mit den Grafikzeichen aus dem       
+	DOS-Zeichensatz erzeugt. Der Schalter ist wirkungslos für (!LaTeX),   
+	WinHelp und HTML.                                                     
+
+!item [Beispiel:] (!T)!/use_ansi_tables [stg](!t)
+
+!item [Siehe auch:] (!I)!/begin_table(!i), Tabellen
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_auto_subsubsubtocs
+
+Automatische Auflistung aller Paragraphen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_auto_subsubsubtocs [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Schaltet den automatischen internen Aufruf des                        
+	(!I)!/subsubsubtoc(!i)-Kommandos ein. Am Ende eines jeden Abschnitts  
+	werden dann automatisch alle dem Unterabschnitt zugehörigen           
+	Paragraphen in Form eines Inhaltsverzeichnisses ausgegeben.           
+
+!item [Beispiel:] (!T)!/use_auto_subsubsubtocs [html,pch,stg,win](!t)
+
+!item [Siehe auch:] (!I)!/subsubsubtoc(!i), (!I)!/ignore_subsubsubtoc(!i), Inhaltsverzeichnisse
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_auto_subsubtocs
+
+Automatische Auflistung aller Unterabschnitte
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_auto_subsubtocs [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Schaltet den automatischen internen Aufruf des                        
+	(!I)!/subsubtoc(!i)-Kommandos ein. Am Ende eines jeden Abschnitts     
+	werden dann automatisch alle dem Abschnitt zugehörigen                
+	Unterabschnitte in Form eines Inhaltsverzeichnisses ausgegeben.       
+
+!item [Beispiel:] (!T)!/use_auto_subsubtocs [html,pch,stg,win](!t)
+
+!item [Siehe auch:] (!I)!/subsubtoc(!i), (!I)!/ignore_subsubtoc(!i), Inhaltsverzeichnisse
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_auto_subtocs
+
+Automatische Auflistung aller Abschnitte
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_auto_subtocs [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Schaltet den automatischen internen Aufruf des                        
+	(!I)!/subtoc(!i)-Kommandos ein. Am Ende eines jeden Kapitels werden   
+	dann automatisch alle dem Kapitel zugehörigen Abschnitte in Form      
+	eines Inhaltsverzeichnisses ausgegeben.                               
+
+!item [Beispiel:] (!T)!/use_auto_subtocs [html,pch,stg,win](!t)
+
+!item [Siehe auch:] (!I)!/subtoc(!i), (!I)!/ignore_subtoc(!i), Inhaltsverzeichnisse
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_chapter_images
+
+Kapitelgrafiken statt -text benutzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_chapter_images [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Gibt an, ob für die angegebenen Formate Grafiken anstelle von         
+	Kapitelüberschriften werden sollen, falls bei einem Kapitel           
+	(!I)!/chapterimage(!i) benutzt wird und die angegebene Datei          
+	vorhanden ist.                                                        
+
+!item [Beispiel:] (!T)!/use_chapter_images [html,win,stg](!t)
+
+!item [Siehe auch:] (!I)!/chapterimage(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_formfeed
+
+Formfeed-Befehl mit ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_formfeed [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Mit diesem Schalter kann man UDO mitteilen, daß beim                  
+	(!I)!/newpage(!i)-Befehl bei ASCII-Formaten ein Formfeed (ASCII~12)   
+	ausgegeben werden soll.                                               
+
+!item [Beispiel:] (!T)!/use_formfeed [asc](!t)
+
+!item [Siehe auch:] (!I)!/man_lpp(!i), (!I)!/newpage(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_justification
+
+Blocksatz einschalten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_justification [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Für die angegebenen Formate werden Absätze im Blocksatz ausgegeben.   
+	Für (!LaTeX) und RTF spielt der Schalter keine Rolle, da dort immer   
+	Blocksatz erzeugt wird. Für WinHelp und HTML spielt der Schalter auch 
+	keine Rolle, da dort kein Blocksatz erzeugt werden kann.              
+
+!item [Beispiel:] (!T)!/use_justification [asc](!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_label_inside_index
+
+Labels automatisch in den Index übernehmen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_label_inside_index [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter im Vorspann angegeben, so werden automatisch     
+	alle Labels im Index der angegebenen Formate angezeigt.               
+
+!item [Beispiel:] (!T)!/use_label_inside_index [win,stg](!t)
+
+!item [Siehe auch:] Indizes, (!I)!/no_index(!i), (!I)!/index(!i), (!I)!/label(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_nodes_inside_index
+
+Kapitel automatisch in den Index übernehmen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_nodes_inside_index [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter im Vorspann angegeben, so werden automatisch     
+	alle Kapitelüberschriften im Index der angegebenen Formate angezeigt. 
+
+!item [Beispiel:] (!T)!/use_nodes_inside_index [win,stg](!t)
+
+!item [Siehe auch:] Indizes, (!I)!/no_index(!i), (!I)!/index(!i), (!I)!/node(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_output_buffer
+
+Ausgabepuffer anfordern
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_output_buffer [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	UDO bricht bei allen Formaten an der durch (!I)!/parwidth(!i)         
+	definierten Position die Zeilen um. Bei WinHelp und HTML kann es      
+	dadurch passieren, daß Querverweise nicht erkannt werden. Wird dieser 
+	Schalter benutzt, so werden Absätze erst komplett in einem            
+	ausreichend großen Puffer erzeugt, dann die Querverweise angelegt und 
+	erst dann die Zeilen umbrochen. Da dies die Umwandlungsdauer negativ  
+	beeinflußt, benutzt UDO standardmäßig keinen Ausgabepuffer. Im        
+	Beispiel würden Ausgabepuffer für WinHelp und HTML angefordert.       
+
+!item [Beispiel:] (!T)!/use_output_buffer [win,html](!t)
+
+!item [Siehe auch:] (!I)!/parwidth(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_short_envs
+
+""Komprimierte"" Umgebungen benutzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_short_envs [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter im Vorspann angegeben, so  werden alle           
+	Umgebungen (mit Ausnahme der verbatim-Umgebung) ohne zusätzlichen     
+	Zwischenräume ausgegeben. Im Beispiel würde dieser Schalter für das   
+	ASCII-Format gesetzt.                                                 
+
+!item [Beispiel:] (!T)!/use_short_envs [asc](!t)
+
+!item [Siehe auch:] (!I)!/begin_itemize(!i), (!I)!/begin_enumerate(!i), (!I)!/begin_description(!i), (!I)!/begin_xlist(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_short_toc
+
+Kurze Inhaltsverzeichnisse benutzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_short_toc [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Wird dieses Kommando im Vorspann benutzt, so wird für die angegebenen 
+	Ausgabeformate ein kurzes Inhaltsverzeichnis erzeugt. Im              
+	Haupt-Inhaltsverzeichnis werden nur die Kapitelnamen und in Kapiteln  
+	nur die Namen der Abschnitte ausgegeben. Im Beispiel würde der Umfang 
+	der Inhaltsverzeichnisse bei allen Ausgabeformaten eingeschränkt.     
+
+!item [Beispiel:] (!T)!/use_short_toc [all](!t)
+
+!item [Siehe auch:] (!I)!/tableofcontents(!i), Inhaltsverzeichnisse
+
+!end_xlist
+#------------------------------
+!subsubnode !/use_style_book
+
+Zieldatei als ""Buch"" ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/use_style_book [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	UDO gibt bei der Umwandlung ins (!LaTeX)-Format (!I)!/node(!i) mit    
+	''(!V)\chapter(!v)'' anstatt ''(!V)\section(!v)'', (!I)!/subnode(!i)  
+	mit ''(!V)\section(!v)'' anstatt ''(!V)\subsection(!v)'' und          
+	(!I)!/subsubnode(!i) mit ''(!V)\subsection(!v)'' anstatt              
+	''(!V)\subsubsection(!v)'' aus. Als Documentstyle bzw. Documentclass  
+	wird ''book'' verwendet. Bei den anderen Formaten wird eine           
+	(!LaTeX)-ähnliche Ausgabe erzeugt, d.h. Kapitel werden auch mit       
+	""Kapitel~#:"" bzw. ""Anhang~X:"" beschriftet.                        
+
+!item [Beispiel:] (!T)!/use_style_book [tex](!t)
+
+!item [Siehe auch:] (!I)!/no_preambel(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (!/U)...(!/u)
+
+Unterstrichenen Text ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/U)<text>(!/u)(!t)
+
+!item [Beschreibung:] 
+	(!V)<text>(!v) wird unterstrichen dargestellt, falls möglich. Diese   
+	Schriftart sollte sparsam eingesetzt werden.                          
+
+!item [Beispiel:] (!T)(!/U)unterstrichen(!/u)(!t)
+
+!item [Siehe auch:] Texthervorhebungen
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

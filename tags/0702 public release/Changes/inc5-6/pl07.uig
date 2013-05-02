@@ -1,0 +1,179 @@
+!subnode	PL7 vom 29.07.1996
+!html_name	r5_pl7
+
+!begin_description
+
+!item	[(!ALL)] ~
+
+!begin_itemize
+
+!item	Neues Schlüsselsystem! Die Kommandozeilenversion testet nun
+auch den Schlüssel ab. Unregistrierte Versionen geben zusätzlichen
+Text aus. Die neuen Schlüssel werden selbstverständlich an alle
+registrierten Benutzer herausgegeben, sofern sie angefordert werden.
+Für unterschiedliche Betriebssysteme (TOS, DOS, MacOS) werden spezielle
+Schlüssel benötigt!
+
+!item	UDO sucht nach einer Datei namens (!V)udo.ini(!v) in folgenden
+Verzeichnissen:
+
+!begin_enumerate
+!item	aktuelles Verzeichnis
+!item	(!V)$UDOPATH(!v)
+!item	(!V)$HOME\defaults(!v)	(nur TOS)
+!item	(!V)$HOME(!v)
+!end_enumerate
+
+Man sollte die Datei am besten in (!V)$HOME(!v) plazieren, damit UDO
+sie auch immer findet. Dazu muß das Environment angepaßt werden, falls
+dort (!V)$HOME(!v) noch nicht gesetzt sein sollte. Wer nicht weiß, wie
+man sein Environment anpaßt, frage mich bitte per PM.
+
+In der Konfigurationsdatei werden die Registrierungsinformationen
+folgendermaßen hinterlegt:
+
+!begin_quote
+!begin_verbatim
+User.Name=Mike Mustermann
+User.Street=Sonstwostraße 42
+User.Town=D-12345 Nirgendwo
+User.Key=ABCD4711WXYZ0815
+!end_verbatim
+!end_quote
+
+
+!item	Aufgrund eines einheitlichen Infofile-Formates müssen die
+Einstellungen für die GEM-Version erneut vorgenommen werden. Sorry, es
+gibt kein Konvertierungsprogramm für die alte Infodatei.
+
+!index (!/file)
+!item	Der vordefinierte Platzhalter (!V)(!/file)(!v) wird nicht mehr
+unterstützt! Hat den überhaupt je einmal jemand benötigt?
+
+!index Makros
+!index Definitionen
+!item	Im ersten Durchlauf werden jetzt auch Makros und Definitionen
+beachtet.
+
+!index Tabellen-Überschriften
+!item	Tabellen-Captions werden nun (wie bei (!LaTeX)) nur dann
+zentriert, wenn sie kürzer als die Zeilenbreite sind. Die runden
+Klammern, die die Captions bisher einschlossen, wurden entfernt.
+
+!item	UDO fängt weitere Fehler ab. So achtet es jetzt auch darauf,
+ob z.B. die letzte blist-Umgebung auch wirklich mit (!I)!/end_blist(!i)
+beendent wurde. Text und Nodes vor (!I)!/begin_document(!i) werden nun
+einfach ignoriert.
+
+!index Aufbau der Fehlermeldungen
+!index Fehlermeldungen
+!item	Die Fehlermeldungen haben nun einen etwas anderen Aufbau:
+!begin_quote
+!begin_verbatim
+Meldung: <file> <zeile>: Text
+!end_verbatim
+!end_quote
+
+In Everest sollte man im Dialog ""Fehlermeldungen"" nun folgendes
+einstellen:
+
+!begin_quote
+!begin_verbatim
+Muster 1: Error: % #:
+Muster 2: Warning: % #:
+Muster 3: Hint: % #:
+!end_verbatim
+!end_quote
+
+!index GEM-Version
+!item	Die GEM-Version gibt die Statusmeldungen nun anders aus. Nun
+wird nicht mehr gescrollt.
+
+!item	Bugfix: Bei der Tabellenausgabe sowie der Ausgabe von Kopf-
+und Fußzeilen wurde der Wert von (!I)!/parwidth(!i) nicht beachtet.
+
+!item	Bugfix: Bei Bildern in Umgebungen wurde die Bildunterschrift
+teilweise mit ""seltsamen"" ASCII-Zeichen eingerückt (Heiko Schäfer).
+
+!item	Bugfix: Durch ein falsch gesetztes (!V)#if(!v) waren doch nur 128
+Tabellenzeilen verwendbar. Jetzt kann man wirklich 256 Zeilen
+verwenden (Andreas Swazinna).
+
+!item	Bugfix: Die GEM-Version setzte die Fehler- und Kapitelzähler
+nicht zurück.
+
+!index Center-Umgebung !! Blocksatz
+!item	Bugfix: Zeilen einer center-Umgebung wurden auch teilweise
+im Blocksatz ausgegeben.
+
+!index Center-Umgebung !! Schriftarten
+!item	Bugfix: Zeilen einer center-Umgebung, die genau 70 Zeichen
+lang waren und in denen Schriftarten benutzten, wurden abgeschnitten.
+
+!item	Bugfix: Definitionen wurden nicht mehr ersetzt (Jan
+Starzynski).
+
+!index Kapitel vor !/begin_document
+!item	Bugfix: Wurden vor (!I)!/begin_document(!i) Kapitel benutzt,
+stürzte UDO ab.
+
+!end_itemize
+
+
+
+!item	[(!LaTeX)] ~
+
+!begin_itemize
+
+!index (!LaTeX) !! Tabellen
+!item	Wird bei Tabellen keine Überschrift gesetzt, so wird die
+Tabelle nicht in eine (!LaTeX)-table-Umgebung eingefaßt (Hauke
+Wessels).
+
+!end_itemize
+
+
+!item	[RTF] ~
+
+!begin_itemize
+
+!index RTF !! Tabellen
+!item	In Tabellen wurden die doppelten Anführungszeichen und
+Apostrophe nicht richtig umgewandelt.
+
+!end_itemize
+
+
+!item	[ST-Guide] ~
+
+!begin_itemize
+
+!index ST-Guide !! @width
+!item	Wenn eine Zeilenbreite länger als 70 Zeichen benutzt wird,
+wird (!V)@width(!v) ausgegeben, damit der ST-Guide nicht umbricht.
+
+!end_itemize
+
+
+
+!item	[WinHelp] ~
+
+!begin_itemize
+
+!index WinHelp !! 8-Bit-Zeichen
+!item	Bugfix: Konnten Zeichen vom Systemzeichensatz nicht in den
+ANSI-Zeichensatz umgewandelt werden, erfolgte keine Warnmeldung.
+Schlimmer noch, es wurden 8-Bit-Zeichen ins RTF-File geschrieben,
+wodurch der HC nur noch Fehler meldete.
+
+!index WinHelp !! DOS-Grafikzeichen
+!item	Zeichen des DOS-Grafikzeichensatzes werden nun durch
+ASCII-Zeichen (+, |, -) ersetzt. Leider ist es mir bisher nicht
+gelungen, WinHelp dazu zu bewegen, den Terminal-Font zu benutzen, so
+daß man auch den kompletten DOS-Zeichensatz anzeigen kann.
+
+!end_itemize
+
+
+!end_description
+

@@ -1,0 +1,15 @@
+!begin_xlist [typewritered:]
+!item [normal:] Hier steht sinnloser Text.
+!end_xlist
+
+!begin_blist [typewritered:]
+!item [bold:] Hier steht nochmal sinnloser Text.
+!end_blist
+
+!begin_ilist [typewritered:]
+!item [italic:] Hier steht auch sinnloser Text.
+!end_ilist
+
+!begin_tlist [typewritered:]
+!item [typewritered:] Hier steht wieder sinnloser Text.
+!end_tlist

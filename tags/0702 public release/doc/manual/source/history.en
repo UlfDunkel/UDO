@@ -1,0 +1,66 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from history.ui)
+#   fd  Jun 06: begascen.ui integrated in text
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro introduced
+#   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 16: great review session #1
+#   fd  Aug 17: 'information' never used in plural in English!
+# 2010:
+#   fd  Mar 03: history_0700 + history_0701
+#   fd  May 25: index adjustments
+#   fd  May 26: history_0702
+#
+################################################################################
+
+!begin_node History
+!label*     history
+!html_name  history
+
+In this chapter you will find a short summary of all the changes in the past.
+
+# = = = = =
+
+!include history_0702.en
+!include history_0701.en
+!include history_0700.en
+!include history_0640.en
+!include history_0621.en
+!include history_0620.en
+!include history_06_PL17.en
+!include history_06_PL16.en
+!include history_06_PL15.en
+!include history_06_PL14.en
+!include history_06.en
+!include history_05.en
+!include history_04.en
+!include history_03.en
+!include history_02.en
+!include history_01.en
+
+# = = = = =
+
+!end_node
+
+# === EOF ===
