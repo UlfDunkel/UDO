@@ -1,16 +1,26 @@
 UDO020.TTP
 
+; Compiler switches
 .C[ -DUSE_PCTOS]
 .C[ -D__COMPATIBLE__ ]
-.C[ -C- ]
-.C[ -K ]
-.C[ -2 ]
-.C[ -P ]
-.C[ -l99 ]               ; Maximum identifier length
-;.C[ -Y ]
+.C[ -D__fast_file ]
 
-.L[ -S=64000 ]
+.C[ -C- ]                ; Not allow nested comments
+.C[ -K ]                 ; Default char is unsigned
+.C[ -P ]                 ; Use absolute calls
+.C[ -2 ]                 ; Generate 68020 Code
+.C[ -l99 ]               ; Maximum identifier length
+.C[ -Y ]                 ; Add debug Information
+
+; Linker switches
+.L[ -S=64000 ]           ; Stacksize
+
+; Linking without debug information
+.L[ -Y- -G- -L- ]
+
+; Linking with debug information
 ;.L[ -Y -G -L ]
+
 
 =
 
