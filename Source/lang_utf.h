@@ -37,6 +37,7 @@
 *                 fr:  corrections by Didier Briel (ddc@imaginet.fr)
 *                 it:  - g.morando@agora.stm.it
 *                      - Sergio Febo, IT
+*                 ja:  Koichi MATSUMOTO
 *                 lv:  Mārtiņš Zemzaris, LV
 *                 nl:  - Rogier Cobben (rogier_cobben@nextjk.stuyts.nl)
 *                      - Paul Pasveer, NL-LEEUWARDEN
@@ -70,6 +71,7 @@
 *  2013:
 *    fd  Feb 15: Japanese added (Microsoft Translator; not verified yet)
 *    fd  May 02: UDOSTRINGS resorted
+*    fd  Jun 03: some Japanese strings updated (by Koichi MATSUMOTO)
 *
 ******************************************|************************************/
 
@@ -470,8 +472,8 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* page        */    "ページ",
          /* see         */    "参照してください",
          /* also        */    "参照してください",
-         /* by          */    "投稿",
-         /* fur         */    "の",
+         /* by          */    "作者",
+         /* fur         */    "所属",
          /* up          */    "を",
          /* exit        */    "終了",
          /* unknown     */    "不明",
