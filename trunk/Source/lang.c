@@ -52,6 +52,8 @@
 *    fd  Feb 19: - uni2ascii() renamed -> recode_udo()
 *                - init_lang_date() + init_lang() generalized
 *                - init_lang_date() debugged: don't recode a const string via pointer :-(
+*  2013:
+*    fd  Jun 03: lang.html_up removed (unused so far)
 *
 ******************************************|************************************/
 
@@ -281,7 +283,6 @@ GLOBAL void init_lang(void)
       recode(lang.unknown,     iEncodingTarget);
       recode(lang.update,      iEncodingTarget);
       recode(lang.html_home,   iEncodingTarget);
-      recode(lang.html_up,     iEncodingTarget);
       recode(lang.html_prev,   iEncodingTarget);
       recode(lang.html_next,   iEncodingTarget);
       recode(lang.html_lang,   iEncodingTarget);
