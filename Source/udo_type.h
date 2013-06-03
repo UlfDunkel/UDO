@@ -50,6 +50,7 @@
 *    fd  May 19: new: LANG.degree
 *  2013:
 *    fd  May 02: LANG string arrays enlarged to 64 chars each (tribute to UTF)
+*    fd  Jun 03: lang.html_up removed (unused so far)
 *
 ******************************************|************************************/
 
@@ -126,7 +127,6 @@ typedef struct _lang                      /* language strings */
    char   update[64];                     /* Last updated on (HTML) */
    char   lcid[64];                       /* LCID fuer WinHelp4 */
    char   html_home[64];                  /* "Home" */
-   char   html_up[64];                    /* "Hoch" */
    char   html_prev[64];                  /* "Zurueck" */
    char   html_next[64];                  /* "Weiter" */
    char   html_lang[64];                  /* Sprachenkuerzel */
