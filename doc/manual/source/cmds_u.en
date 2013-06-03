@@ -37,6 +37,8 @@
 #   fd  May 21: xref links fixed
 #   ggs May 25: use_compressed_envs have a "see also" to himself
 #   fd  May 26: (!url) enhanced for v7.02 [#89]
+# 2013:
+#   fd  May 02: (!url) syntax fixed
 #
 ################################################################################
 
@@ -169,7 +171,7 @@ Reference to external links.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)]) <[(!TARGET)] [(!CLASS)]>(!t)
+!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)] <[(!TARGET)] [(!CLASS)]>)(!t)
 
 !item [(!DESCRIPTION)]
 Use this command to create (external) links. 
