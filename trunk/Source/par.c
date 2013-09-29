@@ -49,6 +49,8 @@
 *    fd  May 19: file tidied up
 *    fd  May 25: c_url() + c_xlink() now support target & class [feature request #89 solved]
 *    fd  May 26: extract_parameters() + get_parameters() debugged
+*  2013
+*    ggs Sep 29: extract_parameters looks now for the ')'
 *
 ******************************************|************************************/
 
@@ -404,11 +406,14 @@ const int   max)          /* maximum # of expected parameters */
       /* und die Zeichen ermitteln, die bis dahin */
       /* im Quelltext auftauchen */
       
-      while ( (pos[0] != '[') && (pos[0] != EOS) )
+      while ( (pos[0] != '[') && (pos[0] != EOS) && (pos[0] != ')'))
       {
          chrcat(Space[i], pos[0]);
          pos++;
       }
+      
+      if (pos[0] == ')')
+         break;
       
       if (pos[0] == EOS)                  /* no more data */
       {
