@@ -19,6 +19,8 @@
 #   fd  Mar 05: ISO-8859-3, ISO-8859-4, CYRILLIC, ARABIC, GREEK, HEBREW
 #   fd  Mar 08: TURKISH, NORDIC, THAI, BALTIC, CELTIC, ISO-8859-15, ISO-8859-16
 #   fd  May 25: index adjustments
+# 2013
+#  ggs  Oct 13: Delete double 'codepages'
 #
 ################################################################################
 
@@ -30,7 +32,7 @@
 !label* codepages
 !label* codepage
 !label* code
-UDO supports various codepages for various systems. Below you see a list of all currently supported systems and (!nolink [codepages])codepages, some of which with multiple descriptors for the same codepage. It doesn't matter if you use these descriptors upper- or lowercase. (The descriptors base on the former UDO descriptors and on those supported by the Unix command (!C)iconv(!c).)
+UDO supports various codepages for various systems. Below you see a list of all currently supported systems and (!nolink [codepages]), some of which with multiple descriptors for the same codepage. It doesn't matter if you use these descriptors upper- or lowercase. (The descriptors base on the former UDO descriptors and on those supported by the Unix command (!C)iconv(!c).)
 
 !begin_table [r|l|l]
 (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Descriptor0(!b)
