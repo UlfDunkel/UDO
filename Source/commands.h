@@ -41,6 +41,8 @@
 *
 *  2010:
 *    fd  Feb 22: header adjusted
+*  2013:
+*    fd  Oct 23: unused HTML_CENTER_ON + HTML_CENTER_OFF removed
 *
 ******************************************|************************************/
 
@@ -235,10 +237,6 @@
 
 #define XHTML_BR         "<br />"
 #define XHTML_HR         "<hr />\n"
-
-/* the next two seem to be unused so far */
-#define HTML_CENTER_ON   "<p align=\"center\">"
-#define HTML_CENTER_OFF  "</p>"
 
 #if 0
 
