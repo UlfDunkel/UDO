@@ -43,6 +43,8 @@
 *  2011:
 *    fd  Feb 14: - all set_html_...() functions moved from TOC to TOC_HTML
 *                - functions tidied up
+*  2013:
+*    fd  Oct 23: set_html_doctype() now knows HTML5
 *
 ******************************************|************************************/
 
@@ -243,6 +245,9 @@ GLOBAL void set_html_doctype(void)
 
 
    tokcpy2(s, 512);
+
+   if (strcmp(s, "5") == 0)
+      html_doctype = HTML5;
 
    if (strcmp(s, "Old") == 0)
       html_doctype = HTML_OLD;

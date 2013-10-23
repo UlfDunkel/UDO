@@ -48,6 +48,9 @@
 *                - webmasteremail   -> contact_name
 *                - webmastermailurl -> contact_link
 *    fd  Mar 05: file tidied up
+*  2013:
+*    fd  Oct 23: - <h1> on HTML5 now uses class UDO_h1_align_center| UDO_h1_align_right
+*                - <h2> on HTML5 now uses class UDO_h2_align_center| UDO_h2_align_right
 *
 ******************************************|************************************/
 
@@ -2082,7 +2085,14 @@ GLOBAL void c_maketitle(void)
 
       if (has_title)
       {
-         voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
+         if (html_doctype == HTML5)
+         {
+            voutlnf("<h2 class=\"UDO_h2_align_center\">%s</h2>", titdat.title);
+         }
+         else
+         {
+            voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
+         }
       }
 
       if (has_programimage)
@@ -2094,12 +2104,26 @@ GLOBAL void c_maketitle(void)
       
       if (has_program)
       {
-         voutlnf("<h1 align=\"center\">%s</h1>", titdat.program);
+         if (html_doctype == HTML5)
+         {
+            voutlnf("<h1 class=\"UDO_h1_align_center\">%s</h1>", titdat.program);
+         }
+         else
+         {
+            voutlnf("<h1 align=\"center\">%s</h1>", titdat.program);
+         }
       }
       
       if (has_version || has_date || has_author || has_address)
       {
-         outln("<p align=\"center\">");
+         if (html_doctype == HTML5)
+         {
+            outln("<p class=\"UDO_p_align_center\">");
+         }
+         else
+         {
+            outln("<p align=\"center\">");
+         }
       }
       
       if (has_version)
@@ -2125,7 +2149,14 @@ GLOBAL void c_maketitle(void)
          
          if (has_author || has_address)
          {
-            outln("<p align=\"center\">");
+            if (html_doctype == HTML5)
+            {
+               outln("<p class=\"UDO_p_align_center\">");
+            }
+            else
+            {
+               outln("<p align=\"center\">");
+            }
          }
       }
       

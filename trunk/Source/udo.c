@@ -121,6 +121,11 @@
 *  2013:
 *    fd  Feb 15: Japanese added (TOJAP, etc.)
 *    ggs Mar 03: copyright year updated
+*    fd  Oct 23: - image output supports HTML5
+*                - tags who used align or valign attrs now use class names, like
+*                - <div> on HTML5 now uses class UDO_div_align_center| UDO_div_align_right
+*                - <p>   on HTML5 now uses class UDO_p_align_center  | UDO_p_align_right
+*                - <td>  on HTML5 now uses class UDO_td_align_center | UDO_td_align_right
 *
 ******************************************|************************************/
 
@@ -3653,11 +3658,22 @@ LOCAL void c_heading(void)
       c_internal_styles(name);
       n[0] = EOS;
       
-      if (inside_center)
-         strcpy(n, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(n, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(n, " class=\"UDO_td_align_center\"");
+      
+         if (inside_right)
+            strcpy(n, " class=\"UDO_td_align_right\"");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(n, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(n, " align=\"right\"");
+      }
          
       voutlnf("<h%d%s>%s</h%d>", html_nodesize, n, name, html_nodesize);
       break;
@@ -3841,11 +3857,22 @@ LOCAL void c_subheading(void)
       c_internal_styles(name);
       n[0] = EOS;
       
-      if (inside_center)
-         strcpy(n, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(n, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(n, " class=\"UDO_td_align_center\"");
+      
+         if (inside_right)
+            strcpy(n, " class=\"UDO_td_align_right\"");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(n, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(n, " align=\"right\"");
+      }
          
       voutlnf("<h%d%s>%s</h%d>", html_nodesize + 1, n, name, html_nodesize + 1);
       break;
@@ -4027,11 +4054,22 @@ LOCAL void c_subsubheading(void)
       c_internal_styles(name);
       n[0] = EOS;
       
-      if (inside_center)
-         strcpy(n, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(n, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(n, " class=\"UDO_td_align_center\"");
+      
+         if (inside_right)
+            strcpy(n, " class=\"UDO_td_align_right\"");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(n, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(n, " align=\"right\"");
+      }
          
       voutlnf("<h%d%s>%s</h%d>", html_nodesize + 2, n, name, html_nodesize + 2);
       break;
@@ -4212,11 +4250,22 @@ LOCAL void c_subsubsubheading(void)
       c_internal_styles(name);
       n[0] = EOS;
       
-      if (inside_center)
-         strcpy(n, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(n, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(n, " class=\"UDO_td_align_center\"");
+      
+         if (inside_right)
+            strcpy(n, " class=\"UDO_td_align_right\"");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(n, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(n, " align=\"right\"");
+      }
          
       voutlnf("<h%d%s>%s</h%d>", html_nodesize + 3, n, name, html_nodesize + 3);
       break;
@@ -4395,11 +4444,22 @@ LOCAL void c_subsubsubsubheading(void)
       c_internal_styles(name);
       n[0] = EOS;
       
-      if (inside_center)
-         strcpy(n, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(n, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(n, " class=\"UDO_td_align_center\"");
+      
+         if (inside_right)
+            strcpy(n, " class=\"UDO_td_align_right\"");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(n, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(n, " align=\"right\"");
+      }
          
       voutlnf("<h%d%s>%s</h%d>", html_nodesize + 4, n, name, html_nodesize + 4);
       break;
@@ -4515,11 +4575,22 @@ LOCAL void c_listheading(void)
       c_internal_styles(name);
       align[0] = EOS;
       
-      if (inside_center)
-         strcpy(align, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(align, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(align, "UDO_td_align_center");
+      
+         if (inside_right)
+            strcpy(align, "UDO_td_align_right");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(align, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(align, " align=\"right\"");
+      }
          
       sFontBeg[0] = EOS;
       sFontEnd[0] = EOS;
@@ -4531,8 +4602,16 @@ LOCAL void c_listheading(void)
          strcpy(sFontEnd, "</font>");
       }
       
-      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-         align, closer, sFontBeg, name);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
+      else
+      {
+         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
       
       if (bEnv1stItem[iEnvLevel])
       {
@@ -4596,11 +4675,22 @@ LOCAL void c_listsubheading(void)
       c_internal_styles(name);
       align[0] = EOS;
       
-      if (inside_center)
-         strcpy(align, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(align, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(align, "UDO_td_align_center");
+      
+         if (inside_right)
+            strcpy(align, "UDO_td_align_right");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(align, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(align, " align=\"right\"");
+      }
          
       sFontBeg[0] = EOS;
       sFontEnd[0] = EOS;
@@ -4612,8 +4702,16 @@ LOCAL void c_listsubheading(void)
          strcpy(sFontEnd, "</font>");
       }
       
-      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-      align, closer, sFontBeg, name);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
+      else
+      {
+         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
       
       if (bEnv1stItem[iEnvLevel])
       {
@@ -4677,11 +4775,22 @@ LOCAL void c_listsubsubheading(void)
       c_internal_styles(name);
       align[0] = EOS;
       
-      if (inside_center)
-         strcpy(align, " align=\"center\"");
-         
-      if (inside_right)
-         strcpy(align, " align=\"right\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(align, "UDO_td_align_center");
+      
+         if (inside_right)
+            strcpy(align, "UDO_td_align_right");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(align, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(align, " align=\"right\"");
+      }
          
       sFontBeg[0] = EOS;
       sFontEnd[0] = EOS;
@@ -4693,8 +4802,16 @@ LOCAL void c_listsubsubheading(void)
          strcpy(sFontEnd, "</font>");
       }
       
-      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-         align, closer, sFontBeg, name);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
+      else
+      {
+         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
       
       if (bEnv1stItem[iEnvLevel])
       {
@@ -4758,11 +4875,22 @@ LOCAL void c_listsubsubsubheading(void)
       c_internal_styles(name);
       align[0] = EOS;
       
-      if (inside_center)
-         strcpy(align, " align=\"center\"");
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(align, "UDO_td_align_center");
       
-      if (inside_right)
-         strcpy(align, " align=\"right\"");
+         if (inside_right)
+            strcpy(align, "UDO_td_align_right");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(align, " align=\"center\"");
+      
+         if (inside_right)
+            strcpy(align, " align=\"right\"");
+      }
       
       sFontBeg[0] = EOS;
       sFontEnd[0] = EOS;
@@ -4774,8 +4902,16 @@ LOCAL void c_listsubsubsubheading(void)
          strcpy(sFontEnd, "</font>");
       }
       
-      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-         align, closer, sFontBeg, name);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
+      else
+      {
+         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
       
       if (bEnv1stItem[iEnvLevel])
       {
@@ -4838,12 +4974,23 @@ LOCAL void c_listsubsubsubsubheading(void)
    case TOMHH:
       c_internal_styles(name);
       align[0] = EOS;
+
+      if (html_doctype == HTML5)
+      {
+         if (inside_center)
+            strcpy(align, "UDO_td_align_center");
       
-      if (inside_center)
-         strcpy(align, " align=\"center\"");
+         if (inside_right)
+            strcpy(align, "UDO_td_align_right");
+      }
+      else
+      {      
+         if (inside_center)
+            strcpy(align, " align=\"center\"");
       
-      if (inside_right)
-         strcpy(align, " align=\"right\"");
+         if (inside_right)
+            strcpy(align, " align=\"right\"");
+      }
       
       sFontBeg[0] = EOS;
       sFontEnd[0] = EOS;
@@ -4855,8 +5002,16 @@ LOCAL void c_listsubsubsubsubheading(void)
          strcpy(sFontEnd, "</font>");
       }
       
-      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-         align, closer, sFontBeg, name);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
+      else
+      {
+         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+            align, closer, sFontBeg, name);
+      }
       
       if (bEnv1stItem[iEnvLevel])
       {
@@ -5681,15 +5836,41 @@ GLOBAL void c_udolink (void)
       strcpy(sTemp, "<p>");
       
       if (inside_center)
-         strcpy(sTemp, "<p align=\"center\">");
+      {
+         if (html_doctype == HTML5)
+         {
+            strcpy(sTemp, "<p class=\"UDO_p_align_center\">");
+         }
+         else
+         {
+            strcpy(sTemp, "<p align=\"center\">");
+         }
+      }
          
       if (inside_right)
-         strcpy(sTemp, "<p align=\"right\">");
+      {
+         if (html_doctype == HTML5)
+         {
+            strcpy(sTemp, "<p class=\"UDO_p_align_right\">");
+         }
+         else
+         {
+            strcpy(sTemp, "<p align=\"right\">");
+         }
+      }
          
       if (nodename[0] == EOS)
       {
-         voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-            sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+               sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize, closer);
+         }
+         else
+         {
+            voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize, closer);
+         }
       }
       else
       {
@@ -5763,8 +5944,16 @@ GLOBAL void c_toplink(void)
    case TOHTM:
    case TOMHH:
                                           /* width and height set to 24 to fix bug #0000005 [voja] */
-      voutlnf("<p><a href=\"#\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\" width=\"24\" height=\"24\"%s></a></p>", 
-         GIF_TP_NAME, closer);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<p><a href=\"#\"><img src=\"%s\" alt=\"\" title=\"\" width=\"24\" height=\"24\"%s></a></p>", 
+            GIF_TP_NAME, closer);
+      }
+      else
+      {
+         voutlnf("<p><a href=\"#\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\" width=\"24\" height=\"24\"%s></a></p>", 
+            GIF_TP_NAME, closer);
+      }
    }
 }
 
@@ -8013,12 +8202,30 @@ BOOLEAN           reset_internals)        /* */
       if (inside_center)                  /* centered text */
       {
          if (!inside_compressed)
-            strcat(z, "<div align=\"center\">\n");
+         {
+            if (html_doctype == HTML5)
+            {
+               strcat(z, "<div class=\"UDO_div_align_center\">\n");
+            }
+            else
+            {
+               strcat(z, "<div align=\"center\">\n");
+            }
+         }
       }
       else if (inside_right)              /* right-justified text */
       {
          if (!inside_compressed)
-            strcat(z, "<div align=\"right\">\n");
+         {
+            if (html_doctype == HTML5)
+            {
+               strcat(z, "<div class=\"UDO_div_align_right\">\n");
+            }
+            else
+            {
+               strcat(z, "<div align=\"right\">\n");
+            }
+         }
       }
       else if (!inside_env)               /* ordinary text in a <p>...</p> */
       {
@@ -8270,6 +8477,14 @@ BOOLEAN           reset_internals)        /* */
          replace_all(token[i], ")", "\\)");
          qreplace_all(token[i], KPSPC_S, KPSPC_S_LEN, ")", 1);
          qreplace_all(token[i], KPSPO_S, KPSPO_S_LEN, "(", 1);
+         break;
+      
+      case TOHAH:
+      case TOHTM:
+      case TOMHH:
+         replace_all(token[i], "&", "&amp;");
+         replace_all(token[i], "<", "&lt;");
+         replace_all(token[i], ">", "&gt;");
 
       }  /* switch (desttype) */
 
@@ -8910,7 +9125,10 @@ BOOLEAN           reset_internals)        /* */
       }
       else if (!inside_env)               /* close ordinary paragraph */
       {
-         outln("</p>\n");
+         if (!inside_compressed)
+            outln("</p>\n");
+         else
+            outln("\n");
       }
       else                                /* we're inside any ENV_... */
       {

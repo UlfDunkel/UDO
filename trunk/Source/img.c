@@ -45,6 +45,8 @@
 *  2011:
 *    fd  Jan 31: - file reformatted
 *                - new: get_image_header(): replaces proprietary get_NNNheader() functions
+*  2013:
+*    fd  Oct 23: HTML output supports HTML5
 *
 ******************************************|************************************/
 
@@ -990,12 +992,26 @@ const int      border)            /* */
 
    if (inside_center)                     /* Bild in einer center-Umgebung */
    {
-      strcpy(align, "<p align=\"center\">");
+      if (html_doctype == HTML5)
+      {
+         strcpy(align, "<p class=\"UDO_p_align_center\">");
+      }
+      else
+      {
+         strcpy(align, "<p align=\"center\">");
+      }
    }
 
    if (inside_right)                      /* Bild in einer flushright-Umgebung */
    {
-      strcpy(align, "<p align=\"right\">");
+      if (html_doctype == HTML5)
+      {
+         strcpy(align, "<p class=\"UDO_p_align_right\">");
+      }
+      else
+      {
+         strcpy(align, "<p align=\"right\">");
+      }
    }
 
    if (!no_img_size)
@@ -1034,15 +1050,34 @@ const int      border)            /* */
    if (caption[0] == EOS)                 /* no image alt / title text available */
    {
                                           /* output empty alt + title contents for valid HTML */
-      sprintf(n, "%s<img src=\"%s\" alt=\"\" title=\"\" border=\"%d\"%s%s%s></p>", 
-         align, datei, border, sWidth, sHeight, closer);
+      if (html_doctype == HTML5)
+      {
+         sprintf(n, "%s<img src=\"%s\" alt=\"\" title=\"\" %s%s%s></p>", 
+            align, datei, sWidth, sHeight, closer);
+      }
+      else
+      {
+         sprintf(n, "%s<img src=\"%s\" alt=\"\" title=\"\" border=\"%d\"%s%s%s></p>", 
+            align, datei, border, sWidth, sHeight, closer);
+      }
+      
       outln(n);
    }
    else                                   /* image alt / title text available */
    {
       image_counter++;
-      sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"%d\"%s%s%s></p>",
-         align, datei, caption, caption, border, sWidth, sHeight, closer);
+      
+      if (html_doctype == HTML5)
+      {
+         sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s%s></p>",
+            align, datei, caption, caption, sWidth, sHeight, closer);
+      }
+      else
+      {
+         sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"%d\"%s%s%s></p>",
+            align, datei, caption, caption, border, sWidth, sHeight, closer);
+      }
+      
       outln(n);
    }
 }

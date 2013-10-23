@@ -126,6 +126,8 @@
 *                - TOC output debugged
 *    fd  Feb 19: c_tableofcontents(): tableofcontents command fixed for TeX ("\" -> "\\")
 *    fd  Oct 07: toc_output(): avoid unwanted output of \end{itemize} in TeX
+*  2013:
+*    fd  Oct 23: HTML output now supports HTML5
 *
 ******************************************|************************************/
 
@@ -630,7 +632,16 @@ int      tocindex)  /* */
       case TOHTM:
       case TOMHH:
          label2html(s);                   /*r6pl2*/
-         voutlnf("<a name=\"%s\"></a>", s);
+         
+         if (html_doctype == HTML5)
+         {
+            voutlnf("<a id=\"%s\"></a>", s);
+         }
+         else
+         {
+            voutlnf("<a name=\"%s\"></a>", s);
+         }
+
          break;  
       
       case TOLDS:
@@ -746,7 +757,16 @@ LOCAL void output_aliasses(void)
             convert_tilde(s);
             
             label2html(s);                /* r6pl2 */
-            voutlnf("<a name=\"%s\"></a>", s);
+
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<a id=\"%s\"></a>", s);
+            }
+            else
+            {
+               voutlnf("<a name=\"%s\"></a>", s);
+            }
+
             break;
             
          case TOLDS:
@@ -1155,13 +1175,29 @@ const UWORD     uiH)                 /* GUI navigation image height */
             
             if (l->is_node || l->is_alias)
             {
-               sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
-                  htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+               if (html_doctype == HTML5)
+               {
+                  sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>", 
+                     htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+               }
+               else
+               {
+                  sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
+                     htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+               }
             }
             else
             {
-               sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-                  htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+            	if (html_doctype == HTML5)
+            	{
+                  sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+                     htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+            	}
+            	else
+            	{
+                  sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+                     htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+               }
             }
          }
       }
@@ -3012,9 +3048,13 @@ BOOLEAN    keywords)             /* */
    strcpy(s, chr_codepage_charset_name(iEncodingTarget));
      
    voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, closer);
-   voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, closer);
-   voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", closer);
-   voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", closer);
+
+   if (html_doctype != HTML5)
+   {
+      voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, closer);
+      voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", closer);
+      voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", closer);
+   }
 
    /* New feature #0000054 in V6.5.2 [NHz] */
    if (html_header_date)
@@ -3456,6 +3496,10 @@ LOCAL void output_html_doctype(void)
       outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"");
       outln("        \"http://www.w3.org/TR/html4/loose.dtd\">");
       break;
+   
+   case HTML5:
+      outln("<!DOCTYPE HTML>");
+      break;
       
    case XHTML_STRICT:
       voutlnf("<?xml version=\"1.0\" encoding=\"%s\"?>", s);
@@ -3867,8 +3911,16 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-            sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+               sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
+         }
+         else
+         {
+            voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
+         }
       }
    }
    else
@@ -3887,7 +3939,14 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" %s%s>", sGifName, sGifSize, closer);
+         }
+         else
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         }
       }
    }
 }
@@ -3948,8 +4007,16 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-            sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
+               sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+         }
+         else
+         {
+            voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
+               sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+         }
       }
    }
    else
@@ -3979,8 +4046,16 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-                        sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+               sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+         }
+         else
+         {
+            voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+         }
       }
    }
 }
@@ -4059,9 +4134,17 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
+         if (html_doctype == HTML5)
+         {
+            voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+               href, target, sGifName, alt, alt, sGifSize, closer);
+         }
+         else
+         {
                                           /* Changed in r6pl16 [NHz] */
-         voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-            href, target, sGifName, alt, alt, sGifSize, closer);
+            voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               href, target, sGifName, alt, alt, sGifSize, closer);
+         }
       }
    }
    else
@@ -4080,7 +4163,14 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" %s%s>", sGifName, sGifSize, closer);
+         }
+         else
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         }
       }
    }
 }
@@ -4225,7 +4315,17 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
          sprintf(s, " bgcolor=\"%s\"", colptr);
       }
       
-      voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\"%s><tr><td valign=\"top\">", s);
+      voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\"%s>");
+      voutlnf("<tr>");
+
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<td class=\"UDO_td_valign_top\">", s);
+      }
+      else
+      {
+         voutlnf("<td valign=\"top\">", s);
+      }
    }
 #endif
    
@@ -4321,7 +4421,14 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" %s%s>", s, sGifSize, closer);
+         }
+         else
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+         }
       }
 #else
       html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
@@ -4371,7 +4478,14 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
                
-               voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+               if (html_doctype == HTML5)
+               {
+                  voutf("<img src=\"%s\" alt=\"\" title=\"\" %s%s>", s, sGifSize, closer);
+               }
+               else
+               {
+                  voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+               }
             }
 #else
                                           /* Frueher Link auf die Startseite */
@@ -4472,7 +4586,14 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+         if (html_doctype == HTML5)
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" %s%s>", s, sGifSize, closer);
+         }
+         else
+         {
+            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+         }
       }
    }
    
@@ -4481,7 +4602,14 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
       if (iDocHtmlSwitchLanguage >= 0 && sDocHtmlSwitchLanguage[0] != EOS)
       {
 #if 1
-         outln("</td><td valign=\"top\" align=\"right\">");
+         if (html_doctype == HTML5)
+         {
+            outln("</td><td class=\"UDO_td_valign_top UDO_td_align_right\">");
+         }
+         else
+         {
+            outln("</td><td valign=\"top\" align=\"right\">");
+         }
 #endif
          if (no_images)
          {
@@ -4516,9 +4644,19 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
+               
+               if (html_doctype == HTML5)
+               {
+                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"Deutsche Version dieses Dokuments\" %s%s></a>",
+                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+               }
+               else
+               {
                                           /* Changed in r6pl16 [NHz] */
-               voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"Deutsche Version dieses Dokuments\" border=\"0\"%s%s></a>",
-                  sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"Deutsche Version dieses Dokuments\" border=\"0\"%s%s></a>",
+                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+               }
+               
                break;
                
             case TOENG:
@@ -4528,9 +4666,18 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
+               
+               if (html_doctype == HTML5)
+               {
+                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"English version of this document\" %s%s></a>",
+                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+               }
+               else
+               {
                                           /* Changed in r6pl16 [NHz] */
-               voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"English version of this document\" border=\"0\"%s%s></a>",
-                  sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"English version of this document\" border=\"0\"%s%s></a>",
+                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+               }
             }
          }
       }
@@ -4610,11 +4757,27 @@ LOCAL void html_node_bar_modern(void)
       sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
       break;
    case ALIGN_CENT:
-      sprintf(sAlignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
+      if (html_doctype == HTML5)
+      {
+         sprintf(sAlignOn, "<tr><td class=\"UDO_td_align_center\">%s", sHtmlPropfontStart);
+      }
+      else
+      {
+         sprintf(sAlignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
+      }
+
       sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
       break;
    case ALIGN_RIGH:
-      sprintf(sAlignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
+      if (html_doctype == HTML5)
+      {
+         sprintf(sAlignOn, "<tr><td class=\"UDO_td_align_right\">%s", sHtmlPropfontStart);
+      }
+      else
+      {
+         sprintf(sAlignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
+      }
+
       sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
    }
 #else
@@ -4631,8 +4794,16 @@ LOCAL void html_node_bar_modern(void)
          sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconActiveWidth, titdat.authoriconActiveHeight);
       }
       
-      voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-         sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, closer, sAlignOff);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" %s%s></a>%s",
+            sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, closer, sAlignOff);
+      }
+      else
+      {
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
+            sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, closer, sAlignOff);
+      }
    }
    else
    {
@@ -4643,8 +4814,16 @@ LOCAL void html_node_bar_modern(void)
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
          }
          
-         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-            sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, closer, sAlignOff);
+         if (html_doctype == HTML5)
+         {
+            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" %s%s></a>%s",
+               sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, closer, sAlignOff);
+         }
+         else
+         {
+            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
+               sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, closer, sAlignOff);
+         }
       }
    }
    
@@ -4679,9 +4858,17 @@ LOCAL void html_node_bar_modern(void)
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
+         if (html_doctype == HTML5)
+         {
+            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" %s%s></a>%s",
+               sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, closer, sAlignOff);
+         }
+         else
+         {
                                           /*r6pl13*/
-         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-            sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, closer, sAlignOff);
+            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
+               sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, closer, sAlignOff);
+         }
       }
    }
    
@@ -4999,11 +5186,27 @@ LOCAL void html_node_bar_frames(void)
          sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
          break;
       case ALIGN_CENT:
-         sprintf(alignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
+         if (html_doctype == HTML5)
+         {
+            sprintf(alignOn, "<tr><td class=\"UDO_td_align_center\">%s", sHtmlPropfontStart);
+         }
+         else
+         {
+            sprintf(alignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
+         }
+
          sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
          break;
       case ALIGN_RIGH:
-         sprintf(alignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
+         if (html_doctype == HTML5)
+         {
+            sprintf(alignOn, "<tr><td class=\"UDO_td_align_right\">%s", sHtmlPropfontStart);
+         }
+         else
+         {
+            sprintf(alignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
+         }
+
          sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
       }
       
@@ -5013,7 +5216,15 @@ LOCAL void html_node_bar_frames(void)
       break;
       
    default:
-      sprintf(alignOn, "<td nowrap=\"nowrap\">%s", sHtmlPropfontStart);
+      if (html_doctype == HTML5)
+      {
+         sprintf(alignOn, "<td class=\"td_nowrap\">%s", sHtmlPropfontStart);
+      }
+      else
+      {
+         sprintf(alignOn, "<td nowrap=\"nowrap\">%s", sHtmlPropfontStart);
+      }
+      
       sprintf(alignOff, "%s</td>", sHtmlPropfontEnd);
       strcpy(rowOn, "<tr>");
       strcpy(rowOff, "</tr>");
@@ -5025,11 +5236,27 @@ LOCAL void html_node_bar_frames(void)
          divOff[0] = EOS;
          break;
       case ALIGN_CENT:
-         strcpy(divOn, "<div align=\"center\">");
+         if (html_doctype == HTML5)
+         {
+            strcpy(divOn, "<div class=\"UDO_div_align_center\">");
+         }
+         else
+         {
+            strcpy(divOn, "<div align=\"center\">");
+         }
+
          strcpy(divOff, "</div>");
          break;
       case ALIGN_RIGH:
-         strcpy(divOn, "<div align=\"right\">");
+         if (html_doctype == HTML5)
+         {
+            strcpy(divOn, "<div class=\"UDO_div_align_right\">");
+         }
+         else
+         {
+            strcpy(divOn, "<div align=\"right\">");
+         }
+         
          strcpy(divOff, "</div>");
       }
       
@@ -5048,9 +5275,34 @@ LOCAL void html_node_bar_frames(void)
          sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
       }
       
-      voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-         alignOn, html_name_prefix, FRAME_FILE_CON, outfile.suff,
-         FRAME_NAME_CON, titdat.authoricon, "" /*sDocImgSuffix*/, sGifSize, closer, alignOff);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\" %s%s></a>%s",
+            alignOn, 
+            html_name_prefix, 
+            FRAME_FILE_CON, 
+            outfile.suff,
+            FRAME_NAME_CON, 
+            titdat.authoricon, 
+            "" /*sDocImgSuffix*/, 
+            sGifSize, 
+            closer, 
+            alignOff);
+      }
+      else
+      {
+         voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
+            alignOn, 
+            html_name_prefix, 
+            FRAME_FILE_CON, 
+            outfile.suff,
+            FRAME_NAME_CON, 
+            titdat.authoricon, 
+            "" /*sDocImgSuffix*/, 
+            sGifSize, 
+            closer, 
+            alignOff);
+      }
    }
    
    for (i = 1; i <= p1_toc_counter; i++)
@@ -5158,18 +5410,39 @@ GLOBAL void html_headline(void)
       
       if (html_modern_backcolor[0] != EOS)
       {
-         voutlnf("<td valign=\"top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
-            html_modern_width,            /* */
-            html_modern_backcolor,        /* */
-            bgCmd,                        /* */
-            sHtmlPropfontStart);          /* */
+         if (html_doctype == HTML5)
+         {
+            voutlnf("<td class=\"UDO_td_valign_top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
+               html_modern_width,         /* */
+               html_modern_backcolor,     /* */
+               bgCmd,                     /* */
+               sHtmlPropfontStart);       /* */
+         }
+         else
+         {
+            voutlnf("<td valign=\"top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
+               html_modern_width,         /* */
+               html_modern_backcolor,     /* */
+               bgCmd,                     /* */
+               sHtmlPropfontStart);       /* */
+         }
       }
       else
       {
-         voutlnf("<td valign=\"top\" width=\"%s\"%s>%s", 
-            html_modern_width,            /* */
-            bgCmd,                        /* */
-            sHtmlPropfontStart);          /* */
+         if (html_doctype == HTML5)
+         {
+            voutlnf("<td class=\"UDO_td_valign_top\" width=\"%s\"%s>%s", 
+               html_modern_width,         /* */
+               bgCmd,                     /* */
+               sHtmlPropfontStart);       /* */
+         }
+         else
+         {
+            voutlnf("<td valign=\"top\" width=\"%s\"%s>%s", 
+               html_modern_width,         /* */
+               bgCmd,                     /* */
+               sHtmlPropfontStart);       /* */
+         }
       }
       
       html_node_bar_modern();
@@ -5180,7 +5453,14 @@ GLOBAL void html_headline(void)
       outln("<td valign=\"top\" width=\"8\">&nbsp;</td>");
 #endif
 
-      voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<td class=\"UDO_td_valign_top\" width=\"100%%\">%s", sHtmlPropfontStart);
+      }
+      else
+      {
+         voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
+      }
    }
    
    if (!no_headlines)
@@ -5190,7 +5470,17 @@ GLOBAL void html_headline(void)
    if (html_modern_layout || html_frames_layout)
    {
       outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n<tr>");
-      voutlnf("<td valign=\"top\" width=\"8\">&nbsp;</td><td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
+      
+      if (html_doctype == HTML5)
+      {
+         voutlnf("<td class=\"UDO_td_valign_top\" width=\"8\">&nbsp;</td>");
+         voutlnf("<td class=\"UDO_td_valign_top\" width=\"100%%\">%s", sHtmlPropfontStart);
+      }
+      else
+      {
+         voutlnf("<td valign=\"top\" width=\"8\">&nbsp;</td>");
+         voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
+      }
    }
 #endif
 }
@@ -5780,11 +6070,28 @@ GLOBAL BOOLEAN save_html_index(void)
          
          if (num_index > 100)             /* set jump entry for index A-Z list */
          {
-            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%s\"></a>%s</span>%s\n",
-               thisc_label, thisc_char, HTML_BR);
+            if (html_doctype == HTML5)
+            {
+               fprintf(uif, "<span class=\"UDO_index_name\"><a id=\"%s\"></a>%s</span>%s\n",
+                  thisc_label, thisc_char, HTML_BR);
+            }
+            else
+            {
+               fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%s\"></a>%s</span>%s\n",
+                  thisc_label, thisc_char, HTML_BR);
+            }
          }
          else
-            fprintf(uif, "<a name=\"%s\"></a>\n", thisc_label);
+         {
+            if (html_doctype == HTML5)
+            {
+               fprintf(uif, "<a id=\"%s\"></a>\n", thisc_label);
+            }
+            else
+            {
+               fprintf(uif, "<a name=\"%s\"></a>\n", thisc_label);
+            }
+         }
          
          lastc = thisc;
       }
@@ -7748,9 +8055,11 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
                      toc[ti]->uiImageHeight);
             }
    
-            voutlnf("%s<p align=\"center\">", hx_start);
-   
-            voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s%s>",
+            if (html_doctype == HTML5)
+            {
+               voutlnf("%s<p class=\"UDO_p_align_center\">", hx_start);
+               
+               voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" %s%s>",
                   toc[ti]->image, 
                   sDocImgSuffix, 
                   numbers, 
@@ -7759,6 +8068,21 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
                   name, 
                   sGifSize, 
                   closer);
+            }
+            else
+            {
+               voutlnf("%s<p align=\"center\">", hx_start);
+
+               voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s%s>",
+                  toc[ti]->image, 
+                  sDocImgSuffix, 
+                  numbers, 
+                  name, 
+                  numbers, 
+                  name, 
+                  sGifSize, 
+                  closer);
+            }
    
             voutlnf("</p>%s", hx_end);
             
@@ -7775,12 +8099,24 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
          label2html(nameNoSty);
          
-         voutlnf("%s<a name=\"%s\"></a>%s%s%s",
+         if (html_doctype == HTML5)
+         {
+            voutlnf("%s<a id=\"%s\"></a>%s%s%s",
                hx_start, 
                nameNoSty, 
                numbers, 
                name, 
                hx_end);
+         }
+         else
+         {
+            voutlnf("%s<a name=\"%s\"></a>%s%s%s",
+               hx_start, 
+               nameNoSty, 
+               numbers, 
+               name, 
+               hx_end);
+         }
       }
       
       if (show_variable.source_filename)
@@ -10376,8 +10712,16 @@ const int    currdepth)                 /* current node depth */
       }
       else
       {
-         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>", 
-            GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight, closer);
+         if (html_doctype == HTML5)
+         {
+            sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>", 
+               GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight, closer);
+         }
+         else
+         {
+            sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>", 
+               GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight, closer);
+         }
       }
    
       if (html_frames_layout)
@@ -10407,7 +10751,16 @@ const int    currdepth)                 /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<tt>+&nbsp;</tt>&nbsp;<a href=\"%s%s\"%s>%s</a>", sFile, outfile.suff, sTarget, s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<span class=\"UDO_span_tt\">+&nbsp;</span>&nbsp;<a href=\"%s%s\"%s>%s</a>", 
+                  sFile, outfile.suff, sTarget, s);
+            }
+            else
+            {
+               voutlnf("<tt>+&nbsp;</tt>&nbsp;<a href=\"%s%s\"%s>%s</a>", 
+                  sFile, outfile.suff, sTarget, s);
+            }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -10419,28 +10772,59 @@ const int    currdepth)                 /* current node depth */
                                           /* if userdef image exists */ 
                if (html_navigation_image_fspec[0] != 0)
                {
+                  if (html_doctype == HTML5)
+                  {
                                           /* don't close the nav line already! */
-                  voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                     voutf("<img src=\"%s\" alt=\"\" title=\"\" %s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
                                           /* folder image file name */
-                     html_navigation_image_fspec,
-                     closer,              /* XHTML single tag closer (if any) */
-                     sFile,               /* file name */
-                     outfile.suff,        /* file suffix */
-                     sTarget,             /* a href target */
-                     s);                  /* node name */
+                        html_navigation_image_fspec,
+                        closer,           /* XHTML single tag closer (if any) */
+                        sFile,            /* file name */
+                        outfile.suff,     /* file suffix */
+                        sTarget,          /* a href target */
+                        s);               /* node name */
+                  }
+                  else
+                  {
+                                          /* don't close the nav line already! */
+                     voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                                          /* folder image file name */
+                        html_navigation_image_fspec,
+                        closer,           /* XHTML single tag closer (if any) */
+                        sFile,            /* file name */
+                        outfile.suff,     /* file suffix */
+                        sTarget,          /* a href target */
+                        s);               /* node name */
+                  }
                }
                else
                {
+                  if (html_doctype == HTML5)
+                  {
                                           /* don't close the nav line already! */
-                  voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                     GIF_FO_NAME,         /* folder image file name */
-                     uiGifFoWidth,        /* folder image width */
-                     uiGifFoHeight,       /* folder image height */
-                     closer,              /* XHTML single tag closer (if any) */
-                     sFile,               /* file name */
-                     outfile.suff,        /* file suffix */
-                     sTarget,             /* a href target */
-                     s);                  /* node name */
+                     voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                        GIF_FO_NAME,      /* folder image file name */
+                        uiGifFoWidth,     /* folder image width */
+                        uiGifFoHeight,    /* folder image height */
+                        closer,           /* XHTML single tag closer (if any) */
+                        sFile,            /* file name */
+                        outfile.suff,     /* file suffix */
+                        sTarget,          /* a href target */
+                        s);               /* node name */
+                  }
+                  else
+                  {
+                                          /* don't close the nav line already! */
+                     voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                        GIF_FO_NAME,      /* folder image file name */
+                        uiGifFoWidth,     /* folder image width */
+                        uiGifFoHeight,    /* folder image height */
+                        closer,           /* XHTML single tag closer (if any) */
+                        sFile,            /* file name */
+                        outfile.suff,     /* file suffix */
+                        sTarget,          /* a href target */
+                        s);               /* node name */
+                  }
                }
             }
             else
@@ -10454,15 +10838,30 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;<a href=\"%s%s\"%s>%s</a>",
-               GIF_FO_NAME,               /* folder image file name */
-               uiGifFoWidth,              /* folder image width */
-               uiGifFoHeight,             /* folder image height */
-               closer,                    /* XHTML single tag closer (if any) */
-               sFile,                     /* file name */
-               outfile.suff,              /* file suffix */
-               sTarget,                   /* a href target */
-               s);                        /* node name */
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                  GIF_FO_NAME,            /* folder image file name */
+                  uiGifFoWidth,           /* folder image width */
+                  uiGifFoHeight,          /* folder image height */
+                  closer,                 /* XHTML single tag closer (if any) */
+                  sFile,                  /* file name */
+                  outfile.suff,           /* file suffix */
+                  sTarget,                /* a href target */
+                  s);                     /* node name */
+            }
+            else
+            {
+               voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                  GIF_FO_NAME,            /* folder image file name */
+                  uiGifFoWidth,           /* folder image width */
+                  uiGifFoHeight,          /* folder image height */
+                  closer,                 /* XHTML single tag closer (if any) */
+                  sFile,                  /* file name */
+                  outfile.suff,           /* file suffix */
+                  sTarget,                /* a href target */
+                  s);                     /* node name */
+            }
          }
       }
    
@@ -10476,8 +10875,16 @@ const int    currdepth)                 /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<br%s><tt>|--+&nbsp;</tt>&nbsp;%s", 
-               closer, s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s><span class=\"UDO_span_tt\">|--+&nbsp;</span>&nbsp;%s", 
+                  closer, s);
+            }
+            else
+            {
+               voutlnf("<br%s><tt>|--+&nbsp;</tt>&nbsp;%s", 
+                  closer, s);
+            }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -10485,8 +10892,16 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            voutlnf("<br%s>%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s", 
-               closer, sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, closer, s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s>%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>&nbsp;%s", 
+                  closer, sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, closer, s);
+            }
+            else
+            {
+               voutlnf("<br%s>%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s", 
+                  closer, sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, closer, s);
+            }
          }
       }
    
@@ -10500,8 +10915,16 @@ const int    currdepth)                 /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", 
-               closer, s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s><span class=\"UDO_span_tt\">&nbsp;&nbsp;&nbsp;|--+&nbsp;</span>&nbsp;%s", 
+                  closer, s);
+            }
+            else
+            {
+               voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", 
+                  closer, s);
+            }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -10509,15 +10932,30 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            voutlnf("<br%s>%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
-               closer,
-               sIndent, 
-               sIndent, 
-               GIF_FO_NAME, 
-               uiGifFoWidth, 
-               uiGifFoHeight, 
-               closer,
-               s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s>%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>&nbsp;%s",
+                  closer,
+                  sIndent, 
+                  sIndent, 
+                  GIF_FO_NAME, 
+                  uiGifFoWidth, 
+                  uiGifFoHeight, 
+                  closer,
+                  s);
+            }
+            else
+            {
+               voutlnf("<br%s>%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
+                  closer,
+                  sIndent, 
+                  sIndent, 
+                  GIF_FO_NAME, 
+                  uiGifFoWidth, 
+                  uiGifFoHeight, 
+                  closer,
+                  s);
+            }
          }
       }
    
@@ -10531,8 +10969,16 @@ const int    currdepth)                 /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
-               closer, s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s><span class=\"UDO_span_tt\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</span>&nbsp;%s",
+                  closer, s);
+            }
+            else
+            {
+               voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
+                  closer, s);
+            }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -10540,16 +10986,32 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
-               closer,
-               sIndent, 
-               sIndent, 
-               sIndent, 
-               GIF_FO_NAME, 
-               uiGifFoWidth, 
-               uiGifFoHeight, 
-               closer,
-               s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>&nbsp;%s",
+                  closer,
+                  sIndent, 
+                  sIndent, 
+                  sIndent, 
+                  GIF_FO_NAME, 
+                  uiGifFoWidth, 
+                  uiGifFoHeight, 
+                  closer,
+                  s);
+            }
+            else
+            {
+               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
+                  closer,
+                  sIndent, 
+                  sIndent, 
+                  sIndent, 
+                  GIF_FO_NAME, 
+                  uiGifFoWidth, 
+                  uiGifFoHeight, 
+                  closer,
+                  s);
+            }
          }
       }
       
@@ -10563,8 +11025,16 @@ const int    currdepth)                 /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
-               closer, s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s><span class=\"UDO_span_tt\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</span>&nbsp;%s",
+                  closer, s);
+            }
+            else
+            {
+               voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
+                  closer, s);
+            }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -10572,16 +11042,32 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
-               closer,
-               sIndent, 
-               sIndent, 
-               sIndent, 
-               GIF_FO_NAME, 
-               uiGifFoWidth, 
-               uiGifFoHeight, 
-               closer,
-               s);
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>&nbsp;%s",
+                  closer,
+                  sIndent, 
+                  sIndent, 
+                  sIndent, 
+                  GIF_FO_NAME, 
+                  uiGifFoWidth, 
+                  uiGifFoHeight, 
+                  closer,
+                  s);
+            }
+            else
+            {
+               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
+                  closer,
+                  sIndent, 
+                  sIndent, 
+                  sIndent, 
+                  GIF_FO_NAME, 
+                  uiGifFoWidth, 
+                  uiGifFoHeight, 
+                  closer,
+                  s);
+            }
          }
       }
       
@@ -11338,7 +11824,15 @@ GLOBAL void c_tableofcontents(void)
 
       if (toc_available)
       {
-         voutlnf("\n<h1><a name=\"%s\"></a>%s</h1>\n", HTML_LABEL_CONTENTS, lang.contents);
+         if (html_doctype == HTML5)
+         {
+            voutlnf("\n<h1><a id=\"%s\"></a>%s</h1>\n", HTML_LABEL_CONTENTS, lang.contents);
+         }
+         else
+         {
+            voutlnf("\n<h1><a name=\"%s\"></a>%s</h1>\n", HTML_LABEL_CONTENTS, lang.contents);
+         }
+
          add_label(HTML_LABEL_CONTENTS, FALSE, FALSE);
          toc_output(TOC_NODE1, depth, FALSE);
       }
@@ -11496,12 +11990,39 @@ GLOBAL void c_label(void)
          if ( (iEnvLevel > 0) && (iEnvType[iEnvLevel] == ENV_DESC) )
          {
             if (!bDescDDOpen)             /* DD hasn't been opened yet */
-               voutlnf("<dd><a name=\"%s\"></a></dd>", sLabel);
+            {
+               if (html_doctype == HTML5)
+               {
+                  voutlnf("<dd><a id=\"%s\"></a></dd>", sLabel);
+               }
+               else
+               {
+                  voutlnf("<dd><a name=\"%s\"></a></dd>", sLabel);
+               }
+            }
             else
-               voutlnf("<a name=\"%s\"></a>", sLabel);
+            {
+               if (html_doctype == HTML5)
+               {
+                  voutlnf("<a id=\"%s\"></a>", sLabel);
+               }
+               else
+               {
+                  voutlnf("<a name=\"%s\"></a>", sLabel);
+               }
+            }
          }
          else
-            voutlnf("<a name=\"%s\"></a>", sLabel);
+         {
+            if (html_doctype == HTML5)
+            {
+               voutlnf("<a id=\"%s\"></a>", sLabel);
+            }
+            else
+            {
+               voutlnf("<a name=\"%s\"></a>", sLabel);
+            }
+         }
       }
    
       break;
