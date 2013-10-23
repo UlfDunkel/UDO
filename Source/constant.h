@@ -45,6 +45,7 @@
 *    fd  Feb 12: BS_C, BS_S
 *  2013:
 *    fd  May 02: MAXDESTLANG increased
+*    fd  Oct 23: HTML5 added
 *
 ******************************************|************************************/
 
@@ -286,9 +287,10 @@
 #define HTML_STRICT           1           /* HTML 4.01 */
 #define HTML_TRANS            2           /* HTML 4.01 Transitional */
 #define HTML_FRAME            3           /* HTML 4.01 Frameset */
-#define XHTML_STRICT          4           /* XHTML 1.0 Strict */
-#define XHTML_TRANS           5           /* XHTML 1.0 Transitional */
-#define XHTML_FRAME           6           /* XHTML 1.0 Frameset */
+#define HTML5                 4           /* HTML 5 */
+#define XHTML_STRICT          5           /* XHTML 1.0 Strict */
+#define XHTML_TRANS           6           /* XHTML 1.0 Transitional */
+#define XHTML_FRAME           7           /* XHTML 1.0 Frameset */
 
 
 
