@@ -8477,14 +8477,6 @@ BOOLEAN           reset_internals)        /* */
          replace_all(token[i], ")", "\\)");
          qreplace_all(token[i], KPSPC_S, KPSPC_S_LEN, ")", 1);
          qreplace_all(token[i], KPSPO_S, KPSPO_S_LEN, "(", 1);
-         break;
-      
-      case TOHAH:
-      case TOHTM:
-      case TOMHH:
-         replace_all(token[i], "&", "&amp;");
-         replace_all(token[i], "<", "&lt;");
-         replace_all(token[i], ">", "&gt;");
 
       }  /* switch (desttype) */
 
@@ -8795,6 +8787,15 @@ BOOLEAN           reset_internals)        /* */
 
          switch (desttype)                   /* remove last space, added by concatenating the tokens */
          {
+/*
+         case TOHAH:
+         case TOHTM:
+         case TOMHH:
+            replace_all(token[i], "&", "&amp;");
+            replace_all(token[i], "<", "&lt;");
+            replace_all(token[i], ">", "&gt;");
+            break;
+*/      
          case TORTF:
          case TOWIN:
          case TOWH4:
