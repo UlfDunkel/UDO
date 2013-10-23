@@ -82,6 +82,7 @@
 *  2013:
 *    ggs Mar 03: copyright year updated
 *    fd  May 02: v7.02 ()
+*    fd  Oct 23: v7.03 (1242) - supporting HTML5
 *
 ******************************************|************************************/
 
@@ -113,8 +114,8 @@
    /* --- Release-Nummer und Patchlevel setzen --- */
 
 #define UDO_REL     "7"
-#define UDO_SUBVER  "02"
-#define UDO_BUILD   "(1228)"
+#define UDO_SUBVER  "03"
+#define UDO_BUILD   "(1242)"
 #define UDO_URL     "http://www.udo-open-source.org/"
 #define UDO_MADE    "Made with UDO"
 
