@@ -80,6 +80,8 @@
 *    mg  Aug 02: more enhancements for NROFF
 *  2012:
 *    fd  Apr 24: c_begin_enumerate() handles optional enumeration start number parameter
+*  2013:
+*    fd  Oct 23: HTML output supports HTML5
 *
 ******************************************|************************************/
 
@@ -2196,7 +2198,19 @@ GLOBAL void c_begin_itemize(void)
       if (bParagraphOpen)                 /* paragraph still open?!? */
       {
          if (!bEnvCompressed[iEnvLevel])  /* no compressed environment */
-            outln("</p>\n");              /* close previous paragraph first */
+         {
+                                          /* we're in a list environment: */
+            if (    (iEnvLevel > 1)
+                 && (iEnvType[iEnvLevel - 1] != ENV_LIST)
+               )
+            {
+               outln("</p>\n");           /* close previous paragraph first */
+            }
+            else
+            {
+               outln("\n");
+            }
+         }
       }
       
       bParagraphOpen = FALSE;
@@ -3689,9 +3703,27 @@ GLOBAL void c_item(void)
             
             c_internal_styles(sBig);
             strinsert(sBig, sHtmlPropfontStart);
-            strinsert(sBig, "<tr><td nowrap=\"nowrap\" valign=\"top\">");
+            
+            if (html_doctype == HTML5)
+            {
+               strinsert(sBig, "<tr><td class=\"UDO_td_nowrap UDO_td_valign_top\">");
+            }
+            else
+            {
+               strinsert(sBig, "<tr><td nowrap=\"nowrap\" valign=\"top\">");
+            }
+
             strcat(sBig, sHtmlPropfontEnd);
-            strcat(sBig, "</td>\n<td valign=\"top\">");
+            
+            if (html_doctype == HTML5)
+            {
+               strcat(sBig, "</td>\n<td class=\"UDO_td_valign_top\">");
+            }
+            else
+            {
+               strcat(sBig, "</td>\n<td valign=\"top\">");
+            }
+
             strcat(sBig, sHtmlPropfontStart);
          }
          else
@@ -4002,7 +4034,7 @@ GLOBAL void c_item(void)
 /*******************************************************************************
 *
 *  c_end_list():
-*     ??? (description missing)
+*     This function outputs the end of a list environment.
 *
 *  Return:
 *     -
@@ -4033,19 +4065,19 @@ int   listkind)  /* */
    switch (listkind)
    {
    case LIST_BOLD:
-      check_env_end (ENV_LIST, listkind, CMD_END_BLIST);
+      check_env_end(ENV_LIST, listkind, CMD_END_BLIST);
       break;
       
    case LIST_ITALIC:
-      check_env_end (ENV_LIST, listkind, CMD_END_ILIST);
+      check_env_end(ENV_LIST, listkind, CMD_END_ILIST);
       break;
       
    case LIST_TYPEWRITER:
-      check_env_end (ENV_LIST, listkind, CMD_END_TLIST);
+      check_env_end(ENV_LIST, listkind, CMD_END_TLIST);
       break;
       
    default:
-      check_env_end (ENV_LIST, listkind, CMD_END_XLIST);
+      check_env_end(ENV_LIST, listkind, CMD_END_XLIST);
    }
 
    if (iListLevel == 0)
@@ -4107,7 +4139,7 @@ int   listkind)  /* */
       
       
    case TOLYX:
-      if (iEnvLevel>0)
+      if (iEnvLevel > 0)
       {
          outln("\\end_deeper");
       }
@@ -4126,8 +4158,13 @@ int   listkind)  /* */
       voutlnf("%s", sHtmlPropfontEnd);
       
       if (bParagraphOpen)
+      {
          if (!bEnvCompressed[iEnvLevel])
-            out("</p>");
+         {
+/*            outln("</p>"); */
+            outln("");
+         }
+      }
 
       outln("</td></tr>\n</table>\n");
 

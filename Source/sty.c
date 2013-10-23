@@ -44,6 +44,8 @@
 *    fd  Jun 08: header added; some reformattings
 *  2010:
 *    fd  Mar 08: file tidied up
+*  2013:
+*    fd  Oct 23: HTML output supports HTML5
 *
 ******************************************|************************************/
 
@@ -899,10 +901,21 @@ char     *s)                  /* */
          qreplace_all(ptr, ITALIC_OFF,  STYLELEN, "</i>", 4);
          qreplace_all(ptr, UNDER_ON,    STYLELEN, "<u>", 3);
          qreplace_all(ptr, UNDER_OFF,   STYLELEN, "</u>", 4);
-         qreplace_all(ptr, VERB_ON,     STYLELEN, "<tt>", 4);
-         qreplace_all(ptr, VERB_OFF,    STYLELEN, "</tt>", 5);
-         qreplace_all(ptr, TWRITER_ON,  STYLELEN, "<tt>", 4);
-         qreplace_all(ptr, TWRITER_OFF, STYLELEN, "</tt>", 5);
+         
+         if (html_doctype == HTML5)
+         {
+            qreplace_all(ptr, VERB_ON,     STYLELEN, "<span class=\"UDO_span_tt\">", 26);
+            qreplace_all(ptr, VERB_OFF,    STYLELEN, "</span>", 7);
+            qreplace_all(ptr, TWRITER_ON,  STYLELEN, "<span class=\"UDO_span_tt\">", 26);
+            qreplace_all(ptr, TWRITER_OFF, STYLELEN, "</span>", 7);
+         }
+         else
+         {
+            qreplace_all(ptr, VERB_ON,     STYLELEN, "<tt>", 4);
+            qreplace_all(ptr, VERB_OFF,    STYLELEN, "</tt>", 5);
+            qreplace_all(ptr, TWRITER_ON,  STYLELEN, "<tt>", 4);
+            qreplace_all(ptr, TWRITER_OFF, STYLELEN, "</tt>", 5);
+         }
       }
       
       footnote2ascii(s);

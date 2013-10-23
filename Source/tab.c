@@ -58,6 +58,8 @@
 *                table_add_line() is a little bit faster now.
 *    ggs Apr 21: convert_table_caption(): Use MAXTABCAPTION for the string define
 *    fd  May 21: new: label* | l*  (#90)
+*  2013:
+*    fd  Oct 23: HTML output now supports HTML5
 *
 ******************************************|************************************/
 
@@ -1130,6 +1132,9 @@ LOCAL void table_output_win(void)
 *  test_for_addition():
 *     ??? (description missing)
 *
+*  Note:
+*     not adjusted for HTML5 output
+*
 *  Return:
 *     -
 *
@@ -1289,7 +1294,14 @@ LOCAL void table_output_html(void)
       }
    }
 
-   voutf("\n<div align=\"%s\">\n", alignOn);
+   if (html_doctype == HTML5)
+   {
+      voutf("\n<div class=\"UDO_div_align_%s\">\n", alignOn);
+   }
+   else
+   {
+      voutf("\n<div align=\"%s\">\n", alignOn);
+   }
 
    if (tab_toplines > 0)
    {
@@ -1304,11 +1316,25 @@ LOCAL void table_output_html(void)
    {
       if (tab_caption_visible)
       {
-         voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
+         if (html_doctype == HTML5)
+         {
+            voutlnf("<caption class=\"UDO_caption_valign_bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
+         }
+         else
+         {
+            voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
+         }
       }
       else
       {
-         voutlnf("<caption align=\"bottom\">%s</caption>", tab_caption);
+         if (html_doctype == HTML5)
+         {
+            voutlnf("<caption class=\"UDO_caption_valign_bottom\">%s</caption>", tab_caption);
+         }
+         else
+         {
+            voutlnf("<caption align=\"bottom\">%s</caption>", tab_caption);
+         }
       }
    }
 
@@ -1375,28 +1401,82 @@ LOCAL void table_output_html(void)
          {
          case TAB_CENTER:
             if (!addition_has_align)
-               um_strcat(addition, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
+            {
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_align_center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
+               }
+               else
+               {
+                  um_strcat(addition, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
+               }
+            }
 
             if (!addition_has_valign)
-               um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
-
+            {
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
+               }
+               else
+               {
+                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
+               }
+            }
+            
             break;
 
          case TAB_RIGHT:
             if (!addition_has_align)
-               um_strcat(addition, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
+            {
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_align_right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
+               }
+               else
+               {
+                  um_strcat(addition, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
+               }
+            }
 
             if (!addition_has_valign)
-               um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
+            {
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
+               }
+               else
+               {
+                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
+               }
+            }
 
             break;
 
          default:
             if (!addition_has_align)
-               um_strcat(addition, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
+            {
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_align_left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
+               }
+               else
+               {
+                  um_strcat(addition, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
+               }
+            }
 
             if (!addition_has_valign)
-               um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
+            {
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
+               }
+               else
+               {
+                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
+               }
+            }
          }
 
          voutf("  <td%s>", addition);
