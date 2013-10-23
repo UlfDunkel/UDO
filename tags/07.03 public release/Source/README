@@ -1,0 +1,21 @@
+Um UDO zu compilieren, beachtet bitte folgendes:
+
+Linux: make -f Makefile.linux
+
+Sinix: make -f makefile.snx
+
+SunOS: make -f makefile.sun
+
+IRIX:  make -f makefile.iri
+
+HP-UX: HP-Roman-8: rm chars.o
+                   make -f makefile.hp8
+                   Es wird dann "udo-hp8" erstellt.
+
+       ISO-Latin1: rm chars.o
+                   make -f makefile.hpi
+                   Es wird dann "udo-iso" erstellt.
+
+UDO wird mit Debug-Informationen (-g) gelinkt. Vor der Zusammenstellung
+der Distribution bitte "strip udo" aufrufen!
+

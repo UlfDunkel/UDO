@@ -1,0 +1,94 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands X
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: LINK macro introduced
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 21: xref links fixed
+#
+################################################################################
+
+!begin_node X!..
+!html_name  cmds_x
+
+# = = = = =
+
+!begin_node (!kw [x])
+!html_name  cmd_x
+
+Set index entry or keyword.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/x (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [index])
+
+!item [(!SEEALSO)]
+(!KW [index])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [xlink])
+!html_name  cmd_xlink()
+
+Reference to external documents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/xlink [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Useful for referencing external documents like other hypertexts or
+WWW-pages. In contrast to (!KKW [link]) (!LINK) will
+not be converted! The example shows how to make a link to a popular
+magazine in a HTML file. If (!LINK) is empty the contents of
+(!TEXT) is used.
+
+Kommt in einem Verweis eine Tilde vor,
+so braucht dieser bei Verwendung im (!KKW [xlink])-Kommando
+(!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
+
+# ToDo: was ist der Unterschied zu !url ?
+
+!item [(!EXAMPLE2)]
+(!T)(!/xlink [Deutsche Telekom] [http://www.dtag.de])(!t) (!nl)
+(!T)(!/xlink [irgendwas] [http://www.domain.de/!~user/index.html])(!t)
+# ToDo: andere Beispiele verwenden!
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Links] [Links])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

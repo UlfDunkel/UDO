@@ -1,0 +1,17 @@
+###########################################################
+# @(#) Makefile fuer SunOS
+# @(#) Dirk Hagedorn, 27.06.1996
+###########################################################
+CC = gcc 
+O=.o
+X=
+
+CFLAGS = -O2 -Wall -D__SUNOS__ $(XCFLAGS)
+
+LDFLAGS = 
+
+include makefile.in
+
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS) -o $@

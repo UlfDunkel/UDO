@@ -1,0 +1,3 @@
+#!/bin/sh
+# export UDOINPUTPATH=/usr/share/udo/udoinput/
+udo --rtf --verbose --force-long --tree --check -o kalkalpen.rtf kalkalpen.txt -D Debug -D NoPics

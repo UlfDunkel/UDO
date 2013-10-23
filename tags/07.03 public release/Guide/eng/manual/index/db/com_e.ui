@@ -1,0 +1,396 @@
+!subsubnode !/else
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/else(!t)
+
+!item [Description:]
+	The following lines are converted until the appearance of             
+	(!I)!/endif(!i), if the abbreviation of the current destination       
+	format wasn't used with the previous (!I)!/ifdest(!i) or              
+	(!I)!/iflang(!i) command.                                             
+
+
+!item [See:] (!I)!/ifdest(!i), (!I)!/iflang(!i), (!I)!/endif(!i), Query commands
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_appendix
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_appendix(!t)
+
+!item [Description:]
+	This command finishes the appendix. UDO supports only one appendix,   
+	so this command should be the precessor of (!I)!/begin_document(!i).  
+
+
+!item [See:] (!I)!/begin_appendix(!i), Appendix
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_blist
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_blist(!t)
+
+!item [Description:]
+	Finsihes the latest blist (""bold list"") environment.                
+
+
+!item [See:] (!I)!/begin_blist(!i), (!I)!/item~[~](!i), Lists
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_center
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_center(!t)
+
+!item [Description:]
+	This command finishes the latest center environment.                  
+
+
+!item [See:] (!I)!/begin_center(!i), center environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_comment
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/end_comment(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_description
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_description(!t)
+
+!item [Description:]
+	This command finishes the latest descripion environment.              
+
+
+!item [See:] (!I)!/begin_description(!i), (!I)!/item~[~](!i), description environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_document
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_document(!t)
+
+!item [Description:]
+	This command (!B)must(!b) be part of a source file and it should be   
+	the last command. If you forget to use this command UDO will print an 
+	error message.                                                        
+
+
+!item [See:] (!I)!/begin_document(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_enumerate
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_enumerate(!t)
+
+!item [Description:]
+	Finishes the latest enumerate environment.                            
+
+
+!item [See:] (!I)!/begin_enumerate(!i), (!I)!/item(!i), enumerate environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_flushleft
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_flushleft(!t)
+
+!item [Description:]
+	This command finishes the latest flushleft environment.               
+
+
+!item [See:] (!I)!/begin_flushleft(!i), flushleft environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_flushright
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_flushright(!t)
+
+!item [Description:]
+	This command finishes the latest flushright environment.              
+
+
+!item [See:] (!I)!/begin_flushright(!i), flushright environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_ilist
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_ilist(!t)
+
+!item [Description:]
+	Finishes the latest ilist (""italic list"") environment.              
+
+
+!item [See:] (!I)!/begin_ilist(!i), (!I)!/item~[~](!i), Lists
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_itemize
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_itemize(!t)
+
+!item [Description:]
+	Finishes the latest itemize environment.                              
+
+
+!item [See:] (!I)!/begin_itemize(!i), (!I)!/item(!i), itemize environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_quote
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_quote(!t)
+
+!item [Description:]
+	This command finishes the last quote environment. Text, that's part   
+	of a quote environment will be displayed indented.                    
+
+
+!item [See:] (!I)!/begin_quote(!i), quote environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_raw
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/end_raw(!t)
+
+!item [Description:]
+	Finishes the raw environment.                                         
+
+
+!item [See:] (!I)!/begin_raw(!i), raw environment
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_sourcecode
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_sourcecode(!t)
+
+!item [Description:]
+	This command finishes the sourcecode environment.                     
+
+
+!item [See:] (!I)!/begin_sourcecode(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_table
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_table(!t)
+
+!item [Description:]
+	Finishes the table environment and prints the table.                  
+
+
+!item [See:] Tables, (!I)!/begin_table(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_tlist
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_tlist(!t)
+
+!item [Description:]
+	Finsihes the latest tlist environment.                                
+
+
+!item [See:] (!I)!/begin_tlist(!i), (!I)!/item~[~](!i), Lists
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_verbatim
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_verbatim(!t)
+
+!item [Description:]
+	Finishes the verbatim environment.                                    
+
+
+!item [See:] (!I)!/begin_verbatim(!i), Preformatted text
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_xlist
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/end_xlist(!t)
+
+!item [Description:]
+	Finsihes the latest xlist environment.                                
+
+
+!item [See:] (!I)!/begin_xlist(!i), (!I)!/item~[~](!i), Lists
+
+!end_xlist
+#------------------------------
+!subsubnode !/endif
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/endif(!t)
+
+!item [Description:]
+	Finishes a query command that was started with (!I)!/ifdest(!i),      
+	(!I)!/iflang(!i), (!I)!/ifset(!i), (!I)!/ifos(!i) or (!I)!/if(!i).    
+
+
+!item [See:] (!I)!/ifdest(!i), (!I)!/iflang(!i), (!I)!/ifset(!i), (!I)!/ifos(!i), (!I)!/if(!i), (!I)!/else(!i), Query commands
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

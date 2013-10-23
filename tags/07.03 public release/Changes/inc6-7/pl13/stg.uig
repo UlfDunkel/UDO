@@ -1,0 +1,16 @@
+!begin_itemize
+
+!index !/image
+!item Bugfix: UDO sucht nun bei (!I)!/image(!i) zunächst ausgehend vom
+Ausgabeverzeichnis. Bilder sollten dann auch vom TTP gefunden werden,
+wenn man UDO nicht im Verzeichnis der Quelldatei startet.
+
+!index !/heading
+!index !/subheading
+!index !/subsubheading
+!index !/subsubsubheading
+!item Bugfix: Wurde (!I)!/heading(!i) in einer center- oder
+flushright-Umgebung eingesetzt so wurde es nicht zentriert bzw.
+rechtsbündig ausgegeben (Stefan Baireuther).
+
+!end_itemize

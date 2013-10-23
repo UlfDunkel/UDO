@@ -1,0 +1,23 @@
+###########################################################
+# @(#) Makefile fuer MacOSX (PPC)
+# @(#) Dirk Hagedorn, 27.06.1996
+# @(#) Stefan Kuhr, 23.04.2003
+###########################################################
+CC = gcc 
+O=.o
+X=
+
+CFLAGS = -fwritable-strings $(CPROJECTFLAGS) -D__MACOSX__ $(XCFLAGS)
+
+#CFLAGS =	-g -O2 -D__MACOSX__ \
+#-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
+#-Wshadow -Wwrite-strings -Wbad-function-cast -Wcast-qual \
+#-Wconversion -pedantic 
+
+LDFLAGS = $(LDPROJECTFLAGS)
+
+include makefile.in
+
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS)-o $@

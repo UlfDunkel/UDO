@@ -1,0 +1,132 @@
+!subsubnode !/macro
+
+Makro definieren
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/macro <wort> <text>(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando definiert ein neues Makro. Bei der Umwandlung wird    
+	dann ""(!/<wort>)"" durch ""<text>"" ersetzt. Im Beispiel würde       
+	""(!/DH)"" durch ""Dirk Hagedorn"" ersetzt.                           
+
+!item [Beispiel:] (!T)!/macro DH Dirk Hagedorn(!t)
+
+!item [Siehe auch:] Makros
+
+!end_xlist
+#------------------------------
+!subsubnode !/maketitle
+
+Titelseite ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/maketitle(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando erzeugt in der Zieldatei eine Titelseite, die aus den 
+	Informationen der unteren Befehle gebildet wird. Wenn                 
+	(!I)!/maketitle(!i) benutzt wird, sollte es nur direkt nach           
+	(!I)!/begin_document(!i) eingesetzt werden.                           
+
+
+!item [Siehe auch:] Titelseite
+
+!end_xlist
+#------------------------------
+!subsubnode !/man_lpp
+
+Zeilen pro Seite setzen (nur Manualpage)
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/man_lpp <wert>(!t)
+
+!item [Beschreibung:] 
+	Setzt die Anzahl der Zeilen pro Seite (""lines per page"") einer      
+	Manualpage. Im Fußbereich werden dann zusätzlich Seitennummern        
+	ausgegeben. Beim Start der Umwandlung ist die Seitenlänge undefiniert 
+	und es werden auch keine Fußzeilen ausgegeben.                        
+
+!item [Beispiel:] (!T)!/man_lpp 60(!t)
+
+!item [Siehe auch:] (!I)!/use_formfeed(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/man_type
+
+Programmtyp setzen (nur Manualpage)
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/man_type <text>(!t)
+
+!item [Beschreibung:] 
+	""<text>"" wird bei der Ausgabe in eine Manualpage in Klammern in der 
+	Kopfzeile ausgegeben. Im Beispiel würde bei benutztem                 
+	""(!I)!/program~udo(!i)"" die Kopfzeile ""udo(1)"" ausgegeben.        
+	""<text>"" wird nicht als Dateiendung benutzt.                        
+
+!item [Beispiel:] (!T)!/man_type 1(!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/medskip
+
+Zwei zusätzliche Leerzeilen einfügen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/medskip(!t)
+
+!item [Beschreibung:] 
+	Dieser Befehl sorgt für die Ausgabe von zwei zusätzlichen Leerzeilen  
+	und dient dazu, Absätze deutlicher voneinander abzuheben. Bei der     
+	Umwandlung ins (!LaTeX)-Format werden keine drei Leerzeilen sondern   
+	''(!V)\medskip(!v)'' ausgegeben.                                      
+
+
+!item [Siehe auch:] (!I)!/smallskip(!i), (!I)!/bigskip(!i)
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+!begin_description !compressed
+!item [Punkt 1] der ‰uﬂeren description-Umgebung
+      mit etwas mehr Text, um die Formatierung
+      zu verdeutlichen.
+!item [Punkt 2] der ‰uﬂeren description-Umgebung.
+      !begin_description
+      !item [Punkt 1] der inneren Umgebung.
+      !item [Punkt 2] der inneren Umgebung.
+      !end_description
+!item [Punkt 3] der ‰uﬂeren description-Umgebung.
+!end_description

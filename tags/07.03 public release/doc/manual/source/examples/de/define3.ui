@@ -1,0 +1,7 @@
+!ifdest [html]
+  !define head <h1>(!1)</h1>
+!else
+  !define head (!1)
+!endif
+[...]
+(!head [Eine Überschrift])

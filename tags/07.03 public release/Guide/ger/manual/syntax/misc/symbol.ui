@@ -1,0 +1,115 @@
+############################################################
+# @(#) Symbole, Dirk Hagedorn, 03.10.1996
+############################################################
+
+!subsubnode Symbole
+
+!index -D
+!index !/set
+!index !/unset
+!index !/ifset
+!index !/ifnset
+
+Symbole sind benutzerdefinierte inhaltsleere Variablen, welche sich
+durch das Kommando (!I)!/set(!i) und beim Aufruf von UDO durch die
+Kommandozeilenoption (!V)-D(!v) setzen und mit dem Kommando
+(!I)!/unset(!i) auch wieder entfernen lassen. Ob ein Symbol (nicht) gesetzt ist,
+läßt sich durch die Abfrage-Befehle (!I)!/ifset(!i) bzw. (!I)!/ifnset(!i)
+testen.
+
+Die Einsatzmöglichkeiten von Symbolen sind vielfältig. Im folgenden
+Beispiel werde ich versuchen, Ihnen ein typisches Anwendungsgebiet zu
+zeigen, bei dem man je nach gesetzten Symbolen eine Zieldatei mit
+unterschiedlichem Inhalt erhält.
+
+Gehen wir einmal davon aus, daß wir einen Quelltext geschrieben haben,
+der drei Kapitel enthält. Die ersten beiden Kapitel sind bereits
+fertig, am letzten Kapitel wird noch eifgrig herumgebastelt. Um nun
+die Turn-Around-Zeiten zu minimieren, wollen wir eine Zieldatei
+erzeugen, die nur das dritte Kapitel enthält. Nur wenn das Symbol
+''(!V)AlleKapitel(!v)'' gesetzt ist, soll die Zieldatei alle Kapitel
+enthalten:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!begin_document
+!tableofcontents
+!ifset [AlleKapitel]
+!include kapitel1.ui
+!include kapitel2.ui
+!endif
+!include kapitel3.ui
+!end_document
+!end_verbatim
+!end_quote
+!autoref [on]
+
+Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur
+das dritte Kapitel enthält. Starten Sie UDO hingegen mit der
+Kommandozeilenoption ''(!T)-D~AlleKapitel(!t)'', so werden alle Kapitel
+umgewandelt.
+
+Das Spielchen kann man natürlich noch etwas ausbauen. Durch Verwendung
+weiterer Symbole kann man gezielt nur einzelne Kapitel oder alle
+zusammen in die Zieldatei aufnehmen. Im folgenden Beispiel wird bei
+Übergabe der Option ''(!T)-D~Kapitel1(!t)'' nur das erste Kapitel in die
+Zieldatei aufgenommen. Übergibt man ''(!T)-D~Kapitel1(!t)'' und
+''(!T)-D~Kapitel2(!t)'', so werden das erste und das zweite Kapitel
+eingebunden. Übergibt man hingegen ''(!T)-D~AlleKapitel(!t)'', so wird die
+Zieldatei komplett dargestellt:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!begin_document
+!tableofcontents
+!ifset [Kapitel1, AlleKapitel]
+!include kapitel1.ui
+!endif
+!ifset [Kapitel2, AlleKapitel]
+!include kapitel2.ui
+!endif
+!ifset [Kapitel3, AlleKapitel]
+!include kapitel3.ui
+!endif
+!end_document
+!end_verbatim
+!end_quote
+!autoref [on]
+
+Der Phantasie sind also wenige Grenzen gesetzt!
+
+Wie in der Einführung zu diesem Abschnitt beschrieben, lassen sich
+Symbole auch wieder löschen. Dazu bedient man sich des Befehls
+(!I)!/unset(!i). 
+
+Wollen Sie in obigem Beispiel partout verhindern, daß alle Kapitel in
+die Zieldatei eingebunden werden, so können Sie zuvor das Symbol
+(!V)AlleKapitel(!v) löschen, sofern es gesetzt wurde. Dies
+funktioniert so:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!ifset [AlleKapitel]
+!unset AlleKapitel
+!endif
+!end_verbatim
+!end_quote
+!autoref [on]
+
+In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
+''(!V)AlleKapitel(!v)'' gesetzt ist. In dem Falle wird es durch den Befehl
+(!I)!/unset(!i) gelöscht. Die vorherige Abfrage ist deshalb notwendig,
+damit man eine Fehlermeldung seitens UDO vermeidet, falls das Symbol
+''(!V)AlleKapitel(!v)'' einmal nicht gesetzt ist.
+
+(!HINTS)
+
+!begin_enumerate
+!item	Es sind maximal 32 Symbole erlaubt.
+!item	Der Bezeichner eines Symbols darf maximal 32 Zeichen lang
+sein.
+!end_enumerate
+

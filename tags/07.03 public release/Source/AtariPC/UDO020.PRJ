@@ -1,0 +1,59 @@
+UDO020.TTP
+
+; Compiler switches
+.C[ -DUSE_PCTOS]
+.C[ -D__COMPATIBLE__ ]
+.C[ -D__fast_file ]
+
+.C[ -C- ]                ; Not allow nested comments
+.C[ -K ]                 ; Default char is unsigned
+.C[ -P ]                 ; Use absolute calls
+.C[ -2 ]                 ; Generate 68020 Code
+.C[ -l99 ]               ; Maximum identifier length
+.C[ -Y ]                 ; Add debug Information
+
+; Linker switches
+.L[ -S=64000 ]           ; Stacksize
+
+; Linking without debug information
+.L[ -Y- -G- -L- ]
+
+; Linking with debug information
+;.L[ -Y -G -L ]
+
+
+=
+
+; Startup-Code from Stefan Kuhr
+StUpArgv.O
+
+; The UDO sources
+; They are compiled, if UDO.TTP is newer than the *.O-Files even
+; if the sources are not changed, so the swich between the two
+; versions is correctly handled
+..\abo.c
+..\cfg.c
+..\chr.c
+..\env.c
+..\file.c
+..\img.c
+..\lang.c
+..\msg.c
+..\par.c
+..\str.c
+..\sty.c
+..\tab.c
+..\toc.c
+..\toc_html.c
+..\tp.c
+..\udo.c
+..\udomem.c
+..\cli.c
+
+; The TOS-Bibliothek
+pctos.lib		; Moderner Ersatz (look at http://acspro.atari.org)
+;pctoslib.lib	; Original Pure-C-Bibliothek
+
+; Die Pure-C-Bibliotheken
+pcfltlib.lib
+pcstdlib.lib

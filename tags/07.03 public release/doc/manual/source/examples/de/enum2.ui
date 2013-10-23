@@ -1,0 +1,9 @@
+!begin_enumerate !compressed
+!item Dies ist Punkt 1 der äußeren enumerate-Umgebung.
+!item Dies ist Punkt 2 der äußeren enumerate-Umgebung.
+      !begin_enumerate
+      !item Dies ist Punkt 1 der inneren Umgebung.
+      !item Dies ist Punkt 2 der inneren Umgebung.
+      !end_enumerate
+!item Dies ist Punkt 3 der äußeren enumerate-Umgebung.
+!end_enumerate

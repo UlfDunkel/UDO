@@ -1,0 +1,330 @@
+!subsubnode !/table_caption
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/table_caption <text>(!t)
+
+!item [Description:]
+	Use this command to set the title of the next table. You have to use  
+	this command outside the table environment. For the first table of    
+	your source file UDO will print ""Table 1: A table"" if you use the   
+	lower example.                                                        
+
+!item [Example:] (!T)!/table_caption A table(!t)
+
+!item [See:] Tables, (!I)!/table_caption*(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/table_caption*
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/table_caption* <text>(!t)
+
+!item [Description:]
+	The difference between this and the (!I)!/table_caption(!i) command   
+	is that UDO won't print ""Table <no>:"" before the table caption.     
+
+!item [Example:] (!T)!/table_caption* A table(!t)
+
+!item [See:] Tables, (!I)!/table_caption(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/table_counter
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/table_counter [<value>](!t)
+
+!item [Description:]
+	With this switch you can set the table counter. If you use the lower  
+	example the caption of the first table will look like this: ""Table   
+	5: !.."".                                                             
+
+!item [Example:] (!T)!/table_counter 5(!t)
+
+!item [See:] Tables
+
+!end_xlist
+#------------------------------
+!subsubnode !/tableofcontents
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/tableofcontents(!t)
+
+!item [Description:]
+	Generates a full table of contents with specific commands of the      
+	destination format. I recommend to use this command right after using 
+	!/begin_document or !/maketitle.                                      
+
+
+!item [See:] Tables of contents, (!I)!/use_short_toc(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/tabwidth
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/tabwidth <value>(!t)
+
+!item [Description:]
+	If lines that are part of a verbatim environment contain TABs         
+	(ASCII~9) UDO will replace them by a specific number of blanks. E.g.  
+	if you have written a C source code using a tabwidth of 3 and you     
+	want to print it with UDO you can use (!I)!/tabwidth~3(!i). You can   
+	reset this value before every verbatim environment. UDO will use a    
+	value of 8 by default.                                                
+
+!item [Example:] (!T)!/tabwidth 3(!t)
+
+!item [See:] verbatim environment, (!I)!/vinclude(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/tex_2e
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/tex_2e(!t)
+
+!item [Description:]
+	UDO will output special (!LaTeXe) commands if you use this command    
+	e.g. (!V)\textbf{...}(!v) instead of (!V){\bf ...}(!v)                
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/tex_dpi
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/tex_dpi <value>(!t)
+
+!item [Description:]
+	Sets the resolution with which images should be output via (!LaTeX).  
+
+!item [Example:] (!T)!/tex_dpi 100(!t)
+
+!item [See:] (!I)!/tex_strunk(!i), (!I)!/tex_lindner(!i), (!I)!/tex_emtex(!i), (!I)!/image(!i), Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/tex_emtex
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/tex_emtex(!t)
+
+!item [Description:]
+	This switch says UDO to generate special emTeX commands to display    
+	Microsoft Paintshop Bitmaps ((!V)*.msp(!v)) when using the !/image    
+	command.                                                              
+
+
+!item [See:] (!I)!/tex_strunk(!i), (!I)!/tex_lindner(!i), (!I)!/image(!i), Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/tex_lindner
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/tex_lindner(!t)
+
+!item [Description:]
+	This switch says UDO to generate special Lindner-(!TeX) commands to   
+	display GEM images when using the !/image command.                    
+
+
+!item [See:] (!I)!/tex_strunk(!i), (!I)!/tex_emtex(!i), (!I)!/image(!i), Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/tex_strunk
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/tex_strunk(!t)
+
+!item [Description:]
+	This switch says UDO to generate special Strunk-(!TeX) commands to    
+	display GEM images when using the !/image command.                    
+
+
+!item [See:] (!I)!/tex_lindner(!i), (!I)!/tex_emtex(!i), (!I)!/image(!i), Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/tex_verb
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/tex_verb <char>(!t)
+
+!item [Description:]
+	""<char"" will be used as the sign for the (!LaTeX) command           
+	(!V)\verb(!v). ""+"" will be used by default.                         
+
+!item [Example:] (!V)!/tex_verb |(!v)
+
+!item [See:] (!I)(!/V)...(!/v)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/toc
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/toc [<abbreviations>](!t)
+
+!item [Description:]
+	Outputs a table of contents without special page or hypertext         
+	commands. The example shows how to output a table of contents (as raw 
+	text) for the ST-Guide.                                               
+
+!item [Example:] (!T)!/toc [stg](!t)
+
+!item [See:] (!I)!/tableofcontents(!i), (!I)!/subtoc(!i), (!I)!/subsubtoc(!i), Tables of contents
+
+!end_xlist
+#------------------------------
+!subsubnode !/toc_offset
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/toc_offset <value>(!t)
+
+!item [Description:]
+	""<value>"" is added to the current chapter number when printing a    
+	chapter headline or a table of contents. The example shows how to set 
+	the number of the first chapter to 10. You can use negative values,   
+	too. This switch has no effect to chapters of the appendix.           
+
+!item [Example:] (!T)!/toc_offset 9(!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode (!/T)...(!/t)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	placeholder, preamble & main part
+
+!item [Syntax:]
+	(!T)(!/T)<text>(!/t)(!t)
+
+!item [Description:]
+	""<text>"" will be displayed in typewriter if possible.               
+
+!item [Example:] (!T)(!/T)monospaced(!/t)(!t)
+
+!item [See:] Emphasizing text
+
+!end_xlist
+#------------------------------
+!subsubnode (!/TeX)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	placeholder, preamble & main part
+
+!item [Syntax:]
+	(!T)(!/TeX)(!t)
+
+!item [Description:]
+	This placeholder will be replaced by (!V)\TeX{}(!v) when converting   
+	to (!LaTeX). Otherwise it will be replace by ""TeX"".                 
+
+!item [Example:] (!/TeX) is printed as (!TeX)
+
+!item [See:] (!I)(!/LaTeX)(!i), (!I)(!/LaTeXe)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (!/today)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	placeholder, preamble & main part
+
+!item [Syntax:]
+	(!T)(!/today)(!t)
+
+!item [Description:]
+	This placeholder will be replaced by the long form of the current     
+	date.                                                                 
+
+!item [Example:] (!T)(!/today)(!t) becomes (!today)
+
+!item [See:]  (!I)(!/short_today)(!i), (!I)!/language(!i)
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+

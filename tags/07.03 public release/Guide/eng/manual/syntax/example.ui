@@ -1,0 +1,77 @@
+!subnode A short example
+
+Before going into details I want to show you how an UDO source file may look
+like. You can use this example to make your own source files if you want to.
+
+!begin_quote
+!hline
+!vinclude syntax/example.u
+!hline
+!end_quote
+
+!subsubheading Explanations
+
+At the beginning of this example you can see a comment. A comment is a line
+that begins with a ''#'' immediately.
+
+The next line is a special line. This line contains a special command
+for the ST-Guide. If you don't know the ST-Guide just add this line at the
+beginning of your source file so that are all the people are able to build a
+hypertext if they want to.
+
+!index !/title
+!index !/program
+!index (!/today)
+!index !/date
+Now the information for the title page and the headlines are set.
+(!I)!/title(!i) and (!I)!/program(!i) should make sense if you read them one
+after another. In this example it would be ""An example for UDO"". If you
+look at the line containing (!I)!/date(!i) you will see the placeholder
+(!I)(!/today)(!i) that is replaced by the current system date. You can set
+(!I)!/date(!i) to April 16th, 1996 manually, if you want to.
+
+!index !/subtoc
+!index !/subsubtoc
+The preamble contains some switches. The first to switches are set for the
+output of ""sub-tables-of-contents"" in hypertexts. The abbreviations of
+these hypertexts you will see inside the brackets. In a ""subtoc"" all
+subnodes of a node are printed like a table of contents so that readers of a
+hypertext are enabled to directly switch to an interesting subnode.
+
+!index !/no_effects
+The switch (!I)!/no_effects [asc](!i) suppresses the usage of Usenet text
+effect commands like stars for bold and slashes for italic text.
+
+!index !/use_justified
+The switch (!I)!/use_justified [asc](!i) tells UDO to layout the ASCII file
+with justified text.
+
+!index !/begin_document
+The command (!I)!/begin_document(!i) tells UDO that now the main part of the
+document begins. This command has to be part of any source file!
+
+!index !/maketitle
+In first place we output the title page that is built with the information
+set in the preamble of this example. You should use (!I)!/maketitle(!i)
+directly after (!I)!/begin_document(!i) if you use it. It's possible to use
+it later but I don't think that it would work without problems.
+
+!index !/tableofcontents
+Then we want that UDO prints a table of contents. There you can see all
+chapters, sections and subsections of the source file. Like
+(!I)!/maketitle(!i) you should use (!I)!/tableofcontents(!i) directly after
+(!I)!/begin_document(!i) or (!I)!/maketitle(!i) if you use this command.
+
+!index !/node
+Now we can enter the first chapter of our text. Chapters are marked with
+(!I)!/node(!i). Please read the contents of this chapter that contains
+additional information.
+
+The following lines demonstrate how to use chapters, sections and
+subsections. You should also read the text of these chapters to get more
+information.
+
+!index !/end_document
+Finally we end our text with the command (!I)!/end_document(!i). This
+command has to be part of every source file and should be the last command
+of a source file!

@@ -1,0 +1,90 @@
+!subnode Fragen zum Pure-C-Help-Format
+!ignore_links
+!html_name faqpch
+
+Das Pure-C-Help-Format wird lediglich für Pure~C, einem Compiler für den
+Atari ST, als Hilfesystem verwendet. Ansonsten hat es keine Bedeutung mehr
+für diesen Rechner.
+
+!begin_description
+
+##################################################
+
+!item [Wie erzeugt UDO hier Titelseite und Inhaltsverzeichnis?] ~
+
+UDO erzeugt eine Seite mit den Titelangaben und dem Inhaltsverzeichnis. Da
+diese Seite bei umfangreicheren Dokumenten ziemlich lang werden kann,
+empfiehlt es sich, den Schalter (!I)!/use_short_toc~[pch](!i) im
+Zusammenhang mit den Schaltern (!I)!/use_auto_subtocs~[pch](!i) und
+(!I)!/use_auto_subsubtocs~[pch](!i) zu benutzen, damit auch Programmierer
+mit kleinen Bildschirmen nicht den Überblick auf dieser Seite zu verlieren.
+
+##################################################
+
+!item [Wie kann ich bei Pure-C-Help die Kopfzeilen entfernen?] ~
+
+UDO erzeugt auf jeder Seite automatisch (!idx [Kopfzeilen]), gebildet aus der
+Überschrift der jeweiligen Seite sowie des Titels der Hilfedatei. Durch
+Anklicken des Titels kann man zur Titelseite bzw. zum Inhaltsverzeichnis
+verzweigen.
+
+Durch den Schalter (!I)!/no_headlines~[pch](!i) läßt sich die Ausgabe dieser
+Kopfzeilen unterbinden.
+
+##################################################
+
+!item [Und wie die Fußzeilen?] ~
+
+UDO erzeugt auf jeder Seite automatisch (!idx [Fußzeilen]), in denen Verweise auf das
+vorherige, nachfolgende und/oder übergeordnete Kapitel zu finden sind. Diese
+ermöglichen dem Leser, direkt zu anderen Kapiteln des Textes zu verzweigen.
+
+Durch den Schalter (!I)!/no_bottomlines~[pch](!i) läßt sich die Ausgabe dieser
+Kopfzeilen unterbinden.
+
+##################################################
+
+!item [Wofür ist diese Datei mit der Endung (!T).cmd(!t)?] ~
+
+UDO legt während der Umwandlung eine Kommandodatei für den Helpcompiler von
+Pure~C an, welche an diesen zur Erzeugung der Helpdatei als Kommando
+übergeben werden muß.
+
+UDO überschreibt diese Kommandodatei ohne Rückfrage. Um manuelle Änderungen
+an dieser Datei zu bewahren, müssen Sie die Datei schreibschützen.
+
+##################################################
+
+!item [Wie erzeuge ich eine Hilfedatei für Pure~C?] ~
+
+Bei der Umwandlung des Quelltextes (!V)foo.u(!v) erzeugt UDO die
+Dateien (!V)foo.scr(!v) und (!V)foo.cmd(!v).
+
+Um eine Hilfedatei für Pure~C zu erhalten, müssen Sie (!V)HC.TTP(!v)
+starten und diesem Programm die Kommandodatei (!V)foo.cmd(!v)
+übergeben:
+
+!begin_quote
+!begin_verbatim
+$ e:\purec\hc.ttp foo.cmd
+!end_verbatim
+!end_quote
+
+Unter GEM ziehen Sie einfach die Datei (!V)foo.cmd(!v) auf
+(!V)HC.TTP(!v).
+
+##################################################
+
+!item [Wie benutzt ich die Hilfedatei mit Pure~C?] ~
+
+Pure~C erlaubt (leider) nur die Einbindung einer einzigen
+benutzerdefinierten Hilfedatei. Diese trägt den Namen (!V)USR.HLP(!v)
+und befindet sich im Pure-C-Ordner.
+
+Um eine eigene Hilfedatei zu benutzen, sichern Sie die alte Hilfedatei
+(z.B. durch Umbenennen in (!V)USR.HLX(!v)) und kopieren Sie die
+eigene, in (!V)USR.HLP(!v) umbenannte Hilfedatei in den Pure-C-Ordner.
+
+##################################################
+
+!end_description

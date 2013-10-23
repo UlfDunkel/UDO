@@ -1,0 +1,222 @@
+!subnode	0.46 vom 11.03.1996
+!html_name	r4_v046
+
+!begin_description
+
+###########################################################
+
+!item	[Allgemein] ~
+
+!begin_itemize
+
+!item	Statt der Tilde kann man nun bei der Kommandozeilenversion auch
+		ein Ausrufezeichen verwenden ((!T)-o !~(!t) entspricht also
+		(!T)-o !(!t)), um UDO den Dateinamen der 
+		Ausgabedatei setzen zu lassen. Grund: ich weiß nicht, wie ich
+		mit dieser blöden HP-Tastatur die Tilde eingeben soll.
+
+!item	Neuer Schalter: (!I)!/french(!i). Der Schalter funktioniert
+		analog zu (!I)!/english(!i) und (!I)!/german(!i) und sorgt
+		für die Ausgabe französischer Ausdrücke. Die Ausdrücke habe
+		ich aus einem Wörterbuch, daher stimmen sehr wahrscheinlich nicht
+		alle (""siehe auch"" = ""voir aussi"", urgh). Von meinem
+		Schulfranzösisch ist nicht mehr allzuviel übrig. (!grin)
+
+!item	Neue Kommandos:
+		!begin_itemize
+		!item	(!I)!/node*(!i)
+		!item	(!I)!/subnode*(!i)
+		!item	(!I)!/subsubnode*(!i)
+		!item	(!I)!/pnode*(!i)
+		!item	(!I)!/psubnode*(!i)
+		!item	(!I)!/psubsubnode*(!i)
+		!end_itemize
+		Der Stern bewirkt, daß solch ein Kapitel nicht im Inhaltsverzeichnis
+		erscheint.
+
+		(!B)Hinweis:(!b) Bei HTML werden momentan auch bei
+		""versteckten"" Kapiteln noch neue Files angelegt. Dies wird
+		demnächst geändert.
+
+!item	Neuer Schalter: (!I)!/no_xlist(!i). Wird dieser Schalter im
+		Vorspann benutzt, so werden für die angegebenen Formate die
+		xlist-Umgebungen wie description-Umgebungen behandelt. Dieser
+		Schalter ersetzt die Sonderbefehle für RTF und WinHelp, kann
+		aber nun auch für andere Formate eingesetzt werden.
+
+!item	Folgt einem Minuszeichen direkt ein Komma, wird an dieser
+		Stelle bei der Silbenrennung kein Zeilenumbruch mehr erzeugt.
+
+!item	Benutzt man die Option (!T)(--)quiet(!t) zusammen mit
+		(!T)-l(!t) und (!T)-o(!t), gibt UDO keine Warnhinweise mehr
+		aus. (Dirk Haun)
+
+!item	Viele, viele interne Änderungen! UDO ist dadurch auch schneller
+		geworden. Hoffentlich wurden keine neuen Bugs eingebaut.
+
+!item	Folgende Änderungen betreffen die GEM-Version:
+
+	!begin_itemize
+
+	!item	Im Hauptdialog steht nun ""*.htm"" statt ""*.html"", da
+			dort ja auch ""*.htm"" als Endung benutzt wird.
+
+	!item	Die Kommandozeilenoption (!T)(--)tree(!t) ist nun auch in
+			der GEM-Version nutzbar. Als Übergabeplatzhalter für
+			externe Programme dient (!T)$T(!t).
+
+	!item	Control-W wechselt die Fenster (Michael Wurm). Dies klappt
+			jedoch nicht, während ein Fenster ikonifiziert ist.
+
+	!item	Beim Eintreffen von (!T)VA_START(!t) wird der Hauptdialog
+			getoppt.
+
+	!item	Dateinamen, die mit (!T)VA_START(!t) eintreffen, während
+			UDO gerade am Konvertieren ist, werden nicht mehr
+			übernommen.
+
+	!end_itemize
+
+!item	Es gibt erste TOS-Binaries, die mit den MiNT-Libs PL46
+		erstellt wurden. Diese heißen (!T)UDO_MINT.APP(!t) sowie
+		(!T)UDO_MINT.TTP(!t) und befinden sich im Archiv
+		(!T)u5046mnt.lzh(!t). Ich hatte wenig Zeit, diese Versionen zu
+		testen (mit dem Minix-FS und Thomas Binders RAMDSK.XFS
+		klappt's), daher bitte ich um Vorsicht und um Rückmeldung,
+		falls etwas nicht funktionieren sollte.
+		
+!item	UDO läuft nun auch unter HP-UX 9.0x auf einer HP
+		apollo Model 715/33. Das Binary, erstellt mit dem GCC 2.7.2,
+		gibt's auf Anfrage.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[ASCII] ~
+
+!begin_itemize
+
+!item	Kapitelnamen werden durch ein weiteres Leerzeichen von
+		der Nummer getrennt.
+
+!item	Kapitelnamen wurden aufgrund eines überflüssigen rechten
+		Leerzeichens falsch zentriert.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[Manualpage] ~
+
+!begin_itemize
+
+!item	Manualpages werden fast komplett neu formatiert. Statt Nodes
+		wie bei ASCII mit Nummern zu versehen und zu unterstreichen,
+		werden diese nun immer fett und großgeschrieben ausgegeben.
+		Der Text wird jeweils um 6 Zeichen links eingerückt.
+
+!item	Die Elemente der Kopfzeile werden fett ausgegeben.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[Pure C Help] ~
+
+!begin_itemize
+
+!item	Kapitelnamen werden durch ein weiteres Leerzeichen von
+		der Nummer getrennt.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[RTF] ~
+
+!begin_itemize
+
+!item	Die xlist-Umgebung wird nun auch beim RTF (für einen 11pt-
+		Font) korrekt ausgegeben. Will man weiterhin xlist-Umgebungen
+		wie description-Umgebungen behandeln, muß man im Vorspann den
+		Schalter (!I)!/no_xlist~[rtf](!i) einsetzen.
+
+!item	Die Titelseite wird ählich der Titelseite von (!LaTeX)
+		erzeugt.
+
+!item	Der Schalter (!I)rtf_try_xlist(!i) existiert nicht mehr.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[ST-Guide] ~
+
+!begin_itemize
+
+!item	Die Grafiken von (!I)!/programimage(!i) und
+		(!I)!/authorimage(!i) werden auch wieder gefunden, wenn ein
+		relativer Pfad angegeben wird.
+
+!item	Kapitelnamen werden durch ein weiteres Leerzeichen von
+		der Nummer getrennt.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[(!TeX)] ~
+
+!begin_itemize
+
+!item	(!I)!/title(!i) wird auf der Titelseite mit
+		""(!T)\Large(!t)"", (!I)!/date(!i) mit ""(!T)\large(!t)"" und
+		(!I)!/version(!i) ebenfalls mit ""(!T)\large(!t)"" ausgegeben.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[WinHelp] ~
+
+!begin_itemize
+
+!item	In WinHelp sind nun auch externe Verweise mittels
+		(!I)(!/xlink~...)(!i) möglich. Ein Beispiel, bei dem sich der
+		UDO-Hilfstext im Verzeichnis (!T)D:\WINHELP\(!t) befindet.
+
+!begin_verbatim
+Klicken Sie (!xlink [hier] [Titel@d:/winhelp/udo.hlp]),
+um sich den Hilfstext von UDO anzusehen.
+!end_verbatim
+
+		Der zweite Parameter muß also folgendermaßen aufgebaut sein:
+		""Contextstring + @ + File""
+
+		Wie der Contextstring lautet, muß man natürlich wissen, sonst
+		meckert WinHelp später über ein nichtexistentes Hilfethema.
+		
+		Beim Dateinamen müssen Slashs benutzt werden! Wird nur der
+		Dateiname angegeben, so sucht WinHelp (jedenfalls unter
+		Win3.11) im aktuellen Verzeichnis und im Windows-Verzeichnis
+		nach der Datei.
+
+!item	Der Schalter (!I)win_hide_xlist(!i) existiert nicht mehr.
+		Seinen Zweck erfüllt nun (!I)!/no_xlist~[win](!i).
+		
+
+!end_itemize
+
+
+###########################################################
+
+!end_description
+

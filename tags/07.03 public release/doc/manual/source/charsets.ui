@@ -1,0 +1,26 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Charsets includes
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: header introduced
+#
+################################################################################
+
+!iflang [german]
+!include charsets.de
+!endif
+!iflang [english]
+!include charsets.en
+!endif
+# === EOF ===

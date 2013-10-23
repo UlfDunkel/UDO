@@ -1,0 +1,66 @@
+!iflang [german]
+!node To-Do-Liste
+!else
+!node To do list
+!endif
+
+!html_name to_do
+
+!begin_enumerate !short
+
+!iflang [german]
+
+	!item Tabellensatz überprüfen, da Zellenbreiten falsch berechnet werden,
+	Probleme mit Definitionen und Makros auftreten.  (Patrick Jerchel,
+	Andreas Swazinna, Wilfried Behne).
+
+	!item Einrückungen in den Inhaltsverzeichnissen verbessern. Überlange
+	Titel umbrechen (Martin Osieka).
+
+	!item Linken Rand durch UDO erzeugen (!/left_margin) (Joachim Hurst).
+
+	!item !/elifdest (Martin Osieka)
+
+	!item (!V)!/toc(!v) macht manchmal Murx (Peter Bajetto).
+
+	!item Umlaute in Makros, die in Tabellen benutzt werden, werden doppelt
+	gequotet, zumindest bei HTML.
+
+	!item UDO unter Unix versteht keine Mac-Texte, UDO unter MacOS
+	keine Unix-Texte (Martin Osieka)
+	
+	!item NeXTStep-Zeichensatz überprüfen (Dirk Schönberger)
+	
+	!item Mehrzeilige Makros und Definitionen (Uwe Mindrup)
+	
+!else
+
+	!item Check output of tables 'cause cell width are miscalculated,
+	problems with definitions and macros appear (Patrick Jerchel, Andreas
+	Swazinna, Wilfried Behne).
+
+	!item Check indent and line break in the table of contents.
+	(Martin Osieka).
+
+	!item UDO shall output a left margin (!/left_margin) (Joachim
+	Hurst)
+
+	!item !/elifdest (Martin Osieka)
+
+	!item (!V)!/toc(!v) has a bug. (Peter Bajetto).
+	
+	!item Umlauts and other 8 bit characters inside macros that are used in tables
+	are converted twice in HTML.
+	
+	!item The Unix versions of UDO cannot read Mac files, the MacOS
+	version cannot read Unix files (Martin Osieka).
+	
+	!item Check the NeXTStep character set (Dirk Schönberger)
+	
+	!item Support macros and definitions with more than one line (Uwe
+	Mindrup).
+
+!endif
+
+!end_enumerate
+

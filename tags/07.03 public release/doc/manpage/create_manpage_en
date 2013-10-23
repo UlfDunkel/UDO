@@ -1,0 +1,3 @@
+#!/bin/sh
+udo --man --verbose --force-long -y -D LANG_EN -o udo.1 manpage.u
+udo --nroff --verbose --force-long -y -D LANG_EN -o udo.man manpage.u

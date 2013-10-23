@@ -1,0 +1,2 @@
+#!/bin/sh
+udo --html --verbose --force-long --tree -o index.html xlist-test.txt

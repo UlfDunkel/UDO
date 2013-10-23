@@ -1,0 +1,15 @@
+!include inc/header.ui
+!pdf_high_compression
+!begin_document
+
+!maketitle
+!tableofcontents !depth 1
+!sloppy
+!raw [tex] \sloppy
+
+!include	inc/6-7.ui
+!include	inc/5-6.ui
+!include	inc/4-5.ui
+
+!end_document
+

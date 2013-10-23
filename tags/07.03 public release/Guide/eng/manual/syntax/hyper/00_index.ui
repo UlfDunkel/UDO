@@ -1,0 +1,12 @@
+############################################################
+# @(#) Hypertext-Elemente, Dirk Hagedorn, 23.08.1995
+############################################################
+
+!subnode Hypertext commands
+
+# Labels
+!include syntax/hyper/label.ui
+
+# Links
+!include syntax/hyper/link.ui
+

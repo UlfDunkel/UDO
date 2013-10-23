@@ -1,0 +1,13 @@
+!ifdest [html]
+!begin_raw
+<form method="post" action="mailto:someone@somewhere.org">
+<pre>
+<p>Name: <input name="Name" size="60"></p>
+<p><input type="submit" value="Absenden"></p>
+<p><input type="reset" value="L&ouml;schen"></p>
+</pre>
+</form>
+!end_raw
+!else
+In der HTML-Version befindet sich hier ein Formular.
+!endif

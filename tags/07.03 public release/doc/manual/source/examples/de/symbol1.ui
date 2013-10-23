@@ -1,0 +1,8 @@
+!begin_document
+!tableofcontents
+!ifset [AlleKapitel]
+!include kapitel1.ui
+!include kapitel2.ui
+!endif
+!include kapitel3.ui
+!end_document
