@@ -51,6 +51,7 @@
 *    fd  May 26: extract_parameters() + get_parameters() debugged
 *  2013
 *    ggs Sep 29: extract_parameters looks now for the ')'
+*    fd  Oct 23: c_ilink() + c_internal_image() support HTML5
 *
 ******************************************|************************************/
 
@@ -2015,8 +2016,16 @@ const BOOLEAN   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewa
             }
             else
             {
-               sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s>",
-                  Param[1], Param[2], Param[2], closer);
+               if (html_doctype == HTML5)
+               {
+                  sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s>",
+                     Param[1], Param[2], Param[2], closer);
+               }
+               else
+               {
+                  sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s>",
+                     Param[1], Param[2], Param[2], closer);
+               }
             }
 
             flag = replace_once(ptr, old_entry, img_entry);
@@ -3610,13 +3619,29 @@ const BOOLEAN   inside_b4_macro)   /* */
          {
             if (Param[3][0] != EOS)
             {
-               sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-                  Param[1], Param[2], Param[3], sGifSize, closer);
+               if (html_doctype == HTML5)
+               {
+                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
+                     Param[1], Param[2], Param[3], sGifSize, closer);
+               }
+               else
+               {
+                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
+                     Param[1], Param[2], Param[3], sGifSize, closer);
+               }
             }
             else
             {
-               sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-                  Param[1], Param[2], Param[2], sGifSize, closer);
+               if (html_doctype == HTML5)
+               {
+                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
+                     Param[1], Param[2], Param[2], sGifSize, closer);
+               }
+               else
+               {
+                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
+                     Param[1], Param[2], Param[2], sGifSize, closer);
+               }
             }
          }
          
