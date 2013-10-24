@@ -44,6 +44,7 @@
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 # 2013:
 #   fd  May 02: (!url) syntax fixed
+#   fd  Oct 24: UDO guide title changed (was 'Das Handbuch zu UDO')
 #
 ################################################################################
 
@@ -235,14 +236,14 @@ Mit ""(!CLASS)"" können Sie den Namen einer CSS-Klasse übergeben, um so z.B. Ver
 (!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
 (!url [http://www.google.de/] []) | 
 (!url [E-Mail schreiben][mailto:someone@somewhere.net][][email]) | 
-(!url [Das Handbuch zu UDO] [http://man.udo-open-source.org/de/] [_blank] [elink])
+(!url [UDO-Handbuch] [http://man.udo-open-source.org/de/] [_blank] [elink])
 !end_verbatim
 (!EXAMPLE_AFTER)
 (!url [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
 (!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
 (!url [http://www.google.de/] []) | 
 (!url [E-Mail schreiben][mailto:someone@somewhere.net][][email]) | 
-(!url [Das Handbuch zu UDO] [http://man.udo-open-source.org/de/] [_blank] [elink])
+(!url [UDO-Handbuch] [http://man.udo-open-source.org/de/] [_blank] [elink])
 (!EXAMPLE_END)
 
 !end_node

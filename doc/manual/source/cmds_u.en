@@ -39,6 +39,7 @@
 #   fd  May 26: (!url) enhanced for v7.02 [#89]
 # 2013:
 #   fd  May 02: (!url) syntax fixed
+#   fd  Oct 24: UDO guide title changed (was 'The guide of UDO')
 #
 ################################################################################
 
@@ -210,14 +211,14 @@ Using ""(!CLASS)"", you can define the name of a CSS class, e.g. to show links t
 (!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
 (!url [http://www.google.com/] []) | 
 (!url [Write an email][mailto:someone@somewhere.net][][email]) | 
-(!url [The guide of UDO] [http://man.udo-open-source.org/en/] [_blank] [elink])
+(!url [UDO guide] [http://man.udo-open-source.org/en/] [_blank] [elink])
 !end_verbatim
 (!EXAMPLE_AFTER)
 (!url [BugTracker of the UDO website] [http://bugs.udo-open-source.org/]) | 
 (!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
 (!url [http://www.google.com/] []) | 
 (!url [Write an email][mailto:someone@somewhere.net][][email]) | 
-(!url [The guide of UDO] [http://man.udo-open-source.org/en/] [_blank] [elink])
+(!url [UDO guide] [http://man.udo-open-source.org/en/] [_blank] [elink])
 (!EXAMPLE_END)
 
 !end_node

@@ -15,13 +15,15 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from manual.u)
 #   fd  Jun 08: html_backpage + html_style_name redefined
+# 2013:
+#   fd  Oct 24: !docinfo [title] changed
 #
 ################################################################################
 
 # ------------------------------------------------------------------------------
 # The title of this documentation depends on the destination format
 # ------------------------------------------------------------------------------
-!docinfo [title]   Das Handbuch zu
+!docinfo [title]   Handbuch
 !docinfo [program] UDO
 
 
