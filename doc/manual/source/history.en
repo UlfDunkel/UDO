@@ -30,7 +30,9 @@
 # 2010:
 #   fd  Mar 03: history_0700 + history_0701
 #   fd  May 25: index adjustments
+# 2013:
 #   fd  May 26: history_0702
+#   fd  Oct 24: history_0703
 #
 ################################################################################
 
@@ -42,6 +44,7 @@ In this chapter you will find a short summary of all the changes in the past.
 
 # = = = = =
 
+!include history_0703.en
 !include history_0702.en
 !include history_0701.en
 !include history_0700.en

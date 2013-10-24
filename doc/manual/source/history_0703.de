@@ -1,0 +1,41 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.03
+# Language    : German
+# Initial Date: 2010-10-24
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Oct 24: introduced
+#
+################################################################################
+
+!begin_node Änderungen in Version 7.03
+!html_name  history_0703
+
+(!PUBLISHED [UDO~7.03][24. Oktober 2013])
+
+!begin_description !compressed
+# ----------------------------------------
+!item [(!KW [html_doctype])]
+# ----------------------------------------
+      Das Kommando unterstützt jetzt einen neuen Parameter (''5''), mit dem Sie HTML-5-Ausgaben erzeugen können. [fd]
+
+# ----------------------------------------
+!item [Kleinere Fehlerkorrekturen]
+      Wie immer wurden verschiedene kleine Fehler korrigiert.
+      Sie waren so klein, dass es nicht lohnt, sie aufzuzählen.
+# ----------------------------------------
+      
+!end_description
+
+!end_node
+
+# === EOF ===

@@ -35,7 +35,9 @@
 # 2010:
 #   fd  Feb 25: history_0700
 #   fd  Mar 03: history_0701
+# 2013:
 #   fd  May 26: history_0702
+#   fd  Oct 24: history_0703
 #
 ################################################################################
 
@@ -46,6 +48,7 @@ Hier finden Sie alle Änderungen, die zwischen den einzelnen Versionen von UDO au
 
 # = = = = =
 
+!include history_0703.de
 !include history_0702.de
 !include history_0701.de
 !include history_0700.de
