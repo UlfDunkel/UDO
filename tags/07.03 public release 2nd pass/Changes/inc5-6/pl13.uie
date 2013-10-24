@@ -1,0 +1,87 @@
+!subnode PL13, October 13th 1996
+!html_name r5_pl13
+
+!begin_description
+
+############################################################
+!item [(!ALL):] ~
+
+!begin_itemize
+
+!index	Special chars ! ß
+!item	Bug fix: The Linux version translated ''ß'' into ''sz''
+		instead of ''ss''.
+
+!index	Error messages
+!item	If an error occurs when opening a file UDO prints the
+		cause (e.g. ""Permission denied"" or ""No such file or
+		directory"").
+
+!index	Windows !! UDO shell
+!item	The shell has changed a bit. The current version is part
+		of the dos archive.
+
+!end_itemize
+
+
+############################################################
+!item [HTML:] ~
+
+!begin_itemize
+
+!index	HTML !! !/html_name
+!item Changed: Use (!I)!/html_name(!i) instead of (!T)!/htmlname(!t) now.
+
+!index HTML !! !/html_keywords
+!item Change: Use (!I)!/html_keywords(!i) instead of (!T)!/htmlkeywords(!t)
+now.
+
+!end_itemize
+
+
+############################################################
+!item [(!LaTeX):] ~
+
+!begin_itemize
+
+!index	(!LaTeXe) !! Line breaks
+!item	Bugfix: UDO doesn't break lines between (!I)(!/V)!..(!/v)(!i) now
+		because (!LaTeXe) doesn't like it. But UDO can manage this only when
+		(!I)(!/V)(!i) and (!I)(!/v)(!i) are part of one source line.
+
+!index	(!LaTeX) !! Special characters
+!item	Bug fix: ''['' and ''['' are now only converted to
+		(!V){\symbol{91}}(!v) if they follow ''(!V)\\(!v)''.
+
+!index	(!/LaTeXe) !! (!LaTeX)
+!item	The (!LaTeXe) logo is now printed correctly when using (!LaTeX)
+2.09.
+
+!end_itemize
+
+
+############################################################
+!item [LyX] ~
+
+!begin_itemize
+
+!item	UDO supports LyX now. Use the command line option
+(!T)(--)lyx(!t) to convert your source files to LyX.
+
+The following things won't work:
+
+	!begin_enumerate
+
+	!item	Special chars aren't converted yet.
+
+	!item	Tables are not converted completely.
+
+	!item	Indices aren't converted.
+
+	!end_enumerate
+
+!end_itemize
+
+
+############################################################
+!end_description

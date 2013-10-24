@@ -1,0 +1,6 @@
+!begin_xlist [description:] !compressed
+!item [itemize:] Itemizations
+!item [enumerate:] Enumerations
+!item [description:] Descriptions
+!item [xlist:] Lists
+!end_xlist

@@ -1,0 +1,451 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands C
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd), Gerhard Stoll (ggs)
+# Write-access: fd, ggs
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: - new chapters: code_source, code_target
+#               - OldKeywords removed -> cmds__old.de
+#               - tiny corrections
+#   ggs Mar 21: wrong syntax in code_source, code_target
+#   fd  May 19: - new chapter 'compressed'
+#   fd  May 19: - more links to "not_compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node C!..
+!html_name  cmds_c
+
+# = = = = =
+
+!begin_node (!kw [chaptericon])
+!html_name  cmd_cshaptericon
+
+Grafik für Kapitel angeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando gibt den Namen einer Grafik an, welche UDO für
+den Link auf den aktuellen Node in der linken Spalte des
+""modernen"" Layouts verwenden soll. Bei Subnodes und tieferen
+Ebenen wird der Befehl momentan missachtet.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon_text]), (!KW [chaptericon_active])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [chaptericon_active])
+!html_name  cmd_chaptericon_active
+
+Grafik für aktives Kapitel angeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon_active (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Hier können Sie für den linken Rahmen bzw. für die linke Spalte
+ein Bild angeben, das nur dann angezeigt wird, wenn das Kapitel
+oder eines dessen Unterkapitel angezeigt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon]), (!KW [chaptericon_text])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [chaptericon_text])
+!html_name  cmd_chaptericon_text
+
+Text für Kapitel-Grafik angeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon_text (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Hiermit können Sie einen Text unterhalb einer Kapitel-Grafik darstellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon]), (!KW [chaptericon_active])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [chapterimage])
+!html_name  cmd_chapterimage
+
+Kapitelüberschrift durch Grafik ersetzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chapterimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Beim HTML-, ST-Guide- und WinHelp-Format wird
+anstelle einer Kapitelüberschrift die Grafik
+""(!FILE)"" verwendet, falls im Vorspann der Schalter
+(!KW [use_chapter_images]) verwendet wurde.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [use_chapter_images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!chapterimage udo
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [cinclude])
+!html_name  cmd_cinclude
+
+Datei einbinden und in einer comment-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/cinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Kommentar an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [begin_comment]), (!KW [comment]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [comment-Umgebung] [comment-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!cinclude hello.txt
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [code_source])
+!html_name  cmd_code_source
+
+Legt fest, in welchem Encoding der Quelltext geschrieben wurde.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_source(!t) [(!CHARSET)]
+
+!item [(!DESCRIPTION)]
+UDO erwartet nach diesem Kommando Texte oder
+Textpassagen, die in dem entsprechenden Zeichensatz verfasst
+wurden. Um wieder auf den Systemzeichensatz
+zurückzuwechseln, verwenden Sie dieses Kommando noch einmal
+mit dem Namen des Systemzeichensatzes.
+
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt
+werden kann:
+
+!include charsets.ui
+!item [(!EXISTSSINCE)] Version~7.00
+!item [(!SEEALSO)]
+(!KW [code_target]), (!link [Sonderzeichen] [Sonderzeichen])
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [code_target])
+!html_name  cmd_code_target
+
+Legt fest, in welchem Encoding das Zielformat ausgegeben werden soll.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_target(!t) [(!CHARSET)]
+
+!item [(!DESCRIPTION)]
+UDO setzt nach diesem Kommando Texte oder Textpassagen in das festgelegte Encoding um.
+Um wieder auf den Systemzeichensatz zurückzuwechseln, verwenden Sie dieses Kommando noch einmal
+mit dem Namen des Systemzeichensatzes.
+
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt
+werden kann:
+
+!include charsets.ui
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [code_source]), (!link [Sonderzeichen] [Sonderzeichen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [coloff])
+!html_name  cmd_coloff
+
+Abschalten der gesetzen Schriftfarbe.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/coloff)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird die gesetzt die Schriftfarbe abgeschlossen.
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text 
+wieder in der Standardfarbe Schwarz.
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text 
+wieder in der Standardfarbe Schwarz.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [comment])
+!html_name  cmd_comment()
+
+Inline-(!nolink [Kommentare]) erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/comment [(!TEXT)])(!t)
+
+!item [(!DESCRIPTION)]
+Mit (!KKW [comment!]) können Inline-Kommentare für HTML,
+WinHelp, RTF, Quickview, C und Pascal erzeugt werden. Wird im
+Vorspann der Schalter (!KW [use_comments]) benutzt, werden die
+(!nolink [Kommentare]) auch bei allen anderen Formaten in Klammern ausgegeben.
+
+!item [(!SEEALSO)]
+(!link [Kommentare] [Kommentare]), (!KW [comment]), (!link [comment-Umgebung] [comment-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!comment [Was soll das?])
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<!-- Was soll das? -->
+!end_verbatim
+!else
+(!comment [Was soll das?])
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [comment])
+!html_name  cmd_comment
+
+Kommentar in die Ausgabedatei schreiben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/comment (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando schreibt ""(!TEXT)"" als Kommentar auch in die Ausgabedatei, sofern das
+jeweilige Format Kommentare beherrscht.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [use_comments]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [compressed])
+!html_name  cmd_compressed
+
+Eine Umgebung ""komprimiert"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/compressed(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter zusammen mit dem Befehl zum
+Beginnen einer Umgebung angegeben, wird diese
+Umgebung in komprimierter Form ausgegeben, sprich es
+werden zwischen den Aufzählungspunkten keine
+zusätzlichen Zwischenräume erzeugt. Das Beispiel
+zeigt, wie Sie eine ""komprimierte"" Itemize-Umgebung erzeugen können.
+
+!item [(!EXISTSSINCE)] 7.01
+
+!item [(!SEEALSO)]
+(!KW [not_compressed]), 
+
+(!KW [begin_description]), 
+(!KW [begin_enumerate]), 
+(!KW [begin_itemize]), 
+
+(!KW [use_compressed_descriptions]), 
+(!KW [use_compressed_enumerates]), 
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_itemizes]), 
+(!KW [use_compressed_lists])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# preamble
+# !use_compressed_envs
+
+# document
+# [...]
+!begin_itemize !compressed
+# [...]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [copyright])
+!html_name  cmd_copyright()
+
+Copyright-Symbol ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/copyright)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Copyright-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [(c!)])"".
+
+!item [(!SEEALSO)]
+Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!copyright)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!copyright)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

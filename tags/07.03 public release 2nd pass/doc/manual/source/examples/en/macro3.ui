@@ -1,0 +1,3 @@
+!macro BI (!B)(!1)(!b)
+...
+This text is printed (!BI [bold and italic]).

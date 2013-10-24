@@ -1,0 +1,51 @@
+!begin_itemize
+
+!index !/no_links
+!item Neu: Schalter (!I)!/no_links~[!..](!i) (!nl) Wird dieser
+Schalter im Vorspann benutzt, so werden Links nicht umgewandelt und
+nur der erste Parameter des Link-Kommandos ausgegeben. Praktisch, wenn
+einem z.B. in RTF das Wörtchen ""siehe !.."" auf die Nerven geht
+(Norbert Hanz).
+
+!index (!/index)
+!item Neu: Platzhalter (!I)(!/index~[<text>](!i) (!nl)
+Funktioniert genau wie (!I)(!/idx~[<text>](!i), mit dem kleinen aber feinen
+Unterschied, daß (!I)<text>(!i) nicht ausgegeben wird, sprich es erfolgt
+nur ein Eintrag in den Index (Christian Nieber).
+
+!index !/subtoc_offset
+!index !/subsubtoc_offset
+!index !/subsubsubtoc_offset
+!item Neu: Schalter (!I)!/subtoc_offset(!i), (!I)!/subsubtoc_offset(!i) und
+(!I)!/subsubsubtoc_offset(!i) (!nl)
+Hiermit lassen sich analog zu (!I)!/toc_offset(!i) die Offsets für die
+Numerierung der Unterkapitel bestimmen (Norbert Hanz). Will man
+beispielsweise die Nummern alle bei 0 starten lassen, so benutzt man
+!begin_verbatim
+!toc_offset -1
+!subtoc_offset -1
+!subsubtoc_offset -1
+!subsubsubtoc_offset -1
+!end_verbatim
+Ihr seht, der angegebene Wert wird auf 1 addiert und als Startnummr
+verwendet.
+
+!index !/begin_ignore
+!index !/end_ignore
+!index ignore-Umgebung
+!item Neu: ignore-Umgebung mit (!I)!/begin_ignore(!i) und
+(!I)!/end_ignore(!i) (!nl)
+Alles, was innerhalb dieser Umgebung steht, wird von UDO schlicht und
+ergreifend ignoriert (zahlreich gewünscht). Ungetestet!
+
+!index !/docinfo [programimage]
+!item Bugfix: Kein Absturz mehr bei Verwendung von
+(!I)!/docinfo~[programimage](!i).
+
+!item Bugfix: Versucht man eine Tabelle innerhalb einer anderen anzulegen,
+beschwert sich UDO nun (Andreas Swazinna).
+
+!item Bugfix: Schachtelt man mit (!I)!/begin_node(!i) zu tief, so erzeugt
+UDO nun eine Fehlermeldung anstatt abzustürzen.
+
+!end_itemize

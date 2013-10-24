@@ -1,0 +1,3 @@
+!ifset [AlleKapitel]
+!unset AlleKapitel
+!endif

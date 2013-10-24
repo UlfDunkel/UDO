@@ -1,0 +1,70 @@
+# ------------------------------------------------------
+# Set the subject for the ST-Guide
+# ------------------------------------------------------
+!raw [stg] @subject "Dokumentation/Utilities"
+
+# ----------------------------------------------------------
+# Settings for csTeX (MultiTeX), GEM images with 100dpi
+# ----------------------------------------------------------
+!ifset [csTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+# ------------------------------------------------------
+# Settings for Lindner-TeX, GEM images with 100dpi
+# ------------------------------------------------------
+!ifset [lindnerTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+
+# -------------------------------------------------------
+# Settings for emTeX, LateX2e, MSP images, 300dpi
+# use symbol emTeX2e or emTeX2.09 to enable them
+# -------------------------------------------------------
+!ifset [emTeX2e]
+!tex_2e
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!ifset [emTeX2.09]
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!raw [tex] \parskip 5pt
+!raw [tex] \parindent 0pt
+
+# ------------------------------------------------------
+# General switches
+# ------------------------------------------------------
+!use_justification	[asc]
+!use_about_udo		[all]
+
+!use_auto_subtocs		[stg,win,html,pch,info]
+!use_auto_subsubtocs	[stg,win,html,pch,info]
+!use_auto_subsubsubtocs	[stg,win,html,pch,info]
+!use_output_buffer      [win]
+!use_nodes_inside_index	[win,stg]
+
+!no_effects				[asc]
+!no_numbers				[html,info]
+!no_umlaute				[info]
+
+!use_style_book [tex,asc,rtf,win,aqv,lyx]
+!sort_hyphen_file [asc,stg,pch]
+
+# ------------------------------------------------------
+# Special switches
+# ------------------------------------------------------
+!win_inline_bitmaps
+!win_medium_compression
+!html_merge_subsubnodes
+

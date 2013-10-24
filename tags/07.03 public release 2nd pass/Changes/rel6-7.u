@@ -1,0 +1,12 @@
+!include inc/header.ui
+!begin_document
+
+!maketitle
+!tableofcontents
+!sloppy
+!raw [tex,pdf] \sloppy
+
+#!include	inc/todo.ui
+!include	inc/6-7.ui
+
+!end_document

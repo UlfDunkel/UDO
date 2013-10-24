@@ -1,0 +1,51 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Appendix includes
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from appendix.ui)
+#   fd  Jun 06: commands.ui should be first in appendix, not last
+#
+################################################################################
+
+!begin_appendix
+!newpage
+
+# ------------------------------------------------------------------------------
+# Commands index
+# ------------------------------------------------------------------------------
+!ifnset [NoIndex]
+!include commands.ui
+!endif
+
+
+# ------------------------------------------------------------------------------
+# more Appendix chapters
+# ------------------------------------------------------------------------------
+!iflang [german]
+!include appendix.de
+!endif
+!iflang [english]
+!include appendix.en
+!endif
+
+# ------------------------------------------------------------------------------
+# History
+# ------------------------------------------------------------------------------
+!ifnset [NoHistory]
+!include history.ui
+!endif
+
+!end_appendix
+
+# === EOF ===

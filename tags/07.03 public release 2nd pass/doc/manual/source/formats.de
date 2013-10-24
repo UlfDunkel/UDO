@@ -1,0 +1,58 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node Ausgabeformate
+!html_name  formatspecific
+
+# = = = = =
+
+# Sort the included format files in alphabetical order of their chapter names!
+
+!include format_amg.de
+!include format_aqv.de
+!include format_asc.de
+!include format_src.de
+!include format_drc.de
+!include format_htag.de
+!include format_html.de
+!include format_hah.de
+!include format_hh.de
+!include format_ipf.de
+!include format_latex.de
+!include format_ldoc.de
+!include format_lyx.de
+!include format_manpage.de
+!include format_nroff.de
+!include format_pas.de
+!include format_pdf.de
+!include format_ps.de
+!include format_pch.de
+!include format_rtf.de
+!include format_stg.de
+!include format_texinfo.de
+!include format_tvh.de
+!include format_udo.de
+!include format_winhelp.de
+!include format_wh4.de
+
+# = = = = =
+
+!end_node # Ausgabeformate
+
+# === EOF ===

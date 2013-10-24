@@ -1,0 +1,322 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Hypertext commands
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: EXAMPLE_... macros optimized
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   ggs Apr 05: removed some !]
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Hypertext commands
+!html_name  hypertext
+
+# = = = = =
+
+!begin_node Labels
+!label*     labels
+!html_name  hypertext_labels
+
+!index (!kw [label])
+Using the command (!KW [label]) you can set labels inside the source
+file. An example:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!label example
+!end_verbatim
+(!EXAMPLE_END)
+
+When converting to the hypertext formats Windows Help, HTML, ST-Guide
+and Pure C Help UDO inserts references inside the text to this label
+automatically. You can search for these labels inside the search
+dialog of Windows Help.
+
+When you set the upper label you can jump from every position where
+the word ""example"" is used to the position where you used the label.
+
+Here a list how UDO converts a label for the hypertext formats:
+
+!begin_xlist [Linuxdoc-SGML:] !compressed
+!item [HTML:]          (!V)<a name="example"></a>(!v)
+!item [LaTeX:]         (!V)\label{example}(!v)
+!item [Linuxdoc-SGML:] (!V)<label id="example">(!v)
+!item [Pure-C-Help:]   (!V)sensitive("example")(!v) inside the header
+!item [ST-Guide:]      (!V)@symbol ar "example"(!v)
+!item [Turbo-Vision:]  (!V).topic example(!v) inside the header
+!item [WinHelp:]       (!V)#{\footnote # example}(!v)
+!end_xlist
+
+!smallskip
+
+(!HINT)
+
+You shouldn't use special chars like commas, semicolons, quotes or
+apostrophes inside the label text because some formats have problems with
+these special characters. Please try to avoid them. In most cases you can
+avoid them if you really want.
+
+!end_node # Labels
+
+# = = = = =
+
+!begin_node Links
+!label*     links
+!html_name  hypertext_links
+
+Sometimes you maybe want to set a link to other parts of the current
+document or to other documents. To make it possible for you to insert
+links UDO offers you the placeholders called (!KKW [link]),
+(!KKW [xlink]), (!KKW [url]) and (!KKW [plink]).
+
+(!HINT)
+
+If you want to use a "")"" or a ""]"" inside a link you have to
+quote it with an exclamation mark:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+Wrong: (!link [Brackets])] [Link])
+Right: (!link [Brackets!]!)] [Link])
+                       ----
+!end_verbatim
+(!EXAMPLE_END)
+
+# = = = = =
+
+!begin_node Internal links
+!label*     internal links
+!html_name  hypertext_links_internal
+
+!index (!kkw [link])
+Using the (!KKW [link]) command you can insert links to parts of
+the current document. You can link to chapters, sections, subsections,
+labels and aliases. The following list shows you how to use the link command
+and how UDO converts it:
+
+!begin_xlist [ST-Guide:] !compressed
+!item [UDO:]      (!KKW [link]) (!code [[a text!] [the link!]])
+!item [HTML:]     <a href="file.htm#the link">a text</a>
+!item [(!LaTeX):]    a text (see \ref{the link})
+!item [ST-Guide:] @{"a text" link "the link"}
+!item [WinHelp:]  {\uldb a text}{\v the_link}
+!item [Turbo:]    {a text:the link}
+!item [else:]    a text (see "the link")
+!end_xlist
+
+The following example shows how to insert a link on the UDO contact information:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/link.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/link.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	You may use up to (!MAXLINK) links inside a paragraph. If you will use
+      more links UDO will output an error message. (!nl)
+      Remember: paragraphs are separated by empty lines in the source.
+
+!item	When converting to hypertext formats UDO checks if the link
+      destination exists. If it doesn't exits UDO prints an error message.
+      When converting to the other formats UDO doesn't check if the link
+      destination exists!
+
+!item	(!LaTeX) only allows to link to aliases and labels.
+
+!end_enumerate
+
+!end_node # Internal links
+
+# = = = = =
+
+!begin_node Internal links with images
+!html_name  hypertext_links_internal_images
+
+!index (!kkw [ilink])
+!index (!kkw [img])
+!index (!kkw [link])
+Especially for Windows Help and HTML, the
+(!KKW [ilink]) (""image link"") command exists. It is a mixture of
+the (!KKW [img]) and (!KKW [link]) command that allows to
+display ""hyperimages"". If you click an image you will jump to
+another part of the current document.
+
+!begin_xlist [WinHelp:] !compressed
+!item [UDO:]      (!KKW [ilink]) (!code [[img!] [text!] [link!]])
+!item [WinHelp:]  {\uldb \{bmc~img.bmp\}}{\v link}
+!item [HTML:]     <a href="link"><img src="img.gif" alt="text" border=0></a>
+!item [else:]    like (!KKW [link]) (!code [[text!] [link!]])
+!end_xlist
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	UDO won't check if the images exist.
+
+!index (!kw [html_img_suffix])
+!item	By default UDO uses (!file [.gif]) as the suffix for images when
+converting to HTML. You can use the command (!KW [html_img_suffix]) to
+change the suffix.
+
+!item	You may use up to (!MAXLINK) links inside a paragraph. If you will use
+more links UDO will print an error message.
+
+!end_enumerate
+
+!end_node # Internal links with images
+
+# = = = = =
+
+!begin_node Internal links to pages
+!html_name  hypertext_links_internal_pages
+
+!index (!kkw [plink])
+Especially for (!LaTeX), the (!KKW [plink]) (""page link"") command exists:
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:] (!KKW [plink]) (!code [[link commands!] [Links!]])
+!item [(!LaTeX):] link commands (see page \pageref{Links})
+!item [else:] link commands
+!end_xlist
+
+The following example shows how to insert a page like to the page that
+contains my contact addresses:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/plink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/plink.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	You can only insert page links to labels and aliases, not to
+chapters when converting to (!LaTeX).
+
+!item	You may use up to (!MAXLINK) links inside a paragraph. If you will use
+more links UDO will print an error message.
+
+!end_enumerate
+
+!end_node # Internal links to pages
+
+# = = = = =
+
+!begin_node External links
+!label*     external links
+!html_name  hypertext_links_external
+
+!index (!kkw [xlink])
+!index (!kkw [url])
+With the (!KKW [xlink]) (""external link"") and (!KKW [url]) commands you can
+insert links to (parts of) other documents, net sites or
+hypertexts. The difference to the upper command: UDO doesn't adjust
+special chars of the link destination. The tilde isn't a non-breaking space
+in the link destination, too.
+
+!begin_xlist [ST-Guide:] !compressed
+!item [UDO:]      (!KKW [xlink]) (!code [[UDO!] [*:\udo.hyp!]])
+!item [ST-Guide:] @{"UDO" link "*:\udo.hyp"}
+(!nl)
+!item [UDO:]      (!KKW [xlink]) (!code [[Atari!] [http://www.atari.com!]])
+!item [HTML:]     <A HREF="http://www.atari.com">Atari</A>
+(!nl)
+!item [UDO:]      (!KKW [xlink]) (!code [[UDO!] [Titel@d:/winhelp/udo.hlp!]])
+!item [WinHelp:]  {\uldb UDO}{\v Titel@d:/winhelp/udo.hlp}
+(!nl)
+!item [else:]     UDO (or Atari)
+!end_xlist
+
+!ifdest [stg]
+How to use external links inside an ST-Guide file is descriped in the
+following example:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/stg/xlink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/stg/xlink.ui
+(!EXAMPLE_END)
+!endif
+
+!ifdest [win,wh4]
+How to use external links inside a Windows Help file is descriped in the
+following example:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/winhelp/xlink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/winhelp/xlink.ui
+(!EXAMPLE_END)
+!endif
+
+!ifdest [html,hh]
+How to use external links inside an HTML file is descriped in the
+following example:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/html/xlink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/html/xlink.ui
+(!EXAMPLE_END)
+!endif
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	You have to use existing topic names for Windows Help. A topic name
+must contain only numbers and characters form the alphabet. All other
+characters will be converted by UDO.
+
+!item	You should use (!file [*:\]) at the beginning of an external link
+for the ST-Guide to tell it to look for the hypertext in all directories you
+defined with (!code [PATHS]) in your (!file [ST-GUIDE.INF]).
+
+!index (!kw [no_xlinks])
+!item Using the switch called (!KW [no_xlinks]) you can
+suppress the conversion of external links. This is useful if you wrote
+a source file especially for HTML and you want to make a version for
+Windows Help or ST-Guide, where the external file would make no
+sense.
+!end_enumerate
+
+!end_node # External links
+
+# = = = = =
+
+!end_node # Links
+
+# = = = = =
+
+!end_node # Hypertext commands
+
+# === EOF ===

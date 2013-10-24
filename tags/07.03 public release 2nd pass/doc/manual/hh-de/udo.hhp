@@ -1,0 +1,16 @@
+[OPTIONS]
+Title=Die Windows-Hilfe zu UDO
+Compatibility=1.0
+Compiled file=udo6de.chm
+Error log file=udo.log
+Contents file=udo.hhc
+Index file=udo.hhk
+Default topic=udo.html
+Display compile progress=No
+Flat=Yes
+Full-text search=Yes
+Auto Index=Yes
+Language=0x407
+
+[FILES]
+udo.html

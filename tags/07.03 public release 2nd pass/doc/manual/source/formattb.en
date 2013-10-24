@@ -1,0 +1,162 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats table
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formattb.ui)
+#   fd  Jun 08: ignored format list removed
+#   fd  Jun 08: text reviewed, xlist -> blist
+#   fd  Jun 09: platforms formatted in italic
+#   fd  Jun 09: codes re-sorted alphabetically, c + pascal listed separately
+#   fd  Jun 10: using macro (!code [])
+#
+################################################################################
+
+!ifnset var_kuerzel
+	!index Abbreviations
+	!set var_kuerzel
+!endif
+
+!begin_blist
+
+!item [amg]
+      AmigaGuide (!nl)
+      hypertext system, used for documentation of Amiga programs (!nl)
+      (!I)Commodore Amiga(!i)
+
+!item [aqv]
+      Apple QuickView (!nl)
+      old hypertext format for Mac~OS (!nl)
+      (!I)Apple(!i)
+
+!item [asc]
+      ASCII (!nl)
+      Plain Text (!nl)
+      (!I)all platforms(!i)
+
+!item [c]
+      Sourcecode (C format) (!nl)
+      The UDO source file will be converted to sourcecode, i.e. normal text becomes
+      comment, the content of the sourcecode environment becomes C sourcecode. (!nl)
+      (!I)several(!i)
+
+!item [drc]
+      David's Readme Compiler (!nl)
+      DOS program for creating menu-driven ReadMe files as EXE-programs (!nl)
+      (!I)MS-DOS(!i)
+
+!item [hah]
+      HTML format for Apple Help Books (!nl)
+      (!I)Mac~OS~X(!i)
+
+!item [helptag]
+      HP-Helptag-SGML (!nl)
+      SGML-based hypertext help system for commercial Unices (HP-UX, Sun Solaris, IBM AIX) (!nl)
+      (!I)Unix(!i)
+
+!item [hh]
+      HTMLHelp (!nl)
+      HTML-related format, for creation of HTML help files under windows (!nl)
+      (!I)Win32(!i)
+
+!item [html]
+      HTML (Hypertext Markup Language) (!nl)
+      page description language -- for websites, documentations and more (!nl)
+      (!I)platform-independent(!i)
+
+!item [info]
+      GNU Texinfo (!nl)
+      for making online documentations, started with (!code [info 'command']) (!nl)
+      (!I)Linux, MiNTNet(!i)
+
+!item [ipf]
+      OS/2 IPF (!nl)
+      SGML-based text format for creating help files (INF, HLP) under OS/2 (!nl)
+      (!I)OS/2(!i)
+
+!item [linuxdoc]
+      Linuxdoc-SGML (!nl)
+      Linuxdoc-SGML (recently: SGMLtools) is -- like UDO -- a multiformat converter
+      which converts its own format to LaTeX, Manualpage, RTF, HTML, Texinfo, etc. (!nl)
+      (!I)Unix/Linux(!i)
+
+!item [lyx]
+      LyX (!nl)
+      a (!LaTeX)-related document processor (!nl)
+      (!I)Unix/Linux(!i)
+
+!item [man]
+      Manualpage (!nl)
+      Unix/Linux help pages for commandline programs (!nl)
+      (!I)Unix/Linux(!i)
+
+!item [nroff]
+      NROFF (!nl)
+      Unix/Linux help pages for commandline programs (!nl)
+      (!I)Unix/Linux(!i)
+
+!item [pascal]
+      Sourcecode (Pascal format) (!nl)
+      the UDO source file will be converted to sourcecode, i.e. normal text becomes
+      comment, the content of the sourcecode environment becomes Pascal sourcecode. (!nl)
+      (!I)several(!i)
+
+!item [pchelp]
+      Pure C Help (!nl)
+      help system for the Pure C compiler (!nl)
+      (!I)Atari TOS(!i)
+
+!item [pdflatex]
+      PDF(!LaTeX) (!nl)
+      for producing PDF files from (!LaTeX) (!nl)
+      (!I)several(!i)
+
+!item [ps]
+      PostScript (!nl)
+      device-independent page description language, e.g. for printers; can also be
+      used for producing PDF files (Ghostscript, Adobe Distiller) (!nl)
+      (!I)several(!i)
+
+!item [rtf]
+      RTF (Rich Text Format) (!nl)
+      for exchanging text between different programs and platforms (!nl)
+      (!I)several(!i)
+
+!item [stg]
+      ST-Guide (!nl)
+      a hypertext system (!nl)
+      (!I)Atari TOS(!i)
+
+!item [tex]
+      (!LaTeX) 2.09, (!LaTeX)2e  (!nl)
+      typesetting system, especially for scientific publications (!nl)
+      (!I)many platforms(!i)
+
+!item [udo]
+      UDO (!nl)
+      merges all UDO input files into one big file (!nl)
+      (!I)all platforms with UDO support(!i)
+
+!item [v]
+      Turbo-Vision-Help (!nl)
+      creating online helpfiles for DOS programs written with Borland's
+      Turbo Vision Library  (!nl)
+      (!I)MS-DOS(!i)
+
+!item [win, wh4]
+      Windows-Help, WinHelp4 (!nl)
+      RTF-derived format for producing WinHelp files under Windows (!nl)
+      (!I)Windows (Win16, Win32)(!i)
+!end_blist
+
+# === EOF ===

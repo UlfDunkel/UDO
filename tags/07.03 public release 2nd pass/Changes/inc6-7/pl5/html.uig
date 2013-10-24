@@ -1,0 +1,74 @@
+!begin_itemize
+
+!index !/docinfo [htmltitle]
+!item Neu: (!I)!/docinfo [htmltitle] <text>(!i) (!nl) (!I)<text>(!i)
+wird für den Titel jeder Seite benutzt (anstelle der Zusammenfassung
+von [title] und [program]). Beispiel:
+
+!begin_verbatim
+!docinfo [title] Around the operating system
+!docinfo [program] ATOS Ausgabe 02/1997
+!docinfo [htmltitle] ATOS 02/97
+!end_verbatim
+
+Benutzt man (!I)[htmltitle](!i), so sieht man im Fenstertitel eines
+Browsers ""(!T)ATOS 02/97: foo bar(!t)"". Ansonsten stünde dort ""(!T)Around
+the operating system ATOS Ausgabe 02/1997: foo bar(!t)"".
+
+!index !/html_description
+!item	Neues Kommando: (!I)!/html_description(!i) (!nl) Hiermit kann
+man die Beschreibung einer Seite in die Metainformationen aufnehmen
+((!T)< META NAME="Description" CONTENT="!.."(!t)). Dieses Kommando ist
+mehrfach in einem Node verwendbar (Frank Röske).
+
+!index !/use_auto_toptocs
+!item Neu: (!I)!/use_auto_toptocs~[html](!i) wird unterstützt.
+
+!index !/html_keywords
+!item	Änderung: Wird (!I)!/html_keywors(!i) mehrfach in einem Node
+benutzt, so werden die einzelnen Einträge, mit einem Komma getrennt,
+in die Metainformationen aufgenommen (Frank Röske).
+
+!item Änderung: HTML 3.2 sieht kein ""(!V)&quot;(!v)""-Entity mehr vor,
+daher verwendet UDO nun ""(!V)&#34;(!v)"".
+
+!index <ol>
+!item Änderung: UDO nutzt nun die Möglichkeiten von HTML 3.2, indem es
+für die enumerate-Umgebung genauso numeriert wie in (!LaTeX), WinHelp
+oder ASCII, sprich UDO benutzt
+""(!T)<ol~type=a>(!t)"",
+""(!T)<ol~type=i>(!t)"" und
+""(!T)<ol~type=A>(!t)"" in verschachtelten Umgebungen.
+
+!index !/heading
+!index !/subheading
+!index !/subsubheading
+!index !/subsubsubheading
+!item Änderung: Werden (!I)!/heading(!i), (!I)!/subheading(!i) etc. in
+einer center- oder flushright-Umgebung benutzt, so werden die
+Überschriften passend eingerückt.
+
+!item Änderung: Aus ""Letzte Änderung am"" wurde ""Letzte
+Aktualisierung am"".
+
+!item Änderung: Wenn Frames benutzt werden, so wir bei Verweisen in
+den Kopfzeilen auf die Startseite nicht mehr ""(!V)target="_top"(!v)""
+benutzt, sondern es wird nur im rechten Rahmen die Datei mit der
+Startseite neu dargestellt.
+
+!item Änderung: Nach Absätzen gibt UDO eine zusätzliche Leerzeile aus
+(Martin Rost).
+
+!index !/html_merge_nodes
+!item Änderung: Wenn (!I)!/html_merge_nodes(!i) verwendet wird, werden
+manche GIFs nicht gesichert, da sie dann nicht benötigt werden.
+
+!index !/html_keywords
+!item	Bugfix: (!I)!/html_keywords(!i) funktionierte auf der
+Hauptseite nicht (Frank Röske).
+
+!item	Bugfix: (!I)("")(!i) wurden durch (!V)"(!v) ersetzt statt
+durch (!V)&quot;(!v).
+
+!end_itemize
+

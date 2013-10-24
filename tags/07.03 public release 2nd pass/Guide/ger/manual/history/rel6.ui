@@ -1,0 +1,240 @@
+##################################################
+# @(#) Änderungen UDO6 gegenüber UDO5
+##################################################
+!subnode Release 6
+!ignore_links
+!html_name rel06
+
+Diese Release wurde am 2. Januar 1997 veröffentlicht.
+
+Hier eine kleine Übersicht der wichtigsten Änderungen zur letzten
+öffentlichen Version. In den acht Monaten wurden einige neue Formate,
+etliche neue Features eingebaut und einige Fehlerbeseitigungen vorgenommen.
+Auch hier hat es in der Zwischenzeit wieder nicht vermeiden lassen, die
+Syntax einiger Befehle zu ändern.
+
+Registrierte Benutzer, die sich die Zwischenversionen beschafft haben,
+finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
+(!T)rel5-6.txt(!t).
+
+!begin_description
+
+!item [Neue Formate:] ~
+
+	!begin_itemize !short
+	!item	Apple QuickView
+	!item	HP-HelpTag-SGML (rudimentär)
+	!item	LyX
+	!item	(!link [C- und Pascal Sourcecode] [In letzter Minute])
+	!item	(!link [NROFF] [In letzter Minute])
+	!end_itemize
+
+
+!item [Neue Befehle:] ~
+
+	!begin_itemize	!short
+	
+	!item	(!I)!/autoref_items~[off|on](!i): Sollen die Items von
+			description- und xlist-Umgebungen (nicht) referenziert werden?
+			
+	!item	(!I)!/code_mac(!i), (!I)!/code_hp8(!i), (!I)!/code_iso(!i),
+			(!I)!/code_dos(!i) und (!I)!/code_tos(!i): UDO kann nun
+			Quelltexte mit vom Systemzeichensatz abweichenden Zeichen
+			umwandeln.
+
+	!item	(!I)!/country(!i): Zusätzliche Titelseiten-Information
+
+	!item	(!I)!/html_backpage(!i): Zur Angabe einer Rücksprung-URL für die
+			Kopfzeile der ersten HTML-Seite.
+
+	!item	(!I)!/html_keywords(!i): Zur Erzeugung von Meta-Informationen
+
+	!item	(!I)!/html_img_suffix(!i): Zur Ermöglichung der Einbindung
+			von JPEG-Grafiken etc.
+
+	!item	(!I)!/html_nodesize(!i): Zur Veränderung der Fontgröße von
+			Kapitelüberschriften bei HTML
+
+	!item	(!I)!/ifos(!i) und (!I)!/ifnos(!i): Zur Abfrage des
+			Betriebssystems.
+
+	!item	(!I)!/ignore_headline(!i), (!I)!/ignore_bottomline(!i): Um
+			Kopf- und/oder Fußzeilen nur in manchen Nodes zu unterdrücken.
+			
+	!item	(!I)!/ignore_subtoc(!i) und Verwandte: Zur Unterdrückung der
+			Ausgabe von automatischen Unter-Inhaltsverzeichnissen
+
+	!item	(!I)!/ignore_links(!i): Zur Unterdrückung automatischer Links
+			auf den Node, in dem dieses Kommando benutzt wird
+
+	!item	(!I)!/image*(!i): Zum Erzeugen von Bildunterschriften
+			ohne ""Abbildung #:"".
+
+	!item	(!I)!/image_counter(!i): Zum Setzen des Bildzählers.
+
+	!item	(!I)!/no_index(!i): Soll kein Index erzeugt werden?
+	
+	!item	(!I)!/no_toc_subnodes(!i), (!I)!/no_toc_subsubnodes(!i),
+			(!I)!/no_toc_subsubsubnodes(!i): Zur Verringerung des Umfangs
+			des Inhaltsverzeichnisses
+
+	!item	(!I)!/no_preamble(!i): Falls man selber die Präambel zu einem
+			Format erstellen möchte.
+	
+	!item	(!I)!/parwidth(!i): Zur Veränderung der Zeilenbreite des
+			Ausgabetextes
+
+	!item	(!I)!/rtf_charwidth(!i): Zur Veränderung des Berechnungswertes
+			für Einrückungen beim RTF
+
+	!item	(!I)!/set(!i), (!I)!/unset(!i), (!I)!/ifset(!i),
+			(!I)!/ifnset(!i): Zum Setzen und Abfragen von Symbolen.
+
+	!item	(!I)!/sort_hyphen_file(!i): Soll UDO die Trennvorschläge
+			sortieren und dabei Dubletten entfernen?
+			
+	!item	(!I)!/subsubsubnode(!i) und Verwandte: Eine vierte
+			Gliederungsebene.
+
+	!item	(!I)!/table_counter(!i): Zum Setzen des Tabellenzählers.
+	
+	!item	(!I)!/table_caption*(!i): Zum Erzeugen von Tabellentiteln
+			ohne ""Tabelle #:"".
+			
+	!item	(!I)!/tabwidth(!i): Zur Angabe der Tabulatorbreite für
+			verbatim-Umgebungen.
+
+	!item	(!I)!/use_justification(!i): Soll Blocksatz erzeugt werden?
+	
+	!item	(!I)!/use_nodes_inside_index(!i),
+			(!I)!/use_alias_inside_index(!i),
+			(!I)!/use_label_inside_index(!i): Sollen Nodes, Aliase und/oder
+			Labels automatisch in den Index übernommen werden?
+
+	!item	(!I)!/use_output_buffer(!i): Soll ein Ausgabe-Puffer benutzt
+			werden, um die Referenzierung bei HTML und Windows Help sicherer
+			zu machen?
+
+	!item	(!I)!/use_short_envs(!i): Sollen alle Umgebungen komprimiert
+			ausgegeben werden?
+
+	!item	(!I)!/verbatimsize(!i): Zum Setzen der Fontgröße von
+			verbatim-Umgebungen.
+
+	!item	(!I)!/win_background(!i): Zum Setzen der Hintergrundfarbe für
+			WinHelp.
+			
+	!item	(!I)!/win_high_compression(!i),
+			(!I)!/win_medium_compression(!i): Zum Setzen der Komressionsrate
+			von WinHelp-Dateien.
+
+	!item	(!I)!/win_inline_bitmaps(!i): Sollen hard-coded Bitmaps für
+			WinHelp benutzt werden?
+
+	!item	(!I)!/win_charwidth(!i): Zur Veränderung des Berechnungswertes
+			für Einrückungen bei WinHelp.
+
+	!end_itemize
+
+
+!item [Neuheiten: ]~
+
+	!begin_itemize	!short
+
+	!item	Eine vierte Gliederungsebene ist nun möglich.
+
+	!item	Blocksatz
+
+	!item	Makros und Definitionen können Parameter enthalten. Das
+			Schreiben eigener Kommandos ist damit in weiten Teilen
+			möglich.
+
+	!item	blist-, ilist- und tlist-Umgebung 
+
+	!item	rechtbündiger Text (flushright-Umgebung)
+
+	!item	linksbündiger Text (flushleft-Umgebung) zur Unterdrückung
+			des Blocksatzes
+
+	!item	Bis zu vier Email-Adressen und das Land des Autors
+			können auf der Titelseite ausgegeben werden.
+
+	!item	Italienisch ((!I)!/language italian(!i)), Spanisch
+			((!I)!/language spanish(!i)) und Schwedisch ((!I)!/language
+			swedish(!i)) können als Ausgabesprache verwendet werden.
+
+	!item	UDO kann die von ihm erzeugten Trennvorschläge sortieren und
+			dabei doppelte Einträge entfernen.
+
+	!item	(!I)!/no_umlaute(!i) wandelt nun nicht nur Umlaute, sondern
+			(fast) alle 8-bit-Zeichen um.
+	
+	!item	Es wurden etliche Laufzeit-Optimierungen vorgenommen. Trotz
+			des gewaltigen Zuwachses an Befehlen braucht UDO nicht mehr
+			Zeit als vorher, ja in den meisten Fällen ist UDO sogar 
+			schneller geworden.
+			
+	!end_itemize
+
+
+!item [Änderungen:] ~
+
+	!begin_itemize	!short
+	
+	!item	Die Umwandlung ins RTF wurde komplett neu programmiert, so
+			daß die erzeugten Dateien nun auch problemlos mit WinWord
+			importiert werden können.
+
+	!item	Für (!LaTeX) 2.09 und (!LaTeXe) erzeugt UDO automatisch
+			eine Präambel (abschaltbar).
+	
+	!item	Es können nun wesentlich mehr Kapitel, Tabellenzeilen,
+			Trennvorschläge etc. benutzt werden.
+			
+	!item	UDO entdeckt wesentlich mehr Syntaxfehler als zuvor.
+			
+	!item	Bilder werden nun umgebungsabhängig positioniert. Sie
+			werden nur noch dann zentriert ausgegeben, wenn der
+			(!I)!/image(!i)-Befehl innerhalb einer center-Umgebung
+			steht. Die linksbündige oder rechtsbündige Ausgabe von
+			Bilder ist somit nun auch möglich.
+
+	!item	Die Default-Endung für ASCII-Dateien lautet nun (!V).txt(!v).			
+
+	!item	Bei der (!LaTeX)-Ausgabe wird innerhalb (!V)\verb(!v) kein
+			Zeilenumbruch mehr erzeugt.
+
+	!item	DOS-Grafikzeichen werden für WinHelp durch ''+'', ''-'' oder
+			''|'' ersetzt.
+			
+	!end_itemize
+
+
+!item [Syntaxänderungen:] ~
+
+	!begin_itemize	!short
+	
+	!item	(!I)!/no_verbatim_umlaute(!i) ersetzt den Schalter
+			(!V)!/verbatim_no_umlaute(!v)
+
+	!item	Der Befehl (!V)!/list_parsep(!v) existiert nicht mehr.
+			Komprimierte Umgebungen können nun viel eleganter mit dem
+			Umgebungsparameter (!I)!/short(!i) erstellt werden.
+
+	!item	Die zu benutzende Sprache muß nun mit (!I)!/language(!i) gesetzt
+			werden. (!I)!/language~german(!i) ersetzt demnach den Befehl
+			(!V)!/german(!v) etc.
+
+	!item	Beim Index-Befehl können nun bis zu drei Indizes übergeben
+			werden.	
+
+	!item	Der Befehl (!V)!/win_html_look(!v) existiert nicht mehr.
+
+	!item	Schattierte, helle, umrandete und umrahmte Schrift wird nicht
+			mehr angeboten. Falls man diese Schriftarten unbedingt benötigt,
+			so kann man sich die nötigen Befehle leicht mit Definitionen
+			selbst programmieren.
+	
+	!end_itemize
+	
+!end_description

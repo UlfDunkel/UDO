@@ -1,0 +1,11 @@
+This is the Debian version of UDO.
+This Debian Package is based on udo V6.2.0.
+UDO is OpenSource under the GNU Public Licence.
+Package was create by Volker Janzen (douglas@voja.org).
+
+Visit http://www.udo-open-source.org/ for further informations.
+
+To build UDO type "make". Install it with "make install". After this you
+can use "make clean" to delete all files created during compilation.
+
+Volker Janzen (douglas@voja.org) [15.10.2003]

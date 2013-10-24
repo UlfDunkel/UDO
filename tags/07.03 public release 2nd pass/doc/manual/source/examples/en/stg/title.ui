@@ -1,0 +1,38 @@
+!docinfo [program] Title pages with UDO
+
+!begin_document
+
+!ifndest [stg]
+
+!maketitle
+
+!else
+
+!node* Title
+
+!begin_center
+The hypertext to ""Hello, World!"" (!nl)
+Version 8.4
+
+written by
+
+Ford Prefect
+!end_center
+
+!smallskip
+
+!begin_center
+Contents
+!end_center
+
+!endif
+
+!tableofcontents
+
+!node The first chapter
+This is the first chapter.
+
+!node Bye bye
+Stop it, now!
+
+!end_document

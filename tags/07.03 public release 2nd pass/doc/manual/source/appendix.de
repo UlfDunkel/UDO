@@ -1,0 +1,104 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Appendix
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from appendix.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 10: table of limitations reformatted
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Limitierungen von UDO
+!html_name  limitations
+
+Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
+
+# Hint: The used macros are defined in macros.ui.
+
+!table_caption Limitierungen von UDO
+!begin_table [l|r] !hline
+Makros:                            !! (!MAXMACRO)
+Länge eines !/macro-Textwertes:    !! (!const [256])
+Defines:                           !! (!MAXDEFINE)
+Länge eines !/define-Textwertes:   !! (!const [256])
+Hyphens:                           !! (!MAXHYPHEN)
+Summe Kapitel, Labels und Aliase:  !! (!const [32768])
+Zeichen pro Zeile:                 !! (!LINELEN)
+Zeichen pro Wort:                  !! (!MAX_TOKEN_LEN)
+Silben pro Wort:                   !! (!MAXSILBEN)
+Worte pro Absatz:                  !! (!MAX_TOKENS)
+Querverweise pro Absatz:           !! (!MAXLINK)
+Zeilen pro Tabelle:                !! (!MAXLINETABLE)
+Spalten pro Tabelle:               !! (!MAXCOLUMSTABLE)
+Zeichen pro Tabellen-Zelle:        !! (!const [1000])
+Schachtelungstiefe der Umgebungen: !! (!const [6])
+!hline
+!end_table
+
+!end_node # Limitierungen von UDO
+
+
+################################################################################
+# auskommentiert 13.12.2003 (da überholt) - Ulrich Kretschmer
+# Angaben zu den verwendeten Entwicklungswerkzeugen gehören in die Entwickler-Dokumentation.
+!begin_ignore
+!begin_node Entwicklungsumgebung
+!html_name  development
+
+UDO wurde unter Zuhilfenahme folgender Programme entwickelt:
+
+!begin_xlist [Macintosh:]
+!item [Atari:]
+Pure C 1.1, Pure Profiler 1.0, MiNT-Libs PL 46, SysGem 2.03(!beta),
+Interface 2.3, Programming Tools von Julian F.~Reschke, MagiC-PC 1.01
+
+!item [DOS:]       EMX-GCC 2.6.3 emxfix06, GDB 4.13, PFE
+
+!item [HP-UX:]     GCC 2.7.2
+
+!item [Linux:]     GCC 2.7.2, S.u.S.E. Linux 4.3 mit Kernel 2.0.18, Joe
+
+!item [Macintosh:] CodeWarrior 9 (68K/PPC), ResEdit 2.1
+!end_xlist
+
+Momentan findet die Entwicklung teils unter Windows 95 auf einem
+Pentium 133 mit dem EMX-GCC, teils auf meinem Compaq Contura 486-DX50
+Notebook unter Linux statt.
+
+!medskip
+
+Diese Dokumentation wurde unter Zuhilfenahme folgender Programme
+geschrieben:
+
+!begin_itemize !compressed
+!item Joe Allan's Own Editor ""Joe"" für MS-DOS und Linux
+!item Allan Phillips' Programmer's File Editor ""PFE""~0.06.01 (der beste
+     Editor für Windows 3.1 und Windows 95, den ich kenne)
+!item Phoenix für Windows 3.11 von Application Systems Heidelberg (wird
+     jetzt als Fuji Base 1.0 verscherbelt)
+!end_itemize
+
+Alle Programme kann ich jedem nur wärmstens empfehlen!
+
+!end_node # Entwicklungsumgebung
+!end_ignore
+
+# === EOF ===

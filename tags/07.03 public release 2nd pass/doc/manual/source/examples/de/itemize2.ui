@@ -1,0 +1,9 @@
+!begin_itemize
+!item Dies ist Punkt 1 der äußeren itemize-Umgebung.
+!item Dies ist Punkt 2 der äußeren itemize-Umgebung.
+      !begin_itemize
+      !item Dies ist Punkt 1 der inneren Umgebung.
+      !item Dies ist Punkt 2 der inneren Umgebung.
+      !end_itemize
+!item Dies ist Punkt 3 der äußeren itemize-Umgebung.
+!end_itemize

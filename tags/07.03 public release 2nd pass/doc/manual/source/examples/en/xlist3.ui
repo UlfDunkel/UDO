@@ -1,0 +1,15 @@
+!begin_xlist [typewritered:]
+!item [normal:] !..
+!end_xlist
+
+!begin_blist [typewritered:]
+!item [bold:] !..
+!end_blist
+
+!begin_ilist [typewritered:]
+!item [italic:] !..
+!end_ilist
+
+!begin_tlist [typewritered:]
+!item [typewritered:] !..
+!end_tlist
