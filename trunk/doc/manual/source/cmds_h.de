@@ -41,6 +41,8 @@
 #   fd  May 18: html_ignore_8bit updated
 #   fd  May 25: using macro NOTE + TIP
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2013:
+#   fd  Oct 24: html_doctype updated (new option for HTML 5)
 #
 ################################################################################
 
@@ -749,7 +751,6 @@ in dem die spätere HTML-Datei erzeugt wird.
 
 # = = = = =
 
-# ToDo: Englisch
 !begin_node (!kw [html_doctype])
 !html_name  cmd_html_doctype
 
@@ -768,6 +769,7 @@ Mit diesem Kommando können Sie den Dokumententyp setzen. Dabei gibt es folgende 
 !item [Old]                HTML 3.2
 !item [Strict]             HTML 4.01 Strict
 !item [Transitional]       HTML 4.01 Transitional
+!item [5]                  HTML 5
 !item [XHTML Strict]       XHTML Strict
 !item [XHTML Transitional] XHTML Transitional
 !end_blist
