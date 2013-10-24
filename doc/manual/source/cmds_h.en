@@ -35,6 +35,8 @@
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  May 18: html_ignore_8bit updated
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2013:
+#   fd  Oct 24: html_doctype localized and updated (new option for HTML 5)
 #
 ################################################################################
 
@@ -684,11 +686,10 @@ where the HTML file will be created.
 
 # = = = = =
 
-# ToDo: Englisch
 !begin_node (!kw [html_doctype])
 !html_name  cmd_html_doctype
 
-Setzen des Dokumententyp (nur HTML).
+Defines the document type (HTML only).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -697,19 +698,38 @@ Setzen des Dokumententyp (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_doctype (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando können Sie den Dokumententyp setzen. Dabei gibt es folgemde
-Möglichkeiten: Old (HTML 3.2), Strict (HTML 4.01 Strict),
-Transitional (HTML 4.01 Transitional), XHTML Strict oder XHTML Transitional.
+This command defines the document type. The following options are available: (!nl)
 
-Für Frames werden die DOCTYPEs automatisch gesetzt.
+!begin_blist
+!item [Old]                HTML 3.2
+!item [Strict]             HTML 4.01 Strict
+!item [Transitional]       HTML 4.01 Transitional
+!item [5]                  HTML 5
+!item [XHTML Strict]       XHTML Strict
+!item [XHTML Transitional] XHTML Transitional
+!end_blist
 
-!item [(!EXAMPLE)]
-(!T)!/html_doctype Strict(!t)
+If you use frame mode, the DOCTYPE will be defined automatically.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~16
 
-
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_doctype Strict
+!end_verbatim
+(!EXAMPLE_AFTER)
+#!ifdest [html]
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+!end_verbatim
+#!else
+#!html_doctype Strict
+#!endif
+(!EXAMPLE_END)
 
 !end_node
 
