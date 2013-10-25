@@ -28,6 +28,8 @@
 #   fd  Mar 08: MAXLINETABLE adjusted to UDO 7.00
 #   ggs Apr 04: Remove a ! in macro KKW in the format ASC and STG
 #   fd  May 26: macro BUG enhanced for UDO 7.02
+# 2013:
+#   fd  Oct 25: macros LT + GT added (for HTML output of < + >)
 #
 ################################################################################
 
@@ -146,8 +148,12 @@
 
 !ifdest [html,hh,hah]
 !macro BUG (!B)(!url [#(!1)][http://bugs.udo-open-source.org/view.php?id=(!1)][_blank][elink])(!b)
+!macro LT  &lt;
+!macro GT  &gt;
 #else
 !macro BUG (!B)#(!1)(!b)
+!macro LT  <
+!macro GT  >
 !endif
 
 # === EOF ===
