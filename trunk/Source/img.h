@@ -43,6 +43,9 @@
 *  2011:
 *    fd  Jan 31: - file reformatted
 *                - IMGTYPE_... introduced; image header definitions resorted
+*  2013:
+*    fd  Oct 31: - get_png_size() added
+*                - c_gif_output() renamed: c_html_image_output()
 *
 ******************************************|************************************/
 
@@ -280,7 +283,7 @@ GLOBAL void save_html_gifs(void);
 GLOBAL void save_stg_imgs(void);
 
 GLOBAL BOOLEAN c_img_output(const char *name, const char *caption, const BOOLEAN visible);
-GLOBAL void c_gif_output(const char *name, const char *caption, const char *suffix, const int border);
+GLOBAL void c_html_image_output(const char *name, const char *caption, const char *suffix, const int border);
 GLOBAL void c_bmp_output(const char *name, const char *caption, const BOOLEAN visible);
 GLOBAL BOOLEAN c_msp_output(const char *name, const char *caption, const BOOLEAN visible);
 GLOBAL BOOLEAN c_pcx_output(const char *name, const char *caption, const BOOLEAN visible);
@@ -293,6 +296,7 @@ GLOBAL void set_image_alignment(void);
 
 GLOBAL BOOLEAN get_gif_size(const char *filename, UWORD *uiW, UWORD *uiH);
 GLOBAL BOOLEAN get_jpg_size(const char *filename, UWORD *uiW, UWORD *uiH);
+GLOBAL BOOLEAN get_png_size(const char *filename, UWORD *uiW, UWORD *uiH);
 
 GLOBAL void init_module_img_pass2(void);
 GLOBAL void init_module_img(void);

@@ -52,6 +52,7 @@
 *  2013
 *    ggs Sep 29: extract_parameters looks now for the ')'
 *    fd  Oct 23: c_ilink() + c_internal_image() support HTML5
+*    fd  Oct 31: c_internal_image() supports PNG images
 *
 ******************************************|************************************/
 
@@ -3539,8 +3540,8 @@ const BOOLEAN   inside_b4_macro)   /* */
    int          pnr = 0,           /* */
                 count;             /* */
    char         s_entry[1024],     /* */
-                sGifSize[80],      /* */
-                sGifName[512];     /* */
+                sImgSize[80],      /* */
+                sImgName[512];     /* */
    BOOLEAN      flag;              /* */
    UWORD        uiW,               /* */
                 uiH;               /* */
@@ -3586,27 +3587,39 @@ const BOOLEAN   inside_b4_macro)   /* */
          path_adjust_separator(Param[1]);
          
          uiW = uiH = 0;
-         sGifSize[0] = EOS;
+         sImgSize[0] = EOS;
          
          if (!no_img_size)
          {
             if (my_stricmp(tmp_suff, ".gif") == 0)
             {
-               strcpy(sGifName, Param[1]);
-               strinsert(sGifName, old_outfile.path);
-               strinsert(sGifName, old_outfile.driv);
-               path_adjust_separator(sGifName);
+               strcpy(sImgName, Param[1]);
+               strinsert(sImgName, old_outfile.path);
+               strinsert(sImgName, old_outfile.driv);
+               path_adjust_separator(sImgName);
          
-               if (!get_gif_size(sGifName, &uiW, &uiH))
+               if (!get_gif_size(sImgName, &uiW, &uiH))
                {
-                  error_read_gif (sGifName);
+                  error_read_gif(sImgName);
+               }
+            }
+            else if (my_stricmp(tmp_suff, ".png") == 0)
+            {
+               strcpy(sImgName, Param[1]);
+               strinsert(sImgName, old_outfile.path);
+               strinsert(sImgName, old_outfile.driv);
+               path_adjust_separator(sImgName);
+         
+               if (!get_png_size(sImgName, &uiW, &uiH))
+               {
+                  error_read_png(sImgName);
                }
             }
          }
          
          if (uiW != 0 && uiH != 0)
          {
-            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+            sprintf(sImgSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
          replace_char(Param[1], "\\", "/");
@@ -3622,12 +3635,12 @@ const BOOLEAN   inside_b4_macro)   /* */
                if (html_doctype == HTML5)
                {
                   sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
-                     Param[1], Param[2], Param[3], sGifSize, closer);
+                     Param[1], Param[2], Param[3], sImgSize, closer);
                }
                else
                {
                   sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-                     Param[1], Param[2], Param[3], sGifSize, closer);
+                     Param[1], Param[2], Param[3], sImgSize, closer);
                }
             }
             else
@@ -3635,12 +3648,12 @@ const BOOLEAN   inside_b4_macro)   /* */
                if (html_doctype == HTML5)
                {
                   sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
-                     Param[1], Param[2], Param[2], sGifSize, closer);
+                     Param[1], Param[2], Param[2], sImgSize, closer);
                }
                else
                {
                   sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-                     Param[1], Param[2], Param[2], sGifSize, closer);
+                     Param[1], Param[2], Param[2], sImgSize, closer);
                }
             }
          }
