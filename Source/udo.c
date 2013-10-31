@@ -126,6 +126,7 @@
 *                - <div> on HTML5 now uses class UDO_div_align_center| UDO_div_align_right
 *                - <p>   on HTML5 now uses class UDO_p_align_center  | UDO_p_align_right
 *                - <td>  on HTML5 now uses class UDO_td_align_center | UDO_td_align_right
+*    fd  Oct 31: c_gif_output() renamed: c_html_image_output()
 *
 ******************************************|************************************/
 
@@ -6543,7 +6544,7 @@ const BOOLEAN   visible)        /* */
    case TOHTM:
    case TOMHH:
       del_internal_styles(caption);       /*r6pl3*/
-      c_gif_output(filename, caption, sDocImgSuffix, 0);
+      c_html_image_output(filename, caption, sDocImgSuffix, 0);
       break;
       
       

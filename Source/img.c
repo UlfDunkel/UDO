@@ -47,6 +47,8 @@
 *                - new: get_image_header(): replaces proprietary get_NNNheader() functions
 *  2013:
 *    fd  Oct 23: HTML output supports HTML5
+*    fd  Oct 31: - c_calc_pngsize() added
+*                - c_gif_output() renamed: c_html_image_output()
 *
 ******************************************|************************************/
 
@@ -138,6 +140,7 @@ LOCAL int set_imgheader(const char *datei, IMGHEADER *head);
 
 LOCAL void calc_gifsize(UWORD *w, UWORD *h, GIFHEADER *head);
 LOCAL void calc_jpgsize(UWORD *w, UWORD *h, JPGHEADER *head);
+LOCAL void calc_pngsize(UWORD *w, UWORD *h, PNGHEADER *head);
 
 LOCAL int uc2ToInt(UBYTE *uc, int *i);
 LOCAL int uc4ToInt(UBYTE *uc, int *i);
@@ -639,6 +642,30 @@ JPGHEADER  *head)  /* */
 
 /*******************************************************************************
 *
+*  calc_pngsize():
+*     calculate size of PNG file
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void calc_pngsize(
+
+UWORD      *w,     /* */
+UWORD      *h,     /* */
+PNGHEADER  *head)  /* */
+{
+   *w = (head->png_width_hi  * 256 + head->png_width_lo);
+   *h = (head->png_height_hi * 256 + head->png_height_lo);
+}
+
+
+
+
+
+/*******************************************************************************
+*
 *  uc2ToInt():
 *     convert 2 unsigned chars to integer
 *
@@ -916,15 +943,15 @@ const BOOLEAN   visible)        /* */
 
 /*******************************************************************************
 *
-*  c_gif_output():
-*     outputs GIF image tag (HTML only)
+*  c_html_image_output():
+*     outputs image tag (HTML only)
 *
 *  return:
 *     -
 *
 ******************************************|************************************/
 
-GLOBAL void c_gif_output(
+GLOBAL void c_html_image_output(
 
 const char    *name,              /* */
 const char    *caption,           /* */
@@ -933,7 +960,7 @@ const int      border)            /* */
 {
    char        n[512],            /* */
                datei[512],        /* */
-               gifdatei[512];     /* */
+               img_file[512];     /* */
    char        align[64];         /* */
    char        sWidth[32],        /* */
                sHeight[32];       /* */
@@ -943,7 +970,8 @@ const int      border)            /* */
                inside_right,      /* */
                inside_left,       /* */
                flag;              /* */
-   GIFHEADER   gifhead;           /* */
+   GIFHEADER   gif_head;          /* */
+   PNGHEADER   png_head;          /* */
 /* JPGHEADER   jpghead; */        /* */
    char        closer[8] = "\0";  /* tag closer in XHTML */
 
@@ -1018,29 +1046,58 @@ const int      border)            /* */
    {
       if (my_stricmp(suffix, ".gif") == 0)
       {
-         strcpy(gifdatei, datei);
-         strinsert(gifdatei, old_outfile.path);
-         strinsert(gifdatei, old_outfile.driv);
-         path_adjust_separator(gifdatei);
+         strcpy(img_file, datei);
+         strinsert(img_file, old_outfile.path);
+         strinsert(img_file, old_outfile.driv);
+         path_adjust_separator(img_file);
          
-         flag = get_image_header(gifdatei, IMGTYPE_GIF, &gifhead);
+         flag = get_image_header(img_file, IMGTYPE_GIF, &gif_head);
 
          if (!flag)
          {
-            build_image_filename(gifdatei, suffix);
+            build_image_filename(img_file, suffix);
             
-            flag = get_image_header(gifdatei, IMGTYPE_GIF, &gifhead);
+            flag = get_image_header(img_file, IMGTYPE_GIF, &gif_head);
 
             if (!flag)
             {
                sWidth[0] = EOS;
-               error_read_gif(gifdatei);
+               error_read_gif(img_file);
             }
          }
 
          if (flag)
          {
-            calc_gifsize(&uiWidth, &uiHeight, &gifhead);
+            calc_gifsize(&uiWidth, &uiHeight, &gif_head);
+            sprintf(sWidth, " width=\"%u\"", uiWidth);
+            sprintf(sHeight, " height=\"%u\"", uiHeight);
+         }
+      }
+      else if (my_stricmp(suffix, ".png") == 0)
+      {
+         strcpy(img_file, datei);
+         strinsert(img_file, old_outfile.path);
+         strinsert(img_file, old_outfile.driv);
+         path_adjust_separator(img_file);
+         
+         flag = get_image_header(img_file, IMGTYPE_PNG, &png_head);
+
+         if (!flag)
+         {
+            build_image_filename(img_file, suffix);
+            
+            flag = get_image_header(img_file, IMGTYPE_PNG, &png_head);
+
+            if (!flag)
+            {
+               sWidth[0] = EOS;
+               error_read_png(img_file);
+            }
+         }
+
+         if (flag)
+         {
+            calc_pngsize(&uiWidth, &uiHeight, &png_head);
             sprintf(sWidth, " width=\"%u\"", uiWidth);
             sprintf(sHeight, " height=\"%u\"", uiHeight);
          }
@@ -2017,7 +2074,7 @@ UWORD         *uiH)       /* */
 /*******************************************************************************
 *
 *  get_jpg_size():
-*     get size of JPEG image
+*     get size of JPG image
 *
 *  return:
 *      TRUE: everything is okay
@@ -2045,6 +2102,46 @@ UWORD         *uiH)       /* */
       
 
       calc_jpgsize(uiW, uiH, &jh);
+   }
+
+   return TRUE;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  get_png_size():
+*     get size of PNG image
+*
+*  return:
+*      TRUE: everything is okay
+*     FALSE: something went wrong
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN get_png_size(
+
+const char    *filename,  /* */
+UWORD         *uiW,       /* */
+UWORD         *uiH)       /* */
+{
+   BOOLEAN     flag;      /* TRUE: PNG header could be read successfully */
+   PNGHEADER   gh;        /* */
+   
+
+   *uiW = *uiH = 0;
+
+   if (!no_img_size)                      /* we don't want to ignore image sizes */
+   {
+      flag = get_image_header(filename, IMGTYPE_PNG, &gh);
+      
+      if (!flag)
+         return FALSE;
+
+      calc_pngsize(uiW, uiH, &gh);
    }
 
    return TRUE;
@@ -2091,7 +2188,7 @@ UWORD         *uiH)       /* */
 
 /*******************************************************************************
 *
-*  init_gif_size():
+*  init_module_img_pass2():
 *     find image sizes of UDO navigation GIFs
 *
 *  Notes:

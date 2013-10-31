@@ -51,6 +51,7 @@
 *  2013:
 *    fd  Oct 23: - <h1> on HTML5 now uses class UDO_h1_align_center| UDO_h1_align_right
 *                - <h2> on HTML5 now uses class UDO_h2_align_center| UDO_h2_align_right
+*    fd  Oct 31: c_gif_output() renamed: c_html_image_output()
 *
 ******************************************|************************************/
 
@@ -574,7 +575,7 @@ GLOBAL BOOLEAN set_docinfo(void)
             {
                replace_char(titdat.authorimage, "\\", "/");    /*r6pl4*/
                                           /* r6pl9: Ausmasse nicht ermitteln -> da */
-                                          /* ueber c_gif_output() ausgegeben wird  */
+                                          /* ueber c_html_image_output() ausgegeben wird  */
             }
          }
          else
@@ -716,7 +717,7 @@ GLOBAL BOOLEAN set_docinfo(void)
             {
                replace_char(titdat.programimage, "\\", "/");   /*r6pl4*/
                                           /* r6pl9: Ausmasse nicht ermitteln -> da */
-                                          /* ueber c_gif_output() ausgegeben wird  */
+                                          /* ueber c_html_image_output() ausgegeben wird  */
             }
          }
          else
@@ -2098,7 +2099,7 @@ GLOBAL void c_maketitle(void)
       if (has_programimage)
       {
          c_begin_center();
-         c_gif_output(titdat.programimage, "", sDocImgSuffix, 0);
+         c_html_image_output(titdat.programimage, "", sDocImgSuffix, 0);
          c_end_center();
       }
       
@@ -2144,7 +2145,7 @@ GLOBAL void c_maketitle(void)
       if (has_authorimage)
       {
          c_begin_center();
-         c_gif_output(titdat.authorimage, "", sDocImgSuffix, 0);
+         c_html_image_output(titdat.authorimage, "", sDocImgSuffix, 0);
          c_end_center();
          
          if (has_author || has_address)
