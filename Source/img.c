@@ -49,6 +49,7 @@
 *    fd  Oct 23: HTML output supports HTML5
 *    fd  Oct 31: - c_calc_pngsize() added
 *                - c_gif_output() renamed: c_html_image_output()
+*    fd  Nov 02: HTML5 output of <img> tags cleaned
 *
 ******************************************|************************************/
 
@@ -1109,8 +1110,8 @@ const int      border)            /* */
                                           /* output empty alt + title contents for valid HTML */
       if (html_doctype == HTML5)
       {
-         sprintf(n, "%s<img src=\"%s\" alt=\"\" title=\"\" %s%s%s></p>", 
-            align, datei, sWidth, sHeight, closer);
+         sprintf(n, "%s<img src=\"%s\" alt=\"\" title=\"\"%s%s></p>", 
+            align, datei, sWidth, sHeight);
       }
       else
       {
