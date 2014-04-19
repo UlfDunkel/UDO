@@ -127,6 +127,8 @@
 *                - <p>   on HTML5 now uses class UDO_p_align_center  | UDO_p_align_right
 *                - <td>  on HTML5 now uses class UDO_td_align_center | UDO_td_align_right
 *    fd  Oct 31: c_gif_output() renamed: c_html_image_output()
+*  2014
+*    ggs Apr 16: copyright year updated
 *
 ******************************************|************************************/
 
@@ -10254,7 +10256,7 @@ LOCAL void output_preamble(void)
    case TOLYX:
       voutlnf("# This file was created by UDO Version %s.%s %s", UDO_REL, UDO_SUBVER, UDO_BUILD);
       outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
-      outln("# UDO (C) 2001-2013 by The UDO Community (www.udo-open-source.org)");
+      outln("# UDO (C) 2001-2014 by The UDO Community (www.udo-open-source.org)");
       outln("\\lyxformat 2.10");
       voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
       outln("\\inputencoding latin1");
