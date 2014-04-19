@@ -84,6 +84,8 @@
 *    fd  May 02: v7.02 ()
 *    fd  Oct 23: v7.03 (1242) - supporting HTML5
 *    fd  Oct 24: v7.03 (1248)
+*  2014
+*    ggs Apr 16: copyright year updated
 *
 ******************************************|************************************/
 
@@ -122,8 +124,8 @@
 
    /* --- Copyright Meldung --- */
 
-#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2013 by The UDO Community"
-#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2013 by The UDO Community\t(!nl)\n"
+#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2014 by The UDO Community"
+#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2014 by The UDO Community\t(!nl)\n"
 
    /* --- Zeichensaetze --- */
 
