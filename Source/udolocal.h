@@ -44,6 +44,8 @@
 *    fd  Feb 15: - file tidied up and reformatted, TAB-free
 *                - new: c_code_source(), c_code_target()
 *    fd  Mar 12: c_code() removed
+*  2014
+*    ggs Apr 20: Add Node6
 *
 ******************************************|************************************/
 
@@ -120,12 +122,14 @@ LOCAL void c_subheading(void);
 LOCAL void c_subsubheading(void);
 LOCAL void c_subsubsubheading(void);
 LOCAL void c_subsubsubsubheading(void);
+LOCAL void c_subsubsubsubsubheading(void);
 
 LOCAL void c_listheading(void);
 LOCAL void c_listsubheading(void);
 LOCAL void c_listsubsubheading(void);
 LOCAL void c_listsubsubsubheading(void);
 LOCAL void c_listsubsubsubsubheading(void);
+LOCAL void c_listsubsubsubsubsubheading(void);
 
    /* encoding handling */
 LOCAL void c_code_source(void);

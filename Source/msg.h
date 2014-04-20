@@ -42,6 +42,8 @@
 *                - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Mar 04: - file tidied up
 *                - message wrapper functions now global
+*  2014:
+*    ggs Apr 20: Add Node6
 *
 ******************************************|************************************/
 
@@ -179,6 +181,7 @@ GLOBAL void error_node2_not_allowed(void);
 GLOBAL void error_node3_not_allowed(void);
 GLOBAL void error_node4_not_allowed(void);
 GLOBAL void error_node5_not_allowed(void);
+GLOBAL void error_node6_not_allowed(void);
 
 
    /* --- warnings (tiny syntax errors) --- */

@@ -47,6 +47,8 @@
 *                - webmasterurl     -> domain_link
 *                - webmasteremail   -> contact_name
 *                - webmastermailurl -> contact_link
+*  2014
+*    ggs Apr 20: Add Node6
 *
 ******************************************|************************************/
 
@@ -164,6 +166,7 @@ typedef struct                            /* ---- Layoutinfos ---- */
    UWORD   node3size;                     /* New in r6pl16 [NHz] */
    UWORD   node4size;                     /* New in r6pl16 [NHz] */
    UWORD   node5size;
+   UWORD   node6size;
 }  LAYOUTDATA;
 
 
