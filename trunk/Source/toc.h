@@ -45,6 +45,8 @@
 *  2011:
 *    fd  Feb 14: - functions add_...node_to_toc() merged into add_nodetype_to_toc()
 *                - all set_html_...() functions moved from TOC to TOC_HTML
+*  2014:
+*    ggs Apr 20: Add Node6
 *
 ******************************************|************************************/
 
@@ -87,7 +89,8 @@
 #define TOC_NODE3  3                      /* !subsubnode */
 #define TOC_NODE4  4                      /* !subsubsubnode */
 #define TOC_NODE5  5                      /* !subsubsubsubnode */
-#define TOC_NONE   6                      /* neither nor ... :-) */
+#define TOC_NODE6  6                      /* !subsubsubsubsubnode */
+#define TOC_NONE   7                      /* neither nor ... :-) */
 
 
 
@@ -113,6 +116,7 @@ typedef struct _label                     /* jump labels to be referenced */
    int       n3;                          /* ... subsubnode */
    int       n4;                          /* ... subsubsubnode */
    int       n5;                          /* ... subsubsubsubnode */
+   int       n6;                          /* ... subsubsubsubsubnode */
    BOOLEAN   appendix;                    /* label is in appendix */
    BOOLEAN   is_node;                     /* label is node title */
    BOOLEAN   is_popup;                    /* node is a popup node */
@@ -148,7 +152,8 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    int       n3;                          /* Unterabschnittnummer   (absolut) */
    int       n4;                          /* Unterabschnittnummer   (absolut) */
    int       n5;                          /* Unterabschnittnummer   (absolut) */
-   int       nr1,nr2,nr3,nr4,nr5;         /* Inhaltsverzeichnis-Nummern */
+   int       n6;                          /* Unterabschnittnummer   (absolut) */
+   int       nr1,nr2,nr3,nr4,nr5,nr6;     /* Inhaltsverzeichnis-Nummern */
    BOOLEAN   appendix;                    /* TRUE = Steht im Anhang */
    int       toctype;                     /* !node, !subnode, !subsubnode, !subsubsubnode, !subsubsubsubnode */
                                           /* Filename der Sourcecodedatei */   /* V6.5.18 */
@@ -207,10 +212,12 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    int       up_n2_index;
    int       up_n3_index;
    int       up_n4_index;
+   int       up_n5_index;
    int       count_n2;                    /* # of contained subnodes */
    int       count_n3;                    /* # of contained subsubnodes */
    int       count_n4;                    /* # of contained subsubsubnodes */
    int       count_n5;                    /* # of contained subsubsubsubnodes */
+   int       count_n6;                    /* # of contained subsubsubsubsubnodes */
    BOOLEAN   ignore_subtoc;               /* ignore !use_auto_subtoc */
    BOOLEAN   ignore_links;                /* don't link to this page */
    BOOLEAN   ignore_index;                /* don't add this to the index page */
@@ -253,19 +260,21 @@ GLOBAL int       subtoc_offset;
 GLOBAL int       subsubtoc_offset;
 GLOBAL int       subsubsubtoc_offset;
 GLOBAL int       subsubsubsubtoc_offset;  /* [GS] */
+GLOBAL int       subsubsubsubsubtoc_offset;  /* [GS] */
 
 GLOBAL int       all_nodes, 
                  all_subnodes, 
                  all_subsubnodes, 
                  all_subsubsubnodes, 
-                 all_subsubsubsubnodes;
+                 all_subsubsubsubnodes,
+                 all_subsubsubsubsubnodes;
 
 GLOBAL BOOLEAN   bInsideAppendix,         /* Ist UDO im Anhang? */
                  bInsideDocument,         /* Ist UDO im Dokument selber? */
                  bInsidePopup;            /* In einem Popup-Node? */
 
 GLOBAL BOOLEAN   called_tableofcontents;  /* Wurde toc ausgegeben? (@toc) */
-GLOBAL BOOLEAN   called_subsubsubsubnode;
+GLOBAL BOOLEAN   called_subsubsubsubsubnode;
 
 GLOBAL BOOLEAN   uses_tableofcontents;    /* !tableofcontents wird benutzt */
 
@@ -281,6 +290,7 @@ GLOBAL int       subtocs1_depth;          /*r6pl2*/
 GLOBAL int       subtocs2_depth;          /*r6pl2*/
 GLOBAL int       subtocs3_depth;          /*r6pl2*/
 GLOBAL int       subtocs4_depth;
+GLOBAL int       subtocs5_depth;
 
 GLOBAL char      sHtmlPropfontStart[256]; /*r6pl7*/
 GLOBAL char      sHtmlPropfontEnd[16];    /*r6pl7*/
@@ -363,6 +373,11 @@ GLOBAL void c_subsubsubsubnode(void);
 GLOBAL void c_subsubsubsubnode_iv(void);
 GLOBAL void c_psubsubsubsubnode(void);
 GLOBAL void c_psubsubsubsubnode_iv(void);
+
+GLOBAL void c_subsubsubsubsubnode(void);
+GLOBAL void c_subsubsubsubsubnode_iv(void);
+GLOBAL void c_psubsubsubsubsubnode(void);
+GLOBAL void c_psubsubsubsubsubnode_iv(void);
 
 GLOBAL void c_endnode(void);
 

@@ -42,6 +42,8 @@
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Mar 04: - file tidied up (some message texts updated or adjusted)
 *                - message wrapper functions now global
+*  2014:
+*    ggs Apr 20: Add Node6
 *
 ******************************************|************************************/
 
@@ -2677,6 +2679,25 @@ GLOBAL void error_node4_not_allowed(void)
 GLOBAL void error_node5_not_allowed(void)
 {
    fatal_msg_solo("use !subsubsubnode first (structure gap) or use !begin_node & !end_node");
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  error_node6_not_allowed():
+*     error message: use !subsubsubsubnode first (structure gap) or use !begin_node & !end_node
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void error_node6_not_allowed(void)
+{
+   fatal_msg_solo("use !subsubsubsubnode first (structure gap) or use !begin_node & !end_node");
 }
 
 

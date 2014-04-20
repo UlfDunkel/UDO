@@ -55,6 +55,8 @@
 *                     use_short_lists
 *    ggs Apr 21: use_short_tocs -> use_compressed_tocs
 *    fd  May 18: html_ignore_8bit_use_charset + html_ignore_8bit_charset no longer required
+*  2014
+*    ggs Apr 20: Add Node6
 *
 ******************************************|************************************/
 
@@ -209,6 +211,7 @@ GLOBAL BOOLEAN     use_auto_subtocs;      /* create sub TOCs automatically? */
 GLOBAL BOOLEAN     use_auto_subsubtocs;
 GLOBAL BOOLEAN     use_auto_subsubsubtocs;
 GLOBAL BOOLEAN     use_auto_subsubsubsubtocs;
+GLOBAL BOOLEAN     use_auto_subsubsubsubsubtocs;
 
 GLOBAL BOOLEAN     use_auto_toptocs;      /* autom. Ueber-Toc's anlegen? */
 GLOBAL BOOLEAN     no_auto_toptocs_icons; /* ... aber ohne Icons */   /*r6pl13*/
@@ -269,6 +272,7 @@ GLOBAL BOOLEAN     html_merge_node2;      /* Subnodes nicht splitten? */
 GLOBAL BOOLEAN     html_merge_node3;      /* Subsubnodes nicht splitten? */
 GLOBAL BOOLEAN     html_merge_node4;      /* Subsubsubnodes nicht splitten? */
 GLOBAL BOOLEAN     html_merge_node5;      /* Subsubsubsubnodes nicht splitten? */
+GLOBAL BOOLEAN     html_merge_node6;      /* Subsubsubsubsubnodes nicht splitten? */
 GLOBAL BOOLEAN     html_no_xlist;         /* xlist- durch description-Umgebung ersetzen? */
 GLOBAL BOOLEAN     html_ignore_8bit;      /* ae nicht in &auml; wandeln? */
 GLOBAL BOOLEAN     html_modern_layout;    /* Modernes 2-Spalten-Layout? */

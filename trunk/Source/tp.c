@@ -52,6 +52,8 @@
 *    fd  Oct 23: - <h1> on HTML5 now uses class UDO_h1_align_center| UDO_h1_align_right
 *                - <h2> on HTML5 now uses class UDO_h2_align_center| UDO_h2_align_right
 *    fd  Oct 31: c_gif_output() renamed: c_html_image_output()
+*  2014
+*    ggs Apr 20: Add Node6
 *
 ******************************************|************************************/
 
@@ -220,6 +222,8 @@ GLOBAL BOOLEAN set_mainlayout(void)
    laydat.node2size = 0;
    laydat.node3size = 0;
    laydat.node4size = 0;
+   laydat.node5size = 0;
+   laydat.node6size = 0;
 
    return TRUE;
 }
@@ -361,6 +365,13 @@ GLOBAL BOOLEAN set_doclayout(void)
       return TRUE;
    }
 
+   if (strcmp(content, "node6size") == 0)
+   {
+      if (str_for_desttype(format))       /* Set size of subsubsubsubnode */
+         laydat.node6size = atoi(data);
+
+      return TRUE;
+   }
                                           /* Specialties for Postscript */
    if (strcmp(content, "openMode") == 0)
    {
