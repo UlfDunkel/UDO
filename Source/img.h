@@ -131,7 +131,14 @@ typedef struct _imgheader
 
 typedef struct _jpgheader
    {
-   UBYTE   jpg_unknown[2];                /* ??? */
+   UBYTE   SOI[2];                        /* Start of Image (SOI) Marker */
+   UBYTE   APP0[2];                       /* Applicaion (APP0) Marker    */
+   UBYTE   APPO_lenght[2];
+   UBYTE   APP0_ID[5];
+   UBYTE   APP0_Version[2];
+   UBYTE   APP0_Units[1];
+   UBYTE   APP0_X_Density[2];
+   UBYTE   APP0_Y_Density[2];
    } JPGHEADER;
 
 
