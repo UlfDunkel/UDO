@@ -14,17 +14,19 @@
 # -------
 # 2014:
 #   ggs May 02: introduced
+#   fd  May 02: adjustments
 #
 ################################################################################
 
 !begin_node Änderungen in Version 7.04
 !html_name  history_0704
 
-(!PUBLISHED [UDO~7.03][]) wurde noch nicht ver”ffentlicht!
+# (!PUBLISHED [UDO~7.04][])
+UDO~7.04 wurde noch nicht veröffentlicht!
 
 !begin_description !compressed
 # ----------------------------------------
-!item [Zus„tzlicher Paragraph]
+!item [Zusätzlicher Paragraph]
 # ----------------------------------------
 
      
