@@ -510,6 +510,56 @@ Start a hidden subparagraph.
 
 # = = = = =
 
+!begin_node (!kw [sssssn])
+!html_name  cmd_sssssn
+
+Start a subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubnode])
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssssn*])
+!html_name  cmd_sssssn_asterisk
+
+Start a hidden subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubnode*])
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [stg_short_title])
 !html_name  cmd_stg_short_title
 
@@ -1006,6 +1056,64 @@ chapters of the appendix.
 
 !end_node
 !end_ignore
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode])
+!html_name  cmd_subsubsubsubsubnode
+
+Start a subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new subparagraph named ""(!TEXT)"". Paragraphs are numbered
+with #.#.#.#.#.# and are displayed inside the table of contents
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubsubnode Subparagraph title(!t)
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode*])
+!html_name  cmd_subsubsubsubsubnode_asterisk
+
+Start a hidden subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subsubsubsubnode]), but here ""(!TEXT)""
+will not appear in the table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubsubnode* Hidden subparagraph title(!t)
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
 
 # = = = = =
 

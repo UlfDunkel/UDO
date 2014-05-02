@@ -544,6 +544,56 @@ Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 # = = = = =
 
+!begin_node (!kw [sssssn])
+!html_name  cmd_sssssn
+
+Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubnode])
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssssn*])
+!html_name  cmd_sssssn_asterisk
+
+Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubnode*])
+
+!item [(!EXISTSSINCE)]  Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [stg_short_title])
 !html_name  cmd_stg_short_title
 
@@ -1131,6 +1181,76 @@ Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 !end_node
 !end_ignore
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode])
+!html_name  cmd_subsubsubsubsubnode
+
+Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet einen Unterparagraph mit der Bezeichnung ""(!TEXT)"" ein. Ein Unterparagraph ist die sechste Gliederungsebene
+und wird mit #.#.#.#.#,# nummeriert.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubsubnode Titel des Unterparagraphs
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading Titel des Unterparagraphs
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode*])
+!html_name  cmd_subsubsubsubsubnode_asterisk
+
+Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubsubnode* Titel des versteckten Unterparagraphs
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading Titel des versteckten Unterparagraphs
+(!EXAMPLE_END)
+
+!end_node
 
 # = = = = =
 

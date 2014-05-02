@@ -445,6 +445,98 @@ Start a hidden popup paragraph.
 
 # = = = = =
 
+!begin_node (!kw [pssss])
+!html_name  cmd_pssss
+
+Start a popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pssss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pssss*])
+!html_name  cmd_pssss_asterisk
+
+Start a hidden popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pssss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psssss])
+!html_name  cmd_psssss
+
+Start a popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psssss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psssss*])
+!html_name  cmd_psssss_asterisk
+
+Start a hidden popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psssss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [psubnode])
 !html_name  cmd_psubnode
 
@@ -663,6 +755,64 @@ This command does the same as (!KW [psubsubsubsubnode]), but here
 (!T)!/psubsubsubsubnode* A hidden popup paragraph(!t)
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubsubnode])
+!html_name  cmd_psubsubsubsubsubnode
+
+Start a popup subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [subsubsubsubsubnode]) but the contents will be displayed
+as a popup inside ST-Guide and WinHelp.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubsubsubsubnode A popup subsection(!t)
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubsubnode*])
+!html_name  cmd_psubsubsubsubsubnode_asterisk
+
+Start a hidden popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [psubsubsubsubsubnode]), but here
+""(!TEXT)"" will not appear in the table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubsubsubsubnode* A hidden popup paragraph(!t)
+
+!item [(!EXISTSSINCE)] Version 7.04
 
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Structure] [Structure])

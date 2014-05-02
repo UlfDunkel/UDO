@@ -504,6 +504,29 @@ Versteckten Popup-Paragraph einleiten.
 
 # = = = = =
 
+!begin_node (!kw [pssss])
+!html_name  cmd_pssss
+
+Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pssss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [pssss*])
 !html_name  cmd_pssss_asterisk
 
@@ -513,13 +536,59 @@ Versteckten Popup-Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
+!item [(!SYNTAX)] (!T)!/pssss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubsubsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psssss])
+!html_name  cmd_psssss
+
+Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psssss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psssss*])
+!html_name  cmd_psssss_asterisk
+
+Versteckten Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psssss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode*])
 
 !end_xlist
 
@@ -794,6 +863,75 @@ in Inhaltsverzeichnissen erscheint.
 !end_verbatim
 (!EXAMPLE_AFTER)
 !subsubsubsubheading Ein versteckter Popup-Unterparagraph
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubsubnode])
+!html_name  cmd_psubsubsubsubsubnode
+
+Popup-Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [subsubsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubsubsubnode Ein Popup-Unterparagraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading Ein Popup-Unterparagraph
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubsubnode*])
+!html_name  cmd_psubsubsubsubsubnode_asterisk
+
+Versteckten Popup-Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubsubsubnode* Ein versteckter Popup-Unterparagraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading Ein versteckter Popup-Unterparagraph
 (!EXAMPLE_END)
 
 !end_node
