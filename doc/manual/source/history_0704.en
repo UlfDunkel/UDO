@@ -1,0 +1,37 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.04
+# Language    : English
+# Initial Date: 2010-10-24
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2014:
+#   ggs May 02: introduced
+#
+################################################################################
+
+!begin_node Changes in version 7.03
+!html_name  history_0703
+
+(!PUBLISHED [UDO~7.03][October 24, 2013])
+
+(!PUBLISHED [UDO~7.03][]) wurde noch nicht ver”ffentlicht!
+
+!begin_description !compressed
+# ----------------------------------------
+# ToDo: Englisch
+!item [Zus„tzlicher Paragraph]
+# ----------------------------------------
+      
+!end_description
+
+!end_node
+
+# === EOF ===
