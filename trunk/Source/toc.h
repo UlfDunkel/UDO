@@ -144,6 +144,16 @@ typedef struct _style                     /* style sheets */
 
 
 
+typedef struct _script                    /* javascript files */
+{
+   char   href[MAX_LABEL_LEN  + 1];       /* javascript file reference */
+   int    scriptindex;                    /* script[1]==1, script[2]==2 etc. */
+   int    tocindex;                       /* belongs to node "toc[tocindex]" */
+   
+}  SCRIPT, *pSCRIPT;
+
+
+
 typedef struct _tocitem                   /* entries for the Table Of Contents (TOC) */
 {
    char      name[MAX_NODE_LEN + 1];      /* Der Eintrag selber */
@@ -305,6 +315,9 @@ GLOBAL int       p2_toc_counter;
                                           /* New in V6.5.9 [NHz] */
 GLOBAL STYLE    *style[MAXSTYLES];        /* Array mit Zeigern auf Stylesheets */
 GLOBAL int       p1_style_counter;        /* Zaehler */
+
+GLOBAL SCRIPT   *script[MAXSCRIPTS];      /* ^ array for javascript files */
+GLOBAL int       p1_script_counter;       /* counter */
 
 GLOBAL char     *html_frames_toc_title;   /* V6.5.16 [GS] */
 GLOBAL char     *html_frames_con_title;   /* V6.5.16 [GS] */
