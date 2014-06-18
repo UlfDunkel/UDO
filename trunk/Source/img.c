@@ -1127,7 +1127,7 @@ const int      border)            /* */
       
       if (html_doctype == HTML5)
       {
-         sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s%s></p>",
+         sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></p>",
             align, datei, caption, caption, sWidth, sHeight, closer);
       }
       else
