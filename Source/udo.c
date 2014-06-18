@@ -6173,7 +6173,7 @@ GLOBAL void c_udolink (void)
       {
          if (html_doctype == HTML5)
          {
-            voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+            voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize, closer);
          }
          else
@@ -11745,13 +11745,13 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
       }
 */
       
-                                          /* New in r6pl15 [NHz] */
+/*
       if (strcmp(token[0], "!html_script_name") == 0)
       {
          set_html_script();
          return TRUE;
       }
-      
+*/
                                           /* New in r6pl15 [NHz] */
       if (strcmp(token[0], "!html_favicon_name") == 0)
       {
@@ -12111,6 +12111,13 @@ LOCAL BOOLEAN pass1_check_everywhere_commands(void)
          return TRUE;
       }
       
+                                          /* fd:2014-06-18: CMD_ALWAYS */
+      if (strcmp(token[0], "!html_script_name") == 0)
+      {
+         set_html_script();
+         return TRUE;
+      }
+
       break;
 
 
