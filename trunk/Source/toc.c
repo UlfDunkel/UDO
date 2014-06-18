@@ -1187,7 +1187,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
             {
                if (html_doctype == HTML5)
                {
-                  sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>", 
+                  sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
                      htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
                }
                else
@@ -1200,7 +1200,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
             {
             	if (html_doctype == HTML5)
             	{
-                  sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+                  sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                      htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
             	}
             	else
@@ -3082,22 +3082,23 @@ LOCAL BOOLEAN html_make_file(void)
 
 LOCAL void output_html_meta(
 
-BOOLEAN    keywords)             /* */
+BOOLEAN     keywords)             /* */
 {
-   int     ti = 0,               /* */
-           i,                    /* */
-           li,                   /* */
-           j,                    /* */
-           html_merge;           /* */
-   STYLE  *styleptr;             /* */
-   char    s[512],               /* buffer for charset and label name */
-           htmlname[512],        /* */
-           sTarget[512] = "\0";  /* */
-   char    backpage[256],        /* */
-           href[256],            /* */
-           alt[256],             /* */
-          *tok;                  /* */
-   char    closer[8] = "\0";     /* single tag closer mark in XHTML */
+   int      ti = 0,               /* */
+            i,                    /* */
+            li,                   /* */
+            j,                    /* */
+            html_merge;           /* */
+   STYLE   *styleptr;             /* */
+   SCRIPT  *scriptptr;            /* */
+   char     s[512],               /* buffer for charset and label name */
+            htmlname[512],        /* */
+            sTarget[512] = "\0";  /* */
+   char     backpage[256],        /* */
+            href[256],            /* */
+            alt[256],             /* */
+           *tok;                  /* */
+   char     closer[8] = "\0";     /* single tag closer mark in XHTML */
 
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -3106,14 +3107,16 @@ BOOLEAN    keywords)             /* */
                                           /* get right charset name */
    strcpy(s, chr_codepage_charset_name(iEncodingTarget));
      
-   voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, closer);
 
    if (html_doctype != HTML5)
    {
+      voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, closer);
       voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, closer);
       voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", closer);
       voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", closer);
    }
+   else
+      voutlnf("<meta charset='%s'%s>", s, closer);
 
    /* New feature #0000054 in V6.5.2 [NHz] */
    if (html_header_date)
@@ -3457,6 +3460,25 @@ BOOLEAN    keywords)             /* */
       {
          voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\"%s>",
             htmlname, outfile.suff, sTarget, s, closer);
+      }
+   }
+
+   /* fd:2014-06-18: new */
+   /* Link for overall and file-related javascript files */
+
+   for (j = 1; j <= p1_script_counter; j++)
+   {
+      scriptptr = script[j];
+      
+      if (scriptptr->href != NULL && (scriptptr->tocindex == 0 || scriptptr->tocindex == p2_toc_counter))
+      {
+         char  this_script[512];  /* */
+         
+         strcpy(this_script, "<script type=\"text/javascript\" src=\"");
+         strcat(this_script, scriptptr->href);
+         strcat(this_script, "\"></script>");
+         
+         outln(this_script);
       }
    }
 
@@ -3973,7 +3995,7 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+            voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
          }
          else
@@ -4069,7 +4091,7 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
+            voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s>",
                sGifName, lang.html_home, lang.html_home, sGifSize, closer);
          }
          else
@@ -4108,7 +4130,7 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+            voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
          }
          else
@@ -4196,7 +4218,7 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s></a>",
+            voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                href, target, sGifName, alt, alt, sGifSize, closer);
          }
          else
