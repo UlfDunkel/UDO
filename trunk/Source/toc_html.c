@@ -1053,13 +1053,13 @@ GLOBAL void set_html_style(void)
       strncpy(styleptr->href, sTemp + 1, lang);
       styleptr->href[lang] = EOS;
 
-                                          /* Hier muessen immer / benutzt werden! */
+                                          /* always use / characters here! */
       replace_char(styleptr->href, "\\", "/");
    }
    else
       strcpy(styleptr->href, token[1]);
 
-   for (i = 1; i < p1_style_counter; i++)
+   for (i = 1; i < p1_style_counter; i++) /* check if this CSS file has already been included */
    {
       if (!strcmp(styleptr->href, style[i]->href))
       {
@@ -1113,7 +1113,7 @@ GLOBAL void set_html_style(void)
 /*******************************************************************************
 *
 *  set_html_script():
-*     sets HTML script name
+*     sets HTML script (usually a JavaScript file)
 *
 *  Return:
 *     -
@@ -1122,45 +1122,61 @@ GLOBAL void set_html_style(void)
 
 GLOBAL void set_html_script(void)
 {
-   char  *ptr,         /* */
-         *dest;        /* */
-   char   sTemp[512];  /* */
+   SCRIPT  *scriptptr;   /* */
+   char     sTemp[512];  /* */
+   int      i;           /* */
+   long     lang;        /* */
    
    
    if (!check_toc_and_counters())
       return;
 
-   if (p1_toc_counter == 0)
-      dest = sDocScript;
-   else
-      dest = toc[p1_toc_counter]->script_name;
-
-
-   if (token[1][0] == '\"')
+                                          /* list overflow? */
+   if (p1_script_counter + 1 >= MAXSCRIPTS)
    {
-      tokcpy2(sTemp, 512);
-      ptr = strchr(sTemp + 1, '\"');      /* find second quote character (") */
-
-      if (ptr)
-      {
-         ptr[0] = EOS;
-         strcpy(dest, sTemp + 1);
-      }
-      else
-      {
-         strcpy(dest, sTemp);
-      }
-   }
-   else
-   {
-      strcpy(dest, token[1]);
+      error_too_many_label();
+      return;
    }
 
-/* dest[0]= EOS;        */
-/* strncat(dest, sTemp, MAX_IMAGE_LEN); */
+   scriptptr = (SCRIPT *)um_malloc(sizeof(SCRIPT) + 1);
 
-                                          /* Hier muessen immer / benutzt werden! */
-   replace_char(dest, "\\", "/");
+   if (scriptptr == NULL)                 /* no memory? */
+   {
+      error_malloc_failed();
+      return;
+   }
+
+   p1_script_counter++;
+   
+   script[p1_script_counter] = scriptptr;
+   
+   scriptptr->href[0] = EOS;
+
+   tokcpy2(sTemp, 512);
+
+   if (sTemp[0] == '\'')
+   {
+      lang = strcspn(sTemp + 1, "'");
+      strncpy(scriptptr->href, sTemp + 1, lang);
+      scriptptr->href[lang] = EOS;
+
+                                          /* always use / characters here! */
+      replace_char(scriptptr->href, "\\", "/");
+   }
+   else
+      strcpy(scriptptr->href, token[1]);
+
+   for (i = 1; i < p1_script_counter; i++) /* check if this CSS file has already been included */
+   {
+      if (!strcmp(scriptptr->href, script[i]->href))
+      {
+         p1_script_counter--;
+         return;
+      }
+   }
+
+   scriptptr->scriptindex = p1_script_counter;
+   scriptptr->tocindex    = p1_toc_counter;
 }
 
 
