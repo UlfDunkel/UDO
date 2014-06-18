@@ -2019,7 +2019,7 @@ const BOOLEAN   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewa
             {
                if (html_doctype == HTML5)
                {
-                  sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s>",
+                  sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s>",
                      Param[1], Param[2], Param[2], closer);
                }
                else
@@ -3634,7 +3634,7 @@ const BOOLEAN   inside_b4_macro)   /* */
             {
                if (html_doctype == HTML5)
                {
-                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
+                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s>",
                      Param[1], Param[2], Param[3], sImgSize, closer);
                }
                else
@@ -3647,7 +3647,7 @@ const BOOLEAN   inside_b4_macro)   /* */
             {
                if (html_doctype == HTML5)
                {
-                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" %s%s>",
+                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s>",
                      Param[1], Param[2], Param[2], sImgSize, closer);
                }
                else
