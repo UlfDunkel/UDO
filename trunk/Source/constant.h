@@ -197,10 +197,12 @@
 #define MAXTOCS           16383           /* max. Eintraege im Inhaltsverzeichnis r6pl13: vorher 4096 */
 #define MAXLABELS         32767           /* max. Labels (!label) r6pl13: vorher 8192*/
 #define MAXSTYLES         32767           /* max. Anzahl an Stylesheets insgesamt / New in V6.5.9 [NHz] */
+#define MAXSCRIPTS        32767           /* max. # of Javascript files */
 #else
 #define MAXTOCS           32768           /* max. Eintraege im Inhaltsverzeichnis r6pl13: vorher 4096 */
 #define MAXLABELS         65536           /* max. Labels (!label) r6pl13: vorher 8192*/
 #define MAXSTYLES         65536           /* max. Anzahl an Stylesheets insgesamt / New in V6.5.9 [NHz] */
+#define MAXSCRIPTS        65536           /* max. # of Javascript files */
 #endif
                         
 #define MAXHYPHEN          4096           /* max. Trennregeln mit !hyphen */   /* PL6 */
