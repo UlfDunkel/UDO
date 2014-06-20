@@ -29,6 +29,8 @@
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 # 2013:
 #   fd  Oct 25: subchapter 'HTML markup with CSS' added
+# 2014:
+#   fd  Jun 20: FAQ item added: 'How to navigate in HTML pages using the keyboard'
 #
 ################################################################################
 
@@ -36,44 +38,69 @@
 !html_name  format_html
 !label      HTML
 
-HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es ist zudem eines der meistgenutzten Formate für Online-Dokumentationen. Logischerweise gibt es zum HTML-Ausgabeformat auch die meisten Fragen. Hier sind die häufigsten als FAQ zusammengefasst.
+HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. 
+Es ist zudem eines der meistgenutzten Formate für Online-Dokumentationen. 
+Logischerweise gibt es zum HTML-Ausgabeformat auch die meisten Fragen. 
+Hier sind die häufigsten als FAQ zusammengefasst.
 
 !begin_description !not_compressed
+
+!index Kann ich per Tastatur in den HTML-Seiten blättern?
+!item [Kann ich per Tastatur in den HTML-Seiten blättern?]
+      Normalerweise werden bei der HTML-Ausgabe pro Seite in den Kopf- und Fußzeilen anklickbare Navigationsbuttons erzeugt.
+      Diese Buttons zeigen die Hierarchie des Dokuments mit einem Home-Button und einigen Pfeil-Buttons.
+      
+      Ab Version 7.04 schreibt UDO in die Anker-Tags dieser anklickbaren Buttons IDs:
+      !begin_blist
+      !item [UDO_nav_hm] Home-Button: Er führt zurück auf die Startseite des HTML-Dokuments.
+      !item [UDO_nav_lf] Nach links: Dieser Button führt zurück auf die logisch vorige Dokumentseite.
+      !item [UDO_nav_up] Nach oben: Dieser Button führt eine Kapitelhierarchiestufe zurück.
+      !item [UDO_nav_rg] Nach rechts: Dieser Button führt zurück auf die logisch folgende Dokumentseite.
+      !end_blist
+      
+      Um diese Navigationsbuttons per Tastatur ansprechen zu können, sollten Sie JavaScript einsetzen.
+      Das HTML-Attribut ""accesskey"" benötigt je nach Browser unterschiedliche Zusatztasten und spricht z.B. keine Pfeiltasten an.
+      Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!KW [no_headlines]) und (!KW [no_footers]) im Vorspann abgeschaltet haben.
+      Binden Sie dann mit (!KW [html_script_name]) ein JavaScript-Skript ein, dass Tastendrücke auswertet.
+
+!index Aufteilung
+!item [Wie können Sie die Aufteilung in mehrere Dateien unterbinden?]
+      Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig mehrere Dateien, die miteinander verknüpft sind. 
+      Für jedes Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene Datei mit dem Suffix (!code [.htm[l!]]) angelegt. 
+      Die Namen der einzelnen Dateien richten sich nach der Nummer und der Position des jeweiligen Kapitel. 
+      Inhaltsverzeichnis und Titelseite gelangen in die Datei, die Sie UDO per Kommandozeile als (!code [(--!)outfile]) übergeben.
 
 !index Aufteilung
 !index HTML !! Aufteilung
 !item [Wie können Sie die Aufteilung in mehrere Dateien unterbinden?]
-      Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig
-      mehrere Dateien, die miteinander verknüpft sind. Für jedes
-      Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene
-      Datei mit dem Suffix (!code [.htm[l!]]) angelegt. Die Namen der einzelnen
-      Dateien richten sich nach der Nummer und der Position des
-      jeweiligen Kapitel. Inhaltsverzeichnis und Titelseite gelangen in
-      die Datei, die Sie UDO per Kommandozeile als (!code [(--!)outfile]) übergeben.
+      Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig mehrere Dateien, die miteinander verknüpft sind. 
+      Für jedes Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene Datei mit dem Suffix (!code [.htm[l!]]) angelegt. 
+      Die Namen der einzelnen Dateien richten sich nach der Nummer und der Position des jeweiligen Kapitel. 
+      Inhaltsverzeichnis und Titelseite gelangen in die Datei, die Sie UDO per Kommandozeile als (!code [(--!)outfile]) übergeben.
 
 !index !html_merge_nodes
 !index !html_merge_subnodes
 !index !html_merge_subsubnodes
 !index !html_merge_subsubsubnodes
-      Mit den Schaltern (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]),
-      (!KW [html_merge_subsubnodes]) oder (!KW [html_merge_subsubsubnodes]) können
-      Sie die Aufteilung in mehrere Dateien unterbinden.
+!index !html_merge_subsubsubsubnodes
+      Mit den Schaltern 
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]),
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]) oder 
+      (!KW [html_merge_subsubsubsubnodes]) 
+      können Sie die Aufteilung in mehrere Dateien unterbinden.
       
-      Wird im Vorspann (!KW [html_merge_nodes]) benutzt, wird das gesamte
-      Dokument in einer Datei gesichert. Dies empfiehlt sich nur
-      bei kleinen Dokumenten, die kleiner als 16 KB sind.
+      Wird im Vorspann (!KW [html_merge_nodes]) benutzt, wird das gesamte Dokument in einer Datei gesichert. 
+      Dies empfiehlt sich nur bei kleinen Dokumenten, die kleiner als 16~KB sind.
       
-      (!KW [html_merge_subnodes]) sorgt dafür, dass alle Abschnitte eines
-      Kapitels in der Datei angegeben werden, in dem sich auch das
-      Kapitel selbst befindet.
+      (!KW [html_merge_subnodes]) sorgt dafür, dass alle Abschnitte eines Kapitels in der Datei angegeben werden, in dem sich auch das Kapitel selbst befindet.
       
-      Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, dass alle
-      Unterabschnitte in der gleichen Datei wie der übergeordnete Abschnitt
-      untergebracht werden.
+      Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, dass alle Unterabschnitte in der gleichen Datei wie der übergeordnete Abschnitt untergebracht werden.
       
-      Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür,
-      dass alle Paragraphen in der gleichen Datei wie der übergeordnete
-      Unterabschnitt untergebracht werden.
+      Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür, dass alle Paragraphen in der gleichen Datei wie der übergeordnete Unterabschnitt untergebracht werden.
+      
+      Der Schalter (!KW [html_merge_subsubsubsubnodes]) schließlich sorgt dafür, dass alle Unterparagraphen in der gleichen Datei wie der übergeordnete Paragraph untergebracht werden.
 
 !index Dateinamen
 !index HTML !! Dateinamen

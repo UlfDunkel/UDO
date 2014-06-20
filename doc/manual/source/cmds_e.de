@@ -242,7 +242,7 @@ oder (!KW [iflang]) nicht das Kürzel des aktuellen Ausgabeformates bzw. der Ausg
 !begin_node (!kw [en])
 !html_name  cmd_en
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
+Beendet ein Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -579,7 +579,7 @@ Beendet die linedraw-Umgebung.
 !begin_node (!kw [end_node])
 !html_name  cmd_end_node
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
+Beendet ein Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -817,7 +817,7 @@ diesem Befehl folgende Text wird wieder für alle Formate ausgegeben.
 !begin_node (!kw [endnode])
 !html_name  cmd_endnode
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
+Beendet ein Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 

@@ -686,7 +686,7 @@ Platzhalter durch ""(!code [trademark])"".
 !begin_node (!kw [toc])
 !html_name  cmd_toc
 
-Inhaltsverzeichnis ""alleine"" ausgeben.
+Listet in Inhaltsverzeichnissen aller Kapitel 1. Ordnung die untergeordneten Kapitel mit der angegebenen Ordnungstiefe auf.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -695,14 +695,12 @@ Inhaltsverzeichnis ""alleine"" ausgeben.
 !item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Gibt ein komplettes Inhaltsverzeichnis aus. Im
-Gegensatz zu (!KW [tableofcontents]) wird dabei bei
-Hypertextformaten keine eigene Seite erzeugt. Im
-Beispiel würde das Inhaltsverzeichnis bei der
-Umwandlung ins ST-Guide-Format ausgegeben.
+      Gibt ein komplettes Inhaltsverzeichnis aus. 
+      Im Gegensatz zu (!KW [tableofcontents]) wird dabei bei Hypertextformaten keine eigene Seite erzeugt. 
+      Im Beispiel würde das Inhaltsverzeichnis bei der Umwandlung ins ST-Guide-Format ausgegeben.
 
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_compressed_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+      (!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_compressed_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
 
@@ -720,7 +718,7 @@ Umwandlung ins ST-Guide-Format ausgegeben.
 !begin_node (!kw [toc_offset])
 !html_name  cmd_toc_offset
 
-Offset für die Kapitelnummerierung setzen.
+Offset für die fortlaufende Nummerierung von Kapiteln 1. Ordnung festlegen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -729,11 +727,10 @@ Offset für die Kapitelnummerierung setzen.
 !item [(!SYNTAX)] (!T)!/toc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern zu
-der aktuellen Nummer hinzugezählt. Im Beispiel würde
-das erste Kapitel mit der Nummer~10 ausgegeben. Es
-können auch negative Werte benutzt werden. Dieser
-Schalter hat keine Wirkung auf Kapitel des Anhangs.
+      ""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 1. Ordnung zu der aktuellen Nummer hinzugezählt. 
+      Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+      Es können auch negative Werte benutzt werden. 
+      Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 !item [(!SEEALSO)]
 (!KW [node]), (!KW [tableofcontents]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])

@@ -24,12 +24,58 @@
 # (!PUBLISHED [UDO~7.04][])
 UDO~7.04 wurde noch nicht veröffentlicht!
 
-!begin_description !compressed
+!begin_description !not_compressed
 # ----------------------------------------
-!item [Zusätzlicher Paragraph]
+!item [Gliederungsebenen]
+      UDO bietet ab sofort eine weitere, 6. Gliederungsebene für Kapitelhierarchien.
+      Diese nachfolgenden neuen Kommandos stehen dafür zur Verfügung:
+      
+      !begin_itemize
+      !item (!KW [html_merge_subsubsubsubsubnodes])
+      !item (!KW [ignore_subsubsubsubsubtoc])
+      !item (!KW [psssss*])
+      !item (!KW [psssss])
+      !item (!KW [psubsubsubsubsubnode*])
+      !item (!KW [psubsubsubsubsubnode])
+      !item (!KW [sssssh])
+      !item (!KW [sssssn*])
+      !item (!KW [sssssn])
+      !item (!KW [subsubsubsubsubheading])
+      !item (!KW [subsubsubsubsubnode*])
+      !item (!KW [subsubsubsubsubnode])
+      !item (!KW [subsubsubsubsubtoc])
+      !item (!KW [subsubsubsubsubtoc_offset])
+      !item (!KW [use_auto_subsubsubsubsubtocs])
+      !end_itemize
+      
+      Sie werden wie die bisher üblichen Kommandos zur Gliederung von HTML-Gliederungsebenen verwendet.
 # ----------------------------------------
 
-     
+# ----------------------------------------
+!item [(!KW [html_script_name])]
+      Dieses Kommando unterstützt jetzt, ähnlich wie (!KW [html_style_name]), beliebig viele Dateien.
+# ----------------------------------------
+
+# ----------------------------------------
+!item [Navigationsbuttons, CSS und JavaScript]
+###   Copy the following description from the HTML FAQ section in format_html.XX:
+      Normalerweise werden bei der HTML-Ausgabe pro Seite in den Kopf- und Fußzeilen anklickbare Navigationsbuttons erzeugt.
+      Diese Buttons zeigen die Hierarchie des Dokuments mit einem Home-Button und einigen Pfeil-Buttons.
+      
+      Ab Version 7.04 schreibt UDO in die Anker-Tags dieser anklickbaren Buttons IDs:
+      !begin_blist
+      !item [UDO_nav_hm] Home-Button: Er führt zurück auf die Startseite des HTML-Dokuments.
+      !item [UDO_nav_lf] Nach links: Dieser Button führt zurück auf die logisch vorige Dokumentseite.
+      !item [UDO_nav_up] Nach oben: Dieser Button führt eine Kapitelhierarchiestufe zurück.
+      !item [UDO_nav_rg] Nach rechts: Dieser Button führt zurück auf die logisch folgende Dokumentseite.
+      !end_blist
+      
+      Um diese Navigationsbuttons per Tastatur ansprechen zu können, sollten Sie JavaScript einsetzen.
+      Das HTML-Attribut ""accesskey"" benötigt je nach Browser unterschiedliche Zusatztasten und spricht z.B. keine Pfeiltasten an.
+      Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!KW [no_headlines]) und (!KW [no_footers]) im Vorspann abgeschaltet haben.
+      Binden Sie dann mit (!KW [html_script_name]) ein JavaScript-Skript ein, dass Tastendrücke auswertet.
+# ----------------------------------------
+
 !end_description
 
 !end_node

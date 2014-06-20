@@ -726,10 +726,60 @@ Dieser Befehl wird derzeit nur für HTML unterstützt.
 
 # = = = = =
 
+!begin_node (!kw [ignore_subsubsubsubsubtoc])
+!html_name  cmd_ignore_subsubsubsubsubtoc
+
+Im aktuellen Kapitel 5. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 6. Ordnung (""subsubsubsubsubtoc"") ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubsubsubsubtoc(!t)
+
+!item [(!DESCRIPTION)]
+      Wenn innerhalb eines Kapitels 5. Ordnung dieser Schalter gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten Kapiteln 6. Ordnung am Ende aufgelistet.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubsubsubsubtocs]), (!KW [subsubsubsubsubtoc])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ignore_subsubsubsubtoc])
+!html_name  cmd_ignore_subsubsubsubtoc
+
+Im aktuellen Kapitel 4. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 5. Ordnung (""subsubsubsubtoc"") ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubsubsubtoc(!t)
+
+!item [(!DESCRIPTION)]
+      Wenn innerhalb eines Kapitels 4. Ordnung dieser Schalter gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten Kapiteln 5. Ordnung am Ende aufgelistet.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubsubsubtocs]), (!KW [subsubsubsubtoc])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [ignore_subsubsubtoc])
 !html_name  cmd_ignore_subsubsubtoc
 
-In dem zugehörigen Subsubnode kein ""subsubsubtoc"" ausgeben.
+Im aktuellen Kapitel 3. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 4. Ordnung (""subsubsubtoc"") ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -738,9 +788,7 @@ In dem zugehörigen Subsubnode kein ""subsubsubtoc"" ausgeben.
 !item [(!SYNTAX)] (!T)!/ignore_subsubsubtoc(!t)
 
 !item [(!DESCRIPTION)]
-Wenn innerhalb eines Subsubnodes dieser Schalter
-gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem die Paragraphen
-des Subsubnodes aufgelistet werden.
+      Wenn innerhalb eines Kapitels 3. Ordnung dieser Schalter gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten Kapiteln 4. Ordnung am Ende aufgelistet.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -756,7 +804,7 @@ des Subsubnodes aufgelistet werden.
 !begin_node (!kw [ignore_subsubtoc])
 !html_name  cmd_ignore_subsubtoc
 
-In dem zugehörigen Subnode kein ""subsubtoc"" ausgeben.
+Im aktuellen Kapitel 2. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 3. Ordnung (""subsubtoc"") ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -765,8 +813,7 @@ In dem zugehörigen Subnode kein ""subsubtoc"" ausgeben.
 !item [(!SYNTAX)] (!T)!/ignore_subsubtoc(!t)
 
 !item [(!DESCRIPTION)]
-Wenn innerhalb eines Subnodes dieser Schalter gesetzt
-wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+      Wenn innerhalb eines Kapitels 2. Ordnung dieser Schalter gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten Kapiteln 3. Ordnung am Ende aufgelistet.
 
 !item [(!SEEALSO)]
 (!KW [use_auto_subsubtocs]), (!KW [subsubtoc])
@@ -780,7 +827,7 @@ wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
 !begin_node (!kw [ignore_subtoc])
 !html_name  cmd_ignore_subtoc
 
-In dem zugehörigen Node kein ""subtoc"" ausgeben.
+Im aktuellen Kapitel 1. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 2. Ordnung (""subtoc"") ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -789,8 +836,7 @@ In dem zugehörigen Node kein ""subtoc"" ausgeben.
 !item [(!SYNTAX)] (!T)!/ignore_subtoc(!t)
 
 !item [(!DESCRIPTION)]
-Wenn innerhalb eines Nodes dieser Schalter gesetzt
-wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+      Wenn innerhalb eines Kapitels 1. Ordnung dieser Schalter gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten Kapiteln 2. Ordnung am Ende aufgelistet.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
