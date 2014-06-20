@@ -4088,8 +4088,12 @@ const char  *sep)               /* */
       strcpy(sIDName, "UDO_nav_lf");
       break;
    
+   case GIF_RG_INDEX:
+      strcpy(sIDName, "UDO_nav_rg");
+      break;
+   
    default:
-      strcpy(sIDName, "UDO_nav_rt");
+      strcpy(sIDName, "UDO_nav_up");
    }
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -4215,8 +4219,12 @@ const char  *sep)               /* */
       strcpy(sIDName, "UDO_nav_lf");
       break;
    
+   case GIF_RG_INDEX:
+      strcpy(sIDName, "UDO_nav_rg");
+      break;
+   
    default:
-      strcpy(sIDName, "UDO_nav_rt");
+      strcpy(sIDName, "UDO_nav_up");
    }
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
