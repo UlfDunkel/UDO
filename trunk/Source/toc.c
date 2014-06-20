@@ -131,6 +131,7 @@
 *    fd  Nov 02: HTML5 output of <img> tags cleaned
 *  2014:
 *    ggs Apr 20: Add Node6
+*    fd  Jun 20: HTML output of navigation bars now writes UDO_nav_xx IDs to anchors
 *
 ******************************************|************************************/
 
@@ -932,6 +933,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
                 sNoSty[512],         /* */
                 hfn[512],            /* */
                 sGifSize[80];        /* */
+   char         sIDName[20];         /* string buffer for anchor ID name, e.g. "id=\"UDO_nav_lf\" " */
    int          ti,                  /* */
                 ui;                  /* */
    BOOLEAN      same_file = FALSE;   /* TRUE: reference is in same file */
@@ -941,6 +943,16 @@ const UWORD     uiH)                 /* GUI navigation image height */
    char         closer[8] = "\0";    /* single tag closer mark in XHTML */
    
    
+   if (!strcmp(pic, GIF_UP_NAME))
+      strcpy(sIDName, " id=\"UDO_nav_up\"");
+   else if (!strcmp(pic, GIF_LF_NAME))
+      strcpy(sIDName, " id=\"UDO_nav_lf\"");
+   else if (!strcmp(pic, GIF_RG_NAME))
+      strcpy(sIDName, " id=\"UDO_nav_rg\"");
+   else
+      sIDName[0] = 0;                     /* empty C string */
+
+
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
    
@@ -1166,12 +1178,14 @@ const UWORD     uiH)                 /* GUI navigation image height */
             if (l->is_node || l->is_alias)
             {
                                           /* Changed in r6pl16 [NHz] */
-               sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",htmlfilename, suff, html_target, n);
+               sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
+                  sIDName, htmlfilename, suff, html_target, n);
             }
             else
             {
                                           /* Changed in r6pl16 [NHz] */
-               sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",htmlfilename, suff, sNoSty, html_target, n);
+               sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
+                  sIDName, htmlfilename, suff, sNoSty, html_target, n);
             }
          }
          else
@@ -1187,26 +1201,26 @@ const UWORD     uiH)                 /* GUI navigation image height */
             {
                if (html_doctype == HTML5)
                {
-                  sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
-                     htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+                  sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
+                     sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
                }
                else
                {
-                  sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
-                     htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+                  sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
+                     sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
                }
             }
             else
             {
             	if (html_doctype == HTML5)
             	{
-                  sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-                     htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
+                     sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
             	}
             	else
             	{
-                  sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-                     htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+                     sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
                }
             }
          }
@@ -1217,7 +1231,8 @@ const UWORD     uiH)                 /* GUI navigation image height */
          {
             if (same_file)
             {
-               sprintf(ref, "<a href=\"#%s\"%s>%s</a>", sNoSty, html_target, n);
+               sprintf(ref, "<a%s href=\"#%s\"%s>%s</a>", 
+                  sIDName, sNoSty, html_target, n);
             }
             else
             {                             /* Hier muss noch unterschieden werden, wenn */
@@ -1231,22 +1246,22 @@ const UWORD     uiH)                 /* GUI navigation image height */
                  )
                {
                                           /* Changed in r6pl16 [NHz] */
-                  sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-                     htmlfilename, suff, sNoSty, html_target, n);
+                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
+                     sIDName, htmlfilename, suff, sNoSty, html_target, n);
                }
                else
                {
                                           /* Changed in r6pl16 [NHz] */
-                  sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
-                     htmlfilename, suff, html_target, n);
+                  sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
+                     sIDName, htmlfilename, suff, html_target, n);
                }
             }
          }
          else
          {
                                           /* Changed in r6pl16 [NHz] */
-            sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-               htmlfilename, suff, sNoSty, html_target, n);
+            sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
+               sIDName, htmlfilename, suff, sNoSty, html_target, n);
          }
       }
       
@@ -3980,7 +3995,7 @@ const char  *sep)               /* */
    {
       if (no_images)                      /*r6pl2*/
       {
-         voutlnf("%s<a href=\"%s%s#%s\"%s>%s</a>",
+         voutlnf("%s<a id=\"UDO_nav_up\" href=\"%s%s#%s\"%s>%s</a>",
             sep, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
       }
       else
@@ -3995,12 +4010,12 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
+            voutf("<a id=\"UDO_nav_up\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
          }
          else
          {
-            voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+            voutf("<a id=\"UDO_nav_up\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
                sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
          }
       }
@@ -4057,10 +4072,25 @@ const char  *sep)               /* */
              sFile[64];         /* */
    char      sGifSize[128],     /* */
              sGifName[256];     /* */
+   char      sIDName[16];       /* string buffer for anchor ID name */
    UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
+
+   switch (idxEnabled)
+   {
+   case GIF_HM_INDEX:
+      strcpy(sIDName, "UDO_nav_hm");
+      break;
+   
+   case GIF_LF_INDEX:
+      strcpy(sIDName, "UDO_nav_lf");
+      break;
+   
+   default:
+      strcpy(sIDName, "UDO_nav_rt");
+   }
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
@@ -4116,7 +4146,7 @@ const char  *sep)               /* */
    
       if (no_images)                      /*r6pl2*/
       {
-         voutlnf("%s<a href=\"%s%s\"%s>%s</a>", sep, sFile, outfile.suff, sTarget, lang.html_home);
+         voutlnf("%s<a id=\"%s\" href=\"%s%s\"%s>%s</a>", sep, sIDName, sFile, outfile.suff, sTarget, lang.html_home);
       }
       else
       {
@@ -4130,13 +4160,13 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-               sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+            voutf("<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
+               sIDName, sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
          }
          else
          {
-            voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-               sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+            voutf("<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               sIDName, sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
          }
       }
    }
@@ -4169,10 +4199,25 @@ const char  *sep)               /* */
             *tok;               /* */
    char      sGifSize[128],     /* */
              sGifName[256];     /* */
+   char      sIDName[16];       /* string buffer for anchor ID name */
    UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
    
+   
+   switch (idxEnabled)
+   {
+   case GIF_HM_INDEX:
+      strcpy(sIDName, "UDO_nav_hm");
+      break;
+   
+   case GIF_LF_INDEX:
+      strcpy(sIDName, "UDO_nav_lf");
+      break;
+   
+   default:
+      strcpy(sIDName, "UDO_nav_rt");
+   }
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
@@ -4204,7 +4249,7 @@ const char  *sep)               /* */
                                           /* Changed in r6pl16 [NHz] */
       if (no_images)
       {
-         voutlnf("%s<a href=\"%s\"%s>%s</a>", sep, href, target, alt);
+         voutlnf("%s<a id=\"%s\" href=\"%s\"%s>%s</a>", sep, sIDName, href, target, alt);
       }                                   /* changed */
       else
       {
@@ -4218,14 +4263,14 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-               href, target, sGifName, alt, alt, sGifSize, closer);
+            voutf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
+               sIDName, href, target, sGifName, alt, alt, sGifSize, closer);
          }
          else
          {
                                           /* Changed in r6pl16 [NHz] */
-            voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-               href, target, sGifName, alt, alt, sGifSize, closer);
+            voutf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               sIDName, href, target, sGifName, alt, alt, sGifSize, closer);
          }
       }
    }
