@@ -39,7 +39,7 @@
 !begin_node (!kw [p])
 !html_name  cmd_p
 
-Popup-Kapitel einleiten.
+Beginnt ein Pop-up-Kapitel 1. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -62,7 +62,7 @@ Popup-Kapitel einleiten.
 !begin_node (!kw [p*])
 !html_name  cmd_p_asterisk
 
-Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Pop-up-Kapitel 1. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -265,7 +265,7 @@ Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.
 !begin_node (!kw [pnode])
 !html_name  cmd_pnode
 
-Popup-Kapitel einleiten.
+Beginnt ein Pop-up-Kapitel 1. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -284,10 +284,10 @@ Identisch mit (!KW [node]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!pnode Titel des Popups
+!pnode Titel des Pop-up-Kapitel 1. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des Popups
+!heading Titel des Pop-up-Kapitel 1. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -297,7 +297,7 @@ Identisch mit (!KW [node]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp
 !begin_node (!kw [pnode*])
 !html_name  cmd_pnode_asterisk
 
-Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Pop-up-Kapitel 1. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -319,10 +319,10 @@ mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!pnode* Titel des versteckten Popups
+!pnode* Titel des versteckten Pop-up-Kapitel 1. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des versteckten Popups
+!heading Titel des versteckten Pop-up-Kapitel 1. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -369,7 +369,7 @@ Platzhalter durch ""(!code [GBP])"".
 !begin_node (!kw [ps])
 !html_name  cmd_ps
 
-Popup-Abschnitt einleiten.
+Beginnt ein Pop-up-Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -392,7 +392,7 @@ Popup-Abschnitt einleiten.
 !begin_node (!kw [ps*])
 !html_name  cmd_ps_asterisk
 
-Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Pop-up-Kapitel 2. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -415,7 +415,7 @@ Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 !begin_node (!kw [pss])
 !html_name  cmd_pss
 
-Popup-Unterabschnitt einleiten.
+Beginnt ein Pop-up-Kapitel 3. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -438,7 +438,7 @@ Popup-Unterabschnitt einleiten.
 !begin_node (!kw [pss*])
 !html_name  cmd_pss_asterisk
 
-Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
+Beginnt ein Pop-up-Kapitel 3. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -461,7 +461,7 @@ Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
 !begin_node (!kw [psss])
 !html_name  cmd_psss
 
-Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -484,7 +484,7 @@ Popup-Paragraph einleiten.
 !begin_node (!kw [psss*])
 !html_name  cmd_psss_asterisk
 
-Versteckten Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 4. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -507,7 +507,7 @@ Versteckten Popup-Paragraph einleiten.
 !begin_node (!kw [pssss])
 !html_name  cmd_pssss
 
-Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 5. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -530,7 +530,7 @@ Popup-Paragraph einleiten.
 !begin_node (!kw [pssss*])
 !html_name  cmd_pssss_asterisk
 
-Versteckten Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 5. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -553,7 +553,7 @@ Versteckten Popup-Paragraph einleiten.
 !begin_node (!kw [psssss])
 !html_name  cmd_psssss
 
-Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 6. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -576,7 +576,7 @@ Popup-Paragraph einleiten.
 !begin_node (!kw [psssss*])
 !html_name  cmd_psssss_asterisk
 
-Versteckten Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 6. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -599,7 +599,7 @@ Versteckten Popup-Paragraph einleiten.
 !begin_node (!kw [psubnode])
 !html_name  cmd_psubnode
 
-Popup-Abschnitt einleiten.
+Beginnt ein Pop-up-Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -619,10 +619,10 @@ ST-Guide und bei WinHelp als Popup dargestellt.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubnode Ein Popup-Abschnitt
+!psubnode Pop-up-Kapitel 2. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subheading Ein Popup-Abschnitt
+!subheading Pop-up-Kapitel 2. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -632,7 +632,7 @@ ST-Guide und bei WinHelp als Popup dargestellt.
 !begin_node (!kw [psubnode*])
 !html_name  cmd_psubnode_asterisk
 
-Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Pop-up-Kapitel 2. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -654,10 +654,10 @@ Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubnode* Ein versteckter Popup-Abschnitt
+!psubnode* Ein verstecktes Pop-up-Kapitel 2. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subheading Ein versteckter Popup-Abschnitt
+!subheading Ein verstecktes Pop-up-Kapitel 2. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -667,7 +667,7 @@ Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [psubsubnode])
 !html_name  cmd_psubsubnode
 
-Popup-Unterabschnitt einleiten.
+Beginnt ein 
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -686,10 +686,10 @@ Identisch mit (!KW [subsubnode]), der Inhalt wird jedoch beim ST-Guide und bei W
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubnode Ein Popup-Unterabschnitt
+!psubsubnode Ein Pop-up-Kapitel 3. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubheading Ein Popup-Unterabschnitt
+!subsubheading Ein Pop-up-Kapitel 3. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -699,7 +699,7 @@ Identisch mit (!KW [subsubnode]), der Inhalt wird jedoch beim ST-Guide und bei W
 !begin_node (!kw [psubsubnode*])
 !html_name  cmd_psubsubnode_asterisk
 
-Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
+Beginnt ein Pop-up-Kapitel 3. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -721,10 +721,10 @@ Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubnode* Ein versteckter Popup-Unterabschnitt
+!psubsubnode* Ein verstecktes Pop-up-Kapitel 3. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubheading Ein versteckter Popup-Unterabschnitt
+!subsubheading Ein verstecktes Pop-up-Kapitel 3. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -734,7 +734,7 @@ Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [psubsubsubnode])
 !html_name  cmd_psubsubsubnode
 
-Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -755,10 +755,10 @@ Identisch mit (!KW [subsubsubnode]), der Inhalt wird jedoch beim ST-Guide und be
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubnode Ein Popup-Paragraph
+!psubsubsubnode Ein Pop-up-Kapitel 4. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubheading Ein Popup-Paragraph
+!subsubsubheading Ein Pop-up-Kapitel 4. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -768,7 +768,7 @@ Identisch mit (!KW [subsubsubnode]), der Inhalt wird jedoch beim ST-Guide und be
 !begin_node (!kw [psubsubsubnode*])
 !html_name  cmd_psubsubsubnode_asterisk
 
-Versteckten Popup-Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel 4. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -790,10 +790,10 @@ in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubnode* Ein versteckter Popup-Paragraph
+!psubsubsubnode* Ein verstecktes Pop-up-Kapitel 4. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubheading Ein versteckter Popup-Paragraph
+!subsubsubheading Ein verstecktes Pop-up-Kapitel 4. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -803,7 +803,7 @@ in Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [psubsubsubsubnode])
 !html_name  cmd_psubsubsubsubnode
 
-Popup-Unterparagraph einleiten.
+Beginnt ein Pop-up-Kapitel 5. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -824,10 +824,10 @@ Identisch mit (!KW [subsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubsubnode Ein Popup-Unterparagraph
+!psubsubsubsubnode Ein Pop-up-Kapitel 5. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubheading Ein Popup-Unterparagraph
+!subsubsubsubheading Ein Pop-up-Kapitel 5. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -837,7 +837,7 @@ Identisch mit (!KW [subsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und
 !begin_node (!kw [psubsubsubsubnode*])
 !html_name  cmd_psubsubsubsubnode_asterisk
 
-Versteckten Popup-Unterparagraph einleiten.
+Beginnt ein Pop-up-Kapitel 5. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -859,10 +859,10 @@ in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubsubnode* Ein versteckter Popup-Unterparagraph
+!psubsubsubsubnode* Ein verstecktes Pop-up-Kapitel 5. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubheading Ein versteckter Popup-Unterparagraph
+!subsubsubsubheading Ein verstecktes Pop-up-Kapitel 5. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -872,7 +872,7 @@ in Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [psubsubsubsubsubnode])
 !html_name  cmd_psubsubsubsubsubnode
 
-Popup-Unterparagraph einleiten.
+Beginnt ein Pop-up-Kapitel 6. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -883,7 +883,7 @@ Popup-Unterparagraph einleiten.
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [subsubsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
 
-!item [(!EXISTSSINCE)] Version 7.04
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
@@ -893,10 +893,10 @@ Identisch mit (!KW [subsubsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide 
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubsubsubnode Ein Popup-Unterparagraph
+!psubsubsubsubsubnode Pop-up-Kapitel 6. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubsubheading Ein Popup-Unterparagraph
+!subsubsubsubsubheading Pop-up-Kapitel 6. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -906,7 +906,7 @@ Identisch mit (!KW [subsubsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide 
 !begin_node (!kw [psubsubsubsubsubnode*])
 !html_name  cmd_psubsubsubsubsubnode_asterisk
 
-Versteckten Popup-Unterparagraph einleiten.
+Beginnt ein Pop-up-Kapitel 6. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -928,10 +928,10 @@ in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubsubsubnode* Ein versteckter Popup-Unterparagraph
+!psubsubsubsubsubnode* Ein verstecktes Pop-up-Kapitel 6. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubsubheading Ein versteckter Popup-Unterparagraph
+!subsubsubsubsubheading Ein verstecktes Pop-up-Kapitel 6. Ordnung
 (!EXAMPLE_END)
 
 !end_node

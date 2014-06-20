@@ -78,7 +78,7 @@ der Text(!N)die Fuﬂnote(!n)
 !begin_node (!kw [n])
 !html_name  cmd_n
 
-Kapitel einleiten.
+Beginnt ein Kapitel 1. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -87,10 +87,11 @@ Kapitel einleiten.
 !item [(!SYNTAX)] (!T)!/n [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [node])
+!item [(!DESCRIPTION)]
+      (!ABBREV) (!KW [node])
 
 !item [(!SEEALSO)]
-(!KW [node])
+      (!KW [node])
 
 !end_xlist
 
@@ -101,7 +102,7 @@ Kapitel einleiten.
 !begin_node (!kw [n*])
 !html_name  cmd_n_asterisk
 
-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 1. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -113,7 +114,7 @@ Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 (!ABBREV) (!KW [node*])
 
 !item [(!SEEALSO)]
-(!KW [node*])
+      (!KW [node*])
 
 !end_xlist
 

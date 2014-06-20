@@ -388,10 +388,76 @@ sofern nicht manuell eine Help-ID mit (!KW [win_helpid]) oder
 
 # = = = = =
 
+!begin_node (!kw [use_auto_subsubsubsubsubtocs])
+!html_name  cmd_use_auto_subsubsubsubsubtocs
+
+Automatische Auflistung aller untergeordneten Kapitel 6. Ordnung.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubsubsubsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+      Schaltet den automatischen internen Aufruf des (!KW [subsubsubsubsubtoc])-Kommandos ein. 
+      Am Ende eines jeden Kapitels 5. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 6. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubtoc]), (!KW [ignore_subsubsubsubsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubsubsubsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_auto_subsubsubsubtocs])
+!html_name  cmd_use_auto_subsubsubsubtocs
+
+Automatische Auflistung aller untergeordneten Kapitel 5. Ordnung.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubsubsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+      Schaltet den automatischen internen Aufruf des (!KW [subsubsubsubtoc])-Kommandos ein. 
+      Am Ende eines jeden Kapitels 4. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 5. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubtoc]), (!KW [ignore_subsubsubsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubsubsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [use_auto_subsubsubtocs])
 !html_name  cmd_use_auto_subsubsubtocs
 
-Automatische Auflistung aller Paragraphen.
+Automatische Auflistung aller untergeordneten Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -400,8 +466,8 @@ Automatische Auflistung aller Paragraphen.
 !item [(!SYNTAX)] (!T)!/use_auto_subsubsubtocs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Schaltet den automatischen internen Aufruf des (!KW [subsubsubtoc])-Kommandos ein. Am Ende eines jeden
-Abschnitts werden dann automatisch alle dem Unterabschnitt zugehörigen Paragraphen in Form eines Inhaltsverzeichnisses ausgegeben.
+      Schaltet den automatischen internen Aufruf des (!KW [subsubsubtoc])-Kommandos ein. 
+      Am Ende eines jeden Kapitels 3. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 4. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -424,7 +490,7 @@ Abschnitts werden dann automatisch alle dem Unterabschnitt zugehörigen Paragraph
 !begin_node (!kw [use_auto_subsubtocs])
 !html_name  cmd_use_auto_subsubtocs
 
-Automatische Auflistung aller Unterabschnitte.
+Automatische Auflistung aller untergeordneten Kapitel 3. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -433,10 +499,8 @@ Automatische Auflistung aller Unterabschnitte.
 !item [(!SYNTAX)] (!T)!/use_auto_subsubtocs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Schaltet den automatischen internen Aufruf des
-(!KW [subsubtoc])-Kommandos ein. Am Ende eines jeden
-Abschnitts werden dann automatisch alle dem Abschnitt
-zugehörigen Unterabschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
+      Schaltet den automatischen internen Aufruf des (!KW [subsubtoc])-Kommandos ein. 
+      Am Ende eines jeden Kapitels 2. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 3. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
 
 !item [(!SEEALSO)]
 (!KW [subsubtoc]), (!KW [ignore_subsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
@@ -457,7 +521,7 @@ zugehörigen Unterabschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
 !begin_node (!kw [use_auto_subtocs])
 !html_name  cmd_use_auto_subtocs
 
-Automatische Auflistung aller Abschnitte.
+Automatische Auflistung aller untergeordneten Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -466,10 +530,8 @@ Automatische Auflistung aller Abschnitte.
 !item [(!SYNTAX)] (!T)!/use_auto_subtocs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Schaltet den automatischen internen Aufruf des
-(!KW [subtoc])-Kommandos ein. Am Ende eines jeden Kapitels
-werden dann automatisch alle dem Kapitel zugehörigen
-Abschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
+      Schaltet den automatischen internen Aufruf des (!KW [subtoc])-Kommandos ein. 
+      Am Ende eines jeden Kapitels 1. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 2. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
 
 !item [(!SEEALSO)]
 (!KW [subtoc]), (!KW [ignore_subtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
@@ -490,7 +552,7 @@ Abschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
 !begin_node (!kw [use_auto_toptocs])
 !html_name  cmd_use_auto_toptocs
 
-Automatische Auflistung aller Abschnitte.
+Automatische Auflistung aller übergeordneten Kapitel.
 
 !begin_xlist [(!TYPEPOSITION)]
 

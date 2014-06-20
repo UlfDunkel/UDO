@@ -77,7 +77,7 @@ Sie überall im Quelltext benutzen.
 !begin_node (!kw [sh])
 !html_name  cmd_sh
 
-Eine Abschnitts-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 2. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -276,7 +276,7 @@ ins (!LaTeX)-Format wird keine Leerzeile sondern
 !begin_node (!kw [sn])
 !html_name  cmd_sn
 
-Abschnitt einleiten.
+Beginnt ein Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -299,7 +299,7 @@ Abschnitt einleiten.
 !begin_node (!kw [sn*])
 !html_name  cmd_sn_asterisk
 
-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 2. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -359,7 +359,7 @@ ASCII- und ST-Guide-Format aktivieren können.
 !begin_node (!kw [ssh])
 !html_name  cmd_ssh
 
-Eine Unterabschnitts-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 3. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -382,7 +382,7 @@ Eine Unterabschnitts-Überschrift ausgeben.
 !begin_node (!kw [ssn])
 !html_name  cmd_ssn
 
-Unterabschnitt einleiten.
+Beginnt ein Kapitel 3. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -405,7 +405,7 @@ Unterabschnitt einleiten.
 !begin_node (!kw [ssn*])
 !html_name  cmd_ssn_asterisk
 
-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 3. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -428,7 +428,7 @@ Unterabschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 !begin_node (!kw [sssh])
 !html_name  cmd_sssh
 
-Eine Paragraphen-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 4. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -451,7 +451,7 @@ Eine Paragraphen-Überschrift ausgeben.
 !begin_node (!kw [sssn])
 !html_name  cmd_sssn
 
-Paragraph einleiten.
+Beginnt ein Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -474,7 +474,7 @@ Paragraph einleiten.
 !begin_node (!kw [sssn*])
 !html_name  cmd_sssn_asterisk
 
-Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 4. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -494,10 +494,33 @@ Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 # = = = = =
 
+!begin_node (!kw [ssssh])
+!html_name  cmd_ssssh
+
+Eine Überschrift in der Schriftgröße eines Kapitels 5. Ordnung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssssh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubheading])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [ssssn])
 !html_name  cmd_ssssn
 
-Unterparagraph einleiten.
+Beginnt ein Kapitel 5. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -522,7 +545,7 @@ Unterparagraph einleiten.
 !begin_node (!kw [ssssn*])
 !html_name  cmd_ssssn_asterisk
 
-Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 5. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -544,10 +567,33 @@ Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 # = = = = =
 
+!begin_node (!kw [sssssh])
+!html_name  cmd_sssssh
+
+Eine Überschrift in der Schriftgröße eines Kapitels 6. Ordnung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubheading])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [sssssn])
 !html_name  cmd_sssssn
 
-Unterparagraph einleiten.
+Beginnt ein Kapitel 6. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -572,7 +618,7 @@ Unterparagraph einleiten.
 !begin_node (!kw [sssssn*])
 !html_name  cmd_sssssn_asterisk
 
-Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein 6. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -591,8 +637,6 @@ Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 !end_xlist
 
 !end_node
-
-# = = = = =
 
 !begin_node (!kw [stg_short_title])
 !html_name  cmd_stg_short_title
@@ -653,7 +697,7 @@ Das Wort ""tiefgestellt"" wird (!SUB)tiefgestellt(!sub) ausgegeben.
 !begin_node (!kw [subheading])
 !html_name  cmd_subheading
 
-Eine Abschnitts-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 2. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -688,7 +732,7 @@ der gleichen Schriftart und -größe wie eine Abschnitts-Überschrift ausgegeben wi
 !begin_node (!kw [subnode])
 !html_name  cmd_subnode
 
-Abschnitt einleiten.
+Beginnt ein Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -697,7 +741,8 @@ Abschnitt einleiten.
 !item [(!SYNTAX)] (!T)!/subnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Abschnitt mit der Bezeichnung ""(!TEXT)"" ein. Abschnitte erscheinen in Inhaltsverzeichnissen.
+      Leitet ein Kapitel 2. Ordnung mit der Bezeichnung ""(!TEXT)"" ein.
+      Es wird mit #.# nummeriert.
 
 !item [(!SEEALSO)]
 (!KW [psubnode]), (!KW [node]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
@@ -707,10 +752,10 @@ Leitet einen Abschnitt mit der Bezeichnung ""(!TEXT)"" ein. Abschnitte erscheine
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subnode Titel des Abschnitts
+!subnode Titel des Kapitels 2. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subheading Titel des Abschnitts
+!subheading Titel des Kapitels 2. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -720,7 +765,7 @@ Leitet einen Abschnitt mit der Bezeichnung ""(!TEXT)"" ein. Abschnitte erscheine
 !begin_node (!kw [subnode*])
 !html_name  cmd_subnode_asterisk
 
-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 2. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -729,8 +774,7 @@ Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 !item [(!SYNTAX)] (!T)!/subnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie
-(!KW [subnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
+      Dieses Kommando hat die gleiche Funktion wie (!KW [subnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.46
 
@@ -742,10 +786,10 @@ Dieses Kommando hat die gleiche Funktion wie
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subnode* Titel des versteckten Abschnitts
+!subnode* Titel des versteckten Kapitels 2. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subheading Titel des versteckten Abschnitts
+!subheading Titel des versteckten Kapitels 2. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -755,7 +799,7 @@ Dieses Kommando hat die gleiche Funktion wie
 !begin_node (!kw [subsubheading])
 !html_name  cmd_subsubheading
 
-Eine Unterabschnitts-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 3. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -791,7 +835,7 @@ Unterabschnitts-Überschrift ausgegeben wird.
 !begin_node (!kw [subsubnode])
 !html_name  cmd_subsubnode
 
-Unterabschnitt einleiten.
+Beginnt ein Kapitel 3. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -800,7 +844,8 @@ Unterabschnitt einleiten.
 !item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Unterabschnitt mit der Bezeichnung ""(!TEXT)"" ein. Unterabschnitte erscheinen in Inhaltsverzeichnissen.
+      Leitet ein Kapitel 3. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+      Es wird mit #.#.# nummeriert.
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
@@ -810,10 +855,10 @@ Leitet einen Unterabschnitt mit der Bezeichnung ""(!TEXT)"" ein. Unterabschnitte
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubnode Titel des Unterabschnitts
+!subsubnode Titel des Kapitels 3. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubheading Titel des Unterabschnitts
+!subsubheading Titel des Kapitels 3. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -823,7 +868,7 @@ Leitet einen Unterabschnitt mit der Bezeichnung ""(!TEXT)"" ein. Unterabschnitte
 !begin_node (!kw [subsubnode*])
 !html_name  cmd_subsubnode_asterisk
 
-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 3. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -832,8 +877,7 @@ Unterabschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 !item [(!SYNTAX)] (!T)!/subsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
-Inhaltsverzeichnissen erscheint.
+      Dieses Kommando hat die gleiche Funktion wie (!KW [subsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.46
 
@@ -845,10 +889,10 @@ Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubnode* Titel des versteckten Unterabschnitts
+!subsubnode* Titel des versteckten Kapitels 3. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubheading Titel des versteckten Unterabschnitts
+!subsubheading Titel des versteckten Kapitels 3. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -858,7 +902,7 @@ Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [subsubsubheading])
 !html_name  cmd_subsubsubheading
 
-Eine Paragraphen-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 4. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -893,7 +937,7 @@ Paragraphen-Überschrift ausgegeben wird.
 !begin_node (!kw [subsubsubnode])
 !html_name  cmd_subsubsubnode
 
-Paragraph einleiten.
+Beginnt ein Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -902,8 +946,8 @@ Paragraph einleiten.
 !item [(!SYNTAX)] (!T)!/subsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Paragraph mit der Bezeichnung ""(!TEXT)"" ein. Ein Paragraph ist die vierte Gliederungsebene
-und wird mit #.#.#.# nummeriert.
+      Leitet ein Kapitel 4. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+      Es wird mit #.#.#.# nummeriert.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -915,10 +959,10 @@ und wird mit #.#.#.# nummeriert.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubsubnode Titel des Paragraphs
+!subsubsubnode Titel des Kapitels 4. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubheading Titel des Paragraphs
+!subsubsubheading Titel des Kapitels 4. Ordnung
 (!EXAMPLE_END)
 
 !end_node
@@ -928,7 +972,7 @@ und wird mit #.#.#.# nummeriert.
 !begin_node (!kw [subsubsubnode*])
 !html_name  cmd_subsubsubnode_asterisk
 
-Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 4. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -937,8 +981,7 @@ Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 !item [(!SYNTAX)] (!T)!/subsubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
-in Inhaltsverzeichnissen erscheint.
+      Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -950,10 +993,356 @@ in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubsubnode* Titel des versteckten Paragraphs
+!subsubsubnode* Titel des versteckten Kapitels 4. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubheading Titel des versteckten Paragraphs
+!subsubsubheading Titel des versteckten Kapitels 4. Ordnung
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubheading])
+!html_name  cmd_subsubsubsubheading
+
+Eine Überschrift in der Schriftgröße eines Kapitels 5. Ordnung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in der gleichen Schriftart und -größe wie eine
+Paragraphen-Überschrift ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubheading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Eine Überschrift
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubnode])
+!html_name  cmd_subsubsubsubnode
+
+Beginnt ein Kapitel 5. Ordnung.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+      Leitet ein Kapitel 5. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+      Es wird mit #.#.#.#.# nummeriert.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubnode Titel des Kapitels 5. Ordnung
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Titel des Kapitels 5. Ordnung
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubnode*])
+!html_name  cmd_subsubsubsubnode_asterisk
+
+Beginnt ein Kapitel 5. Ordnung ohne Eintrag im Inhaltsverzeichnis.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+      Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubnode* Titel des versteckten Kapitels 5. Ordnung
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Titel des versteckten Kapitels 5. Ordnung
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubheading])
+!html_name  cmd_subsubsubsubsubheading
+
+Eine Überschrift in der Schriftgröße eines Kapitels 6. Ordnung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in der gleichen Schriftart und -größe wie eine
+Paragraphen-Überschrift ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubsubheading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading Eine Überschrift
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode])
+!html_name  cmd_subsubsubsubsubnode
+
+Beginnt ein Kapitel 6. Ordnung.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+      Leitet ein Kapitel 6. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+      Es wird mit #.#.#.#.#.# nummeriert.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubsubnode Titel des Kapitels 6. Ordnung
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading Titel des Kapitels 6. Ordnung
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode*])
+!html_name  cmd_subsubsubsubsubnode_asterisk
+
+Beginnt ein Kapitel 6. Ordnung ohne Eintrag im Inhaltsverzeichnis.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+      Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubsubnode* Titel des versteckten Kapitels 6. Ordnung
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading Titel des versteckten Kapitels 6. Ordnung
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubtoc])
+!html_name  cmd_subsubsubsubsubtoc
+
+Listet in Inhaltsverzeichnissen aller Kapitel 5. Ordnung die untergeordneten Kapitel 6. Ordnung auf.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubtoc [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+      Am Ende des von Kapiteln 5. Ordnung werden alle untergeordneten Kapitel 6. Ordnung als Inhaltsverzeichnis aufgelistet.
+      So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+      UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 5. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subsubsubsubsubtoc]) dort verwendet wurde. 
+      Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubsubsubsubtocs]) auch automatisieren.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubtoc_offset])
+!html_name  cmd_subsubsubsubsubtoc_offset
+
+Offset für die fortlaufende Nummerierung von Kapiteln 6. Ordnung festlegen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+      ""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 6. Ordnung zu der aktuellen Nummer hinzugezählt. 
+      Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+      Es können auch negative Werte benutzt werden. 
+      Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubtoc])
+!html_name  cmd_subsubsubsubtoc
+
+Listet in Inhaltsverzeichnissen aller Kapitel 4. Ordnung die untergeordneten Kapitel 5. Ordnung auf.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+      Am Ende des von Kapiteln 4. Ordnung werden alle untergeordneten Kapitel 5. Ordnung als Inhaltsverzeichnis aufgelistet.
+      So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+      UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 4. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subsubsubsubtoc]) dort verwendet wurde. 
+      Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubsubsubtocs]) auch automatisieren.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubtoc_offset])
+!html_name  cmd_subsubsubsubtoc_offset
+
+Offset für die fortlaufende Nummerierung von Kapiteln 5. Ordnung festlegen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+      ""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 5. Ordnung zu der aktuellen Nummer hinzugezählt. 
+      Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+      Es können auch negative Werte benutzt werden. 
+      Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubtoc_offset 9
+!end_verbatim
 (!EXAMPLE_END)
 
 !end_node
@@ -963,7 +1352,7 @@ in Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [subsubsubtoc])
 !html_name  cmd_subsubsubtoc
 
-Paragraphen auflisten.
+Listet in Inhaltsverzeichnissen aller Kapitel 3. Ordnung die untergeordneten Kapitel 4. Ordnung auf.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -972,13 +1361,10 @@ Paragraphen auflisten.
 !item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Listet in Form eines Inhaltsverzeichnisses alle Paragraphen des
-aktuellen Unterabschnitts auf und sorgt dafür, dass Sie in Hypertexten
-zu den Paragraphen weiterverzweigen können. UDO gibt dieses
-Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
-(!KW [ignore_subsubsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse lässt sich durch
-(!KW [use_auto_subsubsubtocs]) auch automatisieren.
+      Am Ende des von Kapiteln 3. Ordnung werden alle untergeordneten Kapitel 4. Ordnung als Inhaltsverzeichnis aufgelistet.
+      So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+      UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 3. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subsubsubtoc]) dort verwendet wurde. 
+      Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubsubtocs]) auch automatisieren.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -1001,7 +1387,7 @@ Unterinhaltsverzeichnisse lässt sich durch
 !begin_node (!kw [subsubsubtoc_offset])
 !html_name  cmd_subsubsubtoc_offset
 
-Offset für die Paragraphennummerierung setzen.
+Offset für die fortlaufende Nummerierung von Kapiteln 4. Ordnung festlegen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1010,11 +1396,10 @@ Offset für die Paragraphennummerierung setzen.
 !item [(!SYNTAX)] (!T)!/subsubsubtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""(!VALUE)"" wird bei der Ausgabe der Paragraphennummern zu
-der aktuellen Nummer hinzugezählt. Im Beispiel würde
-der erste Paragraph mit der Nummer 10 ausgegeben. Es
-können auch negative Werte benutzt werden. Dieser
-Schalter hat keine Wirkung auf Kapitel des Anhangs.
+      ""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 4. Ordnung zu der aktuellen Nummer hinzugezählt. 
+      Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+      Es können auch negative Werte benutzt werden. 
+      Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
@@ -1034,230 +1419,10 @@ Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 # = = = = =
 
-!begin_node (!kw [subsubsubsubnode])
-!html_name  cmd_subsubsubsubnode
-
-Unterparagraph einleiten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/subsubsubsubnode (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-Leitet einen Unterparagraph mit der Bezeichnung ""(!TEXT)"" ein. Ein Unterparagraph ist die fünfte Gliederungsebene
-und wird mit #.#.#.#.# nummeriert.
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
-
-!item [(!SEEALSO)]
-(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEFORE)
-!begin_verbatim
-!subsubsubsubnode Titel des Unterparagraphs
-!end_verbatim
-(!EXAMPLE_AFTER)
-!subsubsubsubheading Titel des Unterparagraphs
-(!EXAMPLE_END)
-
-!end_node
-
-# = = = = =
-
-!begin_node (!kw [subsubsubsubnode*])
-!html_name  cmd_subsubsubsubnode_asterisk
-
-Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/subsubsubsubnode* (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
-in Inhaltsverzeichnissen erscheint.
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
-
-!item [(!SEEALSO)]
-(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEFORE)
-!begin_verbatim
-!subsubsubsubnode* Titel des versteckten Unterparagraphs
-!end_verbatim
-(!EXAMPLE_AFTER)
-!subsubsubsubheading Titel des versteckten Unterparagraphs
-(!EXAMPLE_END)
-
-!end_node
-
-# = = = = =
-
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
-!begin_node (!kw [subsubsubsubtoc])
-!html_name  cmd_subsubsubsubtoc
-
-Unterparagraphen auflisten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/subsubsubsubtoc [(!FORMAT)](!t)
-
-!item [(!DESCRIPTION)]
-Listet in Form eines Inhaltsverzeichnisses alle Unterparagraphen des
-aktuellen Unterabschnitts auf und sorgt dafür, dass Sie in Hypertexten
-zu den Paragraphen weiterverzweigen können. UDO gibt dieses
-Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
-(!KW [ignore_subsubsubsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse lässt sich durch
-(!KW [use_auto_subsubsubsubtocs]) auch automatisieren.
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
-
-!item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEGIN)
-!begin_verbatim
-!subsubsubsubtoc [html,pch,stg,win]
-!end_verbatim
-(!EXAMPLE_END)
-
-!end_node
-!end_ignore
-
-# = = = = =
-
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
-!begin_node (!kw [subsubsubsubtoc_offset])
-!html_name  cmd_subsubsubsubtoc_offset
-
-Offset für die Unterparagraphennummerierung setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/subsubsubsubtoc_offset (!VALUE)(!t)
-
-!item [(!DESCRIPTION)]
-""(!VALUE)"" wird bei der Ausgabe der Unterparagraphennummern zu
-der aktuellen Nummer hinzugezählt. Im Beispiel würde
-der erste Unterparagraph mit der Nummer 10 ausgegeben. Es
-können auch negative Werte benutzt werden. Dieser
-Schalter hat keine Wirkung auf Kapitel des Anhangs.
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
-
-!item [(!SEEALSO)]
-(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEGIN)
-!begin_verbatim
-!subsubsubsubtoc_offset 9
-!end_verbatim
-(!EXAMPLE_END)
-
-!end_node
-!end_ignore
-
-# = = = = =
-
-!begin_node (!kw [subsubsubsubsubnode])
-!html_name  cmd_subsubsubsubsubnode
-
-Unterparagraph einleiten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-Leitet einen Unterparagraph mit der Bezeichnung ""(!TEXT)"" ein. Ein Unterparagraph ist die sechste Gliederungsebene
-und wird mit #.#.#.#.#,# nummeriert.
-
-!item [(!EXISTSSINCE)] Version 7.04
-
-!item [(!SEEALSO)]
-(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEFORE)
-!begin_verbatim
-!subsubsubsubsubnode Titel des Unterparagraphs
-!end_verbatim
-(!EXAMPLE_AFTER)
-!subsubsubsubsubheading Titel des Unterparagraphs
-(!EXAMPLE_END)
-
-!end_node
-
-# = = = = =
-
-!begin_node (!kw [subsubsubsubsubnode*])
-!html_name  cmd_subsubsubsubsubnode_asterisk
-
-Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode* (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
-in Inhaltsverzeichnissen erscheint.
-
-!item [(!EXISTSSINCE)] Version 7.04
-
-!item [(!SEEALSO)]
-(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEFORE)
-!begin_verbatim
-!subsubsubsubsubnode* Titel des versteckten Unterparagraphs
-!end_verbatim
-(!EXAMPLE_AFTER)
-!subsubsubsubsubheading Titel des versteckten Unterparagraphs
-(!EXAMPLE_END)
-
-!end_node
-
-# = = = = =
-
 !begin_node (!kw [subsubtoc])
 !html_name  cmd_subsubtoc
 
-Unterabschnitte auflisten.
+Listet in Inhaltsverzeichnissen aller Kapitel 2. Ordnung die untergeordneten Kapitel 3. Ordnung auf.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1266,12 +1431,10 @@ Unterabschnitte auflisten.
 !item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Listet in Form eines Inhaltsverzeichnisses alle Unterabschnitte des
-aktuellen Abschnitts auf und sorgt dafür, dass Sie in Hypertexten zu den
-Unterabschnitten weiterverzweigen können. UDO gibt dieses
-Unterinhaltsverzeichnis nicht aus, wenn in dem Abschnitt der Schalter
-(!KW [ignore_subsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs]) auch automatisieren.
+      Am Ende des von Kapiteln 2. Ordnung werden alle untergeordneten Kapitel 3. Ordnung als Inhaltsverzeichnis aufgelistet.
+      So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+      UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 2. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subsubtoc]) dort verwendet wurde. 
+      Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs]) auch automatisieren.
 
 !item [(!SEEALSO)]
 (!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
@@ -1292,7 +1455,7 @@ Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs]) auch auto
 !begin_node (!kw [subsubtoc_offset])
 !html_name  cmd_subsubtoc_offset
 
-Offset für die Unterabschnittnummerierung setzen.
+Offset für die fortlaufende Nummerierung von Kapiteln 3. Ordnung festlegen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1301,11 +1464,10 @@ Offset für die Unterabschnittnummerierung setzen.
 !item [(!SYNTAX)] (!T)!/subsubtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""(!VALUE)"" wird bei der Ausgabe der Unterabschnittnummern zu
-der aktuellen Nummer hinzugezählt. Im Beispiel würde
-der erste Unterabschnitt mit der Nummer~10 ausgegeben. Es
-können auch negative Werte benutzt werden. Dieser
-Schalter hat keine Wirkung auf Kapitel des Anhangs.
+      ""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 3. Ordnung zu der aktuellen Nummer hinzugezählt. 
+      Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+      Es können auch negative Werte benutzt werden. 
+      Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
@@ -1328,7 +1490,7 @@ Schalter hat keine Wirkung auf Kapitel des Anhangs.
 !begin_node (!kw [subtoc])
 !html_name  cmd_subtoc
 
-Abschnitte auflisten.
+Listet in Inhaltsverzeichnissen aller Kapitel 1. Ordnung die untergeordneten Kapitel 2. Ordnung auf.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1337,12 +1499,10 @@ Abschnitte auflisten.
 !item [(!SYNTAX)] (!T)!/subtoc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Listet in Form eines Inhaltsverzeichnisses alle Abschnitte des
-aktuellen Kapitels auf und sorgt dafür, dass Sie in Hypertexten zu den
-Abschnitten weiterverzweigen können. UDO gibt dieses
-Unterinhaltsverzeichnis nicht aus, wenn in dem Kapitel der Schalter
-(!KW [ignore_subtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subtocs]) auch automatisieren.
+      Am Ende des von Kapiteln 1. Ordnung werden alle untergeordneten Kapitel 2. Ordnung als Inhaltsverzeichnis aufgelistet.
+      So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+      UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 2. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subtoc]) dort verwendet wurde. 
+      Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subtocs]) auch automatisieren.
 
 !item [(!SEEALSO)]
 (!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
@@ -1363,7 +1523,7 @@ Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subtocs]) auch automat
 !begin_node (!kw [subtoc_offset])
 !html_name  cmd_subtoc_offset
 
-Offset für die Abschnittnummerierung setzen.
+Offset für die fortlaufende Nummerierung von Kapiteln 2. Ordnung festlegen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1372,11 +1532,10 @@ Offset für die Abschnittnummerierung setzen.
 !item [(!SYNTAX)] (!T)!/subtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""(!VALUE)"" wird bei der Ausgabe der Abschnittnummern zu
-der aktuellen Nummer hinzugezählt. Im Beispiel würde
-der erste Abschnitt mit der Nummer~10 ausgegeben. Es
-können auch negative Werte benutzt werden. Dieser
-Schalter hat keine Wirkung auf Kapitel des Anhangs.
+      ""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 2. Ordnung zu der aktuellen Nummer hinzugezählt. 
+      Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+      Es können auch negative Werte benutzt werden. 
+      Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
@@ -1431,7 +1590,5 @@ Das Wort ""hochgestellt"" wird (!SUP)hochgestellt(!sup) ausgegeben.
 !end_node
 
 # = = = = =
-
-!end_node
 
 # === EOF ===

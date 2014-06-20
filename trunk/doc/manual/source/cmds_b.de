@@ -553,7 +553,7 @@ umgeschaltet, sodass DOS-Screenshots korrekt dargestellt werden sollten.
 !begin_node (!kw [begin_node])
 !html_name  cmd_begin_node
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+Beginnt ein Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -562,10 +562,7 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
 !item [(!SYNTAX)] (!T)!/begin_node (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet, abhängig von der momentanen Gliederungsebene,
-ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
-mit der Bezeichnung ""(!TEXT)"" ein.
-Kapitel erscheinen in Inhaltsverzeichnissen.
+      Leitet ein Kapitel beliebiger Ordnung mit der Bezeichnung ""(!TEXT)"" ein.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
@@ -577,18 +574,18 @@ Kapitel erscheinen in Inhaltsverzeichnissen.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!begin_node Titel des Kapitels
+!begin_node Titel des Kapitel 1. Ordnung
 ...
-    !begin_node Titel des Abschnitts
+    !begin_node Titel des Kapitel 2. Ordnung
     ...
     !end_node
 ...
 !end_node
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des Kapitels
+!heading Titel des Kapitel 1. Ordnung
 !.. 
-!subheading Titel des Abschnitts
+!subheading Titel des Kapitel 2. Ordnung
 !..
 (!EXAMPLE_END)
 
@@ -599,7 +596,7 @@ Kapitel erscheinen in Inhaltsverzeichnissen.
 !begin_node (!kw [begin_node*])
 !html_name  cmd_begin_node_asterisk
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel beliebiger Ordnung in der Gliederungshierarchie ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -637,7 +634,7 @@ mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [begin_pnode])
 !html_name  cmd_begin_pnode
 
-Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+Beginnt ein Pop-up-Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -663,12 +660,12 @@ ST-Guide und bei WinHelp als Popup dargestellt.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!begin_pnode Titel des Popup-Kapitels
+!begin_pnode Titel des Pop-up-Kapitels
 ...
 !end_node
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des Popup-Kapitels
+!heading Titel des Pop-up-Kapitels
 ...
 (!EXAMPLE_END)
 
@@ -679,7 +676,7 @@ ST-Guide und bei WinHelp als Popup dargestellt.
 !begin_node (!kw [begin_pnode*])
 !html_name  cmd_begin_pnode_asterisk
 
-Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Pop-up-Kapitel beliebiger Ordnung in der Gliederungshierarchie ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -701,12 +698,12 @@ mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!begin_pnode* Titel des versteckten Popup-Kapitels
+!begin_pnode* Titel des versteckten Pop-up-Kapitels
 ...
 !end_node
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des versteckten Popup-Kapitels
+!heading Titel des versteckten Pop-up-Kapitels
 !..
 (!EXAMPLE_END)
 
@@ -1245,7 +1242,7 @@ Das Wort (!blue)Blau(!coloff) erscheint in der Farbe Blau.
 !begin_node (!kw [bn])
 !html_name  cmd_bn
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+Beginnt ein Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1268,7 +1265,7 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
 !begin_node (!kw [bn*])
 !html_name  cmd_bn_asterisk
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel beliebiger Ordnung in der Gliederungshierarchie ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1291,7 +1288,7 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis ei
 !begin_node (!kw [bp])
 !html_name  cmd_bp
 
-Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+Beginnt ein Pop-Up-Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1314,7 +1311,7 @@ Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
 !begin_node (!kw [bp*])
 !html_name  cmd_bp_asterisk
 
-Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Pop-Up-Kapitel beliebiger Ordnung in der Gliederungshierarchie ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 

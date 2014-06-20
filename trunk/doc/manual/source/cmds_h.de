@@ -43,6 +43,8 @@
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 # 2013:
 #   fd  Oct 24: html_doctype updated (new option for HTML 5)
+# 2014:
+#   fd  Jun 20: html_merge_subsubsubsubnode + html_merge_subsubsubsubsubnode added
 #
 ################################################################################
 
@@ -54,7 +56,7 @@
 !begin_node (!kw [h])
 !html_name  cmd_h
 
-Eine Kapitel-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 1. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -77,7 +79,7 @@ Eine Kapitel-Überschrift ausgeben.
 !begin_node (!kw [heading])
 !html_name  cmd_heading
 
-Eine Kapitel-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 1. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1559,7 +1561,8 @@ die Standardwerte für alle Seiten inkl. dem Inhaltsverzeichnis.
 !begin_node (!kw [html_merge_nodes])
 !html_name  cmd_html_merge_nodes
 
-Nur eine HTML-Datei erzeugen (nur HTML).
+Alle Kapitelhierarchien ab der 1. Gliederungsstufe zusammenfassen (nur HTML).
+Es wird nur eine einzige HTML-Datei erzeugt.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1568,14 +1571,16 @@ Nur eine HTML-Datei erzeugen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_merge_nodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, werden
-alle Kapitel, Abschnitte, Unterabschnitte und
-Paragraphen bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 1. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
 !item [(!SEEALSO)]
-(!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
 
 !end_xlist
 
@@ -1586,7 +1591,7 @@ Paragraphen bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 !begin_node (!kw [html_merge_subnodes])
 !html_name  cmd_html_merge_subnodes
 
-Abschnitte, Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
+Alle Kapitelhierarchien ab der 2. Gliederungsstufe zusammenfassen (nur HTML).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1595,14 +1600,16 @@ Abschnitte, Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_merge_subnodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann eingesetzt, wird
-ein Kapitel samt allen zugehörigen Abschnitten,
-Unterabschnitten und Paragraphen in einer Datei zusammengefasst.
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 2. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
 !item [(!SEEALSO)]
-(!KW [html_merge_nodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
 
 !end_xlist
 
@@ -1613,7 +1620,7 @@ Unterabschnitten und Paragraphen in einer Datei zusammengefasst.
 !begin_node (!kw [html_merge_subsubnodes])
 !html_name  cmd_merge_subsubnodes
 
-Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
+Alle Kapitelhierarchien ab der 3. Gliederungsstufe zusammenfassen (nur HTML).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1622,14 +1629,16 @@ Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_merge_subsubnodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann eingesetzt, wird
-ein Abschnitt samt allen zugehörigen Unterabschnitten
-und Paragraphen in einer Datei zusammengefasst.
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 3. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
 !item [(!SEEALSO)]
-(!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubsubnodes])
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
 
 !end_xlist
 
@@ -1640,7 +1649,7 @@ und Paragraphen in einer Datei zusammengefasst.
 !begin_node (!kw [html_merge_subsubsubnodes])
 !html_name  cmd_html_merge_subsubsubnode
 
-Paragraphen zusammenfassen (nur HTML).
+Alle Kapitelhierarchien ab der 4. Gliederungsstufe zusammenfassen (nur HTML).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1649,13 +1658,74 @@ Paragraphen zusammenfassen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_merge_subsubsubnodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann eingesetzt, werden alle Paragraphen eines Unterabschnitts in
-einer Datei zusammengefasst.
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 4. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
-(!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes])
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_subsubsubsubnodes])
+!html_name  cmd_html_merge_subsubsubsubnodes
+
+Alle Kapitelhierarchien ab der 5. Gliederungsstufe zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubsubsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 5. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_subsubsubsubsubnodes])
+!html_name  cmd_html_merge_subsubsubsubsubnodes
+
+Alle Kapitelhierarchien ab der 6. Gliederungsstufe zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubsubsubsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 6. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]), 
+      (!KW [html_merge_subsubsubsubnodes])
 
 !end_xlist
 
@@ -1991,25 +2061,24 @@ Mit diesem Kommando kann die Darstellung der Navigationsleiste angepasst
 werden. Dabei sind für [(!NAME)] momentan folgende Parameter möglich.
 
 !begin_description
-
 !item [line]
-Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben 
-am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
-standardmäßig ohne Ordnersymbole, mit ""(!code [~>~])"" getrennt.
+      Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
+      standardmäßig ohne Ordnersymbole, mit ""(!code [~>~])"" getrennt.
 
-Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben werden. 
-Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator 
-nicht an den Kapitelnamen klebt.
+      Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben werden. 
+      Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator nicht an den Kapitelnamen klebt.
 
-Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_line]) eingebettet.
-So kann ihr Inhalt über CSS-Anweisungen weiter formatiert werden.
+      Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_line]) eingebettet.
+      So kann ihr Inhalt über CSS-Anweisungen weiter formatiert werden.
 
 !item [image]
-Durch dieses Kommando wird am Anfang der Navigationszeile standardmäßig ein einzelnes Ordnersymbol ausgegeben. Dadurch wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich. Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
-
+      Durch dieses Kommando wird am Anfang der Navigationszeile standardmäßig ein einzelnes Ordnersymbol ausgegeben. 
+      Dadurch wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich. Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
 !end_description
 
-Zudem wird am Ende jeder Navigationszeile ein Link auf die Index-Seite eingefügt. Dieser Link ist zur Zeit nicht abschaltbar und sollte z.B. mit CSS-Anweisungen entsprechend positioniert werden. Er wird in eine (!code [<span>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_index]) eingebettet.
+Zudem wird am Ende jeder Navigationszeile ein Link auf die Index-Seite eingefügt. 
+Dieser Link ist zur Zeit nicht abschaltbar und sollte z.B. mit CSS-Anweisungen entsprechend positioniert werden. 
+Er wird in eine (!code [<span>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_index]) eingebettet.
 
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
