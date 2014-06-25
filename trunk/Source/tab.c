@@ -60,6 +60,8 @@
 *    fd  May 21: new: label* | l*  (#90)
 *  2013:
 *    fd  Oct 23: HTML output now supports HTML5
+*  2014:
+*    fd  Jun 25: table_output_html() must not output multiple CSS class definitions in HTML5
 *
 ******************************************|************************************/
 
@@ -1231,6 +1233,7 @@ LOCAL void table_output_html(void)
              x,
              i;
    char      f[LINELEN],                  /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
+             css[LINELEN],                /* buffer for CSS information */
              alignOn[64];
    char      token_buffer[LINELEN];       /* v6.5.3[vj]: New buffer needed for table extension */
    BOOLEAN   inside_center,
@@ -1382,103 +1385,61 @@ LOCAL void table_output_html(void)
             tab_cell[y][x] = found + 2;
          }
 
-/*       switch(tab_just[x])
-         {
-         case TAB_CENTER:
-            voutf("  <td align=\"center\" valign=\"top\"%s>", addition);
-            break;
-         case TAB_RIGHT:
-            voutf("  <td align=\"right\" valign=\"top\"%s>", addition);
-            break;
-         default:
-            voutf("  <td align=\"left\" valign=\"top\"%s>", addition);
-         }
-*/
-
          /* Everything not set in test_for_addition is now set here */
 
-         switch (tab_just[x])
+         strcpy(css, "");                 /* clear css */
+         
+         if (html_doctype == HTML5)
          {
-         case TAB_CENTER:
-            if (!addition_has_align)
+            switch (tab_just[x])
             {
-               if (html_doctype == HTML5)
-               {
-                  um_strcat(addition, " class=\"UDO_td_align_center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
-               }
-               else
-               {
-                  um_strcat(addition, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
-               }
-            }
-
-            if (!addition_has_valign)
-            {
-               if (html_doctype == HTML5)
-               {
-                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
-               }
-               else
-               {
-                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
-               }
+            case TAB_CENTER:
+               if (!addition_has_align)
+                  um_strcat(css, " class=\"UDO_td_align_center", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
+               break;
+               
+            case TAB_RIGHT:
+               if (!addition_has_align)
+                  um_strcat(css, " class=\"UDO_td_align_right", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
+               break;
+            default:
+               if (!addition_has_align)
+                  um_strcat(css, " class=\"UDO_td_align_left", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
             }
             
-            break;
-
-         case TAB_RIGHT:
-            if (!addition_has_align)
-            {
-               if (html_doctype == HTML5)
-               {
-                  um_strcat(addition, " class=\"UDO_td_align_right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
-               }
-               else
-               {
-                  um_strcat(addition, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
-               }
-            }
-
             if (!addition_has_valign)
-            {
-               if (html_doctype == HTML5)
-               {
-                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
-               }
-               else
-               {
-                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
-               }
-            }
-
-            break;
-
-         default:
-            if (!addition_has_align)
-            {
-               if (html_doctype == HTML5)
-               {
-                  um_strcat(addition, " class=\"UDO_td_align_left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
-               }
-               else
-               {
-                  um_strcat(addition, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
-               }
-            }
-
-            if (!addition_has_valign)
-            {
-               if (html_doctype == HTML5)
-               {
-                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
-               }
-               else
-               {
-                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
-               }
-            }
+               um_strcat(css, " UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
+            else
+               um_strcat(css, "\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
+            
+            if (css)
+               um_strcat(addition, css, TAB_ADDITION_LEN, "table_output_html[3-1-5]");
          }
-
+         else
+         {
+            switch (tab_just[x])
+            {
+            case TAB_CENTER:
+               if (!addition_has_align)
+                  um_strcat(css, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-2-0]");
+               break;
+               
+            case TAB_RIGHT:
+               if (!addition_has_align)
+                  um_strcat(css, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-2-1]");
+               break;
+            default:
+               if (!addition_has_align)
+                  um_strcat(css, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-2-2]");
+            }
+            
+            if (!addition_has_valign)
+               um_strcat(css, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-2-3]");
+            
+            if (css)
+               um_strcat(addition, css, TAB_ADDITION_LEN, "table_output_html[3-2-4]");
+         }
+         
          voutf("  <td%s>", addition);
 
          /* If there is a colspan, we need to supress empty cols */
