@@ -5352,7 +5352,7 @@ LOCAL void html_node_bar_frames(void)
                   sGifSize[80];      /* */
    char           alignOn[128],      /* */
                   alignOff[128],     /* */
-                  divOn[32],         /* */
+                  divOn[38],         /* */
                   divOff[32],        /* */
                   rowOn[16],         /* */
                   rowOff[16];        /* */
