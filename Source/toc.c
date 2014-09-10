@@ -132,6 +132,7 @@
 *  2014:
 *    ggs Apr 20: Add Node6
 *    fd  Jun 20: HTML output of navigation bars now writes UDO_nav_xx IDs to anchors
+*    fd  Sep 10: HTML TOC output for 6. level debugged (no longer doubles single 6th level entries in TOC)
 *
 ******************************************|************************************/
 
@@ -266,6 +267,7 @@ LOCAL int         curr_n2_index;
 LOCAL int         curr_n3_index;
 LOCAL int         curr_n4_index;
 LOCAL int         curr_n5_index;
+LOCAL int         curr_n6_index;
 
 LOCAL int         last_n1_index;          /* toc[]-Indizes fuer Titelzeilen */
 LOCAL int         last_n2_index;
@@ -435,7 +437,7 @@ LOCAL void toc_output(int nodetype, const int depth, BOOLEAN apx);
 LOCAL void do_toc(int nodetype, const int depth);
    /* outputs the breadcrumb navigation links for the current chapter */
 LOCAL void do_toptoc(const int current_node);
-   /*  */
+   /* get the user-defined TOC depth, set by the !depth command */
 LOCAL int get_toccmd_depth(void);
    /* initialize a new TOC entry */
 LOCAL TOCITEM *init_new_toc_entry(const int toctype, const BOOLEAN invisible);
@@ -6615,6 +6617,12 @@ const char       *filename)            /* */
                   last_ssssn = FALSE;
                }
                
+               if (last_sssssn)
+               {
+                  fprintf(file, "\t\t\t\t\t</ul>\n\t\t\t\t</ul>\n\t</ul>\n");
+                  last_sssssn = FALSE;
+               }
+               
                last_n = TRUE;
                print_htmlhelp_contents(file, "\t", i);
                break;
@@ -6642,6 +6650,12 @@ const char       *filename)            /* */
                {
                   fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t</ul>\n");
                   last_ssssn = FALSE;
+               }
+ 
+               if (last_sssssn)
+               {
+                  fprintf(file, "\t\t\t\t\t</ul>\n\t\t\t\t</ul>\n\t</ul>\n");
+                  last_sssssn = FALSE;
                }
  
                last_sn = TRUE;
@@ -6673,6 +6687,12 @@ const char       *filename)            /* */
                   last_ssssn = FALSE;
                }
  
+               if (last_sssssn)
+               {
+                  fprintf(file, "\t\t\t\t\t</ul>\n\t\t\t\t</ul>\n\t</ul>\n");
+                  last_sssssn = FALSE;
+               }
+ 
                last_ssn = TRUE;
                print_htmlhelp_contents(file, "\t\t\t", i);
                break;
@@ -6700,6 +6720,12 @@ const char       *filename)            /* */
                {
                   fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t</ul>\n");
                   last_ssssn = FALSE;
+               }
+
+               if (last_sssssn)
+               {
+                  fprintf(file, "\t\t\t\t\t</ul>\n\t\t\t\t</ul>\n\t</ul>\n");
+                  last_sssssn = FALSE;
                }
 
                last_sssn = TRUE;
@@ -6731,9 +6757,9 @@ const char       *filename)            /* */
                   last_sssn = FALSE;
                }
 
-               if (last_ssssn)
+               if (last_sssssn)
                {
-                  fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t</ul>\n");
+                  fprintf(file, "\t\t\t\t\t</ul>\n\t\t\t\t</ul>\n\t</ul>\n");
                   last_ssssn = FALSE;
                }
  
@@ -6790,13 +6816,13 @@ const char       *filename)            /* */
       fprintf(file, "\t\t</ul>\n\t</ul>\n");
       
    if (last_sssn)
-      fprintf(file, "\t\t\t</ul>\n\t\t</ul>\nswitch (</ul>\n");
+      fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n");
    
    if (last_ssssn)
-      fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t\t</ul>\nswitch (</ul>\n");
+      fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n");
    
    if (last_sssssn)
-      fprintf(file, "\t\t\t\t\t</ul>\n\t\t\t</ul>\n\t\t\t</ul>\nswitch (</ul>\n");
+      fprintf(file, "\t\t\t\t\t</ul>\n\t\t\t\t</ul>\n");
 
 
 #if 0
@@ -7245,6 +7271,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       curr_n3_index = 0;
       curr_n4_index = 0;
       curr_n5_index = 0;
+      curr_n6_index = 0;
    
       last_n1_index = p2_toc_counter;
       last_n2_index = 0;
@@ -7262,6 +7289,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       curr_n3_index = 0;
       curr_n4_index = 0;
       curr_n5_index = 0;
+      curr_n6_index = 0;
 
       last_n2_index = p2_toc_counter;
       last_n3_index = 0;
@@ -7278,6 +7306,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       curr_n3_index = p2_toc_counter;
       curr_n4_index = 0;
       curr_n5_index = 0;
+      curr_n6_index = 0;
    
       last_n3_index = p2_toc_counter;
       last_n4_index = 0;
@@ -7293,6 +7322,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    case TOC_NODE4:
       curr_n4_index = p2_toc_counter;
       curr_n5_index = 0;
+      curr_n6_index = 0;
    
       last_n4_index = p2_toc_counter;
       last_n5_index = 0;
@@ -7307,6 +7337,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    case TOC_NODE5:
       curr_n5_index = p2_toc_counter;
+      curr_n6_index = 0;
 
       last_n5_index = p2_toc_counter;
       last_n6_index = 0;
@@ -7319,6 +7350,8 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       break;
 
    case TOC_NODE6:
+      curr_n6_index = p2_toc_counter;
+
       last_n6_index = p2_toc_counter;
 
       nr1 = toc[p2_toc_counter]->nr1;
@@ -7343,27 +7376,48 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
          switch (nodetype)
          {
          case TOC_NODE1:
-            sprintf(numbers, "%c", 'A'+ nr1 - 1);
+            sprintf(numbers, "%c", 
+                        'A' + nr1 - 1);
             break;
             
          case TOC_NODE2:
-            sprintf(numbers, "%c.%d", 'A' + nr1 - 1, nr2 + subtoc_offset);
+            sprintf(numbers, "%c.%d", 
+                        'A' + nr1 - 1, 
+                        nr2 + subtoc_offset);
             break;
             
          case TOC_NODE3:
-            sprintf(numbers, "%c.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset);
+            sprintf(numbers, "%c.%d.%d", 
+                        'A' + nr1 - 1, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset);
             break;
             
          case TOC_NODE4:
-            sprintf(numbers, "%c.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset);
+            sprintf(numbers, "%c.%d.%d.%d",       
+                        'A' + nr1 - 1, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset, 
+                        nr4 + subsubsubtoc_offset);
             break;
          
          case TOC_NODE5:
-            sprintf(numbers, "%c.%d.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubsubtoc_offset);
+            sprintf(numbers, "%c.%d.%d.%d.%d",
+                        'A' + nr1 - 1, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset, 
+                        nr4 + subsubsubtoc_offset, 
+                        nr5 + subsubsubsubtoc_offset);
             break;
 
          case TOC_NODE6:
-            sprintf(numbers, "%c.%d.%d.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubsubtoc_offset, nr6+subsubsubsubsubtoc_offset);
+            sprintf(numbers, "%c.%d.%d.%d.%d.%d", 
+                        'A' + nr1 - 1, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset, 
+                        nr4 + subsubsubtoc_offset, 
+                        nr5 + subsubsubsubtoc_offset, 
+                        nr6 + subsubsubsubsubtoc_offset);
          }
       }
       else
@@ -7371,27 +7425,48 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
          switch (nodetype)
          {
          case TOC_NODE1:
-            sprintf(numbers, "%d", chapter);
+            sprintf(numbers, "%d", 
+                        chapter);
             break;
             
          case TOC_NODE2:
-            sprintf(numbers, "%d.%d", chapter, nr2 + subtoc_offset);
+            sprintf(numbers, "%d.%d", 
+                        chapter, 
+                        nr2 + subtoc_offset);
             break;
 
          case TOC_NODE3:
-            sprintf(numbers, "%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset);
+            sprintf(numbers, "%d.%d.%d", 
+                        chapter, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset);
             break;
             
          case TOC_NODE4:
-            sprintf(numbers, "%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset);
+            sprintf(numbers, "%d.%d.%d.%d", 
+                        chapter, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset, 
+                        nr4 + subsubsubtoc_offset);
             break;
          
          case TOC_NODE5:
-            sprintf(numbers, "%d.%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubtoc_offset);
+            sprintf(numbers, "%d.%d.%d.%d.%d", 
+                        chapter, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset, 
+                        nr4 + subsubsubtoc_offset, 
+                        nr5 + subsubsubtoc_offset);
             break;
 
          case TOC_NODE6:
-            sprintf(numbers, "%d.%d.%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubtoc_offset, nr6+subsubsubsubsubtoc_offset);
+            sprintf(numbers, "%d.%d.%d.%d.%d.%d", 
+                        chapter, 
+                        nr2 + subtoc_offset, 
+                        nr3 + subsubtoc_offset, 
+                        nr4 + subsubsubtoc_offset, 
+                        nr5 + subsubsubsubtoc_offset, 
+                        nr6 + subsubsubsubsubtoc_offset);
          }
       }
    }
@@ -9744,7 +9819,7 @@ const int         depth)                /* */
 LOCAL void toc_output(
 
 int               nodetype,             /* TOC_NODE... */
-const int         depth,                /* */
+const int         depth,                /* TOC level depth */
 BOOLEAN           apx)                  /* TRUE: appendix output */
 {
    register int   i;                    /* */
@@ -9765,7 +9840,8 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
                   p2_n2,
                   p2_n3,
                   p2_n4,
-                  p2_n5;
+                  p2_n5,
+                  p2_n6;
    int            start;                /* for() loop start point */
    int            depth1;               /* buffers for TOC_NODE... */
    int            depth2;
@@ -10040,6 +10116,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
          p2_n3 = p2_apx_n3;
          p2_n4 = p2_apx_n4;
          p2_n5 = p2_apx_n5;
+         p2_n6 = p2_apx_n6;
       }
       else
       {
@@ -10048,6 +10125,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
          p2_n3 = p2_toc_n3;
          p2_n4 = p2_toc_n4;
          p2_n5 = p2_toc_n5;
+         p2_n6 = p2_toc_n6;
       }
       
       start = last_n5_index;
@@ -11068,7 +11146,10 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
                   outln("\t\t\t\t\t\t\t</li>");
                }
                else
+               {
                   outln(toc_list_end);
+                  outln(toc_list_end);
+               }
                
                last5 = FALSE;
             }
@@ -11340,7 +11421,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
 
 
                                           /* TOC_NODE1: current is a subsubsubsubsubnode */
-      if ( (toc[i]->toctype == depth5) && (depth > 4) )
+      if ( (toc[i]->toctype == depth6) && (depth > 5) )
       {
          /* --- check first if we have to close previous items --- */
 
@@ -11385,7 +11466,10 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
                if (use_toc_list_commands == TOCL_HTM)
                   outln("\t\t\t\t\t\t\t\t\t</li>");
                else
+               {
                   outln(toc_list_end);
+                  outln(toc_list_end);
+               }
                
                last5 = FALSE;
             }
@@ -12302,10 +12386,10 @@ const int    currdepth)                 /* current node depth */
 /*******************************************************************************
 *
 *  get_toccmd_depth():
-*     ???
+*     get the user-defined TOC depth, set by the !depth command
 *
 *  Return:
-*     ???
+*     TOC depth #
 *
 ******************************************|************************************/
 
@@ -12631,11 +12715,11 @@ GLOBAL void c_tableofcontents(void)
 
    depth = get_toccmd_depth();
    
-   if (depth == 0)
+   if (depth == 0)                        /* use default values */
    {
-      if (use_compressed_tocs)
+      if (use_compressed_tocs)            /* show only 1st TOC level */
          depth = 1;
-      else
+      else                                /* show all TOC levels */
          depth = 9;
    }
 
@@ -14496,8 +14580,10 @@ const BOOLEAN   invisible)   /* */
       tocptr->up_n2_index = last_n2_index;
       tocptr->up_n3_index = last_n3_index;
       tocptr->up_n4_index = last_n4_index;
+      tocptr->up_n5_index = 0;
 
       last_n5_index = p1_toc_counter + 1;
+      last_n6_index = 0;
       break;
       
    case TOC_NODE4:
@@ -14508,6 +14594,7 @@ const BOOLEAN   invisible)   /* */
 
       last_n4_index = p1_toc_counter + 1;
       last_n5_index = 0;
+      last_n6_index = 0;
       break;
       
    case TOC_NODE3:
@@ -14515,10 +14602,12 @@ const BOOLEAN   invisible)   /* */
       tocptr->up_n2_index = last_n2_index;
       tocptr->up_n3_index = 0;
       tocptr->up_n4_index = 0;
+      tocptr->up_n5_index = 0;
 
       last_n3_index = p1_toc_counter + 1;
       last_n4_index = 0;
       last_n5_index = 0;
+      last_n6_index = 0;
       break;
       
    case TOC_NODE2:
@@ -14526,11 +14615,13 @@ const BOOLEAN   invisible)   /* */
       tocptr->up_n2_index = 0;
       tocptr->up_n3_index = 0;
       tocptr->up_n4_index = 0;
+      tocptr->up_n5_index = 0;
 
       last_n2_index = p1_toc_counter + 1;
       last_n3_index = 0;
       last_n4_index = 0;
       last_n5_index = 0;
+      last_n6_index = 0;
       break;
       
    case TOC_NODE1:
@@ -14538,12 +14629,14 @@ const BOOLEAN   invisible)   /* */
       tocptr->up_n2_index = 0;
       tocptr->up_n3_index = 0;
       tocptr->up_n4_index = 0;
+      tocptr->up_n5_index = 0;
 
       last_n1_index = p1_toc_counter + 1;
       last_n2_index = 0;
       last_n3_index = 0;
       last_n4_index = 0;
       last_n5_index = 0;
+      last_n6_index = 0;
    }
    
    /* ---------------------------------------------------- */
@@ -16799,6 +16892,7 @@ GLOBAL void init_module_toc(void)
    curr_n3_index = 0;
    curr_n4_index = 0;                     /* [GS] */
    curr_n5_index = 0;
+   curr_n6_index = 0;
 
 
    /* -------------------------------------------------------------- */
