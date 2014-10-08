@@ -248,7 +248,7 @@ generated.
 !begin_node (!kw [sn])
 !html_name  cmd_sn
 
-Start a section.
+Starts a chapter on the 2nd outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -271,7 +271,7 @@ Start a section.
 !begin_node (!kw [sn*])
 !html_name  cmd_sn_asterisk
 
-Start a hidden section.
+Starts a chapter on the 2nd outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -348,7 +348,7 @@ Output a subsection heading.
 !begin_node (!kw [ssn])
 !html_name  cmd_ssn
 
-Start a subsection.
+Starts a chapter on the 3rd outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -371,7 +371,7 @@ Start a subsection.
 !begin_node (!kw [ssn*])
 !html_name  cmd_ssn_asterisk
 
-Start a hidden subsection.
+Starts a chapter on the 3rd outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -417,7 +417,7 @@ Output a paragraph heading.
 !begin_node (!kw [sssn])
 !html_name  cmd_sssn
 
-Start a paragraph.
+Starts a chapter on the 4th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -440,7 +440,7 @@ Start a paragraph.
 !begin_node (!kw [sssn*])
 !html_name  cmd_sssn_asterisk
 
-Start a hidden paragraph.
+Starts a chapter on the 4th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -463,7 +463,7 @@ Start a hidden paragraph.
 !begin_node (!kw [ssssn])
 !html_name  cmd_ssssn
 
-Start a subparagraph.
+Starts a chapter on the 5th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -488,7 +488,7 @@ Start a subparagraph.
 !begin_node (!kw [ssssn*])
 !html_name  cmd_ssssn_asterisk
 
-Start a hidden subparagraph.
+Starts a chapter on the 5th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -513,7 +513,7 @@ Start a hidden subparagraph.
 !begin_node (!kw [sssssn])
 !html_name  cmd_sssssn
 
-Start a subparagraph.
+Starts a chapter on the 6th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -538,7 +538,7 @@ Start a subparagraph.
 !begin_node (!kw [sssssn*])
 !html_name  cmd_sssssn_asterisk
 
-Start a hidden subparagraph.
+Starts a chapter on the 6th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -643,7 +643,7 @@ font and fontsize.
 !begin_node (!kw [subnode])
 !html_name  cmd_subnode
 
-Start a section.
+Starts a chapter on the 2nd outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -669,7 +669,7 @@ Starts a new section named ""(!TEXT)"". Sections will appear in table of content
 !begin_node (!kw [subnode*])
 !html_name  cmd_subnode_asterisk
 
-Start a hidden section.
+Starts a chapter on the 2nd outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -726,7 +726,7 @@ font and fontsize.
 !begin_node (!kw [subsubnode])
 !html_name  cmd_subsubnode
 
-Start a subsection.
+Starts a chapter on the 3rd outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -752,7 +752,7 @@ Starts a new subsection named ""(!TEXT)"". Subsections will appear in table of c
 !begin_node (!kw [subsubnode*])
 !html_name  cmd_subsubnode_asterisk
 
-Start a hidden subsection.
+Starts a chapter on the 3rd outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -810,7 +810,7 @@ subsubsubnode font and fontsize.
 !begin_node (!kw [subsubsubnode])
 !html_name  cmd_subsubsubnode
 
-Start a paragraph.
+Starts a chapter on the 4th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -839,7 +839,7 @@ with #.#.#.# and are displayed inside the table of contents
 !begin_node (!kw [subsubsubnode*])
 !html_name  cmd_subsubsubnode_asterisk
 
-Start a hidden paragraph.
+Starts a chapter on the 4th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -933,7 +933,7 @@ chapters of the appendix.
 !begin_node (!kw [subsubsubsubnode])
 !html_name  cmd_subsubsubsubnode
 
-Start a subparagraph.
+Starts a chapter on the 5th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -962,7 +962,7 @@ with #.#.#.#.# and are displayed inside the table of contents
 !begin_node (!kw [subsubsubsubnode*])
 !html_name  cmd_subsubsubsubnode_asterisk
 
-Start a hidden subparagraph.
+Starts a chapter on the 5th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1062,7 +1062,7 @@ chapters of the appendix.
 !begin_node (!kw [subsubsubsubsubnode])
 !html_name  cmd_subsubsubsubsubnode
 
-Start a subparagraph.
+Starts a chapter on the 6th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1091,7 +1091,7 @@ with #.#.#.#.#.# and are displayed inside the table of contents
 !begin_node (!kw [subsubsubsubsubnode*])
 !html_name  cmd_subsubsubsubsubnode_asterisk
 
-Start a hidden subparagraph.
+Starts a chapter on the 6th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
