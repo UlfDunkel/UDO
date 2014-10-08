@@ -31,29 +31,29 @@ UDO~7.04 wurde noch nicht veröffentlicht!
       Diese nachfolgenden neuen Kommandos stehen dafür zur Verfügung:
       
       !begin_itemize
-      !item (!KW [html_merge_subsubsubsubsubnodes])
-      !item (!KW [ignore_subsubsubsubsubtoc])
-      !item (!KW [psssss*])
-      !item (!KW [psssss])
-      !item (!KW [psubsubsubsubsubnode*])
-      !item (!KW [psubsubsubsubsubnode])
-      !item (!KW [sssssh])
-      !item (!KW [sssssn*])
-      !item (!KW [sssssn])
-      !item (!KW [subsubsubsubsubheading])
-      !item (!KW [subsubsubsubsubnode*])
-      !item (!KW [subsubsubsubsubnode])
-      !item (!KW [subsubsubsubsubtoc])
-      !item (!KW [subsubsubsubsubtoc_offset])
-      !item (!KW [use_auto_subsubsubsubsubtocs])
+      !item (!kw [html_merge_subsubsubsubsubnodes])
+      !item (!kw [ignore_subsubsubsubsubtoc])
+      !item (!kw [psssss*])
+      !item (!kw [psssss])
+      !item (!kw [psubsubsubsubsubnode*])
+      !item (!kw [psubsubsubsubsubnode])
+      !item (!kw [sssssh])
+      !item (!kw [sssssn*])
+      !item (!kw [sssssn])
+      !item (!kw [subsubsubsubsubheading])
+      !item (!kw [subsubsubsubsubnode*])
+      !item (!kw [subsubsubsubsubnode])
+      !item (!kw [subsubsubsubsubtoc])
+      !item (!kw [subsubsubsubsubtoc_offset])
+      !item (!kw [use_auto_subsubsubsubsubtocs])
       !end_itemize
       
       Sie werden wie die bisher üblichen Kommandos zur Gliederung von HTML-Gliederungsebenen verwendet.
 # ----------------------------------------
 
 # ----------------------------------------
-!item [(!KW [html_script_name])]
-      Dieses Kommando unterstützt jetzt, ähnlich wie (!KW [html_style_name]), beliebig viele Dateien.
+!item [(!kw [html_script_name])]
+      Dieses Kommando unterstützt jetzt, ähnlich wie (!kw [html_style_name]), beliebig viele Dateien.
 # ----------------------------------------
 
 # ----------------------------------------
@@ -72,10 +72,15 @@ UDO~7.04 wurde noch nicht veröffentlicht!
       
       Um diese Navigationsbuttons per Tastatur ansprechen zu können, sollten Sie JavaScript einsetzen.
       Das HTML-Attribut ""accesskey"" benötigt je nach Browser unterschiedliche Zusatztasten und spricht z.B. keine Pfeiltasten an.
-      Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!KW [no_headlines]) und (!KW [no_footers]) im Vorspann abgeschaltet haben.
-      Binden Sie dann mit (!KW [html_script_name]) ein JavaScript-Skript ein, dass Tastendrücke auswertet.
+      Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!kw [no_headlines]) und (!kw [no_footers]) im Vorspann abgeschaltet haben.
+      Binden Sie dann mit (!kw [html_script_name]) ein JavaScript-Skript ein, dass Tastendrücke auswertet.
 # ----------------------------------------
 
+# ----------------------------------------
+!item [Kleinere Fehlerkorrekturen]
+      Wie immer wurden verschiedene kleine Fehler korrigiert.
+      Sie waren so klein, dass es nicht lohnt, sie aufzuzählen.
+# ----------------------------------------
 !end_description
 
 !end_node
