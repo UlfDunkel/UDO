@@ -294,7 +294,7 @@ Die von UDO zur Zeit unterstützten CSS-Attribute werden nachfolgend aufgeführt:
 !item [UDO_p_align_center]
 !label UDO_p_align_right
 !item [UDO_p_align_right]
-!label UDO_span_tt
+# !label UDO_span_tt
 !item [UDO_span_tt]
       Da HTML~5 das (!LT)tt(!GT)-Tag nicht mehr unterstützt, wird es mit einer (!LT)span(!GT)-Umgebung nachgebildet. 
       Die Formatierung geschieht über CSS.
