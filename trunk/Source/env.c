@@ -3102,7 +3102,7 @@ GLOBAL void c_item(void)
    {
    case TOTEX:
    case TOPDL:
-      um_strcpy(token[0], "\\item", MAX_TOKEN_LEN+1, "c_item [1]");
+      um_strcpy(token[0], "\\item", MAX_TOKEN_LEN+1, "c_item[1]");
       
       switch (iEnvType[iEnvLevel])
       {
