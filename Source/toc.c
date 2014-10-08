@@ -135,6 +135,7 @@
 *    fd  Sep 10: HTML TOC output for 6. level debugged (no longer doubles single 6th level entries in TOC)
 *    fd  Oct 08: - HTML headlines|bottomlines output now creates unique UDO_nav_xx IDs
 *                - HTML 5 no longer outputs <link rev='made'> and <meta name='Email'>
+*                - string2reference() debugged: don't create IDs without name
 *
 ******************************************|************************************/
 
@@ -949,11 +950,11 @@ const UWORD     uiH)                 /* GUI navigation image height */
    
    
    if (!strcmp(pic, GIF_UP_NAME))
-      strcpy(sIDName, "UDO_nav_up");
+      strcpy(sIDName, " id=\"UDO_nav_up");
    else if (!strcmp(pic, GIF_LF_NAME))
-      strcpy(sIDName, "UDO_nav_lf");
+      strcpy(sIDName, " id=\"UDO_nav_lf");
    else if (!strcmp(pic, GIF_RG_NAME))
-      strcpy(sIDName, "UDO_nav_rg");
+      strcpy(sIDName, " id=\"UDO_nav_rg");
    else
       sIDName[0] = 0;                     /* empty C string */
 
@@ -961,9 +962,9 @@ const UWORD     uiH)                 /* GUI navigation image height */
    if (sIDName[0] > 0)
    {
       if (head_foot)
-         strcat(sIDName, "_HEAD");
+         strcat(sIDName, "_HEAD\"");
       else
-         strcat(sIDName, "_FOOT");
+         strcat(sIDName, "_FOOT\"");
    }
 
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -1191,13 +1192,13 @@ const UWORD     uiH)                 /* GUI navigation image height */
             if (l->is_node || l->is_alias)
             {
                                           /* Changed in r6pl16 [NHz] */
-               sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s>%s</a>",
+               sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
                   sIDName, htmlfilename, suff, html_target, n);
             }
             else
             {
                                           /* Changed in r6pl16 [NHz] */
-               sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
+               sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
                   sIDName, htmlfilename, suff, sNoSty, html_target, n);
             }
          }
@@ -1214,12 +1215,12 @@ const UWORD     uiH)                 /* GUI navigation image height */
             {
                if (html_doctype == HTML5)
                {
-                  sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
+                  sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
                      sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
                }
                else
                {
-                  sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
+                  sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
                      sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
                }
             }
@@ -1227,12 +1228,12 @@ const UWORD     uiH)                 /* GUI navigation image height */
             {
             	if (html_doctype == HTML5)
             	{
-                  sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
+                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                      sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
             	}
             	else
             	{
-                  sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
                      sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
                }
             }
@@ -1244,7 +1245,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
          {
             if (same_file)
             {
-               sprintf(ref, "<a id=\"%s\" href=\"#%s\"%s>%s</a>", 
+               sprintf(ref, "<a%s href=\"#%s\"%s>%s</a>", 
                   sIDName, sNoSty, html_target, n);
             }
             else
@@ -1259,13 +1260,13 @@ const UWORD     uiH)                 /* GUI navigation image height */
                  )
                {
                                           /* Changed in r6pl16 [NHz] */
-                  sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
+                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
                      sIDName, htmlfilename, suff, sNoSty, html_target, n);
                }
                else
                {
                                           /* Changed in r6pl16 [NHz] */
-                  sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s>%s</a>",
+                  sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
                      sIDName, htmlfilename, suff, html_target, n);
                }
             }
@@ -1273,7 +1274,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
          else
          {
                                           /* Changed in r6pl16 [NHz] */
-            sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
+            sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
                sIDName, htmlfilename, suff, sNoSty, html_target, n);
          }
       }
