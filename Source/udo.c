@@ -8389,7 +8389,7 @@ size_t  *u)    /* # of spaces to indent a line */
 *     Note that multiple paragraphs within one <li>...</li> are not separated by
 *     inserting additional </p><p> but with <br><br>, which is much easier because 
 *     we avoid too splendid listings and can handle the additional space between 
-*     paragraphs IN FRONT of any paragraph succeeding the 1st paragraph.
+*     paragraphs IN FRONT of any paragraph following the 1st paragraph.
 *
 *  return:
 *     -
@@ -9393,7 +9393,10 @@ BOOLEAN           reset_internals)        /* */
       if (format_uses_output_buffer && use_output_buffer)
          insert_nl_token_buffer();
 
-      switch (desttype)                   /* This is the last content line of a section */
+
+      /* This is the last content line of a section */
+
+      switch (desttype)
       {
       case TOHAH:                         /* HTML Apple Help */
       case TOHTM:                         /* HTML */
@@ -11625,6 +11628,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
          html_merge_node3 = TRUE;
          html_merge_node4 = TRUE;
          html_merge_node5 = TRUE;
+         html_merge_node6 = TRUE;
          return TRUE;
       }
       
@@ -11634,6 +11638,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
          html_merge_node3 = TRUE;
          html_merge_node4 = TRUE;
          html_merge_node5 = TRUE;
+         html_merge_node6 = TRUE;
          return TRUE;
       }
       
@@ -11642,6 +11647,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
          html_merge_node3 = TRUE;
          html_merge_node4 = TRUE;
          html_merge_node5 = TRUE;
+         html_merge_node6 = TRUE;
          return TRUE;
       }
       
@@ -11649,12 +11655,14 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
       {
          html_merge_node4 = TRUE;
          html_merge_node5 = TRUE;
+         html_merge_node6 = TRUE;
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_merge_subsubsubsubnodes") == 0)
       {
          html_merge_node5 = TRUE;
+         html_merge_node6 = TRUE;
          return TRUE;
       }
       
