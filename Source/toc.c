@@ -133,7 +133,8 @@
 *    ggs Apr 20: Add Node6
 *    fd  Jun 20: HTML output of navigation bars now writes UDO_nav_xx IDs to anchors
 *    fd  Sep 10: HTML TOC output for 6. level debugged (no longer doubles single 6th level entries in TOC)
-*    fd  Oct 08: HTML headlines|bottomlines output now creates unique UDO_nav_xx IDs
+*    fd  Oct 08: - HTML headlines|bottomlines output now creates unique UDO_nav_xx IDs
+*                - HTML 5 no longer outputs <link rev='made'> and <meta name='Email'>
 *
 ******************************************|************************************/
 
@@ -3257,10 +3258,13 @@ BOOLEAN     keywords)             /* */
    /*r6pl5: <link>-Tag */
    if (titdat.contact_name != NULL)
    {
-      voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.contact_name, closer);
+      if (html_doctype != HTML5)
+         voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.contact_name, closer);
+      
 	   if (titdat.contact_link == NULL)
       {
-         voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
+         if (html_doctype != HTML5)
+            voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
 
          /* New in r6pl16 [NHz] */
          voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
@@ -3268,7 +3272,8 @@ BOOLEAN     keywords)             /* */
    }
    if (titdat.contact_link != NULL)
    {
-      voutlnf("<link rev=\"made\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, closer);
+      if (html_doctype != HTML5)
+         voutlnf("<link rev=\"made\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, closer);
 
       /* New in r6pl16 [NHz] */
       voutlnf("<link rel=\"author\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, closer);
