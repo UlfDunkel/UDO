@@ -19,6 +19,8 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 25: index adjustments
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  Jun 20: chapter structure_layers rewritten
 #
 ################################################################################
 
@@ -190,36 +192,38 @@ import the converted RTF file.
 !html_name  structure_layers
 !label      Chapters, sections, subsections and paragraphs
 
-UDO offers you four layers for Structure your documentation. These layers
-are called chapters, sections, subsections and paragraphs.
+UDO offers six outline layers which are called chapters on the 1st to 6th outline level.
 
 !index (!kw [node])
 !index (!kw [subnode])
 !index (!kw [subsubnode])
 !index (!kw [subsubsubnode])
+!index (!kw [subsubsubsubnode])
+!index (!kw [subsubsubsubsubnode])
 !index (!kw [begin_node])
 
-Using the command (!KW [node]) you tell UDO that a new chapter begins and
-you tell it how the chapter is named. The commands (!KW [subnode]),
-(!KW [subsubnode]) and (!KW [subsubsubnode]) do the same for a section,
-subsection and paragraph.
+Using the command (!KW [node]) you tell UDO that a new chapter on the 1st outline level begins and you tell it how the chapter is named. 
+The commands (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [subsubsubsubnode]), and (!KW [subsubsubsubsubnode]) do the same for chapters on the 2nd to 6th outline level.
 
-(!NOTE) You can also use the commands (!KW [begin_node])
-and (!KW [end_node]) to structure your documentation.
+These commands start a new chapter and automatically handle the created outline structure.
+It is even possible to skip an outline level using these commands, although we do not recommend this.
+Don't forget that you must not irritate your readers.
 
-(!NTY)
-Da Bilder oft mehr sagen als tausend Worte, hier ein kleines
-Beispiel. Die (hier inhaltsleere) Befehlsfolge...
+(!NOTE) You can also use the commands (!KW [begin_node]) and (!KW [end_node]) to structure your documentation.
+The advantage of these two commands: You do not have to remember on which outline level you currently are.
+The disadvantage: For each used (!KW [begin_node]) you have to add an (!KW [end_node]) command, too.
 
-Watch this example (without text) to understand what I want to say:
+Because a picture is worth a thousand words, here is a tiny example.
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!node          A chapter
-!subnode       A section
-!subsubnode    A subsection
-!subsubsubnode A paragraph
-!node          And a different chapter
+!node                A 1st outline level chapter
+!subnode             A 2nd outline level chapter
+!subsubnode          A 3rd outline level chapter
+!subsubsubnode       A 4th outline level chapter
+!subsubsubsubnode    A 5th outline level chapter
+!subsubsubsubsubnode A 6th outline level chapter
+!node                Another 1st outline level chapter
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -227,64 +231,74 @@ The table of contents should look like this:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-1  A chapter
-   1.1  A section
-        1.1.1  A subsection
-               1.1.1.1  A Paragraph
+1  A 1st outline level chapter
+   1.1  A 2nd outline level chapter
+        1.1.1  A 3rd outline level chapter
+               1.1.1.1  A 4th outline level chapter
+                        1.1.1.1.1  A 5th outline level chapter
+                                   1.1.1.1.1.1  A 6th outline level chapter
 
-2  And a different chapter
+2  Another 1st outline level chapter
 !end_verbatim
 (!EXAMPLE_END)
 
-Windows Help and ST-Guide may display text in dialog boxes, too. These so
-called popup nodes can be used with the following commands:
+Windows Help and ST-Guide may display text in popup dialog boxes, too. 
+These so called popup nodes can be used with the following commands:
 
 !index (!kw [pnode])
 !index (!kw [psubnode])
 !index (!kw [psubsubnode])
 !index (!kw [psubsubsubnode])
+!index (!kw [psubsubsubsubnode])
+!index (!kw [psubsubsubsubsubnode])
 !begin_itemize !compressed
-!item (!KW [pnode]) for popup chapters,
-!item (!KW [psubnode]) for popup sections,
-!item (!KW [psubsubnode]) for popup subsections and
-!item (!KW [psubsubsubnode]) for popup paragraphs
+!item (!KW [pnode])                 for 1st outline level popup chapters, 
+!item (!KW [psubnode])              for 2nd outline level popup chapters, 
+!item (!KW [psubsubnode])           for 3rd outline level popup chapters, 
+!item (!KW [psubsubsubnode])        for 4th outline level popup chapters, 
+!item (!KW [psubsubsubsubnode])     for 5th outline level popup chapters, 
+!item (!KW [psubsubsubsubsubnode])  for 6th outline level popup chapters.
 !end_itemize
 
-Furthermore you can create chapters that don't appear in the table of
-contents. Use these commands!..
+Furthermore you can create chapters that don't appear in the table of contents. 
+Use these commands!..
 
 !index (!kw [node*])
+!index (!kw [subnode*])
+!index (!kw [subsubnode*])
+!index (!kw [subsubsubnode*])
+!index (!kw [subsubsubsubnode*])
+!index (!kw [subsubsubsubsubnode*])
 !index (!kw [pnode*])
 !index (!kw [psubnode*])
 !index (!kw [psubsubnode*])
 !index (!kw [psubsubsubnode*])
-!index (!kw [subnode*])
-!index (!kw [subsubnode*])
-!index (!kw [subsubsubnode*])
+!index (!kw [psubsubsubsubnode*])
+!index (!kw [psubsubsubsubsubnode*])
 !begin_itemize !compressed
-!item (!KW [node*]) for chapters,
-!item (!KW [subnode*]) for sections,
-!item (!KW [subsubnode*]) for subsections,
-!item (!KW [subsubsubnode*]) for paragraphs
-!item (!KW [pnode*]) for popup chapters,
-!item (!KW [psubnode*]) for popup sections,
-!item (!KW [psubsubnode*]) for popup subsections and
-!item (!KW [psubsubsubnode*]) for popup paragraphs.
+!item (!KW [node*])                 for 1st outline level chapters,
+!item (!KW [subnode*])              for 2nd outline level chapters,
+!item (!KW [subsubnode*])           for 3rd outline level chapters,
+!item (!KW [subsubsubnode*])        for 4th outline level chapters,
+!item (!KW [subsubsubsubnode*])     for 5th outline level chapters,
+!item (!KW [subsubsubsubsubnode*])  for 6th outline level chapters,
+ 
+!item (!KW [pnode*])                for 1st outline level popup chapters,
+!item (!KW [psubnode*])             for 2nd outline level popup chapters,
+!item (!KW [psubsubnode*])          for 3rd outline level popup chapters,
+!item (!KW [psubsubsubnode*])       for 4th outline level popup chapters,
+!item (!KW [psubsubsubsubnode*])    for 5th outline level popup chapters,
+!item (!KW [psubsubsubsubsubnode*]) for 6th outline level popup chapters.
 !end_itemize
 
 (!HINTS)
-
 !begin_enumerate
-
-!item Chapters that aren't listed in the table of contents aren't numbered,
-too. UDO will create hypertext links to them as it does for all other
-chapters.
+!item Chapters that aren't listed in the table of contents aren't numbered, too. 
+      UDO will create hypertext links to them as it does for all other chapters.
 
 !index (!kw [no_numbers])
-!item UDO enumerates the chapters automatically. If you want to display the
-chapter names without numbers you can use the switch (!KW [no_numbers])
-inside the preamble.
-
+!item UDO enumerates the chapters automatically. 
+      If you want to display the chapter names without numbers you can use the switch (!KW [no_numbers]) inside the preamble.
 !end_enumerate
 
 !end_node # Structure Layers
