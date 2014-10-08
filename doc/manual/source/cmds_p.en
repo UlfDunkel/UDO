@@ -36,7 +36,7 @@
 !begin_node (!kw [p])
 !html_name  cmd_p
 
-Start a popup chapter.
+Starts a 1st outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -59,7 +59,7 @@ Start a popup chapter.
 !begin_node (!kw [p*])
 !html_name  cmd_p_asterisk
 
-Start a hidden popup chapter.
+Starts a 1st outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -225,7 +225,7 @@ page reference. Converting into others formats, only ""(!TEXT)"" will be output.
 !begin_node (!kw [pnode])
 !html_name  cmd_pnode
 
-Start a popup chapter.
+Starts a 1st outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -251,7 +251,7 @@ The same as (!KW [node]) but the contents will be displayed as a popup inside ST
 !begin_node (!kw [pnode*])
 !html_name  cmd_pnode_asterisk
 
-Start a hidden popup chapter.
+Starts a 1st outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -310,7 +310,7 @@ this placeholder by ""(!code [GBP])"".
 !begin_node (!kw [ps])
 !html_name  cmd_ps
 
-Start a popup section.
+Starts a 2nd outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -333,7 +333,7 @@ Start a popup section.
 !begin_node (!kw [ps*])
 !html_name  cmd_ps_asterisk
 
-Start hidden popup section.
+Starts a 2nd outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -356,7 +356,7 @@ Start hidden popup section.
 !begin_node (!kw [pss])
 !html_name  cmd_pss
 
-Start a popup subsection.
+Starts a 3rd outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -379,7 +379,7 @@ Start a popup subsection.
 !begin_node (!kw [pss*])
 !html_name  cmd_pss_asterisk
 
-Start a hidden popup subsection.
+Starts a 3rd outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -402,7 +402,7 @@ Start a hidden popup subsection.
 !begin_node (!kw [psss])
 !html_name  cmd_psss
 
-Start a popup paragraph.
+Starts a 4th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -425,7 +425,7 @@ Start a popup paragraph.
 !begin_node (!kw [psss*])
 !html_name  cmd_psss_asterisk
 
-Start a hidden popup paragraph.
+Starts a 4th outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -448,7 +448,7 @@ Start a hidden popup paragraph.
 !begin_node (!kw [pssss])
 !html_name  cmd_pssss
 
-Start a popup paragraph.
+Starts a 5th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -471,7 +471,7 @@ Start a popup paragraph.
 !begin_node (!kw [pssss*])
 !html_name  cmd_pssss_asterisk
 
-Start a hidden popup paragraph.
+Starts a 5th outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -494,7 +494,7 @@ Start a hidden popup paragraph.
 !begin_node (!kw [psssss])
 !html_name  cmd_psssss
 
-Start a popup paragraph.
+Starts a 6th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -517,7 +517,7 @@ Start a popup paragraph.
 !begin_node (!kw [psssss*])
 !html_name  cmd_psssss_asterisk
 
-Start a hidden popup paragraph.
+Starts a 6th outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -540,7 +540,7 @@ Start a hidden popup paragraph.
 !begin_node (!kw [psubnode])
 !html_name  cmd_psubnode
 
-Start a popup section.
+Starts a 2nd outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -567,7 +567,7 @@ popup inside ST-Guide and WinHelp.
 !begin_node (!kw [psubnode*])
 !html_name  cmd_psubnode_asterisk
 
-Start hidden popup section.
+Starts a 2nd outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -596,7 +596,7 @@ will not appear in a table of contents.
 !begin_node (!kw [psubsubnode])
 !html_name  cmd_psubsubnode
 
-Start a popup section.
+Starts a 3rd outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -623,7 +623,7 @@ popup inside ST-Guide and WinHelp.
 !begin_node (!kw [psubsubnode*])
 !html_name  cmd_psubsubnode_asterisk
 
-Start a hidden popup subsection.
+Starts a 3rd outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -652,7 +652,7 @@ This command does the same as (!KW [psubsubnode]), but here
 !begin_node (!kw [psubsubsubnode])
 !html_name  cmd_psubsubsubnode
 
-Start a popup subsection.
+Starts a 4th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -681,7 +681,7 @@ as a popup inside ST-Guide and WinHelp.
 !begin_node (!kw [psubsubsubnode*])
 !html_name  cmd_psubsubsubnode_asterisk
 
-Start a hidden popup paragraph.
+Starts a 4th outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -710,7 +710,7 @@ This command does the same as (!KW [psubsubsubnode]), but here
 !begin_node (!kw [psubsubsubsubnode])
 !html_name  cmd_psubsubsubsubnode
 
-Start a popup subsection.
+Starts a 5th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -739,7 +739,7 @@ as a popup inside ST-Guide and WinHelp.
 !begin_node (!kw [psubsubsubsubnode*])
 !html_name  cmd_psubsubsubsubnode_asterisk
 
-Start a hidden popup paragraph.
+Starts a 5th outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -768,7 +768,7 @@ This command does the same as (!KW [psubsubsubsubnode]), but here
 !begin_node (!kw [psubsubsubsubsubnode])
 !html_name  cmd_psubsubsubsubsubnode
 
-Start a popup subsection.
+Starts a 6th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -797,7 +797,7 @@ as a popup inside ST-Guide and WinHelp.
 !begin_node (!kw [psubsubsubsubsubnode*])
 !html_name  cmd_psubsubsubsubsubnode_asterisk
 
-Start a hidden popup paragraph.
+Starts a 6th outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 

@@ -67,7 +67,7 @@ Create a footnote.
 !begin_node (!kw [n])
 !html_name  cmd_n
 
-Start a chapter.
+Starts a chapter on the 1st outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -90,7 +90,7 @@ Start a chapter.
 !begin_node (!kw [n*])
 !html_name  cmd_n_asterisk
 
-Start a hidden chapter.
+Starts a chapter on the 1st outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
