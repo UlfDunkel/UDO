@@ -133,6 +133,7 @@
 *    ggs Apr 20: Add Node6
 *    fd  Jun 20: HTML output of navigation bars now writes UDO_nav_xx IDs to anchors
 *    fd  Sep 10: HTML TOC output for 6. level debugged (no longer doubles single 6th level entries in TOC)
+*    fd  Oct 08: HTML headlines|bottomlines output now creates unique UDO_nav_xx IDs
 *
 ******************************************|************************************/
 
@@ -240,6 +241,7 @@ LOCAL const char  *HTML_LABEL_CONTENTS = "UDOTOC";
 
 LOCAL BOOLEAN    toc_available;           /* Inhaltsverzeichnis existiert */
 LOCAL BOOLEAN    apx_available;           /* Anhang existiert */
+LOCAL BOOLEAN    head_foot;               /* TRUE: HEAD output, FALSE: FOOT */
 
 LOCAL int        p1_toctype;              /* Typ des aktuellen Kapitels */
 LOCAL int        p2_toctype;              /* Typ des aktuellen Kapitels */
@@ -402,11 +404,11 @@ LOCAL BOOLEAN html_make_file(void);
    /*  */
 LOCAL BOOLEAN html_new_file(void);
 LOCAL void get_giflink_data(const int index, char *name, UWORD *width, UWORD *height);
-LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep, BOOLEAN head);
    /* create and output HOME link for HTML navigation bar */
-LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep, BOOLEAN head);
    /* create and output link to 'back page' for HTML navigation bar */
-LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep, BOOLEAN head);
    /* create and output HTML head and bottom bar lines */
 LOCAL void html_hb_line(BOOLEAN head);
    /*  */
@@ -935,7 +937,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
                 sNoSty[512],         /* */
                 hfn[512],            /* */
                 sGifSize[80];        /* */
-   char         sIDName[20];         /* string buffer for anchor ID name, e.g. "id=\"UDO_nav_lf\" " */
+   char         sIDName[32];         /* string buffer for anchor ID name, e.g. "id=\"UDO_nav_lf\" " */
    int          ti,                  /* */
                 ui;                  /* */
    BOOLEAN      same_file = FALSE;   /* TRUE: reference is in same file */
@@ -946,14 +948,22 @@ const UWORD     uiH)                 /* GUI navigation image height */
    
    
    if (!strcmp(pic, GIF_UP_NAME))
-      strcpy(sIDName, " id=\"UDO_nav_up\"");
+      strcpy(sIDName, "UDO_nav_up");
    else if (!strcmp(pic, GIF_LF_NAME))
-      strcpy(sIDName, " id=\"UDO_nav_lf\"");
+      strcpy(sIDName, "UDO_nav_lf");
    else if (!strcmp(pic, GIF_RG_NAME))
-      strcpy(sIDName, " id=\"UDO_nav_rg\"");
+      strcpy(sIDName, "UDO_nav_rg");
    else
       sIDName[0] = 0;                     /* empty C string */
 
+   /* mark ID as unique */
+   if (sIDName[0] > 0)
+   {
+      if (head_foot)
+         strcat(sIDName, "_HEAD");
+      else
+         strcat(sIDName, "_FOOT");
+   }
 
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
@@ -1180,13 +1190,13 @@ const UWORD     uiH)                 /* GUI navigation image height */
             if (l->is_node || l->is_alias)
             {
                                           /* Changed in r6pl16 [NHz] */
-               sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
+               sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s>%s</a>",
                   sIDName, htmlfilename, suff, html_target, n);
             }
             else
             {
                                           /* Changed in r6pl16 [NHz] */
-               sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
+               sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
                   sIDName, htmlfilename, suff, sNoSty, html_target, n);
             }
          }
@@ -1203,12 +1213,12 @@ const UWORD     uiH)                 /* GUI navigation image height */
             {
                if (html_doctype == HTML5)
                {
-                  sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
+                  sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
                      sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
                }
                else
                {
-                  sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
+                  sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
                      sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
                }
             }
@@ -1216,12 +1226,12 @@ const UWORD     uiH)                 /* GUI navigation image height */
             {
             	if (html_doctype == HTML5)
             	{
-                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
+                  sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
                      sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
             	}
             	else
             	{
-                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+                  sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
                      sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
                }
             }
@@ -1233,7 +1243,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
          {
             if (same_file)
             {
-               sprintf(ref, "<a%s href=\"#%s\"%s>%s</a>", 
+               sprintf(ref, "<a id=\"%s\" href=\"#%s\"%s>%s</a>", 
                   sIDName, sNoSty, html_target, n);
             }
             else
@@ -1248,13 +1258,13 @@ const UWORD     uiH)                 /* GUI navigation image height */
                  )
                {
                                           /* Changed in r6pl16 [NHz] */
-                  sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
+                  sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
                      sIDName, htmlfilename, suff, sNoSty, html_target, n);
                }
                else
                {
                                           /* Changed in r6pl16 [NHz] */
-                  sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
+                  sprintf(ref, "<a id=\"%s\" href=\"%s%s\"%s>%s</a>",
                      sIDName, htmlfilename, suff, html_target, n);
                }
             }
@@ -1262,7 +1272,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
          else
          {
                                           /* Changed in r6pl16 [NHz] */
-            sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
+            sprintf(ref, "<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
                sIDName, htmlfilename, suff, sNoSty, html_target, n);
          }
       }
@@ -3965,7 +3975,9 @@ LOCAL void html_index_giflink(
 
 const int    idxEnabled,        /* */
 const int    idxDisabled,       /* */
-const char  *sep)               /* */
+const char  *sep,               /* */
+BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+                                /* FALSE: output GUI navigation bar in page footer */
 {
    char      sTarget[64],       /* */
              sFile[64],         /* */
@@ -3974,6 +3986,7 @@ const char  *sep)               /* */
    UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
+   char      sIDName[32];       /* string buffer for anchor ID name */
 
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -3995,10 +4008,16 @@ const char  *sep)               /* */
    
    if (uses_tableofcontents)
    {
+      /* mark ID as unique */
+      if (head)
+         strcpy(sIDName, "UDO_nav_up_HEAD");
+      else
+         strcpy(sIDName, "UDO_nav_up_FOOT");
+
       if (no_images)                      /*r6pl2*/
       {
-         voutlnf("%s<a id=\"UDO_nav_up\" href=\"%s%s#%s\"%s>%s</a>",
-            sep, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
+         voutlnf("%s<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
+            sep, sIDName, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
       }
       else
       {
@@ -4012,13 +4031,13 @@ const char  *sep)               /* */
          
          if (html_doctype == HTML5)
          {
-            voutf("<a id=\"UDO_nav_up\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-               sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
+            voutf("<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
+               sIDName, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
          }
          else
          {
-            voutf("<a id=\"UDO_nav_up\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-               sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
+            voutf("<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               sIDName, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
          }
       }
    }
@@ -4068,13 +4087,15 @@ LOCAL void html_home_giflink(
 
 const int    idxEnabled,        /* */
 const int    idxDisabled,       /* */
-const char  *sep)               /* */
+const char  *sep,               /* */
+BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+                                /* FALSE: output GUI navigation bar in page footer */
 {
    char      sTarget[64],       /* */
              sFile[64];         /* */
    char      sGifSize[128],     /* */
              sGifName[256];     /* */
-   char      sIDName[16];       /* string buffer for anchor ID name */
+   char      sIDName[32];       /* string buffer for anchor ID name */
    UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -4097,6 +4118,12 @@ const char  *sep)               /* */
    default:
       strcpy(sIDName, "UDO_nav_up");
    }
+   
+   /* mark ID as unique */
+   if (head)
+      strcat(sIDName, "_HEAD");
+   else
+      strcat(sIDName, "_FOOT");
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
@@ -4196,7 +4223,9 @@ LOCAL void html_back_giflink(
 
 const int    idxEnabled,        /* */
 const int    idxDisabled,       /* */
-const char  *sep)               /* */
+const char  *sep,               /* */
+BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+                                /* FALSE: output GUI navigation bar in page footer */
 {
    char      target[64],        /* */
              backpage[256],     /* */
@@ -4205,7 +4234,7 @@ const char  *sep)               /* */
             *tok;               /* */
    char      sGifSize[128],     /* */
              sGifName[256];     /* */
-   char      sIDName[16];       /* string buffer for anchor ID name */
+   char      sIDName[32];       /* string buffer for anchor ID name */
    UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -4228,6 +4257,12 @@ const char  *sep)               /* */
    default:
       strcpy(sIDName, "UDO_nav_up");
    }
+   
+   /* mark ID as unique */
+   if (head)
+      strcat(sIDName, "_HEAD");
+   else
+      strcat(sIDName, "_FOOT");
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
@@ -4259,7 +4294,7 @@ const char  *sep)               /* */
                                           /* Changed in r6pl16 [NHz] */
       if (no_images)
       {
-         voutlnf("%s<a id=\"%s\" href=\"%s\"%s>%s</a>", sep, sIDName, href, target, alt);
+         voutlnf("%s<a name=\"%s\" href=\"%s\"%s>%s</a>", sep, sIDName, href, target, alt);
       }                                   /* changed */
       else
       {
@@ -4346,7 +4381,9 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
    char      buffer[32] = "";
-
+   
+   /* set global flag */
+   head_foot = head;
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
@@ -4487,7 +4524,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
    /* Verweis auf die Homepage erzeugen                */
    /* ------------------------------------------------ */
    
-   html_home_giflink(GIF_HM_INDEX, GIF_NOHM_INDEX, "[ ");
+   html_home_giflink(GIF_HM_INDEX, GIF_NOHM_INDEX, "[ ", head);
    
    
    /* ------------------------------------------------ */
@@ -4497,11 +4534,11 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
    switch (toc[ti]->toctype)
    {
    case TOC_TOC:                          /* Verweis auf Backpage erzeugen */
-      html_back_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
+      html_back_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ", head);
       break;
 
    case TOC_NODE1:                        /* Weiter nach oben geht es nicht */
-      html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
+      html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ", head);
       break;
    
    
@@ -4591,7 +4628,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
          }
       }
 #else
-      html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
+      html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ", head);
 #endif
    }
    else
@@ -4600,7 +4637,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
    
       if (i == 0)
       {                                   /* Erster Node -> Zurueck zum Hauptfile */
-         html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
+         html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ", head);
       }
       else
       {
@@ -4649,7 +4686,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
             }
 #else
                                           /* Frueher Link auf die Startseite */
-            html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
+            html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ", head);
 #endif
          }
       }
