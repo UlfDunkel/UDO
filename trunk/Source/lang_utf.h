@@ -73,6 +73,8 @@
 *    fd  May 02: UDOSTRINGS resorted
 *    fd  Jun 03: some Japanese strings updated (by Koichi MATSUMOTO)
 *    fd  Jun 03: lang.html_up removed (unused so far)
+*  2015:
+*    fd  Feb 03: more Portuguese words added
 *
 ******************************************|************************************/
 
@@ -158,7 +160,7 @@ _MONTHS   MONTHS[] =                      /* localized months names */
    {TOLVA, {"Janvāris", "Februāris", "Marts",  "Aprīlis",  "Maijs",  "Jūnijs",   "Jūlijs",   "Augusts",  "Septembris", "Oktobris",    "Novembris", "Decembris" }},
    {TONOR, {"January",  "February",  "March",  "April",    "May",    "June",     "July",     "August",   "September",  "October",     "November",  "December" }},
    {TOPOL, {"styczeń",  "luty",      "marzec", "kwiecień", "maj",    "czerwiec", "lipiec",   "sierpień", "wrzesień",   "październik", "listopad",  "grudzień" }},
-   {TOPOR, {"January",  "February",  "March",  "April",    "May",    "June",     "July",     "August",   "September",  "October",     "November",  "December" }},
+   {TOPOR, {"Janeiro",  "Fevereiro", "Março",  "Abril",    "Maio",   "Junho",    "Julho",    "Agosto",   "Setembro",   "Outubro",     "Novembro",  "Dezembro" }},
    {TOSPA, {"Enero",    "Febrero",   "Marzo",  "Abril",    "Mayo",   "Junio",    "Julio",    "Agosto",   "Septiembre", "Octubre",     "Noviembre", "Diciembre" }},
    {TOSWE, {"januari",  "februari",  "mars",   "april",    "maj",    "juni",     "juli",     "augusti",  "september",  "oktober",     "november",  "december" }},
    
@@ -588,33 +590,33 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
    {
       TOPOR,                              /* Portuguese */
       {
-         /* preface     */    "Preface",
-         /* chapter     */    "Chapter",
-         /* title       */    "Title",
-         /* appendix    */    "Appendix",
-         /* contents    */    "Contents",
-         /* listfigure  */    "List of Figures",
-         /* listtable   */    "List of Tables",
-         /* figure      */    "Figure",
-         /* table       */    "Table",
-         /* index       */    "Index",
-         /* page        */    "page",
-         /* see         */    "see",
-         /* also        */    "see also",
-         /* by          */    "by",
-         /* fur         */    "for",
-         /* up          */    "Up",
-         /* exit        */    "Exit",
-         /* unknown     */    "Unknown",
-         /* update      */    "Last updated on",
-         /* lcid        */    "LCID=0x409 0x0 0x0 ;English (USA)",
-         /* html_home   */    "Home",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "en",
-         /* html_start  */    "Begin of the document",
+         /* preface     */    "Prefácio",
+         /* chapter     */    "Capítulo",
+         /* title       */    "Título",
+         /* appendix    */    "Apêndice",
+         /* contents    */    "Conteúdo",
+         /* listfigure  */    "Lista de figuras",
+         /* listtable   */    "Lista de tabelas",
+         /* figure      */    "Figura",
+         /* table       */    "Tabela",
+         /* index       */    "Índice",
+         /* page        */    "página",
+         /* see         */    "ver",
+         /* also        */    "ver também",
+         /* by          */    "por",
+         /* fur         */    "para",
+         /* up          */    "Para cima",
+         /* exit        */    "Sair",
+         /* unknown     */    "Desconhecido",
+         /* update      */    "Actualizada em",
+         /* lcid        */    "LCID=0x0816 0x0 0x0 ;Portuguese (Portugal)",
+         /* html_home   */    "Casa",
+         /* html_prev   */    "Anterior",
+         /* html_next   */    "Próximo",
+         /* html_lang   */    "pt",
+         /* html_start  */    "Início do documento",
          /* translator  */    "Tradução:",
-         /* distributor */    "Distributor:",
+         /* distributor */    "Distribuidor:",
          /* degree      */    "grau",
          "",""
       }
