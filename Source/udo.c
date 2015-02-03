@@ -14635,10 +14635,10 @@ LOCAL void save_htmlhelp_project(void)
       fprintf(hhpfile, "0x816\n");
       break;
       
-/* case TODUT:
-      fprintf(hhpfile, "0x41d\n");
+   case TODUT:
+      fprintf(hhpfile, "0x413\n");
       break;
-*/
+
    case TODAN:
       fprintf(hhpfile, "0x406\n");
       break;
