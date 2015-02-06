@@ -15,6 +15,8 @@
 # 2014:
 #   ggs May 02: introduced
 #   fd  May 02: adjustments
+# 2015:
+#   fd  Feb 06: history updated
 #
 ################################################################################
 
@@ -75,6 +77,12 @@ UDO~7.04 wurde noch nicht veröffentlicht!
       Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!kw [no_headlines]) und (!kw [no_footers]) im Vorspann abgeschaltet haben.
       Binden Sie dann mit (!kw [html_script_name]) ein JavaScript-Skript ein, dass Tastendrücke auswertet.
 # ----------------------------------------
+
+# ----------------------------------------
+!item [(!KW [language])]
+# ----------------------------------------
+      Die portugiesische Übersetzung der von UDO verwendeten Begriffe wurde vervollständigt. 
+
 
 # ----------------------------------------
 !item [Kleinere Fehlerkorrekturen]
