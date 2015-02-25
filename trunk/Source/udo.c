@@ -130,6 +130,8 @@
 *  2014
 *    ggs Apr 16: copyright year updated
 *    ggs Apr 20: Add Node6
+*  2015:
+*    fd  Feb 25: malloc_token_output_buffer(): tomaxlen increased from 200 to 256
 *
 ******************************************|************************************/
 
@@ -7624,7 +7626,7 @@ LOCAL BOOLEAN malloc_token_output_buffer(void)
       return FALSE;
    }
 
-   tomaxlen = 200;
+   tomaxlen = 256;
    check_parwidth();
 
    return TRUE;
