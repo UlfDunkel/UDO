@@ -808,7 +808,8 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!ignore_raw_footer",            "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!ignore_toptoc",                "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!macro",                        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!define",                       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!define",                       "",         c_define,                  TRUE,  CMD_ALWAYS },
+   { "!undef",                        "",         c_undef,                   TRUE,  CMD_ALWAYS },
    { "!hyphen",                       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!docinfo",                      "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!doclayout",                    "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
@@ -2152,10 +2153,25 @@ LOCAL _BOOL check_off(void)
 
 LOCAL void c_set(void)
 {
-   char s[512];
+   char s[LINELEN];
    
    tokcpy2(s, sizeof(s));
    add_udosymbol(s);
+}
+
+
+
+
+
+LOCAL void c_define(void)
+{
+   add_define();
+}
+
+
+LOCAL void c_undef(void)
+{
+   del_define();
 }
 
 
@@ -2174,7 +2190,7 @@ LOCAL void c_set(void)
 
 LOCAL void c_unset(void)
 {
-   char s[512];
+   char s[LINELEN];
    
    tokcpy2(s, sizeof(s));
    del_udosymbol(s);
@@ -10350,16 +10366,23 @@ LOCAL _BOOL pass1(const char *datei)
             if (zeile[0] == META_C && zeile[1] != QUOTE_C)
             {
                /* Erster Parameter von !macro und !define darf nicht gequotet werden! */
+               if (strncmp(zeile, CMD_DEFINE, 7) == 0)
+               {
+                  token_reset();
+                  str2tok(zeile);
+                  add_define();
+                  zeile[0] = EOS;
+               }
+               if (strncmp(zeile, CMD_UNDEF, 6) == 0)
+               {
+                  token_reset();
+                  str2tok(zeile);
+                  del_define();
+                  zeile[0] = EOS;
+               }
+
                if (!bInsideDocument)
                {
-                  if (strncmp(zeile, CMD_DEFINE, 7) == 0)
-                  {
-                     token_reset();
-                     str2tok(zeile);
-                     add_define();
-                     zeile[0] = EOS;
-                  }
-
                   if (strncmp(zeile, CMD_MACRO, 6) == 0)
                   {
                      token_reset();
@@ -12601,6 +12624,7 @@ GLOBAL _BOOL udo(char *datei)
          init_module_tp_pass2();
          init_module_img_pass2();
          init_udosymbol_pass2();
+         define_counter = 0;
          
          sort_hyphens();
          

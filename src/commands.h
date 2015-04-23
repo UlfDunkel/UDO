@@ -218,6 +218,7 @@
 #define CMD_AUTOREF_ITEMS      "!autoref_items"
 #define CMD_BREAK              "!break"
 #define CMD_DEFINE             "!define"
+#define CMD_UNDEF              "!undef"
 #define CMD_HYPHEN             "!hyphen"
 #define CMD_INDEX              "!index"
 #define CMD_KEYWORD            "!keyword"

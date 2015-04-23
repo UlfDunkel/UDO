@@ -4800,6 +4800,42 @@ GLOBAL _BOOL add_define(void)
 }
 
 
+static void free_def(_UWORD d)
+{
+	if (defs[d] != NULL)
+	{
+    	free(defs[d]->name);
+		free(defs[d]->entry);
+	    free(defs[d]);
+	    defs[d] = NULL;
+	}
+}
+
+
+GLOBAL _BOOL del_define(void)
+{
+   _UWORD i;
+
+   if (token_counter <= 1)                /* only "!define" in the line? */   
+   {
+      error_missing_parameter(CMD_UNDEF);
+      return FALSE;
+   }
+   if (!check_macro_name(token[1]))
+      return FALSE;
+   for (i = 0; i < define_counter; i++)
+   {
+   	  if (defs[i] != NULL)
+   	  {
+   	  	if (strcmp(token[1], defs[i]->name) == 0)
+   	  	{
+   	  		free_def(i);
+   	  		return TRUE;
+   	  	}
+   	  }
+   }
+   return FALSE;
+}
 
 
 
@@ -4930,9 +4966,7 @@ GLOBAL void exit_module_par(void)
 
    for (d = 0; d < define_counter; d++)
    {
-      free(defs[d]->name);
-      free(defs[d]->entry);
-      free(defs[d]);
+   	  free_def(d);
    }
    if (defs != NULL)
    {

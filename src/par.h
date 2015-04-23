@@ -126,6 +126,7 @@ GLOBAL void replace_defines(char *s);
 
    /* add definition to list of definitions */
 GLOBAL _BOOL add_define(void);
+GLOBAL _BOOL del_define(void);
 
    /* initialize all arrays used in this module */
 GLOBAL void init_module_par(void);
