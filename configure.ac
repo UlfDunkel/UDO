@@ -644,12 +644,13 @@ ac_atk_version="unknown"
 
 if test "$with_gui" = gtk2 -o "$with_gui" = gtk3 -o "$with_gui" = auto; then
   ok="yes"
+  glib2_min_version="2.40.0"
   gtk2_min_version="2.16.0"
   pkgs=''
-  pkg_check_version         gmodule-2.0  2.0.0
-  pkg_check_version         gthread-2.0  2.0.0
+  pkg_check_version         gmodule-2.0  $glib2_min_version
+  pkg_check_version         gthread-2.0  $glib2_min_version
   if test "$TARGET_OS" = "unix"; then
-  pkg_check_version         gio-unix-2.0 2.0.0
+  pkg_check_version         gio-unix-2.0 $glib2_min_version
   fi
   glib2_pkgs=$pkgs
   pkg_check_version         gtk+-2.0     $gtk2_min_version  ; ac_gtk2_version_string="$vers"
@@ -691,10 +692,10 @@ if test "$with_gui" = gtk2 -o "$with_gui" = gtk3 -o "$with_gui" = auto; then
   ok="yes"
   gtk3_min_version="2.90.6"
   pkgs=''
-  pkg_check_version         gmodule-2.0  2.0.0
-  pkg_check_version         gthread-2.0  2.0.0
+  pkg_check_version         gmodule-2.0  $glib2_min_version
+  pkg_check_version         gthread-2.0  $glib2_min_version
   if test "$TARGET_OS" = "unix"; then
-  pkg_check_version         gio-unix-2.0 2.0.0
+  pkg_check_version         gio-unix-2.0 $glib2_min_version
   fi
   glib3_pkgs=$pkgs
   pkg_check_version         gtk+-3.0     $gtk3_min_version  ; ac_gtk3_version_string="$vers"
