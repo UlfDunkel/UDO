@@ -829,9 +829,11 @@ if test "$with_gui" = gtk2 -o "$with_gui" = gtk3 -o "$with_gui" = auto; then
   if test "$with_gui" = gtk3; then
     GTK_DATADIR=`$pkg_config --variable=prefix gtk+-3.0`
     GTK_DATADIR="$GTK_DATADIR/share"
+    GTK_LIBDIR=`$pkg_config --variable=libdir gtk+-3.0`
   elif test "$with_gui" = gtk2; then
     GTK_DATADIR=`$pkg_config --variable=prefix gtk+-2.0`
     GTK_DATADIR="$GTK_DATADIR/share"
+    GTK_LIBDIR=`$pkg_config --variable=libdir gtk+-2.0`
   fi
 
   if test "$with_gui" = gtk3 -o "$with_gui" = gtk2; then
@@ -949,6 +951,7 @@ AC_SUBST(MKINSTALLDIRS)
 
 
 AC_SUBST(GTK_LIBS)
+AC_SUBST(GTK_LIBDIR)
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GLIB_LIBS)
 AC_SUBST(GLIB_CFLAGS)
