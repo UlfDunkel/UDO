@@ -2676,7 +2676,7 @@ LOCAL LRESULT CALLBACK mainWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARA
 			EnableMenuItem(menu, SC_SIZE, MF_GRAYED);
 		}
 		/* CenterWindow(hwnd); */
-		sd = ((CREATESTRUCT *)lParam)->lpCreateParams;
+		sd = (SHELL_DIALOG *)(((CREATESTRUCT *)lParam)->lpCreateParams);
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, (DWORD_PTR)sd);
 		sd->mainHwnd = hwnd;
 		break;

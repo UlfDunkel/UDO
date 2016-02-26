@@ -274,7 +274,7 @@ LOCAL LRESULT CALLBACK progress_wndproc(HWND hwnd, UINT message, WPARAM wParam, 
 			if (maxVal != minVal)
 				r.right = r.left + ((r.right - r.left) * (pos - minVal)) / (maxVal - minVal);
 			brush = CreateSolidBrush(RGB(255, 0, 0));
-			oldBrush = SelectObject(hdc, brush);
+			oldBrush = (HBRUSH)SelectObject(hdc, brush);
 			FillRect(hdc, &r, brush);
 			DeleteObject(SelectObject(hdc, oldBrush));
 			EndPaint(hwnd, &ps);

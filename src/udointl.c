@@ -80,7 +80,7 @@ char *g_get_package_installation_directory(void)
 	if (!GetModuleFileNameW(NULL, wc_fn, MAX_PATH))
 		return NULL;
 	len = WideCharToMultiByte(CP_UTF8, 0, wc_fn, -1, NULL, 0, NULL, NULL);
-	retval = malloc(len);
+	retval = (char *)malloc(len);
 	WideCharToMultiByte(CP_UTF8, 0, wc_fn, -1, retval, len, NULL, NULL);
 	if ((p = strrchr(retval, '\\')) != NULL)
 		*p = '\0';
@@ -159,10 +159,10 @@ const char *xs_get_locale_dir(void)
 			wchar_t *wc_fn;
 			
 			len = MultiByteToWideChar(CP_UTF8, 0, temp, -1, NULL, 0);
-			wc_fn = malloc(len * sizeof(wchar_t));
+			wc_fn = (wchar_t *)malloc(len * sizeof(wchar_t));
 			MultiByteToWideChar(CP_UTF8, 0, temp, -1, wc_fn, len);
 			len = WideCharToMultiByte(CP_ACP, 0, wc_fn, -1, NULL, 0, NULL, NULL);
-			localedir = malloc(len);
+			localedir = (char *)malloc(len);
 			WideCharToMultiByte(CP_ACP, 0, wc_fn, -1, localedir, len, NULL, NULL);
 			free(wc_fn);
 			free(temp);
