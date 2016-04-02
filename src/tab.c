@@ -1680,7 +1680,7 @@ LOCAL void table_output_general(void)
 			/* ST-Guide kann nur Linien mit einer Laenge von 254 Zeilen */
 			/* zeichen. Deshalb wird hier eine Anschlussline gezeichnet */
 			offset = (int) toffset;
-			y_stg = table.height - y;
+			/* y_stg = table.height - y; */
 
 			for (x = 0; x < table.width; x++)
 			{
