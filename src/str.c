@@ -231,36 +231,6 @@ GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const
 
 /*******************************************************************************
 *
-*  um_physical_strcpy():
-*     make physical copy of a string
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-GLOBAL char *um_physical_strcpy(const char *src, size_t morealloc, const char *place)
-{
-   size_t    slen;           /* length of source string */
-   char     *dest;           /* pointer to the new string */
-
-   slen = strlen(src);
-   dest = (char *)malloc(slen + morealloc + 1);
-
-   if (dest != NULL)
-   {
-      dest = um_strcpy(dest, src, slen + morealloc + 1, place);
-   }
-
-   return dest;
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  chrcat():
 *     concatenate a char to the end of a string
 *

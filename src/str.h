@@ -108,5 +108,3 @@ GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *plac
 GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place);
 GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *place);
 GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place);
-
-GLOBAL char *um_physical_strcpy(const char *src, size_t morealloc, const char *place);

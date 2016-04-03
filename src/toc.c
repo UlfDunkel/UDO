@@ -5214,7 +5214,6 @@ GLOBAL _BOOL save_html_index(void)
    char         suff[100];        /* */
    char         cLabel[512];      /* */
    char        *tocname;          /* */
-   char        *escapedtocname;   /* */
    char         jumplist[4096];   /* buffer string for A-Z navigation bar */
    char         thisc_char[42];   /* buffer string for converted thisc */
    char         thisc_label[42];  /* buffer string for HTML convenient converted thisc */
@@ -5385,13 +5384,6 @@ GLOBAL _BOOL save_html_index(void)
         if (html_merge_node[d])
            html_merge = TRUE;
 
-      /* v6.5.15 [vj] need to make a copy of this, because we need to change it */
-      /* fd:20071121: value increased (100 -> 512), as .tocname is 512 chars long */
-      escapedtocname = um_physical_strcpy(html_index[i].tocname, 512, "save_html_index [1]");
-      
-      if (escapedtocname != NULL)
-         replace_all(escapedtocname, "!", "&#33;");
-
       if (html_index[i].is_node)          /* this index entry points to another file */
       {
          fsplit(htmlname, dummy, dummy, dummy, suff);
@@ -5404,12 +5396,12 @@ GLOBAL _BOOL save_html_index(void)
             if (html_merge)
             {
                fprintf(uif, "<a href=\"%s%s#%s\">%s</a>",
-                  htmlname, outfile.suff, cLabel, escapedtocname);
+                  htmlname, outfile.suff, cLabel, html_index[i].tocname);
             }
             else
             {
                fprintf(uif, "<a href=\"%s%s\">%s</a>",
-                  htmlname, outfile.suff, escapedtocname);
+                  htmlname, outfile.suff, html_index[i].tocname);
             }
          }
          else
@@ -5417,12 +5409,12 @@ GLOBAL _BOOL save_html_index(void)
             if (html_merge)
             {
                fprintf(uif, "<a href=\"%s#%s\">%s</a>",
-                  htmlname, cLabel, escapedtocname);
+                  htmlname, cLabel, html_index[i].tocname);
             }
             else
             {
                fprintf(uif, "<a href=\"%s\">%s</a>",
-                  htmlname, escapedtocname);
+                  htmlname, html_index[i].tocname);
             }
          }
          fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
@@ -5436,13 +5428,11 @@ GLOBAL _BOOL save_html_index(void)
             label2html (cLabel);
             
             fprintf(uif, "<a href=\"%s%s#%s\">%s</a>",
-               htmlname, outfile.suff, cLabel, escapedtocname);
+               htmlname, outfile.suff, cLabel, html_index[i].tocname);
             
             fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
          }
       }
-      
-      free(escapedtocname);            /* v6.5.15 [vj] var can be freed now */
    }
    
    fprintf(uif, "</p>\n\n");
