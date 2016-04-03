@@ -5396,12 +5396,15 @@ GLOBAL _BOOL save_html_index(void)
       {
          fsplit(htmlname, dummy, dummy, dummy, suff);
          
+         strcpy (cLabel, html_index[i].tocname);
+         label2html (cLabel);
+         
          if (suff[0] == EOS)
          {
             if (html_merge)
             {
                fprintf(uif, "<a href=\"%s%s#%s\">%s</a>",
-                  htmlname, outfile.suff, escapedtocname, escapedtocname);
+                  htmlname, outfile.suff, cLabel, escapedtocname);
             }
             else
             {
@@ -5414,7 +5417,7 @@ GLOBAL _BOOL save_html_index(void)
             if (html_merge)
             {
                fprintf(uif, "<a href=\"%s#%s\">%s</a>",
-                  htmlname, escapedtocname, escapedtocname);
+                  htmlname, cLabel, escapedtocname);
             }
             else
             {
