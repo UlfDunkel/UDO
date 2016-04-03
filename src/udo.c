@@ -8448,7 +8448,8 @@ LOCAL _BOOL pop_file_stack(void)
          uiCurrFileLine = 0;
       } else
       {
-      	strcpy(sCurrFileName, file_lookup(uiFiles[iFilesOpened].loc.id));
+      	if (iFilesOpened > 0)
+      	  strcpy(sCurrFileName, file_lookup(uiFiles[iFilesOpened - 1].loc.id));
       	uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
       }
       return TRUE;
