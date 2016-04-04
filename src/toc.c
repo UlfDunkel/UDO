@@ -281,6 +281,7 @@ typedef struct _tWinMapData
 typedef struct _hmtl_idx
 {
    TOCIDX toc_index;
+   _BOOL   is_node;                     /* the label is the caption (?) */
    char tocname[512];
 } HTML_IDX;
 
@@ -5735,6 +5736,9 @@ GLOBAL _BOOL save_htmlhelp_index(const char *filename)
    HTML_IDX  *html_index;
    char       htmlname[MYFILE_FULL_LEN];
    char      *tocname;
+   char         cLabel[512];      /* */
+   int          html_merge;       /* */
+   TOCTYPE d;
    
    if (no_index)
       return FALSE;  /* Index-File wird nicht gewuenscht */
@@ -5782,6 +5786,7 @@ GLOBAL _BOOL save_htmlhelp_index(const char *filename)
       if ((l = label_table[j]) != NULL && !l->ignore_index)
       {
          html_index[num_index].toc_index = l->tocindex;
+         html_index[num_index].is_node = l->is_node;
          tocname = html_index[num_index].tocname;
          strcpy(tocname, l->name);
          replace_macros(tocname);
@@ -5813,9 +5818,25 @@ GLOBAL _BOOL save_htmlhelp_index(const char *filename)
    for (i = 0; i < num_index; i++)
    {
       get_html_filename(html_index[i].toc_index, htmlname);
-      fprintf(file, "<LI> <OBJECT type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"> </OBJECT> </LI>\n",
-         html_index[i].tocname,
-         htmlname, outfile.suff);
+
+      html_merge = FALSE;
+      for (d = TOC_NODE1; d <= toc_table[html_index[i].toc_index]->toctype; d++)
+        if (html_merge_node[d])
+           html_merge = TRUE;
+
+      if (html_merge || !html_index[i].is_node)
+      {
+		  strcpy (cLabel, html_index[i].tocname);
+		  label2html (cLabel);
+		  fprintf(file, "<LI> <OBJECT type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s#%s\"> </OBJECT> </LI>\n",
+		     html_index[i].tocname,
+		     htmlname, outfile.suff, cLabel);
+      } else
+      {
+		  fprintf(file, "<LI> <OBJECT type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"> </OBJECT> </LI>\n",
+		     html_index[i].tocname,
+		     htmlname, outfile.suff);
+      }
    }
    
    fprintf(file, "</UL>\n");
