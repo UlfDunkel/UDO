@@ -21,7 +21,7 @@
 !item [(!KW [maketitle])]
 !item [(!KW [tableofcontents])]
       Bei St-Guide-Ausgabe ist es nun nach diesen Kommandos noch
-      m”glich, !raw Kommandos auf die Seite zu setzen.
+      möglich, !raw Kommandos auf die Seite zu setzen.
       
 !item [Kleinere Fehlerkorrekturen]
       Wie immer wurden verschiedene kleine Fehler korrigiert.
