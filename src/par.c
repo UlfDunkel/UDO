@@ -1287,7 +1287,7 @@ LOCAL _BOOL convert_link_html(char *s, const char *p0, char *p1, char *p2, const
       }
    } else
    {
-   	  if (use_udo_index && !no_index && bCalledIndex && !no_links && strcmp(p2, "Index") == 0)
+   	  if (desttype != TOMHH && use_udo_index && !no_index && bCalledIndex && !no_links && strcmp(p2, "Index") == 0)
    	  {
    	  	 sprintf(s_entry, "<a href=\"%s%s\">%s</a>", sDocHtmlIndexudo, outfile.suff, lang.index);
       } else
