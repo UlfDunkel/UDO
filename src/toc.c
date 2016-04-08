@@ -1090,7 +1090,7 @@ GLOBAL void string2reference(char *ref, const char *display, const LABIDX li, co
       if (html_merge_node[TOC_NODE1])
          ui = 0;
       
-      if (ui == 0)
+      if (ui == 0 && strcmp(l->name, "Main") != 0)
       {
          strcpy(hfn, outfile.name);
          htmlfilename = hfn;
