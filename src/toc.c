@@ -695,13 +695,15 @@ LOCAL void output_aliasses(void)
    
    for (i = start; i <= p1_lab_counter; i++)
    {
+   	  LABEL *l = label_table[i];
+   	  
       /* aktuellen Zaehler mit Alias-Zugehoerigkeit vergleichen */
-      if (label_table[i]->is_alias && p2_toc_counter == label_table[i]->tocindex)
+      if (l->is_alias && p2_toc_counter == l->tocindex)
       {
          switch (desttype)
          {
          case TOSTG:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             node2stg(s);
             convert_tilde(s);
             voutlnf("@alias \"%s\"", s);
@@ -710,7 +712,7 @@ LOCAL void output_aliasses(void)
          case TOWIN:
          case TOWH4:
          case TOAQV:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             del_internal_styles(s);
             convert_tilde(s);
             if (use_alias_inside_index && !no_index)
@@ -723,7 +725,7 @@ LOCAL void output_aliasses(void)
             voutlnf("#{\\footnote # %s}", s);
             if (bDocWinOldKeywords)
             {
-               strcpy(s, label_table[i]->name);
+               strcpy(s, l->name);
                del_internal_styles(s);
                node2winhelp(s);
                voutlnf("#{\\footnote # %s}", s);
@@ -731,7 +733,7 @@ LOCAL void output_aliasses(void)
             break;
             
          case TORTF:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             del_internal_styles(s);
             convert_tilde(s);
             if (use_alias_inside_index && !no_index)
@@ -745,8 +747,10 @@ LOCAL void output_aliasses(void)
          case TOHAH:
          case TOHTM:
          case TOMHH:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             convert_tilde(s);
+	        if (!l->is_node && l->is_alias)
+                recode_chrtab(s, CHRTAB_HTML);
             label2html(s);
 #if 0
             if (html_doctype == HTML5)
@@ -761,28 +765,28 @@ LOCAL void output_aliasses(void)
             break;
             
          case TOLDS:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             convert_tilde(s);
             voutlnf("<label id=\"%s\">", s);
             break;
             
          case TOTEX:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             convert_tilde(s);
             label2tex(s);
             voutlnf("\\label{%s}", s);
             break;
             
          case TOPDL:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             convert_tilde(s);
             label2tex(s);
             voutlnf("\\label{%s}", s);
-            voutlnf("\\pdfdest num %u fitbh", label_table[i]->labindex);
+            voutlnf("\\pdfdest num %u fitbh", l->labindex);
             break;
             
          case TOLYX:
-            strcpy(s, label_table[i]->name);
+            strcpy(s, l->name);
             convert_tilde(s);
             label2lyx(s);
             voutlnf("\\begin_inset LatexCommand \\label{%s}", s);
