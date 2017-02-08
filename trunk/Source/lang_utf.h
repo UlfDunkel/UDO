@@ -75,6 +75,9 @@
 *    fd  Jun 03: lang.html_up removed (unused so far)
 *  2015:
 *    fd  Feb 03: more Portuguese words added
+*  2017:
+*    fd  Feb 07: Russian added
+*    fd  Feb 08: localized copyright string added
 *
 ******************************************|************************************/
 
@@ -163,6 +166,7 @@ _MONTHS   MONTHS[] =                      /* localized months names */
    {TOPOR, {"Janeiro",  "Fevereiro", "Março",  "Abril",    "Maio",   "Junho",    "Julho",    "Agosto",   "Setembro",   "Outubro",     "Novembro",  "Dezembro" }},
    {TOSPA, {"Enero",    "Febrero",   "Marzo",  "Abril",    "Mayo",   "Junio",    "Julio",    "Agosto",   "Septiembre", "Octubre",     "Noviembre", "Diciembre" }},
    {TOSWE, {"januari",  "februari",  "mars",   "april",    "maj",    "juni",     "juli",     "augusti",  "september",  "oktober",     "november",  "december" }},
+   {TORUS, {"Январь",   "Февраль",   "Март",   "Апрель",   "Май",    "Июнь",     "Июль",     "Август",   "Сентябрь",   "Октябрь",     "Ноябрь",    "Декабрь" }},
    
    {  NIL, {"", "", "", "", "", "", "", "", "", "", "", ""} }
 };
@@ -210,6 +214,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Překládání:",
          /* distributor */    "Distributor:",
          /* degree      */    "stupeň",
+         /* copyright   */    "Autorská práva",
          "",""
       }
    },
@@ -244,6 +249,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Oversættelse:",
          /* distributor */    "Distributor:",
          /* degree      */    "grad",
+         /* copyright   */    "Ophavsret",
          "",""
       }
    },
@@ -278,6 +284,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Vertaling:",
          /* distributor */    "Distributeur:",
          /* degree      */    "graad",
+         /* copyright   */    "Auteursrechten",
          "",""
       }
    },
@@ -312,6 +319,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "degree",
+         /* copyright   */    "Copyright",
          "",""
       }
    },
@@ -346,6 +354,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Kääntäminen:",
          /* distributor */    "Distributor:",
          /* degree      */    "aste",
+         /* copyright   */    "Tekijänoikeus",
          "",""
       }
    },
@@ -380,6 +389,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Traduction :",
          /* distributor */    "Distribution :",
          /* degree      */    "degré",
+         /* copyright   */    "Droit d’auteur",
          "",""
       }
    },
@@ -414,6 +424,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Übersetzung:",
          /* distributor */    "Vertrieb:",
          /* degree      */    "Grad",
+         /* copyright   */    "Copyright",
          "",""
       }
    },
@@ -448,6 +459,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Traduzione:",
          /* distributor */    "Distribuzione:",
          /* degree      */    "grado",
+         /* copyright   */    "Diritto d'autore",
          "",""
       }
    },
@@ -482,6 +494,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "翻訳：",
          /* distributor */    "販売元：",
          /* degree      */    "度",
+         /* copyright   */    "著作権",
          "",""
       }
    },
@@ -516,6 +529,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Translation:",
          /* distributor */    "Izplatītājs:",
          /* degree      */    "degree",
+         /* copyright   */    "Autortiesības",
          "",""
       }
    },
@@ -550,6 +564,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Omsetjing:",
          /* distributor */    "Distributor:",
          /* degree      */    "grad",
+         /* copyright   */    "Opphavsrett",
          "",""
       }
    },
@@ -584,6 +599,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Tłumaczenie:",
          /* distributor */    "Distributor:",
          /* degree      */    "stopień",
+         /* copyright   */    "Prawo autorskie",
          "",""
       }
    },
@@ -618,6 +634,42 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Tradução:",
          /* distributor */    "Distribuidor:",
          /* degree      */    "grau",
+         /* copyright   */    "Direito autoral",
+         "",""
+      }
+   },
+   {
+      TORUS,                              /* Russian */
+      {
+         /* preface     */    "Предисловие",
+         /* chapter     */    "Глава",
+         /* title       */    "Название",
+         /* appendix    */    "Приложение",
+         /* contents    */    "Содержание",
+         /* listfigure  */    "Список рисунков",
+         /* listtable   */    "Список таблиц",
+         /* figure      */    "Рисунок",
+         /* table       */    "Таблица",
+         /* index       */    "Индекс",
+         /* page        */    "страница",
+         /* see         */    "см.",
+         /* also        */    "cмотрите также",
+         /* by          */    "по",
+         /* fur         */    "для",
+         /* up          */    "Вверх",
+         /* exit        */    "Выход",
+         /* unknown     */    "Неизвестно",
+         /* update      */    "Последнее обновление:",
+         /* lcid        */    "LCID=0x419 0x0 0x0 ;Russian",
+         /* html_home   */    "Главная",
+         /* html_prev   */    "Предыдущий",
+         /* html_next   */    "Следующая",
+         /* html_lang   */    "ru",
+         /* html_start  */    "Начало документа",
+         /* translator  */    "Перевод:",
+         /* distributor */    "Дистрибьютор:",
+         /* degree      */    "степень",
+         /* copyright   */    "Авторские права",
          "",""
       }
    },
@@ -652,6 +704,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Traducción:",
          /* distributor */    "Distribuidor:",
          /* degree      */    "grado",
+         /* copyright   */    "Derechos de autor",
          "",""
       }
    },
@@ -686,10 +739,11 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Översättning:",
          /* distributor */    "Distributör:",
          /* degree      */    "grad",
+         /* copyright   */    "Upphovsrätt",
          "",""
       }
    },
-   
+
    {  NIL, { "" }}                       /* list terminator */
 };
 

@@ -107,6 +107,8 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
    char   *htmltitle;                     /* <title>         */
    char   *translator;                    /* translator name */
    char   *distributor;                   /* distributor name */
+   char   *degree;                        /* unused??? */
+   char   *copyright;                     /* copyright */
 }   TITLEDATA;
 
 

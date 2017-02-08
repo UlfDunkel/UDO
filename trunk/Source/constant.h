@@ -46,6 +46,8 @@
 *  2013:
 *    fd  May 02: MAXDESTLANG increased
 *    fd  Oct 23: HTML5 added
+*  2017:
+*    fd  Feb 07: TORUS added
 *
 ******************************************|************************************/
 
@@ -97,8 +99,9 @@
 #define TOLVA                12           /* Latvian */
 #define TOPOL                13           /* Polish */
 #define TOJAP                14           /* Japanese */
+#define TORUS                15           /* Russian */
 
-#define MAXDESTLANG          15           /* total # of supported languages */
+#define MAXDESTLANG          16           /* total # of supported languages */
 
 
 
