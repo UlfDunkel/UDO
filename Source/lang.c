@@ -54,6 +54,8 @@
 *                - init_lang_date() debugged: don't recode a const string via pointer :-(
 *  2013:
 *    fd  Jun 03: lang.html_up removed (unused so far)
+*  2017:
+*    fd  Feb 08: Russian date formatting added, init_lang_date() sorted alphab.
 *
 ******************************************|************************************/
 
@@ -158,34 +160,9 @@ GLOBAL void init_lang_date(void)
    
    switch (destlang)
    {
-   case TOGER:                            /* German */
+   case TOCZE:                            /* Czech */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOFRA:                            /* French */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOITA:                            /* Italian */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOSWE:                            /* Swedish */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%0d-%02d-%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
-      break;
-
-   case TOSPA:                            /* Spanish */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TODUT:                            /* Dutch */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
    case TODAN:                            /* Danish */
@@ -193,7 +170,22 @@ GLOBAL void init_lang_date(void)
       sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TOCZE:                            /* Czech */
+   case TODUT:                            /* Dutch */
+      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOFRA:                            /* French */
+      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOGER:                            /* German */
+      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOITA:                            /* Italian */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
@@ -207,6 +199,22 @@ GLOBAL void init_lang_date(void)
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
+
+   case TORUS:                            /* Russian */
+      sprintf(lang.today, "%d %s %d r.", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOSPA:                            /* Spanish */
+      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOSWE:                            /* Swedish */
+      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%0d-%02d-%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
+      break;
+
 
    case TOENG:                            /* English */
    default:                               /* UDO v7: German is no longer default language! */
@@ -290,6 +298,7 @@ GLOBAL void init_lang(void)
       recode(lang.translator,  iEncodingTarget);
       recode(lang.distributor, iEncodingTarget);
       recode(lang.degree,      iEncodingTarget);
+      recode(lang.copyright,   iEncodingTarget);
    }
 
    iEncodingSource = iEncBuf;

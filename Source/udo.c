@@ -132,6 +132,9 @@
 *    ggs Apr 20: Add Node6
 *  2015:
 *    fd  Feb 25: malloc_token_output_buffer(): tomaxlen increased from 200 to 256
+*  2017:
+*    fd  Feb 07: "russian" added
+*    fd  Feb 08: save_htmlhelp_project() adjusted
 *
 ******************************************|************************************/
 
@@ -959,7 +962,7 @@ typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
 }  UDOLANGUAGE;
 
 
-#define MAXLANGUAGE  15
+#define MAXLANGUAGE 16
 
 LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 {
@@ -977,7 +980,8 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
    {"polish",     TOPOL},
    {"portuguese", TOPOR},
    {"spanish",    TOSPA},
-   {"swedish",    TOSWE}
+   {"swedish",    TOSWE},
+   {"russian",    TORUS}
 };
 
 
@@ -14605,18 +14609,30 @@ LOCAL void save_htmlhelp_project(void)
    
    switch (destlang)
    {
-   case TOGER:
-      fprintf(hhpfile, "0x407\n");
+   case TOCZE:
+      fprintf(hhpfile, "0x405\n");
       break;
-      
-   case TOENG:
-      fprintf(hhpfile, "0x409\n");
+
+   case TODAN:
+      fprintf(hhpfile, "0x406\n");
       break;
-      
+
+   case TODUT:
+      fprintf(hhpfile, "0x413\n");
+      break;
+
+   case TOFIN:
+      fprintf(hhpfile, "0x40b\n");
+      break;
+
    case TOFRA:
       fprintf(hhpfile, "0x40c\n");
       break;
       
+   case TOGER:
+      fprintf(hhpfile, "0x407\n");
+      break;
+
    case TOITA:
       fprintf(hhpfile, "0x410\n");
       break;
@@ -14625,32 +14641,34 @@ LOCAL void save_htmlhelp_project(void)
       fprintf(hhpfile, "0x411\n");
       break;
       
+   case TONOR:
+      fprintf(hhpfile, "0x414\n");
+      break;
+
+   case TOPOL:
+      fprintf(hhpfile, "0x415\n");
+      break;
+
+   case TOPOR:
+      fprintf(hhpfile, "0x816\n");
+      break;
+
    case TOSPA:
-      fprintf(hhpfile, "0xc0a\n");
+      fprintf(hhpfile, "0x40a\n");
       break;
       
    case TOSWE:
       fprintf(hhpfile, "0x41d\n");
       break;
-      
-   case TOPOR:
-      fprintf(hhpfile, "0x816\n");
-      break;
-      
-   case TODUT:
-      fprintf(hhpfile, "0x413\n");
+
+   case TORUS:
+      fprintf(hhpfile, "0x419\n");
       break;
 
-   case TODAN:
-      fprintf(hhpfile, "0x406\n");
-      break;
-      
-   case TONOR:
-      fprintf(hhpfile, "0x414\n");
-      break;
-      
-   case TOFIN:
-      fprintf(hhpfile, "0x40b\n");
+
+   default:
+   case TOENG:
+      fprintf(hhpfile, "0x409\n");
    }
    
    fprintf(hhpfile, "\n");

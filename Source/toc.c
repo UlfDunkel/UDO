@@ -136,6 +136,8 @@
 *    fd  Oct 08: - HTML headlines|bottomlines output now creates unique UDO_nav_xx IDs
 *                - HTML 5 no longer outputs <link rev='made'> and <meta name='Email'>
 *                - string2reference() debugged: don't create IDs without name
+*  2017:
+*    fd  Feb 08: using lang.copyright
 *
 ******************************************|************************************/
 
@@ -5890,8 +5892,9 @@ GLOBAL void html_footer(void)
    }
    
                                           /* output address segment */
-   sprintf(footer_buffer, "<address>%sCopyright &copy; ", sHtmlPropfontStart);
-   
+   /* sprintf(footer_buffer, "<address>%sCopyright &copy; ", sHtmlPropfontStart); */
+   sprintf(footer_buffer, "<address>%s%s &copy; ", sHtmlPropfontStart, lang.copyright);
+
    s[0] = EOS;                            /* clear buffer */
    
    switch (has_content)
