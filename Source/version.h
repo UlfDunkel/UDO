@@ -86,6 +86,8 @@
 *    fd  Oct 24: v7.03 (1248)
 *  2014
 *    ggs Apr 16: copyright year updated
+*  2017:
+*    fd  Feb 08: v7.04 ()
 *
 ******************************************|************************************/
 
@@ -117,15 +119,15 @@
    /* --- Release-Nummer und Patchlevel setzen --- */
 
 #define UDO_REL     "7"
-#define UDO_SUBVER  "03"
-#define UDO_BUILD   "(1248)"
+#define UDO_SUBVER  "04"
+#define UDO_BUILD   "(1296)"
 #define UDO_URL     "http://www.udo-open-source.org/"
 #define UDO_MADE    "Made with UDO"
 
    /* --- Copyright Meldung --- */
 
 #define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2014 by The UDO Community"
-#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2014 by The UDO Community\t(!nl)\n"
+#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) since 2001 by The UDO Community\t(!nl)\n"
 
    /* --- Zeichensaetze --- */
 
