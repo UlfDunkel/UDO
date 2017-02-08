@@ -1,0 +1,155 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands V
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#
+################################################################################
+
+!begin_node V!..
+!html_name  cmds_v
+
+# = = = = =
+
+!begin_node (!kkkw [V] [v])
+!html_name  cmd_v()
+!label (!kk1 [/V])
+!label (!kk1 [/v])
+
+Klartext ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/V)(!TEXT)(!/v)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird als Klartext dargestellt, falls möglich.
+Für (!LaTeX) wird (!C)\verb+(!TEXT)+'(!c) ausgegeben, bei allen
+anderen Formaten erfolgt die gleiche Ausgabe wie bei
+(!KKKW [T] [t]).
+
+!item [(!SEEALSO)]
+Schriftarten, (!link [Textgestaltung] [Textgestaltung]), (!KKKW [T] [t]), (!KW [tex_verb])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""Klartext"" wird als (!V)Klartext(!v) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""Klartext"" wird als (!V)Klartext(!v) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [verbatimsize])
+!html_name  cmd_verbatimsize
+
+Schriftgröße für verbatim-Umgebungen einstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/verbatimsize [tiny|small|normal|large|huge](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie festlegen, in welcher
+Schriftgröße Text erscheinen soll, der in einer
+verbatim-Umgebung steht. Der Schalter kann überall im
+Quelltext verwendet werden. Die kleinste Schriftgröße
+wird mit (!code [tiny]), die größte mit (!code [huge]) gesetzt. Die
+Standardgröße für verbatim-Umgebungen ist (!code [normal]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!link [verbatim-Umgebung] [verbatim-Umgebung]), (!KW [html_monofont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!verbatimsize [small]
+Ich bin ein Text, der in kleiner Schrift in einer 
+verbatim-Umgebung ausgegeben werden soll.
+!end_verbatim
+(!EXAMPLE_AFTER)
+!verbatimsize [small]
+!begin_verbatim
+Ich bin ein Text, der in kleiner Schrift in einer 
+verbatim-Umgebung ausgegeben werden soll.
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [vinclude])
+!html_name  cmd_vinclude
+
+Datei einbinden und in einer verbatim-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/vinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Klartext an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [verbatimsize]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [verbatim-Umgebung] [verbatim-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!vinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!vinclude (!EXAMPLES)/hello.c
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

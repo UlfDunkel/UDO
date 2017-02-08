@@ -1,0 +1,11 @@
+!begin_itemize
+!item Dies ist der erste Aufzählungspunkt.
+!item Dies ist der zweite Aufzählungspunkt, dessen
+      Absatz etwas länger ist und bei dem man
+      erkennen kann, wie die Aufzählung formatiert
+      wird.
+      
+      Dies ist der zweite Absatz des zweiten
+      Punktes, der passend eingerückt wird.
+!item Dies ist der letzte Aufzählungspunkt.
+!end_itemize

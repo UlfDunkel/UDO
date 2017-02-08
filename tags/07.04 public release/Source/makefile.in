@@ -1,0 +1,76 @@
+# ###################################################################
+# @(#) Make Include File, used for all systems
+# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
+#
+# Author      : Dirk Hagedorn (DH)
+# Co-Author(s): Stefan Baireuther (SB)
+#
+# History:
+# 1998:
+#   DH  May 25: last version from DH
+# 2010:
+#   SB  Mar 03: adjusted for UDO 7
+#
+# ###################################################################
+
+OSRC =	abo$(O) cfg$(O) chr$(O) env$(O) file$(O) img$(O) lang$(O) msg$(O) par$(O) str$(O) sty$(O) \
+		tab$(O) toc$(O) toc_html$(O) tp$(O) udo$(O) udomem$(O)
+
+HEAD = portab.h version.h constant.h udo_type.h
+
+all::	udo$(X)
+
+abo$(O):	$(HEAD) abo.h commands.h cfg.h file.h sty.h toc.h udo.h
+
+cfg$(O):	$(HEAD) cfg.h file.h str.h
+
+chr$(O):	$(HEAD) chr.h msg.h str.h sty.h udo.h chr_all.h chr_ttf.h \
+		lang_utf.h u_dos.h u_hp.h u_iso.h u_mac.h u_mswin.h u_next.h \
+		u_tos.h u_udo.h u_utf.h unicode.h
+
+cli$(O):	$(HEAD) gui.h file.h cfg.h msg.h udo.h
+
+env$(O):	$(HEAD) env.h commands.h abo.h cfg.h chr.h file.h img.h msg.h \
+		par.h str.h sty.h toc.h tp.h udo.h gui.h
+
+file$(O): $(HEAD) file.h str.h msg.h
+
+img$(O):	$(HEAD) img.h chr.h env.h file.h msg.h str.h sty.h udo.h \
+		img_html.h img_win.h img_stg.h
+
+lang$(O): $(HEAD) lang.h udo.h
+
+msg$(O):	$(HEAD) msg.h udo.h toc.h gui.h
+
+par$(O):	$(HEAD) commands.h chr.h file.h msg.h str.h sty.h toc.h \
+		udo.h img.h
+
+str$(O):	$(HEAD) str.h
+
+sty$(O):	$(HEAD) sty.h commands.h chr.h msg.h str.h udo.h
+
+tab$(O):	$(HEAD) tab.h commands.h chr.h env.h msg.h par.h str.h \
+		sty.h toc.h udo.h gui.h
+
+toc$(O):	$(HEAD) toc.h commands.h abo.h chr.h env.h file.h img.h \
+		msg.h par.h str.h sty.h tp.h udo.h gui.h
+
+toc_html$(O):	$(HEAD) toc.h commands.h abo.h chr.h env.h file.h img.h \
+		msg.h par.h str.h sty.h tp.h udo.h gui.h
+
+tp$(O):	$(HEAD) tp.h commands.h chr.h env.h file.h img.h msg.h \
+		str.h sty.h toc.h udo.h
+
+udo$(O):	$(HEAD) udo.h abo.h cfg.h chr.h env.h file.h img.h lang.h msg.h \
+		par.h str.h sty.h tab.h toc.h tp.h gui.h
+
+udomem$(O):	$(HEAD) udomem.h file.h
+
+install::	udo$(X)
+		install -d $(BIN)
+		install ./udo $(BIN)
+
+clean::
+	$(RM) *$(O)
+	$(RM) udo$(X)
+

@@ -1,0 +1,80 @@
+# tabellen.u
+# letzte Änderungen: 08.02.2004 / last changes: Feb 8, 2004
+
+!sloppy
+
+!begin_document
+
+!node Test Fortsetzungszeilen
+
+!subnode Erstens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Zweitens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Drittens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Viertens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Fünftens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Sechstens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Siebtens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Achtens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Neuntens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!subnode Zehntens
+!include loremipsum.ui
+(!link [4711] [nichtvorhanden])
+!include forts-tabelle.ui
+(!link [4812] [nichtvorhanden])
+!include loremipsum.ui
+
+!end_document

@@ -1,0 +1,1280 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands S
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  May 19: "short" -> "compressed"
+#               - chapter 'compressed' moved to cmds_c.en
+#
+################################################################################
+
+!begin_node S!..
+!html_name  cmds_s
+
+# = = = = =
+
+!begin_node (!kw [set])
+!html_name  cmd_set
+
+Define a symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/set (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set symbols inside your source file that
+you can check with (!I)!/ifset(!i) and (!KW [if]). Symbols may alos
+be set by the command line option (!code [-D]). With the
+(!KW [unset]) command you can delete symbols. You can use
+(!KW [set]) wherever you want.
+
+!item [(!EXAMPLE)]
+(!T)!/set UseColourGraphics(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [unset]), (!KW [ifset]), (!KW [ifnset]), (!link [Symbols] [Symbols])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sh])
+!html_name  cmd_sh
+
+Output a section heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subheading])
+
+!item [(!SEEALSO)]
+(!KW [subheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [short_today])
+!html_name  cmd_short_today()
+
+Insert short form of current date.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/short_today)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the short form of the current date.
+
+!item [(!EXAMPLE)]
+(!T)(!/short_today)(!t) becomes (!short_today)
+
+!item [(!SEEALSO)]
+(!KKW [today]), (!KW [language]), Defined macros
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [silver])
+!html_name  cmd_silver
+
+Sets the textcolor silver (light gray).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/silver)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Hellgrau.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!silver)Hellgrau(!coloff) erscheint in der Farbe Hellgrau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!silver)Hellgrau(!coloff) erscheint in der Farbe Hellgrau.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sinclude])
+!html_name  cmd_sinclude
+
+Include file in sourcecode environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!FILE)"" will be included and displayed like preformatted text
+inside a sourcecode environment. If you use this command inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]).
+
+!item [(!EXAMPLE)]
+(!T)!/sinclude hello.c(!t)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [pinclude]), (!link [Split documents] [Split documents]), (!link [sourcecode environment] [sourcecode environment])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sloppy])
+!html_name  cmd_sloppy
+
+Switch off warnings of short lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sloppy(!t)
+
+!item [(!DESCRIPTION)]
+Switches off warning messages according short lines. You can use this
+command wherever you want. The warnings can be enabled with !/fussy.
+When converting to (!LaTeX) UDO doesn't convert !/sloppy into
+(!code [\sloppy])!
+
+!item [(!SEEALSO)]
+(!KW [fussy]), (!link [Error messages] [Error messages]), (!link [Hyphenation] [Hyphenation])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [smallskip])
+!html_name  cmd_smallskip
+
+Output an empty line.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/smallskip(!t)
+
+!item [(!DESCRIPTION)]
+This command will be simplay replaced by (!code [\smallskip]) when
+converted to (!LaTeX). Otherwise one additional empty line will be
+generated.
+
+!item [(!SEEALSO)]
+(!KW [bigskip]), (!KW [medskip])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!smallskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!smallskip
+(!LOREM)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sn])
+!html_name  cmd_sn
+
+Starts a chapter on the 2nd outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subnode])
+
+!item [(!SEEALSO)]
+(!KW [subnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sn*])
+!html_name  cmd_sn_asterisk
+
+Starts a chapter on the 2nd outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subnode*])
+
+!item [(!SEEALSO)]
+(!KW [subnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sort_hyphen_file])
+!html_name  cmd_sort_hypen_file
+
+Sort file with hyphenation patterns.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/sort_hyphen_file [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside the preamble UDO will read the
+hyphenation file, delete entries that are used more than once and
+will save a sorted version of this hyphenation file. The example
+shows how to do this for ASCII and ST-Guide.
+
+!item [(!EXAMPLE)]
+(!T)!/sort_hyphen_file [asc,stg](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [hyphen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssh])
+!html_name  cmd_ssh
+
+Output a subsection heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubheading])
+
+!item [(!SEEALSO)]
+(!KW [subsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssn])
+!html_name  cmd_ssn
+
+Starts a chapter on the 3rd outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubnode])
+
+!item [(!SEEALSO)]
+(!KW [subsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssn*])
+!html_name  cmd_ssn_asterisk
+
+Starts a chapter on the 3rd outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [subsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssh])
+!html_name  cmd_sssh
+
+Output a paragraph heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubheading])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssn])
+!html_name  cmd_sssn
+
+Starts a chapter on the 4th outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssn*])
+!html_name  cmd_sssn_asterisk
+
+Starts a chapter on the 4th outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssssn])
+!html_name  cmd_ssssn
+
+Starts a chapter on the 5th outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubnode])
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssssn*])
+!html_name  cmd_ssssn_asterisk
+
+Starts a chapter on the 5th outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubnode*])
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssssn])
+!html_name  cmd_sssssn
+
+Starts a chapter on the 6th outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubnode])
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssssn*])
+!html_name  cmd_sssssn_asterisk
+
+Starts a chapter on the 6th outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubnode*])
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [stg_short_title])
+!html_name  cmd_stg_short_title
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/stg_short_title(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# TodDo: Englisch
+!begin_node (!kkkw [SUB] [sub])
+!html_name  cmd_subscript
+!label (!kk1 [/SUB])
+!label (!kk1 [/sub])
+
+Text tiefgestellt ausgeben
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUB)[(!TEXT)](!/sub)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird tiefgestellt dargestellt, falls möglich.
+
+!item [(!EXAMPLE)]
+(!T)(!/SUB)tiefgestellt(!/sub)(!t)
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+!item [(!SEEALSO)]
+Text styles, (!link [Text styling] [Text styling])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subheading])
+!html_name  cmd_subheading
+
+Output a section heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command outputs out ""(!TEXT)"" as a headline using the section
+font and fontsize.
+
+!item [(!EXAMPLE)]
+(!T)!/subheading A headline(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subnode])
+!html_name  cmd_subnode
+
+Starts a chapter on the 2nd outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new section named ""(!TEXT)"". Sections will appear in table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/subnode Section title(!t)
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [node]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subnode*])
+!html_name  cmd_subnode_asterisk
+
+Starts a chapter on the 2nd outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subnode]), but here ""(!TEXT)""
+will not appear in a table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/subnode* Hidden section title(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [subnode]), (!KW [psubnode*]), (!KW [begin_node*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+# = = = = =
+
+!begin_node (!kw [subsubheading])
+!html_name  cmd_subsubheading
+
+Output a subsection heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command outputs out ""(!TEXT)"" as a headline using the subsubnode
+font and fontsize.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubheading A headline(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubnode])
+!html_name  cmd_subsubnode
+
+Starts a chapter on the 3rd outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new subsection named ""(!TEXT)"". Subsections will appear in table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubnode Subsection title(!t)
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubnode*])
+!html_name  cmd_subsubnode_asterisk
+
+Starts a chapter on the 3rd outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subsubnode]), but here
+""(!TEXT)"" will not appear in a table of content
+
+!item [(!EXAMPLE)]
+(!T)!/subsubnode* Hidden subsection title(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [subsubnode]), (!KW [psubsubnode*]), (!KW [begin_node*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubheading])
+!html_name  cmd_subsubsubheading
+
+Output a paragraph heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command outputs out ""(!TEXT)"" as a headline using the
+subsubsubnode font and fontsize.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubheading A headline(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubnode])
+!html_name  cmd_subsubsubnode
+
+Starts a chapter on the 4th outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new paragraph named ""(!TEXT)"". Paragraphs are numbered
+with #.#.#.# and are displayed inside the table of contents
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubnode Paragraph title(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubnode*])
+!html_name  cmd_subsubsubnode_asterisk
+
+Starts a chapter on the 4th outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subsubsubnode]), but here ""(!TEXT)""
+will not appear in the table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubnode* Hidden paragraph title(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [begin_node*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubtoc])
+!html_name  cmd_subsubsubtoc
+
+List paragraphs.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Lists all paragraphs of a subsection as a table of contents
+to enable the reader of a hypertext to switch to the parapraphs.
+UDO does not list this table of contents if the
+switch (!KW [ignore_subsubsubtoc]) has been used inside the subsection.
+This table can be generated automatically with the switch (!KW [use_auto_subsubsubtocs]).
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubtoc [html,pch,stg,win](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubtoc_offset])
+!html_name  cmd_subsubsubtoc_offset
+
+Set offset of paragraph counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" will be added to the current
+paragraph counter when outputting the number.
+The example shows how to output the first
+paragraph with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubtoc_offset 9(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubnode])
+!html_name  cmd_subsubsubsubnode
+
+Starts a chapter on the 5th outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new subparagraph named ""(!TEXT)"". Paragraphs are numbered
+with #.#.#.#.# and are displayed inside the table of contents
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubnode Subparagraph title(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubnode*])
+!html_name  cmd_subsubsubsubnode_asterisk
+
+Starts a chapter on the 5th outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subsubsubsubnode]), but here ""(!TEXT)""
+will not appear in the table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubnode* Hidden subparagraph title(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_ignore
+# Diese Funktion steht derzeit nicht zur Verfügung.
+!begin_node (!kw [subsubsubsubtoc])
+!html_name  cmd_subsubsubsubtoc
+
+List subparagraphs.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Lists all paragraphs of a subsection as a table of contents
+to enable the reader of a hypertext to switch to the parapraphs.
+UDO does not list this table of contents if the
+switch (!KW [ignore_subsubsubsubtoc]) has been used inside the subsection.
+This table can be generated automatically with the switch (!KW [use_auto_subsubsubsubtocs]).
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubtoc [html,pch,stg,win](!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubsubsubtocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+!end_node
+!end_ignore
+
+# = = = = =
+
+!begin_ignore
+# Diese Funktion steht derzeit nicht zur Verfügung.
+!begin_node (!kw [subsubsubsubtoc_offset])
+!html_name  cmd_subsubsubsubtoc_offset
+
+Set offset of subparagraph counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" will be added to the current
+subparagraph counter when outputting the number.
+The example shows how to output the first
+subparagraph with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubtoc_offset 9(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+!end_node
+!end_ignore
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode])
+!html_name  cmd_subsubsubsubsubnode
+
+Starts a chapter on the 6th outline level.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new subparagraph named ""(!TEXT)"". Paragraphs are numbered
+with #.#.#.#.#.# and are displayed inside the table of contents
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubsubnode Subparagraph title(!t)
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubsubnode*])
+!html_name  cmd_subsubsubsubsubnode_asterisk
+
+Starts a chapter on the 6th outline level without reference to the TOC.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subsubsubsubnode]), but here ""(!TEXT)""
+will not appear in the table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubsubnode* Hidden subparagraph title(!t)
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubtoc])
+!html_name  cmd_subsubtoc
+
+List subsections.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Lists all subsections of a section as a table of contents
+to enable the reader of a hypertext to switch to the subsections.
+UDO does not list this table of contents if
+switch (!KW [ignore_subsubtoc]) has been used inside the section.
+This table can be generate automatically with the switch (!KW [use_auto_subsubtocs]).
+
+!item [(!EXAMPLE)]
+(!T)!/subsubtoc [html,pch,stg,win](!t)
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubtoc_offset])
+!html_name  cmd_subsubtoc_offset
+
+Set offset of subsection counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" will be added to the current
+subsection counter when outputting the number.
+The example shows how to output the first
+subsection with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubtoc_offset 9(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subtoc])
+!html_name  cmd_subtoc
+
+List sections.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Lists all sections of a chapter as a table of contents
+to enable the reader of a hypertext to switch to the sections.
+UDO does not list this table of contents if
+switch (!KW [ignore_subtoc]) has been used inside the chapter.
+This table can be generate automatically with the switch (!KW [use_auto_subtocs]).
+
+!item [(!EXAMPLE)]
+(!T)!/subtoc [html,pch,stg,win](!t)
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subtocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subtoc_offset])
+!html_name  cmd_subtoc_offset
+
+Set offset of section counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" will be added to the current
+section counter when outputting the number.
+The example shows how to output the first
+section with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+
+!item [(!EXAMPLE)]
+(!T)!/subtoc_offset 9(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# TodDo: Englisch
+!begin_node (!kkkw [SUP] [sup])
+!html_name  cmd_superscript
+!label (!kk1 [/SUP])
+!label (!kk1 [/sup])
+
+Text hochgestellt ausgeben
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUP)[(!TEXT)](!/sup)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird hochgestellt dargestellt, falls möglich.
+
+!item [(!EXAMPLE)]
+(!T)(!/SUP)superscript(!/sup)(!t)
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+!item [(!SEEALSO)]
+Text styles, (!link [Text styling] [Text styling])
+
+!end_xlist
+
+!end_node
+
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

@@ -1,0 +1,114 @@
+############################################################
+# @(#) Indices, Dirk Hagedorn, 1996/04/17
+############################################################
+
+!subsubnode Indices
+
+!index !/index
+!index (!/idx ...)
+
+To add entries for the index you can use the (!I)!/index(!i) command
+or the (!I)(!/idx ...)(!i) placeholder. You can and should use these
+commands as often as possible.
+
+To add an entry with the (!I)!/index(!i) command use it this way:
+
+!begin_quote
+!begin_verbatim
+!index Index entry
+!end_verbatim
+!end_quote
+
+The entry appears inside the index of (!LaTeX),
+inside the index of a Texinfo file that was printed with (!TeX),
+inside the index of an ST-Guide hypertext,
+inside the search dialog of Windows Help and
+inside the index of an RTF file.
+
+To insert a multi-index you can separate the index entries with a double
+exclamation mark. You can use up to three indices in one line. You should
+use multi-indices when it's obvious that a potential reader looks for an
+entry in different ways.
+
+If you think that a reader might look for ""Index entry"" or ""Entry,
+Index"" you should use the following index commands:
+
+!begin_quote
+!begin_verbatim
+!index Index entries
+!index Entry !! Index
+!end_verbatim
+!end_quote
+
+!smallskip
+
+If you use the placeholder (!I)(!/idx ...)(!i) you can use up to four
+parameters. The following examples show how the commands are converted for
+(!LaTeX), Windows Help and RTF:
+
+!begin_quote
+!begin_verbatim
+UDO:    an (!idx [entry])
+LaTeX:  an entry\index{entry}
+Win:    an {K{\footnote K entry}}entry
+else:   an entry
+
+UDO:    a (!idx [word] [entry])
+LaTeX:  a Wort\index{entry}
+Win:    a {K{\footnote K entry}}word
+else:   a Wort
+
+UDO:    a (!idx [word] [entry] [subentry])
+LaTeX:  a word\index{entry!subentry}
+Win:    a {K{\footnote K entry, subentry}}word
+else:   a word
+
+UDO:    a (!idx [word] [entry] [subentry] [subsubentry])
+LaTeX:  a word\index{entry!subentry!subsubentry}
+Win:    a {K{\footnote K entry, subentry, Subsubentry}}word
+else:   a word
+!end_verbatim
+!end_quote
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!index !/no_index
+!item The conversion of these index commands can be suppressed with the
+switch (!I)!/no_index(!i) inside the preamble.
+
+!index !/use_nodes_inside_index
+!index !/use_label_inside_index
+!index !/use_alias_inside_index
+!item Chapter names, labels and aliases aren't added to the index in no
+destination format. But you can automatize this with the following switches:
+(!I)!/use_nodes_inside_index(!i),
+(!I)!/use_label_inside_index(!i) and
+(!I)!/use_alias_inside_index(!i).
+
+!index !/ignore_index
+!item If a chapter contains the command (!I)!/ignore_index(!i) the chapter
+name won't be added to the index even if you use the switch
+(!I)!/use_nodes_inside_index(!i) inside the preamble of your source file.
+
+!index Makeindex
+!item If you convert to (!LaTeX) and you use (!I)!/index(!i) commands inside
+your source file UDO will add the commands that are necessary for
+""Makeindex"" automatically. Special characters of an index entry are
+converted especially for ""Makeindex"".
+
+!item You have to use the parameters inside brackets. If you want to use a
+bracket inside a parameter you have to insert a ''!''. If you don't
+UDO will think that the placeholder ended. An example:
+
+!begin_quote
+!begin_verbatim
+wrong:  (!idx [Copyright (c) 1995] )
+right:  (!idx [Copyright (c!) 1995] )
+!end_verbatim
+!end_quote
+
+!end_enumerate

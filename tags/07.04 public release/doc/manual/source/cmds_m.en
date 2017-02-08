@@ -1,0 +1,281 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands M
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#
+################################################################################
+
+!begin_node M!..
+!html_name  cmds_m
+
+# = = = = =
+
+!begin_node (!kw [macro])
+!html_name  cmd_macro
+
+Define a macro.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/macro (!WORD) (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Defines a macro. Later on every ""(!/(!WORD))"" will be replaced by
+""(!TEXT)"". When using the lower exmaple every ""(!DH)"" will be
+replaced by ""Dirk Hagedorn"".
+
+!item [(!EXAMPLE)]
+(!T)!/macro DH Dirk Hagedorn(!t)
+
+!item [(!SEEALSO)]
+(!link [Macros] [Macros])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [maketitle])
+!html_name  cmd_maketitle
+
+Output title page.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/maketitle(!t)
+
+!item [(!DESCRIPTION)]
+Outputs a titlepage build with the information set by the (!KW [docinfo])
+command. (!KW [maketitle]) should be used directly after
+(!KW [begin_document]) and before (!KW [tableofcontents]).
+
+!item [(!SEEALSO)]
+(!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [man_lpp])
+!html_name  cmd_man_lpp
+
+Set lines per page (manualpage only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_lpp (!VALUE)(!t)
+
+(!red)
+!item [(!DESCRIPTION)]
+Setzt die Anzahl der Zeilen pro Seite (""lines per page"") einer Manualpage. Im Fußbereich werden dann
+zusätzlich Seitennummern ausgegeben. Beim Start der Umwandlung ist die Seitenlänge undefiniert und es
+werden auch keine Fußzeilen ausgegeben.
+(!coloff)
+!item [(!DESCRIPTION)]
+Sets the ""lines per page"" of a manualpage. If (!VALUE) is bigger
+than 0 UDO generates footlines with pagenumbers. When UDO starts
+!/man_lpp is undefined and UDO won't generate these footlines.
+
+!item [(!EXAMPLE)]
+(!T)!/man_lpp 60(!t)
+
+!item [(!SEEALSO)]
+(!KW [use_formfeed])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [man_type])
+!html_name  cmd_man_type
+
+Set program type (manualpage only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_type (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+When converting into a manualpage UDO uses ""(!TEXT)"" inside the
+headline with brackets. The example and ""(!KW [docinfo] [[program!!] udo])"" would look like ""udo(1)"". UDO doesn't use ""(!TEXT)"" as a file suffix.
+
+!item [(!EXAMPLE)]
+(!T)!/man_type 1(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.45
+
+!item [(!SEEALSO)]
+(!KW [nroff_type])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [mapping])
+!html_name  cmd_mapping
+
+Assign value to node.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/mapping (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+This command is currently only supported for Windows Help and IPF.
+
+!begin_description
+
+!item [IPF:]
+If you use (!KW [mapping] [4711]) inside a node,
+UDO will generate an entry res=4711 in the IPF node header.
+If you don't use (!KW [mapping]), UDO will output nothing.
+
+!item [Windows Help:]
+With this command you can assign a numerical value to
+a node that is used in the map file. If you don't use (!KW [mapping]),
+UDO uses its internal value for the entry, but only
+if you used (!KW [win_helpid]). Thus an entry in the map
+will be generated if you used either (!KW [mapping]) or (!KW [win_helpid])
+or both.
+
+!end_description
+
+!item [(!EXAMPLE)]
+(!T)!/mapping 4711(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_helpid])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [maroon])
+!html_name  cmd_maroon
+
+Sets the textcolor maroon.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/white)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Kastanienbraun.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [medskip])
+!html_name  cmd_medskip
+
+Insert two empty lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/medskip(!t)
+
+(!red)
+!item [(!DESCRIPTION)]
+Dieser Befehl sorgt für die Ausgabe von zwei
+zusätzlichen Leerzeilen und dient dazu, Absätze
+deutlicher voneinander abzuheben. Bei der Umwandlung
+ins (!LaTeX)-Format werden keine zwei Leerzeilen, sondern
+(!code [medskip]) ausgegeben.
+(!coloff)
+!item [(!DESCRIPTION)]
+This command will be simply replaced by (!code [\medskip]) when
+converted to (!LaTeX). Otherwise two additional empty lines will be generated.
+
+!item [(!SEEALSO)]
+(!KW [bigskip]), (!KW [smallskip])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!medskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!medskip
+(!LOREM)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

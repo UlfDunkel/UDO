@@ -1,0 +1,396 @@
+!subsubnode !/newpage
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/newpage(!t)
+
+!item [Description:]
+	Generates a page break if the destination format supports it.         
+
+
+!item [See:] (!I)!/use_formfeed(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_bottomlines
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_bottomlines [<abbreviations>](!t)
+
+!item [Description:]
+	Tells UDO not to generate bottomlines. In the example this is done    
+	for the Pure C Help format.                                           
+
+!item [Example:] (!T)!/no_bottomlines [pch](!t)
+
+!item [See:] (!I)!/no_headlines(!i), (!I)!/ignore_bottomline(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_effects
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_effects [<abbreviations>](!t)
+
+!item [Description:]
+	Switches off the usage of text emphasises. The exmaple shows how to   
+	switch it of when converting to ASCII.                                
+
+!item [Example:] (!T)!/no_effects [asc](!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_headlines
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_headlines [<abbreviations>](!t)
+
+!item [Description:]
+	Switches off the usage of headlines. The example show how to switch   
+	it off when converting to WinHelp.                                    
+
+!item [Example:] (!T)!/no_headlines [win](!t)
+
+!item [See:] (!I)!/no_bottomlines(!i), (!I)!/ignore_headline(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_images
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_images [<abbreviations>](!t)
+
+!item [Description:]
+	Switches off the output of commands to display images. The example    
+	show how to switch it off when converting to HTML.                    
+
+!item [Example:] (!T)!/no_images [html](!t)
+
+!item [See:] (!I)!/image(!i), Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_index
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_index [<abbreviations>](!t)
+
+!item [Description:]
+	If this switch is used inside the preamble UDO suppresses index       
+	commands for the given destination formats. Furthermore neither UDO   
+	nor the destination format will print an index. The example shows how 
+	to suppress index commands for RTF.                                   
+
+!item [Example:] (!T)!/no_index [rtf](!t)
+
+!item [See:] (!I)!/index(!i), (!I)(!/idx~!..)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_numbers
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_numbers [<abbreviations>](!t)
+
+!item [Description:]
+	This command switches off the usage of chapter numbers. In tables of  
+	contens only the chapter titles will be displayed. The example shows  
+	how to suppress them in Windows Help and HTML.                        
+
+!item [Example:] (!T)!/no_numbers [win,html](!t)
+
+!item [See:] (!I)!/tableofcontents(!i), (!I)!/toc(!i), (!I)!/subtoc(!i), (!I)!/subsubtoc(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_preamble
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_preamble [<abbreviations>](!t)
+
+!item [Description:]
+	If this switch is used inside the preamble of the source file UDO     
+	won't print a specific preamble for the destination format. The       
+	example shows how to suppress the preamble for (!LaTeX). You shall    
+	have some knowledge about the destination format if you want to write 
+	your own preamble.                                                    
+
+!item [Example:] (!T)!/no_preamble [tex](!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_quotes
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_quotes [<abbreviations>](!t)
+
+!item [Description:]
+	Says UDO not to replace double quotes and double apostrophes by real  
+	quotes and apostrophes.                                               
+
+!item [Example:] (!T)!/no_quotes [asc,man](!t)
+
+!item [See:] Double quotes,  Double apostrophes
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_umlaute
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_umlaute [<abbreviations>](!t)
+
+!item [Description:]
+	Switches off the usage of German umlauts. The example show how to     
+	switch it off when converting to a manualpage. Umlauts are than       
+	replaced by ae, oe, ue, ss, Ae, Oe and Ue.                            
+
+!item [Example:] (!T)!/no_umlaute [man](!t)
+
+!item [See:] Special characters
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_verbatim_umlaute
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_verbatim_umlaute [<abbreviations>](!t)
+
+!item [Description:]
+	Switches off the usage of German umlauts inside a verbatim            
+	environment. The example show how to switch it off when converting to 
+	(!LaTeX). Umlauts are than replaced by ae, oe, ue, ss, Ae, Oe and Ue. 
+
+!item [Example:] (!T)!/no_verbatim_umlaute [tex](!t)
+
+!item [See:] (!I)!/begin_verbatim(!i), (!I)!/end_verbatim(!i), Preformatted text
+
+!end_xlist
+#------------------------------
+!subsubnode !/no_xlinks
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/no_xlinks [<abbreviations>](!t)
+
+!item [Description:]
+	This command switches off the usage of external links. This is useful 
+	if you used external HTML links in a source file that you want to     
+	convert to another format that supports external links. The example   
+	shows how to suppress the usage of external links when converting to  
+	ST-Guide.                                                             
+
+!item [Example:] (!T)!/no_xlink [stg](!t)
+
+!item [See:] (!I)(!/xlink~!..)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/node
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/node <text>(!t)
+
+!item [Description:]
+	Starts a new chapter named ""<text>"".                                
+
+!item [Example:] (!T)!/node Command reference(!t)
+
+!item [See:] (!I)!/pnode(!i), (!I)!/subnode(!i), (!I)!/subsubnode(!i), (!I)!/subsubsubnode(!i), Structuring
+
+!end_xlist
+#------------------------------
+!subsubnode !/node*
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/node* <text>(!t)
+
+!item [Description:]
+	This command does the same as !/node, but here ""<text>"" will not    
+	appear in a table of contents.                                        
+
+!item [Example:] (!T)!/node* Chapter title(!t)
+
+!item [See:] (!I)!/node(!i), (!I)!/pnode*(!i), Structuring
+
+!end_xlist
+#------------------------------
+!subsubnode !/nop
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/nop(!t)
+
+!item [Description:]
+	This command (""no operation"") does nothing and is used for          
+	debugging purposes.                                                   
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode (!/N)...(!/n)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	placeholder, preamble & main part
+
+!item [Syntax:]
+	(!T)(!/N)<text>(!/n)(!t)
+
+!item [Description:]
+	""<text>"" will be displayed as a footnote or in brakes. Right before 
+	(!/N) shouldn't be a space, tab or linefeed!                          
+
+!item [Example:] (!T)the text(!/N)the footnote(!/n)(!t)
+
+!item [See:] Footnotes
+
+!end_xlist
+#------------------------------
+!subsubnode (!/nl)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	placeholder, main part
+
+!item [Syntax:]
+	(!T)(!/nl)(!t)
+
+!item [Description:]
+	With (!/nl) you can force a line break. You (!B)must(!b) add a space  
+	before (!/nl) if you use it!                                          
+
+!item [Example:] (!T)breaking (!/nl) lines(!t)
+
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

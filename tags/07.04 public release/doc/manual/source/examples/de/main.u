@@ -1,0 +1,26 @@
+[main.u]
+!include header.ui
+!begin_document
+!maketitle
+!tableofcontents
+!include kapitel1.ui
+!include kapitel2.ui
+!include kapitel3.ui
+!include kapitel4.ui
+!include kapitel5.ui
+!end_document
+
+[header.ui]
+!docinfo [title] ...
+!docinfo [program] ...
+!docinfo [author] ...
+
+[kapitel1.ui]
+!node Kapitel 1
+...
+
+[kapitel2.ui]
+!node Kapitel 2
+...
+
+[usw.]

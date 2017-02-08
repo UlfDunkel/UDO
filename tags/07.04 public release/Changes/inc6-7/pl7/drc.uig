@@ -1,0 +1,9 @@
+!begin_itemize
+
+!index !/drc_flags
+!item Neu: Vorspann-Kommando (!I)!/drc_flags~<wert>(!i). Hiermit kann
+man den Wert angeben, der als letzter numerischer Wert einer
+Nodedefinition gesetzt werden soll (Stefan Braunstein). Beispiel:
+(!I)!/drc_flags~6(!i)
+
+!end_itemize

@@ -1,0 +1,2751 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands H
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 09: NAME macro introduced
+#   fd  Jun 09: LINK macro introduced
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+#   fd  Dec 15: chapter html_navigation enhanced
+# 2010:
+#   fd  Jan 20: chapter html_quotes introduced
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
+#   fd  Mar 08: macro K1 resolved to KW
+#   fd  May 18: html_ignore_8bit updated
+#   fd  May 25: using macro NOTE + TIP
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2013:
+#   fd  Oct 24: html_doctype updated (new option for HTML 5)
+# 2014:
+#   fd  Jun 20: html_merge_subsubsubsubnode + html_merge_subsubsubsubsubnode added
+#
+################################################################################
+
+!begin_node H!..
+!html_name  cmds_h
+
+# = = = = =
+
+!begin_node (!kw [h])
+!html_name  cmd_h
+
+Eine Überschrift in der Schriftgröße eines Kapitels 1. Ordnung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/h [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [heading])
+
+!item [(!SEEALSO)]
+(!KW [heading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [heading])
+!html_name  cmd_heading
+
+Eine Überschrift in der Schriftgröße eines Kapitels 1. Ordnung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/heading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
+der gleichen Schriftart und -größe wie eine Kapitel-Überschrift ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!heading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Eine Überschrift
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hh_alinkcolor])
+!html_name  cmd_hh_alinkcolor
+
+Setzen der Farbe für aktive (!nolink [Links]) (nur (!nolink [HTML-Help])).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_alinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Help-Seiten aktive Links darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_textcolor]), (!KW [hh_linkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hh_backcolor])
+!html_name  cmd_hh_backcolor
+
+Setzen der Hintergrundfarbe (nur (!nolink [HTML-Help])).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Help-Seiten den Hintergrund darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_textcolor]), (!KW [hh_linkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_alinkcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hh_backimage])
+!html_name  cmd_hh_backimage
+
+Setzen des Hintergrundbildes (nur (!nolink [HTML-Help])).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt das Hintergrundbild für HTML-Help-Seiten. Als Dateiname
+muss der komplette Name, also einschließlich Dateiendung,
+angegeben werden. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_backcolor]), (!KW [hh_textcolor]), (!KW [hh_linkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_alinkcolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!hh_backimage [hintergrund.gif]
+!end_verbatim
+(!EXAMPLE_AFTER)
+!hh_backimage [hintergrund.gif]
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# fd:20090614: this command doesn't seem to exist!
+
+!begin_ignore
+!begin_node (!kw [hh_img_suffix])
+!html_name  cmd_img_suffix
+
+Suffixe der Grafiken für (!nolink [HTML-Help]) ändern.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_img_suffix <endung>(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie das Suffix der Grafiken
+setzen, die für die folgenden (!KW [image])-Befehle
+verwendet werden soll. Standardmäßig benutzt UDO das
+Suffix (!file [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
+einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
+kann beliebig oft aufgerufen werden, dass einer
+Verwendung verschiedener Grafikformate nichts im Wege steht.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!KW [html_img_suffix]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+!ifdest [hh]
+(!EXAMPLE_BEFORE)
+!else
+(!EXAMPLE_BEGIN)
+!endif
+!begin_verbatim
+!hh_img_suffix jpeg
+!end_verbatim
+!ifdest [hh]
+(!EXAMPLE_AFTER)
+!hh_img_suffix jpeg
+!endif
+(!EXAMPLE_END)
+
+!end_node
+!end_ignore
+
+# = = = = =
+
+!begin_node (!kw [hh_linkcolor])
+!html_name  cmd_hh_linkcolor
+
+Setzen der Farbe für (!nolink [Links]) (nur (!nolink [HTML-Help])).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Help-Seiten Links darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_textcolor]), (!KW [hh_alinkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hh_textcolor])
+!html_name  cmd_hh_textcolor
+
+Setzen der Textfarbe (nur (!nolink [HTML-Help])).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_textcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Help-Seiten Text darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_linkcolor]), (!KW [hh_alinkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hh_verbatim_backcolor])
+!html_name  cmd_hh_verbatim_backcolor
+
+Setzen der Hintergrundfarbe für verbatim-(!nolink [Umgebungen]) (nur (!nolink [HTML-Help])).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_verbatim_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Help-Seiten
+den Hintergrund in verbatim-(!nolink [Umgebungen]) darzustellen.
+
+!item [(!SEEALSO)]
+(!KW [hh_backcolor]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hh_vlinkcolor])
+!html_name  cmd_hh_vlinkcolor
+
+Setzen der Farbe für bereits besuchte (!nolink [Links]) (nur (!nolink [HTML-Help])).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_vlinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Help-Seiten
+Links darzustellen, die bereits besucht wurden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_linkcolor]), (!KW [hh_alinkcolor]), (!KW [hh_textcolor]), (!KW [hh_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hline])
+!html_name  cmd_hline
+
+Waagerechte (horizontale) Linie ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hline(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando fügt in die Zieldatei eine
+waagerechte Linie ein. Desweiteren dient das Kommando
+dazu, um waagerechte Linien innerhalb einer Tabelle
+zu erzeugen. Nicht alle Formate gestatten es,
+waagerechte Linien auszugeben.
+# ToDo: welche Formate sind dies?
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!hline
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_quote
+!hline
+!end_quote
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [htag_img_suffix])
+!html_name  cmd_htag_img_suffix
+
+Suffixe der Grafiken für HP-Helptag-SGML ändern.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/htag_img_suffix <endung>(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie das Suffix der Grafiken
+setzen, die für die folgenden (!KW [image])-Befehle
+verwendet werden soll. Standardmäßig benutzt UDO das
+Suffix (!file [.tiff]). (!KW [htag_img_suffix]) kann beliebig oft
+aufgerufen werden, dass einer Verwendung verschiedener
+Grafikformate nichts im Wege steht.
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!htag_img_suffix xwd
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_alinkcolor])
+!html_name  cmd_html_alinkcolor
+
+Setzen der Farbe für aktive (!nolink [Links]) (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_alinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten aktive Links darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_textcolor]), (!KW [html_linkcolor]), (!KW [html_vlinkcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_backcolor])
+!html_name  cmd_backcolor
+
+Setzen der Hintergrundfarbe (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund darzustellen.
+
+Diese Hintergrundfarbe wird jedoch nicht beim Frames-Layout
+und ""modernen"" Layout benutzt, für die es eigene Befehle gibt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_textcolor]), (!KW [html_linkcolor]), (!KW [html_vlinkcolor]), (!KW [html_alinkcolor]), (!KW [html_modern_backcolor]), (!KW [html_frames_backcolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_backcolor #CCCEEE
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<body bgcolor="#CCCEEE">
+!end_verbatim
+!endif
+!html_backcolor #CCCEEE
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_backimage])
+!html_name  cmd_html_backimage
+
+Setzen des Hintergrundbildes (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt das Hintergrundbild für HTML-Seiten. Als Dateiname
+muss der komplette Name, also einschließlich Dateiendung,
+angegeben werden. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_backcolor]), (!KW [html_textcolor]), (!KW [html_linkcolor]), (!KW [html_vlinkcolor]), (!KW [html_alinkcolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_backimage [hintergrund.gif]
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<body background="[hintergrund.gif]">
+!end_verbatim
+!endif
+!html_backimage [hintergrund.gif]
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [html_backpage])
+!html_name  cmd_html_backpage
+
+Rücksprung-URL angeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_backpage <URL> '(!TEXT)'(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie einen URL angeben, der
+für den Verweis für den ""Go~up""-Button in der
+Kopfzeile der Hauptseite bei HTML-Dateien verwendet werden soll.
+Zuusätzlich können Sie einen Verweistext mit angeben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6, Zusätzlicher Text ab
+     Release~6 Patchlevel~16
+!item [(!SEEALSO)]
+(!KW [no_headlines]), (!KW [no_bottomlines])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_backpage index.htm 'Zurück zur Homepage'
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<a href="index.htm"><img src="udo_hm.gif" alt="Zurück zur Homepage" title="Zurück zur Homepage" border="0" width="24" height="24"></a>
+!end_verbatim
+#!else
+#!html_backpage index.htm
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [html_bgsound])
+!html_name  cmd_html_bgsound
+
+Hintergrungmusik abspielen
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_bgsound (!FILE) (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie Hintergrundmusik für HTML-Seiten angeben. (!FILE) ist dabei
+der Name der Datei mit Suffix. Als Dateiendung sollte möglichst nur MID, AU und WAV verwendet werden.
+(!VALUE) ist optional und gibt an wie oft das Musikstück wiederholt werden soll. Ohne die Angabe
+wird sie endlos wiederholt.
+
+Gehen Sie sparsam mit dieser Funktion um, es kann für einen Nutzer sehr nervig sein ständig mit Musik
+beschallt zu werden!
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+# !item [(!SEEALSO)]
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_bgsound sound.wav 2
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+(!IN_HTML_HEADER)
+!begin_verbatim
+<bgsound src="sound.wav" loop="2">
+!end_verbatim
+!endif
+!html_bgsound sound.wav 2
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_button_alignment])
+!html_name  cmd_html_button_alignment
+
+Buttons beim ""modernen"" Layout ausrichten (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_button_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+Sorgt für die Ausrichtung der Buttons beim ""modernen"" Layout.
+# ToDo - U.K. 7.12.03: welche Buttons? Beschreibung unklar; Bedeutung erforschen
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [html_counter_command])
+!html_name  cmd_html_counter_command
+
+Zähler platzieren (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_counter_command (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Was dem Kommando folgt, wird 1:1 in der Fußzeile
+ausgegeben, sodass Sie den Zähler optisch besser platzieren können.
+Beim ""modernen"" Layout und beim Frames-Layout wird der Zähler in
+der rechten Spalte dargestellt.
+
+Wird das Kommando im Vorspann benutzt, dann wird dies für alle Dateien erzeugt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [use_raw_footer])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_description])
+!html_name  cmd_html_description
+
+Beschreibung in Meta-Informationen aufnehmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_description (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Hiermit können Sie die Beschreibung einer Seite in die Meta-Informationen aufnehmen. Dieses Kommando ist mehrfach in einem Node verwendbar.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [html_name])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_description Diese Seite erklärt den UDO-Befehl html_description.
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+(!IN_HTML_HEADER)
+!begin_verbatim
+<meta name="Description" content="Diese Seite erklärt den UDO-Befehl html_description">
+!end_verbatim
+!endif
+!html_description Diese Seite erklärt den UDO-Befehl html_description.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_ignore
+# auskommentiert 21.12.2003 - Ulrich Kretschmer (diese Funktion steht derzeit nicht zur Verfügung)
+# Achtung, Link von !html_name  und !html_name_prefix auf !html_dirname ist ebenfalls auskommentiert
+!begin_node (!kw [html_dirname])
+!html_name  cmd_html_dirname
+
+Verzeichnisnamen zuweisen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_dirname (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Taucht dieses Kommando innerhalb eines Kapitels,
+Abschnitts, Unterabschnitts oder Paragraphen auf, so
+wird dieser Name für das Verzeichnis verwendet,
+in dem die spätere HTML-Datei erzeugt wird.
+# scheint experimentell zu sein,
+# die entsprechenden Stellen im Source sind auskommentiert
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_name]), (!KW [html_name_prefix]), (!KW [html_use_folders])
+
+!end_xlist
+
+!end_node
+!end_ignore
+
+# = = = = =
+
+!begin_node (!kw [html_doctype])
+!html_name  cmd_html_doctype
+
+Setzen des Dokumententyp (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_doctype (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie den Dokumententyp setzen. Dabei gibt es folgende Möglichkeiten: (!nl)
+
+!begin_blist
+!item [Old]                HTML 3.2
+!item [Strict]             HTML 4.01 Strict
+!item [Transitional]       HTML 4.01 Transitional
+!item [5]                  HTML 5
+!item [XHTML Strict]       XHTML Strict
+!item [XHTML Transitional] XHTML Transitional
+!end_blist
+
+Für Frames werden die DOCTYPE-Einträge automatisch gesetzt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_doctype Strict
+!end_verbatim
+(!EXAMPLE_AFTER)
+#!ifdest [html]
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+!end_verbatim
+#!else
+#!html_doctype Strict
+#!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: -
+!begin_node (!kw [html_favicon_name])
+!html_name  cmd_html_favicon_name
+
+Setzen der Favoriten-Icons (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_favicon_name (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie Favoriten-Icons festlegen. Prinzipiell kann jede einzelne HTML-Seite ein eigenes Favoriten-Icon haben.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_favicon_name favicon.ico
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+(!IN_HTML_HEADER)
+!begin_verbatim
+<link rel="shortcut icon" href="http://www.udo-open-source.org/favicon.ico">
+!end_verbatim
+!else
+!html_favicon_name favicon.ico
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_alignment])
+!html_name  cmd_html_frames_alignment
+
+(!nolink [Links]) beim ""modernen"" Layout ausrichten (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die Ausrichtung der Links im linken Frame
+bestimmen. Standardeinstellung ist ""center"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_alinkcolor])
+!html_name  cmd_html_frames_alinkcolor
+
+Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_alinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund des linken Rahmens darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_backcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_backcolor])
+!html_name  cmd_html_frames_backcolor
+
+Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund im linken Rahmen darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_backimage])
+!html_name  cmd_html_frames_backimage
+
+Setzen des Hintergrundbildes für den linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt das Hintergrundbild für den linken Rahmen in HTML-Seiten. Als Dateiname
+muss der komplette Name, also einschließlich Dateiendung,
+angegeben werden. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_backcolor]), (!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_frames_backimage [hintergrund.gif]
+!end_verbatim
+(!EXAMPLE_AFTER)
+#!ifdest [html]
+!begin_verbatim
+<body background="[hintergrund.gif]">
+!end_verbatim
+#!else
+#!html_frames_backimage [hintergrund.gif]
+#!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [html_frames_con_title])
+!html_name  cmd_html_frames_con_title
+
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_con_title (!TEXT)(!t)
+!item [(!DESCRIPTION)]
+Setzen des Frametitel für den Frame des Inhalts beim Frame-Layout.
+
+!item [(!EXISTSSINCE)] Version 6.5.16
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_toc_title])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_frames_con_title Inhalt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+(!IN_HTML_HEADER)
+!begin_verbatim
+<frame src="00con.htm" name="UDOcon" marginwidth="0" marginheight="0" title="Inhalt">
+!end_verbatim
+#!else
+#!html_frames_con_title Inhalt
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_height])
+!html_name  cmd_html_frames_heigth
+
+Höhe des Rahmens beim Frames-Layout bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_height (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Gibt die Höhe des Frames an, in den die Links bei einem durch
+(!KW [html_frames_layout]) erzeugten Rahmen gesetzt werden,
+sofern dieser oben oder unten platziert ist.
+
+Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_position]), (!KW [html_frames_width])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_layout])
+!html_name  cmd_html_frames_layout
+
+Frames erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_layout {[(!TEXT)]}(!t)
+
+!item [(!DESCRIPTION)]
+Erzeugt ein Layout ähnlich dem ""modernen"" Tabellenlayout, allerdings wird das
+""kleine"" Inhaltsverzeichnis in einem Frame erzeugt. Wie beim
+""modernen"" Layout werden auch hier die sogenannten Kapitel-Icons beachtet.
+
+UDO benutzt folgende Dateinamen, die Sie daher selber nicht benutzen
+sollten: (!file [00con.htm[l!]]) und (!file [00toc.htm[l!]]).
+
+Als ""(!TEXT)"" können folgende Parameter übergeben werden:
+
+!begin_blist
+!item [noresize] Fügt dem Frameset-Tag ""noresize"" hinzu. Die Breite des linken Frames lässt sich dann vom Benutzer nicht mehr verändern.
+!item [noborder] Fügt dem Frameset-Tag ""border=0 frameborder=0 framespacing=0"" hinzu. Der linke Frame hat dann keinen Rand mehr.
+!item [noscrolling]: Fügt dem Frame-Tag ""scrolling=no"" hinzu. Im linken Frame kann dann nicht mehr gescrollt werden.
+!end_blist
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [html_frames_position]), (!KW [html_frames_width]), (!KW [html_frames_height]), (!KW [html_frames_backcolor]), (!KW [html_frames_alignment]), (!KW [html_frames_toc_title]), (!KW [html_frames_con_title]), (!KW [html_modern_layout])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_frames_layout noborder noresize noscrolling
+!html_frames_layout [noborder, noresize]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_linkcolor])
+!html_name  cmd_html_frames_linkcolor
+
+Setzen der Farbe für Links für linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links in dem linken Rahmens darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_textcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_backcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_position])
+!html_name  cmd_frames_position
+
+Position des Rahmens beim Frames-Layout bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_position [left|right|top|bottom](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie die Position des Rahmens bestimmen,
+der die Links auf die Nodes enthält. Standardeinstellung ist links.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_width]), (!KW [html_frames_height])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_frames_position top
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_textcolor])
+!html_name  cmd_frames_textcolor
+
+Setzen der Textfarbe für linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_textcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten Text im linken Rahmen darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_linkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_backcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [html_frames_toc_title])
+!html_name  cmd_html_frames_toc_title
+
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_toc_title (!TEXT)(!t)
+!item [(!DESCRIPTION)]
+Setzt den Frametitel für den Frame des Inhaltsverzeichnisses beim Frame-Layout.
+
+!item [(!EXISTSSINCE)] Version 6.5.16
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_con_title])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_frames_toc_title Navigation
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [asc,stg]
+!begin_verbatim
+<frame src="00toc.htm" name="UDOtoc" marginwidth="0" !\
+      marginheight="0" title="Navigation">
+!end_verbatim
+!else
+!begin_verbatim
+<frame src="00toc.htm" name="UDOtoc" marginwidth="0" marginheight="0" title="Navigation">
+!end_verbatim
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_vlinkcolor])
+!html_name  cmd_html_frames_vlinkcolor
+
+Setzen der Farbe für bereits besuchte Links für linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_vlinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links im linken Rahmen darzustellen, die bereits besucht wurden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_linkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_textcolor]), (!KW [html_frames_backcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_frames_width])
+!html_name  cmd_html_frames_width
+
+Breite des Rahmens beim Frames-Layout bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_width (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Gibt die Breite des Frames an, in den die Links bei einem durch
+(!KW [html_frames_layout]) erzeugten Rahmen gesetzt werden,
+sofern dieser links oder rechts platziert ist.
+
+Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_position]), (!KW [html_frames_height])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# Datumsformat gemäß http://www.w3.org/TR/html401/types.html#type-datetime
+#  für die künftige, endgültige Doku an anderer Stelle:
+# UTC = Coordinated Universal Time, entspricht der vormaligen Greenwich Mean Time (GMT).
+# übersichtliche Umrechungstabelle (wohl am wichtigsten für die praktische
+# UDO-Anwendung): http://setiathome.ssl.berkeley.edu/utc
+# umfassend (mit weiteren Links):
+# http://de.wikipedia.org/wiki/UTC bzw. http://en2.wikipedia.org/wiki/UTC,
+# http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
+# ToDo: Englisch
+!begin_node (!kw [html_header_date])
+!html_name  cmd_html_header_date
+
+Setzen des Datums (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_header_date (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Ist dieser Schalter gesetzt, setzt UDO im HTML-Header ein META-Tag für
+Datum/Uhrzeit der Datei-Erzeugung.
+
+Dabei ist ""(!code [+00:00])"" der Unterschied von der lokalen Zeit zu UTC
+(Coordinated Universal Time, vormals GMT). Mit dem optionalen Parameter (!TEXT)
+kann ein Wert für diese Zeitdifferenz übergeben werden.
+Für (!TEXT) werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbst
+dafür verantwortlich, einen korrekten Wert zu übergeben.
+Ist (!TEXT) leer, wird für den Zeitzonenunterschied ""(!code [+00:00])"" gesetzt.
+
+(!NOTE) (!TEXT) darf momentan max. (!const [6]) Zeichen lang sein.
+
+!item [(!EXISTSSINCE)] Version~6.5.2
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_header_date +02:00
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<meta name="date" content="2009-06-15T22:21:10+01:00">
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt
+#      wird, wenn !html_header_links *nicht* gesetzt ist (+ Beispiel).
+# NHz 29.01.04: Beispiel -> !html_header_links navigation chapter (siehe meine Mail vom 29.01.04)
+# U.K. 29.1.04: die Frage nach dem Beispiel war missverständlich.
+#       Sind obige Klammerzusätze korrekt??
+# Beispiel-Aufruf für spätere Kommando-Doku: !html_header_links chapter, navigation
+# ToDo: Englisch
+!begin_node (!kw [html_header_links])
+!html_name  cmd_html_header_links
+
+(!LINK)-Elemente setzen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_header_links (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Ist dieser Schalter gesetzt, werden je nach Vorgabe (!LINK)-Elemente im HTML-Header erzeugt.
+
+Dadurch, dass die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anforderung
+erzeugt werden, entstehen normalerweise kleinere HTML-Dateien.
+
+!item [(!EXISTSSINCE)] Version~6.5.2
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+Enthält (!TEXT) ""navigation"", werden die Links zur Navigation erzeugt:
+!begin_verbatim
+!html_header_links navigation
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<link rel="start" href="index.html" title="Beginn des Dokumentes">
+!end_verbatim
+ebenso:
+!ifdest [asc,stg]
+!begin_verbatim
+<link rel="home", "contents", "toc", "first", "prev", 
+      "previous", "next", "last" ...
+!end_verbatim
+!else
+!begin_verbatim
+<link rel="home", "contents", "toc", "first", "prev", "previous", "next", "last" ...
+!end_verbatim
+!endif
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+Enthält (!TEXT) ""chapter"" oder ""section"", werden alle Links zu den Kapiteln erzeugt:
+!begin_verbatim
+!html_header_links chapter
+!html_header_links section
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<link rel="chapter" href="..." title="...">
+<link rel="section" href="..." title="...">
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# siehe auch: http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
+!begin_node (!kw [html_ignore_8bit])
+!html_name  cmd_html_ignore_8bit
+
+8-Bit-Zeichen ignorieren (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_ignore_8bit (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden 8-Bit-Zeichen (!I)nicht(!i)
+in HTML-Entities ((!code [&])(!code [auml;]) usw.) umgewandelt.
+
+Das Meta-Tag Content-Type wird automatisch von UDO mit dem richtigen Charset-Bezeichner gefüllt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2, Erweiterung seit Version 6.5.0
+
+!item [(!SEEALSO)]
+(!KW [code_source]), (!KW [code_target])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!code_target      [utf-8]
+!html_ignore_8bit
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+&lt;meta http-equiv="content-type" content="text/html;charset=UTF-8"&gt;
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_img_suffix])
+!html_name  cmd_html_img_suffix
+
+Suffixe der Grafiken für HTML ändern.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_img_suffix <endung>(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie die Suffixe der Grafiken
+setzen, die für die folgenden (!KW [image])-Befehle
+verwendet werden soll. Standardmäßig benutzt UDO das
+Suffix (!file [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
+einfach untenstehendes Beispiel. (!KW [html_img_suffix])
+kann beliebig oft aufgerufen werden, dass einer
+Verwendung verschiedener Grafikformate nichts im Wege steht.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~3
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_img_suffix jpeg
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_javascript])
+!html_name  cmd_html_javascript
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_javascript(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+# dieses Kommando steht in der Liste der Kommandos im Source,
+# macht aber offensichtlich nix
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_keywords])
+!html_name  cmd_html_keywords
+
+HTML-Meta-Keywords setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_keywords (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" sollte eine durch Kommata getrennte Aufzählung
+von Schlüsselworten sein, die UDO als
+Meta-Informationen im Header der Datei ausgibt, in die
+das aktueller Kapitel ausgegeben wird. Manche
+Suchmaschinen benutzen diese Informationen um Seiten
+zu indizieren.
+
+Wird (!KW [html_keywords]) mehrfach in einem Node benutzt, so
+werden die einzelnen Einträge, mit einem Komma getrennt, in die
+Meta-Informationen aufgenommen.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_description])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_keywords Dirk Hagedorn, UDO(!RELEASE), Software, Converter
+!html_keywords UDO Community, Universal Document, Dokument-Generator
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [asc,stg]
+!begin_verbatim
+<meta name="Keywords" content="Dirk Hagedorn, UDO6, !\
+      Software, Converter, UDO Community, Universal !\
+      Document, Dokument-Generator">
+!end_verbatim
+!else
+!begin_verbatim
+<meta name="Keywords" content="Dirk Hagedorn, UDO6, Software, Converter, UDO Community, Universal Document, Dokument-Generator">
+!end_verbatim
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_linkcolor])
+!html_name  cmd_html_linkcolor
+
+Setzen der Farbe für Links (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links darzustellen.
+Wird der Befehl im Vorspann benutzt, setzen Sie damit
+die Standardwerte für alle Seiten inkl. dem Inhaltsverzeichnis.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_textcolor]), (!KW [html_alinkcolor]), (!KW [html_vlinkcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_nodes])
+!html_name  cmd_html_merge_nodes
+
+Alle Kapitelhierarchien ab der 1. Gliederungsstufe zusammenfassen (nur HTML).
+Es wird nur eine einzige HTML-Datei erzeugt.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_nodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 1. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_subnodes])
+!html_name  cmd_html_merge_subnodes
+
+Alle Kapitelhierarchien ab der 2. Gliederungsstufe zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subnodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 2. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_subsubnodes])
+!html_name  cmd_merge_subsubnodes
+
+Alle Kapitelhierarchien ab der 3. Gliederungsstufe zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 3. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_subsubsubnodes])
+!html_name  cmd_html_merge_subsubsubnode
+
+Alle Kapitelhierarchien ab der 4. Gliederungsstufe zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 4. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]),
+      (!KW [html_merge_subsubsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_subsubsubsubnodes])
+!html_name  cmd_html_merge_subsubsubsubnodes
+
+Alle Kapitelhierarchien ab der 5. Gliederungsstufe zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubsubsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 5. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]),
+      (!KW [html_merge_subsubsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_merge_subsubsubsubsubnodes])
+!html_name  cmd_html_merge_subsubsubsubsubnodes
+
+Alle Kapitelhierarchien ab der 6. Gliederungsstufe zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubsubsubsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+      Wird dieser Schalter im Vorspann angegeben, werden alle Kapitelhierarchien ab der 6. Gliederungsebene bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Version 7.04
+
+!item [(!SEEALSO)]
+      (!KW [html_merge_nodes]), 
+      (!KW [html_merge_subnodes]), 
+      (!KW [html_merge_subsubnodes]), 
+      (!KW [html_merge_subsubsubnodes]), 
+      (!KW [html_merge_subsubsubsubnodes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_modern_alignment])
+!html_name  cmd_modern_alignment
+
+Links beim ""modernen"" Layout ausrichten (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die Ausrichtung der Links im linken Teil der Seite
+bestimmen. Standardeinstellung ist ""(!code [center])"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_modern_backcolor])
+!html_name  cmd_modern_backcolor
+
+Setzen der Hintergrundfarbe beim ""modernen"" Layout (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_modern_backimage])
+!html_name  cmd_modern_backimage
+
+Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt das Hintergrundbild für HTML-Seiten. Als Dateiname
+muss der komplette Name, also einschließlich Dateisuffix,
+angegeben werden. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_modern_backcolor]), (!KW [html_modern_layout])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_modern_backimage hintergrund.gif
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_modern_layout])
+!html_name  cmd_html_modern_layout
+
+""Modernes"" ((!nolink [Tabellen])-) Layout erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_layout(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, wird jede Seite
+als Tabelle dargestellt. Die Tabelle besteht dann aus zwei
+Spalten, wobei in der linken Spalte die (!nolink [Links]) auf die anderen
+Nodes und in der rechten Spalte der Seiteninhalt ausgegeben
+werden. Benutzen Sie (!KW [chaptericon]) innerhalb eines Nodes, werden
+in der linken Spalte Imagelinks angelegt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_modern_alignment]), (!KW [html_modern_backcolor]), (!KW [html_modern_width])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_modern_width])
+!html_name  cmd_html_modern_width
+
+Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_width (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Gibt die Breite der linken Spalte an, in die die Links bei einer durch
+(!KW [html_modern_layout]) erzeugten Tabelle gesetzt werden.
+
+Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_monofont_name])
+!html_name  cmd_html_monofont_name
+
+Nichtproportionalen Zeichensatzes für verbatim-Umgebungen bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_monofont_name (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann der Font bestimmt werden, der für die
+Anzeige von Text in verbatim-Umgebungen benutzt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_propfont_name]), (!KW [html_monofont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_monofont_name Courier
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_monofont_size])
+!html_name  cmd_html_monofont_size
+
+Größe des Fonts für verbatim-Umgebungen bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_monofont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann die Größe des Fonts bestimmt werden, der für die
+Anzeige von Text in verbatim-Umgebungen benutzt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_monofont_name]), (!KW [verbatimsize])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_monofont_size +1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_name])
+!html_name  cmd_html_name
+
+Dateinamen zuweisen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_name (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Taucht dieses Kommando innerhalb eines Kapitels,
+Abschnitts, Unterabschnitts oder Paragraphen auf, so
+wird dieser Name anstelle von KKAAUUPP (KK
+Kapitelnummer, AA Abschnittsnummer, UU
+Unterabschnittsnummer, PP Paragraphennummer) für die
+spätere HTML-Datei verwendet.
+
+(!TIP) Es empfiehlt sich, um bei vielen Kapiteln (und ggf. mehreren Sprachen) den Überblick zu behalten, dieses Kommando immer direkt nach (!KW [begin_node]) oder den entsprechenden Kommandos zu platzieren. Außerdem ist es sinnvoll, Kapitelnamen in mehrsprachigen Dokumentationen möglichst einheitlich (in Englisch) zu vergeben. Wenn Sie anschließend z.B. die deutsche Anleitung in einen Unterordner (!file [/de/]) und die englische Anleitung in einen Unterordner (!file [/en/]) legen, sind die URL im Webbrowser immer bis auf den Sprachordner-Namen identisch. So können Ihre Leser und Sie bequem zwischen verschiedenen Sprachen wechseln, indem Sie einfach im URL den Ordnernamen ändern.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_name_prefix])
+# , (!KW [html_dirname])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node Hardware
+...
+!end_node
+
+!begin_node Software
+!html_name software
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!file [010A1202.htm])
+!heading Hardware
+...
+!hline
+(!file [software.htm])
+!heading Software
+...
+!hline
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_name_prefix])
+!html_name  cmd_html_name_prefix
+
+Ausgabenamen ändern (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_name_prefix (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieses Kommando im Vorspann benutzt, wird allen
+Dateinamen, die für HTML erzeugt werden, der angegebene Text vorangestellt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [html_name])
+# , (!KW [html_dirname])
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!html_name_prefix udo_
+
+# Hauptteil
+!begin_document
+!begin_node Einleitung
+!html_name  intro
+...
+!end_node
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!file [udo_intro.htm])
+!heading Einleitung
+!..
+!hline
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_navigation])
+!html_name  cmd_html_navigation
+
+Navigationsleiste verändern
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_navigation [(!NAME)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann die Darstellung der Navigationsleiste angepasst
+werden. Dabei sind für [(!NAME)] momentan folgende Parameter möglich.
+
+!begin_description
+!item [line]
+      Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
+      standardmäßig ohne Ordnersymbole, mit ""(!code [~>~])"" getrennt.
+
+      Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben werden. 
+      Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator nicht an den Kapitelnamen klebt.
+
+      Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_line]) eingebettet.
+      So kann ihr Inhalt über CSS-Anweisungen weiter formatiert werden.
+
+!item [image]
+      Durch dieses Kommando wird am Anfang der Navigationszeile standardmäßig ein einzelnes Ordnersymbol ausgegeben. 
+      Dadurch wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich. Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
+!end_description
+
+Zudem wird am Ende jeder Navigationszeile ein Link auf die Index-Seite eingefügt. 
+Dieser Link ist zur Zeit nicht abschaltbar und sollte z.B. mit CSS-Anweisungen entsprechend positioniert werden. 
+Er wird in eine (!code [<span>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_index]) eingebettet.
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+.UDO_nav_index {
+   position: absolute;
+   right: 8px;
+   padding: 0 0 0 8px;
+   border-width: 0 0 0 1px;
+   border-style: solid;
+   border-color: #888888;
+}
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+!item [(!SEEALSO)]
+(!KW [use_auto_toptocs])
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [line]
+!end_verbatim
+(!EXAMPLE_AFTER)
+Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 Index
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [image]
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [udo_fo] [Ordner]) Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 Index
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [line] ::
+!html_navigation [image] img/udo_16
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [img/udo_16] [UDO]) Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 Index
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_no_xlist])
+!html_name  cmd_html_no_xlist
+
+xlist-Umgebung als description ausgeben (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_no_xlist(!t)
+
+!item [(!DESCRIPTION)]
+Der Schalter (!KW [html_no_xlist]) führt dazu, dass UDO
+die Listen wie bisher als description-Umgebungen ausgibt.
+Standardmäßig erzeugt UDO dafür nun HTML-Tabellen. Leider
+unterscheiden sich Navigator und IE bei der Ausgabe der (!link [Tabellen] [Tabellen]),
+besonders was die Zwischenräume und den Umbruch der ersten Spalte angeht.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+# (!KW [use_xlist])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_nodesize])
+!html_name  cmd_html_nodesize
+
+Größe der Kapitelüberschriften setzen (HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_nodesize (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie die Größe der Überschriften setzen,
+die UDO bei der Ausgabe von Kapiteln
+benutzen soll. Benutzen Sie untenstehendes Beispiel,
+so werden die Überschriften für Nodes mit (!code [<h2>!..</h2>])
+erzeugt, die für Subnodes und Subsubnodes jeweils mit
+einer kleineren Größe. Standardmäßig verwendet UDO den Wert~(!code [1]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!html_nodesize 3
+
+# Hauptteil
+!begin_node Ein Kapitel
+...
+!end_node
+
+!html_nodesize 1
+!begin_node Ein superwichtiges Kapitel
+...
+!end_node
+
+# Wert zuruecksetzen
+!html_nodesize 3
+
+!begin_node Ein anderes Kapitel
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!html_nodesize 3
+!heading Ein Kapitel
+!..
+!hline
+!html_nodesize 1
+!heading Ein superwichtiges Kapitel
+!..
+!hline
+!html_nodesize 3
+!heading Ein anderes Kapitel
+!..
+(!EXAMPLE_END)
+
+# reset value!
+!html_nodesize 1
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_propfont_name])
+!html_name  cmd_html_propfont_name
+
+Standardfont bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_propfont_name (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann der Standardfont bestimmt werden, der für die
+Anzeige von Text in HTML-Dateien benutzt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_monofont_name]), (!KW [html_propfont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_propfont_name Arial
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_propfont_size])
+!html_name  cmd_html_propfont_size
+
+Größe des Standardfonts bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_propfont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann die Größe des Standardfonts bestimmt werden, der für die
+Anzeige von Text in HTML-Dateien benutzt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_propfont_name])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_propfont_size -1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_quotes])
+!html_name  cmd_html_quotes
+
+Ausgabe der An-/Abführungszeichen in HTML festlegen
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_quotes [(!NAME)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann die Darstellung der An- und Abführungszeichen in HTML angepasst werden. Dabei sind für [(!NAME)] folgende Parameter möglich.
+
+!begin_description
+
+!item [tags]
+HTML-Anführungszeichen werden als (!code [<q>]) bzw. (!code [</q>]) ausgegeben. Es empfiehlt sich, in einer .CSS-Datei zu steuern, wie diese Quote-Tags je nach Sprache umgesetzt werden sollen.
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+Hier sind CSS-Anweisungen für verschiedene An-/Abführungszeichen in verschiedenen Sprachen.
+!ifdest [asc,stg]
+!begin_verbatim
+:lang(cs) {quotes:"\00BB" "\00AB"  !\
+                  "\203A" "\2039"; }
+:lang(de) {quotes:"\00BB" "\00AB"  !\
+                  "\203A" "\2039"; }
+:lang(en) {quotes:"\201C" "\201D"  !\
+                  "\2018" "\2019"; }
+
+q:before   { content:open-quote;  color:#2E4793; }
+q:after    { content:close-quote; color:#2E4793; }
+q q:before { content:open-quote;  color:Green;   }
+q q:after  { content:close-quote; color:Green;   }
+!end_verbatim
+!else
+!begin_verbatim
+:lang(cs) { quotes:"\00BB"      "\00AB"      "\203A"      "\2039";      }
+:lang(de) { quotes:"\00BB"      "\00AB"      "\203A"      "\2039";      }
+:lang(en) { quotes:"\201C"      "\201D"      "\2018"      "\2019";      }
+:lang(fr) { quotes:"\00AB\00A0" "\00A0\00BB" "\2039\00A0" "\00A0\203A"; }
+
+q:before   { content:open-quote;  color:#2E4793; }
+q:after    { content:close-quote; color:#2E4793; }
+q q:before { content:open-quote;  color:Green;   }
+q q:after  { content:close-quote; color:Green;   }
+!end_verbatim
+!endif
+(!EXAMPLE_END)
+
+!item [classic]
+HTML-Anführungszeichen werden als (!code [&quot;]) ausgegeben.
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6.5.20
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+!begin_node (!kw [html_robots])
+!html_name  cmd_html_robots
+
+Einstellen der Robots Anweisung für Suchmaschinen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_robots (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" entspricht einer der Robots-Anweisungen, wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind ""(!code [none])"", ""(!code [noindex])"", ""(!code [index])"", ""(!code [nofollow])"" und ""(!code [follow])"". Diese Anweisung hat 
+Vorrang vor (!KW [docinfo] [[robots!!]])
+
+Für HTML Apple Help sind noch ""(!code [keywords])"", ""(!code [segments])"" und ""(!code [anchors])"" erlaubt.
+
+!item [(!EXISTSSINCE)] Version 6.5.17
+
+!item [(!SEEALSO)]
+(!KW [docinfo] [[robots!!]])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+!begin_node (!kw [html_script_name])
+!html_name  cmd_html_script_name
+
+JavaScript einbinden (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_script_name (!FILE).js(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann ein JavaScript eingebunden werden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_script_name js/mein.js
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER)
+!begin_verbatim
+<script language="JavaScript" src="js/mein.js" type="text/javascript">
+</script>
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+!begin_node (!kw [html_style_name])
+!html_name  cmd_html_style_name
+
+Stylesheet einbinden (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_style_name (!FILE).css (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Es können beliebig viele Stylesheets für verschiedene
+Medien, getrennt durch ein Leerzeichen, übergeben werden. Stylsheets
+im Kopf werden in jede Datei geschrieben, Stylesheets in Nodes nur
+in die Datei, die den Node enthält.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!ifdest [asc,stg]
+!begin_verbatim
+!html_style_name css/udo.css     title=UDO-Web
+!html_style_name css/udo_prn.css title=UDO-Druckausgabe \!
+      media=print alternate=TRUE
+!end_verbatim
+!else
+!begin_verbatim
+!html_style_name css/udo.css     title=UDO-Web
+!html_style_name css/udo_prn.css title=UDO-Druckausgabe media=print alternate=TRUE
+!end_verbatim
+!endif
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER)
+!ifdest [asc,stg]
+!begin_verbatim
+<link rel="stylesheet" type="text/css" \!
+      href="css/udo.css" \!
+      title="UDO-Web">
+<link rel="alternate stylesheet" type="text/css" \!
+      href="css/udo_prn.css" media="print" \!
+      title="UDO-Druckausgabe">
+!end_verbatim
+!else
+!begin_verbatim
+<link rel="stylesheet" type="text/css" href="css/udo.css" title="UDO-Web">
+<link rel="alternate stylesheet" type="text/css" href="css/udo_prn.css" media="print" title="UDO-Druckausgabe">
+!end_verbatim
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [html_switch_language])
+!html_name  cmd_html_switch_language
+Verweis für weitere Sprachen erzeugen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_switch_language <sprache> (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieses Kommando im Vorspann benutzt, werden
+beim ""modernen"" und beim Frames-Layout in Inhaltsverzeichnissen
+auf der rechten Seite Verweise für Seiten in anderen Sprachen erzeugt.
+
+UDO kennt zur Zeit nur <german> und <english>, da nur für diese entsprechende
+Grafiken zur Verfügung stehen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_textcolor])
+!html_name  cmd_html_textcolor
+
+Setzen der Textfarbe (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_textcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten Text darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_linkcolor]), (!KW [html_alinkcolor]), (!KW [html_vlinkcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_transparent_buttons])
+!html_name  cmd_html_transparent_buttons
+
+Transparente Navigationsbutton erzeugen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_transparent_buttons(!t)
+
+!item [(!DESCRIPTION)]
+Benutzen Sie diesen Schalter im Vorspann, erzeugt UDO statt der bisher
+bekannten Navigationsbuttons kleinere, transparente Buttons.
+
+(!NOTE) Wenn im Zielverzeichnis schon die Navigations-Buttons erzeugt wurden, legt UDO sie nicht neu an. Falls Sie also die Navigations-Buttons z.B. mithilfe dieses Kommandos ändern wollen, müssen Sie erst die vorhandenen (!const [11])~GIF-Dateien löschen. Sie erkennen Sie leicht an der Namensgebung (!file [udo_])<xxxx>(!file [.gif]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [no_images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# !html_transparent_buttons
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [img/nav_big/udo_hm] [Home])~(!img [img/nav_big/udo_up] [Hoch])~(!img [img/nav_big/udo_lf] [Links])~(!img [img/nav_big/udo_rg] [Rechts])
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_transparent_buttons
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [img/nav_small/udo_hm] [Home])~(!img [img/nav_small/udo_up] [Hoch])~(!img [img/nav_small/udo_lf] [Links])~(!img [img/nav_small/udo_rg] [Rechts])
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_ignore
+# auskommentiert 21.12.2003 - Ulrich Kretschmer (diese Funktion steht derzeit nicht zur Verfügung)
+!begin_node (!kw [html_use_folders])
+!html_name  cmd_html_use_folders
+
+Verzeichnisnamen benutzen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_use_folders(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieses Kommando im Vorspann benutzt, werden
+bei der Ausgabe die mit (!KW [html_dirname])
+gesetzten Verzeichnisnamen benutzt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_dirname])
+
+!end_xlist
+
+!end_node
+!end_ignore
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [html_use_hyphenation])
+!html_name  cmd_html_use_hyphenation
+
+Zeilenumbruch erlauben, nur HTML.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_use_hyphenation(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie festlegen, dass UDO (!code [!!--]) in (!C)&(!c)(!C)shy;(!c) (Abkürzung für ""Soft Hyphen"") umgesetzen soll.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+# !item [(!SEEALSO)]
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!html_use_hyphenation
+
+# Hauptteil:
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+!end_verbatim
+(!EXAMPLE_AFTER)
+Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze 
+Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze
+Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_verbatim_backcolor])
+!html_name  cmd_html_verbatim_backcolor
+
+Setzen der Hintergrundfarbe für verbatim-Umgebungen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_verbatim_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund in verbatim-Umgebungen darzustellen.
+
+!item [(!SEEALSO)]
+(!KW [html_backcolor]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_vlinkcolor])
+!html_name  cmd_html_vlinkcolor
+
+Setzen der Farbe für bereits besuchte Links (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_vlinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links darzustellen, die bereits besucht wurden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_linkcolor]), (!KW [html_alinkcolor]), (!KW [html_textcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [hyphen])
+!html_name  cmd_hyphen
+
+Einen Trennvorschlag global setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/hyphen (!WORD)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie UDO einen globalen
+Trennvorschlag unterbreiten. In ""(!WORD)"" sind die
+Stellen mit der Zeichenfolge !/- zu markieren, an denen
+ein Wort getrennt werden darf. Im folgenden Beispiel
+wird gezeigt, wie Sie die möglichen Trennstellen des
+Wortes ""Silbentrennung"" setzen können.
+
+!item [(!SEEALSO)]
+(!KW [sloppy]), (!KW [fussy]), (!KW [//-]), (!link [Silbentrennung] [Silbentrennung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!hyphen Sil!-ben!-tren!-nung
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

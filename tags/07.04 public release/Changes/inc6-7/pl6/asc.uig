@@ -1,0 +1,8 @@
+!begin_itemize
+
+!item Änderung: Werden Fett-, Kursivschrift etc. über das Zeilenende hinaus
+benutzt, so schließt UDO die Effekte am Zeilenende und öffnet sie am Anfang
+der nächsten Zeile erneut (Norbert Hanz).
+
+!end_itemize
+

@@ -1,0 +1,8 @@
+Currently UDO supports
+(!B)bold(!b),
+(!I)italic(!i),
+(!U)underlined(!u),
+(!V)preformatted(!v),
+(!T)non-proportional text(!t),
+(!SUB)subscript(!sub), and
+(!SUP)superscript(!sup).

@@ -1,0 +1,73 @@
+UL {
+   font-size : 12pt;
+   font-family : Verdana, Arial;
+   color : black;
+}
+
+TD {
+   font-size : 12pt;
+   font-family : Verdana, Arial;
+   color : black;
+}
+
+SMALL {
+   font-size : 8pt;
+   font-family : Arial;
+}
+
+PRE {
+   font-size : 10pt;
+}
+
+P {
+   font-size : 12pt;
+   font-family : Verdana, Arial;
+   color : black;
+}
+
+H3 {
+   font-size : 12pt;
+   font-family : Verdana, Arial;
+   color : black;
+}
+
+H2 {
+   font-size : 14pt;
+   font-family : Verdana, Arial;
+   color : black;
+}
+
+H1 {
+   font-size : 18pt;
+   font-family : Verdana, Arial;
+   color : black;
+}
+
+DD {
+   font-size : 12pt;
+   font-family : Verdana, Arial;
+   color : black;
+}
+
+BODY {
+   font-size : 12pt;
+   font-family : Verdana, Arial;
+   color : black;
+   background-color : floralwhite;
+}
+
+A:link    {
+   color: cornflowerblue;
+}
+
+A:visited {
+   color: cornflowerblue;
+}
+
+A:active  {
+   color: steelblue;
+}
+
+A:hover   {
+   color: #FF8000;
+}

@@ -1,0 +1,34 @@
+!begin_itemize
+
+!index Bilder !! IPF
+!index (!/img~[~]) !! IPF
+
+!item Neu: Inline-Images ((!V)(!/img~[~])(!v)) sollten nun funktionieren
+(R. München).
+
+!item Änderung: Für die Headings wird nun ""(!V)id=(!v)"" anstatt
+""(!V)res=(!v)"" benutzt. Als IDs werden die gleichen IDs wir für
+WinHelp verwendet.
+
+!index !/mapping !! IPF
+
+!item Neu: Mit (!I)!/mapping <nummer>(!i) kann ein res-Wert
+angegeben werden. Wird in einem Node (!I)!/mapping~4711(!i) benutzt,
+so erzeugt UDO den Eintrag (!V)res=4711(!v) im IPF-Node-Header.
+Wird kein (!I)!/mapping(!i) benutzt, so wird auch kein (!V)res=...(!v)
+ausgegeben. (Josef Becker)
+
+!index !/index !! IPF
+!index Index !! IPF
+
+!item Neu: ""(!V)!/index(!v)"" wird unterstützt.
+
+!item Bugfix: Hinter ""(!V)lm margin=x(!v)"" fehlte ein Punkt.
+
+!item Bugfix: ""(!V)!/..(!v)"" wurde falsch angepaßt.
+
+!item Bugfix: Schriftarten wurden in Tabellen nicht angepaßt (R.
+München)
+
+!end_itemize
+
