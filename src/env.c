@@ -106,6 +106,10 @@ const char *id_env_c= "@(#) env.c       $DATE$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <stdlib.h>

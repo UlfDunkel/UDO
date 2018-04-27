@@ -63,6 +63,10 @@ const char *id_toc_html_c= "@(#) toc_html.c    $Date$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <stdlib.h>

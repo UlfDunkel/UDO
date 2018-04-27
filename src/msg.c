@@ -68,6 +68,10 @@ const char *id_msg_c= "@(#) msg.c       $Date$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <stdlib.h>

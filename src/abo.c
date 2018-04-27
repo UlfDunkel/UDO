@@ -72,6 +72,10 @@ const char *id_abo_c= "@(#) abo.c       $DATE$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <stdlib.h>

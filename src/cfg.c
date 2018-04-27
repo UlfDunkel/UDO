@@ -65,6 +65,10 @@ const char *id_cfg_c= "@(#) cfg.c       $DATE$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <string.h>

@@ -162,6 +162,10 @@ const char *id_toc_c= "@(#) toc.c       $date$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <stdlib.h>

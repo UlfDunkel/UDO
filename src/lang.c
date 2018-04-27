@@ -80,6 +80,10 @@ const char *id_lang_c= "@(#) lang.c       $Date$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <string.h>

@@ -69,7 +69,7 @@
 *    fd  Feb 19: - CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
 *                - c_universal_charset() debugged
 *    fd  Feb 20: CODE_CP1251
-*    fd  Feb 22: - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253 (Greek)
 *    fd  Feb 23: - CODE_MAC_CE
 *                - CODE_LAT1 -> CODE_CP1252
@@ -158,6 +158,10 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 *     INCLUDE FILES
 *
 ******************************************|************************************/
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "import.h"
 #include <stdio.h>

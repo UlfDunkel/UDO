@@ -64,11 +64,15 @@ const char *id_udomem_c= "@(#) udomem.c       $Date$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#include "import.h"
+#include "udoport.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-#include "import.h"
 #include "file.h"
 
 #include "export.h"

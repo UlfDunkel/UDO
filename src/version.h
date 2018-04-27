@@ -81,7 +81,7 @@
 *    fd  Feb 14: copyright year updated
 *  2013:
 *    ggs Mar 03: copyright year updated
-*    fd  May 02: v7.02 ()
+*    fd  May 02: v7.02 (1228)
 *    fd  Oct 23: v7.03 (1242) - supporting HTML5
 *    fd  Oct 24: v7.03 (1248)
 *  2014
@@ -175,15 +175,14 @@
 #define USE_LONG_FILENAMES   0
 #define USE_LATIN1_CHARSET   0
 #define SYSTEM_CHARSET       CODE_TOS
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
 #define HAVE_STRICMP         1
 #define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
-#define HAVE_TMPNAM          0
+#endif
 #endif
 
                                           /* OS/2 Support: OS/2 verhaelt sich wie DOS */
@@ -197,15 +196,15 @@
 #define USE_LONG_FILENAMES   0
 #define USE_LATIN1_CHARSET   0
 #define SYSTEM_CHARSET       CODE_437
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
 #define HAVE_STRICMP         1
 #define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __OS2__
@@ -219,15 +218,15 @@
 #define USE_LONG_FILENAMES   0
 #define USE_LATIN1_CHARSET   0
 #define SYSTEM_CHARSET       CODE_850
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
 #define HAVE_STRICMP         1
 #define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __WIN32__
@@ -236,15 +235,15 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
 #define SYSTEM_CHARSET       CODE_CP1252
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
 #define HAVE_STRICMP         1
 #define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __LINUX__
@@ -253,15 +252,11 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
 #define SYSTEM_CHARSET       CODE_CP1252
-#define HAVE_STRUPR          0
-#define HAVE_STRLWR          0
-#define HAVE_STRICMP         0
-#define HAVE_STRNICMP        0
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRCASECMP      1
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
-#define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __AMIGA__
@@ -270,15 +265,13 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
 #define SYSTEM_CHARSET       CODE_CP1252
-#define HAVE_STRUPR          0
-#define HAVE_STRLWR          0
-#define HAVE_STRICMP         0
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRNICMP        1
 #define HAVE_STRCASECMP      1
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __SINIX__
@@ -287,15 +280,13 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
 #define SYSTEM_CHARSET       CODE_CP1252
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
-#define HAVE_STRICMP         0
 #define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
-#define HAVE_SYS_ERRLIST     0
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __SUNOS__
@@ -304,15 +295,12 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
 #define SYSTEM_CHARSET       CODE_CP1252
-#define HAVE_STRUPR          0
-#define HAVE_STRLWR          0
-#define HAVE_STRICMP         0
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __IRIX__
@@ -321,6 +309,7 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
 #define SYSTEM_CHARSET       CODE_CP1252
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          0
 #define HAVE_STRLWR          0
 #define HAVE_STRICMP         0
@@ -328,8 +317,8 @@
 #define HAVE_STRCASECMP      1
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __HPUX_ISO__
@@ -338,15 +327,13 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
 #define SYSTEM_CHARSET       CODE_CP1252
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
-#define HAVE_STRLWR          0
-#define HAVE_STRICMP         0
 #define HAVE_STRNICMP        1
 #define HAVE_STRCASECMP      1
-#define HAVE_SYS_ERRLIST     0
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __HPUX_ROMAN8__
@@ -355,15 +342,14 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   0
 #define SYSTEM_CHARSET       CODE_HP8
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
-#define HAVE_STRICMP         0
 #define HAVE_STRNICMP        1
 #define HAVE_STRCASECMP      1
-#define HAVE_SYS_ERRLIST     0
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __MACOS__
@@ -371,16 +357,13 @@
 #define USE_SLASH            0
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   0
-#define SYSTEM_CHARSET       CODE_MAC
-#define HAVE_STRUPR          0
-#define HAVE_STRLWR          0
-#define HAVE_STRICMP         0
-#define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
-#define HAVE_SYS_ERRLIST     0
-#define HAVE_STRERROR        1
 #define USE_SETFILETYPE      1
+#define SYSTEM_CHARSET       CODE_MAC
+#ifndef HAVE_CONFIG_H
+#define HAVE_STRNICMP        1
+#define HAVE_STRERROR        1
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __MACOSX__
@@ -389,15 +372,13 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   0
 #define SYSTEM_CHARSET       CODE_MAC
-#define HAVE_STRUPR          0
-#define HAVE_STRLWR          0
-#define HAVE_STRICMP         0
-#define HAVE_STRNICMP        0
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRCASECMP      1
+#define HAVE_STRNCASECMP     1
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __NEXTSTEP__
@@ -406,15 +387,14 @@
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   0
 #define SYSTEM_CHARSET       CODE_NEXT
+#ifndef HAVE_CONFIG_H
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
-#define HAVE_STRICMP         0
 #define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
-#define USE_SETFILETYPE      0
 #define HAVE_TMPNAM          1
+#endif
 #endif
 
 #ifdef __BEOS__
@@ -422,19 +402,33 @@
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   0
-#define SYSTEM_CHARSET       CODE_UTF8
-#define HAVE_STRUPR          0
-#define HAVE_STRLWR          0
-#define HAVE_STRICMP         0
-#define HAVE_STRNICMP        1
-#define HAVE_STRCASECMP      0
-#define HAVE_SYS_ERRLIST     0
-#define HAVE_STRERROR        1
 #define USE_SETFILETYPE      1
+#define SYSTEM_CHARSET       CODE_UTF8
+#ifndef HAVE_CONFIG_H
+#define HAVE_STRNICMP        1
+#define HAVE_STRERROR        1
 #define HAVE_TMPNAM          1
 #endif
+#endif
 
-#endif   /* VERSION_H */
+/* generic unix, not in any of the above */
+#ifdef __UNIX__
+#define UDO_OS               "Unix"
+#define USE_SLASH            1
+#define USE_LONG_FILENAMES   1
+#define USE_LATIN1_CHARSET   1
+#define SYSTEM_CHARSET       CODE_CP1252
+#endif
+
+/*******************************************************************************
+*
+*     DEFAULT VALUES
+*
+******************************************|************************************/
+
+#ifndef USE_SETFILETYPE
+#define USE_SETFILETYPE 0
+#endif
 
 
 
@@ -466,40 +460,5 @@
 #error  "SYSTEM_CHARSET not defined!"
 #endif
 
-#ifndef HAVE_STRUPR
-#error  "HAVE_STRUPR not defined!"
-#endif
 
-#ifndef HAVE_STRLWR
-#error  "HAVE_STRLWR not defined!"
-#endif
-
-#ifndef HAVE_STRICMP
-#error  "HAVE_STRICMP not defined!"
-#endif
-
-#ifndef HAVE_STRNICMP
-#error  "HAVE_STRNICMP not defined!"
-#endif
-
-#ifndef HAVE_STRCASECMP
-#error  "HAVE_STRCASECMP not defined!"
-#endif
-
-#ifndef HAVE_SYS_ERRLIST
-#error  "HAVE_SYS_ERRLIST not defined!"
-#endif
-
-#ifndef HAVE_STRERROR
-#error  "HAVE_STRERROR not defined!"
-#endif
-
-#ifndef USE_SETFILETYPE
-#error  "USE_SETFILETYPE not defined!"
-#endif
-
-#ifndef HAVE_TMPNAM
-#error  "HAVE_TMPNAM not defined!"
-#endif
-
-/* +++ EOF +++ */
+#endif   /* VERSION_H */

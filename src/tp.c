@@ -74,6 +74,10 @@ const char *id_tp_c= "@(#) tp.c        $date$";
 *
 ******************************************|************************************/
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "import.h"
 #include <stdio.h>
 #include <stdlib.h>
