@@ -74,7 +74,7 @@ const char *id_msg_c= "@(#) msg.c       $Date$";
 #include <string.h>
 #include <stdarg.h>
 #include <errno.h>
-#include "portab.h"
+#include "udoport.h"
 #include "constant.h"
 #include "version.h"
 #include "udo_type.h"

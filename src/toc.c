@@ -168,7 +168,7 @@ const char *id_toc_c= "@(#) toc.c       $date$";
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
-#include "portab.h"
+#include "udoport.h"
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"

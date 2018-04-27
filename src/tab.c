@@ -90,7 +90,7 @@ const char *id_tab_c= "@(#) tab.c       $date$";
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "portab.h"
+#include "udoport.h"
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"

@@ -75,7 +75,7 @@ const char *id_sty_c= "@(#) sty.c       $Date$";
 #include <stdlib.h>
 #include <string.h>
 
-#include "portab.h"
+#include "udoport.h"
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"

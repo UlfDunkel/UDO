@@ -91,7 +91,7 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "portab.h"
+#include "udoport.h"
 #include "export.h"
 #include "str.h"
 #include "version.h"

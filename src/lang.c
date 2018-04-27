@@ -84,7 +84,7 @@ const char *id_lang_c= "@(#) lang.c       $Date$";
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "portab.h"
+#include "udoport.h"
 
 #include "version.h"                      /* IMPORTANT macros! */ 
 #include "constant.h"                     /* IMPORTANT macros! */

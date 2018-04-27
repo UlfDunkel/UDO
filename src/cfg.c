@@ -70,7 +70,7 @@ const char *id_cfg_c= "@(#) cfg.c       $DATE$";
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "portab.h"
+#include "udoport.h"
 #include "version.h"
 #include "constant.h"
 #include "file.h"

@@ -76,7 +76,7 @@ const char *id_par_c= "@(#) par.c       $DATE$";
 #include <string.h>
 #include <time.h>                         /* v6.5.19 */
 #include <stdlib.h>
-#include "portab.h"
+#include "udoport.h"
 #include "constant.h"
 #include "udo_type.h"
 #include "commands.h"

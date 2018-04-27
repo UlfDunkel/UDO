@@ -80,7 +80,7 @@ const char *id_fsplit_c = "@(#) file.c     $date$";
 #include <direct.h>
 #endif
 #endif
-#include "portab.h"
+#include "udoport.h"
 #include "version.h"
 #include "str.h"
 #include "msg.h"

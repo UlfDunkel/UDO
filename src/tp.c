@@ -78,7 +78,7 @@ const char *id_tp_c= "@(#) tp.c        $date$";
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "portab.h"
+#include "udoport.h"
 #include "constant.h"
 #include "udo_type.h"
 #include "commands.h"

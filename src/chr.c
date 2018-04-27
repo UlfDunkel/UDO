@@ -155,7 +155,7 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include <string.h>
 #include <stdlib.h>
 
-#include "portab.h"
+#include "udoport.h"
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"

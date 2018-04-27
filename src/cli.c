@@ -80,7 +80,7 @@ const char *id_cli_c = "@(#) cli.c       $DATE$";
 #include <stdio.h>   
 #include <string.h>   
 #include <stdlib.h>
-#include "portab.h"
+#include "udoport.h"
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"

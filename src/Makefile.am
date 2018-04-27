@@ -25,7 +25,7 @@ udo_SOURCES = \
 	lang.c lang.h lang_utf.h \
 	msg.c msg.h \
 	par.c par.h \
-	portab.h \
+	udoport.h \
 	str.c str.h \
 	sty.c sty.h \
 	tab.c tab.h \

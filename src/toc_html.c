@@ -68,7 +68,7 @@ const char *id_toc_html_c= "@(#) toc_html.c    $Date$";
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "portab.h"
+#include "udoport.h"
 #include "constant.h"
 #include "udo_type.h"
 #include "chr.h"

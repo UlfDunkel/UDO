@@ -77,7 +77,7 @@ const char *id_img_c= "@(#) img.c       22.04.1999";
 #include "import.h"
 #include <stdio.h>
 #include <string.h>
-#include "portab.h"
+#include "udoport.h"
 #include "constant.h"
 #include "udo_type.h"
 #include "chr.h"

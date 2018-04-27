@@ -166,7 +166,7 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 #include <stdarg.h>
 #include <time.h>
 #include <ctype.h>
-#include "portab.h"
+#include "udoport.h"
 
 #include "version.h"                      /* WICHTIGE Makros! */
 #include "constant.h"                     /* WICHTIGE Makros! */
