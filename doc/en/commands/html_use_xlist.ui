@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [html_use_xlist])
+!html_name cmd_html_use_xlist
+
+Output xlist environment like in ASCII.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_use_xlist(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more.
+Use (!KW [use_xlist] [[html!!]]) instead.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [use_xlist])
+
+!end_xlist
+
+!end_node
+!endif

@@ -1,0 +1,40 @@
+!begin_node (!kw [no_quotes])
+!html_name cmd_no_quotes
+
+Keine typographischen Anführungsstriche benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_quotes [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet die Umwandlung von doppelten in echte
+Anführungszeichen und Apostrophen aus. Doppelte
+Anführungszeichen und Apostrophe werden dann durch
+einfache ersetzt.
+
+!item [(!SEEALSO)]
+(!link [("")] [("")]), (!link [Doppelte Anführungszeichen] [doublequotes]), (!link [('')] [('')]), (!link [Doppelte Apostrophe] [Doppelte Apostrophe])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_quotes [asc,man]
+
+# Hauptteil:
+Da fragte der Richter: ""Stimmt es, daß Sie 
+neulich zum Zeugen ''Du Idiot'' gesagt haben?""
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+Da fragte der Richter: "Stimmt es, daß Sie 
+neulich zum Zeugen 'Du Idiot' gesagt haben?"
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

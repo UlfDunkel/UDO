@@ -1,0 +1,44 @@
+######################################
+# @(#) interne Verknüpfungen - dh 1996
+######################################
+
+!code_source [latin1]
+
+!docinfo [title]	UDOs
+!docinfo [program]	Link-Befehl
+!docinfo [author]	Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+#----------------------------
+!node Ein paar Beispiele für den link-Befehl
+
+Mit UDO können Sie manuelle Verweise auf andere Teile des Textes vornehmen,
+indem Sie den link-Befehl benutzen:
+
+!begin_enumerate
+!item Im (!link [nächsten Kapitel] [Ein Node])!..
+!item Im (!link [folgenden Kapitel] [Ein Alias])!..
+!item Eine (!link [spezielle Stelle] [Ein Label])!..
+!end_enumerate
+
+Gibt man als Ziel den Namen eines Kapitels oder dessen Alias an, so wird
+eine Verknüpfung auf den Anfang des Kapitels angelegt. Gibt man hingegen
+als Ziel ein Label an, so wird an die Stelle verzweigt, wo das Label
+gesetzt wurde.
+
+#----------------------------
+!node Ein Node
+!alias Ein Alias
+
+Dieses Kapitel dient nur als Sprungziel.
+
+!label Ein Label
+
+Dieser Absatz steht unter einem Label.
+
+#----------------------------
+!end_document
+

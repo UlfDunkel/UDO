@@ -1,0 +1,28 @@
+!begin_node (!kw [raw])
+!html_name cmd_raw
+
+Print raw string for destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will only be output if you convert into
+one of the specified formats. ""(!TEXT)"" will be not converted!
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!raw [stg] @subject Documentation/Utilities
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

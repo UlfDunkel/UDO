@@ -1,0 +1,23 @@
+!begin_node (!kw [unset])
+!html_name cmd_unset
+
+Remove a symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/unset (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can delete a symbol that was set with
+(!KW [set]) or with the command line option (!code [-D]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [set]), (!KW [ifset]), (!KW [ifnset]), (!link [Symbols] [Symbols])
+
+!end_xlist
+
+!end_node

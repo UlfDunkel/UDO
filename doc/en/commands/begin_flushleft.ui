@@ -1,0 +1,23 @@
+!begin_node (!kw [begin_flushleft])
+!html_name cmd_begin_flushleft
+
+Start left justified text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_flushleft(!t)
+
+!item [(!DESCRIPTION)]
+Lines that are part of a (!link [flushleft environment] [flushleft environment]) are printed left
+justified without justification.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!KW [end_flushleft]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+!end_node

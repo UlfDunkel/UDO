@@ -1,0 +1,20 @@
+!begin_node (!kw [sssh])
+!html_name cmd_sssh
+
+Output a paragraph heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubheading]).
+
+!item [(!SEEALSO)]
+(!KW [subsubsubheading])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,38 @@
+!begin_node (!kw [begin_table])
+!html_name cmd_begin_table
+
+Eine Tabelle beginnen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_table [<format>] {!hline}(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando wird eine Tabelle eingeleitet.
+Für ""<format>"" geben Sie an, wie die Spalten der
+Tabelle ausgerichtet werden sollen und vor bzw. nach
+welcher Spalte senkrechte Linien gezogen werden
+sollen. Wird zum Schluß noch (!KW [hline]) angegeben, so
+beginnt die Tabelle mit einer waagerechten Linie. Im
+Beispiel sehen Sie eine Tabelle, die links,
+rechts und oben mit einer Linie versehen ist und die
+Spalten linksbündig, zentriert und rechtsbündig
+ausgerichtet werden.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.42
+
+!item [(!SEEALSO)]
+(!KW [hline]), (!KW [end_table]), (!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_table [|lcr|] !hline
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

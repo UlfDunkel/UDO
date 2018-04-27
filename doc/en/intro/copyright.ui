@@ -1,0 +1,41 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Copyright
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (from copyrght.ui)
+#
+################################################################################
+
+!begin_node Copyright
+!html_name introduction_copyright
+
+!ifset copying
+UDO and its documentation are copyrighted by Dirk Hagedorn and the
+(!url [UDO community] [http://www.udo-open-source.org/]).
+
+UDO is distributed under the terms of the GNU GENERAL PUBLIC LICENSE:
+!else
+UDO and its documentation are copyrighted by Dirk Hagedorn and the UDO community.
+
+UDO is distributed under the terms of the GNU GENERAL PUBLIC LICENSE
+(see also file COPYRIGHT):
+!endif
+
+# ------------------------------------------------------------------------------
+# GNU General Public license
+# ------------------------------------------------------------------------------
+!hline
+!include intro/gpl.ui
+
+!end_node

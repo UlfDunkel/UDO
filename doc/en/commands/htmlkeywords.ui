@@ -1,0 +1,26 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [htmlkeywords])
+!html_name cmd_htmlkeywords
+
+Set META keywords for HTML.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/htmlkeywords (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KW [html_keywords]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~3
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_keywords])
+
+!end_xlist
+
+!end_node
+!endif

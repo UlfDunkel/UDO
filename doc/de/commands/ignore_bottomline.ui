@@ -1,0 +1,26 @@
+!begin_node (!kw [ignore_bottomline])
+!html_name cmd_ignore_bottomline
+
+Ausgabe einer Fußzeile unterdrücken.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_bottomline(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+wird bei diesem Kapitel keine Fußzeile erzeugt. Im
+Gegensatz zu (!KW [no_bottomlines]) wird lediglich bei dem
+Kapitel, bei dem (!KW [ignore_bottomline]) benutzt wird, auf
+die Ausgabe einer Kopfzeile verzichtet.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines])
+
+!end_xlist
+
+!end_node

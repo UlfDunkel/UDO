@@ -1,0 +1,12 @@
+!begin_node Installing the Linux rpm package
+!html_name installation_linux_rpm
+
+!begin_itemize !compressed
+!item Download the appropriate rpm file from the (!url [UDO website] [http://www.udo-open-source.org]).
+!item Log in as (!code [root]).
+!item For a new installation enter: (!code [rpm -i]) (!file [file.rpm])
+!item For an upgrade (if you have an older UDO-rpm installed): (!code [rpm -U]) (!file [file.rpm])
+!end_itemize
+Or use your preferred rpm UI (e.g. kpackage, krpmview, yast).
+
+!end_node

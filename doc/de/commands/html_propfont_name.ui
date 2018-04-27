@@ -1,0 +1,30 @@
+!begin_node (!kw [html_propfont_name])
+!html_name cmd_html_propfont_name
+
+Standardfont bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_propfont_name (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann der Standardfont bestimmt werden, der für die
+Anzeige von Text in HTML-Dateien benutzt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_monofont_name]), (!KW [html_propfont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_propfont_name Arial
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

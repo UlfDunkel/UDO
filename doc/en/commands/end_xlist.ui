@@ -1,0 +1,20 @@
+!begin_node (!kw [end_xlist])
+!html_name cmd_end_xlist
+
+Finish a list.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_xlist(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the latest xlist environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_xlist]), (!KW [item] [[~!!]]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node

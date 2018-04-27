@@ -1,0 +1,29 @@
+!begin_node (!kw [use_label_inside_index])
+!html_name cmd_use_label_inside_index
+
+Labels automatisch in den Index übernehmen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_label_inside_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+automatisch alle Labels im Index der angegebenen
+Formate angezeigt.
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KW [label])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_label_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

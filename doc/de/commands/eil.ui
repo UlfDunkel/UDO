@@ -1,0 +1,20 @@
+!begin_node (!kw [eil])
+!html_name cmd_eil
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/eil(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_ilist]).
+
+!item [(!SEEALSO)]
+(!KW [end_ilist])
+
+!end_xlist
+
+!end_node

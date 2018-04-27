@@ -1,0 +1,68 @@
+!begin_node (!kw [no_img_size])
+!html_name cmd_no_img_size
+
+Suppress detection of image sizes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_img_size [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+UDO will normally detect the width and height of images
+(and inserts this value into the (!code [<img>]) tag for HTML).
+UDO will search for the files beginning at the output directory,
+thus constructing the pathname from the pathname of the output
+file and the filename of the image. With this switch you
+can turn off the detection of the image sizes.
+
+(!TIP) If you change the images regularly in your HTML documentation,
+this switch may be helpful since you can just replace the images on
+your web server without having to regenerate the HTML pages.
+
+(!NOTE) If you (!I)don't(!i) use this switch, UDO not only determines
+the dimensions of the images, but also checks wether the image file
+exists at all. Thus you can use this bevaviour to check wether
+all needed images exist. You can use the logfile to find out
+wether any image file was missing.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Images] [Images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Preamble:
+!no_img_size [html]
+
+# Mainpart:
+!image udo_16
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<img src="udo_16.gif" alt="" title="" border="0">
+!end_preformatted
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Preamble:
+# !no_img_size [html]
+
+# Mainpart:
+!image udo_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<img src="udo_16.gif" alt="UDO-Icon" title="UDO-Icon" 
+     border="0" width="16" height="16">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

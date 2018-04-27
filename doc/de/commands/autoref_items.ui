@@ -1,0 +1,24 @@
+!begin_node (!kw [autoref_items])
+!html_name cmd_autoref_items
+
+Referenzierung bei Items ein-/ausschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/autoref_items [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+Hiermit können Sie einstellen, ob UDO die Punkte einer description-Umgebung oder xlist-Umgebung
+referenzieren soll. Beim Start von UDO ist die Referenzierung der Punkte standardmäßig aktiviert.
+
+!item [(!EXAMPLE)]
+(!T)!/autoref_items [off](!t)
+
+!item [(!SEEALSO)]
+(!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen]), (!KW [item] [[~!!]])
+
+!end_xlist
+
+!end_node

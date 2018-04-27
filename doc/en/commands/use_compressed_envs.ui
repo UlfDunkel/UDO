@@ -1,0 +1,32 @@
+!begin_node (!kw [use_compressed_envs])
+!html_name cmd_use_compressed_envs
+
+Output compressed environments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_envs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your source file, UDO
+will print all environments (without the verbatim environment)
+without additional horizontal space. The example shows how to use
+""compressed"" environments by default for the ASCII format.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_ilist]), (!KW [begin_itemize]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_descriptions]), (!KW [use_compressed_enumerates]), (!KW [use_compressed_itemizes]), (!KW [use_compressed_lists]), (!KW [use_compressed_tocs]), (!link [Environments] [Environments])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_compressed_envs [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

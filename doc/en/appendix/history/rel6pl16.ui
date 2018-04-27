@@ -1,0 +1,78 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6 PL 16
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_06_PL16.de)
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+!begin_node Changes from Release 6 Patchlevel 15 to 16
+!html_name history_release_6_PL15_to_16
+
+(!PUBLISHED [UDO~6 Patchlevel~16] [Sept 28, 2003])
+
+!begin_description
+!item [New commands:]
+   !begin_itemize !compressed
+   !item (!KW [html_use_hyphenation]) (!nl)
+         Only if this command is set, the hyphenation marks for
+         the HTML output are converted to (!code [&shy;])
+   !item (!code [!/node1_size foo]) (!nl)
+         This command sets the fontsize of nodes and headings for
+         postscript output (foo: fontsize in pt).
+   !item (!code [!/node2_size foo]) (!nl)
+         This command sets the fontsize of subnodes and subheadings for
+         postscript output (foo: fontsize in pt).
+   !item (!code [!/node3_size foo]) (!nl)
+         This command sets the fontsize of subsubnodes and subsubheadings
+         for postscript output (foo: fontsize in pt).
+   !item (!code [!/node4_size foo]) (!nl)
+         This command sets the fontsize of subsubsubnodes and
+         subsubsubheadings for postscript output (foo: fontsize in pt).
+   !end_itemize
+
+!item [News:]
+   !begin_itemize !compressed
+   !item In the first file of the HTML output ist set a meta tag for AppleTitle/JobTimerHelp.
+   !item All nodes, which got a special name (e.g. foo.php) by (!KW [html_name]) are referenced correct now.
+   !item The table of contents ist included in the tag (!code [<ul>]).
+         This tag is extended to (!code [<ul class="content">]).
+         Therefore you can choose, weather the bullets in front of
+         every item should be drawn or not. You can control it by
+         (!code [ul.content~{~list-style-type:~none;~}]) in a CSS file.
+   !item (!KW [newpage]) will be converted to 
+         (!code [<span style="page-break-after:always;"></span>]) for HTML output.
+         So user agents who knows about it, can make a pge break.
+   !item The image captions will be put out as a field for RTF output.
+         Therefore a table of images could be created.
+   !item There would be build a speacial page with a macro of a list of
+         figures for the RTF output, even if (!KW [listoffigures])
+         is set. The macro must be executed in the word processor.
+   !item The default values are set for kind and heightness of fonts
+         and who PDF files will be opened.
+   !end_itemize
+
+!item [Changes:]
+   !begin_itemize !compressed
+   !item (!KW [html_backpage]) (!code [../index.html "Back to UDO website"]) (!nl)
+         You can tell UDO to set a special text instead of the link text
+         in the ""alt"" attribute. The text must be included in single quotation marks.
+   !item The caption of the image won't be put in parenthis for RTF output any longer.
+   !item The images will be shifted with the text too, if they are in a special environment.
+   !end_itemize
+
+!end_description
+
+!end_node

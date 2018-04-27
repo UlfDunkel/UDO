@@ -1,0 +1,20 @@
+!begin_node (!kw [endnode])
+!html_name cmd_endnode
+
+Finish a chapter/section/subsection/paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/endnode(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the latest level in your document structure.
+
+!item [(!SEEALSO)]
+(!KW [begin_node]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+!end_node

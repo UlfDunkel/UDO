@@ -1,0 +1,21 @@
+!begin_node (!kw [end_table])
+!html_name cmd_end_table
+
+Tabelle beenden und ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_table(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die table-Umgebung und sorgt für die Ausgabe
+der Tabelle.
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [begin_table])
+
+!end_xlist
+
+!end_node

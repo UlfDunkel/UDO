@@ -1,0 +1,254 @@
+!begin_node GEM-Version
+!html_name usage_gem
+
+Für GEM (Atari-Plattformen) steht für UDO eine graphische
+Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr
+weiterentwickelt wird. 
+Siehe (!url [http://www.udo-open-source.org/download/shells.php] []).
+
+!begin_ignore
+Die GEM-Version erlaubt es, bequem mit der Maus Zielformat, Quell- und
+Zieldatei sowie einige Umwandlungsoptionen zu setzen. Darüber hinaus
+können weitere Programme wie Editoren, Hypertextcompiler und/oder
+Anzeigeprogramme für jedes Zielformat angemeldet und direkt aus der
+GEM-Version gestartet werden.
+
+Die GEM-Version unterstützt das VA-Protokoll, Iconification und Drag &
+Drop. Sie läuft unter jedem AES, sprich unter TOS, MultiTOS, Geneva,
+MagiC (Mac/PC) sowie STonX.
+
+Während der Umwandlung können Sie im Hauptdialog den Umwandlungsvorgang
+verfolgen. Dies ist jedoch aufgrund der vielen AES-Aufrufe eine
+zeitaufwendige Angelegenheit. Generell kann ich sagen, daß UDO in der
+GEM-Version wesentlich langsamer läuft als die TTP-Version. Bei großen
+Dokumentationen sollten Sie den Quelltext daher mit der TTP-Version
+übersetzen.
+
+Die Bedienung der GEM-Version ist in weiten Teilen selbst erklärend.
+
+################################################################################
+
+!begin_node GEM-Hauptdialog
+!html_name usage_gem_main
+
+Im Hauptdialog sehen Sie ein paar Buttons und eine Menüzeile. Im
+Hauptdialog wählen Sie die Quelldatei und Zieldatei aus, Sie bestimmen
+hier das Zielformat und Sie können hier die Umwandlung der Quelldatei
+starten.
+
+!begin_center
+!ifset [teTeX]
+!raw [tex] \scalebox{0.9}{
+!endif
+!image (!IMAGES)gem_main
+!ifset [teTeX]
+!raw [tex] }
+!endif
+!end_center
+
+Die Einträge der Menüzeile rufen weitere Dialoge auf bzw. sind
+größtenteils selbsterklärend. Lediglich zwei Menüeinträge sollten hier
+erklärt werden:
+
+!begin_tlist [Ziel/Programm starten:]
+
+!item [Ziel/Programm starten:] In der GEM-Version können Sie für jedes
+Format ein Programm anmelden, welches die Zieldatei weiterverarbeitet.
+So können ST-Guide-Quelltexte direkt aus der GEM-Version in einen
+Hypertext umgewandelt werden, es können (!LaTeX)-Quellen in eine DVI-Datei
+übersetzt werden, oder Sie können sich die erzeugten HTML-Dateien
+gleich mit CAB ansehen. Der Phantasie sind wenig Grenzen gesetzt.
+
+!item [Ziel/ST-Guide:] Wird dieser Menüeintrag aufgerufen, ruft UDO
+den ST-Guide auf und teilt diesem mit, er möge doch bitte den soeben
+erzeugten Hypertext (Name der Zieldatei mit der Endung (!file [.hyp])) 
+anzeigen.
+
+!end_tlist
+
+!end_node
+
+################################################################################
+
+!begin_node GEM-Dialog ""Einstellungen""
+!html_name usage_gem_settings
+
+Nach Auswahl des Menüeintrags ""Optionen, Einstellungen"" öffnet sich
+dieser Dialog. Die Bedeutung der in diesem Dialog enthaltenen Buttons
+wird hier erklärt.
+
+!begin_center
+!ifset [teTeX]
+!raw [tex] \scalebox{0.8}{
+!endif
+!image (!IMAGES)gem_opts
+!ifset [teTeX]
+!raw [tex] }
+!endif
+!end_center
+
+!begin_itemize
+
+!item Zieldatei:
+
+    !begin_itemize
+
+    !item Anpassen: Ist dieser Button selektiert, paßt die GEM-Version
+    den Namen der Zieldatei bei einem Wechsel des Zielformats im
+    Hauptdialog an. Die Anpassung ist abhängig davon, welche der folgenden
+    Buttons Sie selektieren:
+
+        !begin_itemize
+        !item Komplett: UDO übernimmt den kompletten Dateinamen der
+        Quelldatei und paßt nur die Endung an.
+
+        !item Name und Endung: UDO übernimmt den Namen der Quelldatei und
+        paßt die Endung an das ausgewählte Ausgabeformat an. Der Pfad der
+        Zieldatei wird nicht verändert.
+
+        !item Nur Endung: UDO paßt lediglich die Endung der Zieldatei an das
+        jeweilige Ausgabeformat an. Pfad und Name der Zieldatei werden nicht
+        verändert.
+        !end_itemize
+
+    !item Anzeigen Ist dieser Buttons selektiert, wird die nach
+    erfolgter Konvertierung der Zieldatei-Viewer automatisch damit
+    beauftragt, die Zieldatei anzuzeigen.
+
+    !end_itemize
+
+!item Nachfrage vor:
+
+    !begin_itemize
+
+    !item Programmende: Ist dieser Button selektiert, fragt UDO vor
+    dem Programmende noch einmal mittels einer Alertbox nach, ob Sie sich
+    denn nun auch wirklich sicher sind, dieses wunderbare Programm zu
+    verlassen. (!grin)
+
+    !item Überschreiben: Falls die Zieldatei bereits existiert, werden
+    Sie noch einmal gefragt, ob die Datei überschrieben werden soll, falls
+    dieser Button selektiert ist.
+
+    !end_itemize
+
+!item Optionen:
+
+    !begin_itemize
+
+    !item Logfile anlegen: Soll eine Datei erzeugt werden, in der alle
+    Fehlermeldungen protokolliert werden (vergleichbar mit der
+    Kommandozeilen-Option (!V)(--)no-logfile(!v))?
+
+    !item Hyphenfile anlegen: Soll eine Datei erzeugt werden, in der UDO
+    Trennvorschläge sichert (vergleichbar mit der Kommandozeilen-Option
+    (!V)(--)no-hypfile(!v))?
+
+    !item Treefile anlegen: Soll eine Datei angelegt werden, in der
+    Sie den logischen Aufbau aus Include-Dateien erkennen können
+    (identisch mit der Kommandozeilen-Option (!V)(--)treefile(!v))?
+
+    !item Statusmeldungen: Soll UDO während der Konvertierung laufen
+    Statusmeldungen ausgeben (vergleichbar mit der Kommandozeilen-Option
+    (!V)(--)verbose(!v))?
+
+    !item Warnungen unterdrücken: Soll UDO in der Protokolldatei keine Warnungen
+    ausgeben, sondern nur Fehlermeldungen (identisch mit der
+    Kommandozeilen-Option (!V)(--)no-warnings(!v))?
+
+    !end_itemize
+
+!end_itemize
+
+!end_node
+
+################################################################################
+
+!begin_node GEM-Dialog ""Symbole""
+!html_name usage_gem_symbols
+
+Die GEM-Version ermöglicht es Ihnen genau wie die
+Kommandozeilen-Version, bereits vor der eigentlichen Konvertierung
+Symbole zu setzen. Was bei der Kommandozeilen-Version mit der Option (!code [-D])
+erledigt wird, kann hier durch Eingabe und Selektion der zugehörigen
+Buttons erreicht werden.
+
+!begin_center
+!image (!IMAGES)gem_syms
+!end_center
+
+Ist ein Eintrag selektiert, wird er als vordefiniertes Symbol
+behandelt, sonst nicht.
+
+!end_node
+
+################################################################################
+
+!begin_node GEM-Dialog ""Externe Programme""
+!html_name usage_gem_externalprograms
+
+Dieser Dialog sieht ziemlich verwirrend aus und ich muß gestehen, daß 
+er bald ein wenig überarbeitet werden müßte.
+
+In diesem Dialog können Sie festlegen, mit welchen Programmen Sie die
+Quell- und Zieldateien bearbeiten und sich ansehen möchten. Außerdem
+können Sie für jedes Zielformat ein spezielles Programm angeben,
+welches die Zieldatei weiterverarbeiten soll.
+
+!begin_center
+!ifset [teTeX]
+!raw [tex] \scalebox{0.7}{
+!endif
+!image (!IMAGES)gem_prgs
+!ifset [teTeX]
+!raw [tex] }
+!endif
+!end_center
+
+Im oberen Teil wählen Sie das Zielformat aus.
+
+Im unteren Teil können Sie den Pfad des Programms angeben. Falls dieses
+Programm keine GEM-Applikation ist, sondern ein TOS-Programm, so
+sollten Sie den entsprechenden Button selektieren. Ist das Programm
+eine GEM-Applikation, und dieses Programm versteht VA_START, sollten
+Sie ebenfalls den entsprechenden Button selektieren. Die letzten beiden
+Einstellungen sind übrigens nur von Bedeutung, falls UDO das Starten
+der Programme übernimmt. Schließlich können Sie die Parameter angeben,
+die dem jeweiligen Programm übergeben werden sollen. Für den Namen der
+Quell- und Zieldatei können Sie Platzhalter benutzen. Wie diese lauten,
+das erfahren Sie nach einem Klick auf den Button ""Hinweise"".
+
+!subsubsubheading So startet UDO Programme
+
+!begin_itemize
+
+!item
+Zunächst schaut UDO, ob ein AV-Server läuft. Ist (!code [AVSERVER]) im
+Environment angegeben oder laufen Gemini oder Thing, werden
+diese mittels AV_PROGSTART damit beauftragt, das jeweilige
+Programm zu starten.
+
+!item
+Ist kein AV-Server vorhanden, startet UDO Programme auf eigene Faust.
+
+    !begin_itemize
+
+    !item Läuft das Programm als Accessory, werden die Parameter immer
+    per (!code [VA_START]) übermittelt.
+
+    !item Läuft das Programm bereits und versteht es (!code [VA_START]), so
+    verschickt UDO eine (!code [VA_START])-Meldung an eben dieses Programm.
+
+    !item Andernfalls werden GEM-Programme per (!code [shel_write(!)]), TOS-Programme
+    per (!code [Pexec(!)]) gestartet.
+
+    !end_itemize
+!end_itemize
+
+!end_node
+
+################################################################################
+
+!end_ignore
+
+!end_node

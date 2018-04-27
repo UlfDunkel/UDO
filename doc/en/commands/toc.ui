@@ -1,0 +1,30 @@
+!begin_node (!kw [toc])
+!html_name cmd_toc
+
+Output table of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Outputs a table of contents without special page or hypertext
+commands. Unlike (!KW [tableofcontents]) this does not generate a new page.
+The example shows how to output a table of contents (as raw
+text) for the ST-Guide.
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_compressed_tocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!toc [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

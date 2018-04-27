@@ -1,0 +1,32 @@
+!begin_node (!kw [subnode*])
+!html_name cmd_subnode_asterisk
+
+Start a hidden section.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subnode]), but here ""(!TEXT)""
+will not appear in a table of contents.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [subnode]), (!KW [psubnode*]), (!KW [begin_node*]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subnode* Hidden section title
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Hidden section title
+(!EXAMPLE_END)
+
+!end_node

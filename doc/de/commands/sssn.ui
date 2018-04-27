@@ -1,0 +1,20 @@
+!begin_node (!kw [sssn])
+!html_name cmd_sssn
+
+Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubnode]).
+
+!item [(!SEEALSO)]
+(!KW [subsubsubnode])
+
+!end_xlist
+
+!end_node

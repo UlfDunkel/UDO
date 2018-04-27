@@ -1,0 +1,21 @@
+!begin_node (!kw [newpage])
+!html_name cmd_newpage
+
+Seitenumbruch erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/newpage(!t)
+
+!item [(!DESCRIPTION)]
+Erzeugt in der Ausgabedatei einen Seitenumbruch,
+falls das Ausgabeformat Seitenumbrüche unterstützt.
+
+!item [(!SEEALSO)]
+(!KW [use_formfeed])
+
+!end_xlist
+
+!end_node

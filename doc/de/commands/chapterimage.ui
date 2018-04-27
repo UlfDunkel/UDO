@@ -1,0 +1,28 @@
+!begin_node (!kw [chapterimage])
+!html_name cmd_chapterimage
+
+Kapitelüberschrift durch Grafik ersetzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chapterimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Beim HTML-, ST-Guide- und WinHelp-Format wird
+anstelle einer Kapitelüberschrift die Grafik
+""(!FILE)"" verwendet, falls im Vorspann der Schalter
+(!KW [use_chapter_images]) verwendet wurde.
+
+!item [(!EXAMPLE)]
+(!T)!/chapterimage udo(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [use_chapter_images])
+
+!end_xlist
+
+!end_node

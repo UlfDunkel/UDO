@@ -1,0 +1,110 @@
+!begin_node Listen
+!html_name style_lists
+!label xlist-Umgebung
+
+Die xlist-Umgebung eignet sich, genau wie die description-Umgebung, zur
+Erläuterung von Begriffen. Bei dieser Umgebung werden die
+Beschreibungen der Begriffe jedoch alle untereinander aufgeführt. Wie
+weit die Beschreibungen eingerückt wird, hängt von der Länge des bei
+(!KW [begin_xlist] [[(!TEXT!)!!]]) übergebenen Textes ab. Die beiden eckigen
+Klammern werden dabei nicht mitgezählt.
+
+Die Umgebung wird mit (!KW [begin_xlist] [[(!TEXT!)!!]]) eingeleitet und mit
+(!KW [end_xlist]) beendet. Ein Aufzählungsbegriff wird wie bei der
+description-Umgebung durch (!KW [item] [[(!TEXT!)!!]]) gekennzeichnet.
+
+Die Umgebungen können mehrfach verschachtelt benutzt werden und lassen
+sich auch mit anderen Umgebungen kombinieren.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)xlist1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)xlist1.ui
+(!EXAMPLE_END)
+
+Der bereits in den vorherigen Kapiteln besprochene Schalter
+(!KW [compressed]) läßt sich auch bei den Listen einsetzen. Um eine
+""komprimierte"" Liste zu erzeugen, geben Sie einfach den Schalter am
+Ende der Zeile an. Auch hier ein Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)xlist2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)xlist2.ui
+(!EXAMPLE_END)
+
+!label blist-Umgebung
+!label ilist-Umgebung
+!label tlist-Umgebung
+Seit Release 6 gibt es drei weitere Umgebungen, die genauso
+funktionieren wie die hier gezeigte xlist-Umgebung. Bei diesen
+Umgebungen werden jedoch die Texte, die sich innerhalb der eckigen
+Klammern befinden, automatisch mit anderen Schriftarten ausgegeben.
+
+!begin_enumerate !compressed
+
+!item Bei der blist-Umgebung (bold list) werden die Items fett
+ausgegeben. Die blist-Umgebung wird mit (!KW [begin_blist]) eingeleitet
+und mit (!KW [end_blist]) beendet.
+
+!item Bei der ilist-Umgebung (italic list) werden die Items kursiv
+ausgegeben. Die ilist-Umgebung wird mit (!KW [begin_ilist]) eingeleitet
+und mit (!KW [end_ilist]) beendet.
+
+!item Bei der tlist-Ugebung (typewritered list) werden die Items
+nichtproportional ausgegeben. Die tlist-Umgebung wird mit
+(!KW [begin_tlist]) eingeleitet und mit (!KW [end_tlist]) beendet.
+
+!end_enumerate
+
+!smallskip
+
+Das folgende Beispiel soll demonstrieren, wie das Ergebnis aussieht.
+Zunächst der UDO-Quelltext:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)xlist3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)xlist3.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
+
+!begin_enumerate !compressed
+
+!item Wenn der zu beschreibende Text eine schließende eckige Klammer
+enthält, müssen Sie dieser Klammer ein Ausrufezeichen
+voranstellen, damit UDO erkennt, daß die folgende eckige Klammer
+noch zum ""linken Teil"" des Punktes zählt.
+
+!item Wenn das letzte Zeichen ein Ausrufezeichen ist, dann muß diesem
+ein ""/"" folgen, damit UDO nicht die obige Regel annimmt.
+
+!index (!kw [html_no_xlist])
+!item HTML erzeugt für diese Listen Tabellen. 
+Falls Sie (aus welchen Gründen auch immer) keine Tabellen wollen, 
+können Sie UDO mit (!KW [html_no_xlist]) veranlassen,
+die Listen als description-Umgebungen auszugeben.
+      
+!index (!kw [use_xlist])
+!item Linuxdoc-SGML und Texinfo bietet keine direkte
+Unterstützung für Listen diesen Typs, daher werden Listen wie
+Beschreibungen behandelt. Benutzt man jedoch den Schalter
+(!KW [use_xlist]) im Vorspann, werden diese Listen wie beim
+ASCII-Format ausgegeben, jedoch dann als vorformatierter Text,
+
+!index (!kw [rtf_charwidth])
+!index (!kw [win_charwidth])
+!item UDO kennt nicht die Schriftbreiten der benutzten Fonts für
+WinHelp und RTF. Falls die Einrückungen zu groß oder zu klein
+ausfallen, können Sie die Tiefe durch die Schalter (!KW [rtf_charwidth])
+bzw. (!KW [win_charwidth]) korrigieren.
+
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
+der Beschreibung zur itemize-Umgebung.
+
+!end_enumerate
+
+!end_node

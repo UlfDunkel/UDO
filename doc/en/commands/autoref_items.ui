@@ -1,0 +1,25 @@
+!begin_node (!kw [autoref_items])
+!html_name cmd_autoref_items
+
+Turn automatic referencing of items on/off.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/autoref_items [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+With this command you can switch on or off if UDO shall insert links
+in items of a description environment or xlist environment. When UDO
+starts it inserts links by default.
+
+!item [(!EXAMPLE)]
+(!T)!/autoref_items [off](!t)
+
+!item [(!SEEALSO)]
+(!link [Descriptions] [Descriptions]), (!link [Lists] [Lists]), (!KW [item] [[~!!]])
+
+!end_xlist
+
+!end_node

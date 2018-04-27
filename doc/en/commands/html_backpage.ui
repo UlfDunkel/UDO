@@ -1,0 +1,38 @@
+!begin_node (!kw [html_backpage])
+!html_name cmd_html_backpage
+
+Specify link for ""Go up"" button button on title page (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_backpage <URL> '(!TEXT)'(!t)
+
+!item [(!DESCRIPTION)]
+Using this command you can tell UDO where to jump to when the reader
+clicks on the ""Go~Up"" button on the title page.
+(!TEXT) can be used to specify the title of the link.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [no_headlines]), (!KW [no_bottomlines])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_backpage index.html 'Back to Homepage'
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<a href="index.html"><img src="udo_hm.gif"
+   alt="Back to Homepage"
+   title="Back to Homepage"
+   border="0" width="24" height="24"></a>
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

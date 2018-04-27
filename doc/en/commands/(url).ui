@@ -1,0 +1,67 @@
+!begin_node (!kkw [url])
+!html_name cmd_url()
+
+Reference external documents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)] [(!TARGET)] [(!CLASS)])(!t)
+
+!item [(!DESCRIPTION)]
+Use this command to create (external) links. 
+In contrast to (!KKW [xlink]), this command always creates a link to a URL.
+""(!LINK)"" can be empty and will then be replaced by the content of ""(!TEXT)"". 
+So you don't have to enter the URL twice when you want to show it as the link description.
+
+When the URL contains a tilde, it (!I)does not have to be protected(!i) with an exclamation mark in the (!KKW [url]) command.
+
+""(!TARGET)"" defines a target where the URL should be opened in. In Frames layouts, these can be other frames, or use the usual targets:
+!begin_table [l|l]
+_blank  !! opens the link in a new window
+_self   !! opens the link in the current window
+_parent !! leaves the current frameset in nested framesets
+_top    !! leaves all nested framesets
+!end_table
+
+Using ""(!CLASS)"" you can define the name of a CSS class, e.g. to show links to third-party websites in another style than links inside the current website.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [plink]), (!KKW [xlink]), (!KW [no_urls]), (!KW [no_xlinks]), (!link [Links] [Links])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!url [BugTracker of the UDO website] !\ 
+      [http://bugs.udo-open-source.org/]) (!nl)
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) (!nl)
+(!url [http://www.google.com/] []) (!nl)
+(!url [Write an email] !\ 
+      [mailto:someone@somewhere.net] [] [email]) (!nl)
+(!url [UDO guide] !\ 
+      [http://man.udo-open-source.org/en/] !\ 
+      [_blank] [elink]) (!nl)
+(!url [somewhere] !\ 
+      [http://www.domain.de/~user/index.html])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!url [BugTracker of the UDO website] !\
+      [http://bugs.udo-open-source.org/]) (!nl)
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) (!nl)
+(!url [http://www.google.com/] []) (!nl)
+(!url [Write an email] !\
+      [mailto:someone@somewhere.net] !\
+      [] [email]) (!nl)
+(!url [UDO guide] !\
+      [http://man.udo-open-source.org/en/] !\
+      [_blank] [elink]) (!nl)
+(!url [somewhere] !\
+      [http://www.domain.de/~user/index.html])
+(!EXAMPLE_END)
+
+!end_node

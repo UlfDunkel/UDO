@@ -1,0 +1,61 @@
+!begin_node Text-Screenshots darstellen
+!html_name style_linegraphics
+!label linedraw-Umgebung
+
+Normalerweise ersetzt UDO DOS-Grafikzeichen durch die ASCII-Zeichen ""(!code [+])"",
+""(!code [-])"" und ""(!code [|])"", um z.B. DOS-Screenshots halbwegs realistisch
+darzustellen. Eine direkte Einbindung von Screenshots, die DOS-Grafikzeichen
+enthalten, ist daher nicht möglich.
+
+Zur Ausgabe von Screenshots können Sie sich daher der
+linedraw-Umgebung bedienen, welche mit (!KW [begin_linedraw]) begonnen
+und mit (!KW [end_linedraw]) beendet wird.
+
+Der Text, der innerhalb dieser Umgebung steht, wird wie in einer
+verbatim-Umgebung dargestellt, d.h. nicht besonders
+behandelt, der Zeilenumbruch wird exakt übernommen und es
+werden keine UDO-Kommandos (bis auf (!KW [end_linedraw])) bearbeitet.
+Steht eine linedraw-Umgebung allerdings in einer anderen Umgebung, so
+wird der vorformatierte Text zusätzlich eingerückt.
+
+Bei Nicht-RTF-Formaten wird auf den DOS-Zeichensatz umgeschaltet,
+bei RTF wird der Zeichensatz ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm] [] [elink])""
+benutzt. Bei der Ausgabe ins (!LaTeX)-Format werden die Befehle
+(!code [\begin{verbatim}]) und (!code [\end{verbatim}]) ausgegeben. Bei den
+anderen Formaten wird (falls nötig) ein nichtproportionaler Font
+eingestellt und Sonderzeichen automatisch angepaßt.
+
+!index (!kw [tabwidth])
+Tabulatoren, die innerhalb einer linedraw-Umgebung auftauchen, werden
+von UDO automatisch durch Leerzeichen ersetzt. Durch den Schalter (!KW [tabwidth])
+können Sie UDO mitteilen, mit welcher Tabulatorbreite der
+Text geschrieben wurde.
+
+!index (!kw [ldinclude])
+Da innerhalb einer linedraw-Umgebung keine UDO-Kommandos und somit auch
+nicht (!KW [include]) beachtet werden, wäre es nicht möglich, eine
+externe Datei einzuladen und diese unformatiert darzustellen. Aus
+diesem Grund bietet UDO den Befehl (!KW [ldinclude]) an, der eine
+Befehlskombination aus (!KW [begin_linedraw]), (!KW [include]) und
+(!KW [end_linedraw]) darstellt.
+
+!smallskip
+
+(!HINT)
+
+!begin_enumerate !compressed
+!item Da andere Umgebungen im Quelltext eingerückt werden können,
+     erscheint es verlockend, auch eine linedraw-Umgebung im Quelltext
+     passend einzurücken. Bedenken Sie allerdings, daß führende
+     Leerzeichen bei der Ausgabe des vorformatierten Textes übernommen
+     werden und dieser dann in der späteren Ausgabedatei zuweit rechts
+     stehen würde, falls Sie den Text der linedraw-Umgebung einrücken.
+
+!begin_ignore
+!item Word für Windows zeigt die
+Passagen korrekt an, WordPad95 hingegen nicht (warum auch immer).
+!end_ignore
+
+!end_enumerate
+
+!end_node

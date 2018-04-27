@@ -1,0 +1,171 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_06.de)
+#   fd  Mar 03: old translation adjusted, using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 19: link adjustments for old commands
+#
+################################################################################
+
+!begin_node Changes from Release 5 to 6
+!html_name history_release_5_to_6
+
+(!PUBLISHED [UDO~6] [January 3, 1997])
+
+You will find here a very compressed list of the major changes of the
+last eight months. UDO supports now more destination formats, it
+supports new features and there were fixed a lot of bugs. In some
+cases it was impossible not to change the syntax of some commands.
+
+!begin_description !compressed
+
+!item [New destination formats:]
+      !begin_itemize !compressed
+      !item Apple QuickView
+      !item HP-HelpTag-SGML
+      !item LyX
+      !item NROFF (!nl)
+        I don't know if UDO really saves NROFF or if it is TROFF or GROFF.
+        But you can already use it to make simple manpages for Unix systems.
+      !item ""C source code"" and ""Pascal source code""
+        Using these formats it is possible to edit a C or Pascal source
+        code and its documentation in one file.
+
+        UDO will print ""normal"" text using the comment characters of C
+        or Pascal. The source code will be printed without conversion.
+      !end_itemize
+
+!item [New commands:]
+
+      !begin_itemize !compressed
+      !item (!KW [autoref_items] [[off|on!!]]):
+          Shall UDO insert links in items of descriptions and lists?
+      !item (!KW [code_mac]), (!KW [code_hp8]), (!KW [code_iso]), (!KW [code_dos]) and (!KW [code_tos]):
+          UDO understands now the character sets of other operating systems.
+      !item (!KW [country]):
+          Additional title page information.
+      !item (!KW [html_backpage]):
+          For a back-link on the HTML title page.
+      !item (!KW [html_keywords]):
+          For HTML meta information.
+      !item (!KW [html_img_suffix]):
+          To enable you to use JPEG images etc.
+      !item (!KW [html_nodesize]):
+          For changing the font size of HTML headlines.
+      !item (!KW [ifos]) und (!KW [ifnos]):
+          For checking the operating system.
+      !item (!KW [ignore_headline]), (!KW [ignore_bottomline]):
+          For suppressing the headline or the bottomline of a specific node.
+      !item (!KW [ignore_subtoc]) etc.:
+          For suppressing the sub-table of contents inside a specific node.
+      !item (!KW [ignore_links]):
+          For suppressing links to a specific node.
+      !item (!KW [image*]):
+          For printing image captions without ""Figure #:"".
+      !item (!KW [image_counter]):
+          For changing the image counter.
+      !item (!KW [no_index]):
+          For suppressing index command conversion.
+      !item (!KW [no_toc_subnodes]), (!KW [no_toc_subsubnodes]), (!KW [no_toc_subsubsubnodes]):
+          For making the table of contents smaller.
+      !item (!KW [no_preamble]):
+          Useful if you want to write your own preamble.
+      !item (!KW [parwidth]):
+          For changing the paragraph width of the destination file.
+      !item (!KW [rtf_charwidth]):
+          For changing the value UDO uses for calulating indents and cell widths.
+      !item (!KW [set]), (!KW [unset]), (!KW [ifset]), (!KW [ifnset]):
+          For setting and checking symbols.
+      !item (!KW [sort_hyphen_file]):
+          Shall UDO sort the hyphen file and delete duplicates?
+      !item (!KW [subsubsubnode]) etc.:
+          A fourth layer.
+      !item (!KW [table_counter]):
+          For changing the table counter.
+      !item (!KW [table_caption*]):
+          For printing table captions without ""Table #:"".
+      !item (!KW [tabwidth]):
+          For setting the tabulator width for verbatim environments.
+      !item (!KW [use_justification]):
+          Shall UDO generate justification?
+      !item (!KW [use_nodes_inside_index]), (!KW [use_alias_inside_index]), (!KW [use_label_inside_index]):
+          For appending nodes, aliases and labels to the index.
+      !item (!KW [use_output_buffer]):
+          Shall UDO use a buffer to make the references more perfect for HTML and Windows Help?
+      !item (!KW [use_short_envs]):
+          For printing always compressed environments.
+      !item (!KW [verbatimsize]):
+          For changing the font size of verbatim environments.
+      !item (!KW [win_background]):
+          For changing the background color for Windows Help.
+      !item (!KW [win_high_compression]), (!KW [win_medium_compression]):
+          For setting the compression rate for Windows Help.
+      !item (!KW [win_inline_bitmaps]):
+          Shall UDO use special RTF commands for using inline bitmaps?
+      !item (!KW [win_charwidth]):
+          For changing the value UDO uses for calulating indents and cell widths.
+      !end_itemize
+
+!item [News:]
+      !begin_itemize !compressed
+      !item You can use four layers now for structuring your text.
+      !item Justification
+      !item Macros and definitions can contain parameters. Thus, you can write your own commands in most cases.
+      !item blist-, ilist- and tlist-environment
+      !item right justified text (flushright environment)
+      !item left justfied text (flushleft environment) for suppressing the justification
+      !item You can use up to four email addresses on the title page now.
+      !item UDO supports Italian ((!KW [language] [[italian!!]])), Spanish
+            ((!KW [language] [[spanish!!]])) and Swedish
+            ((!KW [language] [[swedish!!]])) now.
+      !item UDO can sort the hyphen file and delete duplicates.
+      !item (!KW [no_umlaute]) converts now all international characters, not only the German umlauts.
+      !item The source code was optimized. Although UDO supports lots of new commands this version of UDO runs faster than the old one.
+      !end_itemize
+
+!item [Changes:]
+
+      !begin_itemize !compressed
+      !item The RTF output was programmed completely new. You can import UDO's RTF files without problems in WinWord.
+      !item UDO saves a preamble for (!LaTeX)~2.09 and (!LaTeXe) on its own (you can switch it off, if you want).
+      !item UDO allows you to use many more nodes, table rows, hyphens etc.
+      !item UDO checks the source files more pedantically.
+      !item Images are positioned like the outer text. To center an
+            image you have to use the (!KW [image]) command inside a
+            center environment. Thus, you can print left and right
+            justified images, too.
+      !item The suffix for ASCII files is now (!file [.txt]).
+      !item UDO doesn't break line between (!code [\verb]) when converting to (!LaTeX).
+      !item Graphic characters of the IBM PC character set will be replaced by ""(!code [+])"", ""(!code [-])"" and ""(!code [|])"" for Windows Help.
+      !end_itemize
+
+!item [Syntax changes:]
+
+      !begin_itemize !compressed
+      !item (!KW [no_verbatim_umlaute]) replaces the switch (!KW [verbatim_no_umlaute])
+      !item The switch (!KW [list_parsep]) doesn't exist anymore.
+            You can print ""compressed"" environment easier with (!KW [short]) now.
+      !item The language of the destination file has to be set with the (!KW [language]) command now.
+            (!KW [language] [[english!!]]) replaces the command (!KW [english]).
+      !item You can pass three index entries with one (!KW [index]) command now.
+      !item (!KW [win_html_look]) doesn't exist anymore.
+      !item Shadowed, hollow, outlined and framed text isn't supported anymore. 
+            But you can define your own commands with definitions if you need these text styles.
+      !end_itemize
+
+!end_description
+
+!end_node

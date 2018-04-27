@@ -1,0 +1,36 @@
+!begin_node (!kkw [black])
+!html_name cmd_black
+
+Setzt die Schriftfarbe Schwarz.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/black)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Schwarz.
+Abgeschlossen wird mit (!KKW [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Schriftfarben] [Schriftfarben])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Das Wort(!coloff) (!black)Schwarz(!coloff) 
+(!red)erscheint in der Farbe Schwarz.(!coloff)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Das Wort(!coloff) (!black)Schwarz(!coloff) 
+(!red)erscheint in der Farbe Schwarz.(!coloff)
+(!EXAMPLE_END)
+
+!end_node

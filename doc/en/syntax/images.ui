@@ -1,0 +1,344 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Images
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Images
+!html_name images
+
+UDO enables you to include images into your destination format if it
+supports images like ST-Guide, (!LaTeX), HTML, RTF, WinHelp, LyX and (!TeX).
+This chapter explains how to include images into a destination
+file and what destination commands UDO generates.
+
+!index (!kw [image])
+To display an image you can use the (!KW [image]) command. You have to add
+the name of the image (!I)without(!i) suffix and an optional image title.
+
+!index (!kkw [img])
+To display images right inside the text you can use the placeholder
+(!KKW [img]) when converting into Windows Help or HTML. The other
+formats don't allow to use images inside the text or it is so difficult that
+UDO cannot automatize it.
+
+Since Release 6 images will not be centered in all cases. To display a
+centered image you have to use the (!KW [image]) command inside a center
+environment. To display a right justified image you have to use the
+(!KW [image]) command inside a flushright environment. In all other cases
+images will be displayed depending on the setting of (!KW [image_alignment]),
+which is left by default.
+
+################################################################################
+
+!begin_node *.eps & te(!TeX)
+!html_name images_tex_te
+
+!index (!kw [tex_tetex])
+If you are using CS-(!TeX) or Multi(!TeX) and you want to include a GEM
+image into your DVI file you have to add (!KW [tex_strunk]) to your
+preamble.
+
+Because the drivers of CS-(!TeX) support the macros of Lindner-(!TeX) the
+same is done here as in the upper section.
+
+!end_node
+
+################################################################################
+
+!begin_node *.img & ST-Guide
+!html_name images_stg
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!image tiger A Tiger
+!end_verbatim
+(!EXAMPLE_END)
+
+UDO opens the file (!file [tiger.img]) and reads the size of this image. A
+special ST-Guide command called (!code [@limage]) is generated and the needed
+parameters are calculated due to the information of the GEM image header.
+
+If you want to display a subtitle add it right after the name of the image
+file. This subtitle will look like ""(Figure x: A tiger)"".
+
+!end_node
+
+################################################################################
+
+!begin_node *.img & Lindner-(!TeX)
+!html_name images_tex_lindner
+
+!index (!kw [tex_lindner])
+If you are using Lindner-(!TeX) and you want to include a GEM image into
+your DVI file you have to add (!KW [tex_lindner]) to your preamble.
+
+UDO replaces the tool called (!file [IMGTOTEX]) that is part of
+Lindner-(!TeX). UDO has all functions of this tool built in.
+
+To set the size of an image you have to use the (!I)!/tex_dpi(!i) command.
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tex_dpi 100
+!image tiger A GEM image
+!end_verbatim
+(!EXAMPLE_END)
+
+UDO reads in the header of (!file [tiger.img]), calculates its size and
+adjusts the header to 100 dpi. In the destination file a (!TeX) macro will
+be generated that includes this image and displays it with 100 dpi.
+
+!smallskip
+
+(!HINT)
+
+Using 100 dpi screenshots are displayed in the original screen
+size on my HP DeskJet 510. (!KW [tex_dpi]) can be used before any image.
+If you are using an image more than once you shouldn't try to display it in
+different resolutions. Use a copy of your image instead and display the
+original one with the first and the copy with the second resolution.
+
+!end_node
+
+################################################################################
+
+!begin_node *.img & CS-(!TeX)/Multi(!TeX)
+!html_name images_tex_csmulti
+
+!index (!kw [tex_strunk])
+If you are using CS-(!TeX) or Multi(!TeX) and you want to include a GEM
+image into your DVI file you have to add (!KW [tex_strunk]) to your
+preamble.
+
+Because the drivers of CS-(!TeX) support the macros of Lindner-(!TeX) the
+same is done here as in the upper section.
+
+!end_node
+
+################################################################################
+
+!begin_node *.msp & em(!TeX)
+!html_name images_emtex_msp
+
+!index (!kw [tex_emtex])
+If you are using em(!TeX) and you want to include an MSP image to your DVI
+file you have to add (!KW [tex_emtex]) to your preamble. Furthermore you
+have to set the resolution of an image via (!KW [tex_dpi]).
+
+The macros for em(!TeX) are generated according to the information of
+(!file [dvidrv.doc]) of em(!TeX).
+
+In first place UDO tries to read in the header of (!file [tiger.msp]) when
+reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
+(!file [tiger.msp]) it will try to find (!file [tiger.pcx]).
+
+An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
+""h"" represent the width and height of the image:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+\begin{figure}[htb]
+\begin{...}
+\begin{picture}(<w>,<h>)
+    \put(0,<h>){\special{em:graph tiger.msp}}
+\end{picture}
+\end{...}
+\caption{A tiger}
+\end{figure}
+!end_verbatim
+(!EXAMPLE_END)
+
+(!HINT)
+
+I use (!KW [tex_dpi] [300]) on my HP DeskJet 510 to display
+screenshots.
+
+!end_node
+
+################################################################################
+
+!begin_node *.pcx & em(!TeX)
+!html_name images_emtex_pcx
+
+If you are using em(!TeX) and you want to include a Paintbrush PCX to your
+DVI file you have to add (!KW [tex_emtex]) to your preamble. Furthermore
+you have to set the resolution of an image via (!KW [tex_dpi]).
+
+The macros for em(!TeX) are generated according to the information of
+(!file [dvidrv.doc]) of em(!TeX).
+
+In first place UDO tries to read in the header of (!file [tiger.msp]) when
+reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
+(!file [tiger.msp]) it will try to find (!file [tiger.pcx]).
+
+An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
+""h"" represent the width and height of the image:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+\begin{figure}[htb]
+\begin{...}
+\begin{picture}(<w>,<h>)
+    \put(0,<h>){\special{em:graph tiger.pcx}}
+\end{picture}
+\end{...}
+\caption{A tiger}
+\end{figure}
+!end_verbatim
+(!EXAMPLE_END)
+
+!smallskip
+
+(!HINT)
+
+In first place UDO tries to find an MSP image. If you are using
+images from Paintbrush PCX you can ignore the warning printed by UDO.
+
+!end_node
+
+################################################################################
+
+!begin_node *.gif & HTML
+!html_name images_html_gif
+
+UDO can generate HTML commands to include a GIF.
+
+For HTML the second parameter of the (!KW [image]) command will be used as
+the alternative text.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image tiger A Tiger
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<p align="...">
+<img src="tiger.gif" alt="(Figure 1: A tiger)" width="200" height="300">
+</p><br>
+!end_verbatim
+(!EXAMPLE_END)
+
+If you don't set the title of this image UDO doesn't output an alternative
+text.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image ../gif/tiger
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<p align="...">
+<img src="../gif/tiger.gif" alt="" width="200" height="300">
+</p><br>
+!end_verbatim
+(!EXAMPLE_END)
+
+If you do not need the image size information, you can suppress it using the command (!KW [no_img_size]).
+
+!end_node
+
+################################################################################
+
+!begin_node *.jpg & HTML
+!html_name images_html_jpg
+
+By default UDO expects that you want to display GIF images (see above). But it is
+possible to display any other kind of image format, too.
+
+!index (!kw [html_img_suffix])
+
+To tell UDO which suffix you want to use the next time you use the
+(!KW [image]) command you can use the command (!KW [html_img_suffix]).
+
+If the upper tiger isn't inside a GIF but inside a JPEG image you can insert
+the following command right before the (!KW [image]) command:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_img_suffix jpg
+!end_verbatim
+(!EXAMPLE_END)
+
+If the file is named (!file [tiger.jpeg]) instead of (!file [tiger.jpg]) use the
+following line:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_img_suffix jpeg
+!end_verbatim
+(!EXAMPLE_END)
+
+The setting is used for all following images. If you want to display a GIF
+next time you have to use (!KW [html_img_suffix] [gif]) before the next
+(!KW [image]) command is used.
+
+!end_node
+
+################################################################################
+
+!begin_node *.bmp & WinHelp
+!html_name images_winhelp
+
+UDO can generate commands for Windows Help to display Windows bitmaps (BMP).
+UDO doesn't check if a BMP exists!
+
+An image can be displayed with or without a subtitle. Windows Help centers
+the image in the help file.
+
+!begin_enumerate
+!item without subtitle: (!KW [image] [tiger])
+!item with subtitle: (!KW [image] [tiger A tiger])
+!end_enumerate
+
+UDO will then generate these commands:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+{\qc \{bmc tiger.bmp\}}\par\pard
+\par
+{\qc (Figure 1: A tiger)}\par\pard
+!end_verbatim
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate
+
+!item   UDO won't check if the image file exists. If it doesn't exists
+or the filename is wrong the Microsoft Help compiler will print an error
+message.
+
+!index (!kw [win_inline_bitmaps])
+!item   With the switch (!KW [win_inline_bitmaps]) you can tell UDO to use
+special Windows Help commands to use ""hard-coded"" images.
+
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!end_node

@@ -1,0 +1,30 @@
+!begin_node (!kw [drc_flags])
+!html_name cmd_drc_flags
+
+Assign value to node definition (DRC only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/drc_flags (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used to assign a value that is printed as last
+numeric value of a node definition when converting to DRC.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [drc_bcolor]), (!KW [drc_icolor]), (!KW [drc_ucolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!drc_flags 6
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

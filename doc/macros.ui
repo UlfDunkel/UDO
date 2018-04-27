@@ -1,0 +1,121 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Macro definitions
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from manual.u)
+#   fd  Jun 08: all commands should be formatted in bold tt
+#   fd  Jun 09: macros x/X renamed to avoid conflicts with other macros and link names
+#   fd  Jun 09: language-dependent macros might better be included first
+#   fd  Jun 10: defines from _def.ui integrated here, using new macro (!const [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: new macro: BUG
+#   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
+#   fd  Mar 08: MAXLINETABLE adjusted to UDO 7.00
+#   ggs Apr 04: Remove a ! in macro KKW in the format ASC and STG
+#   fd  May 26: macro BUG enhanced for UDO 7.02
+# 2013:
+#   tho Jun 18: reverted above changes which broke all output formats
+#
+################################################################################
+
+# ------------------------------------------------------------------------------
+# language-independent macros
+# ------------------------------------------------------------------------------
+!macro UDOR udo(!RELEASE)
+# RELEASE is defined in the generated file version.ui
+
+!macro const           (!1)
+
+# UDO limits. Keep in sync with <constant.h> in source tree
+!macro MAXLINK         (!const [262144])
+!macro MAXMACRO        (!const [1000])
+!macro MAXDEFINE       (!const [128])
+!macro MAXHYPHEN       (!const [4096])
+!macro LINELEN         (!const [4092])
+!macro MAX_TOKEN_LEN   (!const [199])
+!macro MAXSILBEN       (!const [32])
+!macro MAX_TOKENS      (!const [800])
+!macro MAXSYMLEN       (!const [32])
+!macro MAXLINETABLE    (!const [700])
+!macro MAXCOLUMSTABLE  (!const [64])
+
+# paths, file names, extensions, etc.
+# !macro  file (!teal)(!B)(!I)(!T)(!1)(!t)(!i)(!b)(!coloff)
+!macro  file (!red)(!B)(!I)(!T)(!1)(!t)(!i)(!b)(!coloff)
+
+# command parameters without link
+!macro  C    (!B)(!T)
+!macro  c    (!t)(!b)
+!macro  code (!C)(!1)(!c)
+
+!macro  verb (!T)(!1)(!t)
+
+# helper definitions to quote macro paramaters in macros below
+!macro a !]
+!define x !(!1)
+!macro  X !
+
+# linked commands without/with round brackets and leading !
+# ---------------------------------------------------------
+# KW   =  !<command>
+# KKW  = (!<command>)
+# KKKW = (!<command1>)...(!<command2>)
+
+# some formats cannot use (!B) because items of certain
+# environments are already marked with bold attribute
+!ifdest [stg,amg,asc,man,tvh,ipf,drc]
+!macro  KW   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
+!macro  K1   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
+!macro  KKW  (!I)(!link [(!(!1)!)] [(!/(!1)!)])(!i)
+!macro  KK2W (!I)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!i)
+!macro  KKKW (!I)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!i)
+!macro  KK1  (!I)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!i)
+!else
+!macro  KW   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!macro  K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!macro  KKW  (!B)(!T)(!link [(!(!1)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KK2W (!B)(!T)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
+!macro  KK1  (!B)(!T)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!t)(!b)
+!endif
+
+# unlinked commands without/with round brackets and leading !
+# -----------------------------------------------------------
+# kw   =  !<command>
+# kkw  = (!<command>)
+# kkkw = (!<command1>)...(!<command2>)
+
+!macro  kw   !(!1)
+!define k1   !(!1)
+!define kkw  (!/(!1))
+!define kkkw (!/(!1))...(!/(!2))
+!define kk1  (!(!1))
+
+# Lorem Ipsum
+!macro LOREM  Lorem ipsum dolor sit amet, consectetuer sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+
+
+!ifdest [html,hh,hah,stg,amg,tex]
+!macro IMAGES 
+!endif
+
+!ifnset IMAGES
+!macro IMAGES images/
+!endif
+
+!macro EXAMPLES examples/

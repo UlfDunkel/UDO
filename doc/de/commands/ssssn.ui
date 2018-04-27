@@ -1,0 +1,22 @@
+!begin_node (!kw [ssssn])
+!html_name cmd_ssssn
+
+Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubnode]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubnode])
+
+!end_xlist
+
+!end_node

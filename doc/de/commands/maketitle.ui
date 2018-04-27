@@ -1,0 +1,24 @@
+!begin_node (!kw [maketitle])
+!html_name cmd_maketitle
+
+Titelseite ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/maketitle(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando erzeugt in der Zieldatei eine
+Titelseite, die aus den Informationen des (!KW [docinfo])-Befehls
+gebildet wird. Wenn (!KW [maketitle]) benutzt wird,
+sollte es nur direkt nach (!KW [begin_document]) eingesetzt
+werden.
+
+!item [(!SEEALSO)]
+(!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node

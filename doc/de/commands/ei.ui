@@ -1,0 +1,20 @@
+!begin_node (!kw [ei])
+!html_name cmd_ei
+
+Letzte einfache Aufzählung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ei(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_itemize]).
+
+!item [(!SEEALSO)]
+(!KW [end_itemize])
+
+!end_xlist
+
+!end_node

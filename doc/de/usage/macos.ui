@@ -1,0 +1,49 @@
+!begin_node Macintosh-Version
+!html_name usage_macos
+
+# @(#) (alte) Anleitung zur Mac-Version, 26.06.1996, Martin Osieka
+
+# neuer Text 28.01.2004 - Ulrich Kretschmer
+Die frühere UDO-Version für (!B)Mac~OS~9(!b) steht derzeit nicht mehr zur Verfügung.
+Für (!B)Mac~OS~X(!b) gibt es eine Kommandozeilen-Version von UDO.
+
+!begin_ignore
+# auskommentiert 28.01.2004 - Ulrich Kretschmer
+Die Macintosh-Variante von UDO kommt in einem etwas schlichteren
+Gewande als die GEM-Variante daher. Alle einstellbaren Optionen sind in
+einem Dialog zusammengefaßt.
+
+Haben Sie beim Start von UDO kein UDO-Dokument übergeben, wählen Sie
+zunächst die Eingabedatei über den zugehörigen [Auswählen]-Knopf. Über
+das Ausgabeformat-Popup stellen Sie das gewünschte Format ein. Sollen
+die Ausgabedateien nicht im Ordner der Eingabedatei angelegt werden,
+stellen Sie dies im zugehörigen Popup ein und wählt über den zweiten
+[Auswählen]-Knopf einen anderen Ordner aus.
+
+Welche Dateien nun konkret von UDO erzeugt werden sollen, kann über die
+Gruppe von Schaltern --- deren Beschriftung hoffentlich selbsterklärend
+ist --- eingestellt werden. Die Einstellung des Ausgabeanzeige-Popups
+bestimmt die Geschwindigkeit mit der UDO seine Arbeit erledigt bzw. wie
+kooperativ und mitteilsam es dabei ist. Kooperativ bedeutet in diesem
+Fall, daß Sie, während UDO beschäftigt ist, mit einer anderen
+Applikation arbeiten können.
+
+Die eigentliche Konvertierung wird über den [Ausgeben]-Knopf gestartet.
+Bei fehlerfreier Ausgabe beendet sich UDO kommentarlos, ansonsten
+erscheint eine Fehlermeldung mit einem Verweis auf die Protokolldatei.
+
+!ifnset NoShareware
+Nachdem man den Shareware-Beitrag überwiesen haben, erhält man einen
+Registrierungs-Datensatz zugesandt, den man im entsprechenden Dialog
+einträgt. Hat man den Datensatz korrekt eingetragen, sind alle
+Einschränkungen der Shareware-Version aufgehoben.
+!endif
+
+Die Dokumentation zu UDO kann jederzeit aus dem Dialog heraus über die
+Hilfetaste bzw. das Hilfemenü aufgerufen werden, falls sie den
+Hypertext-Viewer Hyperion besitzen und sich der Hypertext (!file [UDO.HYP]) in
+dessen Guides-Ordner befindet.
+
+!end_ignore
+
+!end_node

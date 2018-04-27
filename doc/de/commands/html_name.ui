@@ -1,0 +1,62 @@
+!begin_node (!kw [html_name])
+!html_name cmd_html_name
+
+Dateinamen zuweisen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_name (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Taucht dieses Kommando innerhalb eines Kapitels,
+Abschnitts, Unterabschnitts oder Paragraphen auf, so
+wird dieser Name anstelle von KKAAUUPP (KK
+Kapitelnummer, AA Abschnittsnummer, UU
+Unterabschnittsnummer, PP Paragraphennummer) für die
+spätere HTML-Datei verwendet.
+
+(!TIP) Es empfiehlt sich, um bei vielen Kapiteln (und ggf. mehreren
+Sprachen) den Überblick zu behalten, dieses Kommando immer direkt nach
+(!KW [begin_node]) oder den entsprechenden Kommandos zu platzieren.
+Außerdem ist es sinnvoll, Kapitelnamen in mehrsprachigen
+Dokumentationen möglichst einheitlich (in Englisch) zu vergeben. Wenn
+Sie anschließend z.B. die deutsche Anleitung in einen Unterordner
+(!file [/de/]) und die englische Anleitung in einen Unterordner (!file [/en/])
+legen, sind die URL im Webbrowser immer bis auf den
+Sprachordner-Namen identisch. So können Ihre Leser und Sie bequem
+zwischen verschiedenen Sprachen wechseln, indem Sie einfach in der URL den
+Ordnernamen ändern.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_name_prefix])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node Hardware
+...
+!end_node
+
+!begin_node Software
+!html_name software
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!file [010A1202.htm])
+!heading Hardware
+...
+!hline
+(!file [software.htm])
+!heading Software
+...
+!hline
+(!EXAMPLE_END)
+
+!end_node

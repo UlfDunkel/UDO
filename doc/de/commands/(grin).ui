@@ -1,0 +1,30 @@
+!begin_node (!kkw [grin])
+!html_name cmd_grin()
+
+Emoticon ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/grin)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch einen grinsenden Smiley
+ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
+
+!item [(!SEEALSO)]
+(!KKW [laugh]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!grin)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!grin)
+(!EXAMPLE_END)
+
+!end_node

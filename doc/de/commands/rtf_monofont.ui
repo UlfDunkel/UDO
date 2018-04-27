@@ -1,0 +1,29 @@
+!begin_node (!kw [rtf_monofont])
+!html_name cmd_rtf_monofont
+
+Namen des Monospaced-Font für RTF setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_monofont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie den Font setzen, der zur
+Darstellung von Klartext benutzt werden soll. Als
+Standard verwendet UDO den Font ""Courier New"".
+
+!item [(!SEEALSO)]
+(!KW [rtf_propfont]), (!KW [rtf_monofont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_monofont Monospace 821
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

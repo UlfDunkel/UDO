@@ -1,0 +1,30 @@
+!begin_node (!kw [no_bottomlines])
+!html_name cmd_no_bottomlines
+
+Do not use bottom lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_bottomlines [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Tells UDO not to generate bottomlines. In the example this is done
+for the Pure C Help format.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [no_headlines]), (!KW [no_footers]), (!KW [ignore_bottomline])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_bottomlines [pch]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

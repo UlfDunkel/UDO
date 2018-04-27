@@ -1,0 +1,23 @@
+!begin_node (!kw [endif])
+!html_name cmd_endif
+
+Spezielle Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/endif(!t)
+
+!item [(!DESCRIPTION)]
+Beendet eine spezielle Umgebung, die mit (!KW [ifdest]),
+(!KW [iflang]), (!KW [ifset]), (!KW [ifos]) oder (!KW [if]) begonnen wurde. Der
+diesem Befehl folgende Text wird wieder für alle
+Formate ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [iflang]), (!KW [ifset]), (!KW [ifos]), (!KW [if]), (!KW [else]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+!end_node

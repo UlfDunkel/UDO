@@ -1,0 +1,23 @@
+!begin_node (!kw [listoftables])
+!html_name cmd_listoftables
+
+Output list of tables.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listoftables(!t)
+
+!item [(!DESCRIPTION)]
+This command outputs a list of tables. You should use it directly
+after (!KW [tableofcontents]) or (!KW [listoffigures]) if you
+want to use it. At the moment this command will only be converted for
+(!LaTeX).
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!KW [tableofcontents]), (!KW [listoffigures])
+
+!end_xlist
+
+!end_node

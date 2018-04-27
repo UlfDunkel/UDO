@@ -1,0 +1,30 @@
+!begin_node (!kw [html_monofont_name])
+!html_name cmd_html_monofont_name
+
+Specify name of monospaced font for verbatim environments (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_monofont_name (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command sets the name of the font that
+is used to display text in verbatim environments.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_propfont_name]), (!KW [html_monofont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_monofont_name Courier
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

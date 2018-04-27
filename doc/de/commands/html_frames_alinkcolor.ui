@@ -1,0 +1,23 @@
+!begin_node (!kw [html_frames_alinkcolor])
+!html_name cmd_html_frames_alinkcolor
+
+Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_alinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten
+den Hintergrund des linken Rahmens darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_backcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node

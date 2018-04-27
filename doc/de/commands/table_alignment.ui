@@ -1,0 +1,38 @@
+!begin_node (!kw [table_alignment])
+!html_name cmd_table_alignment
+
+Ausrichtung für Tabellen bestimmen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/table_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+Im Vorspann eingesetzt, bestimmt es die Standard-Ausrichtung von
+(!link [Tabellen] [Tabellen]), die mit (!KW [begin_table]) eingebunden werden. Diese Ausrichtung
+wird genau dann benutzt, wenn eine Tabelle außerhalb einer center-,
+flushleft- oder (!link [flushright-Umgebung] [flushright-Umgebung]) ausgegeben werden soll. Wird eine
+Tabelle innerhalb einer solchen Umgebung ausgegeben, wird sie genauso
+ausgerichtet wie der Text innerhalb der Umgebung, sprich eine Tabelle wird
+in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
+Sie bei (!KW [table_alignment]) gesetzt haben. Wollen Sie eine Tabelle in einer
+center-Umgebung rechtsbündig ausgeben, müssen Sie in dem Fall noch
+eine flushright-Umgebung um den (!KW [begin_table])-Befehl setzen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!KW [image]), (!KKW [img]), (!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!table_alignment left
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

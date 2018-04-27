@@ -1,0 +1,46 @@
+##################################################
+# Ein kurzes Beispiel einer Software-Dokumentation
+##################################################
+!code_source [cp1252]
+
+!docinfo [title]   Die Anleitung zu
+!docinfo [program] Hello, World!
+!docinfo [version] 8.15
+!docinfo [date]    (!today)
+
+!docinfo [author]  Dirk Hagedorn
+!docinfo [address] In der Esmecke 9
+!docinfo [address] D-59846 Sundern
+!docinfo [address] Internet: DirkHage@aol.com
+!docinfo [address] MausNet: Dirk Hagedorn @ MK2
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Installation
+
+Installieren Sie zunächst einen C-Compiler,
+falls noch nicht geschehen.
+
+Erstellen Sie eine neue Datei namens
+(!V)hello.c(!v) und geben Sie folgendes ein:
+
+!begin_quote
+!begin_verbatim
+#include <stdio.h>
+
+int main ( void )
+{
+    puts("Hello, World!");
+
+    return(0);
+}
+!end_verbatim
+!end_quote
+
+Sichern Sie die Datei und compilieren Sie sie.
+Starten Sie das vom Compiler erzeugte Programm.
+
+!end_document
+

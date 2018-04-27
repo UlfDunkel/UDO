@@ -1,0 +1,18 @@
+Statt!..
+!begin_verbatim
+!begin_asc
+[...]
+!else_asc
+[...]
+!end_asc
+!end_verbatim
+
+!.. muß man nun folgendes Konstrukt verwenden:
+!begin_verbatim
+!ifdest [asc]
+[...]
+!else
+[...]
+!endif
+!end_verbatim
+

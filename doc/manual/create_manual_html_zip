@@ -1,4 +1,0 @@
-#!/bin/sh
-# HTML-Fassung des UDO-Manuals dt./engl. in eine ZIP-Datei packen
-zip -j -9 udo-manual-html-de.zip html-de/*.html html-de/*.gif
-zip -j -9 udo-manual-html-en.zip html-en/*.html html-en/*.gif

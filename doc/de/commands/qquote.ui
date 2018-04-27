@@ -1,0 +1,32 @@
+!begin_node ((""))
+!html_name cmd_qquote
+
+Zwei Anführungszeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((""))(!t)
+
+!item [(!DESCRIPTION)]
+Wollen Sie zwei Anführungszeichen ausgeben, müssen Sie diese klammern. Andernfalls würde UDO diese in
+typographische Anführungszeichen umwandeln.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [("")] [("")])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+("")
+!end_verbatim
+(!EXAMPLE_AFTER)
+("")
+(!EXAMPLE_END)
+
+!end_node

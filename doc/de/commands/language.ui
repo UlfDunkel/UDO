@@ -1,0 +1,46 @@
+!begin_node (!kw [language])
+!html_name cmd_language
+
+Ausgabe-Sprache für UDO setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/language [(!LANGUAGE)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die Sprache der Begriffe setzen, die UDO
+für z.B. ""Kapitel"" oder ""Inhaltsverzeichnis"" benutzen soll. UDO
+verwendet standardmäßig deutschsprachige Ausdrücke.
+
+Momentan unterstützt UDO die folgenden Sprachen:
+
+!include syntax/misc/short_lang.ui
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifnlang]), (!KKW [today])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!language english
+!iflang [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!iflang [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+(!EXAMPLE_END)
+
+!end_node

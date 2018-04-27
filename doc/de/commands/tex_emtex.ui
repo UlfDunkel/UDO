@@ -1,0 +1,21 @@
+!begin_node (!kw [tex_emtex])
+!html_name cmd_tex_emtex
+
+Grafikmakros für em(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_emtex(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Windows-Paintshop-Bildern ((!file [*.msp])) ein (!TeX)-Makro für em(!TeX) erzeugt
+werden soll.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node

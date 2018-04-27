@@ -1,0 +1,19 @@
+!begin_node (!kw [show_variable])
+!html_name cmd_show_variable
+
+!(MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/show_variable(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!item [(!EXISTSSINCE)] Version~6.5.19
+
+!end_xlist
+
+!end_node

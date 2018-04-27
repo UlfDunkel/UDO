@@ -1,0 +1,24 @@
+!begin_node (!kw [html_merge_subsubsubsubnodes])
+!html_name cmd_html_merge_subsubsubsubnodes
+
+Merge subparagraphs (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubsubsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your source file UDO
+will save an HTML file for each paragraph. These files will contain
+the subparagraphs, too.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+
+!end_xlist
+
+!end_node

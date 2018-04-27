@@ -1,0 +1,33 @@
+!begin_node (!kw [use_auto_subsubsubsubtocs])
+!html_name cmd_use_auto_subsubsubsubtocs
+
+Automatische Auflistung aller Unterparagraphen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubsubsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet den automatischen internen Aufruf des
+(!KW [subsubsubsubtoc])-Kommandos ein. Am Ende eines jeden
+Unterabschnitts werden dann automatisch alle dem
+Paragraphen zugehörigen Unterparagraphen in Form eines
+Inhaltsverzeichnisses ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubtoc]), (!KW [ignore_subsubsubsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubsubsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,30 @@
+!begin_node (!kw [use_udo_index])
+!html_name cmd_use_udo_index
+
+Create index page automatically.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_udo_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+When you use this command in the preamble, UDO automatically creates an index from the 
+relevant links. If !ignore_...-commands are used accordingly, the relevant nodes, aliases, 
+index references or labels are not listed in the index. This only affects formats
+that don't generate an index of their own, like ASCII, Texinfo, HTML and AppleHelp.
+
+!item [(!SEEALSO)]
+(!KW [ignore_index]), (!KW [ignore_links]), (!KW [index]), (!KW [no_index]), (!KW [use_alias_inside_index]), (!KW [use_label_inside_index]), (!KW [use_nodes_inside_index])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_udo_index [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

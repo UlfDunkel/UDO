@@ -1,0 +1,36 @@
+!begin_node (!kkkw [V] [v])
+!ifdest [ipf]
+!alias (!/V)...(!/v)
+!endif
+!html_name cmd_V()
+!label (!kk1 [/V])
+!label (!kk1 [/v])
+
+Print preformatted text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/V)(!TEXT)(!/v)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed preformatted if possible.
+When converting to (!LaTeX), ""(!code [\verb+(!TEXT!)+])"" will be printed,
+otherwise the same output will be generated as for (!KKKW [T] [t]).
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles]), (!link [Emphasizing text] [Emphasizing text]), (!KKKW [T] [t]), (!KW [tex_verb])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+The word ""cleartext"" will be displayed as (!V)cleartext(!v).
+!end_verbatim
+(!EXAMPLE_AFTER)
+The word ""cleartext"" will be displayed as (!V)cleartext(!v).
+(!EXAMPLE_END)
+
+!end_node

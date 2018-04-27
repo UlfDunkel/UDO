@@ -1,0 +1,40 @@
+!begin_node (!kw [not_compressed])
+!html_name cmd_not_compressed
+
+Eine Umgebung ""nicht komprimiert"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/compressed(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter zusammen mit dem Befehl zum
+Beginnen einer Umgebung angegeben, wird diese
+Umgebung nicht in komprimierter Form ausgegeben, sprich es
+werden zwischen den Aufzählungspunkten 
+zusätzlichen Zwischenräume erzeugt. Das Beispiel
+zeigt, wie Sie eine ""nicht komprimierte"" Itemize-Umgebung erzeugen können.
+
+!item [(!EXISTSSINCE)] Version~7.01
+
+!item [(!SEEALSO)]
+(!KW [compressed]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_itemize]), (!KW [use_compressed_descriptions]), (!KW [use_compressed_enumerates]), (!KW [use_compressed_envs]), (!KW [use_compressed_itemizes]), (!KW [use_compressed_lists])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# preamble
+!use_compressed_envs
+
+# document
+# [...]
+!begin_itemize !not_compressed
+# [...]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

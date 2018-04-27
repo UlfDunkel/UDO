@@ -1,0 +1,36 @@
+!begin_node (!kkkw [N] [n])
+!ifdest [ipf]
+!alias (!/N)...(!/n)
+!endif
+!html_name cmd_N()
+!label (!kk1 [/N])
+!label (!kk1 [/n])
+
+Create a footnote.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/N)(!TEXT)(!/n)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed as a footnote or in brakes.
+
+(!IMPORTANT) Right before (!KK1 [N]) shouldn't be a space, tab or linefeed!
+
+!item [(!SEEALSO)]
+(!link [Footnotes] [Footnotes])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+the text(!N)the footnote(!n)
+!end_verbatim
+(!EXAMPLE_AFTER)
+the text(!N)the footnote(!n)
+(!EXAMPLE_END)
+
+!end_node

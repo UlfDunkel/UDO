@@ -1,0 +1,27 @@
+!begin_node (!kw [rtf_no_tables])
+!html_name cmd_rtf_no_tables
+
+ASCII- statt RTF-Tabellen erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_no_tables(!t)
+
+!item [(!DESCRIPTION)]
+Benutzen Sie diesen Schalter im (!PREAMBLE), werden
+Tabellen nicht mit RTF-Kommandos erzeugt, sondern wie
+ASCII-Tabellen in einem nichtproportionalen Font
+ausgegeben. Der Schalter dient dazu, RTF-Dateien auch
+für solche Textverarbeitungssysteme zu erzeugen, die
+keine RTF-Tabellen importieren können.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+!end_node

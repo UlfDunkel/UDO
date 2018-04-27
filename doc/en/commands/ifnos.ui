@@ -1,0 +1,44 @@
+!begin_node (!kw [ifnos])
+!html_name cmd_ifnos
+
+Query the operating system.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifnos [(!OS)](!t)
+
+!item [(!DESCRIPTION)]
+This command tests the current operating system UDO is running on. If
+""<systems>"" doesn't match any of the abbreviations of the operating
+systems UDO will convert all lines that follow (!KW [else]) if it
+is used. If (!KW [else]) isn't used UDO will ignore all lines until
+an (!KW [endif]). The example shows how you can test if UDO
+does (!B)not(!b) run on an Apple Macintosh.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [ifos]), (!link [Query commands] [Query commands])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifnos [macosx]
+What the hell is Mac~OS~X?
+!else
+Mac~OS~X is the coolest operating system ever.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifnos [macosx]
+What the hell is Mac~OS~X?
+!else
+Mac~OS~X is the coolest operating system ever.
+!endif
+(!EXAMPLE_END)
+
+!end_node

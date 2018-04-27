@@ -1,0 +1,24 @@
+!begin_node (!kw [no_quotes])
+!html_name cmd_no_quotes
+
+Do not use typographical quotes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_quotes [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Tells UDO not to replace double quotes and double apostrophes by typographical
+quotes and apostrophes.
+
+!item [(!EXAMPLE)]
+(!T)!/no_quotes [asc,man](!t)
+
+!item [(!SEEALSO)]
+(!link [("")] [("")]), (!link [Double quotes] [doublequotes]), (!link [('')] [('')]), (!link [Double apostrophes] [Double apostrophes])
+
+!end_xlist
+
+!end_node

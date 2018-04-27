@@ -1,0 +1,26 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Windows Help Vs.~4 (WinHelp4)
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node Windows Help Vs.~4 (WinHelp4)
+!html_name format_wh4
+!label WinHelp4
+
+(!MISS)
+
+!end_node

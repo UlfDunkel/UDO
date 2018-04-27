@@ -1,0 +1,31 @@
+!begin_node (!kw [win_old_keywords])
+!html_name cmd_win_old_keywords
+
+Alte Keywords erzeugen (nur WinHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_old_keywords(!t)
+
+!item [(!DESCRIPTION)]
+Benutzen Sie im Vorspann diesen Schalter,
+so erzeugt UDO wieder wie vor einiger Zeit WinHelp-Keywords,
+die aus dem Namen eines Nodes, Alias oder Labels gebildet werden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_old_keywords
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

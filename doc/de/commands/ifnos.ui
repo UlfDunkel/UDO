@@ -1,0 +1,44 @@
+!begin_node (!kw [ifnos])
+!html_name cmd_ifnos
+
+Betriebssystem abfragen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifnos [(!OS)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando testet das aktuelle Betriebssystem,
+unter dem UDO läuft. Enthält ""(!OS)"" (!I)keines(!i) der
+Kürzel der Betriebssysteme, wandelt UDO alle
+Zeilen ab dem folgenden (!KW [else]) um, falls (!KW [else]) benutzt
+wird. Das Beispiel zeigt, wie Sie abfragen können, ob
+UDO (!I)nicht(!i) auf einem Apple Macintosh läuft.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [ifos]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifnos [macosx]
+Was zum Teufel ist schon Mac~OS~X?
+!else
+Mac~OS~X ist das coolste Betriebssystem zur Zeit.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifnos [macosx]
+Was zum Teufel ist schon Mac~OS~X?
+!else
+Mac~OS~X ist das coolste Betriebssystem zur Zeit.
+!endif
+(!EXAMPLE_END)
+
+!end_node

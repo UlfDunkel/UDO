@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [code_next])
+!html_name cmd_code_next
+
+Auf einen anderen Zeichensatz umschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_next(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [code] [[next!!]]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+
+!end_xlist
+
+!end_node
+!endif

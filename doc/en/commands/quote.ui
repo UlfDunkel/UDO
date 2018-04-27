@@ -1,0 +1,31 @@
+!begin_node ("")
+!html_name cmd_quote
+
+Output typographical quote.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)("")(!t)
+
+!item [(!DESCRIPTION)]
+Two quotes in a row will be replaced by one typographical quote if
+the destination format supports typographical quotes. If it doesn't
+UDO will replace two quotes by one quote.
+
+!item [(!SEEALSO)]
+(!link [((""))] [((""))]), (!link [('')] [('')]), (!KW [no_quotes])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+""typographical quotes""
+!end_verbatim
+(!EXAMPLE_AFTER)
+""typographical quotes""
+(!EXAMPLE_END)
+
+!end_node

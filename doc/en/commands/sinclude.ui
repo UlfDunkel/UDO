@@ -1,0 +1,32 @@
+!begin_node (!kw [sinclude])
+!html_name cmd_sinclude
+
+Include file in sourcecode environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!FILE)"" will be included and displayed like preformatted text
+inside a sourcecode environment. If you use this command inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]).
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [pinclude]), (!link [Split documents] [Split documents]), (!link [sourcecode environment] [sourcecode environment])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!sinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!sinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_enumerate])
+!html_name cmd_begin_enumerate
+
+Start an enumeration.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_enumerate [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Starts an(!link [ enumerate environment] [enumerate environment]). 
+This environment has to be finished with (!KW [end_enumerate]). 
+You can use enumerate environments within other enumerate environments.
+Items of an enumerate environment are introduced with the keyword (!KW [item]) and 
+will be marked with alphanumerical characters.
+Use ""(!TEXT)"" to define another start value than 1.
+
+!item [(!SEEALSO)]
+(!KW [end_enumerate]), (!KW [item]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!link [Enumerations] [Enumerations])
+
+!end_xlist
+
+!end_node

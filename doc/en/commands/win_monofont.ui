@@ -1,0 +1,26 @@
+!begin_node (!kw [win_monofont])
+!html_name cmd_win_monofont
+
+Set name of monospaced font (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_monofont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+preformatted text. The default is ""Courier New"".
+
+!item [(!EXAMPLE)]
+(!T)!/win_monofont Courier(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [win_propfont]), (!KW [win_monofont_size])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,30 @@
+!begin_node (!kkw [short_today])
+!html_name cmd_short_today()
+
+Systemdatum in kurzer Schreibweise einsetzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/short_today)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das bei der Umwandlung
+aktuelle Systemdatum in kurzer Form ersetzt.
+
+!item [(!SEEALSO)]
+(!KKW [today]), (!KW [language]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!short_today)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!short_today)
+(!EXAMPLE_END)
+
+!end_node

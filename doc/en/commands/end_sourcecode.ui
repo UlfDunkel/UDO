@@ -1,0 +1,22 @@
+!begin_node (!kw [end_sourcecode])
+!html_name cmd_end_sourcecode
+
+Finish a sourcecode environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_sourcecode(!t)
+
+!item [(!DESCRIPTION)]
+This command finishes the sourcecode environment.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [begin_sourcecode]), (!KW [no_sourcecode])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,27 @@
+!begin_node (!kkw [nl])
+!html_name cmd_nl()
+
+Set a forced line break.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/nl)(!t)
+
+!item [(!DESCRIPTION)]
+With (!/nl) you can force a line break. You (!B)must(!b) add a space
+before (!/nl) if you use it!
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+breaking (!/nl) lines
+!end_verbatim
+(!EXAMPLE_AFTER)
+breaking (!/nl) lines
+(!EXAMPLE_END)
+
+!end_node

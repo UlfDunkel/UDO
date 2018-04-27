@@ -1,0 +1,77 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Charsets
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from charsets.ui)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: real quotation fixed
+# 2010:
+#   fd  Feb 24: rewritten for UDO v7
+#   fd  Mar 05: ISO-8859-3, ISO-8859-4, CYRILLIC, ARABIC, GREEK, HEBREW
+#   fd  Mar 08: TURKISH, NORDIC, THAI, BALTIC, CELTIC, ISO-8859-15, ISO-8859-16
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!index Zeichensatz
+!index Sonderzeichen
+!begin_flushleft
+!begin_table [|r|l|l|]
+(!B)System(!b) !! (!B)Encoding(!b) !! (!B)Bezeichner(!b)
+!hline
+Unicode        !! UTF-8            !! UTF-8 UTF8
+!hline
+Windows        !! (!url [Codepage 1250] [http://www.kostis.net/charsets/cp1250.htm])    !! CP1250 MS-EE WINDOWS-1250
+               !! (!url [Codepage 1251] [http://www.kostis.net/charsets/cp1251.htm])    !! CP1251 MS-CYRL RUSSIAN WINDOWS-1251
+               !! (!url [Codepage 1252] [http://www.kostis.net/charsets/cp1252.htm])    !! CP1252 MS-ANSI WINDOWS-1252 WIN
+               !! (!url [Codepage 1253] [http://www.kostis.net/charsets/cp1253.htm])    !! CP1253 GREEK MS-GREEK WINDOWS-1253
+               !! (!url [Codepage 1254] [http://www.kostis.net/charsets/cp1254.htm])    !! CP1254 MS-TURK TURKISH WINDOWS-1254
+               !! (!url [Codepage 1255] [http://www.kostis.net/charsets/cp1255.htm])    !! CP1255 HEBREW MS-HEBR WINDOWS-1255
+               !! (!url [Codepage 1256] [http://www.kostis.net/charsets/cp1256.htm])    !! CP1256 ARABIC MS-ARAB WINDOWS-1256
+               !! (!url [Codepage 1257] [http://www.kostis.net/charsets/cp1257.htm])    !! CP1257 BALTIC WINBALTRIM WINDOWS-1257
+               !! (!url [Codepage 1258] [http://www.kostis.net/charsets/cp1258.htm])    !! CP1258 WINDOWS-1258
+!hline
+ISO            !! (!url [8859-1] [http://www.kostis.net/charsets/iso8859.1.htm])           !! ISO-8859-1 ISO-IR-100 ISO8859-1 ISO_8859-1 LATIN1 L1 CSISOLATIN1
+               !! (!url [8859-2] [http://www.kostis.net/charsets/iso8859.2.htm])           !! ISO-8859-2 ISO-IR-101 ISO8859-2 ISO_8859-2 LATIN2 L2 CSISOLATIN2
+               !! (!url [8859-3] [http://www.kostis.net/charsets/iso8859.3.htm])           !! ISO-8859-3 ISO-IR-109 ISO8859-3 ISO_8859-3 LATIN3 L3 CSISOLATIN3
+               !! (!url [8859-4] [http://www.kostis.net/charsets/iso8859.4.htm])           !! ISO-8859-4 ISO-IR-110 ISO8859-4 ISO_8859-4 LATIN4 L4 CSISOLATIN4
+               !! (!url [8859-5] [http://www.kostis.net/charsets/iso8859.5.htm])           !! ISO-8859-5 ISO-IR-144 ISO8859-5 ISO_8859-5 CYRILLIC CSISOLATINCYRILLIC
+               !! (!url [8859-6] [http://www.kostis.net/charsets/iso8859.6.htm])           !! ISO-8859-6 ISO-IR-127 ISO8859-6 ISO_8859-6 ARABIC CSISOLATINARABIC ASMO-708 ECMA-114
+               !! (!url [8859-7] [http://www.kostis.net/charsets/iso8859.7.htm])           !! ISO-8859-7 ISO-IR-126 ISO8859-7 ISO_8859-7 GREEK GREEK8 CSISOLATINGREEK ECMA-118 ELOT_928
+               !! (!url [8859-8] [http://www.kostis.net/charsets/iso8859.7.htm])           !! ISO-8859-8 ISO-IR-138 ISO8859-8 ISO_8859-8 HEBREW CSISOLATINHEBREW
+               !! (!url [8859-9] [http://www.kostis.net/charsets/iso8859.9.htm])           !! ISO-8859-9 ISO-IR-148 ISO8859-9 ISO_8859-9 LATIN5 L5 CSISOLATIN5 TURKISH
+               !! (!url [8859-10] [http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-10.TXT])          !! ISO-8859-10 ISO-IR-157 ISO8859-10 ISO_8859-10 LATIN6 L6 CSISOLATIN6 NORDIC
+               !! (!url [8859-11] [http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-11.TXT])          !! ISO-8859-11 ISO8859-11 ISO_8859-11 THAI
+               !! (!url [8859-13] [http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-13.TXT])          !! ISO-8859-13 ISO-IR-179 ISO8859-13 ISO_8859-13 LATIN7 L7 CSISOLATIN7 BALTIC
+               !! (!url [8859-14] [http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-14.TXT])          !! ISO-8859-14 ISO-IR-199 ISO8859-14 ISO_8859-14 LATIN8 L8 CSISOLATIN8 CELTIC ISO-CELTIC
+               !! (!url [8859-15] [http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-15.TXT])          !! ISO-8859-15 ISO-IR-203 ISO8859-15 ISO_8859-15 LATIN9 L9 CSISOLATIN9
+               !! (!url [8859-16] [http://www.unicode.org/Public/MAPPINGS/ISO8859/8859-16.TXT])          !! ISO-8859-16 ISO-IR-226 ISO8859-16 ISO_8859-16 LATIN10 L10 CSISOLATIN10
+!hline
+Apple          !! (!url [Mac Roman] [http://www.kostis.net/charsets/applerom.htm])        !! MAC MACINTOSH MACROMAN CSMACINTOSH
+               !! (!url [Mac CentEuro] [http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CENTEURO.TXT])     !! MAC_CE MACCENTRALEUROPE
+!hline
+Atari          !! (!url [TOS] [http://www.kostis.net/charsets/atarist.htm])              !! ATARI ATARIST TOS
+!hline
+DOS            !! (!url [Codepage 437] [http://www.kostis.net/charsets/cp437.htm])     !! 437 CP437 IBM437 CSPC8CODEPAGE437 DOS
+               !! (!url [Codepage 850] [http://www.kostis.net/charsets/cp850.htm])     !! 850 CP850 IBM850 CSPC850MULTILINGUAL OS2
+!hline
+HP             !! (!url [Roman8] [http://www.kostis.net/charsets/hproman8.htm])           !! HP8 HP-ROMAN8 R8 ROMAN8 CSHPROMAN8
+!hline
+NeXTStep       !! (!url [NeXTStep] [http://www.kostis.net/charsets/nextstep.htm])         !! NEXT NEXTSTEP
+!end_table
+!end_flushleft
+
+(!IMPORTANT) (!code [latin1]) aus früheren UDO-Dokumenten sollte
+angepasst werden, da UDO vor Version~7 hierfür die Windows-Codepage
+1252 verwendete, seit Version~7 korrekterweise aber ISO-8859-1!

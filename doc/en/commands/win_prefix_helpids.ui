@@ -1,0 +1,30 @@
+!begin_node (!kw [win_prefix_helpids])
+!html_name cmd_win_prefix_helpids
+
+Prefix HelpIDs with text (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_prefix_helpids (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble,
+every HelpID will be prefixed with ""(!TEXT)"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_prefix_helpids UDO
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

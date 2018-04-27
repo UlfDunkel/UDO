@@ -1,0 +1,34 @@
+!begin_node (!kw [/..])
+!html_name cmd_dots
+
+Typographische Auslassungspunkte (Ellipsis) ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/..(!t)
+
+!item [(!DESCRIPTION)]
+Ein Ausrufungszeichen, gefolgt von zwei Punkten,
+wandelt UDO in typographische drei Punkte um, sofern
+das Ausgabeformat diese anzeigen kann. Ansonsten
+wandelt UDO (!code [!/..]) in drei normale Punkte um.
+
+(!NOTE) Im Deutschen muss vor den Auslassungspunkten ein Leerzeichen
+stehen, wenn die Auslassungspunkte für ein ganzes Wort stehen. Wenn ein
+Wort unvollständig geschrieben wird, stehen die Auslassungspunkte
+direkt am Wort.
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+""So ein Ar!.."", dachte er und schaute wütend zur~!..
+!end_verbatim
+(!EXAMPLE_AFTER)
+""So ein Ar!.."", dachte er und schaute wütend zur~!..
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,49 @@
+!begin_node Änderungen in Version 7.11
+!html_name  history_0711
+
+(!PUBLISHED [UDO~7.11][8. November 2013])
+
+!begin_description !compressed
+!item [(!KW [toc_title])]
+
+!item [(!KW [stg_limage])]
+
+!item [(!KW [ignore_toptoc])]
+
+!item [(!KW [use_auto_toptocs])]
+      erzeugt keine Verweise mehr auf Inhaltsverzeichnis
+      wenn keines generiert wurde
+
+!item [(!KKW [link])]
+      Explizite links auf die Index-Seite werden jetzt erlaubt
+      für Formate bei denen der Name der Seite bekannt ist.
+
+!item [(!KW [maketitle])]
+!item [(!KW [tableofcontents])]
+      Bei St-Guide-Ausgabe ist es nun nach diesen Kommandos noch
+      m”glich, !raw Kommandos auf die Seite zu setzen.
+      
+!item [Kleinere Fehlerkorrekturen]
+      Wie immer wurden verschiedene kleine Fehler korrigiert.
+      Sie waren so klein, dass es nicht lohnt, sie aufzuzählen.
+      
+!item [(!KKKW [G] [g])]
+!item [(!KKKW [S] [s])]
+!item [(!KKKW [O] [o])]
+      Neue Textattribute.
+
+!item [(!KKW [xlink])]
+      wertet nun einen evtl. 3. Paramater für ST-Guide aus,
+      und erzeugt bei "_new" ein ALINK statt LINK Kommando
+      (öffnet Ziel in neuem Fenster; wird von ST-Guide ignoiert
+      aber HypView wertet es aus)
+
+!item [(!KKW [url])]
+      wird für ST-Guide nun in ein RX-Kommando umgesetzt
+      (was ihn dazu veranlassen sollte den link an eine
+      vorher über @hostname festgelegte Applikation zu
+      verschicken)
+
+!end_description
+
+!end_node

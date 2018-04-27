@@ -1,0 +1,20 @@
+!begin_node (!kw [end_itemize])
+!html_name cmd_end_itemize
+
+Finish an itemization.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_itemize(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the latest itemize environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [item]), (!link [Itemizations] [Itemizations])
+
+!end_xlist
+
+!end_node

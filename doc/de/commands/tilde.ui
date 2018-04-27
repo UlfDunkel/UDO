@@ -1,0 +1,33 @@
+!begin_node !~
+!html_name cmd_tilde
+!label Festes Leerzeichen
+
+Festes Leerzeichen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!~(!t)
+
+!item [(!DESCRIPTION)]
+Die Tilde gilt in der UDO-Syntax als festes
+Leerzeichen. Wörter, zwischen denen ein festes
+Leerzeichen steht, werden nicht durch einen Zeilenumbruch voneinander getrennt. Beim Blocksatz werden an
+der Einsatzstelle auch keine Leerzeichen eingefügt.
+
+!item [(!SEEALSO)]
+(!link [!!~] [Tilde]), (!link [Feste Leerzeichen] [Feste Leerzeichen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+42~EUR, Dr.~Sommer
+!end_verbatim
+(!EXAMPLE_AFTER)
+42~EUR, Dr.~Sommer
+(!EXAMPLE_END)
+
+!end_node

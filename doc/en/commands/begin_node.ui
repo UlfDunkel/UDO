@@ -1,0 +1,41 @@
+!begin_node (!kw [begin_node])
+!html_name cmd_begin_node
+
+Start new chapter/section/subsection/paragraph/subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_node (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Depending on the current level of your document structure,
+starts a new chapter, section, subsection or paragraph.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [end_node]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node Title of chapter
+...
+    !begin_node Title of section
+    ...
+    !end_node
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Title of chapter
+!.. 
+!subheading Title of section
+!..
+(!EXAMPLE_END)
+
+!end_node

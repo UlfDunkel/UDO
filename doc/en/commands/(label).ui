@@ -1,0 +1,24 @@
+!begin_node (!kkw [label])
+!html_name cmd_label_2
+
+Beliebiger Teil des Textes als Label/Bookmark markieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/label [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann ein beliebiger Teil des Textes als
+Label/Bookmark markiert werden kann. Das Kommando wird
+zur Zeit nur für die RTF-Ausgabe unterstützt.
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!link [Labels] [Labels]), (!link [Links] [Links]), (!KW [label]), (!KKW [link]), (!KKW [plink])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,113 @@
+!begin_node Macros
+!html_name misc_macros
+
+Macros are userdefined placeholders that you can use for different
+purposes.
+
+!index (!kw [macro])
+When using the (!KW [macro]) command you tell UDO the name of the macro in
+first place. The name of the macro is followed by its contents which may be
+empty, too.
+
+Let me show you some examples:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)macro1.ui
+(!EXAMPLE_END)
+
+!index (!kw [include])
+Macros can help you to save time when typing often used long words.
+Furthermore macros can help you to change the contents of your file by
+simply changing the contents for macros (e.g. if your program name changed
+and you use a macro for the name of your program). Another example is the
+usage of standardized text (e.g. a standard disclaimer) where you use macros
+instead of the name of the program etc. These standardized texts can be
+included with (!KW [include]). In the following example a disclaimer is
+included and the name of the program is defined by a macro:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)macro2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index Macros !! Parameters
+!index Parameters !! Macros
+
+Since UDO Release 6 you can use macros with parameters. You can set the
+position of the parameters in the (!I)!/macro(!i) command by inserting
+""(!code [(!/1!)])"", ""(!code [(!/2!)])"" up to ""(!code [(!/9!)])"". To call a macro
+with parameters you have to write brackets (""[!..]"") around them.
+
+The following small example shows how to use a macro for text that shall be
+printed in bold-italic style:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)macro3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)macro3_n.ui
+(!EXAMPLE_END)
+
+The ""(!/1)"" in the macro line will be replaced by the words ""bold and
+italic"".
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!item When naming the macros you should be cautious not to use pre-defined
+UDO command names like ""B"" or ""nl"". If you don't you will get problems
+with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
+
+!item You shouldn't use too many macros because every additional macro slows
+down the conversion of the source file.
+
+!end_enumerate
+
+################################################################################
+
+!begin_node Predefined macros
+!html_name misc_macros_predefined
+
+UDO knows some predefined macros and placeholders:
+
+!begin_table [|l|l|] !hline
+(!KKW [alpha])       !! Print the (!alpha) symbol
+!hline
+(!KKW [beta])        !! Print the (!beta) symbol
+!hline
+(!KKW [copyright])   !! Print the (!copyright) symbol
+!hline
+(!KKW [deg])         !! Print the (!deg) symbol
+!hline
+(!KKW [euro])        !! Print the (!euro) symbol
+!hline
+(!KKW [grin])        !! Print an emoticon (!grin)
+!hline
+(!KKW [LaTeX])       !! Print the (!LaTeX) symbol
+!hline
+(!KKW [LaTeXe])      !! Print the (!LaTeXe) symbol
+!hline
+(!KKW [laugh])       !! Print an emoticon (!laugh)
+!hline
+(!KKW [pound])       !! Print the (!pound) symbol
+!hline
+(!KKW [registered])  !! Print the (!registered) symbol
+!hline
+(!KKW [short_today]) !! Insert short form of current date: (!B)(!short_today)(!b)
+!hline
+(!KKW [TeX])         !! Print the (!TeX) symbol
+!hline
+(!KKW [time])        !! Insert the current time: (!B)(!time [%H:%M:%S])(!b)
+!hline
+(!KKW [tm])          !! Print the (!tm) symbol
+!hline
+(!KKW [today])       !! Insert long form of current date: (!B)(!today)(!b)
+!hline
+!end_table
+
+!end_node
+
+!end_node

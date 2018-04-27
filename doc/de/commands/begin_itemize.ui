@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_itemize])
+!html_name cmd_begin_itemize
+
+Neue Aufzählung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_itemize(!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine (weitere) itemize-Umgebung ein. Diese
+Umgebung muss mit (!KW [end_itemize]) beendet werden. Die
+itemize-Umgebung können Sie mehrfach und auch mit
+anderen Umgebungen kombiniert einsetzen.
+Aufzählungspunkte, die mit (!KW [item]) eingeleitet werden,
+werden mit Punkten und Strichen markiert.
+
+!item [(!SEEALSO)]
+(!KW [end_itemize]), (!KW [item]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Aufzählungen] [Aufzählungen])
+
+!end_xlist
+
+!end_node

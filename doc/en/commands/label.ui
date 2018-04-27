@@ -1,0 +1,32 @@
+!begin_node (!kw [label])
+!html_name cmd_label
+
+Set a label.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/label (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Defines a label that will be referenced in hypertexts or can be
+accessed by a link command.
+
+!item [(!SEEALSO)]
+(!KW [label*]), (!KKW [label]), (!KKW [link]), (!KKW [plink]), (!link [Labels] [Labels]), (!link [Links] [Links])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!label Label
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<a name="Label"></a>
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

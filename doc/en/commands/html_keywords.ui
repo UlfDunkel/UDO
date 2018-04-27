@@ -1,0 +1,42 @@
+!begin_node (!kw [html_keywords])
+!html_name cmd_html_keywords
+
+Set META keywords for HTML.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_keywords (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!code [(!TEXT!)])"" should be a comma separated list of keywords. This list
+will be output by UDO inside the header of the HTML file that
+contains the chapter where you used this comand. Some Internat
+machines are taking these information for referencing the HTML pages.
+
+If you use this command more than once inside a node,
+the entries will be concatenated, separated by a comma.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_description])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_keywords Dirk Hagedorn, UDO(!RELEASE), Software, Converter
+!html_keywords UDO Community, Universal Document, Document-Generator
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<meta name="Keywords" content="Dirk Hagedorn, UDO(!RELEASE),
+      Software, Converter, UDO Community, Universal
+      Document, Document-Generator">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

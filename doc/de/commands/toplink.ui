@@ -1,0 +1,28 @@
+!begin_node (!kw [toplink])
+!html_name cmd_toplink
+
+Link auf Seitenanfang erzeugen (nur HTML und HTMLHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toplink(!t)
+
+!item [(!DESCRIPTION)]
+UDO sichert für HTML und HTMLHelp eine Datei namens
+""(!file [udo_tp.gif])"". Mit diesem Kommando können Sie in sein Werk die
+Grafik einbinden. Zugleich wird ein Link auf den Seitenanfang erzeugt.
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!toplink
+!end_verbatim
+(!EXAMPLE_AFTER)
+!toplink
+(!EXAMPLE_END)
+
+!end_node

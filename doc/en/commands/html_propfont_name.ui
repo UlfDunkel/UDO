@@ -1,0 +1,30 @@
+!begin_node (!kw [html_propfont_name])
+!html_name cmd_html_propfont_name
+
+Specify name of default font (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_propfont_name (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command sets the name of the font that
+is used to display regular text.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_monofont_name]), (!KW [html_propfont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_propfont_name Arial
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

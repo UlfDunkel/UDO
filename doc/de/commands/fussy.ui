@@ -1,0 +1,22 @@
+!begin_node (!kw [fussy])
+!html_name cmd_fussy
+
+Warnmeldungen für kurze Zeilen einschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/fussy(!t)
+
+!item [(!DESCRIPTION)]
+Schaltet die Warnung vor kurzen Zeilen wieder ein.
+Bei der Umwandlung ins (!LaTeX)-Format erfolgt (!B)keine(!b)
+Umsetzung in ""(!code [\fussy])""!
+
+!item [(!SEEALSO)]
+(!KW [sloppy]), (!link [Fehlermeldungen] [Fehlermeldungen]), (!link [Silbentrennung] [Silbentrennung])
+
+!end_xlist
+
+!end_node

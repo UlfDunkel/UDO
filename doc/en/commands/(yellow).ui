@@ -1,0 +1,34 @@
+!begin_node (!kkw [yellow])
+!html_name cmd_yellow
+
+Sets the textcolor yellow.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/yellow)(!t)
+
+!item [(!DESCRIPTION)]
+Text following this placeholder will be displayed in yellow color.
+You can revert to the default color using the placeholder (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Text colors] [Text colors])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+The word (!yellow)yellow(!coloff) appears colored in yellow.
+!end_verbatim
+(!EXAMPLE_AFTER)
+The word (!yellow)yellow(!coloff) appears colored in yellow.
+(!EXAMPLE_END)
+
+!end_node

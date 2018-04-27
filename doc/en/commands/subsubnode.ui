@@ -1,0 +1,30 @@
+!begin_node (!kw [subsubnode])
+!html_name cmd_subsubnode
+
+Start a subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new subsection named ""(!TEXT)"".
+Subsections will appear in table of contents.
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubnode Subsection title
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Subsection title
+(!EXAMPLE_END)
+
+!end_node

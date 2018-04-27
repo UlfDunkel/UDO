@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [=pch])
+!html_name cmd_pch-eq
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=pch (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist anymore.
+Use (!KW [raw] [[pch!!]]) instead.
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif

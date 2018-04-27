@@ -1,0 +1,44 @@
+!begin_node Labels
+!html_name syntax_hypertext_labels
+#!label Labels
+
+!index (!kw [label])
+Using the command (!KW [label]) you can set labels inside the source
+file. An example:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!label example
+!end_verbatim
+(!EXAMPLE_END)
+
+When converting to the hypertext formats Windows Help, HTML, ST-Guide
+and Pure C Help UDO inserts references inside the text to this label
+automatically. You can search for these labels inside the search
+dialog of Windows Help.
+
+When you set the upper label you can jump from every position where
+the word ""example"" is used to the position where you used the label.
+
+Here a list how UDO converts a label for the hypertext formats:
+
+!begin_xlist [Linuxdoc-SGML:] !compressed
+!item [HTML:]          (!V)<a name="example"></a>(!v)
+!item [LaTeX:]         (!V)\label{example}(!v)
+!item [Linuxdoc-SGML:] (!V)<label id="example">(!v)
+!item [Pure-C-Help:]   (!V)sensitive("example")(!v) inside the header
+!item [ST-Guide:]      (!V)@symbol ar "example"(!v)
+!item [Turbo-Vision:]  (!V).topic example(!v) inside the header
+!item [WinHelp:]       (!V)#{\footnote # example}(!v)
+!end_xlist
+
+!smallskip
+
+(!HINT)
+
+You shouldn't use special chars like commas, semicolons, quotes or
+apostrophes inside the label text because some formats have problems with
+these special characters. Please try to avoid them. In most cases you can
+avoid them if you really want.
+
+!end_node

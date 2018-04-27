@@ -1,0 +1,23 @@
+!begin_node (!kw [sloppy])
+!html_name cmd_sloppy
+
+Switch off warnings of short lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sloppy(!t)
+
+!item [(!DESCRIPTION)]
+Switches off warning messages according short lines. You can use this
+command wherever you want. The warnings can be enabled with !/fussy.
+When converting to (!LaTeX) UDO doesn't convert !/sloppy into
+""(!code [\sloppy])""!
+
+!item [(!SEEALSO)]
+(!KW [fussy]), (!link [Error messages] [Error messages]), (!link [Hyphenation] [Hyphenation])
+
+!end_xlist
+
+!end_node

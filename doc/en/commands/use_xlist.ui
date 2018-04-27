@@ -1,0 +1,26 @@
+!begin_node (!kw [use_xlist])
+!html_name cmd_use_xlist
+
+Output xlist environment like in ASCII.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_xlist [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Because the output of an xlist environment is very complicated these
+environments are handled like description environments by default.
+Use this switch inside the preamble to display xlist environments
+like in ASCII and with the use of the preformatted tag.
+
+!item [(!EXAMPLE)]
+(!T)!/use_xlist [html](!t)
+
+!item [(!SEEALSO)]
+(!link [Lists] [Lists]), (!link [Descriptions] [Descriptions])
+
+!end_xlist
+
+!end_node

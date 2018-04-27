@@ -1,0 +1,23 @@
+!begin_node (!kw [html_merge_nodes])
+!html_name cmd_html_merge_nodes
+
+Create only one HTML file (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_nodes(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your UDO source file
+UDO will save only one HTML file that will contain the whole text.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!item [(!SEEALSO)]
+(!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+
+!end_xlist
+
+!end_node

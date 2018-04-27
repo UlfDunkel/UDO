@@ -1,0 +1,31 @@
+!begin_node Rechtsbündiger Text
+!html_name style_justifiedright
+!label flushright-Umgebung
+
+Zeilen, die innerhalb einer flushright-Umgebung stehen, werden in der
+Ausgabedatei rechtsbündig dargestellt, sofern das jeweilige
+Ausgabeformat rechtsbündigen Text unterstützt.
+
+Die flushright-Umgebung kann innerhalb anderer Umgebungen verwendet
+werden, auch innerhalb einer anderen flushright-Umgebung (so sinnlos
+das auch sein mag).
+
+Werden andere Umgebungen innerhalb der flushright-Umgebung verwendet,
+dann werden diese wie sonst auch ausgegeben. Erst wenn die
+flushright-Umgebung wieder aktiv ist, wird Text rechtsbündig
+ausgegeben.
+
+Falls das folgende kleine Beispiel nicht rechtsbündig dargestellt wird,
+so liegt das daran, daß das Format der Dokumentation, die Sie gerade
+lesen, keinen rechtsbündigen Text zuläßt.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)flushright.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)flushright.ui
+(!EXAMPLE_END)
+
+Wie Sie sehen, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, verwenden Sie den Befehl (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+
+!end_node

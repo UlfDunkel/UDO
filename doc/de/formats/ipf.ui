@@ -1,0 +1,90 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: IPF (Information Presentation Facility)
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2003:
+#   uk  Dec 22: Texte zu IPF überarbeitet und ins Englische übertragen
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Information Presentation Facility (IPF)
+!html_name format_ipf
+!label IPF
+
+(!B)IPF(!b) ist das Ausgangsformat für die Hilfedateien unter dem Betriebssystem
+(!I)OS/2~Warp(!i) von IBM (sowie für IBM PC-DOS~7).
+
+Das IPF-Format ist ein Textformat. Es ist dokumentiert im ""IBM OS/2~Warp IPF~Programming Guide"" (Publication Number G25H-7110-00).
+Diese Dokumentation ist online zu lesen auf
+(!url [http://publibfp.boulder.ibm.com/cgi-bin/bookmgr/BOOKS/ej6c2b00/CCONTENTS] [] [] [elink])
+oder im Bookmanager-Format downloadbar. Bookmanager-Dateien sind lesbar mit dem (!url [IBM Library Reader for Windows] [http://www-306.ibm.com/software/applications/office/bkmgr/ilr.html] [] [elink])
+oder mit dem java-basierten (!url [IBM Softcopy Reader] [http://www-306.ibm.com/software/applications/office/bkmgr/softcopyread.html] [] [elink]).
+
+Eine IPF-Dokumentation ist außerdem in der Online-Hilfe des IPFC-Programms
+enthalten.
+
+Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigen Sie den IPF-Compiler ((!file [IPFC.EXE])). 
+Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. (!I)OS/2~Developers Toolkit(!i),
+(!I)Visual-Age(!i) Compiler, (!I)IBM Set C++(!i)), zum Herunterladen (als
+OS/2-Version) findet er sich auf
+(!url [http://www.m-petz.de/Download/Download.htm] [] [] [elink]) (unter ""IPFC-Zubehör"") 
+oder auf (!url [http://www.goellnitz-online.de/os2/infseite/ipfc.htm] [] [] [elink]).
+# 22.12.2003: lt. http://www.sibyl-archive.org/3/euchk60.html
+# IPFC.EXE (Version 4.0) auch auf der CD ""Top OS/2 TOOLS Vol. 6"".
+
+Hilfedateien existieren unter OS/2 als HLP- oder INF-Dateien.
+HLP-Dateien werden nur zusammen mit ausführbaren Programmen verwendet,
+INF-Dateien können eigenständig betrachtet werden, entweder durch
+Doppelklick auf der Arbeitsoberfläche (Workplace Shell) oder auf der
+Kommandozeile mit (!file [VIEW]).
+
+(!B)Achtung:(!b) Das Dateiformat von HLP-Dateien unter OS/2 hat nichts mit dem
+von HLP-Dateien unter Windows zu tun!
+
+Ein alternativer INF-Viewer für OS/2 ist (!url [NewView] [http://www.os2voice.org/VNL/past_issues/VNL0900H/vnewsf6.htm] [] [elink]).
+INF-Viewer für DOS und Win32 können Sie auf (!url [http://www.labyrinth.net.au/~dbareis/swrecom.htm] [] [] [elink]) 
+oder (!url [http://www.goellnitz-online.de/os2/infseite/xview/xview.htm] [] [] [elink]) herunterladen.
+# 22.12.03: Mit dem Win32-Viewer IView kann Sie unter Linux/Wine zwar eine INF-Datei öffnen (Sie sehen das
+# Inhaltsverzeichnis) - aber die Inhalte können Sie nicht anschauen (Fehlermeldungen).
+
+Von IBM gibt es für Windows einen (älteren) 16-bit-Viewer für INF- und HLP-Dateien, der
+Bestandteil des ""Just Add Warp""-Paketes ist (downloadbar via
+(!url [ftp://ftp.software.ibm.com/ps/products/os2/tools/jaow/jaow.zip] [] [] [elink])
+oder
+(!url [ftp://ftp.leo.org/pub/comp/os/os2/leo/windows/justaddwarp.zip] [] [] [elink]))
+(ca. 3,4~MB). Nach dem Installieren werden folgende Dateien aus den
+Verzeichnis (!file [\JUST_ADD]) benötigt: (!file [IPF.DLL]), (!file [LIBIPFX.DLL]), (!file [LIBIPFX.LIB]), (!file [VIEW.EXE]), (!file [VIEWH.HLP]) sowie (!file [XVIEW.PAL]) (der Rest des Softwarepaketes ist irrelevant).
+
+# Notizen 22.12.2003:
+# Info zum Thema: siehe auch noch auf http://www.hypermake.de/english/n024.html
+# = http://www.hypermake.de/deutsch/n024.html
+# GNU texinfo -> ipf Konverter: http://www.fido.de/kama/texinfo/texinfo-de.html
+# allgem. Info zu IPF(C): http://www.mit.edu:8001/activities/os2/faq/os2faq0602.html
+# ipf2html (Perl-Skript): http://web.mit.edu/afs/athena/activity/o/os2/www/ipf2html.html
+# http://www.mgroeber.de/os2.htm
+# http://www.willemer.de/informatik/os2/os2prg.htm
+# http://www.m-petz.de/Software/Phelsuma/Ipf.htm
+# http://www.os2bbs.com/download/dos.html: INF-Viewer für PC-DOS 7 (Subscription erforderlich)
+# HTML2IPF: http://home-5.worldonline.nl/~jdekeij/htmipf.html
+#  http://www.goellnitz-online.de/os2/infseite/infseite.htm
+# INF-Viewer für DOS: http://www.commtalk.de/pages/Windows/Windows_Utilities/ (Download funzt nicht)
+
+!end_node

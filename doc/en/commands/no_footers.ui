@@ -1,0 +1,32 @@
+!begin_node (!kw [no_footers])
+!html_name cmd_no_footers
+
+Do not insert contact information in bottom lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_footers [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This switch will turn off the automatic generation
+if contact informations in the bottom line
+of the page. The example shows how to
+switch it of when converting to HTML.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_footers [html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

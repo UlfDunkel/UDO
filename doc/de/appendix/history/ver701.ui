@@ -1,0 +1,204 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.01
+# Language    : German
+# Initial Date: 2010-03-02
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 02: introduced
+#   fd  Mar 03: - new docinfo attributes: domain_..., contact_...
+#               - using INCOMPLETE, PUBLISHED
+#               - bugfix #86 added
+#   fd  Mar 05: - [Encodings] new ISO codepages added
+#               - [Environments] added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 06: [UDO]: commandline option '-@ F' enhanced
+#   fd  Mar 08: - macro usage adjusted
+#               - ISO encodings completed
+#   fd  May 18: - !html_ignore_8bit no longer requires a charset string
+#               - UTF-8 output no longer crashes UDO
+#   fd  May 19: - environment commands resorted alphabetically
+#               - (!deg) output localized in target formats which do not support the glyph 
+#   fd  May 25: - description items better formatted in RTF + PS
+#               - new: !label*
+#   ggs May 25: some !hline moved, and !hlist changed to !hline
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Änderungen in Version 7.01
+!html_name history_0701
+
+(!PUBLISHED [UDO~7.01][25. Mai 2010])
+
+!begin_description !compressed
+# ----------------------------------------
+!item [Encodings]
+# ----------------------------------------
+      !begin_itemize !compressed
+      !item (!BUG [87]): UDO unterstützt weitere Codepages:
+      !begin_flushleft
+      !begin_table [l|l]
+      (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Bezeichner(!b)
+      !hline
+      ISO !! 8859-3  !! ISO-8859-3 ISO-IR-109 ISO8859-3 ISO_8859-3 LATIN3 L3 CSISOLATIN3
+          !! 8859-4  !! ISO-8859-4 ISO-IR-110 ISO8859-4 ISO_8859-4 LATIN4 L4 CSISOLATIN4
+          !! 8859-5  !! ISO-8859-5 ISO-IR-144 ISO8859-5 ISO_8859-5 CYRILLIC CSISOLATINCYRILLIC
+          !! 8859-6  !! ISO-8859-6 ISO-IR-127 ISO8859-6 ISO_8859-6 ARABIC CSISOLATINARABIC ASMO-708 ECMA-114
+          !! 8859-7  !! ISO-8859-7 ISO-IR-126 ISO8859-7 ISO_8859-7 GREEK GREEK8 CSISOLATINGREEK ECMA-118 ELOT_928
+          !! 8859-8  !! ISO-8859-8 ISO-IR-138 ISO8859-8 ISO_8859-8 HEBREW CSISOLATINHEBREW
+          !! 8859-9  !! ISO-8859-9 ISO-IR-148 ISO8859-9 ISO_8859-9 LATIN5 L5 CSISOLATIN5 TURKISH
+          !! 8859-10 !! ISO-8859-10 ISO-IR-157 ISO8859-10 ISO_8859-10 LATIN6 L6 CSISOLATIN6 NORDIC
+          !! 8859-11 !! ISO-8859-11 ISO8859-11 ISO_8859-11 THAI
+          !! 8859-13 !! ISO-8859-13 ISO-IR-179 ISO8859-13 ISO_8859-13 LATIN7 L7 CSISOLATIN7 BALTIC
+          !! 8859-14 !! ISO-8859-14 ISO-IR-199 ISO8859-14 ISO_8859-14 LATIN8 L8 CSISOLATIN8 CELTIC ISO-CELTIC
+          !! 8859-15 !! ISO-8859-15 ISO-IR-203 ISO8859-15 ISO_8859-15 LATIN9 L9 CSISOLATIN9
+          !! 8859-16 !! ISO-8859-16 ISO-IR-226 ISO8859-16 ISO_8859-16 LATIN10 L10 CSISOLATIN10
+      !end_table
+      !end_flushleft
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [(!KW [docinfo])]
+# ----------------------------------------
+      !begin_itemize !not_compressed
+      !item Die z.T. irreführenden (!KW [docinfo])-Attribute 
+            (!code [webmastername]), 
+            (!code [webmasterurl]), 
+            (!code [webmasteremail]) und 
+            (!code [webmastermailurl]) wurden umbenannt:
+            
+            !begin_flushleft
+            !begin_table [l|l]
+            (!B)alt(!b)       !! (!B)neu(!b)
+            !hline
+            webmastername     !! domain_name
+            webmasterurl      !! domain_link
+            webmasteremail    !! contact_name
+            webmastermailurl  !! contact_link
+            !end_table
+            !end_flushleft
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [(!KW [label*])]
+# ----------------------------------------
+      !begin_itemize !not_compressed
+      !item Ein neues Kommando (!KW [label*]) wurde eingeführt, um z.B. Kapitelüberschriften besser referenzieren zu können. Wenn Sie z.B. in einem englischen Handbuch das Kapitel ""Command Index"" verwenden, aber im Fließtext von ""command index"" gesprochen wird, so kann UDO dies nicht automatisch referenzieren, weil Groß-/Kleinschreibung korrekt unterschieden wird.
+      
+      Mit dem neuen Kommando können Sie ein Label setzen, das zwar von UDO wie andere Label auch referenziert wird, aber nicht im Index erscheint. Im o.g. Beispiel würden also nicht ""Command Index"" und ""command index"" im Index erscheinen, sondern nur die automatisch indizierte Kapitelüberschrift ""Command Index"".
+      
+      (!EXAMPLE)
+      (!EXAMPLE_BEGIN)
+      !begin_verbatim
+      !begin_node Command Index
+      !label*     command index
+      [...]
+      !end_node # Command Index
+      !end_verbatim
+      (!EXAMPLE_END)
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [Umgebungen]
+# ----------------------------------------
+      !begin_itemize !not_compressed
+      !item Das Umgebung-Attribut ""(!kw [short])"" wurde umbenannt zu ""(!kw [compressed])"" 
+            weil wir glauben, daß dieser Begriff besser beschreibt, was dieses Attribut wirklich macht: 
+            Es ändert das Umgebung-Layout von ""splendid"" (großzügig) zu ""compressed"" (kompress/kompakt). 
+            Daher haben wir verschiedene Kommandos umbenannt:
+            !begin_flushleft
+            !begin_table [l|l]
+            (!I)alt(!i)                    !! (!I)neu(!i)
+            !hline
+            (!B)short(!b)                  !! (!KW [compressed])
+            (!B)use_short_descriptions(!b) !! (!KW [use_compressed_descriptions])
+            (!B)use_short_enumerates(!b)   !! (!KW [use_compressed_enumerates])
+            (!B)use_short_envs(!b)         !! (!KW [use_compressed_envs])
+            (!B)use_short_itemizes(!b)     !! (!KW [use_compressed_itemizes])
+            (!B)use_short_lists(!b)        !! (!KW [use_compressed_lists])
+            !end_table
+            !end_flushleft
+            
+            (!IMPORTANT) Die alten Kommandos werden nicht mehr unterstützt!
+      
+      !item Neues Umgebung-Attribut (!code [!not_compressed]): (!nl)
+            Dieses neue Umgebung-Attribut wurde eingeführt, 
+            damit Sie die Vererbung des kompress-Attributs einer äußeren Umgebung an die innere Umgebung abschalten können.
+            
+      !item Damit es einheitlich ist, wurde auch der Schalter (!B)use_short_tocs(!b) in (!KW [use_compressed_tocs]) umbenannt.
+      
+      !item Die Titel der einzelnen Items in Description-Umgebungen werden jetzt in RTF und PS besser formatiert.
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [UDO]
+# ----------------------------------------
+      !begin_itemize !compressed
+      !item Die UDO-Versionen für Mac OS und Mac OS X melden sich jetzt als ""UDO for Mac OS"" bzw. ""UDO for Mac OS X"".
+      !item Wenn Sie die Kommandozeilen-Option ""(!code [-@ F])"" nutzen, müssen Sie nicht länger zwingend exakt eine Option pro Zeile in Datei (!file [F]) angeben.
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [(!BUGFIXES)]
+# ----------------------------------------
+      !begin_itemize !compressed
+      !item (!BUG [86]): Veraltete Kommandos bringen den IF-Stack nicht mehr durcheinander.
+      !item Unter bestimmten Umständen konnte die UTF-8-Ausgabe von UTF-8-Inhalt UDO abstürzen lassen.
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [HTML]
+# ----------------------------------------
+      !begin_itemize !compressed
+      !item (!KW [html_ignore_8bit]) benötigt keinen optionaler Parameter (!TEXT) für das Charset mehr.
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [Verschiedenes]
+# ----------------------------------------
+      !begin_blist !compressed
+      !item [(!/deg)]
+            Wenn in einem Zielformat der Platzhalter nicht als das entsprechende Gradzeichen ausgegeben werden kann, 
+            wird nicht mehr pauschal das deutsche Wort ""Grad"" ausgegeben, 
+            sondern möglichst die gewünschte Übersetzung, z.B. im Englischen ""degree"".
+      !end_blist         
+!end_description
+
+!end_node

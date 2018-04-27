@@ -1,0 +1,30 @@
+!begin_node Zentrieren von Zeilen
+!html_name style_centered
+!label center-Umgebung
+
+Zeilen, die innerhalb einer center-Umgebung stehen, werden in der
+Ausgabedatei zentriert dargestellt, sofern das jeweilige Ausgabeformat
+zentrierten Text unterstützt.
+
+Die center-Umgebung kann innerhalb anderer Umgebungen verwendet werden,
+auch innerhalb einer anderen center-Umgebung (so sinnlos das auch sein
+mag).
+
+Werden andere Umgebungen innerhalb der center-Umgebung verwendet, dann
+werden diese wie sonst auch ausgegeben. Erst wenn die center-Umgebung
+wieder aktiv ist, wird Text zentriert ausgegeben.
+
+Falls das folgende kleine Beispiel nicht zentriert wird, liegt das
+daran, daß das Format der Dokumentation, die Sie gerade lesen, keine
+Zentrierungen zuläßt.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)center.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)center.ui
+(!EXAMPLE_END)
+
+Wie Sie sehen, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, verwenden Sie den Befehl (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+
+!end_node

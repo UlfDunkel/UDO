@@ -1,0 +1,28 @@
+!begin_node (!kw [no_headlines])
+!html_name cmd_no_headlines
+
+Do not use headlines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_headlines [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Switches off the usage of headlines. The example show how to switch
+it off when converting to WinHelp.
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines]), (!KW [no_popup_headlines]), (!KW [ignore_headline])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_headlines [win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

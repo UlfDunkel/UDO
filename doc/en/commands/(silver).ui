@@ -1,0 +1,34 @@
+!begin_node (!kkw [silver])
+!html_name cmd_silver
+
+Sets the textcolor silver (light gray).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/silver)(!t)
+
+!item [(!DESCRIPTION)]
+Text following this placeholder will be displayed in silver color.
+You can revert to the default color using the placeholder (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Text colors] [Text colors])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+The word (!silver)silver(!coloff) appears colored in light gray.
+!end_verbatim
+(!EXAMPLE_AFTER)
+The word (!silver)silver(!coloff) appears colored in light gray.
+(!EXAMPLE_END)
+
+!end_node

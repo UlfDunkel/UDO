@@ -1,0 +1,32 @@
+!begin_node (!kw [pinclude])
+!html_name cmd_pinclude
+
+Datei einbinden und in einer sourcecode-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Sourcecode an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [cinclude]), (!KW [ldinclude]), (!KW [sinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [sourcecode-Umgebung] [sourcecode-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!pinclude hello.pas
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

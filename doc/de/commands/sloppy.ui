@@ -1,0 +1,25 @@
+!begin_node (!kw [sloppy])
+!html_name cmd_sloppy
+
+Warnungen vor kurzen Zeilen ausschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sloppy(!t)
+
+!item [(!DESCRIPTION)]
+Schaltet die Warnung vor kurzen Zeilen aus, die
+ausgegeben werden, wenn ein grober rechter
+Flatterrand erzeugt wird oder bei Benutzung von
+Blocksatz zuviele Leerzeichen in eine Zeile eingefügt
+werden mußten. Bei der Umwandlung ins (!LaTeX)-Format
+erfolgt (!B)keine(!b) Umsetzung in ""(!code [\sloppy])""!
+
+!item [(!SEEALSO)]
+(!KW [fussy]), (!link [Fehlermeldungen] [Fehlermeldungen]), (!link [Silbentrennung] [Silbentrennung])
+
+!end_xlist
+
+!end_node

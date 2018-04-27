@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [code_hp8])
+!html_name cmd_code_hp8
+
+Switch to another character set.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_hp8(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist an more.
+Use (!KW [code] [[hp8!!]]) instead.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+
+!end_xlist
+
+!end_node
+!endif

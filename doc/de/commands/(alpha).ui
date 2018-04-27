@@ -1,0 +1,32 @@
+!begin_node (!kkw [alpha])
+!html_name cmd_alpha()
+
+(!alpha)-Zeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/alpha)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das alpha-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [alpha])"".
+
+!item [(!SEEALSO)]
+(!KKW [beta]), (!link [Sonderzeichen] [Sonderzeichen]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!alpha)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!alpha)
+(!EXAMPLE_END)
+
+!end_node

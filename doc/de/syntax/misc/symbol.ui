@@ -1,0 +1,79 @@
+!begin_node Symbole
+!html_name misc_symbols
+
+!index (!kw [ifnset])
+!index (!kw [ifset])
+!index (!kw [set])
+!index (!kw [unset])
+!index -D
+!index -U
+
+Symbole sind benutzerdefinierte inhaltsleere Variablen, welche sich
+durch das Kommando (!KW [set]) und beim Aufruf von UDO durch die
+Kommandozeilenoption (!code [-D]) setzen und mit dem Kommando (!KW [unset]) auch
+wieder entfernen lassen. Ob ein Symbol gesetzt oder nicht gesetzt ist, läßt sich
+mit den Abfrage-Befehlen (!KW [ifset]) bzw. (!KW [ifnset]) testen.
+
+Die Einsatzmöglichkeiten von Symbolen sind vielfältig. Das folgende 
+Beispiel zeigt Ihnen ein typisches Anwendungsgebiet,
+bei dem Sie je nach gesetzten Symbolen eine Zieldatei mit
+unterschiedlichem Inhalt erhalten.
+
+Gehen wir einmal davon aus, daß wir einen Quelltext geschrieben haben,
+der drei Kapitel enthält. Die ersten beiden Kapitel sind bereits
+fertig, am letzten Kapitel wird noch eifgrig herumgebastelt. Um nun die
+Turn-Around-Zeiten zu minimieren, wollen wir eine Zieldatei erzeugen,
+die nur das dritte Kapitel enthält. Nur wenn das Symbol ""AlleKapitel""
+gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)symbol1.ui
+(!EXAMPLE_END)
+
+Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
+dritte Kapitel enthält. Starten Sie UDO hingegen mit der
+Kommandozeilenoption ""(!code [-D~AlleKapitel])"", werden alle Kapitel umgewandelt.
+
+Das Spielchen können Sie natürlich noch etwas ausbauen. Durch Verwendung
+weiterer Symbole können Sie gezielt nur einzelne Kapitel oder alle
+zusammen in die Zieldatei aufnehmen. Im folgenden Beispiel wird bei
+Übergabe der Option ""(!code [-D~Kapitel1])"" nur das erste Kapitel in die
+Zieldatei aufgenommen. Übergeben Sie ""(!code [-D~Kapitel1])"" und ""(!code [-D~Kapitel2])"",
+so werden das erste und das zweite Kapitel eingebunden. Übergeben Sie 
+hingegen ""(!code [-D~AlleKapitel])"", wird die Zieldatei komplett dargestellt:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)symbol2.ui
+(!EXAMPLE_END)
+
+Ihrer Phantasie sind hier kaum Grenzen gesetzt!
+
+Wie in der Einführung zu diesem Abschnitt beschrieben, lassen sich
+Symbole auch wieder löschen. Dazu verwenden Sie den Befehl (!KW [unset]).
+
+Wollen Sie in obigem Beispiel partout verhindern, daß alle Kapitel in
+die Zieldatei eingebunden werden, können Sie zuvor das Symbol
+(!code [AlleKapitel]) löschen, sofern es gesetzt wurde. Dies funktioniert so:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)symbol3.ui
+(!EXAMPLE_END)
+
+In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
+""(!code [AlleKapitel])"" gesetzt ist. In dem Falle wird es durch den Befehl 
+(!KW [unset]) gelöscht. Die vorherige Abfrage ist deshalb notwendig, damit
+Sie eine Fehlermeldung durch UDO vermeiden, falls das Symbol
+""(!code [AlleKapitel])"" einmal nicht gesetzt ist.
+
+# auskommentiert; trifft beides nicht mehr zu
+!begin_ignore
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Es sind maximal (!MAXDEFINE) Symbole erlaubt.
+
+!item Der Bezeichner eines Symbols darf maximal (!MAXSYMLEN) Zeichen lang sein.
+!end_enumerate
+!end_ignore
+
+!end_node

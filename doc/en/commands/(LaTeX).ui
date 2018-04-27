@@ -1,0 +1,30 @@
+!begin_node (!kkw [LaTeX])
+!html_name cmd_LaTeX()
+
+Print the (!LaTeX) symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/LaTeX)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by ""(!code [\LaTeX{}])"" when
+converting to (!LaTeX). Otherwise it will be replaced by ""(!code [LaTeX])"".
+
+!item [(!SEEALSO)]
+(!KKW [TeX]), (!KKW [LaTeXe]), (!link [Predefined macros] [Predefined macros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LaTeX)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LaTeX)
+(!EXAMPLE_END)
+
+!end_node

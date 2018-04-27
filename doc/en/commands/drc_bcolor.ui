@@ -1,0 +1,24 @@
+!begin_node (!kw [drc_bcolor])
+!html_name cmd_drc_bcolor
+
+Specify color of ""bold"" text (DRC only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_bcolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Since DRC does not know about different text styles,
+but can display text in different colors, you can use
+this command to specify the color of bold text.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_icolor]), (!KW [drc_ucolor]), (!KKKW [B] [b])
+
+!end_xlist
+
+!end_node

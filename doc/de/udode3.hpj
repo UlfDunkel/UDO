@@ -1,0 +1,25 @@
+[OPTIONS]
+Title=Die Windows-Hilfe zu UDO
+Copyright=Copyright (c) 1995 Dirk Hagedorn
+COMPRESS=HIGH
+ICON=help.ico
+
+[WINDOWS]
+;main=,(5,5,780,1015),0,,(127,127,127)
+main=,,0,,(192,192,192)
+win1="UDO7",(573,71,437,540),0,(255,255,231),(192,192,192),1
+
+[CONFIG]
+BrowseButtons()
+CreateButton("BTN_UP", "&Hoch", "JumpID(`', `UDON0000')")
+CreateButton("BTN_INFO", "&Info", "JumpID(`', `UDON0000')")
+CreateButton("BTN_EXIT", "Bee&nden", "Exit()")
+ChangeButtonBinding("BTN_CONTENTS", "JumpID(`', `UDON00001')")
+AddAccelerator(8, 0, "Back()")
+AddAccelerator(37, 2, "Prev()")
+AddAccelerator(39, 2, "Next()")
+AppendItem("mnu_help", "item_udoinfo", "&UDO7...", "JumpID(`>win1', `UDONFFFF')")
+RegisterRoutine("shell32.dll", "ShellExecuteA", "USSSSU")
+
+[FILES]
+udo7de.rtf

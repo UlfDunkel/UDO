@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_verbatim])
+!html_name cmd_begin_verbatim
+
+Eine verbatim-Umgebung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_verbatim(!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine verbatim-Umgebung ein. Diese Umgebung muss
+mit (!KW [end_verbatim]) beendet werden. Text einer
+verbatim-Umgebung wird 1:1 ausgegeben, es werden
+keine UDO-Kommandos umgewandelt! Auch die Wirkung von
+etwaigen Zielformatbefehlen wird aufgehoben. Bei der
+Ausgabe werden Einrückungen beachtet.
+
+!item [(!SEEALSO)]
+(!KW [end_verbatim]), (!KW [begin_preformatted]), (!link [Vorformatierter Text] [Vorformatierter Text]), (!KW [vinclude]), (!KW [verbatimsize])
+
+!end_xlist
+
+!end_node

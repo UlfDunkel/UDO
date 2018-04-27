@@ -1,0 +1,32 @@
+!begin_node (!kw [hyphen])
+!html_name cmd_hyphen
+
+Einen Trennvorschlag global setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/hyphen (!WORD)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie UDO einen globalen
+Trennvorschlag unterbreiten. In ""(!WORD)"" sind die
+Stellen mit der Zeichenfolge !/- zu markieren, an denen
+ein Wort getrennt werden darf. Im folgenden Beispiel
+wird gezeigt, wie Sie die möglichen Trennstellen des
+Wortes ""Silbentrennung"" setzen können.
+
+!item [(!SEEALSO)]
+(!KW [sloppy]), (!KW [fussy]), (!K1 [//-]), (!link [Silbentrennung] [Silbentrennung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!hyphen Sil!-ben!-tren!-nung
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,20 @@
+!begin_node (!kw [end_center])
+!html_name cmd_end_center
+
+Finish a center environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_center(!t)
+
+!item [(!DESCRIPTION)]
+This command finishes the latest center environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_center]), (!link [Emphasizing text] [Emphasizing text]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node

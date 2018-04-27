@@ -1,0 +1,26 @@
+!begin_node (!kw [html_modern_width])
+!html_name cmd_html_modern_width
+
+Set width of left column (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_width (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the width of the
+left column that is generated with (!KW [html_modern_layout]).
+
+If you use a procentual value, UDO will output
+a procentual value, too.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node

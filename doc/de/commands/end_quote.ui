@@ -1,0 +1,21 @@
+!begin_node (!kw [end_quote])
+!html_name cmd_end_quote
+
+Letzte Absatzeinrückung aufheben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_quote(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die letzte quote-Umgebung, in
+der der Text eingerückt dargestellt wird.
+
+!item [(!SEEALSO)]
+(!KW [begin_quote]), (!link [Texthervorhebungen] [Texthervorhebungen])
+
+!end_xlist
+
+!end_node

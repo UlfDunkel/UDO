@@ -1,0 +1,43 @@
+!begin_node (!kw [html_doctype])
+!html_name cmd_html_doctype
+
+Setzen des Dokumententyp (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_doctype (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie den Dokumententyp für HTML setzen. Dabei gibt es folgende Möglichkeiten:
+
+!begin_blist
+!item [Old]                HTML 3.2
+!item [Strict]             HTML 4.01 Strict
+!item [Transitional]       HTML 4.01 Transitional
+!item [5]                  HTML 5
+!item [XHTML Strict]       XHTML Strict
+!item [XHTML Transitional] XHTML Transitional
+!end_blist
+
+Für Frames werden die DOCTYPE-Einträge automatisch gesetzt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_doctype Strict
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER)
+!begin_preformatted
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,24 @@
+!begin_node (!kw [include])
+!html_name cmd_include
+
+Include file.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/include (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Opens the file named ""file"" and converts its contents.
+(!FILESPACEQUOTE)
+
+!item [(!EXAMPLE)]
+(!T)!/include macros.ui(!t)
+
+!item [(!SEEALSO)]
+(!KW [vinclude]), (!KW [rinclude]), (!KW [input]), (!link [Split documents] [Split documents])
+
+!end_xlist
+
+!end_node

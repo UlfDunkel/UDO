@@ -1,0 +1,20 @@
+!begin_node (!kw [eq])
+!html_name cmd_eq
+
+Letzte Absatzeinrückung aufheben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/eq(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_quote]).
+
+!item [(!SEEALSO)]
+(!KW [end_quote])
+
+!end_xlist
+
+!end_node

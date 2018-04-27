@@ -1,0 +1,21 @@
+!begin_node (!kw [end_flushright])
+!html_name cmd_end_flushright
+
+Umgebung für rechtsbündigen Text schließen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_flushright(!t)
+
+!item [(!DESCRIPTION)]
+Die (letzte) flushright-Umgebung wird mit diesem
+Kommando beendet.
+
+!item [(!SEEALSO)]
+(!link [Texthervorhebungen] [Texthervorhebungen]), (!KW [begin_flushright])
+
+!end_xlist
+
+!end_node

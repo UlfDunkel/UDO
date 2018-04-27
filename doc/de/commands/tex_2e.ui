@@ -1,0 +1,26 @@
+!begin_node (!kw [tex_2e])
+!html_name cmd_tex_2e
+
+(!LaTeXe)-Kommandos benutzen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_2e(!t)
+
+!item [(!DESCRIPTION)]
+UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
+spezielle (!LaTeXe)-Kommandos, wie einen Vorspann für
+(!LaTeXe) oder ""(!code [\textbf{!..}])"" anstelle von ""(!code [{\bf~!..}])""
+bei der Umwandlung von (!KK1 [B]).
+
+(!HINT) seit Release 6 Patchlevel 15 ist dies die Voreinstellung
+von UDO.
+
+!item [(!SEEALSO)]
+(!KW [tex_209])
+
+!end_xlist
+
+!end_node

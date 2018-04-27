@@ -1,0 +1,20 @@
+!begin_node (!kw [end_enumerate])
+!html_name cmd_end_enumerate
+
+Finish an enumeration.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_enumerate(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the latest enumerate environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_enumerate]), (!KW [item]), (!link [Enumerations] [Enumerations])
+
+!end_xlist
+
+!end_node

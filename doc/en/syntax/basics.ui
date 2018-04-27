@@ -1,0 +1,199 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Basics
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: macro LINELEN added to text
+#   fd  Jun 08: code UTF-8 added
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: chapter basics_text adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 21: translation completed
+#   fd  May 25: index adjustments
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Basics
+!html_name basics
+
+################################################################################
+
+!begin_node Let's talk about text, Baby!
+!html_name basics_text
+
+!index Text file
+!index Linefeed
+!index Carriage Return
+UDO expects a text file which you can edit with every ASCII editor. You
+should use only printable characters. That means you shouldn't use any
+characters below ""space"" except ASCII~9 (tab), ASCII~10 (line feed) and
+ASCII~13 (carriage return). A text line in a source file shouldn't contain more
+than (!LINELEN) characters.
+
+UDO layouts the destination file itself. That means that it fills in spaces
+between words and lines between paragraphs:
+
+!begin_description
+
+!index word
+!item [Words] are characters which are divided by one or more blank or tab.
+UDO prints words divided by one blank.
+
+!index paragraph
+!item [Paragraphs] consist of words. Paragraphs are divided by one or more
+empty line(s) or UDO commands. UDO divides paragraphs by one empty line when
+printing the destination file.
+
+!end_description
+
+!index Character set
+You can compose the source file using different charsets.
+
+When UDO starts the conversion it excepts the character set that is used on
+the current operating system. If you want to convert source documents which use
+other encodings, you have to inform UDO with the
+relevant commands. Get more information about this in the chapter
+""Special characters"".
+
+!end_node
+
+################################################################################
+
+!begin_node Commands, switches and placeholders
+!html_name basics_commands_switches_placeholders
+
+!begin_description !not_compressed
+!index Command
+!item [Commands]
+An UDO command begins with a single ""!"". A command tells UDO to do something where you
+used it e.g. to output the table of contents with
+(!KW [tableofcontents]).
+
+A command is only recognized, when it is placed at the beginning of a
+line, may be indented by spaces or tabs.
+
+Commands may only be composed of ""!"" and the command descriptor, but they may expect further parameters. 
+Please find more details about the various commands in the command index.
+
+!index Switch
+!item   [Switches]
+An UDO switch begins with a single ""!"". A switch tells UDO how to handle some commands
+e.g. (!KW [language] [[english!!]]) that switches the language of the destination file to
+English so that UDO will print ""Appendix"" instead of ""Anhang"".
+
+A switch is only recognized, when it is placed at the beginning of a
+line, may be indented by spaces or tabs.
+
+Switches may only be composed of ""!"" and the switch descriptor,
+but they may expect further parameters.  Please find more defails about
+the various switches in the command index.
+
+!index Placeholder
+!item [Placeholders]
+An UDO placeholder begins with a ""(!/"" and ends with a single "")"". A
+placeholder is replaced by certain characters, e.g. ''(!KK1 [B])'' by ''(!V){\bf(!v)'' for
+(!LaTeX) or by ''(!V)<b>(!v)'' resp. ''(!V)<strong>(!v)'' for HTML. You can use placeholders wherever you want.
+
+!end_description
+
+!end_node
+
+################################################################################
+
+!begin_node Comments
+!label*     comments
+!html_name basics_comments
+
+A source file can contain comments. UDO ignores a line if the first
+character of a line is a ''#''.
+
+The ''#'' character must not be indented by spaces or tabs!
+
+Inside a verbatim environment or raw environment you cannot use comments
+because UDO prints every line of such an environment.
+
+!end_node
+
+################################################################################
+
+!begin_node Preamble and main part
+!html_name basics_preamble_mainpart
+
+!index Preamble
+!index Main Part
+
+Each source file has to contain a preamble and a main part.
+
+!index (!kw [begin_document])
+
+In the preamble you define general information about the source file like
+information for the title page or the switches that tell UDO how to convert
+the source file. The preamble ends with the command
+(!KW [begin_document]).
+
+!index (!kw [end_document])
+
+The main part contains the text structured into chapters, sections or
+subsections. The main part ends with the command (!KW [end_document]).
+
+!end_node
+
+################################################################################
+
+!begin_node Environments
+!label* environments
+!html_name basics_environments
+
+An environment is a part of a source file that has to be converted in a
+special way. Environments will be started with (!code [!/begin_]) and finished
+with (!code [!/end_]). The commands have to be the first words of a line. They
+may be indented by spaces or tabs.
+
+UDO offers you a large range of environments that will help you to layout
+your text and to insert special commands:
+
+!begin_xlist [description environment:] !compressed
+!item [appendix environment:]     appendix
+!item [center environment:]       centered text
+!item [comment environment:]      comments
+!item [description environment:]  descriptions
+!item [document environment:]     documentation contents
+!item [enumerate environment:]    enumerations
+!item [flushleft environment:]    left justified text
+!item [flushright environment:]   right justified text
+!item [ignore environment:]       ignore text
+!item [itemize environment:]      itemizations
+!item [linedraw environment:]     display graphic screenshots
+!item [preformatted environment:] preformatted text
+!item [quote environment:]        indented text
+!item [raw environment:]          special commands for the destination format
+!item [table environment:]        tables
+!item [verbatim environment:]     preformatted text
+!item [xlist environment:]        lists
+!item [sourcecode environment:]   source code
+!end_xlist
+
+In the relevant sections you can find out how the text of an environment is formatted.
+
+!end_node
+
+################################################################################
+
+!end_node

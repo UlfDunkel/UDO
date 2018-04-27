@@ -1,0 +1,31 @@
+!begin_node (!kw [raw])
+!html_name cmd_raw
+
+Zeile nur für bestimmte Formate ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!TEXT) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!TEXT)
+wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos
+ausgegeben. Diese Zeile zerteilt Absätze genau wie alle anderen
+Kommandos.
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!raw [stg] @subject Documentation/Utilities
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

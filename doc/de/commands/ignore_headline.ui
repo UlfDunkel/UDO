@@ -1,0 +1,26 @@
+!begin_node (!kw [ignore_headline])
+!html_name cmd_ignore_headline
+
+Ausgabe einer Kopfzeile unterdrücken.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_headline(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+wird bei diesem Kapitel keine Kopfzeile erzeugt. Im
+Gegensatz zu (!KW [no_headlines]) wird lediglich bei dem
+Kapitel, bei dem (!KW [ignore_headline]) benutzt wird, auf
+die Ausgabe einer Kopfzeile verzichtet.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [no_headlines])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,43 @@
+!begin_node (!kkkw [INS] [ins])
+!ifdest [ipf]
+!alias (!/INS)...(!/ins)
+!endif
+!html_name cmd_ins
+!label (!kk1 [/INS])
+!label (!kk1 [/ins])
+
+Mark text insertions.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/INS)(!TEXT)(!/ins)(!t)
+
+!item [(!DESCRIPTION)]
+(!NTY)
+""(!TEXT)"" wird als Einfügung markiert.
+
+Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
+und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
+
+Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
+trägt sich UDO als Änderungsautor 1 ein.
+
+Bei WinHelp(4), Apple Quickview und PostScript wird der neue Text in roter
+Farbe geschrieben.
+
+Bei allen anderen Formaten wird der eingefügte Text ohne besondere Kennzeichen
+geschrieben.
+
+!item [(!EXAMPLE)]
+(!T)(!/INS)Einfügungen(!/ins)(!t)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+!end_node

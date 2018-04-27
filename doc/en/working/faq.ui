@@ -1,0 +1,224 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: FAQ
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node General questions (FAQ)
+!html_name faq
+
+!begin_description !not_compressed
+
+############################################################
+
+!item [Why is UDO named ""UDO""?]
+When I began programming UDO I had no better idea than naming it ""UDO"",
+the abbreviation for ""(!B)U(!b)niversal (!B)DO(!b)cument"".
+
+By the way: The author's first name isn't Udo, he's called Dirk!
+
+(!FAQHLINE)
+
+############################################################
+
+!item [How to I pronounce ""UDO""?]
+""UDO"" is pronounced like the prename Udo: ""Ooh-do"". Pronounce the ""U""
+like the ""u"" in ""butcher"", the ""do"" like the ""do"" in ""document"".
+Please don't pronounce it like ""You do"".
+
+(!FAQHLINE)
+
+############################################################
+
+!item [How can I get the current versions?]
+You can always download the current version from the UDO website at 
+(!url [www.udo-open-source.org ][http://www.udo-open-source.org/]). Here you will find links to
+the UDO archives.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Will there be versions for other operating systems?]
+At the moment UDO is available for the following operating systems:
+
+!begin_itemize !compressed
+!item   Atari TOS
+#!item  BeOS
+!item   DOS, OS/2, Windows
+#!item  HP-UX 9.x for 300/400 and 700/800 models
+!item   Linux x86
+!item   Mac~OS
+#!item  NeXTStep
+#!item  SINIX
+#!item SunOS 5.5
+!end_itemize
+
+UDO was completely written in highly portable C. The source code doesn't
+call any system specific functions. Due to this fact UDO could be ported to
+any operating system a C compiler is existing for.
+
+If you would like to port UDO to a system which isn't listed above,
+please (!link [contact] [Contact addresses]) the UDO developer team.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Can UDO generate formats from other systems?]
+Sure. E.g. you can run UDO on a Windows PC and save Linuxdoc-SGML files. You
+can run UDO on a Linux PC and save Windows Help files. No problem. UDO has
+the same functions on any operating systems it is available for.
+
+Maybe you have only to convert the file with GNU-Recode later if the
+charsets are not the same.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Can I write my source files ""here"" and translate them ""there""?]
+Yes, you can e.g. write your source files on a Windows PC and convert them
+on a BeBox or Apple Macintosh. UDO knows the charsets of all operating
+system it is available for. You have only to say UDO which charset was used
+for writing the source files by using the commands like (!KW [code_source] [[cp1252!!]])
+or (!KW [code_source] [[mac!!]]).
+
+(!FAQHLINE)
+
+############################################################
+
+!index Syntax changes
+!item [May the UDO syntax change in the future?]
+UDO is that kind of software that is improved day by day. New commands will
+appear in the future, that's for sure.
+
+In some cases it will be necessary to change the syntax of some commands.
+But I will tell you about these changes. Just take a look at the ""History""
+to get to know about the changes in the past.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [How does UDO work?]
+UDO reads the source file(s) in two passes.
+
+In the first pass UDO reads in the switches, macros, definitions and the
+chapter titles that are needed for referencing.
+
+In the second pass UDO will convert and layout the text. UDO will save all
+lines in an internal buffer until it reads an empty line or an UDO command.
+A command or an empty line tells UDO to layout the last paragraph and to go
+on reading the source file.
+
+(!FAQHLINE)
+
+############################################################
+
+!index (!kw [autoref])
+!item [How does UDO reference other parts of the document?]
+UDO inserts links in hypertext formats (except for the ST-Guide)
+automatically to other parts of the documentation. UDO references chapter
+titles, labels and aliases.
+
+Using the switch (!KW [autoref] [[off!!]]) you can tell UDO not to insert any
+references until you use the switch (!KW [autoref] [[on!!]]).
+
+(!FAQHLINE)
+
+############################################################
+
+!item [How can I link to parts of the current page?]
+Because UDO doesn't insert links to labels of the same page you have to
+insert a explicit link to this label by using the (!KKW [link])
+placeholder. An example:
+
+!autoref [off]
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!node  Test
+!label Test top
+[...]
+(!link [Back to top of page] [Test top])
+!end_verbatim
+(!EXAMPLE_END)
+!autoref [on]
+
+(!FAQHLINE)
+
+############################################################
+
+!item [How can I get images into a table of content?]
+You have to make your own table of contents, that means you have to leave
+the (!KW [tableofcontents]) command. An example:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_document
+!maketitle
+!node Contents
+!image foo
+!toc [all]
+
+!node First chapter
+!end_verbatim
+(!EXAMPLE_END)
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Which editor can I use for UDO?]
+Basically, you can write UDO document source texts with any text editor.
+Some editors even offer luxury functions which can be nice to have in practice.
+
+Here are some suggestions which can of course never be complete or objective:
+
+!begin_table [|l|c|c|] !hline
+""e"" (e.exe) !! OS/2 !! part of the system
+!hline
+(!url [HomeSite][http://www.adobe.com/products/homesite/] [] [elink]) !! Windows !! commercial
+!hline
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/] [] [elink])  !! Linux/KDE !! Open Source
+!hline
+(!url [NotePad++] [http://www.froeb-software.de/] [] [elink]) !! Windows !! Freeware
+!hline
+(!url [Pepper] [http://www.slacksolutions.com/] [] [elink]) !! Linux, Mac, Windows !! commercial
+!hline
+(!url [SciTe] [http://www.scintilla.org/] [] [elink]) !! Linux, Windows !! Open Source
+!hline
+(!url [SuperEdi] [http://www.wolosoft.com/] [] [elink]) !! Windows !! Freeware
+!hline
+(!url [TextPad] [http://www.texpad.com/] [] [elink]) !! Windows !! Freeware
+!hline
+(!url [TextWrangler] [http://www.barebones.com/products/TextWrangler/] [] [elink]) !! Mac~OS~X !! Freeware
+!hline
+(!url [UltraEdit32] [http://www.ultraedit.com/] [] [elink]) !! Windows !! commercial
+!hline
+!end_table
+
+############################################################
+
+!end_description
+
+!end_node

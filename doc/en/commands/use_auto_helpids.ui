@@ -1,0 +1,32 @@
+!begin_node (!kw [use_auto_helpids])
+!html_name cmd_use_auto_helpids
+
+Automatically create Help-IDs.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_helpids [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Settings this switch in the preamble tells UDO
+to automatically save Help-IDs, unless you have
+have specified a Help-ID with (!KW [win_helpid])
+or (!KW [wh4_helpid]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [win_helpid]), (!KW [wh4_helpid])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_helpids [win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,22 @@
+!begin_node (!kw [else])
+!html_name cmd_else
+
+Allgemeine Abfrage.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/else(!t)
+
+!item [(!DESCRIPTION)]
+Die diesem Kommando folgenden Zeilen werden bis zum
+Eintreffen von (!KW [endif]) ausgegeben, wenn bei (!KW [ifdest])
+oder (!KW [iflang]) nicht das Kürzel des aktuellen Ausgabeformates bzw. der Ausgabesprache angegeben wurde.
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [iflang]), (!KW [endif]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+!end_node

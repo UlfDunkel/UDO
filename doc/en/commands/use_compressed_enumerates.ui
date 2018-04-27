@@ -1,0 +1,69 @@
+!begin_node (!kw [use_compressed_enumerates])
+!html_name cmd_use_compressed_enumerates
+
+""Komprimierte"" Enumerate-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_enumerates [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Enumerate-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_enumerates]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_enumerate]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Environments] [Environments])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_compressed_enumerates [all]
+
+# Dokument
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_enumerate !compressed
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_compressed_enumerates [all]
+# !use_compressed_envs       [all]
+
+# Dokument
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+(!EXAMPLE_END)
+
+!end_node

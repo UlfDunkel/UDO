@@ -1,0 +1,28 @@
+!begin_node (!kw [begin_blist])
+!html_name cmd_begin_blist
+
+Eine ""fette"" Liste einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_blist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung
+muss mit (!KW [end_blist]) beendet werden. Die Länge von
+""(!TEXT)"" definiert die Tiefe der Einrückung der
+Aufzählungspunkte. Diese Umgebung lässt sich mit
+anderen Umgebungen kombiniert verwenden. Die Texte,
+die Sie mit (!KW [item] [[~!!]]) angeben, werden fett
+dargestellt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [end_blist]), (!KW [item] [[~!!]]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [use_compressed_envs]), (!link [Listen] [Listen]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node

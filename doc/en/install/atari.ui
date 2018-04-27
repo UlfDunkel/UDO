@@ -1,0 +1,20 @@
+!begin_node Installing the Atari version
+!html_name installation_tos_gem
+
+To install UDO onto an Atari or onto a computer with a TOS-compatible operating
+system (e.g. MagiCMacX, MagiCMac, MagiC-PC, GEMulator, STEmulator, ARAnyM, STonX) just copy all files to a
+directory that should be named ""UDO"".
+
+The GEM version should be the application for files with the suffix
+''(!file [*.u*])'' so you shall do the neccessary changes in your desktop
+(Gemini, Thing, Ease, Magxdesk, !..).
+
+If you prefer the TTP version and you are using a command line shell (e.g.
+Mupfel by Stefan Eissing) copy or move ''(!file [udo.ttp])'' to one of the
+directories that is part of (!file [$PATH]) (e.g. ''(!file [\usr\bin])'').
+
+If you have installed the ST-Guide you should copy or move UDO's hypertext
+((!V)(!UDOR)en.hyp(!v) and (!V)(!UDOR)en.ref(!v)) to the directory that contains
+all your other hypertexts.
+
+!end_node

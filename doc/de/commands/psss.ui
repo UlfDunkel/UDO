@@ -1,0 +1,20 @@
+!begin_node (!kw [psss])
+!html_name cmd_psss
+
+Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubnode]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode])
+
+!end_xlist
+
+!end_node

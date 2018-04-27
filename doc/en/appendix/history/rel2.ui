@@ -1,0 +1,25 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 2
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_02.de)
+#
+################################################################################
+
+!begin_node Changes from Release 1 to 2
+!html_name history_release_1_to_2
+
+We're quite sure that nobody is interested in the changes of this old version any longer.
+
+!end_node

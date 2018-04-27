@@ -1,0 +1,55 @@
+!begin_node Benötigen Sie UDO?
+!html_name intro_need
+
+Falls Sie eine oder mehrere der folgenden Fragen mit Ja beantworten,
+dann dürfte es sich für Sie lohnen, UDO einmal genauer anzusehen.
+Falls Sie keine Frage mit Ja beantworten sollten, dann dürfte es sehr
+wahrscheinlich so sein, daß ein Weiterlesen dieser Dokumentation oder
+der Einsatz von UDO für Sie überflüssig ist.
+
+!begin_itemize !compressed
+!item Sie haben einen Text mit allgemeinem Inhalt verfasst und möchten
+diesen auch Personen zugänglich machen, die nicht das Betriebssystem
+benutzen, welches Sie selbst einsetzen?
+
+!item Sie programmieren und benötigen neben der obligatorischen
+Text-Anleitung (ASCII) noch eine Online-Hilfe oder ein Online-Handbuch in Form
+einer Hilfedatei für Windows, einer HTML-Help-Datei, eines Apple-Help-Books, 
+einer Dokumentation im HTML-Format, eines ST-Guide/Hyperion-Hypertextes,
+einer Hilfe-Datei für Borlands Turbo-Vision oder einer Hilfedatei bzw.
+Anleitung im GNU-Info-Format?
+
+!item Sie programmieren und möchten nur einen gemeinsamen Text für
+gedruckte Dokumentation, Online-Hilfe und für die Webseite erstellen
+und bei Änderungen nur einen Text bearbeiten, den Sie dann in die
+verschiedenen Dokumentationsarten wandeln?
+
+!item Sie programmieren und benötigen neben der ASCII-Anleitung noch
+ein gedrucktes Handbuch, welches Sie mit (!LaTeX) oder einer
+Textverarbeitung, die das Rich Text Format (korrekt!) importieren kann,
+setzen möchten?
+
+!item Sie benötigen nur eine ASCII-Anleitung, möchten sich aber nicht
+immer selbst um den Zeilenumbruch, die Kapitelnummerierung, Blocksatz
+und die Erstellung des Inhaltsverzeichnisses kümmern?
+
+!item Sie möchten einen Hypertext im World Wide Web anbieten, Sie
+besitzen aber keinen leistungsfähigen HTML-Editor, der sich wie UDO um
+eine automatische Referenzierung, Umlautwandlung oder die kapitelweise
+Aufteilung des Hypertextes kümmern kann?
+
+!item Sie möchten einen Hilfstext für ein Windows-Programm anbieten,
+haben aber keine Lust, für ein Tool zu bezahlen, das nur wenig mehr kann als UDO,
+dafür aber wesentlich mehr Ressourcen verbraucht und/oder noch Microsofts Word für Windows
+benötigt?
+
+!item Sie sind der Autor einer Library für Pure-C auf dem Atari und
+benötigen eine Beschreibung der Routinen als Onlinehilfe für Pure-C und
+als ST-Guide-Hypertext?
+
+!end_itemize
+
+Und, konnten Sie eine Frage mit Ja beantworten? Schön! Ansonsten:
+Lesen Sie sich die Fragen noch einmal durch. (!grin)
+
+!end_node

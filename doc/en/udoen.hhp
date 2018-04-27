@@ -1,0 +1,20 @@
+[OPTIONS]
+Title=The Windows Help of UDO
+Compatibility=1.1 or later
+Compiled file=udo7en.chm
+Error log file=udo.log
+Contents file=udo.hhc
+Index file=udo.hhk
+Default topic=udo.html
+Display compile progress=No
+Default Window=main
+Flat=Yes
+Full-text search=Yes
+Auto Index=Yes
+Language=0x409
+
+[WINDOWS]
+main=,"udo.hhc","udo.hhk","udo.html","udo.html",,,,,0x63520,,0x00304e,,,,,,,,0
+
+[FILES]
+udo.html

@@ -1,0 +1,22 @@
+!begin_node Installation der TOS- und GEM-Version (Atari)
+!html_name installation_tos_gem
+
+Zur Installation von UDO auf einem TOS-kompatiblen Computer oder System (z.B. MagicMacX, MagicMac, MagicPC, GEMulator, STEmulator, ARAnyM, STonX) kopieren
+Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
+sinnigerweise ""UDO"" genannt werden sollte.
+
+Die GEM-Version sollten Sie im verwendeten Desktop -- wir empfehlen,
+Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der Dateimaske ''(!file [*.u*])'' anmelden.
+
+Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
+(z.B. mit der Mupfel von Stefan Eissing) arbeiten, kopieren oder
+verschieben Sie ''(!file [udo.ttp])'' in eines der in (!file [$PATH]) angegebenen
+Verzeichnisse (z.B. ''(!file [\usr\bin])'').
+
+Falls Sie den ST-Guide installiert haben, sollten Sie ''(!V)(!UDOR)de.hyp(!v)''
+und ''(!V)(!UDOR)de.ref(!v)'' in Ihr Verzeichnis kopieren oder verschieben, in dem
+Sie auch alle anderen Hypertexte aufbewahren. Nur dann können auch
+andere Hypertexte oder Programme (z.B. ein Editor) auf den
+UDO-Hypertext zugreifen.
+
+!end_node

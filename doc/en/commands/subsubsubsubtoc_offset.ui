@@ -1,0 +1,34 @@
+!begin_node (!kw [subsubsubsubtoc_offset])
+!html_name cmd_subsubsubsubtoc_offset
+
+Set offset of subparagraph counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" will be added to the current
+subparagraph counter when printing the number.
+The example shows how to print the first
+subparagraph with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

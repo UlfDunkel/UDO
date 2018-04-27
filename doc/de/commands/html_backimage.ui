@@ -1,0 +1,31 @@
+!begin_node (!kw [html_backimage])
+!html_name cmd_html_backimage
+
+Setzen des Hintergrundbildes (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt das Hintergrundbild für HTML-Seiten. Als Dateiname
+muss der komplette Name, also einschließlich Dateiendung,
+angegeben werden. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_backcolor]), (!KW [html_textcolor]), (!KW [html_linkcolor]), (!KW [html_vlinkcolor]), (!KW [html_alinkcolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_backimage hintergrund.gif
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,29 @@
+!begin_node (!kw [man_lpp])
+!html_name cmd_man_lpp
+
+Set lines per page (manualpage only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_lpp (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Sets the ""lines per page"" of a manualpage. If (!VALUE) is bigger
+than 0 UDO generates footlines with pagenumbers. When UDO starts
+!/man_lpp is undefined and UDO won't generate these footlines.
+
+!item [(!SEEALSO)]
+(!KW [use_formfeed])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!man_lpp 60
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,31 @@
+[OPTIONS]
+HCW=0
+CONTENTS=UDON0000
+HLP=udo7en4.hlp
+CNT=udo7en4.cnt
+ERRORLOG=udo7en4.err
+REPORT=TRUE
+LCID=0x409 0x0 0x0 ;English (USA)
+TITLE=The Windows Help of UDO
+COPYRIGHT=Copyright (©) by Dirk Hagedorn
+COMPRESS=HIGH
+ICON=help.ico
+
+[WINDOWS]
+main="",(20,20,540,880),0,,(r12632256)
+win1="UDO7",(573,71,437,540),4,(r15204351),(r12632256),1
+
+[CONFIG]
+BrowseButtons()
+CreateButton("BTN_UP", "&Up", "JumpID(`', `UDON0000')")
+CreateButton("BTN_INFO", "&Info", "JumpID(`', `UDON0000')")
+CreateButton("BTN_EXIT", "E&xit", "Exit()")
+ChangeButtonBinding("BTN_CONTENTS", "JumpID(`', `UDON00001')")
+AddAccelerator(8, 0, "Back()")
+AddAccelerator(37, 2, "Prev()")
+AddAccelerator(39, 2, "Next()")
+AppendItem("mnu_help", "item_udoinfo", "&UDO7...", "JumpID(`>win1', `UDONFFFF')")
+RegisterRoutine("shell32.dll", "ShellExecuteA", "USSSSU")
+
+[FILES]
+udo7en4.rtf

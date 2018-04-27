@@ -1,0 +1,30 @@
+!begin_node (!kw [no_toc_subnodes])
+!html_name cmd_no_toc_subnodes
+
+Do not output sections in tables of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_toc_subnodes [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble UDO will print only the
+chapter titles inside the table of contents.
+(!KW [no_toc_subnodes]) is the same as (!KW [use_short_tocs]).
+
+Another possibily is to use the switch (!KW [depth]) with
+the (!KW [toc]) command.
+
+!item [(!EXAMPLE)]
+(!T)!/no_toc_subnodes [win](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+!end_node

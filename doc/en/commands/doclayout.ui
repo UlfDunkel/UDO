@@ -1,0 +1,78 @@
+!begin_node (!kw [doclayout])
+!html_name cmd_doclayout
+
+Set document layout (PostScript only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)] [(!NAME)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command is used to set several informations about the
+decoument layout. ""<name>"" can have one of the following values:
+
+!begin_description
+
+!item [paper]
+""(!TEXT)"" will be used to set the paper size and can be one
+of the values:  A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps] [paper] A4PORTRAIT
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [openMode]
+You can find possible values for ""(!TEXT)"" in the pdfmark primer.
+
+!item [propfontname]
+Possible value for ""(!TEXT)"" are fontnames like Arial, Times New Roman,
+Sans Serif.
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps] [propfontname] sans-serif
+!end_verbatim
+(!EXAMPLE_END)
+
+(!NOTE) For postscript output Helvetica will be set if
+helvetica, Arial or sans serif is specified, otherwise Times New Roman.
+
+!item [propfontsize]
+Possible values for ""(!TEXT)"" are fontsizes with unit pt.
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps] [propfontsize] 12
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [monofontname]
+Possible value for ""(!TEXT)"" are fontnames like Arial, Times New Roman,
+Sans Serif.
+
+!item [monofontsize]
+Possible values for ""(!TEXT)"" are fontsizes with unit pt.
+
+!item [node1size, node2size, node3size, node4size...]
+This command sets the fontsize of nodes and headings for
+postscript output.
+Possible values for ""(!TEXT)"" are fontsizes with unit pt.
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps,rtf] [node1size] 18
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [docinfo]), (!KW [maketitle]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node

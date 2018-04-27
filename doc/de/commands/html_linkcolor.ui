@@ -1,0 +1,24 @@
+!begin_node (!kw [html_linkcolor])
+!html_name cmd_html_linkcolor
+
+Setzen der Farbe für Links (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links darzustellen.
+Wird der Befehl im Vorspann benutzt, setzen Sie damit
+die Standardwerte für alle Seiten inkl. dem Inhaltsverzeichnis.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_textcolor]), (!KW [html_alinkcolor]), (!KW [html_vlinkcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node

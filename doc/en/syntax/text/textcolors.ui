@@ -1,0 +1,23 @@
+!begin_node Text colors
+!html_name style_textcolors
+
+UDO supports definition of text color for words or paragraphs. 
+You can use the following commands:
+
+!include syntax/text/colors.ui
+
+The command (!KK1 [coloff]) resets the default color black.
+
+From~...
+!begin_verbatim
+(!red)Color in UDO(!coloff)
+!end_verbatim
+
+...~you get:
+
+(!red)Color in UDO(!coloff)
+
+Text color definition is currently supported for the output formats 
+HTML, RTF, WinHelp, DRC and PostScript.
+
+!end_node

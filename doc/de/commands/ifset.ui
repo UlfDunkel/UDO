@@ -1,0 +1,44 @@
+!begin_node (!kw [ifset])
+!html_name cmd_ifset
+
+Symbol abfragen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifset [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Abfragebefehl können Sie testen, ob ein
+Symbol für die Umwandlung in der Kommandozeile mit
+der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, 
+werden alle folgenden Zeilen umgewandelt, bis (!KW [else])
+oder (!KW [endif]) auftaucht. Andernfalls werden nur die
+Zeilen umgewandelt, die (!KW [else]) folgen, sofern die
+Abfrage einen else-Zweig besitzt. Das Beispiel
+zeigt, wie Sie abfragen, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [ifnset]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifset [deutsch]
+Das Symbol ""deutsch"" wurde gesetzt!
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!set [deutsch]
+!ifset [deutsch]
+Das Symbol ""deutsch"" wurde gesetzt!
+!endif
+!unset [deutsch]
+(!EXAMPLE_END)
+
+!end_node

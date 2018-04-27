@@ -1,0 +1,85 @@
+!begin_node Itemizations
+!html_name style_itemizations
+!label itemize environment
+
+You can use the itemize environment for itemizations where every
+single item is marked with a bullet, star, dash or point. The itemize
+environment is started with (!KW [begin_itemize]) and finished with
+(!KW [end_itemize]). Each item has to be marked with the
+(!KW [item]) command.
+
+You can use the itemize environment inside other environments or inside
+another itemize environment.
+
+This short example shows how to write a simple itemize environment:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)itemize1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)itemize1.ui
+(!EXAMPLE_END)
+
+And this example, where an itemize environment is used inside another
+one !..
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)itemize2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)itemize2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index (!kw [compressed])
+UDO separates the text of each item by an empty line. In some cases it is not
+a good idea to separate the items e.g. if an item contains only some text.
+In this case it would be better to suppress the empty lines to get a
+compressed environment.
+
+For printing compressed environment UDO offers you the command named
+(!KW [compressed]) you can add to the (!KW [begin_itemize]) command. If you
+add (!KW [compressed]) UDO won't separate the items by inserting empty lines.
+Furthermore in all environments you use inside this itemize environment no
+empty lines will be printed.
+
+The following two examples show how to use the (!KW [compressed]) command and
+which effects this command has. The first example doesn't, the second one
+uses (!KW [compressed]):
+
+Without (!KW [compressed]):
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)itemize3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)itemize3.ui
+(!EXAMPLE_END)
+
+With (!KW [compressed]):
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)itemize4.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)itemize4.ui
+(!EXAMPLE_END)
+
+If you can't see any difference the destination format doesn't allow it to
+suppress the item separation.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!item   The items of the first itemize environment will be marked with a
+bullet that is defined on different positions inside the character set of
+each operating system.
+
+!index (!kw [no_umlaute])
+!item   If you use the switch (!KW [no_umlaute]) inside the preamble of
+the source file the items of the first itemize environment will be marked
+with an ""o"" instead of a bullet.
+
+!end_enumerate
+
+!end_node

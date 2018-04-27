@@ -1,0 +1,29 @@
+!begin_node (!kw [node])
+!html_name cmd_node
+
+Start a chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/node (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new chapter named ""(!TEXT)"".
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!node A chapter title
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading A chapter title
+(!EXAMPLE_END)
+
+!end_node

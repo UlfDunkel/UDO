@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [authorimage])
+!html_name cmd_authorimage
+
+Set logo of author for title page.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/authorimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist anymore.
+Use (!KW [docinfo] [[authorimage!!]]) instead.
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+!endif

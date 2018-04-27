@@ -1,0 +1,69 @@
+!begin_node (!kw [use_compressed_itemizes])
+!html_name cmd_use_compressed_itemizes
+
+""Komprimierte"" Itemize-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_itemizes [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Itemize-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!KW [use_compressed_itemizes]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_compressed_itemizes [all]
+
+# Dokument
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize !compressed
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_compressed_itemizes [all]
+# !use_compressed_envs     [all]
+
+# Dokument
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+(!EXAMPLE_END)
+
+!end_node

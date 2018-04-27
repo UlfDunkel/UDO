@@ -1,0 +1,64 @@
+!begin_node Kontakt zur UDO-Gemeinde
+!html_name intro_contact
+!alias Kontaktadresse
+!alias Mailingliste
+
+Auf der UDO-Website (!url [www.udo-open-source.org] [http://www.udo-open-source.org/])
+finden Sie Informationen für UDO-Anwender und Entwickler, insbesondere
+können Sie hier die aktuellen Versionen des Programms und der
+Dokumentation herunterladen.
+
+Zum Kontakt zwischen den UDO-Anwendern stehen folgende (!B)Mailinglisten(!b) zur Verfügung:
+
+!begin_blist [UDO_Bugtracker] !compressed
+!item [(!url [UDO_Announce] [http://lists.udo-open-source.org/mailman/listinfo/udo_announce])]
+      Ankündigungen rund um UDO (z.B. neue Versionen)
+!item [(!url [UDO_Bugtracker] [http://lists.udo-open-source.org/mailman/listinfo/udo_bugtracker])]
+      In dieser Mailingliste bekommen Sie die Bugmeldungen und Feature-Wünsche von UDO angezeigt, 
+      die im (!url [Bugtracker-System] [http://bugs.udo-open-source.org/]) eingetragen werden.
+!item [(!url [UDO_Dev] [http://lists.udo-open-source.org/mailman/listinfo/udo_dev])]
+      Mailingliste für die UDO-Entwickler.
+!item [(!url [UDO_Discussion] [http://lists.udo-open-source.org/mailman/listinfo/udo_discussion])]
+      In dieser Mailingliste können Fragen rund um UDO gestellt werden und es wird allgemein über UDO diskutiert.
+      Melden Sie sich hier, wenn Sie ein Problem mit UDO haben.
+!end_blist
+
+Die Diskussionen auf den Mailinglisten finden hauptsächlich in Deutsch statt; Anfragen können jedoch auch in Englisch gestellt werden.
+
+!begin_ignore
+!begin_node* Dirk Hagedorn
+#!label Dirk Hagedorn
+!label Anschrift
+
+!begin_xlist [World Wide Web:]
+
+!item	[Anschrift:]
+		Dirk Hagedorn 	(!nl)
+		Asmecke 1		(!nl)
+		59846 Sundern	(!nl)
+		Deutschland
+
+!item	[Telefon/Fax:]
+		+49 2933 77979
+
+!item	[MausNet:]
+		Dirk Hagedorn @ MK2 (keine Mails > 16 KB)
+
+!item	[Internet:]
+		(!T)(!url [info@dirk-hagedorn.de] [mailto:info@dirk-hagedorn.de])(!t)
+
+!item	[World Wide Web:]
+		(!T)(!url [http://www.dirk-hagedorn.de/] [])(!t)
+
+!item	[Bankverbindung:]
+		Konto 3 561 164				(!nl)
+		Sparkasse Arnsberg-Sundern	(!nl)
+		Bankleitzahl 466 500 05
+
+!end_xlist
+
+!end_node
+
+!end_ignore
+
+!end_node

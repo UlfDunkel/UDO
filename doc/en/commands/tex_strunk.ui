@@ -1,0 +1,21 @@
+!begin_node (!kw [tex_strunk])
+!html_name cmd_tex_strunk
+
+Create graphic commands for CS(!TeX) ((!TeX) only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_strunk(!t)
+
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special Strunk-(!TeX) commands to
+display GEM images when using the (!KW [image]) command.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
+
+!end_xlist
+
+!end_node

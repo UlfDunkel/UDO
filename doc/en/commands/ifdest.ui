@@ -1,0 +1,43 @@
+!begin_node (!kw [ifdest])
+!html_name cmd_ifdest
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifdest [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This command tests the current destination format. If one of the
+""<abbreviations>"" matches the abbreviation of the destination
+format UDO will convert all lines between (!KW [ifdest]) and
+(!KW [else]) or (!KW [endif]). If not UDO will only convert the
+lines between (!KW [else]) and (!KW [endif]) if (!KW [else]) is
+used. The example shows how to test if UDO converts to HTML, ST-Guide or
+Windows Help.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [else]), (!KW [endif]), (!KW [ifndest]), (!KW [if]), (!link [Query commands] [Query commands])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifdest [html,stg,win]
+This text only appears when converting to
+HTML, ST-Guide or WinHelp.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html,stg,win]
+This text only appears when converting to
+HTML, ST-Guide or WinHelp.
+!endif
+(!EXAMPLE_END)
+
+!end_node

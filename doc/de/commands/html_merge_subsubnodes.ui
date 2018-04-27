@@ -1,0 +1,24 @@
+!begin_node (!kw [html_merge_subsubnodes])
+!html_name cmd_html_merge_subsubnodes
+
+Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann eingesetzt, wird
+ein Abschnitt samt allen zugehörigen Unterabschnitten
+und Paragraphen in einer Datei zusammengefasst.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!item [(!SEEALSO)]
+(!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubsubnodes])
+
+!end_xlist
+
+!end_node

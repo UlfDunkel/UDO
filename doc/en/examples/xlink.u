@@ -1,0 +1,46 @@
+######################################
+# @(#) externe Verknüpfungen - dh 1996
+######################################
+
+!code_source [latin1]
+
+!docinfo [title]	UDOs
+!docinfo [program]	Xlink-Befehl
+!docinfo [author]	Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+#----------------------------
+!node Ein paar Beispiele für den xlink-Befehl
+
+Mit UDO können Sie manuelle Verweise auf andere Texte vornehmen,
+indem Sie den xlink-Befehl benutzen. Da die Syntax des xlink-Befehls
+abhänig vom jeweiligen Format abhängt, sollte man xlink-Befehle vorsichtig
+einsetzen.
+
+Im Quelltext bzw. hier sehen Sie, wie externe Verweise formatbezogen
+eingesetzt werden:
+
+!ifdest [html]
+Externe Verweise mit HTML:
+Das (!xlink [deutsche Internetverzeichnis] [http://web.de]) usw.
+!endif
+
+!ifdest [stg]
+Externe Verweise beim ST-Guide:
+Der (!xlink [HCP-Hypertext] [*:/hcp.hyp]) usw.
+!endif
+
+!ifdest [win]
+Externe Verweise mit WinHelp:
+Die (!xlink [UDO-Hilfe] [Titel@c:/udo/udo.hlp]) usw.
+!endif
+
+!ifndest [html,stg]
+Externe Verweise sind in diesem Format nicht möglich.
+!endif
+
+!end_document
+

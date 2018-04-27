@@ -1,0 +1,26 @@
+!begin_node (!kw [image_counter])
+!html_name cmd_image_counter
+
+Set image counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/image_counter [(!VALUE)](!t)
+
+!item [(!DESCRIPTION)]
+With this switch you can set the image counter. If you use the lower
+example the caption of the first image will look like this: ""Figure 5: !.."".
+
+!item [(!EXAMPLE)]
+(!T)!/image_counter 5(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KW [image])
+
+!end_xlist
+
+!end_node

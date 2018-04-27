@@ -1,0 +1,75 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: HTML Apple Help
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 19: description content for HAH created
+#   fd  Aug 04: remote hint enhanced
+#
+################################################################################
+
+!begin_node Apple Help Book (HTML)
+!html_name format_hah
+!label HTML Apple Help
+
+Apple, Inc. bietet seit Mac~OS~X einen cleveren Hilfe-Betrachter namens
+(!file [Apple Help Viewer]) für Programme. Dabei muß ein sogenanntes
+""Apple Help Book"" für das Programm im System angemeldet werden, das
+in einem bestimmten Ordner des Programm-Bundles vorhanden ist. Ein
+Apple Help Book ist prinzipiell ein Ordner mit einer Sammlung von
+HTML-Seiten, Bildern und CSS-Anweisungen, vergleichbar einer Website.
+Wichtig ist, daß in der Homepage dieser HTML-Seiten zwei bestimmte
+Meta-Tags für den Apple Help Viewer enthalten sind, damit es anhand
+dieser erkannt wird.
+
+Somit ist das von UDO erzeugte Apple-Help-Book-Format prinzipiell immer
+ein HTML-Format, nur daß eben in der Homepage ((!file [index.htm])
+o.ä.) folgende Meta-Tags eingefügt werden:
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# preamble
+!macro   PROD          iCalamus
+!docinfo [appletitle]  (!PROD)-Handbuch
+!docinfo [appleicon]   (!PROD)%20Help/img/feather.png
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<meta name="AppleTitle" content="iCalamus-Hilfe">
+<meta name="AppleIcon" content="iCalamus%20Help/img/feather.png">
+!end_verbatim
+(!EXAMPLE_END)
+
+(!HINTS)
+!begin_itemize !compressed
+!item Der im Beispiel gezeigte AppleTitle (hier: ""iCalamus-Hilfe"") muss
+nicht mit dem Ordnernamen des Apple Help Books (hier:
+""iCalamus~Help"") übereinstimmen.
+
+!item CSS-Anweisungen in Apple Help Books dürfen keine Elemente (z.B. Bilder)
+einbinden, die außerhalb des Ordners liegen, in dem sich das Apple Help
+Book befindet. UDO kann dies nicht überprüfen. Suchen Sie nach
+Remote-Dateizugriffen z.B. in Safaris Fehler-Konsole.
+
+!item Mit Mac~OS~X v10.6 (Snow Leopard) hat Apple das Format des Apple Help
+Books verändert. Die von UDO zur Zeit erzeugten Apple Help Books
+unterstützen noch das Format bis einschließlich Mac~OS~X v10.5
+(Leopard).
+
+!end_itemize
+
+!end_node

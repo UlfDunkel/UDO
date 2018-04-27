@@ -1,0 +1,27 @@
+!begin_node Centered text
+!html_name style_centered
+!label center environment
+
+Lines that are part of a center environment will be displayed centred if
+the destination format can display centered text.
+
+You can use the center environment inside other environments. You can also
+use it inside another center environment, even if this may be senseless.
+
+If you use other environments inside a center environment they will be
+layouted like in all other cases. Only when the center environment is the
+active one text will be printed centered.
+
+If the following example isn't centered the current documentation format
+doesn't allow it to use centered text.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)center.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)center.ui
+(!EXAMPLE_END)
+
+You see that UDO layouts paragraphs of a center environment, too. To insert
+a manual line break use the (!KKW [nl]) command.
+
+!end_node

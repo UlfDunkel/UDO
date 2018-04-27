@@ -1,0 +1,38 @@
+!begin_node (!kw [use_output_buffer])
+!html_name cmd_use_output_buffer
+
+Ausgabepuffer anfordern.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_output_buffer [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+UDO bricht bei allen Formaten an der durch (!KW [parwidth])
+definierten Position die Zeilen um. Bei WinHelp und
+HTML kann es dadurch passieren, daß Querverweise
+nicht erkannt werden. Wird dieser Schalter benutzt,
+so werden Absätze erst komplett in einem ausreichend
+großen Puffer erzeugt, dann die Querverweise angelegt
+und erst dann die Zeilen umbrochen. Da dies die
+Umwandlungsdauer negativ beeinflusst, benutzt UDO
+standardmäßig keinen Ausgabepuffer. Im Beispiel
+würden Ausgabepuffer für WinHelp und HTML angefordert.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [parwidth])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_output_buffer [win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,24 @@
+!begin_node (!kw [begin_center])
+!html_name cmd_begin_center
+
+Display centered text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_center(!t)
+
+!item [(!DESCRIPTION)]
+This command opens a (new) (!link [center environment] [center environment]). Text that is part of a
+center environment will be printed centred until the
+(!KW [end_center]) command appears. UDO layouts the text of a
+center environment so you will may be be forced to insert manual
+linebreaks with (!KKW [nl]).
+
+!item [(!SEEALSO)]
+(!KW [end_center]), (!KKW [nl]), (!link [Emphasizing text] [Emphasizing text]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,30 @@
+!begin_node (!kw [wh4_backcolor])
+!html_name cmd_wh4_backcolor
+
+Set background color for Windows Help.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_backcolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the background color of your Windows
+Help file. You can use one of the following colors:
+!include syntax/misc/short_color.ui
+But you should use only
+white, grey and black because the other colours are quite ugly.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_backcolor gray
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

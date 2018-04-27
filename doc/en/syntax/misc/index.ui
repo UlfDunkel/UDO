@@ -1,0 +1,123 @@
+!begin_node Indices
+!label* indices
+!html_name misc_indices
+
+!index (!kw [index])
+!index (!kkw [idx])
+!index (!kkw [index])
+
+To add entries for the index you can use the (!KW [index]) command
+or the (!KKW [idx]) or (!KKW [index]) placeholders. You can and should use these
+commands as often as possible.
+
+To add an entry with the (!KW [index]) command use it this way:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)index1.ui
+(!EXAMPLE_END)
+
+The entry appears inside the index of (!LaTeX),
+inside the index of a Texinfo file that was printed with (!TeX),
+inside the index of an ST-Guide hypertext,
+inside the search dialog of Windows Help and
+inside the index of an RTF file.
+
+To insert a multi-index you can separate the index entries with a double
+exclamation mark. You can use up to three indices in one line. You should
+use multi-indices when it is obvious that a potential reader looks for an
+entry in different ways.
+
+If you think that a reader might look for ""Index entry"" or ""Entry,
+Index"" you should use the following index commands:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)index2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+If you use the placeholder (!KKW [idx]) you can use up to four
+parameters. The following examples show how the commands are converted for
+(!LaTeX), Windows Help and RTF:
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   an (!KK2W [idx] [[entry!!]])
+!item [LaTeX:] an entry\index{entry}
+!item [RTF:]   an {\xe\v entry}entry
+!item [Win:]   an {K{\footnote K entry}}entry
+!item [else:]  an entry
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   a (!KK2W [idx] [[word!!] [entry!!]])
+!item [LaTeX:] a word\index{entry}
+!item [RTF:]   a {\xe\v Index}Wort
+!item [Win:]   a {K{\footnote K entry}}word
+!item [else:]  a word
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   a (!KK2W [idx] [[word!!] [entry!!] [subentry!!]])
+!item [LaTeX:] a word\index{entry!subentry}
+!item [RTF:]   a {\xe\v entry, subentry}word
+!item [Win:]   a {K{\footnote K entry, subentry}}word
+!item [else:]  a word
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   a (!KK2W [idx] [[word!!] [entry!!] [subentry!!] [subsubentry!!]])
+!item [LaTeX:] a word\index{entry!subentry!subsubentry}
+!item [RTF:]   a {\xe\v entry, subentry, subsubentry}word
+!item [Win:]   a {K{\footnote K entry, subentry, subsubentry}}word
+!item [else:]  a word
+!end_xlist
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+!index (!kw [no_index])
+!item The conversion of these index commands can be suppressed with the
+switch (!KW [no_index]) inside the preamble.
+
+!index (!kw [use_alias_inside_index])
+!index (!kw [use_label_inside_index])
+!index (!kw [use_nodes_inside_index])
+!item Chapter names, labels and aliases aren't added to the index in no
+destination format. But you can automatize this with the following switches:
+(!KW [use_nodes_inside_index]),
+(!KW [use_label_inside_index]) and
+(!KW [use_alias_inside_index]).
+
+!index (!kw [ignore_index])
+!item If a chapter contains the command (!KW [ignore_index]) the chapter
+name won't be added to the index even if you use the switch
+(!KW [use_nodes_inside_index]) inside the preamble of your source file.
+
+!index Makeindex
+!item If you convert to (!LaTeX) and you use (!KW [index]) commands inside
+your source file UDO will add the commands that are necessary for
+""Makeindex"" automatically. Special characters of an index entry are
+converted especially for ""Makeindex"".
+
+!item You have to use the parameters inside brackets. If you want to use a
+bracket inside a parameter you have to insert a ''!''. If you don't
+UDO will think that the placeholder ended. An example:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+wrong: (!idx [Copyright (c) 1995])
+right: (!idx [Copyright (c!) 1995])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_enumerate
+
+!end_node

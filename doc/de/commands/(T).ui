@@ -1,0 +1,38 @@
+!begin_node (!kkkw [T] [t])
+!ifdest [ipf]
+!alias (!/T)...(!/t)
+!endif
+!html_name cmd_T()
+!label (!kk1 [/T])
+!label (!kk1 [/t])
+
+Text in Schreibmaschinenschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/T)(!TEXT)(!/t)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird in Schreibmaschinenschrift dargestellt,
+falls möglich. Diese Schriftart wird von fast allen
+Ausgabeformaten unterstützt.
+
+!item [(!SEEALSO)]
+(!link [Schriftarten] [Schriftarten]), (!link [Texthervorhebungen] [Texthervorhebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""Schreibmaschinenschrift"" wird in 
+(!T)Schreibmaschinenschrift(!t) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""Schreibmaschinenschrift"" wird in 
+(!T)Schreibmaschinenschrift(!t) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node

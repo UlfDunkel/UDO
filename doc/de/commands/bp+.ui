@@ -1,0 +1,20 @@
+!begin_node (!kw [bp*])
+!html_name cmd_bp_asterisk
+
+Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bp* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_pnode*]).
+
+!item [(!SEEALSO)]
+(!KW [begin_pnode*])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,33 @@
+!begin_node ("")
+!html_name cmd_quote
+
+Typographisches Anführungszeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)("")(!t)
+
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Anführungszeichen werden von
+UDO in die typographischen Anführungszeichen der
+benutzten Sprache umgewandelt, sofern das Ausgabeformat
+diese anzeigen kann. Andernfalls werden doppelte
+Anführungszeichen durch einfache ersetzt.
+
+!item [(!SEEALSO)]
+(!link [((""))] [((""))]), (!link [('')] [('')]), (!KW [no_quotes])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+""Typographische Anführungszeichen""
+!end_verbatim
+(!EXAMPLE_AFTER)
+""Typographische Anführungszeichen""
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,56 @@
+!begin_node Schriftarten
+!html_name style_textstyles
+
+UDO ermöglicht es Ihnen, bereits im Quelltext festzulegen, in welcher
+Schriftart Worte oder Sätze im Ausgabeformat erscheinen soll.
+
+Um für eine Textpassage eine passende Schriftart zu setzen, müssen Sie
+diese mit den zugehörigen Platzhaltern klammern. Lange Rede, kurzer
+Sinn, hier ein Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)effects.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)effects.ui
+(!EXAMPLE_END)
+
+In der folgenden Tabelle können Sie ablesen, durch welche Kommandos
+die Schriftarten im jeweiligen Format erzeugt werden:
+
+!include syntax/text/styles.ui
+
+Wie Sie sehen, werden bei der Ausgabe ins ASCII-Format die Zeichen zur
+Einschaltung von Schriftarten benutzt, wie sie im Usenet üblich
+sind. Die Zeichen werden bei der Ermittlung von Zeilenlängen nicht
+berücksichtigt.
+
+!index (!kw [no_effects])
+Wenn Sie bei einem Ausgabeformat keine Schriftarten benutzen möchten,
+so können Sie die Ausgabe der Schriftartbefehle durch die Angabe des
+Schalter (!KW [no_effects]) unterdrücken. Der Schalter muß dabei zusammen mit
+dem/den gewünschten Format(en) im Vorspann angegeben werden. Um z.B.
+keine Schriftarten beim ASCII- und Manualpage-Format zu benutzen,
+benutzen Sie dafür (!KW [no_effects] [[asc,man!!]]).
+
+(!HINT)
+
+Mit Definitionen lassen sich leicht benutzerdefinierte Schriftarten
+erstellen. Dazu müssen Sie natürlich Kenntnis der Formatbefehle des
+jeweiligen Formates haben. Im folgenden Beispiel wird gezeigt, wie Sie
+die vom ST-Guide unterstützte helle Schrift ein- und ausschalten können:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [stg]
+  !define G @{G}
+  !define g @{g}
+!else
+  !define G
+  !define g
+!endif
+
+Normal und (!G)ghosted(!g).
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

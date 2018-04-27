@@ -1,0 +1,245 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Tips & Tricks
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 09: multi-language paragraph added
+#   fd  Jun 09: text reviewed
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Tipps & Tricks
+!html_name working_tips
+
+################################################################################
+
+!begin_node Zerteilen Sie große Dokumentationen
+!html_name working_tips_split
+
+Falls Sie eine Dokumentation schreiben, die einen Umfang von 30~kB
+oder mehr hat, sollten Sie sie in kleine Häppchen aufteilen. Diese
+Dateien können dann mit dem (!KW [include]) an passender Stelle eingeladen
+werden.
+
+Das Aufteilen bietet den Vorteil, daß Sie die Dokumentation
+durch einfaches Verschieben nur einer einzigen Zeile neu gliedern
+können. Wäre der gesamte Quelltext in einer Datei, müßten Sie mit
+einem Editor gleich ganze Blöcke umkopieren.
+
+Ein weiterer Vorteil des Aufteilens ist, daß Sie bestimmte Kapitel
+schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
+geben.
+
+Außerdem können Sie leicht und schnell nur Teile der Dokumentation auf
+syntaktische Korrektheit testen. Nehmen wir an, wir haben einen
+Quelltext mit fünf Kapiteln. Erstellen Sie eine Datei mit den globalen
+Schaltern, eine Hauptdatei und fünf Dateien mit dem Kapiteltext:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)main.u
+(!EXAMPLE_END)
+
+Falls Sie nun einmal nur ein Kapitel umwandeln wollen, erstellen Sie
+ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)ch5test.u
+(!EXAMPLE_END)
+
+Gerade bei sehr umfangreichen Dokumentationen können Sie so die Fehlersuche
+und -korrektur drastisch beschleunigen.
+
+Falls Sie sich mal ein Bild davon machen wollen, wie so eine
+Aufteilung aussehen kann, dann schauen Sie sich einmal die Quelltexte
+dieser UDO-Dokumentation an. Stünde diese Dokumentation in einer einzigen, großen 
+Datei, hätten wir schon längst den Überblick verloren.
+
+!end_node
+
+################################################################################
+
+!begin_node Verwenden Sie standardisierte Quelltexte
+!html_name working_tips_standardize
+
+Es soll ja Autoren geben, die laufend neue Programme oder Hypertexte
+veröffentlichen. Und in fast allen Beschreibungen tauchen Kapitel auf,
+in denen z.B. Copyrightangaben benutzt werden. Solche Dinge brauchen Sie 
+natürlich nicht immer wieder neu zu schreiben, sondern können sich
+unter Zuhilfenahme von Makros kleinere Standardtexte erstellen.
+
+Nehmen wir an, unsere Copyrightangabe sieht so aus:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+""Hello, World!"" Version 8.15 (!nl)
+Copyright (!copyright) 1996 bei C. Anfänger
+!end_verbatim
+(!EXAMPLE_END)
+
+Bei einem anderen Programm wird wieder fast die gleiche Angabe
+erfolgen, lediglich der Name des Programms und die Versionsnummer
+werden sich unterscheiden.
+
+Was liegt also näher, als solch einen Text zu standardisieren?
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+""(!ProgrammName)"" Version (!ProgrammVersion) (!nl)
+Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
+!end_verbatim
+(!EXAMPLE_END)
+
+Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
+lediglich die Makros ""(!code [ProgrammName])"", ""(!code [ProgrammVersion])"" und
+""(!code [ProgrammJahr])"" gesetzt werden, im Hauptteil muß diese Datei dann nur
+noch an passender Stelle eingebunden werden:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!macro ProgrammName    Hello, World!
+!macro ProgrammVersion 8.15
+!macro ProgrammJahr    1996
+...
+!begin_document
+...
+!include copyleft.ui
+!end_verbatim
+(!EXAMPLE_END)
+
+Dieser Text kann dann wieder beim nächsten Projekt eingesetzt werden,
+indem Sie einfach die Makros anders definieren.
+
+Zugegeben, dies ist nur ein kurzes Beispiel. Bei umfangreicheren
+Texten ist es jedoch eine sehr große Arbeitserleichterung.
+
+!end_node
+
+################################################################################
+
+!begin_node Verwenden Sie standardisierte Dateinamen
+!html_name working_tips_standardize_files
+
+UDO ist es zwar völlig egal, wie die Dateien heißen, aus denen Sie Ihr UDO-Quelltext-Dokument erzeugen. 
+Es kann aber für strukturiertes Arbeiten sehr nützlich sein, sich eigene Standards zuzulegen. 
+Vor allem im Austausch mit anderen Menschen ist es sinnvoll, wenn Sie auch bei den Dateinamen eindeutige 
+Standards verwenden.
+
+Sobald Sie Dokumentationen für mehrere Sprachen entwickeln, empfiehlt
+es sich zudem, die Dateinamen englisch festzulegen, es sei denn, Sie
+wissen genau, daß sämtliche Mit-Autorinnen und Kollegen wirklich gut
+Deutsch können und die Dateisysteme, auf denen sie arbeiten, keine
+Probleme mit deutschen Umlauten haben.
+
+Hier unser Vorschlag:
+
+!begin_blist
+!item [.u]
+      Eselsbrücke: (!code [.u]) wie (!B)U(!b)DO. Die Haupt-Datei für das Dokument, z.B. (!file [manual.u]).
+
+!item [.ui]
+      Eselsbrücke: (!code [.ui]) wie (!B)U(!b)DO-(!B)I(!b)nclude. Dateien, die von der .u-Datei inkludiert werden. 
+      Diese Dateien sollten nur weitere Steuerkommandos enthalten, nicht aber Text, der ggf. übersetzt werden muss.
+
+!item [.uli]
+      Eselsbrücke: (!code [.uli]) wie (!B)U(!b)DO-(!B)L(!b)ibrary-(!B)I(!b)nclude. 
+      Dateien, die aus einer Bibliothek (engl. ""Library"") für verschiedene Projekte gleichzeitig genutzt werden können, z.B. Makros, Silbentrennungslisten usw.
+
+!item [.de]
+      Alle Dateien mit deutschen Texten.
+
+!item [.en]
+      Alle Dateien mit englischen Texten.
+
+!item [.sv]
+      Alle Dateien mit schwedischen Texten. (Falls Sie sich wundern,
+warum wir hier nicht (!code [.se]) vorschlagen, hier die Erklärung:
+(!code [sv]) ist der ISO-Bezeichner für die Sprache Schwedisch, während
+(!code [SE]) der ISO-Bezeichner für das Land Schweden ist. Das wird oft
+verwechselt, auch z.B. bei Tschechisch ((!code [cs])) und Tschechien
+((!code [CZ])).
+
+!item [.fr_CA]
+      Jetzt ahnen Sie es schon, oder? Diese Datei-Endung würde
+festlegen, daß der darin enthaltene Dokument-Text Französisch für
+Kanadier ist. So einfach ist das mit den ISO-Bezeichnern für Sprachen
+und Länder. -- Wenn Sie bei Französisch nicht weiter differenzieren
+müssen, reicht natürlich (!file [.fr]) völlig aus.
+
+!end_blist
+
+Wenn Sie so vorgehen, müssen Sie beim Hinzufügen einer neuen Sprache
+nur die (!KW [include])-Befehle in den (!file [.ui])-Dateien erweitern
+und z.B. die (!file [.en])-Dateien kopieren und den Kopien die
+gewünschten Sprach-Endungen für die neue Übersetzung geben.
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# manual.u
+# --------
+!include praeamble.ui
+
+!begin_document
+!include intro.ui
+!include ref.ui
+!include appendix.ui
+!end_document
+
+# intro.ui
+# --------
+!ifset [de]
+!include intro.de
+!endif
+!ifset [en]
+!include intro.en
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+     
+!end_node # Verwenden Sie standardisierte Dateinamen
+
+################################################################################
+
+!begin_node Schreiben Sie Ihre eigenen Kommandos
+!html_name working_tips_own_commands
+
+UDO unterstützt längst nicht alle Möglichkeiten jedes Ausgabeformates.
+Jedoch ist es unter Zuhilfenahme der Definitionen leicht, sich eigene
+Befehle zu schreiben oder spezielle Befehle für ein Ausgabeformat
+einzubauen. Die Kenntnis der Syntax des Ausgabeformates ist dabei
+natürlich sehr von Vorteil.
+
+Das folgende Beispiel zeigt, wie Sie Befehle zur Änderungen der
+Schriftgröße im (!LaTeX)-, HTML-, WinHelp- und Rich Text Format einbauen
+können:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)fontsize.u
+(!EXAMPLE_END)
+
+!end_node
+
+################################################################################
+
+!end_node

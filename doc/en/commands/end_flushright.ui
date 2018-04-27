@@ -1,0 +1,20 @@
+!begin_node (!kw [end_flushright])
+!html_name cmd_end_flushright
+
+Finish right justified text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_flushright(!t)
+
+!item [(!DESCRIPTION)]
+This command finishes the latest flushright environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_flushright]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+!end_node

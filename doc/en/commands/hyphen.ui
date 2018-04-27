@@ -1,0 +1,29 @@
+!begin_node (!kw [hyphen])
+!html_name cmd_hyphen
+
+Set global hyphenation mark.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/hyphen (!WORD)(!t)
+
+!item [(!DESCRIPTION)]
+You can set hyphenation marks ((!code [!/-])) with this command for
+a word for the whole text. The example shows how to tell UDO where
+it is allowed to split up the word ""hyphenation"".
+
+!item [(!SEEALSO)]
+(!link [Hyphenation] [Hyphenation]), (!KW [sloppy]), (!KW [fussy]), (!K1 [//-])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!hyphen syl!/-labi!/-fi!/-ca!/-tion
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

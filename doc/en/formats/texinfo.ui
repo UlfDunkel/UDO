@@ -1,0 +1,59 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Texinfo
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  May 19: "short" -> "compressed"
+#
+################################################################################
+
+!begin_node Texinfo
+!html_name format_texinfo
+
+GNU Texinfo is used on many Unix systems to offer the user an online
+hypertext manual and a printed documentation that can be made with
+''Makeinfo'' or plain (!TeX). Online manuals can be displayed with ''Info''.
+
+On systems with 8+3-filenames UDO saves files with the suffix (!file [.tex]).
+If the operating systems supports long filenames UDO uses the suffix
+(!file [.texi]) instead.
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Why does UDO change the chapter names?]
+Makeinfo and/or Info get problems if a chapter names contains brackets,
+commas or colons. UDO is forced to delete these characters so that you will
+be able to convert the output with Makeinfo without any problems. If a
+chapter name contains only forbidden characters UDO encodes them.
+
+You will only see the changed chapter names inside the Info headlines and
+Info menus. If you convert the Texinfo file with (!TeX) you will get your
+original chapter names.
+
+##################################################
+
+!item [Why doesn't Texinfo display the environments in ""compressed"" form?]
+Using Texinfo it is impossible to control the paragraph separation. Thus the
+parameter (!KW [compressed]) is useless when converting to Texinfo.
+
+##################################################
+
+!end_description
+
+!end_node

@@ -1,0 +1,40 @@
+!begin_node (!kw [table_caption*])
+!html_name cmd_table_caption_asterisk
+
+Set title of next table.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/table_caption* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+The difference between this and the (!KW [table_caption]) command
+is that UDO won't print ""Table <no>:"" before the table caption.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!KW [table_caption])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!table_caption* A table title
+!begin_table [l|r] !hline
+left cell !! right cell
+left cell !! right cell
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!table_caption* A table title
+!begin_table [l|r] !hline
+left cell !! right cell
+left cell !! right cell
+!end_table
+(!EXAMPLE_END)
+
+!end_node

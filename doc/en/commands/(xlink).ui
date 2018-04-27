@@ -1,0 +1,33 @@
+!begin_node (!kkw [xlink])
+!html_name cmd_xlink()
+
+Reference to external documents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/xlink [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Useful for referencing external documents like other hypertexts or
+WWW-pages. In contrast to (!KKW [link]) (!LINK) will
+not be converted! The example shows how to make a link to a popular
+magazine in a HTML file. If (!LINK) is empty the contents of
+(!TEXT) is used.
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Links] [Links])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!xlink [Internet Explorer] [Contents@iexplore.hlp]) 
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!xlink [Internet Explorer] [Contents@iexplore.hlp]) 
+(!EXAMPLE_END)
+
+!end_node

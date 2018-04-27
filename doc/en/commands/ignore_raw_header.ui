@@ -1,0 +1,26 @@
+!begin_node (!kw [ignore_raw_header])
+!html_name cmd_ignore_raw_header
+
+Ignore header file.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_raw_header(!t)
+
+!item [(!DESCRIPTION)]
+This command may only be used inside a node
+and suppresses the output of the header file
+that was set with (!KW [use_raw_header]).
+
+This command is currently supported by HTML only.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_header]), (!KW [ignore_raw_footer])
+
+!end_xlist
+
+!end_node

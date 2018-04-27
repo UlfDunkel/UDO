@@ -1,0 +1,32 @@
+!begin_node (!kw [psubsubsubnode])
+!html_name cmd_psubsubsubnode
+
+Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [subsubsubnode]), der Inhalt wird jedoch
+beim ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubnode Ein Popup-Paragraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Ein Popup-Paragraph
+(!EXAMPLE_END)
+
+!end_node

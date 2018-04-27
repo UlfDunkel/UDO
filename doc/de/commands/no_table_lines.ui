@@ -1,0 +1,31 @@
+!begin_node (!kw [no_table_lines])
+!html_name cmd_no_table_lines
+
+Keine Linien in Tabellen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_table_lines [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Benutzen Sie im Vorspann diesen Schalter, erzeugt UDO in Tabellen
+keine senkrechten oder waagerechten Linien. Im Beispiel würde UDO keine
+Tabellenlinien für WinHelp und IPF erzeugen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_table_lines [win,ipf]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

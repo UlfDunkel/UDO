@@ -1,0 +1,52 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Manualpage
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node Manualpage
+!html_name format_manpage
+
+The Manualpage is an ASCII format where text styles are made by inserting
+backspace sequences. It is used for short software descriptions for Unix
+systems. For longer descriptions you should use the GNU Texinfo format.
+
+!begin_description !not_compressed
+
+#################################################
+
+!item [How can I set the page length for manpages?]
+You can set the lines each page of a manpage should have with the command
+(!KW [man_lpp]) (""lpp"" means ""lines per page"").
+
+#################################################
+
+!item [How can I set the program type for manpages?]
+Use the switch (!KW [man_type] [X]) where ""X"" is displayed inside brackets
+in the headlines of the manpage.
+
+#################################################
+
+!item [Why does'nt UDO create a table of contents?]
+It is very unusual to use a table of contents in a manpage. For short program
+description -- you only should use manpages for -- tables of contents
+don't make sense, too.
+
+#################################################
+
+!end_description
+
+!end_node

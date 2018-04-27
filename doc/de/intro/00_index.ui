@@ -1,0 +1,49 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Intro
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2008:
+#   fd  Sep 29: 'Apple Computer Inc.' -> 'Apple Inc.'
+# 2009:
+#   fd  Jun 05: file introduced (extracted from intro.ui)
+#   fd  Jun 05: html_name shortened ('introduction' -> 'intro')
+#   fd  Jun 08: ignored format list removed (is included via formattb.ui)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: new chapter 'How to read this manual best'
+#   fd  Jun 10: using ndash instead of mdash in German texts
+# 2010:
+#   fd  Feb 26: - intro_community: Christof Schardt added
+#               - intro_contact: URLs added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Einführung
+!html_name introduction
+
+!include intro/preface.ui
+!include intro/manual.ui
+!include intro/features.ui
+!include intro/need.ui
+!include intro/onceupon.ui
+!include intro/community.ui
+!include intro/contact.ui
+#!include intro/thanx.ui
+!include intro/copyright.ui
+!include intro/disclaim.ui
+!include intro/trademark.ui
+
+!end_node

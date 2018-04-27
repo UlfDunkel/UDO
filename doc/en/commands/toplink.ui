@@ -1,0 +1,29 @@
+!begin_node (!kw [toplink])
+!html_name cmd_toplink
+
+Create link to top of page (HTML and HTMLHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toplink(!t)
+
+!item [(!DESCRIPTION)]
+UDO saves a file named ""(!file [udo_tp.[gif,bmp,img!]])"" when
+converting to HTML or HTMLHelp. With this command
+you can include this image. Additionally a link
+to the top of the page is generated.
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!toplink
+!end_verbatim
+(!EXAMPLE_AFTER)
+!toplink
+(!EXAMPLE_END)
+
+!end_node

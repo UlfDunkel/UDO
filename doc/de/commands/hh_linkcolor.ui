@@ -1,0 +1,23 @@
+!begin_node (!kw [hh_linkcolor])
+!html_name cmd_hh_linkcolor
+
+Setzen der Farbe für Links (nur HTMLHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTMLHelp-Seiten
+Links darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_textcolor]), (!KW [hh_alinkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_backcolor])
+
+!end_xlist
+
+!end_node

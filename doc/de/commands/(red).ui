@@ -1,0 +1,34 @@
+!begin_node (!kkw [red])
+!html_name cmd_red
+
+Setzt die Schriftfarbe Rot.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/red)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Rot.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Schriftfarben] [Schriftfarben])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!red)Rot(!coloff) erscheint in der Farbe Rot.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!red)Rot(!coloff) erscheint in der Farbe Rot.
+(!EXAMPLE_END)
+
+!end_node

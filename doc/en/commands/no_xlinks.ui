@@ -1,0 +1,33 @@
+!begin_node (!kw [no_xlinks])
+!html_name cmd_no_xlinks
+
+Do not generate external links.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_xlinks [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This command switches off the usage of external links. This is useful
+if you used external HTML links in a source file that you want to
+convert to another format that supports external links. The example
+shows how to suppress the usage of external links when converting to
+ST-Guide.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!SEEALSO)]
+(!KKW [xlink]), (!KW [no_links]), (!link [Links] [Links])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_xlinks [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

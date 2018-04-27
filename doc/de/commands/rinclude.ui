@@ -1,0 +1,43 @@
+!begin_node (!kw [rinclude])
+!html_name cmd_rinclude
+
+Datei 1:1 einbinden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei ""(!FILE)"" und gibt deren Inhalt unformatiert an der
+Stelle aus, an der dieses Kommando benutzt wurde. Der Inhalt der Datei
+wird nicht eingerückt oder zentriert ausgegeben. Die raw-Umgebung dient
+dazu, spezielle Formatbefehle einzubinden. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!ifdest [html,hh,hah]
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!rinclude htmlform.html
+!end_verbatim
+(!EXAMPLE_AFTER)
+!rinclude (!EXAMPLES)html/htmlform.html
+(!EXAMPLE_END)
+!else
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rinclude htmlform.html
+!end_verbatim
+(!EXAMPLE_END)
+!endif
+
+!end_node

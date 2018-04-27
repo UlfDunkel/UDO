@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_raw])
+!html_name cmd_begin_raw
+
+Start a raw environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_raw(!t)
+
+!item [(!DESCRIPTION)]
+Starts a (!link [raw environment] [raw environment]) that has to be finished with
+(!KW [end_raw]). Each line inside this environment will be output
+directly without any conversion. Thus this environment can be used to
+insert specific commands for the destionation format.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [end_raw]), (!KW [rinclude]), (!KW [ifdest]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node

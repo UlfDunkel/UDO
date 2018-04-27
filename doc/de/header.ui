@@ -1,0 +1,196 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : header definitions
+# Language    : german
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: header introduced
+#   fd  Jun 08: HTML settings adjusted
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 26: we're at UTF-8 :-)
+#   fd  Mar 03: - encodings and docinfo for title page adjusted (requires UDO 7.01)
+#               - using table_alignment [left]
+#   fd  Mar 05: !use_short_... (for environments) changed: -> !use_compressed_...
+#   fd  May 18: html_ignore_8bit no longer requires a charset
+#   fd  May 19: "short" -> "compressed"
+#   fd  May 21: using short environments again by default (as we have !not_compressed now)
+#                (existing switches must not be removed, as they are overwritten)
+#   fd  Aug 04: docinfo [contact_name] localized in localizable files -> _header.de/en
+#
+################################################################################
+
+# ----------------------------------------------------------
+# Einstellungen fuer csTeX (MultiTeX), GEM-Images mit 100dpi
+# ----------------------------------------------------------
+!ifset [csTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+# ------------------------------------------------------
+# Einstellungen fuer Lindner-TeX, GEM-Images mit 100dpi
+# ------------------------------------------------------
+!ifset [lindnerTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+# -------------------------------------------------------
+# Einstellungen fuer emTeX, LateX2e, MSP-Grafiken, 300dpi
+# werden ueber Symbol emTeX2e bzw. emTeX2.09 aktiviert
+# -------------------------------------------------------
+!ifset [emTeX2e]
+!tex_2e
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!ifset [emTeX2.09]
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!raw [tex] \parskip 5pt
+!raw [tex] \parindent 0pt
+!raw [tex] \global\let\underline\relax
+
+# -------------------------------------------------------
+# Einstellungen fuer teTeX, LateX2e, EPS-Grafiken, 300dpi
+# -------------------------------------------------------
+!ifset [teTeX]
+!tex_tetex
+!tex_dpi 300
+!endif
+
+# -------------------------------------------------------
+# Einstellungen fuer mikTeX, LateX2e, EPS-Grafiken, 300dpi
+# -------------------------------------------------------
+!ifset [mikTeX]
+!tex_miktex
+!tex_dpi 300
+!endif
+
+# ----------------------------------------------------------------
+# Einstellungen fuer RTF
+# ----------------------------------------------------------------
+#!rtf_monofont Courier New
+#!rtf_propfont Times New Roman
+!win_propfont_size 12
+!win_monofont_size 12
+!wh4_propfont_size 12
+!wh4_monofont_size 12
+
+# ----------------------------------------------------------------
+# Einstellungen fuer HTML und HTML-Help
+# ----------------------------------------------------------------
+!html_favicon_name    favicon.ico
+#!html_navigation      [line]
+#!html_merge_nodes
+#!html_use_xlist
+#!no_images [html]
+
+# ----------------------------------------------------------------
+# ST-Guide-Kommandos
+# ----------------------------------------------------------------
+!raw [stg] @options +z
+#!raw [stg] @default Main
+!raw [stg] @help Titel
+#!raw [stg] @indexon
+#!raw [stg] @width 75
+!ifdest [stg,amg]
+!parwidth 75
+!endif
+
+# ----------------------------------------------------------------
+# ASCII commands
+# ----------------------------------------------------------------
+!ifdest [asc]
+!parwidth 80
+!code_target [cp1252]
+!endif
+
+# ----------------------------------------------------------------
+# MAN commands
+# ----------------------------------------------------------------
+!ifdest [man]
+!parwidth 75
+!code_target [cp1252]
+!endif
+
+# ----------------------------------------------------------------
+# Allgemeine Schalter
+# ----------------------------------------------------------------
+!use_justification      [asc]
+!use_about_udo          [all]
+
+!use_nodes_inside_index [stg,amg,win,wh4,html,pch,asc,ipf,hh,info,hah]
+!use_label_inside_index [stg,amg,win,wh4,html,pch,asc,ipf,hh,info,hah]
+!use_alias_inside_index [stg,amg,win,wh4,html,pch,asc,ipf,hh,info,hah]
+!use_auto_toptocs       [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+
+#!use_compressed_envs    [all]
+#!use_compressed_tocs    [stg,amg,win,wh4,html,pch,ipf,hh,hah]
+#!no_toc_subsubnodes     [stg,amg,win,wh4,html,pch,ipf,hh,hah]
+
+!use_auto_subtocs       [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+!use_auto_subsubtocs    [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+!use_auto_subsubsubtocs [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+!sloppy
+
+#!no_toc_subsubnodes    [stg,amg,win,wh4,pch,info,asc,ipf,hh,html,hah]
+!no_effects             [asc]
+!no_numbers             [html,hah,info]
+!no_umlaute             [info]
+
+!use_style_book         [tex,asc,rtf,win,aqv,lyx]
+!sort_hyphen_file       [asc,stg,amg,pch]
+
+# ------------------------------------------------------
+# Spezielle Schalter
+# ------------------------------------------------------
+!win_inline_bitmaps
+!win_high_compression
+!wh4_high_compression
+!pdf_high_compression
+#!wh4_propfont_size 11
+#!html_merge_subsubnodes
+#!html_modern_layout
+#!html_switch_language english ../de/index.html
+!no_links [asc]
+
+# ----------------------------------------------------------------
+# Allgemeine Infos
+# ----------------------------------------------------------------
+#!docinfo [author] Dirk Hagedorn
+#!docinfo [address] Asmecke 1
+#!docinfo [address] D-59846 Sundern
+#!docinfo [address] Deutschland
+#!docinfo [address] Internet: info@dirk-hagedorn.de
+#!docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+#!docinfo [webmastername] Dirk Hagedorn
+#!docinfo [webmasteremail] webmaster@udo-open-source.org
+#!docinfo [authorimage] (!IMAGES)dh
+!docinfo [domain_name] www.udo-open-source.org
+!docinfo [domain_link] http://www.udo-open-source.org/
+!docinfo [contact_link] http://www.udo-open-source.org/contact/
+!ifset [UseForWeb]
+!docinfo [contact_name] Kontact
+!endif
+!docinfo [programimage] (!IMAGES)udo
+
+
+!html_counter_command <p><a href="http://validator.w3.org/check?uri=referer"><img src="valid-html401.png" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a></p>

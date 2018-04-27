@@ -1,0 +1,35 @@
+!begin_node (!kw [smallskip])
+!html_name cmd_smallskip
+
+Output an empty line.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/smallskip(!t)
+
+!item [(!DESCRIPTION)]
+This command will be simplay replaced by ""(!code [\smallskip])"" when
+converted to (!LaTeX). Otherwise one additional empty line will be
+generated.
+
+!item [(!SEEALSO)]
+(!KW [bigskip]), (!KW [medskip])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!smallskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!smallskip
+(!LOREM)
+(!EXAMPLE_END)
+
+!end_node

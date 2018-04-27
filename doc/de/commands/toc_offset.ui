@@ -1,0 +1,31 @@
+!begin_node (!kw [toc_offset])
+!html_name cmd_toc_offset
+
+Offset für die Kapitelnummerierung setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/toc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+das erste Kapitel mit der Nummer 10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!toc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

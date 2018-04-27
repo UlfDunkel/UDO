@@ -1,0 +1,23 @@
+!begin_node (!kw [ignore_subtoc])
+!html_name cmd_ignore_subtoc
+
+In dem zugehörigen Node kein ""subtoc"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subtoc(!t)
+
+!item [(!DESCRIPTION)]
+Wenn innerhalb eines Nodes dieser Schalter gesetzt
+wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subtocs]), (!KW [subtoc])
+
+!end_xlist
+
+!end_node

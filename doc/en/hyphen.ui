@@ -1,0 +1,38 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Hyphenation definitions
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (was hyph-en.ui)
+#
+################################################################################
+
+#
+# patterns according to Webster's New World Dictionary
+#
+!hyphen ab!-bre!-via!-tions
+!hyphen ad!-ver!-tise!-ments
+!hyphen apos!-tro!-phes
+!hyphen char!-ac!-ters
+!hyphen dem!-on!-strate
+!hyphen de!-scrip!-tions
+!hyphen des!-ti!-na!-tion
+!hyphen docu!-men!-ta!-tion
+!hyphen enu!-mer!-a!-tions
+!hyphen en!-vi!-ron!-ment
+!hyphen im!-ple!-men!-ted
+!hyphen in!-stal!-la!-tion
+!hyphen sepa!-ra!-tion
+!hyphen syl!-lab!-i!-fi!-cation
+!hyphen type!-wri!-tered
+!hyphen ty!-po!-graphi!-cal

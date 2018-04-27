@@ -1,0 +1,43 @@
+!begin_node (!kw [begin_quote])
+!html_name cmd_begin_quote
+
+Umgebungstext eingerückt darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_quote [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando leitet eine (weitere) quote-Umgebung
+ein. Text, der zwischen diesem und (!KW [end_quote])
+angegeben ist, wird eingerückt dargestellt. Sie
+können die Umgebung mehrfach und kombiniert mit
+anderen Umgebungen benutzen.
+
+Bei der HTML-Ausgabe kann zusätzlich die ID und
+ein URL auf ein Zitat übergeben werden.
+
+!item [(!SEEALSO)]
+(!KW [end_quote]), (!link [Einrücken von Absätzen] [Einrücken von Absätzen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_quote [id=myid cite=http://www.udo-open-source.org]
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html,hh,hah]
+!begin_verbatim
+<blockquote id="myid" cite="http://www.udo-open-source.org">
+!end_verbatim
+!else
+!begin_quote [id=myid cite=http://www.udo-open-source.org]
+!end_quote
+!endif
+(!EXAMPLE_END)
+
+!end_node

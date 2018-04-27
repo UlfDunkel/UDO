@@ -1,0 +1,55 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Appendix
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from appendix.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 10: table of limitations reformatted
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node UDO's limitations
+!html_name limitations
+
+You can use source files that don't exceed these maximum values:
+
+# Hint: The used macros are defined in macros.ui.
+
+!table_caption UDO's limitations
+!begin_table [l|r] !hline
+Macros:                               !! unlimited (since version 6.6.0, formerly: (!MAXMACRO))
+Length of !/macro text value:         !! (!const [4096])
+Defines:                              !! unlimited (since version 6.6.0, formerly: (!MAXDEFINE))
+Length of !/define text value:        !! (!const [4096])
+Hyphenation patterns:                 !! unlimited (since version 6.6.0, formerly: (!MAXHYPHEN))
+Sum of chapters, labels and aliases:  !! unlimited (since version 6.6.0, formerly: (!const [32768])
+Characters per line:                  !! (!LINELEN)
+Characters per word:                  !! (!MAX_TOKEN_LEN)
+Syllables per word:                   !! (!MAXSILBEN)
+Words per paragraph:                  !! (!MAX_TOKENS)
+Links per paragraph:                  !! (!MAXLINK)
+Rows per table:                       !! (!MAXLINETABLE)
+Columns per table:                    !! (!MAXCOLUMSTABLE)
+Chars per table cell:                 !! (!const [1000])
+Depth of environments:                !! (!const [10])
+Depth of nodes:                       !! (!const [9])
+!hline
+!end_table
+
+!end_node

@@ -1,0 +1,154 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: ST Guide
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 21: xref links fixed
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node ST-Guide
+!html_name format_stg
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Images aren't displayed centred?]
+Get the current ST-Guide version. Since Release 15 the ST-Guide can center
+images itself.
+
+##################################################
+
+!item [How does UDO create the title page and the table of contents?]
+The title page and the table of contents are displayed inside a special
+node. The title page node is named ""Title"". The node that contains the
+table of contents is named ""Main"".
+
+To let the ST-Guide display the first page of the hypertext (this will be
+the title page in most cases) just pass the name of the hypertext. To let
+the ST-Guide display the table of contents pass the node name ""Main"". How
+you can call the ST-Guide from programs you can read in the HCP hypertext.
+
+##################################################
+
+!item [How can I suppress the headlines?]
+UDO prints a headline in every page by default. The headline contains the
+current node name and the title of the hypertext. The headline will be
+displayed underlined.
+
+Using the switch (!KW [no_headlines] [[stg!!]]) inside the preamble you tell
+UDO not to create these headlines.
+
+##################################################
+
+!item [How does UDO insert hypertext links?]
+UDO just insert hypertext links when you use (!KKW [link]) and
+(!KKW [xlink]). All the other hypertext links will be inserted by the
+HCP.
+
+##################################################
+
+!item [How does UDO convert labels?]
+The UDO command (!KW [label]) will be replaced by the HCP command
+""(!code [@symbol ari])"". You have to check yourself if there's a node
+or a label existing with the same name.
+
+##################################################
+
+!item [How can I make popup nodes?]
+Using the (!KW [pnode]) and the familiar commands you can tell the
+ST-Guide to display the contents of the node inside a dialog box instead of
+a window.
+
+But you have to remember that text inside a popup node may have up to 12
+lines of text with 60 characters per line only. Furthermore no images and
+links are allowed inside a popup node.
+
+UDO breaks line after 60 characters but it doesn't print an error message if
+you use more than 12 lines, images or links inside a popup node.
+
+##################################################
+
+!item [There's always an empty line at the end of a popup node, why?]
+UDO reads in the source file line by line. If an empty line appears UDO will
+print the last paragraph and an empty line for separation.
+
+UDO does the same when printing the text of a popup node. The problem cannot
+be solved, I'm sorry.
+
+##################################################
+
+!item [Some cells of my table are too wide, why?]
+The ST-Guide has a built-in italic correction which is active in tables,
+too. Unfortunately the ST-Guide adds a blank when it reads an italic-off
+command. This problem can only be solved by Holger Weets, the author of
+ST-Guide.
+
+Thus you shouldn't use italic text inside tables when converting to ST-Guide
+until Holger doesn't offer a command for disabling the italic correction.
+
+##################################################
+
+!item [The HCP prints the error message ""please add!.."", why?]
+If the HCP prints the error message ""please add a @subject-command to this
+text"" at the end of converting the STG file you have forgotten to insert
+a line like the following one at the beginning of your UDO source file:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!stg @subject "Documentation/Utilities"
+!end_verbatim
+(!EXAMPLE_END)
+
+##################################################
+
+!item [How can i create a user-defined title page for ST-Guide?]
+If you don't like the layout of the title page UDO will make with
+(!KW [maketitle]) you can make your own title page with some commands:
+
+The following example shows how to make your own title page but only for the
+ST-Guide. It uses a ""hidden"" node that contains the word ""Contents"" at
+the end. The ST-Guide will insert a link to the table of contents due to
+this word.
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)stg/title.ui
+(!EXAMPLE_END)
+
+##################################################
+
+!item [Why it is better not to use justified text?]
+""Why that?"" you might ask. Well, Martin Osieka has written a program
+called Hyperion for the Apple Macintosh that can display ST-Guide
+hypertexts.
+
+In contrast to ST-Guide Hyperion can display hypertexts with proportional
+fonts but only if you don't use justified text.
+
+Thus you should don't use the justification if you want that Macintosh users
+shall also read your hypertext without any problems.
+
+If you have written a system specific hypertext that is only interesting for
+Atari users you can use justification without any doubts.
+
+##################################################
+
+!end_description
+
+!end_node

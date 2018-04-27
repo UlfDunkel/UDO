@@ -1,0 +1,33 @@
+!begin_node (!kw [set])
+!html_name cmd_set
+
+Define a symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/set (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set symbols inside your source file that
+you can check with (!I)!/ifset(!i) and (!KW [if]). Symbols may alos
+be set by the command line option (!code [-D]). With the
+(!KW [unset]) command you can delete symbols. You can use
+(!KW [set]) wherever you want.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [unset]), (!KW [ifset]), (!KW [ifnset]), (!link [Symbols] [Symbols])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!set UseColourGraphics
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

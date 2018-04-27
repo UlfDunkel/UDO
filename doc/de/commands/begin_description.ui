@@ -1,0 +1,27 @@
+!begin_node (!kw [begin_description])
+!html_name cmd_begin_description
+
+Neue Beschreibung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_description(!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine (weitere) description-Umgebung ein. Diese
+Umgebung muss mit (!KW [end_description]) beendet werden. Die
+description-Umgebung kann mehrfach verschachtelt
+benutzt oder mit anderen Umgebungen kombiniert
+werden. Aufzählungspunkte werden bei der
+description-Umgebung mit (!KW [item] [[~!!]]) eingeleitet. Der
+Text, der dann hier in eckigen Klammern angegeben
+wird, wird in Fettschrift ausgegeben, sofern das Ausgabeformat Fettschrift unterstützt.
+
+!item [(!SEEALSO)]
+(!KW [end_description]), (!KW [item] [[~!!]]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Beschreibungen] [Beschreibungen])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,35 @@
+!begin_node (!kw [bigskip])
+!html_name cmd_bigskip
+
+Insert three empty lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bigskip(!t)
+
+!item [(!DESCRIPTION)]
+This command will be simply replaced by ""(!code [\bigskip])"" when
+converted to (!LaTeX). Otherwise three additional empty lines will be
+generated.
+
+!item [(!SEEALSO)]
+(!KW [smallskip]), (!KW [medskip])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!bigskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!bigskip
+(!LOREM)
+(!EXAMPLE_END)
+
+!end_node

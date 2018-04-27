@@ -1,0 +1,24 @@
+!begin_node (!kw [html_merge_subsubsubsubnodes])
+!html_name cmd_html_merge_subsubsubsubnodes
+
+Unterparagraphen zusammenfassen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_merge_subsubsubsubnodes(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann eingesetzt, so
+werden alle Unterparagraphen eines Paragraphen in
+einer Datei zusammengefaﬂt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+
+!end_xlist
+
+!end_node

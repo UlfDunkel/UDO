@@ -1,0 +1,23 @@
+!begin_node (!kw [else])
+!html_name cmd_else
+
+General query.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/else(!t)
+
+!item [(!DESCRIPTION)]
+The following lines are converted until the appearance of
+(!KW [endif]), if the abbreviation of the current destination
+format wasn't used with the previous (!KW [ifdest]) or
+(!KW [iflang]) command.
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [iflang]), (!KW [endif]), (!link [Query commands] [Query commands])
+
+!end_xlist
+
+!end_node

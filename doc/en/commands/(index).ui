@@ -1,0 +1,31 @@
+!begin_node (!kkw [index])
+!html_name cmd_index()
+
+Create index entries.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/index [(!TEXT)] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
+
+!item [(!DESCRIPTION)]
+Useful for adding indices right inside the source file.
+In contrast to (!KKW [idx]) no text will be displayed,
+only an entry to the index is made.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!link [Indices] [Indices]), (!KKW [idx]), (!KW [no_index]), (!KW [index])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!index [word] [index entry])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

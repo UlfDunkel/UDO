@@ -1,0 +1,26 @@
+!begin_node (!kkw [comment])
+!html_name cmd_comment()
+
+Write inline comment to destination file.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/comment [(!TEXT)])(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used to create inline comments for
+HTML, WinHelp, RTF, Quickview, C and Pascal.
+If the switch (!KW [use_comments]) is used in the preamble,
+the comments will also be written when converting to other formats.
+
+!item [(!EXAMPLE)]
+(!T)(!/comment [What's this?])(!t)
+
+!item [(!SEEALSO)]
+(!link [Comments] [Comments]), (!KW [comment]), (!link [comment environment] [comment environment])
+
+!end_xlist
+
+!end_node

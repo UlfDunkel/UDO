@@ -1,0 +1,25 @@
+!begin_node Indented paragraphs
+!html_name style_indentations
+!label quote environment
+
+To display indented paragraphs you can use the quote environment which is
+started with (!KW [begin_quote]) and finished with (!KW [end_quote]).
+You can use the quote environment inside another quote environment or inside
+other environments.
+
+This environment is useful to emphasize passages. This effect is used in the
+following example:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)quote.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)quote.ui
+(!EXAMPLE_END)
+
+(!HINT)
+
+When converting to HTML the tag (!V)<BLOCKQUOTE>(!v) is used. Netscape
+and CAB(!N)A web browser for Atari(!n) display paragraphs indented but
+Mosaic displays them just with another font.
+
+!end_node

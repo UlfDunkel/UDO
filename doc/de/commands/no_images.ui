@@ -1,0 +1,30 @@
+!begin_node (!kw [no_images])
+!html_name cmd_no_images
+
+Keine Grafiken benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_images [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando läßt sich die Ausgabe von
+Befehlen zur Ausgabe von Bildern für ein Ausgabeformat unterbinden; (!KW [image]) wird dann einfach ignoriert.
+Im Beispiel würden keine Befehle zur Ausgabe von
+Bildern beim HTML-Format erzeugt.
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_images [html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

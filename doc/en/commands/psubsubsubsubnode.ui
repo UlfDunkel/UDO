@@ -1,0 +1,32 @@
+!begin_node (!kw [psubsubsubsubnode])
+!html_name cmd_psubsubsubsubnode
+
+Start a popup subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [subsubsubsubnode]) but the contents will be
+displayed as a popup inside ST-Guide and WinHelp.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubsubnode A popup subparagraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading A popup subparagraph
+(!EXAMPLE_END)
+
+!end_node

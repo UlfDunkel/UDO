@@ -1,0 +1,20 @@
+!begin_node (!kw [bbl])
+!html_name cmd_bbl
+
+Eine ""fette"" Liste einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bbl [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_blist]).
+
+!item [(!SEEALSO)]
+(!KW [begin_blist])
+
+!end_xlist
+
+!end_node

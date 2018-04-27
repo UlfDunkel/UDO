@@ -1,0 +1,49 @@
+!begin_node (!kw [html_transparent_buttons])
+!html_name cmd_html_transparent_buttons
+
+Transparente Navigationsbutton erzeugen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_transparent_buttons(!t)
+
+!item [(!DESCRIPTION)]
+Benutzen Sie diesen Schalter im Vorspann, erzeugt UDO statt der bisher
+bekannten Navigationsbuttons kleinere, transparente Buttons.
+
+(!NOTE) Wenn im Zielverzeichnis schon die Navigations-Buttons erzeugt
+wurden, legt UDO sie nicht neu an. Falls Sie also die
+Navigations-Buttons z.B. mithilfe dieses Kommandos ändern wollen,
+müssen Sie erst die vorhandenen (!const [11])~GIF-Dateien löschen. Sie
+erkennen Sie leicht an der Namensgebung (!file [udo_])<xxxx>(!file [.gif]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [no_images])
+
+!end_xlist
+
+!ifdest [html,hh,hah]
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# !html_transparent_buttons
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [(!IMAGES)udo_hm] [Home])~(!img [(!IMAGES)udo_up] [Hoch])~(!img [(!IMAGES)udo_lf] [Links])~(!img [(!IMAGES)udo_rg] [Rechts])
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_transparent_buttons
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [(!IMAGES)udo_hm_trans] [Home])~(!img [(!IMAGES)udo_up_trans] [Hoch])~(!img [(!IMAGES)udo_lf_trans] [Links])~(!img [(!IMAGES)udo_rg_trans] [Rechts])
+(!EXAMPLE_END)
+!endif
+
+!end_node

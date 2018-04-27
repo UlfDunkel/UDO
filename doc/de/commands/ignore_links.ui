@@ -1,0 +1,25 @@
+!begin_node (!kw [ignore_links])
+!html_name cmd_ignore_links
+
+Ein Kapitel nicht referenzieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_links(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+werden keine automatischen Querverweise auf dieses
+Kapitel angelegt. Manuelle Links sind jedoch
+weiterhin möglich.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!link [Querverweise] [Querverweise]), (!KKW [link])
+
+!end_xlist
+
+!end_node

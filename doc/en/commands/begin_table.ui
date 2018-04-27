@@ -1,0 +1,31 @@
+!begin_node (!kw [begin_table])
+!html_name cmd_begin_table
+
+Start a table.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_table [<format>] {!hline}(!t)
+
+!item [(!DESCRIPTION)]
+With this command a (!link [table] [table environment]) is started. For <format> you enter the
+justification of the columns of this table and the position of
+vertical lines. If this command is followed by ""(!KW [hline])"" the table
+starts with a horizontal line. The example shows how to make a table
+with three columns where the left column is left justified, the
+second is centered and the last columns is right justified. The table
+begins with a horizontal line an it has one vertical line on the left.
+
+!item [(!EXAMPLE)]
+(!T)!/begin_table [|lcr|] !/hline(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.42
+
+!item [(!SEEALSO)]
+(!KW [hline]), (!KW [end_table]), (!link [Tables] [Tables])
+
+!end_xlist
+
+!end_node

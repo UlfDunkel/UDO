@@ -1,0 +1,31 @@
+!begin_node (!kw [win_inline_bitmaps])
+!html_name cmd_win_inline_bitmaps
+
+Inline-Bitmaps benutzen (nur WinHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_inline_bitmaps(!t)
+
+!item [(!DESCRIPTION)]
+Wenn Sie diesen Schalter im Vorspann verwenden, so
+benutzt UDO zur Einbindung der Bilder den RTF-Befehl
+""(!code [\bmcwd])"" anstelle des Befehls ""(!code [\bmc])"". Daraufhin
+speichert der Microsoft-Helpcompiler die Bilder in
+einem anderen Format in der WinHelp-Datei, wodurch
+Bilder nicht mehr verzerrt dargestellt werden.
+Allerdings dürfen Bilder dann nicht größer als (!const [64])~KB
+sein. Nähere Informationen über den Unterschied
+zwischen den beiden RTF-Befehlen finden Sie in der
+Dokumentation zum (!file [HCP]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [image])
+
+!end_xlist
+
+!end_node

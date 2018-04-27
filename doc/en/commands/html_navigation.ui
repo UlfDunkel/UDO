@@ -1,0 +1,91 @@
+!begin_node (!kw [html_navigation])
+!html_name cmd_html_navigation
+
+Change navigation bar (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_navigation [(!NAME)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Use this command to adjust the navigation bar view. For [(!NAME)] you
+can currently use the following parameters.
+
+!begin_description
+
+!item [line]
+When you use this command in the preamble, the navigation area will be
+output on top of the page in a single navigation bar, without folder
+symbols by default, separated by ""(!code [~>~])"".
+
+As an option, you can define a separator text using the (!TEXT)
+parameter.  This separator text will be enclosed by space characters in
+order to not glue the separator text to the chapter names.
+
+The navigation bar is embedded in a (!code [<div>]) environment, using
+the CSS class (!code [UDO_nav_line]). So you can enhance its content
+formatting using CSS commands.
+
+!item [image]
+When you use this command, the navigation bar line starts with a single
+folder symbol. This makes the purpose of the navigation bar line even
+clearer on first glance. Using the optional parameter, you can define
+your own image here.
+
+!end_description
+
+Furthermore, a link to the Index page will be added at the end of each
+navigation bar line. This link cannot be switched of at the moment and
+should be positioned accordingly, using CSS commands. It is embedded in
+a (!code [<span>]) environment, using the CSS class (!code [UDO_nav_index]).
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+.UDO_nav_index {
+   position: absolute;
+   right: 8px;
+   padding: 0 0 0 8px;
+   border-width: 0 0 0 1px;
+   border-style: solid;
+   border-color: #888888;
+}
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [(!EXISTSSINCE)] Version~6.5.20
+
+!item [(!SEEALSO)]
+(!KW [use_auto_toptocs])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [line]
+!end_verbatim
+(!EXAMPLE_AFTER)
+Chapter 1 > Chapter 1.1 > Chapter 1.1.1 Index
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [image]
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [!(IMAGES)udo_fo] [Ordner]) Chapter 1 > Chapter 1.1 > Chapter 1.1.1 Index
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [line] ::
+!html_navigation [image] udo_16
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [!(IMAGES)udo_16] [UDO]) Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 Index
+(!EXAMPLE_END)
+
+!end_node

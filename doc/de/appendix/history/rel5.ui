@@ -1,0 +1,129 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 5
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 03: old stuff ignored, using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Änderungen von Release 4 nach 5
+!html_name history_release_4_to_5
+
+(!PUBLISHED [UDO~5] [18.04.1996])
+
+!begin_description !compressed
+
+!item [Neue Formate:]
+   !begin_itemize !compressed
+   !item Linuxdoc-SGML
+   !item Turbo Vision Help
+   !item Texinfo
+   !end_itemize
+
+!item [Neue Befehle:]
+   !begin_itemize !compressed
+   !item (!KW [alias])
+   !item (!KW [begin_raw]), (!KW [end_raw])
+         ermöglicht die Angabe größerer Blöcke Spezialbefehle für ein Format
+   !item (!KW [begin_table]), (!KW [end_table])
+         Tabellensatz, latexlike!
+   !item (!KW [chapterimage])
+         einem Kapitel ein Titelbild zuweisen
+   !item (!KW [define])
+   !item (!KW [french])
+         französische Bezeichnungen verwenden
+   !item (!KW [heading]), (!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
+         Erzeugung von Überschriften im Text
+   !item (!KW [hline])
+         Ausgabe horizontaler Linien
+   !item (!KW [html_name])
+         einem Kapitel einen Dateinamen zuweisen
+   !item (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes])
+         Kapitel für die HTML-Ausgabe zusammenfassen
+   !item (!KKW [ilink])
+         Bilder im Text für Querverweise benutzen, nur WinHelp und HTML
+   !item (!KKW [img])
+         Darstellung von Bildern im Text, nur WinHelp und HTML
+   !item (!KW [index])
+         Indexeintrag setzen
+   !item (!KW [list_parsep])
+         Ausgabe von Leerzeilen in Umgebungen aus- und einschalten
+   !item (!KW [ifdest]), (!KW [else]), (!KW [endif])
+         für formatabhänige Textpassagen, flexibler als die alten Befehle für bedingte Texte, (!kw [begin_stg]), (!kw [else_stg]), (!kw [end_stg]), (!kw [begin_asc]), (!kw [else_asc]), (!kw [end_asc]) etc.
+   !item (!KW [iflang]), (!KW [else]), (!KW [endif])
+         für sprachabhängige Textpassagen
+   !item (!KW [node*]), (!KW [subnode*]), (!KW [subsubnode*]), (!KW [pnode*]), (!KW [psubnode*]), (!KW [psubsubnode*])
+         Kapitel ohne Eintragung ins Inhaltsverzeichnung erzeugen
+   !item (!KW [rinclude])
+         Spezialbefehle nachladen
+   !item (!KW [use_about_udo])
+   !item (!KW [use_chapter_images])
+         Bilder statt Kapitelüberschiften benutzen, nur für ST-Guide, WinHelp und HTML
+   !item (!KW [use_style_book])
+   !item (!KW [win_html_look])
+         WinHelp-Dateien im HTML-Look mit grauem Hintergrund ausgeben
+   !end_itemize
+
+!item [Änderungen:]
+   !begin_itemize !compressed
+   !item Ein Tabellensatz wurde implementiert. Tabellen können nun
+         sehr einfach erstellt werden. Dabei kann man frei festlegen,
+         wie Spalten ausgerichtet werden sollen und wo Linien
+         gezeichnet werden sollen.
+   !item Die Formatierung der Umgebungen wurde komplett neu
+         programmiert. Dadurch ist eine bis zu sechsfache Verschachtelung (auch der xlist-Umgebung) möglich. Die Ausgabe aller
+         Umgebungen funktioniert nun auch bei WinHelp und RTF.
+   !item Die halbautomatische Silbentrennung wurde komplett neu programmiert.
+   !item Die automatische Referenzierung wurde dahingehend verändert,
+         daß ein Verweis nur noch bei ganzen Worten angelegt wird.
+   !item Die maximale Anzahl der Kapitel und Labels innerhalb eines
+         Quelltextes wurde verdoppelt. Nun sind maximal 1024 Kapitel
+         und 1024 Labels möglich.
+   !item Pro Absatz sind jetzt bis zu 200 Verweise möglich. Früher
+         waren (aufgrund eines Fehlers) nur 16 Verweise pro Quelltext möglich.
+   !item Manualpages werden komplett neu formatiert. Nun muß man sich
+         nicht mehr die Finger mit description- und quote-Umgebungen
+         verbiegen.
+   !item Für em(!TeX) werden nun auch PCX-Bilder unterstützt.
+   !item Die WinHelp-Ausgabe wurde drastisch erweitert, z.B.
+         werden Buttons im WinHelp-Fenster angelegt, Labels werden
+         direkt angesprungen usw.
+   !item Die Atari-Versionen wurden mit den MiNT-Libs PL 46 erstellt.
+         Die Probleme mit langen Dateinamen dürften daher der
+         Vergangenheit angehören.
+   !end_itemize
+
+!item [Syntaxänderungen:]
+   !begin_itemize !compressed
+   !item Die speziellen Umgebungen, die mit (!I)!/begin_*(!i), (!I)!/else_*(!i) und
+         (!I)!/end_*(!i) gebildet wurden, müssen nun durch die wesentlich
+         flexibleren Kommandos (!KW [ifdest]), (!KW [else]) und (!KW [endif]) erstellt
+         werden.
+
+!begin_quote
+!include appendix/history/begin_asc.ui
+!end_quote
+
+   !end_itemize
+
+!item [Bugfixes:]
+   Etliche. (!grin)
+
+!end_description
+
+!end_node

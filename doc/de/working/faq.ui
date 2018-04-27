@@ -1,0 +1,275 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: FAQ
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Allgemeine Fragen (FAQ)
+!html_name faq
+
+!begin_description !not_compressed
+
+############################################################
+
+!item [Was bedeutet ""FAQ""?]
+""FAQ"" bedeutet ""Frequently Asked Questions"" und heißt 
+übersetzt soviel wie ""häufig gestellte Fragen"". Im übertragenen
+Sinn versteht man darunter eine Auflistung eben dieser oft
+gestellten Fragen samt der passenden Antwort.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Wieso heißt UDO ""UDO""?]
+Als der ursprüngliche UDO-Entwickler Dirk Hagedorn mit der Programmierung von UDO begann, brauchte er einen
+Namen. Ihm fiel auf die Schnelle nichts besseres ein als die
+Abkürzung ""UDO"", was als Abkürzung für ""(!B)U(!b)niversal (!B)DO(!b)cument""
+steht.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Wie spreche ich ""UDO"" aus?]
+""UDO"" wird genauso ausgesprochen wie der Vorname Udo, also ""Uh-Doh"". ""UDO"" wird (!I)nicht(!i) anglophil wie ""Judo"" oder ""You do""
+ausgesprochen!
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Woher bekomme ich die aktuellen Versionen?]
+Die aktuellen Versionen sind unter (!url [www.udo-open-source.org] [http://www.udo-open-source.org/]) erhältlich.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Wird es Portierungen auf andere Systeme geben?]
+Von UDO existieren momentan Versionen für folgende Systeme:
+
+!begin_itemize !compressed
+!item Atari TOS
+# !item BeOS
+!item DOS, OS/2, Windows
+#!item HP-UX 9.x auf HP-Rechnern der 300/400er und 700/800er Baureihe
+!item Linux x86
+!item Mac~OS~X
+#!item NeXTStep
+#!item Sinix
+#!item SunOS 5.5
+!end_itemize
+
+UDO wurde komplett in C geschrieben und verzichtet vollkommen auf
+betriebssystemspezifische Routinen. Dadurch könnte die
+Kommandozeilenversion von UDO theoretisch auf jedes beliebige System
+portiert werden, für das ein ANSI-C-Compiler existiert.
+
+Wenn Sie an einer Portierung auf ein bestimmtes System interessiert
+sind und einen Compiler für dieses System besitzen,
+(!link [kontaktieren] [Kontaktadresse]) Sie bitte die UDO-Entwickler.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Können auch ""systemfremde"" Formate erzeugt werden?]
+Mit UDO können Sie auf jedem System natürlich auch Formate für
+andere Betriebssysteme erzeugen, da die Versionen identisch
+sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
+zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
+
+Die Umsetzung der Sonderzeichen kann UDO für alle unterstützten
+Codepages selbst vornehmen. Falls Sie andere Quelltext-Encodings
+haben, hilft vermutlich das Unix-Kommandozeilen-Programm (!file [iconv])
+am ehesten weiter, um die Quelltexte umzumappen. Gern bauen
+wir weitere Codepages in UDO ein, wenn sie benötigt werden.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Kann ich Texte ""hier"" schreiben und ""dort"" konvertieren?]
+Ja, denn UDO versteht alle Zeichensätze der Systeme, für die UDO
+erhältlich ist. Somit können Texte z.B. unter DOS geschrieben werden
+und auf einem Unix-Rechner konvertiert werden.
+
+Sogar in einer Datei können die Zeichensätze gewechselt werden,
+falls das nötig sein sollte. Durch einen Satz Befehle können Sie
+UDO mitteilen, welcher Zeichensatz in den folgenden Zeilen
+benutzt werden soll: (!KW [code_source]) und (!KW [code_target]).
+
+(!FAQHLINE)
+
+############################################################
+
+!index Änderungen der Syntax
+!index Syntaxänderungen
+!item [Kann sich die UDO-Syntax noch ändern?]
+UDO ist ein Programm, das ständig weiterentwickelt wird. Es
+werden sicherlich auch in Zukunft weitere Kommandos hinzukommen.
+
+Teilweise wird es sich auch nicht vermeiden lassen, die Syntax
+einiger Kommandos zu ändern. Auf solche Änderungen wird aber
+besonders hingewiesen, sodaß Sie die nötigen Anpassungen
+innerhalb von Minuten mit einem Editor vornehmen können.
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Wie funktioniert UDO?]
+UDO liest die Quelldatei(en) in zwei Durchgängen ein.
+
+Im ersten Durchgang werden Schalter, Makros, Definitionen sowie
+die Namen der Kapitel für das Inhaltsverzeichnis und die
+automatische Referenzierung ermittelt.
+
+Im zweiten Durchgang erfolgt dann die Konvertierung und
+Formatierung des Textes. UDO speichert bis zum Eintreffen einer
+Leerzeile bzw. eines Kommandos den Text in einem internen Puffer
+und gibt dann den eingelesenen Absatz aus bzw. führt das
+jeweilige Kommando aus.
+
+Aus dem letzten Satz folgt: Leerzeilen (!I)und(!i) Kommandos unterteilen
+Absätze.
+
+(!FAQHLINE)
+
+############################################################
+
+!index Automatische Referenzierung
+!index Querverweise
+!index Referenzierung
+!index !autoref
+!item [Wie referenziert UDO?]
+UDO legt bei den Hypertext-Formaten (außer beim ST-Guide-Format)
+im Text automatisch Querverweise zu Kapiteln und Sprungmarken an.
+Es werden dabei nur Verweise auf ""andere"" Seiten angelegt, also
+keine Verweise auf Stellen der aktuellen Seite.
+
+Mit dem Schaltern (!KW [autoref]) können Sie die automatische Referenzierung aus- (Parameter (!code [[off!]])) und wieder einschalten (Parameter
+(!code [[on!]])).
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Wie verweise ich auf Stellen des aktuellen Kapitels?]
+Da UDO nicht auf der Seite Verweise anlegt, auf der ein Label
+gesetzt wurde, gibt es ein Problem, falls Sie am Seitenende einen
+Verweis zum Seitenanfang anlegen wollen. Daher müssen Sie hier einen
+manuellen Querverweis setzen.
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!node  Test
+!label Test Anfang
+[...]
+(!link [Zum Seitenanfang] [Test Anfang])
+!end_verbatim
+(!EXAMPLE_END)
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Wie bekomme ich Bilder in ein Inhaltsverzeichnis?]
+Dazu müssen Sie auf den Befehl (!KW [tableofcontents]) verzichten und ein
+Kapitel anlegen, in welches das Inhaltsverzeichnis ausgegeben
+wird. In einem normalen Kapitel können Sie natürlich Bilder wie
+sonst auch benutzen.
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_document
+!maketitle
+!node Inhaltsverzeichnis
+!image foo
+!toc [all]
+
+!node Erstes Kapitel
+!end_verbatim
+(!EXAMPLE_END)
+
+(!FAQHLINE)
+
+############################################################
+
+!item [Welchen Editor kann ich für UDO verwenden?]
+UDO-Quelltexte können Sie prinzipiell mit jedem Texteditor schreiben.
+Einige Editoren bieten jedoch Luxus-Funktionen, die in der Praxis sehr
+nützlich sein können.
+
+Hier einige Vorschläge, die natürlich niemals vollständig oder objektiv sein können:
+
+!begin_table [|l|c|c|] !hline
+""e"" (e.exe) !! OS/2 !! Bestandteil des Systems
+!hline
+(!url [HomeSite] [http://www.adobe.com/products/homesite/] [] [elink]) !! Windows !! kommerziell
+!hline
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/] [] [elink]) !! Linux/KDE !! Open Source
+!hline
+(!url [NotePad++] [http://www.froeb-software.de/] [] [elink]) !! Windows !! Freeware
+!hline
+(!url [Pepper] [http://www.slacksolutions.com/] [] [elink]) !! Linux, Mac~OS, Windows !! kommerziell
+!hline
+(!url [SciTe] [http://www.scintilla.org/] [] [elink]) !! Linux, Windows !! Open Source
+!hline
+(!url [SuperEdi] [http://www.wolosoft.com/] [] [elink]) !! Windows !! Freeware
+!hline
+(!url [TextPad] [http://www.texpad.com/] [] [elink]) !! Windows !! Freeware
+!hline
+(!url [TextWrangler] [http://www.barebones.com/products/TextWrangler/] [] [elink]) !! Mac~OS~X !! Freeware
+!hline
+(!url [UltraEdit32] [http://www.ultraedit.com/] [] [elink]) !! Windows !! kommerziell
+!hline
+!end_table
+
+# Bemerkungen 11.05.2005 - Ulrich Kretschmer:
+# Auswahl-/Testkriterien:
+# a) kommt unter Windows mit Unix/Linux-Zeilenumbrüchen zurecht
+# b) kann überlange Zeilen am Bildschirm umbrechen (word wrap)
+# c) Zeilennummern-Darstellung auf Basis der Datei-Zeilenumbrüche, nicht auf Basis der Bildschirmanzeige
+# Ergebnisse:
+# * BEditor, www.ubesoft.de: (c) funktioniert nicht; eher einfacher Editor
+# * iEdit, www.bitshape.com: kann keine Umbrüche, d.h. (b) nicht erfüllt
+# * Boxer Text Editor, www.boxersoftwae.com: Situation bzgl. Umbrüchen unklar
+# * FoldMaster, www.foldmaster.de: kann keine Umbrüche; ""Falteneditor"" = interessantes Konzept
+# * NaSTex, www.saschaseidel.de, Freeware: (c) nicht erfüllt; aber (b) einfach umschaltbar
+# * NotePro, www.crystaloffice.com: (a) nicht erfüllt, (b) ja, (c) nicht erfüllt
+# * NoteTab light, www.notetab.com: (c) nicht erfüllt
+# * Pepper:
+# * PFE Programmer's File Editor, www.lancs.ac.uk/people/cpaap/pfe, kann keine Umbrüche, Stand 1999
+
+############################################################
+
+!end_description
+
+!end_node

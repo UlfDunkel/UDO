@@ -1,0 +1,52 @@
+!begin_node Vorwort
+!html_name intro_preface
+
+Willkommen zu UDO!
+
+#Vor Ihnen liegt (oder flimmert) die wieder einmal ziemlich überarbeitete
+#Dokumentation zum ziemlich überarbeiteten Programm namens UDO, 
+#geschrieben von einem immer noch völlig überarbeiteten Autor.
+
+UDO ist ein mächtiges und vielseitiges Werkzeug zur Erstellung von 
+Handbüchern, Anleitungen oder sonstigen Textdateien, die in einem oder mehreren 
+Formaten benötigt werden. Trotz der Vielseitigkeit ist UDO leicht zu 
+bedienen und die UDO-Syntax leicht zu erlernen.
+
+UDOs Vielseitigkeit zeigt sich schon darin, daß diese Anleitung 
+ziemlich umfangreich ist. Dieser Umfang schreckt viele Leute ab, die 
+Anleitung einmal komplett durchzulesen. Genau diese Leute sind es aber 
+später, die viele Fragen stellen, die diese Anleitung fast 
+alle erklären kann.
+
+Aus diesem Grunde sei gleich zu Beginn darauf hingewiesen, daß 
+Sie UDO nur dann effizient einsetzen können, wenn Sie die Anleitung 
+einmal komplett durchlesen und mit den mitgelieferten 
+Beispielen ein wenig herumexperimentieren.
+
+Nehmen Sie sich daher bitte die Zeit, diese Anleitung vom 
+Anfang bis zum Ende durchzublättern. Viele Dinge bleiben dann bereits 
+in Ihrem Gedächtnis haften. Außerdem wissen Sie dann später sofort, wo 
+Sie etwas nachschlagen können, falls Ihnen der Sinn eines Befehls 
+wieder entfallen ist.
+
+Falls Sie dabei Stellen entdecken, in denen Dinge zu kurz, falsch oder 
+missverständlich beschrieben worden sind, (!link [teilen Sie uns dies bitte mit] [Mailingliste]).
+Auch Hinweise auf Rechtschreibfehler nehmen wir gerne entgegen.
+
+!ifnset NoShareware
+Bitte beachten Sie, daß UDO als Shareware vertrieben wird und ich sehr 
+darauf angewiesen bin, daß die Arbeit, die ich in meiner Freizeit in 
+dieses Projekt stecke, honoriert wird. Falls Sie UDO also nutzen 
+möchten, bitte ich Sie, sich für UDO auch registrieren zu lassen.
+!endif
+
+Wir hoffen, daß UDO für Sie eine unverzichtbare Hilfe wird und Sie
+mehr Zeit für die wesentlichen Dinge bekommen.
+
+#!raw [tex] \vfill
+
+#Dirk Hagedorn
+
+#Sundern, den 10. Dezember 1996
+
+!end_node

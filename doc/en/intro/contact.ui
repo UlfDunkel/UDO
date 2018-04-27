@@ -1,0 +1,56 @@
+!begin_node Contact the UDO community
+!html_name intro_contact
+!alias Contact addresses
+!alias mailing list
+
+On the UDO website (!url [www.udo-open-source.org] [http://www.udo-open-source.org/]) you can find information
+for UDO users and developers, especially you can download the latest version of UDO and its documentation.
+
+Using the following (!B)mailing lists(!b), you can contact the UDO community:
+
+!begin_blist [UDO_Bugtracker] !compressed
+!item [(!url [UDO_Announce] [http://lists.udo-open-source.org/mailman/listinfo/udo_announce])]
+      UDO announcements (e.g. new versions)
+!item [(!url [UDO_Bugtracker] [http://lists.udo-open-source.org/mailman/listinfo/udo_bugtracker])]
+      bug reports and feature wishes from the (!url [bugtracker system] [http://bugs.udo-open-source.org/]) 
+      will be sent via this mailing list.
+!item [(!url [UDO_Dev] [http://lists.udo-open-source.org/mailman/listinfo/udo_dev])]
+      for UDO developers
+!item [(!url [UDO_Discussion] [http://lists.udo-open-source.org/mailman/listinfo/udo_discussion])]
+      questions and general discussion about UDO. Having problems with UDO, you can ask here.
+!end_blist
+
+Mail discussions are mostly in german, but feel free to ask in english.
+
+!begin_ignore
+!begin_node* Dirk Hagedorn
+!label Address
+#!label Dirk Hagedorn
+
+!begin_xlist [World Wide Web:]
+
+!item	[Address:]
+		Dirk Hagedorn 	(!nl)
+		Asmecke 1		(!nl)
+		59846 Sundern	(!nl)
+		Germany
+
+!item	[Telephone/Fax:]
+		+49 2933 77979
+
+!item	[MausNet:]
+		Dirk Hagedorn @ MK2 (no Mails > 16 KB)
+
+!item	[Internet:]
+		(!url [info@dirk-hagedorn.de] [mailto:info@dirk-hagedorn.de])
+
+!item	[World Wide Web:]
+		(!T)(!url [http://www.dirk-hagedorn.de/] [])(!t)
+
+!end_xlist
+
+!end_node
+
+!end_ignore
+
+!end_node

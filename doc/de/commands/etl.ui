@@ -1,0 +1,20 @@
+!begin_node (!kw [etl])
+!html_name cmd_etl
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/etl(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_tlist]).
+
+!item [(!SEEALSO)]
+(!KW [end_tlist])
+
+!end_xlist
+
+!end_node

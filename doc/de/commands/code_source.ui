@@ -1,0 +1,31 @@
+!begin_node (!kw [code_source])
+!html_name cmd_code_source
+
+Legt fest, in welchem Encoding der Quelltext geschrieben wurde.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_source [(!CHARSET)](!t)
+
+!item [(!DESCRIPTION)]
+UDO erwartet nach diesem Kommando Texte oder
+Textpassagen, die in dem entsprechenden Zeichensatz verfaßt
+wurden. Um wieder auf den Systemzeichensatz
+zurückzuwechseln, verwenden Sie dieses Kommando noch einmal
+mit dem Namen des Systemzeichensatzes.
+
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt
+werden kann:
+
+!include syntax/misc/short_char.ui
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [code_target]), (!link [Sonderzeichen] [Sonderzeichen])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,26 @@
+!begin_node Installation der Macintosh-Version (Mac~OS~X)
+!html_name installation_mac_x
+
+!begin_itemize !compressed
+!item Laden Sie sich die entsprechende ZIP-Datei von der (!url [UDO-Website] [http://www.udo-open-source.org/]) herunter.
+!item Entpacken Sie die ZIP-Datei und kopieren Sie die ausführbare Datei ''(!file [udo])'' nach (!file [/usr/bin]).
+!end_itemize
+
+Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
+
+(!HINT)
+
+Das Verzeichnis (!file [/usr/bin]) wird im Finder normalerweise nicht
+angezeigt. Um es zu öffnen, geben Sie es im Menüpunkt ""Gehe zu/Gehe
+zum Ordner ..."" des Finders ein.
+
+Sie können auch -- sofern gewünscht -- sämtliche unsichtbaren Dateien
+und Verzeichnisse im Finder sichtbar schalten. Um unsichtbare Dateien
+und Ordner im Finder zu sehen, starten Sie das Terminal-Programm
+(Programme > Dienstprogramme > Terminal) und geben Sie dort ein:
+
+(!code [defaults write com.apple.finder AppleShowAllFiles TRUE])
+
+Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
+
+!end_node

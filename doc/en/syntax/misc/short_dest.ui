@@ -1,0 +1,107 @@
+!index Abbreviations
+
+!begin_table [|l|l|l|c|] !hline
+(!B)Abbr.(!b) !! (!B)Format Name(!b) !! (!B)Description(!b) !! (!B)Platform(s)(!b)
+!hline
+amg  !! AmigaGuide      !! hypertext system, used for   !! Commodore
+     !!                 !! documentation of Amiga       !! Amiga
+     !!                 !! programs                     !!
+!hline
+aqv  !! Apple QuickView !! old hypertext format for     !! Apple
+     !!                 !! MacOS                        !!
+!hline
+asc  !! ASCII           !! "plain" text                 !! all
+!hline
+drc  !! (!link [David's Readme] [David's Readme Compiler])  !! DOS program for creating     !! MS-DOS
+     !! (!link [Compiler] [David's Readme Compiler])        !! menu-driven ReadMe's as      !!
+     !!                 !! EXE-programs                 !!
+!hline
+hah  !! AppleHelp       !! HTML format for              !! Mac~OS~X
+     !!                 !! Apple Help Books             !!
+!hline
+html !! HTML (Hypertext !! page description language -- !! platform-
+     !! Markup Language)!! for websites, documentations !! independent
+     !!                 !! and more                     !!
+!hline
+hh   !! HTMLHelp        !! HTML-related format, for     !! Win32
+     !!                 !! creation of HTML-Help files  !! 
+     !!                 !! under windows                !!
+!hline
+htag !! HP-Helptag-SGML !! SGML-based hypertext         !! Unix
+     !!                 !! helpsystem for commercial    !!
+     !!                 !! Unices (HP-UX, Sun Solaris,  !!
+     !!                 !! IBM AIX)                     !!
+!hline
+tex  !! (!LaTeX) 2.09,  !! typesetting system,          !! many platforms
+     !! (!LaTeXe)       !! especially for scientific    !!
+     !!                 !! publications                 !!
+!hline
+ipf  !! OS/2 IPF        !! SGML-based text format for   !! OS/2
+     !!                 !! creating help files          !!
+     !!                 !! (INF, HLP) under OS/2        !!
+!hline
+ldoc !! Linuxdoc-SGML   !! Linuxdoc-SGML (recently:     !! Unix/Linux
+     !!                 !! SGMLtools) is -- like UDO -- !!
+     !!                 !! a multiformat converter which!!
+     !!                 !! converts its own format to   !! 
+     !!                 !! LaTeX, Manualpage, RTF, HTML,!!
+     !!                 !! Texinfo...                   !!
+!hline
+lyx  !! LyX             !! a (!LaTeX)-based document    !! Unix/Linux
+     !!                 !! processor                    !!
+!hline
+man  !! Manualpage      !! Unix-/Linux-help pages for   !! Unix/Linux
+     !!                 !! commandline programs         !!
+!hline
+nroff!! NROFF           !! Unix-/Linux-help pages for   !! Unix/Linux
+     !!                 !! commandline programs         !!
+!hline
+pdf  !! PDF(!LaTeX)     !! for producing PDF files from !! several
+     !!                 !! (!LaTeX)                     !!
+!hline
+ps   !! PostScript      !! device-independent page      !! several
+     !!                 !! description language, e.g.   !!
+     !!                 !! for printers; can also be    !!
+     !!                 !! used for producing PDF files !!
+     !!                 !! (Ghostscript, Adobe Distiller)!!
+!hline
+pch  !! Pure-C-Help     !! help system for the Pure C   !!  Atari ST
+     !!                 !! compiler                     !!
+!hline
+rtf  !! RTF             !! for exchanging text between  !! several
+     !! (Rich Text      !! different programs and       !!
+     !! Format)         !! platforms                    !!
+!hline
+src  !! Sourcecode (C)  !! the UDO source file will be  !! several
+     !!                 !! converted to sourcecode,     !!
+     !!                 !! meaning normal text becomes  !!
+     !!                 !! comment, the content of the  !!
+     !!                 !! the sourcecode environment   !!
+     !!                 !! becomes C-sourcecode         !!
+!hline
+pas  !! Sourcecode      !! the UDO source file will be  !! several
+     !! (Pascal)        !! converted to sourcecode,     !!
+     !!                 !! meaning normal text becomes  !! 
+     !!                 !! comment, the content of the  !!
+     !!                 !! sourcecode environment       !!
+     !!                 !! becomes Pascal-sourcecode    !!
+!hline
+stg  !! ST-Guide        !! a hypertext system           !! Atari ST
+!hline
+info !! GNU Texinfo     !! for making online            !! Linux, MiNTNet
+     !!                 !! documentations, started with !!
+     !!                 !!  (!T)info 'command'(!t)      !!
+!hline
+tvh  !! Turbo-Vision-   !! creating online helpfiles for!! MS-DOS
+     !! Help            !! DOS programs written with    !!
+     !!                 !! Borland's Turbo Vision-      !!
+     !!                 !! Library                      !!
+!hline
+udo  !! (!link [UDO] [UDO-Output]) !! merges all UDO input files   !! all platforms with UDO-support
+     !!                 !! into one big file            !!
+!hline
+win, !! Windows-Help,   !! RTF-derived format for       !! Windows (Win16, Win32)
+wh4  !! WinHelp4        !! producing WinHelp files      !!
+     !!                 !! under Windows                !!
+!hline
+!end_table

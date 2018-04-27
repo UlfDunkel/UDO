@@ -1,0 +1,28 @@
+!begin_node (!kw [autoref])
+!html_name cmd_autoref
+
+Automatische Referenzierung ein-/ausschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/autoref [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl schaltet die automatische Referenzierung ein ((!code [[on!]])) oder aus ((!code [[off!]])). Beim Start der
+Konvertierung ist die automatische Generierung von
+Querverweisen aktiviert. Bei der Umwandlung ins ST-Guide-Format werden die Befehle in (!code [@autorefon]) bzw.
+(!code [@autorefoff]) umgewandelt.
+
+!item [(!EXAMPLE)]
+(!T)!/autoref [off](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+!end_node

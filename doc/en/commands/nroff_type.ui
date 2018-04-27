@@ -1,0 +1,29 @@
+!begin_node (!kw [nroff_type])
+!html_name cmd_nroff_type
+
+Set program type (NROFF only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/nroff_type (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+When converting to NROFF UDO uses ""(!TEXT)"" inside the
+headline with brackets. The example would look like ""udo(1)"". UDO doesn't use ""(!TEXT)"" as a file suffix.
+
+!item [(!SEEALSO)]
+(!KW [man_type])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!nroff_type 1
+!docinfo [program] udo
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

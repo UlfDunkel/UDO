@@ -1,0 +1,55 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 1996:
+#   dh  Jan 10: Erweiterungen
+#   dh  Jan 25: Anderer Aufbau und weitere Fragen
+# 2001:
+#   dh  Oct 20: Zusammengefasst mit Fragen aus Anhang
+# 2003:
+#   dh  Dec 20: eigenes Kapitel "Ausgabeformate"
+#
+################################################################################
+
+!begin_node Ausgabeformate
+!html_name formatspecific
+
+!include formats/amiga.ui
+!include formats/aqv.ui
+!include formats/ascii.ui
+!include formats/drc.ui
+!include formats/htag.ui
+!include formats/html.ui
+!include formats/applehelp.ui
+!include formats/htmlhelp.ui
+!include formats/ipf.ui
+!include formats/latex.ui
+!include formats/linuxdoc.ui
+!include formats/lyx.ui
+!include formats/manpage.ui
+!include formats/nroff.ui
+!include formats/pchelp.ui
+!include formats/pdflatex.ui
+!include formats/postscript.ui
+!include formats/rtf.ui
+!include formats/csource.ui
+!include formats/psource.ui
+!include formats/stguide.ui
+!include formats/texinfo.ui
+!include formats/tvision.ui
+!include formats/udo.ui
+!include formats/winhelp.ui
+!include formats/winhelp4.ui
+
+!end_node

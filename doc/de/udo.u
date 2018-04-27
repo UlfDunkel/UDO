@@ -1,0 +1,220 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : main file
+# Language    : german
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+#
+# Notes
+# -----
+#    This file should not contain any language-specific content!
+# 
+#    All includes should be done from .ui files.
+#    All language-specific content should be included in .ui files, using
+#    ISO designator file extensions like .de (= German) or .en (English).
+#
+#    .ui files, which do NOT include language-specific files, should start with
+#    an underscore, like _lang.ui or _version.ui.
+#
+# ------------------------------------------------------------------------------
+#
+# Command line parameters
+# -----------------------
+#    Using the option -D you can make smaller manuals:
+#    1) without chapter "Introduction":
+#       $ udo ... -o ! -D NoIntro manual.u
+#    2) without chapter "Installation":
+#       $ udo ... -D NoInstall ...
+#    3) without chapter "Running":
+#       $ udo ... -D NoRunning ...
+#    4) without chapter "Syntax":
+#       $ udo ... -D NoSyntax ...
+#    5) without chapter "Output Formats":
+#       $ udo ... -D NoFormats ...
+#    6) without chapter "Working with UDO":
+#       $ udo ... -D NoIntro ...
+#    7) without Appendix:
+#       $ udo ... -D NoAppendix ...
+#    8) Appendix without chapter "History":
+#       $ udo ... -D NoHistory ...
+#    9) Appendix without Command index:
+#       $ udo ... -D NoIndex ...
+# 
+#    By default a complete documentation will be produced.
+#    You can combine these switches.
+# 
+# More parameters
+# ---------------
+#    1) Remove no longer supported commands from command index:
+#       $ udo ... -D NoOldKeywords ...
+#       Default: having command index *with* these commands.
+#    2) Documentation with special HTML parameters for the UDO website (see below):
+#       $ udo ... -D UseForWeb ...
+#
+# ------------------------------------------------------------------------------
+#
+# History
+# -------
+# 2009:
+#   fd  Jun 05: history introduced
+#   fd  Jun 08: main chapters reorganized
+#   fd  Jun 08: _def.ui included
+#   fd  Jun 10: _def.ui no longer required -> macros.ui
+# 2010:
+#   fd  Feb 25: codepage adjusted to UDO 7
+#   fd  Feb 26: using the new encoding commands !code_source + !code_target
+#   fd  Mar 01: !code removed
+#   fd  Mar 03: please define all !code_target in _header.ui
+#
+################################################################################
+
+# ------------------------------------------------------------------------------
+# The source files were written using the Windows codepage 1252 (Western).
+# ------------------------------------------------------------------------------
+!code_source [cp1252]
+
+!language german
+
+!include ../macros.ui                     # language indedendent macros
+!include version.ui                       # version numbers (generated)
+!include header.ui                        # switches
+!include lang.ui                          # language macros
+!include hyphen.ui                        # hyphenation patterns
+
+
+# ---------------------------------------------
+# Titel formatabhängig setzen
+# ---------------------------------------------
+!ifdest [stg,amg]
+!docinfo [title] Der Hypertext zu
+!else
+!ifdest [win,wh4,hh,hah]
+!docinfo [title] Die Windows-Hilfe zu
+!else
+!ifdest [rtf]
+!docinfo [title] Das Handbuch zu
+!else
+!docinfo [title] Die Anleitung zu
+!endif
+!endif
+!endif
+!docinfo [program] UDO
+
+
+# ------------------------------------------------------
+# Subject für den ST-Guide setzen
+# ------------------------------------------------------
+!raw [stg] @subject "Dokumentation/Utilities"
+
+# ------------------------------------------------------
+# Typ für Manualpage setzen
+# ------------------------------------------------------
+!man_type 1
+!nroff_type 1
+
+# ------------------------------------------------------------------------------
+# HTML-Spezialitäten
+# ------------------------------------------------------------------------------
+!ifset [UseForWeb]
+# Dokumentation zur Veröffentlichung auf der UDO-Website:
+!html_style_name udo_web.css
+!ifdest [html]
+!html_backpage http://www.udo-open-source.org/ 'Zurück zur UDO-Website'
+!endif
+!else
+# Dokumentation für den "normalen" Anwender...
+!html_style_name udo.css
+!endif
+
+!ifdest [html,hh,hah]
+!define FAQHLINE !hline
+!else
+!define FAQHLINE
+!endif
+
+# ----------------------------------------------------------------
+# Symbole
+# ----------------------------------------------------------------
+
+# Wenn dieses Symbol gesetzt ist, werden Kommandos, die
+# nicht mehr unterstützt werden, aus dem Index entfernt
+#!set NoOldKeywords
+
+# UDO ist jetzt open-source, nicht mehr Shareware
+!set NoShareware
+
+##################################################################
+# Jetzt geht's lohooos...
+# Man kann durch Benutzung der -D Option kleinere Anleitungen
+# erstellen. Beispiel fuer eine Anleitung ohne Installations-
+# anweisungen und Sharewarehinweisen:
+# $ udo --win -o ! -D NoShareware -D NoInstall udo.u
+##################################################################
+
+!begin_document
+
+!html_keywords UDO
+!html_keywords Univeral Document
+!html_keywords Atari
+!html_keywords Windows
+
+!raw [tex] \sloppy
+
+# create title page + table of contents
+!maketitle
+!tableofcontents !depth 2
+
+# Einführung
+!ifnset [NoIntro]
+!include intro/00_index.ui
+!endif
+
+# Rechtliche Informationen
+#!ifnset [NoLegal]
+#!include legal/00_index.ui
+#!endif
+
+# Shareware
+#!ifnset [NoShareware]
+#!include money/00_index.ui
+#!endif
+
+# Installation
+!ifnset [NoInstall]
+!include install/00_index.ui
+!endif
+
+# Bedienung
+!ifnset [NoUsage]
+!include usage/00_index.ui
+!endif
+
+# Syntax
+!ifnset [NoSyntax]
+!include syntax/00_index.ui
+!endif
+
+# Ausgabeformate
+!ifnset [NoFormats]
+!include formats/00_index.ui
+!endif
+
+# Praktische Arbeit
+!ifnset [NoWorking]
+!include working/00_index.ui
+!endif
+
+###########
+# Anhang
+###########
+
+!ifnset [NoAppendix]
+!include appendix/00_index.ui
+!endif
+
+!end_document

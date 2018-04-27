@@ -1,0 +1,25 @@
+!begin_node (!kw [no_8bit])
+!html_name cmd_no_8bit
+
+Do not use special characters.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_8bit [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Switches off the usage of German umlauts. The example shows how to
+switch it off when converting to a manualpage. Umlauts are then
+replaced by ae, oe, ue, ss, Ae, Oe and Ue.
+
+!item [(!EXAMPLE)]
+(!T)!/no_8bit [man](!t)
+
+!item [(!SEEALSO)]
+(!link [Special characters] [Special characters]), (!KW [no_umlaute])
+
+!end_xlist
+
+!end_node

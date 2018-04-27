@@ -1,0 +1,20 @@
+!begin_node (!kw [i])
+!html_name cmd_i
+
+Start an item.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/i [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [item]).
+
+!item [(!SEEALSO)]
+(!KW [item])
+
+!end_xlist
+
+!end_node

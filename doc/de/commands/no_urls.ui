@@ -1,0 +1,32 @@
+!begin_node (!kw [no_urls])
+!html_name cmd_no_urls
+
+Keine externen Verweise auf WWW-Seiten benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_urls [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl schaltet die Benutzung von externen
+Verweisen auf WWW-Seiten aus, falls das formatzugehörige Kürzel
+angegeben wurde. Dies ist sinnvoll, falls Sie einen
+Hypertext mit HTML-Links versehen haben, die jedoch
+weder in einem WinHelp- noch ST-Guide-Hypertext Sinn
+ergeben würden.
+
+!item [(!SEEALSO)]
+(!KKW [url]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_urls [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

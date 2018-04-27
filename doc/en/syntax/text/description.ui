@@ -1,0 +1,50 @@
+!begin_node Descriptions
+!html_name style_descriptions
+!label description environment
+
+Use the description environment for describing some words. Start the
+environment with (!KW [begin_description]) and finish it using
+(!KW [end_description]).
+
+A word that has to be described is used with the (!KW [item])
+command inside brackets and will be displayed with bold text.
+
+The description environment can be used inside other (description)
+environments.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)description1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)description1.ui
+(!EXAMPLE_END)
+
+In this example the description environment is used inside another one and
+the (!KW [compressed]) is used, too:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)description2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)description2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+
+!item   If the word that shall be displayed in bold text contains a ""]""
+you have to quote it with an exclamation mark to tell UDO that it has to
+be printed in bold text, too.
+
+!item When the last character is an exclamation mark, a ""/"" has to follow 
+      or UDO would protect the closing bracket instead of outputting an exclamation mark.
+
+!item   The HTML version of your source file will print the descriptions in
+bold text, too, even if this not typical for HTML. The next versions of UDO
+will offer a command to disable the bold text inside descriptions for HTML.
+
+!item   A description of the (!KW [compressed]) command is part of the chapter
+""Itemizations"".
+
+!end_enumerate
+
+!end_node

@@ -1,0 +1,20 @@
+!begin_node (!kw [end_description])
+!html_name cmd_end_description
+
+Letzte description-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_description(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte description-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_description]), (!KW [item] [[~!!]]), (!link [Beschreibungen] [Beschreibungen])
+
+!end_xlist
+
+!end_node

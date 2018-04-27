@@ -1,0 +1,26 @@
+!begin_node (!kw [code_target])
+!html_name cmd_code_target
+
+Sets the encoding of the target document(s).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_target [(!CHARSET)](!t)
+
+!item [(!DESCRIPTION)]
+After this command, UDO outputs text in the selected encoding. 
+To switch back to the system encoding, use this command again with the system encoding name.
+
+Here is an overview about the available encoding names:
+!include syntax/misc/short_char.ui
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [code_source]), (!link [Special characters] [Special characters])
+
+!end_xlist
+
+!end_node

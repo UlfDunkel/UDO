@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [verbatim_no_umlaute])
+!html_name cmd_verbatim_no_umlaute
+
+Do not use german umlauts in verbatim environments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/verbatim_no_umlaute [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KW [no_verbatim_umlaute]).
+#TODO: wann?
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [no_verbatim_umlaute])
+
+!end_xlist
+
+!end_node
+!endif

@@ -1,0 +1,46 @@
+!begin_node (!kw [language])
+!html_name cmd_language
+
+Define language.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/language [(!LANGUAGE)](!t)
+
+!item [(!DESCRIPTION)]
+With this command you can tell UDO which language it should use for
+the date and expressions like ""Table"", ""Contents"" or
+""Appendix"". UDO will use German expressions by default.
+
+By now, UDO supports the following languages:
+
+!include syntax/misc/short_lang.ui
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifnlang]), (!KKW [today])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!language english
+!iflang [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!iflang [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+(!EXAMPLE_END)
+
+!end_node

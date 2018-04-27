@@ -1,0 +1,20 @@
+!begin_node (!kw [pssss*])
+!html_name cmd_pssss_asterisk
+
+Start a hidden popup subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pssss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubnode*]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode*])
+
+!end_xlist
+
+!end_node

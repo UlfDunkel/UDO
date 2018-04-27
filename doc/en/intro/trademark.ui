@@ -1,0 +1,21 @@
+!begin_node Trademarks
+!html_name intro_trademarks
+
+This documentation uses names of products and companies that may be
+trademarks or registered trademarks. You may not conclude that these
+names are free of use even if they are not marked explicitly.
+
+!begin_itemize
+!item Atari, TOS and MultiTOS are trademarks or registered trademarks of Atari Corporation.
+!item Arial and Times New Roman are registered trademarks of Monotype Corporation PLC.
+!item GEM and GEM Desktop are trademarks or registered trademarks of Digital Research.
+!item Mac, Macintosh, Mac~OS and Mac~OS~X are registered trademarks of Apple Inc.
+!item MS-DOS, Windows, Windows~95 and Windows~NT are registered trademarks of Microsoft Corporation.
+!item Unix is a registered trademark of X/Open Company Ltd.
+!item Linux is a registered trademark of Linus Torvalds.
+!item SUSE and Yast are registered trademarks of the SUSE AG.
+!end_itemize
+
+Other products mentioned in this documentation may be registered trademarks of their manufacturers.
+
+!end_node

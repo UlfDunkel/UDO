@@ -1,0 +1,92 @@
+!begin_node Format-specific commands
+!html_name misc_commands_format_specific
+!label Special commands
+
+UDO offers you the (!KW [raw]) command and the raw environment to insert
+special commands for a specific format. So you are able to insert small
+passages or huge blocks written in the destination format (like special
+tables for (!LaTeX) or HTML).
+
+You have to use abbreviations of the destination formates if you want
+to use the (!KW [raw]) command:
+
+!label Abbreviations
+!include syntax/misc/short_dest.ui
+
+The next example shows how to insert a line that will only be printed
+for the ASCII format:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)asc1.ui
+(!EXAMPLE_END)
+
+The next example shows how to insert a line that appears in all formats
+except ASCII:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)asc2.ui
+(!EXAMPLE_END)
+
+The contents of the line will be printed without the command and
+without converting the text of the line. These commands split up text
+into different paragraphs like all the other UDO commands. So these
+commands aren't useful to insert a line into a paragraph!
+
+You can use these commands to insert special commands like parts of
+the preamble for (!LaTeX):
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)latex/index.ui
+(!EXAMPLE_END)
+
+!begin_description
+
+!label raw environment
+!index !begin_raw
+!index !end_raw
+!item [The raw environment]
+But it happens that you want to insert large passages only for one
+format with special commands. You could add one of the upper commands
+at the beginning of each line, sure. But to make it easier for you to insert
+these passages UDO has a special environment for this case: the raw
+environment.
+
+Together with the possibility to check the current destination format you
+can e.g. insert complex tables for (!LaTeX) or forms for HTML with the raw
+environment. The following example shows how to enter HTML forms to your
+source code:
+
+!index HTML !! <form>
+!index <form>
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)raw1.ui
+(!EXAMPLE_END)
+
+To say it once more: Text that is part of a raw environment is printed ""as
+is"". That means that it is not converted and not indented. If you will
+insert the upper form source code into a verbatim environment you will
+see the source code in an HTML browser. But if you insert it inside a raw
+environment you will see the form!
+
+Another choice you have is to use the command (!KW [rinclude]).
+
+!label comment environment
+!item [The comment environment]
+
+If you want to write larger blocks in the output file as comments,
+it would be troublesome to start each line with a command.
+
+!index !begin_comment
+!index !end_comment
+Therefore UDO offers the "comment environment". It will be started with the
+command (!KW [begin_comment]) and ends with the command (!KW [end_comment]).
+
+As with the text of lines that start with the (!KW [comment]) command,
+UDO will write text inside this environment as comment to the destination
+file without converting special chars.
+
+Another choice you have is to use the command (!KW [cinclude]).
+
+!end_description
+
+!end_node

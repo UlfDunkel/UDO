@@ -1,0 +1,35 @@
+!begin_node (!kw [define])
+!html_name cmd_define
+
+Set a definition.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/define (!WORD) (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Sets a (new) definition. When converting UDO will replace every
+""(!WORD)"" by ""(!TEXT)"" without converting special chars. When
+using the example below every ""(!code [(!/h1!)])"" will be replaced by
+""(!code [</h1>])"". The difference to a macro: no umlauts or other special
+characters will be converted. Definitions can contain parameters. Read the
+chapter ""Definitions"" to get to know how to use definitions with
+parameters.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!item [(!SEEALSO)]
+(!link [Definitions] [Definitions])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!define h1 </h1>
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

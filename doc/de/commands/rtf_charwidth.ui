@@ -1,0 +1,38 @@
+!begin_node (!kw [rtf_charwidth])
+!html_name cmd_rtf_charwidth
+
+Zeichenbreite einstellen (nur RTF).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rtf_charwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+UDO benutzt zur Ausrichtung der xlist-Umgebungen und
+der Tabellen einen Wert für die Berechnung der
+Einrückungen und Zellenbreiten. Dieser Wert ist so
+ausgelegt, daß auch nichtproportionale fette
+Großschrift noch richtig formatiert wird. Bei
+normaler Schrift kann es jedoch sein, daß die Zeichen
+zu weit eingerückt werden oder daß Tabellenzellen zu
+breit erscheinen. Mit diesem Schalter können sie den
+Berechnungswert anpassen. Standardmäßig benutzt UDO
+den Wert (!const [150]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!link [Listen] [Listen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_charwidth 100
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

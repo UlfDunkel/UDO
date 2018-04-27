@@ -1,0 +1,44 @@
+!begin_node (!kw [ifndest])
+!html_name cmd_ifndest
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifndest [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando fragt das aktuelle Ausgabeformat ab. Stimmt
+""<kürzel>"" (!I)nicht(!i) mit dem Kürzel des Ausgabeformates überein,
+so werden alle Zeilen umgewandelt, die zwischen (!KW [ifndest]) und
+(!KW [else]) bzw. (!KW [endif]) angegeben werden. Stimmt das Kürzel
+überein, werden nur die Zeilen zwischen (!KW [else]) und
+(!KW [endif]) ausgewertet, sofern (!KW [else]) benutzt wird.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [else]), (!KW [endif]), (!KW [ifdest]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifndest [html]
+Dieser Text erscheint nicht in der HTML-Version des Handbuchs.
+!else
+Aber dieser Text erscheint in der HTML-Version des Handbuchs.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifndest [html]
+Dieser Text erscheint nicht in der HTML-Version des Handbuchs.
+!else
+Aber dieser Text erscheint in der HTML-Version des Handbuchs.
+!endif
+(!EXAMPLE_END)
+
+!end_node

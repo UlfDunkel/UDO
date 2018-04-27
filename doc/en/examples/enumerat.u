@@ -1,0 +1,33 @@
+#######################################
+# @(#) enumerate environments - dh 1996
+#######################################
+
+!code_source [iso]
+!english
+
+!title		UDO's
+!program	Enumerate Environment
+!author		Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node A simple enumerate environment
+
+This example shows how to use enumerate environments:
+
+!begin_enumerate
+
+!item This is item no. 1
+!item This is item no. 2 with some more senseless words to show you
+how UDO formats this item.
+
+	This sentence also belongs to item no. 2.
+
+!item Last but not least this is item no. 3. Here you can see the
+effect of a (!nl) manually inserted linebreak.
+
+!end_enumerate
+
+!end_document

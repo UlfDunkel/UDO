@@ -1,0 +1,23 @@
+!begin_node (!kw [tex_miktex])
+!html_name cmd_tex_miktex
+
+Grafikmakros für MiK-(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_miktex(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Bildern ein
+(!TeX)-Makro für das MiK-(!TeX) erzeugt werden soll.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_lindner]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node

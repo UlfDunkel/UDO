@@ -1,0 +1,31 @@
+!code_source [iso]
+
+!ifndest [asc]
+!error Only for ASCII
+!endif
+
+!include version.ui
+
+!macro UDOR udo(!RELEASE)
+
+!no_numbers [asc]
+
+!begin_document
+
+!ifos [dos]
+!include install/dos.ui
+!endif
+
+!ifos [tos]
+!include install/atari.ui
+!endif
+
+!ifos [mac]
+!include install/macos.ui
+!endif
+
+!ifnos [dos,tos,mac]
+!include install/unix.ui
+!endif
+
+!end_document

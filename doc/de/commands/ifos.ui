@@ -1,0 +1,43 @@
+!begin_node (!kw [ifos])
+!html_name cmd_ifos
+
+Betriebssystem abfragen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifos [(!OS)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando testet das aktuelle Betriebssystem,
+auf dem UDO läuft. Enthält ""(!OS)"" eines der
+Kürzel der Betriebssysteme, wandelt UDO alle
+Zeilen zwischen (!KW [ifos]) und (!KW [endif]) bzw. (!KW [else]) um. Das
+Beispiel zeigt, wie Sie testen können, ob UDO unter Unix läuft.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [ifnos]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifos [unix]
+UDO läuft gerade unter Unix.
+!else
+UDO läuft momentan definitiv nicht unter Unix.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifos [unix]
+UDO läuft gerade unter Unix.
+!else
+UDO läuft momentan definitiv nicht unter Unix.
+!endif
+(!EXAMPLE_END)
+
+!end_node

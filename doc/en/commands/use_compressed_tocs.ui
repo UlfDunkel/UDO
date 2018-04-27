@@ -1,0 +1,31 @@
+!begin_node (!kw [use_compressed_tocs])
+!html_name cmd_use_compressed_tocs
+
+Use short table of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_tocs [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+When you use this command in the preamble, UDO outputs short tables of contents. In the main table of
+contents only the names of the chapters and in chapters only the
+names of sections will be output. The example would shorten all tables of contents in all formats.
+#!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+#!item [Existiert wieder seit:] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_compressed_tocs [all]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

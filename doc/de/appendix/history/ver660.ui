@@ -1,0 +1,176 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6.6.0
+# Language    : German
+# Initial Date: 2004-06-16
+# Author      : Thorsten Otto (tho)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2013:
+#   tho Jun 30: excessive examples removed, this is a history file and not a
+#               complete manual
+#
+################################################################################
+
+!begin_node Änderungen von Version 6.4.0 nach 6.6.0
+!html_name history_6_4_0_to_6_6_0
+
+(!PUBLISHED [Version~6.6.0] [16.06.2004])
+
+!heading (!GENERAL)
+!begin_description !compressed
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !compressed
+
+!item (!KW [docinfo]) hat zwei neue Argumente: (!nl)
+    (!code [company]) bezeichnet die Firma, für die ein Dokument erstellt wird.
+    Wenn (!code [company]) benutzt wird, wird auf der Titelseite unter Autor
+    ""für (!I)company(!i)"" eingefügt. (!nl)
+    (!code [category]) bezeichnet eine Kategorie, zu der das Dokument gehört.
+
+!item Endet eine UDO-Eingabezeile mit (!KW [\])<Zeilenumbruch>, so wird die folgende Zeile
+  von UDO als Fortsetzung der vorhergehenden Zeile aufgefaßt.
+         
+!end_itemize
+
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !compressed
+!item Die "UDO Community" ist in dem Text ergänzt worden, der von
+    (!KW [use_about_udo]) ausgegeben wird.
+ 
+!item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heißt
+jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
+(x gerade für Produktionsversionen bzw. ungerade für Entwicklerversionen von UDO).
+
+!item Die OS/2-Version von UDO sollte sich seit Version~6.5.1 als "UDO for OS/2" melden.
+
+!item (!KW [code] [[utf8!!]]) oder (!KW [code] [[utf-8!!]]) wird jetzt unterstützt (seit Version~6.5.1).
+
+!end_itemize
+
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !compressed
+
+!item (!BUG [55]) (!nl)
+    Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen,
+    wurden nicht richtig umgesetzt.
+
+!item (!BUG [48]) (!nl)
+   Fehlermeldung "unknown command: !html_use_hyphenation".
+   Ursache: Kommando fehlte in der Kommandoliste.
+
+!end_itemize
+!end_description
+
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !compressed
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize
+
+!item Neuer Schalter (nur für Vorspann): (!KW [html_header_links] [[<text>!!]]) ((!FEATURE [53])) (!nl)
+   Ist dieser Schalter gesetzt, so werden je nach Vorgabe
+   (!code [(!LINK!)])-Elemente im HTML-Header erzeugt
+# U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt wird, wenn
+# !html_header_links *nicht* gesetzt ist (+ Beispiel).
+# NHz 29.01.04: Beispiel -> !html_header_links navigation chapter (siehe meine Mail vom 29.01.04)
+# U.K. 29.1.04: die Frage nach dem Beispiel war mißverständlich. Sind obige Klammerzusätze korrekt??
+# tho: die Erläuterungen was das Kommando genau macht gehören in die Befehlsbeschreibung und nicht hierher
+
+!item Neuer Schalter (nur für Vorspann): (!KW [html_header_date] [[<text>!!]]) ((!FEATURE [54]))(!nl)
+   Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt,
+   z.B. (!code [<!-- last modified on 29.01.2004 -->]). (!nl)
+   Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für
+   Datum/Uhrzeit der Datei-Erzeugung erzeugt.
+
+!begin_ignore
+# # für die künftige, endgültige Doku an anderer Stelle:
+UTC = Coordinated Universal Time, entspricht der vormaligen Greenwich Mean Time (GMT).
+übersichtliche Umrechungstabelle (wohl am wichtigsten für die praktische
+UDO-Anwendung): http://setiathome.ssl.berkeley.edu/utc.html
+umfassend (mit weiteren Links):
+http://de.wikipedia.org/wiki/UTC bzw. http://en2.wikipedia.org/wiki/UTC,
+http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
+!end_ignore
+
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !compressed
+
+!item Die <link>-Elemente für die Navigation werden nicht mehr automatisch, sondern
+   nur noch auf Anforderung in den HTML-Header geschrieben (siehe oben).
+
+!item Datum/Uhrzeit der Erzeugung der HTML-Datei wird nicht mehr automatisch als Kommentar,
+  sondern nur noch auf Anforderung als META-Tag in den HTML-Header geschrieben (siehe oben).
+
+!item Bei (!KW [html_ignore_8bit]) kann nun ein optionaler Parameter <text> für die Codepage
+   übergeben werden. Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die HTML-Header
+   folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
+# <text> kann max. 20 Zeichen haben.
+# siehe auch: http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
+
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !compressed
+
+!item (!BUG [44]) (!nl)
+   Wenn (!KW [no_numbers]) gesetzt ist, werden keine Nummern mehr vor
+   die Kapitelnamen innerhalb des <link>-Elementes im HTML-Header geschrieben.
+
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Rich Text Format (RTF)
+!begin_description !compressed
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !compressed
+
+!item Die (!T)!/docinfo(!t)-Einträge (!T)subject(!t), (!T)keywords(!t),
+    (!T)company(!t) und (!T)category(!t) werden in die Info-Einträge der
+    RTF-Datei geschrieben.
+# U.K. an N.H.: sind mit "Info-Einträge" die Dokument-Eigenschaften gemeint?
+
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !compressed
+# ..............................................................................
+# zu RTF
+ 
+!item (!BUG [56]) in Version~6.4.1 beseitigt (!nl)
+   Falsche Berechnung der Ausmaße von Bildern bei der RTF-Ausgabe.
+   Versehentlich wurde dem Parameter "Höhe" die Breite übergeben.
+
+!item (!BUG [17]) in Version 6.4.1 beseitigt (!nl)
+   Fehlermeldung: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
+   Neuer Zustand: die Bild-Datei wird jetzt rechtzeitig angelegt, bevor versucht wird,
+   darauf zuzugreifen. (!nl)
+   Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
+
+!end_itemize
+
+!end_description
+
+!end_node

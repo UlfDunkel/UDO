@@ -1,0 +1,92 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6 PL 16
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Änderungen von Release 6 Patchlevel 15 nach 16
+!html_name history_release_6_PL15_to_16
+
+(!PUBLISHED [UDO~6 Patchlevel~16] [28.09.2003])
+
+!begin_description
+!item [Neue Befehle:]
+   !begin_itemize !compressed
+   !item (!KW [html_use_hyphenation]) (!nl)
+         Nur wenn dieses Kommando gesetzt ist, werden die bedingten
+         Trennstriche (!KW [/-]) bei der HTML-Ausgabe in (!code [&shy;])
+         umgesetzt.
+   !item (!code [!/node1_size foo]) (!nl)
+         Mit diesem Kommando (Vorspann) kann die Größe der Nodes und Headings
+         bei der Postscript-Ausgabe festgelegt werden (foo: Zeichensatzgröße
+         in pt).
+   !item (!code [!/node2_size foo]) (!nl)
+         Mit diesem Kommando (Vorspann) kann die Größe der Subnodes und
+         Subheadings bei der Postscript-Ausgabe festgelegt werden (foo:
+         Zeichensatzgröße in pt).
+   !item (!code [!/node3_size foo]) (!nl)
+         Mit diesem Kommando (Vorspann) kann die Größe der Subsubnodes und
+         Subsubheadings bei der Postscript-Ausgabe festgelegt werden
+         (foo: Zeichensatzgröße in pt).
+   !item (!code [!/node4_size foo]) (!nl)
+         Mit diesem Kommando (Vorspann) kann die Größe der Subsubsubnodes
+         und Subsubsubheadings bei der Postscript-Ausgabe festgelegt
+         werden (foo: Zeichensatzgröße in pt).
+   !end_itemize
+
+!item [Neuheiten:]
+   !begin_itemize !compressed
+   !item In der ersten Datei der HTML-Ausgabe wird jetzt ein Meta-Tag
+         für AppleTitle/JobTimerHelp angelegt.
+   !item Jetzt werden auch Nodes, die mit (!KW [html_name]) einen
+         ausführlichen Namen bekommen haben (z.~B. foo.php) richtig
+         referenziert.
+   !item Für die HTML-Ausgabe wird jetzt im Tag <ul> zusätzlich
+         (!code [<ul class="content">]) ausgegeben. Dadurch können
+         Sie mittels eines Eintrages im Stylesheet
+         (!code [(ul.content~{~list-style-type:~none;~}!)]) die
+         Aufzählungspunkte in den Inhaltsverzeichnissen vermeiden.
+   !item Bei der HTML-Ausgabe wird jetzt ein (!code [<span style="page-break-after:always;"></span>])
+         gesetzt, dann können Browser, die das verstehen, beim Ausdruck
+         einen Seitenumbruch vornehmen.
+   !item Die Bildunterschriften werden jetzt als Feld ausgegeben, damit
+         ein Abbildungs!-ver!-zeichnis erstellt werden kann.
+   !item Für RTF wird jetzt eine einzelne Seite erzeugt, die ein
+         Ab!-bildungs!-ver!-zeichnis enthält, wenn (!KW [listoffigures])
+         gesetzt ist. Dieses muß nur aktualisiert werden.
+   !item Es werden Vorgaben für das Layout für die Postscript-Ausgabe
+         gemacht: Art und Größe des proportionalen und äquidistanten
+         Zeichensatzes sowie die Öffnungsparameter für PDF-Dateien.
+   !end_itemize
+
+!item [Änderungen:]
+   !begin_itemize !compressed
+   !item (!KW [html_backpage]) (!code [../index.html "Zurück zur UDO-Website"]) (!nl)
+         Jetzt kann zusätzlich ein Text übergeben werden, der statt
+         des Links in das alt-Attribut eingetragen wird. Der Text muß
+         in einfachen Anführungszeichen stehen ("foo")
+   !item Die Bildunterschrift wird bei der Ausgabe nach RTF nicht
+         mehr in Klammern gesetzt.
+   !item Die Bilder werden jetzt bei der Ausgabe nach RTF innerhalb
+         von Umgebungen mit eingerückt.
+   !end_itemize
+
+!end_description
+
+!end_node

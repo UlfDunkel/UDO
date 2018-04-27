@@ -1,0 +1,24 @@
+!begin_node (!kw [html_linkcolor])
+!html_name cmd_html_linkcolor
+
+Specify the color of links (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display links in HTML pages.
+If you use this command inside the preamble,
+this will be the default color for all pages including the table of contents.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_textcolor]), (!KW [html_alinkcolor]), (!KW [html_vlinkcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node

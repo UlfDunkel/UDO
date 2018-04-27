@@ -1,0 +1,37 @@
+!begin_node (!kkw [img])
+!html_name cmd_img()
+
+Output inline images.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/img [(!FILE)] [(!TEXT)] {[(!TEXT)]})(!t)
+
+!item [(!DESCRIPTION)]
+Use this placeholder to use an image right inside the text of HTML or
+WinHelp. If another destination format will be used only ""(!TEXT)""
+will be  displayed. When converting to HTML, (!file [file.gif]) will be used,
+when converting to WinHelp (!file [file.bmp]) will be used. UDO doesn't check
+if this file exists.
+
+Since version 6.5.18, this command has been enhanced: (!nl)
+(!code [(!/img [(!FILE!)!] [(!TEXT!) [(!TEXT!)!]!]!)]) (!nl)
+This has effects only on HTML, HTML Apple Help and HTML-Help output.
+The second (!TEXT) will then be used for the attribute ""title"". If only one (!TEXT)
+exists, both attributes ('alt' and 'title') get the same text. Example:
+
+<img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
+
+!item [(!EXAMPLE)]
+(!T)(!/img [dh] [my logotype])(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KW [image]), (!KW [no_img_size])
+
+!end_xlist
+
+!end_node

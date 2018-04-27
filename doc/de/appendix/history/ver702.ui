@@ -1,0 +1,99 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.02
+# Language    : German
+# Initial Date: 2010-05-25
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  May 25: introduced
+#   fd  May 26: #89
+# 2013:
+#   fd  May 02: completed for release
+#
+################################################################################
+
+!begin_node Änderungen in Version 7.02
+!html_name history_0702
+
+(!PUBLISHED [UDO~7.02][02. Mai 2013])
+
+Generell bringt diese Updateversion viele kleine Anpassungen, Korrekturen und Verbesserungen, vor allem für die HTML-Ausgabe. 
+Aber wir haben auch einige neue und geänderte Sachen bei einigen UDO-Kommandos hinzugefügt.
+
+
+!begin_description !compressed
+# ----------------------------------------
+!item [(!KW [begin_enumerate])]
+# ----------------------------------------
+      Das Kommando unterstützt jetzt einen optionalen Parameter, mit dem Sie einen anderen Startwert als 1 für die nummerische Aufzählung vorgeben können. [fd]
+
+
+# ----------------------------------------
+!item [(!KW [code_target])]
+# ----------------------------------------
+      !begin_itemize
+      !item (!BUG [94]): Die HTML-Ausgabe stürzt nicht mehr ab, wenn (!KW [html_ignore_8bit]) nicht definiert ist. [fd]
+      
+      !item (!BUG [95]): Die RTF-Ausgabe unterstützt Unicode. [fd]
+      
+      !item (!BUG [96]): Die LaTeX-Ausgabe unterstützt Unicode. [fd]
+      !end_itemize
+
+
+# ----------------------------------------
+!item [(!KW [docinfo]) [translator!]]
+# ----------------------------------------
+      !begin_itemize
+      !item (!BUG [88]): Die PS-Ausgabe (u.a.) stürzt nicht mehr ab, wenn bestimmte (!KW [docinfo])-Parameter nicht definiert sind. [fd]
+      
+      !item Der (!KW [docinfo])-Parameter ""translator"" wird jetzt allgemeiner übersetzt in ""Übersetzung:"" (statt ""Übersetzer:"").
+            Dadurch können Sie wesentlich leichter mehrere Übersetzer/innen Ihres Dokuments benennen. [fd]
+            
+      !item Die LaTeX-Ausgabe versteht die Parameter ""domain_name"", ""domain_link"", ""contact_name"" und ""contact_link"". [fd]
+      !end_itemize
+
+# ----------------------------------------
+!item [html_merge_!..]
+# ----------------------------------------
+      Wenn Dateien mit einem der Kommandos (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]) 
+      oder (!KW [html_merge_subsubsubnodes]) zusammengefügt wurden, werden Label im Index jetzt korrekt erzeugt. [ggs]
+
+
+# ----------------------------------------
+!item [(!KW [html_navigation]) [image!]]
+# ----------------------------------------
+      Wenn Sie die HTML-Navigationsleiste mit GIF-Bildern nutzen, werden keine Zeilenvorschübe im HTML-Code mehr ausgegeben, die Lücken zwischen den Bildern erzeugten. 
+      Somit können Sie jetzt Bilder auch im sog. ""segmented control style"" wie z.B. bei Apple-Formularen benutzen. [fd]
+
+
+# ----------------------------------------
+!item [(!KW [language])]
+# ----------------------------------------
+      UDO unterstützt mittlerweile 15~Sprachen, davon die meisten vollständig.
+      Wir freuen uns über jede Unterstützung, um weitere Sprachen einzubauen. [fd]
+      
+      !include syntax/misc/short_lang.ui
+
+
+# ----------------------------------------
+!item [(!KW [subsubsubsubnode])]
+# ----------------------------------------
+      Alle entsprechenden UDO-Befehle für Kapitel 4. Ordnung werden endlich vollständig unterstützt. [fd]
+
+
+# ----------------------------------------
+!item [(!KKW [url])]
+# ----------------------------------------
+      (!BUG [89]): Das Kommando wurde so erweitert, daß es als optionalen dritten Parameter jetzt (!TARGET) und als optionalen vierten Parameter jetzt (!CLASS) erwarten kann. 
+      Mit diesen beiden neuen Parametern können Sie steuern, in welchem ""Target"" ein URL geöffnet werden soll und mit welcher CSS-Klasse der URL formatiert wird. [fd]
+!end_description
+
+!end_node

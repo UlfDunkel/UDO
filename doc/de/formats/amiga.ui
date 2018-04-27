@@ -1,0 +1,57 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: AmigaGuide
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node AmigaGuide
+!html_name format_amg
+
+AmigaGuide ist ein Hypertext-System, das von Commodore definiert wurde.
+AmigaGuide ist das Standard-Format für Online-Dokumentationen auf dem Amiga-Computer (unter AmigaOS).
+Für andere Plattformen, wie Windows oder Linux, stehen AmigaGuide-Betrachter zur Verfügung.
+
+!autoref [off]
+Weiterführende Informationen (alle in englischer Sprache):
+
+!begin_itemize !compressed
+
+!item allgemeiner Überblick zum Amiga-Computer: (!nl)
+      (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amiga] [] [] [elink])
+
+!item AmigaGuide: A Hypertext Documentation System (Funktionsüberblick): (!nl)
+      (!url [http://www.reality-check-inc.com/aguide.htm] [] [] [elink])
+
+!item AmigaGuide (allgemeiner Überblick mit Links zu Viewern für andere Betriebssysteme): (!nl)
+      (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amigaguide] [] [] [elink])
+
+!item The AmigaGuide Manual. The (!I)complete(!i) documentation of AmigaGuide commands. Von Aric R.~Caley (1995): (!nl)
+      (!url [Ausführliche Beschreibung des AmigaGuide-Formats] [http://www.lysator.liu.se/amiga/code/guide/amigaguide.guide] [] [elink])
+
+!item AmigaGuide Tags and Commands: (!nl)
+      (!url [Übersicht zum AmigaGuide-Format] [http://www.safalra.com/hypertext/amigaguide/] [] [elink])
+
+!item How To Write an AmigaGuide: (!nl)
+      (!url [http://ale.emuunlim.com/write-amigaguide.htm] [] [] [elink])
+
+!end_itemize
+
+!autoref [on]
+
+!end_node

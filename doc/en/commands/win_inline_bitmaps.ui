@@ -1,0 +1,26 @@
+!begin_node (!kw [win_inline_bitmaps])
+!html_name cmd_win_inline_bitmaps
+
+Use inline bitmaps (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_inline_bitmaps(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your source file UDO
+will use the RTF tag ""(!code [\bmcwd])"" instead of ""(!code [\bmc])""
+for displaying images. In this case you cannot use images larger than
+(!const [64])~KB. Please read the HCP documentation to get more information
+about the differences between these two RTF tags.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [image])
+
+!end_xlist
+
+!end_node

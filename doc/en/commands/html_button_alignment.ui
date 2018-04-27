@@ -1,0 +1,23 @@
+!begin_node (!kw [html_button_alignment])
+!html_name cmd_html_button_alignment
+
+Align buttons for the ""modern"" layout (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_button_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+This command is used to align the buttons in the
+left column of the ""modern"" layout.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node

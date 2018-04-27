@@ -1,0 +1,41 @@
+!begin_node (!kw [rinclude])
+!html_name cmd_rinclude
+
+Include file without conversion.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!FILE)"" will be included and output unformatted inside a raw
+environment. Useful for large tables for (!LaTeX) or HTML. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!link [Split documents] [Split documents]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!ifdest [html,hh,hah]
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!rinclude htmlform.html
+!end_verbatim
+(!EXAMPLE_AFTER)
+!rinclude (!EXAMPLES)html/htmlform.html
+(!EXAMPLE_END)
+!else
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rinclude htmlform.html
+!end_verbatim
+(!EXAMPLE_END)
+!endif
+
+!end_node

@@ -1,0 +1,26 @@
+!begin_node (!kw [begin_ilist])
+!html_name cmd_begin_ilist
+
+Start an italic list.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_ilist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [list] [ilist environment]). The length of ""(!TEXT)"" defines the indent of the
+list. This environment must be finished with (!KW [end_ilist]). You
+can use this environment inside other (iltalic list) environments.
+The text you set with (!KW [item] [[~!!]]) will be displayed with an
+italic font.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [end_ilist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_xlist]), (!KW [begin_tlist]), (!KW [compressed]), (!KW [use_compressed_envs]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node

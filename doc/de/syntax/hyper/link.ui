@@ -1,0 +1,261 @@
+!begin_node Querverweise
+!html_name syntax_hypertext_links
+!label Links
+
+UDO legt bei den Hypertextformaten wie WinHelp, HTML oder ST-Guide
+automatisch Verweise zu anderen Stellen des Textes an.
+
+Sie haben darüber hinaus die Möglichkeit, auch zusätzliche Verweise
+auf Kapitel oder Sprungmarken des Textes anzulegen oder auf externe
+Dateien zu verweisen.
+
+(!HINT)
+
+Falls innerhalb eines der Link-Befehle "")"" oder ""]""
+benutzt werden, müssen Sie diese Zeichen quoten, damit UDO den Befehl korrekt
+umsetzen kann. Beispiel:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+Falsch:  (!link [Klammern])] [Verweis])
+Richtig: (!link [Klammern!]!)] [Verweis])
+                         ----
+!end_verbatim
+(!EXAMPLE_END)
+
+################################################################################
+
+!begin_node Interne Querverweise
+!html_name syntax_hypertext_links_internal
+
+Manchmal möchte man auf andere Stellen der Dokumentation oder auf
+andere Hypertexte oder Websites verweisen. Um dies zu ermöglichen,
+bietet UDO einen Satz von Befehlen für Querverweise.
+
+!index (!kkw [link])
+Mit dem (!KKW [link])-Befehl können Sie Bezug auf andere Stellen im
+aktuellen Dokument nehmen:
+
+!begin_xlist [ST-Guide:] !compressed
+!item [UDO:]      (!KK2W [link] [[ein Text!!] [der Verweis!!]])
+!item [HTML:]     <a href="file.htm#der Verweis">ein Text</a>
+!item [(!LaTeX):]    ein Text (siehe \ref{der Verweis})
+!item [ST-Guide:] @{"ein Text" link "der Verweis"}
+!item [WinHelp:]  {\uldb ein Text}{\v der_Verweis}
+!item [Turbo:]    {ein Text:der_Verweis}
+!item [sonst:]    ein Text (siehe "der Verweis")
+!end_xlist
+
+Hier ein Beispiel, bei dem auf den Abschnitt mit den Kontaktinformationen
+zur UDO-Gemeinde verwiesen wird:
+
+# bitte keine Kommentare über Änderungen am Text der Doku
+# in die Beispiele aufnehmen, da sie hier über vinclude
+# eingebunden werden und diese damit auch in der Ausgabe
+# erscheinen!!!
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)link.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)link.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+# auskommentiert, trifft nicht mehr zu
+!begin_ignore
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
+     diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, daß
+     der Link nicht ersetzt werden konnte. (!nl)
+     Zur Erinnerung: Absätze werden durch Leerzeilen getrennt.
+!end_ignore
+
+!item Bei der Umwandlung ins HTML- oder WinHelp-Format wird überprüft,
+     ob der benutzte Verweis vorhanden ist. Ist er es nicht, gibt
+     UDO eine Fehlermeldung aus.
+
+# auskommentiert/geändert
+!begin_ignore
+!item Bei (!LaTeX) können Sie nur auf Labels und Aliase, nicht auf Kapitel
+     verweisen.
+!end_ignore
+!item Damit man auch bei (!LaTeX) auf Kapitel verweisen kann, gibt
+UDO automatisch am Anfang ein entsprechendes Label aus.
+
+!item mit dem Kommandozeilen-Parameter (--)check kann man UDO dazu veranlassen,
+auf doppelt vergebene und unbenutzte Label zu prüfen.
+
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!begin_node Interne Querverweise mit Bildern
+!html_name syntax_hypertext_links_internal_images
+
+!index (!kkw [ilink])
+!index (!kkw [img])
+!index (!kkw [link])
+Speziell für WinHelp und HTML gibt es das Kommando (!KKW [ilink]), um
+Verweise mit Darstellung eines Bildes zu erstellen. Dieser Befehl ist
+eine Kombination aus (!KKW [link]) und (!KKW [img]) und wird bei den anderen
+Formaten wie der oben besprochene Link-Befehl für interne Querverweise
+behandelt:
+
+!begin_xlist [WinHelp:] !compressed
+!item [UDO:]      (!KK2W [ilink] [[img!!] [Text!!] [Verweis!!]])
+!item [WinHelp:]  {\uldb \{bmc~img.bmp\}}{\v Verweis}
+!item [HTML:]     <a href="Verweis"><img src="img.gif" alt="Text" title="Text" border="0"></a>
+!item [sonst:]    analog zu (!KK2W [link] [[Text!!] [Verweis!!]])
+!end_xlist
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item UDO überprüft nicht, ob die Grafiken existieren.
+
+!index (!kw [html_img_suffix])
+!item UDO benutzt als Endung für die Grafiken standardmäßig ''(!file [.gif])''. Mit
+dem Schalter (!KW [html_img_suffix]) kann die Endung jederzeit verändert
+werden.
+
+# auskommentiert, trifft nicht mehr zu
+!begin_ignore
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
+diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, daß
+der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
+werden durch Leerzeilen getrennt.
+!end_ignore
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!begin_node Interne Querverweise auf Seiten
+!html_name syntax_hypertext_links_internal_pages
+
+!index (!kkw [plink])
+Speziell für (!LaTeX) gibt es das Kommando (!KKW [plink]), um Bezug auf
+andere Seiten zu nehmen:
+
+!begin_xlist [sonst:] !compressed
+!item [UDO:] (!KK2W [plink] [[Links!!] [Querverweise!!]])
+!item [(!LaTeX):] Links (siehe Seite \pageref{Querverweise})
+!item [sonst:] Links
+!end_xlist
+
+Hier ein Beispiel, bei dem auf die Seite verwiesen wird, auf der
+Sie unsere Kontaktinformationen finden.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)plink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)plink.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Damit man auch bei (!LaTeX) auf Kapitel verweisen kann, gibt
+UDO automatisch am Anfang ein entsprechendes Label aus.
+
+!begin_ignore
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
+diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, daß
+der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
+werden durch Leerzeilen getrennt.
+!end_ignore
+
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!begin_node Externe Querverweise
+!html_name syntax_hypertext_links_external
+
+!index (!kkw [xlink])
+!index (!kkw [url])
+Mit den Kommandos (!KKW [xlink]) und (!KKW [url]) können Sie Bezug auf Stellen
+(!I)anderer(!i) Hypertexte oder Websites nehmen. Der Unterschied zum
+obigen Befehl besteht darin, daß beim zweiten Parameter bis auf die
+Tilde keine Sonderzeichen angepaßt werden (kann bei Pfadangaben fatal sein!).
+
+!begin_xlist [ST-Guide:] !compressed
+!item [UDO:]      (!KK2W [xlink] [[UDO!!] [*:\udo.hyp!!]])
+!item [ST-Guide:] @{"UDO" link "*:\udo.hyp"}
+(!nl)
+!item [UDO:]      (!KK2W [url] [[Atari!!] [http://www.atari.com!!]])
+!item [HTML:]     <a href="http://www.atari.com">Atari</a>
+(!nl)
+!item [UDO:]      (!KK2W [xlink] [[UDO!!] [Titel@d:/winhelp/udo.hlp!!]])
+!item [WinHelp:]  {\uldb UDO}{\v Titel@d:/winhelp/udo.hlp}
+(!nl)
+!item [sonst:]    UDO bzw. Atari
+!end_xlist
+
+!ifdest [stg]
+Hier ein paar kurze Beispiele für externe Verweise in einem ST-Guide-Hypertext.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)stg/xlink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)stg/xlink.ui
+(!EXAMPLE_END)
+!endif
+
+!ifdest [win,wh4]
+Hier ein paar kurze Beispiele für externe Verweise in einem WinHelp-Datei.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)winhelp/xlink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)winhelp/xlink.ui
+(!EXAMPLE_END)
+!endif
+
+!ifdest [html,hh]
+Hier ein paar kurze Beispiele für externe Verweise in einer
+HTML-Datei.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)html/xlink.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)html/xlink.ui
+(!EXAMPLE_END)
+
+!endif
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Für WinHelp müssen Sie gültige Topicnamen und Dateinamen angeben.
+Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
+Unterstrich. Andere Zeichen werden von UDO angepaßt!
+
+!item Für ST-Guide sollten Sie dem Dateinamen die Zeichen ''(!file [*:\])''
+voranstellen, so daß der ST-Guide in allen in den für ihn angegebenen
+Verzeichnissen aus der in der (!file [ST-GUIDE.INF]) angegebenen Variable namens
+(!code [PATHS]) nach der Datei sucht.
+
+!index (!kw [no_xlinks])
+!item Durch den Schalter (!KW [no_xlinks] [[~!!]]) können Sie im
+Vorspann angeben, bei welchen Formaten externe Verweise umgewandelt
+werden sollen. Dieser Schalter wird z.B. dann benötigt, falls Sie eine
+Seite mit Verweisen für das Internet angelegt haben, die in einem
+ST-Guide- oder WinHelp-Hypertext keinen Sinn ergeben würden.
+
+!index (!kkw [nolink])
+!item Durch den Platzhalter (!KKW [nolink]) können Sie Text
+angeben, bei dem keine Verweise erzeugt werden sollen.
+
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!end_node

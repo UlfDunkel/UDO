@@ -1,0 +1,14 @@
+!begin_node Installation des Paketes für Debian Linux
+!html_name installation_linux_deb
+
+!begin_itemize !compressed
+!item Laden Sie sich das entsprechende deb-Paket von (!url [www.debian.org] [http://www.debian.org/] [] [elink]) herunter.
+!item Melden Sie sich als (!code [root]) an.
+!item (!code [dpkg -i]) (!file [file.deb])
+!end_itemize
+Oder (bei Internetverbindung): (!code [apt-get install udo])
+
+Der Paketname für die englische Dokumentation lautet (!code [udo-doc]),
+für die deutsche Doku (!code [udo-doc-ger]).
+
+!end_node

@@ -1,0 +1,23 @@
+!begin_node (!kw [html_modern_alignment])
+!html_name cmd_html_modern_alignment
+
+Align links of ""modern"" layout (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+This command is used to align the links in the left column.
+Default value is ""(!code [center])"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node

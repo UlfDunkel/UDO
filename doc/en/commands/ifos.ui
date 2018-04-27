@@ -1,0 +1,45 @@
+!begin_node (!kw [ifos])
+!html_name cmd_ifos
+
+Query operating system.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifos [(!OS)](!t)
+
+!item [(!DESCRIPTION)]
+This command tests the current operating system UDO is running on. If
+""(!OS)"" matches one of the abbreviations of the operating systems
+UDO will convert all lines that are used between (!KW [ifos]) and
+(!KW [endif]) or (!KW [else]). If ""(!OS)"" doesn't match any
+of the abbreviations of the operating systems UDO will ignore all
+lines before (!KW [endif]) or (!KW [else]). The example shows how
+you can test if UDO runs with Unix.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [ifnos]), (!link [Query commands] [Query commands])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifos [unix]
+UDO is running on Unix.
+!else
+UDO definitively does not run on Unix.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifos [unix]
+UDO is running on Unix.
+!else
+UDO definitively does not run on Unix.
+!endif
+(!EXAMPLE_END)
+
+!end_node

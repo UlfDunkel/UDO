@@ -1,0 +1,28 @@
+!begin_node (!kw [begin_tlist])
+!html_name cmd_begin_tlist
+
+Eine ""nichtproportionale"" Liste einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_tlist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung
+muss mit (!KW [end_tlist]) beendet werden. Die Länge von
+""(!TEXT)"" definiert die Tiefe der Einrückung der
+Aufzählungspunkte. Sie können diese Umgebung auch mit
+anderen Umgebungen kombinieren. Die
+Die Texte, die Sie mit (!KW [item] [[~!!]]) angeben, werden mit nichtproportionaler Schrift
+dargestellt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [end_tlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node

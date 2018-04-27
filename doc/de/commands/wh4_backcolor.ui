@@ -1,0 +1,34 @@
+!begin_node (!kw [wh4_backcolor])
+!html_name cmd_wh4_backcolor
+
+Hintergrundfarbe für WinHelp4 setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_backcolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die Hintergrundfarbe der
+Hilfedatei festlegen. Es stehen folgende Farben zur
+Verfügung:
+!include syntax/misc/short_color.ui
+
+Gleichzeitig passt UDO die Textfarbe an.
+Man sollte möglichst nur Weiß und Grau als
+Hintergrundfarben verwenden; alle anderen Farben sind
+furchtbar häßlich.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_backcolor gray
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

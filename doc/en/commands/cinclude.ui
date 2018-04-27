@@ -1,0 +1,30 @@
+!begin_node (!kw [cinclude])
+!html_name cmd_cinclude
+
+Include file in a comment environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/cinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!FILE)"" will be included and displayed like preformatted text
+inside a comment environment. If you use this commands inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]). (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [begin_comment]), (!KW [comment]), (!link [Split documents] [Split documents]), (!link [comment environment] [comment environment])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!cinclude hello.txt
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

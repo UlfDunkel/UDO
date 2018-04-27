@@ -1,0 +1,34 @@
+!begin_node (!kw [html_img_suffix])
+!html_name cmd_html_img_suffix
+
+Change filename extension of images (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_img_suffix <suffix>(!t)
+
+!item [(!DESCRIPTION)]
+UDO uses the suffix ""(!file [.gif])"" when converting the image commands for
+HTML by default. If you want to use different image types you can
+redefine the image suffix with this command. The lower example shows
+how to change the image suffix to ""(!file [.jpeg])"". You can use
+(!KW [html_img_suffix]) as often as you want so you can redefine
+the image suffix right before every image.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~3
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Images] [Images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_img_suffix jpeg
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

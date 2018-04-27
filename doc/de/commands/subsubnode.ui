@@ -1,0 +1,30 @@
+!begin_node (!kw [subsubnode])
+!html_name cmd_subsubnode
+
+Unterabschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet einen Unterabschnitt mit der Bezeichnung
+""(!TEXT)"" ein. Unterabschnitte erscheinen in Inhaltsverzeichnissen.
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubnode Titel des Unterabschnitts
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Titel des Unterabschnitts
+(!EXAMPLE_END)
+
+!end_node

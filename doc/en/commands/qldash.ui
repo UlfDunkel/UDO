@@ -1,0 +1,31 @@
+!begin_node ((---))
+!html_name cmd_qldash
+
+Output three dashes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((---))(!t)
+
+!item [(!DESCRIPTION)]
+If you want to output three minus characters you have to insert them
+between brackets. If you don't UDO will replace the three minus
+characters by a long dash.
+
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [(--)] [(--)]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(---)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(---)
+(!EXAMPLE_END)
+
+!end_node

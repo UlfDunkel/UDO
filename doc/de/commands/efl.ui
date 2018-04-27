@@ -1,0 +1,20 @@
+!begin_node (!kw [efl])
+!html_name cmd_efl
+
+Umgebung für linksbündigen Text schließen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/efl(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_flushleft]).
+
+!item [(!SEEALSO)]
+(!KW [end_flushleft])
+
+!end_xlist
+
+!end_node

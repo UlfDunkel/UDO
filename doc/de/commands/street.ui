@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [street])
+!html_name cmd_street
+
+Straße des Autors für den Adressblock der Titelseite setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/street (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [docinfo] [[address!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif

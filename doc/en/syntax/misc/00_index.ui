@@ -1,0 +1,48 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Miscellaneous
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 11: typos
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 25: index adjustments
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Miscellaneous
+!html_name miscellaneous
+
+!include syntax/misc/include.ui
+!include syntax/misc/macro.ui
+!include syntax/misc/define.ui
+!include syntax/misc/symbol.ui
+!include syntax/misc/index.ui
+!include syntax/misc/if.ui
+!include syntax/misc/format.ui
+
+!end_node

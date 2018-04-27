@@ -1,0 +1,27 @@
+!begin_node (!kw [begin_sourcecode])
+!html_name cmd_begin_sourcecode
+
+Start a sourcecode environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_sourcecode(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can start a (!link [sourcecode environment] [sourcecode environment]). It has to
+be finished with the (!KW [end_sourcecode]) command. Lines that are
+part of a sourcecode environment will be printed without conversion
+for the sourcecode formats. For the ""normal"" formats the text of
+the sourcecode environment will be printed like text of a verbatim
+environment that is used inside a quote environment.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [end_sourcecode]), (!KW [sinclude]), (!KW [no_sourcecode])
+
+!end_xlist
+
+!end_node

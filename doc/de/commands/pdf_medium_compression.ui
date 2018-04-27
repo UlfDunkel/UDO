@@ -1,0 +1,25 @@
+!begin_node (!kw [pdf_medium_compression])
+!html_name cmd_pdf_medium_compression
+
+PDF-Datei komprimieren (mittlere Kompressionsrate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/pdf_medium_compression(!t)
+
+!item [(!DESCRIPTION)]
+Der Einsatz dieses Schalters führt bei der späteren
+Umwandlung durch den PDFLaTeX zur
+Komprimierung der Ausgabedatei mit einer
+Kompressionsrate von ca. 40%. Bessere Ergebnisse bei
+allerdings längerer Umwandlungsdauer erzielen Sie mit
+dem Schalter (!KW [pdf_high_compression]).
+
+!item [(!SEEALSO)]
+(!KW [pdf_high_compression])
+
+!end_xlist
+
+!end_node

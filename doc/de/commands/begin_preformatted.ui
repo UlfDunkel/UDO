@@ -1,0 +1,26 @@
+!begin_node (!kw [begin_preformatted])
+!html_name cmd_begin_preformatted
+
+Eine preformatted-Umgebung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_preformatted(!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine preformatted-Umgebung ein. Diese Umgebung muss
+mit (!KW [end_preformatted]) beendet werden. Text einer
+preformatted-Umgebung wird 1:1 ausgegeben, es werden
+keine UDO-Kommandos umgewandelt! Auch die Wirkung von
+etwaigen Zielformatbefehlen wird aufgehoben. Bei der
+Ausgabe werden Einrückungen beachtet.
+# TODO: was ist Unterschied zu begin_verbatim?
+
+!item [(!SEEALSO)]
+(!KW [end_preformatted]), (!KW [begin_verbatim]), (!link [Vorformatierter Text] [Vorformatierter Text]), (!KW [vinclude]), (!KW [verbatimsize])
+
+!end_xlist
+
+!end_node

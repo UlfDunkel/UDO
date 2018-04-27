@@ -1,0 +1,42 @@
+!begin_node Footnotes
+!html_name style_footnotes
+
+Text that is used between (!KKW [N]) and (!KK1 [n]) will be shown as a
+footnote when converting to a format that supports footnotes. Otherwise
+(!KK1 [N]) will be replaced by ""(!code [~(])"", (KK1 [n]) will be replaced by
+""(!code [!)])"".
+
+Important hint: In front of (!KK1 [N]) you shouldn't use a blank. If you do so
+the footnote mark would ""fly"" without context or before the opening parenthesis you
+could read two blanks.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)footnotes.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)footnotes.ui
+(!EXAMPLE_END)
+
+Footnotes are supported by these formats:
+
+!begin_itemize !compressed
+!item (!LaTeX)
+!item Linuxdoc-SGML
+!item LyX
+!item Texinfo
+!item RTF
+!end_itemize
+
+(!HINTS)
+
+!begin_enumerate
+
+!item   I'm a bit unlucky that UDO just prints brackets if the destination
+format doesn't support footnotes. It will be better if UDO saves the
+footnote text and prints it at the end of a chapter or page. Unfortunately
+this is a very tricky problem that cannot be solved in some days.
+
+!item   Don't forget not to use a space or tab before (!KK1 [N]).
+
+!end_enumerate
+
+!end_node

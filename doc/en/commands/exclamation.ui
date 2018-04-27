@@ -1,0 +1,24 @@
+!begin_node (!kw [! ])
+!html_name cmd_exclamation
+
+Divide table cells or index entries.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/!(!t)
+
+!item [(!DESCRIPTION)]
+Double exclamation marks are used for splitting the cells of a table
+row and for multiple indices.
+
+!item [(!EXAMPLE)]
+(!T)!/index Level 1 !! Level 2(!t)
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!link [Indices] [Indices])
+
+!end_xlist
+
+!end_node

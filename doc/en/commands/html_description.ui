@@ -1,0 +1,38 @@
+!begin_node (!kw [html_description])
+!html_name cmd_html_description
+
+Insert description in meta information (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_description (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used to incorporate a description
+into the meta information (<META NAME="Description"
+CONTENT="!..") of a HTML page. The command can be used
+several times inside a node.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [html_keywords])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_description This page describes the command html_description.
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER)
+!begin_preformatted
+<meta name="Description"
+  content="This page describes the command html_description.">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

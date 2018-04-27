@@ -1,0 +1,45 @@
+!begin_node The history of UDO
+!html_name intro_history
+
+Dirk Hagedorn, the UDO "founder", reports:
+
+!begin_quote
+It was autumn 1994 when I wrote some little programs for which I needed an
+ASCII manual, an online help and a printed documentation.
+
+In all cases I began writing the ASCII manual. In a copy of it I inserted
+hypertext commands. Finally the ASCII manual was imported into a text
+processor, layouted and printed. It didn't take a long time for me to
+recognize that this was an inefficient work: if there were any changes in
+one of the files both the others had to be changed in the same way. And if
+there were lots of changes it was necessary to start the whole procedure
+right from the beginning.
+
+When I finished these manuals I said to myself: ""Oh no, Dirk, there
+(!I)must(!i) be another and easier way to get different versions of one text
+file!"".
+
+January 1995 I started to think about a new text format with the project
+name ""UDO"" (as the abbreviation for (!B)U(!b)niversal (!B)DO(!b)cument).
+The UDO syntax should be easy to learn and flexible enough and so I decided
+to create a syntax like (!LaTeX). Next to this I began writing the software
+that was able to convert this new text format into ASCII, ST-Guide and
+(!LaTeX): UDO was born!
+
+At this time UDO was really a small program with only some features. The
+syntax contained about 10 commands and the source code was about 10~kB
+large. Nevertheless this small hack was of a great help for myself and the
+upper described horror scenario was history.
+
+Since this time UDO has been growing up day by day. UDO now supports many
+different text formats, it offers a large variety of layouting commands,
+it is available for different operating system and the size of its source code
+and documentation is now a hundred times larger than it was in former days.
+
+Since then, UDO has become to an operating system independent, very
+powerful and --- proverbially said --- universal tool.
+!end_quote
+
+UDO ist Open Source since October 27, 2001.
+
+!end_node

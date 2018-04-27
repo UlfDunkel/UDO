@@ -1,0 +1,116 @@
+!begin_node What UDO can('t) do for you
+!html_name intro_features
+
+UDO has been originally developed to make it easier for you to write
+software documentations or other kinds of text files that have to be
+available (!I)in more than one(!i) format.
+
+UDO can be a great help if you want to make a (!I)single(!i) destination format,
+too. A beginner will have less problems when learning the UDO syntax instead
+of learning (!LaTeX) or HTML. So if you want to make (!LaTeX) or HTML files
+it should be easier to get to know how to make them using UDO instead of
+writing them on your own. When writing (!LaTeX) or HTML files you have to
+keep attention not to use any of their special command characters. In
+comparison to that UDO will convert these special characters for you when
+converting the source file to (!LaTeX) or HTML. But this is not the only
+thing UDO can do for you.
+
+UDO is a multilingual program. You can make texts in different languages.
+UDO knows how ""Table of contents"", ""Appendix"", ""Figure"" or ""Table""
+is called in the other supported languages.
+The date is also printed out in the right way depended of the selected language.
+
+The syntax of UDO is easy to learn. To make some small documentations you
+just have to learn about ten to fifteen commands; as many as you have
+to learn when you try to learn (!LaTeX) or HTML.
+
+Having written an UDO source file, you can convert it into the following formats:
+
+!include syntax/misc/short_dest.ui
+
+As you can see some formats are just interesting for specific systems,
+but you can also see that the list contains some formats that can be used
+on nearly any existing operating system.
+
+In most cases UDO doesn't make files that are ready to use because have to
+run a further software to view, print or convert the document. E.g. you have
+to convert the Windows Help source file (saved by UDO) with the Microsoft
+Help Compiler (!file [HC.EXE]) into a Windows Help file. Or you have to import
+the RTF file into a text processor to print it.
+
+!smallskip
+
+UDO tries to help the author of a documentation as much as possible. Next to
+the conversion into the destination format UDO offers you the following
+features:
+
+!begin_itemize  !compressed
+!item   automatically generated (!link [title pages] [Title page]),
+(!link [tables of contents] [Tables of contents]), head lines
+and (!link [bottom lines] [Footnotes]),
+!item   (!link [chapter numbering] [Structure Layers]),
+!item   (!link [tables] [Tables]),
+!item   automatically generated (!link [hypertext links] [Links]),
+!item   support for different (!link [text styles] [Text styles]),
+!item   automatic conversion of (!link [umlauts] [Converting 8 bit characters])
+and other (!link [special characters] [Special characters]),
+!item   a large variety of layout commands for making (!link [lists] [Lists]),
+(!link [enumerations] [Enumerations]),
+(!link [descriptions] [Descriptions]),
+justified text,
+(!link [centered] [Centered text]) or
+(!link [indented] [Indented paragraphs]) text or
+text with a (!link [right alignment] [Right justified text]),
+!item (!link [image] [Images]) support,
+!item automatic line breaks with a half-automatic (!link [hyphenation] [Hyphenation]).
+!end_itemize
+
+!smallskip
+
+UDO is not the perfect program for all purposes. The conversion to ASCII-text,
+ST-Guide, HTML, (!LaTeX) and Windows Help is nearly perfect. Some formats
+(like Linuxdoc-SGML and LyX) are quite young and haven't been tested enough.
+You will surely find some aspects that have to be changed in the future.
+
+There are some points that UDO cannot manage yet but will be found on the wishlist:
+an automatically generated index, list of figures and list of tables.
+
+!smallskip
+
+To make complex files like newspapers is impossible with UDO because it
+can't wrap text around images and it can't generate files with two or more
+text columns.
+These functions are part of desktop publishing and not of a software like UDO.
+
+UDO doesn't support an automatic hyphenation.
+You have to tell UDO explicitely where it is allowed to split up words.
+
+UDO is just a ""one way"" converter which converts its own format into the formats listed above.
+UDO can't convert them into its own format.
+
+!begin_ignore
+To sum it up it can be said that UDO can't manage the following things and
+won't be able to manage them in the future:
+
+!begin_enumerate !compressed
+
+!item   UDO can only convert its format into the upper standing formats. UDO
+can't convert them into its own format. Maybe there will be some other
+converters in the near future.
+
+!item   UDO can't make binary formats (like WinWord documents). It can only
+make formats that are based on ASCII.
+
+!item   UDO doesn't support an automatic syllabification. You have to tell
+UDO explicitely where it is allowed to split up words. I don't want to
+implement an automatic syllabification because there are only some formats
+that would profit from it.
+
+!item   UDO can't wrap text around images. UDO can't save multi-columned
+texts, too. These functions are part of desktop publishing and not of a
+software like UDO.
+
+!end_enumerate
+!end_ignore
+
+!end_node

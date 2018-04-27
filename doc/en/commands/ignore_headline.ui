@@ -1,0 +1,25 @@
+!begin_node (!kw [ignore_headline])
+!html_name cmd_ignore_headline
+
+Suppress output of headline.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_headline(!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside a chapter UDO won't print a headline.
+In contrast to (!KW [no_headlines]) this switch will only suppress
+the headline inside the chapter where (!KW [ignore_headline]) is
+used.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [no_headlines])
+
+!end_xlist
+
+!end_node

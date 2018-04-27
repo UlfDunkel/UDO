@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [jumpid])
+!html_name cmd_jumpid
+
+Ausgabe einer Node-ID (nur WinHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/jumpid (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existierte nur in einer der Beta-Versionen
+und heisst nun (!KW [win_helpid]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_helpid])
+
+!end_xlist
+
+!end_node
+!endif

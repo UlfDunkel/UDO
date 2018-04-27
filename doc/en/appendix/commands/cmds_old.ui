@@ -1,0 +1,305 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands 1-0, etc.
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced
+#   fd  Mar 03: - new column 'deprecated since version' added (hi Gerhard ;-))
+#               - old docinfo attributes (webmaster...) listed
+#               - !else_asc, !else_stg + !end_asc, !end_stg added
+#               - more version numbers added
+#   fd  May 19: !short, !use_short_... added
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Deprecated commands
+!html_name cmds_old
+
+The following list shows deprecated UDO commands and switches which are no longer supported in the current version.
+
+!begin_table [l|l|l] !hline
+(!B)Old(!b)                      !! (!B)Function(!b) !\
+                                 !! (!B)New(!b) !\
+                                 !! (!B)Deprecated since(!b)
+!hline
+(!kw [=aqv])                     !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[aqv!]])
+(!kw [=asc])                     !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[asc!]])
+(!kw [aqv])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[aqv!]])
+(!kw [asc])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[asc!]])
+(!kw [author])                   !! define author's name !\
+                                 !! (!KW [docinfo]) (!code [[author!]]) !\
+                                 !! 6 PL14
+(!kw [authorimage])              !! define author's logo for title page !\
+                                 !! (!KW [docinfo]) (!code [[authorimage!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [begin_asc])                !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [begin_stg])                !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
+!hline
+(!kw [code])                     !! define encoding of source document !\
+                                 !! (!KW [code_source]) !\
+                                 !! 7.00
+(!kw [code_dos])                 !! switch to another encoding !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
+(!kw [code_hp8])                 !! switch to another encoding !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
+(!kw [code_iso])                 !! switch to another encoding !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
+(!kw [code_mac])                 !! switch to another encoding !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
+(!kw [code_next])                !! switch to another encoding !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
+(!kw [code_tos])                 !! switch to another encoding !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
+(!kw [country])                  !! define author's country for address block in title page !\
+                                 !! (!KW [docinfo] [[address!!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [date])                     !! set date information for title page !\
+                                 !! (!KW [docinfo] [[date!!]]) !\
+                                 !! 6 PL14
+
+(!kw [docinfo]) (!code [webmastername]) !\
+                                 !! set webmaster name (or company, website, etc.) for title page !\
+                                 !! (!KW [docinfo]) [[domain_name!!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code [webmasterurl]) !\
+                                 !! set webmaster link (see above) for title page !\
+                                 !! (!KW [docinfo] [[domain_link!!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code [webmasteremail]) !\
+                                 !! set webmaster email (or contact page link) for title page !\
+                                 !! (!KW [docinfo] [[contact_name!!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code [webmastermailurl]) !\
+                                 !! set webmaster email or contact page link for title page !\
+                                 !! (!KW [docinfo] [[contact_link!!]]) !\
+                                 !! 7.01
+                                 
+(!kw [drc])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[drc!]])
+!hline
+(!kw [else_asc])                 !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [else_stg])                 !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
+(!kw [email])                    !! set email information for title page !\
+                                 !! (!KW [docinfo] [[contact_name!!]]) or (!KW [docinfo] [[contact_link!!]]) !\
+                                 !! 6 PL14
+(!kw [end_asc])                  !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [end_stg])                  !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
+(!kw [english])                  !! set language !\
+                                 !! (!KW [language]) (!code [[english!]]) !\
+                                 !! 6
+!hline
+(!kw [french])                   !! set language !\
+                                 !! (!KW [language]) (!code [[french!]]) !\
+                                 !! 6
+!hline
+(!kw [german])                   !! set language !\
+                                 !! (!KW [language]) (!code [[german!]]) !\
+                                 !! 6
+!hline
+(!kw [=htag])                    !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[htag!]])
+(!kw [=html])                    !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[html!]])
+(!kw [htag])                     !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[htag!]])
+(!kw [html])                     !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[html!]])
+(!kw [html_frames_column_color]) !! set background color of left frame (HTML only) !\
+                                 !! (!KW [html_frames_backcolor])
+(!kw [html_frames_column_image]) !! set background image of left frame (HTML only) !\
+                                 !! (!KW [html_frames_backimage])
+(!kw [html_frames_column_width]) !! set width of frame in frames layout (HTML only) !\
+                                 !! (!KW [html_frames_width])
+(!kw [html_modern_column_color]) !! set background color in ""modern"" layout (HTML only) !\
+                                 !! (!KW [html_modern_backcolor])
+(!kw [html_modern_column_image]) !! set background image in ""modern"" layout (HTML only) !\
+                                 !! (!KW [html_modern_backimage])
+(!kw [html_modern_column_width]) !! set width of left column in ""modern"" layout (HTML only) !\
+                                 !! (!KW [html_modern_width])
+(!kw [html_use_xlist])           !! output xlist environment like ASCII (HTML only) !\
+                                 !! (!KW [use_xlist] [[html!!]]) !\
+                                 !! 6 PL14
+(!kw [htmlkeywords])             !! set HTML meta keywords !\
+                                 !! (!KW [html_keywords])
+(!kw [htmlname])                 !! assign file name (HTML only) !\
+                                 !! (!KW [html_name])
+!hline
+(!kw [=info])                    !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[info!]])
+(!kkw [image])                   !! output image !\
+                                 !! (!KW [image]), (!KW [image*]), (!KKW [img])
+(!kw [info])                     !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[info!]])
+(!kw [italian])                  !! set language !\
+                                 !! (!KW [language]) (!code [[italian!]]) !\
+                                 !! 6
+!hline
+(!kw [jumpid])                   !! output a node ID (WinHelp only) !\
+                                 !! (!KW [win_helpid])
+!hline
+(!kw [keyword])                  !! set index entry or keyword !\
+                                 !! (!KW [index])
+!hline
+(!kw [=ldoc])                    !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[ldoc!]])
+(!kw [ldoc])                     !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[ldoc!]])
+(!kw [list_parsep])              !! compress environments !\
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
+(!kw [list_parsep_off])          !! compress environments !\
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
+(!kw [list_parsep_on])           !! compress environments !\
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
+!hline
+(!kw [=man])                     !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[man!]])
+(!kw [man])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[man!]])
+!hline
+(!kw [no_toc_subnodes])          !! don't list subnodes in table of contents !\
+                                 !! (!KW [ignore_subtoc]) !\
+                                 !! 6 PL14
+(!kw [no_toc_subsubnodes])       !! don't list subsubnodes in table of contents !\
+                                 !! (!KW [ignore_subsubtoc]) !\
+                                 !! 6 PL14
+(!kw [no_toc_subsubsubnodes])    !! don't list subsubsubnodes in table of contents !\
+                                 !! (!KW [ignore_subsubsubtoc]) !\
+                                 !! 6 PL14
+!hline
+(!kw [=pch])                     !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[pch!]])
+(!kw [=pdf])                     !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[pdf!]])
+(!kw [pch])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[pch!]])
+(!kw [pdf])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[pdf!]])
+(!kw [program])                  !! define program name for title page !\
+                                 !! (!KW [docinfo]) (!code [[program!]]) !\
+                                 !! 6 PL14
+(!kw [programimage])             !! define program image (icon) for title page !\
+                                 !! (!KW [docinfo]) (!code [[programimage!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [=rtf])                     !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[rtf!]])
+(!kw [rtf])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[rtf!]])
+!hline
+(!kw [=stg])                     !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [short])                    !! compress environment output !\
+                                 !! (!KW [compressed]) !\
+                                 !! 7.01
+(!kw [spanish])                  !! set language !\
+                                 !! (!KW [language]) (!code [[spanish!]]) !\
+                                 !! 6
+(!kw [stg])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [stg_no_database])          !! don't output database line (ST-Guide only) !\
+                                 !! (!KW [docinfo]) (!code [[stgdatabase!]]) !\
+                                 !! 6 PL14
+(!kw [stg_parwidth])             !! set line width (ST-Guide only) !\
+                                 !! (!KW [parwidth])
+(!kw [street])                   !! set author's street for address block in title page !\
+                                 !! (!KW [docinfo]) (!code [[address!]]) !\
+                                 !! 6 PL14
+(!kw [swedish])                  !! set language !\
+                                 !! (!KW [language]) (!code [[swedish!]]) !\
+                                 !! 6
+!hline
+(!kw [=tex])                     !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[tex!]])
+(!kw [tex])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[tex!]])
+(!kw [tex_book])                 !! output target file as ""book"" !\
+                                 !! (!KW [use_style_book]) (!code [[tex!]])
+(!kw [title])                    !! define document title !\
+                                 !! (!KW [docinfo]) (!code [[title!]]) !\
+                                 !! 6 PL14
+(!kw [town])                     !! set author's hometown for address block in title page !\
+                                 !! (!KW [docinfo]) (!code [[address!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [udoinfo])                  !! output information page about UDO !\
+                                 !! (!KW [use_about_udo])
+(!kw [use_justified])            !! use justification !\
+                                 !! (!KW [use_justification]) !\
+                                 !! 6 PL14
+(!kw [use_short_descriptions])   !! compress environment output !\
+                                 !! (!KW [use_compressed_descriptions]) !\
+                                 !! 7.01
+(!kw [use_short_enumerates])     !! compress environment output !\
+                                 !! (!KW [use_compressed_enumerates]) !\
+                                 !! 7.01
+(!kw [use_short_envs])           !! compress environment output !\
+                                 !! (!KW [use_compressed_envs]) !\
+                                 !! 7.01
+(!kw [use_short_itemizes])       !! compress environment output !\
+                                 !! (!KW [use_compressed_itemizes]) !\
+                                 !! 7.01
+(!kw [use_short_lists])          !! compress environment output !\
+                                 !! (!KW [use_compressed_lists]) !\
+                                 !! 7.01
+(!kw [use_xlist])                !! output xlist environments like ASCII !\
+                                 !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
+!hline
+(!kw [verbatim_no_umlaute])      !! don't output umlauts in verbatim environments !\
+                                 !! (!KW [no_verbatim_umlaute]) !\
+                                 !! 6.0
+(!kw [version])                  !! set program version number for the title page !\
+                                 !! (!KW [docinfo]) (!code [[version!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [=win])                     !! query output format !\
+                                 !! (!KW [ifndest]) (!code [[win!]])
+(!kw [win])                      !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[win!]])
+(!kw [win_background])           !! define background color for WinHelp !\
+                                 !! (!KW [win_backcolor]) !\
+                                 !! 6 PL14
+(!kw [win_html_look])            !! output pages with gray background (WinHelp only) !\
+                                 !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont]) !\
+                                 !! 6
+!hline
+!end_table
+
+!end_node

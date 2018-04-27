@@ -1,0 +1,30 @@
+!begin_node (!kw [drc_flags])
+!html_name cmd_drc_flags
+
+Wert für Nodefinition festlegen (nur DRC).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/drc_flags (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Hiermit können Sie den Wert angeben, der als letzter numerischer Wert einer
+Nodedefinition gesetzt werden soll.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [drc_bcolor]), (!KW [drc_icolor]), (!KW [drc_ucolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!drc_flags 6
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

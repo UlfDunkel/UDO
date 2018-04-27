@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_comment])
+!html_name cmd_begin_comment
+
+Kommentare in die Ausgabedatei schreiben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_comment(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando öffnet eine (neue) comment-Umgebung.
+Zeilen, die innerhalb dieser Umgebung stehen, werden
+als Kommentar auch in die Ausgabedatei geschrieben, sofern das
+jeweilige Format Kommentare beherrscht.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [end_comment]), (!KW [cinclude]), (!KW [comment]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node

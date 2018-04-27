@@ -1,0 +1,33 @@
+!begin_node (!kw [label])
+!html_name cmd_label
+
+Sprungmarke setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/label (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Definiert eine Sprungmarke, die bei Hypertextformaten
+automatisch referenziert wird und auf die Sie durch
+die Link-Befehle verweisen können.
+
+!item [(!SEEALSO)]
+(!KW [label*]), (!KKW [label]), (!KKW [link]), (!KKW [plink]), (!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!label Sprungmarke
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<a name="Sprungmarke"></a>
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

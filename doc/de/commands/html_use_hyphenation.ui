@@ -1,0 +1,46 @@
+!begin_node (!kw [html_use_hyphenation])
+!html_name cmd_html_use_hyphenation
+
+Silbentrennung benutzen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_use_hyphenation(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie festlegen, daß UDO (!K1 [/-]) in
+(!code [&shy;]) (Abkürzung für ""Soft Hyphen"") umsetzen soll.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!link [Silbentrennung] [Silbentrennung]), (!K1 [/-])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!html_use_hyphenation
+
+# Hauptteil:
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+!end_verbatim
+(!EXAMPLE_AFTER)
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+(!EXAMPLE_END)
+
+!end_node

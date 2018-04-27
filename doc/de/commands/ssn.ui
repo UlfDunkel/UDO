@@ -1,0 +1,20 @@
+!begin_node (!kw [ssn])
+!html_name cmd_ssn
+
+Unterabschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubnode]).
+
+!item [(!SEEALSO)]
+(!KW [subsubnode])
+
+!end_xlist
+
+!end_node

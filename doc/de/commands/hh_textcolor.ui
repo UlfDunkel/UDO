@@ -1,0 +1,23 @@
+!begin_node (!kw [hh_textcolor])
+!html_name cmd_hh_textcolor
+
+Setzen der Textfarbe (nur HTMLHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_textcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTMLHelp-Seiten
+Text darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_linkcolor]), (!KW [hh_alinkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_backcolor])
+
+!end_xlist
+
+!end_node

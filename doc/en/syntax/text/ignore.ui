@@ -1,0 +1,11 @@
+!begin_node Ignore Text
+!html_name ignore
+!label ignore environment
+
+Lines after (!KW [begin_ignore]) are ignored until the
+correspondig (!KW [end_ignore]) is found.
+
+This environment can be used to ignore larger parts
+of your document.
+
+!end_node

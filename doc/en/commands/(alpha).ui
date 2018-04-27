@@ -1,0 +1,31 @@
+!begin_node (!kkw [alpha])
+!html_name cmd_alpha()
+
+Print the (!alpha) symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/alpha)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the alpha symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!code [alpha])"".
+
+!item [(!SEEALSO)]
+(!KKW [beta]), (!link [Special characters] [Special characters]), (!link [Predefined macros] [Predefined macros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!alpha)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!alpha)
+(!EXAMPLE_END)
+
+!end_node

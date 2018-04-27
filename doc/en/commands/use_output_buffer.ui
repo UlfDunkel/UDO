@@ -1,0 +1,36 @@
+!begin_node (!kw [use_output_buffer])
+!html_name cmd_use_output_buffer
+
+Request output buffer.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_output_buffer [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+For all destination formats UDO breaks lines after the amount of
+characters you set with (!KW [parwidth]). When converting to
+Windows Help or HTML it can happen that UDO makes mistakes when
+inserting links. If you use this switch UDO will print a complete
+paragraph into the output buffer, it will then insert the links and
+in the final step it will break the lines. Because this method slows
+down the conversion of the source file UDO doesn't use the output
+buffer normally.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [parwidth])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_output_buffer [win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,71 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Bugs and problems
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 09: file reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!ifnset [NoBugs]
+
+!begin_node Bugs und Probleme
+!html_name bugs
+
+Die folgenden Fehler und Probleme sind derzeit bekannt:
+
+!begin_description
+!item [Schriftarten in Indizes:]
+      In Indizes können derzeit keine Schriftarten gesetzt werden. Abhilfe: Setzen Sie die Schriftarten-Platzhalter außerhalb des (!KKW [idx])-Befehls.
+
+!item [Bilder & em(!TeX):]
+      Die Ausgabe von MSP- und PCX-Bitmaps mittels em(!TeX)
+      ist immer noch ziemlich ungetestet. Erste Tests verliefen bei uns 
+      erfolgreich. Falls die Ausgabe bei Ihnen nicht funktionieren
+      sollte, verwenden Sie das Kommando (!KW [no_images] [[tex!!]]) und sorgen
+      Sie mit der raw-Umgebung bitte selber für die nötige Einbindung
+      der Bilder.
+
+!item [Kleine Fehler bei der Formatierung in WinHelp:]
+      Wenn viele Kapitel benutzt werden und die Kapitelnummern ""breit"" werden, kann es zu
+      falschen Einrückungen in den Inhaltsverzeichnissen kommen.
+      Benutzen Sie dann den Schalter (!KW [no_numbers] [[win!!]]).
+
+!item [Inhaltsverzeichnisse:]
+      In Inhaltsverzeichnissen werden überlange
+      Überschriften noch nicht umbrochen. Außerdem werden die Überschriften 
+      nicht immer in der gleichen Spalte ausgerichtet (""1.9""-""1.10""-Problem).
+
+!item [Tabellen:]
+      Die Breite von Zellen einer Tabelle wird nicht immer sicher
+      erkannt, speziell dann, wenn Sie darin manuelle Querverweise oder
+      andere Spezialitäten verwenden.
+
+!end_description
+
+Weitere Fehler und Probleme sind im (!url [UDO-BugTracker] [http://bugs.udo-open-source.org/] [] [elink])
+dokumentiert. Hier können auch Sie Fehler und Feature-Wünsche
+eintragen. Bitte vergewissern Sie sich jedoch zunächst, ob es sich
+nicht bereits um einen bekannten Fehler oder einen bereits
+dokumentierten Feature-Wunsch handelt. Hierzu können Sie z.B. in der
+Mailingliste ""UDO-Discussion"" nachfragen.
+
+!end_node
+
+!endif

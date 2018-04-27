@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [title])
+!html_name cmd_title
+
+Dokumenttitel definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/title (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [docinfo] [[title!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif

@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [man])
+!html_name cmd_man
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/man (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [raw] [[man!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif

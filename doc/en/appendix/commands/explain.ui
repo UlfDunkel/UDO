@@ -1,0 +1,69 @@
+!begin_node* Command description
+!html_name cmd_explanation
+
+The following chapters describe all UDO commands in detail. All
+descriptions use the same categories so you can see at a glance what to
+do with which command. The categories are explained as follows.
+
+!begin_description
+
+!item [Type & position:]
+   !begin_blist
+   !item [(!COMMANDOBLIGATE)] A (!COMMANDOBLIGATE) must be present in the source file, or UDO will give an error message.
+   !item [(!COMMAND)] A (!COMMAND) tells UDO to do something especially,
+   !item [(!COMMANDABBREV)] Für einige häufig genutzte Kommandos gibt es Kurzformen, die durch ""(!COMMANDABBREV)"" im Typ angegeben werden.
+   !item [(!SWITCH)] A (!SWITCH) sets some internal information for UDO.
+   !item [(!PLACEHOLDER)] A (!PLACEHOLDER) will be simply replaced by a different text fragment.
+   !item [(!SPECIALCHAR)] Special characters are strings that are used as punctuation marks.
+   !end_blist
+
+!item [Position:]
+   !begin_blist
+   !item [Preamble] ""Preamble"" means that you are only allowed to use this command in the preamble of your source file (before (!KW [begin_document])).
+   !item [Main part] ""Main part"" means that you are only allowed to use it behind (!KW [begin_document]).
+   !item [Preamble & main part] ""Preamble & main part"" means that you can use this command wherever you want.
+   !end_blist
+
+!item [Syntax:]
+	Here you can see how to use the command.
+
+	!begin_tlist [WabbreviationsW] !compressed
+
+	!label (!TEXT)
+	!item [(!TEXT)] replaces text
+
+	!label (!FILE)
+	!item [(!FILE)] replaces a file name
+
+	!label (!VALUE)
+	!item [(!VALUE)] replaces a number
+
+	!label (!CHAR)
+	!item [(!CHAR)] replaces a single char
+
+	!label <abbreviations>
+	!item [<abbreviations>] replaces the abbreviation of the (!link [destination formats] [Abbreviations])
+
+	!label <language>
+	!item [<language>] replaces the abbreviation of the (!link [destination language] [Language])
+
+	!label <systems>
+	!item [<systems>] replaces one or more (!link [operating system] [Operating systems])
+
+	!label <color>
+	!item [<color>] replaces the name of a (!link [color] [Colors])
+
+	!label <character set>
+	!item [<character set>] replaces the name of a (!link [character set] [code])
+
+	!end_tlist
+
+!item [Example:]
+	Here you can see a small example.
+
+!item [See also:]
+	Related commands and topic are listed here.
+
+!end_description
+
+!end_node

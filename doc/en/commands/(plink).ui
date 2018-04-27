@@ -1,0 +1,28 @@
+!begin_node (!kkw [plink])
+!html_name cmd_plink
+
+Create manual page reference ((!TeX) only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/plink [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Only useful when converted to (!LaTeX) where it is converted into a
+page reference. Converting into others formats, only ""(!TEXT)"" will be output.
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [xlink]), (!link [Links] [Links])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!plink [word] [label])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

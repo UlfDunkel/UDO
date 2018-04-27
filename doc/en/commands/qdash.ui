@@ -1,0 +1,31 @@
+!begin_node ((--))
+!html_name cmd_qdash
+
+Output two dashes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((--))(!t)
+
+!item [(!DESCRIPTION)]
+If you want to output two minus characters you have to insert them
+between brackets. If you don't UDO will replace the two minus
+characters by a short dash.
+
+!item [(!SEEALSO)]
+(!link [(--)] [(--)]), (!link [(---)] [(---)]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(--)outfile
+!end_verbatim
+(!EXAMPLE_AFTER)
+(--)outfile
+(!EXAMPLE_END)
+
+!end_node

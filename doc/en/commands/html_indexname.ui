@@ -1,0 +1,30 @@
+!begin_node (!kw [html_indexname])
+!html_name cmd_html_indexname
+
+Set filename for index.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_indexname <name>(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used to set the filename UDO uses
+for the automatically generated index page.
+
+!item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [use_udo_index]), (!KW [no_index])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_indexname udoindex
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

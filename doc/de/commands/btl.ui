@@ -1,0 +1,20 @@
+!begin_node (!kw [btl])
+!html_name cmd_btl
+
+Eine ""nichtproportionale"" Liste einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/btl [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_tlist]).
+
+!item [(!SEEALSO)]
+(!KW [begin_tlist])
+
+!end_xlist
+
+!end_node

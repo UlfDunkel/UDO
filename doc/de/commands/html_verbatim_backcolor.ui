@@ -1,0 +1,21 @@
+!begin_node (!kw [html_verbatim_backcolor])
+!html_name cmd_html_verbatim_backcolor
+
+Setzen der Hintergrundfarbe für verbatim-Umgebungen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_verbatim_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten
+den Hintergrund in verbatim-Umgebungen darzustellen.
+
+!item [(!SEEALSO)]
+(!KW [html_backcolor]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,52 @@
+!begin_node UDOs Entstehungsgeschichte
+!html_name intro_history
+
+Dirk Hagedorn, der "Begründer" von UDO, berichtet:
+
+!begin_quote
+Irgendwann im Herbst 1994 hatte ich mehrere kleinere Programme
+geschrieben, für die ich je eine ASCII-Anleitung, eine Online-Hilfe und
+ein gedrucktes Handbuch benötigte.
+
+Ich begann jeweils damit, zunächst die ASCII-Anleitung zu schreiben, in
+eine Kopie der ASCII-Anleitung die Hypertextkommandos einzufügen und
+schließlich die ASCII-Anleitung in eine Textverarbeitung zu
+importieren, um sie neu zu formatieren und auszudrucken. Schnell
+stellte sich heraus, daß dieser Weg ziemlich mühsam war, denn bei auch
+nur kleinen Änderungen mussten diese in gleich drei Dateien durchgeführt
+werden. Bei größeren Änderungen musste der ganze manuelle
+Umwandlungsvorgang erneut durchgeführt werden.
+
+Nachdem diese Prozedur endlich ein Ende gefunden hatte, schwor ich
+mir, daß es (!I)so(!i) einfach nicht weitergehen durfte!
+
+Im Januar 1995 kam mir nach ein paar gründlichen Überlegungen die Idee,
+ein neues Textformat zu entwerfen, welchem ich den Projektnamen "UDO"
+(als Abkürzung für (!B)U(!b)niversal (!B)DO(!b)cument) gab. Die Syntax
+sollte gleichzeitig leicht zu erlernen und flexibel genug sein, und so
+entschloß ich mich dazu, daß sich die neue Syntax an der von (!LaTeX)
+orientieren sollte. Parallel dazu wurde das passende Programm
+entwickelt, welches Textdateien, die in diesem neuen Textformat verfasst
+wurden, ins ASCII- ST-Guide- und (!LaTeX)-Format umwandeln konnte: UDO war
+geboren!
+
+UDO konnte zu diesem Zeitpunkt noch nicht besonders viel. Das Format
+enthielt vielleicht gerade einmal 10 Befehle und der Sourcecode war
+vielleicht 10~kB groß. UDO war damals eigentlich nur ein übler Hack,
+aber dennoch leistete es schon sehr gute Dienste und das oben
+beschriebene Horrorszenario gehörte endgültig der Vergangenheit an.
+
+Seit dieser Zeit hat UDO eine große Entwicklung durchgemacht: Viele
+zusätzliche Formate wurden implementiert, neue Layoutmöglichkeiten
+kamen hinzu, UDO wurde auf weitere Betriebssysteme portiert, der Umfang
+des Sourcecodes und der Dokumentation hat sich mehr als
+verhundertfacht.
+
+UDO hat sich seither zu einem plattformunabhängigen,
+äußerst leistungsfähigen und sprichwörtlich universellen Werkzeug entwickelt.
+
+!end_quote
+
+UDO ist seit dem 27.10.2001 Open Source.
+
+!end_node

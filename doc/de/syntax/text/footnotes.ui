@@ -1,0 +1,44 @@
+!begin_node Fußnoten
+!html_name style_footnotes
+
+Text, der durch (!KK1 [N]) und (!KK1 [n]) eingefaßt wird, wird in eine Fußnote
+umgewandelt, sofern das Ausgabeformat Fußnoten unterstützt. Bei den
+anderen Ausgabeformaten wird (!KK1 [N]) einfach durch ""(!code [~(])"" und (!KK1 [n]) durch
+""(!code [!)])"" ersetzt; die Fußnote erscheint hier also einfach in Klammern.
+
+(!B)Wichtig:(!b) Vor (!KK1 [N]) sollte kein Leerzeichen stehen, da sonst die
+Fußnotenmarkierung später in der Ausgabedatei frei im Raum steht und
+der Bezug weniger klar erkenntlich wird! Unterstützt das Ausgabeformat
+keine Fußnoten, gibt UDO vor der öffnenden Klammer zusätzlich noch das
+fehlende Leerzeichen aus.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)footnotes.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)footnotes.ui
+(!EXAMPLE_END)
+
+Fußnoten werden von folgenden Formaten unterstützt:
+
+!begin_itemize !compressed
+!item (!LaTeX)
+!item Linuxdoc-SGML
+!item LyX
+!item Texinfo
+!item RTF
+!end_itemize
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Daß UDO bei den Formaten, die keine Fußnoten unterstützen, den
+     Fußnotentext einfach in Klammern setzt, ist natürlich etwas
+     unglücklich. Besser wäre es, UDO würde hier die Fußnotentexte
+     sammeln und am Ende eines Kapitels ausgeben. Leider ist dies eine
+     recht knifflige Angelegenheit, die nicht von heute auf morgen
+     gelöst werden kann.
+
+!item Denken Sie daran, vor (!KK1 [N]) kein Leerzeichen zu verwenden.
+!end_enumerate
+
+!end_node

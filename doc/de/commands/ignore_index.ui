@@ -1,0 +1,25 @@
+!begin_node (!kw [ignore_index])
+!html_name cmd_ignore_index
+
+Ein Kapitel nicht in den Index übernehmen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_index(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+wird das Kapitel nicht im Index angezeigt. Auch dann
+nicht, wenn Sie den Schalter (!KW [use_nodes_inside_index])
+im Vorspann gesetzt haben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_nodes_inside_index]), (!KW [no_index]), (!link [Indizes] [Indizes])
+
+!end_xlist
+
+!end_node

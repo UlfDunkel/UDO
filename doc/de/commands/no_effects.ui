@@ -1,0 +1,39 @@
+!begin_node (!kw [no_effects])
+!html_name cmd_no_effects
+
+Keine Schriftarten benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_effects [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet die Benutzung von Schriftarten aus. Befehle
+wie (!KK1 [B]) werden dann nicht in Schriftarten
+umgewandelt, sondern einfach gefiltert. Im Beispiel
+würden diese bei der Umwandlung ins ASCII-Format
+nicht benutzt.
+
+!item [(!SEEALSO)]
+(!link [Schriftarten] [Schriftarten])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_effects [asc,html]
+
+# Hauptteil:
+Dieser Text soll (!B)fett(!b) dargestellt werden, 
+außer im ASCII- oder HTML-Format.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Dieser Text soll fett dargestellt werden, 
+außer im ASCII- oder HTML-Format.
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,31 @@
+!begin_node (!kw [toc])
+!html_name cmd_toc
+
+Inhaltsverzeichnis ""alleine"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Gibt ein komplettes Inhaltsverzeichnis aus. Im
+Gegensatz zu (!KW [tableofcontents]) wird dabei bei
+Hypertextformaten keine eigene Seite erzeugt. Im
+Beispiel würde das Inhaltsverzeichnis bei der
+Umwandlung ins ST-Guide-Format ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_compressed_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!toc [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,32 @@
+!begin_node (!kw [subsubsubnode])
+!html_name cmd_subsubsubnode
+
+Start a paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new paragraph named ""(!TEXT)"". Paragraphs are numbered
+with #.#.#.# and are displayed inside the table of contents.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubnode Paragraph title
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Paragraph title
+(!EXAMPLE_END)
+
+!end_node

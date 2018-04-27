@@ -1,0 +1,24 @@
+!begin_node (!kw [listoffigures])
+!html_name cmd_listoffigures
+
+Abbildungsverzeichnis ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listoffigures(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando sorgt für die Ausgabe eines
+Abbildungsverzeichnisses, in dem alle (!link [Bilder] [Bilder]), die
+eine Überschrift enthalten, aufgelistet werden. Man
+sollte dieses Kommando direkt nach (!KW [tableofcontents])
+verwenden. Momentan wird dieser Befehl nur für (!LaTeX), PDF(!LaTeX), Linuxdoc-SGML, LyX und RTF umgewandelt.
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KW [tableofcontents]), (!KW [listoftables]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node

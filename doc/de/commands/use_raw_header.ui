@@ -1,0 +1,34 @@
+!begin_node (!kw [use_raw_header])
+!html_name cmd_use_raw_header
+
+Header im Zielformat einbinden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_raw_header (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Die Datei soll am Anfang der Seite 1:1 ausgegeben werden. Wird der
+Befehl im Vorspann benutzt, wird für jede Seite die Datei am Anfang
+ausgegeben. Wird der Befehl in einem Node benutzt, wird die Datei
+nur für diesen Node ausgegeben.
+
+Dieser Befehl wird derzeit nur für HTML unterstützt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_footer]), (!KW [ignore_raw_header])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_raw_header header.html
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,29 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Pascal Sourcecode
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Pascal Sourcecode
+!html_name format_pas
+
+Using the Pascal sourcecode output, the UDO source file will be
+converted to sourcecode, meaning normal text becomes comment, the
+content of the sourcecode environment becomes Pascal sourcecode.
+
+!end_node

@@ -1,0 +1,40 @@
+!begin_node (!kw [html_bgsound])
+!html_name cmd_html_bgsound
+
+Hintergrungmusik abspielen
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_bgsound (!FILE) (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie Hintergrundmusik für HTML-Seiten angeben. (!FILE) ist dabei
+der Name der Datei mit Suffix. Als Dateiendung sollte möglichst nur MID, AU und WAV verwendet werden.
+(!VALUE) ist optional und gibt an wie oft das Musikstück wiederholt werden soll. Ohne die Angabe
+wird sie endlos wiederholt.
+
+Gehen Sie sparsam mit dieser Funktion um, es kann für einen Nutzer sehr nervig sein ständig mit Musik
+beschallt zu werden!
+
+!item [(!EXISTSSINCE)] Version~6.5.20
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_bgsound sound.wav 2
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+(!IN_HTML_HEADER)
+!begin_verbatim
+<bgsound src="sound.wav" loop="2">
+!end_verbatim
+!endif
+!html_bgsound sound.wav 2
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,13 @@
+!begin_node Installation der Version für DOS bzw. Windows (32-bit)
+!html_name installation_dos_win32
+
+!begin_itemize !compressed
+!item Laden Sie die entsprechende ZIP-Datei von der (!url [UDO-Website] [http://www.udo-open-source.org/]) herunter.
+!item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
+!item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (DOS: siehe (!file [autoexec.bat])); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
+!end_itemize
+Da die DOS-Version einen DOS-Extender verwendet, benötigen Sie mindestens eine 80386-CPU.
+
+Die für frühere UDO-Versionen nötige Installation von RSX oder EMX ist nicht mehr erforderlich.
+
+!end_node

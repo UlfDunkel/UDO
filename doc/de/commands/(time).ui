@@ -1,0 +1,36 @@
+!begin_node (!kkw [time])
+!html_name cmd_time
+
+Systemzeit ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/time [<format>])(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch die bei der Umwandlung
+aktuelle Systemzeit ersetzt. Dabei gibt (!code [<format>]) an,
+wie die Ausgabe formatiert werden soll, und kann
+die gleichen Modifizier wie die C-Funktion
+(!url [strftime(!)] [http://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html])
+enthalten.
+
+!item [(!EXISTSSINCE)] Version~6.5.19
+
+!item [(!SEEALSO)]
+(!KKW [today]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!T)(!time [%H:%M:%S])(!t)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!T)(!time [%H:%M:%S])(!t)
+(!EXAMPLE_END)
+
+!end_node

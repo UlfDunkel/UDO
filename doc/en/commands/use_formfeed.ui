@@ -1,0 +1,28 @@
+!begin_node (!kw [use_formfeed])
+!html_name cmd_use_formfeed
+
+Output formfeed.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_formfeed [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+With this switch you can tell UDO to output a form feed (ASCII~12)
+when handling the (!KW [newpage])-command.
+
+!item [(!SEEALSO)]
+(!KW [man_lpp]), (!KW [newpage])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_formfeed [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

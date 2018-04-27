@@ -1,0 +1,57 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Appendix
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from appendix.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 10: table of limitations reformatted
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Limitierungen von UDO
+!html_name limitations
+
+Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
+
+# Hint: The used macros are defined in macros.ui.
+
+!table_caption Limitierungen von UDO
+!begin_table [l|r] !hline
+Makros:                            !! unbegrenzt (seit Version 6.6.0, vorher: (!MAXMACRO))
+Länge eines !/macro-Textwertes:    !! (!const [4096])
+Defines:                           !! unbegrenzt (seit Version 6.6.0, vorher: (!MAXDEFINE))
+Länge eines !/define-Textwertes:   !! (!const [4096])
+Hyphens:                           !! unbegrenzt (seit Version 6.6.0, vorher: (!MAXHYPHEN))
+Summe Kapitel, Labels und Aliase:  !! unbegrenzt (seit Version 6.6.0, vorher: (!const [32768]))
+Zeichen pro Zeile:                 !! (!LINELEN)
+Zeichen pro Wort:                  !! (!MAX_TOKEN_LEN)
+Silben pro Wort:                   !! (!MAXSILBEN)
+Worte pro Absatz:                  !! (!MAX_TOKENS)
+Querverweise pro Absatz:           !! (!MAXLINK)
+Zeilen pro Tabelle:                !! (!MAXLINETABLE)
+Spalten pro Tabelle:               !! (!MAXCOLUMSTABLE)
+Zeichen pro Tabellen-Zelle:        !! (!const [1000])
+Schachtelungstiefe der Umgebungen: !! (!const [10])
+Schachtelungstiefe der Kapitel:    !! (!const [9])
+!hline
+!end_table
+
+!end_node

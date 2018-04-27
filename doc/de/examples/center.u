@@ -1,0 +1,32 @@
+#######################################
+# @(#) center-Umgebung - dh 1996
+#######################################
+
+!code_source [latin1]
+!language [german]
+
+!docinfo [title]	UDOs
+!docinfo [program]	Center-Umgebung
+!docinfo [author]	Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Eine center-Umgebung
+
+Dieses Beispiel zeigt, wie man die center-Umgebung benutzt:
+
+!begin_center
+Diese Wörter werden zentriert.
+
+UDO formatiert auch
+diesen Absatz.
+
+Manchmal bietet es sich an, (!nl)
+manuelle Umbrüche einzufügen.
+
+!end_center
+
+!end_document
+

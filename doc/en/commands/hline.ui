@@ -1,0 +1,23 @@
+!begin_node (!kw [hline])
+!html_name cmd_hline
+
+Display a horizontal line.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hline(!t)
+
+!item [(!DESCRIPTION)]
+This command displays a horizontal line inside normal text or inside
+a table. Not all destination formats support horizontal lines.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables])
+
+!end_xlist
+
+!end_node

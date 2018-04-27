@@ -1,0 +1,27 @@
+!begin_node (!kw [begin_raw])
+!html_name cmd_begin_raw
+
+raw-Umgebung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_raw(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl leitet eine raw-Umgebung ein. Diese
+Umgebung muss mit (!KW [end_raw]) beendet werden. Jede Zeile
+innerhalb dieser Umgebung wird direkt, also ohne
+jegliche Umwandlung, Zentrierung oder Einrückung
+ausgegeben. Die Umgebung dient daher zur Einbindung
+spezieller Befehle für die Ausgabeformate.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [end_raw]), (!link [raw-Umgebung] [raw-Umgebung]), (!KW [rinclude]), (!KW [ifdest])
+
+!end_xlist
+
+!end_node

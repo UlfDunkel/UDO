@@ -1,0 +1,24 @@
+!begin_node (!kw [no_sourcecode])
+!html_name cmd_no_sourcecode
+
+Sourcecode-Zeilen nicht ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_sourcecode [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Der Schalter (!KW [no_sourcecode]) bewirkt, daß für die
+angegebenen Formate die Sourcecode-Zeilen nicht ausgegeben werden. Somit
+können Sie sich eine Programm-Doku ohne den Sourcecode erzeugen.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [begin_sourcecode])
+
+!end_xlist
+
+!end_node

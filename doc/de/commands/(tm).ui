@@ -1,0 +1,34 @@
+!begin_node (!kkw [tm])
+!html_name cmd_tm()
+
+Trademark-Symbol ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/tm)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Trademark-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [(tm!)])"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KKW [copyright]), (!KKW [registered]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!tm)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!tm)
+(!EXAMPLE_END)
+
+!end_node

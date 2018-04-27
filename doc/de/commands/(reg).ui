@@ -1,0 +1,23 @@
+!begin_node (!kkw [reg])
+!html_name cmd_reg()
+
+Registermarke-Symbol ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/reg)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser platzhalter wird zwar noch unterstützt, sollte jedoch
+durch (!KKW [registered]) ersetzt werden.
+
+!item [(!EXISTSSINCE)] Version~6.5.8
+
+!item [(!SEEALSO)]
+(!KKW [tm]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+!end_node

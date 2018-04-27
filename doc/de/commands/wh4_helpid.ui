@@ -1,0 +1,31 @@
+!begin_node (!kw [wh4_helpid])
+!html_name cmd_wh4_helpid
+
+Ausgabe einer Node-ID (nur WinHelp4).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/wh4_helpid (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl kann maximal einmal pro Node benutzt werden. Ausgegeben
+wird die ID wie ein Alias. Jump-IDs können als C- oder
+Pascal-Header-Datei ausgegeben werden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [use_auto_helpids]), (!KW [wh4_prefix_helpids])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_helpid 0815
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

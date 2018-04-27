@@ -4,4 +4,4 @@ ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = \
 	COPYRIGHT
 
-SUBDIRS = src
+SUBDIRS = src doc

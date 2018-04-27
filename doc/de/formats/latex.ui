@@ -1,0 +1,100 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: LaTeX
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using EXAMPLE_... macros
+#
+################################################################################
+
+!begin_node (!LaTeX)
+!html_name format_latex
+
+!begin_description !not_compressed
+
+#################################################
+
+!item [Wie erzeugt UDO die (!LaTeX)-Präambel?]
+UDO ""weiß"", in welcher Sprache und mit welchem Dokumentstil die
+Datei gesetzt und ob Indizes benutzt werden sollen. Anhand dieser
+bekannten Informationen bastelt UDO dann die Präambel für
+(!LaTeX)~2.09 bzw. (!LaTeXe) zusammen.
+
+#################################################
+
+!item [Wie werden Dateien für (!LaTeXe) erzeugt?]
+Standardmäßig erzeugt UDO Dateien für (!LaTeX)~2.09. Durch den
+Schalter (!KW [tex_2e]) können Sie UDO mitteilen, Befehle für (!LaTeXe) zu
+erzeugen.
+
+#################################################
+
+!item [Ich benötige eine eigene Präambel, was muß ich tun?]
+Im Gegensatz zu den vorherigen UDO-Versionen erzeugt UDO(!RELEASE) automatisch
+passende (!LaTeX)-Präambeln für (!LaTeX)~2.09 und (!LaTeXe).
+
+Falls Ihnen diese automatisch generierten Präambeln nicht gefallen,
+können Sie UDO mit der Angabe des Schalters (!KW [no_preamble] [[tex!!]]) im
+Vorspann dazu bewegen, die Präambel nicht zu erzeugen.
+
+In dem Falle können Sie mit dem Befehl (!KW [raw] [[tex!!]]) oder der raw-Umgebung zu
+Beginn des Quelltextes die eigene Präambel verfassen.
+
+Das folgende Beispiel zeigt, wie das funktioniert:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)latex/preamble.u
+(!EXAMPLE_END)
+
+#################################################
+
+!item [Wie baue ich Formeln in den Quelltext ein?]
+Benutzen Sie dazu die raw-Umgebung für ganze Absätze oder
+Definitionen für Formeln, die im Fließtext erscheinen sollen.
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [tex]
+!define ab2 $(a+b)^2 = a^2 + 2ab + b^2$
+!else
+!macro  ab2 (a + b)^2 = a^2 + 2ab + b^2
+!endif
+...
+Die erste binomische Formel lautet: (!ab2)
+!end_verbatim
+(!EXAMPLE_END)
+
+#################################################
+
+!item [Wie werden Sonderzeichen in Indizes angepaßt?]
+Sonderzeichen in Indizes werden speziell für makeindex angepaßt.
+Es sind also keine zusätzlichen Anpassungen der von UDO erzeugten
+(!LaTeX)-Datei nötig.
+
+#################################################
+
+!item [Geschweifte Klammern im Indexeintrag erzeugt (!LaTeX)-Fehler!?]
+Laut Kopka ist es zwingend erforderlich, daß jede öffnende
+geschweifte Klammer in einem Indexeintrag eine passende
+schließende geschweifte Klammer erhält. (!KW [index] [{]) ist demnach
+nicht möglich, nur (!KW [index] [{...}]) funktioniert.
+
+#################################################
+
+!end_description
+
+!end_node

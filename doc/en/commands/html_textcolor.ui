@@ -1,0 +1,23 @@
+!begin_node (!kw [html_textcolor])
+!html_name cmd_html_textcolor
+
+Specify the textcolor (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_textcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display text
+in HTML pages.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_linkcolor]), (!KW [html_alinkcolor]), (!KW [html_vlinkcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node

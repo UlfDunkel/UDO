@@ -1,0 +1,20 @@
+!begin_node (!kw [end_preformatted])
+!html_name cmd_end_preformatted
+
+preformatted-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_performatted(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die preformatted-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_preformatted]), (!link [Vorformatierter Text] [Vorformatierter Text])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,20 @@
+!begin_node Windows-Shell
+!html_name usage_winshell
+
+Unter Windows steht für UDO eine graphische Bedienungsoberfläche
+(Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt
+wird. Siehe (!url [http://www.udo-open-source.org/download/shells.php] [] [] [elink]).
+
+!begin_ignore
+
+Die Windows-Shell ""UDOSH"" dient dazu, die Arbeit mit UDO unter Windows
+etwas komfortabler zu gestalten.
+
+Die Shell ist kein eigenständiges Programm, sondern ruft UDO und die
+Zusatzprogramme lediglich mit den passenden Optionen auf.
+
+Die Shell ist daher in einer separaten Anleitung beschrieben.
+
+!end_ignore
+
+!end_node

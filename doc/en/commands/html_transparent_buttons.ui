@@ -1,0 +1,43 @@
+!begin_node (!kw [html_transparent_buttons])
+!html_name cmd_html_transparent_buttons
+
+Create transparent navigation buttons (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_transparent_buttons(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, UDO
+will use smaller and transparent for the navigation links.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [no_images])
+
+!end_xlist
+
+!ifdest [html,hh,hah]
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# !html_transparent_buttons
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [(!IMAGES)udo_hm] [Home])~(!img [(!IMAGES)udo_up] [Up])~(!img [(!IMAGES)udo_lf] [Left])~(!img [(!IMAGES)udo_rg] [Right])
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_transparent_buttons
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [(!IMAGES)udo_hm_trans] [Home])~(!img [(!IMAGES)udo_up_trans] [Up])~(!img [(!IMAGES)udo_lf_trans] [Left])~(!img [(!IMAGES)udo_rg_trans] [Right])
+(!EXAMPLE_END)
+!endif
+
+!end_node

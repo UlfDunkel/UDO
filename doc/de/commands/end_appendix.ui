@@ -1,0 +1,22 @@
+!begin_node (!kw [end_appendix])
+!html_name cmd_end_appendix
+
+Anhang beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_appendix(!t)
+
+!item [(!DESCRIPTION)]
+Beendet den Anhang. UDO unterstützt genau (!I)einen(!i)
+Anhang, daher sollte (!KW [end_appendix]) das letzte
+Kommando vor (!KW [end_document]) sein.
+
+!item [(!SEEALSO)]
+(!KW [begin_appendix]), (!link [Anhang] [Anhang])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,124 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Turbo Vision Help
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: typo
+#
+################################################################################
+
+!begin_node Turbo-Vision-Help
+!html_name format_tvh
+
+This format is used to make online manuals for DOS programs that are
+compiled with Borland's Turbo Vision library. UDO's output has to be
+converted with (!file [TVHC.EXE]). The source code of (!file [TVHC.EXE]) is
+available and you have to change some parts because it contains some bugs.
+
+If you aren't an author that programs software that uses the Turbo Vision
+library you shouldn't use this format.
+
+!begin_description !not_compressed
+
+#####################################################################
+
+!item [TVHC prints the error message ""Unterminated topic reference""!?]
+
+My TVHC version 1.0 contains an ugly bug. Due to this bug you cannot quote
+brackets by using them twice. If your TVHC prints the upper error message
+look for the function (!code [scanForCrossRefs(!)]) in (!file [tvhc.cpp]) and
+patch it like this:
+
+!begin_description
+!item [Original Version:]
+
+!begin_quote
+!begin_verbatim
+if (line[i+1] == begXRef)
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+
+!item [Patched version:]
+
+!begin_quote
+!begin_verbatim
+if (line[i] == begXRef)    // [i] instead of [i+1]
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+!end_description
+
+After having changed the source code you should recompile TVHC to enable the changes.
+
+#####################################################################
+
+!item [TVHC prints the error message ""Text too long""!?]
+
+The file (!file [tvhc.h]) contains a constant number named (!code [bufferSize])
+that defines the maximum size of the text buffer. This text buffer is a
+little bit small. You should increase the buffer size e.g. to 32~KB to
+suppress the upper error message:
+
+!begin_quote
+!begin_verbatim
+const bufferSize = 32768;
+!end_verbatim
+!end_quote
+
+After having changed the buffer size you should recompile TVHC to enable the
+changes.
+
+#####################################################################
+
+!item [TVHC prints the error message ""TOPIC expected""!?]
+
+This error message is printed if a line starts with a point. The point is a
+special character in Turbo Vision Help if it is the first character of a
+line. My TVHC stops if it reads such a line.
+
+But there's no need to stop the conversion. Thus I have patched my TVHC. I
+have replaced this line
+
+!begin_quote
+!begin_verbatim
+error("TOPIC expected");
+!end_verbatim
+!end_quote
+
+with
+
+!begin_quote
+!begin_verbatim
+warning("TOPIC expected");
+!end_verbatim
+!end_quote
+
+If you recompile the TVHC it will print a warning and it will go on
+converting the source file instead of printing an error message.
+
+#####################################################################
+
+!end_description
+
+!end_node

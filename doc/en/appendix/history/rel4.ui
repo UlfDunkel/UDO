@@ -1,0 +1,30 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 4
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_04.de)
+#   fd  Mar 03: translated, using PUBLISHED
+#
+################################################################################
+
+!begin_node Changes from Release 3 to 4
+!html_name history_release_3_to_4
+
+(!PUBLISHED [UDO~4] [November 12, 1995])
+
+It was the first English version with an English documentation!
+
+We're quite sure that nobody is interested in the changes of this old version any longer.
+
+!end_node

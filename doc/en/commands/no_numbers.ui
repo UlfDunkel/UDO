@@ -1,0 +1,29 @@
+!begin_node (!kw [no_numbers])
+!html_name cmd_no_numbers
+
+Do not output chapter numbers.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_numbers [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This command switches off the usage of chapter numbers. In tables of
+contens only the chapter titles will be displayed. The example shows
+how to suppress them in Windows Help and HTML.
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_numbers [win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

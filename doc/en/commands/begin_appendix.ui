@@ -1,0 +1,21 @@
+!begin_node (!kw [begin_appendix])
+!html_name cmd_begin_appendix
+
+Start appendix.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_appendix(!t)
+
+!item [(!DESCRIPTION)]
+Starts the (!link [appendix] [appendix environment]). Chapters are enumerated with letters. UDO
+supports only (!I)one(!i) appendix per source file!
+
+!item [(!SEEALSO)]
+(!KW [end_appendix]), (!link [Appendix] [Appendix])
+
+!end_xlist
+
+!end_node

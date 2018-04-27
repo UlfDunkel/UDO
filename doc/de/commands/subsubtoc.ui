@@ -1,0 +1,33 @@
+!begin_node (!kw [subsubtoc])
+!html_name cmd_subsubtoc
+
+Unterabschnitte auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Listet in Form eines Inhaltsverzeichnisses alle Unterabschnitte des
+aktuellen Abschnitts auf und sorgt dafür, daß Sie in Hypertexten zu den
+Unterabschnitten weiterverzweigen können. UDO gibt dieses
+Unterinhaltsverzeichnis nicht aus, wenn in dem Abschnitt der Schalter
+(!KW [ignore_subsubtoc]) verwendet wurde. Die Ausgabe dieser
+Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs])
+auch automatisieren.
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

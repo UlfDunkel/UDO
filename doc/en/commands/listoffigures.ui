@@ -1,0 +1,22 @@
+!begin_node (!kw [listoffigures])
+!html_name cmd_listoffigures
+
+Output a list of figures.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listoffigures(!t)
+
+!item [(!DESCRIPTION)]
+This command outputs a list of figures. You should use it directly
+after (!KW [tableofcontents]) if you want to use it. At the moment
+this command will only be converted for (!LaTeX), PDF(!LaTeX), Linuxdoc-SGML, LyX and RTF.
+
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KW [image]), (!KW [tableofcontents]), (!KW [listoftables])
+
+!end_xlist
+
+!end_node

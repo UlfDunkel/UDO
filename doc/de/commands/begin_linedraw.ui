@@ -1,0 +1,32 @@
+!begin_node (!kw [begin_linedraw])
+!html_name cmd_begin_linedraw
+
+Eine linedraw-Umgebung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_linedraw(!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine linedraw-Umgebung ein. Diese Umgebung muss
+mit (!KW [end_linedraw]) beendet werden. Text einer
+linedraw-Umgebung wird 1:1 ausgegeben, es werden
+keine UDO-Kommandos umgewandelt! Auch die Wirkung von
+etwaigen Zielformatbefehlen wird aufgehoben. Bei der
+Ausgabe werden Einrückungen beachtet.
+
+Im Unterschied zur verbatim-Umgebung wird (momentan
+nur für RTF) vor der Ausgabe auf einen anderen
+Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm] [] [elink])"")
+umgeschaltet, sodaß DOS-Screenshots korrekt dargestellt werden sollten.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [end_linedraw]), (!link [Vorformatierter Text] [Vorformatierter Text]), (!KW [ldinclude]), (!KW [linedrawsize])
+
+!end_xlist
+
+!end_node

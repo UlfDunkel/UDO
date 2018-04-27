@@ -1,0 +1,42 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: David's Readme Compiler
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node David's Readme Compiler
+!html_name format_drc
+!label* DRC
+
+# Kurz-Info: http://www.palmtoppaper.com/ptphtml/43/43c00021.htm
+
+# von http://home.att.net/~short.stop/freesoft/txtvw01.htm
+# DRC converts a source text file into an executable viewing application that can be accessed via a
+# multilayered menu structure. Multi-language support. Unlike simple TXT2EXE converters, DRC requires
+# insertion of formatting codes within source files.
+
+David's Readme Compiler ist ein von David Harris (dem Autor des E-Mail-Programms ""Pegasus"")
+geschriebenes, frei verfügbares MS-DOS-Programm. Es konvertiert einen mit Formatierungsbefehlen
+versehenen Text (=~DRC-Format) in ein ausführbares Viewer-Programm.
+
+Sie können David's Readme Compiler von (!url [http://risc.ua.edu/pegasus/other/drc21.zip] [] [] [elink]) oder
+(!url [http://public.planetmirror.com/pub/pegasus/other/drc21.zip] [] [] [elink]) herunterladen.
+
+!end_node

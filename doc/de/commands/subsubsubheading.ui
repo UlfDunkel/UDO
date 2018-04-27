@@ -1,0 +1,33 @@
+!begin_node (!kw [subsubsubheading])
+!html_name cmd_subsubsubheading
+
+Eine Paragraphen-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
+der gleichen Schriftart und -größe wie eine
+Paragraphen-Überschrift ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubheading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Eine Überschrift
+(!EXAMPLE_END)
+
+!end_node

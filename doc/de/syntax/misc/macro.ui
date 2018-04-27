@@ -1,0 +1,123 @@
+!begin_node Makros
+!html_name misc_macros
+
+Makros sind benutzerdefinierte Platzhalter, die sich für die
+verschiedensten Dinge eignen.
+
+!index (!kw [macro])
+Beim Befehl (!KW [macro]) geben Sie zunächst den Bezeichner des Makros an,
+dem sich der Ersetzungstext anschließt. Letzterer kann auch leer sein.
+
+Um im Quelltext später den Inhalt eines Makros ausgeben zu lassen,
+geben Sie den Bezeichner des Makros mit einem führenden Ausrufezeichen
+und eingeschlossen in runde Klammern an.
+
+Auch hier zunächst ein paar Beispiele:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)macro1.ui
+(!EXAMPLE_END)
+
+!index (!kw [include])
+Diese Makros könnten dazu benutzt werden, sich lästiges Abschreiben zu
+sparen oder Änderungen zu beschleunigen. Ein weiteres Anwendungsgebiet
+ist das Erstellen standardisierter Texte, deren Inhalt durch
+Makros an den jeweiligen Quelltext angepaßt wird. Im folgenden
+Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
+(!KW [include]) eingebunden wird:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)macro2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index Makros !! Parameter
+!index Parameter !! Makros
+
+Seit UDO Release~6 können Makros auch Parameter übergeben werden. Bei
+der Erzeugung eines Makros geben Sie dazu mit ""(!code [(!/1!)])"", ""(!code [(!/2!)])"" bis ""(!code [(!/9!)])""
+die Position der Parameter an. Um den Makros im Text die Parameter zu
+übergeben, setzen Sie diese in eckige Klammern.
+
+Hier ein kleines Beispiel, bei dem ein Makro für die Ausgabe von
+Text mit mehreren Textstilattributen gleichzeitig definiert wird und später mit
+nur einem Parameter aufgerufen wird:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)macro3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)macro3_n.ui
+(!EXAMPLE_END)
+
+Die Worte ""fett, kursiv und unterstrichen"" werden bei der Ausgabe dann an die Stelle
+von ""(!code [(!/1!)])"" gesetzt. Das Beispiel ist zugegebenermaßen nicht gerade
+glücklich gewählt, da man mit Schriftarten möglichst sparsam umgehen
+sollte, zeigt aber hier auf einfache Weise, wie man Makros einsetzen
+könnte.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Bei der Namensvergabe der Makros sollten Sie möglichst darauf
+achten, diese nicht wie bereits existente Befehle oder Platzhalter zu
+benennen. So sollten sie ein Makro nicht ""(!code [B])"" oder ""(!code [nl])"" nennen, da
+dann die Umschaltung in Fettschrift ((!KK1 [B])) oder ein erzwungener
+Zeilenumbruch nicht mehr funktionieren.
+
+!item Die Benutzung von Makros sollte nicht übertrieben werden. UDO
+erlaubt zwar die Benutzung von beliebig vielen Makros, jedoch verlangsamt
+jedes zusätzliche Makro die Umwandlung der Quelldatei, da jede Zeile
+nach allen Makros durchsucht werden muß.
+
+!item Beachten Sie auch, daß Makro-Definitionen nur im Vorspann, nicht aber im Haupttext Ihres
+      UDO-Dokuments platziert werden dürfen. UDO gibt sonst eine Fehlermeldung aus.
+!end_enumerate
+
+################################################################################
+
+!begin_node Vordefinierte Makros
+!html_name misc_macros_predefined
+
+UDO kennt ein paar vordefinierte Makros/Platzhalter:
+
+!begin_table [|l|l|] !hline
+(!KKW [alpha])       !! (!B)(!alpha)(!b)-Zeichen ausgeben
+!hline
+(!KKW [beta])        !! (!B)(!beta)(!b)-Zeichen ausgeben
+!hline
+(!KKW [copyright])   !! (!B)(!copyright)(!b)-Symbol ausgeben
+!hline
+(!KKW [deg])         !! (!B)(!deg)(!b)-Zeichen ausgeben
+!hline
+(!KKW [euro])        !! (!B)(!euro)(!b)-Zeichen ausgeben
+!hline
+(!KKW [grin])        !! (!B)(!grin)(!b)-Emoticon ausgeben
+!hline
+(!KKW [LaTeX])       !! (!B)(!LaTeX)(!b)-Schriftzug ausgeben
+!hline
+(!KKW [LaTeXe])      !! (!B)(!LaTeXe)(!b)-Schriftzug ausgeben
+!hline
+(!KKW [laugh])       !! (!B)(!laugh)(!b)-Emoticon ausgeben
+!hline
+(!KKW [pound])       !! (!B)(!pound)(!b)-Zeichen ausgeben
+!hline
+(!KKW [registered])  !! (!B)(!registered)(!b)-Zeichen ausgeben
+!hline
+(!KKW [short_today]) !! Systemdatum in kurzer Schreibweise ausgeben: (!B)(!short_today)(!b)
+!hline
+(!KKW [TeX])         !! (!B)(!TeX)(!b)-Schriftzug ausgeben
+!hline
+(!KKW [time])        !! Systemzeit ausgeben: (!B)(!time [%H:%M:%S])(!b)
+!hline
+(!KKW [tm])          !! (!B)(!tm)(!b)-Zeichen ausgeben
+!hline
+(!KKW [today])       !! Systemdatum in langer Schreibweise ausgeben: (!B)(!today)(!b)
+!hline
+!end_table
+
+!end_node
+
+!end_node

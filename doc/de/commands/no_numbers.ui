@@ -1,0 +1,31 @@
+!begin_node (!kw [no_numbers])
+!html_name cmd_no_numbers
+
+Keine Kapitelnummern benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_numbers [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando schaltet die Ausgabe von
+Kapitelnummern aus. In Inhaltsverzeichnissen werden
+dann nur die Kapitelnamen ausgegeben. Im Beispiel
+wird dies für das WinHelp-Format und für HTML
+gemacht.
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_numbers [win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

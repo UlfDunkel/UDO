@@ -1,0 +1,38 @@
+!begin_node (!kkw [comment])
+!html_name cmd_comment()
+
+Inline-Kommentare erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/comment [(!TEXT)])(!t)
+
+!item [(!DESCRIPTION)]
+Mit (!KKW [comment]) können Inline-Kommentare für HTML,
+WinHelp, RTF, Quickview, C und Pascal erzeugt werden. Wird im
+Vorspann der Schalter (!KW [use_comments]) benutzt, werden die
+Kommentare auch bei allen anderen Formaten in Klammern ausgegeben.
+
+!item [(!SEEALSO)]
+(!link [Kommentare] [Kommentare]), (!KW [comment]), (!link [comment-Umgebung] [comment-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!comment [Was soll das?])
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<!-- Was soll das? -->
+!end_verbatim
+!else
+(!comment [Was soll das?])
+!endif
+(!EXAMPLE_END)
+
+!end_node

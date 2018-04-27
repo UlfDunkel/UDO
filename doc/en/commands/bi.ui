@@ -1,0 +1,20 @@
+!begin_node (!kw [bi])
+!html_name cmd_bi
+
+Start an itemization environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bi(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_itemize]).
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize])
+
+!end_xlist
+
+!end_node

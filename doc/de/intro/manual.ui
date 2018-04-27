@@ -1,0 +1,44 @@
+!begin_node Wie Sie dieses Handbuch am besten lesen
+!html_name intro_manual
+
+Dieses Handbuch für UDO wurde so konzipiert, daß Sie es natürlich am
+besten mindestens einmal von vorn bis hinten durchlesen. Wir empfehlen,
+es täglich zu wiederholen. (!grin)
+
+Wir haben viele UDO-Funktionen verwendet, um das Handbuch für Sie so
+praktisch wie möglich zu machen. Hier ein paar Hinweise, damit Sie sich
+rasch zurechtfinden:
+
+!begin_description
+!ifdest [html,hh,hah]
+!item [Navigation]
+(!img [(!IMAGES)udo_hm][Home])~(!img [(!IMAGES)udo_up][Hoch])~(!img [(!IMAGES)udo_lf][links])~(!img [(!IMAGES)udo_rg][rechts]) (!nl)
+
+In der wohl am meisten gelesenen HTML-Variante können Sie bequem über
+die kleinen Symbole am oberen und unteren Rand jeder Seite zum Anfang
+des Handbuchs, eine Kapitel-Ebene höher, zum vorigen Kapitel oder zum
+nächsten Kapitel navigieren. 
+
+Unter der oberen Navigationssymbole-Leiste finden Sie zudem die
+Kapitelhierarchie nochmal aufgeführt, sodaß Sie auch dort einfach auf
+die Kapitelnamen klicken können, um andere Kapitel aufzurufen.
+!endif
+
+!item [Schrift]
+Da das UDO-Handbuch eher in die Kategorie ""Technisches Handbuch und
+Nachschlagewerk"" gehört, haben wir bestimmte Texte auf bestimmte Weise
+markiert, damit Sie z.B. Code oder Dateinamen rascher von normalem Text
+unterscheiden können.
+
+!begin_itemize !compressed
+!item (!code [Code benutzt diese Schriftart.])
+!item (!file [Dateinamen, Pfade und ähnliches werden so dargestellt.])
+!item (!red)Konstanten, die im Programm verwendet werden, sind so dargestellt.(!coloff)
+!item Verknüpfungen zu anderen Kapiteln werden wie sonst auch in Webseiten dargestellt, 
+z.B. (!url [dieser Link zur UDO-Website][http://www.udo-open-source.org/]) 
+oder diese (!link [Verknüpfung zu einem anderen Handbuch-Kapitel][Kontaktadresse]).
+!end_itemize
+
+!end_description
+
+!end_node

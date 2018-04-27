@@ -1,0 +1,33 @@
+!begin_node ((""))
+!html_name cmd_qquote
+
+Output two quotes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((""))(!t)
+
+!item [(!DESCRIPTION)]
+If you want to output two quotes you have to insert them between
+brackets. If you don't UDO will replace the two quotes by a
+typographical quote.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [("")] [("")])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+("")
+!end_verbatim
+(!EXAMPLE_AFTER)
+("")
+(!EXAMPLE_END)
+
+!end_node

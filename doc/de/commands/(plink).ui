@@ -1,0 +1,32 @@
+!begin_node (!kkw [plink])
+!html_name cmd_plink
+
+Manuellen Seitenverweis setzen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/plink [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl ist derzeit nur für (!LaTeX) sinnvoll und
+erzeugt einen Seitenbezug auf einen anderen Teil des
+Dokuments. Bei allen anderen Formaten wird lediglich
+""(!TEXT)"" ausgegeben.
+
+Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [xlink]), (!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!plink [Wort] [Sprungmarke])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

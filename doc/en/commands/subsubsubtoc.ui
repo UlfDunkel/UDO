@@ -1,0 +1,33 @@
+!begin_node (!kw [subsubsubtoc])
+!html_name cmd_subsubsubtoc
+
+List paragraphs.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Lists all paragraphs of a subsection as a table of contents
+to enable the reader of a hypertext to switch to the parapraphs.
+UDO does not list this table of contents if the
+switch (!KW [ignore_subsubsubtoc]) has been used inside the subsection.
+This table can be generated automatically with the switch (!KW [use_auto_subsubsubtocs]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

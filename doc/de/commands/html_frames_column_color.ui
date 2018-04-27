@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [html_frames_column_color])
+!html_name cmd_html_frames_column_color
+
+Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_column_color (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existierte nur in einer der Beta-Versionen
+und heisst nun (!KW [html_frames_backcolor]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_backcolor])
+
+!end_xlist
+
+!end_node
+!endif

@@ -1,0 +1,37 @@
+!begin_node (!kkkw [N] [n])
+!ifdest [ipf]
+!alias (!/N)...(!/n)
+!endif
+!html_name cmd_N()
+!label (!kk1 [/N])
+!label (!kk1 [/n])
+
+Fuﬂnote erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/N)(!TEXT)(!/n)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird als Fuﬂnote oder in Klammern dargestellt.
+
+(!IMPORTANT) Vor (!KK1 [N]) sollte sich kein Leerzeichen, Tabulator oder
+Zeilenumbruch befinden!
+
+!item [(!SEEALSO)]
+(!link [Fuﬂnoten] [Fuﬂnoten])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+der Text(!N)die Fuﬂnote(!n)
+!end_verbatim
+(!EXAMPLE_AFTER)
+der Text(!N)die Fuﬂnote(!n)
+(!EXAMPLE_END)
+
+!end_node

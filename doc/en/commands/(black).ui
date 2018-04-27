@@ -1,0 +1,34 @@
+!begin_node (!kkw [black])
+!html_name cmd_black
+
+Sets the textcolor black.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/black)(!t)
+
+!item [(!DESCRIPTION)]
+Text following this placeholder will be displayed in black color.
+You can revert to the default color using the placeholder (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Text colors] [Text colors])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)The word (!coloff)(!black)black(!coloff)(!red) appears colored in black(!coloff).
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)The word (!coloff)(!black)black(!coloff)(!red) appears colored in black(!coloff).
+(!EXAMPLE_END)
+
+!end_node

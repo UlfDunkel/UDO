@@ -904,4 +904,7 @@ fi
 AC_OUTPUT([
 	Makefile
 	src/Makefile
+	doc/Makefile
+	doc/en/Makefile
+	doc/de/Makefile
 ])

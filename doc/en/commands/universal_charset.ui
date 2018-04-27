@@ -1,0 +1,37 @@
+!begin_node (!kw [universal_charset])
+!html_name cmd_universal_charset
+
+Turn on universal charset.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/universal_charset [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+""(!KW [universal_charset] [[on!!]])"" switches on the usage of the
+universal charset, ""(!KW [universal_charset] [[off!!]])"" switches it
+off. UDO won't use the universal charset by default because it takes
+some time to look for and convert these special characters.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Universal charset] [Universal charset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!end_verbatim
+(!EXAMPLE_AFTER)
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!universal_charset [off]
+(!EXAMPLE_END)
+
+!end_node

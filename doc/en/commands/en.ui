@@ -1,0 +1,20 @@
+!begin_node (!kw [en])
+!html_name cmd_en
+
+Finish a chapter/section/subsection/paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/en(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_node]).
+
+!item [(!SEEALSO)]
+(!KW [end_node])
+
+!end_xlist
+
+!end_node

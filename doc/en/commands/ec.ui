@@ -1,0 +1,20 @@
+!begin_node (!kw [ec])
+!html_name cmd_ec
+
+Finish a center environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ec(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_center]).
+
+!item [(!SEEALSO)]
+(!KW [end_center])
+
+!end_xlist
+
+!end_node

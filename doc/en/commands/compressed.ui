@@ -1,0 +1,27 @@
+!begin_node (!kw [compressed])
+!html_name cmd_compressed
+
+Output a compressed environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/compressed(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch together with environments this specific
+environment will be printed without additional vertical space. The
+example shows how to output a ""compressed"" itemize environment.
+
+!item [(!EXAMPLE)]
+(!T)!/begin_itemize !/compressed(!t)
+
+!item [(!EXISTSSINCE)] Version~7.01
+
+!item [(!SEEALSO)]
+(!KW [not_compressed]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_itemize]), (!KW [use_compressed_descriptions]), (!KW [use_compressed_enumerates]), (!KW [use_compressed_envs]), (!KW [use_compressed_itemizes]), (!KW [use_compressed_lists])
+
+!end_xlist
+
+!end_node

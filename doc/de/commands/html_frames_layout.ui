@@ -1,0 +1,48 @@
+!begin_node (!kw [html_frames_layout])
+!html_name cmd_html_frames_layout
+
+Frames erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_layout {[(!TEXT)]}(!t)
+
+!item [(!DESCRIPTION)]
+Erzeugt ein Layout ähnlich dem ""modernen"" Tabellenlayout, allerdings wird das
+""kleine"" Inhaltsverzeichnis in einem Frame erzeugt. Wie beim
+""modernen"" Layout werden auch hier die sogenannten Kapitel-Icons beachtet.
+
+UDO benutzt folgende Dateinamen, die Sie daher selber nicht benutzen
+sollten: (!file [00con.htm[l!]]) und (!file [00toc.htm[l!]]).
+
+Als ""(!TEXT)"" können folgende Parameter übergeben werden:
+
+!begin_itemize !compressed
+!item ""noresize"": Fügt dem Frameset-Tag ""noresize"" hinzu. Die
+Breite des linken Frames lässt sich dann vom Benutzer nicht
+mehr verändern.
+!item ""noborder"": Fügt dem Frameset-Tag ""border=0 frameborder=0 framespacing=0""
+hinzu. Der linke Frame hat dann keinen Rand
+mehr.
+!item ""noscrolling"": Fügt dem Frame-Tag ""scrolling=no"" hinzu. Im
+linken Frame kann dann nicht mehr gescrollt werden.
+!end_itemize
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [html_frames_position]), (!KW [html_frames_width]), (!KW [html_frames_height]), (!KW [html_frames_backcolor]), (!KW [html_frames_alignment]), (!KW [html_frames_toc_title]), (!KW [html_frames_con_title]), (!KW [html_modern_layout])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_frames_layout noborder noresize noscrolling
+!html_frames_layout [noborder, noresize]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

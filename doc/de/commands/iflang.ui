@@ -1,0 +1,47 @@
+!begin_node (!kw [iflang])
+!html_name cmd_iflang
+
+Abfrage der Ausgabesprache.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/iflang [(!LANGUAGE)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando fragt die aktuelle Ausgabesprache ab.
+Wird ein deutscher Text erzeugt und wird als
+""(!LANGUAGE)"" die Zeichenkette ""(!code [german])"" verwendet, so
+werden alle Zeilen ausgewertet, die bis (!KW [else]) bzw.
+(!KW [endif]) angegeben werden. Andernfalls werden alle
+Zeilen ausgewertet, die zwischen (!KW [else]) und (!KW [endif])
+angegeben werden.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [ifnlang]), (!KW [ifdest]), (!KW [language]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!iflang [english]
+This text is visible only in the English manual.
+!endif
+!iflang [german]
+Dieser Text ist nur im deutschen Handbuch sichtbar.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!iflang [english]
+This text is only visible in the English manual.
+!endif
+!iflang [german]
+Dieser Text ist nur im deutschen Handbuch sichtbar.
+!endif
+(!EXAMPLE_END)
+
+!end_node

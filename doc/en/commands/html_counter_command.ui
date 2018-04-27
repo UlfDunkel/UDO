@@ -1,0 +1,28 @@
+!begin_node (!kw [html_counter_command])
+!html_name cmd_html_counter_command
+
+Place counter (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_counter_command (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+The ""(!TEXT)"" following the command will be written
+unprocessed to the footer line of the current page.
+This command can be used to place the command for
+a counter or similar. For the frames or ""modern""
+layout, it will be displayed in the right column.
+
+When used in the preamble, this will be done for every output file.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [use_raw_footer])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,29 @@
+!begin_node (!kw [parwidth])
+!html_name cmd_parwidth
+
+Set the paragraph width.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/parwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this switch you can tell UDO which width it should use for the
+lines it saves. UDO uses (!const [70]) by default. You can change this value by
+using a (!VALUE) between (!const [20]) and (!const [200]). When converting to
+Windows Help, Apple QuickView or HTML you can use a value that's
+greater than 200 if you use the switch (!KW [use_output_buffer]).
+
+!item [(!EXAMPLE)]
+(!T)!/parwidth 98(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_output_buffer])
+
+!end_xlist
+
+!end_node

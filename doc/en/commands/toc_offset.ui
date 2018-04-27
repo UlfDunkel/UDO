@@ -1,0 +1,32 @@
+!begin_node (!kw [toc_offset])
+!html_name cmd_toc_offset
+
+Set offset of chapter counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/toc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" will be added to the current
+chapter counter when printing a headline or a table of contents.
+The example shows how to print the first
+chapter with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!toc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

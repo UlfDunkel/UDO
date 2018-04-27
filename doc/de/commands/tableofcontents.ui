@@ -1,0 +1,35 @@
+!begin_node (!kw [tableofcontents])
+!html_name cmd_tableofcontents
+
+Inhaltsverzeichnis ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tableofcontents !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando gibt ein komplettes Inhaltsverzeichnis aus, welches
+durch ausgabeformatspezifische Kommandos eingefasst und in Hypertexten
+auf einer eigenen Seite dargestellt wird. Dieses Kommando sollte direkt
+nach (!KW [begin_document]) bzw. nach (!KW [maketitle]) eingesetzt
+werden. Der Umfang des Inhaltsverzeichnis lässt sich durch den Schalter
+(!KW [use_compressed_tocs]) oder durch Angabe des Schalters
+(!KW [depth]) verkleinern.
+Das Beispiel zeigt, wie Sie ein Inhaltsverzeichnis ausgeben,
+das nur die Nodes (1.~Ebene) enthält.
+
+!item [(!SEEALSO)]
+(!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tableofcontents !depth 1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

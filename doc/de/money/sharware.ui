@@ -1,0 +1,61 @@
+!begin_node Shareware
+
+UDO ist Shareware. Dies bedeutet folgendes:
+
+!begin_itemize
+
+!item Sie dürfen UDO genau vier Wochen lang testen!
+
+!item Texte, die während der Probezeit erstellt wurden, dürfen der
+Öffentlichkeit nicht zugänglich gemacht werden, weder als Quelltext
+noch in umgewandelter Form!
+
+!item Nach Ablauf der vier Wochen müssen Sie sich entscheiden, ob Sie
+UDO (!link [kaufen] [Registrierung]) oder ob Sie UDO nicht benutzen
+möchten. Falls Sie UDO nach Ablauf der Testphase nicht kaufen möchten,
+sind Sie verpflichtet, UDO samt aller zugehörigen Dateien zu löschen,
+denn andernfalls würden Sie mit einer Raubkopie arbeiten!
+
+!end_itemize
+
+Sollte ich wider Erwarten zu wenig Resonanz in Form von Registrierungen
+bekommen, werde ich entweder
+
+!begin_enumerate
+
+!item UDO zur Crippleware machen(!N)etwa mit häßlichen Warteschleifen,
+begrenzten Dokumentgrößen, vertauschten Buchstaben in der Zieldatei,
+!..(!n) oder
+
+!item neue Versionen nicht mehr veröffentlichen und nur noch an
+registrierte Anwender herausgeben oder
+
+!item die Weiterentwicklung von UDO komplett einstellen.
+
+!end_enumerate
+
+Das sind keine leeren Drohungen, das ist mein Ernst! Ich bin in der
+Vergangenheit bereits oft genug enttäuscht worden. Manche mögen
+angesichts dieser Worte schmunzeln, ich kann darüber gar nicht mehr
+lachen!
+
+Die ersten Auswirkungen unbefriedigender Resonanz aus dem DOS- und
+Unix-Sektor bekommen Sie nun bereits zu spüren, denn war bis
+einschließlich Release 5 nur die Atari-GEM-Version eingeschränkt,
+enthalten nun auch die Kommandozeilenversionen auf allen Systemen
+häßliche Einschränkungen:
+
+!begin_enumerate
+
+!item UDO erzeugt am Ende jeder Seite einen Hinweis, daß der Text mit
+einer unregistrierten Version erstellt wurde.
+
+!item Der Schalter (!KW [use_about_udo]) wird für alle Ausgabeformate
+automatisch gesetzt.
+
+!end_enumerate
+
+Nach erfolgter Registrierung erhält man einen Schlüssel, mit dem man
+diese Einschränkungen aufheben kann.
+
+!end_node

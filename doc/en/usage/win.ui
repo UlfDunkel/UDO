@@ -1,0 +1,21 @@
+!begin_node UDO Shell for Windows
+!html_name usage_winshell
+
+On the Windows platform you can use a graphical user interface (shell) for interacting with UDO.
+The shell is currently out of development.
+See (!url [http://www.udo-open-source.org/download/shells.php] [] [] [elink]).
+
+!begin_ignore
+
+The UDO shell for Windows (""UDOSH"") makes it easier for you to use UDO
+with Windows.
+
+The shell can call UDO, editors and viewers and you can simple choose which
+destination format you want to use by clicking the mouse.
+
+The shell is distributed with the complete source code for Borland C++ and
+is described in a separate documentation.
+
+!end_ignore
+
+!end_node

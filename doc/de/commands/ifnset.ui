@@ -1,0 +1,43 @@
+!begin_node (!kw [ifnset])
+!html_name cmd_ifnset
+
+Symbol abfragen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifnset [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Abfragebefehl können Sie testen, ob ein
+Symbol für die Umwandlung (!I)weder(!i) in der Kommandozeile
+mit der Option (!code [-D]) noch mit (!KW [set]) gesetzt wurde. Wurde
+""(!TEXT)"" nicht gesetzt, werden alle folgenden Zeilen
+umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht.
+Andernfalls werden nur die Zeilen umgewandelt, die
+(!KW [else]) folgen, sofern die Abfrage einen Sonst-Zweig
+besitzt. Das Beispiel zeigt, wie Sie abfragen, ob das
+Symbol ""deutsch"" nicht gesetzt wurde.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [ifset]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifnset [deutsch]
+This doesn't seem to be a German documentation.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifnset [deutsch]
+This doesn't seem to be a German documentation.
+!endif
+(!EXAMPLE_END)
+
+!end_node

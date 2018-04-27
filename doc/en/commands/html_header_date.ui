@@ -1,0 +1,40 @@
+!begin_node (!kw [html_header_date])
+!html_name cmd_html_header_date
+
+Use meta tags for modication date (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_header_date (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+When using this switch, UDO will generate a META tag
+for the document generation date/time.
+
+""(!code [+00:00])"" means the difference from local time to UTC (Coordinated Universal Time, former
+GMT). Using the optional parameter (!TEXT), you can specify a value for
+this time difference, e.g. (!T)!/html_header_date +02:00(!t).
+
+There are no verifications on (!TEXT). You are responsible for using a
+legal value. If <text> is empty, the value for the time difference is
+set to ""+00:00"".
+
+!item [(!EXISTSSINCE)] Version~6.5.2
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_header_date +02:00
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER)
+!begin_preformatted
+<meta name="date" content="2009-06-15T22:21:10+01:00">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

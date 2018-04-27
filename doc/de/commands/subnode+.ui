@@ -1,0 +1,32 @@
+!begin_node (!kw [subnode*])
+!html_name cmd_subnode_asterisk
+
+Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie
+(!KW [subnode]), mit der Ausnahme, daﬂ ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [subnode]), (!KW [psubnode*]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subnode* Titel des versteckten Abschnitts
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Titel des versteckten Abschnitts
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,45 @@
+!begin_node (!kw [html_name_prefix])
+!html_name cmd_html_name_prefix
+
+Ausgabenamen ändern (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_name_prefix (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieses Kommando im Vorspann benutzt, wird allen
+Dateinamen, die für HTML erzeugt werden, der angegebene
+Text vorangestellt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [html_name])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!html_name_prefix udo_
+
+# Hauptteil
+!begin_document
+!begin_node Einleitung
+!html_name intro
+...
+!end_node
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!file [udo_intro.htm])
+!heading Einleitung
+!..
+!hline
+(!EXAMPLE_END)
+
+!end_node

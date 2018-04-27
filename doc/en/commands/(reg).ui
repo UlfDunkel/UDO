@@ -1,0 +1,22 @@
+!begin_node (!kkw [reg])
+!html_name cmd_reg()
+
+Output the registered symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/reg)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder has been renamed to (!KKW [registered]).
+
+!item [(!EXISTSSINCE)] Version~6.5.8
+
+!item [(!SEEALSO)]
+(!KKW [tm]), (!KKW [registered]), (!link [Predefined macros] [Predefined macros])
+
+!end_xlist
+
+!end_node

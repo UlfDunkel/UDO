@@ -1,0 +1,43 @@
+!begin_node (!kw [begin_node])
+!html_name cmd_begin_node
+
+Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_node (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet, abhängig von der momentanen Gliederungsebene,
+ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
+mit der Bezeichnung ""(!TEXT)"" ein.
+Kapitel erscheinen in Inhaltsverzeichnissen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [end_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node Titel des Kapitels
+...
+    !begin_node Titel des Abschnitts
+    ...
+    !end_node
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des Kapitels
+!.. 
+!subheading Titel des Abschnitts
+!..
+(!EXAMPLE_END)
+
+!end_node

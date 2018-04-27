@@ -1,0 +1,24 @@
+!begin_node Thanks
+
+At this point I want to say ""Thank you"" to the following people
+because of their effective help. Without this help UDO wouldn't be like
+it is today. 
+
+Thank you 
+
+!begin_description
+  !item [Denesh Bhabuta], for supporting UDO in Great Britain
+  !item [Alexander Clauss], for compiling the HP-UX 300/400 version
+  !item [Dirk Haun], one of the fathers of UDO
+  !item [Patrick Jerchel], for managing the mailing list
+  !item [Peter Klasen], the first registered user of UDO
+  !item [Martin Loos], for managing the old mailing list
+  !item [Martin Osieka], for porting UDO to MacOS
+  !item [Rainer Riedl], for compiling the BeOS version
+  !item [Tom Thomason], for supporting UDO in Sweden
+!end_description
+
+In addition to that I want to thank all users of UDO for their
+indefatigable efforts to make UDO better and better.
+
+!end_node

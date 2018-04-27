@@ -1,0 +1,29 @@
+!begin_node (!kw [tex_dpi])
+!html_name cmd_tex_dpi
+
+Grafikauflösung setzen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tex_dpi (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Auflösung, mit der Bilder in (!LaTeX)
+ausgegeben werden sollen. Beim Lindner-(!TeX) wird
+dieser Wert herangezogen, um den Header eines GEM-Images zu verändern.
+
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tex_dpi 100
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,36 @@
+!begin_node (!kkkw [SUB] [sub])
+!ifdest [ipf]
+!alias (!/SUB)...(!/sub)
+!endif
+!html_name cmd_subscript
+!label (!kk1 [/SUB])
+!label (!kk1 [/sub])
+
+Output subscripted text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUB)[(!TEXT)](!/sub)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed subscripted if possible.
+
+!item [(!EXISTSSINCE)] Version~6.5.20
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+This text is (!/SUB)subscripted(!/sub).
+!end_verbatim
+(!EXAMPLE_AFTER)
+This text is (!/SUB)superscripted(!/sub).
+(!EXAMPLE_END)
+
+!end_node

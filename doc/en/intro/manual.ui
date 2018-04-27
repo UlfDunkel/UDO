@@ -1,0 +1,41 @@
+!begin_node How to read this manual best
+!html_name intro_manual
+
+The UDO manual concept is this: read it at least three times from start
+to end. We recommend to repeat this on a daily base. (!grin)
+
+We have used many UDO features to make this manual as handy as possible
+for you. Here you find some hints to get the most out of the manual:
+
+!begin_description
+!ifdest [html,hh,hah]
+!item [Navigation]
+(!img [(!IMAGES)udo_hm][Home])~(!img [(!IMAGES)udo_up][Up])~(!img [(!IMAGES)udo_lf][left])~(!img [(!IMAGES)udo_rg][right])
+
+The HTML version will probably be the mostly read version. You will see
+tiny symbols on the top and bottom border of each page which guide you
+to the ""homepage"" of the manual, one chapter level up, back to the
+previous chapter and forward to the next chapter.
+
+Below the upper navigation symbols bar you will also find the
+breadcrumb section which also helps to navigate to other chapters by
+simply clicking on the chapter names.
+!endif
+
+!item [Fonts]
+Because the UDO manual's category is rather ""Technical Manual And Reference Guide"", we have marked several texts in distinct ways so you
+can differenciate e.g. code snippets or file names from normal text
+more easily.
+
+!begin_itemize
+!item (!code [Code uses this font style.])
+!item (!file [File names, paths and similar are represented this way.])
+!item (!red)Constants which are used inside the application, are shown like this.(!coloff)
+!item Links to other chapters are shown as usual in websites, 
+      e.g. (!url [this link to the UDO website][http://www.udo-open-source.org/]) 
+      or this (!link [link to another manual chapter][Contact addresses]).
+!end_itemize
+
+!end_description
+
+!end_node

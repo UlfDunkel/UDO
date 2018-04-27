@@ -1,0 +1,25 @@
+!begin_node (!kw [alias])
+!html_name cmd_alias
+
+Create aliases for node names.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/alias (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" is used as a secondary name of a chapter. UDO references
+an alias like a label or node name. You can use (!I)!/alias(!i)
+inside a chapter more than once. But you should use (!code [(!TEXT!)])
+only once.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [label]), (!link [Links] [Links]), (!link [Labels] [Labels])
+
+!end_xlist
+
+!end_node

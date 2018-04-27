@@ -1,0 +1,21 @@
+!begin_node (!kw [end_appendix])
+!html_name cmd_end_appendix
+
+Finish the appendix.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_appendix(!t)
+
+!item [(!DESCRIPTION)]
+This command finishes the appendix. UDO supports only (!I)one(!i) appendix,
+so this command should be the predecessor of (!KW [end_document]i).
+
+!item [(!SEEALSO)]
+(!KW [begin_appendix]), (!link [Appendix] [Appendix])
+
+!end_xlist
+
+!end_node

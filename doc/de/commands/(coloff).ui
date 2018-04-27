@@ -1,0 +1,35 @@
+!begin_node (!kkw [coloff])
+!html_name cmd_coloff
+
+Abschalten der gesetzen Schriftfarbe.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/coloff)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Platzhalter wird die gesetzte Schriftfarbe abgeschlossen.
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!link [Schriftfarben] [Schriftfarben])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text 
+wieder in der Standardfarbe Schwarz.
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text 
+wieder in der Standardfarbe Schwarz.
+(!EXAMPLE_END)
+
+!end_node

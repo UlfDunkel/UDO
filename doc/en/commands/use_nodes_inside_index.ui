@@ -1,0 +1,31 @@
+!begin_node (!kw [use_nodes_inside_index])
+!html_name cmd_use_nodes_inside_index
+
+Automatically insert node names into index.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_nodes_inside_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your source file all
+chapter titles will be printed in the index of the given destination
+formats.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!link [Indices] [Indices]), (!KW [no_index]), (!KW [index]), (!KW [node])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_nodes_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

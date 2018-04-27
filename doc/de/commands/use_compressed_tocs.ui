@@ -1,0 +1,33 @@
+!begin_node (!kw [use_compressed_tocs])
+!html_name cmd_use_compressed_tocs
+
+Kurze Inhaltsverzeichnisse benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_tocs [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieses Kommando im Vorspann benutzt, wird für die angegebenen
+Ausgabeformate ein kurzes Inhaltsverzeichnis erzeugt. Im
+Haupt-Inhaltsverzeichnis werden nur die Kapitelnamen und in Kapiteln
+nur die Namen der Abschnitte ausgegeben. Im Beispiel würde der Umfang
+der Inhaltsverzeichnisse bei allen Ausgabeformaten eingeschränkt.
+#!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+#!item [Existiert wieder seit:] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_compressed_tocs [all]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,24 @@
+!begin_node (!kw [html_frames_vlinkcolor])
+!html_name cmd_html_frames_vlinkcolor
+
+Specify the color of visited links of left frame (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_vlinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display visited links
+in the left frame of HTML pages
+when using the frames layout.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_linkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_textcolor]), (!KW [html_frames_backcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node

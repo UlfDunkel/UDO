@@ -1,0 +1,35 @@
+!begin_node (!kw [begin_node*])
+!html_name cmd_begin_node_asterisk
+
+Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_node* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [begin_node]),
+mit der Ausnahme, daﬂ ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [pnode*]), (!KW [begin_node]), (!KW [end_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node* Titel des versteckten Kapitels
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des versteckten Kapitels
+!..
+(!EXAMPLE_END)
+
+!end_node

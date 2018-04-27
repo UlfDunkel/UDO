@@ -1,0 +1,23 @@
+!begin_node (!kw [html_use_folders])
+!html_name cmd_html_use_folders
+
+Use folders (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_use_folders(!t)
+
+!item [(!DESCRIPTION)]
+Only when this command is used in the preamble,
+the directory names set with (!KW [html_dirname]) will be used.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_dirname])
+
+!end_xlist
+
+!end_node

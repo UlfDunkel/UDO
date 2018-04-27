@@ -1,0 +1,22 @@
+!begin_node (!kw [chaptericon_text])
+!html_name cmd_chaptericon_text
+
+Set text for chapter icon.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon_text (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed below the graphic of a (!KW [chaptericon]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon]), (!KW [chaptericon_active])
+
+!end_xlist
+
+!end_node

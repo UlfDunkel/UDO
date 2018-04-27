@@ -1,0 +1,24 @@
+!begin_node (!kw [win_linkcolor])
+!html_name cmd_win_linkcolor
+
+Set color of links (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display active
+links in WinHelp pages.
+If you use this command inside the preamble,
+this will be the default color for all
+pages including the table of contents.
+
+!item [(!SEEALSO)]
+(!KW [win_textcolor]), (!KW [win_backcolor])
+
+!end_xlist
+
+!end_node

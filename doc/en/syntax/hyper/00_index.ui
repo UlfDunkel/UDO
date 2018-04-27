@@ -1,0 +1,39 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Hypertext commands
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: EXAMPLE_... macros optimized
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   ggs Apr 05: removed some !]
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Hypertext commands
+!html_name hypertext
+
+!include syntax/hyper/label.ui
+!include syntax/hyper/link.ui
+
+!end_node

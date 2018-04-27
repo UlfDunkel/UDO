@@ -1,0 +1,30 @@
+!begin_node (!kw [html_propfont_size])
+!html_name cmd_html_propfont_size
+
+Set size of default font (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_propfont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+This command sets the size of the font that
+is used to display regular text.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_propfont_name])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_propfont_size -1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,97 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.02
+# Language    : English
+# Initial Date: 2010-05-25
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  May 25: introduced
+#   fd  May 26: #89
+# 2013:
+#   fd  May 02: completed for release
+#
+################################################################################
+
+!begin_node Changes in version 7.02
+!html_name history_0702
+
+(!PUBLISHED [UDO~7.02][May 02, 2013])
+
+In general, this update version brings many tiny adjustments, fixes and enhancements, esp. for HTML output. 
+But we also added some new and adjusted stuff for some UDO commands.
+
+!begin_description !compressed
+# ----------------------------------------
+!item [(!KW [begin_enumerate])]
+# ----------------------------------------
+      The command now supports an optional parameter which allows to define another start value for the enumeration. [fd]
+
+
+# ----------------------------------------
+!item [(!KW [code_target])]
+# ----------------------------------------
+      !begin_itemize
+      !item (!BUG [94]): HTML output no longer crashes when (!KW [html_ignore_8bit]) is not set. [fd]
+      !item (!BUG [95]): RTF output supports Unicode. [fd]
+      !item (!BUG [96]): LaTeX output supports Unicode. [fd]
+      !end_itemize
+
+
+# ----------------------------------------
+!item [(!KW [docinfo]) [translator!]]
+# ----------------------------------------
+      !begin_itemize
+      !item (!BUG [88]): PS output (and others) no longer crash if certain (!KW [docinfo]) parameters are not defined. [fd]
+      
+      !item The (!KW [docinfo]) parameter ""translator"" now translates to a more general ""Translation:"" (instead of ""Translator:"").
+            This allows to mention more than one translator for your document much easier. [fd]
+            
+      !item LaTeX output supports the parameters ""domain_name"", ""domain_link"", ""contact_name"", and ""contact_link"". [fd]
+      !end_itemize
+
+
+# ----------------------------------------
+!item [html_merge_!..]
+# ----------------------------------------
+      When files are merged with one of the commands (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), 
+      or (!KW [html_merge_subsubsubnodes]), labels in the index are correctly generated. [ggs]
+
+
+# ----------------------------------------
+!item [(!KW [html_navigation]) [image!]]
+# ----------------------------------------
+      HTML navigation bar output using GIF images no longer writes linefeeds in order to prevent gaps between images, 
+      so you can use images in segmented control style, like e.g. in Apple form sheets. [fd]
+
+
+# ----------------------------------------
+!item [(!KW [language])]
+# ----------------------------------------
+      UDO now supports 15~languages, most of them are completely localized.
+      We are really glad about any support to add more languages. [fd]
+      
+      !include syntax/misc/short_lang.ui
+
+
+# ----------------------------------------
+!item [(!KW [subsubsubsubnode])]
+# ----------------------------------------
+      All relevant UDO commands for chapters of 4th category are supported. [fd]
+
+
+# ----------------------------------------
+!item [(!KKW [url])]
+# ----------------------------------------
+      (!BUG [89]): The command has been enhanced to await an optional third (!TARGET) parameter and an optional fourth (!CLASS) parameter. 
+      With these two new parameters you can control the target, a URL should be opened in, and the CSS class which formats the URL. [fd]
+!end_description
+
+!end_node

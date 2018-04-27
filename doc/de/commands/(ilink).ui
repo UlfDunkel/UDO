@@ -1,0 +1,39 @@
+!begin_node (!kkw [ilink])
+!html_name cmd_ilink()
+
+Querverweis mit Grafik (nur WinHelp und HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/ilink [(!FILE)] [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter ist eine Kombination der Platzhalter
+(!KKW [img]) und (!KKW [link]) und dient dazu,
+einen Querverweis durch eine Grafik zu ermöglichen.
+Dies ist momentan nur beim WinHelp- und HTML-Format
+möglich. Im Beispiel wird das Bild (!file [udo_16.bmp]) bzw.
+(!file [udo_16.gif]) zur Darstellung des Links benutzt, das
+Sprungziel lautet ""Installation"". Bei HTML wird als
+Alternativtext ""UDO installieren"" ausgegeben. Bei allen
+anderen Formaten wird nur ""UDO installieren"" ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KKW [img]), (!KKW [link]), (!link [Querverweise] [Querverweise]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!ilink [udo_16] [UDO installieren] [Installation])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!ilink [(!IMAGES)udo_16] [UDO installieren] [Installation])
+(!EXAMPLE_END)
+
+!end_node

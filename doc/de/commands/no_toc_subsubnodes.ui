@@ -1,0 +1,31 @@
+!begin_node (!kw [no_toc_subsubnodes])
+!html_name cmd_no_toc_subsubnodes
+
+Im Inhaltsverzeichnis keine Unterabschnitte auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_toc_subsubnodes [(!FORMAT)<](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, so werden
+bei den angegebenen Formaten im Inhaltsverzeichnis
+keine Unterabschnitte und Pragraphen aufgelistet.
+
+Eine andere Möglichkeit, die Tiefe der Ausgabe des
+Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
+des Parameters (!KW [depth]) bei (!KW [toc]).
+
+!item [(!EXAMPLE)]
+(!T)!/no_toc_subsubnodes [win,stg,html](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+!end_node

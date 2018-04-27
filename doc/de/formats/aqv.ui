@@ -1,0 +1,32 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Apple-QuickView
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node Apple QuickView
+!html_name format_aqv
+!alias Apple-QuickView
+
+Apple QuickView ist ein Hypertext-Format, das unter älteren Mac-OS-Versionen verwendet wurde.
+Es wurde von der Firma Altura ((!url [www.altura.com] [http://www.altura.com/] [] [elink])) definiert.
+
+Eine Spezifikation des Formats ist derzeit nicht verfügbar.
+
+!end_node

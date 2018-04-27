@@ -1,0 +1,20 @@
+!begin_node (!kw [bfr])
+!html_name cmd_bfr
+
+Start right justified text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bfr(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_flushright]).
+
+!item [(!SEEALSO)]
+(!KW [begin_flushright])
+
+!end_xlist
+
+!end_node

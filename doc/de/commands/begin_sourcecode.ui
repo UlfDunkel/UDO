@@ -1,0 +1,32 @@
+!begin_node (!kw [begin_sourcecode])
+!html_name cmd_begin_sourcecode
+
+Eine Sourcecode-Umgebung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_sourcecode(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando leitet eine sourcecode-Umgebung ein.
+Diese Umgebung muss mit (!KW [end_sourcecode]) beendet
+werden. Zeilen die in einer solchen Umgebung
+angegeben sind, werden für die Sourcecode-Formate
+ohne Anpassung ausgegeben. Bei allen ""normalen""
+Formaten erfolgt die Ausgabe der Zeilen, als ob sie
+innerhalb einer verbatim-Umgebung stehen, welche sich
+wiederum innerhalb einer quote-Umgebung befindet.
+Somit wirken auch hier die Befehle, die für die
+verbatim-Umgebungen vorgesehen sind, wie z.B. (!KW [verbatimsize]) und
+(!KW [no_verbatim_umlaute]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [end_sourcecode]), (!KW [sinclude]), (!KW [no_sourcecode])
+
+!end_xlist
+
+!end_node

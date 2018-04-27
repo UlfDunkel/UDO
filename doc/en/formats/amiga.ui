@@ -1,0 +1,56 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: AmigaGuide
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node AmigaGuide
+!html_name format_amg
+
+AmigaGuide is a hypertext system created by Commodore. AmigaGuide is the standard format for
+online documentations on Amiga computer (running under AmigaOS).
+AmigaGuide viewers are also available for other platforms, like Windows or Linux.
+
+!autoref [off]
+More information can be found on:
+
+!begin_itemize
+
+!item General Overview on Amiga Computer: (!nl)
+      (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amiga] [] [] [elink])
+
+!item AmigaGuide: A Hypertext Documentation System (functional overview): (!nl)
+      (!url [http://www.reality-check-inc.com/aguide.htm] [] [] [elink])
+
+!item AmigaGuide (general overviews with links to AmigaGuide viewers for other operating systems): (!nl)
+      (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amigaguide] [] [] [elink])
+
+!item The AmigaGuide Manual. The (!I)complete(!i) documentation of AmigaGuide commands. By Aric R.~Caley (1995): (!nl)
+      (!url [Detailed AmigaGuide format description] [http://www.lysator.liu.se/amiga/code/guide/amigaguide.guide] [] [elink])
+
+!item AmigaGuide Tags and Commands: (!nl)
+      (!url [AmigaGuide format overview] [http://www.safalra.com/hypertext/amigaguide/] [] [elink])
+
+!item How To Write an AmigaGuide: (!nl)
+      (!url [http://ale.emuunlim.com/write-amigaguide.htm] [] [] [elink])
+
+!end_itemize
+
+!autoref [on]
+
+!end_node

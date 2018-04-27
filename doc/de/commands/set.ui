@@ -1,0 +1,34 @@
+!begin_node (!kw [set])
+!html_name cmd_set
+
+Symbol setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/set (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie Symbole in einem
+Quelltext setzen, die Sie durch die Abfrage-Kommandos
+(!KW [ifset]) und (!KW [if]) testen können. Symbole lassen sich auch
+durch die Option (!code [-D]) setzen. Mit dem Befehl (!KW [unset])
+können Sie gesetzte Symbole wieder löschen. (!KW [set]) können
+Sie überall im Quelltext benutzen.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [unset]), (!KW [ifset]), (!KW [ifnset]), (!link [Symbole] [Symbole])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!set UseColourGraphics
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

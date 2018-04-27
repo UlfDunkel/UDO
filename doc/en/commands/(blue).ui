@@ -1,0 +1,34 @@
+!begin_node (!kkw [blue])
+!html_name cmd_blue
+
+Sets the textcolor blue.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/blue)(!t)
+
+!item [(!DESCRIPTION)]
+Text following this placeholder will be displayed in blue color.
+You can revert to the default color using the placeholder (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Text colors] [Text colors])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+The word (!blue)blue(!coloff) appears colored in blue.
+!end_verbatim
+(!EXAMPLE_AFTER)
+The word (!blue)blue(!coloff) appears colored in blue.
+(!EXAMPLE_END)
+
+!end_node

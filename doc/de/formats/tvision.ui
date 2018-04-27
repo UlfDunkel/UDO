@@ -1,0 +1,139 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Turbo Vision Help
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: 'Tip' -> 'Tipp' (NDR)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using ndash instead of mdash in German texts
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Turbo-Vision-Hilfe
+!html_name format_tvh
+
+Dieses Format wird benutzt, um Onlinehilfen für DOS-Programme zu
+erstellen, die mit Borlands Turbo-Vision-Library geschrieben wurden.
+Zuständiger Konverter ist das Programm (!file [TVHC.EXE]), das den
+Entwicklungssystemen auch im Sourcecode beiliegt.
+
+Da das Turbo-Vision-Hilfe-Format wohl nur für Programmierer interessant
+sein dürfte, werden hier auch einige Tipps gegeben, wie Sie den TVHC
+patchen sollten.
+
+Nichtprogrammierer sollten dieses Format meiden, sprich Ihre Hypertexte
+nicht in diesem Format weitergeben, da es außerhalb der Erstellung von
+Onlinehilfen für eigene Programme keine Bedeutung hat.
+
+!begin_description !not_compressed
+
+#####################################################################
+
+!item [TVHC meldet den Fehler ""Unterminated topic reference""!?]
+
+Der mir vorliegende TVHC Version 1.0 enthält einen bösen Fehler, der
+dazu führt, daß die Quotefunktion -- das Aufheben der Funktion der
+geschweiften Klammer durch doppelte Angabe -- nicht funktioniert.
+Falls der TVHC Ihnen die obige Fehlermeldung präsentiert, ändern Sie
+die Funktion (!code [scanForCrossRefs(!)]) in (!file [tvhc.cpp]) folgendermaßen um:
+
+!begin_description
+!item [Original:]
+
+!begin_quote
+!begin_verbatim
+if (line[i+1] == begXRef)
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+
+!item [Patch:]
+
+!begin_quote
+!begin_verbatim
+if (line[i] == begXRef)    // [i] statt [i+1]
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+!end_description
+
+Nach dieser Änderung sollten Sie den TVHC neu übersetzen, um die
+Änderungen wirksam werden zu lassen.
+
+#####################################################################
+
+!item [TVHC meldet den Fehler ""Text too long""!?]
+
+In der Datei (!file [tvhc.h]) legt eine Konstante namens bufferSize die Größe des
+Textpuffers fest, den der TVHC als Zwischenspeicher währen der
+Übersetzung benutzt. Der Puffer ist ziemlich klein dimensioniert, falls
+Sie obige Fehlermeldung erhalten.
+
+Legen Sie einen ausreichen großen Puffer (z.B. 32 KB) an, sodaß auch
+größere Texte problemlos übersetzt werden.
+
+!begin_quote
+!begin_verbatim
+const bufferSize = 32768;
+!end_verbatim
+!end_quote
+
+Nach dieser Änderung sollten Sie den TVHC neu übersetzen, um die
+Änderung wirksam werden zu lassen.
+
+#####################################################################
+
+!item [TVHC meldet den Fehler ""TOPIC expected""!?]
+
+Dieser Fehler tritt auf, sobald eine Zeile mit einem Punkt -- dem
+""commandChar"" -- beginnt. Die mir vorliegende Version bricht darauf
+die Umwandlung ab.
+
+Dieser Abbruch ist jedoch unnötig, weshalb ich meinen TVHC gepatched
+habe. Falls Sie den Sourcecode vorliegen haben, suchen Sie nach
+
+!begin_quote
+!begin_verbatim
+error("TOPIC expected");
+!end_verbatim
+!end_quote
+
+und ersetzen Sie es durch
+
+!begin_quote
+!begin_verbatim
+warning("TOPIC expected");
+!end_verbatim
+!end_quote
+
+Nach einer Neuübersetzung des TVHC bricht dieser die Umwandlung nicht
+mehr ab, sondern gibt lediglich eine Warnmeldung aus, die Sie
+ignorieren können.
+
+#####################################################################
+
+!end_description
+
+!end_node

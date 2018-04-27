@@ -1,0 +1,23 @@
+!begin_node (!kw [ignore_toptoc])
+!html_name cmd_ignore_toptoc
+
+In dem zugehörigen Node kein ""toptoc"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_toptoc(!t)
+
+!item [(!DESCRIPTION)]
+Wenn innerhalb eines Nodes dieser Schalter gesetzt
+wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~7 Version~11
+
+!item [(!SEEALSO)]
+(!KW [use_auto_toptocs])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,28 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [begin_stg])
+!html_name cmd_begin_stg
+!label !/else_stg
+!label !/end_stg
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_stg(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+
+!include appendix/history/begin_asc.ui
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [else]), (!KW [endif])
+
+!end_xlist
+
+!end_node
+!endif

@@ -1,0 +1,31 @@
+!begin_node (!k1 [//-])
+!html_name cmd_qsyllable
+
+Output the character string !/-.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!//-(!t)
+
+!item [(!DESCRIPTION)]
+This string will be converted to !/-.
+Please note that (!K1 [/-]) would
+be interpreted as hyphenation mark.
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!K1 [/-])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Use !/- to output a exclamation mark and minus.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Use !/- to output a exclamation mark and minus.
+(!EXAMPLE_END)
+
+!end_node

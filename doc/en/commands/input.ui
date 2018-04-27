@@ -1,0 +1,29 @@
+!begin_node (!kw [input])
+!html_name cmd_input
+
+Include file.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/input (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Opens the file named ""file"" and converts its contents.
+In contrast to (!KW [include]) this command
+only looks up the file in the directory
+defined by the environment variable (!file [$UDOINPUTPATH]).
+(!FILESPACEQUOTE)
+
+!item [(!EXAMPLE)]
+(!T)!/input macros.ui(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!KW [rinclude]), (!link [Split documents] [Split documents])
+
+!end_xlist
+
+!end_node

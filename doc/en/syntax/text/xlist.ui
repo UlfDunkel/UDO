@@ -1,0 +1,102 @@
+!begin_node Lists
+!html_name style_lists
+!label xlist environment
+
+Like the description environment this set of commands is useful to
+describe words. Using this environment the description of each word
+is displayed beneath one another.
+
+The xlist environment starts with (!KW [begin_xlist]) and
+finishes with (!KW [end_xlist]). You have to tell UDO in brackets
+how wide it should indent the descriptions of each item. Usually you
+use the longest word in brackets. Each word that has to be described
+has to used inside the brackets of the (!KW [item]) command.
+
+You can use the xlist environment inside other (xlist) environments, too.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)xlist1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)xlist1.ui
+(!EXAMPLE_END)
+
+The command (!KW [compressed]) can also be used for xlist environments. To get
+a compressed list just add (!KW [compressed]) at the end of the line that
+contains (!KW [begin_xlist]). Once more a short example:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)xlist2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)xlist2.ui
+(!EXAMPLE_END)
+
+
+!label blist environment
+!label ilist environment
+!label tlist environment
+Since Release 6 UDO offers three additional environments that are similar
+to the xlist environment. In contrast to the xlist environment the items
+will be displayed in bold, italic or typewritered text.
+
+!begin_enumerate
+
+!item   When using the blist environment (bold list) the items will be
+displayed in bold text. A blist environment will be started with
+(!KW [begin_blist]) and finished with (!KW [end_blist]).
+
+!item   When using the ilist environment (italic list) the items will be
+displayed in italic text. A blist environment will be started with
+(!KW [begin_ilist]) and finished with (!KW [end_ilist]).
+
+!item   When using the tlist environment (typewritered list) the items will be
+displayed in typewritered text. A tlist environment will be started with
+(!KW [begin_tlist]) and finished with (!KW [end_tlist]).
+
+!end_enumerate
+
+!smallskip
+
+The following example shall demonstrate the results:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)xlist3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)xlist3.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+You have to notice some aspects:
+
+!begin_enumerate !compressed
+
+!item   If the text inside the brackets contains a ""]"" you have to quote
+it with an exclamation mark so that UDO will recognize that this ""]"" shall
+be part of the item and shall be displayed on the ""left side"".
+
+!item When the last character is an exclamation mark, a ""/"" has to follow 
+or UDO would protect the closing bracket instead of outputting an exclamation mark.
+
+!index (!kw [html_no_xlist])
+!item HTML output creates tables for these lists. 
+If you don't want table output for any reasons, you can advise UDO 
+to output these lists as description environments, 
+using the command (!KW [html_no_xlist]).
+
+!item   Linuxdoc-SGML and Texinfo don't support an environment like
+UDO's xlist environment. In these formats the xlist environments are
+displayed like a description environment by default. But if you use the
+switch (!KW [use_xlist]) inside the preamble UDO will print xlist
+environments like in ASCII, but with preformatted text.
+
+!item   UDO doesn't know the character widths when converting the source
+file to RTF and Windows Help. If the indents are too wide you can adjust the
+indent by using the commands (!KW [rtf_charwidth]) and
+(!KW [win_charwidth]).
+
+!item   A description of the (!KW [compressed]) command is part of the chapter
+""Itemizations"".
+
+!end_enumerate
+
+!end_node

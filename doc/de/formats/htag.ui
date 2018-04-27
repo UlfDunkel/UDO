@@ -1,0 +1,47 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: HP-Helptag-SGML
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: real quotation fixed
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node HP-Helptag-SGML
+!html_name format_htag
+
+HP-Helptag-SGML ist ein SGML-basiertes Hypertext-Hilfesystem für kommerzielle Unices (HP-UX, Sun Solaris, IBM AIX).
+
+Weiterführende Informationen:
+!autoref [off]
+
+!begin_itemize !not_compressed
+
+!item Common Desktop Environment (CDE) Help System:
+(!url [http://www.oasis-open.org/cover/gen-apps.html#cde] [] [] [elink]) (allgemeiner Überblick, mit weiteren Links)
+
+!item ""Common Desktop Environment: Help System Author's and Programmer's Guide"":
+(!url [http://h71000.www7.hp.com/doc/73final/helpguide/helpguide_5.html] [] [] [elink])
+
+!end_itemize
+
+!autoref [on]
+
+# siehe auch: Studienarbeit, Vergleich bestehender Online-Helpsysteme:
+# http://w3studi.informatik.uni-stuttgart.de/~maiersn/uni/hd/sa/ausarbeitung/ausarbeitung-9.html
+
+!end_node

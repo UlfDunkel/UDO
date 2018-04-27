@@ -1,0 +1,25 @@
+!begin_node (!kw [stg_limage])
+!html_name cmd_stg_limage
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/stg_limage [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!item [(!EXAMPLE)]
+(!T)!/stg_limage [off](!t)
+
+!item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [image])
+
+!end_xlist
+
+!end_node

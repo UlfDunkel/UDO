@@ -1,0 +1,47 @@
+!begin_node (!kw [tabwidth])
+!html_name cmd_tabwidth
+
+Set tabulator width of verbatim environments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tabwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+If lines that are part of a verbatim environment contain TABs
+(ASCII~9) UDO will replace them by a specific number of blanks. E.g.
+if you have written a C source code using a tabwidth of 3 and you
+want to print it with UDO you can use (!KW [tabwidth] [3]). You can
+reset this value before every verbatim environment. UDO will use a
+value of 8 by default.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!link [verbatim environment] [verbatim environment]), (!KW [vinclude])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!vinclude src_tab.ui
+!end_verbatim
+(!EXAMPLE_AFTER)
+!tabwidth 8
+!vinclude (!EXAMPLES)src_tab.ui
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!tabwidth 4
+!vinclude src_tab.ui
+!end_verbatim
+(!EXAMPLE_AFTER)
+!tabwidth 4
+!vinclude (!EXAMPLES)src_tab.ui
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,27 @@
+!begin_node (!kw [html_modern_layout])
+!html_name cmd_html_modern_layout
+
+Create ""modern"" (table) layout.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_layout(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble,
+every page wil be displayed as a table.
+The table has two columns, the left one containing
+links to nodes and the right one containing
+the contents. The command (!KW [chaptericon]) can be used
+to replace the links in the left column by images.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_modern_alignment]), (!KW [html_modern_backcolor]), (!KW [html_modern_width])
+
+!end_xlist
+
+!end_node

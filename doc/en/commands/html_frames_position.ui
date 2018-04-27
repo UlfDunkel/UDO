@@ -1,0 +1,31 @@
+!begin_node (!kw [html_frames_position])
+!html_name cmd_html_frames_position
+
+Specify position of frame (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_position [left|right|top|bottom](!t)
+
+!item [(!DESCRIPTION)]
+This command can be used to set the position of the
+frame that contains the table of contents when
+using the frames layout. Default value is left.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_width]), (!KW [html_frames_height])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_frames_position top
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

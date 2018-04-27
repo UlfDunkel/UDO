@@ -1,0 +1,33 @@
+!begin_node (!kw [use_ansi_tables])
+!html_name cmd_use_ansi_tables
+
+Tabellen mit ANSI-Grafikzeichen erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_ansi_tables [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann eingesetzt, so
+werden bei den angegebenen Formaten die Tabellen mit
+den Grafikzeichen aus dem DOS-Zeichensatz erzeugt.
+Der Schalter ist wirkungslos für (!LaTeX), WinHelp und
+HTML.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_ansi_tables [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

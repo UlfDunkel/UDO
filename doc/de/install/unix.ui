@@ -1,0 +1,54 @@
+!begin_node Installation der Unix-Version aus den Quelltexten
+!html_name installation_unix_src
+
+!begin_itemize !compressed
+!item Das UDO-Quelltextarchiv von der (!url [UDO-Website] [http://www.udo-open-source.org/]) herunterladen.
+!item Quelltextarchiv auspacken: (!code [gzip -dc udo_xxx_src.tar.gz | tar xf -])
+!item starten Sie das configure-Script zum erzeugen des (!file [Makefile]): (!nl)
+(!code [./configure])
+!item starten Sie make zum erzeugen des Programms: (!nl)
+(!code [make])
+!item Kopieren Sie die ausführbare UDO-Datei nach (!file [/usr/local/bin]) oder in eines der Verzeichnisse Ihres (!file [$PATH])'s.
+!item wechseln Sie in das Verzeichnis (!file [doc/de]) oder (!file [doc/en]) und starten Sie das (!code [make manpage]). Kopieren Sie dann die UDO-Manualpage (!file [udo.1]) nach (!file [/usr/local/man/man1/]).
+!item Um die UDO-Dokumentation ins HTML-Format zu konvertieren, wechseln Sie in das Verzeichnis (!file [doc/de]) oder (!file [doc/en]) und starten Sie (!code [make html]) -- die Dokumentation wird in das Verzeichnis (!file [doc/output/de/html]) bzw. (!file [doc/output/en/html]) geschrieben.
+!end_itemize
+
+!begin_ignore
+# auskommentiert 10.01.2004 - Ulrich Kretschmer
+Nach Entpacken des Archivs kopieren Sie das Binary aus ''(!file [bin/])'' in das
+Verzeichnis ''(!file [/usr/local/bin])'' oder in eines der Verzeichnisse Ihres
+(!file [$PATH])s.
+
+Kopieren Sie dann die UDO-Manualpage ''(!file [udo.1])'' nach ''(!file [/usr/man/man1/])''.
+
+Um sich die Dokumentation von UDO mittels GNU-Info ansehen zu können,
+sollten Sie die Quelltexte der Dokumentation ins Texinfo-Format
+umwandeln, mit Makeinfo bearbeiten und die erhaltenen Dateien in das
+Verzeichnis kopieren ((!file [$INFOPATH])), in dem sich die anderen Info-Dateien
+befinden, sofern sich in der UDO-Distribution noch keine Info-Dateien
+befinden. Die Datei ''(!file [dir])'' muß dort dann noch angepaßt werden, indem Sie
+auf die UDO-Dokumentation verweisen.
+
+Desweiteren empfiehlt sich das Anlegen von Shellscripten oder Aliasen,
+um nicht immer alle Optionen angeben zu müssen. Das folgende Script,
+welches Sie ''(!file [u2tex])'' benennen sollten, ruft UDO mit den passenden
+Optionen auf.
+
+!begin_quote
+!begin_verbatim
+#!bin/sh
+udo --tex -o ! $*
+!end_verbatim
+!end_quote
+
+Für die anderen Formate können ähnliche Scripte angelegt werden. In der
+Distribution sollten Sie diese Scripte bereits vorfinden.
+
+Ein Hinweis für Linuxdoc-SGML-Benutzer: Zumindest in meiner
+Linuxdoc-SGML-Version fehlen ein paar Entities. Werfen Sie daher kurz
+einen Blick in die FAQ in der Mitte dieser Anleitung, falls
+Linuxdoc-SGML Fehlermeldungen erzeugen sollte.
+
+!end_ignore
+
+!end_node

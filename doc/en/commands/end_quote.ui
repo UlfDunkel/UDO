@@ -1,0 +1,21 @@
+!begin_node (!kw [end_quote])
+!html_name cmd_end_quote
+
+Finish indented text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_quote(!t)
+
+!item [(!DESCRIPTION)]
+This command finishes the last quote environment. Text, that's part
+of a quote environment will be displayed indented.
+
+!item [(!SEEALSO)]
+(!KW [begin_quote]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,32 @@
+!begin_node (!kw [psubsubnode*])
+!html_name cmd_psubsubnode_asterisk
+
+Start a hidden popup subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [psubsubnode]), but here
+""(!TEXT)"" will not appear in a table of contents.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode]), (!KW [subsubnode*]), (!KW [begin_pnode*]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubnode* A hidden popup subsection
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading A hidden popup subsection
+(!EXAMPLE_END)
+
+!end_node

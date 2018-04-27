@@ -1,0 +1,13 @@
+!begin_node Disclaimer
+!html_name intro_disclaimer
+
+There is no warranty for the program or the contents of this documentation.
+
+UDO is provided ""as is"" without warranty of any kind, including but not
+limited to, the implied warranties of merchantability and fitness for a
+particular purpose. The entire risk is with you. Should UDO prove defective
+you assume the cost of all necessary servicing, repair or correction.
+
+Nevertheless the UDO Community will be glad if you (!link [send bug reports] [Contact addresses]).
+
+!end_node

@@ -1,0 +1,31 @@
+!begin_node (!kw [no_preamble])
+!html_name cmd_no_preamble
+
+Ausgabe von Zielformat-Vorspann unterdrücken.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_preamble [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, gibt
+UDO für die angegebenen Formate keinen Vorspann aus.
+Das Beispiel zeigt, wie Sie dafür sorgen können, daß
+UDO keinen (!LaTeX)-Vorspann erzeugt. Diesen Schalter
+sollten Sie nur dann verwenden, wenn Sie ausreichend
+Kenntnis über das jeweilige Zielformat besitzen.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_preamble [tex]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

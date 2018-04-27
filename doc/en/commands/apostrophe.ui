@@ -1,0 +1,32 @@
+!begin_node ('')
+!html_name cmd_apostrophe
+
+Print typographical apostroph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)('')(!t)
+
+!item [(!DESCRIPTION)]
+Two apostrophes in a row will be replaced by one typographical
+apostrophe if the destination format supports typographical
+apostrophes. If it doesn't UDO will replace two apostrophes by one
+apostrophe.
+
+!item [(!SEEALSO)]
+(!link [((''))] [((''))]), (!link [("")] [("")])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+''typographical apostrophes''
+!end_verbatim
+(!EXAMPLE_AFTER)
+''typographical apostrophes''
+(!EXAMPLE_END)
+
+!end_node

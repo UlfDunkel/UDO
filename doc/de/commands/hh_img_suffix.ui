@@ -1,0 +1,37 @@
+!begin_node (!kw [hh_img_suffix])
+!html_name cmd_hh_img_suffix
+
+Endung der Grafiken für HTMLHelp ändern.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_img_suffix <endung>(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie die Endung der Grafiken
+setzen, die für die folgenden (!KW [image])-Befehle
+verwendet werden soll. Standardmäßig benutzt UDO die
+Endung ""(!file [.gif])"". Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf ""(!file [.jpeg])"" enden, benutzen Sie
+einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
+kann beliebig oft aufgerufen werden, sodaß einer
+Verwendung verschiedener Grafikformate nichts im Wege
+steht.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!KW [html_img_suffix]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!hh_img_suffix jpeg
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

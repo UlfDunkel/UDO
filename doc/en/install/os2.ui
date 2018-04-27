@@ -1,0 +1,12 @@
+!begin_node Installing the OS/2 version (32-bit)
+!html_name installation_os2
+
+!begin_itemize !compressed
+!item Download the appropriate ZIP archive from (!url [www.udo-open-source.org] [http://www.udo-open-source.org/])
+!item unzip the ZIP archiv into a new directory
+!item Add the directory with (!file [udo.exe]) to your PATH list (see (!file [config.sys])). Or copy (!file [udo.exe]) into a directory which is part of your PATH list.
+!end_itemize
+
+Older UDO versions needed the installation of EMX. This software is no longer necessary.
+
+!end_node

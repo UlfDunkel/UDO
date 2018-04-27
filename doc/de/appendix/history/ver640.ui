@@ -1,0 +1,76 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6.4.0
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 01: using macro BUG
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Änderungen von Version 6.2.1 nach 6.4.0
+!html_name history_6_2_1_to_6_4_0
+
+(!PUBLISHED [UDO~6.4.0] [07.01.2004])
+
+!heading (!GENERAL)
+!begin_description !compressed
+!item [(!CHANGES)]
+   !begin_itemize !compressed
+   !item In der Tabellenumgebung können Kommentare eingefügt werden.
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+links       !! mittig       !! rechts
+# Dies ist ein Kommentar
+unten links !! unten mittig !! unten rechts
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+        
+   !end_itemize
+
+!end_description
+
+!heading Postscript
+!begin_description
+!item [(!BUGFIXES)]
+   !begin_itemize !compressed
+   !item (!BUG [40]) in Version 6.2.2 beseitigt (!nl)
+         Beseitigung mehrerer kleiner Fehler in der Postscript-Ausgabe.
+         Unter anderem wird in der Fußzeile keine Copyright-Zeichen
+         mehr ausgegeben, wenn kein Author gesetzt ist. Die eckigen
+         Klammern werden jetzt gequoted (\[ und \] statt [ und ]).
+         Das Standard-Seitenformat war nicht gesetzt. Für Named Destination
+         wurde der String nicht richtig an die entsprechende Funktion
+         übergeben.
+   !end_itemize
+
+!end_description
+
+!heading Hypertext Markup Language (HTML)
+!begin_description !compressed
+!item [(!BUGFIXES)]
+   !begin_itemize
+   !item (!BUG [35]): Falscher ungarischer Akzent korrigiert.
+   !end_itemize
+
+!end_description
+
+!end_node

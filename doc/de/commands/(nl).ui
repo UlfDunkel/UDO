@@ -1,0 +1,31 @@
+!begin_node (!kkw [nl])
+!html_name cmd_nl()
+
+Manuellen Zeilenumbruch setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/nl)(!t)
+
+!item [(!DESCRIPTION)]
+Durch (!KKW [nl]) kˆnnen Sie einen Zeilenumbruch erzwingen.
+Vor (!KKW [nl]) (!B)muﬂ(!b) ein (festes) Leerzeichen stehen! Nach
+(!KKW [nl]) muﬂ ebenfalls ein (festes) Leerzeichen stehen
+oder (!KKW [nl]) muﬂ das letzte Wort einer Zeile sein.
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Ein manueller (!nl) Zeilenumbruch und noch ein (!nl)
+manueller Zeilenumbruch.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Ein manueller (!nl) Zeilenumbruch und noch ein (!nl)
+manueller Zeilenumbruch.
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,34 @@
+!begin_node (!kw [subsubtoc_offset])
+!html_name cmd_subsubtoc_offset
+
+Set offset of subsection counter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" will be added to the current
+subsection counter when printing the number.
+The example shows how to print the first
+subsection with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,26 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Nroff
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node Nroff
+!html_name format_nroff
+!alias NROFF
+
+(!MISS)
+
+!end_node

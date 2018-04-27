@@ -1,0 +1,22 @@
+!begin_node (!kw [end_tlist])
+!html_name cmd_end_tlist
+
+Finish a list.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_tlist(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the latest tlist environment.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [begin_tlist]), (!KW [item] [[~!!]]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node

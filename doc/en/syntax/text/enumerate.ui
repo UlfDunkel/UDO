@@ -1,0 +1,49 @@
+!begin_node Enumerations
+!html_name style_enumerations
+!label enumerate environment
+
+The enumerate environment is useful for lists where the items have to be
+enumerated with numbers or letters. It is started with
+(!KW [begin_enumerate]) and finished with (!KW [end_enumerate]). Each
+item has to be marked with (!KW [item]).
+
+You can use the itemize environment inside other environments or inside
+another itemize environment.
+
+This short example shows how to write a simple itemize environment:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)enumerate1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)enumerate1.ui
+(!EXAMPLE_END)
+
+In the following example the enumerate environment is used twice and it will
+be compressed because of the usage of (!KW [compressed]):
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)enumerate2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)enumerate2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate
+
+!item   UDO doesn't enumerate the items for all destination formats. E.g.
+HTML and (!LaTeX) enumerate the items themselves so you have to be cautious
+with using text like ""see item 1"" or ""see point b)"".
+
+!item   The third layer of enumerate environments will be indented deeper
+than the other layers because Roman numbers need a little bit more space.
+
+!item   Because the second layer is enumerated with letters you shouldn't
+use more than (!const [26]) items.
+
+!item   A description of the (!KW [compressed]) command is part of the chapter
+""Itemizations"".
+
+!end_enumerate
+
+!end_node

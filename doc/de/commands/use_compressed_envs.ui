@@ -1,0 +1,33 @@
+!begin_node (!kw [use_compressed_envs])
+!html_name cmd_use_compressed_envs
+
+""Komprimierte"" Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_envs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Umgebungen (mit Ausnahme der verbatim-Umgebung)
+ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für das ASCII-Format
+gesetzt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_ilist]), (!KW [begin_itemize]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_descriptions]), (!KW [use_compressed_enumerates]), (!KW [use_compressed_itemizes]), (!KW [use_compressed_lists]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_compressed_envs [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

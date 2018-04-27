@@ -1,0 +1,25 @@
+!begin_node (--)
+!html_name cmd_dash
+
+Output a short dash.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(--)(!t)
+
+!item [(!DESCRIPTION)]
+Two minus characters in a row will be replaced by a short dash if the
+destination format supports them. If the destination format doesn't
+support them UDO will print one normal minus character instead.
+
+!item [(!EXAMPLE)]
+(!T)A short (--) er, ah (--) dash.(!t)
+
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [((--)!)] [((--)!)]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+!end_node

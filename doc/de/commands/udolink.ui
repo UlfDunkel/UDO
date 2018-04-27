@@ -1,0 +1,25 @@
+!begin_node (!kw [udolink])
+!html_name cmd_udolink
+
+Link auf UDO-Website erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/udolink(!t)
+
+!item [(!DESCRIPTION)]
+UDO sichert für HTML, WinHelp und ST-Guide eine Datei namens
+""(!file [udo_wm.[gif,bmp,img!]])"". Mit diesem Kommando können Sie in sein Werk die
+Grafik einbinden. Bei HTML wird zugleich ein Link auf die
+(!url [Website] [http://www.udo-open-source.org/]) erzeugt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [use_about_udo])
+
+!end_xlist
+
+!end_node

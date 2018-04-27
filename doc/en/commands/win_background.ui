@@ -1,0 +1,26 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [win_background])
+!html_name cmd_win_background
+
+Set background color for Windows Help.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_background (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+This command is deprecated and has been renamed to (!KW [win_backcolor]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~12
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [win_backcolor])
+
+!end_xlist
+
+!end_node
+!endif

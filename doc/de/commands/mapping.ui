@@ -1,0 +1,47 @@
+!begin_node (!kw [mapping])
+!html_name cmd_mapping
+
+Nummer für Node vergeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/mapping (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl wird momentan nur für WinHelp und IPF unterstützt.
+
+!begin_description
+
+!item [IPF:]
+Wird in einem Node (!KW [mapping] [4711]) benutzt, erzeugt UDO den
+Eintrag ""(!code [res=4711])"" im IPF-Node-Header. Wird kein (!KW [mapping]) benutzt,
+so wird auch kein (!code [res=!..]) ausgegeben.
+
+!item [WinHelp:]
+Mit (!KW [mapping] [(!VALUE!)]) kann ein numerischer Wert angegeben
+werden, den UDO dann in der Map-Datei für einen Node verwendet. Wird
+kein (!KW [mapping]) verwendet, sichert UDO einen Eintrag in der Map-Datei
+mit seiner internen Nummer, aber nur dann, wenn Sie eine
+(!KW [win_helpid]) gesetzt haben. Ein Eintrag wird also nur dann
+erzeugt, wenn Sie bei einem Node (!KW [mapping]) oder (!KW [win_helpid]) oder
+beides verwenden.
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_helpid])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!mapping 4711
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

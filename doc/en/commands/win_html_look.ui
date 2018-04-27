@@ -1,0 +1,29 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [win_html_look])
+!html_name cmd_win_html_look
+
+Use gray background for pages (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_html_look(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more. You can
+choose another background color with (!KW [win_backcolor])
+and another font with (!KW [win_propfont]) or
+(!KW [win_monofont]).
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont])
+
+!end_xlist
+
+!end_node
+!endif

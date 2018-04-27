@@ -1,0 +1,25 @@
+!no_numbers [asc]
+!no_effects [asc]
+!no_links [asc]
+!sloppy
+
+!code_source [iso]
+
+!macro  KW   (!I)!(!1)(!i)
+!macro  kw   (!I)!(!1)(!i)
+
+!include lang.ui
+
+!begin_document
+!label Kommandozeilenversion
+
+!include appendix/history/ver660.ui
+!include appendix/history/ver640.ui
+!include appendix/history/ver621.ui
+!include appendix/history/ver620.ui
+!include appendix/history/rel6pl17.ui
+!include appendix/history/rel6pl16.ui
+!include appendix/history/rel6pl15.ui
+!include appendix/history/rel6pl14.ui
+
+!end_document

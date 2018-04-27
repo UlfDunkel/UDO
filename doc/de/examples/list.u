@@ -1,0 +1,53 @@
+#######################################
+# @(#) Listen-Umgebungen - dh 1996
+#######################################
+
+!code_source [latin1]
+
+!docinfo [title]		UDOs
+!docinfo [program]		Listen-Umgebungen
+!docinfo [author]		Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Eine kleine xlist-Umgebung
+
+Das folgende Beispiel --- mit einigen europäischen Staaten und
+deren Hauptstädten --- demonstriert den Gebrauch der xlist-Umgebung:
+
+# Dies ist ein Kommentar:
+# Da wir nur ein paar Dinge darstellen, schalten wir zusätzliche
+# Leerzeilen mittels !short aus.
+
+!begin_xlist [Großbritanien:] !short
+
+!item [Belgien:]		Brüssel
+!item [Frankreich:]		Paris
+!item [Deutschland:]	Berlin
+!item [Großbritanien:]	London
+!item [Niederlande:]	Den Haag
+
+!end_xlist
+
+Wenn Sie (!V)blist(!v) anstelle von (!V)xlist(!v) verwenden, so werden
+die Items in Fettschrift dargestellt. Erkennen Sie die Änderung?
+
+#      v  (b vs. x)
+!begin_blist [Great Britain:] !short
+
+!item [Belgien:]		Brüssel
+!item [Frankreich:]		Paris
+!item [Deutschland:]	Berlin
+!item [Großbritanien:]	London
+!item [Niederlande:]	Den Haag
+
+!end_blist
+#    ^
+
+Desweiteren können Sie (!V)ilist(!v) für kursiv und (!V)tlist(!v) für in
+Schreibmaschinenschrift dargestellte Punkte verwenden.
+
+!end_document
+

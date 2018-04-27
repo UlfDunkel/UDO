@@ -1,0 +1,20 @@
+!begin_node (!kw [lh])
+!html_name cmd_lh
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/lh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [listheading]).
+
+!item [(!SEEALSO)]
+(!KW [listheading])
+
+!end_xlist
+
+!end_node

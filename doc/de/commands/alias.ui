@@ -1,0 +1,28 @@
+!begin_node (!kw [alias])
+!html_name cmd_alias
+
+Zusatznamen eines Kapitels definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/alias (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Definiert einen Zweitnamen eines Kapitels. Taucht
+""(!TEXT)"" im Text auf, werden genauso Querverweise zum
+zugehörigen Kapitel erzeugt wie bei (!KW [label]), (!KW [node]),
+(!KW [subnode]), (!KW [subsubnode]) usw. Sie können (!KW [alias]) mehrfach
+innerhalb eines Kapitels benutzen, jedoch sollte
+(!TEXT) nur einmal als Name für einen Alias, Label
+oder ein Kapitel verwendet werden.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [label]), (!link [Querverweise] [Querverweise]), (!link [Sprungmarken] [Sprungmarken])
+
+!end_xlist
+
+!end_node

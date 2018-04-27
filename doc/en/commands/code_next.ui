@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [code_next])
+!html_name cmd_code_next
+
+Switch to another character set.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_next(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist an more.
+Use (!KW [code] [[next!!]]) instead.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+
+!end_xlist
+
+!end_node
+!endif

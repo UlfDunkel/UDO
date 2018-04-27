@@ -1,0 +1,23 @@
+####################################################################
+# @(#) Installation der Macintosh-Version, 26.06.1996, Martin Osieka
+####################################################################
+
+!begin_node Installation der Macintosh-Version (Mac~OS 9)
+!html_name installation_mac_9
+
+Nach dem Entpacken des Archivs, welches die Macintosh-Version von UDO
+enthält, kann UDO an eine beliebige Stelle im Dateisystem verschoben
+werden (üblicherweise in den Programme Ordner).
+
+UDO liegt als FAT-Binary vor, d.h. es ist sowohl auf 68K- als auch auf
+PowerPC-Rechner lauffähig. Bei Platzmangel im Dateisystem kann UDO mit
+einem entsprechenden Programm auf eine native Version verkleinert
+werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
+
+Hat man die Dokumentation zu UDO als Hypertext (!T)(!UDOR)ger.hyp(!t) vorliegen,
+kann diese aus UDO heraus angezeigt werden, wenn man das Programm
+Hyperion besitzt, das Hypertexte in diesem Format auf dem Macintosh
+anzeigen kann. (!T)(!UDOR)ger.hyp(!t) muß sich dazu im Guides-Ordner von Hyperion
+befinden.
+
+!end_node

@@ -1,0 +1,91 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# Notes:
+#    This file contains the command index (in alphabetical order).
+#    Output for commands which are no longer existing will be created 
+#    only if "OldKeywords" was set.
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (from commands.ui)
+#   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro introduced
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 21: introducing the usage of !label*
+#   fd  May 25: index adjustments
+# 2013:
+#   fd  Oct 24: html_doctype updated (new option for HTML 5)
+#
+################################################################################
+
+# If "NoOldKeywords" is set, commands that are not supported
+# any longer are removed from the command index.
+
+!begin_node Command index
+!html_name cmds
+
+# don't suppress submenu for texinfo, its needed
+!ifndest [info]
+!ignore_subsubtoc
+!endif
+
+In this chapter you will find a short description of every UDO command in
+alphabetical order. The command description shows you the meaning of the
+descriptions.
+
+To help you in upgrading from an older version of UDO,
+(!link [deprecated commands] [Deprecated commands]) that are no longer
+supported or that have been replaced by other commands are included, too.
+
+# Hypertext formats will print a table with the alphabet
+!ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv,info,hah]
+!medskip
+   
+!ifndest [info]
+!ignore_subtoc
+!endif
+
+!hline
+
+!begin_table [llllll]
+A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!..
+G!.. !! H!.. !! I!.. !! J!.. !! K!.. !! L!..
+M!.. !! N!.. !! O!.. !! P!.. !! Q!.. !! R!..
+S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
+Y!.. !! Z!..
+*!..
+!end_table
+
+!medskip
+
+!endif
+
+!include appendix/commands/explain.ui
+
+!begin_node* Colors
+!html_name cmds_colors
+
+!include syntax/misc/short_color.ui
+
+!end_node
+
+!include appendix/commands/01_index.ui
+
+!include appendix/commands/cmds_old.ui
+
+!end_node

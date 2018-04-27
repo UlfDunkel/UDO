@@ -1,0 +1,13 @@
+!code_source [iso]
+!no_numbers [all]
+!no_umlaute [all]
+!sloppy
+
+!set copying
+
+!begin_document
+
+!include intro/copyright.ui
+
+!end_document
+

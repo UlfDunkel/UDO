@@ -1,0 +1,41 @@
+#####################################
+# @(#) description-Umgebung - dh 1996
+#####################################
+
+!code_source [latin1]
+
+!docinfo [title]	UDOs
+!docinfo [program]	description-Umgebungen
+!docinfo [author]	Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Eine kleine description-Umgebung
+
+Das folgende Beispiel, in dem einige Fremdwörter erklärt werden,
+demonstriert den Gebrauch der description-Umgebung:
+
+!begin_description !short
+
+!item [Compiler] [-paI-, engl.] (!I)m(!i).5 Computerprogramm zur Übersetzung von
+Programmen aus ihrer Programmiersprache in eine verarbeitbare
+Maschinensprache
+
+!item [Dokumentation] (!I)w.10(!i)
+	!begin_enumerate
+	!item	Beweisführung auf Grund von Dokumenten
+	!item	Sammlung und Nutzbarmachung von Dokumenten, z.B.
+			Zeitschriftenartikeln, Büchern, Urkunden
+	!end_enumerate
+
+!item [Item] (!I)s.9, veraltet:(!i) zu erörternde Sache, das Weitere, ein
+fraglicher Punkt
+
+!item [Standard] [engl.] (!I)m.(!i)9 Richt-, Eichmaß, Norm
+
+!end_description
+
+!end_document
+

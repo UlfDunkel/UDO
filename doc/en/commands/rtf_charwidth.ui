@@ -1,0 +1,33 @@
+!begin_node (!kw [rtf_charwidth])
+!html_name cmd_rtf_charwidth
+
+Set character width (RTF only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rtf_charwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+UDO uses a constant value for caclulating the indent of lists and the
+widths of table cells. This value works even fine with bold
+monospaced capital letters, but if you use normal text the indents or
+table cells may be too wide. You can adjust this value by using
+(!KW [rtf_charwidth]). UDO uses (!const [150]) by default.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!link [Lists] [Lists])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_charwidth 100
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

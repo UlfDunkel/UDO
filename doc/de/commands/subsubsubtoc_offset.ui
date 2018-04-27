@@ -1,0 +1,33 @@
+!begin_node (!kw [subsubsubtoc_offset])
+!html_name cmd_subsubsubtoc_offset
+
+Offset für die Paragraphennummerierung setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Paragraphennummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+der erste Paragraph mit der Nummer 10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

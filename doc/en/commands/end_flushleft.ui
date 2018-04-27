@@ -1,0 +1,22 @@
+!begin_node (!kw [end_flushleft])
+!html_name cmd_end_flushleft
+
+Finish left justified text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_flushleft(!t)
+
+!item [(!DESCRIPTION)]
+This command finishes the latest flushleft environment.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!KW [begin_flushleft]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+!end_node

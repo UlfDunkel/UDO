@@ -1,0 +1,24 @@
+!begin_node (!kw [no_sourcecode])
+!html_name cmd_no_sourcecode
+
+Do not output source code lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_sourcecode [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If you don't want that source code is output in other formats than
+C and Pascal use the switch (!KW [no_sourcecode]). Thus you can
+produce a special documentation without source code.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [begin_sourcecode])
+
+!end_xlist
+
+!end_node

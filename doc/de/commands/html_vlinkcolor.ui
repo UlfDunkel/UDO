@@ -1,0 +1,23 @@
+!begin_node (!kw [html_vlinkcolor])
+!html_name cmd_html_vlinkcolor
+
+Setzen der Farbe für bereits besuchte Links (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_vlinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten
+Links darzustellen, die bereits besucht wurden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_linkcolor]), (!KW [html_alinkcolor]), (!KW [html_textcolor]), (!KW [html_backcolor])
+
+!end_xlist
+
+!end_node

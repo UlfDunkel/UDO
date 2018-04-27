@@ -1,0 +1,260 @@
+!begin_node (!kw [docinfo])
+!html_name cmd_docinfo
+
+Dokumentinformationen setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/docinfo [(!NAME)] (!TEXT)|(!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando dient dazu, verschiedene Informationen für
+die Titelseite zu setzen. ""(!code [(!NAME!)])"" kann dabei einer
+der folgenden Werte sein:
+
+!begin_description
+
+!item [title]
+""(!TEXT)"" wird auf der Titelseite vor dem Inhalt von
+(!KW [docinfo] [[program!!]]) ausgegeben. ""(!TEXT)"" wird darüber hinaus noch
+zur Darstellung von Kopfzeilen bei einigen Formaten herangezogen.
+
+!item [program]
+""(!TEXT)"" wird auf der Titelseite unterhalb der Titelzeile
+ausgegeben. Desweiteren wird ""(!TEXT)"" bei einigen Formaten zur
+Darstellung von Kopfzeilen herangezogen.
+
+!item [programimage]
+Das Bild ""(!FILE)"" wird unterhalb der Titelzeile auf der Titelseite ausgegeben.
+
+!item [version]
+""(!TEXT)"" wird unterhalb des Programmnamens auf der Titelseite
+ausgegeben. Ansonsten findet ""(!TEXT)"" keine weitere Verwendung.
+
+!item [date]
+""(!TEXT)"" wird unterhalb der Versionsinformationen auf der
+Titelseite ausgegeben. Ansonsten werden diese Informationen nicht
+weiter benötigt. Im Beispiel würde auf der Titelseite das aktuelle
+Systemdatum eingesetzt.
+
+!item [author]
+""(!TEXT)"" wird als Name des Autors auf der Titelseite ausgegeben
+und für weitere, jedoch sehr spezifische Formatbefehle verwendet. Im
+Text selbst findet ""(!TEXT)"" keine weitere Verwendung.
+
+!item [authorimage]
+""(!FILE)"" wird als Bild (z.B. ein Logo) zusätzlich direkt über
+dem Namen des Autors auf der Titelseite ausgegeben, falls das
+Ausgabeformat Unterstützung für Bilder bietet.
+
+!item [authoricon]
+""(!FILE)"" wird als Bild (z.B. ein Logo) im linken Frame bzw.
+in der linken Spalte beim Frame-Layout bzw. ""modernen"" Layout
+von HTML ausgegeben.
+
+!item [address]
+""(!TEXT)"" wird auf der Titelseite unterhalb des Namens
+des Autors ausgegeben. ""(!TEXT)"" findet sonst keine
+weitere Verwendung durch UDO. (!KW [docinfo] [[address!!]]) kann bis zu 15 mal
+angegeben werden, so daß Sie hier z.B. auch mehrere E-Mail-Adressen auf der
+Titelseite angeben können.
+
+!item [company]
+""(!TEXT)"" bezeichnet die Firma, für die ein Dokument erstellt wird.
+Wenn (!code [company]) benutzt wird, wird auf der Titelseite unter Autor
+""für (!I)company(!i)"" eingefügt.
+
+!item [category]
+""(!TEXT)"" bezeichnet eine Kategorie, zu der das Dokument gehört.
+Diese Erweiterung ist seit Version~6.5.4 bisher nur für RTF implementiert.
+
+!item [stgdatabase]
+Mit (!KW [docinfo] [[stgdatabase!!]]) können Sie angeben, was UDO
+für die @database-Zeile beim ST-Guide-Format ausgeben soll.
+Wird (!KW [docinfo] [[stgdatabase!!]]) nicht
+verwendet, erzeugt UDO wie gehabt eine Zeile, gebildet aus
+(!KW [docinfo] [[title!!]])
+und (!KW [docinfo] [[program!!]]).
+
+!item [drcstatusline]
+Mit (!KW [docinfo] [[drcstatusline!!]]) können Sie den Text setzen,
+den UDO für die Statuszeile verwendet. Fehlt diese Angabe, so
+erzeugt UDO eine Zeile der Art ""(!nolink [Copyright]) (!copyright) by <author>"". Wurde
+(!KW [docinfo] [[author!!]]) nicht angegeben, erzeugt UDO eine Zeile
+""Made with UDO"".
+
+!item [keywords]
+(!KW [docinfo] [[keywords!!]]) entspricht dem Kommando (!KW [html_keywords]).
+Kann auch bei PostScript genutzt werden.
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_keywords]) benutzt wird. Diese haben also Vorrang.
+
+!item [description]
+(!KW [docinfo] [[description!!]]) entspricht dem Kommando (!KW [html_description]).
+Kann auch bei PostScript genutzt werden.
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_description]) benutzt wird. Diese haben also Vorrang.
+
+!item [htmltitle]
+""(!TEXT)"" wird für den Titel jeder Seite benutzt (anstelle der
+Zusammenfassung von [title] und [program]).
+
+!item [robots]
+""(!TEXT)"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind ""(!code [none])"", ""(!code [noindex])"", ""(!code [index])"", ""(!code [nofollow])"" und ""(!code [follow])"".
+
+!item [appletitle]
+Wird für HTML Apple Help benötigt und beschreibt den Titel der Hilfe.
+
+!item [appleicon]
+Wird für HTML Apple Help benötigt. Damit wird das Icon angegeben, welches der Apple Help Viewer
+anzeigen soll.
+
+!item [domain_name|domain_link|contact_name|contact_link]
+Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben,
+erzeugt UDO standardmäßig am Ende einer jeden Seite folgende
+Kontaktdaten-Fußzeile:
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [domain_link]    !\ 
+         http://www.udo-open-source.org/
+!docinfo [domain_name]    !\ 
+         UDO OpenSource
+!docinfo [contact_link]   !\ 
+         mailto:webmaster@udo-open-source.org
+!docinfo [contact_name]   !\ 
+         E-Mail an den Webmaster
+
+# Dokument
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [Copyright]) (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [E-Mail an den Webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
+Letzte Aktualisierung am (!today)
+(!EXAMPLE_END)
+
+Werden weniger Informationen angegeben, so werden die Kontaktdaten in
+der Fußzeile entsprechend angepasst. Nachfolgend einige weitere
+Beispiele.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [domain_link] !\ 
+         http://www.meinedomain.de/
+!docinfo [contact_link] !\ 
+         ich@meinedomain.de
+
+# Dokument
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [Copyright]) (!copyright) (!url [http://www.meinedomain.de/] [http://www.meinedomain.de/]) ((!url [ich@meinedomain.de] [mailto:ich@meinedomain.de])) (!nl)
+Letzte Aktualisierung am (!today)
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [domain_name]    Meine Firma
+!docinfo [contact_name]   Mein Name
+
+# Dokument
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+Copyright (!copyright) Meine Firma (Mein Name) (!nl)
+Letzte Aktualisierung am (!today)
+(!EXAMPLE_END)
+
+Das zuletzt gezeigte Beispiel zeigt, daß nur die Parameter mit (!code [link]) im Parameternamen tatsächlich anklickbare Links ergeben.
+
+Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse,
+sondern eine URL anzugeben, die zu einem Kontaktformular führt. Denn
+mittlerweile ist es nicht mehr unbedingt erwünscht, daß
+E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie
+für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte
+Beute.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [domain_link]  !\ 
+         http://www.meinedomain.de/
+!docinfo [domain_name]  Meine Domäne
+!docinfo [contact_link] !\ 
+         http://www.meinedomain.de/kontakt.php
+!docinfo [contact_name] Kontakt
+
+# Dokument
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [Copyright]) (!copyright) (!url [Meine Domäne] [http://www.meinedomain.de/]) ((!url [Kontakt] [http://www.meinedomain.de/kontakt.php])) (!nl)
+Letzte Aktualisierung am (!today)
+(!EXAMPLE_END)
+
+(!HINT) Werden keine Angaben gemacht oder im Vorspann (!KW [no_footers] [[html!!]]) benutzt, so gibt UDO nichts aus.
+
+!item [webmastername]
+Alter, überholter Name für (!KW [docinfo] [[domain_name!!]]).
+
+!item [webmasterurl]
+Alter, überholter Name für (!KW [docinfo] [[domain_link!!]]).
+
+!item [webmasteremail]
+Alter, überholter Name für (!KW [docinfo] [[contact_name!!]]).
+
+!item [webmastermailurl]
+Alter, überholter Name für (!KW [docinfo] [[contact_link!!]]).
+
+!item [translator]
+""(!TEXT)"" bezeichnet den Namen des Übersetzers, der das Produkt oder Dokument übersetzt hat.
+Wenn (!code [translator]) benutzt wird, wird auf der Titelseite nach Autor und Firma 
+""Übersetzung: (!I)translator(!i)"" eingefügt.
+
+!item [distributor]
+""(!TEXT)"" bezeichnet die Firma, die das Produkt oder Dokument vertreibt.
+Wenn (!code [distributor]) benutzt wird, wird auf der Titelseite nach Autor und Firma 
+""Distributor: (!I)distributor(!i)"" eingefügt.
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!docinfo [title] Die Windows-Hilfe zu
+!docinfo [program] UDO
+!docinfo [author] Dirk Hagedorn
+!docinfo [address] Asmecke 1
+!docinfo [address] D-59846 Sundern
+!docinfo [address] Deutschland
+!docinfo [address] Internet: info@dirk-hagedorn.de
+!docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+!docinfo [domain_link] http://www.dirk-hagedorn.de/
+!docinfo [contact_link] mailto:webmaster@dirk-hagedorn.de
+!docinfo [authorimage] dh
+!docinfo [date] (!today)
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

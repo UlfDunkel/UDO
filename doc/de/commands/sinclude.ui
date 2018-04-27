@@ -1,0 +1,34 @@
+!begin_node (!kw [sinclude])
+!html_name cmd_sinclude
+
+Datei einbinden und in einer sourcecode-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Sourcecode an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [pinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [sourcecode-Umgebung] [sourcecode-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!sinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!sinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node

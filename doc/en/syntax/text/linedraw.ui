@@ -1,0 +1,54 @@
+!begin_node Display line graphics
+!html_name style_linegraphics
+!label linedraw environment
+
+Normally UDO will replace all DOS graphic characters by the ASCII characters
+""(!code [+])"", ""(!code [-])"" and ""(!code [|])"". So including DOS screenshots is not possible.
+
+To display DOS screenshots you can use the linedraw environment,
+which is started with (!KW [begin_linedraw]) and finished with
+(!KW [end_linedraw]).
+
+No UDO commands(!N)except
+(!KW [end_linedraw])(!n) or placeholders will be converted. Text
+inside this environment will be indented like normal text.
+
+When converting into RTF, the font ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm] [] [elink])""
+will be used, other formats will use the DOS character set.
+When converting into (!LaTeX) the commands of UDO will be just
+replaced by the (!LaTeX) commands (!code [\begin{verbatim}]) and
+(!code [\end{verbatim}]). When converting to another format UDO adjusts
+special chars and displays the text with a non-proportional font.
+
+!index (!kw [tabwidth])
+If the lines of the linedraw environment contain tabs (ASCII~9) UDO will
+replace them by spaces according to the (!KW [tabwidth]) setting.
+
+!index (!kw [ldinclude])
+Because no commands inside a verbatim environment are noticed you
+cannot use the (!KW [include]) command inside this environment.
+
+To enable you to include an external file and display it as it would
+be inside a linedraw environment UDO offers you the command
+(!KW [ldinclude]). This command is a mixture of
+(!KW [begin_linedraw]), (!KW [include]) and
+(!KW [end_linedraw]).
+
+!smallskip
+
+(!HINT)
+
+!begin_enumerate
+
+!item   Because the text of a linedraw environment is indented like
+normal text you shouldn't use extra spaces at the beginning of each
+line.
+
+!begin_ignore
+!item Word for Windows displays the graphics correctly,
+whereas WordPad95 does not.
+!end_ignore
+
+!end_enumerate
+
+!end_node

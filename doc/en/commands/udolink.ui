@@ -1,0 +1,25 @@
+!begin_node (!kw [udolink])
+!html_name cmd_udolink
+
+Create link to UDO website.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/udolink(!t)
+
+!item [(!DESCRIPTION)]
+UDO saves a file named ""(!file [udo_wm.[gif,bmp,img!]])"" when
+converting to HTML, WinHelp or ST-Guide. With this command
+you can include this image. For HTML additionally a link
+to the (!url [website] [http://www.udo-open-source.org/]) is generated.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [use_about_udo])
+
+!end_xlist
+
+!end_node

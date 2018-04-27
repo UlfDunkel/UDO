@@ -1,0 +1,76 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Linuxdoc-SGML
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 07: macro usage adjusted
+#   fd  May 21: "&Aring;" uses an invisible hyphen (!-) to avoid replacement in HTML
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Linuxdoc-SGML
+!html_name format_ldoc
+
+Mitte März 1996 fand Dirk Hagedorn einen Artikel über dieses Format in der Zeitschrift ""iX"".
+Er las den Artikel, lud das Archiv herunter, 
+las die Dokumentation (zu einer Installation ist es mangels Linux-Rechner nicht
+gekommen) und baute dieses Format binnen zwei Stunden ein. Mangels
+Testmöglichkeiten war es ihm nicht möglich, zu überprüfen, ob UDO
+richtiges Linuxdoc-SGML erzeugt, er hat sich damals allerdings strikt an
+die Vorgaben des User's Guide gehalten.
+
+Linuxdoc-SGML ist genau wie UDO ein Multiformat-Konverter, das auch
+sein eigenes Format in (!LaTeX), Manualpage, RTF, HTML, Texinfo usw.
+umwandeln kann. Nicht ganz ohne Stolz kann aber behauptet werden, 
+daß UDO gegenüber Linuxdoc-SGML 1.5 leistungsfähiger und
+auch leichter zu begreifen ist. Allerdings kann sich das hier gesagte
+bei dem Entwicklungstempo, das von der Linux-Szene bekannt ist, sehr
+schnell ändern.
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Die xlist-Umgebung wird als description-Umgebung ausgegeben!?]
+Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
+Daher wird diese Umgebung hier als description-Umgebung behandelt,
+welche der xlist-Umgebung am ähnlichsten ist.
+
+##################################################
+
+!ifdest [tex,pdf]
+!item [Linuxdoc-SGML bemängelt (!T)&Aring;(!t), warum?]
+!else
+!item [Linuxdoc-SGML bemängelt (!V)&Aring;(!v), warum?]
+!endif
+Fügen Sie in der Datei (!file [/usr/lib/linuxdoc-sgml/rep/html/general])
+folgende Zeile ein:
+
+!begin_quote
+!begin_verbatim
+<!entity Aring sdata "&Aring;" >
+!end_verbatim
+!end_quote
+
+##################################################
+
+!end_description
+
+!end_node

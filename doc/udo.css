@@ -1,0 +1,105 @@
+body {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   background-color: #FFFAF0;
+}
+
+/* --- headlines --- */
+h1 {
+   font-size: 16pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+}
+h2 {
+   font-size: 14pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+}
+h3 {
+   font-size: 12pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+}
+
+/* --- paragraph --- */
+p {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+}
+
+/* --- anchors --- */
+a:link {
+   color: #0000FF;
+}
+a:visited {
+   color: #0000FF;
+}
+a:active  {
+   color: #008000;
+}
+a:hover {
+   color: #ff8000;
+}
+a.email {
+   padding-left: 20px;
+   background-image: url(email.gif);
+   background-position:	left;
+   background-repeat: no-repeat;
+   text-decoration: none;
+}
+a.elink {
+   padding-left: 16px ! important;
+   background-image: url(elink.gif);
+   background-position:	left;
+   background-repeat: no-repeat;
+   text-decoration: none;
+}
+
+/* --- lists --- */
+ul, ol {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   /* margin-left: -16px; */
+}
+dt {
+   font-size: 10pt:
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   background-color: #eeeeff;
+   padding: 4px 4px 4px 8px;
+}
+dd {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+}
+
+/* --- tables --- */
+tr, td {
+   font-family: Verdana, Arial, sans-serif;
+   font-size: 10pt;
+   color: black;
+}
+
+/* --- special formattings */
+small {
+   font-size: 8pt;
+   font-family: Arial, sans-serif;
+}
+pre {
+   font-size: 10pt;
+}
+
+/* --- UDO div formattings --- */
+
+div.example {
+   border-width: 1px;
+   border-style: solid;
+   border-color: #888888;
+   background-color: White;
+   padding: 0 8px 0 8px;
+   margin: 4px 32px 4px 32px;
+}

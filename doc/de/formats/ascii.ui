@@ -1,0 +1,60 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: ASCII
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!code [])
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+!begin_node ASCII
+!html_name format_asc
+
+Das Ausgabeformat ""ASCII"" erzeugt eine Ausgabe in Form einer einzigen Textdatei (""reiner"" Text).
+
+!subsubheading Besonderheiten und nützliche Hinweise
+
+!begin_itemize !compressed
+!item Es ist keine Möglichkeit vorgesehen, die Ausgabe -- analog zu HTML -- in mehrere Dateien aufzuteilen.
+
+!item Die (!idx [Zeilenbreite]) ist standardmäßig auf 70~Zeichen eingestellt und kann
+mit dem Befehl (!KW [parwidth]) verändert werden.
+
+!item Beim Ausgabeformat ""ASCII"" werden Texthervorhebungen wie Fettschrift, 
+kursive oder unterstrichene Wörter mittels (!code [*]), (!code [/]) 
+und (!code [_]) dargestellt, wie sie im Usenet üblich sind. (!nl)
+Da einige Druckprogramme(!N)z.B. IdeaList für den Atari~ST(!n) diese Hervorhebungen in 
+Druckerbefehle umwandeln können bzw. einige Frontends diese Hervorhebungen unterstützen, 
+zählt UDO diese Zeichen bei der Längenermittlung (!I)nicht(!i) mit. 
+Somit können Zeilen, die diese Formatierungen enthalten,
+die eingestellte Zeilenbreite überschreiten. (!nl)
+Möchten Sie auf die Ausgabe der oben genannten Zeichen verzichten, 
+geben Sie im Vorspann eines Quelltextes den Schalter (!KW [no_effects] [[asc!!]]) an.
+
+!autoref [off]
+!item UDO erzeugt ASCII-Dateien, die den jeweiligen Systemzeichensatz verwenden. Unter Windows
+wird jedoch (!I)nicht(!i) der Windows-ANSI-Zeichensatz, sondern der DOS-Zeichensatz verwendet,
+d.h. wenn Sie die von UDO erzeugte ASCII-Datei z.B. mit dem Windows-Editor öffnen,
+stimmen scheinbar die Umlaute (und andere Sonderzeichen) nicht.
+!autoref [on]
+
+!item Mit (!KW [no_umlaute] [[asc!!]]) können Sie die Verwendung von Umlauten deaktivieren.
+
+!end_itemize
+
+!end_node

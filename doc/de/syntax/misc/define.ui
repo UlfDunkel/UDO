@@ -1,0 +1,99 @@
+!begin_node Definitionen
+!html_name misc_definitions
+
+Definitionen sind (wie Makros) benutzerdefinierte Platzhalter. Sie
+können dazu dienen, im endgültigen Text spezielle Kommandos
+einzubauen.
+
+!index (!kw [define])
+Die Syntax für eine Definition lautet (!KW [define] [(!WORD!) (!TEXT!)]). Im
+Gegensatz zu den Makros wird (!C)(!TEXT)(!c) nicht speziell angepaßt, d.h. es
+werden keine Umlaute und andere Sonderzeichen angepaßt.
+
+Im folgenden Beispiel benutzen wir eine Definition, um nur im
+HTML-Format ein Wort als Überschrift auszugeben:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define1.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+Wie Sie sehen, können Sie mit diesen Definitionen spezielle Befehle des
+Ausgabeformates einbauen, die UDO standardmäßig nicht anbietet. In UDO~4
+gab es mal einen Satz Spezialplatzhalter, die nur für (!LaTeX) vorhanden
+waren. Da diese Platzhalter selten gebraucht wurden, die Umwandlung
+eines Quelltextes daher zumeist unnötig bremste, müssen Sie diese
+Platzhalter nun mit geeigneten Definitionen nachahmen:
+
+!index \linebreak
+!index \nolinebreak
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index Definitionen !! Parameter
+!index Parameter !! Definitionen
+Auch bei den Definitionen können Sie Parameter benutzen. Gerade wenn
+es darum geht, Befehle einiger Formate direkt einzubauen, kann diese
+Möglichkeit der hilfreich sein.
+
+Benutzt werden Definitionen, die Parameter enthalten sollen, wie
+Makros mit Parametern. Text, der beim Aufruf einer Definition anstelle
+eines der durchnummerierten Parameter ausgegeben werden soll, ist in
+eckige Klammern einzufassen.
+
+Im obigen Beispiel haben wir Ihnen gezeigt, wie Sie eine Überschrift für
+HTML erzeugen könnten. Benutzt man Parameter, könnte man Überschriften
+wesentlich eleganter erzeugen:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define3.ui
+(!EXAMPLE_END)
+
+Sie sehen, daß Sie mit diesem Befehl einige Möglichkeiten haben,
+spezielle Funktionen eines Formates nachzubilden, die UDO standardmäßig
+nicht zur Verfügung stellt.
+
+Das obige Beispiel für (!LaTeX) ließe sich mit einer parametrischen
+Definition übrigens viel eleganter lösen:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define4.ui
+(!EXAMPLE_END)
+
+In diesem Beispiel wird nur ein Parameter an die Definition übergeben.
+Trotzdem soll für Nicht-(!LaTeX)-Formate der 2. Parameter ausgegeben
+werden. Sie werden sich vielleicht fragen, warum dies so ist. Nun, bei
+Nicht-(!LaTeX)-Formaten soll nichts ausgegeben werden. Ein zweiter
+Parameter ist nicht vorhanden, demnach leer, und somit wird ""(!C)lb (!/2)(!c)""
+zu nichts expandiert. Dieser Umweg ist leider nötig.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Der Text, der zusammen mit (!KW [define]) angegeben wird, wird
+nicht an das Ausgabeformat angepaßt.
+
+!item Text, der als Parameter an eine Definition übergeben wird, wird
+an das Ausgabeformat angepaßt.
+
+!index (!kw [heading])
+!item UDO kann natürlich Überschriften mit (!KW [heading]) direkt
+erzeugen. Die obigen Beispiele eigneten sich halt gut zur Darstellung
+des Problems.
+
+!item Wie bei den Makros sollten Sie aufpassen, daß sie keine von UDO
+benutzten Platzhalter wie (!KK1 [B]), (!KK1 [v]), (!KKW [TeX]) usw. verwenden.
+!begin_ignore
+Auch gibt
+es hier eine maximale Anzahl von benutzbaren Definitionen. Sie liegt
+momentan bei maximal (!MAXMACRO) pro Quelltext.
+!end_ignore
+!end_enumerate
+
+!end_node

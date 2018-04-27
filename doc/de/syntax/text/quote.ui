@@ -1,0 +1,28 @@
+!begin_node Einrücken von Absätzen
+!html_name style_indentations
+!label quote-Umgebung
+
+Die quote-Umgebung dient dazu, Passagen eingerückt darzustellen. Diese
+Umgebung wird mit (!KW [begin_quote]) eingeleitet und mit (!KW [end_quote]) beendet.
+Die quote-Umgebung läßt sich mehrfach ineinander benutzen; Sie können 
+sie auch mit anderen Umgebungen kombinieren.
+
+Diese Umgebung eignet sich dazu, Textpassagen deutlicher vom
+restlichen Text abzuheben. Dieser Effekt wurde auch bei folgendem
+Beispiel erzielt:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)quote.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)quote.ui
+(!EXAMPLE_END)
+
+(!HINT)
+
+Bei HTML werden die Einrückungen durch (!V)<BLOCKQUOTE>(!v) erzeugt.
+Netscape und CAB(!N)Ein Web-Browser für den Atari(!n) geben solche
+Absätze auch eingerückt aus; Mosaic hingegen rückt diese Absätze nicht
+ein, sondern ermöglicht lediglich die Zuweisung eines speziellen Fonts.
+Als Defaulteinstellung wird hier ein kursiver Font benutzt.
+
+!end_node

@@ -1,0 +1,74 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 4
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 03: using PUBLISHED
+#
+################################################################################
+
+!begin_node Änderungen von Release 3 nach 4
+!html_name history_release_3_to_4
+
+(!PUBLISHED [UDO~4] [12.11.1995])
+
+Gegenüber Release 3 hat sich soviel getan, daß ich jedem nur empfehlen
+kann, diese Dokumentation einmal zu überfliegen. Würde ich alle
+Änderungen hier angeben, wäre diese Dokumentation um 10 Seiten länger!
+
+Wer bereits Texte mit UDO3 erstellt hat und sich als registrierter
+Benutzer nicht die aktuellen Betaversionen besorgt hat, dem rate ich,
+einfach einmal diese Texte mit der neuen Version zu übersetzen,
+Fehlermeldungen zu beachten und die Zieldatei unter die Lupe zu
+nehmen.
+
+Es müssen nicht viele Anpassungen vorgenommen werden, und die meisten
+Anpassungen lassen sich durch einfaches Suchen und Ersetzen mit einem
+Editor schnell erledigen. Aber die Syntax von UDO~4 ist teilweise
+inkompatibel zur Syntax von UDO3!
+
+Hier nun nur die wichtigsten Änderungen:
+
+!begin_description !compressed
+!item [Syntaxänderungen und -erweiterungen:]
+     !begin_enumerate !compressed
+     !item Sonderzeichen müssen nicht mehr besonders gekennzeichnet werden, da UDO selber für die nötigen Anpassungen sorgt.
+     !item Makros werden anders behandelt.
+     !item Viele Spezialbefehle wurden durch allgemeinere Befehle ersetzt.
+     !item Manche Befehle dürfen nun nur noch im Vorspann, manche nur noch im Hauptteil benutzt werden.
+     !end_enumerate
+
+!item [(!TeX):]
+     !begin_enumerate !compressed
+     !item Die Titelseite wird nun anders erzeugt.
+     !item Trennvorschläge, die mit (!KW [hyphen]) angelegt werden, werden nun auch hier beachtet.
+     !item Für das CS-(!TeX) wird nun auch das Lindner-(!TeX)-Makro zur Ausgabe von GEM-Images benutzt.
+     !item Neuer Spezialbefehl (!kw [tex_book]).
+     !end_enumerate
+
+!item [ST-Guide:]
+     !begin_enumerate !compressed
+     !item (!kw [stg_short_title]) existiert nicht mehr
+     !end_enumerate
+
+!item [WinHelp, HTML, Manualpage:]
+     Diese Ausgabeformate sind neu hinzugekommen.
+
+!item [1stWordplus:]
+     Dieses Ausgabeformat wird nicht mehr angeboten.
+
+!end_description
+
+!end_node

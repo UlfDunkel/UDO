@@ -1,0 +1,20 @@
+!index Colors
+
+!begin_xlist !compressed
+!item [black] (!black)Black(!coloff)
+!item [silver] (!silver)Silver(!coloff) (light grey, formerly ""grey"")
+!item [gray] (!gray)(Dark-)Gray(!coloff) (""gray"", not ""grey""!!!)
+!item [white] (!raw [html,hh,hah] [<span style="background-color: black">])(!white)White(!coloff)(!raw [html,hh,hah] [</span>])
+!item [maroon] (!maroon)Maroon(!coloff)
+!item [red] (!red)Red(!coloff)
+!item [purple] (!purple)Purple(!coloff)
+!item [fuchsia] (!fuchsia)Fuchsia(!coloff)
+!item [green] (!green)(Dark-)Green(!coloff)
+!item [lime] (!lime)lime(!coloff)        (light green)
+!item [olive] (!olive)(Olive-)Green(!coloff)
+!item [yellow] (!yellow)Yellow(!coloff)
+!item [navy] (!navy)Navy(!coloff)
+!item [blue] (!blue)Blue(!coloff)
+!item [teal] (!teal)Teal(!coloff)
+!item [aqua] (!aqua)Cyan(!coloff)        (formerly ""cyan"")
+!end_xlist

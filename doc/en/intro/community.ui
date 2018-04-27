@@ -1,0 +1,36 @@
+!begin_node The UDO community
+!html_name intro_community
+!alias UDO community
+
+UDO has originally been developed by Dirk Hagedorn and
+is
+!ifdest [pch]
+(!link [open source] [Copy-Right])
+!else
+(!link [open source] [Copyright])
+!endif
+since 10/27/2001.
+
+Persons working on the UDO project (in alphabetical ordner):
+!begin_description !compressed
+  !item [Denesh Bhabuta] supporting UDO in Great Britain (until 2001)
+  !item [Alexander Clauss] compiling the HP-UX 300/400 version (until 2001)
+  !item [Ulf Dunkel] development & documentation (since 2006), maintaining the UDO website & development infrastructure (since 2009)
+  !item [Dirk Hagedorn] creator of UDO, development and documentation (until 2001)
+  !item [Norbert Hanz] development (since 2002)
+  !item [Dirk Haun] one of the fathers of UDO
+  !item [Volker Janzen] maintaining the UDO website & development infrastructure (until 2008), programming
+  !item [Patrick Jerchel] managing the mailing list (until 1999)
+  !item [Peter Klasen], the first registered user of UDO
+  !item [Ulrich Kretschmer] maintaining the documentation (since 2003)
+  !item [Christian Krüger] programming the PostScript support
+  !item [Martin Loos] managing the old mailing list (until ca. 1999)
+  !item [Martin Osieka] porting UDO to Mac~OS (until ca. 1999)
+  !item [Thorsten Otto] maintaining the documentation (2001)
+  !item [Rainer Riedl] compiling the BeOS version (until ca. 2001)
+  !item [Christof Schardt] development (TeX)
+  !item [Gerhard Stoll] development (since 2003)
+  !item [Tom Thomason] supporting UDO in Sweden (until ca. 2001)
+!end_description
+
+!end_node

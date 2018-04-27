@@ -1,0 +1,20 @@
+!begin_node (!kw [pss])
+!html_name cmd_pss
+
+Popup-Unterabschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubnode]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode])
+
+!end_xlist
+
+!end_node

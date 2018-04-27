@@ -1,0 +1,120 @@
+!begin_node Tables
+!html_name style_tables
+!label table environment
+
+Since Release 5 you are able to print simple tables with UDO. You can define
+the justification of the columns and where UDO shall print vertical and/or
+horizontal lines.
+
+!index !/!/
+!index (!kw [begin_table])
+!index (!kw [end_table])
+!index (!kw [hline])
+!index (!kw [table_caption])
+To print tables with UDO you need the following commands:
+
+!begin_enumerate !compressed
+!item (!KW [table_caption] [(!TEXT!)])
+!item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
+!item (!KW [end_table])
+!item (!KW [hline])
+!item (!KW [!/])
+!end_enumerate
+
+The command (!KW [table_caption]) defines the title of the next table. It
+has to be used before the table environment, not inside this environment!
+
+The command (!KW [begin_table]) starts a table, (!KW [end_table])
+finishes and prints the table. After (!KW [begin_table]) you can define
+the justification of the table columns and the usage of vertical lines. Use
+""(!code [c])"" for a centred row, ""(!code [l])"" for a left justified row, ""(!code [r])"" for a
+right justified row, and ""(!code [|])"" for vertical lines inside brackets. If you add
+a (!KW [hline]) command to this line the table starts with a horizontal
+line.
+
+After having described the layout of the table with the upper line
+you can insert the cells of the table. You have to insert a column in
+one source line and you have to divide the cells by using ""!!"".
+
+If you want to insert a horizontal line you can use the (!KW [hline])
+command. (!KW [hline]) has to be at the beginning of the line and it has
+to be the only command of this line.
+
+Here you will see a short example that demonstrates the usage of the upper
+described commands:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!table_caption Tables with UDO
+!begin_table [|l|c|r|] !hline
+upper left      !! up         !! upper right
+lower left cell !! lower cell !! lower right cell
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+
+This example prints a table with two rows and three columns. The first
+column is left justified, the second columns is centred and the third
+columns is printed right justified:
+
+!table_caption Tables with UDO
+!begin_table [|l|c|r|] !hline
+upper left      !! up         !! upper right
+lower left cell !! lower cell !! lower right cell
+!hline
+!end_table
+
+Because I used a ""(!code [|])"" before and after every column they are divided by
+vertical lines. The table starts with a horizontal line because the
+(!KW [hline]) command was added at the end of (!KW [begin_table]).
+Finally the table ends with a horizontal line because the (!KW [hline])
+command is used right before (!KW [end_table]).
+
+The following example shows the upper table without any lines:
+
+!table_caption Another example
+!begin_table [lcr]
+upper left      !! up         !! upper right
+lower left cell !! lower cell !! lower right cell
+!end_table
+
+!smallskip
+
+!index (!kw [use_ansi_tables])
+UDO offers you a switch called (!KW [use_ansi_tables]). If you use this
+switch inside the preamble the lines of the table are printed by using some
+characters of the IBM
+PC graphic character set instead of (!code [+]), (!code [-]) and (!code [|]) when
+converting into an ASCII like format like ASCII or ST-Guide. This switch has
+no effect if you convert to Windows Help, RTF, HTML or (!LaTeX).
+
+!smallskip
+
+(!HINTS)
+
+!begin_itemize
+
+!item   Tables are always output centered by default.
+But using the preamble command (!KW [table_alignment]), you can even define another alignment for tables.
+
+!item   HTML doesn't allow to define where to use lines. If you use the
+(!KW [hline]) command at the end of (!KW [begin_table]) the table is
+printed via (!code [frame=box]). If you don't use (!KW [hline]) it is
+printed without any lines.
+
+!item   Windows Help doesn't allow it to print centred tables or to print
+lines where you want to. If you use (!KW [hline]) in the
+(!KW [begin_table]) line all cells will be printed with a box. If you
+don't use (!KW [hline]) there will be no line at all in this table.
+
+!item   Converting to ST-Guide the lines of a table are generated with
+(!code [@line]). It is not possible to use more than one vertical line between
+columns or more than one horizontal line.
+
+!item   Inside the cells you can use all other UDO commands like text
+styles, links or indices.
+
+!end_itemize
+
+!end_node

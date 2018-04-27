@@ -1,0 +1,33 @@
+!begin_node (!kw [psubnode*])
+!html_name cmd_psubnode_asterisk
+
+Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie
+(!KW [psubnode]), mit der Ausnahme, daﬂ ""(!TEXT)"" nicht in
+Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [subnode*]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubnode* Ein versteckter Popup-Abschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Ein versteckter Popup-Abschnitt
+(!EXAMPLE_END)
+
+!end_node

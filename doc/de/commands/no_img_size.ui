@@ -1,0 +1,72 @@
+!begin_node (!kw [no_img_size])
+!html_name cmd_no_img_size
+
+Ermittlung der Ausmaße von Bildern unterbinden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_img_size [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+UDO ermittelt nun für Bilder die jeweiligen Ausmaße und
+gibt diese dann beim HTML-Format beim (!code [<img>])-Tag an. UDO sucht die Bilder
+ausgehend vom Ausgabeverzeichnis, bastelt sich also den Dateinamen aus
+Laufwerk und Pfad der Ausgabedatei und dem bei (!KW [image]) angebenen
+Dateinamen zusammen. Mit diesem Schalter können Sie die Ermittlung der
+Ausmaße deaktivieren.
+
+(!TIP) Falls Sie in Ihrer HTML-Dokumentation viele Bilder ständig
+aktualisieren, ist es sinnvoll, diesen Schalter zu nutzen, da Sie dann
+einfach nur die Bilder auf dem Server austauschen können, nicht aber
+die HTML-Seiten neu generieren müssen.
+
+(!NOTE) Wenn Sie den Schalter (!I)nicht(!i) nutzen, ermittelt UDO nicht
+nur die Ausmaße jedes Bildes, sondern prüft natürlich auch, ob das
+jeweilige Bild überhaupt im angegebenen Pfad vorhanden ist. Daher
+können Sie das Ermitteln der Bildgröße während der Entwicklungsphase
+Ihrer Dokumentation auch sehr gut nutzen, um zu kontrollieren, ob alle
+benötigten Bilder auch vorhanden sind. Ein Blick in das von UDO
+erzeugte Ausgabeprotokoll hilft dann, fehlende Bilder rasch zu
+ermitteln.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_img_size [html]
+
+# Hauptteil:
+!image udo_16
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<img src="udo_16.gif" alt="" title="" border="0">
+!end_preformatted
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+# !no_img_size [html]
+
+# Hauptteil:
+!image udo_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<img src="udo_16.gif" alt="UDO-Icon" title="UDO-Icon" 
+     border="0" width="16" height="16">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

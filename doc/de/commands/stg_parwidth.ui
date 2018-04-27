@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [stg_parwidth])
+!html_name cmd_stg_parwidth
+
+Einstellen der Zeilenbreite (nur ST-Guide).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/stg_parwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [parwidth]).
+
+!item [(!EXISTSSINCE)] Release~5 Version~0.49
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [parwidth])
+
+!end_xlist
+
+!end_node
+!endif

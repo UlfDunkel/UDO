@@ -1,0 +1,23 @@
+!begin_node (!kw [end_flushleft])
+!html_name cmd_end_flushleft
+
+Umgebung für linksbündigen Text schließen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_flushleft(!t)
+
+!item [(!DESCRIPTION)]
+Die (letzte) flushleft-Umgebung wird mit diesem
+Kommando beendet.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!link [Texthervorhebungen] [Texthervorhebungen]), (!KW [begin_flushleft])
+
+!end_xlist
+
+!end_node

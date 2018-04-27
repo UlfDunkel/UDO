@@ -1,0 +1,45 @@
+!begin_node (!kw [\])
+!html_name cmd_backslash
+
+Continue input line.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/\(!t)
+
+!item [(!DESCRIPTION)]
+When a UDO source document line ends with (!code [!/\])<linefeed>, UDO will add the following line content to this line. 
+So you can concatenate multiple ""real"" source document lines into one ""logical"" source document line. 
+You can use these long source document lines in any place of a UDO source document, even e.g. in macros and definitions. 
+(!nl)
+A possible usage of this is, to divide the content of a table cell into
+multiple lines to enhance the readability of the UDO source document.
+(!nl)
+(!NOTE) If (!code [!/\]) is not at the very end of a line, it will be ignored and output as normal text.
+
+!item [(!EXISTSSINCE)] Version~6.5.4
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_table [c|c] !hline
+short text left !! short text right
+short text left !! !\ 
+Here you see a rather long text which is difficult to read in the editor, !\ 
+if it has to be kept in a long line. Please keep in mind, !\ 
+that text in table cells must not exceed a length of !\ 
+(!MAXLINETABLE) characters.
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_table [c|c] !hline
+short text left !! short text right
+short text left !! Here you see a rather long text which is difficult to read in the editor, if it has to be kept in a long line. Please keep in mind, that text in table cells must not exceed a length of (!MAXLINETABLE) characters.
+!end_table
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,26 @@
+!begin_node (!kw [subsubsubsubheading])
+!html_name cmd_subsubsubsubheading
+
+Output a subparagraph heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command prints out ""(!TEXT)"" as a headline using the
+subsubsubsubnode font and fontsize.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubheading A headline(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
+
+!end_xlist
+
+!end_node

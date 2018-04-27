@@ -1,2 +1,0 @@
-#!/bin/sh
-udo --asc --verbose --force-long -D LANG_DE -o install.txt install.u

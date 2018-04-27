@@ -1,0 +1,20 @@
+!begin_node (!kw [bn*])
+!html_name cmd_bn_asterisk
+
+Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_node*]).
+
+!item [(!SEEALSO)]
+(!KW [begin_node*])
+
+!end_xlist
+
+!end_node

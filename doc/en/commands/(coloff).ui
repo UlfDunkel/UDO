@@ -1,0 +1,35 @@
+!begin_node (!kkw [coloff])
+!html_name cmd_coloff
+
+Reset the textcolor to the default color (black).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/coloff)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder turns off a previously set color attribute.
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!link [Text colors] [Text colors])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Text after the placeholder coloff(!coloff) will be
+displayed in black again.
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Text after the placeholder coloff(!coloff) will be
+displayed in black again.
+(!EXAMPLE_END)
+
+!end_node

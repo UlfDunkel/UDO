@@ -1,0 +1,36 @@
+!begin_node (!kkw [maroon])
+!html_name cmd_maroon
+
+Setzt die Schriftfarbe Kastanienbraun.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/maroon)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Kastanienbraun.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Schriftfarben] [Schriftfarben])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!maroon)Kastanienbraun(!coloff) erscheint 
+in der Farbe Kastanienbraun.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!maroon)Kastanienbraun(!coloff) erscheint 
+in der Farbe Kastanienbraun.
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,27 @@
+!begin_node (!kw [chapterimage])
+!html_name cmd_chapterimage
+
+Replace chapter title with graphic.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chapterimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Converting to Windows Help, HTML or ST-Guide the image called
+""(!FILE)"" is displayed instead of the chapter title if
+(!KW [use_chapter_images]) is used inside the preamble.
+
+!item [(!EXAMPLE)]
+(!T)!/chapterimage udo(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KW [use_chapter_images])
+
+!end_xlist
+
+!end_node

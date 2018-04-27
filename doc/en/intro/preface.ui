@@ -1,0 +1,55 @@
+!begin_node Preface
+!html_name intro_preface
+
+Welcome to UDO!
+
+#You are reading the revised documentation of the revised program called UDO
+#written by a quite overworked author that still is hoping that anybody
+#outside there understands his quite unrevised knowledge of writing English
+#documentations.
+
+UDO is a powerful and multipurpose utility for making a documentation or any
+other text file that is needed in one text format or more. Though UDO is
+powerful it is quite easy to understand and to use.
+
+If you take a look at the size of this documentation you will notice
+immediately that UDO has to be quite powerful. Many users get deterred of
+the size of this documentation and try to use UDO without having read it.
+Unfortunately, exactly these people will ask lots of questions later on
+without knowing that their questions could be answered by simply reading
+this documentation.
+
+Due to this fact it must be noted at the beginning of this documentation that
+you will only be able to use UDO in an efficient way if you read the
+complete documentation one time at least and if you experiment with the
+added examples.
+
+Please take some time, sit down, take a cup of tea or coffee and read this
+documentation from the beginning to the end. You don't have to learn
+everything by heart but you should be able to find things quickly if there
+will be questions later on.
+
+If you will detect parts where things are described in a too short, wrong or
+misleading way: please (!link [let us know] [mailing list])!
+
+And if you have any problems with the English: please let us know, too!
+
+!ifnset NoShareware
+!begin_center
+
+Please note that UDO is Shareware. I have been spending a lot of my spare
+time for this project. If you want to use UDO please register for it.
+
+!end_center
+!endif
+
+The UDO Community hopes that UDO will become an unrenounceable utility for you
+and you will have more time for the really important things.
+
+#!raw [tex] \vfill
+
+#Dirk Hagedorn
+
+#Sundern, December 10th 1996
+
+!end_node

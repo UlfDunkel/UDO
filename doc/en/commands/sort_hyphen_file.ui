@@ -1,0 +1,32 @@
+!begin_node (!kw [sort_hyphen_file])
+!html_name cmd_sort_hyphen_file
+
+Sort file with hyphenation patterns.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/sort_hyphen_file [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside the preamble UDO will read the
+hyphenation file, delete entries that are used more than once and
+will save a sorted version of this hyphenation file. The example
+shows how to do this for ASCII and ST-Guide.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [hyphen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!sort_hyphen_file [asc,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

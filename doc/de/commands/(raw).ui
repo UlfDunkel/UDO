@@ -1,0 +1,39 @@
+!begin_node (!kkw [raw])
+!html_name cmd_raw()
+
+Text unverändert innerhalb einer Zeile für angegebene Formate ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [(!TEXT)])(!t)
+
+!item [(!DESCRIPTION)]
+(!TEXT) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
+angegebenen Formate umgewandelt wird. (!TEXT) wird dann 1:1 und ohne 
+Berücksichtigung etwaiger UDO-Kommandos ausgegeben.
+
+(!HINT) Da die abschließende runde Klammer (!code [!)]) sowie die abschließenden 
+eckigen Klammern (!code [!]]) für die Parameter-Blöcke von UDO erkannt werden müssen, 
+ist es wichtig, diese beiden Zeichen mit ""!"" zu schützen, falls sie im 
+auszugebenden Inhalt selbst vorkommen sollen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!raw [stg] [@subject Dokumentation/Zubehör])
+(!raw [asc] [Die runde Klammer !) 
+            und die eckige Klammer !] 
+            müssen hier geschützt werden.])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

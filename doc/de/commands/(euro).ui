@@ -1,0 +1,34 @@
+!begin_node (!kkw [euro])
+!html_name cmd_euro()
+
+Euro-Zeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/euro)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Euro-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [EUR])"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KKW [copyright]), (!KKW [pound]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!euro)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!euro)
+(!EXAMPLE_END)
+
+!end_node

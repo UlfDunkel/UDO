@@ -1,0 +1,104 @@
+!begin_node Formatspezifische Befehle
+!html_name misc_commands_format_specific
+
+UDO bietet das (!KW [raw])-Kommando und die raw-Umgebung an, mit
+denen es möglich ist, Zeilen nur dann auszugeben, wenn Sie in ein
+bestimmtes Format umwandeln.
+
+In diesen Zeilen können dann spezielle Befehle für ein Format
+angegeben werden, die UDO dann 1:1, also Umwandlung von Sonderzeichen
+und ohne Einrückungen, ausgibt.
+
+Bei dem (!KW [raw])-Befehl spielen Kürzel eine große Rolle.
+Hier eine Übersicht, welches Kürzel für welches Ausgabeformat benutzt
+werden kann:
+
+!label Ausgabeformat
+!include syntax/misc/short_dest.ui
+
+Um beispielsweise eine Zeile nur in das ASCII-Format auszugeben, geben Sie folgendes an:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)asc1.ui
+(!EXAMPLE_END)
+
+Um eine Zeile in allen Formaten außer dem ASCII-Format auszugeben,
+geben Sie folgendes an:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)asc2.ui
+(!EXAMPLE_END)
+
+Der Inhalt dieser Zeilen wird ohne das Kommando selbst, ohne
+Berücksichtigung von UDO-Kommandos und ohne Umwandlung von
+Sonderzeichen ausgegeben. Diese Zeilen sorgen - genau wie alle
+Kommandos - auch dafür, daß ein Absatz beendet wird. Diese Kommandos
+eignen sich also nicht dazu, mittem in einem Absatz unterschiedliche
+Sätze einzufügen!
+
+Dieses Kommandos können dazu dienen, formatspezifische Kommandos
+einzufügen. Im folgenden Beispiel wird gezeigt, welche Kommandos Sie in
+einen Quelltext einfügen müssen, damit (!LaTeX) weiß, mit welchem Stil ein
+Dokument auszudrucken ist und damit es einen Index erzeugt:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)latex/index.ui
+(!EXAMPLE_END)
+
+!begin_description
+
+!label raw-Umgebung
+!item [Die raw-Umgebung]
+
+Wollen Sie größere Blöcke im jeweiligen Format angeben, wäre es ziemlich
+mühsam, wenn Sie jede Zeile mit einem Kürzel beginnen müßten.
+
+!index !begin_raw
+!index !end_raw
+Daher bietet UDO die ""raw-Umgebung"" an. Sie wird mit dem Befehl
+(!KW [begin_raw]) begonnen und mit dem Befehl (!KW [end_raw]) beendet.
+
+Genau wie der Inhalt der Zeilen, die mit den obigen Formatkürzeln
+begonnen werden, gibt UDO diese Zeilen ohne Anpassung von Sonderzeichen
+und ohne Berücksichtigung von UDO-Befehlen direkt aus.
+
+Zusammen mit der Möglichkeit, das Ausgabeformat abzufragen, in das ein
+Quelltext umgewandelt wird, können spezielle Befehle ausgegeben werden.
+Anwendungsbeispiele wären z.B. komplizierte Tabellen für (!LaTeX) oder
+Formulare für HTML. Letzteres soll hier aufgezeigt werden:
+
+!index HTML !! <form>
+!index <form>
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)raw1.ui
+(!EXAMPLE_END)
+
+Um noch einmal den Unterschied zur verbatim-Umgebung klarzumachen: Der
+Text einer verbatim-Umgebung wird 1:1 (!I)dargestellt(!i). Würden Sie
+das obige Formular in eine verbatim-Umgebung packen, würden Sie im
+HTML-Browser lediglich den Quelltext des Formulars sehen! Nur bei der
+Verwendung der raw-Umgebung wird das Formular auch als solches vom
+HTML-Browser dargestellt.
+
+Eine weitere Möglichkeit dazu bietet der Befehl (!KW [rinclude]).
+
+!label comment-Umgebung
+!item [Die comment-Umgebung]
+
+Wollen Sie größere Blöcke als Kommentar in die Ausgabedatei schreiben, wäre es ziemlich
+mühsam, wenn Sie jede Zeile mit einem Kürzel beginnen müßten.
+
+!index !begin_comment
+!index !end_comment
+Daher bietet UDO die ""comment-Umgebung"" an. Sie wird mit dem Befehl
+(!KW [begin_comment]) begonnen und mit dem Befehl (!KW [end_comment]) beendet.
+
+Genau wie der Inhalt der Zeilen, die mit (!KW [comment])
+begonnen werden, gibt UDO diese Zeilen ohne Anpassung von Sonderzeichen
+und ohne Berücksichtigung von UDO-Befehlen als Kommentar aus.
+
+Eine weitere Möglichkeit dazu bietet der Befehl (!KW [cinclude]).
+
+!end_description
+
+!end_node

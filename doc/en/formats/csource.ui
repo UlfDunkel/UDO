@@ -1,0 +1,30 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: C Sourcecode
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node C Sourcecode
+!html_name format_src
+!alias C-Sourcecode
+
+Using the C sourcecode output, the UDO source file will be converted to
+sourcecode, meaning normal text becomes comment, the content of the
+sourcecode environment becomes C sourcecode.
+
+!end_node

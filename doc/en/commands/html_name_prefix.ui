@@ -1,0 +1,45 @@
+!begin_node (!kw [html_name_prefix])
+!html_name cmd_html_name_prefix
+
+Change output filename (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_name_prefix (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+If you use this command inside the preamble,
+all filenames that are generated during output
+will get the specified prefix.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [html_name])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Preamble
+!html_name_prefix udo_
+
+# Document
+!begin_document
+!begin_node Introduction
+!html_name intro
+...
+!end_node
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!file [udo_intro.htm])
+!heading Introduction
+!..
+!hline
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,23 @@
+!begin_node (!kw [begin_description])
+!html_name cmd_begin_description
+
+Start a description.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_description(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [description environment] [description environment]) that has to be finished with
+(!KW [end_description]). You can use the description environment
+inside other (description) environments. Text that stands between the
+brackets of (!KW [item] [[~!!]]) will be output with bold text.
+
+!item [(!SEEALSO)]
+(!KW [end_description]), (!KW [item] [[~!!]]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!link [Descriptions] [Descriptions])
+
+!end_xlist
+
+!end_node

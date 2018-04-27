@@ -1,0 +1,22 @@
+!index Colors
+
+!begin_flushleft
+!begin_table [ll]
+(!KK1 [black])   !! (!black)Black(!coloff)
+(!KK1 [silver])  !! (!silver)Gray(!coloff)
+(!KK1 [gray])    !! (!gray)(Dark-)Gray(!coloff)
+(!KK1 [white])   !! (!raw [html,hh,hah] [<span style="background-color: black">])(!white)White(!coloff)(!raw [html,hh,hah] [</span>])
+(!KK1 [maroon])  !! (!maroon)Maroon(!coloff)
+(!KK1 [red])     !! (!red)Red(!coloff)
+(!KK1 [purple])  !! (!purple)Purple(!coloff)
+(!KK1 [fuchsia]) !! (!fuchsia)Magenta(!coloff)
+(!KK1 [green])   !! (!green)Green(!coloff)
+(!KK1 [lime])    !! (!lime)(Light-)Green(!coloff)
+(!KK1 [olive])   !! (!olive)(Olive-)Green(!coloff)
+(!KK1 [yellow])  !! (!yellow)Yellow(!coloff)
+(!KK1 [navy])    !! (!navy)(Marine-)Blue(!coloff)
+(!KK1 [blue])    !! (!blue)Blue(!coloff)
+(!KK1 [teal])    !! (!teal)Teal(!coloff)
+(!KK1 [aqua])    !! (!aqua)Cyan(!coloff)
+!end_table
+!end_flushleft

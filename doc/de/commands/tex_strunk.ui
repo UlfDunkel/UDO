@@ -1,0 +1,22 @@
+!begin_node (!kw [tex_strunk])
+!html_name cmd_tex_strunk
+
+Grafikmakros für CS(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_strunk(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Bildern ein
+(!TeX)-Makro für das CS- oder Multi(!TeX) erzeugt werden
+soll.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node

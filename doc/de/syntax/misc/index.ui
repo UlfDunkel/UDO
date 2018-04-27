@@ -1,0 +1,127 @@
+!begin_node Indizes
+!html_name misc_indices
+
+!index (!kw [index])
+!index (!kkw [idx])
+!index (!kkw [index])
+
+Um in einem Quelltext Einträge für ein Indexregister anzugeben, gibt es
+den Befehl (!KW [index]) und die Platzhalter (!KKW [idx]) und (!KKW [index]). Indizes
+können und sollten mehrfach angegeben werden.
+
+Der Befehl zur Angabe eines Indexeintrags lautet folgendermaßen:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)index1.ui
+(!EXAMPLE_END)
+
+Der Indexeintrag erscheint dann im Index von (!LaTeX), im Index der mit
+Plain-(!TeX) bearbeiteten Texinfo-Datei, im Index des ST-Guide-Hypertextes
+sowie im Stichwortverzeichnis der Textverarbeitung, mit der Sie die
+RTF-Datei importieren. Bei WinHelp erscheint der Indexeintrag im
+Suchen-Dialog.
+
+Um einen mehrstufigen Indexeintrag anzulegen, benutzen Sie ein doppeltes
+Ausrufezeichen als Trennung der einzelnen Stufen. Es werden bis zu drei
+Stufen unterstützt. Mehrstufige Indizes sollten Sie dann einsetzen,
+falls Sie davon ausgehen können, daß die Leserin/der Leser bei der Suche nach einem
+Wort auf verschiedene Art und Weise im Indexregister nachschaut.
+
+Falls Sie denken, daß der Leser bei der Suche nach dem Wort
+""Zeilenabstand"" im Index auch unter ""Abstand"" nachschauen wird,
+sollten Sie beide Indexeinträge vornehmen.
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)index2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+Bei der Platzhalterversion können zwischen einem und vier Parameter
+benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
+(!LaTeX), WinHelp und RTF erfolgt:
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   ein (!KK2W [idx] [[Index!!]])
+!item [LaTeX:] ein Index\index{Index}
+!item [RTF:]   ein {\xe\v Index}Index
+!item [Win:]   ein {K{\footnote K Index}}Index
+!item [sonst:] ein Index
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!]])
+!item [LaTeX:] ein Wort\index{Index}
+!item [RTF:]   ein {\xe\v Index}Wort
+!item [Win:]   ein {K{\footnote K Index}}Wort
+!item [sonst:] ein Wort
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!] [Subindex!!]])
+!item [LaTeX:] ein Wort\index{Index!Subindex}
+!item [RTF:]   ein {\xe\v Index, Subindex}Wort
+!item [Win:]   ein {K{\footnote K Index, Subindex}}Wort
+!item [sonst:] ein Wort
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!] [Subindex!!] [Subsubindex!!]])
+!item [LaTeX:] ein Wort\index{Index!Subindex!Subsubindex}
+!item [RTF:]   ein {\xe\v Index, Subindex, Subsubindex}Wort
+!item [Win:]   ein {K{\footnote K Index, Subindex, Subsubindex}}Wort
+!item [sonst:] ein Wort
+!end_xlist
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!index (!kw [no_index])
+!item Die Umwandlung von Indizes läßt sich durch den Schalter (!KW [no_index])
+im Vorspann unterbinden.
+
+!index (!kw [use_alias_inside_index])
+!index (!kw [use_label_inside_index])
+!index (!kw [use_nodes_inside_index])
+!item Kapitelüberschriften, Labels und Aliase gelangen standardmäßig
+bei keinem Format in den Index. Sie können dies allerdings
+automatisch von UDO erledigen lassen, indem Sie die Schalter
+(!KW [use_nodes_inside_index]), (!KW [use_label_inside_index]) und
+(!KW [use_alias_inside_index]) im Vorspann setzen.
+
+!index (!kw [ignore_index])
+!item Steht in einem Kapitel der Schalter (!KW [ignore_index]), gelangt die
+Überschrift nicht in den Index. Auch dann nicht, wenn Sie den
+Schalter (!KW [use_nodes_inside_index]) verwenden.
+
+!index Makeindex
+!item Wenn Sie nach (!LaTeX) umwandeln und Index-Befehle verwenden, so
+fügt UDO in die (!LaTeX)-Datei die für das Programm ""Makeindex""
+nötige Befehle ein. Sonderzeichen in den Indizes werden bereits
+speziell für Makeindex angepaßt.
+
+!item Die jeweiligen Parameter werden also durch eckige Klammern
+eingefaßt. Falls Sie in einem Parameter eine schließende eckige
+oder runde Klammer benutzen möchten, muß deren Wirkung mit
+einem Ausrufezeichen aufgehoben werden. Geschieht dies nicht, so
+denkt UDO, der Parameter oder der Index-Befehl wäre bereits
+beendet. Ein Beispiel:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+Falsch:  (!idx [Copyright (c) 1995])
+Richtig: (!idx [Copyright (c!) 1995])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_enumerate
+
+!end_node

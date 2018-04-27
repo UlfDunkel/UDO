@@ -1,0 +1,44 @@
+!begin_node (!kkkw [DEL] [del])
+!ifdest [ipf]
+!alias (!/DEL)...(!/del)
+!endif
+!html_name cmd_del
+!label (!kk1 [/DEL])
+!label (!kk1 [/del])
+
+Mark Text deletions.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/DEL)(!TEXT)(!/del)(!t)
+
+!item [(!DESCRIPTION)]
+(!NTY)
+""(!TEXT)"" wird als Löschung markiert.
+
+Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
+und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
+
+Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
+trägt sich UDO als Änderungsautor 1 ein.
+
+Bei WinHelp(4), Apple Quickview und PostScript wird der Text wird
+durchgestrichen.
+
+Bei ST-Guide und AmigaGuide wird der Text hell dargestellt.
+
+Bei allen anderen Formaten wird der gelöschte Text in eckige Klammern gesetzt. 
+
+!item [(!EXAMPLE)]
+(!T)(!/DEL)Löschungen(!/del)(!t)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+!end_node

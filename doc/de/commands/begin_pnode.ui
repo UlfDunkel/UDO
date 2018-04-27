@@ -1,0 +1,39 @@
+!begin_node (!kw [begin_pnode])
+!html_name cmd_begin_pnode
+
+Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_pnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet, abhängig von der momentanen Gliederungsebene,
+ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
+mit der Bezeichnung ""(!TEXT)"" ein.
+Kapitel erscheinen in Inhaltsverzeichnissen.
+Identisch mit (!KW [begin_node]), der Inhalt wird jedoch beim
+ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [end_node]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_pnode Titel des Popup-Kapitels
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des Popup-Kapitels
+...
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,89 @@
+!begin_node (!kw [use_compressed_lists])
+!html_name cmd_use_compressed_lists
+
+""Komprimierte"" Listen-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_lists [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Listen-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!KW [use_compressed_lists]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_compressed_lists [all]
+
+# Dokument
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist !compressed
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_compressed_lists [all]
+# !use_compressed_envs  [all]
+
+# Dokument
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+(!EXAMPLE_END)
+
+!end_node

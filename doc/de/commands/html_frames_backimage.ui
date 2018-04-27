@@ -1,0 +1,35 @@
+!begin_node (!kw [html_frames_backimage])
+!html_name cmd_html_frames_backimage
+
+Setzen des Hintergrundbildes für den linken Rahmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt das Hintergrundbild für den linken Rahmen in HTML-Seiten. Als Dateiname
+muss der komplette Name, also einschließlich Dateiendung,
+angegeben werden. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_backcolor]), (!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_frames_backimage "hintergrund.gif"
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<body background="hintergrund.gif">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

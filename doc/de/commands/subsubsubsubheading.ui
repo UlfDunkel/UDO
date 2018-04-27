@@ -1,0 +1,27 @@
+!begin_node (!kw [subsubsubsubheading])
+!html_name cmd_subsubsubsubheading
+
+Eine Unterparagraphen-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
+der gleichen Schriftart und -größe wie eine
+Unterparagraphen-Überschrift ausgegeben wird.
+
+!item [(!EXAMPLE)]
+(!T)!/subsubsubsubheading Eine Überschrift(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
+
+!end_xlist
+
+!end_node

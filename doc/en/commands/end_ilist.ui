@@ -1,0 +1,22 @@
+!begin_node (!kw [end_ilist])
+!html_name cmd_end_ilist
+
+Finish a list.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_ilist(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the latest ilist (""italic list"") environment.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [begin_ilist]), (!KW [item] [[~!!]]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node

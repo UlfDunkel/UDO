@@ -1,0 +1,40 @@
+!begin_node (!kw [image])
+!html_name cmd_image
+
+Include image.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/image (!FILE) <caption>(!t)
+
+!item [(!DESCRIPTION)]
+A command to include an image is generated in the destination file,
+if it supports images. You shouldn't pass the suffix of the wanted
+image because UDO itself adds the right one. It will be (!file [.img])
+for the ST-Guide, CS(!TeX) and Lindner-(!TeX), (!file [.gif]) for HTML,
+(!file [.msp]) or (!file [.pcx]) for em(!TeX) and (!file [.bmp]) for
+Windows Help, RTF and IPF.
+If ""<caption>"" is used it will be printed as the title of the image.
+
+The alignment of the image depends on the environment where the command
+is used. You will get centered images when using (!KW [image])
+inside a center environment.
+(!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Images] [Images]), (!KW [html_img_suffix]), (!KW [no_img_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image udo_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!image (!IMAGES)udo_16 UDO-Icon
+(!EXAMPLE_END)
+
+!end_node

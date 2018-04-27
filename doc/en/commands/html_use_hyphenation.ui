@@ -1,0 +1,26 @@
+!begin_node (!kw [html_use_hyphenation])
+!html_name cmd_html_use_hyphenation
+
+Use syllabification marks (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_use_hyphenation(!t)
+
+!item [(!DESCRIPTION)]
+Using this command, syllabification marks will be
+output as (!code [&shy;]) in HTML.
+
+!item [(!EXAMPLE)]
+(!T)!/html_use_hyphenation(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!link [Hyphenation] [Hyphenation]), (!K1 [/-])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [use_short_envs])
+!html_name cmd_use_short_envs
+
+""Komprimierte"" Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_short_envs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [use_compressed_envs]).
+
+!item [(!EXISTEDUNTIL)] Version~7.01
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [compressed]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+!endif

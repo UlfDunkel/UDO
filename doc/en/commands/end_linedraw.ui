@@ -1,0 +1,22 @@
+!begin_node (!kw [end_linedraw])
+!html_name cmd_end_linedraw
+
+Finish a linedraw environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_linedraw(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the latest linedraw environment.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [begin_linedraw]), (!link [Preformatted text] [Preformatted text])
+
+!end_xlist
+
+!end_node

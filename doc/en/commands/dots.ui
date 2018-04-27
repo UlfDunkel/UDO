@@ -1,0 +1,22 @@
+!begin_node (!kw [/..])
+!html_name cmd_dots
+
+Output typographical dots (ellipsis).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/..(!t)
+
+!item [(!DESCRIPTION)]
+An exclamation mark followed by two points will be replaced by
+typographical three dots if the destination format allows it to
+display them. If not, UDO will replace them by three normal dots.
+
+!item [(!EXAMPLE)]
+(!T)!/..(!t) is converted to !..
+
+!end_xlist
+
+!end_node

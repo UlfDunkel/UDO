@@ -1,0 +1,20 @@
+!begin_node (!kw [lsssh])
+!html_name cmd_lsssh
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/lsssh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [listsubsubsubheading]).
+
+!item [(!SEEALSO)]
+(!KW [listsubsubsubheading])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,31 @@
+!begin_node (!kw [no_popup_headlines])
+!html_name cmd_no_popup_headlines
+
+Do not use headlines in popup nodes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_popup_headlines [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Switches off the usage of headlines in popup nodes.
+Headlines for other nodes will continue to be generated.
+The example show how to switch it off when converting to WinHelp.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines]), (!KW [no_headlines])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_popup_headlines [win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

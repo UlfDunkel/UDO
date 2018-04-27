@@ -1,0 +1,22 @@
+!begin_node (!kw [break])
+!html_name cmd_break
+
+Stop processing the source file.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/break(!t)
+
+!item [(!DESCRIPTION)]
+You can use this command inside the source file to stop the
+conversion right at the line where you use this command. UDO calls
+(!KW [end_appendix]) and (!KW [end_document]) itself if necessary.
+
+!item [(!SEEALSO)]
+(!KW [end_document]), (!KW [end_appendix]), (!KW [error])
+
+!end_xlist
+
+!end_node

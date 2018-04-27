@@ -1,0 +1,27 @@
+!begin_node (!kw [html_no_xlist])
+!html_name cmd_html_no_xlist
+
+xlist-Umgebung als description ausgeben (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_no_xlist(!t)
+
+!item [(!DESCRIPTION)]
+Der Schalter (!KW [html_no_xlist]) führt dazu, daß UDO
+die Listen wie bisher als description-Umgebungen ausgibt.
+Standardmäßig erzeugt UDO dafür nun HTML-Tabellen. Leider
+unterscheiden sich Navigator und IE bei der Ausgabe der (!link [Tabellen] [Tabellen]),
+besonders was die Zwischenräume und den Umbruch der ersten
+Spalte angeht.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [use_xlist])
+
+!end_xlist
+
+!end_node

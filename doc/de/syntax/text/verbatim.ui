@@ -1,0 +1,67 @@
+!begin_node Vorformatierter Text
+!html_name style_preformatted_text
+!label verbatim-Umgebung
+!label preformatted-Umgebung
+
+UDO sorgt selbständig für die Formatierung des auzugebenden Textes.
+Dies ist jedoch nicht immer erwünscht. Wollen Sie beispielsweise
+Schnipsel eines Sourcecodes darstellen, wäre es fatal, würde UDO hier
+eine Formatierung vornehmen.
+
+Zur Ausgabe von vorformatiertem Text können Sie sich daher der
+verbatim-Umgebung bedienen, welche mit (!KW [begin_verbatim]) begonnen
+und mit (!KW [end_verbatim]) beendet wird.
+
+Der Text, der innerhalb dieser Umgebung steht, wird nicht besonders
+behandelt, d.h. es wird der Zeilenumbruch exakt übernommen und es
+werden keine UDO-Kommandos (bis auf (!KW [end_verbatim])) bearbeitet.
+Steht eine verbatim-Umgebung allerdings in einer anderen Umgebung, so
+wird der vorformatierte Text zusätzlich eingerückt. Beachten Sie dazu
+auch den Hinweis am Ende dieses Abschnitts.
+
+Bei der Ausgabe ins (!LaTeX)-Format werden die gleichnamigen Befehle
+(!code [\begin{verbatim}]) und (!code [\end{verbatim}]) ausgegeben. Bei den
+anderen Formaten wird (falls nötig) ein nichtproportionaler Font
+eingestellt und Sonderzeichen automatisch angepaßt.
+
+!index (!kw [tabwidth])
+Tabulatoren, die innerhalb einer verbatim-Umgebung auftauchen, werden
+von UDO automatisch durch Leerzeichen ersetzt. Durch den Schalter (!KW [tabwidth])
+können Sie UDO mitteilen, mit welcher Tabulatorbreite der
+Text geschrieben wurde.
+
+!smallskip
+
+!index (!kw [vinclude])
+Da innerhalb einer verbatim-Umgebung keine UDO-Kommandos und somit auch
+nicht (!KW [include]) beachtet werden, wäre es nicht möglich, eine
+externe Datei einzuladen und diese unformatiert darzustellen. Aus
+diesem Grund bietet UDO den Befehl (!KW [vinclude]) an, der eine
+Befehlskombination aus (!KW [begin_verbatim]), (!KW [include]) und
+(!KW [end_verbatim]) darstellt.
+
+Falls Sie jedoch Passagen benutzen wollen, die bereits im Ausgabeformat
+geschrieben wurden (z.B. eine mit (!LaTeX) gesetzte Tabelle), müssen Sie 
+sich der raw-Umgebung bedienen.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+
+!item Da andere Umgebungen im Quelltext eingerückt werden können,
+erscheint es verlockend, auch eine verbatim-Umgebung im Quelltext
+passend einzurücken. Bedenken Sie allerdings, daß führende Leerzeichen
+bei der Ausgabe des vorformatierten Textes übernommen werden und dieser
+dann in der späteren Ausgabedatei zu weit rechts stehen würde, falls Sie
+den Text der verbatim-Umgebung einrücken.
+
+!item Der Unterschied zur raw-Umgebung besteht darin, daß der Text der
+verbatim-Umgebung 1:1 dargestellt wird. Text der raw-Umgebung wird
+hingegen 1:1 übernommen und dient daher der Einbindung spezieller
+Formatbefehle.
+
+!end_enumerate
+
+!end_node

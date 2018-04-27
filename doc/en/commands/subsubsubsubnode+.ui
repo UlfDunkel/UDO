@@ -1,0 +1,32 @@
+!begin_node (!kw [subsubsubsubnode*])
+!html_name cmd_subsubsubsubnode_asterisk
+
+Start a hidden subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [subsubsubsubnode]), but here ""(!TEXT)""
+will not appear in the table of contents.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubnode* Hidden subparagraph title
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Hidden subparagraph title
+(!EXAMPLE_END)
+
+!end_node

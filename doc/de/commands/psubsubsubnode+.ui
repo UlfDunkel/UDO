@@ -1,0 +1,33 @@
+!begin_node (!kw [psubsubsubnode*])
+!html_name cmd_psubsubsubnode_asterisk
+
+Versteckten Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie
+(!KW [psubsubsubnode]), mit der Ausnahme, daﬂ ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubnode* Ein versteckter Popup-Paragraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Ein versteckter Popup-Paragraph
+(!EXAMPLE_END)
+
+!end_node

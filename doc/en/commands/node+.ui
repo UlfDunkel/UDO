@@ -1,0 +1,32 @@
+!begin_node (!kw [node*])
+!html_name cmd_node_asterisk
+
+Start a hidden chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/node* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [node]), but here ""(!TEXT)"" will not
+appear in a table of contents.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [pnode*]), (!KW [begin_node*]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!node* Title of hidden chapter
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Title of hidden chapter
+(!EXAMPLE_END)
+
+!end_node

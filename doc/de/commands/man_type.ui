@@ -1,0 +1,33 @@
+!begin_node (!kw [man_type])
+!html_name cmd_man_type
+
+Programmtyp setzen (nur Manualpage).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_type (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird bei der Ausgabe in eine Manualpage in
+Klammern in der Kopfzeile ausgegeben. Im Beispiel
+würde die Kopfzeile ""udo(1)"" ausgegeben. ""(!TEXT)"" wird nicht als
+Dateiendung benutzt.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.45
+
+!item [(!SEEALSO)]
+(!KW [nroff_type])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!man_type 1
+!docinfo [program] udo
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,37 @@
+!begin_node (!kw [verbatimsize])
+!html_name cmd_verbatimsize
+
+Set font size for verbatim environments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/verbatimsize [tiny|small|normal|large|huge](!t)
+
+!item [(!DESCRIPTION)]
+With this switch you can set the font size of verbatim environments
+if the destination format allows it to use different font sizes. You
+can use this switch wherever you want. The smallest font size is
+activated with ""(!code [tiny])"", the largest one with
+""(!code [huge])"". The default font size is ""(!code [normal])"".
+
+(!NOTE) If -- like in this manual -- the font size does not change
+in the HTML output, you probably have used a CSS style for preformatted
+text ((!code [<pre>])).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!link [verbatim environment] [verbatim environment]), (!KW [html_monofont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!verbatimsize [small]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

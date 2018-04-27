@@ -1,6 +1,0 @@
-#!/bin/sh
-# Seiten "Made with UDO" in Deutsch + Englisch nach HTML übersetzen
-udo --html --verbose --force-long --check -o ./index.html.de mwu.txt -D lang_de
-mv index.html.ulh index.html.de.ulh
-udo --html --verbose --force-long --check -o ./index.html.en mwu.txt -D lang_en
-mv index.html.ulh index.html.en.ulh

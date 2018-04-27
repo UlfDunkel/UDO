@@ -1,0 +1,31 @@
+!begin_node (!kw [no_verbatim_umlaute])
+!html_name cmd_no_verbatim_umlaute
+
+Do not use (german) umlauts in verbatim environments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_verbatim_umlaute [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Switches off the usage of German umlauts inside a verbatim
+environment. The example shows how to switch it off when converting to
+(!LaTeX). Umlauts are then replaced by ae, oe, ue, ss, Ae, Oe and Ue.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [begin_verbatim]), (!KW [end_verbatim]), (!link [Preformatted text] [Preformatted text])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_verbatim_umlaute [tex]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

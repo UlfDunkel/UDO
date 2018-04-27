@@ -1,0 +1,212 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: HTML (Hypertext Markup Language)
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 08: 'Homepage' -> 'Website'
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Hypertext Markup Language (HTML)
+!html_name format_html
+!label HTML
+
+HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt
+werden. Es ist zudem eines der meistgenutzten Formate für
+Online-Dokumentationen. Logischerweise gibt es zum HTML-Ausgabeformat
+auch die meisten Fragen. Hier sind die häufigsten als FAQ
+zusammengefasst.
+
+!begin_description !not_compressed
+
+##################################################
+
+!index Aufteilung
+!index HTML !! Aufteilung
+!item [Wie kann man die Aufteilung in mehrere Dateien unterbinden?]
+Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig
+mehrere Dateien, die miteinander verknüpft sind. Für jedes
+Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene
+Datei mit der Endung (!file [.htm[l!]]) angelegt. Die Namen der einzelnen
+Dateien richten sich nach der Nummer und der Position des
+jeweiligen Kapitel. Inhaltsverzeichnis und Titelseite gelangen in
+die Datei, die Sie UDO per Kommandozeile als (!code [(--!)outfile]) übergeben.
+
+!index !html_merge_nodes
+!index !html_merge_subnodes
+!index !html_merge_subsubnodes
+!index !html_merge_subsubsubnodes
+Mit den Schaltern (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]),
+(!KW [html_merge_subsubnodes]) oder (!KW [html_merge_subsubsubnodes]) können
+Sie die Aufteilung in mehrere Dateien unterbinden.
+
+Wird im Vorspann (!KW [html_merge_nodes]) benutzt, wird das gesamte
+Dokument in einer Datei gesichert. Dies empfiehlt sich lediglich
+bei kleinen Dokumenten, die kleiner als 16 KB sind.
+
+(!KW [html_merge_subnodes]) sorgt dafür, daß alle Abschnitte eines
+Kapitels in der Datei angegeben werden, in dem sich auch das
+Kapitel selbst befindet.
+
+Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, daß alle
+Unterabschnitte in der gleichen Datei wie der übergeordnete Abschnitt
+untergebracht werden.
+
+Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür,
+daß alle Paragraphen in der gleichen Datei wie der übergeordnete
+Unterabschnitt untergebracht werden.
+
+##################################################
+
+!index Dateinamen
+!index HTML !! Dateinamen
+!index !html_name
+!item [Mir gefallen die Dateinamen bei der HTML-Ausgabe nicht!/]
+Durch den Befehl (!KW [html_name]) können Sie einem Kapitel einen
+bestimmten Namen zuweisen, den UDO für die jeweilige Datei
+anstelle der etwas kryptischen Namen wie etwa ""(!file [0a1009.htm])""
+benutzt.
+
+##################################################
+
+!index HTML !! Kopfzeile
+!index udo_lf.gif
+!index udo_rg.gif
+!index udo_up.gif
+!item [Wie bekomme ich diese scheußlichen Kopfzeilen weg?]
+UDO erzeugt standardmäßig auf jeder HTML-Seite eine Kopfzeile,
+anhand derer Sie das Thema (gebildet aus den Daten von (!KW [docinfo] [[title!!]]) und
+(!KW [docinfo] [[program!!]])) des Hypertextes erkennen können. Desweiteren werden Links
+zu der vorgehenden, nachfolgenden und/oder übergeordneten Seite
+angelegt. Dazu werden GIFs benutzt, die UDO automatisch erzeugt.
+Die Dateinamen dieser GIFs lauten (!file [udo_lf.gif]), (!file [udo_rg.gif]) und
+(!file [udo_up.gif]).
+
+!index !no_headlines
+Durch den Schalter (!KW [no_headlines] [[html!!]]) kann die Ausgabe der
+Kopfzeilen und der Grafiken unterbunden werden.
+
+##################################################
+
+!item [Wie kann ich bequem eigene Kopf- und Fußzeilen erzeugen?]
+Um eigene (!idx [Kopfzeilen]) und (!idx [Fußzeilen]) zu erzeugen, können Sie Makros
+benutzen, die Sie jeweils am Anfang und Ende eines Kapitels
+angeben. Der Inhalt dieser Kapitel erscheint dabei jedoch
+unterhalb der Überschrift. Auf folgende Art und Weise wurden
+beispielsweise Kopf- und Fußzeilen meiner Website angelegt,
+in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
+""Links"" gibt:
+
+!begin_description
+!item [Hauptdatei:]
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)html/headfoot.ui
+(!EXAMPLE_END)
+
+!item [software.ui:]
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)html/software.ui
+(!EXAMPLE_END)
+!end_description
+
+Wird nun nach HTML umgewandelt, werden die jeweiligen Kopf- und
+Fußzeilen ausgegeben. Durch die Referenzierung von UDO werden
+automatisch Links auf die anderen Kapitel angelegt.
+
+Wandeln Sie nicht nach HTML um, werden leere Definitionen und
+Makros erzeugt, wodurch keine Kopf- und Fußzeilen ausgegeben
+werden.
+
+Eine andere Möglichkeit, Kopf- bzw. Fußzeilen zu erzeugen, ist die
+Verwendung von (!KW [use_raw_header]) bzw. (!KW [use_raw_footer]).
+
+##################################################
+
+!index HTML !! Tabellen
+!index Umrahmung
+!index Rahmen
+!index Tabelle
+!item [Mal wird eine Tabelle umrahmt dargestellt, mal nicht!?]
+Bei HTML können Sie leider nur angeben, ob die gesamte Tabelle
+umrahmt werden soll oder ob sie gar nicht mit einem Rahmen
+dargestellt werden soll.
+
+Um eine Tabelle mit Rahmen darzustellen, müssen Sie bei
+(!KW [begin_table]) den Befehle (!KW [hline]) angeben. Fehlt (!KW [hline]) bei diesem
+Befehl, wird die Tabelle ohne Rahmen dargestellt.
+
+##################################################
+
+!index HTML !! Dateiendungen
+!item [Wie legt UDO die Endungen der Dateien fest?]
+UDO benutzt als Endung für die HTML-Dateien immer die Endung des
+in der Kommandozeile mit der Option (!code [(--!)outfile]) bzw. (!code [-o]) übergebenen
+Dateinamens:
+
+!begin_tlist [-o INDEX.HTML] !compressed
+!item [-o index.htm]  (!file [.htm])
+!item [-o index.html] (!file [.html])
+!item [-o INDEX.HTML] (!file [.HTML])
+!end_tlist
+
+Wenn Sie stattdessen die Option (!code [-o~!/]) verwenden, benutzt UDO für
+8+3-Dateisysteme immer die Endung (!file [.htm]), bei Dateisystemen, die
+lange Namen erlauben, hingegen immer die Endung (!file [.html]).
+
+##################################################
+
+!item [Die Dateinamen bei den Querverweisen stimmen nicht!?]
+Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, das
+keine langen Namen zuläßt, Sie als Endung (!file [.html]) vorgegeben haben
+und Sie diese Dateien dann auf einem Web-Server ablegen, so
+müssen Sie folgendes beachten:
+
+!begin_enumerate !compressed
+!item UDO versucht zwar, (!file [foo.html]) zu sichern, TOS und DOS sichern
+die Datei jedoch nur als (!file [foo.htm]).
+
+!item UDO benutzt für alle Querverweise die Endung (!file [.html]). Wenn nun
+ein HTML-Browser unter TOS und DOS versucht, (!file [foo.html]) zu
+öffnen, öffnet dieser anstandslos (!file [foo.htm]).
+
+!item Nach dem Kopieren der Dateien auf den Web-Server (!B)müssen(!b)
+die Endungen der Dateien von (!file [.htm]) auf (!file [.html]) angepaßt werden.
+Hier wird (!file [foo.htm]) nicht geöffnet, wenn auf (!file [foo.html])
+zugegriffen werden soll!
+!end_enumerate
+
+##################################################
+
+!index Hintergrundmusik
+!index HTML !! Hintergrundmusik
+!item [Wie kann ich Hintergrundmusik einbinden?]
+Hierfür steht das Kommando (!KW [html_bgsound]) zur Verfügung.
+
+##################################################
+
+!end_description
+
+!end_node

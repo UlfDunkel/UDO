@@ -1,0 +1,24 @@
+!begin_node (!kw [ignore_subsubsubtoc])
+!html_name cmd_ignore_subsubsubtoc
+
+In dem zugehörigen Subsubnode kein ""subsubsubtoc"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubsubtoc(!t)
+
+!item [(!DESCRIPTION)]
+Wenn innerhalb eines Subsubnodes dieser Schalter
+gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem die Paragraphen
+des Subsubnodes aufgelistet werden.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubsubtocs]), (!KW [subsubsubtoc])
+
+!end_xlist
+
+!end_node

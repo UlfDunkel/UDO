@@ -1,0 +1,19 @@
+!begin_node Sourcecode
+!html_name style_sourcecode
+!label sourcecode-Umgebung
+
+Zeilen, die in einer sourcecode-Umgebung stehen, werden für die
+Sourcecode-Formate 1:1 ausgegeben. Bei den ""normalen"" Zielformaten
+werden diese Zeilen so ausgegeben, als stünden sie in einer
+verbatim-Umgebung, die wiederum in einer quote-Umgebung steht.
+
+Ein kleines Beispiel für einen C-Sourcecode mit UDO:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)csource.u
+(!EXAMPLE_END)
+
+Eine weitere Möglichkeit, Sourcecode auszugeben, bietet der
+Befehl (!KW [sinclude]).
+
+!end_node

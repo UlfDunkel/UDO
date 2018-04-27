@@ -1,4 +1,0 @@
-#!/bin/sh
-# dieses bash-Skript konvertiert das englische UDO-Handbuch nach ASCII (text)
-# this bash script converts the english UDO Manual to ASCII (text format)
-udo --asc --verbose --force-long -D LANG_EN manual.u -o manual-en.txt $*

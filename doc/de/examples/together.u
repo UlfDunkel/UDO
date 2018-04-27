@@ -1,0 +1,235 @@
+# Dies ist ein Kommentar, wegen des # als erstes Zeichen der Zeile
+
+# Der ISO-Latin1-Zeichensatz wird verwendet
+!code_source [latin1]
+
+# Informationen für die Titelseite angeben
+!docinfo [title]   Übersicht der Möglichkeiten von
+!docinfo [program] UDO Release 6
+
+!docinfo [author]  Dirk Hagedorn
+!docinfo [address] Postfach 8105
+!docinfo [address] D-59840 Sundern
+
+# Nun sagen wir UDO noch, daß wir bestimmte Features benötigen:
+
+# - Bei ASCII möchten wir Blocksatz
+!use_justification [asc]
+
+# - weißen Hintergrund für HTML auf allen Seiten
+!html_backcolor white
+
+# automatische Unterinhaltsverzeichnisse bei Hypertextformaten
+# ermöglichen das Durchklicken durch den Text
+!use_auto_subtocs [win,html]
+
+# Bei Windows-Help sollen die Kapitelnamen unter "Suchen" erscheinen
+!use_nodes_inside_index [win]
+
+# Nun fängt der eigentliche Inhalt des Textes an
+!begin_document
+!maketitle
+!tableofcontents
+
+#####################################################################
+#####################################################################
+!node Textausrichtung
+
+#--------------------------------------------------------------------
+!subnode Zentrierter Text
+
+!begin_center
+Mit der center-Umgebung kann man Text zentriert ausgeben. UDO erledigt
+das alles automatisch.
+!end_center
+
+#--------------------------------------------------------------------
+!subnode Rechtsbündiger Text
+
+!begin_flushright
+Mit der flushright-Umgebung kann Text rechtsbündig ausgegeben werden.
+UDO erledigt alles automatisch.
+!end_flushright
+
+#--------------------------------------------------------------------
+!subnode Linksbündiger Text
+
+!begin_flushleft
+Mit der flushleft-Umgebung kann Text linksbündig, d.h. ohne Blocksatz,
+ausgegeben werden. Beherrscht ein Format keinen Blocksatz, so wird man
+keinen Unterschied zum normalen Text feststellen.
+!end_flushleft
+
+#--------------------------------------------------------------------
+!subnode Eingerückter Text
+
+!begin_quote
+Mit der quote-Umgebung kann man Text eingerückt ausgeben. Es wird
+dabei zugleich ein linker wie auch ein rechter Rand benutzt.
+!end_quote
+
+#--------------------------------------------------------------------
+!subnode Vorformatierter Text
+
+Vorformatierten Text kann man mit der verbatim-Umgebung ausgeben:
+
+!begin_verbatim
+#include <stdio.h>
+
+int main ( void )
+{
+    printf("Hello, world!\n");
+    
+    return 0;
+}
+!end_verbatim
+
+
+#####################################################################
+#####################################################################
+!node Aufzählungen und Listen
+
+#--------------------------------------------------------------------
+!subnode Die itemize-Umgebung
+
+Mit der itemize-Umgebung kann man schnell und komfortabel Aufzählungen
+erstellen:
+
+!begin_itemize
+!item Afrika
+!item Amerika
+!item Asien
+!item Australien
+!item Europa
+!end_itemize
+
+Das ganze kann man auch noch ohne Zwischenräume ausgeben lassen:
+
+!begin_itemize !short
+!item Afrika
+!item Amerika
+!item Asien
+!item Australien
+!item Europa
+!end_itemize
+
+
+#--------------------------------------------------------------------
+!subnode Die enumerate-Umgebung
+
+Will man eine numerierte Aufzählung ausgeben, so bedient man sich der
+enumerate-Umgebung:
+
+!begin_enumerate !short
+!item Afrika
+!item Amerika
+!item Asien
+!item Australien
+!item Europa
+!end_enumerate
+
+#--------------------------------------------------------------------
+!subnode Die description-Umgebung
+
+Für Beschreibungen kann man die description-Umgebung verwenden:
+
+!begin_description
+
+!item [Afrika] ist ein Kontinent.
+
+!item [Amerika] ist auch ein Kontinent, bestehend aus Südamerika und
+Nordamerika.
+
+!item [Asien] ist auch ein Kontinent, und zwar ist Asien sogar der
+größte.
+
+!item [Australien] ist der kleinste Kontinent der Erde.
+
+!item [Europa] ist der einzige Kontinent, dessen Name nicht mit ""A""
+beginnt.
+
+!end_description
+
+#--------------------------------------------------------------------
+!subnode Listen
+
+Bei Listen werden die Aufzählunspunkte noch anders formatiert. Hier
+stehen die Punkte wie sonst auch links, die Beschreibung erfolgt
+jedoch gleichmäßig ausgerichtet auf der rechten Seite:
+
+!begin_xlist [Australien:]
+
+!item [Afrika:] Afrika ist ein Kontinent.
+
+!item [Amerika:] Amerika ist auch ein Kontinent, bestehend aus
+Südamerika und Nordamerika.
+
+!item [Asien:] Asien ist auch ein Kontinent, und zwar ist Asien sogar
+der größte.
+
+!item [Australien:] Australien ist der kleinste Kontinent der Erde.
+
+!item [Europa:] Europa ist der einzige Kontinent, dessen Name nicht
+mit ""A"" beginnt.
+
+!end_xlist
+
+#####################################################################
+#####################################################################
+!node Tabellen
+
+!ifdest [tex]
+# Bei LaTeX kann man keine Querverweise auf Nodes machen,
+# sondern nur auf Labels, deshalb wird explizit das
+# folgende Label nur für LaTeX angegeben.
+!label Tabellen
+!endif
+
+Kleinere Tabellen kann man völlig unproblematisch mit UDO erzeugen.
+Hier ein paar Beispiele:
+
+!table_caption Eine rahmenlose Tabelle
+!begin_table [lcr]
+Links !! Mitte !! Rechts
+Links unten !! Mitte unten !! Rechts unten
+!end_table
+
+!table_caption Eine Tabelle mit Linien und Rahmen
+!begin_table [|l|c|r|] !hline
+Links !! Mitte !! Rechts
+!hline
+Links unten !! Mitte unten !! Rechts unten
+!hline
+!end_table
+
+
+Bei Windows-Help und HTML ist der Einsatz von Linien sehr
+eingeschränkt möglich.
+
+#####################################################################
+#####################################################################
+!node Querverweise
+
+UDO fügt bei Hypertextformaten wie Windows-Help und HTML automatisch
+Querverweise ein. UDO bietet hier vielfältige Möglichkeiten, von denen
+hier 
+
+Wird z.B. über Tabellen gesprochen, kann man sofort zum vorherigen
+Kapitel verzweigen.
+
+Auch ist es möglich, manuelle Querverweise einzubauen. Beispiel: Beim
+(!link [Tabellensatz] [Tabellen]) !..
+
+#####################################################################
+#####################################################################
+!node Schmankerl
+
+Heute ist der (!today) (Kurzform: (!short_today)). UDO kann auch
+""typographische Anführungszeichen"", ''typographische Apostrope'',
+kurze -- oder auch lange --- Gedankenstriche, verschiedene
+Schriftarten ((!B)bold(!b), (!I)italic(!i), (!U)underlined(!u),
+(!V)verbatim(!v), (!T)typewritered(!t)) und noch vieles mehr.
+
+#####################################################################
+!end_document
+

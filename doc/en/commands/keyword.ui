@@ -1,0 +1,26 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [keyword])
+!html_name cmd_keyword
+
+Set index entry.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/keyword (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KW [index]).
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!KW [index])
+
+!end_xlist
+
+!end_node
+!endif

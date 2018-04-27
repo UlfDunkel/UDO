@@ -1,0 +1,45 @@
+########################################
+# @(#) A small example
+########################################
+
+# Set some flags and title page information
+
+!code_source [iso]
+!english
+!stg @subject "Documentation\Utilities"
+
+!title   A small example for
+!program UDO
+!version Version 1
+!date    (!today)
+!author  Dirk Hagedorn
+!street  In der Esmecke 9
+!town    59846 Sundern
+!country Germany
+!email   Internet: DirkHage@aol.com
+!email   MausNet: Dirk Hagedorn @ MK2
+
+# end of the preamble, start of the main part
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node A chapter
+This is the text of this chapter.
+
+!subnode A section
+This
+	is
+		the
+			text
+	of
+		the
+section.
+
+!subsubnode A subsection
+I think   it's   getting
+boring               now.
+
+!end_document
+

@@ -1,0 +1,134 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6 PL 15
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 25: using macro NOTE
+#
+################################################################################
+
+!begin_node Änderungen von Release 6 Patchlevel 14 nach 15
+!html_name history_release_6_PL14_to_15
+
+(!PUBLISHED [UDO~6 Patchlevel~15] [10.06.2003])
+
+!subheading Allgemeines
+!begin_itemize !compressed
+!item Alle Indexeinträge bis zur vierten Stufe werden in die
+      Projektdatei ((!file [*.upr])) geschrieben.
+!item Die Einträge für (!KW [label]) und (!KW [alias]) werden
+      in die Projektdatei ((!file [*.upr])) geschrieben.
+!item Alle Heading-Einträge werden in die Projektdatei ((!file [*.upr])) geschrieben.
+!item Außerdem werden die entsprechenden Zeilennummern geschrieben.
+!end_itemize
+
+!subheading Postscript
+!begin_itemize !compressed
+!item Die Ausgabe in (!file [abo.c]) kann derzeit von der Postscript-Ausgabe nicht
+      benutzt werden, da diese keine zentrierte bzw. rechts!-bündige
+      Ausgabe zulässt. Deshalb wird die Standard!-ausgabe verhindert
+      und statt!-dessen eine eigene Ausgabe formuliert. Die Ausgabe erfolgt
+      in deutsch, wenn Deutsch gesetzt ist, ansonsten in englisch.
+!item Neue Funktion, um einige Zeichen, die ein Post!-script-Inter!-preter
+      als Teil des Codes inter!-pretieren würde, abzufangen.
+!item Neues Kommando für das Dokumentenlayout: (!nl)
+      (!KW [doclayout] [[ps!!] [paper!!] foo]) (!nl)
+      Möglich Angaben für foo sind A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+      A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
+
+      (!KW [doclayout] [[ps!!] [openMode!!] foo]) (!nl)
+      Mögliche Angaben stehen in der Dokumentation zu den pdf-marks.
+
+      (!KW [doclayout] [[ps!!] [propfontname!!] foo]) (!nl)
+      Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
+      Times New Roman, sans oder sans-serif. (!nl)
+      (!NOTE) Für die Postscript-Ausgabe gilt, daß für Helvetica,
+      Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
+      Times New Roman.
+
+      (!KW [doclayout] [[ps!!] [propfontsize!!] foo]) (!nl)
+      Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+!item (!KW [docinfo] [[keywords!!] foo]) (!nl)
+      Ersatz und Erweiterung für (!KW [html_keywords]) (funkioniert
+      derzeit nur für Postscript).
+!item (!KW [docinfo] [[description!!] foo]) (!nl)
+      Ersatz und Erweiterung für (!KW [html_description]) (funktioniert
+      derzeit nur für Postscript)
+!item Für die Postscript-Ausgabe wird jetzt auch eine Titelseite erzeugt.
+!item Für die Standard-Kopfzeile wird aus ""Titel"" und ""Programm""
+      ((!KW [docinfo])) ein Text erstellt.
+!item Für die Standard-Fusszeile wird aus ""Author"" ((!KW [docinfo]))
+      ein Text erstellt.
+!item Aus den Angaben aus (!KW [docinfo]) werden die Angaben für die
+      Dokumenten!-informationen einer PDF-Datei zusammen!-gestellt.
+!item Die Description- und Listumgebungen werden für Postscript
+      unterstützt.
+!item Neue Aufzählungszeichen für die Itemize-Umgebung.
+!item Der Zeichensatz ""Symbol"" kann benutzt werden.
+!item Interne Links (!KKW [link]), externe Links (!KKW [xlink])
+      und (!KKW [url]) werden für PDF (via Postscript) umgesetzt.
+!item Fußnoten werden für die Postscript-Ausgabe umgesetzt.
+!item Die Tabellen werden jetzt leserlich mit monospaced Zeichen umgesetzt.
+!item Die Kommandos (!KW [bigskip]), (!KW [medskip]) und (!KW [smallskip])
+      werden jetzt leserlich umgesetzt.
+!item Alle Nodes werden für die Postscript-Ausgabe als ""Named Destination""
+      angelegt. Es kann also von außerhalb auf jedes Kapitel einer PDF-Datei
+      verwiesen werden.
+!item Aus allen Nodes wird ein Bookmark-Verzeichnis für PDF-Dateien erzeugt.
+!item Wenn (!KW [tableofcontents]) gesetzt ist, wird ein Inhaltsverzeichnis
+      ausgegeben.
+!item Für (!KW [label]) wird ein ""Named Destination"" gesetzt.
+!end_itemize
+
+!subheading Hypertext Markup Language (HTML)
+!begin_itemize !compressed
+!item Neue Kommandos für die HTML-Ausgabe: (!nl)
+      (!KW [html_style_name] [foo]) (!nl)
+      Zum Setzen eines externen Stylesheets für alle Dateien eines Projektes.
+
+      (!KW [html_script_name] [foo]) (!nl)
+      Zum Setzen eines externen Scriptes für alle Dateien eines Projektes.
+
+      (!KW [html_favicon_name] [foo]) (!nl)
+      Zum Setzen eines Faforiten-Icons für alle Dateien eines Projektes.
+
+      (!B)Achtung:(!b) Möglicherweise werden die Kommandos nochmal
+      geändert.
+!item Trennzeichen (!code [&shy;]) für die Worttrennung in HTML eingefügt
+!item Die Gedankenstriche (!code [&ndash;]) und (!code [&mdash;]) sowie
+      die drei Auslassungspunkte (!code [&hellip;]) werden für HTML gesetzt.
+!item Setzen der Links für die Navigation über das Element (!code [(!LINK!)]).
+      Folgende Attribute werden unterstützt: (!code [contents]), (!code [start]), (!code [first]),
+      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) und (!code [copyright]). (!nl)
+      Die Links für (!code [first]) und (!code [last]) sowie (!code [previous])
+      gelten nur für CAB (evtl. iCab). Der Link für (!code [copyright])
+      zeigt auf aboutudo und wird auch nur dann angelegt. (!nl)
+      CAB unterstützt beim Element (!code [(!LINK!)]) leider nicht das Attribut
+      (!code [target]). Daher funktionieren die Links bei der Benutzung
+      von Frames nicht so schön.
+!item Werden bei der HTML-Ausgabe Frames erzeugt, wird zusätzlich ein Bereich
+      (!code [<noframes></noframes>]) mit Inhaltsverzeichnis gesetzt, damit auch
+      Browser, die gar keine Frames kennen/können (z.B. beim Vorlesen)
+      an das Inhalts!-ver!-zeichnis kommen.
+!end_itemize
+
+!subheading Rich Text Format (RTF)
+!begin_itemize !compressed
+!item Absatzkontrolle (Orphans & Widows) wird für die RTF-Ausgabe
+      standard!-mäßig eingeschaltet.
+!end_itemize
+
+!end_node

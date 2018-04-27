@@ -1,0 +1,38 @@
+!begin_node (!kkkw [U] [u])
+!ifdest [ipf]
+!alias (!/U)...(!/u)
+!endif
+!html_name cmd_U()
+!label (!kk1 [/U])
+!label (!kk1 [/u])
+
+Print underlined text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/U)(!TEXT)(!/u)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed underlined if possible.
+
+(!NOTE) Use this text style sparingly. Keep in mind
+that e.g. in HTML hyperlinks are usually displayed as
+underlined, too.
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+The word ""underlined"" will be displayed (!U)underlined(!u).
+!end_verbatim
+(!EXAMPLE_AFTER)
+The word ""underlined"" will be displayed (!U)underlined(!u).
+(!EXAMPLE_END)
+
+!end_node

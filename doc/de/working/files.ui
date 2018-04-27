@@ -1,0 +1,74 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Generated files
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 09: file reviewed
+#   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+!begin_node Erzeugte Dateien
+!html_name files
+
+Es folgt eine Auflistung der Endungen der Dateien, die Ihnen beim
+Umgang mit UDO über den Weg laufen werden.
+
+#Ausgabe-Formate
+!begin_xlist [.htm(l):] !compressed
+!item [.1:]      Nroff
+!item [.c:]      C-Quelltext
+!item [.txt:]    ASCII-Format
+!item [.man:]    Manualpage-Format
+!item [.cmd:]    Kommandodatei für den Pure-C-Hilfe-Compiler
+!item [.hpj:]    Projektdatei für den WinHelp-Hypertext-Compiler (!file [HC.EXE])
+!item [.htm(l):] HTML-Format
+!item [.lyx:]    LyX-Format
+!item [.pas:]    Pascal-Quelltext
+!item [.rtf:]    RTF bzw. WinHelp- oder QuickView-Quelltext
+!item [.scr:]    Pure-C-Hilfe-Quelltext
+!item [.sgm(l):] Linuxdoc-SGML-Quelltext
+!item [.stg:]    ST-Guide-Quelltext
+!item [.txt:]    Turbo-Vision-Hilfe-Quelltext
+!item [.tex:]    (!LaTeX)-Quelltext
+!item [.texi:]   Texinfo-Quelltext
+!end_xlist
+
+Dateien mit der Endung (!file [.ul?]) enthalten die Fehlermeldungen und
+Informationen, die UDO während der Umwandlung erzeugt.
+
+Dateien mit der Endung (!file [.uh?]) enthalten die Trennvorschläge für das
+ASCII-, ST-Guide- und Pure-C-Hilfe-Format.
+
+Dateien mit der Endung (!file [.ut?]) enthalten den ""Include-Tree"", also den
+logischen Aufbau aus Include-Dateien Ihres Quelltextes.
+
+Die folgenden Dateiendungen werden auftauchen, wenn Sie die von UDO
+erzeugten Dateien durch die formatzugehörigen Programmen (siehe
+Klammerinhalt) weiterbearbeiten:
+
+!begin_xlist [.www]
+!item [.err:] Protokolldatei des WinHelp-Compilers ((!file [HC.EXE]))
+!item [.h:]   C-Header-Datei für Turbo-Vision ((!file [TVHC.EXE]))
+!item [.hlp:] WinHelp-Datei ((!file [HC.EXE])), Turbo-Vision-Hilfe-Datei ((!file [TVHC.EXE])), Pure-C-Hilfe-Datei ((!file [HC.PRG]))
+!item [.hyp:] ST-Guide-Hypertext ((!file [HCP.TTP]))
+!item [.ref:] ST-Guide-Referenzdatei ((!file [HCP.TTP]))
+!end_xlist
+
+!end_node

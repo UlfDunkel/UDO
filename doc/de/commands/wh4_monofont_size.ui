@@ -1,0 +1,31 @@
+!begin_node (!kw [wh4_monofont_size])
+!html_name cmd_wh4_monofont_size
+
+Größe des Monospaced-Font für WinHelp4 setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_monofont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die Größe des Font setzen, der zur
+Darstellung von Klartext benutzt werden soll. Als
+Standard verwendet UDO (!const [10])~pt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [wh4_monofont]), (!KW [wh4_propfont]), (!KW [wh4_propfont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_monofont_size 12
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,39 @@
+!begin_node (!kw [image_counter])
+!html_name cmd_image_counter
+
+Abbildungszähler setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/image_counter [(!VALUE)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie die Nummer festlegen,
+die bei der ersten Abbildung ausgegeben werden soll.
+Würde das Beispiel verwendet, stünde unterhalb der
+ersten Abbildung folgendes: ""Abbildung 5: !.."".
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [image])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!image_counter 5
+
+# Hauptteil:
+!image udo_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!image (!IMAGES)udo_16 UDO-Icon
+Abbildung 5: UDO-Icon
+(!EXAMPLE_END)
+
+!end_node

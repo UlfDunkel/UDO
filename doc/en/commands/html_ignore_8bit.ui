@@ -1,0 +1,37 @@
+!begin_node (!kw [html_ignore_8bit])
+!html_name cmd_html_ignore_8bit
+
+Ignore 8-bit characters (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_ignore_8bit(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, 8 bit characters
+won't be converted to HTML entities ((!code [&auml;]) etc.).
+
+The meta tag Content-Type will automatically be filled with the right charset descriptor by UDO.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [code_source]), (!KW [code_target])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!code_target [utf-8]
+!html_ignore_8bit
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

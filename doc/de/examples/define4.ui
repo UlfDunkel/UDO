@@ -1,0 +1,7 @@
+!ifdest [tex]
+  !define lb \linebreak[(!1)]
+!else
+  !define lb
+!endif
+[...]
+LaTeX eine Umbruchstelle (!lb [2]) vorschlagen.

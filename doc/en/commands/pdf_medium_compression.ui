@@ -1,0 +1,23 @@
+!begin_node (!kw [pdf_medium_compression])
+!html_name cmd_pdf_medium_compression
+
+Compress PDF file (medium compression rate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/pdf_medium_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble PDFLaTeX
+will compress the output file by about 40%. A better result
+with a slower compression you will get with
+(!KW [pdf_high_compression]).
+
+!item [(!SEEALSO)]
+(!KW [pdf_high_compression])
+
+!end_xlist
+
+!end_node

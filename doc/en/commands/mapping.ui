@@ -1,0 +1,46 @@
+!begin_node (!kw [mapping])
+!html_name cmd_mapping
+
+Assign value to node.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/mapping (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+This command is currently only supported for Windows Help and IPF.
+
+!begin_description
+
+!item [IPF:]
+If you use (!KW [mapping] [4711]) inside a node,
+UDO will generate an entry (!code [res=4711]) in the IPF node header.
+If you don't use (!KW [mapping]), UDO will output nothing.
+
+!item [Windows Help:]
+With this command you can assign a numerical value to
+a node that is used in the map file. If you don't use (!KW [mapping]),
+UDO uses its internal value for the entry, but only
+if you used (!KW [win_helpid]). Thus an entry in the map
+will be generated if you used either (!KW [mapping]) or (!KW [win_helpid])
+or both.
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_helpid])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!mapping 4711
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

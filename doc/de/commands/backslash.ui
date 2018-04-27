@@ -1,0 +1,46 @@
+!begin_node (!kw [\])
+!html_name cmd_backslash
+
+Eingabezeile fortsetzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/\(!t)
+
+!item [(!DESCRIPTION)]
+Endet eine UDO-Eingabezeile mit (!code [!/\<Zeilenumbruch>]), wird die folgende Zeile
+von UDO als Fortsetzung der vorhergehenden Zeile aufgefaßt. Dies gilt nicht für verbatim-Umgebungen. Es können damit mehrere ""echte""
+Zeilen aus Sicht von UDO zu einer einzigen ""logischen"" Eingabezeile zusammengefaßt werden.
+Diese Fortsetzungszeilen sind an jeder Stelle im UDO-Quelltext zulässig, auch z.B. in Makros
+und Definitionen. (!nl)
+Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf mehrere Zeilen
+in der Eingabedatei aufzuteilen, um die Lesbarkeit des UDO-Quelltextes zu verbessern.
+(!nl)
+(!NOTE) Steht (!code [!/\]) nicht unmittelbar am Ende einer Zeile, wird es ignoriert und als normaler Text ausgegeben.
+
+!item [(!EXISTSSINCE)] Version~6.5.4
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_table [c|c] !hline
+kurzer Text links !! kurzer Text rechts
+kurzer Text links !! !\ 
+Hier steht ziemlich langer Text, der im Editor schlecht lesbar, !\ 
+wäre wenn er in einer langen Zeile stehen müsste. Beachten Sie !\ 
+auch, daß Texte in Tabellen-Zellen max. (!MAXLINETABLE) Zeichen !\ 
+lang sein dürfen.
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_table [c|c] !hline
+kurzer Text links !! kurzer Text rechts
+kurzer Text links !! Hier steht ziemlich langer Text, der im Editor schlecht lesbar wäre, wenn er in einer langen Zeile stehen müsste. Beachten Sie auch, daß Texte in Tabellen-Zellen max. (!MAXLINETABLE) Zeichen lang sein dürfen.
+!end_table
+(!EXAMPLE_END)
+
+!end_node

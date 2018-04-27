@@ -1,0 +1,66 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Texinfo
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  May 19: "short" -> "compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Texinfo
+!html_name format_texinfo
+
+Texinfo hat in der GNU-Welt eine größere Bedeutung. Texte, die im
+Texinfo-Format erstellt werden, können mit Plain-(!TeX) als sauber
+gesetzte Anleitung ausgedruckt werden bzw. mit ''Makeinfo'' in einen
+Hypertext umgewandelt werden, welchen Sie sich mit ''Info'' anzeigen
+können.
+
+UDO erzeugt auf Systemen, auf denen nur ein 8+3-Dateisystem zur
+Verfügung steht, die Dateiendung (!file [.tex]). Stehen lange Dateinamen zur
+Verfügung, wird (!file [.texi]) benutzt.
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Warum werden bei Texinfo die Kapitelnamen verändert?]
+''Makeinfo'' oder ''Info'' bekommen Probleme, falls im Namen eines Kapitels
+Sonderzeichen wie Klammern, Kommata oder (Doppel-)Punkte auftauchen.
+UDO entfernt daher diese Sonderzeichen. Falls ein Kapitelname nur
+Sonderzeichen enthält, werden die Zeichen des Namens in kodierter
+Form ausgegeben.
+
+Formatieren Sie die Texinfo-Datei mit (!TeX), tauchen diese
+Sonderzeichen in den Kapitelüberschiften selbstverständlich auf.
+
+##################################################
+
+!item [Warum werden Umgebungen nicht ""komprimiert"" dargestellt?]
+Der Parameter (!KW [compressed]) kann bei Texinfo nicht funktionieren, da es
+bei Texinfo nicht möglich ist, die Zwischenräume in Umgebungen zu
+unterdrücken.
+
+##################################################
+
+!end_description
+
+!end_node

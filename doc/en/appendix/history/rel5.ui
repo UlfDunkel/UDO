@@ -1,0 +1,140 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 5
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_05.de)
+#   fd  Mar 03: translated, old stuff ignored, using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Changes from Release 4 to 5
+!html_name history_release_4_to_5
+
+(!PUBLISHED [UDO~5] [April 18, 1996])
+
+A very short description of the major changes I added to this release
+for the last five months is listed here. It wasn't possible to prevent
+a change of the syntax of some commands.
+
+!begin_description !compressed
+
+!item [New destination formats:]
+        !begin_itemize !compressed
+        !item Linuxdoc-SGML
+        !item Turbo Vision Help
+        !item Texinfo
+        !end_itemize
+
+!item [New commands:]
+        !begin_itemize !compressed
+        !item (!KW [alias])
+        !item (!KW [begin_raw]), (!KW [end_raw])
+          inside the raw environment you can enter special commands
+			for a destination format
+        !item (!KW [begin_table]), (!KW [end_table])
+          setting tables like in (!LaTeX)!
+        !item (!KW [chapterimage])
+          an image can be used for the title of a chapter
+        !item (!KW [define])
+        !item (!KW [french])
+          for French expressions
+        !item (!KW [heading]), (!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
+          for displaying headlines
+        !item (!KW [hline])
+          for displaying horizontal lines
+        !item (!KW [html_name])
+          to set the filename of a chapter
+        !item (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes])
+          for merging chapters when converting to HTML
+        !item (!KKW [ilink])
+          for displaying images with links inside the text, Windows Help and HTML only
+        !item (!KKW [img])
+          for displaying images inside the text, Windows Help and HTML only
+        !item (!KW [index])
+          for setting an index entry
+        !item (!KW [list_parsep])
+          for switching the use of empty lines between items of an
+			environment
+        !item (!KW [ifdest]), (!KW [else]), (!KW [endif])
+          for special passages (replacing old commands, (!kw [begin_stg]), (!kw [else_stg]), (!kw [end_stg]), (!kw [begin_asc]), (!kw [else_asc]), (!kw [end_asc]) etc.
+        !item (!KW [iflang]), (!KW [else]), (!KW [endif])
+          for special passages with different languages
+        !item (!KW [node*]), (!KW [subnode*]), (!KW [subsubnode*]), (!KW [pnode*]), (!KW [psubnode*]), (!KW [psubsubnode*])
+          for chapters that don't appear inside a table of contents
+        !item (!KW [rinclude])
+          for including special commands
+        !item (!KW [use_about_udo])
+        !item (!KW [use_chapter_images])
+          for displaying images instead of chapter titles
+        !item (!KW [use_style_book])
+        !item (!KW [win_html_look])
+          for using grey inside a Windows Help file
+        !end_itemize
+
+!item [Changes:]
+        !begin_itemize !compressed
+	!item   You can display tables very easily. You can define how to
+			justify columns and where to draw horizontal and vertical
+			lines.
+
+	!item   The layout of the environments was programmed completely
+			new. Now you can use up to six environments inside
+			another, the xlist environment, too! UDO generates a
+			correct output for Windows Help and RTF.
+
+	!item   The semiautomatic syllabification was programmed
+			completely new.
+
+	!item   UDO now references only complete words.
+
+	!item   You can use 1024 chapters and 1024 labels now.
+
+	!item   You can use up to 200 links inside a paragraph. Due to a
+			bug you could only use 16 links inside a complete document
+			in release 4.
+
+	!item   Manualpages are layouted completely new.
+
+	!item   Paintbrush PCX images are supported for em(!TeX).
+
+	!item   The output of Windows Help was updated in many cases!
+
+	!item   The Atari versions were compiled with MiNT libs PL46.
+				
+        !end_itemize
+
+!item [Syntax changes:]
+        !begin_itemize !compressed
+
+	!item   The special environments that were built with
+			(!I)!/begin_*(!i), (!I)!/else_*(!i) and (!I)!/end_*(!i)
+			have to be made with the more flexible commands
+			(!KW [ifdest]), (!KW [else]) and (!KW [endif]).
+	
+			Instead of!..
+
+!begin_quote
+!include appendix/history/begin_asc.ui
+!end_quote
+
+        !end_itemize
+
+!item [Bug fixes:]
+	Innumerous. (!grin)
+
+!end_description
+
+!end_node

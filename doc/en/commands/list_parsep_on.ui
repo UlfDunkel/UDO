@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [list_parsep_on])
+!html_name cmd_list_parsep_on
+
+Compress environments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/list_parsep_on(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more.
+Use (!KW [compressed]) instead.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [compressed]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node
+!endif

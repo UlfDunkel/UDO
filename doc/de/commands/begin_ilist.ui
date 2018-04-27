@@ -1,0 +1,27 @@
+!begin_node (!kw [begin_ilist])
+!html_name cmd_begin_ilist
+
+Eine ""kursive"" Liste einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_ilist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit
+(!KW [end_ilist]) beendet werden. Die Länge von ""(!TEXT)"" definiert die
+Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung
+auch mit anderen Umgebungen kombinieren. Die
+Aufzählungspunkte, die Sie mit (!KW [item] [[~!!]]) einleiten, werden
+kursiv dargestellt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [end_ilist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_xlist]), (!KW [begin_tlist]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node

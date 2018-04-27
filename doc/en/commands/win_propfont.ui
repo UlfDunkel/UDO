@@ -1,0 +1,30 @@
+!begin_node (!kw [win_propfont])
+!html_name cmd_win_propfont
+
+Set proportional font (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_propfont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is ""Times New Roman"".
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [win_monofont]), (!KW [win_propfont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_monofont Arial
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

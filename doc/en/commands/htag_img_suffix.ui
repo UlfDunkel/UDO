@@ -1,0 +1,32 @@
+!begin_node (!kw [htag_img_suffix])
+!html_name cmd_htag_img_suffix
+
+Change filename extension of images.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/htag_img_suffix <suffix>(!t)
+
+!item [(!DESCRIPTION)]
+UDO uses the suffix ""(!file [.tiff])"" when converting the image commands for
+HP HelpTag SGML by default. If you want to use different image types
+you can redefine the image suffix with this command. The
+example below shows how to change the image suffix to ""(!file [.xwd])"". You can use
+(!KW [htag_img_suffix]) as often as you want so you can redefine
+the image suffix right before every image.
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Images] [Images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!htag_img_suffix xwd
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

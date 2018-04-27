@@ -1,0 +1,21 @@
+####################################################################
+# @(#) Installation der Macintosh-Version, 26.06.1996, Martin Osieka
+####################################################################
+
+!begin_node Installing the Macintosh version (Mac~OS 9)
+!html_name installation_mac_9
+
+After having extracted the archive that contains the Macintosh version of
+UDO you can move UDO's files to any place of your file system you want to.
+In most cases this would be the ""Programs"" directory.
+
+UDO is available as a fat-binary so it will run both on a 68k Macintosh and
+a PowerPC Macintosh. If you want to save some disk space you may be smaller
+the program with a certain software.
+
+If you have access to the hypertext of UDO (''(!V)(!UDOR)eng.hyp(!v)'') you can
+read it with ""Hyperion"". Hyperion is a software written by Martin Osieka
+that can display ST-Guide hypertexts. When using Hyperion you should copy
+''(!V)(!UDOR)eng.hyp(!v)'' to the Hyperion directory.
+
+!end_node

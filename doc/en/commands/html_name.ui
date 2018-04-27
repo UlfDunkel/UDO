@@ -1,0 +1,47 @@
+!begin_node (!kw [html_name])
+!html_name cmd_html_name
+
+Assign filename (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_name (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+If you use this command inside a chapter, section, subsection or
+paragraph, ""(!FILE)"" is used as the name of the HTML file instead of
+(!code [CCSSUUPP]) (CC chapter, SS section, UU subsection, PP paragraph).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_name_prefix])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node Hardware
+...
+!end_node
+
+!begin_node Software
+!html_name software
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!file [010A1202.htm])
+!heading Hardware
+...
+!hline
+(!file [software.htm])
+!heading Software
+...
+!hline
+(!EXAMPLE_END)
+
+!end_node

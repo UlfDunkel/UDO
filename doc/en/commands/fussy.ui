@@ -1,0 +1,23 @@
+!begin_node (!kw [fussy])
+!html_name cmd_fussy
+
+Activate warning messages for short lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/fussy(!t)
+
+!item [(!DESCRIPTION)]
+Switches on warning messages according to short lines. You can use
+this command wherever you want. The warnings can be disabled with
+(!KW [sloppy]). When converting to (!LaTeX) UDO does (!B)not(!b) convert
+(!KW [fussy]) into ""(!code [\fussy])""!
+
+!item [(!SEEALSO)]
+(!KW [sloppy]), (!link [Error messages] [Error messages]), (!link [Hyphenation] [Hyphenation])
+
+!end_xlist
+
+!end_node

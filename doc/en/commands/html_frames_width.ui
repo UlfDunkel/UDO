@@ -1,0 +1,27 @@
+!begin_node (!kw [html_frames_width])
+!html_name cmd_html_frames_width
+
+Set width of left frame (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_width (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the width of the
+frame that is generated with (!KW [html_frames_layout]),
+if it is positioned on the top or bottom.
+
+If you use a procentual value, UDO will output
+a procentual value, too.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_position]), (!KW [html_frames_height])
+
+!end_xlist
+
+!end_node

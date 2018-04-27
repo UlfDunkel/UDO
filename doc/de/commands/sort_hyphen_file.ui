@@ -1,0 +1,34 @@
+!begin_node (!kw [sort_hyphen_file])
+!html_name cmd_sort_hyphen_file
+
+Datei mit Trennvorschlägen sortieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/sort_hyphen_file [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, liest
+UDO nach der Umwandlung der Quelldatei die Datei mit
+den gesicherten Trennvorschlägen neu ein, sortiert die
+Zeilen und entfernt doppelte Einträge. Das Beispiel
+zeigt, wie Sie diese Option für die Umwandlung ins
+ASCII- und ST-Guide-Format aktivieren können.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [hyphen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!sort_hyphen_file [asc,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

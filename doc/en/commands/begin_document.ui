@@ -1,0 +1,21 @@
+!begin_node (!kw [begin_document])
+!html_name cmd_begin_document
+
+Start the main part of the document.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/begin_document(!t)
+
+!item [(!DESCRIPTION)]
+This command (!B)must(!b) be part of every source file. It divides
+the preamble from the main part.
+
+!item [(!SEEALSO)]
+(!KW [end_document])
+
+!end_xlist
+
+!end_node

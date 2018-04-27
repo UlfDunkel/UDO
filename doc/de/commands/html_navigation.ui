@@ -1,0 +1,92 @@
+!begin_node (!kw [html_navigation])
+!html_name cmd_html_navigation
+
+Navigationsleiste für HTML verändern.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_navigation [(!NAME)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann die Darstellung der Navigationsleiste angepasst
+werden. Dabei sind für [(!NAME)] momentan folgende Parameter möglich:
+
+!begin_description
+
+!item [line]
+Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben 
+am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
+standardmäßig ohne Ordnersymbole, mit ""(!code [~>~])"" getrennt.
+
+Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben
+werden.  Dieser wird automatisch vorn und hinten mit einem Leerzeichen
+ergänzt, damit der Separator  nicht an den Kapitelnamen klebt.
+
+Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der
+CSS-Klasse (!code [UDO_nav_line]) eingebettet. So kann ihr Inhalt über
+CSS-Anweisungen weiter formatiert werden.
+
+!item [image]
+Durch dieses Kommando wird am Anfang der Navigationszeile standardmäßig
+ein einzelnes Ordnersymbol ausgegeben. Dadurch wird die Funktion der
+Navigationszeile auf den ersten Blick besser verständlich. Mit dem
+optionalen Parameter kann ein eigenes Bild angegeben werden.
+
+!end_description
+
+Zudem wird am Ende jeder Navigationszeile ein Link auf die Index-Seite
+eingefügt. Dieser Link ist zur Zeit nicht abschaltbar und sollte z.B.
+mit CSS-Anweisungen entsprechend positioniert werden. Er wird in eine
+(!code [<span>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_index])
+eingebettet.
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+.UDO_nav_index {
+   position: absolute;
+   right: 8px;
+   padding: 0 0 0 8px;
+   border-width: 0 0 0 1px;
+   border-style: solid;
+   border-color: #888888;
+}
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [(!EXISTSSINCE)] Version~6.5.20
+
+!item [(!SEEALSO)]
+(!KW [use_auto_toptocs])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [line]
+!end_verbatim
+(!EXAMPLE_AFTER)
+Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 Index
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [image]
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [(!IMAGES)udo_fo] [Ordner]) Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 Index
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_navigation [line] ::
+!html_navigation [image] udo_16
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!img [(!IMAGES)udo_16] [UDO]) Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 Index
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_enumerate])
+!html_name cmd_begin_enumerate
+
+Neue Nummerierung einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_enumerate [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine (weitere) enumerate-Umgebung ein. Diese Umgebung muss mit
+(!KW [end_enumerate]) beendet werden. Die enumerate-Umgebung können Sie
+mehrfach verschachtelt und auch mit anderen Umgebungen kombiniert
+benutzen. Aufzählungspunkte einer enumerate-Umgebung werden mit (!KW [item])
+eingeleitet und mit alphanumerischen Zeichen markiert. Mit ""(!TEXT)"" können Sie
+optional einen anderen Startwert als~1 angeben.
+
+!item [(!SEEALSO)]
+(!KW [end_enumerate]), (!KW [item]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Nummerierungen] [Nummerierungen])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,32 @@
+!begin_node (!kw [subsubsubheading])
+!html_name cmd_subsubsubheading
+
+Output a paragraph heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command prints out ""(!TEXT)"" as a headline using the
+subsubsubnode font and fontsize.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubheading A headline
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading A headline
+(!EXAMPLE_END)
+
+!end_node

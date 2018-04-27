@@ -1,0 +1,21 @@
+!begin_node (!kw [ignore_title])
+!html_name cmd_ignore_title
+
+Ignore title lines (HTML and HTMLHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_title(!t)
+
+!item [(!DESCRIPTION)]
+If you use this command inside a chapter, section, subsection
+or paragraph, UDO will not generate a title line on the
+corresponding page.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!end_xlist
+
+!end_node

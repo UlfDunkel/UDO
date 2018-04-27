@@ -1,0 +1,32 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Color Commands
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+################################################################################
+
+!index Farben
+
+!begin_xlist [fuchsia] !compressed
+!item [black] (!black)Schwarz(!coloff)
+!item [silver] (!silver)Hellgrau(!coloff) (ehemals ""grey"")
+!item [gray] (!gray)(Dunkel-)Grau(!coloff) (""gray"", nicht ""grey""!!!)
+!item [white] (!raw [html,hh,hah] [<span style="background-color: black">])(!white)Weiß(!coloff)(!raw [html,hh,hah] [</span>])
+!item [maroon] (!maroon)Kastanienbraun(!coloff)
+!item [red] (!red)Rot(!coloff)
+!item [purple] (!purple)Lila(!coloff)
+!item [fuchsia] (!fuchsia)Magenta(!coloff)
+!item [green] (!green)(Dunkel-)Grün(!coloff)
+!item [lime] (!lime)Hellgrün(!coloff)
+!item [olive] (!olive)Olivgrün(!coloff)
+!item [yellow] (!yellow)Gelb(!coloff)
+!item [navy] (!navy)Marineblau(!coloff)
+!item [blue] (!blue)Blau(!coloff)
+!item [teal] (!teal)Blaugrün(!coloff)
+!item [aqua] (!aqua)Cyan(!coloff) (ehemals ""cyan"")
+!end_xlist

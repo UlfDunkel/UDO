@@ -1,0 +1,30 @@
+!begin_node (!kw [rtf_monofont_size])
+!html_name cmd_rtf_monofont_size
+
+Set size of monospaced font (RTF only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_monofont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the size of the font
+that is used to display text in verbatim environments. The default is (!code [10])~pt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [rtf_monofont]), (!KW [rtf_propfont]), (!KW [rtf_propfont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_monofont_size 12
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

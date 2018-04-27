@@ -1,0 +1,20 @@
+!begin_node (!kw [h])
+!html_name cmd_h
+
+Eine Kapitel-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/h [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [heading]).
+
+!item [(!SEEALSO)]
+(!KW [heading])
+
+!end_xlist
+
+!end_node

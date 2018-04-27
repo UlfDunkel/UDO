@@ -1,0 +1,39 @@
+!begin_node (!kw [universal_charset])
+!html_name cmd_universal_charset
+
+Universellen Zeichensatz einschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/universal_charset [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+""(!KW [universal_charset] [on!!]])"" schaltet die Verwendung des
+universellen Zeichensatzes ein,
+""(!KW [universal_charset] [off!!]])"" wieder aus. Standardm‰ﬂig
+wird der universelle Zeichensatz von UDO nicht
+verwendet, da die Umwandlung der universellen Zeichen
+eine zeitaufwendige Angelegenheit ist.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Universeller Zeichensatz] [Universeller Zeichensatz])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!end_verbatim
+(!EXAMPLE_AFTER)
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!universal_charset [off]
+(!EXAMPLE_END)
+
+!end_node

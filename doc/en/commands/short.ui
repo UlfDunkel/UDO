@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [short])
+!html_name cmd_short
+
+Output a compressed environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/short(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more.
+Use (!KW [compressed]) instead.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!EXISTEDUNTIL)] Version~7.01
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_compressed_envs])
+
+!end_xlist
+
+!end_node
+!endif

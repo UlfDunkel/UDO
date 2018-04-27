@@ -1,0 +1,27 @@
+!begin_node (!kw [win_medium_compression])
+!html_name cmd_win_medium_compression
+
+WinHelp-Datei komprimieren (mittlere Kompressionsrate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_medium_compression(!t)
+
+!item [(!DESCRIPTION)]
+Der Einsatz dieses Schalters führt bei der späteren
+Umwandlung durch den Microsoft-Helpcompiler zur
+Komprimierung der Hilfedatei mit einer
+Kompressionsrate von ca. 40%. Bessere Ergebnisse bei
+allerdings längerer Umwandlungsdauer erzielen Sie mit
+dem Schalter (!KW [win_high_compression]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_high_compression])
+
+!end_xlist
+
+!end_node

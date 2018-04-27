@@ -1,0 +1,22 @@
+!index Farben
+
+!begin_flushleft
+!begin_table [ll]
+(!KK1 [black])   !! (!black)Schwarz(!coloff)
+(!KK1 [silver])  !! (!silver)Hellgrau(!coloff)
+(!KK1 [gray])    !! (!gray)(Dunkel-)Grau(!coloff)
+(!KK1 [white])   !! (!raw [html,hh,hah] [<span style="background-color: black">])(!white)Weiß(!coloff)(!raw [html,hh,hah] [</span>])
+(!KK1 [maroon])  !! (!maroon)Kastanienbraun(!coloff)
+(!KK1 [red])     !! (!red)Rot(!coloff)
+(!KK1 [purple])  !! (!purple)Lila(!coloff)
+(!KK1 [fuchsia]) !! (!fuchsia)Magenta(!coloff)
+(!KK1 [green])   !! (!green)Grün(!coloff)
+(!KK1 [lime])    !! (!lime)Hellgrün(!coloff)
+(!KK1 [olive])   !! (!olive)Olivgrün(!coloff)
+(!KK1 [yellow])  !! (!yellow)Gelb(!coloff)
+(!KK1 [navy])    !! (!navy)Marineblau(!coloff)
+(!KK1 [blue])    !! (!blue)Blau(!coloff)
+(!KK1 [teal])    !! (!teal)Blaugrün(!coloff)
+(!KK1 [aqua])    !! (!aqua)Cyan(!coloff)
+!end_table
+!end_flushleft

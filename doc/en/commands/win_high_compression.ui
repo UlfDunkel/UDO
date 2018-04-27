@@ -1,0 +1,25 @@
+!begin_node (!kw [win_high_compression])
+!html_name cmd_win_high_compression
+
+Compress WinHelp file (high compression).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_high_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble the Microsoft Helpcompiler
+will compress the Windows Help file by about 50%. The compression of
+the Windows Help file takes some time. A similar result with a faster
+compression you will get with (!KW [win_medium_compression]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_medium_compression])
+
+!end_xlist
+
+!end_node

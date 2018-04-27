@@ -1,0 +1,21 @@
+!begin_node (!kw [endif])
+!html_name cmd_endif
+
+Finish a special environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/endif(!t)
+
+!item [(!DESCRIPTION)]
+Finishes a query command that was started with (!KW [ifdest]),
+(!KW [iflang]), (!KW [ifset]), (!KW [ifos]) or (!KW [if]).
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [iflang]), (!KW [ifset]), (!KW [ifos]), (!KW [if]), (!KW [else]), (!link [Query commands] [Query commands])
+
+!end_xlist
+
+!end_node

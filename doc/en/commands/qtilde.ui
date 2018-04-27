@@ -1,0 +1,31 @@
+!begin_node !!~
+!html_name cmd_qtilde
+!label Tilde
+
+Output a tilde.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!!~(!t)
+
+!item [(!DESCRIPTION)]
+These characters will be printed as a tilde. Please remember that a
+single tilde is used for a non-breaking space.
+
+!item [(!SEEALSO)]
+(!link [!~] [Non breaking space]), (!link [Non breaking spaces] [Non breaking spaces])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!~
+!end_verbatim
+(!EXAMPLE_AFTER)
+!~
+(!EXAMPLE_END)
+
+!end_node

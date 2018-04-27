@@ -1,0 +1,37 @@
+!begin_node (!kkkw [T] [t])
+!ifdest [ipf]
+!alias (!/T)...(!/t)
+!endif
+!html_name cmd_T()
+!label (!kk1 [/T])
+!label (!kk1 [/t])
+
+Print text in typewriter font face.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/T)(!TEXT)(!/t)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed in typewriter font face, if possible.
+This text style is supported by almost all output formats.
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+The word ""typewriter"" will be 
+displayed using a (!T)typewriter(!t) font face.
+!end_verbatim
+(!EXAMPLE_AFTER)
+The word ""typewriter"" will be 
+displayed using a (!T)typewriter(!t) font face.
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,34 @@
+!begin_node (!kkw [lime])
+!html_name cmd_lime
+
+Setzt die Schriftfarbe Hellgrün.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/lime)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Hellgrün.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Schriftfarben] [Schriftfarben])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,33 @@
+!begin_node (!kw [depth])
+!html_name cmd_depth
+
+Tiefe für Inhaltsverzeichnis angeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter zusammen mit dem Befehl zur
+Ausgabe eines Inhaltsverzeichnisses angegeben,
+legt er die Tiefe des ausgegebenen Verzeichnisses fest.
+Das Beispiel zeigt, wie Sie ein Inhaltsverzeichnis ausgeben,
+das nur die Nodes (1.~Ebene) enthält.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_compressed_tocs]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tableofcontents !depth 1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,120 @@
+!begin_node Was kann UDO und was nicht?
+!html_name intro_features
+
+UDO wurde ursprünglich entwickelt, um das Erstellen von Handbüchern und Anleitungen
+zu Computerprogrammen oder vergleichbaren Dokumentationen zu
+vereinfachen, die in (!I)mehreren(!i) Formaten benötigt werden.
+
+UDO leistet aber auch gute Dienste, falls Sie nur
+(!I)ein(!i) Format erzeugen wollen. So ist es für Anfänger sicherlich einfacher,
+die Syntax von UDO zu begreifen als die von HTML oder (!LaTeX), denn bei
+letzteren müssen Sie beispielsweise höllisch aufpassen, daß Sie nicht
+unerlaubte Zeichen im Quelltext einbauen, wogegen UDO auch mit
+Sonderzeichen klarkommt und diese automatisch an das jeweilige Ausgabeformat
+anpasst. Sprich, selbst wenn Sie nur HTML oder nur (!LaTeX) erzeugen wollen,
+kann UDO sehr gute Dienste leisten.
+
+Bei alledem ist UDO multilingual, d.h. Sie können Texte in verschiedenen Sprachen erzeugen 
+und UDO wird dabei für die unterstützten Sprachen die jeweils passenden Begriffe für
+""Inhaltsverzeichnis"", ""Anhang"", ""Abbildung"" oder ""Tabelle"" ausgeben oder das Datum
+im Format der gewählten Sprache darstellen.
+
+Die Syntax von UDO ist wirklich leicht zu erlernen. Zur Erstellung
+einfacher Dateien müssen Sie lediglich etwa zehn bis 
+fünfzehn Befehle kennen, also etwa so viele, wie Sie auch beim
+Verfassen von HTML- oder (!LaTeX)-Dateien besitzen müssen.
+
+Haben Sie einen UDO-Quelltext erstellt, können Sie diesen in folgende Formate umwandeln:
+
+!include syntax/misc/short_dest.ui
+
+Einige Formate sind systemweit austauschbar, einige sind nur auf
+bestimmten System von Interesse.
+
+UDO erzeugt größtenteils keine ''fertigen'' Dokumente. In aller Regel
+müssen die von UDO erzeugten Dateien erst noch durch weitere Programme
+bearbeitet werden. So müssen z.B. Windows-Help-Quelltexte erst noch durch
+den Hypertext-Compiler (!file [HC.EXE]) bearbeitet werden, RTF-Dateien mit einer
+Textverarbeitung ausgegeben werden, usw.
+
+UDO versucht, Ihnen beim Verfassen des Textes soviel Arbeit wie möglich
+abzunehmen. Neben der reinen Umwandlung bietet UDO daher je nach Ausgabeformat sinnvolle Nützlichkeiten wie
+
+#TODO: link zu Kopfzeilen fehlt, ebenso das dazugehörige Kapitel
+!begin_itemize !compressed
+!item automatische Generierung von (!link [Titelseiten] [Titelseite]),
+Kopfzeilen, (!link [Fußnoten] [Fußnoten]), (!link [Inhaltsverzeichnissen] [Inhaltsverzeichnisse]),
+!item automatische (!link [Kapitelnummerierung] [Gliederungsebenen]),
+!item (!link [Tabellensatz] [Tabellen]),
+!item automatisches Anlegen von (!link [Querverweisen] [Querverweise]) bei Hypertext-Formaten,
+!item Unterstützung verschiedener (!link [Schriftarten] [Schriftarten]),
+!item automatische Umwandlung von (!link [Umlauten] [Umwandlung von 8-bit-Zeichen])
+und sonstigen (!link [Sonderzeichen] [Sonderzeichen]),
+!item umfangreiche Formatierungsmöglichkeiten mit Erstellung von
+(!link [Aufzählungen] [Aufzählungen]),
+(!link [Listen] [Listen]),
+Blocksatz (nur bei bestimmten Ausgabeformaten möglich),
+(!link [zentriertem] [Zentrieren von Zeilen]),
+(!link [rechtsbündigem] [Rechtsbündiger Text]) oder
+(!link [eingerücktem] [Einrücken von Absätzen]) Text,
+!item automatisches Einbinden von (!link [Bildern] [Bilder]) sowie
+!item automatischen Zeilenumbruch mit halbautomatischer (!link [Silbentrennung] [Silbentrennung]).
+!end_itemize
+
+!smallskip
+
+Wie jedes Programm hat auch UDO seine Stärken und Schwächen. Die Umwandlung in die Formate ASCII-Text,
+ST-Guide, HTML, (!LaTeX) und WinHelp gehören -- historisch
+bedingt -- sicherlich zu den Stärken dieses Programms. Die Ausgabeformate
+Linuxdoc-SGML und LyX werden erst seit einiger Zeit unterstützt und
+wurden noch nicht ausreichend getestet; hier gibt es sicherlich
+noch ein paar Dinge, die geändert werden (müssen).
+
+Einige Dinge stehen ganz oben auf der Wunschliste, z.B. die automatische Erzeugung
+eines Stichwortverzeichnisses sowie die Ausgabe eines Abbildungs- und
+Tabellenverzeichnisses.
+
+!smallskip
+
+Das Erstellen komplexer Dokumente wie Zeitschriften ist mit UDO
+nicht möglich, da z.B. Bilder nicht frei positioniert oder von Text
+umflossen werden können und UDO keinen Spaltensatz erzeugen kann.
+Dies sind Funktionen, die zum Desktop Publishing gehören und in einem Programm
+wie UDO nichts zu suchen haben.
+
+UDO besitzt keine eingebaute automatische Silbentrennung, sondern bietet nur
+die Möglichkeit, Wörter an vom Autor markierten Stellen zu trennen.
+
+UDO ist nur ein Textkonverter ""in eine Richtung"", kann also nur das eigene Format
+in die oben aufgelisteten Formate umwandeln. UDO kann keines dieser Formate in das eigene Format umwandeln.
+
+!begin_ignore
+Zusammenfassend kann gesagt werden, daß UDO folgende Dinge nicht kann
+und in absehbarer Zukunft auch nicht können wird:
+
+!begin_enumerate !compressed
+
+!item UDO kann nur das eigene Format in die oben aufgelisteten Formate
+umwandeln. UDO kann keines dieser Formate in das eigene Format
+umwandeln. Hierfür sind Zusatzprogramme nötig, die bald erhältlich sein
+werden.
+
+!item UDO kann keine Binärformate (z.B. WinWord-Dateien) erzeugen,
+sondern nur ASCII-Formate, also solche, die man mit einem üblichen
+Editor bearbeiten kann.
+
+!item UDO besitzt keine automatische Silbentrennung, sondern bietet nur
+die Möglichkeit, Wörter an vom Autor markierten Stellen zu trennen. Auf
+eine automatische Silbentrennung wird verzichtet, da der überwiegende
+Teil keine Silbentrennung benötigt und UDO sonst nur größer, träger
+sowie teurer würde.
+
+!item UDO kann Bilder und Tabellen nicht von Text umfließen lassen. UDO
+kann auch keinen Spaltensatz erzeugen. Dies sind Funktionen, die zum
+Desktop Publishing gehören und in einem Programm wie UDO nichts zu
+suchen haben.
+
+!end_enumerate
+!end_ignore
+
+!end_node

@@ -1,0 +1,27 @@
+!begin_node (!kw [use_xlist])
+!html_name cmd_use_xlist
+
+Xlist-Umgebungen wie bei ASCII ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_xlist [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Da die Ausgabe der xlist-Umgebung beim HTML-Format ziemlich kritisch
+ist, werden xlist-Umgebung standardm‰ﬂig wie description-Umgebungen
+behandelt. Durch die Angabe dieses Schalters im Vorspann werden
+xlist-Umgebungen jedoch wie beim ASCII-Format --- geklammert mit dem
+Preformatted-Tag --- ausgegeben.
+
+!item [(!EXAMPLE)]
+(!T)!/use_xlist [html](!t)
+
+!item [(!SEEALSO)]
+(!link [Listen] [Listen]), (!link [Beschreibungen] [Beschreibungen])
+
+!end_xlist
+
+!end_node

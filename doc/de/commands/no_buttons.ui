@@ -1,0 +1,21 @@
+!begin_node (!kw [no_buttons])
+!html_name cmd_no_buttons
+
+Keine Browsebuttons erzeugen (nur WinHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_buttons(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, werden keine Befehle in die
+Projekt-Datei geschrieben, die Browse-Buttons in der Hilfe-Datei
+erzeugen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!end_xlist
+
+!end_node

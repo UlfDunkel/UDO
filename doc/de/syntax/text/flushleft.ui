@@ -1,0 +1,29 @@
+!begin_node Linksbündiger Text
+!html_name style_justifiedleft
+!label flushleft-Umgebung
+
+Zeilen, die innerhalb einer flushleft-Umgebung stehen, werden in der
+Ausgabedatei linksbündig ohne Blocksatz dargestellt.
+
+Die flushleft-Umgebung kann innerhalb anderer Umgebungen verwendet
+werden, auch innerhalb einer anderen flushleft-Umgebung, so sinnlos
+das auch normalerweise sein mag.
+
+Werden andere Umgebungen innerhalb der flushleft-Umgebung verwendet,
+dann werden diese wie sonst auch ausgegeben. Erst wenn die
+flushleft-Umgebung wieder aktiv ist, wird Text linksbündig ausgegeben.
+
+Die flushleft-Umgebung eignet sich dafür, Text bei den Formaten
+linksbündig auszugeben, die sonst standardmäßig Blocksatz erzeugen.
+Ein Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)flushleft.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)flushleft.ui
+(!EXAMPLE_END)
+
+Wie Sie sehen, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, verwenden Sie den Befehl (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+
+!end_node

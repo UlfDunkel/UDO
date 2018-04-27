@@ -1,0 +1,20 @@
+!begin_node (!kw [bd])
+!html_name cmd_bd
+
+Start a description.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bd(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_description]).
+
+!item [(!SEEALSO)]
+(!KW [begin_description])
+
+!end_xlist
+
+!end_node

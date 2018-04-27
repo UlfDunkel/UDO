@@ -1,0 +1,32 @@
+!begin_node (!kw [subsubsubsubnode])
+!html_name cmd_subsubsubsubnode
+
+Start a subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new subparagraph named ""(!TEXT)"". Subparagraphs are numbered
+with #.#.#.#.# and are displayed inside the table of contents.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubnode Subparagraph title
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Subparagraph title
+(!EXAMPLE_END)
+
+!end_node

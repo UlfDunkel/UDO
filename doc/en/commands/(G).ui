@@ -1,0 +1,34 @@
+!begin_node (!kkkw [G] [g])
+!ifdest [ipf]
+!alias (!/G)...(!/g)
+!endif
+!html_name cmd_G()
+!label (!kk1 [/G])
+!label (!kk1 [/g])
+
+Print text in ghosted.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/G)(!TEXT)(!/g)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed in ghosted text if possible.
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!G)This text will be displayed ghosted.(!g)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!G)This text will be displayed ghosted.(!g)
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,272 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6 PL 14
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 01: typo in node title fixed
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Änderungen bis Release 6 Patchlevel 14
+!html_name history_release_6_until_PL14
+
+(!PUBLISHED [UDO~6 Patchlevel~14] [11.07.1999])
+
+Hier eine kleine Übersicht der wichtigsten Änderungen zum letzten Release.
+
+In den letzten Jahren wurden einige neue Formate,
+etliche neue Features eingebaut und einige Fehlerbeseitigungen
+vorgenommen. Auch hier hat es in der Zwischenzeit wieder nicht
+vermeiden lassen, die Syntax einiger Befehle zu ändern.
+
+!begin_description
+
+!item [Neue Formate:]
+        !begin_itemize !compressed
+        !item WinHelp4
+        !item UDO
+        !item PDFLaTeX
+        !item DRC (David's Readme Compiler für DOS)
+        !item IPF (Information Presentation Facility, OS/2)
+        !item PostScript
+        !item C-Sourcecode
+        !item Pascal-Sourcecode
+        !item AmigaGuide
+        !end_itemize
+
+!item [Neue Befehle:]
+        !begin_itemize !compressed
+        !item (!KW [use_mirrored_indices])
+        !item (!KW [begin_flushleft]), (!KW [end_flushleft])
+        !item (!KW [begin_flushright]), (!KW [end_flushright])
+        !item (!KW [table_caption*])
+        !item (!KW [image*])
+        !item (!KW [html_backimage]), (!KW [html_backcolor]), (!KW [html_textcolor]), (!KW [html_linkcolor]),
+        !item (!KW [html_no_xlist])
+        !item (!KW [html_ignore_8bit])
+        !item (!KW [chaptericon])
+        !item (!KW [no_footers])
+        !item (!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [comment]), (!KKW [comment])
+        !item (!KW [win_helpid])
+        !item (!KW [no_links])
+        !item (!KW [html_modern_layout]), (!KW [html_modern_width]),
+            (!KW [html_modern_backcolor]), (!KW [html_modern_backimage]),
+            (!KW [html_alinkcolor]), (!KW [html_vlinkcolor]), (!KW [html_modern_alignment])
+        !item (!KW [html_frames_layout]), (!KW [html_frames_width]),
+            (!KW [html_frames_backcolor]), (!KW [html_frames_backimage]),
+            (!KW [html_frames_height] [<wert>]),
+            (!KW [html_frames_position] [<text>]),
+            (!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]),
+            (!KW [html_frames_alinkcolor]), (!KW [html_frames_vlinkcolor])
+        !item (!KW [html_counter_command])
+        !item (!KW [wh4_helpid]), (!KW [wh4_charwidth]),
+            (!KW [wh4_propfont]), (!KW [wh4_backcolor]),
+            (!KW [wh4_textcolor]), (!KW [wh4_background]),
+            (!KW [wh4_inline_bitmaps]), (!KW [wh4_high_compression]),
+            (!KW [wh4_old_keywords]), (!KW [wh4_prefix_helpids])
+        !item (!KW [win_monofont]), (!KW [wh4_monofont])
+        !item (!KW [win_textcolor] [<farbe>])
+        !item (!KW [begin_linedraw]), (!KW [end_linedraw]),
+            (!KW [ldinclude]), (!KW [linedrawsize])
+        !item (!KW [hh_backimage]), (!KW [hh_backcolor]),
+            (!KW [hh_textcolor]), (!KW [hh_linkcolor]),
+            (!KW [hh_alinkcolor]), (!KW [hh_vlinkcolor]),
+            (!KW [hh_img_suffix])
+        !item (!KW [html_description])
+        !item (!KW [drc_bcolor]), (!KW [drc_icolor]),
+            (!KW [drc_ucolor]), (!KW [drc_flags])
+        !item (!KW [udolink])
+        !item (!KW [use_auto_toptocs] [[<kürzel>!!]])
+        !item (!KW [error] [<text>])
+        !item (!KW [begin_node*]), (!KW [begin_pnode]),
+            (!KW [begin_pnode*])
+        !item (!KW [input])
+        !item (!KW [rtf_keep_tables] [[on|off!!]])
+        !item (!KW [html_button_alignment] [[left|center|right!!]])
+        !item (!KW [chaptericon_active])
+        !item (!KW [begin_ignore]), (!KW [end_ignore])
+        !item (!KW [subtoc_offset]), (!KW [subsubtoc_offset]),
+            (!KW [subsubsubtoc_offset])
+        !item (!I)(!/index)(!i)
+#TODO: (!KKW [index]) funktioniert nicht???
+        !item (!KW [chaptericon_text])
+        !item (!KW [html_propfont_name]), (!KW [html_propfont_size])
+        !item (!KW [html_monofont_name]), (!KW [html_monofont_size])
+        !item (!KKW [raw])
+        !item (!KW [mapping] [<nummer>])
+        !item (!KW [tex_miktex])
+        !item (!KW [no_img_size])
+        !item (!KW [table_alignment])
+        !item (!KW [image_alignment])
+        !item (!KW [no_popup_headlines])
+        !item (!KW [use_raw_header] [(!FILE!)]), (!KW [use_raw_footer] [(!FILE!)]),
+            (!KW [ignore_raw_header]), (!KW [ignore_raw_footer])
+        !item (!KW [win_old_keywords])
+        !item (!KW [no_table_lines])
+        !item (!KW [html_transparent_buttons])
+        !item (!KKW [url])
+        !item (!KW [use_auto_helpids])
+        !item (!KW [win_prefix_helpids])
+        !end_itemize
+
+!item [Neuheiten:]
+        !begin_itemize !compressed
+        !item flushleft-Umgebung
+        !item flushright-Umgebung
+        !item Holländisch wird als Sprache angeboten ((!KW [language] [[dutch!!]])).
+        !item der NeXTStep-Zeichensatz ((!KW [code] [[next!!]])) wird nun unterstützt.
+        !item (!KW [docinfo] [[webmastername!!]]) erzeugt eine
+           Fusszeile am Ende einer jeden HTML-Datei.
+        !item Den Befehlen, die sich um die Ausgabe der
+          Inhaltsverzeichnisse kümmern, können Sie nun einen weiteren
+          Parameter übergeben, der angibt, wie tief die Ausgabe des
+          Inhaltsverzeichnisses gehen soll.
+        !item Kommandozeilen-Option (!link [(--)force-long] [Kommandozeilenversion]).
+        !item Kommandozeilen-Optionen (!link [(--)c-idfile] [Kommandozeilenversion])
+          und (!link [(--)pas-idfile] [Kommandozeilenversion]).
+        !item Kommandozeilen-Option (!link [-@] [Kommandozeilenversion]).
+        !item comment-Umgebung
+        !item UDO kann nun mittels (!KW [html_frames_layout]) Frames erzeugen.
+        !item linedraw-Umgebung
+        !item Im RTF-Header wird nun auch eine Colortable ausgegeben. Das
+           bedeutet, daß Sie nun auch in RTF Farben verwenden können.
+        !item Die Gliederung kann jetzt auch mittels (!KW [begin_node]) und
+           (!KW [end_node]) vorgenommen werden.
+        !item (!KW [use_nodes_inside_index] [[rtf!!]]),
+          (!KW [use_label_inside_index] [[rtf!!]])
+          und (!KW [use_alias_inside_index] [[rtf!!]]) werden unterstützt.
+        !item Bilder werden für das RTF-Format unterstützt.
+        !item ignore-Umgebung
+        !item Kommandozeilen-Option (!link [(--)map] [Kommandozeilenversion]).
+        !item Befehlsabkürzungen sind nun verwendbar.
+        !item UDO ermittelt nun für Bilder im GIF-Format die jeweiligen Ausmaße.
+        !item Kommandozeilen-Option (!link [(--)check] [Kommandozeilenversion]).
+        !item Zeichensatzschalter (!KW [code] [[cp850!!]]) und (!KW [code] [[cp437!!]])
+        !item Benutzerdefinierte Header und Footer für HTML.
+        !item Kommandozeilen-Option (!link [(--)map-pas] [Kommandozeilenversion]).
+        !item Help-IDs können automatisch mit (!KW [use_auto_helpids]) gesichert werden.
+        !item Kommandozeilen-Option (!link [(--)force-short] [Kommandozeilenversion]).
+        !item Wird beim Schalter (!KW [use_auto_toptocs]) zusätzlich noch
+          (!KW [no_icons]) angegeben, werden keine Bilder neben den Verweisen
+          auf die übergeordneten Kapitel ausgegeben.
+        !end_itemize
+
+!item [Änderungen:]
+        !begin_itemize !compressed
+        !item Es sind nun 3000 Kapitel benutzbar
+        !item (!KW [verbatimsize]) wird nun für HTML unterstützt.
+        !item Auf Systemen, die lange Dateinamen unterstützen,
+          benutzt UDO nun für die Nummerierung der HTML-Dateien drei
+          Stellen pro Ebene anstatt zwei (001002003004.html anstatt
+          01020304.html).
+        !item Die Einträge für das Inhaltsverzeichnis werden nun
+          zur Hälfte dynamisch verwaltet. UDO sollte daher auf Systemen
+          mit wenig RAM nicht so schnell die Puste ausgehen.
+        !item Die Titelseite wird intern nun dynamisch verwaltet,
+          daher sollten keine Probleme (bis auf den fehlenden Umbruch) mehr
+          bei überlangen Einträgen auftreten.
+        !item Es sind nun 4096 Nodes und Labels/Aliase benutzbar.
+        !item Umfangreiche Optimierungen. UDO sollte spürbar und
+          messbar schneller fertig sein. Probiert es mal aus.
+        !item UDO kann nun auch Dateien ""includen"", die Leerzeichen
+          im Namen enthalten.
+        !item Wird (!KW [tabwidth] [0]) benutzt, wandelt UDO keine TABs
+          mehr in verbatim-/sourcecode-Umgebungen in Leerzeichen um.
+        !item UDO gibt jetzt eine Fehlermeldung aus, wenn (!KW [maketitle])
+          benutzt wird, ohne irgendwelche Informationen für die Titelseite
+          bereitgestellt zu haben.
+        !item Werden (!KW [heading]), (!KW [subheading]) usw. in einer center-
+          oder flushright-Umgebung benutzt, werden die Überschriften
+          passend eingerückt.
+        !item Wird (!KW [html_keywords]) mehrfach in einem Node benutzt, so
+          werden die einzelnen Einträge, mit einem Komma getrennt, in die
+          Meta-Informationen aufgenommen.
+        !item Die Anzahl der maximal zu verwendenden Symbole wurde
+          von 32 auf 128 erhöht.
+        !item (!KW [image]) können Sie nun auch problemlos Bilder
+           anzeigen lassen, deren Dateiname Leerzeichen enthält.
+        !item Doppel- und Dreifach-Indizes werden für RTF nun korrekt
+           exportiert.
+        !item Auf der ersten HTML-Seite wird nur noch dann ein Home-
+           Symbol erzeugt, wenn (!KW [html_backpage]) benutzt wird, welches dann
+           auf diese Seite zeigt.
+        !item Aus ""Hints"" wurden in der Protokolldatei ""Notes"".
+        !item UDO gibt seine Versionsnummer nun zusätzlich in der Protokolldatei aus.
+        !item Bei Verwendung von (!KKW [img]) erzeugt UDO nun auch
+           eine Fehlermeldung, falls es die Ausmasse des Bildes nicht
+           ermitteln konnte.
+        !item Die MAP-Datei für WinHelp hat nun die Endung ""(!file [.hpc])"".
+        !item Konnte UDO ein (!KW [chaptericon]) nicht finden, wird dies
+           nun in der Protokolldatei bemängelt.
+        !item Beim Einsatz von (!KW [no_images]) werden beim HTML-Format wie bisher keine
+           Browse-Buttons ausgegeben, allerdings wird nicht mehr das
+           Linkziel ausgegeben, sondern ASCII-Pfeile, welche zudem mit
+           eckigen Klammern und Pipesymbolen voneinander getrennt sind.
+           Außerdem werden nun auch in den ""Top-Tocs"" keine Bilder mehr benutzt, sondern die Ordnerstruktur
+           mit ASCII-Zeichen angedeutet.
+        !item Die Kommandos (!KW [subtoc]), (!KW [subsubtoc]) und (!KW [subsubsubtoc])
+           bewirken nun alle dasselbe, sprich es wird jeweils das einzig
+           sinnvolle Unterinhaltsverzeichnis ausgegeben. Dies behebt die
+           Probleme, die entstanden, wenn Sie die Node-Struktur mit
+           (!KW [begin_node]) und (!KW [end_node]) aufbauten.
+        !item Pro Zelle können in Tabellen nun bis zu 1000 Zeichen
+           verwendet werden.
+        !item Die Anzahl der maximalen Makros und Definitionen wurde
+           jeweils auf 1000 erhöht. Die Anzahl der maximalen
+           Nodes wurde auf 32.768 erhöht.
+        !item Das Datumsformat für (!KW [language] [[french!!]]) wurde
+           angepasst (Didier Briel).
+        !item Es ist fortan zu vermeiden, in Dateinamen für Bilder,
+           die mit (!KW [image]) eingebunden werden, Umlaute oder andere
+           Sonderzeichen zu verwenden!
+        !end_itemize
+
+!item [Syntaxänderungen:]
+        !begin_itemize !compressed
+        !item Der Schalter für den Blocksatz heisst nun
+           (!KW [use_justification]) anstatt (!KW [use_justified]).
+        !item Der Schalter (!KW [html_use_xlist]) existiert nicht mehr.
+        !item (!KW [german]), (!KW [english]), (!KW [french]) usw.
+           existieren nicht mehr und wurden durch den Befehl (!KW [language])
+           ersetzt.
+        !item (!KW [no_toc_subnodes]) kann nun durch (!KW [tableofcontents] [!depth 1])
+           ersetzt werden.
+        !item Die Befehle zum Setzen des Zeichensatzes haben
+           sich geändert. Jetzt gibt es nur noch einen Befehl (!KW [code]).
+           Entfallen sind dadurch (!KW [code_dos]), (!KW [code_hp8]), (!KW [code_iso]), (!KW [code_mac]), (!KW [code_next])
+           und (!KW [code_tos])
+        !item Die Befehle für die Titelseiten-Informationen
+           haben sich geändert. Statt (!KW [title]), (!KW [program]), (!KW [version]), (!KW [date]), (!KW [author]), (!KW [street]),
+           (!KW [town]), (!KW [country]) und (!KW [email]) gibt es jetzt den
+           neuen Befehl (!KW [docinfo] [[~!!]]).
+        !item Die Format-Spezialbefehle haben sich geändert:
+           aus (!KW [asc]) wird (!KW [raw] [[asc!!]]),
+           aus (!KW [stg]) wird (!KW [raw] [[stg!!]]),
+           aus (!KW [win]) wird (!KW [raw] [[win!!]]) usw.
+           Die Befehle, die nur Zeilen ausgeben, wenn Sie nicht in das
+           passende Format umwandeln, existieren nicht mehr.
+        !item Der Schalter (!KW [stg_no_database]) existiert nicht mehr,
+           stattdessen kann jetzt (!KW [docinfo] [[stgdatabase!!]])
+           benutzt werden.
+        !item (!KW [win_backcolor]) ersetzt den Schalter (!KW [win_background]).
+        !item Die Farbnamen wurden neu festgelegt und orientieren
+           sich nun an den durch HTML 3.2 definierten 16 Farben.
+        !end_itemize
+
+!end_description
+
+!end_node

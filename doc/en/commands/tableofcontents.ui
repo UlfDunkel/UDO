@@ -1,0 +1,32 @@
+!begin_node (!kw [tableofcontents])
+!html_name cmd_tableofcontents
+
+Print table of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tableofcontents !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Generates a full table of contents with specific commands of the
+destination format. I recommend to use this command right after using
+(!KW [begin_document] or (!KW [maketitle]). You can influence the
+depth of the table with the switch behind the command. The
+example shows how to print a table of contents that contains
+only the chapters.
+
+!item [(!SEEALSO)]
+(!link [Tables of contents] [Tables of contents]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tableofcontents !depth 1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

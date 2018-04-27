@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_tlist])
+!html_name cmd_begin_tlist
+
+Start a monospaced list.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_tlist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [list] [tlist environment]). The length of ""(!TEXT)"" defines the indent of the
+list. This environment must be finished with (!KW [end_tlist]). You
+can use this environment inside other environments. The text you set
+with (!KW [item] [[~!!]]) will be displayed with a monospaced font.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [end_tlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [use_compressed_envs]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node

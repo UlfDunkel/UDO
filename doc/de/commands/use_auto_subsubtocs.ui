@@ -1,0 +1,30 @@
+!begin_node (!kw [use_auto_subsubtocs])
+!html_name cmd_use_auto_subsubtocs
+
+Automatische Auflistung aller Unterabschnitte.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet den automatischen internen Aufruf des
+(!KW [subsubtoc])-Kommandos ein. Am Ende eines jeden
+Abschnitts werden dann automatisch alle dem Abschnitt
+zugehörigen Unterabschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [subsubtoc]), (!KW [ignore_subsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

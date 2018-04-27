@@ -1,0 +1,30 @@
+!begin_node (!kw [pnode])
+!html_name cmd_pnode
+
+Start a popup chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [node]) but the contents will be displayed as a
+popup inside ST-Guide and WinHelp.
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pnode Popup title
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Popup title
+(!EXAMPLE_END)
+
+!end_node

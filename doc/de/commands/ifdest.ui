@@ -1,0 +1,45 @@
+!begin_node (!kw [ifdest])
+!html_name cmd_ifdest
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifdest [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando fragt das aktuelle Ausgabeformat ab.
+Stimmt ""<kürzel>"" mit dem Kürzel des Ausgabeformates
+überein, werden alle Zeilen umgewandelt, die
+zwischen (!KW [ifdest]) und (!KW [else]) bzw. (!KW [endif]) angegeben
+werden. Stimmt das Kürzel nicht überein, werden
+nur die Zeilen zwischen (!KW [else]) und (!KW [endif]) ausgewertet,
+sofern (!KW [else]) benutzt wird. Das Beispiel zeigt, wie
+Sie testen können, ob die Quelldatei ins HTML, ST-Guide- oder
+WinHelp-Format umgewandelt wird.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [else]), (!KW [endif]), (!KW [ifndest]), (!KW [if]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifdest [html,stg,win]
+Dieser Text erscheint nur in den Handbuch-Formaten 
+HTML, ST-Guide und WinHelp.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html,stg,win]
+Dieser Text erscheint nur in den Handbuch-Formaten 
+HTML, ST-Guide und WinHelp.
+!endif
+(!EXAMPLE_END)
+
+!end_node

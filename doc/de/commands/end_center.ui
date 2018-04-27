@@ -1,0 +1,21 @@
+!begin_node (!kw [end_center])
+!html_name cmd_end_center
+
+Die (letzte) center-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_center(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die zuletzt geöffnete
+center-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_center]), (!link [Texthervorhebungen] [Texthervorhebungen]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node

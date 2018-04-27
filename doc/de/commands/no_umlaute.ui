@@ -1,0 +1,32 @@
+!begin_node (!kw [no_umlaute])
+!html_name cmd_no_umlaute
+
+Keine Umlaute benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_umlaute [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Umlaute, die im Quelltext vorkommen, werden in der
+Zieldatei durch ae, oe, ue, ss, Ae, Oe und Ue
+ausgegeben. Im Beispiel würde dies bei der Umwandlung
+ins Manualpage-Format geschehen.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!link [Sonderzeichen] [Sonderzeichen]), (!KW [no_8bit])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_umlaute [man]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

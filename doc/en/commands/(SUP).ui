@@ -1,0 +1,36 @@
+!begin_node (!kkkw [SUP] [sup])
+!ifdest [ipf]
+!alias (!/SUP)...(!/sup)
+!endif
+!html_name cmd_superscript
+!label (!kk1 [/SUP])
+!label (!kk1 [/sup])
+
+Output superscripted text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUP)[(!TEXT)](!/sup)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed superscripted if possible.
+
+!item [(!EXISTSSINCE)] Version~6.5.20
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+This text is (!/SUP)superscripted(!/sup).
+!end_verbatim
+(!EXAMPLE_AFTER)
+This text is (!/SUP)superscripted(!/sup).
+(!EXAMPLE_END)
+
+!end_node

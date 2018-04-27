@@ -1,0 +1,30 @@
+!begin_node (!kw [use_alias_inside_index])
+!html_name cmd_use_alias_inside_index
+
+Include aliases in index automatically.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_alias_inside_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your source file all
+aliases will be printed in the index of the given destination formats.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!link [Indices] [Indices]), (!KW [no_index]), (!KW [index]), (!KW [alias])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_alias_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

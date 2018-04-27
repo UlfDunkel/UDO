@@ -1,0 +1,24 @@
+!begin_node (!kw [error])
+!html_name cmd_error
+
+Print out an error message.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/error [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Similar to the preprocessor command (!code [#error]) of a C compiler
+you can use this command to generate an error message.
+UDO will stop processing the input file then.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [break])
+
+!end_xlist
+
+!end_node

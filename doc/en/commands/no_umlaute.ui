@@ -1,0 +1,31 @@
+!begin_node (!kw [no_umlaute])
+!html_name cmd_no_umlaute
+
+Do not use german umlauts.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_umlaute [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Switches off the usage of German umlauts. The example shows how to
+switch it off when converting to a manualpage. Umlauts are then
+replaced by ae, oe, ue, ss, Ae, Oe and Ue.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!link [Special characters] [Special characters]), (!KW [no_8bit])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_umlaute [man]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,20 @@
+!begin_node (!kw [newpage])
+!html_name cmd_newpage
+
+Generate a page break.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/newpage(!t)
+
+!item [(!DESCRIPTION)]
+Generates a page break if the destination format supports it.
+
+!item [(!SEEALSO)]
+(!KW [use_formfeed])
+
+!end_xlist
+
+!end_node

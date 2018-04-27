@@ -1,0 +1,25 @@
+!begin_node (!kw [unset])
+!html_name cmd_unset
+
+Symbol entfernen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/unset (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Symbole, die Sie mit (!KW [set])
+oder der Kommandozeilenoption (!code [-D]) gesetzt haben,
+wieder entfernen. Dieses Kommando darf überall im
+Quelltext verwendet werden.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [set]), (!KW [ifset]), (!KW [ifnset]), (!link [Symbole] [Symbole])
+
+!end_xlist
+
+!end_node

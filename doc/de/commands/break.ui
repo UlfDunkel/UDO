@@ -1,0 +1,24 @@
+!begin_node (!kw [break])
+!html_name cmd_break
+
+Umwandlung vorzeitig unterbrechen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/break(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando können Sie benutzen, um die Umwandlung
+des Quelltextes vorzeitig zu beenden. Alles, was nach
+(!KW [break]) folgt, wird nicht mehr beachtet. UDO führt
+noch automatisch ein (!KW [end_appendix]) und (!KW [end_document])
+aus, bevor die Umwandlung unterbrochen wird.
+
+!item [(!SEEALSO)]
+(!KW [end_document]), (!KW [end_appendix]), (!KW [error])
+
+!end_xlist
+
+!end_node

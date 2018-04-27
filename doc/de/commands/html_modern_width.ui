@@ -1,0 +1,26 @@
+!begin_node (!kw [html_modern_width])
+!html_name cmd_html_modern_width
+
+Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_width (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Gibt die Breite der linken Spalte an, in die die Links bei einer durch
+(!KW [html_modern_layout]) erzeugten Tabelle gesetzt werden.
+
+Wird statt eines dezimalen Wertes ein
+Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node

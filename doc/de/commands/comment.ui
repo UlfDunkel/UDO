@@ -1,0 +1,23 @@
+!begin_node (!kw [comment])
+!html_name cmd_comment
+
+Kommentar in die Ausgabedatei schreiben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/comment (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando schreibt ""(!TEXT)"" als Kommentar auch in die Ausgabedatei, sofern das
+jeweilige Format Kommentare beherrscht.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [use_comments]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node

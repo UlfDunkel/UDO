@@ -1,0 +1,24 @@
+!begin_node (!kw [rtf_no_tables])
+!html_name cmd_rtf_no_tables
+
+Output ASCII table (RTF only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_no_tables(!t)
+
+!item [(!DESCRIPTION)]
+If you use this command inside the preamble UDO prints tables without
+using special RTF commands. It will print the table ASCII like with a
+monospaced font.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables])
+
+!end_xlist
+
+!end_node

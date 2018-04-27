@@ -1,0 +1,20 @@
+!begin_node (!kw [sh])
+!html_name cmd_sh
+
+Eine Abschnitts-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subheading]).
+
+!item [(!SEEALSO)]
+(!KW [subheading])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,40 @@
+!begin_node (!kkkw [U] [u])
+!ifdest [ipf]
+!alias (!/U)...(!/u)
+!endif
+!html_name cmd_U()
+!label (!kk1 [/U])
+!label (!kk1 [/u])
+
+Unterstrichenen Text ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/U)(!TEXT)(!/u)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird unterstrichen dargestellt, falls möglich.
+
+(!NOTE) Diese Schriftart sollte sparsam eingesetzt werden. Denken Sie
+z.B. beim HTML-Format daran, daß standardmäßig Hypertext-Links in
+HTML-Seiten unterstrichen werden, sodaß Sie dort erwarten, auf jeden
+unterstrichenen Text klicken zu können, um eine andere Seite
+aufzurufen.
+
+!item [(!SEEALSO)]
+(!link [Schriftarten] [Schriftarten]), (!link [Texthervorhebungen] [Texthervorhebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""unterstrichen"" wird (!U)unterstrichen(!u) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""unterstrichen"" wird (!U)unterstrichen(!u) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node

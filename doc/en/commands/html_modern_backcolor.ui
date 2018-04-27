@@ -1,0 +1,23 @@
+!begin_node (!kw [html_modern_backcolor])
+!html_name cmd_html_modern_backcolor
+
+Specify the background color of ""modern"" layout (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display the background
+in the left column of HTML pages when using the ""modern"" layout.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node

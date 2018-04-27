@@ -1,0 +1,35 @@
+!begin_node (!kw [html_frames_backimage])
+!html_name cmd_html_frames_backimage
+
+Specify a background image for left frame (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Specifies a file that is used as background image
+for the left frame of HTML pages. You have to use the complete
+name, including extension, of the file name. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_backcolor]), (!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_frames_backimage "background.gif"
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<body background="background.gif">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

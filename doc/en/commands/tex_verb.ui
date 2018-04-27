@@ -1,0 +1,28 @@
+!begin_node (!kw [tex_verb])
+!html_name cmd_tex_verb
+
+Set verbatim character for (!LaTeX) ((!TeX) only)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tex_verb (!CHAR)(!t)
+
+!item [(!DESCRIPTION)]
+""(!CHAR)"" will be used as the sign for the (!LaTeX) command
+""(!code [\verb])"". ""(!code [+])"" will be used by default.
+
+!item [(!SEEALSO)]
+(!KKKW [V] [v])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tex_verb
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

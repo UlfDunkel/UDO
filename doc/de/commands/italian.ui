@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [italian])
+!html_name cmd_italian
+
+Sprache setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/italian(!t)
+
+!item [(!DESCRIPTION)]
+Der Befehl (!KW [italian]) existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [language] [[italian!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif

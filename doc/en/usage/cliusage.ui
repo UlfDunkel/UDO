@@ -1,0 +1,252 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commandline
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from cmdline.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 06: '-@ F' now accepts more commands per line
+# 2013:
+#   tho Jun 18: reverted above change with parsing command file,
+#               because no attempt was made to correctly parse quoted arguments
+#
+################################################################################
+
+!subheading Name
+
+udo --- convert files from UDO into different formats
+
+################################################################################
+
+!subheading Synopsis
+
+# pdfLaTeX can't handle \verb inside attributes
+!ifdest [pdf]
+udo [-acdDfghHilmnpPqrstuvwWxy4] (!U)(!T)source file(!t)(!u) (!nl)
+udo [-acdDfghHilmnpPqrstuvwWxy4] -o (!U)(!T)destination file(!t)(!u) (!U)(!T)source file(!t)(!u)
+!else
+udo [-acdDfghHilmnpPqrstuvwWxy4] (!U)(!V)source file(!v)(!u) (!nl)
+udo [-acdDfghHilmnpPqrstuvwWxy4] -o (!U)(!V)destination file(!v)(!u) (!U)(!V)source file(!v)(!u)
+!endif
+
+################################################################################
+
+!subheading Description
+
+#Ausgabe-Formate
+!include usage/udowork.ui
+
+Using the first method UDO prints the destination format to the standard
+output (STDOUT) and error messages to the standard error output (STDERR).
+Using the second method UDO writes the destination format to the
+(!U)destination file(!u) and error messages to a log file with the suffix
+(!V).ul?(!v).
+
+You have to pass single options to (!B)UDO(!b): (!V)-al(!v) isn't the same
+as (!V)-a -l(!v)!
+
+The name of the source file has to be the last option.
+
+################################################################################
+
+!subheading Options
+#Ausgabe-Formate
+
+!begin_tlist [-W, (--)no-warningslines]
+
+!item [-@ F] UDO will read the options from the file named ""F"".
+This file should contain exactly one option per line.
+
+!item [-a, (--)asc] The (!U)source file(!u) will be converted to ASCII.
+
+!item [(--)amg] The (!U)source file(!u) will be converted to AmigaGuide.
+
+!item [(--)aqv, (--)quickview] The (!U)source file(!u) will be converted to Apple-QuickView.
+
+!item [-c, (--)c] The (!U)source file(!u) will be converted to C source code.
+Normal text becomes comment, the content of the sourcecode environment becomes C code.
+
+!item [(--)check] Activate some additional checks.
+
+!item [-d, (--)no-idxfile] Suppress the generation of index files.
+
+!item [(--)drc] The (!U)source file(!u) will be converted to DRC Format (David's Readme Compiler).
+
+!item [-D symbol] Set the symbol ''symbol'' which can be tested in the source file
+with (!KW [ifset]).
+
+!item [(--)force-long] UDO tries to use long filenames even on
+operating systems that normally do not support them.
+
+!item [(--)force-short] Force UDO to use short filenames (8+3).
+
+!item [-f, (--)pdflatex] The (!U)source file(!u) will be converted to PDF(!LaTeX) sourcecode.
+
+!item [-g, (--)helptag] The (!U)source file(!u) will be converted to HP Helptag SGML.
+
+!item [-h, (--)html] The (!U)source file(!u) will be converted to HTML.
+
+!item [(--)hah] The (!U)source file(!u) will be converted to HTML Apple Help.
+
+!item [-hh, (--)htmlhelp] The (!U)source file(!u) will be converted to HTML-Help.
+
+!item [-H, (--)hold] You have to press a key before (!B)UDO(!b) finishes.
+
+!item [-i, (--)info] The (!U)source file(!u) will be converted to GNU Texinfo.
+
+!item [(--)ipf] The (!U)source file(!u) will be converted to OS/2 IPF.
+
+!item [(--)lyx] The (!U)source file(!u) will be converted to LyX.
+
+!item [-l, (--)no-logfile] When using the Option (!V)-o(!v) (!B)UDO(!b) doesn't save a log file.
+
+!item [-m, (--)man] The (!U)source file(!u) will be converted to a manualpage.
+
+!item [(--)map] Creates a header file for C with the WinHelp-Jump-IDs.
+
+!item [(--)map-pas] Creates a map file with the WinHelp-Jump-IDs for Pascal/Delphi.
+
+!item [(--)map-gfa] Creates a map file with the WinHelp-Jump-IDs for GFA Basic.
+
+!item [(--)map-vb] Creates a map file with the WinHelp-Jump-IDs for Visual Basic.
+
+!item [-n, (--)nroff] The (!U)source file(!u) will be converted to Nroff.
+
+!item [-o F, (--)outfile F]  (!B)UDO(!b) writes the output into the file named ""F"".
+# ergänzt 10.01.2004 - Ulrich Kretschmer
+With (!T)-o !(!t), the output filename will be the source filename with new extension
+(e.g. (!T)file.u(!t) becomes (!T)file.stg(!t)).
+
+!item [-p, (--)pchelp] The (!U)source file(!u) will be converted to Pure C Help.
+
+!item [-P, (--)pascal] The (!U)source file(!u) will be converted to pascal source code.
+Normal text becomes comment, the content of the sourcecode environment becomes Pascal code.
+
+!item [(--)ps] The (!U)source file(!u) will be converted to PostScript.
+
+!item [-q, (--)quiet] (!B)UDO(!b) won't print anything to STDOUT or STDERR.
+
+!item [-r, (--)rtf] The (!U)source file(!u) will be converted to Rich Text Format (RTF).
+
+!item [-s, (--)stg] The (!U)source file(!u) will be converted to ST-Guide sourcecode.
+
+!item [(--)save-upr] When using this option (!B)UDO(!b) will save a
+file with the suffix (!V).upr(!v) with a list of all source files,
+include files and generated files
+
+!item [-t, (--)tex] The (!U)source file(!u) will be converted to (!LaTeX).
+
+!item [(--)test] When using this option (!B)UDO(!b) won't save a destination file.
+
+!item [(--)tree] When using this option (!B)UDO(!b) will save a file with the
+suffix (!V).ut?(!v). In this file you will see a tree with all
+files your source file includes.
+
+!item [-u, (--)udo] Generate one file in udo format containing all included source files. 
+This allows to put all source files into one udo file.
+
+!item [-v, (--)vision] The (!U)source file(!u) will be converted to Turbo Vision Help.
+
+!item [(--)verbose] (!B)UDO(!b) will print some status information while converting
+the source file.
+
+!item [-w, (--)win] The (!U)source file(!u) will be converted to Windows Help sourcecode.
+
+!item [-4, (--)win4] The (!U)source file(!u) will be converted to Windows Help 4 sourcecode.
+
+!item [-W, (--)no-warnings] Warnings will be suppressed. Error messages will still be printed.
+
+!item [-Wl, (--)no-warningslines] Suppress warnings for lines being too short or too long.
+
+!item [-x, (--)linuxdoc] The (!U)source file(!u) will be converted to Linuxdoc-SGML.
+
+!item [-y, (--)no-hypfile] (!B)UDO(!b) doesn't save a file with hyphenation hints when
+using the option (!V)-o(!v).
+
+!item [(--)help] Outputs a help page and quits.
+
+!item [(--)version] Outputs version information and quits (!B)UDO(!b).
+
+!end_tlist
+
+################################################################################
+
+!subheading Examples
+
+!begin_description
+!item [udo file.u]
+                Convert the source file ''(!V)file.u(!v)'' to ASCII (default) and print the
+                output to the standard output and error messages to the standard
+                error output.
+
+!item [udo (--)tex -o output.tex file.u]
+                Convert the source file ''(!V)file.u(!v)'' to (!LaTeX) and write the output
+                to the file named ''(!V)output.tex(!v)''. Warnings, error messages
+                and additional information will be written to the log file named
+                ''(!V)output.ult(!v)''.
+
+!item [udo -s -y -l -o ! file.u]
+                Convert the source file ''(!V)file.u(!v)'' to ST-Guide and write the
+                output to ''(!V)file.stg(!v)''. UDO won't save a log file or a file
+                with hyphenation patterns.
+
+!end_description
+
+################################################################################
+
+!subheading Environment
+
+!begin_xlist [UDOINPUTPATH]
+
+!item [HOME]
+                UDO looks for the file (!V)udo.ini(!v) in your home directory if
+                (!B)UDOPATH(!b) doesn't exist.
+
+!item [LANG]
+                Sets the language UDO shall use for error messages if neither
+                (!B)LC_ALL(!b) nor (!B)LC_MESSAGES(!b) exists.
+
+
+!item [LC_ALL]
+                If this is set to ''german'' (!B)UDO(!b) prints German messages.
+                If this variable doesn't exist (!B)LC_MESSAGES(!b) it tested
+                instead.
+
+!item [LC_MESSAGES]
+                See (!B)LC_ALL(!b). If this variable doesn't exist, too,
+                (!B)LANG(!b) is tested instead.
+
+!item [UDOPATH]
+                (!B)UDO(!b) looks for the file (!V)udo.ini(!v) in the directory
+                defined by this variable. If (!B)UDOPATH(!b) doesn't exist
+                (!B)HOME(!b) is tested instead.
+
+!item [UDOINPUTPATH]
+                (!B)UDO(!b) looks for files included by the (!KW [input]) command
+                in the directory defined by this variable.
+
+!end_xlist
+
+################################################################################
+
+!subheading Exit Status
+
+!begin_xlist [>0] !compressed
+!item [0]       Everything was OK.
+!item [>0]      An error has appeared.
+!end_xlist

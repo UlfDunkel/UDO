@@ -1,0 +1,52 @@
+!begin_node Nummerierungen
+!html_name style_enumerations
+!label enumerate-Umgebung
+
+Die enumerate-Umgebung ist ebenso wie die itemize-Umgebung dafür
+geeignet, schnell und komfortabel durchnummerierte Aufzählungen zu
+erstellen, bei denen die Aufzählungspunkte durch Zahlen oder Buchstaben
+gekennzeichnet werden.
+
+Eine enumerate-Umgebung wird mit (!KW [begin_enumerate]) eingeleitet
+und mit (!KW [end_enumerate]) beendet. Die einzelnen Aufzählungspunkte
+werden jeweils mit dem Kommando (!KW [item]) gekennzeichnet.
+
+Die enumerate-Umgebung ist auch mehrfach schachtelbar und mit anderen
+Umgebungen kombinierbar. Hier ein kleines, unverschachteltes Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)enumerate1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)enumerate1.ui
+(!EXAMPLE_END)
+
+Hier ein kleines Beispiel, in dem die enumerate-Umgebung
+verschachtelt und mit dem Schalter (!KW [compressed]) benutzt wird.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)enumerate2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)enumerate2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Bei den Formaten, die von Hause aus eine vergleichbare Umgebung
+     anbieten (z.B. HTML) werden die Punkte nicht von UDO nummeriert.
+     Daher sollten Sie vorsichtig mit Angaben wie ""siehe Punkt 1"" oder
+     ""vergleiche Punkt b)"" sein.
+
+!item Die dritte Ebene dieser Umgebung wird relativ gesehen etwas
+     weiter eingerückt, da die Nummerierung durch römische Zahlen mehr
+     Platz benötigt.
+
+!item Bei vielen Punkten sollten Sie aufpassen, nicht die Grenzen zu
+     überschreiten. Wird eine Ebene mit Buchstaben nummeriert, sollten
+     Sie nicht mehr als (!const [26]) Aufzählungspunkte benutzen.
+
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
+     der Beschreibung zur itemize-Umgebung.
+!end_enumerate
+
+!end_node

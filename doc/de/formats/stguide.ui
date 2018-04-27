@@ -1,0 +1,180 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: ST Guide
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 21: xref links fixed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node ST-Guide
+!html_name format_stg
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Warum erscheinen Bilder bei mir nicht zentriert?]
+Beschaffen Sie sich die aktuelle ST-Guide-Version. ST-Guide Release 15
+kann Bilder selbständig zentrieren.
+
+##################################################
+
+!item [Wie werden die Titelseite und das Inhaltsverzeichnis erzeugt?]
+Titelseite und Inhaltsverzeichnis werden jeweils auf einer
+eigenen Seite dargestellt. Die Titelseite hat dabei den Namen
+""Titel"", dem Inhaltsverzeichnis wird dabei der primäre Name
+""Main"" zugewiesen.
+
+Um den ST-Guide die erste Seite des Hypertextes (was meistens die
+Titelseite sein wird) darstellen zu lassen, übergeben Sie einfach
+den Namen des erzeugten Hypertextes. Um das Inhaltsverzeichnis
+darzustellen, übergeben Sie zusätzlich ""Main"".
+Wie Sie dem ST-Guide mitteilen, welche Seite welchen Hypertextes anzuzeigen ist,
+finden Sie in der Beschreibung zum HCP.
+
+##################################################
+
+!item [Wie entferne ich die Kopfzeilen?]
+UDO erzeugt standardmäßig auf jeder Seite eine Kopfzeile,
+gebildet aus dem Titel und dem Namen des im Hypertext besprochenen Programms. Die Kopfzeilen werden unterstrichen dargestellt.
+
+Durch den Schalter (!KW [no_headlines] [[stg!!]]) läßt sich die Ausgabe
+dieser Kopfzeilen unterbinden.
+
+##################################################
+
+!item [Wie wird beim ST-Guide referenziert?]
+Die Referenzierung wird fast komplett dem HCP des ST-Guide
+überlassen.
+
+Nur bei den manuell gesetzten Links durch die Kommandos 
+(!KKW [link]) und (!KKW [xlink]) setzt UDO explizite Querverweise auf
+andere Kapitel oder Labels.
+
+##################################################
+
+!item [Wie werden Labels umgesetzt?]
+UDOs Kommando (!KW [label]) wird in den HCP-Befehl ""(!code [@symbol ari])""
+umgesetzt. Dabei ist zu beachten, daß noch kein anderes Kapitel
+oder Label mit gleichem Namen existiert, da der HCP dies
+bemängeln würde.
+
+Labels werden (wie bei den anderen Formaten auch) automatisch
+referenziert und gelangen darüber hinaus auch in den Index des
+Hypertextes.
+
+##################################################
+
+!item [Wie können Popup-Nodes erzeugt werden?]
+Durch die Befehle (!KW [pnode]) usw. können Kapitel im ST-Guide als
+Popups dargestellt werden. Dabei ist folgendes zu beachten:
+
+Beim ST-Guide dürfen in einem Popup lediglich 12 Zeilen mit
+maximal 60 Zeichen stehen. Außerdem dürfen in einem Popup keine
+Bilder oder Verweise benutzt werden.
+
+UDO bricht Zeilen eines Popup-Nodes auf 60 Zeichen um, achtet
+aber nicht darauf, ob Sie zuviele Zeilen, Verweise oder Bilder
+benutzt haben.
+
+##################################################
+
+!item [In den Popup-Nodes steht am Ende immer eine Leerzeile, wieso?]
+UDO bearbeitet einen Quelltext Zeile für Zeile. Beim Auftreten
+einer Leerzeile oder eines Kommandos wird der letzte Absatz samt
+einer zusätzlichen Leerzeile ausgegeben.
+
+Dies ist auch bei den Popup-Nodes nicht anders. Das Problem läßt
+sich leider nicht lösen.
+
+##################################################
+
+!item [In Tabellen sind manche Zellen verschoben, warum?]
+Der ST-Guide besitzt eine eingebaute Italic-Korrektur, die leider
+auch bei Tabellen zuschlägt und Leerzeichen einfügt. Das ist ein
+Problem des ST-Guide und kann nur von dessen Autor, Holger Weets,
+geändert werden.
+
+Man sollte daher bei Tabellen, die für den ST-Guide eingesetzt
+werden, möglichst auf Kursivschrift verzichten, solange es keine
+neuere ST-Guide-Version gibt.
+
+##################################################
+
+!item [Der HCP meldet mir den Fehler ""please add...""?]
+Falls der HCP die Fehlermeldung ""please add a @subject-command
+to this text"" am Ende der Übersetzung des erzeugten ST-Guide-Quelltextes erzeugt, haben Sie vergessen, im Vorspann des
+UDO-Quelltextes folgenden ST-Guide-Spezialbefehl anzugeben:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!stg @subject "..."
+!end_verbatim
+(!EXAMPLE_END)
+
+Anstelle der Punkte müssen Sie die Rubriken angegeben werden, in die
+ein Hypertext eingeordnet werden kann. Bei einem kleinen Tool geben Sie
+z.B. ""Dokumentation/Utilities"" an. Weitere Informationen zu diesem
+Thema finden Sie in der Dokumentation des ST-Guide.
+
+##################################################
+
+!item [Wie erzeuge ich eine eigene Titelseite?]
+Falls Ihnen das Layout der Titelseite, die UDO mit (!KW [maketitle]) erzeugen
+kann, nicht gefällt, können Sie sich mit nur wenigen Handgriffen
+Ihre eigene Titelseite erzeugen.
+
+Im folgenden Beispiel wird nach (!KW [begin_document]) nur für den ST-Guide
+eine eigene Titelseite mittels eines Kapitels erzeugt, welches nicht
+im Inhaltsverzeichnis erscheint. Am Ende der Titelseite wird das Wort
+""Inhaltsverzeichnis"" angegeben, sodaß ein Link zu eben diesem vom
+ST-Guide erzeugt wird.
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)stg/title.ui
+(!EXAMPLE_END)
+
+##################################################
+
+!item [Warum ist es besser, auf Blocksatz zu verzichten?]
+""Warum das denn?"", werden Sie sich vielleicht fragen. Nun, mit
+Hyperion/HypC gibt es von Martin Osieka ein Programmpaket für den
+Apple Macintosh, mit dem Sie ST-Guide-Hypertexte auch hier schreiben,
+umwandeln und darstellen können.
+
+Im Gegensatz zum ST-Guide können jedoch mit Hyperion auch Hypertexte
+vernünftig mit proportionalen Zeichensätzen dargestellt werden, falls
+kein Blocksatz benutzt wird.
+
+Sie sollten daher Hypertexte mit allgemeinem Inhalt nicht mit
+Blocksatz erstellen, denn interessierte Hyperion-Benutzer würden es
+Ihnen verübeln.
+
+Bei Hypertexten, die nur auf dem Atari Sinn ergeben (z.B. für ein
+Programm), können Sie natürlich ruhigen Gewissens Blocksatz verwenden.
+
+##################################################
+
+!end_description
+
+!end_node

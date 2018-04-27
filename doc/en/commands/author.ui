@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [author])
+!html_name cmd_author
+
+Set name of author.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/author (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist anymore.
+Use (!KW [docinfo] [[author!!]]) instead.
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+!endif

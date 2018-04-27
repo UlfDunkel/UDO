@@ -1,0 +1,26 @@
+!begin_node (!kw [html_robots])
+!html_name cmd_html_robots
+
+Einstellen der Robots Anweisung für Suchmaschinen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_robots (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" entspricht einer der Robots-Anweisungen, wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind ""(!code [none])"", ""(!code [noindex])"", ""(!code [index])"", ""(!code [nofollow])"" und ""(!code [follow])"". Diese Anweisung hat 
+Vorrang vor (!KW [docinfo] [[robots!!]])
+
+Für HTML Apple Help sind noch ""(!code [keywords])"", ""(!code [segments])"" und ""(!code [anchors])"" erlaubt.
+
+!item [(!EXISTSSINCE)] Version~6.5.17
+
+!item [(!SEEALSO)]
+(!KW [docinfo])
+
+!end_xlist
+
+!end_node

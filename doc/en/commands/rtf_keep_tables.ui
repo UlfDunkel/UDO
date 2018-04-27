@@ -1,0 +1,32 @@
+!begin_node (!kw [rtf_keep_tables])
+!html_name cmd_rtf_keep_tables
+
+Insert pagebreak before tables (RTF only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rtf_keep_tables [on|off](!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch, UDO will output all following tables such that
+for example WinWord won't split them at the end of the page,
+but insert a pagebreak before the table. Using (!code [[off!]]) you turn
+can this effect off again.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [rtf_no_tables]), (!link [Tables] [Tables]), (!link [Lists] [Lists])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_keep_tables [on]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

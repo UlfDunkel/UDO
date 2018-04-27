@@ -1,0 +1,33 @@
+!begin_node (!kw [html_script_name])
+!html_name cmd_html_script_name
+
+Set JavaScript name (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_script_name (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used to define a JavaScript file to
+be included.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_script_name js/my.js
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER)
+!begin_verbatim
+<script language="JavaScript" src="js/my.js" type="text/javascript">
+</script>
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

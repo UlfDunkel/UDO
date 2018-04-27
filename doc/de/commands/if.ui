@@ -1,0 +1,39 @@
+!begin_node (!kw [if])
+!html_name cmd_if
+
+Allgemeine Abfrage beginnen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/if [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando vereint die Abfragekommandos (!KW [iflang]),
+(!KW [ifdest]), (!KW [ifset]) und (!KW [ifos]). Das (etwas unglücklich
+gewählte) Beispiel zeigt, wie Sie abfragen können, ob
+der Quelltext nach HTML oder mit deutschsprachigen
+Ausdrücken übersetzt wird.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifdest]), (!KW [ifset]), (!KW [ifos]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!if [html,german]
+Dieser Text erscheint nur im deutschen HTML-Handbuch.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!if [html,german]
+Dieser Text erscheint nur im deutschen HTML-Handbuch.
+!endif
+(!EXAMPLE_END)
+
+!end_node

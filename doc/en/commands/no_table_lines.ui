@@ -1,0 +1,31 @@
+!begin_node (!kw [no_table_lines])
+!html_name cmd_no_table_lines
+
+Do not use lines in tables.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_table_lines [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, UDO won't generate
+vertical or horzontal lines in tables. The example show how
+to suppress line for the WinHelp and IPF formats.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tables] [Tables])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_table_lines [win,ipf]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

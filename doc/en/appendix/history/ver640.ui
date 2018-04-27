@@ -1,0 +1,74 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6.4.0
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_0640.de)
+#   fd  Mar 03: translation adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Changes from version 6.2.1 to 6.4.0
+!html_name history_6_2_1_to_6_4_0
+
+(!PUBLISHED [UDO~6.4.0] [Jan 7, 2004])
+
+!heading (!GENERAL)
+!begin_description !compressed
+!item [(!CHANGES)]
+   !begin_itemize !compressed
+   !item You can add comments in the table environment.
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+left        !! center        !! right
+# This is a comment
+bottom left !! bottom center !! bottom right
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+        
+   !end_itemize
+
+!end_description
+
+!heading Postscript
+!begin_description
+!item [(!BUGFIXES)]
+   !begin_itemize !compressed
+   !item Fixed (!BUG [40]) in version 6.2.2 (!nl)
+         Fixed many little bugs for postscript output. Among other things
+         the won't be written a copyright sign any longer if there is no
+         author set in !docinfo. The brackets are quoted now (\[ and \]
+         instead of [ and ]). The standard page layout wasn't set. The
+         string for Named Destination wasn't submitted in the right way
+         to a function.
+   !end_itemize
+
+!end_description
+
+!heading Hypertext Markup Language (HTML)
+!begin_description !compressed
+!item [(!BUGFIXES)]
+   !begin_itemize
+   !item (!BUG [35]): Wrong Hungarian accent corrected.
+   !end_itemize
+
+!end_description
+
+!end_node

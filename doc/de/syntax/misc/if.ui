@@ -1,0 +1,201 @@
+!begin_node Abfragebefehle
+!html_name misc_queries
+
+In vielen Fällen ist es nötig, direkt im Quelltext verschiedene
+Passagen für die jeweiligen Formate oder Sprachen anzugeben. UDO
+bietet daher einen Satz Befehle, mit denen diese Abfragen erfolgen
+können.
+
+!index (!kw [if])
+!index (!kw [else])
+!index (!kw [endif])
+Mit einem (!KW [if])-Befehl wird eine Abfrage eingeleitet. Liefert die
+Abfrage ein wahres Ergebnis, werden alle Zeilen bis zum Befehl
+(!KW [endif]) bzw. (!KW [else]) von UDO verarbeitet. Liefert die Abfrage ein
+falsches Ergebnis, werden alle Zeilen bis zu (!KW [endif]) bzw. (!KW [else])
+ignoriert.
+
+############################################################
+
+!begin_node Abfrage des Zielformats
+!html_name misc_queries_dest
+
+!index Abfrage !! Zielformat
+!index Zielformat !! Abfrage
+!index (!kw [ifdest])
+
+Mit dem Befehl (!KW [ifdest]) können Sie das Format abfragen, welches von UDO
+ausgegeben wird. Zur Abfrage verwenden Sie die Kürzel der Ausgabeformate:
+
+!include syntax/misc/short_dest.ui
+
+Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
+""(!code [all])"" und ""(!code [none])"" verwendet werden. Bei ""(!code [all])"" liefert eine Abfrage
+immer ein wahres Ergebnis, bei ""(!code [none])"" immer ein falsches.
+
+Das folgende Beispiel zeigt, wie Sie den Titel der Windows-Hilfe
+anders als für die anderen Formate setzen:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [win]
+!docinfo [title] Die Windows-Hilfe zu
+!else
+!docinfo [title] Die Anleitung zu
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!index (!kw [ifndest])
+Verwandt mit dem (!KW [ifdest])-Befehl ist der Befehl (!KW [ifndest]). Hier wird
+abgefragt, ob Sie (!I)nicht(!i) in ein Format ausgeben. Das obige Beispiel läßt
+sich demnach auch folgendermaßen darstellen:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifndest [win]
+!docinfo [title] Die Anleitung zu
+!else
+!docinfo [title] Die Windows-Hilfe zu
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+Bei den Abfragen können Sie natürlich auch mehrere Formatkürzel
+angeben. Die Abfrage liefert dann ein wahres Ergebnis, wenn mindestens
+ein Kürzel mit dem Ausgabeformat übereinstimmt. Mit folgender Abfrage
+können Sie z.B. den Hypertextformaten einen besonderen Titel
+verpassen:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [win,html,stg,htag]
+!docinfo [title] Der Hypertext zu
+!else
+!docinfo [title] Die Anleitung zu
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+############################################################
+
+!begin_node Abfrage der Sprache
+!html_name misc_queries_lang
+
+!index Abfrage !! Sprache
+!index Sprache !! Abfrage
+!index (!kw [iflang])
+
+Mit dem Befehl (!KW [iflang]) können Sie die Sprache abfragen, die für die
+Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende
+Zeichenketten:
+
+!label Sprache
+!include syntax/misc/short_lang.ui
+
+Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
+""(!code [all])"" und ""(!code [none])"" verwendet werden. Bei ""(!code [all])"" liefert eine Abfrage
+immer ein wahres Ergebnis, bei ""(!code [none])"" immer ein falsches.
+
+Bei kleineren Texten können Sie so z.B. gleich alle Übersetzungen in
+einem Quelltext unterbringen:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!iflang [german]
+!docinfo [title] Die Benutzeranleitung zu
+!else
+!docinfo [title] The User's Guide to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!index (!kw [ifnlang])
+Auch hier gibt es den verwandten Befehl (!KW [ifnlang]), der abfragt, ob
+(!I)nicht(!i) in eine Sprache ausgegeben wird. Das obige Beispiel ließe sich
+also auch so ausdrücken:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifnlang [german]
+!docinfo [title] The User's Guide to
+!else
+!docinfo [title] Die Benutzeranleitung zu
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+Selbstverständlich können Sie auch bei dieser Abfrage wieder mehrere
+Sprachkürzel angeben.
+
+!end_node
+
+############################################################
+
+!begin_node Abfrage von Symbolen
+!html_name misc_queries_symbols
+
+!index Abfrage !! Symbole
+!index Symbole !! Abfrage
+!index (!kw [ifnset])
+!index (!kw [ifset])
+
+Mit dem Befehl (!KW [ifset]) können Sie testen, ob Symbole gesetzt sind, mit
+dem Befehl (!KW [ifnset]), ob Symbole nicht gesetzt sind.
+
+!index (!kw [set])
+!index (!kw [unset])
+!index -D
+!index -U
+Wie Sie bereits wissen, können Sie Symbole mit der Kommandozeilenoption
+(!code [-D]) und mit dem Befehl (!KW [set]) setzen und mit dem Befehl 
+(!KW [unset]) wieder löschen.
+
+Im folgenden Beispiel wird abgefragt, ob das Symbol (!code [Farbbilder]) gesetzt
+ist und entsprechend ein passendes Bild eingebunden:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifset [Farbbilder]
+!image colour/tiger
+!else
+!image mono/tiger
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+Wenn Sie nun UDO mit der Option (!code [-D Farbbilder]) aufrufen bzw. vor der
+obigen Abfrage das Kommando (!KW [set] [Farbbilder]) in den Quelltext einbauen,
+so bindet UDO ein Farbbild ein, andernfalls ein monochromes Bild.
+
+!end_node
+
+############################################################
+
+!begin_node Abfrage des Betriebssystems
+!html_name misc_queries_os
+
+!index Abfrage !! Betriebssystem
+!index Betriebssystem !! Abfrage
+!index (!kw [ifos])
+
+Mit dem Befehl (!KW [ifos]) können Sie das Betriebssystem abfragen, auf dem
+UDO läuft. Hierbei gelten folgende Zeichenketten:
+
+!label Betriebssystem
+!include syntax/misc/short_os.ui
+
+Auch hier gilt, daß zusätzlich zu den genannten Zeichenketten auch
+""(!code [all])"" und ""(!code [none])"" verwendet werden können.
+
+!index (!kw [ifnos])
+Wiederum existiert ein verwandter Befehl namens (!KW [ifnos]), der abfragt,
+ob UDO (!I)nicht(!i) auf dem angegebenen Betriebssystem läuft.
+
+!end_node
+
+############################################################
+
+!end_node

@@ -1,0 +1,36 @@
+!begin_node (!kw [ldinclude])
+!html_name cmd_ldinclude
+
+Datei einbinden und in einer linedraw-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ldinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Grafik an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [linedrawsize]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [linedraw-Umgebung] [linedraw-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ldinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ldinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node

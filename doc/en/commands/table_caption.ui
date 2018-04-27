@@ -1,0 +1,40 @@
+!begin_node (!kw [table_caption])
+!html_name cmd_table_caption
+
+Set title of next table.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/table_caption (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Use this command to set the title of the next table. You have to use
+this command outside the table environment. For the first table of
+your source file UDO will print ""Table 1: A table title"" if you use the
+example below.
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!KW [table_caption*])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!table_caption A table title
+!begin_table [l|r] !hline
+left cell !! right cell
+left cell !! right cell
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!table_caption A table title
+!begin_table [l|r] !hline
+left cell !! right cell
+left cell !! right cell
+!end_table
+(!EXAMPLE_END)
+
+!end_node

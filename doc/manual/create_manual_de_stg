@@ -1,4 +1,0 @@
-#!/bin/sh
-# dieses bash-Skript konvertiert das deutsche UDO-Handbuch nach ST-Guide
-# this bash script converts the german UDO Manual to ST-Guide
-udo --stg --verbose --force-long -D LANG_DE manual.u -o manual-de.stg $*

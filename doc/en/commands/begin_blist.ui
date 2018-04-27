@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_blist])
+!html_name cmd_begin_blist
+
+Start a ""bold"" list.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_blist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [list] [blist environment]). The length of ""(!TEXT)"" defines the indent of the
+list. This environment must be finished with (!KW [end_blist]). You
+can use this environment inside other environments. The text you set
+with (!KW [item] [[~!!]]) will be displayed with a bold font.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [end_blist]), (!KW [item] [[~!!]]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [use_compressed_envs]), (!link [Lists] [Lists]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node

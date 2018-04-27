@@ -1,0 +1,23 @@
+!begin_node Warenzeichen
+!html_name intro_trademarks
+
+Innerhalb dieser Dokumentation wird auf Warenzeichen Bezug genommen,
+die nicht explizit als solche ausgewiesen sind. Aus dem Fehlen einer
+Kennzeichnung kann nicht geschlossen werden, daß ein Name frei von den
+Rechten Dritter ist.
+
+!begin_itemize !compressed
+!item Atari, TOS und MultiTOS sind Warenzeichen oder eingetragene Warenzeichen der Atari Corporation.
+!item Arial und Times New Roman sind eingetragene Warenzeichen der Monotype Corporation PLC.
+!item GEM und GEM Desktop sind Warenzeichen oder eingetragene Warenzeichen von Digital Research.
+!item Mac, Macintosh, Mac~OS und Mac~OS~X sind eingetragene Warenzeichen von Apple Inc.
+!item MS-DOS, Windows, Windows~95 und Windows~NT sind eingetragene Warenzeichen der Microsoft Corporation.
+!item Unix ist ein eingetragenes Warenzeichen von X/Open Company Ltd.
+!item Linux ist ein eingetragenes Warenzeichen von Linus Torvalds.
+!item SUSE und Yast sind eingetragene Warenzeichen der SUSE AG.
+!end_itemize
+
+Andere, in dieser Dokumentation genannte Produkte können eingetragene Warenzeichen
+ihrer jeweiligen Hersteller sein.
+
+!end_node

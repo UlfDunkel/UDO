@@ -1,0 +1,197 @@
+!begin_node Query commands
+!html_name misc_queries
+
+In some cases you might want to insert some special passages for a
+destination format, language or operating system.
+
+UDO supports some commands you can use to check the destination format,
+language, operating system and the existence of symbols.
+
+!index (!kw [if])
+!index (!kw [else])
+!index (!kw [endif])
+With an (!KW [if]) command you start a query. If the query returns a true value
+the following lines will be converted until UDO reads the (!KW [endif]) or
+(!KW [else]) commands. If the query returns a false value UDO will ignore
+the following lines until (!KW [endif]) or (!KW [else]).
+
+############################################################
+
+!begin_node Testing the target format
+!html_name misc_queries_dest
+
+!index Query !! Destination format
+!index Destination format !! Query
+!index (!kw [ifdest])
+
+With the command (!KW [ifdest]) you can test the destination format. Use
+the following abbreviations:
+
+!include syntax/misc/short_dest.ui
+
+In addition to these abbreviations you can use ""all"" and ""none"". A query
+with ""all"" always returns a true value, a query with ""none"" always
+returns a false value.
+
+The following example shows how to set a special document title for Windows
+Help:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [win]
+!docinfo [title] The Windows Help to
+!else
+!docinfo [title] The guide to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!index (!kw [ifndest])
+The (!KW [ifndest]) command is related to (!KW [ifdest]). But
+(!KW [ifndest]) will check if you do (!I)not(!i) convert to the given
+destination format. Thus you can write the upper example this way, too:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifndest [win]
+!docinfo [title] The guide to
+!else
+!docinfo [title] The Windows Help to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+You can pass more than one abbreviation to the query command. If you do so
+the query returns a true value if one or more abbreviations match the
+current destination format. The next example shows how to set a special
+document title for hypertext formats:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [win,html,stg,htag]
+!docinfo [title] The hypertext to
+!else
+!docinfo [title] The guide to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+############################################################
+
+!begin_node Testing the destination language
+!html_name misc_queries_lang
+
+!index Query !! Language
+!index Language !! Query
+!index (!kw [iflang])
+
+Using the (!KW [iflang]) command you can test the language UDO will use in
+the destination file. Use the following words to test the language:
+
+!label Language
+!include syntax/misc/short_lang.ui
+
+In addition to these words you can use ""all"" and ""none"". A query
+with ""all"" always returns a true value, a query with ""none"" always
+returns a false value.
+
+If you write a small documentation you can enter all langaguages to a single
+source file:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!iflang [german]
+!docinfo [title] Die Benutzeranleitung zu
+!else
+!docinfo [title] The User's Guide to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!index (!kw [ifnlang])
+The (!KW [ifnlang]) command is related to (!KW [iflang]). But
+(!KW [ifnlang]) will check if you do (!I)not(!i) convert to the given
+destination language. Thus you can write the upper example this way, too:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifnlang [german]
+!docinfo [title] The User's Guide to
+!else
+!docinfo [title] Die Benutzeranleitung zu
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+It goes without saying that you can test more than one language.
+
+!end_node
+
+############################################################
+
+!begin_node Testing symbols
+!html_name misc_queries_symbols
+
+!index Query !! Symbols
+!index Symbols !! Query
+!index (!kw [ifnset])
+!index (!kw [ifset])
+
+With the (!KW [ifset]) command you can test if a symbol was set in the
+preamble or via command line. The (!KW [ifnset]) tests if a symbol is
+(!I)not(!i) set.
+
+!index (!kw [set])
+!index (!kw [unset])
+!index -D
+!index -U
+As you know you can set symbols via command line by using the option
+(!code [-D]) and by the command (!I)!/set(!i).
+
+The following example shows how to test the symbol (!code [UseColour]) and
+to display the right image:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifset [UseColor]
+!image colour/tiger
+!else
+!image mono/tiger
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+If you call UDO with passing the option (!code [-D~UseColor]) or if you set
+the symbol with (!KW [set] [UseColor]) inside the preamble UDO will display
+the color image instead of the monochrome image.
+
+!end_node
+
+############################################################
+
+!begin_node Testing the operating system
+!html_name misc_queries_os
+
+!index Query !! Operating system
+!index Operating system !! Query
+!index (!kw [ifos])
+
+With the (!KW [ifos]) command you can test the operating system UDO is
+running on. Use the following words for this kind of query:
+
+!label Operating systems
+!include syntax/misc/short_os.ui
+
+Like in the other queries you can use ""all"" and ""none"", too.
+
+!index (!kw [ifnos])
+The related command called (!KW [ifnos]) tests if UDO does (!I)not(!i)
+run on the given operating system.
+
+!end_node
+
+############################################################
+
+!end_node

@@ -1,0 +1,26 @@
+!begin_node (!kw [no_8bit])
+!html_name cmd_no_8bit
+
+Keine Sonderzeichen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_8bit [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Umlaute, die im Quelltext vorkommen, werden in der
+Zieldatei durch ae, oe, ue, ss, Ae, Oe und Ue
+ausgegeben. Im Beispiel würde dies bei der Umwandlung
+ins Manualpage-Format geschehen.
+
+!item [(!EXAMPLE)]
+(!T)!/no_8bit [man](!t)
+
+!item [(!SEEALSO)]
+(!link [Sonderzeichen] [Sonderzeichen]), (!KW [no_umlaute])
+
+!end_xlist
+
+!end_node

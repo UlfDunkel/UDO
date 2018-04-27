@@ -1,0 +1,32 @@
+!begin_node (!kw [cinclude])
+!html_name cmd_cinclude
+
+Datei einbinden und in einer comment-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/cinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Kommentar an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [begin_comment]), (!KW [comment]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [comment-Umgebung] [comment-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!cinclude hello.c
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,26 @@
+!begin_node (!kw [win_backcolor])
+!html_name cmd_win_backcolor
+
+Hintergrundfarbe für WinHelp setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_backcolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die Hintergrundfarbe der
+Hilfedatei festlegen. Es stehen folgende Farben zur
+Verfügung:
+!include syntax/misc/short_color.ui
+Gleichzeitig passt UDO die Textfarbe an.
+
+!item [(!EXAMPLE)]
+(!T)!/win_backcolor gray(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!end_xlist
+
+!end_node

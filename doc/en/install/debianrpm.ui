@@ -1,0 +1,13 @@
+!begin_node Installing the Debian Linux package
+!html_name installation_linux_deb
+
+!begin_itemize !compressed
+!item Download the appropriate deb-package from (!url [www.debian.org] [http://www.debian.org/] [] [elink]).
+!item Log in as (!code [root])
+!item (!code [dpkg -i]) (!file [file.deb])
+!end_itemize
+Or (with Internet connection): (!code [apt-get install udo])
+
+The package name for the english documentation is (!code [udo-doc]).
+
+!end_node

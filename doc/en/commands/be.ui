@@ -1,0 +1,20 @@
+!begin_node (!kw [be])
+!html_name cmd_be
+
+Start an enumeration.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/be(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_enumerate]).
+
+!item [(!SEEALSO)]
+(!KW [begin_enumerate])
+
+!end_xlist
+
+!end_node

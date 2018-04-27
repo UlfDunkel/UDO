@@ -1,0 +1,8 @@
+!begin_node Money, money, money
+
+!include money/sharware.ui
+!include money/prices.ui
+!include money/upgrades.ui
+!include money/register.ui
+
+!end_node

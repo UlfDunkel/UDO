@@ -1,0 +1,59 @@
+#######################################
+# @(#) list environments - dh 1996
+#######################################
+
+!code_source [iso]
+!english
+
+!title		UDO's
+!program	List Environments
+!author		Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node A simple xlist environment
+
+The following example --- with some European countries and capitals ---
+shows how to use xlist environments:
+
+# This is a comment:
+# Because we display only few data extra line breaks are surpressed 
+# with !list_parsep [off]
+
+!list_parsep [off]
+!begin_xlist [Great Britain:]
+
+!item [Belgium:]	Brussels
+!item [France:]		Paris
+!item [Germany:]	Berlin
+!item [Great Britain:]	London
+!item [Netherlands:]	Den Haag
+
+!end_xlist
+!list_parsep [on]
+
+If you use (!V)blist(!v) instead of (!V)xlist(!v) the items will be displayed
+in bold type. Watch the difference:
+
+!list_parsep [off]
+
+#      v  (b vs. x)
+!begin_blist [Great Britain:]
+
+!item [Belgium:]	Brussels
+!item [France:]		Paris
+!item [Germany:]	Berlin
+!item [Great Britain:]	London
+!item [Netherlands:]	Den Haag
+
+!end_blist
+#    ^
+
+!list_parsep [on]
+
+Furthermore you can use (!V)ilist(!i) for italic items and (!V)tlist(!v)
+typewritered items. Try yourself!
+
+!end_document

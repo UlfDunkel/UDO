@@ -1,0 +1,29 @@
+!begin_node (!kw [depth])
+!html_name cmd_depth
+
+Specify depth of table of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+This switch, used in conjunction with a command
+to output a table of contents, specifies the
+depth of the generated table. The example
+below show how to generate a table of contents
+containing only the chapter names.
+
+!item [(!EXAMPLE)]
+(!T)!/tableofcontents !/depth 1(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_compressed_tocs]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc])
+
+!end_xlist
+
+!end_node

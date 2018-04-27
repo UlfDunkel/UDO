@@ -1,0 +1,44 @@
+!begin_node Macintosh version
+!html_name usage_macos
+
+# @(#) (alte) Anleitung zur Mac-Version, 26.06.1996, Martin Osieka
+
+The former UDO version for (!B)Mac~OS~9(!b) is currently not available.
+For (!B)Mac~OS~X(!b) you can use the UDO commandline version.
+
+!begin_ignore
+The macintosh version looks more simply than the GEM version. All available
+options are combined in one dialog.
+
+If you don't start it with passing a UDO source file you can choose one by
+clicking the [Choose] or [Auswählen] button. You can set the destination
+format by using one of the available formats that are listed inside the
+popup. If the destination files shouldn't be saved in the source folder you
+can choose a destination folder by clicking the second [Choose] or
+[Auswählen] button.
+
+Which files UDO will save you can define by using the group of buttons. I
+hope you can guess the function of each button by reading the labels. The
+setting of the display popup (""Ausgabeanzeige"") sets the speed of UDO. If
+you set it to ""cooperative"" (""kooperativ"") you can work with other
+applications while UDO is converting the source file.
+
+The conversion can be started by clicking the [Output] or [Ausgeben] button.
+If your source file doesn't contain any error UDO quits without any comment.
+If there were errors the Macintosh version presents an error message with
+link to the log file.
+
+!ifnset NoShareware
+After having paid the shareware fee you will get a personalized keycode that
+you can enter into the dialog. If you enter the keycode correctly all
+limitations of the shareware version will be disabled.
+!endif
+
+The documentation of UDO can be displayed anytime by pressing the help key
+or clicking the help menu if you have installed the hypertext viewer
+Hyperion (written by Martin Osieka) and if the hypertext (!file [UDO.HYP]) is
+installed in the guides folder of Hyperion.
+
+!end_ignore
+
+!end_node

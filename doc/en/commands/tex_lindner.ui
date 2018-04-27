@@ -1,0 +1,21 @@
+!begin_node (!kw [tex_lindner])
+!html_name cmd_tex_lindner
+
+Create graphic commands for Lindner-(!TeX) ((!TeX) only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_lindner(!t)
+
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special Lindner-(!TeX) commands to
+display GEM images when using the (!KW [image]) command.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
+
+!end_xlist
+
+!end_node

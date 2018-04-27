@@ -1,0 +1,163 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Hyphenation
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: text reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Silbentrennung
+!html_name hyphenation
+
+UDO bietet für die Formate ASCII, HTML, Manualpage, Pure-C-Hilfe und
+ST-Guide eine halbautomatische Silbentrennung an. Halbautomatisch
+bedeutet, daß Sie in einem Quelltext die Stellen markieren müssen, an
+denen ein Wort getrennt werden darf.
+
+Es gibt zwei Möglichkeiten, diese Trennstellen zu setzen:
+
+!index (!k1 [/-])
+!begin_enumerate !compressed
+!item lokales Setzen durch Trennmarken (!KW [/-])
+!index (!kw [hyphen])
+!item globales Setzen durch das Kommando (!KW [hyphen])
+!end_enumerate
+
+Bei der Umwandlung ins (!LaTeX)-Format werden die angegebenen Trennstellen
+durch ""(!code [\-])"" ersetzt. (!LaTeX) weiß dann, daß das Wort nur an den Stellen
+getrennt werden darf.
+
+Bei der Ausgabe im HTML-Format werden die angegebenen Trennstellen
+durch ""(!code [&])(!code [shy;])"" ersetzt. Dazu muss allerdings auch
+der Schalter (!KW [html_use_hyphenation]) im Vorspann gesetzt sein.
+
+Bei der Umwandlung ins Rich-Text- und WinHelp-Format werden die
+Trennmarken einfach gefiltert.
+
+!index (!k1 [//-])
+Falls Sie die Zeichenfolge (!code [!/-]) ausgeben möchten, müssen Sie im
+Quelltext (!K1 [//-]) angeben.
+
+################################################################################
+
+!begin_node Lokales Setzen von Trennstellen
+!html_name hyphenation_patterns_local
+
+Im Quelltext können Sie in einem Wort durch ""(!K1 [/-])"" die Stellen markieren, an
+denen UDO (bzw. (!LaTeX)) das Wort trennen darf. Ein Beispiel:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+eine halbautomatische Sil!-ben!-tren!-nung.
+!end_verbatim
+(!EXAMPLE_END)
+
+Bei der Umwandlung ins (!LaTeX)-Format werden alle ""(!K1 [/-])"" durch ""(!code [\-])"" ersetzt;
+es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung nach
+ASCII, HTML, Pure-C-Hilfe, Manualpage und ST-Guide wird das Wort
+passend aufgetrennt, falls es nicht mehr komplett in eine Zeile paßt
+(z.B. in ""Sil-~bentrennung"" oder ""Silben-~trennung""). Bei allen
+anderen Ausgabeformaten werden die Trennmarken einfach entfernt.
+
+!end_node
+
+################################################################################
+
+!begin_node Globales Setzen von Trennstellen
+!html_name hyphenation_patterns_global
+
+!index (!kw [hyphen])
+Trennstellen können durch das Kommando (!KW [hyphen]) global gesetzt werden.
+Global bedeutet, daß Sie die Trennstelle nur einmal im Vorspann des
+Quelltextes angeben müssen, UDO dann bei der Umwandlung alle Zeilen
+nach dem zugehörigen Wort durchsucht und die nötigen Anpassungen
+durchführt.
+
+Sobald in Ihrem Quelltext mehrere problematische Worte (also Worte,
+die ungetrennt einen häßlichen rechten Flatterrand erzeugen)
+auftauchen, sollten Sie sich überlegen, ob es nicht vielleicht
+sinnvoller ist, im Vorspann einmal (!KW [hyphen]) zu benutzen.
+
+In diesem Beispiel wird davon ausgegangen, daß in Ihrem Quelltext das
+Wort ""Dokumentation"" mehrfach auftaucht. Damit Sie nicht bei jedem
+Wort die Trennstellen lokal setzen müssen, fügen Sie folgenden
+Zeile(n) in den Vorspann des Quelltextes ein:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!hyphen Do!-ku!-men!-ta!-tio!-nen
+!hyphen Do!-ku!-men!-ta!-tion
+!end_verbatim
+(!EXAMPLE_END)
+
+In diesem Beispiel wurde zusätzlich der Trennvorschlag für den Plural
+angegeben, da dieser anders getrennt werden muß. Der Plural muß, wenn
+er angegeben werden wird, (!I)vor(!i) dem Singular stehen. Der Grund: UDO
+speichert alle Trennvorschläge in einer Liste, die es bei der
+Umwandlung im FIFO-Prinzip(!N)first in first out(!n) abarbeitet.
+
+!end_node
+
+################################################################################
+
+!begin_node Hinweise auf zu kurze Zeilen
+!html_name hyphenation_shortlines
+
+Bei der Umwandlung ins ASCII-, Manualpage-, Pure-C-Hilfe- und
+ST-Guide-Format kann UDO durch seine halbautomatische Silbentrennung
+dafür sorgen, daß im Ausgabetext ein relativ gleichmäßiger rechter Rand
+erzeugt bzw. beim Blocksatz eine Zeile mit wenig Leerzeichen aufgefüllt
+wird.
+
+Dies ist dann nicht der Fall, wenn manche Zeilen zu kurz geraten. UDO
+bemängelt diese Zeilen in der Logdatei und zeigt Ihnen dort auch das
+Wort, welches durch seine Länge dazu führte, daß ein ungleichmäßiger
+rechter Rand erzeugt bzw. die Zeile mit zuviel Leerzeichen aufgefüllt
+wurde.
+
+Versuchen Sie nun, durch Einsetzen von Trennmarken UDO zu erlauben,
+dieses Wort zu trennen und damit einen gleichmäßigeren rechten Rand zu
+erzeugen.
+
+(!HINT)
+
+!index (!kw [fussy])
+!index (!kw [sloppy])
+Durch den Befehl (!KW [sloppy]) werden die Hinweise auf solche kurzen Zeilen
+ausgeschaltet. Durch den Befehl (!KW [fussy]) lassen sich die Warnungen
+wieder einschalten.
+
+Gerade in der Entwicklungsphase einer Dokumentation interessieren
+einen die Warnungen eher weniger. Benutzen Sie dann einfach zu Beginn
+des Dokumentes den Befehl (!KW [sloppy]), daß in der Logdatei nur noch die
+""wichtigen"" Dinge zu erkennen sind. Vor der Veröffentlichung der
+Dokumentation sollten Sie dann den Befehl auskommentieren und die
+Formatierung überprüfen.
+
+!end_node
+
+################################################################################
+
+!end_node

@@ -1,0 +1,48 @@
+!begin_node (!kw [verbatimsize])
+!html_name cmd_verbatimsize
+
+Schriftgröße für verbatim-Umgebungen einstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/verbatimsize [tiny|small|normal|large|huge](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie festlegen, in welcher
+Schriftgröße Text erscheinen soll, der in einer
+verbatim-Umgebung steht. Der Schalter kann überall im
+Quelltext verwendet werden. Die kleinste Schriftgröße
+wird mit ""(!code [tiny])"", die größte mit ""(!code [huge])"" gesetzt. Die
+Standardgröße für verbatim-Umgebungen ist ""(!code [normal])"".
+
+(!NOTE) Wenn -- wie in diesem Handbuch -- die Schriftgröße sich in der
+HTML-Darstellung nicht ändert, kann es daran liegen, daß Sie eine
+CSS-Formatierung für vorformattierten Text ((!code [<pre>])) definiert
+haben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!link [verbatim-Umgebung] [verbatim-Umgebung]), (!KW [html_monofont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!verbatimsize [small]
+Ich bin ein Text, der in kleiner Schrift in einer 
+verbatim-Umgebung ausgegeben werden soll.
+!end_verbatim
+(!EXAMPLE_AFTER)
+!verbatimsize [small]
+!begin_verbatim
+Ich bin ein Text, der in kleiner Schrift in einer 
+verbatim-Umgebung ausgegeben werden soll.
+!end_verbatim
+!verbatimsize [normal]
+(!EXAMPLE_END)
+
+!end_node

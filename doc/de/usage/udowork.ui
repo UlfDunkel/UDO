@@ -1,0 +1,51 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : general app description
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from udowork.ui)
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+UDO wandelt Dateien vom eigenen UDO-Format in folgende Formate um:
+
+#Ausgabe-Formate
+!begin_itemize !compressed
+!item (!link [AmigaGuide] [AmigaGuide])
+!item (!link [Apple Help Book] [Apple Help Book (HTML!)])
+!item (!link [Apple QuickView] [Apple QuickView])
+!item (!link [ASCII] [ASCII])
+!item (!link [David's Readme-Compiler] [DRC])
+!item (!link [HP-Helptag-SGML] [HP-Helptag-SGML])
+!item (!link [HTML] [HTML])
+!item (!link [HTML-Help] [HTML-Help])
+!item (!link [OS/2 IPF] [IPF])
+!item (!link [(!LaTeX!)] [(!LaTeX!)])
+!item (!link [Linuxdoc-SGML] [Linuxdoc-SGML])
+!item (!link [LyX] [LyX])
+!item (!link [Manualpage] [Manualpage])
+!item (!link [Nroff] [Nroff])
+!item (!link [Pure-C-Hilfe] [Pure-C-Hilfe])
+!item (!link [PDF (!LaTeX!)] [PDFLaTeX])
+!item (!link [PostScript] [PostScript])
+!item (!link [RTF] [RTF])
+!item (!link [ST-Guide (Quelltext!)] [ST-Guide])
+!item (!link [Texinfo] [Texinfo])
+!item (!link [Turbo-Vision-Hilfe (Quelltext!)] [Turbo-Vision-Hilfe])
+!item (!link [UDO] [UDO-Output])
+!item (!link [WinHelp-Quelltext] [WinHelp])
+!item (!link [WinHelp4-Quelltext] [WinHelp4])
+!end_itemize

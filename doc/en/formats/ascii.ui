@@ -1,0 +1,51 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: ASCII
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using macro (!code [])
+#
+################################################################################
+
+!begin_node ASCII
+!html_name format_asc
+
+The ""ASCII"" output generates a single text file with ""plain"" text.
+
+!subsubheading Specialities and useful hints
+!begin_itemize !compressed
+!item It is not possible to split the output into more than one single file (like HTML).
+
+!item The paragraph width can be changed with the (!KW [parwidth]) command.
+UDO uses a value of 70~characters by default.
+
+!item Text styles like bold, italic or underlined are generated with the characters (!code [*]), (!code [/]) and
+(!code [_]) (as common in the Usenet). (!nl)
+Because of the existence of some print tools(!N)e.g. IdeaList for Atari~ST(!n)
+and newsreaders knowing these text styles UDO doesn't count these special characters. Lines containing such formatting characters can become longer than the specified paragraph width. (!nl)
+If you want to suppress the output of these characters you can use the
+switch (!KW [no_effects] [[asc!!]]) inside the preamble.
+
+!autoref [off]
+!item UDO generates ASCII files using the actual system charset.
+Running UDO under Windows, not the Windows-ANSI charset but the DOS charset will be used.
+Opening an UDO-generated text file with an Windows editor, umlauts and other
+special characters seems to wrong.
+!autoref [on]
+
+!item Using (!KW [no_umlaute] [[asc!!]]), you can switch off umlauts and special characters.
+
+!end_itemize
+
+!end_node

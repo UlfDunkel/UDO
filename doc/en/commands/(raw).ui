@@ -1,0 +1,32 @@
+!begin_node (!kkw [raw])
+!html_name cmd_raw()
+
+Output text within a line without changes, for defined destination formats.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [(!TEXT)])(!t)
+
+!item [(!DESCRIPTION)]
+(!TEXT) will only be output when converting to one of the specified 
+destination formats. (!TEXT) will be output then without any conversion.
+
+(!HINT) Because UDO needs to recognize the closing bracket (!code [!)]) as well as 
+the closing square brackets (!code [!]]) of the parameter blocks, it is important 
+to protect these characters with ""!"" if you want to use them in the content 
+themselves.
+
+!item [(!EXAMPLE2)]
+(!/raw [stg] [@subject Documentation/Utilities]) (!nl)
+(!/raw [asc] [Round brackets !) and square brackets !] have to be protected here.])
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node

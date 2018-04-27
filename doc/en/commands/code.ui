@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [code])
+!html_name cmd_code
+
+Switch to another character set.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code [(!CHARSET)](!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist an more.
+Use (!KW [code_source]) instead.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!EXISTEDUNTIL)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [code_source]), (!KW [code_target]), (!link [Special characters] [Special characters])
+
+!end_xlist
+
+!end_node
+!endif

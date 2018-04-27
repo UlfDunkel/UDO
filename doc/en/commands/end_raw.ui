@@ -1,0 +1,20 @@
+!begin_node (!kw [end_raw])
+!html_name cmd_end_raw
+
+Finish a raw environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_raw(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the raw environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_raw]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node

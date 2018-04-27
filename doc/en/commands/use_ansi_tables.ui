@@ -1,0 +1,31 @@
+!begin_node (!kw [use_ansi_tables])
+!html_name cmd_use_ansi_tables
+
+Create tables with ANSI graphic characters.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_ansi_tables [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble tables will be printed
+with graphic chars from the DOS characterset. This switch has no
+function when converting into (!LaTeX), WinHelp or HTML.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tables] [Tables])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_ansi_tables [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

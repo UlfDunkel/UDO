@@ -1,0 +1,102 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Example
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 10: using EXAMPLE_... macros
+#
+################################################################################
+
+!begin_node A short example
+!html_name syntax_example
+
+Before going into details I want to show you how an UDO source file may
+look like. You can use this example to make your own source files if
+you want to.
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)example.u
+(!EXAMPLE_END)
+
+!subsubheading Explanations
+
+At the beginning of this example you can see a comment. A comment is a
+line that begins with a ""#"" immediately.
+
+The next line is a special line. This line contains a special command
+for the ST-Guide. If you don't know the ST-Guide just add this line at
+the beginning of your source file so that are all the people are able
+to build a hypertext if they want to.
+
+!index (!kw [docinfo])
+!index (!kkw [today])
+Now the information for the title page and the headlines are set.
+(!KW [docinfo] [[title!!]]) and
+(!KW [docinfo] [[program!!]]) should make sense if you read them one after
+another. In this example it would be ""An example for UDO"". If you look
+at the line containing (!KW [docinfo] [[date!!]])
+ you will see the placeholder (!KKW [today]) that
+is replaced by the current system date. You can set the date to April
+16th, 1996 manually, if you want to.
+
+!index (!kw [subsubtoc])
+!index (!kw [subtoc])
+
+The preamble contains some switches. The first to switches are set for
+the output of ''sub-tables-of-contents'' in hypertexts. The abbreviations
+of these hypertexts you will see inside the brackets. In a ''subtoc'' all
+subnodes of a node are printed like a table of contents so that readers
+of a hypertext are enabled to directly switch to an interesting
+subnode.
+
+!index (!kw [no_effects])
+The switch (!KW [no_effects] [[asc!!]]) suppresses the usage of Usenet text effect
+commands like stars for bold and slashes for italic text.
+
+!index (!kw [use_justification])
+The switch (!KW [use_justification] [[asc!!]]) tells UDO to layout the
+ASCII file with justified text.
+
+!index (!kw [begin_document])
+The command (!KW [begin_document]) tells UDO that now the main part of the
+document begins. This command has to be part of any source file!
+
+!index (!kw [maketitle])
+In first place we output the title page that is built with the
+information set in the preamble of this example. You should use
+(!KW [maketitle]) directly after (!KW [begin_document]) if you use it. It is possible
+to use it later but I don't think that it would work without problems.
+
+!index (!kw [tableofcontents])
+Then we want that UDO prints a table of contents. There you can see all
+chapters, sections and subsections of the source file. Like (!KW [maketitle])
+you should use (!KW [tableofcontents]) directly after (!KW [begin_document]) or
+(!KW [maketitle]) if you use this command.
+
+!index (!kw [node])
+Now we can enter the first chapter of our text. Chapters are marked
+with (!KW [node]). Please read the contents of this chapter that contains
+additional information.
+
+The following lines demonstrate how to use chapters, sections and
+subsections. You should also read the text of these chapters to get
+more information.
+
+!index (!kw [end_document])
+Finally we end our text with the command (!KW [end_document]). This command
+has to be part of every source file and should be the last command of a
+source file!
+
+!end_node

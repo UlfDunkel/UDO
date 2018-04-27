@@ -1,0 +1,77 @@
+!begin_node* Befehlserklärung
+!html_name cmd_explanation
+
+In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten
+Befehle detailliert erklärt. Dabei werden immer wieder gleiche
+Kategorien verwendet, damit Sie auf einen Blick sehen, was mit welchem
+Befehl möglich ist. Diese Kategorien werden nachfolgend erklärt.
+
+!begin_description
+
+!item [Typ:]
+   !begin_blist
+   !item [(!COMMANDOBLIGATE)] Ein (!COMMANDOBLIGATE) muss in jedem UDO-Quelltext stehen, sonst gibt UDO eine Fehlermeldung aus.
+   !item [(!COMMAND)] Ein (!COMMAND) veranlasst UDO, etwas Bestimmtes zu tun.
+   !item [(!COMMANDABBREV)] Für einige häufig genutzte Kommandos gibt es Kurzformen, die durch ""(!COMMANDABBREV)"" im Typ angegeben werden.
+   !item [(!SWITCH)] Ein (!SWITCH) setzt bestimmte Informationen, an denen UDO erkennt, wie es demnächst zu verfahren hat.
+   !item [(!PLACEHOLDER)] Ein (!PLACEHOLDER) wird bei der Umwandlung nur durch etwas anderes ersetzt.
+   !item [(!SPECIALCHAR)] (!SPECIALCHAR) sind festgelegte Zeichenfolgen, die etwas Bestimmtes bewirken.
+   !end_blist
+
+!item [Position:]
+   !begin_blist
+   !item [Vorspann] Bei ""Vorspann"" dürfen Sie einen Befehl nur im Vorspann des Quelltextes (also vor (!KW [begin_document])) einsetzen.
+   !item [Hauptteil] Bei ""Hauptteil"" dürfen Sie einen Befehl nur im Hauptteil des Quelltextes (also nach (!KW [begin_document])) einsetzen.
+   !item [Vorspann & Hauptteil] Bei ""Vorspann & Hauptteil"" dürfen Sie einen Befehl überall einsetzen.
+   !end_blist
+
+!item [Syntax:]
+	Hier sehen Sie, wie die Befehle eingesetzt werden müssen.
+
+	!begin_tlist [WsystemeW] !compressed
+
+	!label (!TEXT)
+	!item [(!TEXT)] steht für eine Zeichenfolge
+
+	!label (!FILE)
+	!item [(!FILE)] steht für einen Dateinamen
+
+	!label (!VALUE)
+	!item [(!VALUE)] steht für eine Ziffernfolge
+
+	!label (!CHAR)
+	!item [(!CHAR)] steht für ein einzelnes Zeichen
+
+	!label <kürzel>
+	!item [<kürzel>] steht für die Angabe von Kürzeln der (!link [Ausgabeformate] [Ausgabeformat])
+
+	!label <sprache>
+	!item [<sprache>] steht für die Angabe von (!link [Sprachkürzeln] [Sprache])
+
+	!label <systeme>
+	!item [<systeme>] steht für ein oder mehrere (!link [Betriebssysteme] [Betriebssystem])
+
+	!label <farbe>
+	!item [<farbe>] steht für einen (!link [Farbnamen] [Farben])
+
+	!label <zeichensatz>
+	!item [<zeichensatz>] steht für einen (!link [Zeichensatz] [Code])
+
+	!end_tlist
+
+!item [Beschreibung:]
+	Hier wird der jeweilige UDO-Befehl genauer erklärt.
+
+!item [Existiert seit:]
+   Dieses Feld gibt an, ab welcher Version von UDO dieser Befehl verwendet werden kann. Ggf. müssen Sie Ihre eingesetzte UDO-Version aktualisieren, wenn ein neuer Befehl bei Ihnen noch nicht funktioniert.
+
+!item [Siehe auch:]
+	Hier sind verwandte Befehle oder Themen ausgelistet, die
+	in direktem Zusammenhang mit dem beschriebenen Befehl stehen.
+
+!item [Beispiel:]
+	Hier sehen Sie eventuell kurze Beispiele für den jeweiligen Befehl und seine Wirkung im Zielformat.
+
+!end_description
+
+!end_node

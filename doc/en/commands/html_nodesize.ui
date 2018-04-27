@@ -1,0 +1,29 @@
+!begin_node (!kw [html_nodesize])
+!html_name cmd_html_nodesize
+
+Set size of headings (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_nodesize (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+You can set the font size of the HTML headlines with this switch. By
+default UDO will use  value of 1. That means, that UDO will output
+(!code [<h1>...</h1>]) for chapters, (!code [<h2>...</h2>]) for sections
+etc. The example shows how to tell UDO that it should output
+(!code [<h2>...</h2>]) for chapters etc.
+
+!item [(!EXAMPLE)]
+(!T)!/html_nodesize 2(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode])
+
+!end_xlist
+
+!end_node

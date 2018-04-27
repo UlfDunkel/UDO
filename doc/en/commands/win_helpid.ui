@@ -1,0 +1,30 @@
+!begin_node (!kw [win_helpid])
+!html_name cmd_win_helpid
+
+Assign a Help-ID (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/win_helpid (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used only once per node. The ID will be used like
+an alias. Help-IDs can be written to a C or Pascal header file.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [use_auto_helpids]), (!KW [win_prefix_helpids])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_helpid 0815
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

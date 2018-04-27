@@ -1,0 +1,73 @@
+!begin_node Registration
+
+The height of the shareware or upgrade fee depends on your status. How much
+money you have to pay you will find in ""How much does UDO cost?"" and ""How
+much do upgrades cost?"".
+
+Users from Great Britain are recommended to register UDO via Denesh Bhabuta.
+Users from Sweden are recommended to register UDO via Tom Thomasson.
+
+The appropriate amount of money can be paid by sending a cheque, a
+Eurocheque or cash or by transferring the amount of money to my bank
+account.
+
+If you really want to risk to send cash please send Deutsche Mark and insert
+a black piece of paper into the envelope so nobody can look inside gets the
+idea to steal the letter.
+
+Please send cheques, Eurocheques or cash to:
+
+!begin_quote
+Dirk Hagedorn	(!nl)
+Asmecke 1		(!nl)
+59846 Sundern	(!nl)
+Germany
+!end_quote
+
+If you prefer transferring the money to my bank account use these data:
+
+!begin_quote
+!begin_xlist [Account number:] !compressed
+!item [Account holder:]	Dirk Hagedorn
+!item [Account number:]	3 561 164
+!item [Bank:]			Sparkasse Arnsberg-Sundern, Germany
+!item [Bank code:]		466 500 05
+!end_xlist
+!end_quote
+
+In all cases please don't forget to send me
+
+!begin_itemize !compressed
+!item your name
+!item your complete address
+!item your email address (if available)
+!item on which operating system(s) you want to use UDO
+!end_itemize
+
+After having received the money I will send you a bill and a personalized
+keycode. With the keycode you can disable the limitations of the shareware
+version. 
+
+#--------------------------------------------------------------------
+!subsubheading Services for registered users
+
+New releases of UDO are released two or three times per year at maximum.
+Registered users are enabled to use current beta versions at any time.
+
+Because UDO is available for many operating systems and I don't have so much
+time to compile new release every time I change some things, new releases
+will be published only if the number of changes is high enough.
+
+For registered users after about two weeks updated versions are published.
+In these version old bugs are fixed, new destination formats are presented
+and wishes of registered users are considered if they may be realised.
+
+Registered users can download these updates via modem or FTP or they can
+order them by sending a formated floppy disk with a readdressed envelope and
+2~DM for stamps.
+
+It goes without saying that registered users will get gratis support via
+via (e)mail. Questions of registered users will be answered as detailed as
+possible.
+
+!end_node

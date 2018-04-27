@@ -1,0 +1,372 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Structure
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 25: index adjustments
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Structuring
+!html_name structure
+
+In this chapter you will get to know what commands are offered to structure
+your documentation.
+
+################################################################################
+
+!begin_node Title page
+!html_name structure_titlepage
+
+!index (!kw [maketitle])
+Using the command (!KW [maketitle]) you can tell UDO to generate a title
+page built with information you set in the preamble with the following
+commands:
+
+!begin_xlist [programimage:] !compressed
+
+!item [(!KW [docinfo] [[title!!]]):]
+		The title of the documentation e.g. ""The guide to"" or ""The
+		introduction to"".
+
+!item [(!KW [docinfo] [[program!!]]):]
+		The name of the software or theme you describe inside the
+		documentation.
+
+!item [(!KW [docinfo] [[programimage!!]]):]
+		The filename of an image UDO shall display on the title page
+		instead of (!KW [docinfo] [[program!!]]).
+
+!item [(!KW [docinfo] [[version!!]]):]
+		This is used for version information e.g. ""Release 6"" or ""Version
+		42"".
+
+!item [(!KW [docinfo] [[date!!]]):]
+		The date you have written the documentation or the program.
+
+!item [(!KW [docinfo] [[author!!]]):]
+		The name of the author of the documentation.
+
+!item [(!KW [docinfo] [[authorimage!!]]):]
+		The filename of an image UDO shall display on the title page above
+		the name of the author.
+
+!item [(!KW [docinfo] [[address!!]]):]
+		The street, town, country etc. where the author lives. Optionally you can enter any
+		other text that will be displayed below the name of the author on
+		the title page, such as email addresses.
+
+!end_xlist
+
+You don't have to use all commands but you should use one command at least
+if you are using the command (!KW [maketitle]).
+
+When used (!KW [maketitle]) should only be used directly after
+(!KW [begin_document]). To use this command at another place of the
+source file is allowed but there could be problems.
+
+The title page will be printed on a single page when converting to ST-Guide
+or Windows Help. This is a great help for people with small screens.  From
+the title page you will be able to jump to the table of contents.
+
+Converting to (!LaTeX) UDO generates a single page using the title page
+environment built with the information from the preamble.
+
+If you want to make your own title page you have to use some tricks. You
+will find an example inside the UDO distribution that shows you how to make
+userdefined title pages.
+
+!end_node
+
+################################################################################
+
+!begin_node Tables of contents
+!html_name structure_tocs
+
+!index (!kw [tableofcontents])
+
+Using the command (!KW [tableofcontents]) you can tell UDO to generate a
+table of contents that lists all chapters, sections and subsections of the
+source file.
+
+You should use (!KW [tableofcontents]) directly after (!KW [maketitle])
+or (!KW [begin_document]) to avoid problems.
+
+!index (!kw [no_toc_subnodes])
+!index (!kw [no_toc_subsubnodes])
+!index (!kw [no_toc_subsubsubnodes])
+!index (!kw [toc])
+By using the switches (!KW [no_toc_subnodes]),
+(!KW [no_toc_subsubnodes]) and (!KW [no_toc_subsubsubnodes]) you can
+decrease the size of the table of contents. This is useful when writing
+large hypertexts.
+
+!index (!kw [subsubsubtoc])
+!index (!kw [subsubtoc])
+!index (!kw [subtoc])
+!index (!kw [use_auto_subsubsubtocs])
+!index (!kw [use_auto_subsubtocs])
+!index (!kw [use_auto_subtocs])
+If you want to list all sections of a chapter, all subsections of section or
+all paragraphs of a subsection you can output this so called ""sub-table of
+contents"" with the commands called (!KW [subtoc]), (!KW [subsubtoc])
+and (!KW [subsubsubtoc]). This is useful for hypertexts where you then
+have the possibility to switch directly to an interesting section or
+subsection. UDO enables you to automatize the output of these ""subtoc's""
+using the switches (!KW [use_auto_subtocs]),
+(!KW [use_auto_subsubtocs]) and (!KW [use_auto_subsubsubtocs]).
+
+!index (!kw [ignore_subsubsubtoc])
+!index (!kw [ignore_subsubtoc])
+!index (!kw [ignore_subtoc])
+If you use the upper switches to print subtocs automatically but you don't
+want to print them in specific chapters you can insert the commands
+(!KW [ignore_subtoc]), (!KW [ignore_subsubtoc]) or
+(!KW [ignore_subsubsubtoc]). If a chapter contains one of these commands
+there will be printed no table of contents neither automatically nor
+manually by using (!KW [subtoc]) etc.
+
+
+!subsubsubheading Summary of all commands and switches
+
+!begin_xlist [use_auto_subsubsubtocs:] !compressed
+
+!item [(!KW [tableofcontents]):]
+		Prints the table of contents on a separate page.
+!item [(!KW [toc]):]
+		Prints the table of contents inside the text.
+!item [(!KW [subtoc]):]
+		Prints all sections of a chapter.
+!item [(!KW [subsubtoc]):]
+		Prints all subsections of a section.
+!item [(!KW [subsubsubtoc]):]
+		Prints all paragraphs of a subsection.
+!item [(!KW [no_toc_subnodes]):]
+		Tells UDO that it has to print only the chapter names inside the
+		table of contents.
+!item [(!KW [no_toc_subsubnodes]):]
+		The table of contents lists only the chapters and sections.
+!item [(!KW [no_toc_subsubsubnodes]):]
+		The table of contents lists only the chapters, sections and
+		subsections.
+!item [(!KW [use_auto_subtocs]):]
+		Print all sections of a chapter automatically.
+!item [(!KW [use_auto_subsubtocs]):]
+		Print all subsections of a section automatically.
+!item [(!KW [use_auto_subsubsubtocs]):]
+		Print all paragraphs of a subsection automatically.
+!item [(!KW [ignore_subtoc]):]
+		Don't print the sections of the current chapter.
+!item [(!KW [ignore_subsubtoc]):]
+		Don't print the subsections of the current section.
+!item [(!KW [ignore_subsubsubtoc]):]
+		Don't print the paragraphs of the current subsection.
+!end_xlist
+
+(!HINTS)
+
+!begin_enumerate
+
+!item When converting to HTML the title page and the table of contents will
+be printed in the file you passed via the command line.
+
+!item When converting to RTF no table of contents will be generated! You
+should make this with the functions of your text processor that is used to
+import the converted RTF file.
+
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!begin_node Structure Layers
+!html_name structure_layers
+
+UDO offers you nine layers for structuring your documentation. These layers
+are called chapters, sections, subsections, paragraphs and sub-paragraphs.
+
+!index (!kw [node])
+!index (!kw [subnode])
+!index (!kw [subsubnode])
+!index (!kw [subsubsubnode])
+!index (!kw [subsubsubsubnode])
+!index (!kw [begin_node])
+
+Using the command (!KW [node]) you tell UDO that a new chapter begins and
+you tell it how the chapter is named. The commands (!KW [subnode]),
+(!KW [subsubnode]), (!KW [subsubsubnode]) and (!KW [subsubsubsubnode]) do the same for a section,
+subsection, paragraph and subparagraph.
+
+(!NOTE) You can also use the commands (!KW [begin_node])
+and (!KW [end_node]) to structure your documentation.
+
+(!NTY)
+Da Bilder oft mehr sagen als tausend Worte, hier ein kleines
+Beispiel. Die (hier inhaltsleere) Befehlsfolge...
+
+Watch this example (without text) to understand what I want to say:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!node             A chapter
+!subnode          A section
+!subsubnode       A subsection
+!subsubsubnode    A paragraph
+!subsubsubsubnode A subparagraph
+!node             And a different chapter
+!end_verbatim
+(!EXAMPLE_END)
+
+The table of contents should look like this:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+1  A chapter
+   1.1  A section
+        1.1.1  A subsection
+               1.1.1.1  A Paragraph
+                        1.1.1.1.1 A Subparagraph
+
+2  And a different chapter
+!end_verbatim
+(!EXAMPLE_END)
+
+Windows Help and ST-Guide may display text in dialog boxes, too. These so
+called popup nodes can be used with the following commands:
+
+!index (!kw [pnode])
+!index (!kw [psubnode])
+!index (!kw [psubsubnode])
+!index (!kw [psubsubsubnode])
+!index (!kw [psubsubsubsubnode])
+!begin_itemize !compressed
+!item (!KW [pnode]) for popup chapters,
+!item (!KW [psubnode]) for popup sections,
+!item (!KW [psubsubnode]) for popup subsections,
+!item (!KW [psubsubsubnode]) for popup paragraphs and
+!item (!KW [psubsubsubsubnode]) for popup subparagraphs
+!end_itemize
+
+Furthermore you can create chapters that don't appear in the table of
+contents. Use these commands!..
+
+!index (!kw [node*])
+!index (!kw [pnode*])
+!index (!kw [psubnode*])
+!index (!kw [psubsubnode*])
+!index (!kw [psubsubsubnode*])
+!index (!kw [psubsubsubsubnode*])
+!index (!kw [subnode*])
+!index (!kw [subsubnode*])
+!index (!kw [subsubsubnode*])
+!index (!kw [subsubsubsubnode*])
+!begin_itemize !compressed
+!item (!KW [node*]) for chapters,
+!item (!KW [subnode*]) for sections,
+!item (!KW [subsubnode*]) for subsections,
+!item (!KW [subsubsubnode*]) for paragraphs,
+!item (!KW [subsubsubsubnode*]) for subparagraphs,
+!item (!KW [pnode*]) for popup chapters,
+!item (!KW [psubnode*]) for popup sections,
+!item (!KW [psubsubnode*]) for popup subsections,
+!item (!KW [psubsubsubnode*]) for popup paragraphs and
+!item (!KW [psubsubsubsubnode*]) for popup subparagraphs.
+!end_itemize
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Chapters that aren't listed in the table of contents aren't numbered,
+too. UDO will create hypertext links to them as it does for all other
+chapters.
+
+!index (!kw [no_numbers])
+!item UDO enumerates the chapters automatically. If you want to display the
+chapter names without numbers you can use the switch (!KW [no_numbers])
+inside the preamble.
+
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!begin_node Appendix
+!html_name structure_appendix
+!label appendix environment
+
+!index (!kw [begin_appendix])
+!index (!kw [end_appendix])
+
+UDO can manage one(!/) appendix. The contents of the appendix has to be used
+inside the appendix environment. This environment is started with
+(!KW [begin_appendix]) and finished with (!KW [end_appendix]).
+
+Chapters that are part of the appendix are enumerated using letters instead
+of numbers. A short example:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!node  A chapter outside the appendix
+!begin_appendix
+!node           A chapter
+!subnode        A section
+!subsubnode     A subsection
+!subsubsubnode  A paragraph
+!end_appendix
+!end_verbatim
+(!EXAMPLE_END)
+
+The table of contents should look like this:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+5  A chapter outside the appendix
+
+Appendix
+
+A  A chapter
+   A.1  A section
+        A.1.1  A subsection
+               A.1.1.1  A paragraph
+!end_verbatim
+(!EXAMPLE_END)
+
+
+(!HINTS)
+
+!begin_enumerate
+
+!item You should use the appendix at the end of your source file. In other
+words (!KW [end_appendix]) should be the last but one command before
+(!KW [end_document]). You shouldn't use any additional chapters behind
+(!KW [end_appendix]) because UDO will get confused especially while
+enumerating the chapters.
+
+!item Because UDO uses letters for creating the numbers for the chapters of
+the appendix you shouldn't use more than 26 chapters inside the appendix.
+
+!end_enumerate
+
+!end_node
+
+################################################################################
+
+!end_node

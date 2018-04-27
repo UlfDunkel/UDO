@@ -1,0 +1,25 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 1
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+#
+################################################################################
+
+!begin_node Release 1
+!html_name history_1
+
+Weiﬂ noch jemand, wann UDO v1 erschienen ist?
+
+!end_node

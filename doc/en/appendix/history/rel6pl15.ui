@@ -1,0 +1,123 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6 PL 15
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_06_PL15.de)
+#   fd  Mar 03: translation adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+!begin_node Changes from Release 6 Patchlevel 14 to 15
+!html_name history_release_6_PL14_to_15
+
+(!PUBLISHED [UDO~6 Patchlevel~15] [June 10, 2003])
+
+!subheading General
+!begin_itemize !compressed
+!item All index entrys up to fourth level will be written in the
+      project file ((!file [*.upr]))
+!item The entrys for (!KW [label]) and (!KW [alias]) will
+      be written in the project file ((!file [*.upr])).
+!item All heading entrys will be written in the project file ((!file [*.upr])).
+!item For all entrys the line number will be written.
+!end_itemize
+
+!subheading Postscript
+!begin_itemize !compressed
+!item The standard output of ""about udo"" can't be used for postscript,
+      so there is a special one. The output will be done in german if
+      ""german"" ist set, otherwise in english
+!item New function for postscript output included, to hide characters
+      which can be interpreted as postscript code.
+!item New command for the document layout (!nl)
+      (!KW [doclayout] [[ps!!] [paper!!] foo]) (!nl)
+      Possible values for foo: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+      A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
+
+      (!KW [doclayout] [[ps!!] [openMode!!] foo]) (!nl)
+      You can find possible values for foo in the pdfmark primer.
+
+      (!KW [doclayout] [[ps!!] [propfontname!!] foo]) (!nl)
+      Possible value for foo are fontnames like Arial, Times New Roman,
+      ans or sans serif (!nl)
+      (!B)Hint:(!b) For postscript output will be set Helvetica if
+      helvetica, Arial or sans serif is set, otherwise times New Roman
+
+      (!KW [doclayout] [[ps!!] [propfontsize!!] foo]) (!nl)
+      Possible values for foo are fontsizes with unit pt
+!item (!KW [docinfo] [[keywords!!] foo]) (!nl)
+      Replacement for (!KW [html_keywords]) (works only for postscript)
+!item (!KW [docinfo] [[description!!] foo]) (!nl)
+      Replacement for (!KW [html_description]) (works only for postscript)
+!item There is built a titlepage for postscript output now.
+!item For the standard heading line the title and programm items are
+      extracted from (!KW [docinfo])
+!item For the standard footer line the author item is extracted from
+      (!KW [docinfo])
+!item The document info of a PDF file is build from the values of
+      the (!KW [docinfo])
+!item Description- and list environments are supported for postscript
+!item New characters for the itemize environment
+!item The font ""Symbol"" can be used.
+!item Internal links (!KKW [link]), external links (!KKW [xlink])
+      and (!KKW [url]) are transposed for PDF (via Postscript)
+!item Footnotes are transposed for postscript
+!item Tables are transposed legible with monospaced characters
+!item Commands (!KW [bigskip]), (!KW [medskip]) and (!KW [smallskip])
+      are transposed legible now.
+!item All nodes are set as ""Named Destination"", so it is possible to
+      link from outside directly to every node of a pdf file.
+!item With data from all nodes is built a bookmark content table
+!item Table of contents will be put out, if (!KW [tableofcontents]) is set
+!item (!KW [label]) will be transposed to a ""Named Destination""
+!end_itemize
+
+!subheading Hypertext Markup Language (HTML)
+!begin_itemize !compressed
+!item New commands for the HTML output: (!nl)
+      (!KW [html_style_name] [foo]) (!nl)
+      Set an external stylesheet for all files of a project
+
+      (!KW [html_script_name] [foo]) (!nl)
+      Set an external script for all files of a project
+
+      (!KW [html_favicon_name] [foo]) (!nl)
+      Set an favicon for all files of a project
+
+      (!B)Important:(!b) This commands may be changed in future possibly.
+!item Character (!code [&shy;]) for hyphenation in HTML included
+!item The entities (!code [&ndash;]), (!code [&mdash;]) and (!code [&hellip;])
+      are used for HTML.
+!item Setting links for the navigation through a project of HTML sites
+      via the element (!code [(!LINK!)]).
+      The following attributes are supported: (!code [contents]), (!code [start]), (!code [first]),
+      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) and (!code [copyright]) (!nl)
+      The links for (!code [first]), (!code [last]) and (!code [previous])
+      are only vaild for CAB (perhaps iCab). The link for (!code [copyright])
+      introduces a link to aboutudo and in this case will be built. (!nl)
+      CAB doesn't support the attribute (!code [target]), when using the
+      element (!code [(!LINK!)]). Therfore this link-Element doesn't work so
+      properly if frames are used.
+!item If frames are built for HTML output, there will be built a
+      <noframes></noframes> area with a table of contents too. Therefor
+      browser, which doesn't knows frames, can read the content.
+!end_itemize
+
+!subheading Rich Text Format (RTF)
+!begin_itemize !compressed
+!item Paragraph checks for orphans and widows are used now.
+!end_itemize
+
+!end_node

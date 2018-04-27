@@ -1,0 +1,245 @@
+!begin_node (!kw [docinfo])
+!html_name cmd_docinfo
+
+Set document information.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/docinfo [(!NAME)] (!TEXT)|(!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+This command is used to set several informations printed
+on the title page. ""(!NAME)"" can have one of the following values:
+
+!begin_description
+
+!item [title]
+""(!TEXT)"" will be displayed on the title page before the contents of
+the program name. It is also used inside the headlines.
+
+!item [program]
+""(!TEXT)"" will be displayed on the title page below the title.
+Furthermore ""(!TEXT)"" will be used by some destination formats
+to generate the header line.
+
+!item [programimage]
+""(!FILE)"" will be displayed on the title page if the destination format supports images.
+
+!item [version]
+""(!TEXT)"" will be given out right below the contents of the program name on
+the title page.
+
+!item [date]
+""(!TEXT)"" will be displayed on the title page below the contents of
+the program version. The example shows how to use the current system
+time for the title page.
+
+!item [author]
+""(!TEXT)"" will be used as the name of the author on the title page
+and for different other purposes.
+
+!item [authorimage]
+""(!FILE)"" will be displayed above the name of the author on the
+title page if the destination format supports images.
+
+!item [authoricon]
+""(!FILE)"" will be displayed as image in the left frame or
+left column when using the frame layout or ""modern"" layout
+of HTML.
+
+!item [address]
+""(!TEXT)"" will be given out below the author's name on the
+title page. (!KW [docinfo] [[address!!]]) can be used up to 15 times,
+and can contain any address lines, such as email-addresses.
+
+!item [company]
+""(!TEXT)"" marks a company, for whom the document is made. If
+(!code [company]) is used, the title page will be supplemented with
+""for (!I)company(!i)"" after the author entry.
+
+!item [category]
+""(!TEXT)"" describes a category to which the document belongs.
+This extension has been implemented since version~6.5.4 (for RTF only).
+
+!item [stgdatabase]
+With this command you can specify the contents of the @database-line
+that is generated for the ST-Guide format.
+If you don't use this command, UDO will construct a line containing
+the title and the program name.
+
+!item [drcstatusline]
+This command is used to specify the contents of the status line
+for the DRC format. If you don't use this command, UDO
+will use a line like ""Copyright (!copyright) by <author>"".
+If you did not set the name of the author, UDO will use
+the text ""Made with UDO"".
+
+!item [keywords]
+(!KW [docinfo] [[keywords!!]]) is similar to (!KW [html_keywords]),
+but can also be used when converting to PostScript or RTF.
+When converting to HTML, (!KW [html_keywords]) has precedeence.
+
+!item [description]
+(!KW [docinfo] [[description!!]]) is similar to (!KW [html_description]),
+but can also be used when converting to PostScript or RTF.
+When converting to HTML, (!KW [html_description]) has precedeence.
+
+!item [htmltitle]
+""(!TEXT)"" will be used as the title of every page (instead of
+using [title] and [program]).
+
+!item [robots]
+""(!TEXT)"" corresponds to a robots command which is evaluated by search engines.
+Valid commands are e.g. "(!code [none])", "(!code [noindex])", "(!code [index])", "(!code [nofollow])", and "(!code [follow])".
+
+!item [appletitle]
+Required for HTML Apple Help; it describes the title of the help book.
+
+!item [appleicon]
+Required for HTML Apple Help; it defines the icon which should be shown by Apple Help Viewer.
+
+!item [domain_name|domain_link|contact_name|contact_link]
+When you use all these contact data (in four separate lines!), UDO creates the following contact data footer in each page:
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Preamble
+!docinfo [domain_link]  !\ 
+         http://www.udo-open-source.org/
+!docinfo [domain_name]  !\ 
+         UDO OpenSource
+!docinfo [contact_link] !\ 
+         mailto:webmaster@udo-open-source.org
+!docinfo [contact_name] !\ 
+         Email to the webmaster
+
+# Document
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [Copyright]) (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [Email to the webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
+Last updated on (!today)
+(!EXAMPLE_END)
+
+If you define less information, the contact data in the footer are adjusted accordingly. Here are some more examples.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [domain_link]  !\ 
+         http://www.mydomain.net/
+!docinfo [contact_link] !\ 
+         mailto:me@mydomain.net
+
+# Dokument
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [Copyright]) (!copyright) (!url [http://www.mydomain.net/] [http://www.mydomain.net/]) ((!url [me@mydomain.net] [mailto:me@mydomain.net])) (!nl)
+Last updated on (!today)
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Preamble
+!docinfo [domain_name]    My Company
+!docinfo [contact_name]   My Name
+
+# Document
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [Copyright]) (!copyright) My Company (My Name) (!nl)
+Last updated on (!today)
+(!EXAMPLE_END)
+
+The last shown example demonstrates that only parameters with (!code [link]) in the parameter name create real clickable links.
+
+Chances are that you don't like to give a real email address as contact
+link, but rather an URL which leads to a contact form. Today it is no
+longer desired to show vaild email addresses in web pages. They can
+easily be found by robots and harvesters which are looking for email
+addresses for junk.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Preamble
+!docinfo [domain_link]  !\ 
+         http://www.mydomain.net/
+!docinfo [domain_name]  My Domain
+!docinfo [contact_link] !\ 
+         http://www.mydomain.net/contact.php
+!docinfo [contact_name] Contact
+
+# Document
+!begin_document
+!maketitle
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [Copyright]) (!copyright) (!url [My Domain] [http://www.mydomain.net/]) ((!url [Contact] [http://www.mydomain.net/contact.php])) (!nl)
+Last updated on (!today)
+(!EXAMPLE_END)
+
+(!HINT) If you don't specify
+any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
+UDO will output nothing.
+
+!item [webmastername]
+Old, deprecated name for (!KW [docinfo] [[domain_name!!]]).
+
+!item [webmasterurl]
+Old, deprecated name for (!KW [docinfo] [[domain_link!!]]).
+
+!item [webmasteremail]
+Old, deprecated name for (!KW [docinfo] [[contact_name!!]]).
+
+!item [webmastermailurl]
+Old, deprecated name for (!KW [docinfo] [[contact_link!!]]).
+
+!item [translator]
+""(!TEXT)"" describes the name of the localizer who has translated the product or document.
+When (!code [translator]) is used, the title page will show it below author and company as 
+""Translator: (!I)translator(!i)"".
+
+!item [distributor]
+""(!TEXT)"" describes the company which distributes the product or document.
+When (!code [distributor]) is used, the title page will show it below author and company as 
+""Distributor: (!I)distributor(!i)"".
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!link [Title page] [Title page])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!docinfo [title] The Windows Help of
+!docinfo [program] UDO
+!docinfo [author] Dirk Hagedorn
+!docinfo [address] Asmecke 1
+!docinfo [address] D-59846 Sundern
+!docinfo [address] Germany
+!docinfo [address] Internet: info@dirk-hagedorn.de
+!docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+!docinfo [domain_link] http://www.dirk-hagedorn.de/
+!docinfo [contact_link] mailto:webmaster@dirk-hagedorn.de
+!docinfo [authorimage] dh
+!docinfo [date] (!today)
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

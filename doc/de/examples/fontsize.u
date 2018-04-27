@@ -1,0 +1,47 @@
+!code_source [latin1]
+!docinfo [program] Änderung der Schriftgröße
+!docinfo [author] Dirk Hagedorn
+!docinfo [date] 19. August 1996
+
+!ifdest [tex]
+!define tiny  {\tiny{(!1)}}
+!define large {\large{(!1)}}
+!define Large {\Large{(!1)}}
+!define LARGE {\LARGE{(!1)}}
+!define huge  {\huge{(!1)}}
+!define Huge  {\Huge{(!1)}}
+!endif
+
+!ifdest [win,rtf]
+!define tiny  {\fs14 (!1)}
+!define large {\fs28 (!1)}
+!define Large {\fs36 (!1)}
+!define LARGE {\fs44 (!1)}
+!define huge  {\fs50 (!1)}
+!define Huge  {\fs60 (!1)}
+!endif
+
+!ifndest [tex,win,rtf]
+!macro  tiny  (!1)
+!macro  large (!1)
+!macro  Large (!1)
+!macro  LARGE (!1)
+!macro  huge  (!1)
+!macro  Huge  (!1)
+!endif
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Test
+
+(!tiny [tiny]),
+normal,
+(!large [large]),
+(!Large [Large]),
+(!LARGE [LARGE]),
+(!huge [huge]) und
+(!Huge [Huge]).
+
+!end_document

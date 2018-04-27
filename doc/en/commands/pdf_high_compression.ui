@@ -1,0 +1,23 @@
+!begin_node (!kw [pdf_high_compression])
+!html_name cmd_pdf_high_compression
+
+Compress PDF file (high compression rate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/pdf_high_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble PDFLaTex
+will compress the output file by about 50%. The compression of
+the file takes some time. A similar result with a faster
+compression you will get with (!KW [pdf_medium_compression]).
+
+!item [(!SEEALSO)]
+(!KW [pdf_medium_compression])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,62 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Text styling
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: EXAMPLE_... macros optimized
+#   fd  Jun 16: great review session #1
+#   fd  Dec 15: typo
+# 2010:
+#   fd  Mar 03: chapter style_tables: hint for table_alignment added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
+#   fd  May 25: index adjustments
+#   fd  May 26: table adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node Emphasizing text
+!html_name style
+
+In this section you will get to know how to layout passages in different
+ways. UDO supports centered, left justified, right justified and indented
+text, different kinds of lists, environments for preformatted text and
+tables. Furthermore you can use different text styles and footnotes.
+
+!include syntax/text/itemize.ui
+!include syntax/text/enumerate.ui
+!include syntax/text/description.ui
+!include syntax/text/xlist.ui
+!include syntax/text/center.ui
+!include syntax/text/flushright.ui
+!include syntax/text/flushleft.ui
+!include syntax/text/quote.ui
+!include syntax/text/verbatim.ui
+!include syntax/text/linedraw.ui
+!include syntax/text/footnotes.ui
+!include syntax/text/effects.ui
+!include syntax/text/textcolors.ui
+!include syntax/text/tables.ui
+!include syntax/text/sourcecode.ui
+!include syntax/text/ignore.ui
+
+!end_node

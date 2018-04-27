@@ -1,0 +1,305 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands 1-0, etc.
+# Language    : German
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced
+#   fd  Mar 03: - new column 'deprecated since version' added (hi Gerhard ;-))
+#               - old docinfo attributes (webmaster...) listed
+#               - !else_asc, !else_stg + !end_asc, !end_stg added
+#               - more version numbers added
+#   fd  May 19: !short, !use_short_... added
+#   fd  May 26: table adjustments
+#
+################################################################################
+
+!begin_node Veraltete Kommandos
+!html_name cmds_old
+
+Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werden in der aktuellen Version nicht mehr unterstützt.
+
+!begin_table [l|l|l|l] !hline
+(!B)Alt(!b)                      !! (!B)Funktion(!b) !\
+                                 !! (!B)Neu(!b) !\
+                                 !! (!B)Veraltet seit(!b)
+!hline
+(!kw [=aqv])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[aqv!]])
+(!kw [=asc])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[asc!]])
+(!kw [aqv])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[aqv!]])
+(!kw [asc])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[asc!]])
+(!kw [author])                   !! Namen des Autors setzen !\
+                                 !! (!KW [docinfo]) (!code [[author!]]) !\
+                                 !! 6 PL14
+(!kw [authorimage])              !! Logo des Autors für die Titelseite definieren !\
+                                 !! (!KW [docinfo]) (!code [[authorimage!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [begin_asc])                !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [begin_stg])                !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
+!hline
+(!kw [code])                     !! Encoding des Quelltextes festlegen !\
+                                 !! (!KW [code_source]) !\
+                                 !! 7.00
+(!kw [code_dos])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 6 PL14, 7.00
+(!kw [code_hp8])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 6 PL14, 7.00
+(!kw [code_iso])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 6 PL14, 7.00
+(!kw [code_mac])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 6 PL14, 7.00
+(!kw [code_next])                !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 6 PL14, 7.00
+(!kw [code_tos])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 6 PL14, 7.00
+(!kw [country])                  !! Land des Autors für den Adressblock der Titelseite setzen. !\
+                                 !! (!KW [docinfo] [[address!!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [date])                     !! Datumsinformation für Titelseite setzen !\
+                                 !! (!KW [docinfo] [[date!!]]) !\
+                                 !! 6 PL14
+                                 
+(!kw [docinfo]) (!code [webmastername]) !\
+                                 !! Name des Webmasters (oder Firma, Website, usw.) auf der Titelseite setzen !\
+                                 !! (!KW [docinfo] [[domain_name!!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code [webmasterurl]) !\
+                                 !! Link zum Webmaster (s.o.) auf der Titelseite setzen !\
+                                 !! (!KW [docinfo] [[domain_link!!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code [webmasteremail]) !\
+                                 !! Webmaster-E-Mail (oder Kontaktseiten-Link) auf der Titelseite setzen !\
+                                 !! (!KW [docinfo] [[contact_name!!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code [webmastermailurl]) !\
+                                 !! Webmaster-E-Mail oder Kontaktseiten-Link auf der Titelseite setzen !\
+                                 !! (!KW [docinfo] [[contact_link!!]]) !\
+                                 !! 7.01
+                                 
+(!kw [drc])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[drc!]])
+!hline
+(!kw [else_asc])                 !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [else_stg])                 !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
+(!kw [email])                    !! E-Mail-Informationen für die Titelseite setzen !\
+                                 !! (!KW [docinfo] [[contact_name!!]]) oder (!KW [docinfo] [[contact_link!!]]) !\
+                                 !! 6 PL14, 7.01
+(!kw [end_asc])                  !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [end_stg])                  !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
+(!kw [english])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[english!]]) !\
+                                 !! 6
+!hline
+(!kw [french])                   !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[french!]]) !\
+                                 !! 6
+!hline
+(!kw [german])                   !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[german!]]) !\
+                                 !! 6
+!hline
+(!kw [=htag])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[htag!]])
+(!kw [=html])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[html!]])
+(!kw [htag])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[htag!]])
+(!kw [html])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[html!]])
+(!kw [html_frames_column_color]) !! Setzen der Hintergrundfarbe für linken Rahmen (nur HTML) !\
+                                 !! (!KW [html_frames_backcolor])
+(!kw [html_frames_column_image]) !! Setzen des Hintergrundbildes für den linken Rahmen (nur HTML) !\
+                                 !! (!KW [html_frames_backimage])
+(!kw [html_frames_column_width]) !! Breite des Rahmens beim Frames-Layout bestimmen (nur HTML) !\
+                                 !! (!KW [html_frames_width])
+(!kw [html_modern_column_color]) !! Setzen der Hintergrundfarbe beim ""modernen"" Layout (nur HTML) !\
+                                 !! (!KW [html_modern_backcolor])
+(!kw [html_modern_column_image]) !! Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML) !\
+                                 !! (!KW [html_modern_backimage])
+(!kw [html_modern_column_width]) !! Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur HTML) !\
+                                 !! (!KW [html_modern_width])
+(!kw [html_use_xlist])           !! xlist-Umgebung wie bei ASCII ausgeben (nur HTML) !\
+                                 !! (!KW [use_xlist] [[html!!]]) !\
+                                 !! 6 PL14
+(!kw [htmlkeywords])             !! HTML-Meta-Keywords setzen !\
+                                 !! (!KW [html_keywords])
+(!kw [htmlname])                 !! Dateinamen zuweisen (nur HTML) !\
+                                 !! (!KW [html_name])
+!hline
+(!kw [=info])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[info!]])
+(!kkw [image])                   !! Grafik ausgeben !\
+                                 !! (!KW [image]), (!KW [image*]), (!KKW [img])
+(!kw [info])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[info!]])
+(!kw [italian])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[italian!]]) !\
+                                 !! 6
+!hline
+(!kw [jumpid])                   !! Ausgabe einer Node-ID (nur WinHelp) !\
+                                 !! (!KW [win_helpid])
+!hline
+(!kw [keyword])                  !! Indexeintrag bzw. Schlüsselwort setzen !\
+                                 !! (!KW [index])
+!hline
+(!kw [=ldoc])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[ldoc!]])
+(!kw [ldoc])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[ldoc!]])
+(!kw [list_parsep])              !! Umgebungen komprimieren !\
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
+(!kw [list_parsep_off])          !! Umgebungen komprimieren !\
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
+(!kw [list_parsep_on])           !! Umgebungen komprimieren !\
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
+!hline
+(!kw [=man])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[man!]])
+(!kw [man])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[man!]])
+!hline
+(!kw [no_toc_subnodes])          !! Im Inhaltsverzeichnis keine Subnodes auflisten !\
+                                 !! (!KW [ignore_subtoc]) !\
+                                 !! 6 PL14
+(!kw [no_toc_subsubnodes])       !! Im Inhaltsverzeichnis keine Unterabschnitte auflisten !\
+                                 !! (!KW [ignore_subsubtoc]) !\
+                                 !! 6 PL14
+(!kw [no_toc_subsubsubnodes])    !! Im Inhaltsverzeichnis keine Paragraphen auflisten !\
+                                 !! (!KW [ignore_subsubsubtoc]) !\
+                                 !! 6 PL14
+!hline
+(!kw [=pch])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[pch!]])
+(!kw [=pdf])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[pdf!]])
+(!kw [pch])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[pch!]])
+(!kw [pdf])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[pdf!]])
+(!kw [program])                  !! Programmnamen für Titelseite definieren !\
+                                 !! (!KW [docinfo]) (!code [[program!]]) !\
+                                 !! 6 PL14
+(!kw [programimage])             !! Programmgrafik für Titelseite definieren !\
+                                 !! (!KW [docinfo]) (!code [[programimage!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [=rtf])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[rtf!]])
+(!kw [rtf])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[rtf!]])
+!hline
+(!kw [=stg])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [short])                    !! Umgebungen kompress ausgeben !\
+                                 !! (!KW [compressed]) !\
+                                 !! 7.01
+(!kw [spanish])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[spanish!]]) !\
+                                 !! 6
+(!kw [stg])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [stg_no_database])          !! Keine Database-Zeile ausgeben (nur ST-Guide) !\
+                                 !! (!KW [docinfo]) (!code [[stgdatabase!]]) !\
+                                 !! 6 PL14
+(!kw [stg_parwidth])             !! Einstellen der Zeilenbreite (nur ST-Guide) !\
+                                 !! (!KW [parwidth])
+(!kw [street])                   !! Straße des Autors für den Adressblock der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[address!]]) !\
+                                 !! 6 PL14
+(!kw [swedish])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[swedish!]]) !\
+                                 !! 6
+!hline
+(!KW [=tex])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[tex!]])
+(!KW [tex])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[tex!]])
+(!KW [tex_book])                 !! Zieldatei als ""Buch"" ausgeben !\
+                                 !! (!KW [use_style_book]) (!code [[tex!]])
+(!KW [title])                    !! Dokumenttitel definieren !\
+                                 !! (!KW [docinfo]) (!code [[title!]]) !\
+                                 !! 6 PL14
+(!KW [town])                     !! Wohnort des Autors für den Adressblock der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[address!]]) !\
+                                 !! 6 PL14
+!hline
+(!KW [udoinfo])                  !! Informationsseite über UDO ausgeben !\
+                                 !! (!KW [use_about_udo])
+(!KW [use_justified])            !! Blocksatz einschalten !\
+                                 !! (!KW [use_justification]) !\
+                                 !! 6 PL14
+(!kw [use_short_descriptions])   !! Umgebungen komprimiert ausgeben !\
+                                 !! (!KW [use_compressed_descriptions]) !\
+                                 !! 7.01
+(!kw [use_short_enumerates])     !! Umgebungen komprimiert ausgeben !\
+                                 !! (!KW [use_compressed_enumerates]) !\
+                                 !! 7.01
+(!kw [use_short_envs])           !! Umgebungen komprimiert ausgebent !\
+                                 !! (!KW [use_compressed_envs]) !\
+                                 !! 7.01
+(!kw [use_short_itemizes])       !! Umgebungen komprimiert ausgeben !\
+                                 !! (!KW [use_compressed_itemizes]) !\
+                                 !! 7.01
+(!kw [use_short_lists])          !! Umgebungen komprimiert ausgeben !\
+                                 !! (!KW [use_compressed_lists]) !\
+                                 !! 7.01
+(!kw [use_xlist])                !! xlist-Umgebungen wie bei ASCII ausgeben !\
+                                 !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
+!hline
+(!kw [verbatim_no_umlaute])      !! Keine Umlaute in verbatim-Umgebungen verwenden. !\
+                                 !! (!KW [no_verbatim_umlaute]) !\
+                                 !! 6
+(!kw [version])                  !! Versionsnummer des Programms für die Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[version!]]) !\
+                                 !! 6 PL14
+!hline
+(!kw [=win])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[win!]])
+(!kw [win])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[win!]])
+(!kw [win_background])           !! Hintergrundfarbe für WinHelp setzen !\
+                                 !! (!KW [win_backcolor]) !\
+                                 !! 6 PL14
+(!kw [win_html_look])            !! Seiten mit grauem Hintergrund ausgeben (nur WinHelp) !\
+                                 !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont]) !\
+                                 !! 6
+!hline
+!end_table
+
+!end_node

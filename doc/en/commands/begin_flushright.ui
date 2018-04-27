@@ -1,0 +1,23 @@
+!begin_node (!kw [begin_flushright])
+!html_name cmd_begin_flushright
+
+Start right justified text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_flushright(!t)
+
+!item [(!DESCRIPTION)]
+Lines that are part of a (!link [flushright environment] [flushright environment]) are printed right
+justified without justification.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [end_flushright]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,22 @@
+!begin_node (!kw [win_linkcolor])
+!html_name cmd_win_linkcolor
+
+Setzen der Farbe für Links (nur WinHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in Hilfe-Seiten Links darzustellen.
+Wird der Befehl im Vorspann benutzt, setzen Sie damit
+die Standardwerte für alle Seiten inkl. des Inhaltsverzeichnisses.
+
+!item [(!SEEALSO)]
+(!KW [win_textcolor]), (!KW [win_backcolor])
+
+!end_xlist
+
+!end_node

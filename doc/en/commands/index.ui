@@ -1,0 +1,34 @@
+!begin_node (!kw [index])
+!html_name cmd_index
+
+Set index entry.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/index (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+#Ausgabe-Formate
+""(!TEXT)"" will be printed as ""(!code [\index~{...}])"" for (!LaTeX),
+""(!code [K{\footnote K ...}])"" for WinHelp and WinHelp4, ""(!code [{\xe\v ...}])"" for RTF
+and ""(!code [@index ...])"" for ST-Guide. So, ""(!TEXT)"" appears in
+the index of (!LaTeX) and ST-Guide. WinHelp allows  to search this
+word. You can use this command as many times as you like.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Indices] [Indices]), (!KW [no_index]), (!KKW [idx])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!index index entry !! Index
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

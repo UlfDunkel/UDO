@@ -1,0 +1,31 @@
+!begin_node (!kkw [laugh])
+!html_name cmd_laugh()
+
+Emoticon ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/laugh)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch einen lachenden Smiley
+ersetzt, der in Schreibmaschinenschrift ausgegeben
+wird.
+
+!item [(!SEEALSO)]
+(!KKW [grin]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!laugh)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!laugh)
+(!EXAMPLE_END)
+
+!end_node

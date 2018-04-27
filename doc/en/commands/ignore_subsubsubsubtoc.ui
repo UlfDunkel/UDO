@@ -1,0 +1,25 @@
+!begin_node (!kw [ignore_subsubsubsubtoc])
+!html_name cmd_ignore_subsubsubsubtoc
+
+Suppress output of ""subsubsubsubtoc"".
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubsubsubtoc(!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside a paragraph UDO won't print a
+""subsubsubsubtoc"" which contains all subparagraphs of this paragraph
+even if you have used (!KW [use_auto_subsubsubsubtocs]) inside the
+preamble.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubsubsubtocs]), (!KW [subsubsubsubtoc])
+
+!end_xlist
+
+!end_node

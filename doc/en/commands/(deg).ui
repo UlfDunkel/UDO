@@ -1,0 +1,33 @@
+!begin_node (!kkw [deg])
+!html_name cmd_deg()
+
+Print the degree symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/deg)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the degree symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by the localized string for ""(!code [degree])"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KKW [copyright]), (!KKW [registered]), (!link [Predefined macros] [Predefined macros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+10~(!deg)C
+!end_verbatim
+(!EXAMPLE_AFTER)
+10~(!deg)C
+(!EXAMPLE_END)
+
+!end_node

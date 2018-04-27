@@ -1,0 +1,132 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Hyphenation
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: typo
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Hyphenation
+!label* hyphenation
+!html_name hyphenation
+
+UDO supports a semi-automatic hyphenation for ASCII, ST-Guide, Pure C
+Help and Manualpage. ""Semi-automatic"" means that you have to tell UDO at
+which position a word can be divided into two pieces.
+
+You have two possibilities to set the hyphenation patterns:
+
+!index (!k1 [/-])
+!begin_enumerate !compressed
+!item Local definition ((!KW [/-]))
+!index (!kw [hyphen])
+!item Global definition using the (!KW [hyphen]) command
+!end_enumerate
+
+When converting to (!LaTeX) the marks will be replaced by ""(!code [\-])"". Then
+(!LaTeX) knows that a word can be split at these positions.
+
+When converting to RTF, Windows Help and HTML the marks are deleted.
+
+!index (!k1 [//-])
+If you want to display (!code [!/-]) you have to use (!K1 [//-]).
+
+################################################################################
+
+!begin_node Local definition of hyphenation patterns
+!html_name hyphenation_patterns_local
+
+You can set the Hyphenation marks in the source file using ""(!K1 [/-])"". At
+these marks UDO is allowed to split up a word. A short example:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+semi-automatic syl!-labi!-fi!-cation
+!end_verbatim
+(!EXAMPLE_END)
+
+When converting to (!LaTeX) UDO replaces all ""(!K1 [/-])"" by ""(!code [\-])"". So it would
+look like ""syl\-labi\-fi\-cation"".
+
+When converting to ASCII, ST-Guide, Pure C Help and Manualpage the word is split
+up into different parts if it doesn't have enough place at the end of a
+line. So it can look like ""syl-~labification"", ""syllabi-~fication"" or
+""syllabifi-~cation"".
+
+When converting to other formats the marks are simply deleted.
+
+!end_node
+
+################################################################################
+
+!begin_node Global definition of hyphenation patterns
+!html_name hyphenation_patterns_global
+
+!index (!kw [hyphen])
+You can set these marks at the beginning of a source file with the
+(!KW [hyphen]) command for often used words. ""Global"" means that you only
+have to define the marks once.
+
+If a word hasn't enough place at the end of a line when converting to ASCII,
+ST-Guide, Pure C Help or Manualpage UDO looks for a global definition in its
+internal list.
+
+In the following example I expect that the word ""documentation"" is used
+many times in your source file:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!hyphen do!-cu!-men!-ta!-tion
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+################################################################################
+
+!begin_node Short lines
+!html_name hyphenation_shortlines
+
+When converting to ASCII, Pure C Help, ST-Guide or Manualpage UDO can
+generate a relative regular right margin due to its semi-automatic
+hyphenation.
+
+The right margin becomes irregular when long words haven't enough place at
+the end of a line. UDO will print a warning containing the specific word and
+you should try to insert some hyphenation marks.
+
+(!HINT)
+
+!index (!kw [fussy])
+!index (!kw [sloppy])
+
+The command (!KW [sloppy]) switches of these warnings, (!KW [fussy])
+switches them back on. While developing a documentation you should use
+(!KW [sloppy]). At the end of developing a text you should comment this
+switch and you should look after warnings according short lines.
+
+!end_node
+
+################################################################################
+
+!end_node

@@ -1,0 +1,32 @@
+#######################################
+# @(#) rightflush-Umgebung - dh 1996
+#######################################
+
+!code_source [latin1]
+!language [german]
+
+!docinfo [title]	UDOs
+!docinfo [program]	Rightflush-Umgebung
+!docinfo [author]	Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Eine rightflush-Umgebung
+
+Dieses Beispiel zeigt, wie man die rightflush-Umgebung benutzt:
+
+!begin_center
+Diese Wörter werden rechtbündig ausgegeben.
+
+UDO formatiert auch
+diesen Absatz.
+
+Manchmal bietet es sich an, (!nl)
+manuelle Umbrüche einzufügen.
+
+!end_center
+
+!end_document
+

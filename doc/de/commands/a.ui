@@ -1,0 +1,20 @@
+!begin_node (!kw [a])
+!html_name cmd_a
+
+Zusatznamen eines Kapitels definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/a [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [alias]).
+
+!item [(!SEEALSO)]
+(!KW [alias])
+
+!end_xlist
+
+!end_node

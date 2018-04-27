@@ -1,0 +1,41 @@
+!begin_node (!kw [linedrawsize])
+!html_name cmd_linedrawsize
+
+Set text size of linedraw environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/linedrawsize [tiny|small|normal|large|huge](!t)
+
+!item [(!DESCRIPTION)]
+With this switch you can set the font size of linedraw environments
+if the destination format allows it to use different font sizes. You
+can use this switch wherever you want. The smallest font size is
+activated with ""(!code [tiny])"", the largest one with
+""(!code [huge])"". The default font size is ""(!code [normal])"".
+
+(!NOTE) If -- like in this manual -- the font size does not change
+in the HTML output, you probably have used a CSS style for preformatted
+text ((!code [<pre>])).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!link [linedraw environment] [linedraw environment]), (!KW [html_monofont_size]), (!KW [verbatimsize])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!linedrawsize [small]
+!ldinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!linedrawsize [small]
+!ldinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node

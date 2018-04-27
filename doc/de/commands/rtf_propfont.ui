@@ -1,0 +1,29 @@
+!begin_node (!kw [rtf_propfont])
+!html_name cmd_rtf_propfont
+
+Namen des Proportional-Fonts für RTF setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_propfont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie den Font setzen, der zur
+Darstellung von Fließtext und Überschriften benutzt
+werden soll. Als Standard verwendet UDO den Font ""Times New Roman"".
+
+!item [(!SEEALSO)]
+(!KW [rtf_monofont]), (!KW [rtf_propfont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_propfont Dutch 801 Roman
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

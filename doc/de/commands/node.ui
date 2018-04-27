@@ -1,0 +1,30 @@
+!begin_node (!kw [node])
+!html_name cmd_node
+
+Kapitel einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/node (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet ein Kapitel mit der Bezeichnung ""(!TEXT)"" ein.
+Kapitel erscheinen in Inhaltsverzeichnissen.
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!node Titel des Kapitels
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des Kapitels
+(!EXAMPLE_END)
+
+!end_node

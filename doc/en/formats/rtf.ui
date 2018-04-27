@@ -1,0 +1,124 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: RTF (Rich Text Format)
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!code [])
+#
+################################################################################
+
+!begin_node Rich Text Format (RTF)
+!html_name format_rtf
+!label RTF
+
+The Rich Text Format (RTF) is used for the system wide exchange of text
+files. This format has a strict definition. New commands can be added every
+time. If a RTF software reads in an unknown command it has to ignore it.
+
+Unfortunately not all the existing software ignore unknown RTF commands,
+some are interpreting some senseless stuff. Microsoft Word doesn't
+interpret the RTF correctly in all cases, even if Microsoft has developed
+the Rich Text Format.
+
+It is not wrong if I say that RTF is the most misinterpreted format ever
+known.
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Why doesn't UDO print a table of contents?]
+I think the reader of your documentation wants to print it out with
+a text processor. And it is for sure that you want the correct page numbers
+inside the table of contents.
+
+But UDO cannot know on which page a chapter will be printed. Thus it doesn't
+print a table of contents when converting to RTF.
+
+OK, it wouldn't be a problem to print it but I think you don't want a table
+of contents without page numbers.
+
+##################################################
+
+!item [The output of my text processor is horrible, why?]
+Bad luck. You own a text processor that cannot import RTF correctly. UDO
+strictly pays attention to the RTF definition. If it is possible for you to
+contact the authors of your text processor send them your RTF file.
+
+##################################################
+
+!item [8-bit characters aren't imported correctly!?]
+UDO saves RTF files that use the Windows ANSI character set. Every text
+processor should be able to import RTF files that use the IBM-PC
+character set, the Macintosh character set and the Windows ANSI character set.
+If some 8-bit characters are displayed incorrectly it is a problem of your
+text processor and not a bug of UDO.
+
+##################################################
+
+!item [Quotes aren't imported correctly, why?]
+UDO uses the RTF commands (!code [\lquote]), (!code [\rquote]),
+(!code [\rdblquote]) and (!code [\ldblquote]) for displaying the typographical
+quotes and apostrophes. Your text processor has to know these common RTF
+commands.
+
+If it doesn't want to import these RTF commands or the quotes and
+apostrophes are displayed incorrectly you can tell UDO not to use these RTF
+commands by inserting the switch (!KW [no_quotes] [[rtf!!]]) inside the
+preamble of the UDO source file.
+
+##################################################
+
+!item [My text processor cannot import tables. What can I do?]
+Use the switch (!KW [rtf_no_tables]) inside the preamble of your UDO
+source file to tell UDO that it shall print tables without RTF commands like
+in the ASCII format.
+
+##################################################
+
+!item [StarWriter 3.0 prints an RTF error!?]
+It seems to be that StarWriter 3.0 doesn't know all RTF commands and
+furthermore it faults correct RTF commands.
+
+##################################################
+
+!item [Indices aren't imported into StarWriter!?]
+StarWriter 3.0 ignores the RTF command ""(!code [\xe])"" which is used for
+indices.
+
+##################################################
+
+!item [Lotus WordPro places chapter numbers outside the text frame!?]
+I'm sorry but I have no idea why it does this. Other text processors display
+the chapter numbers correctly.
+
+##################################################
+
+!item [Lotus WordPro doesn't display tables correctly!?]
+I don't know why Lotus WordPro doesn't recognize the ending of a table. The
+table itself will be displayed incorrectly, too. Please use the switch
+(!KW [rtf_no_tables]) inside the preamble of your UDO source file.
+
+##################################################
+
+!item [WordPad doesn't display tables, why?]
+Because WordPad cannot display tables. Use the switch
+(!KW [rtf_no_tables]) inside the preamble of your UDO source file.
+
+##################################################
+
+!end_description
+
+!end_node

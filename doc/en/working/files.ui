@@ -1,0 +1,73 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Generated files
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+!begin_node Generated files
+!html_name files
+
+Using UDO, you may see the follwing file suffixes:
+
+#Ausgabe-Formate
+!begin_xlist [.htm(l):] !compressed
+
+!item   [.1:]           Nroff
+!item   [.c:]           C source code
+!item   [.cmd:]         command file for the Pure C help compiler
+!item   [.txt:]         ASCII
+!item   [.hpj:]         project file for the Microsoft Help Compiler (!file [HC.EXE])
+!item   [.htm(l):]      HTML
+!item   [.lyx:]         LyX
+!item   [.man:]         Manualpage
+!item   [.pas:]         Pascal source code
+!item   [.rtf:]         RTF or WinHelp source code or QuickView source code
+!item   [.scr:]         Pure C Help source code
+!item   [.sgm(l):]      Linuxdoc-SGML
+!item   [.stg:]         ST-Guide source code
+!item   [.txt:]         Turbo-Vision-Help source code
+!item   [.tex:]         (!LaTeX)
+!item   [.texi:]        Texinfo
+
+!end_xlist
+
+Files with the suffix (!file [.ul?]) contain the error messages and warnings
+UDO prints while converting the source file.
+
+Files with the suffix (!file [.uh?]) contain the hyphenation patterns UDO
+prints for ASCII, ST-Guide and Pure C Help.
+
+Files with the suffix (!file [.ut?]) contain the ""include tree"".
+
+The following suffixes appear if UDO saves a file that has to be converted
+with another software to get the final result:
+
+!begin_xlist [.www:]
+
+!item   [.err:] log file of the Microsoft Help Compiler ((!file [HC.EXE]))
+!item   [.h:]   C header file for Turbo Vision ((!file [TVHC.EXE]))
+!item   [.hlp:] Windows Help file ((!file [HC.EXE])),
+                                Turbo Vision Help file ((!file [TVHC.EXE])),
+                                Pure C Help file ((!file [HC.PRG]))
+!item   [.hyp:] ST-Guide hypertext ((!file [HCP.TTP]))
+!item   [.ref:] ST-Guide reference file ((!file [HCP.TTP]))
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,24 @@
+!begin_node (!kw [error])
+!html_name cmd_error
+
+Fehlermeldung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/error [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Genau wie die Präprozessoranweisung (!code [#error]) eines C-Compilers
+können Sie hiermit eine Fehlermeldung erzeugen und ""(!TEXT)"" ausgeben.
+UDO bricht beim Eintreffen dieses Kommandos die Konvertierung ab.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [break])
+
+!end_xlist
+
+!end_node

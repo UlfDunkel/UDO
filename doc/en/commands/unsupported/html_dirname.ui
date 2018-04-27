@@ -1,0 +1,24 @@
+!begin_node (!kw [html_dirname])
+!html_name cmd_html_dirname
+
+Assign directory name (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_dirname (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+If you use this command inside a chapter, section, subsection or
+paragraph, ""(!FILE)"" is used as the name of the directory
+where the HTML file will be created.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_name]), (!KW [html_name_prefix]), (!KW [html_use_folders])
+
+!end_xlist
+
+!end_node

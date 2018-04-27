@@ -1,0 +1,60 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6.2.1
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_0621.de)
+#   fd  Mar 03: translation adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 09: using macro BUG
+#
+################################################################################
+
+!begin_node Changes from version 6.2.0 to 6.2.1
+!html_name history_6_2_0_to_6_2_1
+
+(!PUBLISHED [UDO~6.2.1] [Dec 9, 2003])
+
+!heading PDF-(!LaTeX)
+!begin_description
+!item [(!BUGFIXES)]
+   !begin_itemize !compressed
+   !item If the destination is pdf(!LaTeX), the (!TeX) version isn't set to Mik(!TeX) any longer.
+   !item Made changes for links and URLs for pdf(!LaTeX) output.
+   !item Made changes for images for pdf(!LaTeX) output.
+   !item The information of (!KW [docinfo]) ist submitted correct for pdf(!LaTeX) output.
+   !end_itemize
+!end_description
+
+!heading Richtext Format (RTF)
+!begin_description
+!item [(!BUGFIXES)]
+   !begin_itemize !compressed
+   !item Fixed (!BUG [24]) in version 6.2.1 (!nl)
+         In the (!code [(!LINK!)]) elements are listed all subsubnodes of other subnodes
+   !item Fixed (!BUG [25]) in version 6.2.1 (!nl)
+         UDO chrashed, when umlauts are used in the filename or domain in
+         the command (!/url !..).
+   !item Fixed (!BUG [29]) in version 6.2.1 (!nl)
+         By using (!/url !..) for RTF output, the opening quote and the
+         following word were swallowed because of missing blanks.
+   !item Fixed (!BUG [30]) in version 6.2.1 (!nl)
+         Nonbreaking blanks are converted wrong, when used in a link and for
+         RTF output (\\~ instead of \~).
+   !item Fixed (!BUG [39]) in version 6.2.1 (!nl)
+         Although (!KW [html_name_prefix]) was set, the prefix was missing in the
+         (!code [(!LINK!)]) elements for navigation.
+   !end_itemize
+!end_description
+
+!end_node

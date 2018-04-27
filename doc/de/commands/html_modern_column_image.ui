@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [html_modern_column_image])
+!html_name cmd_html_modern_column_image
+
+Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_column_image <datei>(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existierte nur in einer der Beta-Versionen
+und heisst nun (!KW [html_modern_backimage]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_modern_backimage])
+
+!end_xlist
+
+!end_node
+!endif

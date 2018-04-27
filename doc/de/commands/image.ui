@@ -1,0 +1,40 @@
+!begin_node (!kw [image])
+!html_name cmd_image
+
+Grafik ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/image (!FILE) <titel>(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando erzeugt in der Ausgabedatei Befehle
+zur Einbindung des Bildes. Die Endung der Datei
+sollte nicht übergeben werden, da UDO dies selbst
+erledigt. UDO benutzt ''(!file [.img])'' beim ST-Guide, CS(!TeX) und
+Lindner-(!TeX), ''(!file [.gif])'' für HTML, ''(!file [.msp])'' oder ''(!file [.pcx])'' für
+em(!TeX) und ''(!file [.bmp])'' für WinHelp, RTF und IPF.
+Wird ""<titel>"" angegeben, wird der Text als Bildunterschrift angegeben.
+
+Die Ausrichtung des Bildes richtet sich nach der
+eventuell vorhandenen äußeren Umgebung. Zentrierte
+Bilder erhalten Sie demnach, wenn Sie das (!KW [image])-Kommando in einer center-Umgebung verwenden.
+(!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix]), (!KW [no_img_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image udo_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!image (!IMAGES)udo_16 UDO-Icon
+(!EXAMPLE_END)
+
+!end_node

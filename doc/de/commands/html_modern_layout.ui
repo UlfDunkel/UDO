@@ -1,0 +1,27 @@
+!begin_node (!kw [html_modern_layout])
+!html_name cmd_html_modern_layout
+
+""Modernes"" (Tabellen-) Layout erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_modern_layout(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, wird jede Seite
+als Tabelle dargestellt. Die Tabelle besteht dann aus zwei
+Spalten, wobei in der linken Spalte die Links auf die anderen
+Nodes und in der rechten Spalte der Seiteninhalt ausgegeben
+werden. Benutzen Sie (!KW [chaptericon]) innerhalb eines Nodes, werden
+in der linken Spalte Imagelinks angelegt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_modern_alignment]), (!KW [html_modern_backcolor]), (!KW [html_modern_width])
+
+!end_xlist
+
+!end_node

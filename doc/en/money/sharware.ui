@@ -1,0 +1,56 @@
+!begin_node Shareware
+
+UDO is distributed as shareware. This means:
+
+!begin_itemize
+
+!item	You are allowed to check for exactly four weeks if UDO meets your
+requirements!
+
+!item	It's forbidden to publish any text you have made with UDO during
+this trial period.
+
+!item	After the trial period of four weeks you have to decide whether you
+want to (!link [buy UDO] [Registration]) or if you don't want to use it. If
+you don't want to buy UDO you are obligated to delete UDO and all its
+additional files from your hard disc. If you don't you will work with a black
+copy of UDO!
+
+!end_itemize
+
+If I will get less registrations than I expect I!..
+
+!begin_enumerate
+
+!item	!..will increase the number of limitations(!N)e.g. limited document
+sizes, exchanged characters in the destination file or ugly speed
+limitations(!n), or I!..
+
+!item	!..won't publish further versions of UDO and give them only to
+registered users, or I!..
+
+!item	!..will stop going on developing UDO.
+
+!end_enumerate
+
+That's no joke! In the past I was often disappointed due to the amount of
+registrations I got for other software of mine. Please believe me that I
+cannot laugh anymore about users that are too lazy to pay for shareware.
+
+In former versions UDO didn't have any limitations. But due to the
+unsatisfying resonance from Unix and DOS users I implemented limitations in
+all UDO versions:
+
+!begin_enumerate
+
+!item	UDO will print an ugly message at the end of every page.
+
+!item	The switch (!KW [use_about_udo]) is set automatically for all
+destination formats.
+
+!end_enumerate
+
+When you have paid the shareware fee you will get a personalised keycode.
+With this keycode you will be able to disable these limitations.
+
+!end_node

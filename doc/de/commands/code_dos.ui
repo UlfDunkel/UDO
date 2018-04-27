@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [code_dos])
+!html_name cmd_code_dos
+
+Auf einen anderen Zeichensatz umschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_dos(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [code] [[dos!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+
+!end_xlist
+
+!end_node
+!endif

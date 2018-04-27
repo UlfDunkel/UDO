@@ -1,0 +1,26 @@
+!begin_node (!kkw [nolink])
+!html_name cmd_nolink()
+
+Suppress referencing.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/nolink [(!TEXT)])(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder can be used to ensure that the text
+inside the brackets won't be referenced.
+
+!item [(!EXAMPLE)]
+(!T)(!nolink [hello])(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [no_links]), (!KKW [link])
+
+!end_xlist
+
+!end_node

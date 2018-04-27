@@ -1,0 +1,32 @@
+!begin_node (!kw [use_chapter_images])
+!html_name cmd_use_chapter_images
+
+Use images instead of titles for chapters.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_chapter_images [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This command switches on the usage of chapter images instead of
+chapter titles. Chapters that use the (!KW [chapterimage]) command will use
+an image instead. The example demonstrates this for Windows Help,
+HTML and ST-Guide).
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!KW [chapterimage])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_chapter_images [html,win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,34 @@
+!begin_node (!kw [ldinclude])
+!html_name cmd_ldinclude
+
+Include file in linedraw environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ldinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!FILE)"" will be included and displayed like preformatted text
+inside a linedraw environment. If you use this command inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]). (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [linedrawsize]), (!link [Split documents] [Split documents]), (!link [linedraw environment] [linedraw environment])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ldinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ldinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node

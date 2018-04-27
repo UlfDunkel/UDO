@@ -1,0 +1,26 @@
+!begin_node (!kw [html_robots])
+!html_name cmd_html_robots
+
+Set the robots commands (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_robots (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" corresponds to a robots command which is evaluated by search engines.
+Valid commands are e.g. "none", "noindex", "index", "nofollow", and "follow".
+This command has precedence ovr (!KW [docinfo] [[robots!!]])
+(!nl)
+HTML Apple Help also allows "keywords", "segments" and "anchors".
+
+!item [(!EXISTSSINCE)] Version~6.5.17
+
+!item [(!SEEALSO)]
+(!KW [docinfo])
+
+!end_xlist
+
+!end_node

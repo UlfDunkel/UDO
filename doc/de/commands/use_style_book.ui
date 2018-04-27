@@ -1,0 +1,36 @@
+!begin_node (!kw [use_style_book])
+!html_name cmd_use_style_book
+
+Zieldatei als ""Buch"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_style_book [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+UDO gibt bei der Umwandlung ins (!LaTeX)-Format (!KW [node]) mit
+""(!code [\chapter])"" anstatt ""(!code [\section])"", (!KW [subnode]) mit
+""(!code [\section])"" anstatt ""(!code [\subsection])"" und
+(!KW [subsubnode]) mit ""(!code [\subsection])"" anstatt
+""(!code [\subsubsection])"" aus. Als Documentstyle bzw. Documentclass
+wird ""(!code [book])"" verwendet. Bei den anderen Formaten wird eine
+(!LaTeX)-ähnliche Ausgabe erzeugt, d.h. Kapitel werden auch mit
+""Kapitel #:"" bzw. ""Anhang X:"" beschriftet.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [no_preamble])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_style_book [tex]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

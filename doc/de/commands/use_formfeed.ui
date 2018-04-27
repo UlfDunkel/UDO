@@ -1,0 +1,29 @@
+!begin_node (!kw [use_formfeed])
+!html_name cmd_use_formfeed
+
+Formfeed-Befehl mit ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_formfeed [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie UDO mitteilen, daß beim
+(!KW [newpage])-Befehl bei ASCII-Formaten ein Formfeed
+(ASCII~12) ausgegeben werden soll.
+
+!item [(!SEEALSO)]
+(!KW [man_lpp]), (!KW [newpage])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_formfeed [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

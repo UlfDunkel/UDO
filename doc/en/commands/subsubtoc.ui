@@ -1,0 +1,31 @@
+!begin_node (!kw [subsubtoc])
+!html_name cmd_subsubtoc
+
+List subsections.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Lists all subsections of a section as a table of contents
+to enable the reader of a hypertext to switch to the subsections.
+UDO does not list this table of contents if
+switch (!KW [ignore_subsubtoc]) has been used inside the section.
+This table can be generated automatically with the switch (!KW [use_auto_subsubtocs]).
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

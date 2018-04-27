@@ -1,0 +1,28 @@
+!begin_node (!kw [! ])
+!html_name cmd_exclamation
+
+Tabellen- oder Indexeinträge trennen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/!(!t)
+
+!item [(!DESCRIPTION)]
+Ein doppeltes Ausrufungszeichen trennt die Zellen
+einer Tabellenzeile sowie Indexeinträge.
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!link [Indizes] [Indizes])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!index Ebene 1 !! Ebene 2
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

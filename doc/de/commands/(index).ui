@@ -1,0 +1,31 @@
+!begin_node (!kkw [index])
+!html_name cmd_index()
+
+Indexeinträge im Text angeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/index [(!TEXT)] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
+
+!item [(!DESCRIPTION)]
+Dient zum Erzeugen von Indizes direkt im Quelltext.
+Im Gegensatz zu (!KKW [idx]) wird ""(!TEXT)"" nicht ausgegeben,
+es erfolgt also lediglich ein Eintrag in den Index.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KKW [idx]), (!KW [no_index]), (!KW [index])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!index [Wort])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

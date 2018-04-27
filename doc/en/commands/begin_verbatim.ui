@@ -1,0 +1,22 @@
+!begin_node (!kw [begin_verbatim])
+!html_name cmd_begin_verbatim
+
+Start a verbatim environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_verbatim(!t)
+
+!item [(!DESCRIPTION)]
+Starts a (!link [verbatim environment] [verbatim environment]) that has to be finished with
+(!KW [end_verbatim]). Text that is part of a verbatim environment
+is printed out as given using a monospaced font.
+
+!item [(!SEEALSO)]
+(!KW [end_verbatim]), (!KW [begin_preformatted]), (!KW [vinclude]), (!KW [verbatimsize]), (!link [Preformatted text] [Preformatted text])
+
+!end_xlist
+
+!end_node

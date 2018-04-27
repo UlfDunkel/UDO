@@ -1,0 +1,194 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+# 2010:
+#   fd  Mar 03: using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 19: link adjustments for old commands
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Änderungen von Release 5 nach 6
+!html_name history_release_5_to_6
+
+(!PUBLISHED [UDO~6] [2. Januar 1997])
+
+Hier eine kleine Übersicht der wichtigsten Änderungen zur letzten
+öffentlichen Version. In den acht Monaten wurden einige neue Formate,
+etliche neue Features eingebaut und einige Fehlerbeseitigungen
+vorgenommen. Auch hier hat es in der Zwischenzeit wieder nicht
+vermeiden lassen, die Syntax einiger Befehle zu ändern.
+
+!begin_description !compressed
+
+!item [Neue Formate:]
+   !begin_itemize !compressed
+   !item Apple QuickView
+   !item HP-HelpTag-SGML (rudimentär)
+   !item LyX
+   !item NROFF (!nl)
+         Dieses Format, bei dem ich mir gar nicht sicher bin, ob es denn
+         nun NROFF ist, oder nicht vielleicht TROFF oder GROFF oder was
+         auch immer, wird nun rudimentär unterstützt.
+         
+         Sicherlich wird nicht alles funktionieren, aber dennoch kann man
+         es jetzt schon bereits verwenden, um auf einfache Art und Weise
+         Manpages für Unix-Systeme zu erstellen.
+         
+   !item C-Sourcecode und Pascal-Sourcecode (!nl)
+         Mit diesen beiden Formaten ist es nun erstmals mit UDO möglich,
+         Quelltext und dessen Dokumentation in einer Datei
+         zusammenzufassen.
+         
+         UDO gibt normalen Text für diese Formate so aus, daß er zwischen
+         die typischen Kommentarzeichen gesetzt wird. Der Quelltext selber
+         wird in einer sourcecode-Umgebung angegeben.
+   !end_itemize
+
+!item [Neue Befehle:]
+   !begin_itemize !compressed
+   !item (!KW [autoref_items] [[off|on!!]]):
+         Sollen die Items von description- und xlist-Umgebungen (nicht) referenziert werden?
+   !item (!KW [code_mac]), (!KW [code_hp8]), (!KW [code_iso]), (!KW [code_dos]) und (!KW [code_tos]):
+         UDO kann nun Quelltexte mit vom Systemzeichensatz abweichenden Zeichen umwandeln.
+   !item (!KW [country]):
+         Zusätzliche Titelseiten-Information
+   !item (!KW [html_backpage]):
+         Zur Angabe einer Rücksprung-URL für die Kopfzeile der ersten HTML-Seite.
+   !item (!KW [html_keywords]):
+         Zur Erzeugung von Meta-Informationen
+   !item (!KW [html_img_suffix]):
+         Zur Ermöglichung der Einbindung von JPEG-Grafiken usw.
+   !item (!KW [html_nodesize]):
+         Zur Veränderung der Fontgröße von Kapitel-überschriften bei HTML
+   !item (!KW [ifos]) und (!KW [ifnos]): 
+         Zur Abfrage des Betriebssystems.
+   !item (!KW [ignore_headline]), (!KW [ignore_bottomline]):
+         Um Kopf- und/oder Fußzeilen nur in manchen Nodes zu unterdrücken.
+   !item (!KW [ignore_subtoc]) und Verwandte: 
+         Zur Unterdrückung der Ausgabe von automatischen Unter-Inhaltsverzeichnissen
+   !item (!KW [ignore_links]): 
+         Zur Unterdrückung automatischer Links auf den Node, in dem dieses Kommando benutzt wird
+   !item (!KW [image*]): 
+         Zum Erzeugen von Bildunterschriften ohne ""Abbildung #:"".
+   !item (!KW [image_counter]): 
+         Zum Setzen des Bildzählers.
+   !item (!KW [no_index]):
+         Soll kein Index erzeugt werden?
+   !item (!KW [no_toc_subnodes]), (!KW [no_toc_subsubnodes]), (!KW [no_toc_subsubsubnodes]):
+         Zur Verringerung des Umfangs des Inhaltsverzeichnisses
+   !item (!KW [no_preamble]):
+         Falls Sie selber den Vorspann zu einem Format erstellen möchten.
+   !item (!KW [parwidth]):
+         Zur Veränderung der Zeilenbreite des Ausgabetextes
+   !item (!KW [rtf_charwidth]):
+         Zur Veränderung des Berechnungswertes für Einrückungen beim RTF
+   !item (!KW [set]), (!KW [unset]), (!KW [ifset]), (!KW [ifnset]):
+         Zum Setzen und Abfragen von Symbolen.
+   !item (!KW [sort_hyphen_file]):
+         Soll UDO die Trennvorschläge sortieren und dabei Dubletten entfernen?
+   !item (!KW [subsubsubnode]) und Verwandte: 
+         Eine vierte Gliederungsebene.
+   !item (!KW [table_counter]): 
+         Zum Setzen des Tabellenzählers.
+   !item (!KW [table_caption*]): 
+         Zum Erzeugen von Tabellentiteln ohne ""Tabelle #:"".
+   !item (!KW [tabwidth]): 
+         Zur Angabe der Tabulatorbreite für verbatim-Umgebungen.
+   !item (!KW [use_justification]): 
+         Soll Blocksatz erzeugt werden?
+   !item (!KW [use_nodes_inside_index]), (!KW [use_alias_inside_index]), (!KW [use_label_inside_index]):
+         Sollen Nodes, Aliase und/oder Labels automatisch in den Index übernommen werden?
+   !item (!KW [use_output_buffer]): 
+         Soll ein Ausgabe-Puffer benutzt werden, um die Referenzierung bei HTML und Windows Help sicherer zu machen?
+   !item (!KW [use_short_envs]):
+         Sollen alle Umgebungen komprimiert ausgegeben werden?
+   !item (!KW [verbatimsize]): 
+         Zum Setzen der Fontgröße von verbatim-Umgebungen.
+   !item (!KW [win_background]): 
+         Zum Setzen der Hintergrundfarbe für WinHelp.
+   !item (!KW [win_high_compression]), (!KW [win_medium_compression]): 
+         Zum Setzen der Kompressionsrate von WinHelp-Dateien.
+   !item (!KW [win_inline_bitmaps]): 
+         Sollen hard-coded Bitmaps für WinHelp benutzt werden?
+   !item (!KW [win_charwidth]): 
+         Zur Veränderung des Berechnungswertes für Einrückungen bei WinHelp.
+   !end_itemize
+
+!item [Neuheiten:]
+   !begin_itemize !compressed
+   !item Eine vierte Gliederungsebene ist nun möglich.
+   !item Blocksatz
+   !item Makros und Definitionen können Parameter enthalten. Das
+         Schreiben eigener Kommandos ist damit in weiten Teilen möglich.
+   !item blist-, ilist- und tlist-Umgebung
+   !item rechtbündiger Text (flushright-Umgebung)
+   !item linksbündiger Text (flushleft-Umgebung) zur Unterdrückung
+         des Blocksatzes
+   !item Bis zu vier Email-Adressen und das Land des Autors können
+         auf der Titelseite ausgegeben werden.
+   !item Italienisch ((!KW [language] [[italian!!]])), Spanisch ((!KW [language] [[spanish!!]]))
+         und Schwedisch ((!KW [language] [[swedish!!]])) können als
+         Ausgabesprache verwendet werden.
+   !item UDO kann die von ihm erzeugten Trennvorschläge sortieren und
+         dabei doppelte Einträge entfernen.
+   !item (!KW [no_umlaute]) wandelt nun nicht nur Umlaute, sondern (fast)
+         alle 8-bit-Zeichen um.
+   !item Es wurden etliche Laufzeit-Optimierungen vorgenommen. Trotz
+         des gewaltigen Zuwachses an Befehlen braucht UDO nicht mehr
+         Zeit als vorher, ja in den meisten Fällen ist UDO sogar
+         schneller geworden.
+   !end_itemize
+
+!item [Änderungen:]
+   !begin_itemize !compressed
+   !item Die Umwandlung ins RTF wurde komplett neu programmiert, so
+         daß die erzeugten Dateien nun auch problemlos mit WinWord
+         importiert werden können.
+   !item Für (!LaTeX)~2.09 und (!LaTeXe) erzeugt UDO automatisch eine
+         Präambel (abschaltbar).
+   !item Es können nun wesentlich mehr Kapitel, Tabellenzeilen,
+         Trennvorschläge usw. benutzt werden.
+   !item UDO entdeckt wesentlich mehr Syntaxfehler als zuvor.
+   !item Bilder werden nun umgebungsabhängig positioniert. Sie werden
+         nur noch dann zentriert ausgegeben, wenn der (!KW [image])-Befehl
+         innerhalb einer center-Umgebung steht. Die linksbündige oder
+         rechtsbündige Ausgabe von Bilder ist somit nun auch möglich.
+   !item Die Default-Endung für ASCII-Dateien lautet nun (!file [.txt]).
+   !item Bei der (!LaTeX)-Ausgabe wird innerhalb \verb kein Zeilenumbruch mehr erzeugt.
+   !item DOS-Grafikzeichen werden für WinHelp durch ""(!code [+])"", ""(!code [-])"" oder ""(!code [|])"" ersetzt.
+   !end_itemize
+
+!item [Syntaxänderungen:]
+   !begin_itemize !compressed
+   !item (!KW [no_verbatim_umlaute]) ersetzt den Schalter (!KW [verbatim_no_umlaute])
+   !item Der Befehl (!kw [list_parsep]) existiert nicht mehr. Komprimierte
+         Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
+   !item Die zu benutzende Sprache muß nun mit (!KW [language]) gesetzt
+         werden. (!KW [language] [[german!!]]) ersetzt demnach den Befehl !german usw.
+   !item Beim Index-Befehl können nun bis zu drei Indizes übergeben werden.
+   !item Der Befehl (!KW [win_html_look]) existiert nicht mehr.
+   !item Schattierte, helle, umrandete und umrahmte Schrift wird
+         nicht mehr angeboten. Falls Sie diese Schriftarten unbedingt
+         benötigen, können Sie sich die nötigen Befehle leicht mit
+         Definitionen selbst programmieren.
+   !end_itemize
+
+!end_description
+
+!end_node

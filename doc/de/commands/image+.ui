@@ -1,0 +1,33 @@
+!begin_node (!kw [image*])
+!html_name cmd_image_asterisk
+
+Grafik ohne Nummer ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/image* (!FILE) <titel>(!t)
+
+!item [(!DESCRIPTION)]
+Der einzige Unterschied zum (!KW [image])-Kommando ist der,
+daﬂ in der Bildunterschrift keine Abbildungsnummer
+ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!KW [no_images]), (!KKW [img]), (!KW [image]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix]), (!KW [no_img_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image* tiger Dies ist ein Tiger
+!end_verbatim
+(!EXAMPLE_AFTER)
+!image* (!IMAGES)tiger Dies ist ein Tiger
+(!EXAMPLE_END)
+
+!end_node

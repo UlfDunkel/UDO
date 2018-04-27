@@ -1,0 +1,49 @@
+!begin_node Beschreibungen
+!html_name style_descriptions
+!label description-Umgebung
+
+Die description-Umgebung ist dafür geeignet, eine Beschreibung von
+mehreren Begriffen zu erzeugen, wobei Begriffe fett dargestellt werden.
+
+Ein Aufzählungspunkt wird durch (!KW [item] [[(!TEXT!)!!]]) gekennzeichnet,
+wobei ""(!TEXT)"" in der Aufzählung fett dargestellt wird.
+
+Die description-Umgebung ist mehrfach schachtelbar und läßt sich auch
+mit anderen Umgebungen kobinieren. Hier ein kleines, unverschachteltes
+Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)description1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)description1.ui
+(!EXAMPLE_END)
+
+In diesem Beispiel wird die description-Umgebung verschachtelt und
+mit dem Schalter (!KW [compressed]) benutzt.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)description2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)description2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Wenn der zu beschreibende Text eine schließende eckige Klammer
+     enthält, müssen Sie dieser Klammer ein Ausrufezeichen
+     voranstellen, damit UDO erkennt, daß die folgende eckige Klammer
+     auch fett dargestellt werden soll.
+
+!item Wenn das letzte Zeichen ein Ausrufezeichen ist, dann muss diesem
+      ein ""/"" folgen, damit UDO nicht die obige Regel annimmt.
+      
+!item Der in den eckigen Klammer angegebene Text wird auch in HTML fett
+     ausgegeben, obwohl dies eher untypisch für HTML ist. In einer der
+     nächsten Versionen werden Sie dies ggf. ändern können.
+
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
+     der Beschreibung zur itemize-Umgebung.
+!end_enumerate
+
+!end_node

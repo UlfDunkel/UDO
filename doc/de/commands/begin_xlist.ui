@@ -1,0 +1,26 @@
+!begin_node (!kw [begin_xlist])
+!html_name cmd_begin_xlist
+
+Eine Liste einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_xlist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung
+muss mit (!KW [end_xlist]) beendet werden. Die Länge von
+""(!TEXT)"" definiert die Tiefe der Einrückung der
+Aufzählungspunkte. Diese Umgebung lässt sich mit
+anderen Umgebungen kombiniert verwenden. Die Texte,
+die Sie mit (!KW [item] [[~!!]]) angeben, werden normal
+dargestellt.
+
+!item [(!SEEALSO)]
+(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node

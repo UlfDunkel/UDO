@@ -1,0 +1,32 @@
+!begin_node (!kw [use_about_udo])
+!html_name cmd_use_about_udo
+
+Informationsseite einbauen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_about_udo [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Die Benutzung dieses Schalters erzeugt am Ende der erzeugten Datei
+(sofern das zugehörige Format als Kürzel übergeben wurde) eine kleine
+Seite mit Informationen zu UDO. Wenn Sie ein bisschen Werbung für UDO machen
+möchten, setzen Sie dieses Kommando im Vorspann ein und bringen Sie im Quelltext
+das Wort ""UDO(!RELEASE)"" mindestens einmal unter, da diese Werbeseite nicht im
+Inhaltsverzeichnis aufgeführt wird.
+
+!item [(!SEEALSO)]
+(!KW [udolink])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_about_udo [stg,win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

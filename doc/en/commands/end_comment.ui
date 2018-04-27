@@ -1,0 +1,20 @@
+!begin_node (!kw [end_comment])
+!html_name cmd_end_comment
+
+Finish a comment enviroment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_comment(!t)
+
+!item [(!DESCRIPTION)]
+This command finishes the latest comment environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_comment]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node

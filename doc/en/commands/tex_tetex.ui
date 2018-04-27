@@ -1,0 +1,23 @@
+!begin_node (!kw [tex_tetex])
+!html_name cmd_tex_tetex
+
+Create graphic commands for te(!TeX) ((!TeX) only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_tetex(!t)
+
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special te(!TeX) commands to
+display EPS images when using the (!KW [image]) command.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_lindner]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
+
+!end_xlist
+
+!end_node

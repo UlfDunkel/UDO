@@ -1,0 +1,210 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Windows Help (WinHelp)
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node Windows Help (WinHelp)
+!html_name format_winhelp
+!alias WinHelp
+!alias Windows-Help
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [WinHelp says that the RTF-File isn't a Windows Help file. Why?]
+The RTF file UDO saves isn't a Windows Help file. It is just the source code
+of a Windows Help file! You have to convert this source code with the
+Microsoft Helpcompiler to get a Windows Help file.
+
+##################################################
+
+!item [Where can I get the Microsoft Helpcompiler?]
+You can download the Microsoft Helpcompiler (!file [HC31.EXE]) from
+Microsoft's FTP server (ftp.microsoft.com) free of charge.
+
+##################################################
+
+!item [Why doesn't want the HC to compile UDO's output?]
+This can have two reasons:
+
+!begin_enumerate
+
+!item   The UDO source file contains errors. Please take a look at UDO's log
+file (suffix (!file [.ulw])) and correct the errors you will find there.
+If the log file doesn't contain any error messages your source file may
+contain errors UDO hasn't detected.
+
+!item   The HC is working incorrectly. Take a look at the HC's error file
+(suffix (!file [.err])). Unfortunately I can't tell you the sense of the
+errors printed in the error file in most cases.
+
+!end_enumerate
+
+##################################################
+
+!ifdest [tex,pdf]
+!item   [What is the file ''(!T).hpj(!t)'' good for?]
+!else
+!item   [What is the file ''(!V).hpj(!v)'' good for?]
+!endif
+When converting to Windows Help UDO will save an RTF file and a project file
+for the Microsoft Helpcompiler named (!file [.hpj]). You have to start the
+(!file [HC]) by passing the name of this project file to get a Windows Help file.
+
+This project file contains several information e.g. the title of the help
+file, code for adding additional buttons, the size of the main window when
+opening the help file.
+
+UDO will overwrite this project file without previously asking you if you
+want it. So, if you have changed the project file and you want to protect
+your changes you have to write protect the project file.
+
+##################################################
+
+!item   [How does UDO generate headlines?]
+UDO prints on every page (without the title page and the table of contents) a
+headline. In this headline the chapter name is printed inside a
+non-scrolling region. Thus you can see always the chapter name  even if you
+scroll the text.
+
+If you use the switch (!KW [no_headlines] [[win!!]]) inside the preamble no
+headlines will be printed.
+
+If you use the command (!KW [ignore_headline]) inside a chapter in this
+chapter no headline will be printed.
+
+##################################################
+
+!item   [How does UDO create the context strings?]
+If you want to create a link from another help file or a program to a help
+file that was made with UDO you have to know how UDO creates the context
+strings.
+
+Windows Help doesn't allow to use special characters inside context strings.
+UDO creates the context strings in the following way:
+
+!begin_enumerate
+
+!item   Special characters are printed in RTF form.
+
+!item   Blanks will be replaced by underscores.
+
+!item   All other characters except numbers and letters will be replaced by
+their hexadecimal value with a leading underscore.
+
+!end_enumerate
+
+An example with German words:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+UDO:     !node LaTeX-Einführung Teil 1
+WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
+!end_verbatim
+(!EXAMPLE_END)
+
+Description:
+
+!begin_enumerate
+
+!item   The hexadecimal ASCII code of the dash is ""(!code [0x2D])"". The dash
+will be replaced by ""(!code [_2D])"".
+
+!item   The ""ü"" inside ""Einführung"" is printed in RTF files like
+""(!code [\'FC])"". The ASCII code of the backslash (""\"") is
+""(!code [0x5C])"", so the backslash will be replaced by ""(!code [_5C])"". The
+ASCII code of ""(!code ['])"" is ""(!code [0x27])"", so the apostrophe will be
+replaced by ""(!code [_27])"".
+
+!item   The blanks will be replaced by ""(!code [_])""
+
+!end_enumerate
+
+Thus the single letter ""ü"" will be replaced by the really long string
+""(!code [_5C_27FC])"". Maybe you want to say that this is quite awkward
+but if UDO would simply replace the ""ü"" by ""FC"" problems would appear
+very soon. Using the former way the chance that UDO creates a context string
+that is already used is very small.
+
+##################################################
+
+!item [Why doesn't UDO center tables?]
+It is impossible to center tables in Windows Help.
+
+##################################################
+
+!item [Why are there no lines inside tables?]
+Windows Help doesn't allow it to layout complex tables like in RTF. It is
+impossible to tell Windows Help where to draw lines. It is only possible to
+tell Windows Help to print table cells with or without frames.
+
+##################################################
+
+!item [Indents in lists and cells in tables are too wide, why?]
+UDO doesn't know the width of the characters you use inside lists and
+tables. Thus UDO is forced to calculate with values so that even bold and
+italic capital letters will fit the cells. I think that it is better to have
+cells with a width that is too large than too small.
+
+##################################################
+
+!item [How can I print graphic characters from the IBM-PC character set?]
+Sorry, there's no way to print them.
+
+I don't know the reason but Windows Help won't use the fonts ""Terminal"" or
+""MS~LineDraw"". Windows Help will always use another font if you want to
+use the upper fonts that contain the graphic characters.
+
+Thus UDO will replace the graphic characters of the IBM-PC character set by
+""(!code [+])"", ""(!code [-])"" or ""(!code [|])"".
+
+##################################################
+
+!item [Why should I write the source files with a Windows editor?]
+You can speed up the conversion if you write the source files with a Windows
+editor. In this case UDO doesn't have to convert the characters from the IBM
+PC character set into the Windows ANSI character set.
+
+If you write source file with a Windows Editor you have to e.g. insert the command
+(!KW [code_source] [[cp1252!!]]) inside the preamble of your source file. If you forget to
+do this UDO will think that the source file was written with the IBM PC
+character set.
+
+(!TIP) I recommend to use the ""Programmer's File Editor"" (PFE) written by
+Alan Phillips, a really great freeware editor that is available both for
+Windows 3.11 and Windows95/NT.
+
+##################################################
+
+!item [Why should i compress the Windows Help files?]
+Using the switch (!KW [win_medium_compression]) or
+(!KW [win_high_compression]) you can tell the help compiler to
+compress the final Windows Help file up to 50%. The help compiler
+will need a little bit more time to convert the RTF source file if you use
+the above switches.
+
+##################################################
+
+!end_description
+
+!end_node

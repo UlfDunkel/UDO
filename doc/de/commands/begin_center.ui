@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_center])
+!html_name cmd_begin_center
+
+Text zentriert ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_center(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando öffnet eine (neue) center-Umgebung.
+Zeilen, die innerhalb dieser Umgebung stehen, werden
+zentriert ausgegeben, bis das Kommando (!KW [end_center])
+angegeben wird. UDO formatiert auch die Zeilen dieser
+Umgebung, daher sollten Sie auch hier notfalls
+manuelle Zeilenumbrüche mit (!KKW [nl]) einfügen.
+
+!item [(!SEEALSO)]
+(!KW [end_center]), (!KKW [nl]), (!link [Texthervorhebungen] [Texthervorhebungen]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,28 @@
+!begin_node (!kw [html_dirname])
+!html_name cmd_html_dirname
+
+Verzeichnisnamen zuweisen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_dirname (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Taucht dieses Kommando innerhalb eines Kapitels,
+Abschnitts, Unterabschnitts oder Paragraphen auf, so
+wird dieser Name für das Verzeichnis verwendet,
+in dem die spätere HTML-Datei erzeugt wird.
+# scheint experimentell zu sein,
+# die entsprechenden Stellen im Source sind auskommentiert
+# Achtung, Link von !html_name, !html_name_prefix und !html_use_folders auf !html_dirname ist ebenfalls auskommentiert
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_name]), (!KW [html_name_prefix]), (!KW [html_use_folders])
+
+!end_xlist
+
+!end_node

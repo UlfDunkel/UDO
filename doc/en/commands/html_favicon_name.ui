@@ -1,0 +1,31 @@
+!begin_node (!kw [html_favicon_name])
+!html_name cmd_html_favicon_name
+
+Defines the favorite icon (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_favicon_name (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Use this command to define the favorite icon.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_favicon_name favicon.ico
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER)
+!begin_preformatted
+<link rel="shortcut icon" href="http://www.udo-open-source.org/favicon.ico">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

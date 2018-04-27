@@ -1,0 +1,23 @@
+!begin_node (!kw [begin_itemize])
+!html_name cmd_begin_itemize
+
+Start an itemization environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_itemize(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [itemize environment] [itemize environment]) that has to be finished with
+(!KW [end_itemize]). You can use the itemize environment inside
+other (itemize) environments. Items of the itemize environment will
+be marked with bullets, dashes or stars.
+
+!item [(!SEEALSO)]
+(!KW [end_itemize]), (!KW [item]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!KW [use_short_tocs]), (!link [Itemizations] [Itemizations])
+
+!end_xlist
+
+!end_node

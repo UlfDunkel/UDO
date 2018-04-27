@@ -1,0 +1,124 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Example
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: text reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Quelltext-Beispiel
+!html_name syntax_example
+
+Bevor wir ins Detail gehen, möchten wir Ihnen an dieser Stelle ein
+Beispiel eines kompletten Quelltextes zeigen, welches Ihnen auch dazu
+dienen kann, eigene Quelltexte mit UDO zu erstellen:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)example.u
+(!EXAMPLE_END)
+
+!subsubheading Erläuterungen
+
+Zu Beginn des Quelltextes ist ein Kommentar angegeben, damit Sie später
+noch auf Anhieb erkennen können, womit sich der Text befaßt. Eine Zeile
+bewertet UDO als Kommantar, wenn das erste Zeichen der Zeile ein ""#""
+ist.
+
+Es folgt eine spezielle Zeile für den ST-Guide. Hier wird dem ST-Guide
+mitgeteilt, in welche Rubrik der Hypertext in den Katalog einzuordnen
+ist. Kennen Sie sich nicht mit dem ST-Guide aus, verwenden Sie
+einfach diese Zeile zu Beginn Ihres Quelltextes.
+
+
+!index (!kw [docinfo])
+!index (!kkw [today])
+Nun werden die Informationen für die Titelseite und die Kopfzeilen
+gesetzt, die bei einigen Formaten automatische erzeugt werden.
+(!KW [docinfo] [[title!!]]) und (!KW [docinfo] [[program!!]])
+bilden eine Einheit, daher sollte
+beides zusammengenommen einen Sinn ergeben. Hier würde bei einigen
+Formaten in den Kopfzeilen ""Ein UDO-Bespiel-Quelltext"" ausgegeben. Bei
+(!KW [docinfo] [[date!!]]) wird der Platzhalter (!KKW [today]) durch das aktuelle
+Systemdatum expandiert. Sie können natürlich auch manuell für die
+Angabe des Datums sorgen (z.B. mit ""(!KW [docinfo] [[date!!]]) (!code [31.~Dezember~1999])"").
+
+!index (!kw [subsubtoc])
+!index (!kw [subtoc])
+Im Vorspann werden nun noch einige Schalter gesetzt. Die ersten beiden
+Schalter sorgen bei Hypertexten, deren Kürzel Sie in den eckigen
+Klammern erkennen, für die Ausgabe sogenannter
+''Unterinhaltsverzeichnisse''. In diesen werden dann alle Abschnitte und
+Unterabschnitte eines Kapitels bzw. alle Unterabschnitte eines
+Abschnittes in Form eines Inhaltsverzeichnisses aufgelistet. Dem Leser
+eines Hypertextes wird es dadurch ermöglicht, direkt zu den zugehörigen
+Abschnitten weiterzuklicken. Theoretische wäre es auch möglich, bei
+jedem Kapitel durch die Angabe des Befehls (!KW [subtoc]) bzw. bei
+jedem Abschnitt durch die Angabe des Befehls (!KW [subsubtoc]) diese
+Unterinhaltsverzeichnisse einzufügen. Bei kleineren Texten empfiehlt es
+sich jedoch, diese Ausgabe zu automatisieren.
+
+!index (!kw [no_effects])
+Der Schalter (!KW [no_effects] [[asc!!]]) sorgt für die Unterdrückung der
+Schriftarten für das ASCII-Format. Würde dieser Schalter nicht
+angegeben, würde UDO beim ASCII-Format die in der DFÜ gebräuchlichen
+Zeichen zur Schriftartumschaltung benutzen.
+
+!index (!kw [use_justification])
+Der Schalter (!KW [use_justification] [[asc,stg!!]]) sorgt dafür, daß UDO beim
+ASCII- und ST-Guide-Format Blocksatz erzeugt.
+
+!index (!kw [begin_document])
+Das Kommando (!KW [begin_document]) teilt UDO mit, daß nun der
+Hauptteil des Quelltextes beginnt. Dieses Kommando darf in keinem
+Quelltext fehlen, da hier unverzichtbare Informationen für die
+Ausgabeformate ausgegeben werden!
+
+!index (!kw [maketitle])
+Zu Anfang geben wir eine Titelseite aus, die aus den Informationen aus
+der im oberen Teil des Vorspanns gebildet wird. Das Kommando
+(!KW [maketitle]) sollte -- wenn es benutzt wird -- direkt hinter
+(!KW [begin_document]) angegeben werden. UDO erlaubt zwar auch den
+Einsatz an späterer Stelle, jedoch ist dies weder sinnvoll noch
+unproblematisch.
+
+!index (!kw [tableofcontents])
+Danach möchten wir, daß UDO ein Inhaltsverzeichnis ausgibt. In diesem
+sind alle Kapitel, Abschnitte und Unterabschnitte des Quelltextes
+aufgelistet. Das oben Gesagte gilt auch hier. Wird der Befehl
+(!KW [tableofcontents]) benutzt, sollte er direkt hinter
+(!KW [maketitle]) oder (bei Verzicht auf die Ausgabe der Titelseite)
+hinter (!KW [begin_document]) angegeben werden.
+
+!index (!kw [node])
+Endlich! Nach dem ganzen Vorgeplänkel beginnen wir mit dem Befehl
+(!KW [node]) das erste Kapitel. Beachten Sie bitte auch den Inhalt
+dieses Kapitels, da er weitere Informationen enthält.
+
+Die folgenden Zeilen demonstrieren, wie Sie Kapitel, Abschnitte und
+Unterabschnitte erzeugen. Auch hier sollten Sie einen Blick auf den Text
+werfen.
+
+!index (!kw [end_document])
+Unser Quelltext ist nun beendet. Dies zeigen wir UDO mit dem Befehl
+(!KW [end_document]) an. Auch dieser Befehl darf in keinem Quelltext
+fehlen!
+
+!end_node

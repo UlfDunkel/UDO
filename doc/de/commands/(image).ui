@@ -1,0 +1,26 @@
+!ifnset NoOldKeywords
+!begin_node (!kkw [image])
+!html_name cmd_image()
+
+Grafik ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/image [(!FILE)] [(!TEXT)])(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl wurde umbenannt in (!KKW [img]).
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KKW [img])
+
+!end_xlist
+
+!end_node
+!endif

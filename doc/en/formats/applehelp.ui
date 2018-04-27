@@ -1,0 +1,71 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: HTML Apple Help
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 19: description content for HAH created
+#   fd  Aug 04: typo fixed, remote hint enhanced
+#
+################################################################################
+
+!begin_node HTML Apple Help
+!html_name format_hah
+!label Apple Help Book
+
+Since Mac~OS~X, Apple, Inc. offers a smart (!file [Apple Help Viewer])
+for applications. You have to register a so-called ""Apple Help Book""
+for the app in the system. It has to be available in a certain folder
+within the app bundle. Basically, an Apple Help Book is a collection of
+HTML files, images and CSS commands, just like a website. But it is
+important that the homepage of these HTML pages contains two meta tags
+for the Apple Help Viewer or it cannot be recognized properly.
+
+So in general, the UDO created Apple Help Book format is an HTML
+format, with two meta tags added to the homepage file ((!file [index.htm])
+or similar):
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# preamble
+!macro   PROD          iCalamus
+!docinfo [appletitle]  (!PROD) Manual
+!docinfo [appleicon]   (!PROD)%20Help/img/feather.png
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<meta name="AppleTitle" content="iCalamus Manual">
+<meta name="AppleIcon" content="iCalamus%20Help/img/feather.png">
+!end_verbatim
+(!EXAMPLE_END)
+
+(!HINTS)
+!begin_itemize !compressed
+!item The AppleTitle in the example (here: ""iCalamus Manual"") doesn't have
+to be identical to the folder name of the Apple Help Book (here:
+""iCalamus~Help"").
+
+!item CSS commands in Apple Help Books must not include elements (e.g.
+images) from outside the folder which contains the Apple Help Book. 
+UDO cannot check this. Check for remote files e.g. in Safari's Error
+Console.
+
+!item Starting with Mac~OS~X v10.6 (Snow Leopard), Apple has changed the
+Apple Help Book format. The Apple Help Books created by UDO still
+support the format up to Mac~OS~X v10.5 (Leopard).
+
+!end_itemize
+
+!end_node

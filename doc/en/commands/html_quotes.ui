@@ -1,0 +1,59 @@
+!begin_node (!kw [html_quotes])
+!html_name cmd_html_quotes
+
+Define output format of quotation marks in HTML
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_quotes [(!NAME)](!t)
+
+!item [(!DESCRIPTION)]
+Use this command to define the output format of quotation marks in
+HTML. [(!NAME)] accepts the following parameters.
+
+!begin_description
+
+!item [tags]
+HTML quotations will be output as (!code [<q>]) or (!code [</q>])
+respectively. We recommend to control the replacement characters for
+the quote tags in various languages in a .CSS file.
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+Here are CSS commands for various quotation marks in several languages.
+!begin_verbatim
+:lang(cs) { quotes:"\00BB"      "\00AB" !\ 
+            "\203A"      "\2039";      }
+:lang(de) { quotes:"\00BB"      "\00AB" !\ 
+            "\203A"      "\2039";      }
+:lang(en) { quotes:"\201C"      "\201D" !\ 
+            "\2018"      "\2019";      }
+:lang(fr) { quotes:"\00AB\00A0" "\00A0\00BB" !\ 
+            "\2039\00A0" "\00A0\203A"; }
+
+q:before   {content:open-quote;  !\ 
+            color:#2E4793;}
+q:after    {content:close-quote; !\ 
+            color:#2E4793;}
+q q:before {content:open-quote;  !\ 
+            color:Green;  }
+q q:after  {content:close-quote; !\ 
+            color:Green;  }
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [classic]
+HTML quotations will be output as (!code [&quot;]).
+
+!end_description
+
+!item [(!EXISTSSINCE)] Version~6.5.20
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
+
+!end_node

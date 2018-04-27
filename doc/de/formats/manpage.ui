@@ -1,0 +1,57 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Manualpage
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using ndash instead of mdash in German texts
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Manualpage
+!html_name format_manpage
+
+Das Manualpage-Format ist ein ASCII-Format, bei dem
+lediglich Schriftarten durch Backspace-Sequenzen erzeugt werden. Es
+findet seinen Einsatz zur kurzen Beschreibung von Programmen für
+Unix-Betriebssysteme. Für längere Anleitungen sollten Sie nicht
+Manualpages erstellen, sondern das Texinfo-Format vorziehen.
+
+!begin_description !not_compressed
+
+#################################################
+
+!item [Wie kann man die Seitenlänge der Manualpages einstellen?]
+Mit dem Schalter (!KW [man_lpp] [xx]) können Sie die Anzahl der Zeilen
+(xx) pro Seite angeben.
+
+#################################################
+
+!item [Wie kann man den Programmtyp für die Kopfzeilen setzen]
+Dafür gibt es den Schalter (!KW [man_type] [X]). ""X"" wird in der/den
+Kopfzeile/n in runden Klammern dargestellt.
+
+#################################################
+
+!item [Wieso gibt UDO kein Inhaltsverzeichnis aus?]
+Inhaltsverzeichnisse sind in Manualpages sind mehr als unüblich. Bei
+kurzen Beschreibungen -- und dafür sind Manualpages gedacht -- sind
+auch keine Inhaltsverzeichnisse nötig.
+
+#################################################
+
+!end_description
+
+!end_node

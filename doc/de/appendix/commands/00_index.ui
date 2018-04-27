@@ -1,0 +1,108 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# Notes:
+#    This file contains the command index (in alphabetical order).
+# 
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (from commands.ui)
+#   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro introduced
+# 2010:
+#   fd  Mar 01: old commands can be found in cmds__old.de now
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2013:
+#   fd  Oct 24: html_doctype updated (new option for HTML 5)
+#
+################################################################################
+
+# Wenn "NoOldKeywords" gesetzt ist, erscheinen Kommandos, die
+# nicht mehr unterstützt werden, nicht im Befehlsindex.
+
+!begin_node Befehlsindex
+!html_name cmds
+
+# texinfo brauch unbedingt ein menu
+!ifndest [info]
+!ignore_subsubtoc
+!endif
+
+In diesem Anhang finden Sie eine Kurzbeschreibung aller UDO-Kommandos
+in alphabetischer Reihenfolge. In der Befehlserklärung wird
+beschrieben, was die Beschreibungen bedeuten.
+
+Um den Umstieg von einer älteren UDO-Version zu erleichtern,
+sind hier auch (!link [veraltete Kommandos] [Veraltete Kommandos])
+aufgeführt, die in der aktuellen Version nicht mehr existieren
+oder durch andere Kommandos ersetzt wurden.
+
+# Bei den Hypertexten eine Tabelle anbieten, von der aus man die
+# nach dem Alphabet sortierten Unterkapitel erreichen kann
+!ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv,info,hah]
+
+!medskip
+   
+!ifndest [info]
+!ignore_subtoc
+!endif
+
+!hline
+
+!begin_table [llllll]
+A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!..
+G!.. !! H!.. !! I!.. !! J!.. !! K!.. !! L!..
+M!.. !! N!.. !! O!.. !! P!.. !! Q!.. !! R!..
+S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
+Y!.. !! Z!..
+*!..
+!end_table
+
+!medskip
+
+!endif
+
+!include appendix/commands/explain.ui
+
+!begin_node* Farben
+!html_name cmds_colors
+
+UDO unterstützt das Einstellen bestimmter Schriftfarben im Ausgabeformat. 
+Dazu stehen mehrere Kommandos zur Verfügung:
+
+!include syntax/misc/short_color.ui
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Farbe in UDO(!coloff)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Farbe in UDO(!coloff)
+(!EXAMPLE_END)
+
+(!COLORSUPPORT)
+
+!end_node
+
+!include appendix/commands/01_index.ui
+
+!include appendix/commands/cmds_old.ui
+
+!end_node

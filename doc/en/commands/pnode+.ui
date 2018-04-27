@@ -1,0 +1,32 @@
+!begin_node (!kw [pnode*])
+!html_name cmd_pnode_asterisk
+
+Start a hidden popup chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [pnode]), but here ""(!TEXT)""
+will not appear in a table of contents.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [node*]), (!KW [begin_pnode*]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pnode* Title of hidden popup
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Title of hidden popup
+(!EXAMPLE_END)
+
+!end_node

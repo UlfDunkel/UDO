@@ -1,0 +1,24 @@
+!begin_node (!kw [ignore_index])
+!html_name cmd_ignore_index
+
+Don't include chapter in index.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_index(!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside a chapter UDO won't add its title to
+the index even if the switch (!KW [use_nodes_inside_index]) is used
+inside the preamble of the source file.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_nodes_inside_index]), (!KW [no_index]), (!link [Indices] [Indices])
+
+!end_xlist
+
+!end_node

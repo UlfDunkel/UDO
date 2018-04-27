@@ -1,0 +1,20 @@
+!begin_node (!kw [end_verbatim])
+!html_name cmd_end_verbatim
+
+Finish a verbatim environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_verbatim(!t)
+
+!item [(!DESCRIPTION)]
+Finishes the verbatim environment.
+
+!item [(!SEEALSO)]
+(!KW [begin_verbatim]), (!link [Preformatted text] [Preformatted text])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,130 @@
+!begin_node (!kw [item [~!]])
+!html_name cmd_item2
+
+Start an item.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/item [(!TEXT)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new item of a (!link [description] [description environment]), blist, ilist or xlist environment.
+""<text>"" will be displayed in bold text inside a (!link [description] [description environment]) or blist
+environment, italic in an ilist environment and normal in a xlist environment.
+
+!item [(!SEEALSO)]
+(!KW [item]), (!link [Descriptions] [Descriptions]), (!link [Lists] [Lists])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_description
+!item [description enironment] This is the first item
+in a description environment.
+!item [description enironment]
+This is the second item
+in a description environment.
+!item [description enironment]
+      This is the third item
+      in a description environment.
+!end_description
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_description
+!item [description enironment] This is the first item
+in a description environment.
+!item [description enironment]
+This is the second item
+in a description environment.
+!item [description enironment]
+      This is the third item
+      in a description environment.
+!end_description
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_blist
+!item [blist enironment] This is the first item
+in a blist environment.
+!item [blist enironment]
+This is the second item
+in a blist environment.
+!item [blist enironment]
+      This is the third item
+      in a blist environment.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist
+!item [blist enironment] This is the first item
+in a blist environment.
+!item [blist enironment]
+This is the second item
+in a blist environment.
+!item [blist enironment]
+      This is the third item
+      in a blist environment.
+!end_blist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_ilist
+!item [ilist enironment] This is the first item
+in an ilist environment.
+!item [ilist enironment]
+This is the second item
+in an ilist environment.
+!item [ilist enironment]
+      This is the third item
+      in an ilist environment.
+!end_ilist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_ilist
+!item [ilist enironment] This is the first item
+in an ilist environment.
+!item [ilist enironment]
+This is the second item
+in an ilist environment.
+!item [ilist enironment]
+      This is the third item
+      in an ilist environment.
+!end_ilist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_xlist
+!item [xlist enironment] This is the first item
+in a xlist environment.
+!item [xlist enironment]
+This is the second item
+in a xlist environment.
+!item [xlist enironment]
+      This is the third item
+      in a xlist environment.
+!end_xlist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_xlist
+!item [xlist enironment] This is the first item
+in a xlist environment.
+!item [xlist enironment]
+This is the second item
+in a xlist environment.
+!item [xlist enironment]
+      This is the third item
+      in a xlist environment.
+!end_xlist
+(!EXAMPLE_END)
+
+!end_node

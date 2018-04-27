@@ -1,0 +1,22 @@
+!begin_node (!kw [end_sourcecode])
+!html_name cmd_end_sourcecode
+
+Eine sourcecode-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_sourcecode(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die sourcecode-Umgebung.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [begin_sourcecode])
+
+!end_xlist
+
+!end_node

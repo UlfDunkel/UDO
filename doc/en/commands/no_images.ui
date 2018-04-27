@@ -1,0 +1,28 @@
+!begin_node (!kw [no_images])
+!html_name cmd_no_images
+
+Do not use images.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_images [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Switches off the output of commands to display images.
+The example show how to switch it off when converting to HTML.
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Images] [Images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_images [html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

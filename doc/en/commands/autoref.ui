@@ -1,0 +1,27 @@
+!begin_node (!kw [autoref])
+!html_name cmd_autoref
+
+Turn automatic referencing on/off.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/autoref [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+Switches on or off automatic references. When UDO starts it will
+insert references automatically by default. For the ST-Guide UDO
+prints (!code [@autorefon]) or (!code [@autorefoff]).
+
+!item [(!EXAMPLE)]
+(!T)!/autoref [off](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!link [Links] [Links])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,38 @@
+!begin_node (!kw [image_alignment])
+!html_name cmd_image_alignment
+
+Specify alignment of images.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/image_alignment [left|center|right](!t)
+
+!item [(!DESCRIPTION)]
+Used in the preamble this command determines the default
+alignment of images that are included with the (!KW [image]) command.
+This alignment will be used when an image is placed outside
+a center, flushleft or flushright environment.
+When an image is placed inside such an environment,
+it will be aligned according to the text of the environment,
+independent of the setting of the (!KW [image_alignment]) command.
+If you want to align an image right inside a center environment,
+you will have to insert a flushright environment around
+the (!KW [image]) command.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [image]), (!KW [image*]), (!KKW [img]), (!KW [table_alignment]), (!link [Images] [Images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!image_alignment right
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

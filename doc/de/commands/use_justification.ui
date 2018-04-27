@@ -1,0 +1,31 @@
+!begin_node (!kw [use_justification])
+!html_name cmd_use_justification
+
+Blocksatz einschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_justification [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Für die angegebenen Formate werden Absätze im
+Blocksatz ausgegeben. Für (!LaTeX) und RTF spielt der
+Schalter keine Rolle, da dort immer Blocksatz erzeugt
+wird. Für WinHelp und HTML spielt der Schalter auch
+keine Rolle, da dort kein Blocksatz erzeugt werden
+kann.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_justification [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

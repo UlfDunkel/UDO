@@ -1,0 +1,240 @@
+!begin_node GEM version
+!html_name usage_gem
+
+For GEM (Atari platforms) there is a graphical user interface (shell)
+which is no longer maintained and supported. 
+See (!url [http://www.udo-open-source.org/download/shells.php] []).
+
+# auskommentiert 28.01.2004 - Ulrich Kretschmer
+!begin_ignore
+
+The GEM version enables you to set the files and options by simply
+clicking the mouse. Furthermore you can define programs for editing
+and viewing files that can be started by the GEM version.
+
+The GEM version supports the VA protocoll, iconification and drag &
+drop. It runs with every AES: TOS, MultiTOS, Geneva, MagiC (Mac/PC) or
+STonX.
+
+While converting you can see the current status of UDO. Because of the
+AES calls the GEM version runs slower than the TTP version. If you
+want to convert large source files I recommend to use the TTP version.
+
+The usage of the GEM version is very easy.
+
+################################################################################
+
+!begin_node GEM main dialog
+!html_name usage_gem_main
+
+In the main dialog you can see several buttons and a menu bar. In the
+main dialog you choose the source file, the destination file and the
+destination format. By pressing the ""Convert"" button you start the
+conversion.
+
+!begin_center
+!ifset [teTeX]
+!raw [tex] \scalebox{0.9}{
+!endif
+!image (!IMAGES)gem_main
+!ifset [teTeX]
+!raw [tex] }
+!endif
+!end_center
+
+
+The items of the menu bar open other dialogs in most cases. If not you
+can guess the sense of them by simply reading the menu item text. Two
+menu items have to be described:
+
+!begin_tlist [Dest/Start program:]
+
+!item	[Dest/Start program:] You can define a program for each
+destination format. E.g. you can define a program that converts the
+ST-Guide source files (made with UDO) into a ST-Guide hypertext, or a
+program that converts the (!LaTeX) files into a DVI file.
+
+!item	[Dest/ST-Guide:] If you choose this menu item UDO calls the
+ST-Guide and tells it to display the converted hypertext (source file
+name, suffix (!file [.hyp])).
+
+!end_tlist
+
+!end_node
+
+################################################################################
+
+!begin_node GEM dialog ""Settings""
+!html_name usage_gem_settings
+
+After clicking the menu item ""Options, Settings"" this dialog
+appears. The sense of each button you can see in this dialog will be
+described now.
+
+!begin_center
+!ifset [teTeX]
+!raw [tex] \scalebox{0.8}{
+!endif
+!image (!IMAGES)gem_opts
+!ifset [teTeX]
+!raw [tex] }
+!endif
+!end_center
+
+!begin_itemize
+
+!item	Destination file:
+
+	!begin_itemize
+
+	!item	Adjust: If this button is checked the GEM version will
+	adjust the file name of the destination file when changing the
+	destination format. How it is adjusted depends on the status of
+	the following buttons:
+
+		!begin_itemize
+
+		!item	Completely: UDO adjusts the name completely.
+
+		!item	Name and suffix: UDO takes the name of the source file
+		and adjusts the suffix according to the current destination
+		format. The path of the destination file isn't adjusted.
+
+		!item	Only the suffix: UDO adjusts only the suffix of the
+		destination file according to the current destination format.
+		The path and the file name aren't adjusted.
+
+		!end_itemize
+
+	!item	View: If this button is checked UDO will call the
+	destination viewer after having converted the source file.
+
+	!end_itemize
+
+!item	Ask before:
+
+	!begin_itemize
+
+	!item	Quitting UDO: If this button is checked UDO asks you
+	before quitting it.
+
+	!item	Overwriting file:If the destination file already exists
+	UDO will ask if it should overwrite the file when starting the
+	conversion.
+
+	!end_itemize
+
+!item	Options:
+
+	!begin_itemize
+
+	!item	Save log file: Shall UDO save a log file that contains all
+	error messages, warning messages and additional information
+	(similar to the command line option (!V)(--)no-logfile)(!v)?
+
+	!item	Save hyphen file: Shall UDO save a hyphen file with
+	hyphenation patterns
+	(similar to the command line option (!V)(--)no-hypfile)(!v)?
+
+	!item	Save tree file: Shall UDO save a tree file where you can
+	see the include file structure of your documentation
+	(similar to the command line option (!V)(--)treefile(!v))?
+
+	!item	Verbose mode: Shall UDO display the status during the
+	conversion
+	(similar to the command line option (!V)(--)verbose(!v))?
+
+	!item	Suppress warnings: Shall UDO suppress warning messages in
+	the log file
+	(similar to the command line option (!V)(--)no-warnings(!v))?
+
+	!end_itemize
+
+!end_itemize
+
+!end_node
+
+################################################################################
+
+!begin_node GEM dialog ""Symbols""
+!html_name usage_gem_symbols
+
+The GEM version enables you to set predefined symbols when starting
+the conversion. You can insert the text and choose which symbol has to
+be used by clicking the buttons on the left side.
+
+!begin_center
+!image (!IMAGES)gem_syms
+!end_center
+
+If an entry is checked UDO will use the text as a predefined symbol.
+
+!end_node
+
+################################################################################
+
+!begin_node GEM dialog ""External programs""
+!html_name usage_gem_externalprograms
+
+This dialog looks very complicated and I must say that I have to
+change the design next time.
+
+In this dialog you can define the programs you can use for editing and
+viewing the source files and destination files or for converting the
+destination files.
+
+!begin_center
+!ifset [teTeX]
+!raw [tex] \scalebox{0.7}{
+!endif
+!image (!IMAGES)gem_prgs
+!ifset [teTeX]
+!raw [tex] }
+!endif
+!end_center
+
+Please select the destination format in the upper half.
+
+In the lower half you can choose the program. If this program isn't a
+GEM application you should check the button ""TOS program"". If it is
+a GEM application and it supports (!code [VA_START]) you should check
+the ""Supports (!code [VA_START])"" button. These settings are only used
+if UDO starts the programs itself. Finally you can edit the parameters
+UDO shall use when calling the programs. You can use placeholders for
+the name of the current source file and destination file. Click the
+""Hint"" button to get more information.
+
+!subsubsubheading How UDO starts programs
+
+!begin_itemize
+
+!item	In first place UDO will look for an AV server. If
+(!code [AVSERVER]) is set inside the environment or Gemini or Thing are
+running, UDO tells them to start the program.
+
+!item	If there's no AV server available UDO starts the programs
+itself.
+
+	!begin_itemize
+
+	!item	If the program is an accessory the parameters will be
+	transferred via (!code [VA_START]).
+
+	!item	If the program is already running and it supports
+	(!code [VA_START]), UDO will send a (!code [VA_START]) message to this
+	program.
+
+	!item	In all other cases UDO will start GEM applications with
+	(!code [shel_write(!)]) and TOS programs with (!code [Pexec(!)]).
+
+	!end_itemize
+
+!end_itemize
+
+!end_node
+
+################################################################################
+
+!end_ignore
+
+!end_node

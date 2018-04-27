@@ -1,0 +1,26 @@
+!begin_node (!kw [drc_icolor])
+!html_name cmd_drc_icolor
+
+Farbe für ""kursiven"" Text bestimmen (nur DRC).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_icolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Da DRC keine verschiedenen Schriftarten kennt, sondern Text
+lediglich farbig hervorheben kann, können Sie mit diesem Befehl
+UDO mitteilen, in welcher Farbe kursiver Text dargestellt werden soll.
+Es stehen folgende Farben zur Verfügung:
+!include syntax/misc/short_color.ui
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_bcolor]), (!KW [drc_ucolor]), (!KKKW [I] [i])
+
+!end_xlist
+
+!end_node

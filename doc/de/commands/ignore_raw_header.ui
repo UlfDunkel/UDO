@@ -1,0 +1,26 @@
+!begin_node (!kw [ignore_raw_header])
+!html_name cmd_ignore_raw_header
+
+Headerdatei ignorieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_raw_header(!t)
+
+!item [(!DESCRIPTION)]
+Darf nur in einem Node benutzt werden und besagt, daß in diesem Node
+die global geltende Headerdatei nicht ausgegeben werden soll. Somit
+können Sie einzelne Nodes davor schützen, einen Header zu erhalten.
+
+Dieser Befehl wird derzeit nur für HTML unterstützt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_header]), (!KW [ignore_raw_footer])
+
+!end_xlist
+
+!end_node

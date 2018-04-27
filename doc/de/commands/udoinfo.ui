@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [udoinfo])
+!html_name cmd_udoinfo
+
+Informationsseite einbauen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/udoinfo](!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [use_about_udo]).
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!KW [use_about_udo])
+
+!end_xlist
+
+!end_node
+!endif

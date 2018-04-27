@@ -1,0 +1,23 @@
+!begin_node (!kw [ignore_subsubtoc])
+!html_name cmd_ignore_subsubtoc
+
+Suppress output of ""subsubtoc"" in the relevant subnode.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubtoc(!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside a section UDO won't output a
+""subsubtoc"" which contains all subsections and paragraphs of this
+section even if you have used (!KW [use_auto_subsubtocs]) inside
+the preamble.
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubtocs]), (!KW [subsubtoc])
+
+!end_xlist
+
+!end_node

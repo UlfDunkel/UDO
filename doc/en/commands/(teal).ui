@@ -1,0 +1,34 @@
+!begin_node (!kkw [teal])
+!html_name cmd_teal
+
+Sets the textcolor teal.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/teal)(!t)
+
+!item [(!DESCRIPTION)]
+Text following this placeholder will be displayed in teal color.
+You can revert to the default color using the placeholder (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), (!link [Text colors] [Text colors])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+The word (!teal)teal(!coloff) appears colored in teal.
+!end_verbatim
+(!EXAMPLE_AFTER)
+The word (!teal)teal(!coloff) appears colored in teal.
+(!EXAMPLE_END)
+
+!end_node

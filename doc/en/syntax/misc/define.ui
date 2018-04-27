@@ -1,0 +1,98 @@
+!begin_node Definitions
+!html_name misc_definitions
+
+Like macros, definitions are user-defined placeholders. You can use them to
+insert special commands inside the text especially for the destination
+format.
+
+!index (!kw [define])
+The syntax  is (!KW [define] [(!WORD!) (!TEXT!)]). In contrast to macros,
+(!C)(!TEXT)(!c) will not be converted in a special way. No special
+characters are translated inside (!C)(!TEXT)(!c).
+
+This example demonstrates how to print headlines with HTML:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define1.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+As you can see you can use definitions to insert special commands that
+aren't supported by UDO. UDO Release 4 offered a lot of special
+commands for (!LaTeX) that you now have to simulate with the
+(!KW [define]) command:
+
+!index \linebreak
+!index \nolinebreak
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index Definitions !! Parameters
+!index Parameters !! Definitions
+You can use definitions with parameters, too. Definitions with parameters
+are used the same way you can use macros with parameters. Definitions with
+parameters are a great help to expand UDO's support of a destination format.
+
+You declare definitions like in the upper example. You can tell UDO the
+positions of the parameters by adding ""(!code [(!/1!)])"", ""(!code [(!/2!)])""
+up to ""(!code [(!/9!)])"". When you call a definition you have to write
+brackets (""[!..]"") around the parameters.
+
+In the upper example I have shown you how to make a heading for HTML. When
+using parameters it may look like the following example:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define3.ui
+(!EXAMPLE_END)
+
+As you can see in this example you can write format depending commands UDO
+doesn't support already.
+
+The upper (!LaTeX) example can be defined nicer, too. If you use parameters
+you can provide all available (!LaTeX) commands in one definition:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)define4.ui
+(!EXAMPLE_END)
+
+In this example only one parameter is used but the non-(!LaTeX) definition
+contains a second parameter. You may ask yourself why it has to be like
+this. Well, if you call the definition with only one parameter the second
+parameter is empty. When expanding the non-(!LaTeX) definition UDO will
+replace the definition placeholder by empty space (because there is no second
+parameter, you understand?). Unfortunately you have to use this work-around
+when using definition with placeholders.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+!item   Characters of the text of the (!KW [define]) command won't be
+converted.
+
+!item   Characters of the parameters you pass to the definition will be
+converted.
+
+!index (!kw [heading])
+!item   UDO supports the (!KW [heading]) command for displaying headlines.
+The upper HTML example is only used for demonstration.
+
+!item When naming the definitions you should be cautious not to use
+pre-defined UDO command names like ""B"" or ""nl"". If you don't you will
+get problems with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
+
+!item You shouldn't use too many definitions because every additional
+definition slows down the conversion of the source file.
+!begin_ignore
+The maximum number
+of definitions is (!MAXMACRO).
+!end_ignore
+
+!end_enumerate
+
+!end_node

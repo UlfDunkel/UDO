@@ -1,0 +1,22 @@
+!begin_node (!kw [maketitle])
+!html_name cmd_maketitle
+
+Print title page.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/maketitle(!t)
+
+!item [(!DESCRIPTION)]
+Outputs a titlepage build with the information set by the (!KW [docinfo])
+command. (!KW [maketitle]) should be used directly after
+(!KW [begin_document]) and before (!KW [tableofcontents]).
+
+!item [(!SEEALSO)]
+(!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node

@@ -1,0 +1,23 @@
+!begin_node (!kw [begin_xlist])
+!html_name cmd_begin_xlist
+
+Start a list.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_xlist [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [list] [xlist environment]). The length of ""(!TEXT)"" defines the indent of the
+list. This environment must be finished with (!KW [end_xlist]). You
+can use this environment inside other environments. The text you set
+with (!KW [item] [[~!!]]) will be displayed with the normal font.
+
+!item [(!SEEALSO)]
+(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [compressed]), (!KW [not_compressed]), (!KW [use_compressed_envs]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node

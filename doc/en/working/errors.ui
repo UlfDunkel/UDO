@@ -1,0 +1,347 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Error messages
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 04: 'underfull' -> 'too short'
+#
+################################################################################
+
+!ifnset [NoErrors]
+
+!begin_node Error messages
+!html_name errormessages
+
+UDO prints all error messages, warnings and hints that appear when
+converting the source file to files with the suffix
+(!file [.ul?]). Each message is constructed the following way:
+
+!begin_quote
+!begin_verbatim
+  Error: <file> <line number>: <text>
+Warning: <file> <line number>: <text>
+   Hint: <file> <line number>: <text>
+!end_verbatim
+!end_quote
+
+If you want to avoid these errors, warnings and hints open the printed file,
+go to the printed line and try to find the error. Start with the first
+printed error and convert your source file once again. A lot of messages
+will disappear because they depend on earlier errors.
+
+!begin_description
+
+!item ['!..' called twice]
+The printed command was used twice or more inside the source file
+even if it is only to be used once.
+
+!item ['!..' expected]
+UDO has expected the printed command. Please check if all
+environments were finished with the correct command or if a
+(!I)!/begin_*(!i) is missing.
+
+!item ['!..' followed by '!..']
+You have finished an environment with an incorrect command or you
+have forgotten to finish it. Another possibility is that you have
+misplaced the (!I)!/end_*(!i) command.
+
+!item ['!..' ignored inside preamble]
+It is only allowed to use the printed command inside the main part of
+the source file. That means you have to place it after
+(!KW [begin_document]).
+
+!item ['!..' ignored outside preamble]
+It is only allowed to use the printed command inside the preamble of
+the source file. That means you have to place it before
+(!KW [begin_document]).
+
+!item ['!..' maybe not available in (!LaTeX)]
+The printed character cannot be used for (!LaTeX). Please try to use
+another character.
+
+!item ['!..' not active]
+A text style or a footnote shall be finished even if it isn't active.
+Please note that the placeholders contain a capital letter for
+activating a text style. The placeholders that finish a text style
+contain a small letter.
+
+!item ['!..' not available in ISO Latin 1]
+ISO Latin1 doesn't contain the printed character. Thus, UDO cannot
+convert the printed character.
+
+!item ['!..' not available in this charset]
+The printed character isn't available in the system character set.
+Thus, UDO cannot convert it. Please try to avoid the printed
+character.
+
+!item ['!..' still active]
+A text style or a footnote shall be started even if it is still
+active. Please note that the placeholders contain a capital letter
+for activating a text style. The placeholders that finish a text
+style contain a small letter.
+
+!item ['!..' without '!..']
+You wanted to finish an environment even if it wasn't started before.
+
+!item [!/else without !/if]
+You have used the (!KW [else]) command but you haven't started a
+query with (!KW [if]), (!KW [ifdest]) etc.
+
+!item [!/endif without !/if]
+Your source file contains an (!KW [endif]) command but you haven't
+started a query with (!KW [if]), (!KW [ifdest]) etc.
+You will also get this error message if you use (!KW [end_ignore]) without according (!KW [begin_ignore]).
+
+!item ['!/item' outside environment]
+You have used the (!KW [item]) command outside an itemization,
+enumeration, description or list.
+
+!item [check this paragraph]
+UDO prints a filename and a line number where you can find the reason
+for the upper printed error message.
+
+!item [couldn't open (!FILE) (pass1)]
+UDO couldn't open the printed file in the first of two passes.
+
+!item [couldn't open (!FILE) (pass2)]
+UDO couldn't open the printed file in the second pass. Please check
+the filename you have used for (!KW [include]).
+
+!item [couldn't open destination file]
+UDO couldn't open the destination file. Please check the filename or
+remove file protection of the existing file.
+
+!item [couldn't open hypfile]
+UDO couldn't open the hyphenation file. Please check the filename or
+remove file protection of the existing file.
+
+!item [couldn't open logfile]
+UDO couldn't open the log file. Please check the filename or remove
+file protection of the existing file.
+
+!item [couldn't open source file]
+UDO couldn't open the source file. Please check the filename.
+
+!item [couldn't open treefile]
+UDO couldn't open the tree file. Please check the filename or remove
+file protection of the existing file.
+
+!item [couldn't read BMP header]
+The printed file isn't a Windows Bitmap or the file doesn't exist.
+
+!item [couldn't read IMG header]
+The printed file isn't a GEM image or the file doesn't exist.
+
+!item [couldn't read MSP header]
+The printed file isn't a MSP image or the file doesn't exist.
+
+!item [couldn't read PCX header]
+The printed file isn't a PCX image or the file doesn't exist.
+
+!item [couldn't replace (!KKW [ilink])]
+A manual image link couldn't be replaced. You are allowed to use up
+to (!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+
+!item [couldn't replace (!KKW [img])]
+An internal image couldn't be replaced. You are allowed to use up to
+(!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+
+!item [couldn't replace (!KKW [link])]
+A manual link couldn't be replaced. You are allowed to use up to
+(!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+
+# (!KKW [xlink]) does not work here???
+!item [couldn't replace !/xlink]
+An external link couldn't be replaced. You are allowed to use up to
+(!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+
+!item [couldn't write IMG header]
+UDO couldn't open the printed file for changing the image
+information. Maybe the file doesn't exist or it is write protected.
+
+!item [definition contents longer than !.. characters]
+The contents of a definition exceeds the maximum number of
+characters. Please shorten your definition contents.
+
+!item [definition name longer than !.. characters]
+The name of a definition exceeds the maximum number of characters.
+Please shorten your definition name.
+
+!item [language !.. not supported]
+The printed language isn't supported by UDO (yet) or you have written
+the language in a wrong way.
+
+!item [link destination undefined]
+The destination of a manual link isn't defined. That means there's no
+chapter or label exisiting with the given name.
+
+!item [macro contents longer than !.. characters]
+The contents of a macro exceeds the maximum number of characters.
+Please shorten your macro contents.
+
+!item [macro name longer than !.. characters]
+The name of a macro exceeds the maximum number of characters.
+Please shorten your macro name.
+
+!item [memory allocation failed]
+UDO couldn't allocate the needed memory. It doesn't stop converting
+the source file but you should take a look at the destination file wether
+it's OK.
+
+!item [missing parameter(s)]
+A command needs a specific numer of parameters and you have used not
+enough parameters. Check the command and add the needed parameters.
+
+!item [odd number of ('')]
+The source file contains an odd number of double apostrophes. UDO
+will find this error at the end of a chapter so check the chapter
+above the printed line number.
+
+!item [odd number off ("")]
+The source file contains an odd number of double quotes. UDO will
+find this error at the end of a chapter so check the chapter above
+the printed line number.
+
+!item [overfull line]
+A line of a verbatim environment is longer than the value of
+(!KW [parwidth]). Try to cut the line or increase the paragraph
+width.
+
+!item [source and destination file are equal]
+You have tried to read and write the same file. Check your command
+line options.
+
+!item [string buffer overflow]
+# ToDo: ändern!!!
+Please contact the author.
+
+!begin_ignore
+!item [too many aliases used]
+Your source file contains too many (!I)!/alias(!i) commands. Please
+delete some unimportant aliases or contact the author to get a
+special version of UDO.
+!end_ignore
+
+!item [too many columns used]
+Your source file contains a table with too many columns.
+
+!item [too many defines used]
+Your source file contains more than (!MAXDEFINE) definitions.
+
+!item [too many environments used]
+You have used too many environments nested into one another. Try to layout
+your source file less complex.
+
+!item [too many files opened]
+During the conversion too many files were opened. Check your source
+file if you constructed a recursive include.
+
+!begin_ignore
+!item [too many hyphens used]
+Your source file contains too many hyphenation patterns. Delete
+some of them and use local hyphenation marks.
+!end_ignore
+
+!item [too many items inside enumeration]
+You have used too many items inside an enumerate environment where
+items are marked with letters. Reduce the ammount of items to 26 or
+use an itemize environment instead.
+
+!begin_ignore
+!item [too many labels used]
+Your source file contains too many (!KW [label]) commands. Because
+UDO handles chapters and aliases like labels, too, this error message
+can appear when using only some labels. Please delete some
+unimportant labels or aliases or contact the author to get a special
+version of UDO.
+!end_ignore
+
+!item [too many labels used in table]
+Your source file contains too many (!KW [label]) commands.
+
+!begin_ignore
+!item [too many macros used]
+Your source file uses more than (!MAXMACRO) macros.
+!end_ignore
+
+!begin_ignore
+!item [too many nodes used]
+Your source file uses too many chapters. If possible try to merge
+some chapters or contact the author to get a special version of UDO.
+!end_ignore
+
+!item [too many parameters used]
+A command or placeholder was called with too many parameters. Check
+the command and look for additional information inside the command
+index.
+
+!item [too many rows used]
+Your source file uses a table with too many rows.
+
+!item [too many words used inside paragraph]
+A paragraph of your source file uses too many words. Try to split up
+the paragraph into two or more parts.
+
+!item [too short line]
+The printed line is too short and you will see an ugly right margin.
+If you use justification this error message says that there were
+inserted too many blanks. Try to insert hyphenation marks or use
+the (!KW [sloppy]) command to suppress this type of error message.
+
+!item [unexpected end of line in command]
+Your source file contains a placeholder that wasn't finished
+correctly.
+
+!item [unknown command]
+UDO doesn't know the printed command. If you want to use a word a the
+beginning of a line that begins with an exclamation mark you have to
+mark it with a slash (""/"").
+
+!item [use (!/V) and (!/v) in one line]
+(!MISS)
+
+!item [use (!/xlink [text!] [topic@foo.hlp!])]
+The construction of an external link for Windows Help is incorrect.
+
+!item [wrong number of parameters]
+You called a command or placeholder with the wrong number of
+parameters. Check the command index for additional information.
+
+!item [xlink needs WinHelp destination topic]
+The construction of an external link for Windows Help is incorrect.
+Here the name of the page is missing.
+
+!item [xlinks needs WinHelp destination file]
+The construction of an external link for Windows Help is incorrect.
+Here, the name of the Windows Help file is missing.
+
+!end_description
+
+!end_node
+
+!endif

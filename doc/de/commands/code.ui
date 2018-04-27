@@ -1,0 +1,27 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [code])
+!html_name cmd_code
+
+Auf einen anderen Zeichensatz umschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code [(!CHARSET)](!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr.
+Benutzen Sie stattdessen (!KW [code_source]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!EXISTEDUNTIL)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [code_source]), (!KW [code_target]), (!link [Sonderzeichen] [Sonderzeichen])
+
+!end_xlist
+
+!end_node
+!endif

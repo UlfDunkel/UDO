@@ -1,0 +1,36 @@
+!begin_node (---)
+!html_name cmd_ldash
+
+Output a long dash.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(---)(!t)
+
+!item [(!DESCRIPTION)]
+Three minus characters in a row will be replaced by a long dash if
+the destination format supports them. If the destination format
+doesn't support them UDO will print one normal minus character
+instead.
+
+!item [(!SEEALSO)]
+(!link [((---)!)] [((---)!)]), (!link [(--)] [(--)]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+American English not only uses long dashes, 
+but also prefers---we do not really know why---to ""glue"" 
+them between words.
+!end_verbatim
+(!EXAMPLE_AFTER)
+American English not only uses long dashes,
+but also prefers---we do not really know why---to ""glue""
+them between words.
+(!EXAMPLE_END)
+
+!end_node

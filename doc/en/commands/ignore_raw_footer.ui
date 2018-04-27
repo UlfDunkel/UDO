@@ -1,0 +1,26 @@
+!begin_node (!kw [ignore_raw_footer])
+!html_name cmd_ignore_raw_footer
+
+Ignore footer file.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_raw_footer(!t)
+
+!item [(!DESCRIPTION)]
+This command may only be used inside a node
+and suppresses the output of the footer file
+that was set with (!KW [use_raw_footer]).
+
+This command is currently supported by HTML only.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_footer]), (!KW [ignore_raw_header])
+
+!end_xlist
+
+!end_node

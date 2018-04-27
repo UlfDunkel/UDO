@@ -1,0 +1,83 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: IPF (Information Presentation Facility)
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2003:
+#   uk  Dec 22: Texte zu IPF ï¿½berarbeitet und ins Englische übertragen
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!begin_node Information Presentation Facility (IPF)
+!html_name format_ipf
+!label IPF
+
+# Notizen 22.12.2003:
+# Info zum Thema: siehe auch noch auf http://www.hypermake.de/english/n024.html
+# = http://www.hypermake.de/deutsch/n024.html
+# GNU texinfo -> ipf Konverter: http://www.fido.de/kama/texinfo/texinfo-de.html
+# allgem. Info zu IPF(C): http://www.mit.edu:8001/activities/os2/faq/os2faq0602.html
+# ipf2html (Perl-Skript): http://web.mit.edu/afs/athena/activity/o/os2/www/ipf2html.html
+# http://www.mgroeber.de/os2.htm
+# http://www.willemer.de/informatik/os2/os2prg.htm
+# http://www.m-petz.de/Software/Phelsuma/Ipf.htm
+# http://www.os2bbs.com/download/dos.html: INF-Viewer für PC-DOS 7 (Subscription erforderlich)
+# HTML2IPF: http://home-5.worldonline.nl/~jdekeij/htmipf.html
+#  http://www.goellnitz-online.de/os2/infseite/infseite.htm
+# INF-Viewer für DOS: http://www.commtalk.de/pages/Windows/Windows_Utilities/ (Download funzt nicht)
+# ------------------------------------------------------------------------------
+(!B)IPF(!b) is the source format for helpfiles under IBM's operating system (!I)OS/2~Warp(!i) (and IBM PC-DOS~7).
+
+The IPF format is a text format. It is documented in the "IBM
+OS/2~Warp IPF~Programming Guide" (Publication Number G25H-7110-00).
+You can read this documentation online on
+(!url [http://publibfp.boulder.ibm.com/cgi-bin/bookmgr/BOOKS/ej6c2b00/CCONTENTS] [] [] [elink])
+or download it as a bookmanager file. 
+You can read bookmanager files using the (!url [IBM Library Reader for Windows] [http://www-306.ibm.com/software/applications/office/bkmgr/ilr.html] [] [elink]) 
+or the java-based (!url [IBM Softcopy Reader] [http://www-306.ibm.com/software/applications/office/bkmgr/softcopyread.html] [] [elink]).
+
+An IPFC documentation comes also with the online help of the IPFC program.
+
+For producing help files from the IPF-files, you need the IPF-compiler ((!file [IPFC.EXE])) which is part of
+(commercial) IBM developer products (e.g. (!I)OS/2~Developers Toolkit(!i),
+(!I)Visual-Age(!i) Compiler, (!I)IBM Set C++(!i)). 
+The OS/2 executable IPFC is downloadable on (!url [http://www.m-petz.de/Download/Download.htm] [] [] [elink]) (topic "IPFC-Zubehör") 
+or (!url [http://www.goellnitz-online.de/os2/infseite/ipfc.htm] [] [] [elink]).
+
+Helpfiles under OS/2 are existing as HLP- or INF-files. HLP-files are
+used together with executable programs, where INF-files may be viewed
+standalone by doubleclicking on the (!I)Workplace Shell(!i) or using
+the commandline program (!file [VIEW]).
+
+Please note: the OS/2 HLP format has nothing in common with the Windows HLP format!
+
+Another INF viewer for OS/2 is (!url [NewView] [http://www.os2voice.org/VNL/past_issues/VNL0900H/vnewsf6.htm] [] [elink]).
+INF-viewer for Win32 or DOS can be downloaded on
+(!url [http://www.labyrinth.net.au/~dbareis/swrecom.htm] [] [] [elink]) or
+(!url [http://www.goellnitz-online.de/os2/infseite/xview/xview.htm] [] [] [elink]).
+
+IBM provided an older 16-bit windows viewer for INF and HLP-files which
+is part of the ""Just Add Warp"" package. You can download it on
+(!url [ftp://ftp.software.ibm.com/ps/products/os2/tools/jaow/jaow.zip] [] [] [elink]) or
+(!url [ftp://ftp.leo.org/pub/comp/os/os2/leo/windows/justaddwarp.zip] [] [] [elink]) (approx. 3.4~MB).
+After installing, you need only the following
+files from the directory (!file [\JUST_ADD]): (!file [IPF.DLL]),
+(!file [LIBIPFX.DLL]), (!file [LIBIPFX.LIB]), (!file [VIEW.EXE]),
+(!file [VIEWH.HLP]) and (!file [XVIEW.PAL]) (all other files from this
+package are not relevant).
+
+!end_node

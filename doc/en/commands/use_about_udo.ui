@@ -1,0 +1,31 @@
+!begin_node (!kw [use_about_udo])
+!html_name cmd_use_about_udo
+
+Include information page.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_about_udo [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This command switches on the usage of a page with information about
+UDO. This page doesn't appear in tables of contents. If you want to
+tell anybody else about UDO please add this switch to your preamble
+and insert ""UDO(!RELEASE)"" somewhere in your source file. The example shows
+how to add this information page in Windows Help, ST-Guide and Pure C Help.
+
+!item [(!SEEALSO)]
+(!KW [udolink])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_about_udo [stg,win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

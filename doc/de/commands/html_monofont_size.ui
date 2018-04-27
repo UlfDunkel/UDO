@@ -1,0 +1,30 @@
+!begin_node (!kw [html_monofont_size])
+!html_name cmd_html_monofont_size
+
+Größe des Fonts für verbatim-Umgebungen bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_monofont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann die Größe des Fonts bestimmt werden, der für die
+Anzeige von Text in verbatim-Umgebungen benutzt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_monofont_name]), (!KW [verbatimsize])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_monofont_size +1
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

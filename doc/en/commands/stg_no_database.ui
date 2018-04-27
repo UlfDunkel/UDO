@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [stg_no_database])
+!html_name cmd_stg_no_database
+
+Suppress output of database line (ST-Guide only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/stg_no_database(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more.
+Use (!KW [docinfo] [[stgdatabase] [~!!]]) instead.
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~3
+
+!item [(!SEEALSO)]
+(!KW [docinfo])
+
+!end_xlist
+
+!end_node
+!endif

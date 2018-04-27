@@ -1,0 +1,80 @@
+!begin_node Verteilte Dokumente
+!html_name misc_distributed_documents
+
+!index (!kw [include])
+!index (!kw [rinclude])
+!index (!kw [vinclude])
+!index (!kw [sinclude])
+!index (!kw [cinclude])
+!index (!kw [input])
+
+UDO stellt Ihnen die Kommandos (!KW [include]), (!KW [input]),
+(!KW [vinclude]) und (!KW [rinclude]) zur Verfügung, mit denen Sie die
+Möglichkeit haben, ein großes Dokument in mehrere kleine Dateien
+aufzuteilen oder identische Passagen mehrfach einzubinden.
+
+(!KW [include]) kann sowohl im Vorspann als auch im Hauptteil benutzt werden.
+Dadurch besteht die Möglichkeit, sowohl Makros und Trennvorschläge als
+auch Kapitel in externe Dateien auszulagern.
+
+Um den Inhalt von Dateien als Klartext darstellen zu können, nutzen Sie das
+Kommando (!KW [vinclude]) (""verbatim include"").
+
+(!TIP) Das Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecode oder
+Header-Dateien darzustellen.
+
+Falls Sie direkte Befehle für ein Format nachladen möchten, können Sie 
+sich des Kommandos (!KW [rinclude]) (""raw include"") bedienen.
+
+(!TIP) Dieser Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
+z.B. spezielle (!LaTeX)-Tabellen oder HTML-Formulare einzubinden.
+
+Diese Dokumentation macht übrigens intensiven Gebrauch von diesen
+Möglichkeiten. Die Hauptdatei (!file [udo.u]) enthält lediglich wichtige
+Einstellungen und etliche (!KW [include])-Kommandos, jedoch keine
+einzige Zeile ""sichtbaren"" Textes.
+
+(!B)Mögliche Anwendungsgebiete:(!b)
+
+!begin_enumerate !compressed
+
+!item Bei umfangreichen Texten empfiehlt es sich, die Kapitel in
+eigenen Dateien zu halten und von einer Hauptdatei mittels
+(!KW [include]) an passender Stelle einzubinden. Dies hat den Vorteil, daß
+Sie durch einfaches Verschieben des (!KW [include])-Befehls dem Text
+eine neue Struktur geben können.
+
+!item Wenn Sie Texte in mehrere Dateien aufteilen, die von einer Hauptdatei
+nachgeladen werden, kann dies die Fehlersuche erheblich beschleunigen.
+Durch auskommentieren der Zeilen, die bereits korrekte Kapitel
+einladen, können Sie sofort sehen, wie UDO das zuletzt bearbeitete
+Kapitel umwandelt.
+
+!item In Verbindung mit Makros können Sie sich standardisierte Texte
+erstellen, die Sie für mehrere Programmbeschreibungen verwenden können.
+Z.B. tauchen in Programmdokumentationen immer wieder die Kapitel auf,
+die sich mit dem Haftungsausschluß oder den Warenzeichen anderer
+Produkte befassen.
+
+!item Beim Schreiben eines Textes kann die Arbeit auf beliebig viele
+Personen aufgeteilt werden. Jeder Autor kann dann in aller Ruhe seine
+Texte bearbeiten und austesten. Erst kurz vor Vollendung des
+Gesamtwerks faßt ein Projektleiter alle Texte zu einem zusammen.
+
+UDO wird beispielsweise dazu eingesetzt, ein Online-Computermagazin zu
+erstellen. Der Projektleiter gibt Vorgaben, wie das Layout der
+einzelnen Artikel auszusehen hat, damit ein einheitliches
+Erscheinungsbild gewährleistet wird. Jedes Projektmitglied schreibt nun
+seinen Artikel. Ist ein Artikel fertig, wird er dem Projektleiter zur
+Verfügung gestellt. Dieser kann nun nach und nach das Magazin
+komplettieren.
+
+!index (!kw [tabwidth])
+
+!item Mit (!KW [vinclude]) lassen sich in Verbindung mit
+(!KW [tabwidth]) sehr leicht Sourcecodes oder Header-Dateien darstellen, falls
+Sie beispielsweise eine Library oder eine Programmiersprache
+beschreiben möchten.
+!end_enumerate
+
+!end_node

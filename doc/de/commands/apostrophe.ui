@@ -1,0 +1,32 @@
+!begin_node ('')
+!html_name cmd_apostrophe
+
+Typographischen Apostroph ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)('')(!t)
+
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Apostrophe werden von UDO
+in die typographischen Apostrophe der benutzten Sprache umgewandelt, sofern das Ausgabeformat diese
+anzeigen kann. Andernfalls werden doppelte Apostrophe
+durch einfache ersetzt.
+
+!item [(!SEEALSO)]
+(!link [((''))] [((''))]), (!link [("")] [("")])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+''Typographische Apostrophe''
+!end_verbatim
+(!EXAMPLE_AFTER)
+''Typographische Apostrophe''
+(!EXAMPLE_END)
+
+!end_node

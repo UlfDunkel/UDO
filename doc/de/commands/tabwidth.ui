@@ -1,0 +1,52 @@
+!begin_node (!kw [tabwidth])
+!html_name cmd_tabwidth
+
+Tabulatorbreite für verbatim-Umgebungen setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tabwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Enthalten Zeilen einer verbatim-Umgebung Tabulatoren,
+so wandelt UDO diese entsprechend dem angegebenen
+(!VALUE) in Leerzeichen um. Wollen Sie beispielsweise
+Sourcecodes darstellen, die Sie mit einer
+Tabulatorweite von 4 erstellt haben, sollten Sie
+das folgende Beispiel vor der verbatim-Umgebung bzw.
+vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
+beliebig oft im Quelltext angegeben werden. (!VALUE)
+wird jeweils für die nächste verbatim-Umgebung
+verwendet. Standardmäßig benutzt UDO den Wert (!const [8]).
+Benutzen Sie 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!link [verbatim-Umgebung] [verbatim-Umgebung]), (!KW [vinclude])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!vinclude src_tab.ui
+!end_verbatim
+(!EXAMPLE_AFTER)
+!tabwidth 8
+!vinclude (!EXAMPLES)src_tab.ui
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!tabwidth 4
+!vinclude src_tab.ui
+!end_verbatim
+(!EXAMPLE_AFTER)
+!tabwidth 4
+!vinclude (!EXAMPLES)src_tab.ui
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,69 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Seven rules
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+# 2010:
+#   fd  May 21: reformatted and enhanced
+#
+################################################################################
+
+!begin_node Seven rules for writing UDO source files
+!html_name rules
+
+Before starting to write UDO source files you should take a look at these
+rules and learn them by heart:
+
+!begin_enumerate
+
+#1
+!item   (!B)Arrange your documentation clearly!(!b)
+A smart guy once said: ""If you can say something simple, say it simple.""
+
+#2
+!item   (!B)Speak directly to the reader.(!b)
+Use ""You can!.."" instead of ""It is possible to!.."".
+
+#3
+!item   (!B)Use text styles sparingly and homogeneously.(!b)
+Don't use (!I)italic(!i), (!B)bold(!b) and (!U)underlined(!u) text too often. But if you use
+different text styles use them homogeneously. This documentations prints all
+UDO command in italics, all filenames are printed with a mono-spaced font.
+
+#4
+!item   (!B)Make it brief as possible.(!b)
+Don't write novels, come straight to the point. If you don't the reader may
+get bored while reading your manual.
+
+I have to admit that I'm not able to do this in some cases. (!grin)
+
+#5
+!item   (!B)Use short chapter names.(!b)
+If you use short chapter names the reader will find the chapter more quickly
+after having read the table of contents. Furthermore you can help UDO to
+insert hypertext links more quickly.
+
+#6
+!item   (!B)Avoid to use the same chapter name more than once.(!b)
+If you use the same chapter name more than once UDO and the hypertext
+compilers get confused. And you will confuse the reader, too.
+
+#7
+!item   (!B)Use macros and definitions sparingly.(!b)
+UDO has to look for macros and definitions twice in every line of your
+source file. Any additional macro or definitions slows down the conversion.
+
+!end_enumerate
+
+!end_node

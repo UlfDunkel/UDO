@@ -1,0 +1,1467 @@
+BIN_DIR=	$(top_builddir)/doc/output
+
+if CROSS_COMPILING
+UDO=		$(build_triplet)-udo
+HCP=		$(build_triplet)-hcp
+UDO_DEP=
+HCP_DEP=
+else
+UDO=		$(top_builddir)/src/udo
+HCP=		$(top_builddir)/tools/hypview/hyp/hcp
+UDO_DEP=	$(UDO)
+HCP_DEP=	$(HCP)
+endif
+MKDIRHIER=	mkdir -p
+RMDIRHIER=	rm -rf
+CP=		cp
+MV=		mv
+# check for explicit .exe here, hcp.ttp might be the ST-Guide compiler
+HC31=		hcp.exe
+HCRTF=		hcrtf
+HHC=		hhc
+PCHELP=		hc
+LATEX=		latex
+PDFLATEX=	pdflatex
+MAKEINDEX=	makeindex
+MAKEINFO=	makeinfo
+
+MAKEFILE=	$(srcdir)/Makefile
+
+VER=		$(UDO_MAJOR_VERSION)$(OUTPUT_LANG)
+
+####################################################################
+
+WIN3HPJ=	$(srcdir)/udo$(OUTPUT_LANG)3.hpj
+WIN4HPJ=	$(srcdir)/udo$(OUTPUT_LANG)4.hpj
+
+HTML_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/html/
+APPLEHELP_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/applehelp/
+HTMLHELP_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/htmlhelp/
+WINHELP3_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/winhelp3/
+WINHELP4_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/winhelp4/
+STGUIDE_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/stguide/
+AMGUIDE_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/amigaguide/
+PCHELP_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/pchelp/
+QUICKVIEW_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/quickview/
+TEX_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/tex/
+RTF_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/rtf/
+PDF_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/pdf/
+LYX_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/lyx/
+INFO_DIR=	$(BIN_DIR)/$(OUTPUT_LANG)/info/
+START=		$(HTML_DIR)index.html
+STARTH=		$(HTMLHELP_DIR)udo.html
+
+UDO_DOC=	$(srcdir)/udo.u \
+		version.ui \
+		$(srcdir)/header.ui \
+		$(srcdir)/hyphen.ui \
+		$(srcdir)/lang.ui \
+		\
+		$(srcdir)/intro/00_index.ui \
+		$(srcdir)/intro/preface.ui \
+		$(srcdir)/intro/manual.ui \
+		$(srcdir)/intro/features.ui \
+		$(srcdir)/intro/need.ui \
+		$(srcdir)/intro/onceupon.ui \
+		$(srcdir)/intro/community.ui \
+		$(srcdir)/intro/contact.ui \
+		$(srcdir)/intro/thanx.ui \
+		$(srcdir)/intro/gpl.ui \
+		\
+		$(srcdir)/intro/copyright.ui \
+		$(srcdir)/intro/disclaim.ui \
+		$(srcdir)/intro/trademark.ui \
+		\
+		$(srcdir)/money/00_index.ui \
+		$(srcdir)/money/sharware.ui \
+		$(srcdir)/money/prices.ui \
+		$(srcdir)/money/upgrades.ui \
+		$(srcdir)/money/register.ui \
+		$(srcdir)/money/england.ui \
+		$(srcdir)/money/sweden.ui \
+		\
+		$(srcdir)/install/00_index.ui \
+		$(srcdir)/install/atari.ui \
+		$(srcdir)/install/dos.ui \
+		$(srcdir)/install/os2.ui \
+		$(srcdir)/install/macos.ui \
+		$(srcdir)/install/macosx.ui \
+		$(srcdir)/install/freemint.ui \
+		$(srcdir)/install/linuxrpm.ui \
+		$(srcdir)/install/debianrpm.ui \
+		$(srcdir)/install/unix.ui \
+		\
+		$(srcdir)/usage/00_index.ui \
+		$(srcdir)/usage/cli.ui \
+		$(srcdir)/usage/cliusage.ui \
+		$(srcdir)/usage/gem.ui \
+		$(srcdir)/usage/macos.ui \
+		$(srcdir)/usage/win.ui \
+		$(srcdir)/usage/udowork.ui \
+		\
+		$(srcdir)/syntax/00_index.ui \
+		$(srcdir)/syntax/example.ui \
+		$(srcdir)/syntax/basics.ui \
+		$(srcdir)/syntax/structure.ui \
+		$(srcdir)/syntax/text/00_index.ui \
+		$(srcdir)/syntax/text/itemize.ui \
+		$(srcdir)/syntax/text/enumerate.ui \
+		$(srcdir)/syntax/text/description.ui \
+		$(srcdir)/syntax/text/xlist.ui \
+		$(srcdir)/syntax/text/center.ui \
+		$(srcdir)/syntax/text/flushright.ui \
+		$(srcdir)/syntax/text/flushleft.ui \
+		$(srcdir)/syntax/text/quote.ui \
+		$(srcdir)/syntax/text/verbatim.ui \
+		$(srcdir)/syntax/text/linedraw.ui \
+		$(srcdir)/syntax/text/footnotes.ui \
+		$(srcdir)/syntax/text/effects.ui \
+		$(srcdir)/syntax/text/tables.ui \
+		$(srcdir)/syntax/text/sourcecode.ui \
+		$(srcdir)/syntax/text/ignore.ui \
+		$(srcdir)/syntax/text/textcolors.ui \
+		$(srcdir)/syntax/text/colors.ui \
+		$(srcdir)/syntax/text/styles.ui \
+		$(srcdir)/syntax/spec.ui \
+		$(srcdir)/syntax/hyphenation.ui \
+		$(srcdir)/syntax/images.ui \
+		$(srcdir)/syntax/hyper/00_index.ui \
+		$(srcdir)/syntax/hyper/label.ui \
+		$(srcdir)/syntax/hyper/link.ui \
+		$(srcdir)/syntax/misc/00_index.ui \
+		$(srcdir)/syntax/misc/include.ui \
+		$(srcdir)/syntax/misc/macro.ui \
+		$(srcdir)/syntax/misc/define.ui \
+		$(srcdir)/syntax/misc/symbol.ui \
+		$(srcdir)/syntax/misc/index.ui \
+		$(srcdir)/syntax/misc/if.ui \
+		$(srcdir)/syntax/misc/format.ui \
+		$(srcdir)/syntax/misc/short_os.ui \
+		$(srcdir)/syntax/misc/short_char.ui \
+		$(srcdir)/syntax/misc/short_color.ui \
+		$(srcdir)/syntax/misc/short_dest.ui \
+		$(srcdir)/syntax/misc/short_lang.ui \
+		\
+		$(srcdir)/formats/00_index.ui \
+		$(srcdir)/formats/amiga.ui \
+		$(srcdir)/formats/aqv.ui \
+		$(srcdir)/formats/ascii.ui \
+		$(srcdir)/formats/drc.ui \
+		$(srcdir)/formats/htag.ui \
+		$(srcdir)/formats/html.ui \
+		$(srcdir)/formats/applehelp.ui \
+		$(srcdir)/formats/htmlhelp.ui \
+		$(srcdir)/formats/ipf.ui \
+		$(srcdir)/formats/latex.ui \
+		$(srcdir)/formats/linuxdoc.ui \
+		$(srcdir)/formats/lyx.ui \
+		$(srcdir)/formats/manpage.ui \
+		$(srcdir)/formats/nroff.ui \
+		$(srcdir)/formats/pchelp.ui \
+		$(srcdir)/formats/pdflatex.ui \
+		$(srcdir)/formats/postscript.ui \
+		$(srcdir)/formats/rtf.ui \
+		$(srcdir)/formats/csource.ui \
+		$(srcdir)/formats/psource.ui \
+		$(srcdir)/formats/stguide.ui \
+		$(srcdir)/formats/texinfo.ui \
+		$(srcdir)/formats/tvision.ui \
+		$(srcdir)/formats/udo.ui \
+		$(srcdir)/formats/winhelp.ui \
+		$(srcdir)/formats/winhelp4.ui \
+		\
+		$(srcdir)/working/00_index.ui \
+		$(srcdir)/working/7rules.ui \
+		$(srcdir)/working/tips.ui \
+		$(srcdir)/working/faq.ui \
+		$(srcdir)/working/files.ui \
+		$(srcdir)/working/errors.ui \
+		$(srcdir)/working/bugs.ui \
+		\
+		$(srcdir)/appendix/00_index.ui \
+		$(srcdir)/appendix/limits.ui \
+		$(srcdir)/appendix/development.ui \
+		$(srcdir)/appendix/history/00_index.ui \
+		$(srcdir)/appendix/history/ver711.ui \
+		$(srcdir)/appendix/history/ver703.ui \
+		$(srcdir)/appendix/history/ver702.ui \
+		$(srcdir)/appendix/history/ver701.ui \
+		$(srcdir)/appendix/history/ver700.ui \
+		$(srcdir)/appendix/history/ver660.ui \
+		$(srcdir)/appendix/history/ver640.ui \
+		$(srcdir)/appendix/history/ver621.ui \
+		$(srcdir)/appendix/history/ver620.ui \
+		$(srcdir)/appendix/history/rel6pl17.ui \
+		$(srcdir)/appendix/history/rel6pl16.ui \
+		$(srcdir)/appendix/history/rel6pl15.ui \
+		$(srcdir)/appendix/history/rel6pl14.ui \
+		$(srcdir)/appendix/history/rel6.ui \
+		$(srcdir)/appendix/history/rel5.ui \
+		$(srcdir)/appendix/history/rel4.ui \
+		$(srcdir)/appendix/history/rel3.ui \
+		$(srcdir)/appendix/history/rel2.ui \
+		$(srcdir)/appendix/history/rel1.ui \
+		$(srcdir)/appendix/history/begin_asc.ui \
+		$(srcdir)/appendix/commands/00_index.ui \
+		$(srcdir)/appendix/commands/explain.ui \
+		$(srcdir)/appendix/commands/01_index.ui \
+		$(srcdir)/appendix/commands/cmds_old.ui \
+		\
+		$(srcdir)/commands/a.ui \
+		$(srcdir)/commands/=aqv.ui \
+		$(srcdir)/commands/=asc.ui \
+		$(srcdir)/commands/alias.ui \
+		$(srcdir)/commands/aqv.ui \
+		$(srcdir)/commands/asc.ui \
+		$(srcdir)/commands/author.ui \
+		$(srcdir)/commands/authorimage.ui \
+		$(srcdir)/commands/autoref.ui \
+		$(srcdir)/commands/autoref_items.ui \
+		$(srcdir)/commands/bbl.ui \
+		$(srcdir)/commands/bc.ui \
+		$(srcdir)/commands/bd.ui \
+		$(srcdir)/commands/be.ui \
+		$(srcdir)/commands/begin_appendix.ui \
+		$(srcdir)/commands/begin_asc.ui \
+		$(srcdir)/commands/begin_blist.ui \
+		$(srcdir)/commands/begin_center.ui \
+		$(srcdir)/commands/begin_comment.ui \
+		$(srcdir)/commands/begin_description.ui \
+		$(srcdir)/commands/begin_document.ui \
+		$(srcdir)/commands/begin_enumerate.ui \
+		$(srcdir)/commands/begin_flushleft.ui \
+		$(srcdir)/commands/begin_flushright.ui \
+		$(srcdir)/commands/begin_ignore.ui \
+		$(srcdir)/commands/begin_ilist.ui \
+		$(srcdir)/commands/begin_itemize.ui \
+		$(srcdir)/commands/begin_linedraw.ui \
+		$(srcdir)/commands/begin_node.ui \
+		$(srcdir)/commands/begin_node+.ui \
+		$(srcdir)/commands/begin_pnode.ui \
+		$(srcdir)/commands/begin_pnode+.ui \
+		$(srcdir)/commands/begin_preformatted.ui \
+		$(srcdir)/commands/begin_quote.ui \
+		$(srcdir)/commands/begin_raw.ui \
+		$(srcdir)/commands/begin_sourcecode.ui \
+		$(srcdir)/commands/begin_stg.ui \
+		$(srcdir)/commands/begin_table.ui \
+		$(srcdir)/commands/begin_tlist.ui \
+		$(srcdir)/commands/begin_verbatim.ui \
+		$(srcdir)/commands/begin_xlist.ui \
+		$(srcdir)/commands/bfl.ui \
+		$(srcdir)/commands/bfr.ui \
+		$(srcdir)/commands/bigskip.ui \
+		$(srcdir)/commands/bi.ui \
+		$(srcdir)/commands/bil.ui \
+		$(srcdir)/commands/bn.ui \
+		$(srcdir)/commands/bn+.ui \
+		$(srcdir)/commands/bp.ui \
+		$(srcdir)/commands/bp+.ui \
+		$(srcdir)/commands/bq.ui \
+		$(srcdir)/commands/break.ui \
+		$(srcdir)/commands/btl.ui \
+		$(srcdir)/commands/bxl.ui \
+		$(srcdir)/commands/chaptericon.ui \
+		$(srcdir)/commands/chaptericon_active.ui \
+		$(srcdir)/commands/chaptericon_text.ui \
+		$(srcdir)/commands/chapterimage.ui \
+		$(srcdir)/commands/cinclude.ui \
+		$(srcdir)/commands/code.ui \
+		$(srcdir)/commands/code_source.ui \
+		$(srcdir)/commands/code_target.ui \
+		$(srcdir)/commands/code_dos.ui \
+		$(srcdir)/commands/code_hp8.ui \
+		$(srcdir)/commands/code_iso.ui \
+		$(srcdir)/commands/code_mac.ui \
+		$(srcdir)/commands/code_next.ui \
+		$(srcdir)/commands/code_tos.ui \
+		$(srcdir)/commands/comment.ui \
+		$(srcdir)/commands/compressed.ui \
+		$(srcdir)/commands/country.ui \
+		$(srcdir)/commands/date.ui \
+		$(srcdir)/commands/define.ui \
+		$(srcdir)/commands/depth.ui \
+		$(srcdir)/commands/docinfo.ui \
+		$(srcdir)/commands/doclayout.ui \
+		$(srcdir)/commands/drc.ui \
+		$(srcdir)/commands/drc_bcolor.ui \
+		$(srcdir)/commands/drc_flags.ui \
+		$(srcdir)/commands/drc_icolor.ui \
+		$(srcdir)/commands/drc_ucolor.ui \
+		$(srcdir)/commands/ebl.ui \
+		$(srcdir)/commands/ec.ui \
+		$(srcdir)/commands/ed.ui \
+		$(srcdir)/commands/ee.ui \
+		$(srcdir)/commands/efl.ui \
+		$(srcdir)/commands/efr.ui \
+		$(srcdir)/commands/ei.ui \
+		$(srcdir)/commands/eil.ui \
+		$(srcdir)/commands/else.ui \
+		$(srcdir)/commands/email.ui \
+		$(srcdir)/commands/en.ui \
+		$(srcdir)/commands/end_appendix.ui \
+		$(srcdir)/commands/end_blist.ui \
+		$(srcdir)/commands/end_center.ui \
+		$(srcdir)/commands/end_comment.ui \
+		$(srcdir)/commands/end_description.ui \
+		$(srcdir)/commands/end_document.ui \
+		$(srcdir)/commands/end_enumerate.ui \
+		$(srcdir)/commands/end_flushleft.ui \
+		$(srcdir)/commands/end_flushright.ui \
+		$(srcdir)/commands/end_ignore.ui \
+		$(srcdir)/commands/end_ilist.ui \
+		$(srcdir)/commands/end_itemize.ui \
+		$(srcdir)/commands/end_linedraw.ui \
+		$(srcdir)/commands/end_node.ui \
+		$(srcdir)/commands/end_preformatted.ui \
+		$(srcdir)/commands/end_quote.ui \
+		$(srcdir)/commands/end_raw.ui \
+		$(srcdir)/commands/end_sourcecode.ui \
+		$(srcdir)/commands/end_table.ui \
+		$(srcdir)/commands/end_tlist.ui \
+		$(srcdir)/commands/end_verbatim.ui \
+		$(srcdir)/commands/end_xlist.ui \
+		$(srcdir)/commands/endif.ui \
+		$(srcdir)/commands/endnode.ui \
+		$(srcdir)/commands/english.ui \
+		$(srcdir)/commands/eq.ui \
+		$(srcdir)/commands/error.ui \
+		$(srcdir)/commands/etl.ui \
+		$(srcdir)/commands/exl.ui \
+		$(srcdir)/commands/french.ui \
+		$(srcdir)/commands/fussy.ui \
+		$(srcdir)/commands/german.ui \
+		$(srcdir)/commands/h.ui \
+		$(srcdir)/commands/=htag.ui \
+		$(srcdir)/commands/=html.ui \
+		$(srcdir)/commands/heading.ui \
+		$(srcdir)/commands/hh_alinkcolor.ui \
+		$(srcdir)/commands/hh_backcolor.ui \
+		$(srcdir)/commands/hh_backimage.ui \
+		$(srcdir)/commands/hh_img_suffix.ui \
+		$(srcdir)/commands/hh_linkcolor.ui \
+		$(srcdir)/commands/hh_textcolor.ui \
+		$(srcdir)/commands/hh_verbatim_backcolor.ui \
+		$(srcdir)/commands/hh_vlinkcolor.ui \
+		$(srcdir)/commands/hline.ui \
+		$(srcdir)/commands/htag.ui \
+		$(srcdir)/commands/htag_img_suffix.ui \
+		$(srcdir)/commands/html.ui \
+		$(srcdir)/commands/html_alinkcolor.ui \
+		$(srcdir)/commands/html_backcolor.ui \
+		$(srcdir)/commands/html_backimage.ui \
+		$(srcdir)/commands/html_backpage.ui \
+		$(srcdir)/commands/html_bgsound.ui \
+		$(srcdir)/commands/html_button_alignment.ui \
+		$(srcdir)/commands/html_counter_command.ui \
+		$(srcdir)/commands/html_description.ui \
+		$(srcdir)/commands/html_doctype.ui \
+		$(srcdir)/commands/html_favicon_name.ui \
+		$(srcdir)/commands/html_frames_alignment.ui \
+		$(srcdir)/commands/html_frames_alinkcolor.ui \
+		$(srcdir)/commands/html_frames_backcolor.ui \
+		$(srcdir)/commands/html_frames_backimage.ui \
+		$(srcdir)/commands/html_frames_column_color.ui \
+		$(srcdir)/commands/html_frames_column_image.ui \
+		$(srcdir)/commands/html_frames_column_width.ui \
+		$(srcdir)/commands/html_frames_height.ui \
+		$(srcdir)/commands/html_frames_layout.ui \
+		$(srcdir)/commands/html_frames_linkcolor.ui \
+		$(srcdir)/commands/html_frames_position.ui \
+		$(srcdir)/commands/html_frames_textcolor.ui \
+		$(srcdir)/commands/html_frames_vlinkcolor.ui \
+		$(srcdir)/commands/html_frames_width.ui \
+		$(srcdir)/commands/html_frames_con_title.ui \
+		$(srcdir)/commands/html_frames_toc_title.ui \
+		$(srcdir)/commands/html_quotes.ui \
+		$(srcdir)/commands/html_robots.ui \
+		$(srcdir)/commands/html_navigation.ui \
+		$(srcdir)/commands/html_ignore_8bit.ui \
+		$(srcdir)/commands/html_header_date.ui \
+		$(srcdir)/commands/html_header_links.ui \
+		$(srcdir)/commands/html_script_name.ui \
+		$(srcdir)/commands/html_style_name.ui \
+		$(srcdir)/commands/html_img_suffix.ui \
+		$(srcdir)/commands/html_indexname.ui \
+		$(srcdir)/commands/html_keywords.ui \
+		$(srcdir)/commands/html_linkcolor.ui \
+		$(srcdir)/commands/html_merge_nodes.ui \
+		$(srcdir)/commands/html_merge_subnodes.ui \
+		$(srcdir)/commands/html_merge_subsubnodes.ui \
+		$(srcdir)/commands/html_merge_subsubsubnodes.ui \
+		$(srcdir)/commands/html_merge_subsubsubsubnodes.ui \
+		$(srcdir)/commands/html_modern_alignment.ui \
+		$(srcdir)/commands/html_modern_backcolor.ui \
+		$(srcdir)/commands/html_modern_backimage.ui \
+		$(srcdir)/commands/html_modern_column_color.ui \
+		$(srcdir)/commands/html_modern_column_image.ui \
+		$(srcdir)/commands/html_modern_column_width.ui \
+		$(srcdir)/commands/html_modern_layout.ui \
+		$(srcdir)/commands/html_modern_width.ui \
+		$(srcdir)/commands/html_monofont_name.ui \
+		$(srcdir)/commands/html_monofont_size.ui \
+		$(srcdir)/commands/html_name.ui \
+		$(srcdir)/commands/html_name_prefix.ui \
+		$(srcdir)/commands/html_no_xlist.ui \
+		$(srcdir)/commands/html_nodesize.ui \
+		$(srcdir)/commands/html_propfont_name.ui \
+		$(srcdir)/commands/html_propfont_size.ui \
+		$(srcdir)/commands/html_switch_language.ui \
+		$(srcdir)/commands/html_textcolor.ui \
+		$(srcdir)/commands/html_transparent_buttons.ui \
+		$(srcdir)/commands/html_use_hyphenation.ui \
+		$(srcdir)/commands/html_use_xlist.ui \
+		$(srcdir)/commands/html_verbatim_backcolor.ui \
+		$(srcdir)/commands/html_vlinkcolor.ui \
+		$(srcdir)/commands/htmlkeywords.ui \
+		$(srcdir)/commands/htmlname.ui \
+		$(srcdir)/commands/hyphen.ui \
+		$(srcdir)/commands/i.ui \
+		$(srcdir)/commands/=info.ui \
+		$(srcdir)/commands/if.ui \
+		$(srcdir)/commands/ifdest.ui \
+		$(srcdir)/commands/iflang.ui \
+		$(srcdir)/commands/ifndest.ui \
+		$(srcdir)/commands/ifnlang.ui \
+		$(srcdir)/commands/ifnos.ui \
+		$(srcdir)/commands/ifnset.ui \
+		$(srcdir)/commands/ifos.ui \
+		$(srcdir)/commands/ifset.ui \
+		$(srcdir)/commands/ignore_bottomline.ui \
+		$(srcdir)/commands/ignore_headline.ui \
+		$(srcdir)/commands/ignore_index.ui \
+		$(srcdir)/commands/ignore_links.ui \
+		$(srcdir)/commands/ignore_raw_footer.ui \
+		$(srcdir)/commands/ignore_raw_header.ui \
+		$(srcdir)/commands/ignore_subsubsubsubtoc.ui \
+		$(srcdir)/commands/ignore_subsubsubtoc.ui \
+		$(srcdir)/commands/ignore_subsubtoc.ui \
+		$(srcdir)/commands/ignore_subtoc.ui \
+		$(srcdir)/commands/ignore_title.ui \
+		$(srcdir)/commands/ignore_toptoc.ui \
+		$(srcdir)/commands/image.ui \
+		$(srcdir)/commands/image+.ui \
+		$(srcdir)/commands/image_alignment.ui \
+		$(srcdir)/commands/image_counter.ui \
+		$(srcdir)/commands/include.ui \
+		$(srcdir)/commands/index.ui \
+		$(srcdir)/commands/info.ui \
+		$(srcdir)/commands/input.ui \
+		$(srcdir)/commands/italian.ui \
+		$(srcdir)/commands/item.ui \
+		$(srcdir)/commands/item2.ui \
+		$(srcdir)/commands/jumpid.ui \
+		$(srcdir)/commands/keyword.ui \
+		$(srcdir)/commands/l.ui \
+		$(srcdir)/commands/l+.ui \
+		$(srcdir)/commands/=ldoc.ui \
+		$(srcdir)/commands/label.ui \
+		$(srcdir)/commands/label+.ui \
+		$(srcdir)/commands/language.ui \
+		$(srcdir)/commands/ldinclude.ui \
+		$(srcdir)/commands/ldoc.ui \
+		$(srcdir)/commands/lh.ui \
+		$(srcdir)/commands/linedrawsize.ui \
+		$(srcdir)/commands/listheading.ui \
+		$(srcdir)/commands/listoffigures.ui \
+		$(srcdir)/commands/listoftables.ui \
+		$(srcdir)/commands/list_parsep.ui \
+		$(srcdir)/commands/list_parsep_off.ui \
+		$(srcdir)/commands/list_parsep_on.ui \
+		$(srcdir)/commands/listsubheading.ui \
+		$(srcdir)/commands/listsubsubheading.ui \
+		$(srcdir)/commands/listsubsubsubheading.ui \
+		$(srcdir)/commands/listsubsubsubsubheading.ui \
+		$(srcdir)/commands/lsh.ui \
+		$(srcdir)/commands/lssh.ui \
+		$(srcdir)/commands/lsssh.ui \
+		$(srcdir)/commands/macro.ui \
+		$(srcdir)/commands/=man.ui \
+		$(srcdir)/commands/maketitle.ui \
+		$(srcdir)/commands/man.ui \
+		$(srcdir)/commands/man_lpp.ui \
+		$(srcdir)/commands/man_type.ui \
+		$(srcdir)/commands/mapping.ui \
+		$(srcdir)/commands/medskip.ui \
+		$(srcdir)/commands/newpage.ui \
+		$(srcdir)/commands/n.ui \
+		$(srcdir)/commands/n+.ui \
+		$(srcdir)/commands/not_compressed.ui \
+		$(srcdir)/commands/no_8bit.ui \
+		$(srcdir)/commands/no_bottomlines.ui \
+		$(srcdir)/commands/no_buttons.ui \
+		$(srcdir)/commands/no_effects.ui \
+		$(srcdir)/commands/no_footers.ui \
+		$(srcdir)/commands/no_headlines.ui \
+		$(srcdir)/commands/no_icons.ui \
+		$(srcdir)/commands/no_images.ui \
+		$(srcdir)/commands/no_img_size.ui \
+		$(srcdir)/commands/no_index.ui \
+		$(srcdir)/commands/no_links.ui \
+		$(srcdir)/commands/no_numbers.ui \
+		$(srcdir)/commands/no_popup_headlines.ui \
+		$(srcdir)/commands/no_preamble.ui \
+		$(srcdir)/commands/no_quotes.ui \
+		$(srcdir)/commands/no_sourcecode.ui \
+		$(srcdir)/commands/no_table_lines.ui \
+		$(srcdir)/commands/no_toc_subnodes.ui \
+		$(srcdir)/commands/no_toc_subsubnodes.ui \
+		$(srcdir)/commands/no_toc_subsubsubnodes.ui \
+		$(srcdir)/commands/no_umlaute.ui \
+		$(srcdir)/commands/no_urls.ui \
+		$(srcdir)/commands/no_verbatim_umlaute.ui \
+		$(srcdir)/commands/no_xlinks.ui \
+		$(srcdir)/commands/node.ui \
+		$(srcdir)/commands/node+.ui \
+		$(srcdir)/commands/nop.ui \
+		$(srcdir)/commands/nroff_type.ui \
+		$(srcdir)/commands/p.ui \
+		$(srcdir)/commands/p+.ui \
+		$(srcdir)/commands/parwidth.ui \
+		$(srcdir)/commands/=pch.ui \
+		$(srcdir)/commands/pch.ui \
+		$(srcdir)/commands/=pdf.ui \
+		$(srcdir)/commands/pdf.ui \
+		$(srcdir)/commands/pdf_high_compression.ui \
+		$(srcdir)/commands/pdf_medium_compression.ui \
+		$(srcdir)/commands/pinclude.ui \
+		$(srcdir)/commands/pnode.ui \
+		$(srcdir)/commands/pnode+.ui \
+		$(srcdir)/commands/program.ui \
+		$(srcdir)/commands/programimage.ui \
+		$(srcdir)/commands/ps.ui \
+		$(srcdir)/commands/ps+.ui \
+		$(srcdir)/commands/pss.ui \
+		$(srcdir)/commands/pss+.ui \
+		$(srcdir)/commands/psss.ui \
+		$(srcdir)/commands/psss+.ui \
+		$(srcdir)/commands/pssss.ui \
+		$(srcdir)/commands/pssss+.ui \
+		$(srcdir)/commands/psubnode.ui \
+		$(srcdir)/commands/psubnode+.ui \
+		$(srcdir)/commands/psubsubnode.ui \
+		$(srcdir)/commands/psubsubnode+.ui \
+		$(srcdir)/commands/psubsubsubnode.ui \
+		$(srcdir)/commands/psubsubsubnode+.ui \
+		$(srcdir)/commands/psubsubsubsubnode.ui \
+		$(srcdir)/commands/psubsubsubsubnode+.ui \
+		$(srcdir)/commands/rinclude.ui \
+		$(srcdir)/commands/raw.ui \
+		$(srcdir)/commands/=rtf.ui \
+		$(srcdir)/commands/rtf.ui \
+		$(srcdir)/commands/rtf_add_color.ui \
+		$(srcdir)/commands/rtf_charwidth.ui \
+		$(srcdir)/commands/rtf_keep_tables.ui \
+		$(srcdir)/commands/rtf_monofont.ui \
+		$(srcdir)/commands/rtf_monofont_size.ui \
+		$(srcdir)/commands/rtf_no_tables.ui \
+		$(srcdir)/commands/rtf_propfont.ui \
+		$(srcdir)/commands/rtf_propfont_size.ui \
+		$(srcdir)/commands/set.ui \
+		$(srcdir)/commands/sh.ui \
+		$(srcdir)/commands/short.ui \
+		$(srcdir)/commands/show_variable.ui \
+		$(srcdir)/commands/sinclude.ui \
+		$(srcdir)/commands/sloppy.ui \
+		$(srcdir)/commands/smallskip.ui \
+		$(srcdir)/commands/sn.ui \
+		$(srcdir)/commands/sn+.ui \
+		$(srcdir)/commands/sort_hyphen_file.ui \
+		$(srcdir)/commands/spanish.ui \
+		$(srcdir)/commands/ssh.ui \
+		$(srcdir)/commands/ssn.ui \
+		$(srcdir)/commands/ssn+.ui \
+		$(srcdir)/commands/sssh.ui \
+		$(srcdir)/commands/sssn.ui \
+		$(srcdir)/commands/sssn+.ui \
+		$(srcdir)/commands/ssssn.ui \
+		$(srcdir)/commands/ssssn+.ui \
+		$(srcdir)/commands/=stg.ui \
+		$(srcdir)/commands/stg.ui \
+		$(srcdir)/commands/stg_limage.ui \
+		$(srcdir)/commands/stg_no_database.ui \
+		$(srcdir)/commands/stg_parwidth.ui \
+		$(srcdir)/commands/street.ui \
+		$(srcdir)/commands/subheading.ui \
+		$(srcdir)/commands/subnode.ui \
+		$(srcdir)/commands/subnode+.ui \
+		$(srcdir)/commands/subsubheading.ui \
+		$(srcdir)/commands/subsubnode.ui \
+		$(srcdir)/commands/subsubnode+.ui \
+		$(srcdir)/commands/subsubsubheading.ui \
+		$(srcdir)/commands/subsubsubnode.ui \
+		$(srcdir)/commands/subsubsubnode+.ui \
+		$(srcdir)/commands/subsubsubsubheading.ui \
+		$(srcdir)/commands/subsubsubsubnode.ui \
+		$(srcdir)/commands/subsubsubsubnode+.ui \
+		$(srcdir)/commands/subsubsubsubtoc.ui \
+		$(srcdir)/commands/subsubsubsubtoc_offset.ui \
+		$(srcdir)/commands/subsubsubtoc.ui \
+		$(srcdir)/commands/subsubsubtoc_offset.ui \
+		$(srcdir)/commands/subsubtoc.ui \
+		$(srcdir)/commands/subsubtoc_offset.ui \
+		$(srcdir)/commands/subtoc.ui \
+		$(srcdir)/commands/subtoc_offset.ui \
+		$(srcdir)/commands/swedish.ui \
+		$(srcdir)/commands/table_alignment.ui \
+		$(srcdir)/commands/table_caption.ui \
+		$(srcdir)/commands/table_caption+.ui \
+		$(srcdir)/commands/table_counter.ui \
+		$(srcdir)/commands/tableofcontents.ui \
+		$(srcdir)/commands/tabwidth.ui \
+		$(srcdir)/commands/tex.ui \
+		$(srcdir)/commands/=tex.ui \
+		$(srcdir)/commands/tex_209.ui \
+		$(srcdir)/commands/tex_2e.ui \
+		$(srcdir)/commands/tex_book.ui \
+		$(srcdir)/commands/tex_dpi.ui \
+		$(srcdir)/commands/tex_emtex.ui \
+		$(srcdir)/commands/tex_lindner.ui \
+		$(srcdir)/commands/tex_miktex.ui \
+		$(srcdir)/commands/tex_strunk.ui \
+		$(srcdir)/commands/tex_tetex.ui \
+		$(srcdir)/commands/tex_verb.ui \
+		$(srcdir)/commands/title.ui \
+		$(srcdir)/commands/toc.ui \
+		$(srcdir)/commands/toc_offset.ui \
+		$(srcdir)/commands/toc_title.ui \
+		$(srcdir)/commands/toplink.ui \
+		$(srcdir)/commands/town.ui \
+		$(srcdir)/commands/udoinfo.ui \
+		$(srcdir)/commands/udolink.ui \
+		$(srcdir)/commands/universal_charset.ui \
+		$(srcdir)/commands/unset.ui \
+		$(srcdir)/commands/use_about_udo.ui \
+		$(srcdir)/commands/use_alias_inside_index.ui \
+		$(srcdir)/commands/use_ansi_tables.ui \
+		$(srcdir)/commands/use_auto_helpids.ui \
+		$(srcdir)/commands/use_auto_subsubsubsubtocs.ui \
+		$(srcdir)/commands/use_auto_subsubsubtocs.ui \
+		$(srcdir)/commands/use_auto_subsubtocs.ui \
+		$(srcdir)/commands/use_auto_subtocs.ui \
+		$(srcdir)/commands/use_auto_toptocs.ui \
+		$(srcdir)/commands/use_chapter_images.ui \
+		$(srcdir)/commands/use_comments.ui \
+		$(srcdir)/commands/use_compressed_descriptions.ui \
+		$(srcdir)/commands/use_compressed_enumerates.ui \
+		$(srcdir)/commands/use_compressed_envs.ui \
+		$(srcdir)/commands/use_compressed_itemizes.ui \
+		$(srcdir)/commands/use_compressed_lists.ui \
+		$(srcdir)/commands/use_compressed_tocs.ui \
+		$(srcdir)/commands/use_formfeed.ui \
+		$(srcdir)/commands/use_justification.ui \
+		$(srcdir)/commands/use_justified.ui \
+		$(srcdir)/commands/use_label_inside_index.ui \
+		$(srcdir)/commands/use_mirrored_indices.ui \
+		$(srcdir)/commands/use_nodes_inside_index.ui \
+		$(srcdir)/commands/use_output_buffer.ui \
+		$(srcdir)/commands/use_raw_footer.ui \
+		$(srcdir)/commands/use_raw_header.ui \
+		$(srcdir)/commands/use_short_envs.ui \
+		$(srcdir)/commands/use_short_tocs.ui \
+		$(srcdir)/commands/use_style_book.ui \
+		$(srcdir)/commands/use_udo_index.ui \
+		$(srcdir)/commands/use_xlist.ui \
+		$(srcdir)/commands/verbatimsize.ui \
+		$(srcdir)/commands/verbatim_no_umlaute.ui \
+		$(srcdir)/commands/version.ui \
+		$(srcdir)/commands/vinclude.ui \
+		$(srcdir)/commands/wh4_backcolor.ui \
+		$(srcdir)/commands/wh4_background.ui \
+		$(srcdir)/commands/wh4_charwidth.ui \
+		$(srcdir)/commands/wh4_helpid.ui \
+		$(srcdir)/commands/wh4_high_compression.ui \
+		$(srcdir)/commands/wh4_inline_bitmaps.ui \
+		$(srcdir)/commands/wh4_linkcolor.ui \
+		$(srcdir)/commands/wh4_medium_compression.ui \
+		$(srcdir)/commands/wh4_monofont.ui \
+		$(srcdir)/commands/wh4_monofont_size.ui \
+		$(srcdir)/commands/wh4_old_keywords.ui \
+		$(srcdir)/commands/wh4_prefix_helpids.ui \
+		$(srcdir)/commands/wh4_propfont.ui \
+		$(srcdir)/commands/wh4_propfont_size.ui \
+		$(srcdir)/commands/wh4_textcolor.ui \
+		$(srcdir)/commands/=win.ui \
+		$(srcdir)/commands/win.ui \
+		$(srcdir)/commands/win_backcolor.ui \
+		$(srcdir)/commands/win_background.ui \
+		$(srcdir)/commands/win_charwidth.ui \
+		$(srcdir)/commands/win_helpid.ui \
+		$(srcdir)/commands/win_high_compression.ui \
+		$(srcdir)/commands/win_html_look.ui \
+		$(srcdir)/commands/win_inline_bitmaps.ui \
+		$(srcdir)/commands/win_linkcolor.ui \
+		$(srcdir)/commands/win_medium_compression.ui \
+		$(srcdir)/commands/win_monofont.ui \
+		$(srcdir)/commands/win_monofont_size.ui \
+		$(srcdir)/commands/win_old_keywords.ui \
+		$(srcdir)/commands/win_prefix_helpids.ui \
+		$(srcdir)/commands/win_propfont.ui \
+		$(srcdir)/commands/win_propfont_size.ui \
+		$(srcdir)/commands/win_textcolor.ui \
+		$(srcdir)/commands/x.ui \
+		\
+		$(srcdir)/commands/(B).ui \
+		$(srcdir)/commands/(DEL).ui \
+		$(srcdir)/commands/(G).ui \
+		$(srcdir)/commands/(I).ui \
+		$(srcdir)/commands/(INS).ui \
+		$(srcdir)/commands/(LaTeX).ui \
+		$(srcdir)/commands/(LaTeXe).ui \
+		$(srcdir)/commands/(N).ui \
+		$(srcdir)/commands/(O).ui \
+		$(srcdir)/commands/(S).ui \
+		$(srcdir)/commands/(SUB).ui \
+		$(srcdir)/commands/(SUP).ui \
+		$(srcdir)/commands/(T).ui \
+		$(srcdir)/commands/(TeX).ui \
+		$(srcdir)/commands/(U).ui \
+		$(srcdir)/commands/(V).ui \
+		$(srcdir)/commands/(alpha).ui \
+		$(srcdir)/commands/(aqua).ui \
+		$(srcdir)/commands/(beta).ui \
+		$(srcdir)/commands/(black).ui \
+		$(srcdir)/commands/(blue).ui \
+		$(srcdir)/commands/(coloff).ui \
+		$(srcdir)/commands/(comment).ui \
+		$(srcdir)/commands/(copyright).ui \
+		$(srcdir)/commands/(deg).ui \
+		$(srcdir)/commands/(euro).ui \
+		$(srcdir)/commands/(fuchsia).ui \
+		$(srcdir)/commands/(gray).ui \
+		$(srcdir)/commands/(green).ui \
+		$(srcdir)/commands/(grin).ui \
+		$(srcdir)/commands/(idx).ui \
+		$(srcdir)/commands/(ilink).ui \
+		$(srcdir)/commands/(image).ui \
+		$(srcdir)/commands/(img).ui \
+		$(srcdir)/commands/(index).ui \
+		$(srcdir)/commands/(label).ui \
+		$(srcdir)/commands/(laugh).ui \
+		$(srcdir)/commands/(lime).ui \
+		$(srcdir)/commands/(link).ui \
+		$(srcdir)/commands/(maroon).ui \
+		$(srcdir)/commands/(navy).ui \
+		$(srcdir)/commands/(nl).ui \
+		$(srcdir)/commands/(nolink).ui \
+		$(srcdir)/commands/(olive).ui \
+		$(srcdir)/commands/(plabel).ui \
+		$(srcdir)/commands/(plink).ui \
+		$(srcdir)/commands/(pound).ui \
+		$(srcdir)/commands/(purple).ui \
+		$(srcdir)/commands/(raw).ui \
+		$(srcdir)/commands/(red).ui \
+		$(srcdir)/commands/(reg).ui \
+		$(srcdir)/commands/(registered).ui \
+		$(srcdir)/commands/(short_today).ui \
+		$(srcdir)/commands/(silver).ui \
+		$(srcdir)/commands/(teal).ui \
+		$(srcdir)/commands/(time).ui \
+		$(srcdir)/commands/(tm).ui \
+		$(srcdir)/commands/(today).ui \
+		$(srcdir)/commands/(url).ui \
+		$(srcdir)/commands/(white).ui \
+		$(srcdir)/commands/(xlink).ui \
+		$(srcdir)/commands/(yellow).ui \
+		$(srcdir)/commands/unsupported/html_dirname.ui \
+		$(srcdir)/commands/unsupported/html_use_folders.ui \
+		\
+		$(srcdir)/commands/backslash.ui \
+		$(srcdir)/commands/qtilde.ui \
+		$(srcdir)/commands/syllable.ui \
+		$(srcdir)/commands/qsyllable.ui \
+		$(srcdir)/commands/exclamation.ui \
+		$(srcdir)/commands/dots.ui \
+		$(srcdir)/commands/tilde.ui \
+		$(srcdir)/commands/quote.ui \
+		$(srcdir)/commands/qquote.ui \
+		$(srcdir)/commands/qapostrophe.ui \
+		$(srcdir)/commands/qdash.ui \
+		$(srcdir)/commands/qldash.ui \
+		$(srcdir)/commands/apostrophe.ui \
+		$(srcdir)/commands/dash.ui \
+		$(srcdir)/commands/ldash.ui
+
+OTHERS=		$(srcdir)/copying.u \
+		$(srcdir)/install.u \
+		$(srcdir)/manpage.u \
+		$(srcdir)/news.u \
+		$(WIN3HPJ) \
+		$(WIN4HPJ) \
+		$(srcdir)/udo$(OUTPUT_LANG).hhp \
+		$(srcdir)/images/help.ico \
+		$(srcdir)/images/valid-html401.png \
+		$(srcdir)/version.mak
+
+GENERATED=	$(START) \
+		$(STARTH) \
+		news.txt \
+		install.txt \
+		udo.txt \
+		udo.man \
+		udo.1
+
+IMAGES=		$(srcdir)/images/dh.bmp \
+		$(srcdir)/images/dh.gif \
+		$(srcdir)/images/dh.img \
+		$(srcdir)/images/dh.eps \
+		$(srcdir)/images/dh.png \
+		$(srcdir)/images/udo.gif \
+		$(srcdir)/images/udo.img \
+		$(srcdir)/images/udo.eps \
+		$(srcdir)/images/udo.png \
+		$(srcdir)/images/udo.bmp \
+		$(srcdir)/images/udo_16.bmp \
+		$(srcdir)/images/udo_16.gif \
+		$(srcdir)/images/udo_16.img \
+		$(srcdir)/images/udo_16.eps \
+		$(srcdir)/images/udo_16.png \
+		$(srcdir)/images/gem_main.bmp \
+		$(srcdir)/images/gem_main.gif \
+		$(srcdir)/images/gem_main.img \
+		$(srcdir)/images/gem_main.eps \
+		$(srcdir)/images/gem_main.png \
+		$(srcdir)/images/gem_opts.bmp \
+		$(srcdir)/images/gem_opts.gif \
+		$(srcdir)/images/gem_opts.img \
+		$(srcdir)/images/gem_opts.eps \
+		$(srcdir)/images/gem_opts.png \
+		$(srcdir)/images/gem_prgs.bmp \
+		$(srcdir)/images/gem_prgs.gif \
+		$(srcdir)/images/gem_prgs.img \
+		$(srcdir)/images/gem_prgs.eps \
+		$(srcdir)/images/gem_prgs.png \
+		$(srcdir)/images/gem_syms.bmp \
+		$(srcdir)/images/gem_syms.gif \
+		$(srcdir)/images/gem_syms.img \
+		$(srcdir)/images/gem_syms.eps \
+		$(srcdir)/images/gem_syms.png \
+		$(srcdir)/images/favicon.ico \
+		$(srcdir)/images/email.gif \
+		$(srcdir)/images/elink.gif \
+		$(srcdir)/images/tiger.bmp \
+		$(srcdir)/images/tiger.gif \
+		$(srcdir)/images/tiger.img \
+		$(srcdir)/images/tiger.eps \
+		$(srcdir)/images/tiger.png
+
+EXAMPLES=	$(srcdir)/examples/asc1.ui \
+		$(srcdir)/examples/asc2.ui \
+		$(srcdir)/examples/center.ui \
+		$(srcdir)/examples/ch5test.u \
+		$(srcdir)/examples/csource.u \
+		$(srcdir)/examples/define1.ui \
+		$(srcdir)/examples/define2.ui \
+		$(srcdir)/examples/define3.ui \
+		$(srcdir)/examples/define4.ui \
+		$(srcdir)/examples/description1.ui \
+		$(srcdir)/examples/description2.ui \
+		$(srcdir)/examples/effects.ui \
+		$(srcdir)/examples/enumerate1.ui \
+		$(srcdir)/examples/enumerate2.ui \
+		$(srcdir)/examples/example.u \
+		$(srcdir)/examples/flushleft.ui \
+		$(srcdir)/examples/flushright.ui \
+		$(srcdir)/examples/footnotes.ui \
+		$(srcdir)/examples/hello.c \
+		$(srcdir)/examples/hello.pas \
+		$(srcdir)/examples/index1.ui \
+		$(srcdir)/examples/index2.ui \
+		$(srcdir)/examples/itemize1.ui \
+		$(srcdir)/examples/itemize2.ui \
+		$(srcdir)/examples/itemize3.ui \
+		$(srcdir)/examples/itemize4.ui \
+		$(srcdir)/examples/link.ui \
+		$(srcdir)/examples/macro1.ui \
+		$(srcdir)/examples/macro2.ui \
+		$(srcdir)/examples/macro3.ui \
+		$(srcdir)/examples/macro3_n.ui \
+		$(srcdir)/examples/main.u \
+		$(srcdir)/examples/plink.ui \
+		$(srcdir)/examples/quote.ui \
+		$(srcdir)/examples/raw1.ui \
+		$(srcdir)/examples/src_tab.ui \
+		$(srcdir)/examples/symbol1.ui \
+		$(srcdir)/examples/symbol2.ui \
+		$(srcdir)/examples/symbol3.ui \
+		$(srcdir)/examples/xlist1.ui \
+		$(srcdir)/examples/xlist2.ui \
+		$(srcdir)/examples/xlist3.ui \
+		$(srcdir)/examples/general/example_before.ui \
+		$(srcdir)/examples/general/example_after.ui \
+		$(srcdir)/examples/html/headfoot.ui \
+		$(srcdir)/examples/html/htmlform.html \
+		$(srcdir)/examples/html/software.ui \
+		$(srcdir)/examples/html/xlink.ui \
+		$(srcdir)/examples/latex/formula.u \
+		$(srcdir)/examples/latex/index.ui \
+		$(srcdir)/examples/latex/preamble.u \
+		$(srcdir)/examples/stg/title.ui \
+		$(srcdir)/examples/stg/xlink.ui \
+		$(srcdir)/examples/winhelp/colors.u \
+		$(srcdir)/examples/winhelp/xlink.ui
+
+# Examples that are not used in the manual
+# Should probably be moved to another directory
+DIST_EXAMPLES=	$(srcdir)/examples/center.u \
+		$(srcdir)/examples/descript.u \
+		$(srcdir)/examples/enumerat.u \
+		$(srcdir)/examples/fontsize.u \
+		$(srcdir)/examples/hello.u \
+		$(srcdir)/examples/itemize.u \
+		$(srcdir)/examples/link.u \
+		$(srcdir)/examples/list.u \
+		$(srcdir)/examples/quick.u \
+		$(srcdir)/examples/right.u \
+		$(srcdir)/examples/tables.u \
+		$(srcdir)/examples/texdef.ui \
+		$(srcdir)/examples/together.u \
+		$(srcdir)/examples/xlink.u
+
+UDO_DOC_DEP =	$(srcdir)/../macros.ui \
+		$(UDO_DOC) $(IMAGES) $(EXAMPLES) $(UDO_DEP)
+
+EXTRA_DIST = $(UDO_DOC) $(OTHERS) $(IMAGES) $(EXAMPLES) $(DIST_EXAMPLES)
+
+####################################################################
+
+all:		help
+
+####################################################################
+
+# create default formats of manual
+help:	udo_help
+
+udo_help:		win4 \
+			html \
+			htmlhelp \
+			stg
+
+# create all formats of manual
+help-all: ascii man stg tex rtf pch html win info tvh ldoc aqv hph lyx nroff src srp ipf drc htmlhelp pdf win4 ps amg hah udo
+
+version.ui: $(srcdir)/version.mak
+		$(AM_V_GEN)(echo '!docinfo [version] Release $(UDO_MAJOR_VERSION) Patchlevel $(UDO_MINOR_VERSION)'; \
+		 echo '!docinfo [date] $(UDO_DATE)'; \
+		 echo '!macro DATE $(UDO_DATE)'; \
+		 echo '!macro RELEASE $(UDO_MAJOR_VERSION)'; \
+		) > $@
+
+####################################################################
+
+manpage:	udo.1
+
+udo.1:	$(srcdir)/manpage.u
+		$(AM_V_GEN)$(UDO) --nroff -o $@ $(srcdir)/manpage.u
+
+man: .stamp.man
+
+.stamp.man: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating Man documentation"; \
+		$(UDO) --man -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).man -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+ascii txt: .stamp.ascii
+
+.stamp.ascii: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating Ascii documentation"; \
+		$(UDO) --asc -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).txt -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+stg: .stamp.stguide
+
+.stamp.stguide:	$(UDO_DOC_DEP)
+		$(AM_V_at)($(CP) $(srcdir)/images/*.img .; \
+		 $(MKDIRHIER) $(STGUIDE_DIR) || exit 1; \
+		 echo "generating ST-Guide documentation"; \
+		 $(UDO) --stg -o udo.stg -l $(srcdir)/udo.u || exit 1; \
+		 cat udo.stg | tr '\344\366\374\304\326\334\337\341\275' '\204\224\201\216\231\232\236\236\275' > $(STGUIDE_DIR)udo$(VER).stg; \
+		 $(RM) udo.stg; \
+		 $(MV) *.img $(STGUIDE_DIR); \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+tex latex: .stamp.tex
+
+.stamp.tex:	$(UDO_DOC_DEP)
+		$(AM_V_at)($(MKDIRHIER) $(TEX_DIR) || exit 1; \
+		 echo "generating LaTeX documentation"; \
+		 $(CP) $(srcdir)/images/*.eps $(TEX_DIR); \
+		 $(UDO) --tex --save-upr -o $(TEX_DIR)udo$(VER).tex -D teTeX -l $(srcdir)/udo.u || exit 1; \
+		 if test "`type $(LATEX) 2>/dev/null`" = ""; then \
+		   echo "LaTex ($(LATEX)) not found" >& 2; \
+		 else \
+		 (cd $(TEX_DIR); \
+		 $(LATEX) udo$(VER).tex; \
+		 $(LATEX) udo$(VER).tex; \
+		 $(LATEX) udo$(VER).tex; \
+		 if test -f udo$(VER).idx; then \
+		   if test "`type $(MAKEINDEX) 2>/dev/null`" = ""; then \
+		     echo "makeindex ($(MAKEINDEX)) not found; index may not be correct" >& 2; \
+		   else \
+		     $(MAKEINDEX) udo$(VER).idx; \
+		     $(LATEX) -interaction=batchmode udo$(VER).tex; \
+		   fi; \
+		 fi; \
+		 $(RM) udo$(VER).aux udo$(VER).idx udo$(VER).ilg udo$(VER).ind udo$(VER).log udo$(VER).toc missfont.log \
+		 ); \
+		 fi \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+rtf: .stamp.rtf
+
+.stamp.rtf:	$(UDO_DOC_DEP)
+		$(AM_V_at)($(MKDIRHIER) $(RTF_DIR) || exit 1; \
+		 echo "generating rtf documentation"; \
+		 $(UDO) --rtf -o $(RTF_DIR)udo$(VER).rtf -l $(srcdir)/udo.u || exit 1; \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+pch pchelp: .stamp.pchelp
+
+.stamp.pchelp:	$(UDO_DOC_DEP)
+		$(AM_V_at)($(MKDIRHIER) $(PCHELP_DIR) || exit 1; \
+		 echo "generating PC-Help documentation"; \
+		 $(UDO) --pchelp -o udo$(VER).scr -l $(srcdir)/udo.u || exit 1; \
+		 cat udo$(VER).scr | tr '\344\366\374\304\326\334\337\341\275' '\204\224\201\216\231\232\236\236\275' > $(PCHELP_DIR)udo$(VER).scr; \
+		 $(CP) udo$(VER).cmd $(PCHELP_DIR)udo$(VER).cmd; \
+		 if test "`type $(PCHELP)$(EXEEXT) 2>/dev/null`" = ""; then \
+		 echo "PC-Help Help Compiler ($(PCHELP)) not found" >& 2; \
+		 else \
+		 (cd $(PCHELP_DIR); \
+		   $(PCHELP)$(EXEEXT) udo$(VER).cmd; \
+		 ); \
+		 fi; \
+		 $(RM) udo$(VER).scr udo$(VER).cmd; \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+html: .stamp.html
+
+.stamp.html:	$(UDO_DOC_DEP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css
+		$(AM_V_at)$(MKDIRHIER) $(HTML_DIR) || exit 1; \
+		echo "generating Html documentation"; \
+		( cd $(HTML_DIR) && $(RM) `ls .`) ; \
+		$(CP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(HTML_DIR); \
+		$(CP) $(srcdir)/images/*.gif $(HTML_DIR); \
+		$(CP) $(srcdir)/images/favicon.ico $(HTML_DIR); \
+		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(HTML_DIR)"; \
+		$(CP) $(srcdir)/images/valid-html401.png $(HTML_DIR); \
+		$(UDO) --html --force-short --check --tree --save-upr -o $(START) $(srcdir)/udo.u || exit 1; \
+		: $(RM) $(HTML_DIR)*.u?h
+		$(AM_V_at)touch $@
+
+####################################################################
+
+win winhelp3: .stamp.winhelp
+
+.stamp.winhelp:	$(UDO_DOC_DEP) $(WIN3HPJ)
+		$(AM_V_at)($(MKDIRHIER) "$(WINHELP3_DIR)" || exit 1; \
+		 echo "generating WinHelp3 documentation"; \
+		 $(UDO) --win -o "$(WINHELP3_DIR)udo$(VER).rtf" -l $(srcdir)/udo.u || exit 1; \
+		 $(CP) $(WIN3HPJ) "$(WINHELP3_DIR)udo$(VER).hpj"; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).hlp; \
+		 if test "`type $(HC31) 2>/dev/null`" = ""; then \
+		   echo "WinHelp Help Compiler ($(HC31)) not found" >& 2; \
+		 else \
+		  (cd "$(WINHELP3_DIR)"; \
+		   $(HC31) udo$(VER).hpj; \
+		   $(HC31) udo$(VER).hpj \
+		  ); \
+		  $(CP) "$(WINHELP3_DIR)udo$(VER).hlp" $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).hlp || exit 1; \
+		  : $(RMDIRHIER) "$(WINHELP3_DIR)"; \
+		 fi; \
+		 chmod -f +w $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).FTS 2>/dev/null; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).gid $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).GID; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).FTS \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+info: .stamp.info
+
+.stamp.info: $(UDO_DOC_DEP)
+		$(AM_V_at)($(MKDIRHIER) $(INFO_DIR) || exit 1; \
+		 echo "generating info documentation"; \
+		 $(UDO) --info -o $(INFO_DIR)/udo$(VER).texinfo -l $(srcdir)/udo.u || exit 1; \
+		 if test "`type $(MAKEINFO) 2>/dev/null`" = ""; then \
+		   echo "makeinfo ($(MAKEINFO)) not found" >& 2; \
+		 else \
+		  (cd $(INFO_DIR); $(MAKEINFO) --number-sections udo$(VER).texinfo; \
+                  : $(RM) udo$(VER).texinfo \
+                  ); \
+		 fi \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+tvh vision: .stamp.tvh
+
+.stamp.tvh: $(UDO_DOC_DEP)
+		$(AM_V_at)(echo "generating Turbo-Vision documentation"; \
+		 $(UDO) --vision -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).tvh -l $(srcdir)/udo.u || exit 1; \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+ldoc linuxdoc: .stamp.linuxdoc
+
+.stamp.linuxdoc: $(UDO_DOC_DEP)
+		$(AM_V_at)(echo "generating Linux-Doc documentation"; \
+		 $(UDO) --linuxdoc -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).sgml -l $(srcdir)/udo.u || exit 1; \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+aqv quickview: .stamp.quickview
+
+.stamp.quickview: $(UDO_DOC_DEP)
+		$(AM_V_at)($(MKDIRHIER) $(QUICKVIEW_DIR) || exit 1; \
+		 echo "generating Apple QuickView documentation"; \
+		 $(UDO) --quickview -o $(QUICKVIEW_DIR)udo$(VER).aqv -l $(srcdir)/udo.u || exit 1; \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+hph helptag: .stamp.helptag
+
+.stamp.helptag: $(UDO_DOC_DEP)
+		$(AM_V_at)(echo "generating HP Helptag documentation"; \
+		 $(UDO) --helptag -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).hph -l $(srcdir)/udo.u || exit 1; \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+lyx: .stamp.lyx
+
+.stamp.lyx:	$(UDO_DOC_DEP)
+		$(AM_V_at)($(MKDIRHIER) $(LYX_DIR) || exit 1; \
+		 echo "generating LyX documentation"; \
+		 $(MKDIRHIER) $(LYX_DIR)images/ || exit 1; \
+		 $(CP) $(srcdir)/images/*.eps $(LYX_DIR)images; \
+		 $(RM) udo*.eps udo.ul?; \
+		 $(UDO) --lyx --tree --save-upr -o udo.lyx $(srcdir)/udo.u || exit 1; \
+		 $(CP) udo.lyx $(LYX_DIR)udo$(VER).lyx || exit 1; \
+		 $(RM) udo.lyx; \
+		 $(MV) udo*.eps udo.upr udo.utl udo.ul? $(LYX_DIR); \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+nroff: .stamp.nroff
+
+.stamp.nroff: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating Nroff documentation"; \
+		$(UDO) --nroff -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).1 -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+src: .stamp.src
+
+.stamp.src: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating C-Source documentation"; \
+		$(UDO) --c -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).c -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+srp: .stamp.srp
+
+.stamp.srp: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating Pascal-Source documentation"; \
+		$(UDO) --pascal -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).pas -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+ipf: .stamp.ipf
+
+.stamp.ipf: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating OS/2 IPF documentation"; \
+		$(UDO) --ipf -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).ipf -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+drc: .stamp.drc
+
+.stamp.drc: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating David's Readme Compiler documentation"; \
+		$(UDO) --drc -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).drc -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+htmlhelp: .stamp.htmlhelp
+
+.stamp.htmlhelp:	$(UDO_DOC_DEP) $(srcdir)/udo$(OUTPUT_LANG).hhp
+		$(AM_V_at)$(MKDIRHIER) "$(HTMLHELP_DIR)" || exit 1; \
+		echo "generating HtmlHelp documentation"; \
+		$(CP) $(srcdir)/images/*.gif "$(HTMLHELP_DIR)"; \
+		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}.gif "$(HTMLHELP_DIR)"; \
+		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(HTMLHELP_DIR)"; \
+		$(UDO) --htmlhelp --check --force-short -o "$(HTMLHELP_DIR)udo.html" -l $(srcdir)/udo.u || exit 1; \
+		$(RM) "$(HTMLHELP_DIR)udo.hhp"; \
+		$(CP) udo$(OUTPUT_LANG).hhp "$(HTMLHELP_DIR)"; \
+		$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).chm; \
+		if test "`type $(HHC) 2>/dev/null`" = ""; then \
+		 echo "HTML Help Compiler ($(HHC)) not found" >& 2; \
+		 else \
+		(cd $(HTMLHELP_DIR); \
+		 $(HHC) udo$(OUTPUT_LANG).hhp; \
+		); \
+		$(CP) $(HTMLHELP_DIR)udo$(VER).chm $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).chm || exit 1; \
+		: $(RMDIRHIER) "$(HTMLHELP_DIR)"; \
+		fi
+		$(AM_V_at)touch $@
+
+####################################################################
+
+pdf pdflatex: .stamp.pdflatex
+
+.stamp.pdflatex:	$(UDO_DOC_DEP)
+		$(AM_V_at)($(MKDIRHIER) $(PDF_DIR)images/ || exit 1; \
+		 echo "generating PDF documentation"; \
+		 $(CP) $(srcdir)/images/*.png $(PDF_DIR)images; \
+		 $(UDO) --pdflatex --save-upr -o $(PDF_DIR)udo$(VER).tex -D mikTeX -l $(srcdir)/udo.u || exit 1; \
+		 if test "`type $(PDFLATEX) 2>/dev/null`" = ""; then \
+		   echo "PDFLaTex ($(PDFLATEX)) not found" >& 2; \
+		 else \
+		 (cd $(PDF_DIR); \
+		 $(PDFLATEX) udo$(VER).tex; \
+		 $(PDFLATEX) udo$(VER).tex; \
+		 $(PDFLATEX) udo$(VER).tex; \
+		 if test -f udo$(VER).idx; then \
+		   if test "`type $(MAKEINDEX) 2>/dev/null`" = ""; then \
+		     echo "makeindex ($(MAKEINDEX)) not found; index may not be correct" >& 2; \
+		   else \
+		     $(MAKEINDEX) udo$(VER).idx; \
+		     $(PDFLATEX) -interaction batchmode udo$(VER).tex; \
+		   fi; \
+		 fi; \
+		 ); \
+		 $(CP) $(PDF_DIR)udo$(VER).pdf $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).pdf || exit 1; \
+		 : $(RMDIRHIER) "$(PDF_DIR)"; \
+		 fi \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+win4 winhelp4: .stamp.winhelp4
+
+.stamp.winhelp4:	$(UDO_DOC_DEP) $(WIN4HPJ)
+		$(AM_V_at)($(MKDIRHIER) "$(WINHELP4_DIR)images" || exit 1; \
+		 echo "generating WinHelp4 documentation"; \
+		 pwd; echo $(UDO) --win4 --check -o "$(WINHELP4_DIR)udo$(VER)4.rtf" -l $(srcdir)/udo.u; \
+		 $(UDO) --win4 --check -o "$(WINHELP4_DIR)udo$(VER)4.rtf" -l $(srcdir)/udo.u || exit 1; \
+		 $(CP) $(WIN4HPJ) "$(WINHELP4_DIR)udo$(VER)4.hpj"; \
+		 $(CP) $(srcdir)/images/help.ico "$(WINHELP4_DIR)help.ico"; \
+		 $(CP) $(srcdir)/images/*.bmp "$(WINHELP4_DIR)images"; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.hlp $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.cnt; \
+		 chmod -f +w $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.FTS 2>/dev/null; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.gid $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.GID; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.FTS; \
+		 if test "`type $(HCRTF) 2>/dev/null`" = ""; then \
+		   echo "WinHelp4 Help Compiler ($(HCRTF)) not found" >& 2; \
+		 else \
+		   ( \
+		   cd "$(WINHELP4_DIR)"; \
+		   $(RM) UDO$(VER)4.HLP udo$(VER)4.hlp; \
+		   $(HCRTF) -x -NG udo$(VER)4.hpj; \
+		   $(HCRTF) -x -NG udo$(VER)4.hpj; \
+		   ); \
+		   $(CP) "$(WINHELP4_DIR)udo$(VER)4.hlp" $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.hlp || exit 1; \
+		   $(CP) "$(WINHELP4_DIR)udo$(VER)4.cnt" $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.cnt || exit 1; \
+		   : $(RMDIRHIER) "$(WINHELP4_DIR)"; \
+		 fi \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+ps: .stamp.ps
+
+.stamp.ps: $(UDO_DOC_DEP)
+		$(AM_V_at)echo "generating PostScript documentation"; \
+		$(UDO) --ps -o $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).ps -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+amg: .stamp.amguide
+
+.stamp.amguide: $(UDO_DOC_DEP)
+		$(AM_V_at)$(MKDIRHIER) "$(AMGUIDE_DIR)" || exit 1; \
+		echo "generating AmigaGuide documentation"; \
+                $(CP) $(srcdir)/images/*.img "$(AMGUIDE_DIR)"; \
+		$(UDO) --amg -o $(AMGUIDE_DIR)/udo$(VER).guide -l $(srcdir)/udo.u || exit 1
+		$(AM_V_at)touch $@
+		
+####################################################################
+
+hah applehelp: .stamp.applehelp
+
+.stamp.applehelp:	$(UDO_DOC_DEP) $(srcdir)/../udo.css
+		$(AM_V_at)$(MKDIRHIER) $(APPLEHELP_DIR) || exit 1; \
+		echo "generating AppleHelp documentation"; \
+		( cd $(APPLEHELP_DIR) && $(RM) `ls .`) ; \
+		$(CP) $(srcdir)/../udo.css $(APPLEHELP_DIR); \
+		$(CP) $(srcdir)/images/*.gif $(APPLEHELP_DIR); \
+		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(APPLEHELP_DIR)"; \
+		$(CP) $(srcdir)/images/valid-html401.png $(APPLEHELP_DIR); \
+		$(UDO) --hah --force-short --check --tree --save-upr -o $(APPLEHELP_DIR)index.html $(srcdir)/udo.u || exit 1; \
+		: $(RM) $(APPLEHELP_DIR)*.u?h
+		$(AM_V_at)touch $@
+
+####################################################################
+
+udo: .stamp.udo
+
+.stamp.udo:	$(UDO_DOC_DEP)
+		$(AM_V_at)(echo "generating UDO documentation"; \
+		 $(UDO) --udo --check -o $(BIN_DIR)/$(OUTPUT_LANG)/manual.u -l $(srcdir)/udo.u || exit 1; \
+		)
+		$(AM_V_at)touch $@
+
+####################################################################
+
+install.txt:	$(srcdir)/install.u
+		$(AM_V_GEN)$(UDO) --asc -o $@ $(srcdir)/install.u
+
+####################################################################
+
+news.txt:	$(srcdir)/news.u
+		$(AM_V_GEN)$(UDO) --asc -o $@ $(srcdir)/news.u
+
+####################################################################
+
+udo.txt:	$(UDO_DOC_DEP)
+		$(AM_V_GEN)$(UDO) --asc -o $@ $(srcdir)/udo.u
+
+####################################################################
+
+udo.man:	$(srcdir)/manpage.u
+		$(AM_V_GEN)$(UDO) --man -o $@ $(srcdir)/manpage.u
+
+####################################################################
+
+distclean-local:
+	$(RM) version.ui
+
+# beware; udo$(VER).hpj and udo$(VER)4.hpj are generated, but udo{en,de}{3,4}.hpj are hand-crafted version
+# with some extra buttons
+clean-local:
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).txt
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).man
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).hyp $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).ref
+	if test -d "$(STGUIDE_DIR)"; then $(RMDIRHIER) "$(STGUIDE_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).tex
+	$(RM) udo.tex udo.aux udo.idx udo.ilg udo.ind udo.log udo.toc missfont.log udo.dvi
+	if test -d "$(TEX_DIR)"; then $(RMDIRHIER) "$(TEX_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).rtf
+	if test -d $(RTF_DIR); then $(RMDIRHIER) $(RTF_DIR); fi
+	$(RM) udo.rtf udo$(VER).rtf udo$(VER)4.rtf
+	$(RM) udo.stg
+	$(RM) udo.guide
+	$(RM) udo$(VER).scr udo$(VER).cmd
+	if test -d "$(PCHELP_DIR)"; then $(RMDIRHIER) "$(PCHELP_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).hlp $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).HLP
+	if test -d "$(HTML_DIR)"; then $(RMDIRHIER) "$(HTML_DIR)"; fi
+	$(RM) udo.hpc udo.hpj udo$(VER).hpj udo$(VER).hpc
+	if test -d "$(WINHELP3_DIR)"; then $(RMDIRHIER) "$(WINHELP3_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).hlp  $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).gid  $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).cnt  $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).fts
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo3.hlp $(BIN_DIR)/$(OUTPUT_LANG)/udo3.gid $(BIN_DIR)/$(OUTPUT_LANG)/udo3.cnt $(BIN_DIR)/$(OUTPUT_LANG)/udo3.fts
+	$(RM) udo.texinfo udo.texi
+	if test -d "$(INFO_DIR)"; then $(RMDIRHIER) "$(INFO_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).tvh
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).sgml
+	if test -d "$(QUICKVIEW_DIR)"; then $(RMDIRHIER) "$(QUICKVIEW_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).hph
+	if test -d $(LYX_DIR); then $(RMDIRHIER) $(LYX_DIR); fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).1
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).c
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).pas
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).ipf $(BIN_DIR)/$(OUTPUT_LANG)/udo_mw.bmp
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).drc
+	$(RM) udo.drc
+	if test -d "$(HTMLHELP_DIR)"; then $(RMDIRHIER) "$(HTMLHELP_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).chm
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).pdf
+	if test -d $(PDF_DIR); then $(RMDIRHIER) $(PDF_DIR); fi
+	chmod -f +w $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.FTS 2>/dev/null || true
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.hlp $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.gid $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.GID $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.cnt $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.FTS
+	if test -d "$(WINHELP4_DIR)"; then $(RMDIRHIER) "$(WINHELP4_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).ps
+	if test -d "$(AMGUIDE_DIR)"; then $(RMDIRHIER) "$(AMGUIDE_DIR)"; fi
+	if test -d "$(APPLEHELP_DIR)"; then $(RMDIRHIER) "$(APPLEHELP_DIR)"; fi
+	$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/manual.u
+	$(RM) udo.hhp
+	$(RM) udo.err
+	$(RM) udo.txt
+	$(RM) udo.1
+	$(RM) udo.man
+	$(RM) udo.sgml
+	$(RM) udo.ipf
+	$(RM) udo.lyx
+	$(RM) udo.cmd udo.scr
+	$(RM) udo.ps
+	$(RM) udo.cnt
+	$(RM) udo.upr
+	$(RM) *.ul?
+	$(RM) *.uh?
+	$(RM) *.ut?
+	$(RM) *.upr
+	$(RM) *.img
+	$(RM) *.bmp
+	$(RM) *.gif
+	$(RM) *.eps
+	$(RM) *.png
+	$(RM) core gmon.out
+	for i in man ascii stguide tex rtf pchelp html winhelp info tvh linuxdoc quickview helptag lyx nroff src srp ipf drc htmlhelp pdflatex winhelp4 ps amguide applehelp udo; do \
+		$(RM) .stamp.$$i; \
+	done
+
+####################################################################
+
+images:
+	@for i in dh udo gem_main gem_opts gem_prgs gem_syms tiger udo_16; do \
+		echo generating images/$$i.bmp; \
+		pngtopnm images/$$i.png | pnmquant 256 | ppmtobmp > tmp$$$$ && mv tmp$$$$ images/$$i.bmp || ($(RM) tmp$$$$; exit 1); \
+		echo generating images/$$i.gif; \
+		pngtopnm images/$$i.png | pnmquant 256 | ppmtogif > tmp$$$$ && mv tmp$$$$ images/$$i.gif || ($(RM) tmp$$$$; exit 1); \
+		echo generating images/$$i.eps; \
+		pngtopnm images/$$i.png | pnmquant 256 | pnmtops -noturn > tmp$$$$ && mv tmp$$$$ images/$$i.eps || ($(RM) tmp$$$$; exit 1); \
+		echo generating images/$$i.img; \
+		pngtopnm images/$$i.png | pnmquant 16 | ppmtopgm | pgmtopbm | pbmtogem > tmp$$$$ && mv tmp$$$$ images/$$i.img || ($(RM) tmp$$$$; exit 1); \
+	done
+.PHONY: images
+
+####################################################################
+
+# There are several output formats that generate
+# the same log file names, and automatically generated
+# images may be the same for some, so we cant run anything
+# in parallel here:
+.NOTPARALLEL:

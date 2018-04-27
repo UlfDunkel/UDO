@@ -1,0 +1,23 @@
+!begin_node (!kw [wh4_background])
+!html_name cmd_wh4_background
+
+Hintergrundfarbe für WinHelp4 setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_background (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl wird zwar noch unterstützt, sollte jedoch
+durch (!KW [wh4_backcolor]) ersetzt werden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [wh4_backcolor])
+
+!end_xlist
+
+!end_node

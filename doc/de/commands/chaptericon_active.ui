@@ -1,0 +1,24 @@
+!begin_node (!kw [chaptericon_active])
+!html_name cmd_chaptericon_active
+
+Grafik für aktives Kapitel angeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon_active (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Hier können Sie für den linken Rahmen bzw. für die linke Spalte
+ein Bild angeben, das nur dann angezeigt wird, wenn das Kapitel
+oder eines dessen Unterkapitel angezeigt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon]), (!KW [chaptericon_text])
+
+!end_xlist
+
+!end_node

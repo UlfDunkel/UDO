@@ -1,0 +1,37 @@
+!begin_node (!kw [hline])
+!html_name cmd_hline
+
+Waagerechte (horizontale) Linie ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hline(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando fügt in die Zieldatei eine
+waagerechte Linie ein. Desweiteren dient das Kommando
+dazu, um waagerechte Linien innerhalb einer Tabelle
+zu erzeugen. Nicht alle Formate gestatten es,
+waagerechte Linien auszugeben.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!hline
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_quote
+!hline
+!end_quote
+(!EXAMPLE_END)
+
+!end_node

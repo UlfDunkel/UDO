@@ -1,0 +1,35 @@
+!begin_node (!kw [subsubsubtoc])
+!html_name cmd_subsubsubtoc
+
+Paragraphen auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Listet in Form eines Inhaltsverzeichnisses alle Paragraphen des
+aktuellen Unterabschnitts auf und sorgt dafür, daß Sie in Hypertexten
+zu den Paragraphen weiterverzweigen können. UDO gibt dieses
+Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
+(!KW [ignore_subsubsubtoc]) verwendet wurde. Die Ausgabe dieser
+Unterinhaltsverzeichnisse lässt sich durch
+(!KW [use_auto_subsubsubtocs]) auch automatisieren.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

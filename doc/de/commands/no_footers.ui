@@ -1,0 +1,32 @@
+!begin_node (!kw [no_footers])
+!html_name cmd_no_footers
+
+Keine Kontaktangaben in den Fußzeilen erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_footers [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die automatische
+Erzeugung der Kontaktangaben in der Fußzeile der jeweiligen Ausgabeformate
+unterbinden, sofern diese vorhanden sind. Im Beispiel würde dies bei der
+Umwandlung ins HTML-Format geschehen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_footers [html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

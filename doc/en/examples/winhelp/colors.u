@@ -1,0 +1,29 @@
+#######################################
+# @(#) Farben mit WinHelp - dh 1996
+#######################################
+!code_source [latin1]
+
+!ifdest [win]
+!define black		{\cf1 (!1)}
+!define blue		{\cf2 (!1)}
+!define cyan		{\cf3 (!1)}
+!define green		{\cf4 (!1)}
+!define magenta		{\cf5 (!1)}
+!define red			{\cf6 (!1)}
+!define yellow		{\cf7 (!1)}
+!else
+!endif
+
+!begin_document
+
+!node* Farben mit WinHelp
+
+(!black [schwarz]),
+(!blue [blau]),
+(!cyan [cyan]),
+(!green [grün]),
+(!magenta [magenta]),
+(!red [rot]),
+(!yellow [gelb])
+
+!end_document

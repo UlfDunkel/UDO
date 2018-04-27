@@ -1,0 +1,133 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Macro definitions
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from manual.u)
+#   fd  Jun 05: FILESPACEQUOTE
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: some macros enhanced
+#   fd  Jun 10: EXAMPLE_... macros introduced
+#   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 24: macro IMPORTANT
+#   fd  Mar 02: macro NTY (= not translated yet)
+#   fd  Mar 03: macro INCOMPLETE, deprecated macros removed
+#   fd  May 25: macro NOTE + TIP
+#   fd  May 26: macro CLASS + TARGET
+#
+################################################################################
+
+!ifdest [win,wh4,rtf]
+!macro  FORMAT (!link [<k\'FCrzel>] [Ausgabeformat])
+!else
+!ifdest [hh,hah,html]
+!macro  FORMAT (!link [&lt;k&uuml;rzel&gt;] [Ausgabeformat])
+!else
+!macro  FORMAT (!link [<kürzel>] [Ausgabeformat])
+!endif
+!endif
+
+# HTML macro formattings
+# ------------------------------------------------------------------------------
+!ifdest [hh,hah,html]
+!macro EXAMPLE_BEGIN  (!raw [all] [<div class="example">])
+!macro EXAMPLE_END    (!raw [all] [<br>&nbsp;</div>])
+!macro EXAMPLE_BEFORE (!raw [all] [<div class="example"><b><i>Vorher:</i></b>])
+!macro EXAMPLE_AFTER  (!raw [all] [<hr><b><i>Nachher:</i></b><br>&nbsp;<br>])
+
+!macro COLOR    (!link [&lt;farbe&gt;] [Farben])
+!macro LANGUAGE (!link [&lt;sprache&gt;] [Sprache])
+!macro OS       (!link [&lt;system&gt;] [Betriebssystem])
+!macro CHARSET  (!link [&lt;zeichensatz&gt;] [Code])
+
+# other macro formattings
+# ------------------------------------------------------------------------------
+!else
+!macro EXAMPLE_BEGIN  !begin_quote
+!macro EXAMPLE_END    !end_quote
+!macro EXAMPLE_BEFORE !include (!EXAMPLES)general/example_before.ui
+!macro EXAMPLE_AFTER  !include (!EXAMPLES)general/example_after.ui
+
+!macro COLOR    (!link [<farbe>] [Farben])
+!macro LANGUAGE (!link [<sprache>] [Sprache])
+!macro OS       (!link [<system>] [Betriebssystem])
+!macro CHARSET  (!link [<zeichensatz>] [Code])
+
+!endif
+
+!macro CHAR           <zeichen>
+!macro CLASS          <klasse>
+!macro FILE           <datei>
+!macro LINK           <link>
+!macro NAME           <name>
+!macro TARGET         <ziel>
+!macro TEXT           <text>
+!macro VALUE          <wert>
+!macro WORD           <wort>
+
+!ifdest [tex,pdf]
+!macro BUG (!url [Bug \#(!1)] [http://bugs.udo-open-source.org/bug_view_advanced_page.php?id=(!1)][_blank][elink])
+!macro FEATURE (!url [Feature-Wunsch \#(!1)] [http://bugs.udo-open-source.org/view.php?id=(!1)][_blank][elink])
+!else
+!macro BUG (!url [Bug #(!1)] [http://bugs.udo-open-source.org/bug_view_advanced_page.php?bug_id=(!1)][_blank][elink])
+!macro FEATURE (!url [Feature-Wunsch #(!1)] [http://bugs.udo-open-source.org/view.php?bug_id=(!1)][_blank][elink])
+!endif
+
+# hinzugefügt 13.01.2004 - Ulrich Kretschmer
+!macro DocumentationWorkInProgress Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
+
+# general macro formattings
+# ------------------------------------------------------------------------------
+
+
+# Sprachabhängige Textbausteine für die UDO-Historie in history.ui (alphabetisch geordnet)
+!macro BUGFIXES Fehlerbehebungen
+!macro CHANGES Änderungen
+!macro GENERAL Allgemeines
+!macro NEWS Neuheiten
+!macro PUBLISHED (!1) wurde am (!2) veröffentlicht.
+
+# Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
+!macro ABBREV Dies ist eine Abkürzung für das Kommando
+!macro COLORSUPPORT Farbbefehle werden z.Zt. nur bei den Formaten HTML, RTF, WinHelp, DRC und PostScript unterstützt.
+!macro COMMAND Kommando
+!macro COMMANDABBREV Kommando-Abkürzung
+!macro COMMANDOBLIGATE Pflicht-Kommando
+!macro DESCRIPTION Beschreibung:
+!macro EXAMPLE Beispiel:
+!macro EXAMPLE2 Beispiele:
+!macro EXISTSSINCE Existiert seit:
+!macro EXISTEDUNTIL Existierte bis:
+!macro FILESPACEQUOTE Enthält der Dateiname Leerzeichen, muss er in Anführungszeichen gesetzt werden.
+!macro FILESPACEQUOTE2 Enthält der Dateiname Leerzeichen, muss er in Apostrophe gesetzt werden.
+!macro HINT (!B)Hinweis:(!b)
+!macro HINTS (!B)Hinweise:(!b)
+!macro IMPORTANT (!B)(!red)Wichtig:(!coloff)(!b)
+!macro INCOMPLETE (!red)(!I)Dieser Seiteninhalt ist noch nicht vollständig!(!i)(!coloff)
+!macro IN_HTML_HEADER (!gray)(!I)Ausgabe erfolgt im Seiten-Header:(!i)(!coloff)
+!macro MAINPART Hauptteil
+!macro MISS (!red)(!idx [Für dieses Kapitel existiert noch kein Text.])(!coloff)
+!macro NOTE (!B)Bitte beachten:(!b)
+!macro NOTEXISTING Dieser Befehl existiert nicht mehr.
+!macro NTY (!red)[Der nachfolgende Text wurde noch nicht übersetzt.](!coloff) (!nl)
+!macro PLACEHOLDER Platzhalter
+!macro PREAMBLE Vorspann
+!macro RENAMEDTO Dieses Kommando (!1) wurde umbenannt zu
+!macro SEEALSO Siehe auch:
+!macro SPECIALCHAR Sonderzeichen
+!macro SWITCH Schalter
+!macro SYNTAX Syntax:
+!macro TIP (!B)Tipp:(!b)
+!macro TYPEPOSITION Typ & Position:

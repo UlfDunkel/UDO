@@ -1,0 +1,34 @@
+!begin_node (!kw [vinclude])
+!html_name cmd_vinclude
+
+Datei einbinden und in einer verbatim-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/vinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Klartext an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [verbatimsize]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [verbatim-Umgebung] [verbatim-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!vinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!vinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,31 @@
+!begin_node (!kw [win_monofont])
+!html_name cmd_win_monofont
+
+Namen des Monospaced-Font für WinHelp setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_monofont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie den Font setzen, der zur
+Darstellung von Klartext benutzt werden soll. Als
+Standard verwendet UDO den Font ""Courier New"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [win_propfont]), (!KW [win_monofont_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_monofont Courier
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

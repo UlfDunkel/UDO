@@ -1,0 +1,31 @@
+!begin_node (!kw [html_backimage])
+!html_name cmd_html_backimage
+
+Specify a background image (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Specifies a file that is used as background image
+of HTML pages. You have to use the complete
+name, including extension, of the file name. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_backcolor]), (!KW [html_textcolor]), (!KW [html_linkcolor]), (!KW [html_vlinkcolor]), (!KW [html_alinkcolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_backimage background.gif
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

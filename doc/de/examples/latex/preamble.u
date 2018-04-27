@@ -1,0 +1,16 @@
+!no_preamble [tex]
+
+# Für LaTeX 2.09 die folgenden Zeilen auskommentieren
+# !tex \documentstyle[12pt,german]{article}
+
+# Für LaTeX 2e die folgenden Zeilen auskommentieren
+!tex_2e
+!raw [tex] \documentclass[12pt,a4paper]{article}
+!raw [tex] \usepackage{german,a4}
+
+!begin_document
+!node Beispiel
+In diesem Beispiel wird eine benutzerdefinierte
+(!LaTeX)-Präambel verwendet.
+!end_document
+

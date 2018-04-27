@@ -1,0 +1,104 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Pure C Help
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'Atari ST' -> 'Atari'
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 19: "short" -> "compressed"
+#
+################################################################################
+
+!begin_node Pure C Help
+!html_name format_pch
+!alias Pure-C-Help
+
+The Pure C Help format is only useful for the Pure C compiler on Atari ST
+for displaying online library descriptions. The format isn't used for any
+other purposes neither on this nor on other computers.
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [How does UDO create the title page and the table of contents?]
+UDO prints a single page that contains both the title page and the table of
+contents. Because this page can get very long you should use the switch
+(!KW [use_compressed_tocs] [[pch!!]]).
+
+##################################################
+
+!item [How can I suppress the headlines?]
+UDO prints a (!idx [headline]) on each page automatically. Headlines contain the
+name of the current chapter and the title of the source file. By clicking
+the title you can jump to the title page or the table of contents.
+
+Using the switch (!KW [no_headlines] [[pch!!]]) you can suppress the output of
+these headlines.
+
+##################################################
+
+!item [How can I suppress the bottomlines?]
+UDO prints a bottomline on each page automatically that contain links to the
+previous page, next page and upper page. Thus the reader of the online
+manual is enabled to jump directly to other pages without returning to the
+table of contents.
+
+Using the switch (!KW [no_bottomlines] [[pch!!]]) you can suppress the output
+of these bottomlines.
+
+##################################################
+
+!item [What can I do with the file with the suffix (!T).cmd(!t)?]
+UDO saves a command file for the Pure C Help compiler (!file [HC.TTP]). You
+have to call the HC by passing the name of this command file to get a
+compiled help file.
+
+UDO always overwrites this file. You have to switch in write protection if
+you want to protect your own changes to this file.
+
+##################################################
+
+!item [How do I build a help file for Pure~C?]
+UDO saves two file when converting the source fie (!file [foo.u]):
+(!file [foo.scr]) and (!file [foo.cmd]).
+
+To get a Pure C Help file you have to call (!file [HC.TTP]) by passing the
+command file (!file [foo.cmd]):
+
+!begin_quote
+!begin_verbatim
+$ e:\purec\hc.ttp foo.cmd
+!end_verbatim
+!end_quote
+
+Using GEM just drag (!file [foo.cmd]) onto (!file [HC.TTP]) to start the
+conversion.
+
+##################################################
+
+!item [How can I install this help file?]
+Pure C can display own user defined help file. This file has to be named
+(!file [USR.HLP]) and it has to be placed inside the Pure C directory.
+
+To install your help file backup the original (!file [USR.HLP]), rename your
+help file to (!file [USR.HLP]) and copy it to the Pure C directory.
+
+##################################################
+
+!end_description
+
+!end_node

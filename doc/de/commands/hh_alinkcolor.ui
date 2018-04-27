@@ -1,0 +1,23 @@
+!begin_node (!kw [hh_alinkcolor])
+!html_name cmd_hh_alinkcolor
+
+Setzen der Farbe für aktive Links (nur HTMLHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_alinkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTMLHelp-Seiten
+aktive Links darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_textcolor]), (!KW [hh_linkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_backcolor])
+
+!end_xlist
+
+!end_node

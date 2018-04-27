@@ -1,0 +1,25 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: PostScript
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node PostScript
+!html_name format_ps
+
+(!MISS)
+
+!end_node

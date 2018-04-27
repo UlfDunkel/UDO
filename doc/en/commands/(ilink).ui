@@ -1,0 +1,38 @@
+!begin_node (!kkw [ilink])
+!html_name cmd_ilink()
+
+Create link with graphic (WinHelp and HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/ilink [(!FILE)] [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder is a combination of (!KKW [img]) and (!KKW [link]) and
+is useful to display an image right inside the text. If you click
+this image you will jump to another part of the document. The example
+shows how to display an image called (!file [disk.[bmp,gif!!]]), the link
+destination is ""Download"". In HTML ""download UDO"" will be used as
+the alternative text. In all other formats only ""download"" UDO will
+be dislayed.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KKW [img]), (!KKW [link]), (!link [Links] [Links]), (!link [Images] [Images])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!ilink [udo_16] [download UDO] [Download])
+!end_verbatim
+(!EXAMPLE_AFTER)
+!label* Download
+(!ilink [(!IMAGES)udo_16] [download UDO] [Download])
+(!EXAMPLE_END)
+
+!end_node

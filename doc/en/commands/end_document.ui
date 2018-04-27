@@ -1,0 +1,22 @@
+!begin_node (!kw [end_document])
+!html_name cmd_end_document
+
+Finish the document.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_document(!t)
+
+!item [(!DESCRIPTION)]
+This command (!B)must(!b) be part of a source file and it should be
+the last command. If you forget to use this command UDO will print an
+error message.
+
+!item [(!SEEALSO)]
+(!KW [begin_document])
+
+!end_xlist
+
+!end_node

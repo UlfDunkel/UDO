@@ -1,0 +1,10 @@
+!begin_node Money, money, money
+
+!include money/sharware.ui
+!include money/prices.ui
+!include money/upgrades.ui
+!include money/register.ui
+!include money/england.ui
+!include money/sweden.ui
+
+!end_node

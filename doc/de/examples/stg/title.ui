@@ -1,0 +1,41 @@
+!docinfo [program] Titelseiten mit UDO
+
+!begin_document
+
+!ifndest [stg]
+
+!maketitle
+
+!else
+
+!node* Titel
+
+!begin_center
+Der Hypertext zu ""Hello, World!"" (!nl)
+Version 8.4
+!end_center
+
+!begin_table [cc]
+Autor:             !! Vertrieb:
+Reiner C. Anf‰nger !! Ultra-Supra-Soft
+Feldweg 42         !! Postfach 4711
+D-98755 Irgendwo   !! D-12345 Sonstwo
+!end_table
+
+!smallskip
+
+!begin_center
+Inhaltsverzeichnis
+!end_center
+
+!endif
+
+!tableofcontents
+
+!node Jetzt geht's lohoos
+Dies ist das erste Kapitel.
+
+!node Feierabend
+Schluﬂ jetzt!
+
+!end_document

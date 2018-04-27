@@ -1,0 +1,23 @@
+!begin_node (!kw [begin_preformatted])
+!html_name cmd_begin_preformatted
+
+Start a preformatted environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_preformatted(!t)
+
+!item [(!DESCRIPTION)]
+Starts a (!link [preformatted environment] [preformatted environment]) that has to be finished with
+(!KW [end_preformatted]). Text that is part of a preformatted environment
+is printed out as given using a monospaced font.
+# TODO: was ist Unterschied zu begin_verbatim?
+
+!item [(!SEEALSO)]
+(!KW [end_preformatted]), (!KW [begin_verbatim]), (!KW [vinclude]), (!KW [verbatimsize]), (!link [Preformatted text] [Preformatted text])
+
+!end_xlist
+
+!end_node

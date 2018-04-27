@@ -1,0 +1,34 @@
+!begin_node (!kw [no_toc_subnodes])
+!html_name cmd_no_toc_subnodes
+
+Im Inhaltsverzeichnis keine Subnodes auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_toc_subnodes [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Dieser Schalter dient zur Unterdrückung der Ausgabe
+von Subnodes und der tieferen Gliederungsebenen im
+Inhaltsverzeichnis. Das Beispiel zeigt, wie man die
+Auflistung beim WinHelp-Format unterdrücken kann.
+(!KW [no_toc_subnodes]) ist funktionsgleich mit
+(!KW [use_short_tocs]).
+
+Eine andere Möglichkeit, die Tiefe der Ausgabe des
+Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
+des Parameters (!KW [depth]) bei (!KW [toc]).
+
+!item [(!EXAMPLE)]
+(!T)!/no_toc_subnodes [win](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+!end_node

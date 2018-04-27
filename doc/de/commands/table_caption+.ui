@@ -1,0 +1,40 @@
+!begin_node (!kw [table_caption*])
+!html_name cmd_table_caption_asterisk
+
+Titel der n‰chsten Tabelle setzen, ohne die Tabellennummer mit auszugeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/table_caption* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Der einzige Unterscheid zum Kommando (!KW [table_caption])
+ist, daﬂ UDO dem Tabellentitel nicht ""Tabelle <nummer>:"" voranstellt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [table_caption])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!table_caption* Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!table_caption* Ein Tabellentitel
+!begin_table [l|r] !hline
+linke Zelle !! rechte Zelle
+linke Zelle !! rechte Zelle
+!end_table
+(!EXAMPLE_END)
+
+!end_node

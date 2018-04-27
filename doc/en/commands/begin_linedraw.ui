@@ -1,0 +1,28 @@
+!begin_node (!kw [begin_linedraw])
+!html_name cmd_begin_linedraw
+
+Start a linedraw environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_linedraw(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [linedraw environment] [linedraw environment]) that has to be
+finished with (!KW [end_linedraw]).
+Text inside this enviroment is treated like
+in a verbatim environment. Additionaly,
+the character set will be switched to dos,
+and if converting to RTF the ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm] [] [elink])""
+font will be used.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [end_linedraw]), (!KW [ldinclude]), (!KW [linedrawsize]), (!link [Preformatted text] [Preformatted text])
+
+!end_xlist
+
+!end_node

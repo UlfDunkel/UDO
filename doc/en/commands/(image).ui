@@ -1,0 +1,26 @@
+!ifnset NoOldKeywords
+!begin_node (!kkw [image])
+!html_name cmd_image()
+
+Print inline images.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/image [<file>] [<text>])(!t)
+
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KKW [img]).
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KKW [img])
+
+!end_xlist
+
+!end_node
+!endif

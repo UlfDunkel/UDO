@@ -1,0 +1,23 @@
+!begin_node (!kw [end_document])
+!html_name cmd_end_document
+
+Ende des Dokumentes setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_document(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando (!B)muss(!b) in jedem Quelltext vorhanden
+sein. Es beendet den Hauptteil und sollte das letzte
+Kommando des Quelltextes sein. Fehlt dieses Kommando,
+erzeugt UDO eine Fehlermeldung.
+
+!item [(!SEEALSO)]
+(!KW [begin_document])
+
+!end_xlist
+
+!end_node

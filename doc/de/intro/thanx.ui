@@ -1,0 +1,25 @@
+!begin_node Danksagung
+
+Ich möchte mich an dieser Stelle bei folgenden, namentlich sortierten
+Personen bedanken, ohne deren tatkräftige Unterstützung UDO nie zu dem
+geworden wäre, was es heute ist.
+
+Vielen Dank daher an!..
+
+!begin_description
+  !item [Denesh Bhabuta], für den Support in England
+  !item [Alexander Clauss], für die Erstellung der HP-UX-300/400-Version
+  !item [Dirk Haun], einem der Geburtsväter von UDO
+  !item [Patrick Jerchel], für die Verwaltung der Mailingliste
+  !item [Peter Klasen], der als erster registrierter Benutzer in die Geschichte von UDO eingehen wird
+  !item [Martin Loos], für die aufwendige Verwaltung der alten Mailingliste
+  !item [Martin Osieka], für die aufwendige Portierung auf MacOS
+  !item [Rainer Riedl], für die Erstellung der BeOS-Version
+  !item [Tom Thomason], für den Support in Schweden
+!end_description
+
+Außerdem möchte ich mich bei all denjenigen bedanken, die durch ihren
+unermüdlichen Einsatz dazu beigetragen haben, daß UDO fehlerfreier und
+leistungsfähiger denn je ist.
+
+!end_node

@@ -1,0 +1,69 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Text styling
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 08: text reviewed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 03: chapter style_tables: hint for table_alignment added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
+#   fd  May 26: table adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Texthervorhebungen
+!html_name style
+
+In diesem Abschnitt werden Sie erfahren, mit welchen Kommandos und
+Platzhaltern Sie Ihren Text formatieren können. UDO ermöglicht die
+Zentrierung, links- und rechtsbündige Ausrichtung sowie die Einrückung
+von Textpassagen, bietet verschiedene Aufzählungsumgebungen sowie eine
+Umgebung für Klartext.
+
+Darüber hinaus stehen selbstverständlich verschiedene Texteffekte
+sowie die Möglichkeit, Fußnoten direkt im Text anzugeben, zur
+Verfügung.
+
+!include syntax/text/itemize.ui
+!include syntax/text/enumerate.ui
+!include syntax/text/description.ui
+!include syntax/text/xlist.ui
+!include syntax/text/center.ui
+!include syntax/text/flushright.ui
+!include syntax/text/flushleft.ui
+!include syntax/text/quote.ui
+!include syntax/text/verbatim.ui
+!include syntax/text/linedraw.ui
+!include syntax/text/footnotes.ui
+!include syntax/text/effects.ui
+!include syntax/text/textcolors.ui
+!include syntax/text/tables.ui
+!include syntax/text/sourcecode.ui
+!include syntax/text/ignore.ui
+
+!end_node

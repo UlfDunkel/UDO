@@ -1,0 +1,20 @@
+!begin_node (!kw [nop])
+!html_name cmd_nop
+
+Nichts tun.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/nop(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl (""no operation"") macht gar nichts und
+wird lediglich für Debugging-Zwecke eingesetzt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!end_xlist
+
+!end_node

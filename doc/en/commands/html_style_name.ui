@@ -1,0 +1,43 @@
+!begin_node (!kw [html_style_name])
+!html_name cmd_html_style_name
+
+Set stylesheet (HTML only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_style_name (!FILE) (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+You can define an arbitrary number of stylesheets for different
+types of media, separated by spaces. Stylesheets defined in the
+preamble are written to every output file, while stylesheets
+defined in nodes are written only to the file containing the node.
+(!FILESPACEQUOTE2)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_style_name css/udo.css     title=UDO-Web
+!html_style_name css/udo_prn.css !\ 
+      title=UDO-Printout !\ 
+      media=print alternate=TRUE
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!IN_HTML_HEADER) (!nl)
+!begin_preformatted
+<link rel="stylesheet" type="text/css"
+      href="css/udo.css"
+      title="UDO-Web">
+<link rel="alternate stylesheet" type="text/css"
+      href="css/udo_prn.css" media="print"
+      title="UDO-Printout">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

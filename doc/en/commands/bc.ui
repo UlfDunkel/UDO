@@ -1,0 +1,20 @@
+!begin_node (!kw [bc])
+!html_name cmd_bc
+
+Display centered text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bc(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_center]).
+
+!item [(!SEEALSO)]
+(!KW [begin_center])
+
+!end_xlist
+
+!end_node

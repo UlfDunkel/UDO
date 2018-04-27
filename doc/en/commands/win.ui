@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [win])
+!html_name cmd_win
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/win (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more.
+Use (!KW [raw] [[win!!]]) instead.
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif

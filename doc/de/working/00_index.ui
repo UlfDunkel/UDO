@@ -1,0 +1,30 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#
+################################################################################
+
+!begin_node Praktische Arbeit mit UDO
+!html_name working_general
+
+!include working/7rules.ui
+!include working/tips.ui
+!include working/faq.ui
+!include working/files.ui
+!include working/errors.ui
+!include working/bugs.ui
+
+!end_node

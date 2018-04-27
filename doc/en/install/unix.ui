@@ -1,0 +1,48 @@
+!begin_node Installing the Unix version from source
+!html_name installation_unix_src
+
+!begin_itemize !compressed
+!item Download the sourcecode archive from (!url [www.udo-open-source.org] [http://www.udo-open-source.org])
+!item Unpack the sourcecode archive: (!code [gzip -dc udo_xxx_src.tar.gz | tar xf -])
+!item run the configure script to create the (!code [Makefile]): (!nl)
+(!code [./configure])
+!item run make to create the program: (!nl)
+(!code [make])
+!item copy the UDO executable to (!file [/usr/local/bin]) or into any other directory of your (!file [$PATH]).
+!item (!code [chdir]) to directory (!file [doc/en]) and run (!code [make manpage]). Copy the UDO manualpage (!file [udo.1]) to (!file [/usr/local/man/man1/]).
+!item For converting the UDO manual to HTML, (!code [chdir]) to (!file [doc/en]) and run (!code [make html]) -- documentation will be written to the directory (!file [doc/output/en/html]).
+!end_itemize
+
+!begin_ignore
+# auskommentiert 10.01.2004 - Ulrich Kretschmer
+After having extracted the archive copy the files of ''(!file [bin/])''
+to ''(!file [/usr/local/bin])'' or any other directory of (!file [$PATH]).
+
+Copy the manpage ''(!file [udo.1])'' to ''(!file [/usr/man/man1/])''.
+
+To read the documentation of UDO with GNU Info convert the UDO source
+files to GNU Texinfo, run Makeinfo and copy the Info file to
+(!file [$INFOPATH]). You have to edit (!file [$INFOPATH/dir]) to get
+access to the UDO Info files.
+
+Furthermore you should make some scripts or aliase to simplify calling
+UDO. The following script (named ''(!file [u2tex])'') shows how to tell UDO that he shall convert
+the source file to (!LaTeX)):
+
+!begin_quote
+!begin_verbatim
+#!bin/sh
+udo --tex -o ! $*
+!end_verbatim
+!end_quote
+
+You can make similar scripts for the other destination formats if you
+want. The UDO distribution already contains some scripts.
+
+Hint for users of Linux-SGML: My version doesn't contain all possible
+entities. Just take a look ate the Linuxdoc-SGML FAQ in the middle of
+this documentation if Linuxdoc-SGML prints an error message.
+
+!end_ignore
+
+!end_node

@@ -1,0 +1,34 @@
+#######################################
+# @(#) itemize-Umgebung - dh 1996
+#######################################
+
+!code_source [latin1]
+!language [german]
+
+!docinfo [title]	UDOs
+!docinfo [program]	Itemize-Umgebung
+!docinfo [author]	Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Eine kurze itemize-Umgebung
+
+Dieses Beispiel zeigt, wie man itemize-Umgebungen benutzt:
+
+!begin_itemize
+
+!item Dies ist der erste Punkt.
+!item Dies ist der zweite Punkt mit einem etwas längeren
+Absatz, so daß man erkennen kann, wie UDO Absätze formatiert.
+
+	Dieser Satz gehört noch zu Punkt 2.
+
+!item Zum guten Schluß folgt hier noch ein dritter Punkt
+mit einem (!nl) manuellen Zeilenumbruch.
+
+!end_itemize
+
+!end_document
+

@@ -1,0 +1,21 @@
+!begin_node (!kw [begin_document])
+!html_name cmd_begin_document
+
+Hauptteil des Dokumentes einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/begin_document(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando (!B)muss(!b) in jedem Quelltext vorhanden sein.
+Es trennt den Vorspann des Quelltextes vom Hauptteil.
+
+!item [(!SEEALSO)]
+(!KW [end_document])
+
+!end_xlist
+
+!end_node

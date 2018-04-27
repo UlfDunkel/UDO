@@ -1,0 +1,66 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6.2.1
+# Language    : German
+# Initial Date: 2009-06-16
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from history.de)
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+# 2010:
+#   fd  Mar 01: using macro BUG
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+!begin_node Änderungen von Version 6.2.0 nach 6.2.1
+!html_name history_6_2_0_to_6_2_1
+
+(!PUBLISHED [UDO~6.2.1] [09.12.2003])
+
+!heading PDF-(!LaTeX)
+!begin_description
+
+!item [(!BUGFIXES)]
+   !begin_itemize !compressed
+   !item Wenn PDF-(!LaTeX) als Zielformat gesetzt wird, wird die (!TeX)-Version
+         nicht mehr auf Mik-(!TeX) gesetzt.
+   !item Umsetzung der Links für die PDF-(!LaTeX)-Ausgabe geändert.
+   !item Umsetzung der PDF-(!LaTeX)-Ausgabe für Bilder geändert.
+   !item Die Informationen von (!KW [docinfo]) werden jetzt richtig übergeben für
+         die PDF-(!LaTeX)-Ausgabe.
+   !end_itemize
+!end_description
+
+!heading Richtext Format (RTF)
+!begin_description
+!item [(!BUGFIXES)]
+   !begin_itemize !compressed
+   !item (!BUG [24]) in Version 6.2.1 beseitigt (!nl)
+         In den (!code [(!LINK!)])-Elementen wurde alle Subsubnodes aus anderen Subnodes
+         mit aufgeführt
+   !item (!BUG [25]) in Version 6.2.1 beseitigt (!nl)
+         UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain einer URL
+         im Kommando (!/url !..) vorkamen.
+   !item (!BUG [29]) in Version 6.2.1 beseitigt (!nl)
+         Bei (!/url !..) wurde bei der RTF-Ausgabe das führende
+         Anführungszeichen und das folgende Wort verschluckt, weil ein
+         Leerzeichen fehlte.
+   !item (!BUG [30]) in Version 6.2.1 beseitigt (!nl)
+         Feste Leerzeichen in Links wurden bei der RTF-Ausgabe falsch
+         umgesetzt (\\~ statt \~).
+   !item (!BUG [39]) in Version 6.2.1 beseitigt (!nl)
+         Obwohl (!KW [html_name_prefix]) gesetzt war, fehlte der entsprechende
+         Zusatz in den (!code [(!LINK!)])-Elementen zur Navigation.
+   !end_itemize
+!end_description
+
+!end_node

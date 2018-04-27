@@ -1,0 +1,40 @@
+!begin_node How much do upgrades cost?
+
+You have to pay an upgrade fee for upgrading an old release to the current
+one.
+
+The height of this upgrade fee depends on which release you have currently
+registered and if you are a private, commercial or ""educational"" user. The
+following table shows the upgrade fees in Deutsche Mark. The second table
+shows you the equivalent values in your currency.
+
+!begin_table [ll|r|r|r]
+from          !! to        !! Private !! Commercial !! Education
+!hline
+Release 3     !! Release 6 !! 15 DM  !! 50/10 DM   !! (--)
+Release 4     !! Release 6 !! 10 DM  !! 30/10 DM   !! (--)
+Rel. 5 (1996) !! Release 6 !!  0 DM  !!     0 DM   !!  0 DM  
+Rel. 5 (1997) !! Release 6 !! 10 DM  !! 50/10 DM   !! 50/10 DM
+!end_table
+
+!begin_table [r|r|r|r|r|r]
+DM !! $US !! Pounds !! sFR !!  öS !! nFL !!  FF
+!hline
+10 !!   7 !!      5 !!  13 !!  70 !!  11 !!  30
+15 !!  10 !!      8 !!  20 !! 105 !!  17 !!  45
+30 !!  20 !!     15 !!  40 !! 210 !!  34 !!  60
+50 !!  35 !!     25 !!  65 !! 350 !!  56 !! 150
+!end_table
+
+If you have registered UDO Release 5 in 1996 you don't have to pay any
+upgrade fee. The new keycodes will be sent to you on demand (email
+preferred).
+
+If you have registered UDO Release 5 in 1997 or later you will have to pay
+the upgrade fees listed in the table in the row labelled ""Rel. 5 (1997)"".
+
+The values in the columns for commercial and educational users are the
+upgrade fees for the first licence (left value) and additional licences
+(right value).
+
+!end_node

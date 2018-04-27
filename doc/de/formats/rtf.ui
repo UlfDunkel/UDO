@@ -1,0 +1,128 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: RTF (Rich Text Format)
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
+#
+################################################################################
+
+!begin_node Rich Text Format (RTF)
+!html_name format_rtf
+!label RTF
+
+Das Rich Text Format (kurz: RTF) dient zum systemweiten Austausch von
+Texten. Dieses Format hat eine klare Definition und kann laufend um
+neue Kommandos erweitert werden. Trifft ein Programm auf einen
+unbekannten RTF-Befehl, ist dieser zu ignorieren.
+
+Leider handeln nicht alle Programme so, sondern interpretieren
+irgendwelchen Unsinn. Selbst Microsoft Word scheint das im eigenen
+Hause entwickelte Format nicht ganz zu verstehen.
+
+Somit kann durchaus gesagt werden, daß das RTF das am meisten
+mißverstandende Format ist, das derzeit existiert!
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Wieso erzeugt UDO beim RTF kein Inhaltsverzeichnis?]
+Sicherlich möchten Sie oder jemand anderes die RTF-Datei mit
+einer Textverarbeitung ausdrucken und dann auch wissen, auf
+welcher Seite ein Kapitel zu finden ist.
+
+Und weil UDO nicht wissen kann, auf welcher Seite später ein
+Kapitel zu finden ist, erzeugt es kein Inhaltsverzeichnis.
+
+Sicher, es wäre kein Problem, dieses auszugeben, allerdings
+würden dann die Seitennummern fehlen, und ich kann mir kaum
+vorstellen, daß dies gewünscht wird.
+
+##################################################
+
+!item [Meine Textverarbeitung zeigt nur Müll an!?]
+Tja, dann haben Sie halt Pech gehabt, denn UDO erzeugt RTF-Dateien, die
+sich strikt an die RTF-Definition halten. Falls es möglich ist, Kontakt
+zu den Autoren der Textverarbeitung aufzunehmen, schicken Sie denen die
+RTF-Datei und verlangen Sie Besserung.
+
+##################################################
+
+!item [Die Umlaute kommen beim RTF nicht richtig an?]
+UDO erzeugt RTF-Dateien, die den Windows-ANSI-Zeichensatz
+benutzen. Jede Textverarbeitung sollte mit Dateien klarkommen,
+die im PC-, ANSI- und Mac-Zeichensatz erstellt wurden. Dies ist
+kein Problem von UDO, sondern ebenfalls von der benutzten
+Textverarbeitung.
+
+##################################################
+
+!item [Die Anführungszeichen werden falsch dargestellt?]
+UDO benutzt zur Darstellung der doppelten Anführungszeichen und
+Apostrophe die RTF-Befehle (!code [\lquote]), (!code [\rquote]), (!code [\rdblquote]) und
+(!code [\ldblquote]). Die Textverarbeitung ist für die Umsetzung dieser gebräuchlichen RTF-Befehle in die korrekten Zeichen zuständig.
+
+Falls Ihre Textverarbeitung diese Befehle nicht kennt, können
+Sie die Benutzung dieser Befehle bei der Konvertierung durch den
+Schalter (!KW [no_quotes] [[rtf!!]]) unterbinden.
+
+##################################################
+
+!item [Meine Textverarbeitung stellt Tabellen nicht dar?]
+Falls Ihre Textverarbeitung keine RTF-Tabellen-Befehle kennt,
+können Sie mit dem Schalter (!KW [rtf_no_tables]) dafür sorgen, daß
+UDO die Tabellen wie beim ASCII-Format ausgibt.
+
+##################################################
+
+!item [StarWriter 3.0 meldet einen RTF-Fehler!?]
+StarWriter 3.0 scheint nicht alle RTF-Befehle zu kennen und
+bemängelt sogar korrekte RTF-Tags.
+
+##################################################
+
+!item [Die Indizes werden nicht von StarWriter 3.0 importiert!?]
+StarWriter 3.0 versteht das RTF-Tag (!code [\xe]) nicht, welches für das
+Einbauen von Indizes zuständig ist.
+
+##################################################
+
+!item [Lotus WordPro platziert Kapitelnummern außerhalb des Textrahmens!?]
+Tja, wenn ich wüßte, was WordPro sich dabei denkt, dann könnte
+ich etwas dazu sagen. Andere Textverarbeitungen stellen die
+Kapitelnummern korrekt dar.
+
+##################################################
+
+!item [Lotus WordPro formatiert Tabellen und folgenden Text falsch!?]
+Lotus WordPro bekommt aus mir unerfindlichen Gründen das Ende
+einer Tabelle nicht mit. Die Tabelle selbst wird ebenso nicht
+korrekt dargestellt.
+
+Abhilfe: Verwenden Sie den Schalter (!KW [rtf_no_tables]).
+
+##################################################
+
+!item [Das WordPad von Win95 stellt Tabellen nicht dar!?]
+WordPad kann keine Tabellen darstellen. Verwenden Sie den
+Schalter (!KW [rtf_no_tables]).
+
+##################################################
+
+!end_description
+
+!end_node

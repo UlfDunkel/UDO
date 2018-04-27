@@ -1,6 +1,0 @@
-#!/bin/sh
-# dieses bash-Skript konvertiert das deutsche UDO-Handbuch nach HTML-Help-Source
-# this bash script converts the german UDO Manual to HTML-help-source
-udo -hh --verbose --force-long -D LANG_DE --tree -o ../hh-de/index.html manual.u $*
-mv ../hh-de/index.ulh ../manual-de-hh.ulh
-mv ../hh-de/index.uth ../manual-de-hh.uth

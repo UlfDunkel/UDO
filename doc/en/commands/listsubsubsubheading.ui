@@ -1,0 +1,17 @@
+!begin_node (!kw [listsubsubsubheading])
+!html_name cmd_listsubsubsubheading
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listsubsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node

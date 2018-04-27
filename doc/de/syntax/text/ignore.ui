@@ -1,0 +1,11 @@
+!begin_node Textpassagen ignorieren
+!html_name ignore
+!label ignore-Umgebung
+
+Zeilen, die zwischen (!KW [begin_ignore]) und (!KW [end_ignore]) stehen, werden
+vollständig ignoriert und nicht umgewandelt.
+
+Diese Umgebung ist dazu gedacht, längere Textpassagen
+ausgrenzen zu können.
+
+!end_node

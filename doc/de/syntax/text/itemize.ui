@@ -1,0 +1,97 @@
+!begin_node Aufzählungen
+!html_name style_itemizations
+!label itemize-Umgebung
+
+Mit der itemize-Umgebung lassen sich auf einfache Art und Weise
+Aufzählungen erstellen, bei denen die Aufzählungspunkte (""Items"") durch
+Punkte und Striche gekennzeichnet werden.
+
+Eine itemize-Umgebung wird mit (!KW [begin_itemize]) eingeleitet und
+mit (!KW [end_itemize]) beendet. Die einzelnen Aufzählungspunkte werden
+jeweils mit dem Kommando (!KW [item]) gekennzeichnet.
+
+Die Befehle zum Einleiten oder Beenden der Umgebung bzw. zum Einleiten
+eines Aufzählungspunktes müssen am Zeilenanfang stehen, eventuell
+eingerückt durch Leerzeichen oder Tabulatoren.
+
+Die itemize-Umgebung kann mehrfach verschachtelt benutzt werden und
+läßt sich auch mit anderen Umgebungen kombinieren.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)itemize1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)itemize1.ui
+(!EXAMPLE_END)
+
+Hier ein kleines Beispiel, in dem die itemize-Umgebung
+verschachtelt benutzt wird.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)itemize2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)itemize2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index (!kw [compressed])
+UDO gibt nach jedem Item eine Leerzeile aus, um die Items voneinander
+abzuheben. Dies ist jedoch nicht immer erwünscht, besonders dann
+nicht, wenn die Items nur wenig Text enthalten und die gesamte
+Aufzählung dadurch unschön auseinandergezogen würde.
+
+Um nun Aufzählungen ""komprimiert"" auszugeben, können Sie den Schalter
+(!KW [compressed]) direkt hinter dem Befehl (!KW [begin_itemize]) angeben.
+Dies bewirkt, daß die zusätzlichen Zwischenräume in dieser nicht
+ausgegeben werden. Zusätzlich wird die Unterdrückung der Ausgabe der
+Zwischenräume an innere Umgebungen vererbt.
+
+Es folgen zwei kurze Beispiele, die Ihnen zeigen sollen, wie der
+Schalter (!KW [compressed]) eingesetzt wird und welche Auswirkungen er hat.
+Im ersten Beispiel wird auf (!KW [compressed]) verzichtet, im zweiten
+Beispiel wird er eingesetzt:
+
+Ohne (!KW [compressed])!..
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)itemize3.ui
+(!EXAMPLE_END)
+
+!..~ergibt dies:
+
+(!EXAMPLE_BEGIN)
+!include (!EXAMPLES)itemize3.ui
+(!EXAMPLE_END)
+
+Mit (!KW [compressed])!..
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)itemize4.ui
+(!EXAMPLE_END)
+
+!..~ergibt dies:
+
+(!EXAMPLE_BEGIN)
+!include (!EXAMPLES)itemize4.ui
+(!EXAMPLE_END)
+
+Falls Sie keinen Unterschied erkennen sollten, ist es in dem Format,
+in dem Sie gerade dieses Handbuch lesen, nicht möglich, die
+Zwischenräume zu unterdrücken, oder sie wurden z.B. bei HTML über eine CSS-Anweisung fixiert.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+
+!item Als Markierung für die erste Ebene dieser Umgebung wird ein
+Bullet verwendet, welches in den Systemzeichensätzen der verschiedenen
+Rechner, auf denen UDO läuft, jeweils an anderer Stelle definiert ist.
+
+!index (!kw [no_umlaute])
+!item Verwenden Sie im Vorspann den Schalter (!KW [no_umlaute]), so
+wird als Markierung für die Ebene ein ""o"" statt des Bullets verwendet.
+!end_enumerate
+
+!end_node

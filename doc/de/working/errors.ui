@@ -1,0 +1,411 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Error messages
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: file reviewed
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
+# 2010:
+#   fd  Mar 04: 'underfull' -> 'too short'
+#   fd  Mar 07: macro usages adjusted
+#
+################################################################################
+
+!ifnset [NoErrors]
+
+!begin_node Fehlermeldungen
+!html_name errormessages
+
+UDO protokolliert in einer Datei mit der Endung (!file [.ul?]) alle Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
+Warnungen und Hinweise haben dabei immer folgenden Aufbau:
+
+!begin_quote
+!begin_verbatim
+  Error: <datei> <zeilennummer>: <text>
+Warning: <datei> <zeilennummer>: <text>
+   Hint: <datei> <zeilennummer>: <text>
+!end_verbatim
+!end_quote
+
+Zum Beheben dieser Fehlermeldung(en) schauen Sie sich bitte in der
+angegebenen Datei die betroffene Zeile an und versuchen Sie, den
+angegeben Fehler zu lokalisieren und zu korrigieren. Beginnen Sie dabei
+mit der Korrektur des ersten Fehlers jeder angegebenen Datei und
+wandeln Sie die Quelldatei neu um, da manche Fehlermeldungen auf
+vorhergehende Fehler zurückzuführen sind.
+
+!begin_description
+
+!item ['!..' called twice]
+Das angegebene Kommando taucht zweimal oder sogar noch öfters in
+Ihrem Quelltext auf, darf aber nur einmalig benutzt werden.
+
+!item ['!..' expected]
+UDO hat den angegebenen Befehl erwartet. Überprüfen Sie, ob jede
+geöffnete Umgebung mit dem richtigen Befehl beendet wurde oder ob
+vielleicht ein (!code [!/begin_])!.. fehlt.
+
+!item ['!..' followed by '!..']
+Eine Umgebung wurde mit einem falschen Befehl beendet. Entweder
+haben Sie den falschen Befehl zur Beedigung einer Umgebung
+vergessen oder falsch positioniert.
+
+!item ['!..' ignored inside preamble]
+Das angegebene Kommando ist im Vorspann nicht erlaubt. Sorgen Sie
+dafür, daß es nach (!KW [begin_document]) angegeben wird oder löschen
+Sie das Kommando.
+
+!item ['!..' ignored outside preamble]
+Das angegebene Kommando ist im Hauptteil nicht erlaubt. Sorgen
+Sie dafür, daß es vor (!KW [begin_document]) angegeben wird oder löschen
+Sie das Kommando.
+
+!item ['!..' maybe not available in (!LaTeX)]
+Das angegebene Zeichen ist sehr wahrscheinlich nicht von (!LaTeX)
+darstellbar. Verzichten Sie besser auf das angegebene Zeichen.
+
+!item ['!..' not active]
+Eine Schriftart oder Fußnote sollte beendet werden, obwohl Sie
+noch gar nicht begonnen wurde. Beachten Sie, daß die Platzhalter
+mit Großbuchstaben eine Schriftart oder Fußnote beginnen, wogegen
+Platzhalter mit Kleinbuchstaben sie beenden.
+
+!item ['!..' not available in ISO Latin 1]
+Das angegebene Zeichen ist im ISO-Latin-1-Zeichensatz nicht
+definiert. UDO kann dieses Zeichen demnach nicht umwandeln.
+
+!item ['!..' not available in this charset]
+Das angegebene Zeichen ist im Systemzeichensatz nicht vorhanden
+und kann demnach nicht dargestellt werden. Weichen Sie, falls
+möglich, auf andere Zeichen aus.
+
+!item ['!..' still active]
+Eine Schriftart oder Fußnote soll begonnen werden, obwohl sie
+noch aktiv ist. Entweder fehlt vor der Stelle, an dem dieser
+Fehler auftritt, der Platzhalter zur Beendigung der Schriftart
+bzw. Fußnote oder Sie haben sich verschrieben.
+
+!item ['!..' without '!..']
+Sie haben eine Umgebung beendet, obwohl sie noch gar nicht
+begonnen wurde. Entweder ist das Ende-Kommando überflüssig, oder
+aber das Anfangskommando fehlt.
+
+!item [!/else without !/if]
+In Ihrem Quelltext steht (!KW [else]), ohne daß Sie mit (!KW [if]), (!KW [ifdest])
+usw. eine Abfrage begonnen haben.
+
+!item [!/endif without !/if]
+In Ihrem Quelltext steht (!KW [endif]), ohne daß Sie mit (!KW [if]), (!KW [ifdest])
+usw. eine Abfrage begonnen haben.
+Diese Fehlermeldung wird auch erzeugt, wenn im Quelltext ein (!KW [end_ignore]) ohne zugehöriges (!KW [begin_ignore]) vorkommt.
+
+!item ['!/item' outside environment]
+Sie haben einen Aufzählungspunkt außerhalb einer Aufzählung,
+Nummerierung, Beschreibung oder Liste eingesetzt. Sorgen Sie
+dafür, daß der Punkt innerhalb einer solchen Umgebung steht.
+
+!item [check this paragraph]
+UDO zeigt Ihnen den Dateinamen und die Zeilennummer, wo sie einen
+Fehler korrigieren sollten.
+
+!item [couldn't open (!FILE) (pass1)]
+Im ersten der beiden Durchgänge konnte UDO die angegebene Datei
+nicht öffnen.
+
+!item [couldn't open (!FILE) (pass2)]
+Im zweiten der beiden Durchgänge konnte UDO die angegebene Datei
+nicht öffnen. Überprüfen Sie bitte den Dateinamen, den Sie bei
+einem include-Kommando angegeben haben, löschen Sie das include-Kommando oder kommentieren Sie es.
+
+!item [couldn't open destination file]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+sie bereits existiert.
+
+!item [couldn't open hypfile]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+sie bereits existiert.
+
+!item [couldn't open logfile]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+sie bereits existiert.
+
+!item [couldn't open source file]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen.
+
+!item [couldn't open treefile]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+sie bereits existiert.
+
+!item [couldn't read BMP header]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im BMP-Format. Stellen Sie
+sicher, daß die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+
+!item [couldn't read IMG header]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im IMG-Format. Stellen Sie
+sicher, daß die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+
+!item [couldn't read MSP header]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im MSP-Format. Stellen Sie
+sicher, daß die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+
+!item [couldn't read PCX header]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im PCX-Format. Stellen Sie
+sicher, daß die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+
+!item [couldn't replace (!/ilink)]
+Ein manueller Link mit einem ""fließendes"" Bild konnte nicht
+ersetzt werden. Innerhalb eines Absatzes sind nur (!MAXLINK)
+interne und externe Querverweise sowie Querverweise auf Seiten
+und ""fließende"" Bilder möglich. Teilen Sie den Absatz, in dem
+dieser manuelle Querverweis benutzt werden soll in zwei Hälften
+oder entfernen Sie ein paar manuelle Querverweise.
+
+!item [couldn't replace (!/img)]
+Ein ""fließendes"" Bild konnte nicht ersetzt werden. Innerhalb
+eines Absatzes sind nur (!MAXLINK) interne und externe Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder möglich.
+Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt
+werden soll in zwei Hälften oder entfernen Sie ein paar manuelle
+Querverweise.
+
+!item [couldn't replace (!/link)]
+Ein manueller interner Querverweis konnte nicht ersetzt werden.
+Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
+Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
+möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein
+paar manuelle Querverweise.
+
+# (!KKW [xlink]) does not work here???
+!item [couldn't replace (!/xlink)]
+Ein manueller externer Querverweis konnte nicht ersetzt werden.
+Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
+Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
+möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein
+paar manuelle Querverweise.
+
+!item [couldn't write IMG header]
+UDO konnte die angegebene Datei nicht öffnen, um die Bildinformationen zu ändern. Entweder ist diese Datei nicht vorhanden oder
+sie ist schreibgeschützt.
+
+!item [definition contents longer than !.. characters]
+Der Inhalt einer Definition darf maximal die angegebene Anzahl an
+Zeichen enthalten. Die in Ihrem Quelltext benutzte Definition
+enthält mehr Text und muß daher gekürzt werden.
+# wie hoch ist denn die maximale Anzahl?
+# 4096
+
+!item [definition name longer than !.. characters]
+Der Name einer Definition darf maximal die angegebene Anzahl an
+Zeichen enthalten. Die in Ihrem Quelltext benutzte Definition hat
+einen längeren Namen und muß daher gekürzt werden.
+
+!item [language !.. not supported]
+Die von Ihnen gewünschte Sprache wird von UDO (noch) nicht
+unterstützt oder Sie haben sich einfach nur verschrieben.
+
+!item [link destination undefined]
+Das Ziel eines manuellen Querverweises ist nicht definiert,
+d.h. es existiert kein Kapitel und kein Label mit einem solchen
+Namen.
+
+!item [macro contents longer than !.. characters]
+Der Inhalt eines Makros darf maximal die angegebene Anzahl an
+Zeichen enthalten. Das in Ihrem Quelltext benutzte Makro
+enthält mehr Text und muß daher gekürzt werden.
+
+!item [macro name longer than !.. characters]
+Der Name eines Makros darf maximal die angegebene Anzahl an
+Zeichen enthalten. Das in Ihrem Quelltext benutzte Makro hat
+einen längeren Namen und muß daher gekürzt werden.
+
+!item [memory allocation failed]
+UDO konnte den für eine Aktion nötigen Speicher nicht anfordern.
+UDO bricht die Umwandlung nicht ab, jedoch sollten Sie die
+Ausgabedatei sehr skeptisch betrachten. Sorgen Sie vor der
+nächsten Umwandlung dafür, daß mehr Arbeitsspeicher vorhanden
+ist.
+
+!item [missing parameter(s)]
+Bei einem Befehl wurden nötige Informationen nicht angegeben.
+Überprüfen Sie den Befehl und fügen Sie die fehlenden Informationen ein.
+
+!item [odd number of ('')]
+Ihr Quelltext besitzt eine ungerade Anzahl an doppelten
+Apostrophen. UDO stellt diesen Mangel erst am Ende eines Kapitels
+fest. Kontrollieren Sie daher das Kapitel oberhalb der von UDO
+angegebenen Zeilennummer.
+
+!item [odd number off ("")]
+Ihr Quelltext besitzt eine ungerade Anzahl an doppelten
+Anführungszeichen. UDO stellt diesen Mangel erst am Ende eines
+Kapitels fest. Kontrollieren Sie daher das Kapitel oberhalb der
+von UDO angegebenen Zeilennummer.
+
+!item [overfull line]
+Eine Zeile einer verbatim-Umgebung ist länger als die eingestellte Zeilenbreite. Versuchen Sie, diese Zeile zu kürzen oder
+stellen Sie mit (!KW [parwidth]) eine größere Zeilenbreite ein.
+
+!item [source and destination file are equal]
+Sie haben versucht, eine Datei ""in sich selbst"" umzuwandeln.
+Übergeben Sie UDO die richtigen Dateinamen in der Kommandozeile.
+
+!item [string buffer overflow]
+Dieser Fehler sollte normalerweise nicht auftreten. (!link [Bitte verständigen Sie die UDO-Entwickler.] [Kontaktadresse])
+
+# gibt keine beschränkung mehr und deshalb auch nicht mehr die meldung
+!begin_ignore
+!item [too many aliases used]
+Ihr Quelltext benutzt zu viele (!KW [alias])-Befehle. Verzichten Sie auf
+unwichtige Aliase.
+!end_ignore
+
+!item [too many columns used]
+Ihr Quelltext benutzt in einer Tabelle zuviele Spalten.
+
+!item [too many defines used]
+In Ihrem Quelltext werden mehr als (!MAXDEFINE) Definitionen benutzt.
+
+!item [too many environments used]
+In Ihrem Quelltext wurde die maximale Schachtelungstiefe für
+Umgebungen überschritten. Versuchen Sie, Ihren Text einfacher zu
+gestalten.
+
+!item [too many files opened]
+Zuviele Dateien waren während der Umwandlung gleichzeitig
+geöffnet. Untersuchen Sie Ihren Quelltext daraufhin, ob (!KW [include])
+rekursiv verwendet wird.
+
+# gibt keine beschränkung mehr und deshalb auch nicht mehr die meldung
+!begin_ignore
+!item [too many hyphens used]
+Ihr Quelltext verwendet zuviele globale Trennvorschläge.
+Entfernen Sie die unwichtigsten und benutzen Sie lokale
+Trennvorschläge.
+!end_ignore
+
+!item [too many items inside enumeration]
+In einer enumerate-Umgebung, die mit Buchstaben gekennzeichnet
+wird, wurden zuviele Aufzählungspunkte eingesetzt. Reduzieren Sie
+die Anzahl der Punkte auf (!const [26]) oder benutzen Sie anstelle der
+enumerate-Umgebung eine itemize-Umgebung.
+
+# gibt keine beschränkung mehr und deshalb auch nicht mehr die meldung
+!begin_ignore
+!item [too many labels used]
+Ihr Quelltext verwendet zuviele Sprungmarken. Da UDO Kapitel und
+Aliase intern auch als Sprungmarken verwendet, kann diese
+Fehlermeldung auch bei nur wenigen benutzten Labels auftreten,
+wenn viele Kapitel benutzt werden. Abhilfe: Verzichten Sie auf
+einige Labels oder Aliase.
+!end_ignore
+
+!item [too many labels used in table]
+Ihr Quelltext verwendet zuviele Sprungmarken zwischen zwei Tabellenzeilen.
+
+# gibt keine beschränkung mehr und deshalb auch nicht mehr die meldung
+!begin_ignore
+!item [too many macros used]
+In Ihrem Quelltext werden mehr als (!MAXMACRO) Makros benutzt.
+!end_ignore
+
+# gibt keine beschränkung mehr und deshalb auch nicht mehr die meldung
+!begin_ignore
+!item [too many nodes used]
+In Ihrem Quelltext werden zuviele Kapitel verwendet. Falls
+möglich, versuchen Sie einige Kapitel zusammenzufassen. Falls
+dies nicht möglich ist, fordern Sie beim Autor eine Spezialversion
+von UDO an.
+!end_ignore
+
+!item [too many parameters used]
+Bei einem Befehl oder Platzhalter wurden zuviele Parameter
+übergeben. Lesen Sie bitte im Befehlsindex nach, welche und
+wieviele Parameter dem angegebenen Befehl übergeben werden müssen
+und korrigieren Sie Ihren Quelltext.
+
+!item [too many rows used]
+Ihr Quelltext benutzt in einer Tabelle zuviele Zeilen.
+
+!item [too many words used inside paragraph]
+In einem Absatz wurden zuviele Wörter benutzt. Teilen Sie den
+Absatz in zwei Hälften, um diese Fehlermeldung zu beseitigen.
+
+!item [too short line]
+Die angegebene Zeile ist zu kurz und hinterläßt einen stark
+ungleichmäßigen rechten Rand. Bei der Benutzung von Blocksatz
+bedeutet diese Meldung, daß zuviele Leerzeichen in eine Zeile
+eingefügt werden mußten, um den Blocksatz zu erzielen. Versuchen
+Sie, in den folgenden Wörtern Trennmarken einzubauen oder
+verwenden Sie den Befehl (!KW [sloppy]), um diese Fehlermeldung nicht
+mehr zu erhalten.
+
+!item [unexpected end of line in command]
+Ihr Quelltext benutzt einen Platzhalter, dessen Text sich über
+mehrere Zeilen erstreckt oder dessen Ende UDO nicht finden
+konnte.
+
+!item [unknown command]
+UDO kennt das angegebene Kommando nicht. Falls Sie ein Wort
+darstellen möchten, daß mit einem Ausrufungszeichen beginnt, so
+müssen Sie dieses durch Einfügen eines ""(!code [/])"" besonders markieren.
+
+!item [use (!/V) and (!/v) in one line]
+(!MISS)
+
+!item [use (!/xlink [text!] [topic@foo.hlp!])]
+Der Aufbau eines externen Verweises für WinHelp ist nicht
+korrekt.
+
+!item [wrong number of parameters]
+Bei einem Befehl oder Platzhalter wurde die falsche Anzahl an
+Parametern übergeben. Lesen Sie bitte im Befehlsindex nach,
+welche und wieviele Parameter dem angegebenen Befehl übergeben
+werden müssen und korrigieren Sie Ihren Quelltext.
+
+!item [xlink needs WinHelp destination topic]
+Der Aufbau eines externen Verweises für WinHelp ist nicht
+korrekt. In diesem Fall fehlt der Name der Seite, die WINHELP.EXE
+darstellen soll.
+
+!item [xlinks needs WinHelp destination file]
+Der Aufbau eines externen Verweises für WinHelp ist nicht
+korrekt. In diesem Fall fehlt der Name der Hilfedatei.
+
+!end_description
+
+!end_node
+
+!endif

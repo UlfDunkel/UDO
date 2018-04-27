@@ -1,0 +1,21 @@
+!begin_node Source code
+!html_name style_sourcecode
+!label sourcecode environment
+
+Lines that are part of a sourcecode environment
+will be displayed without conversion when converting
+to one of the source code formats. 
+When converting to one of the other destination formats,
+these lines will be displayed like being part of 
+a verbatim environment inside a quote environment.
+
+A small example for a C source code with UDO:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)csource.u
+(!EXAMPLE_END)
+
+Another possibility to include source code
+is offered by the command (!KW [sinclude]).
+
+!end_node

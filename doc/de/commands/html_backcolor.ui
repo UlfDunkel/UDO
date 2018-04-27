@@ -1,0 +1,38 @@
+!begin_node (!kw [html_backcolor])
+!html_name cmd_html_backcolor
+
+Setzen der Hintergrundfarbe (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTML-Seiten
+den Hintergrund darzustellen.
+
+Diese Hintergrundfarbe wird jedoch nicht beim Frames-Layout
+und ""modernen"" Layout benutzt, für die es eigene Befehle
+gibt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [html_textcolor]), (!KW [html_linkcolor]), (!KW [html_vlinkcolor]), (!KW [html_alinkcolor]), (!KW [html_modern_backcolor]), (!KW [html_frames_backcolor])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_backcolor #CCCEEE
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<body bgcolor="#CCCEEE">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

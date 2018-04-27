@@ -1,0 +1,25 @@
+!begin_node (!kw [ignore_bottomline])
+!html_name cmd_ignore_bottomline
+
+Suppress output of bottom line.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_bottomline(!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside a chapter UDO won't print a bottom line.
+In contrast to (!KW [no_bottomlines]) this switch will only
+suppress the bottom line inside the chapter where
+(!KW [ignore_bottomline]) is used.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines])
+
+!end_xlist
+
+!end_node

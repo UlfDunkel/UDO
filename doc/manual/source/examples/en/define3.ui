@@ -1,7 +1,0 @@
-!ifdest [html]
-  !define head <H1>(!1)</H1>
-!else
-  !define head (!1)
-!endif
-[...]
-(!head [A headline])

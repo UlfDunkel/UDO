@@ -1,0 +1,34 @@
+!begin_node (!kkw [time])
+!html_name cmd_time
+
+Insert current time.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/time [<format>])(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the the current
+time. (!code [<format>]) is used to control the output
+format and may contain the same conversion modifiers as
+(!url [strftime(!)] [http://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html]).
+
+!item [(!EXISTSSINCE)] Version~6.5.19
+
+!item [(!SEEALSO)]
+(!KKW [today]), (!link [Predefined macros] [Predefined macros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!T)(!time [%H:%M:%S])(!t)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!T)(!time [%H:%M:%S])(!t)
+(!EXAMPLE_END)
+
+!end_node

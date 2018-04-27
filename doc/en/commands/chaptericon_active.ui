@@ -1,0 +1,24 @@
+!begin_node (!kw [chaptericon_active])
+!html_name cmd_chaptericon_active
+
+Set graphic for active chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon_active (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+You can use this command to tell UDO which graphic
+should be displayed in the left column of the ""modern""
+layout, if the current chapter or one of its subnodes is active.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon]), (!KW [chaptericon_text])
+
+!end_xlist
+
+!end_node

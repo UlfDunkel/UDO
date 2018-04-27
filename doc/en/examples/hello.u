@@ -1,0 +1,49 @@
+###################################################
+# A small demonstration of a software documentation
+###################################################
+
+!code_source [cp1252]
+!english
+
+!title   The Guide to
+!program Hello, World!
+!version Release 42
+!date    (!today)
+
+!author  Dirk Hagedorn
+!street  In der Esmecke 9
+!town    59846 Sundern
+!country Germany
+!email   Internet: DirkHage@aol.com
+!email   MausNet: Dirk Hagedorn @ MK2
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Installation
+
+In first place you should install a C compiler if you haven't installed
+one yet.
+
+Generate a text file called (!V)hello.c(!v) end
+insert the following lines:
+
+!begin_quote
+!begin_verbatim
+#include <stdio.h>
+
+int main ( void )
+{
+    puts("Hello, World!");
+
+    return(0);
+}
+!end_verbatim
+!end_quote
+
+Save this file and compile it. Start the
+program the compiler has built.
+
+!end_document
+

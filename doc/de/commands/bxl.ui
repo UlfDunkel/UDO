@@ -1,0 +1,20 @@
+!begin_node (!kw [bxl])
+!html_name cmd_bxl
+
+Eine Liste einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bxl [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_xlist]).
+
+!item [(!SEEALSO)]
+(!KW [begin_xlist])
+
+!end_xlist
+
+!end_node

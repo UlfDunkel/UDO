@@ -1,0 +1,33 @@
+!begin_node (!kw [no_index])
+!html_name cmd_no_index
+
+Keinen Index erzeugen und Index-Befehle ignorieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, werden
+für die angegebenen Formate die Befehle (!KW [index]), (!KKW [index]) und
+(!KKW [idx]) ignoriert. Desweiteren wird weder von UDO
+noch vom Zielformat ein Index erzeugt. Im Beispiel
+würden keine Indizes für das RTF ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [index]), (!KKW [index]), (!KKW [idx])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_index [rtf]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

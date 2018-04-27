@@ -1,0 +1,32 @@
+!begin_node (!kkw [copyright])
+!html_name cmd_copyright()
+
+Copyright-Symbol ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/copyright)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Copyright-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [(c!)])"".
+
+!item [(!SEEALSO)]
+(!KKW [registered]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!copyright)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!copyright)
+(!EXAMPLE_END)
+
+!end_node

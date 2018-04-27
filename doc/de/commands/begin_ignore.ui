@@ -1,0 +1,24 @@
+!begin_node (!kw [begin_ignore])
+!html_name cmd_begin_ignore
+
+Textpassagen ignorieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_ignore(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando öffnet eine (neue) ignore-Umgebung.
+Zeilen, die innerhalb dieser Umgebung stehen, werden
+vollständig ignoriert und nicht umgewandelt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [end_ignore]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node

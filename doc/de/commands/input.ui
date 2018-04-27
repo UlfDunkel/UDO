@@ -1,0 +1,31 @@
+!begin_node (!kw [input])
+!html_name cmd_input
+
+Datei einbinden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/input (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei ""(!FILE)"" und gibt deren
+umgewandelten Inhalt an der Stelle aus, an der dieses
+Kommando benutzt wurde. Im Gegensatz zu (!KW [include])
+sucht (!KW [input]) nur in
+dem Verzeichnis, welches durch die Umgebungsvariable
+(!file [$UDOINPUTPATH]) definiert ist.
+(!FILESPACEQUOTE)
+
+!item [(!EXAMPLE)]
+(!T)!/input macros.ui(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!KW [rinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente])
+
+!end_xlist
+
+!end_node

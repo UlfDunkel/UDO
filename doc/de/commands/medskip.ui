@@ -1,0 +1,37 @@
+!begin_node (!kw [medskip])
+!html_name cmd_medskip
+
+Zwei zusätzliche Leerzeilen einfügen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/medskip(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl sorgt für die Ausgabe von zwei
+zusätzlichen Leerzeilen und dient dazu, Absätze
+deutlicher voneinander abzuheben. Bei der Umwandlung
+ins (!LaTeX)-Format werden keine drei Leerzeilen sondern
+""(!code [\medskip])"" ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [bigskip]), (!KW [smallskip])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!medskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!medskip
+(!LOREM)
+(!EXAMPLE_END)
+
+!end_node

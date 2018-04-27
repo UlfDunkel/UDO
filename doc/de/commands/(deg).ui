@@ -1,0 +1,34 @@
+!begin_node (!kkw [deg])
+!html_name cmd_deg()
+
+Grad-Symbol ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/deg)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Grad-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch den sprachlich angepassten Text für ""(!code [Grad])"".
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KKW [copyright]), (!KKW [registered]), (!link [Vordefinierte Makros] [Vordefinierte Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+10~(!deg)C
+!end_verbatim
+(!EXAMPLE_AFTER)
+10~(!deg)C
+(!EXAMPLE_END)
+
+!end_node

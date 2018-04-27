@@ -1,0 +1,64 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from history.ui)
+#   fd  Jun 06: begascen.ui integrated in text
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro introduced
+#   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 16: great review session #1
+#   fd  Aug 17: 'information' never used in plural in English!
+# 2010:
+#   fd  Mar 03: history_0700 + history_0701
+#   fd  May 25: index adjustments
+# 2013:
+#   fd  May 26: history_0702
+#   fd  Oct 24: history_0703
+#
+################################################################################
+
+!begin_node History
+!html_name history
+
+In this chapter you will find a short summary of all the changes in the past.
+
+!include appendix/history/ver711.ui
+!include appendix/history/ver703.ui
+!include appendix/history/ver702.ui
+!include appendix/history/ver701.ui
+!include appendix/history/ver700.ui
+!include appendix/history/ver660.ui
+!include appendix/history/ver640.ui
+!include appendix/history/ver621.ui
+!include appendix/history/ver620.ui
+!include appendix/history/rel6pl17.ui
+!include appendix/history/rel6pl16.ui
+!include appendix/history/rel6pl15.ui
+!include appendix/history/rel6pl14.ui
+!include appendix/history/rel6.ui
+!include appendix/history/rel5.ui
+!include appendix/history/rel4.ui
+!include appendix/history/rel3.ui
+!include appendix/history/rel2.ui
+!include appendix/history/rel1.ui
+
+!end_node

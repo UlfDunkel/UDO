@@ -1,0 +1,54 @@
+!begin_node (!kkw [img])
+!html_name cmd_img()
+
+Grafik ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/img [(!FILE)] [(!TEXT)] {[(!TEXT)]})(!t)
+
+!item [(!DESCRIPTION)]
+Benutzen Sie dieses Kommando, um ein Bild direkt im
+Text bei der Umwandlung nach HTML oder WinHelp
+auszugeben. Bei der Umwandlung nach HTML wird
+(!file [file.gif]), bei WinHelp (!file [file.bmp]) benutzt, wobei UDO
+nicht überprüft, ob die jeweiligen Bilder existieren.
+
+Bei HTML wird ""(!TEXT)"" als Alternativtext benutzt. Bei
+den anderen Formaten wird nur ""(!TEXT)"" ausgegeben.
+
+Das zweite, optionale {[(!TEXT)]} hat nur Auswirkung bei der Ausgabe
+nach HTML, HTML Apple Help und HTMLHelp. Er wird für das Attribut
+""title"" benutzt. Ist nur ein (!TEXT) vorhanden, bekommen beide
+Attribute (""(!code [alt])"" und ""(!code [title])"") denselben Text,
+siehe Beispiel.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [image]), (!KW [no_img_size])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!img [udo_16] [UDO-Icon 1])
+(!img [udo_16] [UDO-Icon 2] [Halten Sie mal !\ 
+      den Mauszeiger auf das Bild.])
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<img src="udo_16.gif" alt="UDO-Icon 1" title="UDO-Icon 1" !\ 
+     border="0" width="16" height="16">
+<img src="udo_16.gif" alt="UDO-Icon 2" 
+     title="Halten Sie mal den Mauszeiger auf das Bild." !\ 
+     border="0" width="16" height="16">
+!end_verbatim
+(!img [(!IMAGES)udo_16] [UDO-Icon 1])
+(!img [(!IMAGES)udo_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
+(!EXAMPLE_END)
+
+!end_node

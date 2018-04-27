@@ -1,0 +1,72 @@
+########################################
+# @(#) Formeln mit UDO & LaTeX - dh 1996
+########################################
+
+# für LaTeX2e die folgende Zeile nicht kommentieren
+# !tex_2e
+
+!raw [tex] \parskip 5pt
+!raw [tex] \parindent 0pt
+
+!code_source [cp1252]
+!docinfo [title] Formeln mit
+!docinfo [program] UDO & (!LaTeX)
+!docinfo [author] Dirk Hagedorn
+!docinfo [address] Internet: info@dirk-hagedorn.de
+!docinfo [address] MausNet: Dirk Hagedorn @ MK2
+!language [german]
+
+####################################################
+# Formeln für Fließtext als Definitionen deklarieren
+####################################################
+
+!ifdest [tex]
+!define	ab2	$(a+b)^2=a^2+2ab+b^2$
+!else
+!macro  ab2 (a+b)² = a² + 2ab + b²
+!endif
+
+!begin_document
+
+!node Binomische Formeln
+!subtoc [all]
+
+!subnode Die erste binomische Formel
+
+Die erste binomische Formel lautet (!ab2).
+
+!subnode Die zweite binomische Formel
+
+Die zweite binomische Formel lautet folgendermaßen:
+
+!ifdest [tex]
+!begin_raw
+\begin{displaymath}
+(a-b)^2 = a^2 - 2ab + b^2
+\end{displaymath}
+!end_raw
+!else
+!begin_center
+(a-b)² = a² - 2ab + b²
+!end_center
+!endif
+
+
+!subnode Die dritte binomische Formel
+
+Die dritte binomische Formel lautet folgendermaßen:
+
+!ifdest [tex]
+!begin_raw
+\begin{equation}
+(a+b)(a-b) = a^2 - b^2
+\end{equation}
+!end_raw
+!else
+!begin_center
+(a+b)(a-b) = a² - b² (!nl)
+!end_center
+!endif
+
+!end_document
+

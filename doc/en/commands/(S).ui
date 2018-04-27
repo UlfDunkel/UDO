@@ -1,0 +1,34 @@
+!begin_node (!kkkw [S] [s])
+!ifdest [ipf]
+!alias (!/S)...(!/s)
+!endif
+!html_name cmd_S()
+!label (!kk1 [/S])
+!label (!kk1 [/s])
+
+Print text in shadowed.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/S)(!TEXT)(!/s)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed in shadowed text if possible.
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles]), (!link [Emphasizing text] [Emphasizing text])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!S)This text will be displayed shadowed.(!s)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!S)This text will be displayed shadowed.(!s)
+(!EXAMPLE_END)
+
+!end_node

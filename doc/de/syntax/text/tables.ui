@@ -1,0 +1,134 @@
+!begin_node Tabellen
+!html_name style_tables
+!label table-Umgebung
+
+Seit Release~5 besteht die Möglichkeit, einfache Tabellen mit UDO
+setzen zu lassen. Sie können festlegen, wie Spalten ausgerichtet werden
+und wo horizontale oder vertikale Linien in der Tabelle benutzt werden
+sollen.
+
+!index !/!/
+!index (!kw [begin_table])
+!index (!kw [end_table])
+!index (!kw [hline])
+!index (!kw [table_caption])
+Um mit UDO Tabellen zu setzen, benötigen Sie folgende Kommandos:
+
+!begin_enumerate !compressed
+!item (!KW [table_caption] [(!TEXT!)])
+!item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
+!item (!KW [end_table])
+!item (!KW [hline])
+!item (!KW [!/])
+!end_enumerate
+
+Das Kommando (!KW [table_caption]) legt die Überschrift der folgenden Tabelle
+fest. (!KW [table_caption]) muß vor der table-Umgebung eingesetzt werden,
+darf also nicht innerhalb dieser Umgebung stehen.
+
+Das Kommando (!KW [begin_table]) leitet eine Tabelle ein. Das Ende der
+Tabelle wird mit (!KW [end_table]) angegeben. Direkt nach
+(!KW [begin_table]) können Sie angeben, wie die Spalten der Tabelle
+ausgerichtet werden sollen (""(!code[l])"" = linksbündig, ""(!code[c])"" = zentriert, ""(!code[r])"" = rechtsbündig)
+und vor und nach welchen Spalten vertikale Linien gezogen werden sollen
+(durch das Symbol ""(!code[|])""). Folgt diesen Angaben noch das Kommando
+(!KW [hline]), beginnt die Tabelle mit einer horizontalen Linie.
+
+Nachdem Sie das Format der Tabelle angegeben haben, folgt der
+eigentliche Tabelleninhalt. Jede Tabellenzeile muß auch in einer
+Textzeile angegeben werden, wobei die einzelnen Zellen durch zwei
+Ausrufezeichen voneinander getrennt werden. Leere Tabellenfelder
+sollten im Quelltext stets mit einer Tilde (!~) gefüllt werden, da
+diese Tabellen sonst in einigen Browsern unschön dargestellt werden.
+
+Möchten Sie eine horizontale Linie in der Tabelle ausgeben, benutzen
+Sie dazu das Kommando (!KW [hline]). Dieser Befehl muß am Anfang einer
+Zeile und alleine in dieser Zeile stehen.
+
+Falls Sie die obigen Erklärungen mehr verwirrt haben sollten, als Ihnen
+den Tabellensatz zu erläutern, sehen Sie sich einfach mal folgendes
+kleines Beispiel an:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!table_caption Tabellen mit UDO
+!begin_table [|l|c|r|] !hline
+links       !! mittig       !! rechts
+unten links !! unten mittig !! unten rechts
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+
+Dieses Beispiel erzeugt folgende Tabelle, die aus zwei Zeilen und drei
+Spalten besteht, wobei die erste Spalte linksbündig, die zweite Spalte
+zentriert und die dritte Spalte rechtsbündig ausgegeben wird:
+
+(!EXAMPLE_BEGIN)
+!table_caption Tabellen mit UDO
+!begin_table [|l|c|r|] !hline
+links       !! mittig       !! rechts
+unten links !! unten mittig !! unten rechts
+!hline
+!end_table
+(!EXAMPLE_END)
+
+Da vor und nach jeder Spalte ein ""(!code[|])"" angegeben ist, werden die Spalten
+durch vertikale Linien voneinander getrennt. Die Tabelle beginnt mit
+einer horizontalen Linie, da bereits in der Zeile mit
+(!KW [begin_table]) ein (!KW [hline]) angegeben wurde. Schließlich endet die
+Tabelle mit einer horizontalen Linie, da vor (!KW [end_table]) wiederum
+ein (!KW [hline]) angegeben wurde.
+
+Hier noch ein weiteres Beispiel einer Tabelle, die den gleichen Inhalt
+zeigt, wie die obige Tabelle, aber bei der keine Linien benutzt
+werden. Dies wird dadurch ermöglicht, indem Sie kein ""(!code[|])"" und kein
+(!KW [hline]) verwenden. Das Ergebnis:
+
+(!EXAMPLE_BEGIN)
+!table_caption Ein weiteres Beispiel
+!begin_table [lcr]
+links       !! mittig       !! rechts
+unten links !! unten mittig !! unten rechts
+!end_table
+(!EXAMPLE_END)
+
+
+!index (!kw [use_ansi_tables])
+UDO bietet einen Schalter an, um die Linien der Tabelle nicht mit den
+ASCII-Zeichen ""(!code [+])"", ""(!code [-])"" und ""(!code [|])"" zu erzeugen. Wird im Vorspann der Schalter
+(!KW [use_ansi_tables]) benutzt, werden die Linien der Tabelle mit
+Hilfe der Grafikzeichen aus dem PC-Zeichensatz erzeugt. Auf die Formate
+WinHelp, RTF, HTML und (!LaTeX) hat dieser Schalter keinen Einfluß.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Tabellen werden standardmäßig immer zentriert ausgegeben. 
+Mit dem Vorspann-Kommando (!KW [table_alignment]) können Sie jedoch auch andere Ausrichtungen festlegen.
+
+!item In HTML können Sie die Benutzung von Linien nicht frei festlegen,
+daher werden Tabellen dort immer mit (!code [frame=box]) erzeugt, falls Sie in
+der Zeile mit (!KW [begin_table]) den Befehl (!KW [hline]) benutzen.
+
+!item Für WinHelp werden die Möglichkeiten zur Tabellenausgabe
+ausgeschöpft. Leider ist es hier nicht möglich, eine Tabelle zentriert
+auszugeben oder Linien frei zu setzen. Daher werden alle Zellen der
+Tabelle umrahmt dargestellt, falls Sie in der Zeile mit 
+(!KW [begin_table]) das Kommando (!KW [hline]) benutzen. Benutzen Sie es
+nicht, wird die komplette Tabelle ohne Linien dargestellt.
+
+!item Beim ST-Guide werden die Tabellenlinien durch den Grafikbefehl
+(!code [@line]) erzeugt. Hier ist es nicht möglich, mehrere Linien
+zwischen den Spalten zu erzeugen, wenn Sie keine ANSI-Tabellen ausgeben
+lassen.
+
+!item In den Feldern der Tabelle sind natürlich alle sonstigen
+UDO-Kommandos erlaubt. Sie können dort also auch Schriftarten,
+Querverweise, Indizes usw. verwenden.
+
+!end_enumerate
+
+!end_node

@@ -1,0 +1,31 @@
+!begin_node (!k1 [//-])
+!html_name cmd_qsyllable
+
+Die Zeichenfolge !/- ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!//-(!t)
+
+!item [(!DESCRIPTION)]
+Diese Zeichenfolge wird nach der Umwandlung als !/-
+dargestellt. Beachten Sie, daﬂ (!K1 [/-]) als
+Trennstelle interpretiert wird.
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!K1 [/-])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Rufzeichen und Minus hintereinander ausgeben geht so: !/-
+!end_verbatim
+(!EXAMPLE_AFTER)
+Rufzeichen und Minus hintereinander ausgeben geht so: !/-
+(!EXAMPLE_END)
+
+!end_node

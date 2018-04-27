@@ -1,6 +1,0 @@
-#!/bin/sh
-# dieses bash-Skript konvertiert die UDO-Wunschliste nach HTML
-# this bash scripts converts the UDO wishlist to HTML
-udo --html --verbose --force-long --tree -o ./html/index.html index.u $*
-mv ./html/index.ulh ./index.ulh
-mv ./html/index.uth ./index.uth

@@ -1,0 +1,20 @@
+!begin_node (!kw [ps])
+!html_name cmd_ps
+
+Start a popup section.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ps [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubnode]).
+
+!item [(!SEEALSO)]
+(!KW [psubnode])
+
+!end_xlist
+
+!end_node

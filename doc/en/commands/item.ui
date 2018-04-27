@@ -1,0 +1,41 @@
+!begin_node (!kw [item])
+!html_name cmd_item
+
+Start an item.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/item (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new item of an itemize or enumerate environment.
+
+!item [(!SEEALSO)]
+(!KW [item] [[~!!]]), (!link [Itemizations] [Itemizations]), (!link [Enumerations] [Enumerations])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_itemize
+!item This is an item of an itemize enviroment.
+!end_itemize
+
+!begin_enumerate
+!item This is an item of an enumerate enviroment.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize
+!item This is an item of an itemize enviroment.
+!end_itemize
+
+!begin_enumerate
+!item This is an item of an enumerate enviroment.
+!end_enumerate
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,24 @@
+!begin_node (!kw [ignore_links])
+!html_name cmd_ignore_links
+
+Suppress referencing a chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_links(!t)
+
+!item [(!DESCRIPTION)]
+If this switch is part of a chapter UDO won't insert links to this
+chapter automatically. You are still able to insert links with
+(!KKW [link]) on your own.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!link [Links] [Links]), (!KKW [link])
+
+!end_xlist
+
+!end_node

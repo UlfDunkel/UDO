@@ -1,0 +1,32 @@
+!begin_node (!kw [no_index])
+!html_name cmd_no_index
+
+Do not create index and ignore index commands.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+If this switch is used inside the preamble UDO ignores index
+commands ((!KW [index]), (!KKW [index]) and (!KKW [idx])) for the given destination formats. Furthermore neither UDO
+nor the destination format will output an index. The example shows how
+to suppress index commands for RTF.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [index]), (!KKW [idx])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_index [rtf]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

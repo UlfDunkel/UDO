@@ -1,0 +1,30 @@
+!begin_node (!kw [iflang])
+!html_name cmd_iflang
+
+Query the language.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/iflang [(!LANGUAGE)](!t)
+
+!item [(!DESCRIPTION)]
+This command test the language UDO uses for the destination file. If
+""(!LANGUAGE)"" matches one of the abbreviations for the destination
+languages UDO will convert all lines between (!KW [iflang]) and
+(!KW [else]) or (!KW [endif]). If not UDO will only convert the
+lines between (!KW [else]) and (!KW [endif]) if (!KW [else]) is
+used. The example shows how to test if UDO converts to English.
+
+!item [(!EXAMPLE)]
+(!T)!/iflang [english](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [ifnlang]), (!KW [ifdest]), (!KW [language]), (!link [Query commands] [Query commands])
+
+!end_xlist
+
+!end_node

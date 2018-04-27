@@ -1,0 +1,36 @@
+!begin_node (!kw [no_effects])
+!html_name cmd_no_effects
+
+Do not use text styles.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_effects [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Switches off the usage of text emphasises.
+The example shows how to switch it off when converting to ASCII.
+
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Preamble:
+!no_effects [asc,html]
+
+# Mainpart:
+This text should be displayed (!B)bold(!b),
+except for ASCII oder HTML.
+!end_verbatim
+(!EXAMPLE_AFTER)
+This text should be displayed bold,
+except for ASCII oder HTML.
+(!EXAMPLE_END)
+
+!end_node

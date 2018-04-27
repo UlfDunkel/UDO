@@ -1,0 +1,23 @@
+!begin_node (!kw [tex_2e])
+!html_name cmd_tex_2e
+
+Use (!LaTeXe) commands ((!TeX) only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_2e(!t)
+
+!item [(!DESCRIPTION)]
+UDO will output special (!LaTeXe) commands if you use this command
+e.g. ""(!code [\textbf{...}])"" instead of ""(!code [{\bf ...}])"".
+
+(!HINT) this is the default behaviour of UDO since Release 6 Patchlevel 15.
+
+!item [(!SEEALSO)]
+(!KW [tex_209])
+
+!end_xlist
+
+!end_node

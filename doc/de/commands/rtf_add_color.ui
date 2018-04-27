@@ -1,0 +1,26 @@
+!begin_node (!kw [rtf_add_color])
+!html_name cmd_rtf_add_color
+
+Zusätzliche Farben definieren (nur RTF).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_add_color (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können zusätzliche Farben (über die (!const [16])~Standardfarben hinaus) in den Kopf einer RTF-Datei geschrieben werden.
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_add_color \red153\green204\blue255
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

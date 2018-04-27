@@ -1,0 +1,30 @@
+!begin_node (!kw [html_frames_position])
+!html_name cmd_html_frames_position
+
+Position des Rahmens beim Frames-Layout bestimmen (nur HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_position [left|right|top|bottom](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie die Position des Rahmens bestimmen,
+der die Links auf die Nodes enthält. Standardeinstellung ist links.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_width]), (!KW [html_frames_height])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!html_frames_position top
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

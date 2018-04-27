@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_comment])
+!html_name cmd_begin_comment
+
+Create comments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_comment(!t)
+
+!item [(!DESCRIPTION)]
+This command opens a (new) (!link [comment environment] [comment environment]).
+Text that is part of a comment environment
+will be written as comments to the destination file, provided that
+the target format supports comments.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [end_comment]), (!KW [cinclude]), (!KW [comment]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node

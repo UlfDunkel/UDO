@@ -1,0 +1,31 @@
+!begin_node (!kw [use_auto_subsubsubtocs])
+!html_name cmd_use_auto_subsubsubtocs
+
+Automatically create tables of contents in subsections.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Tells UDO to use the (!KW [subsubsubtoc]) command automatically in every
+subsection. The example shows how to use them inside the hypertext
+formats.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [subsubsubtoc]), (!KW [ignore_subsubsubtoc]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

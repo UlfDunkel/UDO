@@ -1,0 +1,62 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Bugs and problems
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
+#
+################################################################################
+
+!ifnset [NoBugs]
+
+!begin_node Bugs and Problems
+!html_name bugs
+
+The following known bugs will be fixed as fast as possible:
+
+!begin_description
+
+!item   [Text styles inside indices:]
+Inside indices you cannot use text styles at the moment. You can avoid this
+problem of you use the text style commands outside the (!KKW [idx])
+placeholder.
+
+!item   [Images & em(!TeX):]
+The output of (!LaTeX) commands for displaying MSP and PCX images with
+em(!TeX) wasn't tested enough. If you have problems printing the images use
+the switch (!KW [no_images] [[tex!!]]) inside the preamble and write your own
+commands inside a raw environment.
+
+!item   [Small mistakes when layouting WinHelp:]
+If you use many chapters and the chapter numbers become ""too wide"" there
+may be wrong indents in the tables of contents. You can avoid this by using
+the switch (!KW [no_numbers] [[win!!]]) in the preamble.
+
+!item   [Tables of contents:]
+In the tables of contents long chapter titles aren't sized to the current
+document width yet. Chapter titles may also appear in different columns
+(""1.9""-""1.10"" problem).
+
+!end_description
+
+More bugs and problems are documented in the (!url [UDO-BugTracker] [http://bugs.udo-open-source.org/] [] [elink]).
+You may enter new bugs and problems into the bugtracker system. Before
+doing so, please check if your bug isn't already known or your feature
+wish isn't already documented. You may ask on the mailing list ""UDO discussion"".
+
+!end_node
+
+!endif

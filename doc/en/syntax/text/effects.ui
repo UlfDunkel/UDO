@@ -1,0 +1,46 @@
+!begin_node Text styles
+!html_name style_textstyles
+
+UDO enables you to set text styles right inside the source file.
+
+!include (!EXAMPLES)effects.ui
+
+If you want to display a single word or some words in a certain text style
+you have to use them between the according placeholders. Look, how the upper
+paragraph was made:
+
+!vinclude (!EXAMPLES)effects.ui
+
+In this table you will see in which way the placeholders will be replaced:
+
+!include syntax/text/styles.ui
+
+!index (!kw [no_effects])
+As you see here for the ASCII format there will be used the text style
+commands as they are used in Usenet. If you don't like them you can use the
+switch called (!KW [no_effects]) to suppress them. Use
+(!KW [no_effects] [[asc!!]]) to suppress the text style commands when
+converting to ASCII.
+
+(!HINT)
+
+Definitions are great for programming user-defined text styles. It is
+for sure that you need some knowledge about the destination forma to do
+this. The following example shows how to use ghosted text which is available
+for the ST-Guide:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [stg]
+  !define G @{G}
+  !define g @{g}
+!else
+  !define G
+  !define g
+!endif
+
+Normal and (!G)ghosted(!g).
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

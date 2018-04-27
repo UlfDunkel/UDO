@@ -1,0 +1,45 @@
+!begin_node (!kw [html_keywords])
+!html_name cmd_html_keywords
+
+HTML-Meta-Keywords setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_keywords (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" sollte eine durch Kommata getrennte Aufzählung
+von Schlüsselworten sein, die UDO als
+Meta-Informationen im Header der Datei ausgibt, in die
+das aktueller Kapitel ausgegeben wird. Manche
+Suchmaschinen benutzen diese Informationen um Seiten
+zu indizieren.
+
+Wird (!KW [html_keywords]) mehrfach in einem Node benutzt, so
+werden die einzelnen Einträge, mit einem Komma getrennt, in die
+Meta-Informationen aufgenommen.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [html_description])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!html_keywords Dirk Hagedorn, UDO(!RELEASE), Software, Converter
+!html_keywords UDO Community, Universal Document, Dokument-Generator
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_preformatted
+<meta name="Keywords" content="Dirk Hagedorn, UDO(!RELEASE),
+      Software, Converter, UDO Community, Universal
+      Document, Dokument-Generator">
+!end_preformatted
+(!EXAMPLE_END)
+
+!end_node

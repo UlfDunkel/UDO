@@ -1,0 +1,21 @@
+!begin_node (!kw [tex_lindner])
+!html_name cmd_tex_lindner
+
+Grafikmakros für Lindner-(!TeX) erzeugen (nur (!TeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_lindner(!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Bildern ein
+(!TeX)-Makro für das Lindner-(!TeX) erzeugt werden soll.
+
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+
+!end_xlist
+
+!end_node

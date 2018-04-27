@@ -1,0 +1,80 @@
+!begin_node (!kw [doclayout])
+!html_name cmd_doclayout
+
+Setzen von Informationen für das Layout.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)] [(!NAME)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando dient dazu, verschiedene Informationen für
+das Layout zu setzen. ""(!NAME)"" kann dabei einer
+der folgenden Werte sein:
+
+!begin_description
+
+!item [paper]
+""(!TEXT)"" bezeichnet die verwendete Papiergröße und kann einer
+der folgenden Werte sein: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps] [paper] A4PORTRAIT
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [openMode]
+Mögliche Angaben für ""(!TEXT)"" stehen in der Dokumentation zu den pdf-marks.
+
+!item [propfontname]
+Mögliche Angaben für ""(!TEXT)"" sind Zeichensatznamen, z.B. Arial,
+Times New Roman, sans oder sans-serif.
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps] [propfontname] sans-serif
+!end_verbatim
+(!EXAMPLE_END)
+
+(!NOTE) Für die Postscriptausgabe gilt, daß für Helvetica,
+Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
+Times New Roman.
+
+!item [propfontsize]
+Mögliche Angabe für ""(!TEXT)"" ist eine Zeichensatzgröße in pt.
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps] [propfontsize] 12
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [monofontname]
+Mögliche Angaben für ""(!TEXT)"" sind Zeichensatznamen, z.B. Arial,
+Times New Roman, sans oder sans-serif.
+
+!item [monofontsize]
+Mögliche Angabe für ""(!TEXT)"" ist eine Zeichensatzgröße in pt.
+
+!item [node1size, node2size, node3size, node4size...]
+Mit diesem Kommando kann die Größe der Übeschriften der entsprechenden Gilederungsebene
+bei der Postscript-Ausgabe festgelegt werden.
+Mögliche Angabe für ""(!TEXT)"" ist eine Zeichensatzgröße in pt.
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!doclayout [ps,rtf] [node1size] 18
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [docinfo]), (!KW [maketitle]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node

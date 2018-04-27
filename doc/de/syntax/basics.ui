@@ -1,0 +1,267 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Basics
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 08: macro LINELEN added to text
+#   fd  Jun 08: code UTF-8 added
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 08: text reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more text-formatting macros
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
+# 2010:
+#   fd  Mar 01: chapter basics_text adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: tiny corrections
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Grundlagen
+!html_name basics
+
+################################################################################
+
+!begin_node Let's talk about text, Baby!
+!html_name basics_text
+
+!index Carriage Return
+!index Linefeed
+!index Textdatei
+UDO erwartet als Quelldatei eine Textdatei, wie sie mit jedem
+ASCII-Editor erstellt werden kann. Außer ASCII~9 (Tabulator), ASCII~10
+(Linefeed) und ASCII~13 (Carriage Return) sollten keine Steuerzeichen
+(d.h. keine Zeichen mit einem ASCII-Wert kleiner als 32) benutzt
+werden! Eine Zeile darf nicht länger als (!LINELEN) Zeichen sein.
+
+UDO kümmert sich bei der Umwandlung selbständig um die Formatierung des
+Textes, sprich um den Zeilenumbruch und die Absatzabstände:
+
+!begin_description
+
+!index Wort
+!item [Wörter] sind Zeichenfolgen, die durch ein oder mehrere Leerzeichen
+oder Tabulatoren voneinander getrennt sind. UDO gibt Wörter durch
+ein Leerzeichen voneinander getrennt aus.
+
+!index Absatz
+!item [Absätze] sind Folgen von Wörter, die durch eine oder mehrere
+Leerzeilen voneinander getrennt in der Quelldatei auftreten. UDO
+sorgt selbständig für den Zeilenumbruch innerhalb von Absätzen
+und gibt automatisch die passende Anzahl von Leerzeilen zwischen
+zwei Absätzen aus.
+
+!end_description
+
+!index Zeichensatz
+Quelltexte können in den verschiedensten Zeichensätzen erstellt werden.
+
+Beim Start der Konvertierung erwartet UDO den aktuellen
+Systemzeichensatz. Sollen Quelltexte konvertiert werden, die andere
+Zeichensätze benutzen, müssen Sie UDO dies mit den entsprechenden Befehlen
+kenntlich machen. Mehr zu diesem Thema finden Sie im Kapitel
+""Sonderzeichen"".
+
+!end_node
+
+################################################################################
+
+!begin_node Kommandos, Schalter und Platzhalter
+!html_name basics_commands_switches_placeholders
+
+!begin_description !not_compressed
+!index Kommando
+!item [Kommandos]
+Ein UDO-Kommando ist eine mit einem ""!"" beginnende
+Zeichenfolge. Ein Kommando bewirkt eine Aktion, wie
+z.B. die Ausgabe eines Inhaltsverzeichnisses (siehe (!KW [tableofcontents])).
+
+Ein Kommando wird nur erkannt, wenn es am Anfang einer Zeile steht, eventuell
+eingerückt durch Leerzeichen oder Tabs.
+
+Kommandos können nur aus ""!"" und dem eigentlichen Kommando-Bezeichner bestehen, aber auch weitere Parameter erwarten. 
+Genaueres zu den einzelnen Kommandos finden Sie im Befehlsindex.
+
+!index Schalter
+!item [Schalter]
+Ein UDO-Schalter ist eine mit einem ""!"" beginnende
+Zeichenfolge, die die Aktionen von UDO oder einem Kommando
+beeinflussen. So gibt es z.B. einen Schalter, der bewirkt, daß
+Bezeichnungen in englischer Sprache(!N)""Appendix"" statt ""Anhang""(!n)
+ausgegeben werden (siehe (!KW [language])).
+
+Ein Schalter wird nur erkannt, wenn er am Anfang einer Zeile steht, eventuell
+eingerückt durch Leerzeichen oder Tabs.
+
+Schalter können nur aus ""!"" und dem eigentlichen Schalter-Bezeichner bestehen, aber auch weitere Parameter erwarten. 
+Genaueres zu den einzelnen Schaltern finden Sie im Befehlsindex.
+
+!index Platzhalter
+!item [Platzhalter]
+Ein Platzhalter ist eine mit ""(!/"" beginnende
+Zeichenfolge, die durch "")"" beendet wird. Ein Platzhalter
+wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
+ersetzt, z.B. ''(!KK1 [B])'' durch ''(!V){\bf(!v)'' für (!LaTeX) oder ''(!V)<b>(!v)'' bzw. ''(!V)<strong>(!v)'' für HTML.
+
+Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
+
+!end_description
+
+!end_node
+
+################################################################################
+
+!begin_node Kommentare
+!html_name basics_comments
+
+!index Kommentar
+Es besteht die Möglichkeit, in einer Quelldatei Kommentare einzufügen.
+Ist das erste Zeichen einer Zeile ein ""#"", faßt UDO diese Zeile als
+Kommentar auf und wertet diese Zeile nicht aus.
+
+Das ""#"" darf nicht eingerückt sein, muß also das erste Zeichen einer
+Zeile sein!
+
+Keine Regel ohne Ausnahme: Innerhalb einer verbatim- oder raw-Umgebung
+werden alle Zeilen ausgegeben, also auch die Zeilen, die mit einem ""#""
+beginnen. Innerhalb dieser Umgebung können also keine Kommentare
+benutzt werden.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node Geheimes Kapitel
+
+Dieses Kapitel enthält einen Kommentar, der nicht ausgegeben
+werden soll!
+# Ulf Dunkel ist doof.
+#Nein, er ist schlau!
+#             Na, so schlau nun auch wieder nicht.
+   # Das Kommentarzeichen muss am Zeilenanfang stehen!
+Der Kommentar kann sogar mitten in einem Absatz stehen.
+
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Geheimes Kapitel
+Dieses Kapitel enthält einen Kommentar, der nicht ausgegeben
+werden soll!
+# Ulf Dunkel ist doof.
+#Nein, er ist schlau!
+#             Na, so schlau nun auch wieder nicht.
+   # Das Kommentarzeichen muss am Zeilenanfang stehen!
+Der Kommentar kann sogar mitten in einem Absatz stehen.
+(!EXAMPLE_END)
+
+!end_node
+
+################################################################################
+
+!begin_node Vorspann und Hauptteil
+!html_name basics_preamble_mainpart
+
+!index Hauptteil
+!index Vorspann
+
+Eine Quelldatei besteht immer aus einem Vorspann(!N)auch ""Preambel"" genannt(!n) und
+einem Hauptteil.
+
+!index (!kw [begin_document])
+
+Im Vorspann werden grundsätzliche Informationen über den umzuwandelnden
+Text selbst deklariert. Desweiteren können im Vorspann spezielle
+Kommandos plaziert werden, die UDO mitteilen, wie er die Quelldatei
+umwandeln soll(!N)z.B. ob ein kurzes oder ausführliches
+Inhaltsverzeichnis ausgegeben werden soll, ob Begriffe und
+Datumsangaben in deutscher oder englischer Sprache erfolgen sollen
+usw.(!n). Zum Vorspann zählen alle Zeilen, die vor dem Kommando
+(!KW [begin_document]) stehen.
+
+!index (!kw [end_document])
+
+Im Hauptteil schließlich befindet sich der nach Kapiteln, Abschnitten
+und Unterabschnitten strukturierte Inhalt des umzuwandelnden Textes.
+Der Hauptteil schließt mit dem Kommando (!KW [end_document]).
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# Vorspann
+!docinfo [author] Ulf Dunkel
+
+# Hauptteil
+!begin_document
+!maketitle
+!tableofcontents
+
+!begin_node Erstes Kapitel
+
+Es war einmal, !..
+
+!end_node # Erstes Kapitel
+
+!end_document
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+################################################################################
+
+!begin_node Umgebungen
+!html_name basics_environments
+
+Eine Umgebung ist ein Teil der Quelldatei, der speziell behandelt
+werden soll. Umgebungen werden jeweils mit (!code [!/begin_]) eingeleitet und mit
+(!code [!/end_]) beendet. Diese Befehle müssen dabei jeweils am Anfang einer
+Zeile stehen, eventuell eingerückt durch Leerzeichen und/oder
+Tabulatoren.
+
+Es gibt zahlreiche Umgebungen, die Ihnen die Arbeit erleichtern können
+und die die jeweiligen ausgabeformatspezifischen Besonderheiten
+berücksichtigen. Hier eine Übersicht:
+
+!begin_xlist [description-Umgebung:] !compressed
+!item [appendix-Umgebung:]     Anhang
+!item [center-Umgebung:]       Zentrierungen
+!item [comment-Umgebung:]      Kommentare
+!item [description-Umgebung:]  Beschreibungen
+!item [document-Umgebung:]     Dokument-Inhalt
+!item [enumerate-Umgebung:]    numerierte Aufzählungen
+!item [flushleft-Umgebung:]    linksbündiger Text
+!item [flushright-Umgebung:]   rechtsbündiger Text
+!item [ignore-Umgebung:]       Textpassagen ignorieren
+!item [itemize-Umgebung:]      einfache Aufzählungen
+!item [linedraw-Umgebung:]     Screenshots darstellen
+!item [preformatted-Umgebung:] vorformatierter Text
+!item [quote-Umgebung:]        Einrückungen
+!item [raw-Umgebung:]          spezielle Befehle des Ausgabeformats
+!item [table-Umgebung:]        Tabellen
+!item [verbatim-Umgebung:]     vorformatierter Text
+!item [xlist-Umgebung:]        Listen
+!item [sourcecode-Umgebung:]   Sourcecode
+!end_xlist
+
+Wie der Text, der innerhalb dieser Umgebungen steht, behandelt wird,
+lesen Sie bitte in den zugehörigen Kapiteln nach.
+
+!end_node
+
+################################################################################
+
+!end_node

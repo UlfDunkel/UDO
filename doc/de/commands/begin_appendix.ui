@@ -1,0 +1,21 @@
+!begin_node (!kw [begin_appendix])
+!html_name cmd_begin_appendix
+
+Anhang einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_appendix(!t)
+
+!item [(!DESCRIPTION)]
+Leitet den (!link [Anhang] [appendix-Umgebung]) ein. Kapitel werden im Anhang mit
+Buchstaben gekennzeichnet. UDO unterstützt nur (!I)einen(!i) Anhang pro Quelltext!
+
+!item [(!SEEALSO)]
+(!KW [end_appendix]), (!link [Anhang] [Anhang])
+
+!end_xlist
+
+!end_node

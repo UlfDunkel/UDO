@@ -1,0 +1,155 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 6.6.0
+# Language    : English
+# Initial Date: 2004-06-16
+# Author      : Thorsten Otto (tho)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2013:
+#   tho Jun 30: excessive examples removed, this is a history file and not a
+#               complete manual
+#
+################################################################################
+
+!begin_node Changes from version 6.4.0 to 6.6.0
+!html_name history_6_4_0_to_6_6_0
+
+(!PUBLISHED [UDO~6.6.0] [June 16, 2004])
+
+!heading (!GENERAL)
+!begin_description !compressed
+
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !compressed
+
+!item (!KW [docinfo]) has two new arguments: (!nl)
+    (!code [company]) marks a company, for whom the document is made. If
+    (!code [company]) is used, the title page will be supplemented with
+    ""for (!I)company(!i)"" after the author entry. (!nl)
+    (!code [category]) describes a category to which the document belongs. (!nl)
+
+!item Concatenate text lines (!nl)
+               If an UDO source document line ends with (!KW [\])<linefeed>, the following line will be seen as sequel of the current line. 
+         
+!end_itemize
+
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !compressed
+!item The ""UDO Community"" has been added to the text which is output by (!KW [use_about_udo]).
+
+!item UDO's version nomenclature was changed. It's called "Version~6.x.y"
+   instead of "Release~6.x Patchlevel~yy" now (x is even for (stable) production versions
+   and odd for developer versions).
+
+!item UDO for OS/2 should identify itself with "UDO for OS/2".
+
+!item (!KW [code] [[utf8!!]]) (same as (!KW [code] [[utf-8!!]])) will be supported now (since version~6.5.1).
+
+!end_itemize
+
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !compressed
+!item Fixed !(BUG [55]) (!nl)
+    Umlauts used in the second parameter of (!KKW [img]) or (!KKW [ilink])
+    were not converted in the right way.
+
+!item Fixed (!BUG [48]) (!nl)
+    Error message "unknown command: !html_use_hyphenation".
+    Reason: command wasn't present in the command list.
+
+!end_itemize
+!end_description
+
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !compressed
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize
+!item New Switch (preamble only): (!KW [html_header_links] [[<text>!!]]) ((!FEATURE [53])) (!nl)
+   If this switch is set, several (!code [(!LINK!)]) elements are generated in the HTML header
+
+!item New Switch (preamble only): (!KW [html_header_date] [[<text>!!]]) ((!FEATURE [54])) (!nl)
+   Until now, UDO inserted near to the beginning of every HTML file the building date,
+   e.g. (!code [<!-- last modified on 2004/01/29 -->]). (!nl)
+   Now, only if this switch is set, a META element for the building date/time is generated
+   in the HTML Header.
+
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !compressed
+
+!item The <link> elements for navigation and chapters are not generated
+    automatically any longer but only on demand (see above).
+
+!item Creation date/time of the HTML file will be written only on demand
+   as META Tag into the HTML header (instead of the former comment). See above.
+
+!item While using (!KW [html_ignore_8bit]), you can use now an optional parameter <text>
+  for the codepage. For example, if you use (!T)!/html_ignore_8bit ISO-8859-2(!t), you will
+  get HTML headers with
+  (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
+
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !compressed
+
+!item Fixed (!BUG [44]) (!nl)
+   If (!KW [no_numbers]) is set, there won't any longer printed numbers in front of the
+   node names in the HTML header <link> elements.
+
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Rich Text Format (RTF)
+!begin_description !compressed
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !compressed
+
+!item The (!T)!/docinfo(!t) entries (!T)subject(!t), (!T)keywords!(!t),
+   (!T)company(!t) and (!T)category(!t) are written into the info values
+   of RTF files.
+
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !compressed
+# ..............................................................................
+# zu RTF
+
+!item Fixed (!BUG [56]) (!nl)
+   Wrong calculation of pictures sizes using the RTF output.
+   By mistake the ""height"" parameter got the width.
+
+!item Fixed (!BUG [17]) (!nl)
+   Error message: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
+   New behavior: the picture file will now be written before it is being used. (!nl)
+   The image will be found now on TOS compatible computers too.
+
+!end_itemize
+
+!end_description
+
+!end_node

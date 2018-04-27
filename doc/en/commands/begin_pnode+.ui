@@ -1,0 +1,35 @@
+!begin_node (!kw [begin_pnode*])
+!html_name cmd_begin_pnode_asterisk
+
+Start new popup-chapter/section/subsection/paragraph/subparagraph without entry in table of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_pnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [begin_pnode]), but here ""(!TEXT)"" will not
+appear in a table of contents.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [node*]), (!KW [begin_pnode]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_pnode* Title of hidden Popup chapter
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Title of hidden Popup chapter
+!..
+(!EXAMPLE_END)
+
+!end_node

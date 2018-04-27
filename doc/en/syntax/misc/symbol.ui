@@ -1,0 +1,71 @@
+!begin_node Symbols
+!html_name misc_symbols
+
+!index (!kw [ifnset])
+!index (!kw [ifset])
+!index (!kw [set])
+!index (!kw [unset])
+!index -D
+!index -U
+
+Symbols are user-defined variables which can be set with the (!KW [set])
+command or via the command line with the (!code [-D]) option. Symbols can be
+deleted with the (!KW [unset]) command. If a symbol is set you can test
+with the query commands (!KW [ifset]) and (!KW [ifnset]).
+
+Symbols can be used for different purposes. In the following example I will
+show you how to make a destination file with a different contents depending
+on set symbols.
+
+Assuming that you have written a soure file that contains three chapters,
+the first two chapters have been finished and you are still working on the
+third chapter. To mimize the conversion time of UDO you want only to convert
+the last chapter if the symbol (!code [AllChapters]) is set:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)symbol1.ui
+(!EXAMPLE_END)
+
+If you start UDO as you without setting the symbol it will make a
+destination file that contains all chapters. If you set the symbol via
+adding the option ""(!code [-D~AllChapters])"" you will get a destination file
+that contains only the last chapter.
+
+You can even do more. If you use more symbols you can make destination files
+with only one, some or all chapters. If you use the following example and
+you call UDO with the option ""(!code [-D~Chapter1])"" you will get only the
+first chapter. If you call UDO with the options ""(!code [-D~Chapter1])"" and
+""(!code [-D~Chapter2])"" you will get a destination file with the first and
+second chapter. If you call UDO with the option ""(!code [AllChapters])"" you
+will get a complete destination file:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)symbol2.ui
+(!EXAMPLE_END)
+
+As I descriped at the beginning of this section you can delete symbols with
+the (!KW [unset]) command.
+
+If you want to avoid that all chapters are saved in the destination file you
+can add the following lines to the beginning of your source file. Here the
+symbol (!code [AllChapters]) will be deleted if it is set:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)symbol3.ui
+(!EXAMPLE_END)
+
+In first place it will be testet if the symbol is set. If you don't test the
+symbol UDO will print an error message if you want to delete an unused
+symbol.
+
+!begin_ignore
+(!HINTS)
+
+!begin_enumerate
+!item You may use up to (!MAXDEFINE) symbols.
+
+!item The name of a symbol may be up to (!MAXSYMLEN) characters long.
+!end_enumerate
+!end_ignore
+
+!end_node

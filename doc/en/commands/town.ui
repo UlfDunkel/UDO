@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [town])
+!html_name cmd_town
+
+Set document information.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/town (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more.
+Use (!KW [docinfo] [[address!!]]) instead.
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+!endif

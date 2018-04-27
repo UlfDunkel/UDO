@@ -1,0 +1,25 @@
+!begin_node (!kw [begin_ignore])
+!html_name cmd_begin_ignore
+
+Ignore text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_ignore(!t)
+
+!item [(!DESCRIPTION)]
+Starts a new (!link [ignore environment] [ignore environment]). Lines that
+are part of this environment are ignored
+until the correspondig (!KW [end_ignore]) is
+found.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [end_ignore]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node

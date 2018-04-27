@@ -1,0 +1,35 @@
+!begin_node (!kw [begin_node*])
+!html_name cmd_begin_node_asterisk
+
+Start new chapter/section/subsection/paragraph/subparagraph without entry in table of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_node* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [begin_node]), but here ""(!TEXT)"" will not
+appear in a table of contents.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [pnode*]), (!KW [begin_node]), (!KW [end_node]), (!link [Structuring] [Structuring])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node* Title of hidden Chapter
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Title of hidden Chapter
+!..
+(!EXAMPLE_END)
+
+!end_node

@@ -1,0 +1,32 @@
+!begin_node (!kw [heading])
+!html_name cmd_heading
+
+Output a chapter headline.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/heading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command prints out ""(!TEXT)"" like a headline using the chapter
+font and fontsize.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!heading A headline
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading A headline
+(!EXAMPLE_END)
+
+!end_node

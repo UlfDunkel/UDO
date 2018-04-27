@@ -1,0 +1,124 @@
+!begin_node (!kw [item [~!]])
+!html_name cmd_item2
+
+Aufzählungspunkt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/item [(!TEXT)] (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet einen neuen Aufzählungspunkt einer
+description-Umgebung, blist-Umgebung, ilist-Umgebung oder xlist-Umgebung ein.
+Der Text, der in eckige Klammern eingefasst wird, wird
+bei der description-Umgebung und der blist-Umgebung in der Ausgabedatei fett
+dargestellt, bei der ilist-Umgebung kursiv und bei der xlist-Umgebung normal.
+
+!item [(!SEEALSO)]
+(!KW [item]), (!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_description
+!item [description-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer description-Umgebung.
+!item [description-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer 
+description-Umgebung.
+!item [description-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt 
+      in einer description-Umgebung.
+!end_description
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_description
+!item [description-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer description-Umgebung.
+!item [description-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer 
+description-Umgebung.
+!item [description-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt 
+      in einer description-Umgebung.
+!end_description
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_blist
+!item [blist-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer blist-Umgebung.
+!item [blist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer blist-Umgebung.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist
+!item [blist-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer blist-Umgebung.
+!item [blist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer blist-Umgebung.
+!end_blist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_ilist
+!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt 
+      in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer ilist-Umgebung.
+!end_ilist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_ilist
+!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt 
+      in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer ilist-Umgebung.
+!end_ilist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_xlist
+!item [xlist-Umgebung] Dies ist ein 
+Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer 
+       xlist-Umgebung.
+!item [xlist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer 
+      xlist-Umgebung.
+!end_xlist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_xlist
+!item [xlist-Umgebung] Dies ist ein 
+Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer 
+       xlist-Umgebung.
+!item [xlist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer 
+      xlist-Umgebung.
+!end_xlist
+(!EXAMPLE_END)
+
+!end_node

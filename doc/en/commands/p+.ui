@@ -1,0 +1,20 @@
+!begin_node (!kw [p*])
+!html_name cmd_p_asterisk
+
+Start a hidden popup chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/p* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [pnode*]).
+
+!item [(!SEEALSO)]
+(!KW [pnode*])
+
+!end_xlist
+
+!end_node

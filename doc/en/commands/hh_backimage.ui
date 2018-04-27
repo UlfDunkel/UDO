@@ -1,0 +1,27 @@
+!begin_node (!kw [hh_backimage])
+!html_name cmd_hh_backimage
+
+Specify a background image (HTMLHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_backimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Specifies a file that is used as background image
+of HTMLHelp pages. You have to use the complete
+name, including extension, of the file name. (!FILESPACEQUOTE)
+
+!item [(!EXAMPLE)]
+(!T)!/hh_backimage background.gif(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_backcolor]), (!KW [hh_textcolor]), (!KW [hh_linkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_alinkcolor])
+
+!end_xlist
+
+!end_node

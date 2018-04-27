@@ -1,0 +1,378 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.00
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_0700.de)
+#   fd  Mar 02: translated
+#   fd  Mar 03: using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro usages adjusted
+#   fd  Apr 08: typo
+#   fd  May 19: link adjustments for old commands
+#
+################################################################################
+
+!begin_node Changes in version 7.00
+!html_name history_0700
+
+UDO~7 is a big upgrade since the last released version. Especially the
+full Unicode support and many HTML output enhancements make this
+version more powerful than ever.
+
+(!PUBLISHED [UDO~7.00] [March 1, 2010])
+
+!begin_description !compressed
+# ----------------------------------------
+!item [Text style]
+# ----------------------------------------
+   !begin_itemize
+   !item (!B)New commands:(!b)
+   
+      !begin_blist
+      !item [(!KKKW [SUP] [sup])]
+            output superscript text
+      !item [(!KKKW [SUB] [sub])]
+            output subscript text
+      !item [(!KKKW [INS] [ins])]
+            output insertion style
+      !item [(!KKKW [DEL] [del])]
+            output deleted text style
+      !end_blist
+
+   !end_itemize
+
+
+
+
+# ----------------------------------------
+!item [Languages]
+# ----------------------------------------
+   !begin_itemize
+   !item (!B)New languages for UDO standard texts:(!b)
+   
+      !begin_blist
+      !item [(!KW [language]) [czech]]
+            Czech
+      !item [(!KW [language]) [danish]]
+            Danish
+      !item [(!KW [language]) [polish]]
+            Polish
+      !item [(!KW [language]) [swedish]]
+            Swedish
+      !end_blist
+   
+   !end_itemize # Languages
+
+
+
+
+
+# ----------------------------------------
+!item [Colors]
+# ----------------------------------------
+   !begin_itemize
+   !item The 16 default colors are now available as placeholders in UDO, for the output formats 
+         HTML, RTF, WinHelp, DRC, and PostScript. 
+         The colors are used like this: (!KKW [black]),
+         (!KKW [red]), etc. Usage of color is switched off with (!KKW [coloff]) accordingly.
+   !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [Tables]
+# ----------------------------------------
+   !begin_itemize !compressed
+   !item You can now add comments to table environments.
+   !item Table environments now accept labels.
+   !item UDO universal characters are now properly output in table environments.
+   !item Table cells may now have a maximum of 700 lines height.
+   !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [Encodings]
+# ----------------------------------------
+   !begin_itemize
+   
+   !item UDO now supports 18 1-byte codepages and Unicode (UTF-8). 
+   Most important difference to former UDO versions: UDO manages all codepages internally in Unicode format. 
+   Thus you will not get too many conversion losses any more.
+   
+   !item Encodings of UDO documents and target formats can now be clearly defined by two new commands, independent from the UDO binary:
+   
+      !begin_blist
+      !item [(!KW [code_source])]
+            defines the source format encoding of the UDO documents.
+      !item [(!KW [code_target])]
+            defines the output format encoding.
+      !end_blist
+   
+   !item The formerly used UDO command (!code [code]) is no longer available. Please adjust your UDO documents accordingly.
+
+   !item Some new UDO universal characters have been added to the list, and output to target formats has been enhanced.
+   
+   !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [Structural]
+# ----------------------------------------
+
+   !begin_itemize
+   
+   !item (!KW [docinfo]) offers more arguments:
+         !begin_blist
+         !item [[distributor]]
+               describes the company which distributes the product or document.
+               When you use [distributor], the title page shows a ""Distributor: [distributor]"" line below the author and company lines.
+         !item [[translator]]
+               describes the translator's name who localized the product or document.
+               When you use [translator], the title page shows a ""Translation: [translator]"" line below the author and company lines.
+         !end_blist
+   
+   !item The (!KW [docinfo]) options (!code [[program!]]) and (!code [[programimage!]]) no longer exclude each other,
+         but can be used simultaneously. When you use both options, [program] will be output first.
+      
+   !item Index link in table of contents
+         !begin_blist
+         !item [(!KW [use_udo_index])]
+               When you use this switch, an ""Index"" link will be added to the (!KW [tableofcontents]) section or page.
+         !end_blist
+
+   !item New commandline parameter:
+         !begin_blist
+         !item [(--)no-warningslines]
+               No output of warnings
+         !item [-Wl]
+               Abbreviated form of the above command line parameter.
+         !end_blist
+
+   !item (!B)New switches:(!b) (!nl)
+         !begin_blist
+         !item [!use_short_descriptions]
+               Outputs all description environments ""compressed"" (which means without additional empty lines between paragraphs).
+         !item [!use_short_enumerates]
+               Outputs all enumerate environments ""compressed"" (which means without additional empty lines between paragraphs).
+         !item [!use_short_itemizes]
+               Outputs all itemize environments ""compressed"" (which means without additional empty lines between paragraphs).
+         !item [!use_short_lists]
+               Outputs all list environments ""compressed"" (which means without additional empty lines between paragraphs).
+         !end_blist
+         These four new switches offer to make much more distinctions on environment formatting, compared to the general switch (!B)!use_short_envs(!b).
+         But if you use this general switch, the four switches mentioned above are without effect, being subsets of it.
+
+   !item (!B)New command:(!b) (!nl)
+         !begin_blist
+         !item [(!KKW [label])]
+               Offers to manually create links in any places of the source document.
+         !end_blist
+
+   !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [General (!BUGFIXES)]
+# ----------------------------------------
+   !begin_itemize
+   !item Bugfix (!BUG [38]): Character output should no longer have issues thanks to Unicode support (not only in Mac encodings).
+   !item Bugfix (!BUG [45])/(!BUG [77]): Stack overflow in DOS version of UDO fixed.
+   !item Bugfix (!BUG [59]): Macros can now use definitions.
+   !item Bugfix (!BUG [75]): (!KW [raw]) output corrected.
+   !item Bugfix (!BUG [78]): Sorting in index page (e.g. indexudo.htm) much enhanced.
+   !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [HTML Apple Help]
+# ----------------------------------------
+   !begin_itemize !compressed
+   
+   !item (!B)New output format: HTML Apple Help(!b) (!nl)
+      Basically this is nothing but HTML, but there are tiny differences. Therefore, (!KW [docinfo]) comes with two new arguments for this format: (!nl)
+      !begin_blist
+      !item [[AppleTitle]]
+            defines the (localizable) title of the help book.
+      !item [[AppleIcon]]
+            defines the icon which will be shown for this help book in Apple Help Viewer's list of registered help books.
+      !end_blist
+
+   !end_itemize # HTML Apple Help
+
+
+
+
+
+# ----------------------------------------
+!item [Hypertext Markup Language (HTML)]
+# ----------------------------------------
+   !begin_itemize
+   !item Neue Kommandos:
+   
+   !begin_blist !compressed
+   !item [(!KW [html_bgsound])]
+         defines the background music for an HTML page.
+         
+   !item [(!KW [html_robots])]
+         Use it to define (!code [robots]) commands for search engines. (!code [!/html_robots]) is prior to (!KW [docinfo]) [robots].
+   !item [(!KW [docinfo]) [robots!]]
+         Use it to define (!code [robots]) commands for search engines. Outputs only when single pages don't use (!KW [html_robots]).
+         
+   !item [(!KW [html_frames_toc_title])]
+         Defines the TOC frame title in frame layout.
+   !item [(!KW [html_frames_con_title])]
+         Defines the CON frame title in frame layout.
+   
+   !item [(!KW [html_navigation]) [line!]]
+         This command offers a new way to format the navigation bar. 
+         The supported HTML output formats now optionally shows a one line navigation bar (starting with or without a folder symbol).
+   !item [(!KW [html_navigation]) [image!]]
+         Use this additional option with the option mentioned above and define which ""symbol"" should be used as ""folder"" in front of the navigation bar. 
+         We recommend to use e.g. the program icon when you write a program manual.
+   !end_blist
+   
+   !item New switches:
+   !begin_blist !compressed
+   !item [(!KW [html_quotes]) [classic | tags!]]
+         (!BUG [82]): Use this new switch to control whether quotation marks should be output like before as <tt>&quot;</tt> ([classic]), or as HTML quotation tags <q> + </q> ([tags], default).
+   !end_blist
+         
+   !item New: Index page for HTML, which also offers a quick jump bar (A--Z) to find entries faster in long index lists.
+   
+   !item New: The navigation bar now always has a link to the Index page. (!nl)
+         The link will be output in a span named ""UDO_nav_index"" and can e.g. be easily placed right-justified on the page, using CSS commands.
+         
+   !item Feature request (!BUG [70]): The command (!KKW [img]) has been enhanced.
+         
+   !item (!LINK) elements for navigation are no longer written automatically to the HTML header, but only on request (see above).
+         
+   !item File creation date/time are no longer automatically written as a comment in the HTML file, but only optionally as a META tag in the HTML header (see above).
+         
+   !item (!KW [html_ignore_8bit]) can now handle an optional parameter (!TEXT) which sets the charset (codepage) in the HTML header.
+         
+   !item (!KW [html_counter_command]) can now be used in the preamble too. It will then create the relevant output for all files.
+
+   !item The commands (!/B), (!/I), (!/U), (!/T), and (!/V) will be output as (!code [<strong>]), (!code [<em>]), 
+         (!code [<span style="text-decoration: underline;">]), and (!code [<kbd>]), when the HTML doctype >= XHTML_STRICT. 
+         If not, the old elements are output.
+         
+   !item The title page area is now enclosed by the following DIV environment: (!nl)
+         (!code [<div id="udo_titlepage"></div>])
+         
+   !item (!KW [use_raw_header]) and (!KW [use_raw_footer]) define that macros and defines should be used.
+         
+   !item Better HTML formatting and compliance:
+         !begin_itemize
+         !item Attributes (nowrap, noresize) enhanced.
+         !item (!BUG [11]): (<br />, <hr />, <img />, <frame />, <link />)
+         !item (!BUG [11]): XML namespace for XHTML files added.
+         !item Description environments are properly formatted, even with included links.
+         !item Lists and tables are output much better and syntactically correct.
+         !item Anchor names can no longer use unallowed characters in URLs.
+         !end_itemize
+         
+   !item The table which shows the menu in the left column of ""Modern Layout"", now has an ID named ""UDO_menu"". You might e.g. want to hide it via CSS for print output, etc.
+         
+   !item The (!KW [docinfo]) entries [keywords, description] are now also written in HTML output, 
+         but only if (!KW [html_keywords]) or (!KW [html_description]) are not used in single files. 
+         The latter commands have priority.
+         
+   !item The command (!KW [begin_quote]) can use an argument now.
+         
+   !item The command (!KW [html_style_name]) can use any number of stylesheets.
+         
+   !item Until now the anchor (!code [<a name="UDOTOC"></a>]) was output in front of the table of contents which could be linked to inside of raw environments.
+         
+         Now the UDOTOC label will be created whenever a TOC has to be created for HTML. 
+         So you can link to UDOTOC from everywhere inside the UDO source document without errors.
+
+   !item Bugfix (!BUG [12]): No unnecessary spaces behind tags any more.
+   
+   !item Bugfix (!BUG [58]): Wrong UDO version information in HTML meta tags fixed.
+   
+   !item Bugfix (!BUG [65]): Wrong character output in IMG tags fixed.
+   
+   !item Bugfix (!BUG [83]): Anchor URL now only use valid characters for URLs.
+   
+   !item Bugfix (!BUG [84]): Labels in description environments are correctly enclosed in DT tags.
+
+   !item Bugfix (!BUG [85]): TOC lists are properly formatted.
+!end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [Rich Text Format (RTF)]
+# ----------------------------------------
+!begin_itemize
+
+!item New: New command (!KW [rtf_add_color]) which write additional colors (other than the 16 default colors) to the color table in the RTF file header.
+         
+!item New: The (!code [!/docinfo]) entries (!code [subject]), (!code [keywords]),
+      (!code [company]), and (!code [category]) are also output as info entries into the RTF file.
+
+!item New: All nodes, subnodes, etc. are marked as label/bookmark for RTF output.
+
+!item New: The command (!KKW [plink]) is supported. Output points to the page number.
+
+!item New: ""\*\revtbl {Unknown}{UDO Version x.x.x}}"" is set.
+
+!item New: (!KW [use_raw_header]) can also be used for RTF output.
+
+!item Bugfix (!BUG [60]): RTF output should no longer crash.
+
+!end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [HTML-Help]
+# ----------------------------------------
+!begin_itemize
+!item New: Use the command line parameter (!code [--map]) to let UDO create an alias and a MAP file, too.
+!item New: (!KW [html_name]) is now used in HTML-Help output.
+!end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [ST-Guide]
+# ----------------------------------------
+!begin_itemize
+!item Bugfix: Horizontal lines can be longer than (!const [126])~characters.
+!end_itemize
+
+!end_description
+
+!end_node

@@ -1,0 +1,37 @@
+!begin_node (!kkkw [V] [v])
+!ifdest [ipf]
+!alias (!/V)...(!/v)
+!endif
+!html_name cmd_V()
+!label (!kk1 [/V])
+!label (!kk1 [/v])
+
+Klartext ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/V)(!TEXT)(!/v)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird als Klartext dargestellt, falls möglich.
+Für (!LaTeX) wird ""(!code [\verb+(!TEXT!)+])"" ausgegeben, bei allen
+anderen Formaten erfolgt die gleiche Ausgabe wie bei
+(!KKKW [T] [t]).
+
+!item [(!SEEALSO)]
+(!link [Schriftarten] [Schriftarten]), (!link [Texthervorhebungen] [Texthervorhebungen]), (!KKKW [T] [t]), (!KW [tex_verb])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""Klartext"" wird als (!V)Klartext(!v) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""Klartext"" wird als (!V)Klartext(!v) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node

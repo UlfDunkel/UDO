@@ -1,0 +1,29 @@
+!begin_node (!kkw [short_today])
+!html_name cmd_short_today()
+
+Insert short form of current date.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/short_today)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the short form of the current date.
+
+!item [(!SEEALSO)]
+(!KKW [today]), (!KW [language]), (!link [Predefined macros] [Predefined macros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!short_today)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!short_today)
+(!EXAMPLE_END)
+
+!end_node

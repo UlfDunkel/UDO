@@ -1,0 +1,31 @@
+#######################################
+# @(#) center environments - dh 1996
+#######################################
+
+!code_source [iso]
+!english
+
+!title		UDO's
+!program	Center Environment
+!author		Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node A simple center environment
+
+This example shows you how to use the center environment.
+
+!begin_center
+These words will be centered.
+
+UDO formats paragraphs
+of a center environment, too.
+
+Maybe you have to use (!nl)
+manually inserted linebreaks (!nl)
+to format paragraphs like this one.
+!end_center
+
+!end_document

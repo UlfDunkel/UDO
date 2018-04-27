@@ -1,0 +1,21 @@
+!docinfo [program] Hello, world!
+!docinfo [author]  Dirk Hagedorn
+
+!begin_document
+
+!node Hello, World
+This program is just for demonstrating
+the sourcecode environment.
+
+!begin_sourcecode
+#include <stdio.h>
+
+int main ( void )
+{
+    printf("Hello, world!\n");
+
+    return 0;
+}
+!end_sourcecode
+
+!end_document

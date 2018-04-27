@@ -1,0 +1,39 @@
+!begin_node (!kw [begin_quote])
+!html_name cmd_begin_quote
+
+Print indented text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_quote [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+This command starts a new (!link [quote environment] [quote environment]). Text is printed
+indented until UDO reads the (!KW [end_quote]) command.
+
+When converting to HTML, (!code [(!TEXT!)]) can specify the ID and a URL of a citation.
+
+!item [(!SEEALSO)]
+(!KW [end_quote]), (!link [Indented paragraphs] [Indented paragraphs])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_quote [id=myid cite=http://www.udo-open-source.org]
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html,hh,hah]
+!begin_verbatim
+<blockquote id="myid" cite="http://www.udo-open-source.org">
+!end_verbatim
+!else
+!begin_quote [id=myid cite=http://www.udo-open-source.org]
+!end_quote
+!endif
+(!EXAMPLE_END)
+
+!end_node

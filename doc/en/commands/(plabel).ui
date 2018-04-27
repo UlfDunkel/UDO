@@ -1,0 +1,25 @@
+!begin_node (!kkw [plabel])
+!html_name cmd_plabel()
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/plabel [<name>] [<text>])(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!item [(!EXAMPLE)]
+(!T)(!/plabel [label] [Wort])(!t)
+
+!item [(!EXISTSSINCE)] Version~6.5.9
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KKW [idx]), (!KW [no_index]), (!KW [index])
+
+!end_xlist
+
+!end_node

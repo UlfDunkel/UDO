@@ -1,0 +1,12 @@
+!begin_node Schriftfarben
+!html_name style_textcolors
+
+UDO unterstützt verschiedene Systemfarben für die Textgestaltung. Zur Zeit sind es folgende Farben:
+
+!include syntax/text/colors.ui
+
+Mit dem Kommando (!KK1 [coloff]) wird wieder auf die Standardfarbe Schwarz zurückgeschaltet.
+
+(!COLORSUPPORT)
+
+!end_node

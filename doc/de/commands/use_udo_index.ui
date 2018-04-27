@@ -1,0 +1,31 @@
+!begin_node (!kw [use_udo_index])
+!html_name cmd_use_udo_index
+
+Indexseite automatisch erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_udo_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wenn dieses Kommando im Vorspann benutzt wird, erzeugt UDO automatisch einen Index
+aus den gefundenen Querverweisen. Falls entsprechende !ignore_...-Befehle genutzt wurden, 
+werden die entsprechenden Kapitel, Aliase, Indexreferenzen oder Label nicht in den Index 
+aufgenommen. Dies betrifft lediglich Formate die selber keinen Index erzeugen, wie z.B.
+ASCII, Texinfo, HTML und AppleHelp.
+
+!item [(!SEEALSO)]
+(!KW [ignore_index]), (!KW [ignore_links]), (!KW [index]), (!KW [no_index]), (!KW [use_alias_inside_index]), (!KW [use_label_inside_index]), (!KW [use_nodes_inside_index])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_udo_index [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

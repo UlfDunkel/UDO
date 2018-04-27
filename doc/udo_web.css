@@ -1,0 +1,194 @@
+body {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   background-color: #FFFAF0;
+}
+
+/* --- quotation marks --- */
+q:lang(cs) { quotes: "\201E"      "\201C"      "\201A"      "\2018"      }
+q:lang(da) { quotes: "\00BB"      "\00AB"      "\203A"      "\2039"      }
+/* 
+q:lang(de) { quotes: "\201E"      "\201C"      "\201A"      "\2018"      }
+*/
+q:lang(de) { quotes: "\00BB"      "\00AB"      "\203A"      "\2039"      }
+q:lang(en) { quotes: "\201C"      "\201D"      "\2018"      "\2019"      }
+q:lang(fr) { quotes: "\00AB\00A0" "\00A0\00BB" "\2039\00A0" "\00A0\203A" }
+q:lang(it) { quotes: "\00AB"      "\00BB"      "\2039"      "\203A"      }
+q:lang(lv) { quotes: "\201D"      "\201C"      "\201D"      "\201C"      }
+q:lang(nl) { quotes: "\201E"      "\201D"      "\201A"      "\2019"      }
+q:lang(pl) { quotes: "\201E"      "\201C"      "\00AB"      "\00BB"      }
+q:lang(sv) { quotes: "\201D"      "\201D"      "\2019"      "\2019"      }
+
+q:before   { content:open-quote;  color:Blue; }
+q:after    { content:close-quote; color:Blue; }
+q q:before { content:open-quote;  color:Red;  }
+q q:after  { content:close-quote; color:Red;  }
+
+/* --- headlines --- */
+h1 {
+   font-size: 16pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   background-color: #FFFAF0;
+}
+h2 {
+   font-size: 14pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   background-color: #FFFAF0;
+}
+h3 {
+   font-size: 12pt;
+   font-family: Verdana, Arial, sans-serif;
+   background-color: #FFFAF0;
+   color: black;
+}
+
+/* --- paragraph --- */
+p {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   background-color: #FFFAF0;
+   color: black;
+}
+
+/* --- anchors --- */
+a:link {
+   color: #0000FF;
+   background-color: #FFFAF0;
+}
+a:visited {
+   color: #0000FF;
+   background-color: #FFFAF0;
+}
+a:active  {
+   color: #008000;
+   background-color: #FFFAF0;
+}
+a:hover {
+   color: #ff8000;
+   background-color: #FFFAF0;
+}
+a.email {
+   padding-left: 20px;
+   background-image: url(../img/email.gif);
+   background-position:	left;
+   background-repeat: no-repeat;
+   text-decoration: none;
+}
+a.elink {
+   padding-left: 16px ! important;
+   background-image: url(../img/elink.gif);
+   background-position:	left;
+   background-repeat: no-repeat;
+   text-decoration: none;
+}
+
+/* --- lists --- */
+ul, ol {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   background-color: #FFFAF0;
+   color: black;
+   /* margin-left: -16px; */
+}
+li {
+   padding: 4pt 0 0 0;
+   background-color: #FFFAF0;
+}
+dt {
+   font-size: 10pt:
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   background-color: #eeeeff;
+   padding: 4px 4px 4px 8px;
+}
+dd {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   color: black;
+   padding: 4px;
+   margin: 0 0 8px 24px;
+}
+
+/* --- tables --- */
+table {
+   font-family: Verdana, Arial, sans-serif;
+   font-size: 10pt;
+   border-width: 0 1px 1px 0;
+   border-color: #2E4793;
+   background-color: #eeeeff;
+}
+tr, td {
+   border-width: 0;
+   border-style: solid;
+   border-color: #2E4793;
+   padding: 4px 8px 4px 8px;
+}
+td {
+   font-size: 10pt;
+   font-family: Verdana, Arial, sans-serif;
+   background-color: #FFFAF0;
+   color: black;
+}
+
+/* --- special formattings */
+small {
+   font-size: 8pt;
+   font-family: Arial, sans-serif;
+}
+pre {
+   font-size: 11pt;
+   color: #278278;
+}
+
+tt {
+   font-size: 11pt;
+}
+
+address {
+   font-size: 8pt;
+}
+
+hr {
+   width: 100%;
+   height:1px;
+   border-width: 0 0 0 0;
+   color: #888888;
+   background-color: #888888;
+   margin: 4px 0 4px 0;
+}
+
+/* --- UDO div formattings --- */
+
+div.example {
+   border-width: 1px;
+   border-style: solid;
+   border-color: #888888;
+   background-color: White;
+   padding: 0 8px 0 8px;
+   margin: 4px 32px 4px 32px;
+}
+
+.UDO_index_list {
+   background-color: #eeeeff;
+   padding: 4px 4px 4px 8px;
+}
+
+.UDO_index_name {
+   background-color: #eeeeff;
+   padding: 0 16px 0 16px;
+   border-width: 1px 0 0 1px;
+   border-color : #2e4793;
+   border-style : solid;
+}
+
+.UDO_nav_index {
+   position: absolute;
+   right: 8px;
+   padding: 0 0 0 8px;
+   border-width: 0 0 0 1px;
+   border-style: solid;
+   border-color: #888888;
+}

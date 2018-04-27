@@ -1,0 +1,20 @@
+!begin_node (!kw [bq])
+!html_name cmd_bq
+
+Umgebungstext eingerückt darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bq(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_quote]).
+
+!item [(!SEEALSO)]
+(!KW [begin_quote])
+
+!end_xlist
+
+!end_node

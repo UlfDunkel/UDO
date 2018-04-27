@@ -1,0 +1,32 @@
+!begin_node !~
+!html_name cmd_tilde
+!label Non breaking space
+
+Output a non-breaking space.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!~(!t)
+
+!item [(!DESCRIPTION)]
+The tilde is used for a non-breaking space inside the UDO syntax. If
+a tilde is used between words UDO won't split them up when breaking
+lines or calculating the justification.
+
+!item [(!SEEALSO)]
+(!link [!!~] [Tilde]), (!link [Non breaking spaces] [Non breaking spaces])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+42~EUR, Dr.~Summer
+!end_verbatim
+(!EXAMPLE_AFTER)
+42~EUR, Dr.~Summer
+(!EXAMPLE_END)
+
+!end_node

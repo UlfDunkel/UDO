@@ -1,0 +1,22 @@
+!begin_node (!kw [end_blist])
+!html_name cmd_end_blist
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_blist(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte blist-Umgebung.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), (!KW [item] [[~!!]]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node

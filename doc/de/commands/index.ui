@@ -1,0 +1,38 @@
+!begin_node (!kw [index])
+!html_name cmd_index
+
+Indexeintrag bzw. Schlüsselwort setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/index (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+#Ausgabe-Formate
+""(!TEXT)"" wird für (!LaTeX) als ""(!code [\index~{...}])"", für WinHelp
+und WinHelp4 als ""(!code [K{\footnote~K~...}])"",
+für RTF als ""(!code [{\xe\v~...}])""
+und für den ST-Guide als ""(!code [@index~...])"" ausgegeben.
+""(!TEXT)"" kommt damit bei (!LaTeX) und dem ST-Guide in den
+Index, bei WinHelp können Sie im Suchen-Dialog nach
+diesem Schlüsselwort suchen und bekommt die Namen der
+Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
+""(!TEXT)"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KW [no_index]), (!KKW [idx])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!index Eintrag !! Index
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

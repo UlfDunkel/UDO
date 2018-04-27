@@ -1,0 +1,29 @@
+!begin_node (!kw [use_comments])
+!html_name cmd_use_comments
+
+Create comments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_comments [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Using this switch in the preamble tells UDO to output
+comments in brackets for formats that don't have special
+commands for comments.
+
+!item [(!SEEALSO)]
+(!KW [comment]), (!KW [begin_comment]), (!KKW [comment])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_comments [html,win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

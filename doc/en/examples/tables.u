@@ -1,0 +1,53 @@
+#####################################
+# @(#) Tabellensatz - dh 1996
+#####################################
+
+!code_source [latin1]
+
+!docinfo [title]	UDOs
+!docinfo [program]	Tabellensatz
+!docinfo [author]	Dirk Hagedorn
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Kurze Beispiele
+
+Es folgt eine rahmen- und titellose Tabelle mit zwei Zeilen und drei
+Spalten, wobei die Zellen linksbündig ausgerichtet sind:
+
+!begin_table [lll]
+Stadt   !! Fläche/qkm !! Einwohner ('93)
+Berlin  !! 889,10     !! 3.465.748
+Hamburg !! 775,31     !! 1.688.785
+München !! 310,47     !! 1.256.638
+!end_table
+
+Die Überschriften in dieser Tabelle sollte man durch eine Linie vom Rest
+durch eine Linie verdeutlichen. Wir fügen daher den Befehl (!I)!/hline(!i)
+ein. Außerdem werden die Spalten durch Linien voneinander getrennt, indem
+man ""(!V)|(!v)"" einfügt:
+
+!begin_table [l|l|l]
+Stadt   !! Fläche/qkm !! Einwohner ('93)
+!hline
+Berlin  !! 889,10     !! 3.465.748
+Hamburg !! 775,31     !! 1.688.785
+München !! 310,47     !! 1.256.638
+!end_table
+
+Nun verpassen wir der obigen Tabelle noch eine Überschrift. Außerdem
+richten wir die zweite und dritte Spalte rechtbündig aus:
+
+!table_caption Städte mit mehr als 1 Mio. Einwohner
+!begin_table [l|r|r]
+Stadt   !! Fläche/qkm !! Einwohner ('93)
+!hline
+Berlin  !! 889,10     !! 3.465.748
+Hamburg !! 775,31     !! 1.688.785
+München !! 310,47     !! 1.256.638
+!end_table
+
+!end_document
+

@@ -1,0 +1,27 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 1
+# Language    : English
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced (from history_01.de)
+#
+################################################################################
+
+!begin_node Release 1
+!html_name history_1
+
+Does anybody still know when UDO v1 has been released?
+
+!end_node
+
+# === EOF ===

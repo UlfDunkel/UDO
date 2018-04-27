@@ -1,0 +1,68 @@
+!begin_node (!kw [html_nodesize])
+!html_name cmd_html_nodesize
+
+Größe der Kapitelüberschriften setzen (HTML).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/html_nodesize (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl können Sie die Größe der Überschriften setzen,
+die UDO bei der Ausgabe von Kapiteln
+benutzen soll. Benutzt man untenstehendes Beispiel,
+so werden die Überschriften für Nodes mit (!code [<h2>!..</h2>])
+erzeugt, die für Subnodes und Subsubnodes jeweils mit
+einer kleineren Größe. Standardmäßig verwendet UDO
+den Wert (!code [1]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!html_nodesize 3
+
+# Hauptteil
+!begin_node Ein Kapitel
+...
+!end_node
+
+!html_nodesize 1
+!begin_node Ein superwichtiges Kapitel
+...
+!end_node
+
+# Wert zuruecksetzen
+!html_nodesize 3
+
+!begin_node Ein anderes Kapitel
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!html_nodesize 3
+!heading Ein Kapitel
+!..
+!hline
+!html_nodesize 1
+!heading Ein superwichtiges Kapitel
+!..
+!hline
+!html_nodesize 3
+!heading Ein anderes Kapitel
+!..
+
+# reset value!
+!html_nodesize 1
+(!EXAMPLE_END)
+
+!end_node

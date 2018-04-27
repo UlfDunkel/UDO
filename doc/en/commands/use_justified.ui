@@ -1,0 +1,26 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [use_justified])
+!html_name cmd_use_justified
+
+Turn on justification.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_justified [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KW [use_justification]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!KW [use_justification])
+
+!end_xlist
+
+!end_node
+!endif

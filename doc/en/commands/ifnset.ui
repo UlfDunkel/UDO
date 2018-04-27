@@ -1,0 +1,41 @@
+!begin_node (!kw [ifnset])
+!html_name cmd_ifnset
+
+Query symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifnset [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+With this command you can test if a symbol was (!B)not(!b) set with
+the command line option (!code [-D]) or with (!KW [set]). If
+""(!TEXT)"" wasn't set UDO will convert all lines bewteen
+(!KW [ifnset]) and (!KW [else]) or (!KW [endif]). If
+""(!TEXT)"" was set UDO will convert all lines between
+(!KW [else]) and (!KW [endif]) if (!KW [else]) was used. The
+example shows how to test if the symbol ""british"" isn't set.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [ifset]), (!link [Query commands] [Query commands])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifnset [british]
+This doesn't seem to be a british documentation.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifnset [british]
+This doesn't seem to be a british documentation.
+!endif
+(!EXAMPLE_END)
+
+!end_node

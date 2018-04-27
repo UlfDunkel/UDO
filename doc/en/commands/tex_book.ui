@@ -1,0 +1,25 @@
+!ifnset NoOldKeywords
+!begin_node (!kw [tex_book])
+!html_name cmd_tex_book
+
+Use a book style.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_book(!t)
+
+!item [(!DESCRIPTION)]
+This command does not exist any more.
+Use (!KW [use_style_book] [[tex!!]]) instead.
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [use_style_book])
+
+!end_xlist
+
+!end_node
+!endif

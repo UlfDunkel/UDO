@@ -1,0 +1,26 @@
+!begin_node (!kw [chaptericon])
+!html_name cmd_chaptericon
+
+Set graphic for chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+You can use this command to tell UDO which graphic
+should be used to generate a link to the current node
+in the left column of the ""modern"" layout.
+Right now, the command will be ignored inside
+sections and subsections.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon_text]), (!KW [chaptericon_active])
+
+!end_xlist
+
+!end_node

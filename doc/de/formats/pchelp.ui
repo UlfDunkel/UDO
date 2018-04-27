@@ -1,0 +1,114 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Pure C Help
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: 'Atari ST' -> 'Atari'
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 19: "short" -> "compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+#
+################################################################################
+
+!begin_node Pure-C-Hilfe
+!html_name format_pch
+
+Das Pure-C-Hilfe-Format wird nur für Pure~C, einem Compiler für
+den Atari~ST, als Hilfesystem verwendet. Ansonsten hat es keine
+Bedeutung mehr für diesen Rechner.
+
+!begin_description !not_compressed
+
+##################################################
+
+!item [Wie erzeugt UDO hier Titelseite und Inhaltsverzeichnis?]
+UDO erzeugt eine Seite mit den Titelangaben und dem Inhaltsverzeichnis.
+Da diese Seite bei umfangreicheren Dokumenten ziemlich lang werden
+kann, empfiehlt es sich, den Schalter (!KW [use_compressed_tocs] [[pch!!]])
+im Zusammenhang mit den Schaltern (!KW [use_auto_subtocs] [[pch!!]])
+und (!KW [use_auto_subsubtocs] [[pch!!]]) zu benutzen, damit auch
+Programmierer mit kleinen Bildschirmen nicht den Überblick auf dieser
+Seite zu verlieren.
+
+##################################################
+
+!item [Wie kann ich bei Pure-C-Hilfe die Kopfzeilen entfernen?]
+UDO erzeugt auf jeder Seite automatisch (!idx [Kopfzeilen]), gebildet aus
+der Überschrift der jeweiligen Seite sowie des Titels der
+Hilfedatei. Durch Anklicken des Titels können Sie zur Titelseite
+bzw. zum Inhaltsverzeichnis verzweigen.
+
+Durch den Schalter (!KW [no_headlines] [[pch!!]]) läßt sich die Ausgabe
+dieser Kopfzeilen unterbinden.
+
+##################################################
+
+!item [Und wie die Fußzeilen?]
+UDO erzeugt auf jeder Seite automatisch (!idx [Fußzeilen]), in denen
+Verweise auf das vorherige, nachfolgende und/oder übergeordnete
+Kapitel zu finden sind. Diese ermöglichen dem Leser, direkt zu
+anderen Kapiteln des Textes zu verzweigen.
+
+Durch den Schalter (!KW [no_bottomlines] [[pch!!]]) läßt sich die Ausgabe
+dieser Kopfzeilen unterbinden.
+
+##################################################
+
+!item [Wofür ist diese Datei mit der Endung (!T).cmd(!t)?]
+UDO legt während der Umwandlung eine Kommandodatei für den
+Helpcompiler von Pure~C an, welche an diesen zur Erzeugung der
+Helpdatei als Kommando übergeben werden muß.
+
+UDO überschreibt diese Kommandodatei ohne Rückfrage. Um manuelle
+Änderungen an dieser Datei zu bewahren, müssen Sie die Datei
+schreibschützen.
+
+##################################################
+
+!item [Wie erzeuge ich eine Hilfedatei für Pure~C?]
+Bei der Umwandlung des Quelltextes (!file [foo.u]) erzeugt UDO die Dateien
+(!file [foo.scr]) und (!file [foo.cmd]).
+
+Um eine Hilfedatei für Pure~C zu erhalten, müssen Sie (!file [HC.TTP])
+starten und diesem Programm die Kommandodatei (!file [foo.cmd]) übergeben:
+
+!begin_quote
+!begin_verbatim
+$ e:\purec\hc.ttp foo.cmd
+!end_verbatim
+!end_quote
+
+Unter GEM ziehen Sie einfach die Datei (!file [foo.cmd]) auf (!file [HC.TTP]).
+
+##################################################
+
+!item [Wie benutzt ich die Hilfedatei mit Pure~C?]
+Pure~C erlaubt (leider) nur die Einbindung einer einzigen
+benutzerdefinierten Hilfedatei. Diese trägt den Namen (!file [USR.HLP]) und
+befindet sich im Pure-C-Ordner.
+
+Um eine eigene Hilfedatei zu benutzen, sichern Sie die alte
+Hilfedatei (z.B. durch Umbenennen in (!file [USR.HLX])) und kopieren Sie
+die eigene, in (!file [USR.HLP]) umbenannte Hilfedatei in den Pure-C-Ordner.
+
+##################################################
+
+!end_description
+
+!end_node

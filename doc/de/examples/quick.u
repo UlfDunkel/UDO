@@ -1,0 +1,45 @@
+########################################
+# @(#) Ein kleines Beispiel
+########################################
+
+# Ein paar Schalter und Titelinfos setzen
+
+!code_source [latin1]
+!language [german]
+!raw [stg] @subject "Dokumentation\Utilities"
+
+!docinfo [title]   Ein kleines Beispiel für
+!docinfo [program] UDO
+!docinfo [version] Version 1
+!docinfo [date]    (!today)
+!docinfo [author]  Dirk Hagedorn
+!docinfo [address] Postfach 8105
+!docinfo [address] 59840 Sundern
+!docinfo [address] Deutschland
+!docinfo [address] Internet: DirkHage@aol.com
+!docinfo [address] MausNet: Dirk Hagedorn @ MK2
+
+# Ende des Vorspanns, Anfang des Hauptteils
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Ein Kapitel
+Dies ist der Text des Kapitels.
+
+!subnode Ein Abschnitt
+Dies
+	ist
+		der
+			Text
+	des
+		Abschnitts.
+
+!subsubnode Ein Unterabschnitt
+Ich denke,   daß   es jetzt
+langsam               langweilig
+           wird.
+
+!end_document
+

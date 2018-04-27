@@ -1,0 +1,29 @@
+!begin_node Left justified text
+!html_name style_justifiedleft
+!label flushleft environment
+
+Lines that are part of a flushleft environment will be displayed left
+justified without justification.
+
+Er, do you understand that? No? OK, one more try. If you use the switch
+(!KW [use_justification]) UDO adjusts the lines by inserting spaces between
+the words so that you have a proper right margin. But UDO won't insert
+spaces between words of a flushleft environment.
+
+You can use the flushleft environment inside other environments. You can also
+use it inside another flushleft environment, even this may be senseless.
+
+If you use other environments inside a flushleft environment they will be
+layouted like in all other cases. Only when the flushleft environment is the
+active one text will be printed without justification.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)flushleft.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)flushleft.ui
+(!EXAMPLE_END)
+
+You see that UDO layouts paragraphs of a flushleft environment, too. To
+insert a manual line break use the (!KKW [nl]) command.
+
+!end_node

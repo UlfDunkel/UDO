@@ -1,0 +1,23 @@
+!begin_node (!kw [hh_backcolor])
+!html_name cmd_hh_backcolor
+
+Setzen der Hintergrundfarbe (nur HTMLHelp).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/hh_backcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Farbe, die benutzt wird, um in HTMLHelp-Seiten
+den Hintergrund darzustellen.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hh_textcolor]), (!KW [hh_linkcolor]), (!KW [hh_vlinkcolor]), (!KW [hh_alinkcolor])
+
+!end_xlist
+
+!end_node
