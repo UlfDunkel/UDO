@@ -155,8 +155,8 @@ LOCAL int   quot_level;                   /* Zaehler fuer quote-Umgebungen */
 LOCAL char   itemchar[MAXENVLEVEL+1][64]; /* Zeichen fuer Itemize-Umgebung */
 
 
-LOCAL BOOLEAN   bCalledBeginAppendix;     /* */
-LOCAL BOOLEAN   bCalledEndAppendix;       /* */
+LOCAL _BOOL   bCalledBeginAppendix;     /* */
+LOCAL _BOOL   bCalledEndAppendix;       /* */
 
 LOCAL int   pre_linedraw_charset;
 
@@ -185,8 +185,8 @@ LOCAL void strcat_prev_indent(char *s);
 LOCAL void strcpy_prev_indent(char *s);
 
 LOCAL void set_env_compressed(const int el, const char *s);
-LOCAL BOOLEAN check_iEnvLevel(void);
-LOCAL BOOLEAN check_env_end(const int etype, const int ekind, const char *ecomm);
+LOCAL _BOOL check_iEnvLevel(void);
+LOCAL _BOOL check_env_end(const int etype, const int ekind, const char *ecomm);
 
 LOCAL void end_env_output_line(const int el);
 
@@ -340,7 +340,7 @@ const char  *s)   /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_iEnvLevel(void)
+LOCAL _BOOL check_iEnvLevel(void)
 {
    if (iEnvLevel >= MAXENVLEVEL - 1)
    {
@@ -372,7 +372,7 @@ LOCAL BOOLEAN check_iEnvLevel(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_env_end(
+LOCAL _BOOL check_env_end(
 
 const int    etype,  /* ENV_ITEM, ENV_ENUM, etc. */
 const int    ekind,  /* LIST_NORMAL, LIST_BOLD, etc. */
@@ -590,7 +590,7 @@ LOCAL void end_env_output_line(
 
 const int    el)            /* environment level to check */
 {
-   BOOLEAN   flag = FALSE;  /* */
+   _BOOL   flag = FALSE;  /* */
    
    switch (el)
    {
@@ -2981,8 +2981,8 @@ LOCAL void add_description(void)
 {
    int       i;                 /* */
    size_t    sl;                /* */
-   BOOLEAN   finished = FALSE;  /* */
-   BOOLEAN   no_bracket;        /* */
+   _BOOL   finished = FALSE;  /* */
+   _BOOL   no_bracket;        /* */
    char     *found,             /* */
             *ptr;               /* */
             

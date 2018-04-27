@@ -46,6 +46,12 @@
 *  2013:
 *   tho  Dec 07: renamed from portab.h, sometimes concflicts
 *                with system header of same name
+*  2014:
+*   tho  Aug 08: removed unused definitions
+*                renamed remaining typedefs to _BOOL, _UBYTE, _UWORD and _ULONG because
+*                of conflicts with windows headers
+*                removed XPOINT typedef
+*                removed NIL define
 *
 ******************************************|************************************/
 
@@ -67,7 +73,6 @@
 #define FALSE  0
 #endif
 
-#define NIL        (-1)                   /* 'invalid' indicator */
 #define EOS        '\0'
 
 #define LOCAL      static
@@ -88,15 +93,10 @@
 *
 ******************************************|************************************/
 
-typedef int             BOOLEAN;          /* boolean type */
-typedef void            VOID;             /* void type */
-typedef signed char     SBYTE;            /* signed 8 bit integer */
-typedef unsigned char   UBYTE;            /* unsigned 8 bit integer */
-typedef signed int      SWORD;            /* signed 16 bit integer */
-typedef unsigned int    UWORD;            /* unsigned 16 bit integer */
-typedef signed long     SLONG;            /* signed 32 bit integer */
-typedef unsigned long   ULONG;            /* unsigned 32 bit integer */
-typedef void *          XPOINT;           /* pointer to anything */
+typedef int             _BOOL;            /* boolean type */
+typedef unsigned char   _UBYTE;           /* unsigned 8 bit integer */
+typedef unsigned int    _UWORD;           /* unsigned 16 bit integer */
+typedef unsigned long   _ULONG;           /* unsigned 32 bit integer */
 
 
 

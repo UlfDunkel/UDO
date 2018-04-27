@@ -52,7 +52,7 @@
 ******************************************|************************************/
 
    /* creates the navigation bar for HTML output */
-GLOBAL BOOLEAN set_html_navigation(void);
+GLOBAL _BOOL set_html_navigation(void);
 
    /* sets the variable html_doctype */
 GLOBAL void set_html_doctype(void);

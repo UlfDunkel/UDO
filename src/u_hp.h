@@ -39,7 +39,7 @@
 *  2010:
 *    fd  Feb 16: file introduced
 *    fd  Feb 17: CODE_HP8_lig[] + sort_CODE_HP8[] added
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -63,7 +63,7 @@
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_HP8[] =             /* CODE_HP8 */
+static _UWORD   u_CODE_HP8[] =             /* CODE_HP8 */
 {
    U_NIL,                                 /* 0x00  NULl */
    U_NIL,                                 /* 0x01  Start Of Heading */
@@ -339,7 +339,7 @@ static UWORD   u_CODE_HP8[] =             /* CODE_HP8 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_HP8_lig[][3] =        /* CODE_HP8 character ligatures */
+static _UWORD   CODE_HP8_lig[][3] =        /* CODE_HP8 character ligatures */
 {
    {0x00CB, U_LatinCapitalLetterE, U_LatinSmallLetterE},      /* 0xa5 = 0x00CB: LATIN CAPITAL LETTER E WITH DIAERESIS */
    {0x00CF, U_LatinCapitalLetterI, U_LatinSmallLetterE},      /* 0xa7 = 0x00CF: LATIN CAPITAL LETTER I WITH DIAERESIS */
@@ -378,7 +378,7 @@ static UWORD   CODE_HP8_lig[][3] =        /* CODE_HP8 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_HP8[] =          /* CODE_HP8 */
+static _UWORD   sort_CODE_HP8[] =          /* CODE_HP8 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */

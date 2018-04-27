@@ -101,7 +101,7 @@ const char *id_sty_c= "@(#) sty.c       $Date$";
 *
 ******************************************|************************************/
 
-extern ULONG   footnote_cnt;              /* UDO.H: footnote counter */
+extern _ULONG   footnote_cnt;              /* UDO.H: footnote counter */
 
 
 

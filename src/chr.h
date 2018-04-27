@@ -44,7 +44,7 @@
 *                - CHRTAB_... introduced
 *    fd  Feb 19: uni2ascii() renamed -> recode_udo()
 *    fd  Feb 20: utf8_to_uchar()
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 23: some prototypes adjusted
 *    fd  Feb 24: - new: chr_codepage()
 *                - new: chr_codepage_name()
@@ -132,16 +132,16 @@
 ******************************************|************************************/
 
    /* convert UTF-8 bytes into Unicode codepoint value (known length of byte stream!) */
-GLOBAL UWORD utf8_to_bstr(const char *sz, int len);
+GLOBAL _UWORD utf8_to_bstr(const char *sz, int len);
 
    /* convert UTF-8 bytes into Unicode char (unknown length of byte stream) */
-GLOBAL UWORD utf8_to_uchar(const char *sz, int *length);
+GLOBAL _UWORD utf8_to_uchar(const char *sz, int *length);
 
    /* convert Unicode value into UTF-8 bytes */
-GLOBAL char *bstr_to_utf8(UWORD ucode, char *s);
+GLOBAL char *bstr_to_utf8(_UWORD ucode, char *s);
 
    /* get char(s!) from Unicode value */
-GLOBAL char *unicode2char(UWORD unicode, char *s);
+GLOBAL char *unicode2char(_UWORD unicode, char *s);
 
 
 GLOBAL void convert_sz(char * s);
@@ -181,7 +181,7 @@ GLOBAL void alias2NrIPF(char *s, int i);
 GLOBAL void label2NrIPF(char *s, int i);
 
 GLOBAL void node2pchelp (char *n);
-GLOBAL void node2postscript(char *s, BOOLEAN text);
+GLOBAL void node2postscript(char *s, _BOOL text);
 
 GLOBAL void node2stg(char *s);
 GLOBAL void index2stg(char *s);
@@ -207,23 +207,23 @@ GLOBAL void c_vars(char *s);
 GLOBAL void c_man_styles(char * s);
 
    /* convert special characters for relevant target encodings */
-GLOBAL void auto_quote_chars(char *s, BOOLEAN all);
+GLOBAL void auto_quote_chars(char *s, _BOOL all);
 GLOBAL void auto_quote_texindex(char * s);
 GLOBAL void auto_quote_linedraw(char * s);
 
 GLOBAL void init_module_chars(void);
 
    /* get ^ to desired codepage */
-GLOBAL UWORD *chr_codepage(int encoding);
+GLOBAL _UWORD *chr_codepage(int encoding);
 
    /* get ^ to desired codepage for sorting purposes */
-GLOBAL UWORD *chr_sort_codepage(int encoding);
+GLOBAL _UWORD *chr_sort_codepage(int encoding);
 
    /* get ^ to desired Unicode sorting table */
-GLOBAL VOID *chr_usort_codepage(int encoding);
+GLOBAL void *chr_usort_codepage(int encoding);
 
    /* get ^ to desired table of ligatures */
-GLOBAL VOID *chr_ligatures(int encoding);
+GLOBAL void *chr_ligatures(int encoding);
 
    /* get human-readable name of desired codepage */
 GLOBAL char *chr_codepage_name(int encoding);

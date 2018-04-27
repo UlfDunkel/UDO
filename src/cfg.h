@@ -69,32 +69,32 @@ typedef struct _appcfg
 {
    char      strApp[CFG_MAX_FILE_LEN+1];
    char      strOpt[CFG_MAX_OPT_LEN+1];
-   BOOLEAN   bVa;
-   BOOLEAN   bTos;
+   _BOOL   bVa;
+   _BOOL   bTos;
 }  APPCFG;
 
 typedef struct _config
 {
-   BOOLEAN   bRegistered;
+   _BOOL   bRegistered;
    char   strUserName[CFG_MAX_USER_LEN+1];
    char   strUserStreet[CFG_MAX_USER_LEN+1];
    char   strUserTown[CFG_MAX_USER_LEN+1];
    char   strUserKey[CFG_MAX_USER_LEN+1];
 
-   BOOLEAN   bDestAdjust;
-   BOOLEAN   bDestAdjustAll;
-   BOOLEAN   bDestAdjustName;
-   BOOLEAN   bDestAdjustSuff;
-   BOOLEAN   bDestLowerFile;
-   BOOLEAN bDestLowerPath;
+   _BOOL   bDestAdjust;
+   _BOOL   bDestAdjustAll;
+   _BOOL   bDestAdjustName;
+   _BOOL   bDestAdjustSuff;
+   _BOOL   bDestLowerFile;
+   _BOOL bDestLowerPath;
 
-   BOOLEAN   bUseLogfile;
-   BOOLEAN   bUseHypfile;
-   BOOLEAN   bUseTreefile;
-   BOOLEAN   bUseUPRfile;
-   BOOLEAN   bShowStatus;
-   BOOLEAN bForceLong;      /*r6pl2*/
-   BOOLEAN bForceShort;   /*r6pl13*/
+   _BOOL   bUseLogfile;
+   _BOOL   bUseHypfile;
+   _BOOL   bUseTreefile;
+   _BOOL   bUseUPRfile;
+   _BOOL   bShowStatus;
+   _BOOL bForceLong;      /*r6pl2*/
+   _BOOL bForceShort;   /*r6pl13*/
 
 #ifdef __TOS__
    APPCFG   dedit, dview;
@@ -129,14 +129,14 @@ typedef struct _config
    char   strSourcefile[CFG_MAX_FILE_LEN+1];
    char   strDestfile[CFG_MAX_FILE_LEN+1];
 
-   BOOLEAN   bDestView;
-   BOOLEAN   bNoWarnings;
-   BOOLEAN   bCheckMisc;
-   BOOLEAN bAskQuit;
-   BOOLEAN bWarnOver;
+   _BOOL   bDestView;
+   _BOOL   bNoWarnings;
+   _BOOL   bCheckMisc;
+   _BOOL bAskQuit;
+   _BOOL bWarnOver;
 
    char   strSymbol[CFG_MAX_SYMBOL][CFG_MAX_SYMBOL_LEN];
-   BOOLEAN   bUseSymbol[CFG_MAX_SYMBOL];
+   _BOOL   bUseSymbol[CFG_MAX_SYMBOL];
    
 #endif /* __TOS__ */
 
@@ -153,7 +153,7 @@ GLOBAL CONFIG config;
 /*   ############################################################
    # Funktionen
    ############################################################   */
-GLOBAL BOOLEAN key_check (const char *nam, const char *str, const char *tow, const char *key );
+GLOBAL _BOOL key_check (const char *nam, const char *str, const char *tow, const char *key );
 GLOBAL void key_calc (const char *nam, const char *str, const char *tow, const char *app, const char *os, char *key );
 
 

@@ -40,7 +40,7 @@
 *  2010:
 *    fd  Feb 16: file introduced
 *    fd  Feb 17: CODE_NEXT_lig[] + sort_CODE_NEXT[] added
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -64,7 +64,7 @@
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_NEXT[] =            /* CODE_NEXT */
+static _UWORD   u_CODE_NEXT[] =            /* CODE_NEXT */
 {
    U_NIL,                                 /* 0x00  NULl */
    U_NIL,                                 /* 0x01  Start Of Heading */
@@ -339,7 +339,7 @@ static UWORD   u_CODE_NEXT[] =            /* CODE_NEXT */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_NEXT_lig[][3] =       /* CODE_NEXT character ligatures */
+static _UWORD   CODE_NEXT_lig[][3] =       /* CODE_NEXT character ligatures */
 {
    {0x00C4, U_LatinCapitalLetterA, U_LatinSmallLetterE},      /* 85 = 0x00C4: LATIN CAPITAL LETTER A WITH DIAERESIS */
    {0x00C5, U_LatinCapitalLetterA, U_LatinSmallLetterO},      /* 86 = 0x00C5: LATIN CAPITAL LETTER A WITH RING ABOVE */
@@ -377,7 +377,7 @@ static UWORD   CODE_NEXT_lig[][3] =       /* CODE_NEXT character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_NEXT[] =         /* CODE_NEXT */
+static _UWORD   sort_CODE_NEXT[] =         /* CODE_NEXT */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */

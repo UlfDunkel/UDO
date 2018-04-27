@@ -75,7 +75,7 @@
 *                - win2sys() -> recode_chrtab()
 *    fd  Feb 18: - str_UTF_sort_cmp()
 *                - save_html_index() uses a new approach with flattened HTML_INDEX.sortname
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 23: - UDO_PL -> UDO_BUILD (no more patchlevels)
 *                - unicode2char() adjusted, using ^string instead of local string
 *    fd  Mar 01: html_footer(): changes from (ME) reverted - see discussion in UDO_DEV
@@ -200,7 +200,7 @@ const char *id_toc_c= "@(#) toc.c       $date$";
 *
 ******************************************|************************************/
 
-extern ULONG   footnote_cnt;              /* UDO.H: footnote counter */
+extern _ULONG   footnote_cnt;              /* UDO.H: footnote counter */
 
 
 
@@ -243,9 +243,9 @@ LOCAL const char  *HTML_LABEL_CONTENTS = "UDOTOC";
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN    toc_available;           /* Inhaltsverzeichnis existiert */
-LOCAL BOOLEAN    apx_available;           /* Anhang existiert */
-LOCAL BOOLEAN    head_foot;               /* TRUE: HEAD output, FALSE: FOOT */
+LOCAL _BOOL    toc_available;           /* Inhaltsverzeichnis existiert */
+LOCAL _BOOL    apx_available;           /* Anhang existiert */
+LOCAL _BOOL    head_foot;               /* TRUE: HEAD output, FALSE: FOOT */
 
 LOCAL int        p1_toctype;              /* Typ des aktuellen Kapitels */
 LOCAL int        p2_toctype;              /* Typ des aktuellen Kapitels */
@@ -323,10 +323,10 @@ LOCAL char        html_target[64];
 typedef struct   _hmtl_index              /* index output for HTML */
    {
    int       toc_index;                   /* # of found label for TOC */
-   BOOLEAN   is_node;                     /* the label is the caption (?) */
+   _BOOL   is_node;                     /* the label is the caption (?) */
    char      tocname[512];                /* label or node name */
    char      sortname[512];               /* 'flattened' label or node name */
-   UWORD     codepoint;                   /* Unicode codepoint for sorting purposes */
+   _UWORD     codepoint;                   /* Unicode codepoint for sorting purposes */
    }  HTML_INDEX;
 
 typedef struct _tWinMapData
@@ -357,25 +357,25 @@ typedef struct _hmtl_idx                  /* */
 ******************************************|************************************/
 
    /* check if certain values are valid */
-LOCAL BOOLEAN check_toc_counters(void);
+LOCAL _BOOL check_toc_counters(void);
    /* check if certain values are valid */
-LOCAL BOOLEAN check_toc_and_token(void);
+LOCAL _BOOL check_toc_and_token(void);
 
    /* output aliasses of a chapter */
 LOCAL void output_aliasses(void);
 
    /*  */
-LOCAL BOOLEAN add_ref(const char *r);
+LOCAL _BOOL add_ref(const char *r);
    /*  */
 LOCAL void replace_refs(char *s);
    /*  */
-LOCAL void string2reference(char *ref, const LABEL *l, const BOOLEAN for_toc, const char *pic, const UWORD uiW, const UWORD uiH);
+LOCAL void string2reference(char *ref, const LABEL *l, const _BOOL for_toc, const char *pic, const _UWORD uiW, const _UWORD uiH);
 
    /* read raw file and output it unchanged */
-LOCAL BOOLEAN output_raw_file(const char *filename);
+LOCAL _BOOL output_raw_file(const char *filename);
 
    /* output header for ST-Guide */
-LOCAL void stg_header(const char *numbers, const char *nodename, BOOLEAN is_popup);
+LOCAL void stg_header(const char *numbers, const char *nodename, _BOOL is_popup);
 
    /* output topline for PC-HELP */
 LOCAL void pch_headline(char *s);
@@ -393,28 +393,28 @@ LOCAL void output_vision_header(const char *numbers, const char *name);
 LOCAL void output_texinfo_node(const char *name);
 
    /* output topline for WinHelp */
-LOCAL void win_headline(char *name, BOOLEAN popup);
+LOCAL void win_headline(char *name, _BOOL popup);
    /* output header for WinHelp */
-LOCAL void output_win_header(const char *name, const BOOLEAN insivisble);
+LOCAL void output_win_header(const char *name, const _BOOL insivisble);
 
    /* get filename for HTML according to current node */
 LOCAL char *get_html_filename(const int tocindex, char *s, int *html_merge);
    /* output HTML meta data in the HTML head section */
-LOCAL void output_html_meta(BOOLEAN keywords);
+LOCAL void output_html_meta(_BOOL keywords);
    /* output HTML doctype in HTML header */
 LOCAL void output_html_doctype(void);
    /* create new HTML file and output header and meta information */
-LOCAL BOOLEAN html_make_file(void);
+LOCAL _BOOL html_make_file(void);
    /*  */
-LOCAL BOOLEAN html_new_file(void);
-LOCAL void get_giflink_data(const int index, char *name, UWORD *width, UWORD *height);
-LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep, BOOLEAN head);
+LOCAL _BOOL html_new_file(void);
+LOCAL void get_giflink_data(const int index, char *name, _UWORD *width, _UWORD *height);
+LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head);
    /* create and output HOME link for HTML navigation bar */
-LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep, BOOLEAN head);
+LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head);
    /* create and output link to 'back page' for HTML navigation bar */
-LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep, BOOLEAN head);
+LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head);
    /* create and output HTML head and bottom bar lines */
-LOCAL void html_hb_line(BOOLEAN head);
+LOCAL void html_hb_line(_BOOL head);
    /*  */
 LOCAL void html_node_bar_modern(void);
    /*  */
@@ -424,12 +424,12 @@ LOCAL void html_node_bar_frames(void);
 LOCAL void set_inside_node(int nodetype);
 
    /* create a new node of the requested depth */
-LOCAL void make_nodetype(int nodetype, const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void make_nodetype(int nodetype, const _BOOL popup, const _BOOL invisible);
 
    /* make TOC entry line bold */
 LOCAL void tocline_make_bold(char *s, const int depth);
    /* output start of TOC listing head if the first item is going to be output */
-LOCAL void tocline_handle_1st(BOOLEAN *f);
+LOCAL void tocline_handle_1st(_BOOL *f);
    /* remove all formatting stuff from a node name */
 LOCAL void convert_toc_item(TOCITEM *t);
    /* output the Appendix title line */
@@ -438,7 +438,7 @@ LOCAL void output_appendix_line(void);
 LOCAL void toc_link_output(const int depth ); /* New in r6pl16 [NHz] */
 
    /* create output for all !use_auto_...tocs commands */
-LOCAL void toc_output(int nodetype, const int depth, BOOLEAN apx);
+LOCAL void toc_output(int nodetype, const int depth, _BOOL apx);
    /* wrapper for toc_output() */
 LOCAL void do_toc(int nodetype, const int depth);
    /* outputs the breadcrumb navigation links for the current chapter */
@@ -446,9 +446,9 @@ LOCAL void do_toptoc(const int current_node);
    /* get the user-defined TOC depth, set by the !depth command */
 LOCAL int get_toccmd_depth(void);
    /* initialize a new TOC entry */
-LOCAL TOCITEM *init_new_toc_entry(const int toctype, const BOOLEAN invisible);
+LOCAL TOCITEM *init_new_toc_entry(const int toctype, const _BOOL invisible);
    /* add TOC page (indexudo) to toc[0] */
-LOCAL BOOLEAN add_toc_to_toc(void);
+LOCAL _BOOL add_toc_to_toc(void);
    /* exit TOC module */
 /* LOCAL void free_toc_data(char **var ); */
 
@@ -479,7 +479,7 @@ LOCAL BOOLEAN add_toc_to_toc(void);
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_toc_counters(void)
+LOCAL _BOOL check_toc_counters(void)
 {
    if (p1_toc_counter < 0)
       return FALSE;
@@ -505,7 +505,7 @@ LOCAL BOOLEAN check_toc_counters(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_toc_and_token(void)
+LOCAL _BOOL check_toc_and_token(void)
 {
    if (p1_toc_counter < 0)
       return FALSE;
@@ -534,16 +534,16 @@ LOCAL BOOLEAN check_toc_and_token(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN is_node_link(
+GLOBAL _BOOL is_node_link(
 
 const char       *link,          /* ^ link text name */
 char             *node,          /* ^ node name which uses this label */
 int              *ti,            /* TOC index of node/label/alias */
-BOOLEAN          *isnode,        /* TRUE: is label, FALSE: is node or alias */
+_BOOL          *isnode,        /* TRUE: is label, FALSE: is node or alias */
 int              *li)            /* LAB index of node/label/alias */
 {
    register int   i;             /* counter*/
-   BOOLEAN        ret = FALSE;   /* TRUE: label exists, FALSE: label does not exist*/
+   _BOOL        ret = FALSE;   /* TRUE: label exists, FALSE: label does not exist*/
 
 
    node[0] = EOS;
@@ -855,7 +855,7 @@ GLOBAL void reset_refs(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN add_ref(
+LOCAL _BOOL add_ref(
 
 const char  *r)  /* */
 {
@@ -931,10 +931,10 @@ LOCAL void string2reference(
 
 char           *ref,                 /* */
 const LABEL    *l,                   /* */
-const BOOLEAN   for_toc,             /* */
+const _BOOL   for_toc,             /* */
 const char     *pic,                 /* constant for GUI navigation image, e.g. GIF_UP_NAME */
-const UWORD     uiW,                 /* GUI navigation image width */
-const UWORD     uiH)                 /* GUI navigation image height */
+const _UWORD     uiW,                 /* GUI navigation image width */
+const _UWORD     uiH)                 /* GUI navigation image height */
 {
    char         s[512],              /* */
                 n[512],              /* */
@@ -944,7 +944,7 @@ const UWORD     uiH)                 /* GUI navigation image height */
    char         sIDName[32];         /* string buffer for anchor ID name, e.g. "id=\"UDO_nav_lf\" " */
    int          ti,                  /* */
                 ui;                  /* */
-   BOOLEAN      same_file = FALSE;   /* TRUE: reference is in same file */
+   _BOOL      same_file = FALSE;   /* TRUE: reference is in same file */
    char        *htmlfilename,        /* */
                                      /* */
                 suff[MYFILE_SUFF_LEN + 1];
@@ -1355,10 +1355,10 @@ const UWORD     uiH)                 /* GUI navigation image height */
 GLOBAL void auto_references(
 
 char             *s,             /* ^ string to check */
-const BOOLEAN     for_toc,       /* TRUE: use auto reference for TOC */
+const _BOOL     for_toc,       /* TRUE: use auto reference for TOC */
 const char       *pic,           /* also images can be referenced (used in string2reference()) */
-const UWORD       uiWidth,       /* image width */
-const UWORD       uiHeight)      /* image height */
+const _UWORD       uiWidth,       /* image width */
+const _UWORD       uiHeight)      /* image height */
 {
    register int   i;             /* counter */
    char           the_ref[512],  /* */
@@ -1371,11 +1371,11 @@ const UWORD       uiHeight)      /* image height */
    int            found_lab;     /* */
    size_t         found_len,     /* */
                   ll;            /* */
-   BOOLEAN        ref_it;        /* */
-   BOOLEAN        ignore_it;     /* */
-   BOOLEAN        next_ok,       /* */
+   _BOOL        ref_it;        /* */
+   _BOOL        ignore_it;     /* */
+   _BOOL        next_ok,       /* */
                   prev_ok;       /* */
-   BOOLEAN        found_one,     /* */
+   _BOOL        found_one,     /* */
                   found_ok;      /* */
    LABEL         *labptr;        /* */
    
@@ -1582,7 +1582,7 @@ GLOBAL void check_endnode(void)
       case TOASC:
          if (footnote_cnt)
          {
-            ULONG        i;   /* counter */
+            _ULONG        i;   /* counter */
             MYTEXTFILE  *tf;  /* */
             char         fnotefile[32] = "";
             char         buf[4];  /* */
@@ -1656,7 +1656,7 @@ GLOBAL void check_endnode(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN output_raw_file(
+LOCAL _BOOL output_raw_file(
 
 const char     *filename)           /* */
 {
@@ -1687,7 +1687,7 @@ const char     *filename)           /* */
    {
       len = strlen(s);
       
-      while ( (len>0) && (((UBYTE)s[len-1]) <= 32) )
+      while ( (len>0) && (((_UBYTE)s[len-1]) <= 32) )
       {
          s[len-1]= EOS;
          len--;
@@ -1719,7 +1719,7 @@ const char     *filename)           /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN check_output_raw_header(void)
+GLOBAL _BOOL check_output_raw_header(void)
 {
    if (!toc[p2_toc_counter]->ignore_raw_header)
    {
@@ -1755,9 +1755,9 @@ GLOBAL BOOLEAN check_output_raw_header(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN check_output_raw_footer(
+GLOBAL _BOOL check_output_raw_footer(
 
-BOOLEAN   lastNode)    /* */
+_BOOL   lastNode)    /* */
 {
    int    offset = 1;  /* */
    
@@ -1963,11 +1963,11 @@ LOCAL void stg_header(
 
 const char  *numbers,   /* */
 const char  *nodename,  /* */
-BOOLEAN      is_popup)  /* */
+_BOOL      is_popup)  /* */
 {
    char      n[512];    /* */
    int       ti;        /* */
-   BOOLEAN   flag;      /* */
+   _BOOL   flag;      /* */
    
    
    output_aliasses();
@@ -2554,7 +2554,7 @@ const char  *name)     /* */
 LOCAL void win_headline(
 
 char     *name,    /* */
-BOOLEAN   popup)   /* */
+_BOOL   popup)   /* */
 {
    char   n[512],  /* */
           fs[32];  /* */
@@ -2611,7 +2611,7 @@ BOOLEAN   popup)   /* */
 LOCAL void output_win_header(
 
 const char     *name,           /* */
-const BOOLEAN   invisible)      /* */
+const _BOOL   invisible)      /* */
 {
    char         n[512],         /* */
                 f[512],         /* */
@@ -3016,7 +3016,7 @@ int         hexwidth;            /* */    /* r6pl2 */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN html_make_file(void)
+LOCAL _BOOL html_make_file(void)
 {
    if (outfile.name[0] == EOS)
       return FALSE;
@@ -3113,7 +3113,7 @@ LOCAL BOOLEAN html_make_file(void)
 
 LOCAL void output_html_meta(
 
-BOOLEAN     keywords)             /* */
+_BOOL     keywords)             /* */
 {
    int      ti = 0,               /* */
             i,                    /* */
@@ -3649,7 +3649,7 @@ LOCAL void output_html_doctype(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN html_new_file(void)
+LOCAL _BOOL html_new_file(void)
 {
    char   t[512],        /* */
           xml_lang[15],  /* */
@@ -3903,8 +3903,8 @@ LOCAL void get_giflink_data(
 
 const int   index,   /* */
 char       *name,    /* */
-UWORD      *width,   /* */
-UWORD      *height)  /* */
+_UWORD      *width,   /* */
+_UWORD      *height)  /* */
 {
    name[0] = EOS;                         /* clear name */
    
@@ -3984,14 +3984,14 @@ LOCAL void html_index_giflink(
 const int    idxEnabled,        /* */
 const int    idxDisabled,       /* */
 const char  *sep,               /* */
-BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
                                 /* FALSE: output GUI navigation bar in page footer */
 {
    char      sTarget[64],       /* */
              sFile[64],         /* */
              sGifSize[80],      /* */
              sGifName[256];     /* */
-   UWORD     uiW,               /* */
+   _UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
    char      sIDName[32];       /* string buffer for anchor ID name */
@@ -4096,7 +4096,7 @@ LOCAL void html_home_giflink(
 const int    idxEnabled,        /* */
 const int    idxDisabled,       /* */
 const char  *sep,               /* */
-BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
                                 /* FALSE: output GUI navigation bar in page footer */
 {
    char      sTarget[64],       /* */
@@ -4104,7 +4104,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
    char      sGifSize[128],     /* */
              sGifName[256];     /* */
    char      sIDName[32];       /* string buffer for anchor ID name */
-   UWORD     uiW,               /* */
+   _UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
@@ -4232,7 +4232,7 @@ LOCAL void html_back_giflink(
 const int    idxEnabled,        /* */
 const int    idxDisabled,       /* */
 const char  *sep,               /* */
-BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
                                 /* FALSE: output GUI navigation bar in page footer */
 {
    char      target[64],        /* */
@@ -4243,7 +4243,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
    char      sGifSize[128],     /* */
              sGifName[256];     /* */
    char      sIDName[32];       /* string buffer for anchor ID name */
-   UWORD     uiW,               /* */
+   _UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
    
@@ -4371,7 +4371,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
 
 LOCAL void html_hb_line(
 
-BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
                                 /* FALSE: output GUI navigation bar in page footer */
 {
    int       i,                 /* */
@@ -4383,9 +4383,9 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
              sGifFile[128],     /* */
              sTarget[64],       /* */
             *colptr;            /* */
-   BOOLEAN   old_autorefoff;    /* */
-   BOOLEAN   for_main_file;     /* */
-   UWORD     uiW,               /* */
+   _BOOL   old_autorefoff;    /* */
+   _BOOL   for_main_file;     /* */
+   _UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
    char      buffer[32] = "";
@@ -4946,7 +4946,7 @@ LOCAL void html_node_bar_modern(void)
 {
    register int   i;                 /* */
    int            li;                /* */
-   UWORD          uiW,               /* */
+   _UWORD          uiW,               /* */
                   uiH;               /* */
    char           the_ref[1024],     /* */
                  *ptrImg,            /* */
@@ -5391,7 +5391,7 @@ LOCAL void html_node_bar_frames(void)
 {
    register int   i;                 /* */
    int            li;                /* */
-   UWORD          uiW,               /* */
+   _UWORD          uiW,               /* */
                   uiH;               /* */
    char           the_ref[1024],     /* */
                  *ptr,               /* */
@@ -5831,7 +5831,7 @@ GLOBAL void html_bottomline(void)
 
 GLOBAL void html_footer(void)
 {
-   BOOLEAN   has_counter,       /* */
+   _BOOL   has_counter,       /* */
              has_main_counter;  /* */
    char      s[512];            /* */
    int       has_content = 0;   /* flags */
@@ -6147,7 +6147,7 @@ const void  *_p2)              /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_html_index(void)
+GLOBAL _BOOL save_html_index(void)
 {
    FILE        *uif;              /* ^ to temporary index file */
    size_t       i;                /* counter */
@@ -6155,7 +6155,7 @@ GLOBAL BOOLEAN save_html_index(void)
    int          html_merge;       /* */
    size_t       num_index;        /* # of entries in index file */
    HTML_INDEX  *html_index;       /* ^ to HTML_INDEX array */
-   UWORD        thisc,            /* single char for comparison */
+   _UWORD        thisc,            /* single char for comparison */
                 lastc;            /* last char from comparison */
    char         htmlname[512];    /* */
    char         dummy[512];       /* */
@@ -6559,19 +6559,19 @@ const int    ti)             /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_htmlhelp_contents(
+GLOBAL _BOOL save_htmlhelp_contents(
 
 const char       *filename)            /* */
 {
    FILE          *file;                /* */
    register int   i;                   /* */
-   BOOLEAN        last_n = TRUE;       /* */
-   BOOLEAN        last_sn = FALSE;     /* */
-   BOOLEAN        last_ssn = FALSE;    /* */
-   BOOLEAN        last_sssn = FALSE;   /* */
-   BOOLEAN        last_ssssn = FALSE;  /* */
-   BOOLEAN        last_sssssn = FALSE; /* */
-   BOOLEAN        inApx = FALSE;       /* */
+   _BOOL        last_n = TRUE;       /* */
+   _BOOL        last_sn = FALSE;     /* */
+   _BOOL        last_ssn = FALSE;    /* */
+   _BOOL        last_sssn = FALSE;   /* */
+   _BOOL        last_ssssn = FALSE;  /* */
+   _BOOL        last_sssssn = FALSE; /* */
+   _BOOL        inApx = FALSE;       /* */
    
    
    file = myFwopen(filename, FTHHC);
@@ -6926,7 +6926,7 @@ const void  *_p2)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_htmlhelp_index(
+GLOBAL _BOOL save_htmlhelp_index(
 
 const char   *filename)       /* */
 {
@@ -7072,8 +7072,8 @@ const char   *filename)       /* */
 LOCAL void make_nodetype(
 
 int             nodetype,        /* TOC_NODE... */
-const BOOLEAN   popup,           /* TRUE: this is a popup node */
-const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
+const _BOOL   popup,           /* TRUE: this is a popup node */
+const _BOOL   invisible)       /* TRUE: this is an invisible node */
 {
    char         n[512],          /* */
                 name[512],       /* */
@@ -7096,10 +7096,10 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
                 nr4,             /* */
                 nr5,             /* */
                 nr6;             /* */
-   BOOLEAN      flag;            /* */
-   BOOLEAN      do_index;        /* */
+   _BOOL      flag;            /* */
+   _BOOL      do_index;        /* */
    
-   BOOLEAN      html_mergenode;  /* */
+   _BOOL      html_mergenode;  /* */
    
    
    if (p2_toc_counter >= MAXTOCS)
@@ -9314,7 +9314,7 @@ const int depth)
 
 LOCAL void tocline_handle_1st(
 
-BOOLEAN  *f)  /* */
+_BOOL  *f)  /* */
 {
    if (*f)                                /* first */
    {
@@ -9381,7 +9381,7 @@ TOCITEM  *t)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN bookmarks_ps(void)
+GLOBAL _BOOL bookmarks_ps(void)
 {
    /* 6.3.12 [vj] Added this define for buffer checks, increased value from 128 to 148 (for Ulrich :-)) */
    #define PS_BOOKM_LEN    148
@@ -9866,22 +9866,22 @@ LOCAL void toc_output(
 
 int               nodetype,             /* TOC_NODE... */
 const int         depth,                /* TOC level depth */
-BOOLEAN           apx)                  /* TRUE: appendix output */
+_BOOL           apx)                  /* TRUE: appendix output */
 {
    register int   i;                    /* */
    int            li;                   /* */
    char           n[512],               /* */
                   ref[512];             /* */
-   BOOLEAN        leerzeile = FALSE;    /* TRUE: output an empty line */
-   BOOLEAN        last_n = FALSE;       /* TRUE: this node is last node */
-   BOOLEAN        last_sn = FALSE;      /* TRUE: this node is last subnode */
-   BOOLEAN        last_ssn = FALSE;     /* TRUE: this node is last subsubnode */
-   BOOLEAN        last_sssn = FALSE;    /* TRUE: this node is last subsubsubnode */
-   BOOLEAN        last_ssssn = FALSE;   /* TRUE: this node is last subsubsubsubnode */
-   BOOLEAN        last_sssssn = FALSE;  /* TRUE: this node is last subsubsubsubsubnode */
-   BOOLEAN        first = TRUE;         /* */
-   BOOLEAN        output_done = FALSE;  /* */
-   BOOLEAN        old;                  /* */
+   _BOOL        leerzeile = FALSE;    /* TRUE: output an empty line */
+   _BOOL        last_n = FALSE;       /* TRUE: this node is last node */
+   _BOOL        last_sn = FALSE;      /* TRUE: this node is last subnode */
+   _BOOL        last_ssn = FALSE;     /* TRUE: this node is last subsubnode */
+   _BOOL        last_sssn = FALSE;    /* TRUE: this node is last subsubsubnode */
+   _BOOL        last_ssssn = FALSE;   /* TRUE: this node is last subsubsubsubnode */
+   _BOOL        last_sssssn = FALSE;  /* TRUE: this node is last subsubsubsubsubnode */
+   _BOOL        first = TRUE;         /* */
+   _BOOL        output_done = FALSE;  /* */
+   _BOOL        old;                  /* */
    int            p2_n1,                /* buffers */
                   p2_n2,
                   p2_n3,
@@ -9895,12 +9895,12 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    int            depth4;
    int            depth5;
    int            depth6;
-   BOOLEAN        last1 = FALSE;        /* TRUE: this node is last node */
-   BOOLEAN        last2 = FALSE;        /* TRUE: this node is last subnode */
-   BOOLEAN        last3 = FALSE;        /* TRUE: this node is last subsubnode */
-   BOOLEAN        last4 = FALSE;        /* TRUE: this node is last subsubsubnode */
-   BOOLEAN        last5 = FALSE;        /* TRUE: this node is last subsubsubsubnode */
-   BOOLEAN        last6 = FALSE;        /* TRUE: this node is last subsubsubsubsubnode */
+   _BOOL        last1 = FALSE;        /* TRUE: this node is last node */
+   _BOOL        last2 = FALSE;        /* TRUE: this node is last subnode */
+   _BOOL        last3 = FALSE;        /* TRUE: this node is last subsubnode */
+   _BOOL        last4 = FALSE;        /* TRUE: this node is last subsubsubnode */
+   _BOOL        last5 = FALSE;        /* TRUE: this node is last subsubsubsubnode */
+   _BOOL        last6 = FALSE;        /* TRUE: this node is last subsubsubsubsubnode */
    char          *form_x1;
    char          *form_x2;
    char          *form_x3;
@@ -12483,7 +12483,7 @@ LOCAL int get_toccmd_depth(void)
 
 GLOBAL void c_toc(void)
 {
-   BOOLEAN   flag = FALSE;  /* */
+   _BOOL   flag = FALSE;  /* */
    int       d;             /* */
    
    
@@ -12522,7 +12522,7 @@ GLOBAL void c_toc(void)
 
 GLOBAL void c_subtoc(void)
 {
-   BOOLEAN   flag = FALSE;  /* */
+   _BOOL   flag = FALSE;  /* */
    int       d;             /* */
 
                                           /* token[0] enthaelt das !sub*toc-Kommando */
@@ -13335,8 +13335,8 @@ GLOBAL void c_alias(void)
 GLOBAL int add_label(
 
 const char     *label,   /* ^ label name string */
-const BOOLEAN   isn,     /* TRUE: chapter (node), FALSE: label only */
-const BOOLEAN   isp)     /* TRUE: popup */
+const _BOOL   isn,     /* TRUE: chapter (node), FALSE: label only */
+const _BOOL   isp)     /* TRUE: popup */
 {
    LABEL       *labptr;  /* ^ to label structure in memory */
 
@@ -13433,10 +13433,10 @@ const BOOLEAN   isp)     /* TRUE: popup */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_alias(
+GLOBAL _BOOL add_alias(
 
 const char     *alias,   /* */
-const BOOLEAN   isp)     /* */
+const _BOOL   isp)     /* */
 {
    LABEL       *labptr;  /* */
 
@@ -14148,7 +14148,7 @@ GLOBAL void set_chapter_icon_text(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN add_toc_to_toc(void)
+LOCAL _BOOL add_toc_to_toc(void)
 {
    TOCITEM  *tocptr;  /* ^ to TOCITEM structure */
 
@@ -14214,7 +14214,7 @@ GLOBAL void toc_init_lang(void)
 LOCAL TOCITEM *init_new_toc_entry(
 
 const int       toctype,    /* */
-const BOOLEAN   invisible)  /* TRUE: node is invisible */
+const _BOOL   invisible)  /* TRUE: node is invisible */
 {
    TOCITEM     *tocptr;     /* ^ into toc[] structure */
 
@@ -14356,11 +14356,11 @@ const BOOLEAN   invisible)  /* TRUE: node is invisible */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_nodetype_to_toc(
+GLOBAL _BOOL add_nodetype_to_toc(
 
 int             nodetype,    /* TOC_... */
-const BOOLEAN   popup,       /* */
-const BOOLEAN   invisible)   /* */
+const _BOOL   popup,       /* */
+const _BOOL   invisible)   /* */
 {
    TOCITEM     *tocptr;      /* */
    int          li;          /* */
@@ -14950,10 +14950,10 @@ const BOOLEAN   invisible)   /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN toc_begin_node(
+GLOBAL _BOOL toc_begin_node(
 
-const BOOLEAN   popup, 
-const BOOLEAN   invisible)
+const _BOOL   popup, 
+const _BOOL   invisible)
 {
    switch (p1_toctype)
    {
@@ -15053,7 +15053,7 @@ GLOBAL int get_toc_counter(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN save_the_alias(
+LOCAL _BOOL save_the_alias(
 
 const char       *filename,  /* */
 const char       *suffix,    /* */
@@ -15146,10 +15146,10 @@ tWinMapData      *data)      /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_htmlhelp_alias(void)
+GLOBAL _BOOL save_htmlhelp_alias(void)
 {
    tWinMapData   data;  /* */
-   BOOLEAN       flag;  /* */
+   _BOOL       flag;  /* */
    
    
    memset(&data, 0, sizeof(data));
@@ -15175,7 +15175,7 @@ GLOBAL BOOLEAN save_htmlhelp_alias(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN save_the_map(
+LOCAL _BOOL save_the_map(
 
 const char       *filename, 
 const char       *suffix, 
@@ -15298,10 +15298,10 @@ tWinMapData      *data)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_htmlhelp_map(void)
+GLOBAL _BOOL save_htmlhelp_map(void)
 {
    tWinMapData   data;  /* */
-   BOOLEAN       flag;  /* */
+   _BOOL       flag;  /* */
    
    
    memset(&data, 0, sizeof(data));
@@ -15330,10 +15330,10 @@ GLOBAL BOOLEAN save_htmlhelp_map(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_winhelp_map_c(void)
+GLOBAL _BOOL save_winhelp_map_c(void)
 {
    tWinMapData   data;  /* */
-   BOOLEAN       flag;  /* */
+   _BOOL       flag;  /* */
    
    
    memset(&data, 0, sizeof(data));
@@ -15362,10 +15362,10 @@ GLOBAL BOOLEAN save_winhelp_map_c(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_winhelp_map_pas(void)
+GLOBAL _BOOL save_winhelp_map_pas(void)
 {
    tWinMapData   data;  /* */
-   BOOLEAN       flag;  /* */
+   _BOOL       flag;  /* */
    
    
    memset(&data, 0, sizeof(data));
@@ -15396,10 +15396,10 @@ GLOBAL BOOLEAN save_winhelp_map_pas(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_winhelp_map_vb(void)
+GLOBAL _BOOL save_winhelp_map_vb(void)
 {
    tWinMapData   data;  /* */
-   BOOLEAN       flag;  /* */
+   _BOOL       flag;  /* */
    
    
    memset(&data, 0, sizeof(data));
@@ -15430,10 +15430,10 @@ GLOBAL BOOLEAN save_winhelp_map_vb(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_winhelp_map_gfa(void)
+GLOBAL _BOOL save_winhelp_map_gfa(void)
 {
    tWinMapData   data;  /* */
-   BOOLEAN       flag;  /* */
+   _BOOL       flag;  /* */
    
    
    memset(&data, 0, sizeof(data));
@@ -15466,7 +15466,7 @@ GLOBAL BOOLEAN save_winhelp_map_gfa(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN save_winhelp4_cnt(void)
+GLOBAL _BOOL save_winhelp4_cnt(void)
 {
    FILE          *cntfile;                /* */
    register int   i;                      /* */
@@ -15475,11 +15475,11 @@ GLOBAL BOOLEAN save_winhelp4_cnt(void)
    char           sName[512],             /* */
                   sMisc[512],             /* */
                   sID[128];               /* */
-   BOOLEAN        n1HadChildren = FALSE;  /* */
-   BOOLEAN        n2HadChildren = FALSE;  /* */
-   BOOLEAN        n3HadChildren = FALSE;  /* */
-   BOOLEAN        n4HadChildren = FALSE;  /* */
-   BOOLEAN        n5HadChildren = FALSE;  /* */
+   _BOOL        n1HadChildren = FALSE;  /* */
+   _BOOL        n2HadChildren = FALSE;  /* */
+   _BOOL        n3HadChildren = FALSE;  /* */
+   _BOOL        n4HadChildren = FALSE;  /* */
+   _BOOL        n5HadChildren = FALSE;  /* */
    
 
    cntfile = myFwopen(sCntfull, FTCNT);
@@ -16700,15 +16700,15 @@ GLOBAL void init_module_toc_pass2(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN check_module_toc_pass1(void)
+GLOBAL _BOOL check_module_toc_pass1(void)
 {
    int       i,            /* counter */
              j;            /* cunter */
    char      s[512],       /* */
              sTyp[32],     /* */
              sNode[256];   /* */
-   BOOLEAN   ret = TRUE;   /* */
-   BOOLEAN   checkString;  /* */
+   _BOOL   ret = TRUE;   /* */
+   _BOOL   checkString;  /* */
 
 
    /* --- Schauen, ob bei Hypertextformaten Dinge eindeutig benutzt werden --- */
@@ -16859,7 +16859,7 @@ GLOBAL BOOLEAN check_module_toc_pass1(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN check_module_toc_pass2(void)
+GLOBAL _BOOL check_module_toc_pass2(void)
 {
    int    i;       /* counter */
    char   s[512];  /* */

@@ -39,7 +39,7 @@
 *
 *  2010:
 *    fd  Jan 23: - converted all German umlauts in comments into plain ASCII
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Mar 04: - file tidied up (some message texts updated or adjusted)
 *                - message wrapper functions now global
 *  2014:
@@ -152,7 +152,7 @@ const char  *msg)            /* */
 {
    char      z[512];         /* */
    char      lineinfo[100];  /* */
-   UWORD     realstart;      /* */
+   _UWORD     realstart;      /* */
    
    if (uiMultiLines > 0)                  /* New in v6.5.5 to get a proper message with multilines */
    {
@@ -607,7 +607,7 @@ const char  *msg)            /* */
 {
    char      z[512];         /* */
    char      lineinfo[100];  /* */
-   UWORD     realstart;      /* */
+   _UWORD     realstart;      /* */
    
    
    if (uiMultiLines > 0)                  /* New in v6.5.5 to get a proper message with multilines */
@@ -2240,7 +2240,7 @@ const char  *l)  /* */
 GLOBAL void error_too_many_if(
 
 const char   *s,       /* */
-const UWORD   l)       /* */
+const _UWORD   l)       /* */
 {
    char       m[512];  /* */
    
@@ -2304,7 +2304,7 @@ GLOBAL void error_endif_without_if(void)
 GLOBAL void error_missing_endif(
 
 const char   *s,       /* */
-const UWORD   l)       /* */
+const _UWORD   l)       /* */
 {
    char       m[512];  /* */
    
@@ -2739,7 +2739,7 @@ GLOBAL void note_long_sourceline(void)
 GLOBAL void warning_long_destline(
 
 const char   *s,       /* */
-const UWORD   lnr,     /* */
+const _UWORD   lnr,     /* */
 const int     ll)      /* */
 {
    char       m[512];  /* */
@@ -2794,7 +2794,7 @@ const char  *s)  /* */
 GLOBAL void warning_short_destline(
 
 const char   *s,       /* */
-const UWORD   lnr,     /* */
+const _UWORD   lnr,     /* */
 const int     ll,      /* */
 const char   *w)       /* */
 {
@@ -2855,7 +2855,7 @@ const char  *te)      /* target encoding */
 
    if (iUdopass == PASS2)
    {
-      sprintf(s, "cannot recode %c (%s #%u) to %s", c, se, ((UBYTE)c), te);
+      sprintf(s, "cannot recode %c (%s #%u) to %s", c, se, ((_UBYTE)c), te);
       warning_msg_solo(s);
    }
 }

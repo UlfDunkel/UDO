@@ -137,7 +137,7 @@ LOCAL int       tab_counter;              /* Tabellen-Zaehler                   
 LOCAL int       tab_w, tab_h;             /* Spalten und Zeilen           */
                                           /* Tabellen-Ueberschrift        */
 LOCAL char      tab_caption[MAXTABCAPTION + 1];
-LOCAL BOOLEAN   tab_caption_visible;      /* Im Tabellenverzeichnis?      */
+LOCAL _BOOL   tab_caption_visible;      /* Im Tabellenverzeichnis?      */
                                           /* Zeiger auf Feldtext             */
 LOCAL char     *tab_cell[MAX_TAB_H+1][MAX_TAB_ROWS+1];
 LOCAL size_t    tab_cell_w[MAX_TAB_ROWS+1];  /* Breiten der Spalten          */
@@ -154,8 +154,8 @@ LOCAL char      cells[MAX_TAB_ROWS+1][MAX_CELLS_LEN];
 LOCAL int       cells_counter;            /* Anzahl Zellen von Zeilen     */
 
 LOCAL char      addition[TAB_ADDITION_LEN] = "";
-LOCAL BOOLEAN   addition_has_align;
-LOCAL BOOLEAN   addition_has_valign;
+LOCAL _BOOL   addition_has_align;
+LOCAL _BOOL   addition_has_valign;
 LOCAL int       addition_col_offset;
 
 
@@ -169,7 +169,7 @@ LOCAL int       addition_col_offset;
 ******************************************|************************************/
 
 LOCAL void   cells_reset(void);
-LOCAL void   convert_table_caption(const BOOLEAN visible);
+LOCAL void   convert_table_caption(const _BOOL visible);
 LOCAL void   table_output_lyx(void);
 LOCAL void   table_output_ipf(void);
 LOCAL void   table_output_win(void);
@@ -286,7 +286,7 @@ GLOBAL void table_reset(void)
 
 LOCAL void convert_table_caption(
 
-const BOOLEAN   visible)  /* */
+const _BOOL   visible)  /* */
 {
    char         n[MAXTABCAPTION +1];   /* */
 
@@ -432,7 +432,7 @@ char       *s)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN table_add_line(
+GLOBAL _BOOL table_add_line(
 
 char       *s)    /* */
 {
@@ -623,13 +623,13 @@ LOCAL void table_output_lyx(void)
    int       y,              /* */
              x,              /* */
              i;              /* */
-   BOOLEAN   bl,             /* Flags fuer Linien */
+   _BOOL   bl,             /* Flags fuer Linien */
              bt,             /* */
              bb,             /* */
              br;             /* */
    char      f[512],         /* */
              alignOn[64];    /* */
-BOOLEAN      inside_center,  /* */
+_BOOL      inside_center,  /* */
              inside_right,   /* */
              inside_left;    /* */
 
@@ -1236,10 +1236,10 @@ LOCAL void table_output_html(void)
              css[LINELEN],                /* buffer for CSS information */
              alignOn[64];
    char      token_buffer[LINELEN];       /* v6.5.3[vj]: New buffer needed for table extension */
-   BOOLEAN   inside_center,
+   _BOOL   inside_center,
              inside_right,
              inside_left;
-   BOOLEAN   inside_env;
+   _BOOL   inside_env;
 
 
    inside_center = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_CENT);
@@ -1361,7 +1361,7 @@ LOCAL void table_output_html(void)
          token_buffer[0] = EOS;
 
 
-         /* This BOOLEAN flags are possibly set in test_for_addition */
+         /* This _BOOL flags are possibly set in test_for_addition */
 
          addition_has_align  = FALSE;
          addition_has_valign = FALSE;
@@ -1516,7 +1516,7 @@ LOCAL void table_output_tex(void)
    char      f[512],         /* */
              alignOn[64],    /* */
              alignOff[64];   /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right,   /* */
              inside_left;    /* */
 
@@ -1802,11 +1802,11 @@ LOCAL void table_output_general(void)
              twidth,         /* */
              toffset = 1,    /* */
              isl;            /* */
-   BOOLEAN   tortf,          /* */
+   _BOOL   tortf,          /* */
              tosrc,          /* */
              ansichars,      /* */
              align_caption;  /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right,   /* */
              inside_left;    /* */
 

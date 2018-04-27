@@ -139,7 +139,7 @@ GLOBAL void init_lang_date(void)
    iDateMin   = zeit->tm_min;
    iDateSec   = zeit->tm_sec;
    
-   while (MONTHS[i].lan != NIL)           /* find localized month name */
+   while (MONTHS[i].lan != -1)           /* find localized month name */
    {
       if (MONTHS[i].lan == destlang)      /* desired language found */
       {                                   /* remember month name */
@@ -153,7 +153,7 @@ GLOBAL void init_lang_date(void)
    iEncBuf = iEncodingSource;
    iEncodingSource = CODE_UTF8;
       
-   if ( (iEncodingTarget > NIL) && (iEncodingTarget != CODE_UTF8) )
+   if ( (iEncodingTarget > -1) && (iEncodingTarget != CODE_UTF8) )
       recode(month,iEncodingTarget);
    
    iEncodingSource = iEncBuf;
@@ -250,7 +250,7 @@ GLOBAL void init_lang(void)
 
    memset(&lang, 0, sizeof(LANG));
 
-   while (UDOSTRINGS[i].lan != NIL)       /* find localized month name */
+   while (UDOSTRINGS[i].lan != -1)       /* find localized month name */
    {
       if (UDOSTRINGS[i].lan == destlang)  /* desired language found */
       {
@@ -269,7 +269,7 @@ GLOBAL void init_lang(void)
    iEncBuf = iEncodingSource;
    iEncodingSource = CODE_UTF8;
       
-   if ( (iEncodingTarget > NIL) && (iEncodingTarget != CODE_UTF8) )
+   if ( (iEncodingTarget > -1) && (iEncodingTarget != CODE_UTF8) )
    {
       recode(lang.preface,     iEncodingTarget);
       recode(lang.chapter,     iEncodingTarget);

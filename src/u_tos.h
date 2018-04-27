@@ -40,7 +40,7 @@
 *    fd  Feb 15: file introduced
 *    fd  Feb 16: - table adjusted, based on <http://www.kostis.net/charsets/atarist.htm>
 *                - ligatures and sorting tables moved from encoding.h
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -64,7 +64,7 @@
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_TOS[] =             /* CODE_TOS */
+static _UWORD   u_CODE_TOS[] =             /* CODE_TOS */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -347,7 +347,7 @@ static UWORD   u_CODE_TOS[] =             /* CODE_TOS */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_TOS_lig[][3] =        /* CODE_TOS character ligatures */
+static _UWORD   CODE_TOS_lig[][3] =        /* CODE_TOS character ligatures */
 {
    {0x0081, U_LatinCapitalLetterU, U_LatinCapitalLetterE},    /* 0x0081  U_LatinSmallLetterUWithDiaeresis */
    {0x0084, U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x0084  U_LatinSmallLetterAWithDiaeresis */
@@ -382,7 +382,7 @@ static UWORD   CODE_TOS_lig[][3] =        /* CODE_TOS character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_TOS[] =          /* CODE_TOS */
+static _UWORD   sort_CODE_TOS[] =          /* CODE_TOS */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */

@@ -39,7 +39,7 @@
 *
 *  2010:
 *    fd  Feb 22: - header adjusted
-*                - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  May 19: file tidied up
 *
 ******************************************|************************************/
@@ -84,7 +84,7 @@ typedef struct _macros                    /* !macro structur */
    {
    char      name[ MACRO_NAME_LEN + 1];   /* macro name */
    char      entry[MACRO_CONT_LEN + 1];   /* macro content */
-   BOOLEAN   vars;                        /* optional parameters */
+   _BOOL   vars;                        /* optional parameters */
    } MACROS, *pMACROS;
 
 
@@ -92,7 +92,7 @@ typedef struct _defs                      /* !define structure */
    {
    char      name[ DEFINE_NAME_LEN + 1];  /* definition name, formatted as (!%s) */
    char      entry[DEFINE_CONT_LEN + 1];  /* definition content */
-   BOOLEAN   vars;                        /* optional parameters */
+   _BOOL   vars;                        /* optional parameters */
    } DEFS, *pDEFS;
 
 typedef struct _placeholder               /* general placeholder */
@@ -100,7 +100,7 @@ typedef struct _placeholder               /* general placeholder */
    char      magic[10];                   /* a control magic <ESC><0xB0 + nr> */
    char     *entry;                       /* the whole command */
    char     *text;                        /* text only (required by toklen()) */
-   BOOLEAN   replaced;                    /* TRUE: PH has already been replaced */
+   _BOOL   replaced;                    /* TRUE: PH has already been replaced */
    } PLACEHOLDER;
 
 
@@ -108,7 +108,7 @@ typedef struct _speccmd                   /* special format command placeholder 
    {
    char      magic[6];                    /* a control magic <ESC><0xB0 + nr> */
    char     *entry;                       /* the whole command */
-   BOOLEAN   replaced;                    /* TRUE: PH has already been replaced */
+   _BOOL   replaced;                    /* TRUE: PH has already been replaced */
    } SPECCMD;
 
 #endif   /* UDO_PAR_H */
@@ -123,9 +123,9 @@ typedef struct _speccmd                   /* special format command placeholder 
 *
 ******************************************|************************************/
 
-GLOBAL UWORD         hyphen_counter;      /* # of loaded hyphenation rules */
-GLOBAL UWORD         macro_counter;       /* # of loaded macros */
-GLOBAL UWORD         define_counter;      /* # of loaded definitions */
+GLOBAL _UWORD         hyphen_counter;      /* # of loaded hyphenation rules */
+GLOBAL _UWORD         macro_counter;       /* # of loaded macros */
+GLOBAL _UWORD         define_counter;      /* # of loaded definitions */
 
 GLOBAL PLACEHOLDER   phold[MAXPHOLDS + 1];/* array of placeholders */
 GLOBAL int           phold_counter;       /* # of placeholders */
@@ -147,10 +147,10 @@ GLOBAL void replace_variables(char *s, const char *cmd, const char *entry);
 GLOBAL void reset_speccmds(void);
 
    /* insert special format commands into the text as placeholders */
-GLOBAL BOOLEAN add_speccmd(char *entry);
+GLOBAL _BOOL add_speccmd(char *entry);
 
    /* insert special format command placeholders into the text */
-GLOBAL BOOLEAN insert_speccmd(char *s, const char *rep, char *entry);
+GLOBAL _BOOL insert_speccmd(char *s, const char *rep, char *entry);
 
    /* replace special format command placeholders in the text */
 GLOBAL void replace_speccmds(char *s);
@@ -159,10 +159,10 @@ GLOBAL void replace_speccmds(char *s);
 GLOBAL void reset_placeholders(void);
 
    /*  */
-GLOBAL BOOLEAN add_placeholder(char *entry, char *rawtext);
+GLOBAL _BOOL add_placeholder(char *entry, char *rawtext);
 
    /*  */
-GLOBAL BOOLEAN insert_placeholder(char *s, const char *rep, char *entry, char *rawtext);
+GLOBAL _BOOL insert_placeholder(char *s, const char *rep, char *entry, char *rawtext);
 
    /* replace the internal placeholder commands by human-readable content */
 GLOBAL void replace_placeholders(char *s);
@@ -174,10 +174,10 @@ GLOBAL void replace_placeholders_text(char *s);
 GLOBAL size_t pholdlen(int i);
 
    /*  */
-GLOBAL void c_internal_index(char *s, const BOOLEAN inside_b4_macro);
+GLOBAL void c_internal_index(char *s, const _BOOL inside_b4_macro);
 
    /*  */
-GLOBAL void c_commands_inside(char *s, const BOOLEAN inside_b4_macro);
+GLOBAL void c_commands_inside(char *s, const _BOOL inside_b4_macro);
 
    /* replace word with hyphenated word in document */
 GLOBAL void replace_hyphens(char *s);
@@ -189,13 +189,13 @@ GLOBAL void add_hyphen(void);
 GLOBAL void replace_macros(char *s);
 
    /* add macro to list of macros */
-GLOBAL BOOLEAN add_macro(void);
+GLOBAL _BOOL add_macro(void);
 
    /* replace definition (!%s) with definition content in document */
 GLOBAL void replace_defines(char *s);
 
    /* add definition to list of definitions */
-GLOBAL BOOLEAN add_define(void);
+GLOBAL _BOOL add_define(void);
 
    /* initialize all arrays used in this module */
 GLOBAL void init_module_par(void);

@@ -48,7 +48,7 @@
 *    fd  Feb 16: - more stuff globalized
 *                - MAXCHARSET increased for CODE_CP1250
 *    fd  Feb 19: - MAXCHARSET removed
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Mar 01: new: use_short_itemizes
 *                     use_short_enumerates
 *                     use_short_descriptions
@@ -90,7 +90,7 @@ GLOBAL MYFILE      udofile;               /* */
 
 GLOBAL int         iUdopass;              /* PASS1 oder PASS2 */
 
-GLOBAL BOOLEAN     bNopDetected;          /* Fuer Debugging-Zwecke */
+GLOBAL _BOOL     bNopDetected;          /* Fuer Debugging-Zwecke */
 
 GLOBAL int         desttype;              /* Ausgabeformat  (TOASC, ...) */
 GLOBAL int         destlang;              /* Ausgabesprache (TOENG, ...) */
@@ -105,29 +105,29 @@ GLOBAL int         iDateHour,
                    iDateMin, 
                    iDateSec;
 
-GLOBAL BOOLEAN     bNoLogfile;            /* Logfile anlegen? */
-GLOBAL BOOLEAN     bNoHypfile;            /* Hyphenationfile anlegen? */
-GLOBAL BOOLEAN     bNoIdxfile;            /* Indexfile anlegen? */
-GLOBAL BOOLEAN     bBeQuiet;              /* Statusinfos nicht ausgeben? */
-GLOBAL BOOLEAN     bCheckMisc;            /* diverse Ueberpruefungen? */
-GLOBAL BOOLEAN     bVerbose;              /* langen Status ausgeben? */
-GLOBAL BOOLEAN     bTestmode;             /* Testmodus? */
-GLOBAL BOOLEAN     bUseTreefile;          /* Include-Baum listen? */
-GLOBAL BOOLEAN     bUseUPRfile;           /* Project-File sichern? */
-GLOBAL BOOLEAN     bUseIdMapFileC;        /* Jump-ID-File fuer HPJ? */
-GLOBAL BOOLEAN     bUseIdMapFilePas;      /* Jump-ID-File fuer HPJ? */
-GLOBAL BOOLEAN     bUseIdMapFileVB;       /* Jump-ID-File fuer HPJ? */
-GLOBAL BOOLEAN     bUseIdMapFileGFA;      /* Jump-ID-File fuer HPJ? */
-GLOBAL BOOLEAN     bNoWarnings;           /* Keine Warnungen ausgeben? */
-GLOBAL BOOLEAN     bNoWarningsLines;      /* Keine Warnungen ausgeben, bei zu langen oder kurzen Zeilen */
-GLOBAL BOOLEAN     bForceLong;            /* Immer lange Dateinamen? */
-GLOBAL BOOLEAN     bForceShort;           /* Immer kurze Dateinamen? */
+GLOBAL _BOOL     bNoLogfile;            /* Logfile anlegen? */
+GLOBAL _BOOL     bNoHypfile;            /* Hyphenationfile anlegen? */
+GLOBAL _BOOL     bNoIdxfile;            /* Indexfile anlegen? */
+GLOBAL _BOOL     bBeQuiet;              /* Statusinfos nicht ausgeben? */
+GLOBAL _BOOL     bCheckMisc;            /* diverse Ueberpruefungen? */
+GLOBAL _BOOL     bVerbose;              /* langen Status ausgeben? */
+GLOBAL _BOOL     bTestmode;             /* Testmodus? */
+GLOBAL _BOOL     bUseTreefile;          /* Include-Baum listen? */
+GLOBAL _BOOL     bUseUPRfile;           /* Project-File sichern? */
+GLOBAL _BOOL     bUseIdMapFileC;        /* Jump-ID-File fuer HPJ? */
+GLOBAL _BOOL     bUseIdMapFilePas;      /* Jump-ID-File fuer HPJ? */
+GLOBAL _BOOL     bUseIdMapFileVB;       /* Jump-ID-File fuer HPJ? */
+GLOBAL _BOOL     bUseIdMapFileGFA;      /* Jump-ID-File fuer HPJ? */
+GLOBAL _BOOL     bNoWarnings;           /* Keine Warnungen ausgeben? */
+GLOBAL _BOOL     bNoWarningsLines;      /* Keine Warnungen ausgeben, bei zu langen oder kurzen Zeilen */
+GLOBAL _BOOL     bForceLong;            /* Immer lange Dateinamen? */
+GLOBAL _BOOL     bForceShort;           /* Immer kurze Dateinamen? */
 
 GLOBAL size_t      zDocParwidth;          /* PL6: max. Zeilenbreite */
 
 GLOBAL int         iTexVersion;           /* Lindner-, Strunk-, emTex? */   
 GLOBAL int         iTexDPI;               /* Aufloesung fuer Images */
-GLOBAL BOOLEAN     bTex2e;                /* LaTeX2e wird benutzt? */
+GLOBAL _BOOL     bTex2e;                /* LaTeX2e wird benutzt? */
 GLOBAL char        cTexVerb;              /* Zeichen fuer \verb */
 
 GLOBAL char        sSrcRemOn[8];          /* Kommentar ein */
@@ -138,11 +138,11 @@ GLOBAL int         iDocVerbatimSize;      /* Fontgroesse fuer verbatim-Umgebung 
 GLOBAL int         iDocLinedrawSize;      /* Fontgroesse fuer linedraw-Umgebung */
 
 GLOBAL char        sCurrFileName[512];    /* Gerade aktive Datei */
-GLOBAL UWORD       uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
-GLOBAL UWORD       uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
+GLOBAL _UWORD       uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
+GLOBAL _UWORD       uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
 
-GLOBAL BOOLEAN     b1stQuote;             /* flag for "real" double quotation marks */
-GLOBAL BOOLEAN     b1stApost;             /* flag for 'real' single quotation marks */
+GLOBAL _BOOL     b1stQuote;             /* flag for "real" double quotation marks */
+GLOBAL _BOOL     b1stApost;             /* flag for 'real' single quotation marks */
 
 GLOBAL char        tmp_driv[MYFILE_DRIV_LEN + 1];
 GLOBAL char        tmp_path[MYFILE_PATH_LEN + 1];
@@ -152,29 +152,29 @@ GLOBAL char        tmp_suff[MYFILE_SUFF_LEN + 1];
 GLOBAL MYFILE      outfile;
 GLOBAL MYFILE      infile;
 GLOBAL MYFILE      old_outfile;
-GLOBAL BOOLEAN     bOutOpened;            /* File geoeffnet? */
+GLOBAL _BOOL     bOutOpened;            /* File geoeffnet? */
 
 GLOBAL FILE       *fLogfile;
 GLOBAL char        sLogfull[MYFILE_FULL_LEN + 1];
-GLOBAL BOOLEAN     bLogopened;            /* Logfile geoeffnet? */
+GLOBAL _BOOL     bLogopened;            /* Logfile geoeffnet? */
 
 GLOBAL FILE       *fHypfile;
 GLOBAL char        sHypfull[MYFILE_FULL_LEN + 1];
-GLOBAL BOOLEAN     bHypopened;            /* Hyphenfile geoeffnet? */
-GLOBAL BOOLEAN     bHypfailed;            /* Hypfile oeffnen gescheitert */
+GLOBAL _BOOL     bHypopened;            /* Hyphenfile geoeffnet? */
+GLOBAL _BOOL     bHypfailed;            /* Hypfile oeffnen gescheitert */
 
 GLOBAL FILE       *fTreefile;
 GLOBAL char        sTreefull[MYFILE_FULL_LEN + 1];
-GLOBAL BOOLEAN     bTreeopened;           /* Treefile geoeffnet? */
+GLOBAL _BOOL     bTreeopened;           /* Treefile geoeffnet? */
 
 GLOBAL FILE       *fIdxfile;
 GLOBAL char        sIdxfull[MYFILE_FULL_LEN + 1];
-GLOBAL BOOLEAN     bIdxopened;            /* Indexfile geoeffnet? */
-GLOBAL BOOLEAN     bIdxfailed;            /* Indexfile oeffnen gescheitert*/
+GLOBAL _BOOL     bIdxopened;            /* Indexfile geoeffnet? */
+GLOBAL _BOOL     bIdxfailed;            /* Indexfile oeffnen gescheitert*/
 
 GLOBAL FILE       *fUPRfile;
 GLOBAL char        sUPRfull[MYFILE_FULL_LEN + 1];
-GLOBAL BOOLEAN     bUPRopened;            /* Logfile geoeffnet? */
+GLOBAL _BOOL     bUPRopened;            /* Logfile geoeffnet? */
 
 GLOBAL char        sInfMsg[256];          /* Zur Information */
 
@@ -188,108 +188,108 @@ GLOBAL char        sHhkfull[512];         /* Name der HHK-Datei fuer HTML Help *
 
 GLOBAL PASSFLAGS   pflag[3];              /* Flags fuer die Durchlaeufe */
 
-GLOBAL BOOLEAN     bFatalErrorDetected;   /* Fataler Fehler aufgetreten? */
-GLOBAL BOOLEAN     bErrorDetected;        /* Fehler aufgetreten? */
-GLOBAL BOOLEAN     bBreakHappened;        /* wuenscht User Abbruch */
-GLOBAL BOOLEAN     bBreakInside;          /* !break gelesen */
+GLOBAL _BOOL     bFatalErrorDetected;   /* Fataler Fehler aufgetreten? */
+GLOBAL _BOOL     bErrorDetected;        /* Fehler aufgetreten? */
+GLOBAL _BOOL     bBreakHappened;        /* wuenscht User Abbruch */
+GLOBAL _BOOL     bBreakInside;          /* !break gelesen */
 
-GLOBAL BOOLEAN     udo_running;           /* Ist UDO gerade am werkeln? */
-GLOBAL BOOLEAN     uses_udolink;          /* Wird !udolink benutzt? */
-GLOBAL BOOLEAN     uses_toplink;          /* Wird !toplink benutzt? */
+GLOBAL _BOOL     udo_running;           /* Ist UDO gerade am werkeln? */
+GLOBAL _BOOL     uses_udolink;          /* Wird !udolink benutzt? */
+GLOBAL _BOOL     uses_toplink;          /* Wird !toplink benutzt? */
 
 GLOBAL LANG        lang;                  /* Spracheinstellungen */
 
 GLOBAL char        token[MAX_TOKENS][MAX_TOKEN_LEN + 1];
 GLOBAL int         token_counter;
-GLOBAL BOOLEAN     tokens_contain_item;
+GLOBAL _BOOL     tokens_contain_item;
 
 GLOBAL char        udosymbol[MAX_UDOSYMBOLS][MAX_UDOSYMBOL_LEN + 1];
 GLOBAL int         udosymbol_counter;
 
 
-GLOBAL BOOLEAN     use_auto_subtocs;      /* create sub TOCs automatically? */
-GLOBAL BOOLEAN     use_auto_subsubtocs;
-GLOBAL BOOLEAN     use_auto_subsubsubtocs;
-GLOBAL BOOLEAN     use_auto_subsubsubsubtocs;
-GLOBAL BOOLEAN     use_auto_subsubsubsubsubtocs;
+GLOBAL _BOOL     use_auto_subtocs;      /* create sub TOCs automatically? */
+GLOBAL _BOOL     use_auto_subsubtocs;
+GLOBAL _BOOL     use_auto_subsubsubtocs;
+GLOBAL _BOOL     use_auto_subsubsubsubtocs;
+GLOBAL _BOOL     use_auto_subsubsubsubsubtocs;
 
-GLOBAL BOOLEAN     use_auto_toptocs;      /* autom. Ueber-Toc's anlegen? */
-GLOBAL BOOLEAN     no_auto_toptocs_icons; /* ... aber ohne Icons */   /*r6pl13*/
-GLOBAL BOOLEAN     use_compressed_tocs;   /* Kurze Inhaltsverzeichnisse default? */
+GLOBAL _BOOL     use_auto_toptocs;      /* autom. Ueber-Toc's anlegen? */
+GLOBAL _BOOL     no_auto_toptocs_icons; /* ... aber ohne Icons */   /*r6pl13*/
+GLOBAL _BOOL     use_compressed_tocs;   /* Kurze Inhaltsverzeichnisse default? */
 
-GLOBAL BOOLEAN     use_compressed_envs;   /* compress all supporting environments */
+GLOBAL _BOOL     use_compressed_envs;   /* compress all supporting environments */
                                           /* compress all itemize environments only */
-GLOBAL BOOLEAN     use_compressed_itemizes;
+GLOBAL _BOOL     use_compressed_itemizes;
                                           /* compress all enumerate environments only */
-GLOBAL BOOLEAN     use_compressed_enumerates;
+GLOBAL _BOOL     use_compressed_enumerates;
                                           /* compress all description environments only */
-GLOBAL BOOLEAN     use_compressed_descriptions;
-GLOBAL BOOLEAN     use_compressed_lists;  /* compress all ?list environments only */
+GLOBAL _BOOL     use_compressed_descriptions;
+GLOBAL _BOOL     use_compressed_lists;  /* compress all ?list environments only */
 
-GLOBAL BOOLEAN     use_formfeed;          /* Formfeed verwenden? */
-GLOBAL BOOLEAN     use_chapter_images;    /* Kapitelgrafiken verwenden? */
-GLOBAL BOOLEAN     use_about_udo;
-GLOBAL BOOLEAN     use_ansi_tables;       /* Tabellen mit ANSI-Grafiken umrahmen? */
-GLOBAL BOOLEAN     use_style_book;        /* chapter oder sections? */
-GLOBAL BOOLEAN     use_justification;     /* Blocksatz? */
-GLOBAL BOOLEAN     use_nodes_inside_index;/* Kapitel in den Index uebernehmen? */
-GLOBAL BOOLEAN     use_alias_inside_index;/* Aliase in den Index uebernehmen? */
-GLOBAL BOOLEAN     use_label_inside_index;/* Labels in den Index uebernehmen? */
-GLOBAL BOOLEAN     use_udo_index;         /* Soll UDO einen Index ausgeben? */
-GLOBAL BOOLEAN     use_mirrored_indices;  /* !index I1 !! I2 auch spiegeln? */
-GLOBAL BOOLEAN     use_comments;          /* Kommentare ausgeben (!rem [...]) */
-GLOBAL BOOLEAN     use_auto_helpids;      /* HelpIDs automatisch generieren? */      /* r6pl13 */
+GLOBAL _BOOL     use_formfeed;          /* Formfeed verwenden? */
+GLOBAL _BOOL     use_chapter_images;    /* Kapitelgrafiken verwenden? */
+GLOBAL _BOOL     use_about_udo;
+GLOBAL _BOOL     use_ansi_tables;       /* Tabellen mit ANSI-Grafiken umrahmen? */
+GLOBAL _BOOL     use_style_book;        /* chapter oder sections? */
+GLOBAL _BOOL     use_justification;     /* Blocksatz? */
+GLOBAL _BOOL     use_nodes_inside_index;/* Kapitel in den Index uebernehmen? */
+GLOBAL _BOOL     use_alias_inside_index;/* Aliase in den Index uebernehmen? */
+GLOBAL _BOOL     use_label_inside_index;/* Labels in den Index uebernehmen? */
+GLOBAL _BOOL     use_udo_index;         /* Soll UDO einen Index ausgeben? */
+GLOBAL _BOOL     use_mirrored_indices;  /* !index I1 !! I2 auch spiegeln? */
+GLOBAL _BOOL     use_comments;          /* Kommentare ausgeben (!rem [...]) */
+GLOBAL _BOOL     use_auto_helpids;      /* HelpIDs automatisch generieren? */      /* r6pl13 */
 
-GLOBAL BOOLEAN     no_umlaute;            /* Umlaute durch ae etc. ersetzen? */
-GLOBAL BOOLEAN     no_headlines;          /* Keine Titelzeilen? */
-GLOBAL BOOLEAN     no_titles;             /* Keine Ueberschriften? */
-GLOBAL BOOLEAN     no_bottomlines;        /* Keine Fusszeilen? */
-GLOBAL BOOLEAN     no_popup_headlines;    /* In Popups nie eine Titelzeile? */
-GLOBAL BOOLEAN     no_footers;            /* Keine speziellen Fusszeilen? */
-GLOBAL BOOLEAN     no_effects;            /* Keine Effekte? */
-GLOBAL BOOLEAN     no_numbers;            /* Kapitel mit Nummern ausgeben? */
-GLOBAL BOOLEAN     no_quotes;             /* "unechte" Anfuehrungszeichnen? */
-GLOBAL BOOLEAN     no_preamble;           /* preamble nicht ausgeben? */
-GLOBAL BOOLEAN     no_index;              /* !index ignorieren und keinen Index? */
-GLOBAL BOOLEAN     no_buttons;            /* Keine Knoepfe erzeugen (WinHelp) */
-GLOBAL BOOLEAN     no_img_size;           /* Keine Ausmasse ermitteln? */
-GLOBAL BOOLEAN     no_images;             /* Bilder verwenden? */
-GLOBAL BOOLEAN     no_urls;               /* Keine URLs verwenden? */
-GLOBAL BOOLEAN     no_xlinks;             /* Keine externen Links verwenden? */
-GLOBAL BOOLEAN     no_links;              /* Keine Links verwenden? */
-GLOBAL BOOLEAN     no_sourcecode;         /* Sourcecode-Umgebung nicht ausgeben? */
-GLOBAL BOOLEAN     no_table_lines;        /* Tabellen ohne Linien ausgeben? */
+GLOBAL _BOOL     no_umlaute;            /* Umlaute durch ae etc. ersetzen? */
+GLOBAL _BOOL     no_headlines;          /* Keine Titelzeilen? */
+GLOBAL _BOOL     no_titles;             /* Keine Ueberschriften? */
+GLOBAL _BOOL     no_bottomlines;        /* Keine Fusszeilen? */
+GLOBAL _BOOL     no_popup_headlines;    /* In Popups nie eine Titelzeile? */
+GLOBAL _BOOL     no_footers;            /* Keine speziellen Fusszeilen? */
+GLOBAL _BOOL     no_effects;            /* Keine Effekte? */
+GLOBAL _BOOL     no_numbers;            /* Kapitel mit Nummern ausgeben? */
+GLOBAL _BOOL     no_quotes;             /* "unechte" Anfuehrungszeichnen? */
+GLOBAL _BOOL     no_preamble;           /* preamble nicht ausgeben? */
+GLOBAL _BOOL     no_index;              /* !index ignorieren und keinen Index? */
+GLOBAL _BOOL     no_buttons;            /* Keine Knoepfe erzeugen (WinHelp) */
+GLOBAL _BOOL     no_img_size;           /* Keine Ausmasse ermitteln? */
+GLOBAL _BOOL     no_images;             /* Bilder verwenden? */
+GLOBAL _BOOL     no_urls;               /* Keine URLs verwenden? */
+GLOBAL _BOOL     no_xlinks;             /* Keine externen Links verwenden? */
+GLOBAL _BOOL     no_links;              /* Keine Links verwenden? */
+GLOBAL _BOOL     no_sourcecode;         /* Sourcecode-Umgebung nicht ausgeben? */
+GLOBAL _BOOL     no_table_lines;        /* Tabellen ohne Linien ausgeben? */
 
-GLOBAL BOOLEAN     bDocAutorefOff;        /* Nicht autom. referenzieren? */
-GLOBAL BOOLEAN     bDocAutorefItemsOff;   /* Items nicht autom. referenzieren? */
-GLOBAL BOOLEAN     bDocUniversalCharsetOn;/* Universellen Zeichensatz benutzen? */
-GLOBAL BOOLEAN     bDocRtfKeepTablesOn;   /* Tabellen zusammenhalten? */
-GLOBAL BOOLEAN     bDocWinOldKeywords;    /* Alte Keywords benutzen? */
-GLOBAL BOOLEAN     bDocSortHyphenFile;    /* *.uh? sortieren */
+GLOBAL _BOOL     bDocAutorefOff;        /* Nicht autom. referenzieren? */
+GLOBAL _BOOL     bDocAutorefItemsOff;   /* Items nicht autom. referenzieren? */
+GLOBAL _BOOL     bDocUniversalCharsetOn;/* Universellen Zeichensatz benutzen? */
+GLOBAL _BOOL     bDocRtfKeepTablesOn;   /* Tabellen zusammenhalten? */
+GLOBAL _BOOL     bDocWinOldKeywords;    /* Alte Keywords benutzen? */
+GLOBAL _BOOL     bDocSortHyphenFile;    /* *.uh? sortieren */
 
-GLOBAL BOOLEAN     html_merge_node1;      /* Nodes nicht splitten? */
-GLOBAL BOOLEAN     html_merge_node2;      /* Subnodes nicht splitten? */
-GLOBAL BOOLEAN     html_merge_node3;      /* Subsubnodes nicht splitten? */
-GLOBAL BOOLEAN     html_merge_node4;      /* Subsubsubnodes nicht splitten? */
-GLOBAL BOOLEAN     html_merge_node5;      /* Subsubsubsubnodes nicht splitten? */
-GLOBAL BOOLEAN     html_merge_node6;      /* Subsubsubsubsubnodes nicht splitten? */
-GLOBAL BOOLEAN     html_no_xlist;         /* xlist- durch description-Umgebung ersetzen? */
-GLOBAL BOOLEAN     html_ignore_8bit;      /* ae nicht in &auml; wandeln? */
-GLOBAL BOOLEAN     html_modern_layout;    /* Modernes 2-Spalten-Layout? */
-GLOBAL BOOLEAN     html_frames_layout;    /* Frames fuer HTML benutzen? */
-GLOBAL BOOLEAN     html_frames_noresize;
-GLOBAL BOOLEAN     html_frames_noborder;
-GLOBAL BOOLEAN     html_frames_noscroll;
-GLOBAL BOOLEAN     html_use_folders;      /* Ordnerstruktur erzeugen? */
+GLOBAL _BOOL     html_merge_node1;      /* Nodes nicht splitten? */
+GLOBAL _BOOL     html_merge_node2;      /* Subnodes nicht splitten? */
+GLOBAL _BOOL     html_merge_node3;      /* Subsubnodes nicht splitten? */
+GLOBAL _BOOL     html_merge_node4;      /* Subsubsubnodes nicht splitten? */
+GLOBAL _BOOL     html_merge_node5;      /* Subsubsubsubnodes nicht splitten? */
+GLOBAL _BOOL     html_merge_node6;      /* Subsubsubsubsubnodes nicht splitten? */
+GLOBAL _BOOL     html_no_xlist;         /* xlist- durch description-Umgebung ersetzen? */
+GLOBAL _BOOL     html_ignore_8bit;      /* ae nicht in &auml; wandeln? */
+GLOBAL _BOOL     html_modern_layout;    /* Modernes 2-Spalten-Layout? */
+GLOBAL _BOOL     html_frames_layout;    /* Frames fuer HTML benutzen? */
+GLOBAL _BOOL     html_frames_noresize;
+GLOBAL _BOOL     html_frames_noborder;
+GLOBAL _BOOL     html_frames_noscroll;
+GLOBAL _BOOL     html_use_folders;      /* Ordnerstruktur erzeugen? */
                                           /* Transparente Buttons benutzen? */
-GLOBAL BOOLEAN     html_transparent_buttons;
+GLOBAL _BOOL     html_transparent_buttons;
 
 GLOBAL SHOW_VAR    show_variable;         /* New in V6.5.19 */
 
-GLOBAL BOOLEAN     html_navigation_line;  /* v6.5.19[fd] TRUE: show navigation levels in one line without folder symbols */
+GLOBAL _BOOL     html_navigation_line;  /* v6.5.19[fd] TRUE: show navigation levels in one line without folder symbols */
                                           /* v6.5.19[fd] string which separates navigation levels (default: '&gt; ') */
 GLOBAL char        html_navigation_separator[20];
-GLOBAL BOOLEAN     html_navigation_image; /* v6.5.19[fd] TRUE: show (folder) symbol */
+GLOBAL _BOOL     html_navigation_image; /* v6.5.19[fd] TRUE: show (folder) symbol */
                                           /* v6.5.19[fd] fspec to userdef (folder equivalent) symbol */
 GLOBAL char        html_navigation_image_fspec[128];
 
@@ -337,16 +337,16 @@ GLOBAL int         html_quotes;           /* define HTML formatting of quotes */
 GLOBAL char        html_name_prefix[512]; /* Prefix fuer HTML-Dateinamen */
 
 /* New in r6pl16 [NHz] */
-GLOBAL BOOLEAN     html_use_hyphenation;  /* Lange Woerter sollen durch (!-) getrennt werden */
+GLOBAL _BOOL     html_use_hyphenation;  /* Lange Woerter sollen durch (!-) getrennt werden */
 GLOBAL int         html_doctype;          /* Welche DTD soll benutzt werden? */
 
 /* New feature #0000054 in V6.5.2 [NHz] */
-GLOBAL BOOLEAN     html_header_date;      /* Ausgabe des Datums im Element <meta> */
+GLOBAL _BOOL     html_header_date;      /* Ausgabe des Datums im Element <meta> */
                                           /* date zone */
 GLOBAL char        html_header_date_zone[10];
 
 /* New feature #0000053 in V6.5.2 [NHz] */
-GLOBAL BOOLEAN     html_header_links;     /* Ausgabe der Daten im Element <link> */
+GLOBAL _BOOL     html_header_links;     /* Ausgabe der Daten im Element <link> */
                                           /* Welche Links sollen ausgegeben werden? */
 GLOBAL char        html_header_links_kind[50];
 
@@ -381,9 +381,9 @@ GLOBAL char        sDocVerbatimBackColor[32];
 GLOBAL char        sDocRawHeaderFilename[512];     /*r6pl10*/
 GLOBAL char        sDocRawFooterFilename[512];     /*r6pl10*/
 
-GLOBAL BOOLEAN     bDocInlineBitmaps;     /* {bmcwd statt {bmc verwenden? */
-GLOBAL BOOLEAN     bDocHighCompression;
-GLOBAL BOOLEAN     bDocMediumCompression;
+GLOBAL _BOOL     bDocInlineBitmaps;     /* {bmcwd statt {bmc verwenden? */
+GLOBAL _BOOL     bDocHighCompression;
+GLOBAL _BOOL     bDocMediumCompression;
 
 GLOBAL int         iDocCharwidth;         /* Zeichenbreiten-Konstanten */
 
@@ -397,11 +397,11 @@ GLOBAL char        sDocPropfontSize[16];
 GLOBAL int         iDocPropfontSize;
 GLOBAL char        sDocMonofontSize[16];
 GLOBAL int         iDocMonofontSize;
-GLOBAL BOOLEAN     bDocNoTables;          /* Keine echten RTF-Tabellen anlegen? */
+GLOBAL _BOOL     bDocNoTables;          /* Keine echten RTF-Tabellen anlegen? */
 
-GLOBAL BOOLEAN     bCalledIndex;          /* !index ignorieren und keinen Index? */
+GLOBAL _BOOL     bCalledIndex;          /* !index ignorieren und keinen Index? */
 
-GLOBAL ULONG       footnote_cnt;          /* footnote counter */
+GLOBAL _ULONG       footnote_cnt;          /* footnote counter */
 
 
 
@@ -449,15 +449,15 @@ GLOBAL void output_ascii_line(const char *c, const size_t len);
    /* --- check if command is available for language/format --- */
 
    /* ? */
-GLOBAL BOOLEAN str_for_desttype(const char *s);
+GLOBAL _BOOL str_for_desttype(const char *s);
    /* ? */
-GLOBAL BOOLEAN is_for_desttype(BOOLEAN *schalter, const char *cmd);
+GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd);
 
 
    /* --- colors --- */
 
    /* ? */
-GLOBAL BOOLEAN get_html_color(const char *s, char *h);
+GLOBAL _BOOL get_html_color(const char *s, char *h);
 
 
    /* --- commandline symbol manager --- */
@@ -467,13 +467,13 @@ GLOBAL void del_udosymbol(const char *s);
    /* ? */
 GLOBAL void add_udosymbol(const char *s);
    /* ? */
-GLOBAL BOOLEAN udosymbol_set(const char *s);
+GLOBAL _BOOL udosymbol_set(const char *s);
 
 
    /* --- index and TOC manager --- */
 
    /* ? */
-GLOBAL BOOLEAN add_idxlist_item(const char *x1, const char *x2, const char *x3);
+GLOBAL _BOOL add_idxlist_item(const char *x1, const char *x2, const char *x3);
    /* ? */
 GLOBAL void print_index(void);
    /* ? */
@@ -510,7 +510,7 @@ GLOBAL void tokcpy2(char *s, size_t maxlen);
    /* ? */
 GLOBAL void token_reset(void);
    /* ? */
-GLOBAL void token_output(BOOLEAN reset_internals);
+GLOBAL void token_output(_BOOL reset_internals);
    /* ? */
 GLOBAL void tokenize(char *s);
 
@@ -539,9 +539,9 @@ GLOBAL void build_image_filename(char *d, const char *suff);
    /* --- main routines --- */
 
    /* ? */
-GLOBAL BOOLEAN udo (char *datei);
+GLOBAL _BOOL udo (char *datei);
    /* ? */
-GLOBAL BOOLEAN udo2udo (char *datei);
+GLOBAL _BOOL udo2udo (char *datei);
    /* ? */
 GLOBAL void init_vars(void);
 

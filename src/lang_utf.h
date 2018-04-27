@@ -168,7 +168,7 @@ _MONTHS   MONTHS[] =                      /* localized months names */
    {TOSWE, {"januari",  "februari",  "mars",   "april",    "maj",    "juni",     "juli",     "augusti",  "september",  "oktober",     "november",  "december" }},
    {TORUS, {"Январь",   "Февраль",   "Март",   "Апрель",   "Май",    "Июнь",     "Июль",     "Август",   "Сентябрь",   "Октябрь",     "Ноябрь",    "Декабрь" }},
    
-   {  NIL, {"", "", "", "", "", "", "", "", "", "", "", ""} }
+   {  -1, {"", "", "", "", "", "", "", "", "", "", "", ""} }
 };
 
 
@@ -744,8 +744,5 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
       }
    },
 
-   {  NIL, { "" }}                       /* list terminator */
+   {  -1, { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" }}
 };
-
-
-/* +++ EOF +++ */

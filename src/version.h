@@ -261,7 +261,7 @@
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
 #define USE_SETFILETYPE      0
-#define HAVE_TMPNAM          0
+#define HAVE_TMPNAM          1
 #endif
 
 #ifdef __AMIGA__

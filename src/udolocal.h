@@ -58,7 +58,7 @@
 typedef struct _udoswitch                 /* ---- table of functions ---- */
 {
    char     *magic;                       /* UDO command */
-   BOOLEAN  *flag;                        /* relevant switch */
+   _BOOL  *flag;                        /* relevant switch */
    char      partype;                     /* parameter type */
    char     *parcmd;                      /* parameter command */
    void     *parval;                      /* parameter variable */
@@ -78,8 +78,8 @@ typedef struct _udoswitch                 /* ---- table of functions ---- */
 LOCAL void strjustify(char *s, size_t len);
 
    /* check if command is valid for desired language or format */
-LOCAL BOOLEAN str_for_destlang(const char *s);
-LOCAL BOOLEAN str_for_os(const char *s);
+LOCAL _BOOL str_for_destlang(const char *s);
+LOCAL _BOOL str_for_os(const char *s);
 
    /* color handling */
 LOCAL int get_color(void);
@@ -98,8 +98,8 @@ LOCAL void set_wh4_textcolor (char *s, const int c);
 LOCAL void set_wh4_linkcolor (char *s, const int c);
 
    /* check if a command uses [on] or [off] */
-LOCAL BOOLEAN check_on(void);
-LOCAL BOOLEAN check_off(void);
+LOCAL _BOOL check_on(void);
+LOCAL _BOOL check_off(void);
 
    /* manage symbols */
 LOCAL void c_set(void);
@@ -175,7 +175,7 @@ LOCAL void c_linedrawsize(void);
 LOCAL void c_check_raw(char *s);
 
    /* general image handling */
-LOCAL void convert_image(const BOOLEAN visible);
+LOCAL void convert_image(const _BOOL visible);
 LOCAL void c_image(void);
 LOCAL void c_image_nonr(void);
 
@@ -194,7 +194,7 @@ LOCAL void str2silben(char *s);
 
    /* token management */
 LOCAL void check_parwidth(void);
-LOCAL BOOLEAN malloc_token_output_buffer(void);
+LOCAL _BOOL malloc_token_output_buffer(void);
 LOCAL void free_token_output_buffer(void);
 LOCAL void insert_nl_token_buffer(void);
 
@@ -209,29 +209,29 @@ LOCAL int hyplist_compare (HYPLIST *p, HYPLIST *q);
 LOCAL HYPLIST *hyplist_merge (HYPLIST *p, HYPLIST *q);
 LOCAL HYPLIST *hyplist_sort (HYPLIST *p);
 LOCAL HYPLIST * new_hyplist_item(void);
-LOCAL BOOLEAN add_hyplist_item(const char *s);
+LOCAL _BOOL add_hyplist_item(const char *s);
 LOCAL void sort_hypfile(const char *name);
 
    /* check commands for formats or languages */
 LOCAL void clear_if_stack(void);
-LOCAL void push_if_stack(int kind, BOOLEAN ignore);
+LOCAL void push_if_stack(int kind, _BOOL ignore);
 LOCAL void pop_if_stack(void);
 LOCAL void toggle_if_stack(void);
-LOCAL BOOLEAN is_if_stack_ignore(void);
+LOCAL _BOOL is_if_stack_ignore(void);
 LOCAL void pass_check_free_line(char *zeile, int pnr);
 LOCAL void pass_check_if (char *zeile, int pnr);
 
    /* get + set switches */
 LOCAL void get_switch_par(const UDOSWITCH *us);
-LOCAL BOOLEAN pass1_check_preamble_commands(void);
-LOCAL BOOLEAN pass1_check_main_commands(void);
-LOCAL BOOLEAN pass1_check_everywhere_commands(void);
+LOCAL _BOOL pass1_check_preamble_commands(void);
+LOCAL _BOOL pass1_check_main_commands(void);
+LOCAL _BOOL pass1_check_everywhere_commands(void);
 
    /* check special environments */
 LOCAL void pass1_check_environments(char *zeile);
 
    /* parse lines and create TOCs (pass 1) */
-LOCAL BOOLEAN pass1(char *datei);
+LOCAL _BOOL pass1(char *datei);
 
    /* parse lines and convert them (pass 2) */
 LOCAL void output_verbatim_line(char *zeile);
@@ -239,7 +239,7 @@ LOCAL void output_linedraw_line(char *zeile);
 LOCAL void output_comment_line(char *zeile);
 LOCAL void c_comment(void);
 
-LOCAL BOOLEAN pass2 (char *datei);
+LOCAL _BOOL pass2 (char *datei);
 
    /* create files for several target formats */
 LOCAL void save_pchelp_commandfile(void);
@@ -252,7 +252,7 @@ LOCAL void set_format_flags(void);
 
    /* more misc. */
 LOCAL void show_udo_intro(void);
-LOCAL BOOLEAN passU(char *datei);
+LOCAL _BOOL passU(char *datei);
 
    /* set strings for target language */
 LOCAL void get_timestr(char *t);
@@ -270,8 +270,8 @@ LOCAL void init_vars_spec(void);
 LOCAL void init_modules(void);
 LOCAL void exit_modules(void);
 
-LOCAL BOOLEAN check_modules_pass1(void);
-LOCAL BOOLEAN check_modules_pass2(void);
+LOCAL _BOOL check_modules_pass1(void);
+LOCAL _BOOL check_modules_pass2(void);
 
    /* adjust file names and extensions */
 LOCAL void logfile_adjust(void);

@@ -49,7 +49,7 @@
 *    fd  Feb 19: - file introduced (extracted from u_iso.h)
 *                - CODE_CP1257 (Baltic)
 *    fd  Feb 20: - CODE_CP1251 (Russian)
-*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253 (Greek)
 *    fd  Feb 23: CODE_LAT1 -> CODE_CP1252
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
@@ -86,7 +86,7 @@
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1250[] =          /* CODE_CP1250 */
+static _UWORD   u_CODE_CP1250[] =          /* CODE_CP1250 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -362,7 +362,7 @@ static UWORD   u_CODE_CP1250[] =          /* CODE_CP1250 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1250_lig[][3] =     /* CODE_CP1250 character ligatures */
+static _UWORD   CODE_CP1250_lig[][3] =     /* CODE_CP1250 character ligatures */
 {
    { U_LatinCapitalLetterSWithCaron,      U_LatinCapitalLetterS, U_LatinCapitalLetterJ },   /* 0x8A   0x0160  LATIN CAPITAL LETTER S WITH CARON */
    { U_LatinCapitalLetterTWithCaron,      U_LatinCapitalLetterT, U_LatinCapitalLetterJ },   /* 0x8D   0x0164  LATIN CAPITAL LETTER T WITH CARON */
@@ -410,7 +410,7 @@ static UWORD   CODE_CP1250_lig[][3] =     /* CODE_CP1250 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1250[] =       /* CODE_CP1250 */
+static _UWORD   sort_CODE_CP1250[] =       /* CODE_CP1250 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -695,7 +695,7 @@ static UWORD   sort_CODE_CP1250[] =       /* CODE_CP1250 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1251[] =          /* CODE_CP1251 */
+static _UWORD   u_CODE_CP1251[] =          /* CODE_CP1251 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -973,7 +973,7 @@ static UWORD   u_CODE_CP1251[] =          /* CODE_CP1251 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1251_lig[][3] =     /* CODE_CP1251 character ligatures */
+static _UWORD   CODE_CP1251_lig[][3] =     /* CODE_CP1251 character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -991,7 +991,7 @@ static UWORD   CODE_CP1251_lig[][3] =     /* CODE_CP1251 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
+static _UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1276,7 +1276,7 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1252[] =          /* CODE_CP1252 */
+static _UWORD   u_CODE_CP1252[] =          /* CODE_CP1252 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1559,7 +1559,7 @@ static UWORD   u_CODE_CP1252[] =          /* CODE_CP1252 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1252_lig[][3] =     /* CODE_CP1252 character ligatures */
+static _UWORD   CODE_CP1252_lig[][3] =     /* CODE_CP1252 character ligatures */
 {
    { U_LatinCapitalLigatureOE,            U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x008c  U_LatinCapitalLigatureOE */
    { U_LatinSmallLigatureOE,              U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x009c  U_LatinSmallLigatureOE */
@@ -1596,7 +1596,7 @@ static UWORD   CODE_CP1252_lig[][3] =     /* CODE_CP1252 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
+static _UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1888,7 +1888,7 @@ static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1253[] =          /* CODE_CP1253 */
+static _UWORD   u_CODE_CP1253[] =          /* CODE_CP1253 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -2167,7 +2167,7 @@ static UWORD   u_CODE_CP1253[] =          /* CODE_CP1253 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1253_lig[][3] =     /* CODE_CP1253 character ligatures */
+static _UWORD   CODE_CP1253_lig[][3] =     /* CODE_CP1253 character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -2185,7 +2185,7 @@ static UWORD   CODE_CP1253_lig[][3] =     /* CODE_CP1253 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1253[] =       /* CODE_CP1253 */
+static _UWORD   sort_CODE_CP1253[] =       /* CODE_CP1253 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -2470,7 +2470,7 @@ static UWORD   sort_CODE_CP1253[] =       /* CODE_CP1253 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1254[] =          /* CODE_CP1254 */
+static _UWORD   u_CODE_CP1254[] =          /* CODE_CP1254 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -2746,7 +2746,7 @@ static UWORD   u_CODE_CP1254[] =          /* CODE_CP1254 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1254_lig[][3] =     /* CODE_CP1254 character ligatures */
+static _UWORD   CODE_CP1254_lig[][3] =     /* CODE_CP1254 character ligatures */
 {
    { U_LatinCapitalLigatureOE,            U_LatinCapitalLetterO, U_LatinCapitalLetterE }, /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
    { U_LatinSmallLigatureOE,              U_LatinCapitalLetterO, U_LatinCapitalLetterE }, /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
@@ -2786,7 +2786,7 @@ static UWORD   CODE_CP1254_lig[][3] =     /* CODE_CP1254 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1254[] =       /* CODE_CP1254 */
+static _UWORD   sort_CODE_CP1254[] =       /* CODE_CP1254 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3071,7 +3071,7 @@ static UWORD   sort_CODE_CP1254[] =       /* CODE_CP1254 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1255[] =          /* CODE_CP1255 */
+static _UWORD   u_CODE_CP1255[] =          /* CODE_CP1255 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3347,7 +3347,7 @@ static UWORD   u_CODE_CP1255[] =          /* CODE_CP1255 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1255_lig[][3] =     /* CODE_CP1255 character ligatures */
+static _UWORD   CODE_CP1255_lig[][3] =     /* CODE_CP1255 character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -3365,7 +3365,7 @@ static UWORD   CODE_CP1255_lig[][3] =     /* CODE_CP1255 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1255[] =       /* CODE_CP1255 */
+static _UWORD   sort_CODE_CP1255[] =       /* CODE_CP1255 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3650,7 +3650,7 @@ static UWORD   sort_CODE_CP1255[] =       /* CODE_CP1255 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1256[] =          /* CODE_CP1256 */
+static _UWORD   u_CODE_CP1256[] =          /* CODE_CP1256 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3926,7 +3926,7 @@ static UWORD   u_CODE_CP1256[] =          /* CODE_CP1256 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1256_lig[][3] =     /* CODE_CP1256 character ligatures */
+static _UWORD   CODE_CP1256_lig[][3] =     /* CODE_CP1256 character ligatures */
 {
    { U_LatinCapitalLigatureOE,         U_LatinCapitalLetterO, U_LatinCapitalLetterE },   /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
    { U_LatinSmallLigatureOE,           U_LatinCapitalLetterO, U_LatinCapitalLetterE },   /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
@@ -3950,7 +3950,7 @@ static UWORD   CODE_CP1256_lig[][3] =     /* CODE_CP1256 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1256[] =       /* CODE_CP1256 */
+static _UWORD   sort_CODE_CP1256[] =       /* CODE_CP1256 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -4235,7 +4235,7 @@ static UWORD   sort_CODE_CP1256[] =       /* CODE_CP1256 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1257[] =          /* CODE_CP1257 */
+static _UWORD   u_CODE_CP1257[] =          /* CODE_CP1257 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -4511,7 +4511,7 @@ static UWORD   u_CODE_CP1257[] =          /* CODE_CP1257 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1257_lig[][3] =     /* CODE_CP1257 character ligatures */
+static _UWORD   CODE_CP1257_lig[][3] =     /* CODE_CP1257 character ligatures */
 {
    {U_LatinCapitalLetterOSlash,         U_LatinCapitalLetterO, U_LatinCapitalLetterE}, /* 0xA8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
    {U_LatinCapitalLigatureAE,           U_LatinCapitalLetterA, U_LatinCapitalLetterE}, /* 0xAF   0x00C6   LATIN CAPITAL LETTER AE */
@@ -4542,7 +4542,7 @@ static UWORD   CODE_CP1257_lig[][3] =     /* CODE_CP1257 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1257[] =       /* CODE_CP1257 */
+static _UWORD   sort_CODE_CP1257[] =       /* CODE_CP1257 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -4827,7 +4827,7 @@ static UWORD   sort_CODE_CP1257[] =       /* CODE_CP1257 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_CP1258[] =          /* CODE_CP1258 */
+static _UWORD   u_CODE_CP1258[] =          /* CODE_CP1258 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -5103,7 +5103,7 @@ static UWORD   u_CODE_CP1258[] =          /* CODE_CP1258 */
 *
 ******************************************|************************************/
 
-static UWORD   CODE_CP1258_lig[][3] =     /* CODE_CP1258 character ligatures */
+static _UWORD   CODE_CP1258_lig[][3] =     /* CODE_CP1258 character ligatures */
 {
    { U_LatinCapitalLigatureOE,            U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
    { U_LatinSmallLigatureOE,              U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
@@ -5142,7 +5142,7 @@ static UWORD   CODE_CP1258_lig[][3] =     /* CODE_CP1258 character ligatures */
 *
 ******************************************|************************************/
 
-static UWORD   sort_CODE_CP1258[] =       /* CODE_CP1258 */
+static _UWORD   sort_CODE_CP1258[] =       /* CODE_CP1258 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */

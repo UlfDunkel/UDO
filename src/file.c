@@ -42,7 +42,7 @@
 *
 *  2010:
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 25: myTextGetline() no longer concatenates '!\' lines in ENV_VERBATIM
 *    ggs Mar 13: Delete # in line 49
 *  2011:
@@ -101,7 +101,7 @@ const char *id_fsplit_c = "@(#) file.c     $date$";
 *
 ******************************************|************************************/
 
-extern UWORD       uiMultiLines;          /* */
+extern _UWORD       uiMultiLines;          /* */
 extern PASSFLAGS   pflag[3];              /* UDO.H */
 extern int         iUdopass;              /* UDO.H */
 
@@ -306,7 +306,7 @@ MYTEXTFILE  *tf)      /* */
 
    register char  *s_ptr;  /* */
    size_t          sl;     /* */
-   BOOLEAN         cont;   /* */
+   _BOOL         cont;   /* */
 
    /* This indicates how many lines have been added with \! to the current line */
 
@@ -831,7 +831,7 @@ LOCAL MYFILE *my_new_myfile(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN my_free_myfile(
+LOCAL _BOOL my_free_myfile(
 
 MYFILE  *myfile)  /* */
 {
@@ -897,7 +897,7 @@ const char  *mode)      /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN my_fclose(
+GLOBAL _BOOL my_fclose(
 
 MYFILE  *myfile)  /* */
 {
@@ -955,12 +955,12 @@ char  *s)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN my_getcwd(
+LOCAL _BOOL my_getcwd(
 
 char        *s,            /* */
 int          maxlen)       /* */
 {
-   BOOLEAN   ret = TRUE;   /* */
+   _BOOL   ret = TRUE;   /* */
    
 
    if (getcwd(s, maxlen) == NULL)
@@ -986,12 +986,12 @@ int          maxlen)       /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN myDirExists(
+LOCAL _BOOL myDirExists(
 
 char        *s)           /* */
 {
    char      old[512];    /* */
-   BOOLEAN   ret = TRUE;  /* */
+   _BOOL   ret = TRUE;  /* */
    
 
    my_getcwd(old, 512);
@@ -1021,11 +1021,11 @@ char        *s)           /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN my_mkdir(
+GLOBAL _BOOL my_mkdir(
 
 char        *s)           /* */
 {
-   BOOLEAN   ret = TRUE;  /* */
+   _BOOL   ret = TRUE;  /* */
    
 
    if (!myDirExists(s))

@@ -97,7 +97,7 @@ const char *id_toc_html_c= "@(#) toc_html.c    $Date$";
 ******************************************|************************************/
 
    /* check if certain values are valid */
-LOCAL BOOLEAN check_toc_and_counters(void);
+LOCAL _BOOL check_toc_and_counters(void);
 
 
 
@@ -125,7 +125,7 @@ LOCAL BOOLEAN check_toc_and_counters(void);
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_toc_and_counters(void)
+LOCAL _BOOL check_toc_and_counters(void)
 {
    if (p1_toc_counter < 0)
       return FALSE;
@@ -168,7 +168,7 @@ LOCAL BOOLEAN check_toc_and_counters(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN set_html_navigation(void)
+GLOBAL _BOOL set_html_navigation(void)
 {
    char     s[512],       /* */
            *cont,         /* */
@@ -903,7 +903,7 @@ const int    which)       /* */
 {
    char      color[256],  /* */
             *ptr;         /* */
-   BOOLEAN   ret;         /* */
+   _BOOL   ret;         /* */
    
    
    if (!check_toc_and_counters())
@@ -1255,7 +1255,7 @@ GLOBAL void set_html_special_color(
 char        *hc)          /* */
 {
    char      color[256];  /* */
-   BOOLEAN   ret;         /* */
+   _BOOL   ret;         /* */
    
    
    if (!check_toc_and_counters())

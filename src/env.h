@@ -84,22 +84,22 @@ GLOBAL int       iEnvType[MAXENVLEVEL + 1];
                                           /* Einrueckungstiefe einer Umgebung */
 GLOBAL int       iEnvIndent[MAXENVLEVEL + 1];
                                           /* TRUE: compressed, FALSE: splendid (default) */
-GLOBAL BOOLEAN   bEnvCompressed[MAXENVLEVEL + 1];
+GLOBAL _BOOL   bEnvCompressed[MAXENVLEVEL + 1];
                                           /* Ist das naechste !item das erste? */
-GLOBAL BOOLEAN   bEnv1stItem[MAXENVLEVEL + 1];
+GLOBAL _BOOL   bEnv1stItem[MAXENVLEVEL + 1];
                                           /* Erster Absatz des !item? */
-GLOBAL BOOLEAN   bEnv1stPara[MAXENVLEVEL + 1];
+GLOBAL _BOOL   bEnv1stPara[MAXENVLEVEL + 1];
 
 GLOBAL int       iItemLevel;              /* Zaehler fuer itemize-Umgebungen */
 GLOBAL int       iEnumLevel;              /* Zaehler fuer enumerate-Umgeb. */
 GLOBAL int       iDescLevel;              /* Zaehler fuer description-Umgeb. */
 GLOBAL int       iListLevel;              /* Zaehler fuer xlist-Umgebungen */
 
-GLOBAL BOOLEAN   bCalledEndDocument;      /* */
-GLOBAL BOOLEAN   bCalledBeginDocument;    /* */
+GLOBAL _BOOL   bCalledEndDocument;      /* */
+GLOBAL _BOOL   bCalledBeginDocument;    /* */
 
-GLOBAL BOOLEAN   bDescDDOpen;             /* TRUE: description env.: <dd> open */
-GLOBAL BOOLEAN   bParagraphOpen;          /* TRUE: <p> has been output */
+GLOBAL _BOOL   bDescDDOpen;             /* TRUE: description env.: <dd> open */
+GLOBAL _BOOL   bParagraphOpen;          /* TRUE: <p> has been output */
 
 
 

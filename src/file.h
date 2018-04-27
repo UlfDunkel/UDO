@@ -80,14 +80,14 @@ GLOBAL FILE * myFwopen ( const char *filename, const int filetype );
 GLOBAL FILE * myFwbopen ( const char *filename, const int filetype );
 
 GLOBAL MYFILE *my_fopen ( const char *filename, const char *mode );
-GLOBAL BOOLEAN my_fclose ( MYFILE *myfile );
+GLOBAL _BOOL my_fclose ( MYFILE *myfile );
 
 GLOBAL void path_adjust_separator(char *s);
 
 
 #if USE_HTML_FOLDERS
 
-GLOBAL BOOLEAN my_mkdir(char *s);
+GLOBAL _BOOL my_mkdir(char *s);
 
 #endif /* USE_HTML_FOLDERS */
 

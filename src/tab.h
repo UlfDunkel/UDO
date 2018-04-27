@@ -54,7 +54,7 @@ GLOBAL void c_table_caption(void);
 GLOBAL void c_table_caption_nonr(void);
 GLOBAL void table_get_header(char *s);
 
-GLOBAL BOOLEAN table_add_line(char *s);
+GLOBAL _BOOL table_add_line(char *s);
 GLOBAL void table_output(void);
 
 GLOBAL void set_table_counter ( const int i );

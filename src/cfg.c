@@ -344,7 +344,7 @@ GLOBAL int read_profile(void)
              proval[256];  /* */
    size_t    sl;           /* */
    int       i;            /* counter */
-   BOOLEAN   found;        /* */
+   _BOOL   found;        /* */
    
 
    if (profilefull[0] == EOS)             /* no profile fspec available */

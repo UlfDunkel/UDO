@@ -107,7 +107,7 @@ const char *id_tp_c= "@(#) tp.c        $date$";
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN init_docinfo_data(char *data, char **var, int allow_empty);
+LOCAL _BOOL init_docinfo_data(char *data, char **var, int allow_empty);
 LOCAL void init_titdat(void);
 LOCAL void free_titdat(char **var);
 
@@ -143,7 +143,7 @@ LOCAL void free_titdat(char **var);
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN set_show_variable(void)
+GLOBAL _BOOL set_show_variable(void)
 {
    char     s[512],       /* */
            *cont,         /* */
@@ -199,7 +199,7 @@ GLOBAL BOOLEAN set_show_variable(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN set_mainlayout(void)
+GLOBAL _BOOL set_mainlayout(void)
 {
                                           /* Fixed Bug #40 in r6.3pl16 [NHz] */
    init_docinfo_data("A4PORTRAIT", &(laydat.paper), FALSE);
@@ -250,7 +250,7 @@ GLOBAL BOOLEAN set_mainlayout(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN set_doclayout(void)
+GLOBAL _BOOL set_doclayout(void)
 {
    char   s[512],        /* */
          *cont_format,   /* */
@@ -450,7 +450,7 @@ GLOBAL BOOLEAN set_doclayout(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN init_docinfo_data(
+LOCAL _BOOL init_docinfo_data(
 
 char       *data,         /* ^ to content */
 char      **var,          /* ^^ to variable */
@@ -517,7 +517,7 @@ int         allow_empty)  /* TRUE: empty data are okay, FALSE: throw error messa
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN set_docinfo(void)
+GLOBAL _BOOL set_docinfo(void)
 {
    char     s[512],              /* */
            *cont,                /* */
@@ -1027,7 +1027,7 @@ GLOBAL void c_maketitle(void)
    char      n[512],            /* */
              s1[128],           /* */
              s2[128];           /* */
-   BOOLEAN   has_author,        /* flag */
+   _BOOL   has_author,        /* flag */
              has_program,       /* flag */
              has_title,         /* flag */
              has_version,       /* flag */

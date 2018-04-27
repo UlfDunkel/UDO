@@ -42,7 +42,7 @@
 *  2009:
 *    fd  Jun 04: !docinfo [translator] introduced
 *  2010:
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Mar 02: - webmastername    -> domain_name
 *                - webmasterurl     -> domain_link
 *                - webmasteremail   -> contact_name
@@ -93,10 +93,10 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
    char   *authoricon_active;             /* -> Modern/Frames */
    char   *appletitle;                    /* for HTML Apple Help V6.5.17 */
    char   *appleicon;                     /* for HTML Apple Help V6.5.17 */
-   UWORD   authoriconWidth;               /* */
-   UWORD   authoriconHeight;              /* */
-   UWORD   authoriconActiveWidth;         /* */
-   UWORD   authoriconActiveHeight;        /* */
+   _UWORD   authoriconWidth;               /* */
+   _UWORD   authoriconHeight;              /* */
+   _UWORD   authoriconActiveWidth;         /* */
+   _UWORD   authoriconActiveHeight;        /* */
    char   *keywords;                      /* New in r6pl15 [NHz] */
    char   *description;                   /* New in r6pl15 [NHz] */
    char   *robots;                        /* New in V6.5.17 */
@@ -126,17 +126,17 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
 typedef struct                            /* Paper Format */
 {
    char     *paper;                       /* paper format */
-   UWORD     width_mm10;                  /* width  in 10th of a mm */
-   UWORD     height_mm10;                 /* height in 10th of a mm */
-   UWORD     width_pt;                    /* */
-   UWORD     height_pt;                   /* */
-   UWORD     margintop_pt;                /* */
-   UWORD     marginleft_pt;               /* */
-   UWORD     marginright_pt;              /* */
-   UWORD     marginbottom_pt;             /* */
-   UWORD     width_twips;                 /* */
-   UWORD     height_twips;                /* */
-   BOOLEAN   landscape;                   /* TRUE: landscape, FALSE: portrait */
+   _UWORD     width_mm10;                  /* width  in 10th of a mm */
+   _UWORD     height_mm10;                 /* height in 10th of a mm */
+   _UWORD     width_pt;                    /* */
+   _UWORD     height_pt;                   /* */
+   _UWORD     margintop_pt;                /* */
+   _UWORD     marginleft_pt;               /* */
+   _UWORD     marginright_pt;              /* */
+   _UWORD     marginbottom_pt;             /* */
+   _UWORD     width_twips;                 /* */
+   _UWORD     height_twips;                /* */
+   _BOOL   landscape;                   /* TRUE: landscape, FALSE: portrait */
 } PAPERFORMAT;
 
 
@@ -160,15 +160,15 @@ typedef struct                            /* ---- Layoutinfos ---- */
    char   *hidetoolbar;                   /* */
    char   *hidemenubar;                   /* */
    char   *propfontname;                  /* */
-   UWORD   propfontsize;                  /* */
+   _UWORD   propfontsize;                  /* */
    char   *monofontname;                  /* */
-   UWORD   monofontsize;                  /* */
-   UWORD   node1size;                     /* New in r6pl16 [NHz] */
-   UWORD   node2size;                     /* New in r6pl16 [NHz] */
-   UWORD   node3size;                     /* New in r6pl16 [NHz] */
-   UWORD   node4size;                     /* New in r6pl16 [NHz] */
-   UWORD   node5size;
-   UWORD   node6size;
+   _UWORD   monofontsize;                  /* */
+   _UWORD   node1size;                     /* New in r6pl16 [NHz] */
+   _UWORD   node2size;                     /* New in r6pl16 [NHz] */
+   _UWORD   node3size;                     /* New in r6pl16 [NHz] */
+   _UWORD   node4size;                     /* New in r6pl16 [NHz] */
+   _UWORD   node5size;
+   _UWORD   node6size;
 }  LAYOUTDATA;
 
 
@@ -185,8 +185,8 @@ typedef struct                            /* ---- Layoutinfos ---- */
 ******************************************|************************************/
 
 GLOBAL int          address_counter;      /* */
-GLOBAL BOOLEAN      called_maketitle;     /* */
-GLOBAL BOOLEAN      uses_maketitle;       /* */
+GLOBAL _BOOL      called_maketitle;     /* */
+GLOBAL _BOOL      uses_maketitle;       /* */
 
 GLOBAL TITLEDATA    titdat;               /* */
 GLOBAL LAYOUTDATA   laydat;               /* New in r6pl15 [NHz] */
@@ -203,10 +203,10 @@ GLOBAL char         titleprogram[512];    /* */
 *
 ******************************************|************************************/
    
-GLOBAL BOOLEAN set_show_variable(void);   /* New V6.5.19 */
-GLOBAL BOOLEAN set_mainlayout(void);      /* New in r6pl16 [NHz] */
-GLOBAL BOOLEAN set_doclayout(void);       /* New in r6pl15 [NHz] */
-GLOBAL BOOLEAN set_docinfo(void);
+GLOBAL _BOOL set_show_variable(void);   /* New V6.5.19 */
+GLOBAL _BOOL set_mainlayout(void);      /* New in r6pl16 [NHz] */
+GLOBAL _BOOL set_doclayout(void);       /* New in r6pl15 [NHz] */
+GLOBAL _BOOL set_docinfo(void);
 GLOBAL void    c_maketitle(void);
 GLOBAL void    pch_titlepage(void);
 

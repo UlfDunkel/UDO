@@ -39,7 +39,7 @@
 *
 *  2010:
 *    fd  Feb 22: - header adjusted
-                 - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+                 - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -99,7 +99,7 @@ GLOBAL void my_strupr ( char *string );
 GLOBAL void my_strlwr ( char *string );
 GLOBAL void str_din_5007_1 ( char *string );   /* New V6.5.20 [gs] */
 
-GLOBAL UWORD str_flatten(char *zeile);
+GLOBAL _UWORD str_flatten(char *zeile);
 GLOBAL int str_UTF_sort_cmp(char *s1, char *s2);
 GLOBAL int str_sort_flatten_cmp(char *s1, char *s2);   /* New V6.5.20 [gs] */
 GLOBAL int str_sort_cmp(char *s1, char *s2);   /* New V6.5.20 [gs] */

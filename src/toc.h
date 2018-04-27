@@ -40,7 +40,7 @@
 *  2010:
 *    fd  Jan 20: new: html_quotes()
 *    fd  Feb 05: file reformatted and tidied up; TAB-free
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  May 21: more comments translated
 *  2011:
 *    fd  Feb 14: - functions add_...node_to_toc() merged into add_nodetype_to_toc()
@@ -117,14 +117,14 @@ typedef struct _label                     /* jump labels to be referenced */
    int       n4;                          /* ... subsubsubnode */
    int       n5;                          /* ... subsubsubsubnode */
    int       n6;                          /* ... subsubsubsubsubnode */
-   BOOLEAN   appendix;                    /* label is in appendix */
-   BOOLEAN   is_node;                     /* label is node title */
-   BOOLEAN   is_popup;                    /* node is a popup node */
-   BOOLEAN   is_alias;                    /* alias name of a node */
+   _BOOL   appendix;                    /* label is in appendix */
+   _BOOL   is_node;                     /* label is node title */
+   _BOOL   is_popup;                    /* node is a popup node */
+   _BOOL   is_alias;                    /* alias name of a node */
    int       tocindex;                    /* belongs to node "toc[tocindex]" */
-   BOOLEAN   ignore_links;                /* don't link to this label */
-   BOOLEAN   ignore_index;                /* don't index this label (node only!) */
-   BOOLEAN   referenced;                  /* TRUE: label has been referenced */
+   _BOOL   ignore_links;                /* don't link to this label */
+   _BOOL   ignore_index;                /* don't index this label (node only!) */
+   _BOOL   referenced;                  /* TRUE: label has been referenced */
    
 }  LABEL,  *pLABEL;
 
@@ -164,7 +164,7 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    int       n5;                          /* Unterabschnittnummer   (absolut) */
    int       n6;                          /* Unterabschnittnummer   (absolut) */
    int       nr1,nr2,nr3,nr4,nr5,nr6;     /* Inhaltsverzeichnis-Nummern */
-   BOOLEAN   appendix;                    /* TRUE = Steht im Anhang */
+   _BOOL   appendix;                    /* TRUE = Steht im Anhang */
    int       toctype;                     /* !node, !subnode, !subsubnode, !subsubsubnode, !subsubsubsubnode */
                                           /* Filename der Sourcecodedatei */   /* V6.5.18 */
    char      source_filename[MYFILE_FULL_LEN];
@@ -202,19 +202,19 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    char      bgsound[MYFILE_FULL_LEN + 1];
 
    char     *image;                       /* Grafik anstelle Kapitelnamen */
-   UWORD     uiImageWidth;                /* Breite und Hoehe des Bildes */ 
-   UWORD     uiImageHeight;
+   _UWORD     uiImageWidth;                /* Breite und Hoehe des Bildes */ 
+   _UWORD     uiImageHeight;
    char     *icon;                        /* Icon fuer modernes Layout */
-   UWORD     uiIconWidth;                 /* Breite und Hoehe des Icons */ 
-   UWORD     uiIconHeight;
+   _UWORD     uiIconWidth;                 /* Breite und Hoehe des Icons */ 
+   _UWORD     uiIconHeight;
    char     *icon_active;                 /* Icon fuer    -""- (aktive Seite) */
-   UWORD     uiIconActiveWidth;           /* Breite und Hoehe des Icons */ 
-   UWORD     uiIconActiveHeight;
+   _UWORD     uiIconActiveWidth;           /* Breite und Hoehe des Icons */ 
+   _UWORD     uiIconActiveHeight;
    char     *icon_text;                   /* Icontext fuer modernes Layout */
    char     *helpid;                      /* Eine Jump-ID, wie ein Alias */
    int       mapping;                     /* Eine Jump-ID fuer WinHelp/IPF */
-   BOOLEAN   invisible;                   /* TRUE = Nicht ins Inhaltsverzeichnis */
-   BOOLEAN   converted;                   /* Bereits Makros etc. angepasst? */
+   _BOOL   invisible;                   /* TRUE = Nicht ins Inhaltsverzeichnis */
+   _BOOL   converted;                   /* Bereits Makros etc. angepasst? */
    int       labindex;                    /* lab[]-Position */
    int       prev_index;                  /* toc[]-Position des HTML-Vorgaengers */
    int       next_index;                  /* toc[]-Position des HTML-Nachfolgers */
@@ -228,18 +228,18 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    int       count_n4;                    /* # of contained subsubsubnodes */
    int       count_n5;                    /* # of contained subsubsubsubnodes */
    int       count_n6;                    /* # of contained subsubsubsubsubnodes */
-   BOOLEAN   ignore_subtoc;               /* ignore !use_auto_subtoc */
-   BOOLEAN   ignore_links;                /* don't link to this page */
-   BOOLEAN   ignore_index;                /* don't add this to the index page */
-   BOOLEAN   ignore_title;                /* don't create title for this node */
-   BOOLEAN   ignore_headline;             /* don't create a header line */
-   BOOLEAN   ignore_bottomline;           /* don't create a bottom line */
-   BOOLEAN   ignore_footer;               /* don't create a footer line */
+   _BOOL   ignore_subtoc;               /* ignore !use_auto_subtoc */
+   _BOOL   ignore_links;                /* don't link to this page */
+   _BOOL   ignore_index;                /* don't add this to the index page */
+   _BOOL   ignore_title;                /* don't create title for this node */
+   _BOOL   ignore_headline;             /* don't create a header line */
+   _BOOL   ignore_bottomline;           /* don't create a bottom line */
+   _BOOL   ignore_footer;               /* don't create a footer line */
    char     *raw_header_filename;         /* */
    char     *raw_footer_filename;         /* */
-   BOOLEAN   ignore_raw_header;           /* don't read user-defined header */
-   BOOLEAN   ignore_raw_footer;           /* don't read user-defined footer */
-   BOOLEAN   has_children;                /* TRUE: this node has subnode(s) */
+   _BOOL   ignore_raw_header;           /* don't read user-defined header */
+   _BOOL   ignore_raw_footer;           /* don't read user-defined footer */
+   _BOOL   has_children;                /* TRUE: this node has subnode(s) */
 
 }  TOCITEM, *pTOCITEM;
 
@@ -279,14 +279,14 @@ GLOBAL int       all_nodes,
                  all_subsubsubsubnodes,
                  all_subsubsubsubsubnodes;
 
-GLOBAL BOOLEAN   bInsideAppendix,         /* Ist UDO im Anhang? */
+GLOBAL _BOOL   bInsideAppendix,         /* Ist UDO im Anhang? */
                  bInsideDocument,         /* Ist UDO im Dokument selber? */
                  bInsidePopup;            /* In einem Popup-Node? */
 
-GLOBAL BOOLEAN   called_tableofcontents;  /* Wurde toc ausgegeben? (@toc) */
-GLOBAL BOOLEAN   called_subsubsubsubsubnode;
+GLOBAL _BOOL   called_tableofcontents;  /* Wurde toc ausgegeben? (@toc) */
+GLOBAL _BOOL   called_subsubsubsubsubnode;
 
-GLOBAL BOOLEAN   uses_tableofcontents;    /* !tableofcontents wird benutzt */
+GLOBAL _BOOL   uses_tableofcontents;    /* !tableofcontents wird benutzt */
 
                                           /* 6.3.11 [vj]: This is needed, because current_node_name_sys needs to buffer a lot of stuff! */
 GLOBAL char      current_node_name_sys[CNNS_LEN];
@@ -332,16 +332,16 @@ GLOBAL char     *html_frames_con_title;   /* V6.5.16 [GS] */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN is_node_link(const char *link, char *node, int *ti, BOOLEAN *isnode, int *li);
+GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, int *li);
 GLOBAL int getLabelIndexFromTocIndex(int *li, const int ti);
 
 GLOBAL void reset_refs(void);
-GLOBAL void auto_references(char *s, const BOOLEAN for_toc, const char *pic, const UWORD uiWidth, const UWORD uiHeight);
+GLOBAL void auto_references(char *s, const _BOOL for_toc, const char *pic, const _UWORD uiWidth, const _UWORD uiHeight);
 
 GLOBAL void check_endnode(void);
 
-GLOBAL BOOLEAN check_output_raw_header(void);
-GLOBAL BOOLEAN check_output_raw_footer(BOOLEAN lastNode);
+GLOBAL _BOOL check_output_raw_header(void);
+GLOBAL _BOOL check_output_raw_footer(_BOOL lastNode);
 
 GLOBAL void man_headline(void);
 GLOBAL void man_bottomline(void);
@@ -352,12 +352,12 @@ GLOBAL void html_save_frameset(void);
 GLOBAL void html_headline(void);
 GLOBAL void html_bottomline(void);
 GLOBAL void html_footer(void);
-GLOBAL BOOLEAN save_html_index(void);
+GLOBAL _BOOL save_html_index(void);
 GLOBAL void add_pass1_index_udo(void);
 GLOBAL void hh_headline(void);
 GLOBAL void hh_bottomline(void);
-GLOBAL BOOLEAN save_htmlhelp_contents(const char* filename);
-GLOBAL BOOLEAN save_htmlhelp_index(const char* filename);
+GLOBAL _BOOL save_htmlhelp_contents(const char* filename);
+GLOBAL _BOOL save_htmlhelp_index(const char* filename);
 
 
    /* --- chapter commands --- */
@@ -414,7 +414,7 @@ GLOBAL void c_listoftables(void);
    /* outputs an auto-generated Table Of Contents */
 GLOBAL void c_tableofcontents(void);
 
-GLOBAL BOOLEAN bookmarks_ps(void);
+GLOBAL _BOOL bookmarks_ps(void);
 
 
    /* --- output a label in pass 2 --- */
@@ -425,8 +425,8 @@ GLOBAL void c_alias(void);
 
    /* --- misc. --- */
 
-GLOBAL BOOLEAN add_label(const char *label, const BOOLEAN isn, const BOOLEAN isp);
-GLOBAL BOOLEAN add_alias(const char *alias, const BOOLEAN isp);
+GLOBAL _BOOL add_label(const char *label, const _BOOL isn, const _BOOL isp);
+GLOBAL _BOOL add_alias(const char *alias, const _BOOL isp);
 
 
    /* --- enhance TOC --- */
@@ -451,9 +451,9 @@ GLOBAL void set_chapter_icon(void);
 GLOBAL void set_chapter_icon_active(void);
 GLOBAL void set_chapter_icon_text(void);
 
-GLOBAL BOOLEAN add_nodetype_to_toc(int nodetype, const BOOLEAN popup, const BOOLEAN invisible);
+GLOBAL _BOOL add_nodetype_to_toc(int nodetype, const _BOOL popup, const _BOOL invisible);
 
-GLOBAL BOOLEAN toc_begin_node (const BOOLEAN popup, const BOOLEAN invisible);
+GLOBAL _BOOL toc_begin_node (const _BOOL popup, const _BOOL invisible);
 GLOBAL void toc_end_node(void);
 GLOBAL int is_current_node(int tocindex);
 GLOBAL int get_toc_counter(void);
@@ -462,20 +462,20 @@ GLOBAL void toc_init_lang(void);
 
    /* --- output files with Jump IDs for several compilers --- */
 
-GLOBAL BOOLEAN save_htmlhelp_alias(void);
-GLOBAL BOOLEAN save_htmlhelp_map(void);
-GLOBAL BOOLEAN save_winhelp_map_c(void);
-GLOBAL BOOLEAN save_winhelp_map_pas(void);
-GLOBAL BOOLEAN save_winhelp_map_vb(void);
-GLOBAL BOOLEAN save_winhelp_map_gfa(void);
+GLOBAL _BOOL save_htmlhelp_alias(void);
+GLOBAL _BOOL save_htmlhelp_map(void);
+GLOBAL _BOOL save_winhelp_map_c(void);
+GLOBAL _BOOL save_winhelp_map_pas(void);
+GLOBAL _BOOL save_winhelp_map_vb(void);
+GLOBAL _BOOL save_winhelp_map_gfa(void);
 
-GLOBAL BOOLEAN save_winhelp4_cnt(void);
+GLOBAL _BOOL save_winhelp4_cnt(void);
 
 
    /* --- module check --- */
 
-GLOBAL BOOLEAN check_module_toc_pass1(void);
-GLOBAL BOOLEAN check_module_toc_pass2(void);
+GLOBAL _BOOL check_module_toc_pass1(void);
+GLOBAL _BOOL check_module_toc_pass2(void);
 
 
    /* --- module functions --- */

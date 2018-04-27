@@ -47,6 +47,7 @@
 *                - new: get_image_header(): replaces proprietary get_NNNheader() functions
 *  2013:
 *    fd  Oct 23: HTML output supports HTML5
+*    tho Oct 29: Disabled the nonsense for HTML5 that only works on the UDO webpage
 *    fd  Oct 31: - c_calc_pngsize() added
 *                - c_gif_output() renamed: c_html_image_output()
 *    fd  Nov 02: HTML5 output of <img> tags cleaned
@@ -73,6 +74,10 @@ const char *id_img_c= "@(#) img.c       22.04.1999";
 *     INCLUDE FILES
 *
 ******************************************|************************************/
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "import.h"
 #include <stdio.h>
@@ -108,8 +113,6 @@ LOCAL int image_counter;
 
 
 
-
-
 /*******************************************************************************
 *
 *     MACRO DEFINITIONS
@@ -120,31 +123,25 @@ LOCAL int image_counter;
 
 
 
-
-
-
-
 /*******************************************************************************
 *
 *     LOCAL PROTOTYPES
 *
 ******************************************|************************************/
 
-LOCAL void save_one_html_gif(const char *name, const UBYTE *buffer, const size_t length, BOOLEAN *ret);
-LOCAL void save_one_win_bmp(const char *name, const UBYTE *buffer, const size_t length, BOOLEAN *ret);
-LOCAL void save_one_stg_img(const char *name, const UBYTE *buffer, const size_t length, BOOLEAN *ret);
+LOCAL void save_one_html_gif(const char *name, const _UBYTE *buffer, const size_t length, _BOOL *ret);
+LOCAL void save_one_win_bmp(const char *name, const _UBYTE *buffer, const size_t length, _BOOL *ret);
+LOCAL void save_one_stg_img(const char *name, const _UBYTE *buffer, const size_t length, _BOOL *ret);
 
-
-LOCAL BOOLEAN get_image_header(const char *datei, int type, XPOINT head);
 
 LOCAL int set_imgheader(const char *datei, IMGHEADER *head);
 
-LOCAL void calc_gifsize(UWORD *w, UWORD *h, GIFHEADER *head);
-LOCAL void calc_jpgsize(UWORD *w, UWORD *h, JPGHEADER *head);
-LOCAL void calc_pngsize(UWORD *w, UWORD *h, PNGHEADER *head);
+LOCAL void calc_gifsize(_UWORD *w, _UWORD *h, GIFHEADER *head);
+LOCAL void calc_jpgsize(_UWORD *w, _UWORD *h, JPGHEADER *head);
+LOCAL void calc_pngsize(_UWORD *w, _UWORD *h, PNGHEADER *head);
 
-LOCAL int uc2ToInt(UBYTE *uc, int *i);
-LOCAL int uc4ToInt(UBYTE *uc, int *i);
+LOCAL int uc2ToInt(_UBYTE *uc, int *i);
+LOCAL int uc4ToInt(_UBYTE *uc, int *i);
 
 
 
@@ -175,9 +172,9 @@ LOCAL int uc4ToInt(UBYTE *uc, int *i);
 LOCAL void save_one_html_gif(
 
 const char    *name,     /* */
-const UBYTE   *buffer,   /* */
+const _UBYTE   *buffer,   /* */
 const size_t   length,   /* */
-BOOLEAN       *ret)      /* TRUE: file has been saved */
+_BOOL       *ret)      /* TRUE: file has been saved */
 {
    FILE       *giffile;  /* */
    
@@ -198,7 +195,10 @@ BOOLEAN       *ret)      /* TRUE: file has been saved */
          error_open_outfile(name);
    }
    else                                    /* yes: GIF file exists already */
+   {
       fclose(giffile);                     /* just close it */
+      *ret = TRUE;
+   }
 
    save_upr_entry_image(name);
 }
@@ -314,9 +314,9 @@ GLOBAL void save_html_gifs(void)
 LOCAL void save_one_win_bmp(
 
 const char    *name,     /* */
-const UBYTE   *buffer,   /* */
+const _UBYTE   *buffer,   /* */
 const size_t   length,   /* */
-BOOLEAN       *ret)      /* */
+_BOOL       *ret)      /* */
 {
    FILE       *bmpfile;  /* */
    
@@ -413,9 +413,9 @@ GLOBAL void save_rtf_bmps(void)
 LOCAL void save_one_stg_img(
 
 const char    *name,     /* */
-const UBYTE   *buffer,   /* */
+const _UBYTE   *buffer,   /* */
 const size_t   length,   /* */
-BOOLEAN       *ret)      /* */
+_BOOL       *ret)      /* */
 {
    FILE       *imgfile;  /* */
    
@@ -498,15 +498,15 @@ GLOBAL void save_stg_imgs(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN get_image_header(
+LOCAL _BOOL get_image_header(
 
 const char  *datei,  /* */
 int          type,   /* IMGTYPE_... */
-XPOINT       head)   /* image header struct */
+void *       head)   /* image header struct */
 {
    FILE     *file;   /* */
    size_t    elem;   /* */
-   ULONG     size;   /* sizeof() */
+   _ULONG     size;   /* sizeof() */
    
    
    
@@ -603,8 +603,8 @@ IMGHEADER   *head)   /* */
 
 LOCAL void calc_gifsize(
 
-UWORD      *w,     /* */
-UWORD      *h,     /* */
+_UWORD      *w,     /* */
+_UWORD      *h,     /* */
 GIFHEADER  *head)  /* */
 {
    *w = (head->gif_width_hi  * 256 + head->gif_width_lo);
@@ -627,8 +627,8 @@ GIFHEADER  *head)  /* */
 
 LOCAL void calc_jpgsize(
 
-UWORD      *w,     /* */
-UWORD      *h,     /* */
+_UWORD      *w,     /* */
+_UWORD      *h,     /* */
 JPGHEADER  *head)  /* */
 {
    /* <???> Hier fehlt noch viel */
@@ -653,8 +653,8 @@ JPGHEADER  *head)  /* */
 
 LOCAL void calc_pngsize(
 
-UWORD      *w,     /* */
-UWORD      *h,     /* */
+_UWORD      *w,     /* */
+_UWORD      *h,     /* */
 PNGHEADER  *head)  /* */
 {
    *w = (head->png_width_hi  * 256 + head->png_width_lo);
@@ -677,7 +677,7 @@ PNGHEADER  *head)  /* */
 
 LOCAL int uc2ToInt(
 
-UBYTE  *uc,  /* */
+_UBYTE  *uc,  /* */
 int    *i)   /* */
 {
    *i = uc[0] + 256 * uc[1];
@@ -701,7 +701,7 @@ int    *i)   /* */
 
 LOCAL int uc4ToInt (
 
-UBYTE  *uc,  /* */
+_UBYTE  *uc,  /* */
 int    *i)   /* */
 {
    *i = uc[0] + 256 * uc[1];
@@ -735,10 +735,10 @@ int    *i)   /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN c_img_output(
+GLOBAL _BOOL c_img_output(
 const char     *name,           /* filename */
 const char     *caption,        /* */
-const BOOLEAN   visible)        /* */
+const _BOOL   visible)        /* */
 {
    IMGHEADER    imghead;        /* IMG file header */
    char         n[256],         /* */
@@ -756,7 +756,7 @@ const BOOLEAN   visible)        /* */
                 pix_hmm;        /* */
    int          indent,         /* indentation */
                 max_width;      /* maximum available width */
-   BOOLEAN      inside_center,  /* flags */
+   _BOOL      inside_center,  /* flags */
                 inside_right,   /* */
                 inside_left,    /* */
                 flag;           /* */
@@ -828,11 +828,11 @@ const BOOLEAN   visible)        /* */
             width  = 25400 / iTexDPI;
             height = 25400 / iTexDPI;
 
-            imghead.im_pixwidth_hi  = (UBYTE)(width  / 256);
-            imghead.im_pixwidth_lo  = (UBYTE)(width  - imghead.im_pixwidth_hi  * 256);
+            imghead.im_pixwidth_hi  = (_UBYTE)(width  / 256);
+            imghead.im_pixwidth_lo  = (_UBYTE)(width  - imghead.im_pixwidth_hi  * 256);
 
-            imghead.im_pixheight_hi = (UBYTE)(height / 256);
-            imghead.im_pixheight_lo = (UBYTE)(height - imghead.im_pixheight_hi * 256);
+            imghead.im_pixheight_hi = (_UBYTE)(height / 256);
+            imghead.im_pixheight_lo = (_UBYTE)(height - imghead.im_pixheight_hi * 256);
 
             if ( !set_imgheader(datei, &imghead) )
             {
@@ -965,9 +965,9 @@ const int      border)            /* */
    char        align[64];         /* */
    char        sWidth[32],        /* */
                sHeight[32];       /* */
-   UWORD       uiWidth,           /* */
+   _UWORD       uiWidth,           /* */
                uiHeight;          /* */
-   BOOLEAN     inside_center,     /* */
+   _BOOL     inside_center,     /* */
                inside_right,      /* */
                inside_left,       /* */
                flag;              /* */
@@ -1158,7 +1158,7 @@ GLOBAL void c_bmp_output(
 
 const char     *name, 
 const char     *caption, 
-const BOOLEAN   visible)
+const _BOOL   visible)
 {
    FILE        *file;
    BMPHEADER    bmpheader;
@@ -1178,8 +1178,8 @@ const BOOLEAN   visible)
    int          indent;
    char         li[32], 
                 dump[32];
-   UBYTE        onebyte;
-   BOOLEAN      inside_center, 
+   _UBYTE        onebyte;
+   _BOOL      inside_center, 
                 inside_right, 
                 inside_left;
 
@@ -1468,11 +1468,11 @@ const BOOLEAN   visible)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN c_msp_output(
+GLOBAL _BOOL c_msp_output(
 
 const char     *name,           /* */
 const char     *caption,        /* */
-const BOOLEAN   visible)        /* */
+const _BOOL   visible)        /* */
 {
    MSPHEADER    mspheader;      /* */
    char         n[256],         /* */
@@ -1483,7 +1483,7 @@ const BOOLEAN   visible)        /* */
                 yorg,           /* */
                 width,          /* */
                 height;         /* */
-   BOOLEAN      inside_center,  /* */
+   _BOOL      inside_center,  /* */
                 inside_right,   /* */
                 inside_left;    /* */
                 
@@ -1600,11 +1600,11 @@ const BOOLEAN   visible)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN c_pcx_output(
+GLOBAL _BOOL c_pcx_output(
 
 const char     *name,           /* */
 const char     *caption,        /* */
-const BOOLEAN   visible)        /* */
+const _BOOL   visible)        /* */
 {
    PCXHEADER    pcxheader;      /* */
    char         n[256],         /* */
@@ -1619,7 +1619,7 @@ const BOOLEAN   visible)        /* */
                 lower,          /* */
                 width,          /* */
                 height;         /* */
-   BOOLEAN      inside_center,  /* */
+   _BOOL      inside_center,  /* */
                 inside_right,   /* */
                 inside_left;    /* */
                 
@@ -1747,12 +1747,12 @@ GLOBAL void c_eps_output(
 const char     *name,           /* */
 const char     *caption,        /* */
 const char     *suffix,         /* */
-const BOOLEAN   visible)        /* */
+const _BOOL   visible)        /* */
 {
 #if 0
    char         n[256];         /* */
    char         align[64];      /* */
-   BOOLEAN      inside_center,  /* */
+   _BOOL      inside_center,  /* */
                 inside_right;   /* */
 #endif
    char         datei[512];     /* */
@@ -1840,13 +1840,13 @@ GLOBAL void c_png_output(
 const char     *name,           /* */
 const char     *caption,        /* */
 const char     *suffix,         /* */
-const BOOLEAN   visible)        /* */
+const _BOOL   visible)        /* */
 {
    char         datei[512],     /* */
                 pngdatei[512];  /* */
-   UWORD        uiWidth,        /* */
+   _UWORD        uiWidth,        /* */
                 uiHeight;       /* */
-   BOOLEAN      inside_center,  /* */
+   _BOOL      inside_center,  /* */
                 inside_right,   /* */
                 inside_left,    /* */
                 flag;           /* */
@@ -2043,13 +2043,13 @@ const int   i)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN get_gif_size(
+GLOBAL _BOOL get_gif_size(
 
 const char    *filename,  /* */
-UWORD         *uiW,       /* */
-UWORD         *uiH)       /* */
+_UWORD         *uiW,       /* */
+_UWORD         *uiH)       /* */
 {
-   BOOLEAN     flag;      /* TRUE: GIF header could be read successfully */
+   _BOOL     flag;      /* TRUE: GIF header could be read successfully */
    GIFHEADER   gh;        /* */
    
 
@@ -2083,13 +2083,13 @@ UWORD         *uiH)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN get_jpg_size(
+GLOBAL _BOOL get_jpg_size(
 
 const char    *filename,  /* */
-UWORD         *uiW,       /* */
-UWORD         *uiH)       /* */
+_UWORD         *uiW,       /* */
+_UWORD         *uiH)       /* */
 {
-   BOOLEAN     flag;      /* TRUE: JPEG header could be read successfully */
+   _BOOL     flag;      /* TRUE: JPEG header could be read successfully */
    JPGHEADER   jh;        /* */
 
    *uiW = *uiH = 0;
@@ -2123,13 +2123,13 @@ UWORD         *uiH)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN get_png_size(
+GLOBAL _BOOL get_png_size(
 
 const char    *filename,  /* */
-UWORD         *uiW,       /* */
-UWORD         *uiH)       /* */
+_UWORD         *uiW,       /* */
+_UWORD         *uiH)       /* */
 {
-   BOOLEAN     flag;      /* TRUE: PNG header could be read successfully */
+   _BOOL     flag;      /* TRUE: PNG header could be read successfully */
    PNGHEADER   gh;        /* */
    
 
@@ -2165,11 +2165,11 @@ UWORD         *uiH)       /* */
 LOCAL void init_gif_size(
 
 const char    *filename,  /* */
-const UBYTE   *def,       /* */
-UWORD         *uiW,       /* */
-UWORD         *uiH)       /* */
+const _UBYTE   *def,       /* */
+_UWORD         *uiW,       /* */
+_UWORD         *uiH)       /* */
 {
-   BOOLEAN     flag;      /* TRUE: GIF header could be read successfully */
+   _BOOL     flag;      /* TRUE: GIF header could be read successfully */
    GIFHEADER   gh;        /* */
 
 

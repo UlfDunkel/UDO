@@ -69,7 +69,7 @@
 *    fd  Feb 19: - CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
 *                - c_universal_charset() debugged
 *    fd  Feb 20: CODE_CP1251
-*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253 (Greek)
 *    fd  Feb 23: - CODE_MAC_CE
 *                - CODE_LAT1 -> CODE_CP1252
@@ -239,9 +239,9 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 typedef struct _if_stack_item             /* */
 {
    int       kind;                        /* */
-   BOOLEAN   ignore;                      /* */
+   _BOOL   ignore;                      /* */
    char      filename[512];               /* */
-   UWORD     fileline;                    /* */
+   _UWORD     fileline;                    /* */
 }  IF_STACK_ITEM;
 
 
@@ -268,7 +268,7 @@ typedef struct _udocommand                /* ---- Funktionentabelle ---- */
    char     *magic;                       /* UDO-Kommando */
    char     *macut;                       /* Shortcut des Kommandos */
    CMDPROC   proc;                        /* zugehoerige Routine */
-   BOOLEAN   reset;                       /* Tokens danach loeschen? */
+   _BOOL   reset;                       /* Tokens danach loeschen? */
    int       pos;                         /* Erlaubnis Vorspann/Hauptteil */
 }  UDOCOMMAND;
 
@@ -500,7 +500,7 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"next",                CODE_NEXT     },
    {"nextstep",            CODE_NEXT     },
    
-   {"", NIL}                              /* list terminator */
+   {"", -1}                              /* list terminator */
 };
 
 
@@ -547,19 +547,19 @@ LOCAL UDOCOLOR udocolor[MAX_UDOCOLOR + 1] =
 
 #include "udolocal.h"                     /* local prototypes */
 
-LOCAL BOOLEAN   format_needs_exact_toklen;
-LOCAL BOOLEAN   format_uses_output_buffer;
-LOCAL BOOLEAN   format_protect_commands;
+LOCAL _BOOL   format_needs_exact_toklen;
+LOCAL _BOOL   format_uses_output_buffer;
+LOCAL _BOOL   format_protect_commands;
 
-LOCAL BOOLEAN   out_lf_needed;            /* Fehlt noch ein Linefeed? */
-LOCAL UWORD     outlines;                 /* Anzahl gesicherter Zeilen */
+LOCAL _BOOL   out_lf_needed;            /* Fehlt noch ein Linefeed? */
+LOCAL _UWORD     outlines;                 /* Anzahl gesicherter Zeilen */
 
 LOCAL char     *tobuffer;                 /* Puffer fuer token_output() */
 LOCAL size_t    tomaxlen;                 /* spaeteste Umbruchstelle in t_o() */
 
-LOCAL BOOLEAN   bDocSloppy;               /* Kurze Zeilen bemaengeln? */
-LOCAL BOOLEAN   no_verbatim_umlaute;      /* In verbatim Umlaute entfernen? */
-LOCAL BOOLEAN   use_output_buffer;        /* Erst puffern, dann ausgeben? */
+LOCAL _BOOL   bDocSloppy;               /* Kurze Zeilen bemaengeln? */
+LOCAL _BOOL   no_verbatim_umlaute;      /* In verbatim Umlaute entfernen? */
+LOCAL _BOOL   use_output_buffer;        /* Erst puffern, dann ausgeben? */
 
 LOCAL char      timer_start[16];          /* Uhrzeiten fuer Start und Stopp */
 LOCAL char      timer_stop[16];
@@ -568,31 +568,31 @@ LOCAL char      timer_stop[16];
 LOCAL char      silbe[MAXSILBEN][MAX_TOKEN_LEN + 1];
 LOCAL int       silben_counter;           /* Der passende Zaehler */
 
-LOCAL BOOLEAN   bHypSaved;
-LOCAL BOOLEAN   bIdxSaved;
-LOCAL BOOLEAN   bTreeSaved;
-LOCAL BOOLEAN   bCmdSaved;
-LOCAL BOOLEAN   bHpjSaved;
-LOCAL BOOLEAN   bCntSaved;
-LOCAL BOOLEAN   bUPRSaved;
-LOCAL BOOLEAN   bMapSavedC, 
+LOCAL _BOOL   bHypSaved;
+LOCAL _BOOL   bIdxSaved;
+LOCAL _BOOL   bTreeSaved;
+LOCAL _BOOL   bCmdSaved;
+LOCAL _BOOL   bHpjSaved;
+LOCAL _BOOL   bCntSaved;
+LOCAL _BOOL   bUPRSaved;
+LOCAL _BOOL   bMapSavedC, 
                 bMapSavedPas, 
                 bMapSavedVB, 
                 bMapSavedGFA;
-LOCAL BOOLEAN   bHhpSaved, 
+LOCAL _BOOL   bHhpSaved, 
                 bHhcSaved, 
                 bHhkSaved;
 
 LOCAL int       iFilesOpened;             /* Anzahl geoeffneter Files */
                                           /* Zeilen geoeffneter Files */
-LOCAL UWORD     uiFileLines[MAXFILECOUNTER];
+LOCAL _UWORD     uiFileLines[MAXFILECOUNTER];
                                           /* Namen geoeffneter Files */
 LOCAL char      sFileNames[MAXFILECOUNTER][512 + 1];
 
 LOCAL IF_STACK_ITEM   if_stack[MAX_IF_STACK + 1];
 LOCAL int             counter_if_stack;
 
-LOCAL ULONG     lPass1Lines,              /* fuer die Prozentangabe */ 
+LOCAL _ULONG     lPass1Lines,              /* fuer die Prozentangabe */ 
                 lPass2Lines;
 
 LOCAL HYPLIST  *hyplist;                  /* */
@@ -1422,7 +1422,7 @@ size_t      length)  /* length of right-justified string */
 #define MAXBLANKPOS  256
 
 LOCAL size_t    blankpos[MAXBLANKPOS+1];  /* Positionen der Blanks */
-LOCAL BOOLEAN   justify_from_right;       /* Blanks rechts einfuegen? */
+LOCAL _BOOL   justify_from_right;       /* Blanks rechts einfuegen? */
 
 LOCAL void strjustify(
 
@@ -1435,7 +1435,7 @@ size_t       len)        /* */
    int       count,      /* */
              pos,        /* */
              j;          /* */
-   BOOLEAN   is_verbed;  /* */
+   _BOOL   is_verbed;  /* */
    
 
    if (s[0] == ' ' || s[0] == EOS)        /* string starts with space or is empty? */
@@ -1615,11 +1615,11 @@ LOCAL void cmd_inside_preamble(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN str_for_destlang(
+LOCAL _BOOL str_for_destlang(
 
 const char       *s)             /* ^ token string */
 {
-   BOOLEAN        flag = FALSE;  /* return value */
+   _BOOL        flag = FALSE;  /* return value */
    register int   i;             /* counter */
    
 
@@ -1659,11 +1659,11 @@ const char       *s)             /* ^ token string */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN str_for_desttype(
+GLOBAL _BOOL str_for_desttype(
 
 const char  *s)             /* ^ token string */
 {
-   BOOLEAN   flag = FALSE;  /* return value */
+   _BOOL   flag = FALSE;  /* return value */
 
    switch (desttype)                      /* list sorted by token string! */
    {
@@ -1719,13 +1719,13 @@ const char  *s)             /* ^ token string */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN is_for_desttype(
+GLOBAL _BOOL is_for_desttype(
 
-BOOLEAN          *schalter,      /* */
+_BOOL          *schalter,      /* */
 const char       *cmd)           /* */
 {
    register int   i;             /* counter */
-   BOOLEAN        flag = FALSE;  /* return value */
+   _BOOL        flag = FALSE;  /* return value */
    
 
    if (token_counter <= 1)                /* at least TWO tokens expected */
@@ -1766,11 +1766,11 @@ const char       *cmd)           /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN str_for_os(
+LOCAL _BOOL str_for_os(
 
 const char  *s)     /* ^ token string */
 {
-   BOOLEAN   flag;  /* return value */
+   _BOOL   flag;  /* return value */
 
 
    flag = FALSE;
@@ -1881,7 +1881,7 @@ LOCAL int get_color(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN get_html_color(
+GLOBAL _BOOL get_html_color(
 
 const char       *s,  /* */
 char             *h)  /* */
@@ -2210,7 +2210,7 @@ const int   c)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_on(void)
+LOCAL _BOOL check_on(void)
 {
    char   n[512];  /* */
    
@@ -2234,7 +2234,7 @@ LOCAL BOOLEAN check_on(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_off(void)
+LOCAL _BOOL check_off(void)
 {
    char   n[512];  /* */
    
@@ -2268,7 +2268,7 @@ GLOBAL void del_udosymbol(
 
 const char       *s)              /* */
 {
-   BOOLEAN        found = FALSE;  /* */
+   _BOOL        found = FALSE;  /* */
    register int   i,              /* */
                   j;              /* */
                   
@@ -2347,7 +2347,7 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN udosymbol_set(
+GLOBAL _BOOL udosymbol_set(
 
 const char       *s)  /* */
 {
@@ -2680,7 +2680,7 @@ LOCAL IDXLIST *new_idxlist_item(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_idxlist_item(
+GLOBAL _BOOL add_idxlist_item(
 
 const char  *x1,  /* */
 const char  *x2,  /* */
@@ -2819,8 +2819,8 @@ LOCAL void print_ascii_index(void)
             *prev;            /* */
    char      thisc,           /* */
              lastc;           /* */
-   BOOLEAN   misslf = FALSE;  /* */
-   BOOLEAN   same1,           /* */
+   _BOOL   misslf = FALSE;  /* */
+   _BOOL   same1,           /* */
              same2,           /* */
              same3;           /* */
              
@@ -3581,7 +3581,7 @@ LOCAL void c_heading(void)
    char      name[512],      /* */
              n[512],         /* */
              align[64];      /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right;   /* */
    
 
@@ -3775,7 +3775,7 @@ LOCAL void c_subheading(void)
    char      name[512],      /* */
              n[512],         /* */
              align[64];      /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right;   /* */
    
 
@@ -3972,7 +3972,7 @@ LOCAL void c_subsubheading(void)
    char      name[512],      /* */
              n[512],         /* */
              align[64];      /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right;   /* */
    
 
@@ -4170,7 +4170,7 @@ LOCAL void c_subsubsubheading(void)
    char      name[512],      /* */
              n[512],         /* */
              align[64];      /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right;   /* */
    
 
@@ -4364,7 +4364,7 @@ LOCAL void c_subsubsubsubheading(void)
    char      name[512],      /* */
              n[512],         /* */
              align[64];      /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right;   /* */
    
 
@@ -4559,7 +4559,7 @@ LOCAL void c_subsubsubsubsubheading(void)
    char      name[512],      /* */
              n[512],         /* */
              align[64];      /* */
-   BOOLEAN   inside_center,  /* */
+   _BOOL   inside_center,  /* */
              inside_right;   /* */
    
 
@@ -4755,7 +4755,7 @@ LOCAL void c_listheading(void)
              sFontBeg[512],     /* */
              sFontEnd[32],      /* */
              align[64];         /* */
-   BOOLEAN   inside_center,     /* */
+   _BOOL   inside_center,     /* */
              inside_right;      /* */
    int       iSize;             /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -4856,7 +4856,7 @@ LOCAL void c_listsubheading(void)
              sFontBeg[512],     /* */
              sFontEnd[32],      /* */
              align[64];         /* */
-   BOOLEAN   inside_center,     /* */
+   _BOOL   inside_center,     /* */
              inside_right;      /* */
    int       iSize;             /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -4955,7 +4955,7 @@ LOCAL void c_listsubsubheading(void)
              sFontBeg[512],     /* */
              sFontEnd[32],      /* */
              align[64];         /* */
-   BOOLEAN   inside_center,     /* */
+   _BOOL   inside_center,     /* */
              inside_right;      /* */
    int       iSize;             /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -5056,7 +5056,7 @@ LOCAL void c_listsubsubsubheading(void)
              sFontBeg[512],     /* */
              sFontEnd[32],      /* */
              align[64];         /* */
-   BOOLEAN   inside_center,     /* */
+   _BOOL   inside_center,     /* */
              inside_right;      /* */
    int       iSize;             /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -5156,7 +5156,7 @@ LOCAL void c_listsubsubsubsubheading(void)
              sFontBeg[512],     /* */
              sFontEnd[32],      /* */
              align[64];         /* */
-   BOOLEAN   inside_center,     /* */
+   _BOOL   inside_center,     /* */
              inside_right;      /* */
    int       iSize;             /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -5256,7 +5256,7 @@ LOCAL void c_listsubsubsubsubsubheading(void)
              sFontBeg[512],     /* */
              sFontEnd[32],      /* */
              align[64];         /* */
-   BOOLEAN   inside_center,     /* */
+   _BOOL   inside_center,     /* */
              inside_right;      /* */
    int       iSize;             /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -5468,7 +5468,7 @@ GLOBAL void c_debug(void)
 /*******************************************************************************
 *
 *  c_nop():
-*     do nothing but toggle the BOOLEAN nop_detected
+*     do nothing but toggle the _BOOL nop_detected
 *
 *  Notes:
 *     Use c_nop() for debugging, just by inserting !nop in the UDO document
@@ -5705,7 +5705,7 @@ LOCAL void c_code_target(void)
 
 LOCAL void c_autoref(void)
 {
-   BOOLEAN   newoff;  /* */
+   _BOOL   newoff;  /* */
 
    if (token_counter <= 1)                /* this command needs a parameter */
    {
@@ -5759,7 +5759,7 @@ LOCAL void c_autoref(void)
 
 LOCAL void c_autoref_items(void)
 {
-   BOOLEAN   newoff;  /* */
+   _BOOL   newoff;  /* */
    
 
    if (token_counter <= 1)                /* this command needs a parameter */
@@ -5810,7 +5810,7 @@ LOCAL void c_autoref_items(void)
 
 LOCAL void c_universal_charset(void)
 {
-   BOOLEAN   newon;  /* */
+   _BOOL   newon;  /* */
    
    
    if (token_counter <= 1)                /* this command needs a parameter */
@@ -5885,7 +5885,7 @@ LOCAL void c_rtf_keep_tables(void)
 LOCAL void c_verbatim_backcolor(void)
 {
    char      color[256];  /* */
-   BOOLEAN   ret;         /* */
+   _BOOL   ret;         /* */
 
 
    if (token[1][0] == EOS)                /* no parameter? */
@@ -6120,7 +6120,7 @@ GLOBAL void c_udolink (void)
    char      sTemp[64],         /* */
              nodename[512],     /* */
              sGifSize[80];      /* */
-   BOOLEAN   inside_center,     /* */
+   _BOOL   inside_center,     /* */
              inside_right;      /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
@@ -6734,7 +6734,7 @@ char       *s)            /* */
 
 LOCAL void convert_image(
 
-const BOOLEAN   visible)        /* */
+const _BOOL   visible)        /* */
 {
    char         filename[512],  /* */
                 caption[512],   /* */
@@ -7585,7 +7585,7 @@ LOCAL void check_parwidth (void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN malloc_token_output_buffer(void)
+LOCAL _BOOL malloc_token_output_buffer(void)
 {
    const size_t   bs[6] =  /* */
       {
@@ -7999,7 +7999,7 @@ const char    *t)          /* the too long word */
    size_t      i,          /* counter */
                sl;         /* */
    int         nr;         /* */
-   BOOLEAN     flag;       /* */
+   _BOOL     flag;       /* */
    
 
    /* Wenn im naechsten Token bereits ein Trennvorschlag steckt, */
@@ -8404,7 +8404,7 @@ size_t  *u)    /* # of spaces to indent a line */
 
 GLOBAL void token_output(
 
-BOOLEAN           reset_internals)        /* */
+_BOOL           reset_internals)        /* */
 {
    register int   i,                      /* */
                   j;                      /* */
@@ -8412,15 +8412,15 @@ BOOLEAN           reset_internals)        /* */
    char          *z = tobuffer;           /* buffer for paragraph content output */
    char           sIndent[512];           /* */
    size_t         umbruch;                /* computes the line width for several formats */
-   BOOLEAN        newline = FALSE;        /* TRUE: (!nl) detected, we have to output some linefeed */
+   _BOOL        newline = FALSE;        /* TRUE: (!nl) detected, we have to output some linefeed */
                                           /*   or a line has become too long and must be wrapped */
-   BOOLEAN        just_linefeed = FALSE;  /* */
-   BOOLEAN        use_token;              /* */
-   BOOLEAN        inside_center,          /* TRUE: we're inside an ENV_CENT */
+   _BOOL        just_linefeed = FALSE;  /* */
+   _BOOL        use_token;              /* */
+   _BOOL        inside_center,          /* TRUE: we're inside an ENV_CENT */
                   inside_right,           /* TRUE: we're inside an ENV_RIGH */
                   inside_left,            /* TRUE: we're inside an ENV_LEFT */
                   inside_quote;           /* TRUE: we're inside an ENV_QUOT */
-   BOOLEAN        inside_compressed,      /* TRUE: this environment should be output 'compressed' */
+   _BOOL        inside_compressed,      /* TRUE: this environment should be output 'compressed' */
                   inside_env,             /* TRUE: we're inside ENV_ITEM | ENV_ENUM | ENV_DESC | ENV_LIST */
                   inside_fussy;           /* */
    size_t         sl,                     /* */
@@ -8825,7 +8825,7 @@ BOOLEAN           reset_internals)        /* */
 
                if ((inside_env) && (desttype == TOKPS))
                {
-                  BOOLEAN   replaced_blank = TRUE;  /* */
+                  _BOOL   replaced_blank = TRUE;  /* */
 
 
                   do
@@ -9593,9 +9593,9 @@ GLOBAL void tokenize(
 
 char             *s)                    /* */
 {
-   BOOLEAN        newtoken = FALSE;     /* */
-   BOOLEAN        reset_token = FALSE;  /* */
-   BOOLEAN        found = FALSE;        /* */
+   _BOOL        newtoken = FALSE;     /* */
+   _BOOL        reset_token = FALSE;  /* */
+   _BOOL        found = FALSE;        /* */
    register int   i,                    /* */
                   j;                    /* */
 
@@ -9895,7 +9895,7 @@ LOCAL HYPLIST *new_hyplist_item(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN add_hyplist_item(
+LOCAL _BOOL add_hyplist_item(
 
 const char  *s)  /* */
 {
@@ -10721,7 +10721,7 @@ LOCAL void clear_if_stack(void)
 LOCAL void push_if_stack(
 
 int       kind,    /* IF_DEST, IF_LANG, IF_SET, IF_OS, IF_GENERAL */
-BOOLEAN   ignore)  /* TRUE: ignore all lines until "!else" or "!endif" */
+_BOOL   ignore)  /* TRUE: ignore all lines until "!else" or "!endif" */
 {
    if (counter_if_stack < MAX_IF_STACK)
    {
@@ -10808,7 +10808,7 @@ LOCAL void toggle_if_stack(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN is_if_stack_ignore(void)
+LOCAL _BOOL is_if_stack_ignore(void)
 {
    register int   i;  /* counter */
    
@@ -10879,9 +10879,9 @@ LOCAL void pass_check_if(
 char        *zeile,         /* */
 int          pnr)           /* */
 {
-   BOOLEAN   ignore,        /* */
+   _BOOL   ignore,        /* */
              match;         /* */
-   BOOLEAN   matches_lang,  /* */
+   _BOOL   matches_lang,  /* */
              matches_dest,  /* */
              matches_symb,  /* */
              matches_os;    /* */
@@ -11063,7 +11063,7 @@ const UDOSWITCH  *us)   /* */
          switch (us->partype)
          {
          case 'b':                        /* boolean */
-            *(BOOLEAN *)(us->parval) = TRUE;
+            *(_BOOL *)(us->parval) = TRUE;
             return;
 
          case 'i':                        /* int */
@@ -11098,7 +11098,7 @@ const UDOSWITCH  *us)   /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN pass1_check_preamble_commands(void)
+LOCAL _BOOL pass1_check_preamble_commands(void)
 {
    register int   i;       /* */
    int            c;       /* */
@@ -11980,7 +11980,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN pass1_check_main_commands(void)
+LOCAL _BOOL pass1_check_main_commands(void)
 {
    /* --- spezielle Schalter (nur im Hauptteil erlaubt) --- */
 
@@ -12065,7 +12065,7 @@ LOCAL BOOLEAN pass1_check_main_commands(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN pass1_check_everywhere_commands(void)
+LOCAL _BOOL pass1_check_everywhere_commands(void)
 {
    /* --- spezielle Schalter (ueberall erlaubt) --- */
 
@@ -12369,7 +12369,7 @@ char  *zeile)  /* */
 
 #define USE_PASS1_OUTPUT   0   
 
-LOCAL BOOLEAN pass1(
+LOCAL _BOOL pass1(
 
 char           *datei)           /* */
 {
@@ -12464,7 +12464,7 @@ char           *datei)           /* */
 
       len = strlen(zeile);
       
-      while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
+      while ( (len > 0) && (((_UBYTE)zeile[len - 1]) <= 32) )
       {
          zeile[len - 1] = EOS;
          len--;
@@ -13381,7 +13381,7 @@ LOCAL void c_comment(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN pass2_check_environments(
+LOCAL _BOOL pass2_check_environments(
 
 char     *zeile)  /* */
 {
@@ -13769,7 +13769,7 @@ char  *zeile)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN pass2(
+LOCAL _BOOL pass2(
 
 char           *datei)            /* */
 {
@@ -13862,7 +13862,7 @@ char           *datei)            /* */
       
       len = strlen(zeile);
       
-      while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
+      while ( (len > 0) && (((_UBYTE)zeile[len - 1]) <= 32) )
       {
          zeile[len - 1] = EOS;
          len--;
@@ -14868,11 +14868,11 @@ LOCAL int call_dummy(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN udo
+GLOBAL _BOOL udo
 
 (char       *datei)        /* */
 {
-   BOOLEAN   ret = FALSE;  /* */
+   _BOOL   ret = FALSE;  /* */
    int       i,            /* */
              val;          /* */
    FILE     *file;         /* */
@@ -15459,7 +15459,7 @@ GLOBAL BOOLEAN udo
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN passU(
+LOCAL _BOOL passU(
 
 char           *datei)                       /* */
 {
@@ -15470,7 +15470,7 @@ char           *datei)                       /* */
                 old_datei[256];              /* */
    int          i;                           /* */
    size_t       len;                         /* */
-   BOOLEAN      inc_done;                    /* */
+   _BOOL      inc_done;                    /* */
    const char  *orgBeg = "##### start of ";  /* */
    const char  *orgEnd = "##### end of ";    /* */
    
@@ -15546,7 +15546,7 @@ char           *datei)                       /* */
 
       len = strlen(zeile);
       
-      while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
+      while ( (len > 0) && (((_UBYTE)zeile[len - 1]) <= 32) )
       {
          zeile[len - 1]= EOS;
          len--;
@@ -15662,11 +15662,11 @@ char           *datei)                       /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN udo2udo(
+GLOBAL _BOOL udo2udo(
 
 char        *datei)        /* */
 {
-   BOOLEAN   ret = FALSE;  /* */
+   _BOOL   ret = FALSE;  /* */
    int       i,            /* */
              val;          /* */
    FILE     *file;         /* */
@@ -16304,7 +16304,7 @@ LOCAL void exit_modules(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_modules_pass1(void)
+LOCAL _BOOL check_modules_pass1(void)
 {
    if (!check_module_toc_pass1())
       return FALSE;
@@ -16327,7 +16327,7 @@ LOCAL BOOLEAN check_modules_pass1(void)
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN check_modules_pass2(void)
+LOCAL _BOOL check_modules_pass2(void)
 {
    if (!check_module_toc_pass2())
       return FALSE;

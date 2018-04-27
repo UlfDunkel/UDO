@@ -41,7 +41,7 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Feb 05: - file partly reformatted, TAB-free now
 *                - replace_placeholders(): issue #12 fixed
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 24: replace_placeholders() debugged
 *    fd  Feb 25: replace_placeholders() debugged
 *    fd  Feb 26: replace_placeholders() debugged
@@ -157,91 +157,91 @@ LOCAL int get_parameters(char *s, const char *search, const int min, const int m
 LOCAL void adjust_params_inside(char * s);
 
    /* convert a link command into LDS format */
-LOCAL BOOLEAN convert_link_lds(char *s, const char *p0, char *p1, char *p2, const char *link);
+LOCAL _BOOL convert_link_lds(char *s, const char *p0, char *p1, char *p2, const char *link);
 
    /* convert a link command into STG format */
-LOCAL BOOLEAN convert_link_stg(char *s, const char *p0, char *p1, char *p2, const char *link);
+LOCAL _BOOL convert_link_stg(char *s, const char *p0, char *p1, char *p2, const char *link);
 
    /* convert a link command into PureC format */
-LOCAL BOOLEAN convert_link_pch(char *s, const char *p0, char *p1, char *p2, const char *link);
+LOCAL _BOOL convert_link_pch(char *s, const char *p0, char *p1, char *p2, const char *link);
 
    /* convert a link command into TeX format */
-LOCAL BOOLEAN convert_link_tex(char *s, const char *p0, char *p1, char *p2);
+LOCAL _BOOL convert_link_tex(char *s, const char *p0, char *p1, char *p2);
 
    /* convert a link command into PDF format */
-LOCAL BOOLEAN convert_link_pdf(char *s, const char *p0, char *p1, char *p2, const char *link);
+LOCAL _BOOL convert_link_pdf(char *s, const char *p0, char *p1, char *p2, const char *link);
 
    /* convert a link command into LaTeX format */
-LOCAL BOOLEAN convert_link_lyx(char *s, const char *p0, char *p1, char *p2);
+LOCAL _BOOL convert_link_lyx(char *s, const char *p0, char *p1, char *p2);
 
    /* convert a link command into TurboVisionHelp format */
-LOCAL BOOLEAN convert_link_tvh(char *s, const char *p0, char *p1, char *p2);
+LOCAL _BOOL convert_link_tvh(char *s, const char *p0, char *p1, char *p2);
 
    /* convert a link command into TeXinfo format */
-LOCAL BOOLEAN convert_link_info(char *s, const char *p0, char *p1, char *p2, const char *link);
+LOCAL _BOOL convert_link_info(char *s, const char *p0, char *p1, char *p2, const char *link);
 
    /* convert a link command into IPF format */
-LOCAL BOOLEAN convert_link_ipf(char *s, const char *p0, char *p1, char *p2, const char *link);
+LOCAL _BOOL convert_link_ipf(char *s, const char *p0, char *p1, char *p2, const char *link);
 
    /* convert a link command into RTF? format */
-LOCAL BOOLEAN convert_link_etc(char *s, const char *p0, char *p1, char *p2, const char *link);
+LOCAL _BOOL convert_link_etc(char *s, const char *p0, char *p1, char *p2, const char *link);
 
    /* convert a link command into its target format */
-LOCAL void c_link(char *s, BOOLEAN inside_b4_macro);
+LOCAL void c_link(char *s, _BOOL inside_b4_macro);
 
    /* convert a url command into its target format */
-LOCAL void c_url(char *s, BOOLEAN inside_b4_macro);
+LOCAL void c_url(char *s, _BOOL inside_b4_macro);
 
    /* convert an xlink command into its target format */
-LOCAL void c_xlink(char *s, BOOLEAN inside_b4_macro);
+LOCAL void c_xlink(char *s, _BOOL inside_b4_macro);
 
    /* convert an ilink command into its target format */
-LOCAL void c_ilink(char *s, const BOOLEAN inside_b4_macro);
+LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro);
 
    /* convert a plink command into its target format */
-LOCAL void c_plink(char *s, const BOOLEAN inside_b4_macro);
+LOCAL void c_plink(char *s, const _BOOL inside_b4_macro);
 
    /* convert a label command into its target format */
-LOCAL void c_plabel(char *s, const BOOLEAN inside_b4_macro); /* New in V6.5.9 [NHz] */
+LOCAL void c_plabel(char *s, const _BOOL inside_b4_macro); /* New in V6.5.9 [NHz] */
 
    /* convert a nolink command into its target format */
-LOCAL void c_nolink(char *s, const BOOLEAN inside_b4_macro);
+LOCAL void c_nolink(char *s, const _BOOL inside_b4_macro);
 
    /* convert a comment command into its target format */
-LOCAL void c_comment(char *s, const BOOLEAN inside_b4_macro);
+LOCAL void c_comment(char *s, const _BOOL inside_b4_macro);
 
    /* convert an index command into its target format */
-LOCAL BOOLEAN c_index(char *s, const BOOLEAN inside_b4_macro);
+LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro);
 
    /*  */
-LOCAL BOOLEAN c_single_index(char *s, const BOOLEAN inside_b4_macro);
+LOCAL _BOOL c_single_index(char *s, const _BOOL inside_b4_macro);
 
    /*  */
-LOCAL BOOLEAN c_double_index(char *s, const BOOLEAN inside_b4_macro);
+LOCAL _BOOL c_double_index(char *s, const _BOOL inside_b4_macro);
 
    /*  */
-LOCAL BOOLEAN c_tripple_index(char *s, const BOOLEAN inside_b4_macro);
+LOCAL _BOOL c_tripple_index(char *s, const _BOOL inside_b4_macro);
 
    /*  */
-LOCAL BOOLEAN c_quadruple_index(char *s, const BOOLEAN inside_b4_macro);
+LOCAL _BOOL c_quadruple_index(char *s, const _BOOL inside_b4_macro);
 
    /* convert a time command into its target format */
-LOCAL void c_internal_time(char *s, const BOOLEAN inside_b4_macro); /* V 6.5.19 */
+LOCAL void c_internal_time(char *s, const _BOOL inside_b4_macro); /* V 6.5.19 */
 
    /* convert an img command into its target format */
-LOCAL void c_internal_image(char *s, const BOOLEAN inside_b4_macro);
+LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro);
 
    /* convert a raw command into its target format */
-LOCAL BOOLEAN c_single_raw(char *s, const BOOLEAN inside_b4_macro);
+LOCAL _BOOL c_single_raw(char *s, const _BOOL inside_b4_macro);
 
    /* convert a raw command into its target format */
-LOCAL BOOLEAN c_double_raw(char *s, const BOOLEAN inside_b4_macro);
+LOCAL _BOOL c_double_raw(char *s, const _BOOL inside_b4_macro);
 
    /* handle conversion of raw commands */
-LOCAL void c_internal_raw(char *s, const BOOLEAN inside_b4_macro);
+LOCAL void c_internal_raw(char *s, const _BOOL inside_b4_macro);
 
    /* check if macro or definition uses parameters */
-LOCAL BOOLEAN md_uses_parameters(const char *s);
+LOCAL _BOOL md_uses_parameters(const char *s);
 
 
 
@@ -475,7 +475,7 @@ const int   max)          /* maximum # of expected parameters */
       return 0;
    }
 
-   return i;                              /* PL14: Anzahl der Parameter statt BOOLEAN */
+   return i;                              /* PL14: Anzahl der Parameter statt _BOOL */
 }
 
 
@@ -531,7 +531,7 @@ const int    max)     /* maximum # of expected parameters */
 
    strcat(Param[0], ")");
 
-   return params;                         /* PL14: Anzahl der Parameter statt BOOLEAN */
+   return params;                         /* PL14: Anzahl der Parameter statt _BOOL */
 }
 
 
@@ -573,7 +573,7 @@ char  *s)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_lds(
+LOCAL _BOOL convert_link_lds(
 
 char        *s,                /* */
 const char  *p0,               /* */
@@ -584,7 +584,7 @@ const char  *link)             /* */
    char      s_entry[1024],    /* */
              old_entry[1024];  /* */
    char     *ptr;              /* */
-   BOOLEAN   flag;             /* */
+   _BOOL   flag;             /* */
    
 
    strcpy(s_entry, p2);
@@ -637,7 +637,7 @@ const char  *link)             /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_stg(
+LOCAL _BOOL convert_link_stg(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -649,8 +649,8 @@ const char  *link)           /* */
              s_entry[256];   /* */
    int       ti,             /* */
              li;             /* */
-   BOOLEAN   isnode;         /* */
-   BOOLEAN   flag;           /* */
+   _BOOL   isnode;         /* */
+   _BOOL   flag;           /* */
    
 
    c_tilde(p2);
@@ -714,7 +714,7 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_pch(
+LOCAL _BOOL convert_link_pch(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -726,8 +726,8 @@ const char  *link)           /* */
              s_entry[256];   /* */
    int       ti,             /* */
              li;             /* */
-   BOOLEAN   isnode;         /* */
-   BOOLEAN   flag;           /* */
+   _BOOL   isnode;         /* */
+   _BOOL   flag;           /* */
    
 
    c_tilde(p2);
@@ -773,7 +773,7 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_tex(
+LOCAL _BOOL convert_link_tex(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -783,7 +783,7 @@ char        *p2)             /* */
    char      s_entry[1024];  /* */
    int       li,             /* */
              ti;             /* */
-   BOOLEAN   isnode;         /* */
+   _BOOL   isnode;         /* */
    char      nodename[256];  /* */
    
 
@@ -820,7 +820,7 @@ char        *p2)             /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_pdf(
+LOCAL _BOOL convert_link_pdf(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -833,8 +833,8 @@ const char  *link)           /* */
    int       ti,             /* */
              li,             /* */
              dest;           /* */
-   BOOLEAN   isnode;         /* */
-   BOOLEAN   flag;           /* */
+   _BOOL   isnode;         /* */
+   _BOOL   flag;           /* */
    
 
    c_tilde(p2);
@@ -886,7 +886,7 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_lyx(
+LOCAL _BOOL convert_link_lyx(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -896,7 +896,7 @@ char        *p2)             /* */
    char      s_entry[1024];  /* */
    int       li,             /* */
              ti;             /* */
-   BOOLEAN   isnode;         /* */
+   _BOOL   isnode;         /* */
    char      nodename[256];  /* */
 
    is_node_link(p2, nodename, &ti, &isnode, &li);
@@ -926,7 +926,7 @@ char        *p2)             /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_tvh(
+LOCAL _BOOL convert_link_tvh(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -936,7 +936,7 @@ char        *p2)             /* */
    char      s_entry[1024];  /* */
    int       li,             /* */
              ti;             /* */
-   BOOLEAN   isnode;         /* */
+   _BOOL   isnode;         /* */
    char      nodename[256];  /* */
    
 
@@ -966,7 +966,7 @@ char        *p2)             /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_info(
+LOCAL _BOOL convert_link_info(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -978,8 +978,8 @@ const char  *link)           /* */
              s_entry[256];   /* */
    int       ti,             /* */
              li;             /* */
-   BOOLEAN   isnode;         /* */
-   BOOLEAN   flag;           /* */
+   _BOOL   isnode;         /* */
+   _BOOL   flag;           /* */
    
 
    c_tilde(p2);
@@ -1030,7 +1030,7 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_ipf(
+LOCAL _BOOL convert_link_ipf(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -1043,8 +1043,8 @@ const char  *link)           /* */
              s_id[256];      /* */
    int       ti,             /* */
              li;             /* */
-   BOOLEAN   isnode;         /* */
-   BOOLEAN   flag;           /* */
+   _BOOL   isnode;         /* */
+   _BOOL   flag;           /* */
    
 
    c_tilde(p2);
@@ -1088,7 +1088,7 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_ps(
+LOCAL _BOOL convert_link_ps(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -1100,8 +1100,8 @@ const char  *link)           /* */
              s_entry[256];   /* */
    int       ti,             /* */
              li;             /* */
-   BOOLEAN   isnode;         /* */
-   BOOLEAN   flag;           /* */
+   _BOOL   isnode;         /* */
+   _BOOL   flag;           /* */
    
 
                                           /* Internal Link for Postscript */
@@ -1155,7 +1155,7 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN convert_link_etc(
+LOCAL _BOOL convert_link_etc(
 
 char        *s,              /* */
 const char  *p0,             /* */
@@ -1169,8 +1169,8 @@ const char  *link)           /* */
              rq[16];         /* */
    int       ti,             /* */
              li;             /* */
-   BOOLEAN   isnode;         /* */
-   BOOLEAN   flag;           /* */
+   _BOOL   isnode;         /* */
+   _BOOL   flag;           /* */
    
 
    c_tilde(p2);
@@ -1249,16 +1249,16 @@ const char  *link)           /* */
 LOCAL void c_link(
 
 char        *s,                /* */
-BOOLEAN      inside_b4_macro)  /* */
+_BOOL      inside_b4_macro)  /* */
 {
    int       pnr = 0;          /* */
    char      s_entry[1024],    /* */
              old_entry[1024],  /* */
              link[1024];       /* */
    char     *ptr;              /* */
-   BOOLEAN   linkerror;        /* */
-   BOOLEAN   flag;             /* */
-   BOOLEAN   old_autorefoff;   /* */
+   _BOOL   linkerror;        /* */
+   _BOOL   flag;             /* */
+   _BOOL   old_autorefoff;   /* */
    
 
    old_autorefoff = bDocAutorefOff;
@@ -1455,7 +1455,7 @@ BOOLEAN      inside_b4_macro)  /* */
 LOCAL void c_url(
 
 char        *s,                  /* */
-BOOLEAN      inside_b4_macro)    /* */
+_BOOL      inside_b4_macro)    /* */
 {
    int       pnr = 0,            /* */
              url_len,            /* */
@@ -1463,9 +1463,9 @@ BOOLEAN      inside_b4_macro)    /* */
    char      s_entry[4096],      /* */
              url_rtf[2048],      /* */
              rtf0[4];            /* */
-   BOOLEAN   linkerror = FALSE;  /* */
-   BOOLEAN   target = FALSE;     /* TRUE: explicit target has been found */
-   BOOLEAN   class = FALSE;      /* TRUE: CSS class name found */
+   _BOOL   linkerror = FALSE;  /* */
+   _BOOL   target = FALSE;     /* TRUE: explicit target has been found */
+   _BOOL   class = FALSE;      /* TRUE: CSS class name found */
    
    char      rtf1[] = "00d0c9ea79f9bace118c8200aa004ba90b0200000003000000";
    char      rtf2[] = "e0c9ea79f9bace118c8200aa004ba90b";
@@ -1686,16 +1686,16 @@ BOOLEAN      inside_b4_macro)    /* */
 LOCAL void c_xlink(
 
 char        *s,                  /* */
-BOOLEAN      inside_b4_macro)    /* */
+_BOOL      inside_b4_macro)    /* */
 {
    int       pnr = 0;            /* */
    char      s_entry[1024];      /* */
    char      wnode[1024],        /* */
              wfile[1024],        /* */
             *ptr;                /* */
-   BOOLEAN   linkerror = FALSE;  /* */
-   BOOLEAN   target = FALSE;     /* TRUE: explicit target has been found */
-   BOOLEAN   class = FALSE;      /* TRUE: CSS class name found */
+   _BOOL   linkerror = FALSE;  /* */
+   _BOOL   target = FALSE;     /* TRUE: explicit target has been found */
+   _BOOL   class = FALSE;      /* TRUE: CSS class name found */
    
 
    while (!linkerror && ((pnr = get_parameters(s, "xlink", 2, 4)) >= 2))
@@ -1933,7 +1933,7 @@ BOOLEAN      inside_b4_macro)    /* */
 LOCAL void c_ilink(
 
 char           *s,                 /* komplette Zeile */
-const BOOLEAN   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewandelt worden? */
+const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewandelt worden? */
 {
    int          pnr = 0;           /* */
    char         s_entry[1024],     /* */
@@ -1941,9 +1941,9 @@ const BOOLEAN   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewa
                 old_entry[1024],   /* */
                 link[1024];        /* */
    char        *ptr;               /* */
-   BOOLEAN      flag;              /* */
-   BOOLEAN      linkerror;         /* */
-   BOOLEAN      old_autorefoff;    /* */
+   _BOOL      flag;              /* */
+   _BOOL      linkerror;         /* */
+   _BOOL      old_autorefoff;    /* */
    char         closer[8] = "\0";  /* tag closer */
    
    
@@ -2152,12 +2152,12 @@ const BOOLEAN   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewa
 LOCAL void c_plink(
 
 char           *s,                  /* */
-const BOOLEAN   inside_b4_macro)    /* */
+const _BOOL   inside_b4_macro)    /* */
 {
    int          pnr = 0;            /* */
    char         s_entry[1024];      /* */
    char         n[512];             /* */
-   BOOLEAN      linkerror = FALSE;  /* */
+   _BOOL      linkerror = FALSE;  /* */
 
    while (!linkerror && (pnr = get_parameters(s, "plink", 2, 2)) == 2)
    {
@@ -2240,12 +2240,12 @@ const BOOLEAN   inside_b4_macro)    /* */
 LOCAL void c_plabel(
 
 char           *s,                  /* */
-const BOOLEAN   inside_b4_macro)    /* */
+const _BOOL   inside_b4_macro)    /* */
 {
    int          pnr = 0;            /* */
    char         s_entry[1024],      /* */
                 n[512];             /* */
-   BOOLEAN      linkerror = FALSE;  /* */
+   _BOOL      linkerror = FALSE;  /* */
 
 
    while (!linkerror && (pnr = get_parameters(s, "label", 2, 2)) == 2)
@@ -2302,11 +2302,11 @@ const BOOLEAN   inside_b4_macro)    /* */
 LOCAL void c_nolink(
 
 char           *s,                  /* */
-const BOOLEAN   inside_b4_macro)    /* */
+const _BOOL   inside_b4_macro)    /* */
 {
    int          pnr = 0;            /* */
    char         s_entry[1024];      /* */
-   BOOLEAN      linkerror = FALSE;  /* */
+   _BOOL      linkerror = FALSE;  /* */
 
 
    while (!linkerror && (pnr = get_parameters(s, "nolink", 1, 1)) == 1)
@@ -2373,11 +2373,11 @@ const BOOLEAN   inside_b4_macro)    /* */
 LOCAL void c_comment(
 
 char           *s,                  /* */
-const BOOLEAN   inside_b4_macro)    /* */
+const _BOOL   inside_b4_macro)    /* */
 {
    int          pnr = 0;            /* */
    char         s_entry[1024];      /* */
-   BOOLEAN      linkerror = FALSE;  /* */
+   _BOOL      linkerror = FALSE;  /* */
    
 
    while (!linkerror && (pnr = get_parameters(s, "comment", 1, 1)) == 1)
@@ -2480,16 +2480,16 @@ const BOOLEAN   inside_b4_macro)    /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN c_index(
+LOCAL _BOOL c_index(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    char         s_tidx[256],      /* */
                 s_entry[256],     /* */
                 upr_entry[512];   /* */
    char         keyword[256];     /* */
-   BOOLEAN      ret = TRUE;       /* */
+   _BOOL      ret = TRUE;       /* */
    
 
    if (get_parameters(s, "index", 1, 1) )
@@ -2672,16 +2672,16 @@ const BOOLEAN   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN c_single_index(
+LOCAL _BOOL c_single_index(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    char         s_tidx[256],      /* */
                 s_entry[256],     /* */
                 upr_entry[512];   /* */
    char         keyword[256];     /* */
-   BOOLEAN      ret = TRUE;       /* */
+   _BOOL      ret = TRUE;       /* */
    
 
    if (get_parameters(s, "idx", 1, 1) )
@@ -2850,14 +2850,14 @@ const BOOLEAN   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN c_double_index(
+LOCAL _BOOL c_double_index(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    char         s_entry[1024],    /* */
                 upr_entry[512];   /* */
-   BOOLEAN      ret = TRUE;       /* */
+   _BOOL      ret = TRUE;       /* */
    
 
    if (get_parameters(s, "idx", 2, 2) )
@@ -3032,14 +3032,14 @@ const BOOLEAN   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN c_tripple_index(
+LOCAL _BOOL c_tripple_index(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    char         s_entry[1024],    /* */
                 upr_entry[512];   /* */
-   BOOLEAN      ret = TRUE;       /* */
+   _BOOL      ret = TRUE;       /* */
    
 
    if (get_parameters(s, "idx", 3, 3) )
@@ -3272,14 +3272,14 @@ const BOOLEAN   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN c_quadruple_index(
+LOCAL _BOOL c_quadruple_index(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    char         s_entry[1024],    /* */
                 upr_entry[512];   /* */
-   BOOLEAN      ret = TRUE;       /* */
+   _BOOL      ret = TRUE;       /* */
    
 
    if (get_parameters(s, "idx", 4, 4) )
@@ -3484,10 +3484,10 @@ const BOOLEAN   inside_b4_macro)  /* */
 LOCAL void c_internal_time(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    char         str[1024];        /* */
-   BOOLEAN      flag;             /* */
+   _BOOL      flag;             /* */
    time_t       uhrzeit;          /* */
    struct tm   *timeptr;          /* */
 
@@ -3535,15 +3535,15 @@ const BOOLEAN   inside_b4_macro)  /* */
 LOCAL void c_internal_image(
 
 char           *s,                 /* */
-const BOOLEAN   inside_b4_macro)   /* */
+const _BOOL   inside_b4_macro)   /* */
 {
    int          pnr = 0,           /* */
                 count;             /* */
    char         s_entry[1024],     /* */
                 sImgSize[80],      /* */
                 sImgName[512];     /* */
-   BOOLEAN      flag;              /* */
-   UWORD        uiW,               /* */
+   _BOOL      flag;              /* */
+   _UWORD        uiW,               /* */
                 uiH;               /* */
    char         closer[8] = "\0";  /* single tag closer mark in XHTML */
 
@@ -3762,12 +3762,12 @@ const BOOLEAN   inside_b4_macro)   /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN c_single_raw(
+LOCAL _BOOL c_single_raw(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
-   BOOLEAN      flag;             /* */
+   _BOOL      flag;             /* */
 
 
    UNUSED(inside_b4_macro);
@@ -3802,12 +3802,12 @@ const BOOLEAN   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN c_double_raw(
+LOCAL _BOOL c_double_raw(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
-   BOOLEAN      flag;             /* */
+   _BOOL      flag;             /* */
 
 
    UNUSED(inside_b4_macro);
@@ -3851,10 +3851,10 @@ const BOOLEAN   inside_b4_macro)  /* */
 LOCAL void c_internal_raw(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    int          nr;               /* */
-   BOOLEAN      flag;             /* */
+   _BOOL      flag;             /* */
    
 
    if (strstr(s, "(!raw") == NULL)
@@ -3901,7 +3901,7 @@ const BOOLEAN   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN md_uses_parameters(
+LOCAL _BOOL md_uses_parameters(
 
 const char  *s)  /* ^ to macro/definition string */
 {
@@ -3985,7 +3985,7 @@ const char  *entry)         /* */
    char      p[16],         /* */
              without[128],  /* */
             *ptr;           /* ^ into string <s> */
-   BOOLEAN   flag;          /* */
+   _BOOL   flag;          /* */
 
                                           /* PL10: (!macro) vorher loeschen */
    sprintf(without, "(!%s)", cmd);
@@ -4105,7 +4105,7 @@ GLOBAL void reset_speccmds(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_speccmd(
+GLOBAL _BOOL add_speccmd(
 
 char       *entry)  /* */
 {
@@ -4168,7 +4168,7 @@ char       *entry)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN insert_speccmd(
+GLOBAL _BOOL insert_speccmd(
 
 char        *s,      /* */
 const char  *rep,    /* */
@@ -4297,7 +4297,7 @@ GLOBAL void reset_placeholders(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_placeholder(
+GLOBAL _BOOL add_placeholder(
 
 char       *entry,    /* */
 char       *rawtext)  /* */
@@ -4366,7 +4366,7 @@ char       *rawtext)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN insert_placeholder(
+GLOBAL _BOOL insert_placeholder(
 
 char        *s,        /* */
 const char  *rep,      /* */
@@ -4507,11 +4507,11 @@ int   i)  /* # of desired placeholder */
 GLOBAL void c_internal_index(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    int          nr;               /* */
-   BOOLEAN      flag;             /* */
-   BOOLEAN      has_idx,          /* */
+   _BOOL      flag;             /* */
+   _BOOL      has_idx,          /* */
                 has_index;        /* */
 
 
@@ -4597,7 +4597,7 @@ const BOOLEAN   inside_b4_macro)  /* */
 GLOBAL void c_commands_inside(
 
 char           *s,                /* */
-const BOOLEAN   inside_b4_macro)  /* */
+const _BOOL   inside_b4_macro)  /* */
 {
    if (strstr(s, "(!") == NULL)           /* wrong format */
       return;
@@ -4635,7 +4635,7 @@ GLOBAL void replace_hyphens(
 
 char      *s)  /* ^ character */
 {
-   UWORD   h;  /* hyphen index */
+   _UWORD   h;  /* hyphen index */
 
         
    if (hyphen_counter == 0)
@@ -4743,7 +4743,7 @@ GLOBAL void replace_macros(
 
 char      *s)  /* ^ found macro string "(!%s)" in document */
 {
-   UWORD   i;  /* counter */
+   _UWORD   i;  /* counter */
    
 
    if (strstr(s, "(!") == NULL)           /* wrong format */
@@ -4778,7 +4778,7 @@ char      *s)  /* ^ found macro string "(!%s)" in document */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_macro(void)
+GLOBAL _BOOL add_macro(void)
 {
    int      i;           /* counter */
    MACROS  *p;           /* ^ to macro */
@@ -4883,7 +4883,7 @@ GLOBAL void replace_defines(
 
 char      *s)  /* ^ found definition string "(!%s)" in document */
 {
-   UWORD   i;  /* counter */
+   _UWORD   i;  /* counter */
 
 
    if (strstr(s, "(!") == NULL)           /* wrong format */
@@ -4919,7 +4919,7 @@ char      *s)  /* ^ found definition string "(!%s)" in document */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_define(void)
+GLOBAL _BOOL add_define(void)
 {
    int    i;           /* counter */
    DEFS  *p;           /* ^ to definition */

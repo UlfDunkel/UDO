@@ -39,7 +39,7 @@
 *
 *  2010:
 *    fd  Feb 22: - header adjusted
-*                - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Mar 04: - file tidied up
 *                - message wrapper functions now global
 *  2014:
@@ -158,10 +158,10 @@ GLOBAL void error_too_many_alias(void);
 GLOBAL void error_too_many_files(void);
 GLOBAL void error_replace_param(const char *s);
 GLOBAL void error_undefined_link(const char *l);
-GLOBAL void error_too_many_if(const char *s, const UWORD l);
+GLOBAL void error_too_many_if(const char *s, const _UWORD l);
 GLOBAL void error_else_without_if(void);
 GLOBAL void error_endif_without_if(void);
-GLOBAL void error_missing_endif(const char *s, const UWORD l);
+GLOBAL void error_missing_endif(const char *s, const _UWORD l);
 GLOBAL void error_table_width(void);
 GLOBAL void error_table_height(void);
 GLOBAL void error_table_cell_width(void);
@@ -187,10 +187,10 @@ GLOBAL void error_node6_not_allowed(void);
    /* --- warnings (tiny syntax errors) --- */
 
 GLOBAL void note_long_sourceline(void);
-GLOBAL void warning_long_destline(const char *s, const UWORD lnr, const int ll);
+GLOBAL void warning_long_destline(const char *s, const _UWORD lnr, const int ll);
 
 GLOBAL void note_short_sourceline(const char *s);
-GLOBAL void warning_short_destline(const char *s, const UWORD lnr, const int ll, const char *w);
+GLOBAL void warning_short_destline(const char *s, const _UWORD lnr, const int ll, const char *w);
 
 GLOBAL void warning_no_unichar(const char *s);
 GLOBAL void warning_cannot_recode(const char c, const char *scs, const char *dcs);

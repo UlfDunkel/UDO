@@ -39,7 +39,7 @@
 *                - 2580-259F completed
 *    fd  Feb 16: tiny adjustments
 *    fd  Feb 19: 0400-04FF: Cyrillic
-*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - 0370-03ff completed (Greek)
 *    fd  Feb 24: - 0590-05FF completed (Hebrew)
 *                - 0600-06FF: Arabic
@@ -3124,7 +3124,7 @@
 /* !!!!! WARNING !!!!! */
 /* ------------------- */
 /* As soon as Unicode constants > 0xFFFF are defined, */
-/* the relevant tables must no longer use UWORD, */
+/* the relevant tables must no longer use _UWORD, */
 /* but have to switch to ULONG. */
 
 

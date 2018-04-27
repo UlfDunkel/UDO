@@ -100,10 +100,10 @@
 
 typedef struct _passflags                 /* several flags for pass1() and pass2() */
 {
-   BOOLEAN   inside_apx;                  /* !begin_appendix aktiv? */
+   _BOOL   inside_apx;                  /* !begin_appendix aktiv? */
    int       ignore_line;                 /* Zeile nicht bearbeiten? */
    int       env;                         /* ENV_NONE, ENV_RAW etc. */   /*r6pl2*/
-   BOOLEAN   env1st;
+   _BOOL   env1st;
 }  PASSFLAGS;
 
 
@@ -161,7 +161,7 @@ typedef struct _myfile                    /* file information */
                                           /* New in V6.5.19 */
 typedef struct _show_variable             /* */
 {
-   BOOLEAN source_filename;               /* Filename anzeigen */
+   _BOOL source_filename;               /* Filename anzeigen */
 }  SHOW_VAR;
 
 

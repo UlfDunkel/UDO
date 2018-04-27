@@ -64,17 +64,17 @@
 
 typedef struct _styleflag                 /* various style control flags */
 {
-   BOOLEAN   bold;                        /* (!B)...(!b) */
-   BOOLEAN   footnote;                    /* (!N)...(!n) */
-   BOOLEAN   italic;                      /* (!I)...(!i) */
-   BOOLEAN   underlined;                  /* (!U)...(!u) */
-   BOOLEAN   verbatim;                    /* (!V)...(!v) */
-   BOOLEAN   twriter;                     /* (!T)...(!t) */
-   BOOLEAN   insert;                      /* (!INS)...(!ins) */
-   BOOLEAN   deleted;                     /* (!DEL)...(!del) */
-   BOOLEAN   colour;                      /* (!<colorname>)...(!coloff) */
-   BOOLEAN   sup;                         /* (!SUP)...(!sup) */
-   BOOLEAN   sub;                         /* (!SUB)...(!sub) */
+   _BOOL   bold;                        /* (!B)...(!b) */
+   _BOOL   footnote;                    /* (!N)...(!n) */
+   _BOOL   italic;                      /* (!I)...(!i) */
+   _BOOL   underlined;                  /* (!U)...(!u) */
+   _BOOL   verbatim;                    /* (!V)...(!v) */
+   _BOOL   twriter;                     /* (!T)...(!t) */
+   _BOOL   insert;                      /* (!INS)...(!ins) */
+   _BOOL   deleted;                     /* (!DEL)...(!del) */
+   _BOOL   colour;                      /* (!<colorname>)...(!coloff) */
+   _BOOL   sup;                         /* (!SUP)...(!sup) */
+   _BOOL   sub;                         /* (!SUB)...(!sub) */
 }  STYLEFLAG;
 
 #endif /* UDO_STY_H */

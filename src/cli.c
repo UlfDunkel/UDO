@@ -47,7 +47,7 @@
 *                - mac2iso() and stuff removed
 *                - tos2iso() and stuff removed
 *    fd  Feb 19: id_charset_h removed
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *    fd  Mar 05: file tidied up
 *    fd  Mar 06: read_cliopt_file() decomposes arguments from read file (finally)
@@ -166,7 +166,7 @@ typedef struct _cliopt                    /* command line options */
    char     *longname;                    /* lange Option */
    char     *shortname;                   /* kurze Option */
    char      type;                        /* Typ: b=Boolean, c=char[] */
-   BOOLEAN   needs2;                      /* folgt der Option ein Parameter? */
+   _BOOL   needs2;                      /* folgt der Option ein Parameter? */
    void     *var;                         /* Variable, die geaendert wird */
    int       val;                         /* Wert, der bei Benutzung zugewiesen wird */
 }  CLIOPT;
@@ -184,11 +184,11 @@ typedef struct _cliopt                    /* command line options */
 LOCAL char      strPrgname[33];           /* der Name dieses Programms */
 LOCAL t_lang    eLanguage;                /* Sprache */
 
-LOCAL BOOLEAN   bHoldKey;
-LOCAL BOOLEAN   bShowArgs;
-LOCAL BOOLEAN   bShowHelp;
-LOCAL BOOLEAN   bShowVersion;
-LOCAL BOOLEAN   bShowIdent;
+LOCAL _BOOL   bHoldKey;
+LOCAL _BOOL   bShowArgs;
+LOCAL _BOOL   bShowHelp;
+LOCAL _BOOL   bShowVersion;
+LOCAL _BOOL   bShowIdent;
 LOCAL int       last_percent;
 
 
@@ -208,7 +208,7 @@ LOCAL void show_use_help(void);
 LOCAL void show_help(void);
 LOCAL void show_unknown(const char *s);
 LOCAL void wait_on_keypress(void);
-LOCAL int  getcliopt(int *counter, const char *arg, const char *argnext, const BOOLEAN from_file);
+LOCAL int  getcliopt(int *counter, const char *arg, const char *argnext, const _BOOL from_file);
 
 
 
@@ -467,7 +467,7 @@ GLOBAL void show_status_loginfo(
 
 const char  *s)             /* */
 {
-   BOOLEAN   flag = FALSE;  /* */
+   _BOOL   flag = FALSE;  /* */
    
    
    if ( (bOutOpened || bTestmode) && !bBeQuiet )
@@ -629,8 +629,8 @@ const char  *s)  /* */
 
 GLOBAL void show_status_percent(
 
-ULONG    Pass1Lines,  /* */
-ULONG    Pass2Lines)  /* */
+_ULONG    Pass1Lines,  /* */
+_ULONG    Pass2Lines)  /* */
 {
    int   percent;     /* */
 
@@ -901,7 +901,7 @@ GLOBAL void cursor_active(void)
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN break_action(void)
+GLOBAL _BOOL break_action(void)
 {
    return FALSE;
 }
@@ -1109,7 +1109,7 @@ LOCAL void wait_on_keypress(void)
 
 #define   MAX_FILE_ARGV   256
 
-LOCAL BOOLEAN read_cliopt_file(
+LOCAL _BOOL read_cliopt_file(
 
 const char  *name)                      /* ^ filename */
 {
@@ -1118,7 +1118,7 @@ const char  *name)                      /* ^ filename */
             *mp;                        /* */
    FILE     *file;                      /* ^ file */
    char      opt[256];                  /* read buffer */
-   SLONG     sl;                        /* string length */
+   int       sl;                        /* string length */
    int       counter = -1;              /* */
    int       i;                         /* counter for chars in ptr */
    
@@ -1130,7 +1130,7 @@ const char  *name)                      /* ^ filename */
 
    while (fgets(opt, 256, file))          /* read file in blocks of 256 */
    {
-      sl = strlen(opt);
+      sl = (int) strlen(opt);
       
       while (sl > 0 && opt[sl - 1] < ' ') /* TRIM right */
       {
@@ -1143,7 +1143,7 @@ const char  *name)                      /* ^ filename */
       while (*ptr != EOS && (*ptr == ' ' || *ptr == '\t') )
          ptr++;
          
-      sl = strlen(ptr);
+      sl = (int) strlen(ptr);
       
       while (sl > 0)
       {
@@ -1212,15 +1212,15 @@ const char  *name)                      /* ^ filename */
 *
 ******************************************|************************************/
 
-LOCAL BOOLEAN getcliopt(
+LOCAL _BOOL getcliopt(
 
 int              *counter,        /* */
 const char       *arg,            /* */
 const char       *argnext,        /* */
-const BOOLEAN     from_file)      /* */
+const _BOOL     from_file)      /* */
 {
    register int   i;              /* */
-   BOOLEAN        found = FALSE;  /* */
+   _BOOL        found = FALSE;  /* */
 
    i = 0;
 
@@ -1236,8 +1236,8 @@ const BOOLEAN     from_file)      /* */
          {
             switch (cliopt[i].type)
             {
-            case 'b':                     /* BOOLEAN */
-               *(BOOLEAN *)cliopt[i].var = cliopt[i].val;
+            case 'b':                     /* _BOOL */
+               *(_BOOL *)cliopt[i].var = cliopt[i].val;
                break;
                
             case 'c':                     /* char */
@@ -1336,7 +1336,7 @@ const char  *argv[])   /* arguments */
    int       i;        /* */
    char      nam[32],  /* */
             *ptr;      /* */
-   BOOLEAN   cliok;    /* */
+   _BOOL   cliok;    /* */
 
 
    init_um();                             /* init UDO memory management first, */
