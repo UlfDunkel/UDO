@@ -87,21 +87,6 @@
 
 /*******************************************************************************
 *
-*     CONSTANTS
-*
-******************************************|************************************/
-
-#ifndef ID_ENV_C
-#define ID_ENV_C
-const char *id_env_c= "@(#) env.c       $DATE$";
-#endif
-
-
-
-
-
-/*******************************************************************************
-*
 *     INCLUDE FILES
 *
 ******************************************|************************************/
@@ -156,21 +141,21 @@ LOCAL int   flushright_level;             /* Zaehler fuer flushright-Umgebungen 
 LOCAL int   flushleft_level;              /* Zaehler fuer flushleft-Umgebungen */
 LOCAL int   quot_level;                   /* Zaehler fuer quote-Umgebungen */
 
-LOCAL char   itemchar[MAXENVLEVEL+1][64]; /* Zeichen fuer Itemize-Umgebung */
+LOCAL char  itemchar[MAXENVLEVEL+1][64]; /* Zeichen fuer Itemize-Umgebung */
 
 
-LOCAL _BOOL   bCalledBeginAppendix;     /* */
-LOCAL _BOOL   bCalledEndAppendix;       /* */
+LOCAL _BOOL   bCalledBeginAppendix;
+LOCAL _BOOL   bCalledEndAppendix;
 
 LOCAL int   pre_linedraw_charset;
 
 LOCAL const PAPERFORMAT paperSize[MAXPAPERSIZE]=
 {
-   { "A3PORTRAIT",   2970, 4200,  842, 1191, 1136, 85,  780, 72, 0, 0, FALSE},
+   { "A3PORTRAIT",   2970, 4200,  842, 1191, 1136, 85,  780, 72, 0, 0, FALSE },
    { "A3LANDSCAPE",  4200, 2970, 1191,  842,  780, 72, 1119, 72, 0, 0, TRUE },
-   { "A4PORTRAIT",   2100, 2970,  595,  842,  780, 85,  540, 72, 0, 0, FALSE},
+   { "A4PORTRAIT",   2100, 2970,  595,  842,  780, 85,  540, 72, 0, 0, FALSE },
    { "A4LANDSCAPE",  2970, 2100,  842,  595,  530, 72,  770, 72, 0, 0, TRUE },
-   { "A5PORTRAIT",   1485, 2100,  421,  595,  530, 85,  366, 72, 0, 0, FALSE},
+   { "A5PORTRAIT",   1485, 2100,  421,  595,  530, 85,  366, 72, 0, 0, FALSE },
    { "A5LANDSCAPE",  2100, 1485,  595,  421,  356, 72,  523, 72, 0, 0, TRUE },
 };
 

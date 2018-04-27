@@ -57,21 +57,6 @@
 
 /*******************************************************************************
 *
-*     CONSTANTS
-*
-******************************************|************************************/
-
-#ifndef ID_CLI_C
-#define ID_CLI_C
-const char *id_cli_c = "@(#) cli.c       $DATE$";
-#endif
-
-
-
-
-
-/*******************************************************************************
-*
 *     INCLUDE FILES
 *
 ******************************************|************************************/
@@ -81,8 +66,8 @@ const char *id_cli_c = "@(#) cli.c       $DATE$";
 #endif
 
 #include "import.h"
-#include <stdio.h>   
-#include <string.h>   
+#include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "udoport.h"
 #include "version.h"
@@ -105,48 +90,6 @@ const char *id_cli_c = "@(#) cli.c       $DATE$";
 #include "export.h"
 #include "gui.h"
 #include "str.h"                          /* my_str...() */
-
-
-
-
-
-/*******************************************************************************
-*
-*     EXTERNAL REFERENCES
-*
-******************************************|************************************/
-
-extern const char  *id_abo_c;
-extern const char  *id_cfg_c;
-extern const char  *id_chr_c;
-extern const char  *id_env_c;
-extern const char  *id_fsplit_c;
-extern const char  *id_img_c;
-extern const char  *id_lang_c;            /* V6.5.18 */
-extern const char  *id_msg_c;
-extern const char  *id_str_c;
-extern const char  *id_sty_c;
-extern const char  *id_tab_c;
-extern const char  *id_toc_c;
-extern const char  *id_toc_html_c;        /* V6.5.20 [gs] */
-extern const char  *id_tp_c;
-extern const char  *id_udo_c;
-extern const char  *id_udomem_c;          /* V6.5.20 [gs] */
-extern const char  *id_img_html_h;
-extern const char  *id_img_win_h;
-extern const char  *id_img_stg_h;
-
-
-
-
-
-/*******************************************************************************
-*
-*     MACRO DEFINITIONS
-*
-******************************************|************************************/
-
-#define PRGNAME   "udo"
 
 
 
@@ -185,14 +128,13 @@ typedef struct _cliopt                    /* command line options */
 *
 ******************************************|************************************/
 
-LOCAL char      strPrgname[33];           /* der Name dieses Programms */
+LOCAL const char *strPrgname = "udo";     /* der Name dieses Programms */
 LOCAL t_lang    eLanguage;                /* Sprache */
 
 LOCAL _BOOL   bHoldKey;
 LOCAL _BOOL   bShowArgs;
 LOCAL _BOOL   bShowHelp;
 LOCAL _BOOL   bShowVersion;
-LOCAL _BOOL   bShowIdent;
 LOCAL int       last_percent;
 
 
@@ -205,7 +147,6 @@ LOCAL int       last_percent;
 *
 ******************************************|************************************/
 
-LOCAL void show_ident(void);
 LOCAL void show_version(void);
 LOCAL void show_usage(void);
 LOCAL void show_use_help(void);
@@ -239,9 +180,8 @@ LOCAL const CLIOPT cliopt[] =
    { "--help",             "",      'b',  FALSE, &bShowHelp,        TRUE  },
    { "--helptag",          "-g",    'b',  FALSE, &desttype,         TOHPH },
    { "--html",             "-h",    'b',  FALSE, &desttype,         TOHTM },
-   { "--hah",              "",      'b',  FALSE, &desttype,         TOHAH },   /* V6.5.17 */
+   { "--hah",              "",      'b',  FALSE, &desttype,         TOHAH },
    { "--htmlhelp",         "-hh",   'b',  FALSE, &desttype,         TOMHH },
-   { "--ident",            "",      'b',  FALSE, &bShowIdent,       TRUE  },
    { "--info",             "-i",    'b',  FALSE, &desttype,         TOINF },
    { "--ipf",              "",      'b',  FALSE, &desttype,         TOIPF },
    { "--linuxdoc",         "-x",    'b',  FALSE, &desttype,         TOLDS },
@@ -279,7 +219,7 @@ LOCAL const CLIOPT cliopt[] =
    { "--win4",             "-4",    'b',  FALSE, &desttype,         TOWH4 },
 
                                           /* list terminator */
-   { "",                   "",      'c',  FALSE,  NULL,            0      }
+   { "",                   "",      'c',  FALSE,  NULL,             0     }
 };
 
 
@@ -944,51 +884,6 @@ LOCAL void show_version(void)
 
 /*******************************************************************************
 *
-*  show_ident():
-*     listet die Identstrings
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void show_ident(void)
-{
-   show_version();
-   
-   fprintf(stdout, "\n");
-   
-   fprintf(stdout, "%s\n", id_abo_c      + 5);
-   fprintf(stdout, "%s\n", id_cfg_c      + 5);
-   fprintf(stdout, "%s\n", id_chr_c      + 5);
-   fprintf(stdout, "%s\n", id_cli_c      + 5);
-   fprintf(stdout, "%s\n", id_env_c      + 5);
-   fprintf(stdout, "%s\n", id_fsplit_c   + 5);
-   fprintf(stdout, "%s\n", id_img_c      + 5);
-   fprintf(stdout, "%s\n", id_lang_c     + 5);
-   fprintf(stdout, "%s\n", id_msg_c      + 5);
-   fprintf(stdout, "%s\n", id_str_c      + 5);
-   fprintf(stdout, "%s\n", id_sty_c      + 5);
-   fprintf(stdout, "%s\n", id_toc_c      + 5);
-   fprintf(stdout, "%s\n", id_toc_html_c + 5);
-   fprintf(stdout, "%s\n", id_tab_c      + 5);
-   fprintf(stdout, "%s\n", id_tp_c       + 5);
-   fprintf(stdout, "%s\n", id_udo_c      + 5);
-   fprintf(stdout, "%s\n", id_udomem_c   + 5);
-
-   fprintf(stdout, "\n");
-
-   fprintf(stdout, "%s\n", id_img_html_h + 5);
-   fprintf(stdout, "%s\n", id_img_win_h  + 5);
-   fprintf(stdout, "%s\n", id_img_stg_h  + 5);
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  show_usage():
 *     gibt Auskunft ueber den Gebrauch dieses Programm
 *
@@ -1351,9 +1246,6 @@ const char  *argv[])   /* arguments */
 
 #ifdef __TOS__
    Pdomain(1);
-   strcpy(strPrgname, PRGNAME);
-#else
-   ((argv[0][0] != 0)) ? strcpy(strPrgname, argv[0]) : strcpy(strPrgname, PRGNAME);
 #endif
 
 
@@ -1397,7 +1289,6 @@ const char  *argv[])   /* arguments */
    bShowArgs        = FALSE;
    bShowVersion     = FALSE;
    bShowHelp        = FALSE;
-   bShowIdent       = FALSE;
    
    no_stderr_output = FALSE;
 
@@ -1456,10 +1347,6 @@ const char  *argv[])   /* arguments */
    else if (bShowVersion)
    {
       show_version();
-   }
-   else if (bShowIdent)
-   {
-      show_ident();
    }
    else
    {                                      /* Leere Kommandozeile uebergeben oder kein Infile */
