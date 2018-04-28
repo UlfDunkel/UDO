@@ -358,8 +358,6 @@ LOCAL void output_aliasses(void);
 LOCAL _BOOL add_ref(const char *r);
    /*  */
 LOCAL void replace_refs(char *s);
-   /*  */
-LOCAL void string2reference(char *ref, const LABEL *l, const _BOOL for_toc, const char *pic, const _UWORD uiW, const _UWORD uiH);
 
    /* read raw file and output it unchanged */
 LOCAL _BOOL output_raw_file(const char *filename);
@@ -917,15 +915,16 @@ char             *s)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void string2reference(
+void string2reference(
 
 char           *ref,                 /* */
-const LABEL    *l,                   /* */
+int li,
 const _BOOL   for_toc,             /* */
 const char     *pic,                 /* constant for GUI navigation image, e.g. GIF_UP_NAME */
 const _UWORD     uiW,                 /* GUI navigation image width */
 const _UWORD     uiH)                 /* GUI navigation image height */
 {
+   const LABEL   *l = lab[li];
    char         s[512],              /* */
                 n[512],              /* */
                 sNoSty[512],         /* */
@@ -1499,7 +1498,7 @@ const _UWORD       uiHeight)      /* image height */
    
          if (ref_it)
          {
-            string2reference(the_ref, lab[found_lab], for_toc, pic, uiWidth, uiHeight);
+            string2reference(the_ref, found_lab, for_toc, pic, uiWidth, uiHeight);
             add_ref(the_ref);
          }
          else
@@ -4573,7 +4572,7 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       {
          um_strcpy(s, lab[li]->name, 512, buffer);
 
-         string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+         string2reference(anchor, li, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
          replace_once(s, lab[li]->name, anchor);
 
          if (no_images)
@@ -4644,7 +4643,7 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
             li = toc[i]->labindex;
             um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
 
-            string2reference(anchor, lab[li], TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
+            string2reference(anchor, li, TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
             replace_once(s, lab[li]->name, anchor);
 
             if (no_images)
@@ -4766,7 +4765,7 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       li = toc[i]->labindex;
       um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
 
-      string2reference(anchor, lab[li], TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
+      string2reference(anchor, li, TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
       replace_once(s, lab[li]->name, anchor);
 
       if (no_images)
@@ -5129,7 +5128,7 @@ LOCAL void html_node_bar_modern(void)
                }
             }
             
-            string2reference(the_ref, lab[li], FALSE, ptrImg, uiW, uiH);
+            string2reference(the_ref, li, FALSE, ptrImg, uiW, uiH);
             
             if (ptrImg != noImg && toc[i]->icon_text != NULL)
             {
@@ -5561,7 +5560,7 @@ LOCAL void html_node_bar_frames(void)
                }
             }
             
-            string2reference(the_ref, lab[li], FALSE, ptrImg, uiW, uiH);
+            string2reference(the_ref, li, FALSE, ptrImg, uiW, uiH);
    
             /* Im Inhaltsverzeichnis DARF nicht <a href="#..."> stehen! */
             /* kleiner Zwischenhack, da Frames mit gemergten Nodes wohl */
@@ -10405,7 +10404,7 @@ _BOOL           apx)                  /* TRUE: appendix output */
          last1 = TRUE;
          
          li = toc[i]->labindex;
-         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         string2reference(ref, li, TRUE, "", 0, 0);
          
          if (no_numbers)
          {
@@ -10722,7 +10721,7 @@ _BOOL           apx)                  /* TRUE: appendix output */
          last2 = TRUE;
 
          li = toc[i]->labindex;
-         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         string2reference(ref, li, TRUE, "", 0, 0);
       
          if (no_numbers)
          {
@@ -10980,7 +10979,7 @@ _BOOL           apx)                  /* TRUE: appendix output */
          last3 = TRUE;
 
          li = toc[i]->labindex;
-         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         string2reference(ref, li, TRUE, "", 0, 0);
          
          if (no_numbers)
          {
@@ -11213,7 +11212,7 @@ _BOOL           apx)                  /* TRUE: appendix output */
          last4 = TRUE;
 
          li = toc[i]->labindex;
-         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         string2reference(ref, li, TRUE, "", 0, 0);
          
          if (no_numbers)
          {
@@ -11379,7 +11378,7 @@ _BOOL           apx)                  /* TRUE: appendix output */
          last5 = TRUE;                    /* we're a subsubsubsubnode! */
 
          li = toc[i]->labindex;
-         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         string2reference(ref, li, TRUE, "", 0, 0);
          
          if (no_numbers)
          {
@@ -11526,7 +11525,7 @@ _BOOL           apx)                  /* TRUE: appendix output */
          last6 = TRUE;                    /* we're a subsubsubsubsubnode! */
 
          li = toc[i]->labindex;
-         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         string2reference(ref, li, TRUE, "", 0, 0);
          
          if (no_numbers)
          {

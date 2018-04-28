@@ -428,7 +428,9 @@ GLOBAL void c_alias(void);
 GLOBAL _BOOL add_label(const char *label, const _BOOL isn, const _BOOL isp);
 GLOBAL _BOOL add_alias(const char *alias, const _BOOL isp);
 
+GLOBAL void string2reference(char *ref, int li, const _BOOL for_toc, const char *pic, const _UWORD uiW, const _UWORD uiH);
 
+ 
    /* --- enhance TOC --- */
 
 GLOBAL void set_ignore_headline(void);

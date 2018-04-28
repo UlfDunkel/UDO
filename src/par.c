@@ -155,126 +155,7 @@ LOCAL int       speccmd_counter;
 
 LOCAL unsigned char const encode_chars[64] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#=";
 LOCAL int decode_chars[128];
-
-
-
-
-/*******************************************************************************
-*
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-   /* delete quotes in parameter strings */
-LOCAL void del_param_quotes (char *s);
-
-   /* get # of parameter blocks of command blocks in round brackets */
-LOCAL int get_nr_of_parameters(const char *cmd, char *s);
-
-   /*  */
-LOCAL void reset_parameters(void);
-
-   /* extract parameters from a string */
-LOCAL int extract_parameters(char *s, const char *cmd, const int min, const int max);
-
-   /* get parameters from a string */
-LOCAL int get_parameters(char *s, const char *search, const int min, const int max);
-
-   /*  */
-LOCAL void adjust_params_inside(char * s);
-
-   /* convert a link command into LDS format */
-LOCAL _BOOL convert_link_lds(char *s, const char *p0, char *p1, char *p2, const char *link);
-
-   /* convert a link command into STG format */
-LOCAL _BOOL convert_link_stg(char *s, const char *p0, char *p1, char *p2, const char *link);
-
-   /* convert a link command into PureC format */
-LOCAL _BOOL convert_link_pch(char *s, const char *p0, char *p1, char *p2, const char *link);
-
-   /* convert a link command into TeX format */
-LOCAL _BOOL convert_link_tex(char *s, const char *p0, char *p1, char *p2);
-
-   /* convert a link command into PDF format */
-LOCAL _BOOL convert_link_pdf(char *s, const char *p0, char *p1, char *p2, const char *link);
-
-   /* convert a link command into LaTeX format */
-LOCAL _BOOL convert_link_lyx(char *s, const char *p0, char *p1, char *p2);
-
-   /* convert a link command into TurboVisionHelp format */
-LOCAL _BOOL convert_link_tvh(char *s, const char *p0, char *p1, char *p2);
-
-   /* convert a link command into TeXinfo format */
-LOCAL _BOOL convert_link_info(char *s, const char *p0, char *p1, char *p2, const char *link);
-
-   /* convert a link command into IPF format */
-LOCAL _BOOL convert_link_ipf(char *s, const char *p0, char *p1, char *p2, const char *link);
-
-   /* convert a link command into RTF? format */
-LOCAL _BOOL convert_link_etc(char *s, const char *p0, char *p1, char *p2, const char *link);
-
-   /* convert a link command into its target format */
-LOCAL void c_link(char *s, _BOOL inside_b4_macro);
-
-   /* convert a url command into its target format */
-LOCAL void c_url(char *s, _BOOL inside_b4_macro);
-
-   /* convert an xlink command into its target format */
-LOCAL void c_xlink(char *s, _BOOL inside_b4_macro);
-
-   /* convert an ilink command into its target format */
-LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro);
-
-   /* convert a plink command into its target format */
-LOCAL void c_plink(char *s, const _BOOL inside_b4_macro);
-
-   /* convert a label command into its target format */
-LOCAL void c_plabel(char *s, const _BOOL inside_b4_macro); /* New in V6.5.9 [NHz] */
-
-   /* convert a nolink command into its target format */
-LOCAL void c_nolink(char *s, const _BOOL inside_b4_macro);
-
-   /* convert a comment command into its target format */
-LOCAL void c_comment(char *s, const _BOOL inside_b4_macro);
-
-   /* convert an index command into its target format */
-LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro);
-
-   /*  */
-LOCAL _BOOL c_single_index(char *s, const _BOOL inside_b4_macro);
-
-   /*  */
-LOCAL _BOOL c_double_index(char *s, const _BOOL inside_b4_macro);
-
-   /*  */
-LOCAL _BOOL c_tripple_index(char *s, const _BOOL inside_b4_macro);
-
-   /*  */
-LOCAL _BOOL c_quadruple_index(char *s, const _BOOL inside_b4_macro);
-
-   /* convert a time command into its target format */
-LOCAL void c_internal_time(char *s, const _BOOL inside_b4_macro); /* V 6.5.19 */
-
-   /* convert an img command into its target format */
-LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro);
-
-   /* convert a raw command into its target format */
-LOCAL _BOOL c_single_raw(char *s, const _BOOL inside_b4_macro);
-
-   /* convert a raw command into its target format */
-LOCAL _BOOL c_double_raw(char *s, const _BOOL inside_b4_macro);
-
-   /* handle conversion of raw commands */
-LOCAL void c_internal_raw(char *s, const _BOOL inside_b4_macro);
-
-   /* check if macro or definition uses parameters */
-LOCAL _BOOL md_uses_parameters(const char *s);
-
-
-
-
-
-
+LOCAL char const macro_allowed_name[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
 
 
 
@@ -295,9 +176,7 @@ LOCAL _BOOL md_uses_parameters(const char *s);
 *
 ******************************************|************************************/
 
-LOCAL void del_param_quotes(
-
-char  *s)  /* ^ to a complete line */
+LOCAL void del_param_quotes(char *s)
 {
    qreplace_all(s, "!)", 2, ")", 1);
    qreplace_all(s, "!]", 2, "]", 1);
@@ -320,42 +199,38 @@ char  *s)  /* ^ to a complete line */
 *
 ******************************************|************************************/
 
-LOCAL int get_nr_of_parameters(
-
-const char  *cmd,             /* command string, e.g. "raw" */
-char        *s)               /* string to check */
+LOCAL int get_nr_of_parameters(const char *cmd, const char *s)
 {
    int       count = 0;       /* # of found parameters */
    char     *pos;             /* ^ to string s */
    char      search[128];     /* buffer for search string */
 
-
    sprintf(search, "(!%s", cmd);          /* create search string, e.g. "(!raw" */
 
-                                          /* command not found */
-   if ((pos = strstr(s, search)) == NULL )
-      return 0;                           /* exit */
+   if ((pos = strstr(s, search)) == NULL)
+      return 0;
 
-   pos += strlen(search);                 /* skip command */
-
-                                          /* find first uncasted closing bracket */
-   while (pos[0] != ')' || (pos[0] == ')' && pos[-1] == '!') )
+   /* skip command */
+   pos += strlen(search);
+   /* check if macro name really ends here,
+      and don't try to replace (!xlink ...) by (!x ...)
+    */
+   if (strchr(macro_allowed_name, pos[0]) != NULL)
+      return 0;
+   
+   /* find first uncasted closing bracket */
+   while (pos[0] != ')' || (pos[0] == ')' && pos[-1] == '!'))
    {
       switch (pos[0])
       {
       case EOS:                           /* not allowed: command block has a line break! */
          error_unexpected_eol();
          return 0;
-         
       case ']':                           /* parameter found? */
          if (pos[-1] != '!')              /* if ] wasn't casted by ! ... */
-         {
             count++;                      /* yes, parameter found */
-         }
-         
          break;
       }
-      
       pos++;                              /* next char */
    }
 
@@ -378,14 +253,13 @@ char        *s)               /* string to check */
 
 LOCAL void reset_parameters(void)
 {
-   int   i;  /* */
-   
+   int i;
    
    for (i = 0; i < MAX_PARAMETERS; i++)
    {
       Param[i][0] = EOS;
       Space[i][0] = EOS;
-   };
+   }
 }
 
 
@@ -397,6 +271,11 @@ LOCAL void reset_parameters(void)
 *  extract_parameters():
 *     extract parameters from a string
 *
+* @in: complete line
+* @cmd: command without "(!": link, plink, xlink
+* @min: minimum # of expected parameters
+* @max: maximum # of expected parameters
+*
 *  Notes:
 *     The string has to have the syntax "(!command [text] <[text] [...]>)".
 *
@@ -405,23 +284,16 @@ LOCAL void reset_parameters(void)
 *
 ******************************************|************************************/
 
-LOCAL int extract_parameters(
-
-char       *s,            /* ^ complete line */
-const char *cmd,          /* ^ command without "(!": link, plink, xlink */
-const int   min,          /* minimum # of expected parameters */
-const int   max)          /* maximum # of expected parameters */
+LOCAL int extract_parameters(const char *s, const char *cmd, int count)
 {
    int      i;            /* # of found parameters */
    char    *pos,          /* ^ into string */
             search[128];  /* string buffer */
-            
 
-   sprintf(search, "(!%s", cmd);          /* PL3 */
+   sprintf(search, "(!%s", cmd);
 
-   if ( (pos = strstr(s, search)) == NULL)
+   if ((pos = strstr(s, search)) == NULL)
       return 0;
-      
 
    reset_parameters();
 
@@ -429,42 +301,29 @@ const int   max)          /* maximum # of expected parameters */
 
    i = 0;
 
-   while (i < max)      
+   while (i < count)
    {
       /* Anfang "[" des Parameters bestimmen */
       /* und die Zeichen ermitteln, die bis dahin */
       /* im Quelltext auftauchen */
-      
-      while ( (pos[0] != '[') && (pos[0] != EOS) && (pos[0] != ')'))
+      while (pos[0] != '[' && pos[0] != EOS)
       {
          chrcat(Space[i], pos[0]);
          pos++;
       }
       
-      if (pos[0] == ')')
-         break;
-      
-      if (pos[0] == EOS)                  /* no more data */
+      if (pos[0] == EOS)
       {
-         if (min == max)                  /* error! */
-         {
-            error_unexpected_eol();
-            return 0;
-         }
-         else                             /* not all expected parameters found */
-         {
-            Space[i][0] = EOS;            /* remove last ")" from spaces */
-            return i;
-         }
+         error_unexpected_eol();
+         return 0;
       }
 
       /* Pointer auf erstes Zeichen des Parameters setzen */
       /* und bis zur naechsten Klammer lesen, die nicht */
       /* duch ein Ausrufungszeichen gequotet ist. */
-      
       pos++;
 
-      while ( (pos[0] != ']' || (pos[0] == ']' && pos[-1] == '!')) && (pos[0] != EOS) )
+      while ((pos[0] != ']' || (pos[0] == ']' && pos[-1] == '!')) && (pos[0] != EOS))
       {
          chrcat(Param[i + 1], pos[0]);
          pos++;
@@ -481,20 +340,11 @@ const int   max)          /* maximum # of expected parameters */
    }
 
    /* Zeichen lesen, die bis zum Ende des Kommandos auftauchen */
-
-#if 1
-   while ( (pos[0] != ')') && (pos[0] != EOS) )
+   while (pos[0] != ')' && pos[0] != EOS)
    {
-      chrcat(Space[min], pos[0]);
+      chrcat(Space[count], pos[0]);
       pos++;
    }
-#else
-   while ( (pos[0] != ')') && (pos[0] != EOS) )
-   {
-      chrcat(Space[min + 1], pos[0]);
-      pos++;
-   }
-#endif
 
    if (pos[0] == EOS)
    {
@@ -502,7 +352,7 @@ const int   max)          /* maximum # of expected parameters */
       return 0;
    }
 
-   return i;                              /* PL14: Anzahl der Parameter statt _BOOL */
+   return i;
 }
 
 
@@ -514,32 +364,31 @@ const int   max)          /* maximum # of expected parameters */
 *  get_parameters():
 *     get parameters from a string
 *
+* @in: complete line
+* @cmd: command without "(!": link, plink, xlink
+* @min: minimum # of expected parameters
+* @max: maximum # of expected parameters
+*
 *  Return:
 *     # of parameters
 *
 ******************************************|************************************/
 
-LOCAL int get_parameters(
-
-char        *s,       /* */
-const char  *search,  /* */
-const int    min,     /* minimum # of expected parameters */
-const int    max)     /* maximum # of expected parameters */
+LOCAL int get_parameters(const char *s, const char *search, int min, int max)
 {
-   int       i,       /* */
-             params;  /* */
-             
+   int i, params;
 
-   params = extract_parameters(s, search, min, max);
+   params = get_nr_of_parameters(search, s);
+   
+   if (params == 0)
+      return 0;
+   if (params < min || params > max)
+      return params;
+   
+   params = extract_parameters(s, search, params);
 
    if (params == 0)
       return 0;
-   
-
-#if 0
-   if (params != count)
-      error "was nun?"
-#endif
 
    sprintf(Param[0], "(!%s%s", search, Space[0]);
 
@@ -558,7 +407,7 @@ const int    max)     /* maximum # of expected parameters */
 
    strcat(Param[0], ")");
 
-   return params;                         /* PL14: Anzahl der Parameter statt _BOOL */
+   return params;
 }
 
 
@@ -575,9 +424,7 @@ const int    max)     /* maximum # of expected parameters */
 *
 ******************************************|************************************/
 
-LOCAL void adjust_params_inside(
-
-char  *s)  /* */
+LOCAL void adjust_params_inside(char *s)
 {
    replace_macros(s);
    c_divis(s);
@@ -600,20 +447,13 @@ char  *s)  /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_lds(
-
-char        *s,                /* */
-const char  *p0,               /* */
-char        *p1,               /* */
-char        *p2,               /* */
-const char  *link)             /* */
+LOCAL _BOOL convert_link_lds(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      s_entry[1024],    /* */
-             old_entry[1024];  /* */
-   char     *ptr;              /* */
-   _BOOL   flag;             /* */
+   char      s_entry[1024],
+             old_entry[1024];
+   char     *ptr;
+   _BOOL   flag;
    
-
    strcpy(s_entry, p2);
    c_tilde(s_entry);
    replace_udo_quotes(s_entry);
@@ -626,21 +466,19 @@ const char  *link)             /* */
    
    strcpy(old_entry, p2);
 
-                                          /* auch Links innerhalb der Seite ermoeglichen */
+   /* auch Links innerhalb der Seite ermoeglichen */
    auto_references(s_entry, TRUE, "", 0, 0);
    
    /* Trick: Schauen, ob nun "> im Eintrag steht und dann */
    /* ab dort den Link einsetzen. */
-   
    flag = FALSE;
-   
-   if ( (ptr = strstr(s_entry, "name=\"")) != NULL)
+   if ((ptr = strstr(s_entry, "name=\"")) != NULL)
       flag = replace_once(ptr, old_entry, p1);
 
    if (!flag)
    {
       error_undefined_link(link);
-      strcpy(s_entry, p1);   /* PL9 */
+      strcpy(s_entry, p1);
    }
 
    if (insert_placeholder(s, p0, s_entry, p1))
@@ -664,22 +502,15 @@ const char  *link)             /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_stg(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2,             /* */
-const char  *link)           /* */
+LOCAL _BOOL convert_link_stg(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      nodename[256],  /* */
-             s_entry[256];   /* */
-   int       ti,             /* */
-             li;             /* */
-   _BOOL   isnode;         /* */
-   _BOOL   flag;           /* */
+   char      nodename[256],
+             s_entry[256];
+   int       ti,
+             li;
+   _BOOL   isnode;
+   _BOOL   flag;
    
-
    c_tilde(p2);
    replace_udo_quotes(p2);
 
@@ -701,7 +532,8 @@ const char  *link)           /* */
       
       replace_2at_by_1at(nodename);
 
-      if (isnode && is_current_node(ti))  /* r6pl15: links auf gleiche node mag ST-Guide nicht */
+      /* links auf gleiche node mag ST-Guide nicht */
+      if (isnode && is_current_node(ti))
       {
          strcpy(s_entry, p1);
       }
@@ -741,21 +573,14 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_pch(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2,             /* */
-const char  *link)           /* */
+LOCAL _BOOL convert_link_pch(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      nodename[256],  /* */
-             s_entry[256];   /* */
-   int       ti,             /* */
-             li;             /* */
-   _BOOL   isnode;         /* */
-   _BOOL   flag;           /* */
-   
+   char      nodename[256],
+             s_entry[256];
+   int       ti,
+             li;
+   _BOOL   isnode;
+   _BOOL   flag;
 
    c_tilde(p2);
    replace_udo_quotes(p2);
@@ -773,8 +598,9 @@ const char  *link)           /* */
       node2pchelp(p2);
       sprintf(s_entry, "\\link(\"%s\")%s\\#", p2, p1);
    }
-   else                                   /* Node, Alias oder Label nicht definiert */
+   else
    {
+      /* Node, Alias oder Label nicht definiert */
       error_undefined_link(link);
       strcpy(s_entry, p1);
    }
@@ -800,20 +626,14 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_tex(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2)             /* */
+LOCAL _BOOL convert_link_tex(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      s_entry[1024];  /* */
-   int       li,             /* */
-             ti;             /* */
-   _BOOL   isnode;         /* */
-   char      nodename[256];  /* */
+   char s_entry[1024];
+   int       li,
+             ti;
+   _BOOL   isnode;
+   char nodename[256];
    
-
    convert_tilde(p1);
    convert_tilde(p2);
    
@@ -847,23 +667,16 @@ char        *p2)             /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_pdf(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2,             /* */
-const char  *link)           /* */
+LOCAL _BOOL convert_link_pdf(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      nodename[256],  /* */
-             s_entry[256];   /* */
-   int       ti,             /* */
-             li,             /* */
-             dest;           /* */
-   _BOOL   isnode;         /* */
-   _BOOL   flag;           /* */
+   char      nodename[256],
+             s_entry[256];
+   int       ti,
+             li,
+             dest;
+   _BOOL   isnode;
+   _BOOL   flag;
    
-
    c_tilde(p2);
    replace_udo_quotes(p2);
 
@@ -913,18 +726,13 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_lyx(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2)             /* */
+LOCAL _BOOL convert_link_lyx(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      s_entry[1024];  /* */
-   int       li,             /* */
-             ti;             /* */
-   _BOOL   isnode;         /* */
-   char      nodename[256];  /* */
+   char s_entry[1024];
+   int       li,
+             ti;
+   _BOOL   isnode;
+   char nodename[256];
 
    is_node_link(p2, nodename, &ti, &isnode, &li);
 
@@ -953,20 +761,14 @@ char        *p2)             /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_tvh(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2)             /* */
+LOCAL _BOOL convert_link_tvh(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      s_entry[1024];  /* */
-   int       li,             /* */
-             ti;             /* */
-   _BOOL   isnode;         /* */
-   char      nodename[256];  /* */
+   char s_entry[1024];
+   int       li,
+             ti;
+   _BOOL isnode;
+   char nodename[256];
    
-
    is_node_link(p2, nodename, &ti, &isnode, &li);
 
    node2vision(p2);
@@ -993,22 +795,14 @@ char        *p2)             /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_info(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2,             /* */
-const char  *link)           /* */
+LOCAL _BOOL convert_link_info(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      nodename[256],  /* */
-             s_entry[256];   /* */
-   int       ti,             /* */
-             li;             /* */
-   _BOOL   isnode;         /* */
-   _BOOL   flag;           /* */
+   char nodename[256], s_entry[256];
+   int       ti,
+             li;
+   _BOOL isnode;
+   _BOOL flag;
    
-
    c_tilde(p2);
    replace_udo_quotes(p2);
 
@@ -1016,6 +810,7 @@ const char  *link)           /* */
 
    convert_tilde(p1);
    replace_udo_quotes(p1);
+   qreplace_all(p1, "*", 1, "\\*", 2);
 
    replace_udo_tilde(p2);
    replace_udo_nbsp(p2);
@@ -1027,13 +822,23 @@ const char  *link)           /* */
          strcpy(nodename, p2);
       else
          node2texinfo(nodename);
-
-      sprintf(s_entry, "%s (@xref{%s})", p1, nodename);
+      sprintf(s_entry, "%s (@pxref{%s})", p1, nodename);
    }
-   else                                   /* Node, Alias oder Label nicht definiert */
+   else
    {
-      error_undefined_link(link);
-      strcpy(s_entry, p1);
+      /* Node, Alias oder Label nicht definiert */
+      if (!no_index && bCalledIndex && use_udo_index && strcmp(p2, "Index") == 0)
+      {
+      	 /*
+      	  * Allow links to Index page. It is automatically generated
+      	  * by UDO and therefore not found as link destination
+      	  */
+         sprintf(s_entry, "%s (@pxref{%s})", p1, lang.index);
+      } else
+      {
+         error_undefined_link(link);
+         strcpy(s_entry, p1);
+      }
    }
 
    if (insert_placeholder(s, p0, s_entry, p1))
@@ -1057,23 +862,14 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_ipf(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2,             /* */
-const char  *link)           /* */
+LOCAL _BOOL convert_link_ipf(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      nodename[256],  /* */
-             s_entry[256],   /* */
-             s_id[256];      /* */
-   int       ti,             /* */
-             li;             /* */
-   _BOOL   isnode;         /* */
-   _BOOL   flag;           /* */
+   char nodename[256], s_entry[256], s_id[256];
+   int       ti,
+             li;
+   _BOOL isnode;
+   _BOOL flag;
    
-
    c_tilde(p2);
    replace_udo_quotes(p2);
 
@@ -1088,8 +884,9 @@ const char  *link)           /* */
       node2NrIPF(s_id, li);
       sprintf(s_entry, ":link reftype=hd refid=%s.%s:elink.", s_id, p1);
    }
-   else                                   /* Node, Alias oder Label nicht definiert */
+   else
    {
+      /* Node, Alias oder Label nicht definiert */
       error_undefined_link(link);
       strcpy(s_entry, p1);
    }
@@ -1115,23 +912,18 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_ps(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2,             /* */
-const char  *link)           /* */
+LOCAL _BOOL convert_link_ps(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      nodename[256],  /* */
-             s_entry[256];   /* */
-   int       ti,             /* */
-             li;             /* */
-   _BOOL   isnode;         /* */
-   _BOOL   flag;           /* */
+   char nodename[256], s_entry[256];
+   int       ti,
+             li;
+   _BOOL isnode;
+   _BOOL flag;
    
-
-                                          /* Internal Link for Postscript */
+   c_tilde(p2);
+   replace_udo_quotes(p2);
+   
+   /* Internal Link for Postscript */
    flag = is_node_link(p2, nodename, &ti, &isnode, &li);
 
    convert_tilde(p1);
@@ -1144,7 +936,6 @@ const char  *link)           /* */
       replace_udo_quotes(p2);
       replace_udo_quotes(p1);
 
-      /* Changed in V6.5.3 [NHz] */
       replace_all(p1, "(", "\\(");
       replace_all(p1, ")", "\\)");
       
@@ -1155,8 +946,9 @@ const char  *link)           /* */
       
       sprintf(s_entry, ") udoshow (%s) /%s 0 255 0 Link (", p1, p2);
    }
-   else                                   /* Node, Alias oder Label nicht definiert */
+   else
    {
+      /* Node, Alias oder Label nicht definiert */
       error_undefined_link(link);
       strcpy(s_entry, p1);
    }
@@ -1182,23 +974,14 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL convert_link_etc(
-
-char        *s,              /* */
-const char  *p0,             /* */
-char        *p1,             /* */
-char        *p2,             /* */
-const char  *link)           /* */
+LOCAL _BOOL convert_link_etc(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char      nodename[256],  /* */
-             s_entry[256];   /* */
-   char      lq[16],         /* */
-             rq[16];         /* */
-   int       ti,             /* */
-             li;             /* */
-   _BOOL   isnode;         /* */
-   _BOOL   flag;           /* */
-   
+   char nodename[256], s_entry[256];
+   char lq[16], rq[16];
+   int       ti,
+             li;
+   _BOOL isnode;
+   _BOOL flag;
 
    c_tilde(p2);
    replace_udo_quotes(p2);
@@ -1208,23 +991,20 @@ const char  *link)           /* */
    replace_udo_tilde(p2);
    replace_udo_nbsp(p2);
 
-   /* Deleted in r6.2pl1 [NHz] / Bug #00000030 */
-/* convert_tilde(p1); */
-
+   convert_tilde(p1);
    replace_udo_quotes(p1);
 
    if (flag)
    {
       if (no_links)
       {
-         /* r6pl6: Links unterdruecken */
          strcpy(s_entry, p1);
       }
       else
       {
-         if (desttype == TORTF)   /*r6pl6: die richtigen benutzen */
+         if (desttype == TORTF)   /* die richtigen benutzen */
          {
-            strcpy(lq, "\\ldblquote");
+            strcpy(lq, "\\ldblquote ");
             strcpy(rq, "\\rdblquote");
          }
          else
@@ -1245,7 +1025,6 @@ const char  *link)           /* */
       }
    }
 
-
    if (!flag)
    {
       /* Node, Alias oder Label nicht definiert */
@@ -1253,14 +1032,140 @@ const char  *link)           /* */
       strcpy(s_entry, p1);
    }
 
-   if (replace_once(s, p0, s_entry))
-      return TRUE;
+   if (insert_placeholder(s, p0, s_entry, p1))
+       return TRUE;
 
    return FALSE;
 }
 
 
 
+/*******************************************************************************
+*
+*  convert_link_win():
+*     convert a link command into WinHelp/WinHelp4 format
+*
+*  return:
+*     FALSE: failure
+*     TRUE : success
+*
+******************************************|************************************/
+
+LOCAL _BOOL convert_link_win(char *s, const char *p0, char *p1, char *p2, const char *link)
+{
+   char s_entry[1024];
+   char nodename[1024];
+   _BOOL flag;
+   int       ti,
+             li;
+   _BOOL isnode;
+
+   strcpy(s_entry, p2);
+   c_tilde(s_entry);
+   replace_udo_quotes(s_entry);
+
+   convert_tilde(p1);
+   convert_tilde(p2);
+   replace_udo_quotes(p1);
+   replace_udo_quotes(p2);
+   flag = is_node_link(p2, nodename, &ti, &isnode, &li);
+   if (flag)
+   {
+      if (no_links)
+      {
+         strcpy(s_entry, p1);
+      }
+      else
+      {
+#if 0
+         replace_udo_tilde(nodename);
+         replace_udo_nbsp(nodename);
+         if (isnode)
+            node2NrWinhelp(ref, li);
+         else if (isalias)
+            alias2NrWinhelp(ref, li);
+         else
+            label2NrWinhelp(ref, li);
+         if (ispopup)
+         {  sprintf(s_entry, "{\\ul %s}{\\v %s}", nodename, ref);
+         }
+         else
+         {  sprintf(s_entry, "{\\uldb %s}{\\v %s}", nodename, ref);
+         }
+#else
+         string2reference(s_entry, li, TRUE, "", 0, 0);
+#endif
+      }
+   } else
+   {
+      /*
+       * Allow links to Index page. It is not generated
+       * by UDO and therefore not found as link destination.
+       */
+      if ((!no_index && bCalledIndex && strcmp(p2, "Index") == 0))
+      {
+      	 sprintf(s_entry, "{\\uldb %s}{\\v !JumpKeyword(`')}", p1);
+      } else
+      {
+        /* Node, Alias or Label undefined */
+        error_undefined_link(link);
+        strcpy(s_entry, p1);
+      }
+   }
+   return insert_placeholder(s, p0, s_entry, p1);
+}
+
+
+
+/*******************************************************************************
+*
+*  convert_link_html():
+*     convert a link command into HTML format
+*
+*  return:
+*     FALSE: failure
+*     TRUE : success
+*
+******************************************|************************************/
+
+LOCAL _BOOL convert_link_html(char *s, const char *p0, char *p1, char *p2, const char *link)
+{
+   char s_entry[1024];
+   char nodename[1024];
+   _BOOL flag;
+   int       ti,
+             li;
+   _BOOL isnode;
+   
+   strcpy(s_entry, p2);
+   c_tilde(s_entry);
+   replace_udo_quotes(s_entry);
+
+   convert_tilde(p1);
+   convert_tilde(p2);
+   replace_udo_quotes(p1);
+   replace_udo_quotes(p2);
+
+   flag = is_node_link(p2, nodename, &ti, &isnode, &li);
+   
+   if (flag)
+   {
+      if (no_links)
+      {
+         strcpy(s_entry, p1);
+      }
+      else
+      {
+         string2reference(s_entry, li, TRUE, "", 0, 0);
+      }
+   } else
+   {
+      error_undefined_link(link);
+      strcpy(s_entry, p1);
+   }
+   
+   return insert_placeholder(s, p0, s_entry, p1);
+}
 
 
 /*******************************************************************************
@@ -1273,33 +1178,29 @@ const char  *link)           /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_link(
-
-char        *s,                /* */
-_BOOL      inside_b4_macro)  /* */
+LOCAL void c_link(char *s, _BOOL inside_b4_macro)
 {
-   int       pnr = 0;          /* */
-   char      s_entry[1024],    /* */
-             old_entry[1024],  /* */
-             link[1024];       /* */
-   char     *ptr;              /* */
-   _BOOL   linkerror;        /* */
-   _BOOL   flag;             /* */
-   _BOOL   old_autorefoff;   /* */
+   int       pnr = 0;
+   _BOOL   linkerror;
+   char      link[1024];
+   _BOOL   old_autorefoff;
    
-
    old_autorefoff = bDocAutorefOff;
    bDocAutorefOff = FALSE;
 
    linkerror = FALSE;
-   
-   while (!linkerror && ((pnr = get_parameters(s, "link", 2, 2)) == 2) )
+   while (!linkerror && (pnr = get_parameters(s, "link", 2, 2)) == 2)
    {
-      strcpy(link, Param[2]);
-      
       del_whitespaces(Param[1]);
       del_whitespaces(Param[2]);
 
+      /* Wird ein leerer Parameter benutzt, den */
+      /* den ersten auch als zweiten verwenden. */
+      if (Param[2][0] == EOS)
+      {
+         strcpy(Param[2], Param[1]);
+      }
+      strcpy(link, Param[2]);
 
       if (inside_b4_macro)
       {
@@ -1318,131 +1219,59 @@ _BOOL      inside_b4_macro)  /* */
       case TOHAH:
       case TOHTM:
       case TOMHH:
-         strcpy(s_entry, Param[2]);
-         c_tilde(s_entry);
-         replace_udo_quotes(s_entry);
-
-         convert_tilde(Param[1]);
-         convert_tilde(Param[2]);
-         
-         replace_udo_quotes(Param[1]);
-         replace_udo_quotes(Param[2]);
-         
-         strcpy(old_entry, Param[2]);
-
-         auto_references(s_entry, TRUE, "", 0, 0);      /* auch Links innerhalb der Seite ermoeglichen */
-
-         /* Trick: Schauen, ob nun "> im Eintrag steht und dann */
-         /* ab dort den Link einsetzen. */
-         
-         flag = FALSE;
-         
-         if ( (ptr = strstr(s_entry, "\">")) != NULL)
-            flag = replace_once(ptr, old_entry, Param[1]);
-
-         if (!flag)
-         {
-            error_undefined_link(link);
-            strcpy(s_entry, Param[1]);
-         }
-
-         linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+         linkerror = !convert_link_html(s, Param[0], Param[1], Param[2], link);
          break;
-
 
       case TOWIN:
       case TOWH4:
       case TOAQV:
-         strcpy(s_entry, Param[2]);
-         c_tilde(s_entry);
-         replace_udo_quotes(s_entry);
-
-         convert_tilde(Param[1]);
-         convert_tilde(Param[2]);
-         
-         replace_udo_quotes(Param[1]);
-         replace_udo_quotes(Param[2]);
-         
-         strcpy(old_entry, Param[2]);
-
-         auto_references(s_entry, TRUE, "", 0, 0);      /* auch Links innerhalb der Seite ermoeglichen */
-
-         /* Trick: Schauen, ob nun {\uldb im Eintrag steht und dann */
-         /* ab dort den Link einsetzen. */
-         
-         flag = FALSE;
-
-         ptr =strstr(s_entry, "{\\uldb");
-
-         if (ptr == NULL)   /* PL8: Links auf Popups erlauben */
-            ptr = strstr(s_entry, "{\\ul");
- 
-         if (ptr != NULL)
-            flag = replace_once(ptr, old_entry, Param[1]);
-
-         if (!flag)
-         {
-            error_undefined_link(link);
-            strcpy(s_entry, Param[1]);
-         }
-
-         linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+         linkerror = !convert_link_win(s, Param[0], Param[1], Param[2], link);
          break;
-         
          
       case TOLDS:
          linkerror = !convert_link_lds(s, Param[0], Param[1], Param[2], link);
          break;
-         
          
       case TOSTG:
       case TOAMG:
          linkerror = !convert_link_stg(s, Param[0], Param[1], Param[2], link);
          break;
          
-         
       case TOTEX:
-         linkerror = !convert_link_tex(s, Param[0], Param[1], Param[2]);
+         linkerror = !convert_link_tex(s, Param[0], Param[1], Param[2], link);
          break;
-         
          
       case TOPDL:
          linkerror = !convert_link_pdf(s, Param[0], Param[1], Param[2], link);
          break;
          
-         
       case TOLYX:
-         linkerror = !convert_link_lyx(s, Param[0], Param[1], Param[2]);
+         linkerror = !convert_link_lyx(s, Param[0], Param[1], Param[2], link);
          break;
-         
          
       case TOTVH:
-         linkerror = !convert_link_tvh(s, Param[0], Param[1], Param[2]);
+         linkerror = !convert_link_tvh(s, Param[0], Param[1], Param[2], link);
          break;
-         
          
       case TOPCH:
          linkerror = !convert_link_pch(s, Param[0], Param[1], Param[2], link);
          break;
          
-         
       case TOINF:
          linkerror = !convert_link_info(s, Param[0], Param[1], Param[2], link);
          break;
-         
          
       case TOIPF:
          linkerror = !convert_link_ipf(s, Param[0], Param[1], Param[2], link);
          break;
 
-         /* Internal Link for Postscript */
       case TOKPS:
          linkerror = !convert_link_ps(s, Param[0], Param[1], Param[2], link);
          break;
 
-
       default:
          linkerror = !convert_link_etc(s, Param[0], Param[1], Param[2], link);
+         break;
       }
    }
 
@@ -1957,19 +1786,16 @@ _BOOL      inside_b4_macro)    /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_ilink(
-
-char           *s,                 /* komplette Zeile */
-const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewandelt worden? */
+LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
 {
-   int          pnr = 0;           /* */
-   char         s_entry[1024],     /* */
-                img_entry[1024],   /* */
-                old_entry[1024],   /* */
-                link[1024];        /* */
-   char        *ptr;               /* */
-   _BOOL      flag;              /* */
-   _BOOL      linkerror;         /* */
+   int          pnr = 0;
+   char         s_entry[1024],
+                img_entry[1024],
+                old_entry[1024],
+                link[1024];
+   char        *ptr;
+   _BOOL      flag;
+   _BOOL      linkerror;
    _BOOL      old_autorefoff;    /* */
    char         closer[8] = "\0";  /* tag closer */
    
@@ -1982,23 +1808,21 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
    
-   while (!linkerror && ((pnr = get_parameters(s, "ilink", 3, 3)) == 3) )
+   while (!linkerror && (pnr = get_parameters(s, "ilink", 3, 3)) == 3)
    {
       strcpy(link, Param[3]);
       del_whitespaces(Param[1]);
       del_whitespaces(Param[2]);
       del_whitespaces(Param[3]);
-   
+
       if (inside_b4_macro)
       {
-         /* Fixed bug #0000055 in V6.5.2 [NHz] */
-/*       if (desttype!=TOSTG)
+         if (desttype != TOSTG)
          {
             auto_quote_chars(Param[2], TRUE);
             auto_quote_chars(Param[3], TRUE);
          }
-*/
-   
+
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
          adjust_params_inside(Param[3]);
@@ -2011,7 +1835,7 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
       
       switch (desttype)
       {
-      case TOHAH:                         /* V6.5.17 */
+      case TOHAH:
       case TOHTM:
       case TOMHH:
          strcpy(tmp_suff, sDocImgSuffix);
@@ -2028,17 +1852,16 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
          replace_udo_quotes(Param[3]);
          strcpy(old_entry, Param[3]);
          
-                                          /* auch innerhalb des Nodes linken (TRUE)! */
+         /* auch innerhalb des Nodes linken (TRUE)! */
          auto_references(s_entry, TRUE, "", 0, 0);
          
          /* Trick/Hack: Schauen, ob nun "> im Eintrag steht und dann */
          /* ab dort den Image-Eintrag setzen. */
          
          flag = FALSE;
-         
          if ((ptr = strstr(s_entry, "\">")) != NULL )
          {
-            if (no_images)                /* r6pl2 */
+            if (no_images)
             {
                strcpy(img_entry, Param[2]);
             }
@@ -2062,7 +1885,7 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
          if (!flag)
          {
             error_undefined_link(link);
-            strcpy(s_entry, Param[2]);    /* PL9 */
+            strcpy(s_entry, Param[2]);
          }
          
          linkerror = !insert_placeholder(s, Param[0], s_entry, Param[2]);
@@ -2085,17 +1908,15 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
          replace_udo_quotes(Param[3]);
          strcpy(old_entry, Param[3]);
          
-                                          /* auch innerhalb des Nodes linken (TRUE)! */
+         /* auch innerhalb des Nodes linken (TRUE)! */
          auto_references(s_entry, TRUE, "", 0, 0);
          
          /* Trick: Schauen, ob nun {\uldb im Eintrag steht und dann */
          /* ab dort den Image-Text einsetzen. */
-         
          flag = FALSE;
-         
-         if ((ptr = strstr(s_entry, "{\\uldb")) != NULL )
+         if ((ptr = strstr(s_entry, "{\\uldb")) != NULL)
          {
-            if (no_images)                /*r6pl2*/
+            if (no_images)
             {
                strcpy(img_entry, Param[2]);
             }
@@ -2103,14 +1924,13 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
             {
                sprintf(img_entry, "\\{bmc %s\\}", Param[1]);
             }
-
             flag = replace_once(ptr, old_entry, img_entry);
          }
          
          if (!flag)
          {
             error_undefined_link(link);
-            strcpy(s_entry, Param[2]);    /* PL9 */
+            strcpy(s_entry, Param[2]);
          }
          
          linkerror = !insert_placeholder(s, Param[0], s_entry, Param[2]);
@@ -2127,24 +1947,24 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
          
       case TOTEX:
       case TOPDL:
-         linkerror = !convert_link_tex(s, Param[0], Param[2], Param[3]);
+         linkerror = !convert_link_tex(s, Param[0], Param[2], Param[3], link);
          break;
          
       case TOLYX:
-         linkerror = !convert_link_lyx(s, Param[0], Param[2], Param[3]);
+         linkerror = !convert_link_lyx(s, Param[0], Param[2], Param[3], link);
          break;
          
       case TOTVH:
-         linkerror = !convert_link_tvh(s, Param[0], Param[2], Param[3]);
+         linkerror = !convert_link_tvh(s, Param[0], Param[2], Param[3], link);
          break;
          
-      /* New in V6.5.5 [NHz] */
       case TOKPS:
          linkerror = !convert_link_ps(s, Param[0], Param[2], Param[3], link);
          break;
          
       default:
          linkerror = !convert_link_etc(s, Param[0], Param[2], Param[3], link);
+         break;
       }
    }
    
@@ -2155,10 +1975,8 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
    }
    
    if (pnr != 0 && pnr != 3)
-   {
       error_wrong_nr_parameters("!ilink");
-   }
-   
+
    bDocAutorefOff = old_autorefoff;
 }
 
@@ -2176,19 +1994,15 @@ const _BOOL   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewand
 *
 ******************************************|************************************/
 
-LOCAL void c_plink(
-
-char           *s,                  /* */
-const _BOOL   inside_b4_macro)    /* */
+LOCAL void c_plink(char *s, const _BOOL inside_b4_macro)
 {
-   int          pnr = 0;            /* */
-   char         s_entry[1024];      /* */
-   char         n[512];             /* */
-   _BOOL      linkerror = FALSE;  /* */
+   int          pnr = 0;
+   char         s_entry[1024];
+   char         n[512];
+   _BOOL      linkerror = FALSE;
 
    while (!linkerror && (pnr = get_parameters(s, "plink", 2, 2)) == 2)
    {
-
       if (inside_b4_macro)
       {
          if (desttype != TOSTG)
@@ -2196,7 +2010,6 @@ const _BOOL   inside_b4_macro)    /* */
             auto_quote_chars(Param[1], TRUE);   
             auto_quote_chars(Param[2], TRUE);   
          }
-         
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
       }
@@ -2204,12 +2017,14 @@ const _BOOL   inside_b4_macro)    /* */
       switch (desttype)
       {
       case TOTEX:
-      case TOPDL:
          label2tex(Param[2]);
          sprintf(s_entry, "%s (%s %s \\pageref{%s})", Param[1], lang.see, lang.page, Param[2]);
          linkerror = !replace_once(s, Param[0], s_entry);
          break;
          
+      case TOPDL:
+         linkerror = !convert_link_pdf(s, Param[0], Param[1], Param[2], Param[2]);
+         break;
          
       case TOLYX:
          sprintf(s_entry,
@@ -2221,9 +2036,7 @@ const _BOOL   inside_b4_macro)    /* */
             linkerror = TRUE;
             replace_once(s, Param[0], s_entry);
          }
-         
          break;
-         
          
       case TORTF:
          um_strcpy(n, Param[2], 512, "c_plink[1]");
@@ -2232,20 +2045,18 @@ const _BOOL   inside_b4_macro)    /* */
          sprintf(s_entry, 
                  "%s (%s %s {\\field{\\*\\fldinst {PAGEREF %s }}{\\fldrslt {\\lang1024 x}}})",
                  Param[1], lang.see, lang.page, n);
-                 
          linkerror = !replace_once(s, Param[0], s_entry);
-         break;    
+         break;
          
-                             
       default:
          linkerror = !replace_once(s, Param[0], Param[1]);
+         break;
       }
    }
 
    if (pnr != 0 && pnr != 2)
       error_wrong_nr_parameters("!plink");
    
-
    if (linkerror)
       error_replace_param("!plink");
 }
@@ -2264,16 +2075,12 @@ const _BOOL   inside_b4_macro)    /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_plabel(
-
-char           *s,                  /* */
-const _BOOL   inside_b4_macro)    /* */
+LOCAL void c_plabel(char *s, const _BOOL inside_b4_macro)
 {
-   int          pnr = 0;            /* */
-   char         s_entry[1024],      /* */
-                n[512];             /* */
-   _BOOL      linkerror = FALSE;  /* */
-
+   int          pnr = 0;
+   char         s_entry[1024],
+                n[512];
+   _BOOL      linkerror = FALSE;
 
    while (!linkerror && (pnr = get_parameters(s, "label", 2, 2)) == 2)
    {
@@ -2298,16 +2105,15 @@ const _BOOL   inside_b4_macro)    /* */
          linkerror = !replace_once(s, Param[0], s_entry);
          break;                    
          
-         
       default:
          linkerror = !replace_once(s, Param[0], Param[1]);
+         break;
       }
    }
 
    if (pnr != 0 && pnr != 2)
       error_wrong_nr_parameters("!label");
    
-
    if (linkerror)
       error_replace_param("!label");
 }
@@ -2326,15 +2132,11 @@ const _BOOL   inside_b4_macro)    /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_nolink(
-
-char           *s,                  /* */
-const _BOOL   inside_b4_macro)    /* */
+LOCAL void c_nolink(char *s, const _BOOL inside_b4_macro)
 {
-   int          pnr = 0;            /* */
-   char         s_entry[1024];      /* */
-   _BOOL      linkerror = FALSE;  /* */
-
+   int          pnr = 0;
+   char         s_entry[1024];
+   _BOOL      linkerror = FALSE;
 
    while (!linkerror && (pnr = get_parameters(s, "nolink", 1, 1)) == 1)
    {
@@ -2345,7 +2147,6 @@ const _BOOL   inside_b4_macro)    /* */
             auto_quote_chars(Param[1], TRUE);   
             auto_quote_chars(Param[2], TRUE);   
          }
-         
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
       }
@@ -2356,15 +2157,12 @@ const _BOOL   inside_b4_macro)    /* */
       case TOAMG:
          replace_2at_by_1at(Param[1]);
          sprintf(s_entry, "@{\"%s\" ignore}", Param[1]);
-         
          if (!insert_placeholder(s, Param[0], s_entry, Param[1]))
          {
             linkerror = TRUE;
             replace_once(s, Param[0], Param[1]);
          }
-         
          break;
-
 
       default:
          if (!insert_placeholder(s, Param[0], Param[1], Param[1]))
@@ -2372,13 +2170,13 @@ const _BOOL   inside_b4_macro)    /* */
             linkerror = TRUE;
             replace_once(s, Param[0], Param[1]);
          }
+         break;
       }
    }
 
    if (pnr != 0 && pnr != 1)
       error_wrong_nr_parameters("!nolink");
    
-
    if (linkerror)
       error_replace_param("!nolink");
 }
@@ -2397,26 +2195,21 @@ const _BOOL   inside_b4_macro)    /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_comment(
-
-char           *s,                  /* */
-const _BOOL   inside_b4_macro)    /* */
+LOCAL void c_comment(char *s, const _BOOL inside_b4_macro)
 {
-   int          pnr = 0;            /* */
-   char         s_entry[1024];      /* */
-   _BOOL      linkerror = FALSE;  /* */
+   int          pnr = 0;
+   char         s_entry[1024];
+   _BOOL      linkerror = FALSE;
    
-
    while (!linkerror && (pnr = get_parameters(s, "comment", 1, 1)) == 1)
    {
       if (inside_b4_macro)
       {
-         if (desttype!=TOSTG)
+         if (desttype != TOSTG)
          {
             auto_quote_chars(Param[1], TRUE);   
             auto_quote_chars(Param[2], TRUE);   
          }
-         
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
       }
@@ -2427,15 +2220,12 @@ const _BOOL   inside_b4_macro)    /* */
       case TOHTM:
       case TOMHH:
          sprintf(s_entry, "<!-- %s -->", Param[1]);
-         
          if (!insert_placeholder(s, Param[0], s_entry, Param[1]))
          {
             linkerror = TRUE;
             replace_once(s, Param[0], Param[1]);
          }
-         
          break;
-
 
       case TOSRC:
       case TOSRP:
@@ -2449,21 +2239,17 @@ const _BOOL   inside_b4_macro)    /* */
          
          break;
 
-
       case TOWIN:
       case TOWH4:
       case TORTF:
       case TOAQV:
          sprintf(s_entry, "{\\*\\%s}", Param[1]);
-         
          if (!insert_placeholder(s, Param[0], s_entry, Param[1]))
          {
             linkerror = TRUE;
             replace_once(s, Param[0], Param[1]);
          }
-         
          break;
-
 
       default:
          if (use_comments)
@@ -2479,10 +2265,9 @@ const _BOOL   inside_b4_macro)    /* */
          else
          {
             if (!delete_once(s, Param[0]))
-            {
                linkerror = TRUE;
-            }
          }
+         break;
       }
    }
 
@@ -2507,37 +2292,29 @@ const _BOOL   inside_b4_macro)    /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL c_index(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro)
 {
-   char         s_tidx[256],      /* */
-                s_entry[256],     /* */
-                upr_entry[512];   /* */
-   char         keyword[256];     /* */
-   _BOOL      ret = TRUE;       /* */
+   char         s_tidx[1024],
+                s_entry[256],
+                upr_entry[512];
+   char         keyword[256];
+   _BOOL      ret = TRUE;
    
-
    if (get_parameters(s, "index", 1, 1) )
    {
       strcpy(s_tidx, Param[1]);
 
       if (inside_b4_macro)
       {
-         if (desttype!=TOSTG)
+         if (desttype != TOSTG)
          {
             auto_quote_chars(Param[1], TRUE);   
-            auto_quote_chars(s_tidx, TRUE);   
+            auto_quote_chars(s_tidx, TRUE);
          }
-
          adjust_params_inside(Param[1]);
       }
 
-      /* New in r6pl15 [NHz] */
-
       /* Set index in project file */
-
       sprintf(upr_entry, "%s", Param[1]); 
 
       save_upr_entry_index(1, sCurrFileName, upr_entry, uiCurrFileLine);
@@ -2571,7 +2348,6 @@ const _BOOL   inside_b4_macro)  /* */
             
 /*          ret = delete_once(s, Param[0]); */
             break;
-            
             
          case TOWIN:
          case TOWH4:
@@ -4001,63 +3777,42 @@ const char  *s)  /* ^ to macro/definition string */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_variables(
-
-char        *s,             /* */
-const char  *cmd,           /* */
-const char  *entry)         /* */
+LOCAL void replace_variables(char *s, const char *cmd, const char *entry)
 {
-   int       parms,         /* */
-             i;             /* */
-   char      p[16],         /* */
-             without[128],  /* */
-            *ptr;           /* ^ into string <s> */
-   _BOOL   flag;          /* */
+   int       parms,
+             i;
+   char      p[16],
+             without[128],
+            *ptr;
+   _BOOL   flag;
 
-                                          /* PL10: (!macro) vorher loeschen */
+   /* PL10: (!macro) vorher loeschen */
    sprintf(without, "(!%s)", cmd);
    delete_all(s, without);
 
    flag = TRUE;
-   
    while (flag && (parms = get_nr_of_parameters(cmd, s)) > 0)
    {
       if (parms > MAX_PARAMETERS)
       {
          error_message(_("too many parameters used"));
          return;
-      }   
+      }
 
       get_parameters(s, cmd, parms, parms);
 
-      /* r6pl2: ptr statt s benutzen, damit die Parameter nur ab */
-      /* der Stelle des/r Makros/Definition ersetzt werden und */
-      /* nicht bereits davor. */
-      
-      /* Trotzdem werden auch (!1) etc. ersetzt, die nach den */
-      /* Parameter-Befehle stehen. Dies wuerde aber einen */
-      /* unheimlichen Umstand bedeuten (Ausschneiden, Ersetzen, */
-      /* wieder Einfuegen: fuer jedes etwaige vorhandene Makro) */
-      /* Da aber (!0) ... (!9) eh verboten sind, wird hier keine */
-      /* Ruecksicht auf die Pappenheimer genommen, die UDO-Befehle */
-      /* nicht quoten wollen, wie z.B. mit (!/0), (!/1) etc. */
-
       ptr = strstr(s, Param[0]);
 
-                                          /* r6pl2: ptr statt s */
-      if (replace_all(ptr, Param[0], entry) )
+      if (replace_all(ptr, Param[0], entry))
       {
-         qdelete_all(ptr, "(!0)", 4);     /* r6pl2 */
-         
+         qdelete_all(ptr, "(!0)", 4);
          for (i = 0; i < MAX_PARAMETERS; i++)
          {
             sprintf(p, "(!%d)", i + 1);
-            
             if (parms > i)
             {
-                                          /* <???> */
                auto_quote_chars(Param[i + 1], TRUE);
-               replace_all(ptr, p, Param[i+1]);
+               replace_all(ptr, p, Param[i + 1]);
             }
             else
             {

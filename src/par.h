@@ -128,9 +128,6 @@ GLOBAL _UWORD         define_counter;      /* # of loaded definitions */
 *
 ******************************************|************************************/
 
-   /* adjust macros and definitions which contain variables */
-GLOBAL void replace_variables(char *s, const char *cmd, const char *entry);
-
    /* remove special format command placeholders from the text */
 GLOBAL void reset_speccmds(void);
 
