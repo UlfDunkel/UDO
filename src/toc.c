@@ -12848,20 +12848,24 @@ GLOBAL void c_tableofcontents(void)
    case TOAMG:
       outln("");
       
+      if (toc_title[0] != EOS)
+      	strcpy(n, toc_title);
+      else
+        strcpy(n, lang.contents);
       if (desttype == TOSTG)
       {
-         voutlnf("@node Main \"%s\"", lang.contents);
+         voutlnf("@node Main \"%s\"", n);
          voutlnf("@symbol \"%s\"", lang.contents);
       }
       else
       {
-         if (titleprogram[0] != EOS)
+         if (titleprogram[0] != EOS && toc_title[0] == EOS)
          {
-            voutlnf("@node Main \"%s - %s\"", titleprogram, lang.contents);
+            voutlnf("@node Main \"%s - %s\"", titleprogram, n);
          }
          else
          {
-            voutlnf("@node Main \"%s\"", lang.contents);
+            voutlnf("@node Main \"%s\"", n);
          }
       }
 
@@ -12886,9 +12890,12 @@ GLOBAL void c_tableofcontents(void)
 
    case TOTVH:
       outln("");
-      voutlnf(".topic %s", lang.contents);
+      if (toc_title[0] != EOS)
+      	strcpy(n, toc_title);
+      else
+        strcpy(n, lang.contents);
+      voutlnf(".topic %s", n);
       output_helpid(0);
-      strcpy(n, lang.contents);
       out("  ");
       outln(n);
       out("  ");
@@ -12908,32 +12915,34 @@ GLOBAL void c_tableofcontents(void)
       break;
 
    case TOASC:
+      if (toc_title[0] != EOS)
+      	strcpy(n, toc_title);
+      else
+        strcpy(n, lang.contents);
       if (toc_available)
       {
          if (use_style_book)
          {
             output_ascii_line("=", zDocParwidth);
-            outln(lang.contents);
+            outln(n);
             output_ascii_line("=", zDocParwidth);
          }
          else
          {
-            outln(lang.contents);
-            output_ascii_line("=", strlen(lang.contents));
+            outln(n);
+            output_ascii_line("=", strlen(n));
          }
 
          outln("");
          toc_output(TOC_NODE1, depth, FALSE);
          outln("");
       }
-
       if (apx_available)
       {
          output_appendix_line();
          toc_output(TOC_NODE1, depth, TRUE);
          outln("");
       }
-
       break;
 
    case TODRC:     /* <???> */
@@ -12975,7 +12984,7 @@ GLOBAL void c_tableofcontents(void)
       {
          outln("\\keepn");
          sprintf(n, "\\fs%d", iDocPropfontSize + 14);
-         voutlnf("{%s\\b %s}\\par\\pard\\par", n, lang.contents);
+         voutlnf("{%s\\b %s}\\par\\pard\\par", n, toc_title[0] != EOS ? toc_title : lang.contents);
          toc_output(TOC_NODE1, depth, FALSE);
       }
 
@@ -12989,15 +12998,19 @@ GLOBAL void c_tableofcontents(void)
       break;
 
    case TOPCH:
-      if (titdat.program != NULL)
+      if (toc_title[0] != EOS)
+   	  {
+   	     if (titdat.program != NULL)
+         voutlnf("screen(capsensitive(\"%s\"), screen(capsensitive(\"%s\"), capsensitive(\"%s\"))", toc_title, titdat.program, lang.contents);
+         else
+         voutlnf("screen(capsensitive(\"%s\"), capsensitive(\"%s\"))", toc_title, lang.contents);
+      } else if (titdat.program != NULL)
       {
-         voutlnf("screen(capsensitive(\"%s\"), capsensitive(\"%s\"))",titdat.program, lang.contents);
-      }
-      else
+         voutlnf("screen(capsensitive(\"%s\"), capsensitive(\"%s\"))", titdat.program, lang.contents);
+      } else
       {
-         voutlnf("screen(capsensitive(\"%s\"), capsensitive(\"%s\"))",lang.unknown, lang.contents);
+         voutlnf("screen(capsensitive(\"%s\"))", lang.contents);
       }
-      
       output_helpid(0);
       pch_headline(lang.contents);
       outln("");
@@ -17073,7 +17086,8 @@ GLOBAL void init_module_toc(void)
    strcpy(allowed_prev_chars, allowed_next_chars);
 
 
-   uses_tableofcontents = FALSE;          /* r5pl12 */
+   uses_tableofcontents = FALSE;
+   toc_title[0] = EOS;
 
    current_chapter_name[0] = EOS;         /* r5pl16 */
    current_chapter_nr[0]   = EOS;         /* r5pl16 */

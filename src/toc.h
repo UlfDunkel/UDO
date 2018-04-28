@@ -287,6 +287,7 @@ GLOBAL _BOOL   called_tableofcontents;  /* Wurde toc ausgegeben? (@toc) */
 GLOBAL _BOOL   called_subsubsubsubsubnode;
 
 GLOBAL _BOOL   uses_tableofcontents;    /* !tableofcontents wird benutzt */
+GLOBAL char      toc_title[MAX_NODE_LEN + 1];
 
                                           /* 6.3.11 [vj]: This is needed, because current_node_name_sys needs to buffer a lot of stuff! */
 GLOBAL char      current_node_name_sys[CNNS_LEN];

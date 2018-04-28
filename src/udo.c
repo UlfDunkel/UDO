@@ -725,6 +725,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!tex_verb",                     "",        c_tex_verb,                TRUE,  CMD_ALWAYS },
    { "!maketitle",                    "",        c_maketitle,               TRUE,  CMD_ONLY_MAINPART },
    { "!tableofcontents",              "",        c_tableofcontents,         TRUE,  CMD_ONLY_MAINPART },
+   { "!toc_title",                    "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!listoffigures",                "",        c_listoffigures,           TRUE,  CMD_ONLY_MAINPART },
    { "!listoftables",                 "",        c_listoftables,            TRUE,  CMD_ONLY_MAINPART },
    { "!toc",                          "",        c_toc,                     TRUE,  CMD_ONLY_MAINPART },
@@ -12800,6 +12801,10 @@ char           *datei)           /* */
                   else if (strcmp(token[0], "!tableofcontents") == 0)
                   {
                      uses_tableofcontents = TRUE;
+                  }
+                  else if (strcmp(token[0], "!toc_title") == 0)
+                  {
+                     tokcpy2(toc_title, MAX_NODE_LEN);
                   }
                   else if (strcmp(token[0], "!begin_appendix") == 0)
                   {
