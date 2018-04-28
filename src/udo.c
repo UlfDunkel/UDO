@@ -180,10 +180,11 @@
 #include "tp.h"                           /* Titelseite (!maketitle) */
 
 #include "gui.h"                          /* Funktionen GUI-/CLI-Version */
+#include "debug.h"                        /* Debugging */
+#include "udomem.h"                       /* Memory-Management */
 
 #include "export.h"
 #include "udo.h"                          /* globale Prototypen */
-#include "udomem.h"                       /* Memory-Management */
 
 
 
@@ -2634,7 +2635,7 @@ LOCAL IDXLIST *new_idxlist_item(void)
    IDXLIST  *l;  /* */
    
 
-   l = (IDXLIST *)um_malloc(sizeof(IDXLIST));
+   l = (IDXLIST *)malloc(sizeof(IDXLIST));
 
    if (l != NULL)
    {
@@ -2682,7 +2683,6 @@ const char  *x3)  /* */
 
    if (n == NULL)
    {
-      error_malloc_failed();
       return FALSE;
    }
 
@@ -7585,7 +7585,7 @@ LOCAL _BOOL malloc_token_output_buffer(void)
    {
       for (i = 0; i < 6; i++)
       {
-         tobuffer = (char *)um_malloc(bs[i]);
+         tobuffer = (char *)malloc(bs[i]);
          
          if (tobuffer != NULL)
          {
@@ -7597,11 +7597,10 @@ LOCAL _BOOL malloc_token_output_buffer(void)
       }
    }
 
-   tobuffer = (char *)um_malloc(2048L);
+   tobuffer = (char *)malloc(2048L);
 
    if (tobuffer == NULL)
    {
-      error_malloc_failed();
       return FALSE;
    }
 
@@ -7629,7 +7628,7 @@ LOCAL void free_token_output_buffer(void)
 {
    if (tobuffer != NULL)
    {
-      um_free(tobuffer);
+      free(tobuffer);
       tobuffer = NULL;
    }
 }
@@ -9810,7 +9809,7 @@ LOCAL HYPLIST *new_hyplist_item(void)
    HYPLIST  *l;  /* */
 
 
-   l= (HYPLIST *)um_malloc(sizeof(HYPLIST));
+   l= (HYPLIST *)malloc(sizeof(HYPLIST));
 
    if (l != NULL)
    {
@@ -16226,8 +16225,8 @@ LOCAL void exit_modules(void)
 {
    cursor_working();
 
-   exit_module_toc();                     /* 6.3.19[vj] for speedup there isn't done um_free(), um_exit() will do this */
-   exit_module_par();                     /* 6.3.19[vj] for speedup there isn't done um_free(), um_exit() will do this */
+   exit_module_toc();                     /* 6.3.19[vj] for speedup there isn't done free(), um_exit() will do this */
+   exit_module_par();                     /* 6.3.19[vj] for speedup there isn't done free(), um_exit() will do this */
    exit_module_tp();                      /* 6.3.19[vj] Needs to be checked, if um_exit() can do a faster cleanup here */
 
    cursor_active();

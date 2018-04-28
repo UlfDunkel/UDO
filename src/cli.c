@@ -997,7 +997,7 @@ LOCAL NOINLINE _BOOL read_cliopt_file(const char *name)
 
             if (i > 0)                    /* token found */
             {                             /* get space for it */
-               mp = (char *)um_malloc((i + 1) * sizeof(char));
+               mp = (char *)malloc((i + 1) * sizeof(char));
             
                if (mp)                    /* malloc succeeded */
                {
@@ -1031,7 +1031,7 @@ LOCAL NOINLINE _BOOL read_cliopt_file(const char *name)
    {
       if (fargv[i] != NULL)
       {
-         um_free(fargv[i]);
+         free(fargv[i]);
          fargv[i] = NULL;
       }
    }
@@ -1060,13 +1060,11 @@ int main(int argc, const char **argv)
    char      nam[32];
    _BOOL   cliok;
 
-   init_um();                             /* init UDO memory management first, */
-                                          /* or um_malloc() cannot be used! */
-
-
 #ifdef __TOS__
    Pdomain(1);
 #endif
+
+   mem_test_start();
 
 #ifdef HAVE_SETLOCALE
    setlocale(LC_ALL, "");
@@ -1078,6 +1076,8 @@ int main(int argc, const char **argv)
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 #endif
 
+   mem_print_alloc_errors = error_malloc_failed;
+   
    /* --- init global variables --- */
    
    init_vars();
@@ -1198,7 +1198,7 @@ int main(int argc, const char **argv)
    xs_locale_exit();
 #endif
 
-   exit_um();                             /* clean up allocated memory */
+   mem_test_end();                        /* clean up allocated memory */
 
    wait_on_keypress();
 

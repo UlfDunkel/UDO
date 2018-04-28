@@ -3858,7 +3858,7 @@ GLOBAL void reset_speccmds(void)
       {
          if (speccmd[i].entry != NULL)
          {
-            um_free(speccmd[i].entry);
+            free(speccmd[i].entry);
             speccmd[i].entry = NULL;
          }
 
@@ -3901,11 +3901,10 @@ char       *entry)  /* */
 
       sl = strlen(entry);
       
-      ptr = (char *)(um_malloc(sl * sizeof(char) + 1));
+      ptr = (char *)(malloc(sl * sizeof(char) + 1));
       
       if (ptr == NULL)
       {
-         error_malloc_failed();
          speccmd_counter--;
          return FALSE;
       }
@@ -4059,13 +4058,13 @@ GLOBAL void reset_placeholders(void)
 #endif
       if (phold[i].entry != NULL)
       {
-         um_free(phold[i].entry);
+         free(phold[i].entry);
          phold[i].entry = NULL;
       }
 
       if (phold[i].text != NULL)
       {
-         um_free(phold[i].text);
+         free(phold[i].text);
          phold[i].text= NULL;
       }
    }
@@ -4457,11 +4456,10 @@ GLOBAL void add_hyphen(void)
    }
 
                                           /* create space for hyphen structure */
-   p = (HYPHEN *)um_malloc(sizeof(HYPHEN));
+   p = (HYPHEN *)malloc(sizeof(HYPHEN));
 
    if (p == NULL)                         /* no free memory? */
    {
-      error_malloc_failed();
       return;
    }
 
@@ -4565,11 +4563,10 @@ GLOBAL _BOOL add_macro(void)
    }
 
                                           /* create space for a macro */
-   p = (MACROS *)um_malloc(sizeof(MACROS));
+   p = (MACROS *)malloc(sizeof(MACROS));
 
    if (p == NULL)                         /* no free memory! */
    {
-      error_malloc_failed();
       return FALSE;
    }
 
@@ -4602,7 +4599,7 @@ GLOBAL _BOOL add_macro(void)
    if (strlen(entry) > MACRO_CONT_LEN)     /* macro content too long? */
    {
       error_message(_("macro contents longer than %d characters"), MACRO_CONT_LEN);
-      um_free(p);
+      free(p);
       return FALSE;
    }
 
@@ -4706,11 +4703,10 @@ GLOBAL _BOOL add_define(void)
       return FALSE;
    }
 
-   p = (DEFS *)um_malloc(sizeof(DEFS));    /* create space for a definition */
+   p = (DEFS *)malloc(sizeof(DEFS));    /* create space for a definition */
 
    if (p == NULL)                          /* no free memory! */
    {
-      error_malloc_failed();
       return FALSE;
    }
 
@@ -4731,7 +4727,7 @@ GLOBAL _BOOL add_define(void)
    if (strlen(entry) > DEFINE_CONT_LEN)    /* definition content too long? */
    {
       error_message(_("definition contents longer than %d characters"), DEFINE_CONT_LEN);
-      um_free(p);
+      free(p);
       return FALSE;
    }
 
@@ -4829,19 +4825,19 @@ GLOBAL void exit_module_par(void)
    for (i = MAXMACROS - 1; i >= 0; i--)
    {
       if (macros[i] != NULL)
-         um_free(macros[i]);
+         free(macros[i]);
    }
 
    for (i = MAXDEFS - 1; i >= 0; i--)
    {
       if (defs[i] != NULL)
-         um_free(defs[i]);
+         free(defs[i]);
    }
 
    for (i = MAXHYPHEN - 1; i >= 0; i--)
    {
       if (hyphen[i] != NULL)
-         um_free(hyphen[i]);
+         free(hyphen[i]);
    }
 */
 

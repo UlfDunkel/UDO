@@ -85,35 +85,20 @@
 #include "import.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "udoport.h"
-#include "export.h"
-#include "str.h"
 #include "version.h"
+#include "udo_type.h"
 #include "msg.h"
 #include "udomem.h"
 #include "constant.h"                     /* LINELEN */
 #include "chr.h"                          /* utf8_to_bstr() */
+#include "file.h"
+#include "udo.h"
 
-
-
-
-
-/*******************************************************************************
-*
-*     EXTERNAL REFERENCES
-*
-******************************************|************************************/
-
-extern int   iEncodingTarget;             /* udo.h: target encoding */
-
-
-
-
-
-
-
-
+#include "export.h"
+#include "str.h"
 
 /*******************************************************************************
 *
@@ -131,39 +116,19 @@ extern int   iEncodingTarget;             /* udo.h: target encoding */
 *
 ******************************************|************************************/
 
-GLOBAL char *um_strcpy(
-
-char        *dest,         /* */
-const char  *src,          /* */
-size_t       max,          /* */
-const char  *place)        /* */
+GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *place)
 {
-   size_t    slen;         /* temp buffer for the length of src */
+   size_t slen;         /* temp buffer for the length of src */
    
-   
-   if (dest == NULL)
-   {
-      warning_message("um_strcpy: dest is NULL: %s", place);
-      return dest;
-   }
-   
-   if (src == NULL)
-   {
-      warning_message("um_strcpy: src is NULL: %s", place);
-      dest[0] = EOS;
-      return dest;
-   }
-
-   slen = (size_t)strlen(src);            /* Stringlaenge bestimmen */
-   
-   if ( ((size_t)slen + 1) < max)         /* Testen obs  */
+   slen = strlen(src);
+   if ((slen + 1) < max)
    {
       return strcpy(dest, src);
    }
    else
    {
       dest[0] = EOS;
-      warning_buffer_overrun(place, "", slen + 1, max);
+      warning_buffer_overrun("um_strcpy", place, slen, max);
       return dest;
    }
 }
@@ -182,37 +147,16 @@ const char  *place)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL char *um_strncpy(
-
-char        *dest,         /* */
-const char  *src,          /* */
-size_t       n,            /* */
-size_t       max,          /* */
-const char  *place)        /* */
+GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place)
 {
-   char      errbuf[120];  /* */
-
-
-   if (dest == NULL)
-   {
-      warning_message("um_strncpy: dest is NULL: %s", place);
-      return dest;
-   }
-   if (src == NULL)
-   {
-      warning_message("um_strncpy: src is NULL: %s", place);
-      dest[0] = EOS;
-      return dest;
-   }
-
-   if ( (n + 1) < max)
+   if ((n + 1) < max)
    {
       return strncpy(dest, src, n);
    }
    else
    {
       dest[0] = EOS;
-      warning_buffer_overrun(place, "", n + 1, max);
+      warning_buffer_overrun("um_strncpy", place, n, max);
       return dest;
    }
 }
@@ -231,40 +175,21 @@ const char  *place)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL char *um_strcat(
-
-char        *dest,         /* */
-const char  *src,          /* */
-size_t       max,          /* */
-const char  *place)        /* */
+GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *place)
 {
-   char      errbuf[120];  /* */
-   size_t    dlen,         /* */
-             slen;         /* */
-            
+   size_t dlen, slen;
 
-   if (dest == NULL)
-   {
-      warning_message("um_strcat: dest is NULL: %s", place);
-      return dest;
-   }
-   if (src == NULL)
-   {
-      warning_message("um_strcat: src is NULL: %s", place);
-      return dest;
-   }
-
-   dlen = (size_t)strlen(dest);
-   slen = (size_t)strlen(src);
+   dlen = strlen(dest);
+   slen = strlen(src);
    
-   if ( (dlen + slen + 1) < max)
+   if ((dlen + slen + 1) < max)
    {
       return strcat(dest, src);
    }
    else
    {
       dest[0] = EOS;
-      warning_buffer_overrun(place, "", dlen + slen + 1, max);
+      warning_buffer_overrun("um_strcat", place, dlen + slen, max);
       return dest;
    }
 }
@@ -283,38 +208,19 @@ const char  *place)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL char *um_strncat(
-
-char        *dest,         /* */
-const char  *src,          /* */
-size_t       n,            /* */
-size_t       max,          /* */
-const char  *place)        /* */
+GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place)
 {
-   size_t    dlen;         /* */
-
-
-   if (dest == NULL)
-   {
-      warning_message("um_strncat: dest is NULL: %s", place);
-      return dest;
-   }
-   if (src == NULL)
-   {
-      warning_message("um_strncat: src is NULL: %s", place);
-      return dest;
-   }
+   size_t dlen;
 
    dlen = strlen(dest);
-   
-   if ( (dlen + n + 1) < max)
+   if ((dlen + n + 1) < max)
    {
       return strncat(dest, src, n);
    }
    else
    {
       dest[0] = EOS;
-      warning_buffer_overrun(place, "", dlen + n + 1, max);
+      warning_buffer_overrun("um_strncat", place, dlen + n, max);
       return dest;
    }
 }
@@ -333,26 +239,17 @@ const char  *place)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL char *um_physical_strcpy(
-
-const char  *src,            /* */
-size_t       morealloc,      /* # of bytes to allocate for new string, */
-                             /*  e.g. when it will become longer than the original */
-const char  *place)          /* */
+GLOBAL char *um_physical_strcpy(const char *src, size_t morealloc, const char *place)
 {
    size_t    slen;           /* length of source string */
    char     *dest;           /* pointer to the new string */
-   char      placebuf[120];  /* internal buffer for place handling */
-
-
-   sprintf(placebuf, "%s: um_physical_strcpy", place);
 
    slen = strlen(src);
-   dest = um_malloc(slen + morealloc + 1);
+   dest = malloc(slen + morealloc + 1);
 
    if (dest != NULL)
    {
-      dest = um_strcpy(dest, src, slen + morealloc + 1, placebuf);
+      dest = um_strcpy(dest, src, slen + morealloc + 1, place);
    }
 
    return dest;
@@ -372,17 +269,12 @@ const char  *place)          /* */
 *
 ******************************************|************************************/
 
-GLOBAL char *chrcat(
-
-char        *dest,         /* */
-const char   c)            /* */
+GLOBAL char *chrcat(char *dest, const char c)
 {
-   char      one[2] = "";  /* char buffer string */
-
+   char one[2] = { 0,0 };
 
    one[0] = c;
-   
-   return(strcat(dest, one));
+   return strcat(dest, one);
 }
 
 
@@ -399,17 +291,13 @@ const char   c)            /* */
 *
 ******************************************|************************************/
 
-GLOBAL char *strinsert(
-
-char        *string,  /* */
-const char  *insert)  /* */
+GLOBAL char *strinsert(char *string, const char *insert)
 {
    char     *start;   /* ^ to start of string */
    size_t    sl,      /* length of string */
              il;      /* length of insert string */
-             
    
-   if (insert[0] == '\0')                 /* nothing to do */
+   if (insert[0] == '\0')
       return string;
    
    sl = strlen(string);
@@ -431,19 +319,20 @@ const char  *insert)  /* */
 *  replace_char():
 *     replace all occurrences of <search> by <replace> in <string>
 *
+*
+*  Parameters:
+*     string:  string to be edited
+*     search:  search character
+*     replace: replace character
+*
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-GLOBAL void replace_char(
-
-char        *string,   /* ^string to be edited */
-const char  *search,   /* ^search string */
-const char  *replace)  /* ^replace string */
+GLOBAL void replace_char(char *string, const char *search, const char *replace)
 {
-   char     *ptr;      /* ^edit string */
-
+   char *ptr;
    
    ptr = string;                          /* set ^ to begin of edit string */
 
@@ -451,7 +340,6 @@ const char  *replace)  /* ^replace string */
    {
       if (*ptr == *search)                /* character found! */
         *ptr = *replace;                  /* replace it */
-      
       ptr++;
    }
 }
@@ -471,38 +359,31 @@ const char  *replace)  /* ^replace string */
 *
 ******************************************|************************************/
 
-GLOBAL int replace_once(
-
-char        *string,   /* */
-const char  *search,   /* */
-const char  *replace)  /* */
+GLOBAL int replace_once(char *string, const char *search, const char *replace)
 {
-   char     *found;    /* */
-   size_t    slen,     /* */
-             rlen,     /* */
-             flen;     /* */
-             
+   char     *found;
+   size_t    slen,
+             rlen,
+             flen;
    
-   if (string[0] == '\0')                 /* empty string */
+   if (string[0] == '\0')
       return 0;
-      
-   if (search[0] == '\0')                 /* nothing to search for */
+   if (search[0] == '\0')
       return 0;
-                                          /* <search> not found */
-   if ( (found = strstr(string, search) ) == NULL)
+
+   if ((found = strstr(string, search)) == NULL)
       return 0;
 
    slen = strlen(search);
    flen = strlen(found);
 
-                                          /* remove <search> */
+   /* remove <search> */
    memmove(found, found + slen, flen - slen + 1);
 
    if (replace[0] != EOS)                 /* <replace> may even be empty! */
    {
       rlen = strlen(replace);
-      flen = strlen(found);
-      
+      flen -= slen;
       memmove(found + rlen, found, flen + 1);
       memcpy(found, replace, rlen);
    }
@@ -525,26 +406,21 @@ const char  *replace)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL int replace_last(
-
-char        *string,   /* */
-const char  *search,   /* */
-const char  *replace)  /* */
+GLOBAL int replace_last(char *string, const char *search, const char *replace)
 {
-   char     *found,    /* */
-            *look,     /* */
-            *last;     /* */
+   char     *found,
+            *look,
+            *last;
 
-   if (string[0] == '\0')                 /* empty string */
+   if (string[0] == '\0')
       return 0;
-      
-   if (search[0] == '\0')                 /* nothing to search for */
+   if (search[0] == '\0')
       return 0;
    
    look = string;
    last = NULL;
 
-   while ( (found = strstr(look, search)) != NULL)
+   while ((found = strstr(look, search)) != NULL)
    {
       look = found + 1;
       last = found;
@@ -552,7 +428,7 @@ const char  *replace)  /* */
 
    if (last != NULL)                      /* last position of <search> found */
    {
-     return (replace_once(last, search, replace));
+      return replace_once(last, search, replace);
    }
    
    return 0;
@@ -567,17 +443,19 @@ const char  *replace)  /* */
 *  replace_all():
 *     replaces all occurrences of <search> by <replace> in string <source>
 *
+*
+*  Parameters:
+*    source:   string to be edited
+*    search:   search string to be replaced
+*    replace:  replacement string
+*
 *  Return:
 *     1: <search> has been replaced
 *     0: <search> has not been found
 *
 ******************************************|************************************/
 
-GLOBAL int replace_all(
-
-   char        *source,   /* ^string to be edited */
-   const char  *search,   /* ^search string to be replaced */
-   const char  *replace)  /* ^replacement string */
+GLOBAL int replace_all(char *source, const char *search, const char *replace)
 {
    char       *found;     /* ^ found character */
    size_t      slen,      /* length of search string */
@@ -585,15 +463,12 @@ GLOBAL int replace_all(
                flen,      /* length of found string */
                i;         /* counter */
    
-   
-   if (source[0]  == '\0')                /* empty edit string? */
+   if (source[0] == '\0')                 /* empty edit string? */
       return 0;                           /* not allowed! */
-      
-   if (replace[0] == '\0')                /* empty search string? */
+   if (search[0] == '\0')                 /* empty search string? */
       return 0;                           /* not allowed! */
 
-                                          /* search string not in edit string? */
-   if ((found = strstr(source, search)) == NULL )
+   if ((found = strstr(source, search)) == NULL)
       return 0;
 
    slen = strlen(search);
@@ -606,12 +481,10 @@ GLOBAL int replace_all(
       while (found != NULL)               /* still something found! */
       {
          for (i = 0; i < rlen; i++)       /* replace characters in edit string */
-            found[i] = replace[i];             
-
+            found[i] = replace[i];
                                           /* find next position of replacement string */
          found = strstr(found + rlen, search);
       }
-      
       return 1;                           /* done! */
    }
 
@@ -622,17 +495,15 @@ GLOBAL int replace_all(
    {
       flen = strlen(found);               /* get length of remaining edit string */
 
-                                          /* Zu Ersetzendes entfernen */
+      /* remove <search> */
       memmove(found, found + slen, flen - slen + 1);
    
-
-      if (replace[0] != EOS)              /* replacement string must not be empty! */
+      if (replace[0] != EOS)              /* replacement string can be empty */
       {
          flen = strlen(found);            /* get new length of remaining edit string */
                                           /* Platz schaffen fuer neues und dorthin kopieren */
          memmove(found + rlen, found, flen + 1);
          memcpy(found, replace, rlen);    /* insert replacement string */
-
                                           /* find next position of replacement string */
          found = strstr(found + rlen, search);
       }
@@ -642,7 +513,7 @@ GLOBAL int replace_all(
       }
    }
    
-   return 1;                              /* done! */
+   return 1;
 }
 
 
@@ -664,26 +535,19 @@ GLOBAL int replace_all(
 *
 ******************************************|************************************/
 
-GLOBAL int qreplace_once(
-
-char          *string,   /* */
-const char    *search,   /* */
-const size_t   slen,     /* */
-const char    *replace,  /* */
-const size_t   rlen)     /* */
+GLOBAL int qreplace_once(char *string, const char *search, const size_t slen, const char *replace, const size_t rlen)
 {
-   char       *found;    /* */
-   size_t      flen;     /* */
+   char  *found;
+   size_t   flen;
 
 #if CHECK_REPLACE_LEN
-   if (rlen != strlen(replace))
+   if (slen != strlen(search))
    {
       fprintf(stdout, "Fehler in qreplace_once:\n");
       fprintf(stdout, "slen= %d\n", slen);
       fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
    }
-   
-   if (rlen != strlen(by))
+   if (rlen != strlen(replace))
    {
       fprintf(stdout, "Fehler in qreplace_once:\n");
       fprintf(stdout, "rlen= %d\n", rlen);
@@ -691,30 +555,27 @@ const size_t   rlen)     /* */
    }
 #endif
    
-   if (string[0] == '\0')                 /* empty string */
+   if (string[0] == '\0')
       return 0;
-      
-   if (search[0] == '\0')                 /* nothing to search for */
+   if (search[0] == '\0')
       return 0;
-                                          /* <search> not found */
 
-   if ( (found = strstr(string, search)) == NULL)
+   if ((found = strstr(string, search)) == NULL)
       return 0;
 
    flen = strlen(found);                  /* get length of remaining edit string */
 
-                                          /* Zu Ersetzendes entfernen */
+   /* remove <search> */
    memmove(found, found + slen, flen - slen + 1);
 
-   if (replace[0] != EOS)                 /* replacement string must not be empty! */
+   if (replace[0] != EOS)                 /* replacement string can be empty */
    {
-      flen = strlen(found);               /* get new length of remaining edit string */
-                                          /* Platz schaffen fuer neues und dorthin kopieren */
+      flen -= slen;
       memmove(found + rlen, found, flen + 1);
       memcpy(found, replace, rlen);       /* insert replacement string */
    }
    
-   return 1;                              /* done! */
+   return 1;
 }
 
 
@@ -736,17 +597,9 @@ const size_t   rlen)     /* */
 *
 ******************************************|************************************/
 
-GLOBAL int qreplace_last(
-
-char          *string,
-const char    *search,
-const size_t   slen,
-const char    *replace,
-const size_t   rlen)
+GLOBAL int qreplace_last(char *string, const char *search, const size_t slen, const char *replace, const size_t rlen)
 {
-   char       *found, 
-              *look, 
-              *last;
+   char *found, *look, *last;
 
 #if CHECK_REPLACE_LEN
    if (slen != strlen(search))
@@ -755,7 +608,6 @@ const size_t   rlen)
       fprintf(stdout, "slen = %d\n", slen);
       fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
    }
-   
    if (rlen != strlen(replace))
    {
       fprintf(stdout, "Fehler in qreplace_last:\n");
@@ -764,16 +616,15 @@ const size_t   rlen)
    }
 #endif
 
-   if (string[0] == '\0')                 /* empty string */
+   if (string[0] == '\0')
       return 0;
-      
-   if (search[0] == '\0')                 /* nothing to search for */
+   if (search[0] == '\0')
       return 0;
    
    look = string;
    last = NULL;
 
-   while ( (found = strstr(look, search)) != NULL)
+   while ((found = strstr(look, search)) != NULL)
    {
       look = found + 1;
       last = found;
@@ -781,7 +632,7 @@ const size_t   rlen)
 
    if (last != NULL)                      /* last position of <search> found */
    {
-      return (qreplace_once(last, search, slen, replace, rlen) );
+      return qreplace_once(last, search, slen, replace, rlen);
    }
    
    return 0;
@@ -802,55 +653,42 @@ const size_t   rlen)
 *
 ******************************************|************************************/
 
-GLOBAL int qreplace_all(
-
-char          *source,   /* */
-const char    *replace,  /* */
-const size_t   rlen,     /* */
-const char    *by,       /* */
-const size_t   blen)     /* */
+GLOBAL int qreplace_all(char *string, const char *search, const size_t slen, const char *replace, const size_t rlen)
 {
-   char       *found;    /* */
-   size_t      flen,     /* */
-               i;        /* */
+   char  *found;
+   size_t   flen, i;
 
 #if CHECK_REPLACE_LEN
+   if (slen != strlen(search))
+   {
+      fprintf(stdout, "Fehler in qreplace_all:\n");
+      fprintf(stdout, "slen= %d\n", slen);
+      fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
+   }
    if (rlen != strlen(replace))
    {
       fprintf(stdout, "Fehler in qreplace_all:\n");
       fprintf(stdout, "rlen= %d\n", rlen);
       fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
    }
-   
-   if (blen != strlen(by))
-   {
-      fprintf(stdout, "Fehler in qreplace_all:\n");
-      fprintf(stdout, "blen= %d\n", blen);
-      fprintf(stdout, "strlen(%s)= %d\n", by, strlen(by));
-   }
 #endif
    
-   if (source[0]  == '\0')
+   if (string[0] == '\0')
       return 0;
-      
-   if (replace[0] == '\0')
-      return 0;
-
-   if ((found = strstr(source, replace)) == NULL)
+   if (search[0] == '\0')
       return 0;
 
-   if (rlen == blen)
+   if ((found = strstr(string, search)) == NULL)
+      return 0;
+
+   if (slen == rlen)
    {
       while (found != NULL)
       {
-         for (i = 0; i < blen; i++)
-         {
-            found[i] = by[i];
-         }
-         
-         found = strstr(found + blen, replace);
+         for (i = 0; i < rlen; i++)
+            found[i] = replace[i];
+         found = strstr(found + rlen, search);
       }
-      
       return 1;
    }
 
@@ -858,19 +696,20 @@ const size_t   blen)     /* */
    {
       flen = strlen(found);
 
-                                          /* Zu Ersetzendes entfernen */
-      memmove(found, found + rlen, flen - rlen + 1);
+      /* Zu Ersetzendes entfernen */
+      memmove(found, found + slen, flen - slen + 1);
    
-      if (by[0] != EOS)                   /* Platz schaffen fuer neues und dorthin kopieren */
+      /* Platz schaffen fuer neues und dorthin kopieren */
+      if (replace[0] != EOS)
       {
          flen = strlen(found);
-         memmove(found + blen, found, flen + 1);
-         memcpy(found, by, blen);
-         found = strstr(found + blen, replace);
+         memmove(found + rlen, found, flen + 1);
+         memcpy(found, replace, rlen);
+         found = strstr(found + rlen, search);
       }
       else
       {
-         found = strstr(found, replace);
+         found = strstr(found, search);
       }
       
    }
@@ -893,12 +732,9 @@ const size_t   blen)     /* */
 *
 ******************************************|************************************/
 
-GLOBAL int delete_once(
-
-char        *source,     /* */
-const char  *to_delete)  /* */
+GLOBAL int delete_once(char *string, const char *to_delete)
 {
-   return (replace_once(source, to_delete, ""));
+   return replace_once(string, to_delete, "");
 }
 
 
@@ -916,13 +752,9 @@ const char  *to_delete)  /* */
 *
 ******************************************|************************************/
 
-
-GLOBAL int delete_last(
-
-char        *source,     /* */
-const char  *to_delete)  /* */
+GLOBAL int delete_last(char *string, const char *to_delete)
 {
-   return (replace_last(source, to_delete, ""));
+   return replace_last(string, to_delete, "");
 }
 
 
@@ -940,13 +772,9 @@ const char  *to_delete)  /* */
 *
 ******************************************|************************************/
 
-
-GLOBAL int delete_all(
-
-char        *source,     /* */
-const char  *to_delete)  /* */
+GLOBAL int delete_all(char *string, const char *to_delete)
 {
-   return (replace_all(source, to_delete, ""));
+   return replace_all(string, to_delete, "");
 }
 
 
@@ -964,13 +792,9 @@ const char  *to_delete)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL int qdelete_once(
-
-char          *source,     /* */
-const char    *to_delete,  /* */
-const size_t   dlen)       /* */
+GLOBAL int qdelete_once(char *string, const char *to_delete, const size_t dlen)
 {
-   return (qreplace_once (source, to_delete, dlen, "", 0));
+   return qreplace_once(string, to_delete, dlen, "", 0);
 }
 
 
@@ -988,14 +812,9 @@ const size_t   dlen)       /* */
 *
 ******************************************|************************************/
 
-
-GLOBAL int qdelete_last(
-
-char          *source,     /* */
-const char    *to_delete,  /* */
-const size_t   dlen)       /* */
+GLOBAL int qdelete_last(char *string, const char *to_delete, const size_t dlen)
 {
-   return (qreplace_last (source, to_delete, dlen, "", 0));
+   return qreplace_last(string, to_delete, dlen, "", 0);
 }
 
 
@@ -1013,14 +832,9 @@ const size_t   dlen)       /* */
 *
 ******************************************|************************************/
 
-
-GLOBAL int qdelete_all(
-
-char          *source,     /* */
-const char    *to_delete,  /* */
-const size_t   dlen)       /* */
+GLOBAL int qdelete_all(char *string, const char *to_delete, const size_t dlen)
 {
-   return (qreplace_all (source, to_delete, dlen, "", 0));
+   return qreplace_all(string, to_delete, dlen, "", 0);
 }
 
 
@@ -1037,14 +851,11 @@ const size_t   dlen)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL void del_right_spaces(
-
-char       *s)   /* ^ string */
+GLOBAL void del_right_spaces(char *s)
 {
-   size_t   sl;  /* length of string */
+   size_t   sl;
    
-   
-   sl = strlen(s);                        /* get length of string */
+   sl = strlen(s);
 
    while ( (sl > 0) && (s[sl - 1] == ' ') )
    {
@@ -1067,15 +878,12 @@ char       *s)   /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void del_whitespaces(
-
-char       *s)         /* ^ string */
+GLOBAL void del_whitespaces(char *s)
 {
    size_t   sl;        /* length of string */
    char    *p1st = s;  /* ^ start of string */
    
-   
-                                          /* find first space or tab */
+   /* find first space or tab */
    while (*p1st != EOS && (*p1st == ' ' || *p1st == '\t') )
    {
       ++p1st;
@@ -1110,25 +918,24 @@ char       *s)         /* ^ string */
 *     oder "!docinfo [author] Dirk Hagedorn" den Zeiger auf das
 *     erste Zeichen hinter der ersten [ und die Anzahl der Zeichen,
 *     die bis zur ersten ] folgen.
-*  
+*
+*  Parameters:
+*  s      : string to be checked
+*  cont   : first char of content
+*  data   : first char of data
+*
 *  Returns:
 *     0   : wrong syntax (no brackets [ + ] found)
 *     else: length of content
 *
 ******************************************|*************************************/
 
-GLOBAL size_t get_brackets_ptr(
-
-char       *s,     /* ^ string to be checked */
-char      **cont,  /* ^ first char of content */
-char      **data)  /* ^ first char of data */
+GLOBAL size_t get_brackets_ptr(char *s, char **cont, char **data)
 {
-   char    *ptr;   /* a pointer */
-   size_t   len;   /* computed length */
+   char *ptr;
+   size_t len;   /* computed length */
    
-
    ptr = s;                               /* copy pointer as we will change it local */
-   
    *cont = NULL;                          /* nothing found yet */
    *data = NULL;
 
@@ -1148,16 +955,14 @@ char      **data)  /* ^ first char of data */
             *data = ptr + 1;              /* set ^ data behind this bracket */
             len = ptr - *cont;            /* compute length of content string */
          }
-         
          return len;                      /* we're done */
       }
       
       ptr++;                              /* next char */
    }
 
-   return 0;                              /* error */
-   
-}  /* get_brackets_ptr() */
+   return 0;
+}
 
 
 
@@ -1170,28 +975,25 @@ char      **data)  /* ^ first char of data */
 *     die Zeiger auf die ersten Zeichen hinter den ersten [ und die
 *     Anzahl der Zeichen, die bis zur ersten ] folgen.
 *  
+*  Parameters:
+*  s             : string to be checked
+*  cont_format   : first char of formats
+*  cont_content  : first char of content
+*  data          : first char of data
+*
 *  Returns:
 *     0   : wrong syntax (no brackets [ + ] found)
 *     else: length of format and content
 *
-*  Note: New since r6pl15 [NHz]
-*
 ******************************************|*************************************/
 
-GLOBAL struct size_brackets get_two_brackets_ptr(
-
-char                     *s,             /* ^ string to be checked */
-char                    **cont_format,   /* ^ first char of formats */
-char                    **cont_content,  /* ^ first char of content */
-char                    **data)          /* ^ first char of data */
+GLOBAL struct size_brackets get_two_brackets_ptr(char *s, char **cont_format, char **cont_content, char **data)
 {
-   char                  *ptr;           /* a pointer */
-   struct size_brackets   len;           /* computed length */
-   _BOOL                firstend;      /* flag: TRUE = first ] found in string */
+   char *ptr;
+   struct size_brackets len;
+   _BOOL firstend;                      /* flag: TRUE = first ] found in string */
    
-   
-   ptr = s;                               /* copy pointer as we will change it local */
-
+   ptr = s;
    *cont_format  = NULL;                  /* nothing found yet */
    *cont_content = NULL;
    *data         = NULL;
@@ -1206,28 +1008,20 @@ char                    **data)          /* ^ first char of data */
       if ((*ptr=='[') && (!firstend))     /* 1st opening bracket [ found */
       {
          *cont_format = ptr + 1;          /* remind start of format string */
-      }
-                                          /* 1st closing bracket ] found */
-      else if ((*ptr == ']') && (!firstend))
+      } else if ((*ptr == ']') && !firstend)
       {
-         firstend = TRUE;                 /* format descriptor string is complete */
-         len.format = ptr - *cont_format; /* remind length of format */
-      }
-                                         /* 2nd opening bracket [ found */
-      else if ((*ptr == '[') && (firstend))
+         firstend = TRUE;
+         len.format = ptr - *cont_format;
+      } else if ((*ptr == '[') && firstend)
       {
-         *cont_content = ptr + 1;        /* remind start of content string */
-      }
-                                         /* 2nd closing bracket ] found */ 
-      else if ((*ptr == ']') && (firstend))
+         *cont_content = ptr + 1;
+      } else if (*ptr == ']' && firstend)
       {
-         if (*cont_content != NULL)      /* we have found content already */
+         if (*cont_content != NULL)
          {
-            *data = ptr + 1;             /* set ^ data behind this bracket */
-                                         /* compute length of content string */ 
+            *data = ptr + 1;
             len.content = ptr - *cont_content;
          }
-         
          return len;                     /* we're done */
       }
       
@@ -1252,21 +1046,17 @@ char                    **data)          /* ^ first char of data */
 *
 ******************************************|************************************/
 
-GLOBAL char *get_8bit_ptr(
-
-char     *s)    /* ^ string */
+GLOBAL char *get_8bit_ptr(char *s)
 {
-   char  *ptr;  /* ^ to string */
+   char *ptr;
    
+   ptr = s;
    
-   ptr = s;                               /* start */
-   
-   while (*ptr != EOS)                    /* check whole string */
+   while (*ptr != EOS)
    {
-      if ((_UBYTE)*ptr > 127)              /* gotcha! */
+      if ((_UBYTE)*ptr > 127)
          return ptr;
-      
-      ptr++;                              /* next char */
+      ptr++;
    }
    
    return NULL;                           /* nothing found */
@@ -1290,24 +1080,9 @@ char     *s)    /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL char *get_section_ptr(
-
-char     *s)    /* ^ string */
+GLOBAL char *get_section_ptr(char *s)
 {
-   char  *ptr;  /* ^ to string */
-   
-   
-   ptr = s;                               /* start */
-   
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ((_UBYTE)*ptr == '\025')          /* gotcha! */
-         return ptr;
-      
-      ptr++;                              /* next char */
-   }
-   
-   return NULL;                           /* nothing found */
+   return strchr(s, '\025');
 }
 
 
@@ -1325,21 +1100,16 @@ char     *s)    /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL char *get_1stchar_ptr(
-
-char     *s)    /* ^ string */
+GLOBAL char *get_1stchar_ptr(char *s)
 {
-   char  *ptr;  /* ^ to string */
+   char *ptr;
    
+   ptr = s;
    
-   ptr = s;                               /* start */
-   
-   while (*ptr != EOS)                    /* check whole string */
+   while (*ptr != EOS)
    {
-                                          /* gotcha! */
-      if ( (*ptr != ' ') && (*ptr != '\t') )
+      if (*ptr != ' ' && *ptr != '\t')
          return ptr;
-      
       ptr++;                              /* next char */
    }
    
@@ -1360,46 +1130,28 @@ char     *s)    /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void tabs2spaces(
-
-char       *s,            /* ^ string */
-const int   tw)           /* tab width */
+GLOBAL void tabs2spaces(char *s, const int tw)
 {
    char     n[1024];      /* buffer for converted string */
-#if 0
-   char     one[2] = "";  /* char buffer string */
-#endif
    size_t   i,            /* counter */
             nl;           /* length of buffer string */
-            
 
    if (tw == 0)                           /* don't replace Null sized tabs! */
       return;
 
    n[0] = EOS;                            /* clear buffer */
-   
    nl = 0;
    
-   for (i = 0; i < strlen(s); i++)        /* check whole string */
+   for (i = 0; i < strlen(s); i++)
    {
       if (s[i] == '\t')                   /* tab found! */
       {
          do
          {
-            strcat(n, " ");               /* add as many spaces as required */
+            n[nl] = ' ';                 /* add as many spaces as required */
             nl++;
-         } while ( (nl % tw) != 0);       /* by tab width */
+         } while ((nl % tw) != 0);       /* by tab width */
       }
-#if 0
-      /* fd:2010-01-28: old method, seems to be unneccessary */
-      
-      else                                /* other char found */
-      {
-         one[0] = s[i];                   /* buffer this char */
-         strcat(n, one);                  /* attach this char to n[] */
-         nl++;                            /* increase length of n */
-      }
-#endif
       else
       {
          n[nl] = s[i];
@@ -1435,10 +1187,7 @@ const int   tw)           /* tab width */
 *
 ******************************************|************************************/
 
-GLOBAL char *itoroman(
-
-int      value,   /* decimal value to be converted */
-char    *string)  /* ^ result string */
+GLOBAL char *itoroman(int value, char *string)
 {
    int   m,       /* thousands */
          c,       /* hundreds */
@@ -1446,20 +1195,19 @@ char    *string)  /* ^ result string */
          o,       /* ones */
          i;       /* counter */
    
-   static const char *ones[] = {"", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"};
-   static const char *cent[] = {"", "c", "cc", "ccc", "cd", "d", "dc", "dcc", "dccc", "cm"};
-   static const char *deci[] = {"", "x", "xx", "xxx", "xl", "l", "lx", "lxx", "lxxx", "xc"};
+   static const char *ones[] = { "", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix" };
+   static const char *cent[] = { "", "c", "cc", "ccc", "cd", "d", "dc", "dcc", "dccc", "cm" };
+   static const char *deci[] = { "", "x", "xx", "xxx", "xl", "l", "lx", "lxx", "lxxx", "xc" };
 
    string[0] = '\0';                      /* clear result string */
 
    if (value <= 0)                        /* no negative or zero values! */
-      return (string);
-   
+      return string;
    
    m = value / 1000;                      /* decompose value */
    c = (value - m * 1000) / 100;
-   d = (value - m * 1000  - c * 100) / 10;
-   o = (value - m * 1000  - c * 100 - d * 10);
+   d = (value - m * 1000 - c * 100) / 10;
+   o = (value - m * 1000 - c * 100 - d * 10);
    
    for (i = 0; i < m; i++)                /* add thousands first */
       strcat(string, "m") ;
@@ -1468,7 +1216,7 @@ char    *string)  /* ^ result string */
    strcat(string, deci[d]);               /* add tenths */
    strcat(string, ones[o]);               /* add ones */
    
-   return (string);
+   return string;
 }
 
 
@@ -1488,26 +1236,18 @@ char    *string)  /* ^ result string */
 *
 ******************************************|************************************/
 
-GLOBAL void my_strupr(
-
-char  *string)  /* ^ string */
+GLOBAL void my_strupr(char *string)
 {
-#if HAVE_STRUPR
+#ifdef HAVE_STRUPR
    strupr(string);
 #else
-
-   size_t   i;  /* counter */
-   
-   
-   if (string[0] == EOS)                  /* empty string */
-      return;
-   
-   for (i = 0; i < strlen(string); i++)   /* whole string */
+   while (*string != EOS)
    {
-      if (string[i] >= 'a' && string[i] <= 'z')
+      if (*string >= 'a' && *string <= 'z')
       {
-         string[i] = (char)toupper(string[i]);
+         *string = toupper(*string);
       }
+      string++;
    }
 #endif
 }
@@ -1529,26 +1269,18 @@ char  *string)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void my_strlwr(
-
-char  *string)  /* ^ string */
+GLOBAL void my_strlwr(char *string)
 {
-#if HAVE_STRLWR
+#ifdef HAVE_STRLWR
    strlwr(string);
 #else
-
-   size_t   i;  /* counter */
-   
-   
-   if (string[0] == EOS)                  /* empty string */
-      return;
-   
-   for (i = 0; i < strlen(string); i++)   /* whole string */
+   while (*string != EOS)
    {
-      if (string[i] >= 'A' && string[i] <= 'Z')
+      if (*string >= 'A' && *string <= 'Z')
       {
-         string[i] = (char)tolower(string[i]);
+         *string = tolower(*string);
       }
+      string++;
    }
 #endif
 }
@@ -1572,18 +1304,26 @@ char  *string)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL int my_stricmp(
-
-const char  *s1,  /* ^ 1st string */
-const char  *s2)  /* ^ 2nd string */
+GLOBAL int my_stricmp(const char *s1, const char *s2)
 {
-
-#if HAVE_STRICMP
-     return stricmp(s1, s2);
-#elif HAVE_STRCASECMP
-     return strcasecmp(s1, s2);
+#if defined(HAVE_STRICMP)
+   return stricmp(s1, s2);
+#elif defined(HAVE_STRCASECMP)
+   return strcasecmp(s1, s2);
 #else
-     return strcmp(s1, s2);
+   unsigned char c1, c2;
+      
+   do {
+      c1 = *s1++;
+      c2 = *s2++;
+      c1 = toupper(c1);
+      c2 = toupper(c2);
+   } while (c1 != '\0' && c1 == c2);
+   if (c1 == c2)
+      return 0;
+   if (c2 == '\0')
+      return 1;
+   return c1 < c2 ? -1 : 1;
 #endif
 }
 
@@ -1606,16 +1346,36 @@ const char  *s2)  /* ^ 2nd string */
 *
 ******************************************|************************************/
 
-GLOBAL int my_strnicmp(
-
-const char  *s1,   /* ^ 1st string */
-const char  *s2,   /* ^ 2nd string */
-size_t       len)  /* # of chars to compare */
+GLOBAL int my_strnicmp(const char *s1, const char *s2, size_t len)
 {
-#if HAVE_STRNICMP
+#if defined(HAVE_STRNICMP)
    return strnicmp(s1, s2, len);
+#elif defined(HAVE_STRINCMP)
+   return strincmp(s1, s2, len);
+#elif defined(HAVE_STRNCMPI)
+   return strncmpi(s1, s2, len);
+#elif defined(HAVE_STRNCASECMP)
+   return strncasecmp(s1, s2, len);
 #else
-   return strncmp(s1, s2, len);
+   long count;
+   unsigned char c1, c2;
+   
+   count = len;
+   do {
+      c1 = *s1++;
+      c2 = *s2++;
+      c1 = toupper(c1);
+      c2 = toupper(c2);
+   } while (--count >= 0 && c1 != '\0' && c1 == c2);
+   if (count < 0)
+      return 0;
+   if (c1 == c2)
+      return 0;
+   if (c1 == '\0')
+      return -1;
+   if (c2 == '\0')
+      return 1;
+   return c1 < c2 ? -1 : 1;
 #endif
 }
 

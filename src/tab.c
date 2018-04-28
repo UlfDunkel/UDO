@@ -94,10 +94,10 @@
 #include "toc.h"
 #include "udo.h"
 #include "gui.h"
+#include "udomem.h"
 
 #include "export.h"
 #include "tab.h"
-#include "udomem.h"
 
 
 
@@ -232,7 +232,7 @@ GLOBAL void table_reset(void)
       {
          if (tab_cell[y][x] != NULL)
          {
-            um_free(tab_cell[y][x]);
+            free(tab_cell[y][x]);
             tab_cell[y][x] = NULL;
          }
       }
@@ -245,7 +245,7 @@ GLOBAL void table_reset(void)
       {
          if (tab_label_cell[y][x] != NULL)
          {
-            um_free(tab_label_cell[y][x]);
+            free(tab_label_cell[y][x]);
             tab_label_cell[y][x] = NULL;
          }
       }
@@ -459,11 +459,10 @@ char       *s)    /* */
       }
 
       sl = strlen(s);
-      ptr = (char *)(um_malloc(sl + 2));
+      ptr = (char *)(malloc(sl + 2));
 
       if (ptr == NULL)
       {
-         error_malloc_failed();
          return FALSE;
       }
 
@@ -574,11 +573,10 @@ char       *s)    /* */
          if (tl > tab_cell_w[x])
             tab_cell_w[x] = tl;
 
-         ptr = (char *)(um_malloc(sl + 2));
+         ptr = (char *)(malloc(sl + 2));
 
          if (ptr == NULL)
          {
-            error_malloc_failed();
             return FALSE;
          }
 

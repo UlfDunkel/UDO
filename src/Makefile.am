@@ -16,6 +16,7 @@ udo_SOURCES = \
 	chr.c chr.h chr_all.h chr_ttf.h \
 	commands.h \
 	constant.h \
+	debug.c debug.h \
 	env.c env.h \
 	export.h \
 	file.c file.h \

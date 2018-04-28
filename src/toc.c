@@ -175,10 +175,11 @@
 #include "tp.h"
 #include "udo.h"
 #include "gui.h"
+#include "debug.h"
+#include "udomem.h"
 
 #include "export.h"
 #include "toc.h"
-#include "udomem.h"
 
 
 
@@ -6184,12 +6185,11 @@ GLOBAL _BOOL save_html_index(void)
       fprintf(uif, "!autoref [off]\n");
 
                                           /* we need memory */   
-   html_index = (HTML_INDEX *)um_malloc(num_index * sizeof(HTML_INDEX));
+   html_index = (HTML_INDEX *)malloc(num_index * sizeof(HTML_INDEX));
    
    if (html_index == NULL)                /* fatal error! */
    {
       fclose(uif);
-      error_malloc_failed();
       return FALSE;
    }
    
@@ -6386,7 +6386,7 @@ GLOBAL _BOOL save_html_index(void)
          }
       }
       
-      um_free(escapedtocname);            /* v6.5.15 [vj] var can be freed now */
+      free(escapedtocname);            /* v6.5.15 [vj] var can be freed now */
    }
    
    fprintf(uif, "</p>\n\n");
@@ -6410,7 +6410,7 @@ GLOBAL _BOOL save_html_index(void)
 /* printf("%s\n", udofile.full); */
    remove(udofile.full);
 
-   um_free((void *)html_index);
+   free((void *)html_index);
    
    return TRUE;
 }
@@ -6953,12 +6953,11 @@ const char   *filename)       /* */
    if (file == NULL)
       return FALSE;
 
-   html_index = (HTML_IDX *)um_malloc(num_index * sizeof(HTML_IDX));
+   html_index = (HTML_IDX *)malloc(num_index * sizeof(HTML_IDX));
    
    if (html_index == NULL)
    {
       fclose(file);
-      error_malloc_failed();
       return FALSE;
    }
 
@@ -7030,7 +7029,7 @@ const char   *filename)       /* */
    fprintf(file, "</html>\n");
    fclose(file);
 
-   um_free((void *)html_index);
+   free((void *)html_index);
 
    return TRUE;
 }
@@ -13347,8 +13346,7 @@ const _BOOL   isp)     /* TRUE: popup */
 
    if (labptr == NULL)                    /* no more memory? */
    {
-      error_malloc_failed();
-   return FALSE;
+       return FALSE;
    }
 
 
@@ -13443,11 +13441,10 @@ const _BOOL   isp)     /* */
    if (alias[0] == EOS)                   /* rel6pl2: Leeren Alias abweisen */
       return FALSE;
 
-   labptr = (LABEL *)um_malloc(sizeof(LABEL) + 1);
+   labptr = (LABEL *)malloc(sizeof(LABEL) + 1);
 
    if (labptr == NULL)                    /* memory overflow? */
    {
-      error_malloc_failed();
       return FALSE;
    }
 
@@ -13572,11 +13569,10 @@ GLOBAL void set_raw_header_filename(void)
    }
    else
    {
-      ptr = (char *)um_malloc(1 + strlen(s) * sizeof(char));
+      ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
       
       if (!ptr)
       { 
-         error_malloc_failed();
          bFatalErrorDetected = TRUE;
       }
       else
@@ -13618,11 +13614,10 @@ GLOBAL void set_raw_footer_filename(void)
    }
    else
    {
-      ptr = (char *)um_malloc(1 + strlen(s) * sizeof(char));
+      ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
       
       if (!ptr)
       {
-         error_malloc_failed();
          bFatalErrorDetected = TRUE;
       }
       else
@@ -13830,11 +13825,10 @@ GLOBAL void set_helpid(void)
 
    /* <???> Hier pruefen, ob nur A-Z, a-z, 0-9 und _ benutzt werden */
 
-   ptr = (char *)um_malloc(1 + strlen(id) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(id) * sizeof(char));
 
    if (!ptr)
    {
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
    }
    else
@@ -13917,11 +13911,10 @@ GLOBAL void set_chapter_image(void)
       replace_char(s, "\\", "/");
    }
 
-   ptr = (char *)um_malloc(1 + strlen(s) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
 
    if (!ptr)
    {  
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
       return;
    }
@@ -13977,11 +13970,10 @@ GLOBAL void set_chapter_icon(void)
       replace_char(s, "\\", "/");
    }
 
-   ptr = (char *)um_malloc(1 + strlen(s) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
 
    if (!ptr)
    {
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
       return;
    }
@@ -14054,11 +14046,10 @@ GLOBAL void set_chapter_icon_active(void)
       replace_char(s, "\\", "/");
    }
 
-   ptr = (char *)um_malloc(1 + strlen(s) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
 
    if (!ptr)
    {
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
       return;
    }
@@ -14107,11 +14098,10 @@ GLOBAL void set_chapter_icon_text(void)
    tokcpy2(s, 512);
    auto_quote_chars(s, TRUE);
 
-   ptr = (char *)um_malloc(1 + strlen(s) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
 
    if (!ptr)
    {
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
    }
    else
@@ -14145,7 +14135,7 @@ LOCAL _BOOL add_toc_to_toc(void)
 
 
                                           /* get memory for new TOC structure */
-   tocptr = (TOCITEM *)um_malloc(sizeof(TOCITEM));
+   tocptr = (TOCITEM *)malloc(sizeof(TOCITEM));
  
    if (tocptr == NULL)                    /* memory error */
       return FALSE;
@@ -14218,7 +14208,7 @@ const _BOOL   invisible)  /* TRUE: node is invisible */
    }
 
                                           /* get memory for new TOC structure */
-   tocptr = (TOCITEM *)um_malloc(sizeof(TOCITEM));
+   tocptr = (TOCITEM *)malloc(sizeof(TOCITEM));
  
    if (tocptr == NULL)                    /* memory error */
       return FALSE;
@@ -14231,7 +14221,7 @@ const _BOOL   invisible)  /* TRUE: node is invisible */
    {
       fatal_message("missing node name");
       bFatalErrorDetected = TRUE;
-      um_free(tocptr);
+      free(tocptr);
       return NULL;
    }
                                           /* New in r6pl15 [NHz] */
@@ -17151,7 +17141,7 @@ char **var)
 {
    if (*var != NULL)
    {
-      um_free(*var);
+      free(*var);
       *var = NULL;
    }
 }
@@ -17200,7 +17190,7 @@ GLOBAL void exit_module_toc(void)
          free_toc_data(&(toc[i]->raw_header_filename));
          free_toc_data(&(toc[i]->raw_footer_filename));
 
-         um_free(toc[i]);
+         free(toc[i]);
          
          toc[i] = NULL;
       }
@@ -17210,7 +17200,7 @@ GLOBAL void exit_module_toc(void)
    {
       if (lab[i] != NULL)
       {
-         um_free(lab[i]);
+         free(lab[i]);
       }
    }
 
@@ -17219,12 +17209,9 @@ GLOBAL void exit_module_toc(void)
    {
       if (style[i] != NULL)
       {
-         um_free(style[i]);
+         free(style[i]);
       }
    }
 */
 
 }       /* exit_module_toc */
-
-
-/* +++ EOF +++ */

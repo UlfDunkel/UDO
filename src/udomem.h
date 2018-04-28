@@ -44,66 +44,61 @@
 
 #ifndef UDO_MEMORY
 #define UDO_MEMORY
+
+#include <stdarg.h>
+#include "udoport.h"
+#include "debug.h"
+
 /*
- * Defines the check codes..
+ * values for DEBUG_ALLOC:
+ * 0 - disable
+ * 1 - track number of blocks and total allocated size
+ * 2 - track every block and where it is allocated
+ * 3 - same as 2 and track maximum allocated size & number
+ * 4 - same as 3 and write log file to "dbgalloc.trc"
  */
-#define UM_LONG_CHECK 0x55446f00L
-#define UM_END_STRING "You've got a buffer overflow!"
-/* define or undef this symbol, to get or don't get call-messages */
-#undef UM_DEBUG_SHOW_CALLS
-/* define or undefine this symbol, to get or don't get a stat of malloc/free calls */
-#undef UM_DEBUG_SHOW_STATS
-/* define or undef to get more debug messages */
-#undef UM_DEBUG_SHOW_MSGS
-/* define or undef to say um_free to print the block start and end on an
- * "memory block end check broken" error
- */
-#undef UM_DEBUG_SHOW_BUFFER_ON_FREE_ERROR
-/*
- * For gcc the um_free and um_realloc methods use %ld instead of %d in some printf
- * statements, to get rid of some compiler warnings. This tests if Linux is used,
- * so the Symbol UM_PRINTF_USE_LD is set to switch this behavior on, otherwise the
- * symbol is deleted
- * Note: at the moment I don't know for which compiler this will be need, so its
- * always undef
- */
-#undef   UM_PRINTF_USE_LD
-#ifdef   __TOS__
-#define   UM_PRINTF_USE_LD
-#endif
-#ifdef   __LINUX__
-#define   UM_PRINTF_USE_LD
-#endif
-/*
- * Declarations for vars that keep memory management information
- */
-extern long um_malloc_count;   /* This counts the number of um_malloc calls */
-extern long um_free_count;   /* Counts the um_free calls */
-extern int memory_error;   /* This indicates a broken memory management */
-extern char endstring[];   /* This is the const string, that holds the ending string of memory blocks */
-extern size_t endstring_len; /* For better performance this var saves the string length of endstring */
-/*
- * Structure definitions
- */
-typedef struct _memory_list
-{
-   long check;
-   void *block;
-   char *endmark;
-   char file[30];
-   int line;
-   struct _memory_list *next;
-} MEMLIST;
-/*
- * This is the UDO memory interface. Use it instead of malloc or mfree!
- */
-GLOBAL void init_um(void);
-GLOBAL void exit_um(void);
-GLOBAL void *um_malloc2(size_t size, char *file, int line );
-#define um_malloc(size) um_malloc2(size, __FILE__, __LINE__ )
-GLOBAL void *um_realloc(void *block, size_t size);
-GLOBAL void um_free(void *memblock);
+#ifndef DEBUG_ALLOC
+#  define DEBUG_ALLOC 0
 #endif
 
+void *mem_get(size_t size);
+void *mem_realloc(void *block, size_t newsize);
+void mem_free(void *p);
+void *mem_0get(size_t size);
+char *mem_str_dup(const char *str);
 
-/* +++ EOF +++ */
+#undef strdup
+
+#if DEBUG_ALLOC
+
+void *mem_debug_get(size_t size, const char *from, long line);
+void mem_debug_free(void *block, const char *from, long line);
+void *mem_debug_0get(size_t size, const char *from, long line);
+char *mem_debug_str_dup(const char *str, const char *from, long line);
+void *mem_debug_realloc(void *block, size_t newsize, const char *from, long line);
+
+#define malloc(size) mem_debug_get(size, __FILE__, __LINE__)
+#define calloc(nitems, size) mem_debug_0get((size_t)(nitems) * (size_t)(size), __FILE__, __LINE__)
+#define strdup(str) mem_debug_str_dup(str, __FILE__, __LINE__)
+#define free(block) mem_debug_free(block, __FILE__, __LINE__)
+#define realloc(block, newsize) mem_debug_realloc(block, newsize, __FILE__, __LINE__)
+
+#else
+
+#define malloc(size) mem_get(size)
+#define calloc(nitems, size) mem_0get((size_t)(nitems) * (size_t)(size))
+#define strdup(str) mem_str_dup(str)
+#define realloc(block, newsize) mem_realloc(block, newsize)
+#define free(block) mem_free(block)
+
+#endif /* DEBUG_ALLOC */
+
+extern void (*mem_print_alloc_errors)(size_t size);
+
+void mem_test_start(void);
+int mem_test_end(void);
+
+char *um_strdup_printf(const char *format, ...) __attribute__((format(printf, 1, 2)));
+char *um_strdup_vprintf(const char *format, va_list args);
+
+#endif /* UDO_MEMORY */

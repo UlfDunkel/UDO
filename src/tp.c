@@ -457,7 +457,7 @@ int         allow_empty)  /* TRUE: empty data are okay, FALSE: throw error messa
    len *=2;                               /* We need space if some text will be replace */
    len++;                                 /* End of string */
 
-   buffer = (char *)um_malloc(len);
+   buffer = (char *)malloc(len);
 
    if (buffer)                            /* Check if the buffer could be allocated */
    {
@@ -487,7 +487,6 @@ int         allow_empty)  /* TRUE: empty data are okay, FALSE: throw error messa
    }
 
    /* An error occured when allocating the buffer */
-   error_malloc_failed();
    bFatalErrorDetected = TRUE;
    return FALSE;
 }
@@ -569,7 +568,7 @@ GLOBAL _BOOL set_docinfo(void)
       else
       {
          path_adjust_separator(data);
-         buffer = (char *) um_malloc(strlen(data) * sizeof(char) + 1);
+         buffer = (char *) malloc(strlen(data) * sizeof(char) + 1);
          
          if (buffer)
          {
@@ -585,7 +584,6 @@ GLOBAL _BOOL set_docinfo(void)
          }
          else
          {
-            error_malloc_failed();
             bFatalErrorDetected = TRUE;
          }
       }
@@ -610,7 +608,7 @@ GLOBAL _BOOL set_docinfo(void)
          sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
          path_adjust_separator(data);
          
-         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
          
          if (buffer)
          {
@@ -637,7 +635,6 @@ GLOBAL _BOOL set_docinfo(void)
          }
          else
          {
-            error_malloc_failed();
             bFatalErrorDetected = TRUE;
          }
       }
@@ -662,7 +659,7 @@ GLOBAL _BOOL set_docinfo(void)
          sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
          path_adjust_separator(data);
          
-         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
          
          if (buffer)
          {
@@ -689,7 +686,6 @@ GLOBAL _BOOL set_docinfo(void)
          }
          else
          {
-            error_malloc_failed();
             bFatalErrorDetected = TRUE;
          }
       }
@@ -711,7 +707,7 @@ GLOBAL _BOOL set_docinfo(void)
       else
       {
          path_adjust_separator(data);
-         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
          
          if (buffer)
          {
@@ -727,7 +723,6 @@ GLOBAL _BOOL set_docinfo(void)
          }
          else
          {
-            error_malloc_failed();
             bFatalErrorDetected = TRUE;
          }
       }
@@ -936,7 +931,7 @@ GLOBAL _BOOL set_docinfo(void)
       }
       else
       {
-         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
          
          if (buffer)
          {
@@ -945,7 +940,6 @@ GLOBAL _BOOL set_docinfo(void)
          }
          else
          {
-            error_malloc_failed();
             bFatalErrorDetected = TRUE;
          }
       }
@@ -2641,7 +2635,7 @@ char **var)  /* ^^ to string in titdat.[] */
 {
    if (*var != NULL)
    {
-      um_free(*var);
+      free(*var);
       *var = NULL;
    }
 }

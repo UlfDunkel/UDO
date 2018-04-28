@@ -75,32 +75,10 @@
 #include "sty.h"
 #include "toc.h"
 #include "udo.h"
-
-#include "export.h"
 #include "udomem.h"
 
-
-
-
-
-
-
-
-/*******************************************************************************
-*
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-   /* check if certain values are valid */
-LOCAL _BOOL check_toc_and_counters(void);
-
-
-
-
-
-
-
+#include "export.h"
+#include "toc_html.h"
 
 
 
@@ -587,11 +565,10 @@ GLOBAL void set_html_keywords(void)
       
       newsize = strlen(oldk) + strlen(k) + 3;
 
-      ptr = (char *)um_realloc(oldptr, newsize);
+      ptr = (char *)realloc(oldptr, newsize);
       
       if (!ptr)
       {
-         error_malloc_failed();
          bFatalErrorDetected = TRUE;
       }
       else
@@ -602,11 +579,10 @@ GLOBAL void set_html_keywords(void)
    }
    else
    {
-      ptr = (char *)um_malloc(1 + strlen(k) * sizeof(char));
+      ptr = (char *)malloc(1 + strlen(k) * sizeof(char));
 
       if (!ptr)
       {
-         error_malloc_failed();
          bFatalErrorDetected = TRUE;
       }
       else
@@ -657,11 +633,10 @@ GLOBAL void set_html_description(void)
       strcpy(oldd, oldptr);
       newsize = strlen(oldd) + strlen(d) + 2;
 
-      ptr = (char *)um_realloc(oldptr, newsize);
+      ptr = (char *)realloc(oldptr, newsize);
 
       if (!ptr)
       {
-         error_malloc_failed();
          bFatalErrorDetected = TRUE;
       }
       else
@@ -672,11 +647,10 @@ GLOBAL void set_html_description(void)
    }
    else
    { 
-      ptr = (char *)um_malloc(1 + strlen(d) * sizeof(char));
+      ptr = (char *)malloc(1 + strlen(d) * sizeof(char));
 
       if (!ptr)
       {
-         error_malloc_failed();
          bFatalErrorDetected = TRUE;
       }
       else
@@ -744,11 +718,10 @@ GLOBAL void set_html_robots(void)
       }
    }
 
-   ptr = (char *)um_malloc(1 + strlen(d) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(d) * sizeof(char));
 
    if (!ptr)
    {
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
    }
    else
@@ -1019,11 +992,10 @@ GLOBAL void set_html_style(void)
       return;
    }
 
-   styleptr = (STYLE *)um_malloc(sizeof(STYLE) + 1);
+   styleptr = (STYLE *)malloc(sizeof(STYLE) + 1);
 
    if (styleptr == NULL)                  /* no memory? */
    {
-      error_malloc_failed();
       return;
    }
 
@@ -1133,11 +1105,10 @@ GLOBAL void set_html_script(void)
       return;
    }
 
-   scriptptr = (SCRIPT *)um_malloc(sizeof(SCRIPT) + 1);
+   scriptptr = (SCRIPT *)malloc(sizeof(SCRIPT) + 1);
 
    if (scriptptr == NULL)                 /* no memory? */
    {
-      error_malloc_failed();
       return;
    }
 
@@ -1317,11 +1288,10 @@ GLOBAL void set_html_counter_command(void)
       return;
    }
 
-   ptr = (char *)um_malloc(1 + strlen(k) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(k) * sizeof(char));
 
    if (!ptr)
    {
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
    }
    else
@@ -1359,13 +1329,12 @@ GLOBAL void set_html_frames_toc_title(void)
    replace_udo_quotes(d);
 
    if (html_frames_toc_title != NULL)
-      um_free(html_frames_toc_title);
+      free(html_frames_toc_title);
 
-   ptr = (char *)um_malloc(1 + strlen(d) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(d) * sizeof(char));
 
    if (!ptr)
    { 
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
    }
    else
@@ -1403,13 +1372,12 @@ GLOBAL void set_html_frames_con_title(void)
    replace_udo_quotes(d);
 
    if (html_frames_con_title != NULL)
-      um_free(html_frames_con_title);
+      free(html_frames_con_title);
 
-   ptr = (char *)um_malloc(1 + strlen(d) * sizeof(char));
+   ptr = (char *)malloc(1 + strlen(d) * sizeof(char));
 
    if (!ptr)
    { 
-      error_malloc_failed();
       bFatalErrorDetected = TRUE;
    }
    else
