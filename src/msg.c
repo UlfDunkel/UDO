@@ -66,10 +66,12 @@
 #include "udoport.h"
 #include "constant.h"
 #include "version.h"
+#include "udointl.h"
 #include "udo_type.h"
 #include "udo.h"
 #include "toc.h"
 #include "gui.h"
+#include "udomem.h"
 
 #include "export.h"
 #include "msg.h"
@@ -94,32 +96,6 @@ LOCAL int note_counter;
 
 /*******************************************************************************
 *
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-LOCAL void loglnpos(const char *we, const char *msg);
-LOCAL void warnlnpos(const char *msg);
-LOCAL void errlnpos(const char *msg);
-LOCAL void fatallnpos(const char *msg);
-
-LOCAL void error_msg_para2(const char *f, const char *s1, const char *s2);
-
-LOCAL char *my_strerror(char *s);
-LOCAL void errno_logln(const char *s);
-
-
-
-
-
-
-
-
-
-
-
-/*******************************************************************************
-*
 *     LOCAL FUNCTIONS
 *
 ******************************************|************************************/
@@ -134,12 +110,10 @@ LOCAL void errno_logln(const char *s);
 *
 ******************************************|************************************/
 
-LOCAL void loglnpos(
-
-const char  *we,             /* */
-const char  *msg)            /* */
+LOCAL void loglnpos(const char *we, const char *format, va_list args)
 {
    char      z[512];         /* */
+   char      msg[512];
    char      lineinfo[100];  /* */
    _UWORD     realstart;      /* */
    
@@ -154,124 +128,11 @@ const char  *msg)            /* */
       sprintf(lineinfo, "%u", uiCurrFileLine);
    }
    
+   vsprintf(msg, format, args);
    sprintf(z, "%s: %s %s: %s", we, sCurrFileName, lineinfo, msg);
    logln(z);
 
    show_logln_message(z);                 /* Ausgabe ans GUI weiterreichen */
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  warnlnpos():
-*     output a warning message with file name and line position
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void warnlnpos(
-
-const char  *msg)  /* */
-{
-   if (!bNoWarnings)
-      loglnpos("Warning", msg);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  errlnpos():
-*     output an error message with file name and line position
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void errlnpos(
-
-const char  *msg)  /* */
-{
-   loglnpos("Error", msg);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  fatallnpos():
-*     output a fatal error message with file name and line position
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void fatallnpos(
-
-const char  *msg)  /* */
-{
-   loglnpos("Fatal Error", msg);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  notelnpos():
-*     output a note message with file name and line position
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void notelnpos(
-
-const char  *msg)  /* */
-{
-   if (!bNoWarnings)
-      loglnpos("Note", msg);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_msg_para2():
-*     ?? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void error_msg_para2(
-
-const char  *f,       /* */
-const char  *s1,      /* */
-const char  *s2)      /* */
-{
-   char      m[512];  /* */
-   
-
-   sprintf(m, f, s1, s2);
-   errlnpos(m);
-   error_counter++;
 }
 
 
@@ -292,19 +153,18 @@ const char  *s2)      /* */
 *
 ******************************************|************************************/
 
-LOCAL char *my_strerror(
-
-char  *s)  /* */
+LOCAL const char *my_strerror(int err_no)
 {
-#if HAVE_STRERROR
-   strcpy(s, strerror(errno));
-#elif HAVE_SYS_ERRLIST
-   strcpy(s, sys_errlist[errno]);
+#if defined(HAVE_STRERROR)
+   return strerror(err_no);
+#elif defined(HAVE_SYS_ERRLIST)
+   return sys_errlist[err_no];
 #else
-   sprintf(s, "Error #%d", errno);
-#endif
+   static char s[20];
+   sprintf(s, "Error #%d", err_no);
 
    return s;
+#endif
 }
 
 
@@ -321,22 +181,21 @@ char  *s)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void errno_logln(
-
-const char  *s)       /* */
+LOCAL void errno_logln(const char *s)
 {
-   char      p[512];  /* */
-
-
-   my_strerror(p);
+   const char *p;
+   char buf[512];
+   
+   p = my_strerror(errno);
    
    if (s[0] != EOS)
-      vloglnf("%s: %s", s, p);
-   else
-      vloglnf("%s", p);
+   {
+      sprintf(buf, "%s: %s", s, p);
+      p = buf;
+   }
+   logln(p);
+   show_logln_message(p);
 }
-
-
 
 
 
@@ -353,7 +212,7 @@ const char  *s)       /* */
 
 /*******************************************************************************
 *
-*  fatal_msg_solo():
+*  warning_message():
 *     ??? (description missing)
 *
 *  Return:
@@ -361,138 +220,16 @@ const char  *s)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL void fatal_msg_solo(
-
-const char  *s)  /* */
+GLOBAL void warning_message(const char *msg, ...)
 {
-   fatallnpos(s);
-   error_counter++;
-   bFatalErrorDetected = TRUE;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  fatal_msg_para():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void fatal_msg_para(
-
-const char  *f,       /* */
-const char  *s)       /* */
-{
-   char      m[512];  /* */
-
-
-   sprintf(m, f, s);
-   fatallnpos(m);
-   error_counter++;
-   bFatalErrorDetected = TRUE;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_msg_solo():
-*     ?? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_msg_solo(
-
-const char  *em)  /* */
-{
-   errlnpos(em);
-   error_counter++;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_msg_para():
-*     ?? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_msg_para(
-
-const char  *f,       /* */
-const char  *s)       /* */
-{
-   char      m[512];  /* */
-
-
-   sprintf(m, f, s);
-   errlnpos(m);
-   error_counter++;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  warning_msg_solo():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void warning_msg_solo(
-
-const char  *em)  /* */
-{
-   warnlnpos(em);
-   warning_counter++;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  warning_msg_para():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void warning_msg_para(
-
-const char  *f,       /* */
-const char  *s)       /* */
-{
-   char      m[512];  /* */
+   va_list args;
    
-
-   sprintf(m, f, s);
-   warnlnpos(m);
+   if (!bNoWarnings)
+   {
+      va_start(args, msg);
+      loglnpos(_("Warning"), msg, args);
+      va_end(args);
+   }
    warning_counter++;
 }
 
@@ -502,7 +239,7 @@ const char  *s)       /* */
 
 /*******************************************************************************
 *
-*  note_msg_solo():
+*  error_message():
 *     ??? (description missing)
 *
 *  Return:
@@ -510,39 +247,14 @@ const char  *s)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL void note_msg_solo(
-
-const char  *em)  /* */
+GLOBAL void error_message(const char *msg, ...)
 {
-   notelnpos(em);
-   note_counter++;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  note_msg_para():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void note_msg_para(
-
-const char  *f,       /* */
-const char  *s)       /* */
-{
-   char      m[512];  /* */
-
-
-   sprintf(m, f, s);
-   notelnpos(m);
-   note_counter++;
+   va_list args;
+   
+   va_start(args, msg);
+   loglnpos(_("Error"), msg, args);
+   va_end(args);
+   error_counter++;
 }
 
 
@@ -559,66 +271,29 @@ const char  *s)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL void logln(
-
-const char  *s)  /* log file entry line */
+GLOBAL void logln(const char *s)
 {
+   /*
+    * if no logfile, output wil go to screen;
+    * suppress if requested by quiet option
+    */
    if (bBeQuiet && bNoLogfile)
       return;
    
+   /*
+    * if no logfile, fLogfile will be stderr;
+    * suppress if using GUI and output should not go there
+    */
    if (bNoLogfile && no_stderr_output)
       return;
    
+   if (fLogfile == NULL)
+      return;
+   if (*s == '\0' && fLogfile == stderr)
+   	  return;
+   
    fprintf(fLogfile, "%s\n", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  loglnposprintf():
-*     Ausgabe ins Logfile und via printf inklusive Datei und Zeilennummer
-*
-*  Notes:
-*     [vj] v6.3.7 hinzugefuegt zu debuggingzwecken
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void loglnposprintf(
-
-const char  *we,             /* */
-const char  *msg)            /* */
-{
-   char      z[512];         /* */
-   char      lineinfo[100];  /* */
-   _UWORD     realstart;      /* */
-   
-   
-   if (uiMultiLines > 0)                  /* New in v6.5.5 to get a proper message with multilines */
-   {
-                                          /* Special: we are on a multiline */
-      realstart = uiCurrFileLine - uiMultiLines;
-      
-      sprintf(lineinfo, "%u-%u", realstart, uiCurrFileLine);
-   }
-   else
-   {
-      sprintf(lineinfo, "%u", uiCurrFileLine);
-   }
-   
-   sprintf(z, "%s: %s %s: %s", we, sCurrFileName, lineinfo, msg);
-   logln(z);
-
-#ifdef USE_LOGLNPOSPRINTF
-   printf("%s\n", z);
-#else
-   show_logln_message(z);                 /* r6pl12: Ausgabe ans GUI weiterreichen */
-#endif
+   fflush(fLogfile);
 }
 
 
@@ -635,74 +310,15 @@ const char  *msg)            /* */
 *
 ******************************************|************************************/
 
-GLOBAL void vloglnf(
-
-const char  *fmt,      /* format string */
-             ...)      /* more parameters */
+GLOBAL void vloglnf(const char *fmt, ...)
 {
-   va_list   ap;       /* */
-   char      s[1024];  /* line output buffer */
+   va_list ap;
+   char s[512];
 
-
-   s[0] = EOS;                            /* clear buffer */
-   
    va_start(ap, fmt);
    vsprintf(s, fmt, ap);
    va_end(ap);
-   
    logln(s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_message():
-*     ?? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_message(
-
-const char  *msg)     /* */
-{
-   char      s[512];  /* */
-
-
-   sprintf(s, "Error: %s", msg);
-   logln(s);
-   error_counter++;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  warning_message():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void warning_message(
-
-const char  *msg)     /* */
-{
-   char      s[512];  /* */
-   
-
-   sprintf(s, "Warning: %s", msg);
-   logln(s);
-   warning_counter++;
 }
 
 
@@ -719,15 +335,16 @@ const char  *msg)     /* */
 *
 ******************************************|************************************/
 
-GLOBAL void note_message(
-
-const char  *msg)     /* */
+GLOBAL void note_message(const char *msg, ...)
 {
-   char      s[512];  /* */
+   va_list args;
    
-
-   sprintf(s, "Note: %s", msg);
-   logln(s);
+   if (!bNoWarnings && msg != NULL)
+   {
+      va_start(args, msg);
+      loglnpos(_("Note"), msg, args);
+      va_end(args);
+   }
    note_counter++;
 }
 
@@ -745,15 +362,13 @@ const char  *msg)     /* */
 *
 ******************************************|************************************/
 
-GLOBAL void fatal_message(
-
-const char  *msg)     /* */
+GLOBAL void fatal_message(const char *msg, ...)
 {
-   char      s[512];  /* */
+   va_list args;
    
-
-   sprintf(s, "Fatal Error: %s", msg);
-   logln(s);
+   va_start(args, msg);
+   loglnpos(_("Fatal Error"), msg, args);
+   va_end(args);
    error_counter++;
    bFatalErrorDetected = TRUE;
 }
@@ -774,7 +389,9 @@ const char  *msg)     /* */
 
 GLOBAL void logln_warnings_errors(void)
 {
-   logln("######## errors, warnings and notes:");
+   if (fLogfile == stderr)
+      return;
+   logln(_("######## errors, warnings and notes:"));
    logln("");
 }
 
@@ -795,7 +412,7 @@ GLOBAL void logln_warnings_errors(void)
 GLOBAL void logln_information(void)
 {
    logln("");
-   logln("######## information:");
+   logln(_("######## information:"));
    logln("");
 }
 
@@ -815,7 +432,7 @@ GLOBAL void logln_information(void)
 
 GLOBAL void logln_interrupted(void)
 {
-   logln("interruption");
+   logln(_("interruption"));
 }
 
 
@@ -832,16 +449,11 @@ GLOBAL void logln_interrupted(void)
 *
 ******************************************|************************************/
 
-GLOBAL void logln_file_generated(
-
-const char  *kind,      /* */
-const char  *filename,  /* */
-const char  *suff)      /* */
+GLOBAL void logln_file_generated(const char *kind, const char *filename, const char *suff)
 {
-   char      m[512];    /* */
+   char m[512];
    
-
-   sprintf(m, "%s written to %s%s", kind, filename, suff);
+   sprintf(m, _("%s written to %s%s"), kind, filename, suff);
    logln(m);
 }
 
@@ -859,11 +471,9 @@ const char  *suff)      /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_logfile(
-
-const char  *s)  /* */
+GLOBAL void error_open_logfile(const char *s)
 {
-   error_msg_para("couldn't open logfile <%s>", s);
+   error_message(_("couldn't open logfile <%s>"), s);
    errno_logln(s);
 }
 
@@ -881,11 +491,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_hypfile(
-
-const char  *s)  /* */
+GLOBAL void error_open_hypfile(const char *s)
 {
-   error_msg_para("couldn't open hypfile <%s>", s);
+   error_message(_("couldn't open hypfile <%s>"), s);
    errno_logln(s);
 }
 
@@ -903,11 +511,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_idxfile(
-
-const char  *s)  /* */
+GLOBAL void error_open_idxfile(const char *s)
 {
-   error_msg_para("couldn't open index file <%s>", s);
+   error_message(_("couldn't open index file <%s>"), s);
    errno_logln(s);
 }
 
@@ -925,11 +531,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_treefile(
-
-const char  *s)  /* */
+GLOBAL void error_open_treefile(const char *s)
 {
-   error_msg_para("couldn't open treefile <%s>", s);
+   error_message(_("couldn't open treefile <%s>"), s);
    errno_logln(s);
 }
 
@@ -947,11 +551,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_uprfile(
-
-const char  *s)  /* */
+GLOBAL void error_open_uprfile(const char *s)
 {
-   error_msg_para("couldn't open project file <%s>", s);
+   error_message(_("couldn't open project file <%s>"), s);
    errno_logln(s);
 }
 
@@ -969,11 +571,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_outfile(
-
-const char  *s)  /* */
+GLOBAL void error_open_outfile(const char *s)
 {
-   error_msg_para("couldn't open destination file <%s>", s);
+   error_message(_("couldn't open destination file <%s>"), s);
    errno_logln(s);
 }
 
@@ -991,33 +591,10 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_infile(
-
-const char  *s)  /* */
+GLOBAL void error_open_infile(const char *s)
 {
-   error_msg_para("couldn't open source file <%s>", s);
+   error_message(_("couldn't open source file <%s>"), s);
    errno_logln(s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_infile_outfile():
-*     program error message: source and destination file are equal
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_infile_outfile(
-
-const char  *s)  /* */
-{
-   error_msg_para("source and destination file are equal: <%s>", s);
 }
 
 
@@ -1034,11 +611,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_write_img(
-
-const char  *s)  /* */
+GLOBAL void error_write_img(const char *s)
 {
-   error_msg_para("couldn't write IMG header of <%s>", s);
+   error_message(_("couldn't write IMG header of <%s>"), s);
    errno_logln(s);
 }
 
@@ -1056,11 +631,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_read_img(
-
-const char  *s)  /* */
+GLOBAL void error_read_img(const char *s)
 {
-   error_msg_para("couldn't read IMG header of <%s>", s);
+   error_message(_("couldn't read IMG header of <%s>"), s);
    errno_logln(s);
 }
 
@@ -1078,17 +651,10 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_read_bmp(
-
-const char  *s)  /* */
+GLOBAL void error_read_bmp(const char *s)
 {
-   if (strcmp(s, BMP_MW_NAME) == 0)       /* Fixed bug #0000017 in V6.5.2 [NHz] */
-      note_msg_solo("Image for UDO link generated (see below), please translate again to complete");
-   else
-   {
-      error_msg_para("couldn't read BMP header of <%s>", s);
-      errno_logln(s);
-   }
+   error_message(_("couldn't read BMP header of <%s>"), s);
+   errno_logln(s);
 }
 
 
@@ -1105,11 +671,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_read_pcx(
-
-const char  *s)  /* */
+GLOBAL void error_read_pcx(const char *s)
 {
-   error_msg_para("couldn't read PCX header of <%s>", s);
+   error_message(_("couldn't read PCX header of <%s>"), s);
    errno_logln(s);
 }
 
@@ -1127,11 +691,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_read_msp(
-
-const char  *s)  /* */
+GLOBAL void error_read_msp(const char *s)
 {
-   error_msg_para("couldn't read MSP header of <%s>", s);
+   error_message(_("couldn't read MSP header of <%s>"), s);
    errno_logln(s);
 }
 
@@ -1149,11 +711,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_read_gif(
-
-const char  *s)  /* */
+GLOBAL void error_read_gif(const char *s)
 {
-   error_msg_para("couldn't read GIF header of <%s>", s);
+   error_message(_("couldn't read GIF header of <%s>"), s);
    errno_logln(s);
 }
 
@@ -1171,11 +731,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_read_png(
-
-const char  *s)  /* */
+GLOBAL void error_read_png(const char *s)
 {
-   error_msg_para("couldn't read PNG header of <%s>", s);
+   error_message(_("couldn't read PNG header of <%s>"), s);
    errno_logln(s);
 }
 
@@ -1193,11 +751,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_read_jpeg(
-
-const char  *s)  /* */
+GLOBAL void error_read_jpeg(const char *s)
 {
-   error_msg_para("couldn't read JPEG header of <%s>", s);
+   error_message(_("couldn't read JPEG header of <%s>"), s);
    errno_logln(s);
 }
 
@@ -1215,15 +771,12 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_pass1(
-
-const char  *s)       /* */
+GLOBAL void error_open_pass1(const char *s)
 {
-   char      e[512];  /* */
-   
-   
-   my_strerror(e);
-   error_msg_para2("couldn't open <%s>: %s", s, e);
+   const char *e;
+
+   e = my_strerror(errno);
+   error_message(_("couldn't open <%s>: %s"), s, e);
 }
 
 
@@ -1240,15 +793,12 @@ const char  *s)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_open_pass2(
-
-const char  *s)       /* */
+GLOBAL void error_open_pass2(const char *s)
 {
-   char      e[512];  /* */
-   
-   
-   my_strerror(e);
-   error_msg_para2("couldn't open <%s>: %s", s, e);
+   const char *e;
+
+   e = my_strerror(errno);
+   error_message(_("couldn't open <%s>: %s"), s, e);
 }
 
 
@@ -1265,15 +815,12 @@ const char  *s)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_mkdir(
-
-const char  *s)       /* */
+GLOBAL void error_mkdir(const char *s)
 {
-   char      e[512];  /* */
+   const char *e;
    
-   
-   my_strerror(e);
-   error_msg_para2("couldn't make directory <%s>: %s", s, e);
+   e = my_strerror(errno);
+   error_message(_("couldn't make directory <%s>: %s"), s, e);
 }
 
 
@@ -1292,45 +839,7 @@ const char  *s)       /* */
 
 GLOBAL void error_malloc_failed(void)
 {
-   error_msg_solo("memory allocation failed");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_buffer_overflow():
-*     program error message: string buffer overflow
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_buffer_overflow(void)
-{
-   error_msg_solo("string buffer overflow");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_missing_title_data():
-*     program error message: no title data available
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_missing_title_data(void)
-{
-   error_msg_solo("no title data available");
+   fatal_message(_("memory allocation failed"));
 }
 
 
@@ -1349,50 +858,7 @@ GLOBAL void error_missing_title_data(void)
 
 GLOBAL void error_empty_docinfo(void)
 {
-   error_msg_solo("empty !docinfo");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_unknown_docinfo():
-*     program error message: unknown docinfo
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_unknown_docinfo(const char *s)
-{
-   error_msg_para("unknown !docinfo: %s", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_unknown_html_navigation():
-*     program error message: unknown html_navigation
-*
-*  Notes:
-*     New V 6.5.20
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_unknown_html_navigation(
-
-const char  *s)  /* */
-{
-   error_msg_para("unknown html_navigation: %s", s);
+   error_message(_("empty !docinfo"));
 }
 
 
@@ -1409,97 +875,11 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_unknown_color(
-
-const char  *s)  /* */
+GLOBAL void error_unknown_color(const char *s)
 {
-   error_msg_para("unknown color: %s", s);
+   error_message(_("unknown color: %s"), s);
 }
 
-
-
-
-
-/*******************************************************************************
-*
-*  error_wrong_header_date():
-*     program error message: wrong argument for html_header_date
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_wrong_header_date(
-
-const char  *s)  /* */
-{
-   error_msg_para("wrong argument for !html_header_date: %s, e.g. +01:00", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_empty_header_links():
-*     program error message: empty html_header_links
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_empty_header_links(void)
-{
-   error_msg_solo("empty !html_header_links");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_argument_header_links():
-*     program error message: unknown linktype (!html_header_links)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_argument_header_links(
-
-const char  *s)  /* */
-{
-   error_msg_para("unknown linktype (!html_header_links): %s", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_error():
-*     ??? (desription missing)
-*
-*  Notes:
-*     r6pl4
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_error(
-
-const char  *s)  /* */
-{
-   error_msg_solo(s);
-}
 
 
 
@@ -1516,7 +896,7 @@ const char  *s)  /* */
 
 GLOBAL void error_syntax_error(void)
 {
-   error_msg_solo("syntax error");
+   error_message(_("syntax error"));
 }
 
 
@@ -1533,17 +913,9 @@ GLOBAL void error_syntax_error(void)
 *
 ******************************************|************************************/
 
-GLOBAL void error_end_without_begin(
-
-const char  *se,      /* */
-const char  *sb)      /* */
+GLOBAL void error_end_without_begin(const char *se, const char *sb)
 {
-   char      m[512];  /* */
-   
-   
-   sprintf(m, "'%s' without '%s'", se, sb);
-   errlnpos(m);
-   error_counter++;
+   error_message(_("'%s' without '%s'"), se, sb);
 }
 
 
@@ -1560,36 +932,9 @@ const char  *sb)      /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_wrong_end(
-
-const char  *sb,      /* */
-const char  *se)      /* */
+GLOBAL void error_wrong_end(const char *sb, const char *se)
 {
-   char      m[512];  /* */
-   
-   
-   sprintf(m, "'%s' followed by '%s'", sb, se);
-   errlnpos(m);
-   error_counter++;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_item_outside_env():
-*     error message: '!item' outside environment
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_item_outside_env(void)
-{
-   error_msg_solo("'!item' outside environment");
+   error_message(_("'%s' followed by '%s'"), sb, se);
 }
 
 
@@ -1608,7 +953,7 @@ GLOBAL void error_item_outside_env(void)
 
 GLOBAL void error_item_many_enum(void)
 {
-   error_msg_solo("too many items inside enumeration");
+   error_message(_("too many items inside enumeration"));
 }
 
 
@@ -1625,11 +970,9 @@ GLOBAL void error_item_many_enum(void)
 *
 ******************************************|************************************/
 
-GLOBAL void error_missing_end(
-
-const char  *s)  /* */
+GLOBAL void error_missing_end(const char *s)
 {
-   error_msg_para("'%s' expected", s);
+   error_message(_("'%s' expected"), s);
 }
 
 
@@ -1646,30 +989,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_called_twice(
-
-const char  *s)  /* */
+GLOBAL void error_called_twice(const char *s)
 {
-   error_msg_para("'%s' called twice", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_too_many_env():
-*     error message: too many environments used
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_too_many_env(void)
-{
-   error_msg_solo("too many environments used");
+   error_message(_("'%s' called twice"), s);
 }
 
 
@@ -1686,11 +1008,28 @@ GLOBAL void error_too_many_env(void)
 *
 ******************************************|************************************/
 
-GLOBAL void error_not_active(
-
-const char  *s)  /* */
+GLOBAL void error_not_active(const char *s)
 {
-   error_msg_para("%s not active", s);
+   error_message(_("%s not active"), s);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  error_already_active():
+*     error message: %s already active
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void error_already_active(const char *s)
+{
+   error_message(_("%s already active"), s);
 }
 
 
@@ -1707,11 +1046,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_still_active(
-
-const char  *s)  /* */
+GLOBAL void error_still_active(const char *s)
 {
-   error_msg_para("%s still active", s);
+   error_message(_("%s still active"), s);
 }
 
 
@@ -1728,31 +1065,10 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_missing_parameter(
-
-const char  *s)  /* */
+GLOBAL void error_missing_parameter(const char *s)
 {
-   error_msg_para("missing parameter(s) at %s", s);
+   error_message(_("missing parameter(s) at %s"), s);
 }
-
-
-
-
-/*******************************************************************************
-*
-*  error_too_many_parameters():
-*     error message: too many parameters used
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_too_many_parameters(void)
-{
-   error_msg_solo("too many parameters used");
-}
-
 
 
 
@@ -1767,74 +1083,9 @@ GLOBAL void error_too_many_parameters(void)
 *
 ******************************************|************************************/
 
-GLOBAL void error_wrong_nr_parameters(
-
-const char  *s)  /* */
+GLOBAL void error_wrong_nr_parameters(const char *s)
 {
-   error_msg_para("wrong number of parameters: %s", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_outside_preamble():
-*     error message: %s ignored outside preamble
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_outside_preamble(
-
-const char  *s)  /* */
-{
-   error_msg_para("%s ignored outside preamble", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_inside_preamble():
-*     error message: %s ignored inside preamble
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_inside_preamble(
-
-const char  *s)  /* */
-{
-   error_msg_para("%s ignored inside preamble", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_unknown_command():
-*     error message: unknown command: %s
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_unknown_command(
-
-const char  *s)  /* */
-{
-   error_msg_para("unknown command: %s", s);
+   error_message(_("wrong number of parameters: %s"), s);
 }
 
 
@@ -1853,7 +1104,7 @@ const char  *s)  /* */
 
 GLOBAL void error_unexpected_eol(void)
 {
-   error_msg_solo("unexpected end of line in command");
+   error_message(_("unexpected end of line in command"));
 }
 
 
@@ -1872,57 +1123,7 @@ GLOBAL void error_unexpected_eol(void)
 
 GLOBAL void error_too_many_macros(void)
 {
-   error_msg_solo("too many macros used");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_long_macro_name():
-*     error message: macro name longer than %s characters
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_long_macro_name(
-
-int       len)    /* */
-{
-   char   s[32];  /* */
-   
-   
-   sprintf(s, "%d", len);
-   error_msg_para("macro name longer than %s characters", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_long_macro_cont():
-*     error message: macro contents longer than %s characters
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_long_macro_cont(
-
-int       len)    /* */
-{
-   char   s[32];  /* */
-   
-   
-   sprintf(s, "%d", len);
-   error_msg_para("macro contents longer than %s characters", s);
+   error_message("too many macros used");
 }
 
 
@@ -1941,57 +1142,7 @@ int       len)    /* */
 
 GLOBAL void error_too_many_defines(void)
 {
-   error_msg_solo("too many definitions used");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_long_define_name():
-*     error message: definition name longer than %s characters
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_long_define_name(
-
-int       len)    /* */
-{
-   char   s[32];  /* */
-   
-   
-   sprintf(s, "%d", len);
-   error_msg_para("definition name longer than %s characters", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_long_define_cont():
-*     error message: definition contents longer than %s characters
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_long_define_cont(
-
-int       len)    /* */
-{
-   char   s[32];  /* */
-   
-   
-   sprintf(s, "%d", len);
-   error_msg_para("definition contents longer than %s characters", s);
+   error_message("too many definitions used");
 }
 
 
@@ -2010,7 +1161,7 @@ int       len)    /* */
 
 GLOBAL void error_too_many_placeholder(void)
 {
-   error_msg_solo("too many placeholder used");
+   error_message("too many placeholder used");
 }
 
 
@@ -2029,7 +1180,7 @@ GLOBAL void error_too_many_placeholder(void)
 
 GLOBAL void error_too_many_symbols(void)
 {
-   error_msg_solo("too many symbols used");
+   error_message("too many symbols used");
 }
 
 
@@ -2050,7 +1201,7 @@ GLOBAL void error_unset_symbol(
 
 const char  *s)  /* */
 {
-   error_msg_para("symbol %s not set", s);
+   error_message("symbol %s not set", s);
 }
 
 
@@ -2069,7 +1220,7 @@ const char  *s)  /* */
 
 GLOBAL void error_too_many_hyphens(void)
 {
-   error_msg_solo("too many hyphens used");
+   error_message("too many hyphens used");
 }
 
 
@@ -2088,7 +1239,7 @@ GLOBAL void error_too_many_hyphens(void)
 
 GLOBAL void error_too_many_tokens(void)
 {
-   error_msg_solo("too many words used inside paragraph");
+   error_message(_("too many words used inside paragraph"));
 }
 
 
@@ -2107,7 +1258,7 @@ GLOBAL void error_too_many_tokens(void)
 
 GLOBAL void error_too_many_node(void)
 {
-   error_msg_solo("too many nodes used");
+   error_message("too many nodes used");
 }
 
 
@@ -2126,7 +1277,7 @@ GLOBAL void error_too_many_node(void)
 
 GLOBAL void error_too_many_label(void)
 {
-   error_msg_solo("too many labels used");
+   error_message("too many labels used");
 }
 
 
@@ -2145,7 +1296,7 @@ GLOBAL void error_too_many_label(void)
 
 GLOBAL void error_too_many_alias(void)
 {
-   error_msg_solo("too many aliases used");
+   error_message("too many aliases used");
 }
 
 
@@ -2164,7 +1315,7 @@ GLOBAL void error_too_many_alias(void)
 
 GLOBAL void error_too_many_files(void)
 {
-   error_msg_solo("too many files opened");
+   error_message("too many files opened");
 }
 
 
@@ -2181,11 +1332,9 @@ GLOBAL void error_too_many_files(void)
 *
 ******************************************|************************************/
 
-GLOBAL void error_replace_param(
-
-const char  *s)  /* */
+GLOBAL void error_replace_param(const char *s)
 {
-   error_msg_para("couldn't replace (%s ...)", s);
+   error_message(_("couldn't replace (%s ...)"), s);
 }
 
 
@@ -2202,78 +1351,12 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_undefined_link(
-
-const char  *l)  /* */
-{   
+GLOBAL void error_undefined_link(const char *l)
+{
    if (bInsideDocument)
    {
-      error_msg_para("link destination undefined: %s", l);
+      error_message(_("link destination undefined: '%s'"), l);
    }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_too_many_if():
-*     error message: too many !if in: <%s> line %d
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_too_many_if(
-
-const char   *s,       /* */
-const _UWORD   l)       /* */
-{
-   char       m[512];  /* */
-   
-   
-   sprintf(m, "too many !if in: <%s> line %d", s, l);
-   error_msg_solo(m);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_else_without_if():
-*     error message: !else without !if...
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_else_without_if(void)
-{
-   error_msg_solo("!else without !if...");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_endif_without_if():
-*     error message: !endif without !if...
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_endif_without_if(void)
-{
-   error_msg_solo("!endif without !if...");
 }
 
 
@@ -2290,152 +1373,10 @@ GLOBAL void error_endif_without_if(void)
 *
 ******************************************|************************************/
 
-GLOBAL void error_missing_endif(
-
-const char   *s,       /* */
-const _UWORD   l)       /* */
+GLOBAL void error_missing_endif(const char *s, _UWORD l)
 {
-   char       m[512];  /* */
-   
-   
-   error_msg_solo("'!endif' expected");
-   sprintf(m, "last '!if': <%s> line %d", s, l);
-   error_msg_solo(m);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_table_width():
-*     error message: too many columns used
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_table_width(void)
-{
-   error_msg_solo("too many columns used");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_table_height():
-*     error message: too many rows used
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_table_height(void)
-{
-   error_msg_solo("too many rows used");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_table_cell_width():
-*     error message: table cell contains too many characters
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_table_cell_width(void)
-{
-   error_msg_solo("table cell contains too many characters");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_table_label():
-*     error message: too many labels used in table
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_table_label(void)
-{
-   error_msg_solo("too many labels used in table");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_odd_dblquotes():
-*     error message: odd number of ""
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_odd_dblquotes(void)
-{
-   error_msg_solo("odd number of \"\"");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_odd_quotes():
-*     error message: odd number of ''
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_odd_quotes(void)
-{
-   error_msg_solo("odd number of ''");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_no_language():
-*     error message: language %s not supported
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_no_language(
-
-const char  *s)  /* */
-{
-   error_msg_para("language %s not supported", s);
+   error_missing_end("!endif");
+   note_message(_("last '!if': <%s> line %lu"), s, l);
 }
 
 
@@ -2452,146 +1393,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void error_no_charset(
-
-const char  *s)  /* */
+GLOBAL void error_no_charset(const char *s)
 {
-   error_msg_para("charset/encoding %s not supported", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_xlink_win_syntax():
-*     error message: use (!xlink [text] [topic@foo.hlp])
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_xlink_win_syntax(void)
-{
-   error_msg_solo("use (!xlink [text] [topic@foo.hlp])");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_xlink_win_topic():
-*     error message: xlink needs WinHelp destination topic
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_xlink_win_topic(void)
-{
-   error_msg_solo("xlink needs WinHelp destination topic");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_xlink_win_file():
-*     error message: xlinks needs WinHelp destination file
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_xlink_win_file(void)
-{
-   error_msg_solo("xlinks needs WinHelp destination file");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_no_udoinputpath():
-*     error message: $UDOINPUTPATH not set!
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_no_udoinputpath(void)
-{
-   error_msg_solo("$UDOINPUTPATH not set!");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_fatal_error():
-*     error message: fatal error
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_fatal_error(
-
-const char  *s)  /* */
-{
-   fatal_msg_para("%s", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_fatal_error():
-*     error message: UDO cannot handle nested tables
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_table_inside_table(void)
-{
-   error_msg_solo("UDO cannot handle nested tables");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_wrong_mapping():
-*     error message: mapping not numeric or not of type integer
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_wrong_mapping(void)
-{
-   error_msg_solo("mapping not numeric or not of type integer");
+   error_message(_("charset/encoding %s not supported"), s);
 }
 
 
@@ -2610,7 +1414,7 @@ GLOBAL void error_wrong_mapping(void)
 
 GLOBAL void error_node2_not_allowed(void)
 {
-   fatal_msg_solo("use !node first (structure gap) or use !begin_node & !end_node");
+   fatal_message("use !node first (structure gap) or use !begin_node & !end_node");
 }
 
 
@@ -2629,7 +1433,7 @@ GLOBAL void error_node2_not_allowed(void)
 
 GLOBAL void error_node3_not_allowed(void)
 {
-   fatal_msg_solo("use !subnode first (structure gap) or use !begin_node & !end_node");
+   fatal_message("use !subnode first (structure gap) or use !begin_node & !end_node");
 }
 
 
@@ -2648,7 +1452,7 @@ GLOBAL void error_node3_not_allowed(void)
 
 GLOBAL void error_node4_not_allowed(void)
 {
-   fatal_msg_solo("use !subsubnode first (structure gap) or use !begin_node & !end_node");
+   fatal_message("use !subsubnode first (structure gap) or use !begin_node & !end_node");
 }
 
 
@@ -2667,7 +1471,7 @@ GLOBAL void error_node4_not_allowed(void)
 
 GLOBAL void error_node5_not_allowed(void)
 {
-   fatal_msg_solo("use !subsubsubnode first (structure gap) or use !begin_node & !end_node");
+   fatal_message("use !subsubsubnode first (structure gap) or use !begin_node & !end_node");
 }
 
 
@@ -2686,29 +1490,7 @@ GLOBAL void error_node5_not_allowed(void)
 
 GLOBAL void error_node6_not_allowed(void)
 {
-   fatal_msg_solo("use !subsubsubsubnode first (structure gap) or use !begin_node & !end_node");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  note_long_sourceline():
-*     note message: check this paragraph (line too long)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void note_long_sourceline(void)
-{
-   if (!bNoWarnings && !bNoWarningsLines)
-      note_msg_solo("check this paragraph");
-   else
-      note_counter++;
+   fatal_message("use !subsubsubsubnode first (structure gap) or use !begin_node & !end_node");
 }
 
 
@@ -2725,20 +1507,16 @@ GLOBAL void note_long_sourceline(void)
 *
 ******************************************|************************************/
 
-GLOBAL void warning_long_destline(
-
-const char   *s,       /* */
-const _UWORD   lnr,     /* */
-const int     ll)      /* */
+GLOBAL void warning_long_destline(const char *s, const _UWORD lnr, const int ll)
 {
-   char       m[512];  /* */
+   char m[512];
 
    if (!bNoWarnings && !bNoWarningsLines)
    {
-      sprintf(m, "Warning: %s %u: overfull line: %d", s, lnr, ll);
+      sprintf(m, _("Warning: %s %u: overfull line: %d"), s, lnr, ll);
       logln(m);
+      show_logln_message(m);
    }
-   
    warning_counter++;
 }
 
@@ -2756,12 +1534,10 @@ const int     ll)      /* */
 *
 ******************************************|************************************/
 
-GLOBAL void note_short_sourceline(
-
-const char  *s)  /* */
+GLOBAL void note_short_sourceline(const char *s)
 {
    if (!bNoWarnings && !bNoWarningsLines)
-      note_msg_para("check this paragraph", s);
+      note_message(_("check this paragraph: %s"), s);
    else
       note_counter++;
 }
@@ -2780,43 +1556,17 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void warning_short_destline(
-
-const char   *s,       /* */
-const _UWORD   lnr,     /* */
-const int     ll,      /* */
-const char   *w)       /* */
+GLOBAL void warning_short_destline(const char *s, _UWORD lnr, const int ll, const char *w)
 {
-   char       m[512];  /* */
+   char m[512];
 
    if (!bNoWarnings && !bNoWarningsLines)
    {
-      sprintf(m, "Warning: %s %u: too short line: %d: %s", s, lnr, ll, w);
+      sprintf(m, _("Warning: %s %u: too short line: %d: %s"), s, lnr, ll, w);
       logln(m);
+      show_logln_message(m);
    }
-   
    warning_counter++;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  warning_no_unichar():
-*     warning message: %s not available in this charset
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void warning_no_unichar(
-
-const char  *s)  /* */
-{
-   warning_msg_para("%s not available in this charset", s);
 }
 
 
@@ -2833,19 +1583,11 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void warning_cannot_recode(
-
-const char   c,       /* char */
-const char  *se,      /* source encoding */
-const char  *te)      /* target encoding */
+GLOBAL void warning_cannot_recode(const char c, const char *se, const char *te)
 {
-   char      s[512];  /* */
-
-
    if (iUdopass == PASS2)
    {
-      sprintf(s, "cannot recode %c (%s #%u) to %s", c, se, ((_UBYTE)c), te);
-      warning_msg_solo(s);
+      warning_message(_("cannot convert %c (%s #%u) to %s"), c, se, ((_UBYTE)c), te);
    }
 }
 
@@ -2863,17 +1605,11 @@ const char  *te)      /* target encoding */
 *
 ******************************************|************************************/
 
-GLOBAL void warning_cannot_recode_utf8(
-
-const char  *utf,     /* UTF-8 byte stream (e.g. 0xC0 0x85) */
-const char  *te)      /* target encoding */
+GLOBAL void warning_cannot_recode_utf8(const char *utf, const char *te)
 {
-   char      s[512];  /* */
-
    if (iUdopass == PASS2)
    {
-      sprintf(s, "can't recode UTF-8 (%s) to %s", utf, te);
-      warning_msg_solo(s);
+      warning_message(_("can't convert UTF-8 (%s) to %s"), utf, te);
    }
 }
 
@@ -2891,15 +1627,9 @@ const char  *te)      /* target encoding */
 *
 ******************************************|************************************/
 
-GLOBAL void warning_no_isochar(
-
-const char   c)     /* */
+GLOBAL void warning_no_isochar(const char c)
 {
-   char      s[2];  /* */
-   
-
-   sprintf(s, "%c", c);
-   warning_msg_para("%s not available in ISO Latin 1", s);
+   warning_message(_("%x not available in ISO Latin 1"), (_UBYTE) c);
 }
 
 
@@ -2916,34 +1646,9 @@ const char   c)     /* */
 *
 ******************************************|************************************/
 
-GLOBAL void warning_no_texchar(
-
-const char   c)     /* */
+GLOBAL void warning_no_texchar(const char c)
 {
-   char      s[2];  /* */
-
-
-   sprintf(s, "%c", c);
-   warning_msg_para("%s maybe not available in LaTeX", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  warning_split_verb():
-*     warning message: please use (!V) and (!v) in one paragraph
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void warning_split_verb(void)
-{
-   warning_msg_solo("please use (!V) and (!v) in one paragraph");
+   warning_message(_("%c maybe not available in LaTeX"), c);
 }
 
 
@@ -2962,12 +1667,17 @@ GLOBAL void warning_split_verb(void)
 
 GLOBAL void warning_node_too_deep(void)
 {
-   warning_msg_solo("structure depth exceeded, using subsubsubsubnode"); /* [GS] */
+   warning_message(_("structure depth exceeded, using subsubsubsubnode"));
 }
 
 
 
 
+
+GLOBAL void warning_buffer_overrun( const char *func, const char *place, size_t n, size_t maxlen)
+{
+   warning_message(_("%s: buffer overrun prevented: %s: %u>%u"), func, place, (unsigned int)(n + 1), (unsigned int)(maxlen));
+}
 
 /*******************************************************************************
 *
@@ -2981,7 +1691,7 @@ GLOBAL void warning_node_too_deep(void)
 
 GLOBAL int get_warning_counter(void)
 {
-   return (warning_counter);
+   return warning_counter;
 }
 
 
@@ -3000,7 +1710,7 @@ GLOBAL int get_warning_counter(void)
 
 GLOBAL int get_note_counter(void)
 {
-   return (note_counter);
+   return note_counter;
 }
 
 
@@ -3019,7 +1729,7 @@ GLOBAL int get_note_counter(void)
 
 GLOBAL int get_error_counter(void)
 {
-   return (error_counter);
+   return error_counter;
 }
 
 
@@ -3042,6 +1752,3 @@ GLOBAL void init_module_msg(void)
    warning_counter = 0;
    note_counter    = 0;
 }
-
-
-/* +++ EOF +++ */

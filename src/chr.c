@@ -149,6 +149,7 @@
 #include "constant.h"
 #include "udo_type.h"
 #include "commands.h"
+#include "udointl.h"
 #include "msg.h"
 #include "str.h"
 #include "sty.h"

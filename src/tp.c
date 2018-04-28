@@ -74,6 +74,7 @@
 #include "udoport.h"
 #include "constant.h"
 #include "udo_type.h"
+#include "udointl.h"
 #include "commands.h"
 #include "chr.h"
 #include "env.h"
@@ -85,10 +86,10 @@
 #include "sty.h"
 #include "toc.h"
 #include "udo.h"
+#include "udomem.h"
 
 #include "export.h"
 #include "tp.h"
-#include "udomem.h"
 
 
 
@@ -905,6 +906,11 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- domain_name --- */
    
+   if (strcmp(inhalt, "webmastername") == 0)
+   {
+      warning_message(_("!docinfo [webmastername] is deprecated, use !docinfo [domain_name] instead"));
+      strcpy(inhalt, "domain_name");
+   }
    if (strcmp(inhalt, "domain_name") == 0)
    {
       init_docinfo_data(data, &(titdat.domain_name), FALSE);
@@ -914,6 +920,11 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- domain_link --- */
    
+   if (strcmp(inhalt, "webmasterurl") == 0)
+   {
+      warning_message(_("!docinfo [webmasterurl] is deprecated, use !docinfo [domain_link] instead"));
+      strcpy(inhalt, "domain_link");
+   }
    if (strcmp(inhalt, "domain_link") == 0)
    {
       del_whitespaces(data);              /* nicht init_...!!! */
@@ -945,6 +956,11 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- contact_name --- */
    
+   if (strcmp(inhalt, "webmasteremail") == 0)
+   {
+      warning_message(_("!docinfo [webmasteremail] is deprecated, use !docinfo [contact_name] instead"));
+      strcpy(inhalt, "contact_name");
+   }
    if (strcmp(inhalt, "contact_name") == 0)
    {
       init_docinfo_data(data, &(titdat.contact_name), FALSE);
@@ -954,6 +970,11 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- contact_link --- */
    
+   if (strcmp(inhalt, "webmastermailurl") == 0)
+   {
+      warning_message(_("!docinfo [webmastermailurl] is deprecated, use !docinfo [contact_link] instead"));
+      strcpy(inhalt, "contact_link");
+   }
    if (strcmp(inhalt, "contact_link") == 0)
    {
       init_docinfo_data(data, &(titdat.contact_link), FALSE);
@@ -995,7 +1016,7 @@ GLOBAL _BOOL set_docinfo(void)
       return TRUE;
    }
    
-   error_unknown_docinfo(inhalt);
+   error_message(_("unknown !docinfo: %s"), inhalt);
    
    return FALSE;
 }
@@ -1072,7 +1093,7 @@ GLOBAL void c_maketitle(void)
           )
       )
    {
-      error_missing_title_data();         /* r6pl2 */
+      error_message(_("no title data available"));
       return;
    }
 

@@ -215,7 +215,6 @@ LOCAL void sort_hypfile(const char *name);
    /* check commands for formats or languages */
 LOCAL void clear_if_stack(void);
 LOCAL void push_if_stack(int kind, _BOOL ignore);
-LOCAL void pop_if_stack(void);
 LOCAL void toggle_if_stack(void);
 LOCAL _BOOL is_if_stack_ignore(void);
 LOCAL void pass_check_free_line(char *zeile, int pnr);

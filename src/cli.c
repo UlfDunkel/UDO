@@ -52,6 +52,9 @@
 *    fd  Mar 05: file tidied up
 *    fd  Mar 06: read_cliopt_file() decomposes arguments from read file (finally)
 *    fd  Mar 12: using my_str...()
+# 2013:
+*   tho Jun 18: reverted above change with parsing command file,
+*               because no attempt was made to correctly parse quoted arguments
 *
 ******************************************|************************************/
 
@@ -73,11 +76,16 @@
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"
+#include "udointl.h"
 #include "file.h"
 #include "cfg.h"
 #include "msg.h"
 #include "udo.h"
 #include "udomem.h"
+#include "img.h"
+#ifdef HAVE_SETLOCALE
+#include <locale.h>
+#endif
 
 #ifdef __TOS__
    #ifdef USE_PCTOS
@@ -101,17 +109,10 @@
 *
 ******************************************|************************************/
 
-typedef enum                              /* supported UDO CLI languages */
-{
-   DEUTSCH,
-   ENGLISH
-}  t_lang;
-
-
 typedef struct _cliopt                    /* command line options */
 {
-   char     *longname;                    /* lange Option */
-   char     *shortname;                   /* kurze Option */
+   const char *longname;                  /* lange Option */
+   const char  *shortname;                /* kurze Option */
    char      type;                        /* Typ: b=Boolean, c=char[] */
    _BOOL   needs2;                      /* folgt der Option ein Parameter? */
    void     *var;                         /* Variable, die geaendert wird */
@@ -129,31 +130,12 @@ typedef struct _cliopt                    /* command line options */
 ******************************************|************************************/
 
 LOCAL const char *strPrgname = "udo";     /* der Name dieses Programms */
-LOCAL t_lang    eLanguage;                /* Sprache */
 
 LOCAL _BOOL   bHoldKey;
 LOCAL _BOOL   bShowArgs;
 LOCAL _BOOL   bShowHelp;
 LOCAL _BOOL   bShowVersion;
 LOCAL int       last_percent;
-
-
-
-
-
-/*******************************************************************************
-*
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-LOCAL void show_version(void);
-LOCAL void show_usage(void);
-LOCAL void show_use_help(void);
-LOCAL void show_help(void);
-LOCAL void show_unknown(const char *s);
-LOCAL void wait_on_keypress(void);
-LOCAL int  getcliopt(int *counter, const char *arg, const char *argnext, const _BOOL from_file);
 
 
 
@@ -224,143 +206,6 @@ LOCAL const CLIOPT cliopt[] =
 
 
 
-LOCAL const char *Usage[] =               /* program output: usage */
-{
-   "Gebrauch: %s [-acdDghHilmnpPqrstvwWxy@] [-o outfile] file",
-   "usage: %s [-acdDghHilmnpPqrstvwWxy@] [-o outfile] file"
-};
-
-
-
-LOCAL const char *Use_Help[] =            /* program output: use --help */
-{
-   "          Mehr Hilfe mit --help",
-   "          use --help for more information"
-};
-
-LOCAL const char *Prog_Help[] =           /* program output: list of controls */
-{
-   "-a,    --asc             ins ASCII-Format konvertieren\n"
-   "       --amg             ins AmigaGuide-Format konvertieren\n"
-   "--aqv, --quickview       ins Apple-QuickView-Format konvertieren\n"
-   "-c,    --c               C-Sourcecode erzeugen\n"
-   "       --check           Ueberpruefungen aktivieren\n"
-   "       --drc             ins David's-Readme-Compiler-Format konvertieren\n"
-   "-d,    --noidxfile       kein Indexfile (.ux?) anlegen\n"
-   "-D sym                   Symbol <sym> setzen\n"
-   "       --force-long      immer lange Dateinamen erzeugen\n"
-   "       --force-short     immer kurze Dateinamen erzeugen\n"
-   "-f     --pdflatex        ins PDFLaTeX-Format konvertieren\n"
-   "-g,    --helptag         ins HP-Helptag-SGML-Format konvertieren\n"
-   "-h,    --html            ins HTML-Format konvertieren\n"
-   "       --hah             ins HTML-Apple-Help-Format konvertieren\n"    /* V6.5.17 */
-   "-hh,   --htmlhelp        ins HTML-Help-Format konvertieren\n"
-   "-H,    --hold            am Ende auf Tastendruck warten\n"
-   "-i,    --info            ins GNU-Texinfo-Format konvertieren\n"
-   "       --ipf             ins OS/2-IPF-Format konvertieren\n"
-   "       --lyx             ins LyX-Format konvertieren\n"
-   "-l,    --nologfile       kein Logfile (.ul?) anlegen\n"
-   "-m,    --man             in eine Manualpage konvertieren\n"
-   "       --map             C-Headerfile mit WinHelp-Jump-IDs erzeugen\n"
-   "       --map-pas         Pascal-Headerfile mit WinHelp-Jump-IDs erzeugen\n"
-   "       --map-vb          VB-Headerfile mit WinHelp-Jump-IDs erzeugen\n"
-   "       --map-gfa         GFA-Headerfile mit WinHelp-Jump-IDs erzeugen\n"
-   "-n,    --nroff           ins nroff-Format konvertieren\n"
-   "-o F,  --outfile F       Ausgaben in die Datei F schreiben\n"
-   "-p,    --pchelp          ins Pure-C-Help-Quelltextformat konvertieren\n"
-   "-P,    --pascal          Pascal-Sourcecode erzeugen\n"
-   "       --ps              ins PostScript-Format konvertieren\n"
-   "-q,    --quiet           Ausgaben auf stdout und stderr unterdruecken\n"
-   "-r,    --rtf             ins Rich Text Format konvertieren\n"
-   "       --save-upr        Projekt-Datei (.upr) ausgeben\n"
-   "-s,    --stg             ins ST-Guide-Quelltextformat konvertieren\n"
-   "       --test            Testmodus (kein Outfile erzeugen)\n"
-   "-t,    --tex             ins LaTeX-Format konvertieren\n"
-   "       --tree            Include-Baum (.ut?) ausgeben\n"
-   "       --verbose         ausfuehrliche Konvertierungs-Infos anzeigen\n"
-   "-u,    --udo             Dateien sammeln und in einer UDO-Datei sichern\n"
-   "-v,    --vision          ins Turbo-Vision-Help-Format konvertieren\n"
-   "-w,    --win             ins WinHelp-Quelltextformat konvertieren\n"
-   "-w4,   --win4            ins WinHelp4-Quelltextformat konvertieren\n"
-   "-W,    --no-warnings     Warnungen unterdruecken\n"
-   "-Wl,   --no-warningslines   Warnungen fuer Zeilenlaenge unterdruecken\n"
-   "-x,    --linuxdoc        ins Linuxdoc-SGML-Format konvertieren\n"
-   "-y,    --no-hypfile      kein Hyphenfile (.uh?) anlegen\n"
-   "-@ F                     Optionen aus der Datei F lesen\n"
-   "       --help            diese Informationen anzeigen und beenden\n"
-   "       --version         Versionsinformationen anzeigen und beenden",
-
-
-
-
-   "-a,    --asc           convert to ASCII\n"
-   "       --amg           convert to AmigaGuide\n"
-   "--aqv, --quickview     convert to Apple QuickView\n"
-   "-c,    --c             generate C sourcecode\n"
-   "       --check         activate checkings\n"
-   "       --drc           convert to David's Readme Compiler format\n"
-   "-d,    --no-idxfile    don't generate index file (.ux?)\n"
-   "-D sym                 set symbol <sym>\n"
-   "       --force-long    save always long filenames\n"
-   "       --force-short   save always short filenames\n"
-   "-f     --pdflatex      generate PDFLaTeX sourcecode\n"
-   "-g,    --helptag       convert to HP Helptag SGML\n"
-   "-h,    --html          convert to HTML\n"
-   "       --hah           convert to HTML Apple Help\n"                  /* V6.5.17 */
-   "-hh,   --htmlhelp      convert to HTML-Help\n"
-   "-H,    --hold          press key when udo finishs\n"
-   "-i,    --info          convert to GNU Texinfo\n"
-   "       --ipf           convert to OS/2 IPF format\n"
-   "       --lyx           convert to LyX\n"
-   "-l,    --no-logfile    don't generate logfile (.ul?)\n"
-   "-m,    --man           convert to a manualpage\n"
-   "       --map           generate C header file with jump id's for WinHelp\n"
-   "       --map-pas       generate Pascal header file with jump id's for WinHelp\n"
-   "       --map-vb        generate VB header file with jump id's for WinHelp\n"
-   "       --map-gfa       generate GFA header file with jump id's for WinHelp\n"
-   "-n,    --nroff         convert to nroff\n"
-   "-o F,  --outfile F     write to file F\n"
-   "-p,    --pchelp        convert to Pure C Help\n"
-   "-P,    --pascal        generate Pascal sourcecode\n"
-   "       --ps            convert to PostScript\n"
-   "-q,    --quiet         suppress output to stdout and stderr\n"
-   "-r,    --rtf           convert to RTF\n"
-   "       --save-upr      create project file (.upr)\n"
-   "-s,    --stg           convert to ST-Guide\n"
-   "       --test          use test mode (no outfile will be saved)\n"
-   "-t,    --tex           convert to LaTeX\n"
-   "       --tree          generate tree file (.ut?)\n"
-   "-u,    --udo           collect all files and save in UDO format\n"
-   "       --verbose       verbose mode\n"
-   "-v,    --vision        convert to Turbo Vision Help\n"
-   "-w,    --win           convert to WinHelp\n"
-   "-w4,   --win4          convert to WinHelp4\n"
-   "-W,    --no-warnings   suppress warnings\n"
-   "-Wl,   --no-warningslines   suppress warnings for line lengths\n"
-   "-x,    --linuxdoc      convert to Linuxdoc SGML\n"
-   "-y,    --no-hypfile    don't generate hyphen file (.uh?)\n"
-   "-@ F                   read options from file F\n"
-   "       --help          show this helppage and exit\n"
-   "       --version       show version of UDO and exit\n"
-};
-
-
-
-LOCAL const char *No_Option[] =           /* program output: unknown option */
-{
-   "Unbekannte Option!",
-   "unknown option!"
-};
-
-
-
-
-
-
-
-
-
-
 /*******************************************************************************
 *
 *     LOCAL / GLOBAL FUNCTIONS
@@ -381,11 +226,9 @@ LOCAL const char *No_Option[] =           /* program output: unknown option */
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_info(
-
-const char  *s)  /* */
+GLOBAL void show_status_info(const char *s)
 {
-   if ( (bOutOpened || bTestmode) && !bBeQuiet )
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "%s\n", s);
 }
 
@@ -407,14 +250,11 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_loginfo(
-
-const char  *s)             /* */
+GLOBAL void show_status_loginfo(const char *s)
 {
-   _BOOL   flag = FALSE;  /* */
+   _BOOL   flag = FALSE;
    
-   
-   if ( (bOutOpened || bTestmode) && !bBeQuiet )
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
    {
       fprintf(stdout, "%s\n", s);
       flag = TRUE;
@@ -431,7 +271,7 @@ const char  *s)             /* */
 /*******************************************************************************
 *
 *  show_status_pass():
-*     Ausgabe von Informationen auf die Standardausgabe
+*     show status about pass just started
 *
 *  Notes:
 *     (aber nur falls ein Outfile geoeffnet wurde, der Testmodus aktiv ist und 
@@ -442,13 +282,10 @@ const char  *s)             /* */
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_pass(
-
-const char  *s)  /* */
+GLOBAL void show_status_pass(const char *s)
 {
-   if ( (bOutOpened || bTestmode) && !bBeQuiet )
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "%s\n", s);
-   
 }
 
 
@@ -469,11 +306,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_udo2udo(
-
-const char  *s)
+GLOBAL void show_status_udo2udo(const char *s)
 {
-   if ( (bOutOpened || bTestmode) && !bBeQuiet )
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "Reading %s\n", s);
 }
 
@@ -484,7 +319,7 @@ const char  *s)
 /*******************************************************************************
 *
 *  show_status_node():
-*     Ausgabe von Informationen auf die Standardausgabe
+*     show status about current node
 *
 *  Notes:
 *     (aber nur falls ein Outfile geoeffnet wurde, der Testmodus aktiv ist und 
@@ -495,12 +330,10 @@ const char  *s)
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_node(
-
-const char  *s)  /* */
+GLOBAL void show_status_node(const char *numbers)
 {
-   if ( (bOutOpened || bTestmode) && !bBeQuiet )
-      fprintf(stdout, "%s", s);
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
+      fprintf(stdout, "%s", numbers);
 }
 
 
@@ -510,19 +343,17 @@ const char  *s)  /* */
 /*******************************************************************************
 *
 *  show_status_file_1():
-*     Ausgabe von Informationen auf die Standardausgabe
+*     show status about file just being opened during pass1()
 *
 *  Notes:
-*     Dummy function!
+*     does nothing in cli interface
 *
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_file_1(
-
-const char  *s)  /* */
+GLOBAL void show_status_file_1(const char *s)
 {
    UNUSED(s);
 }
@@ -534,7 +365,7 @@ const char  *s)  /* */
 /*******************************************************************************
 *
 *  show_status_file_2():
-*     Ausgabe von Informationen auf die Standardausgabe
+*     show status about file just being opened during pass2()
 *
 *  Notes:
 *     (aber nur falls ein Outfile geoeffnet wurde, der Testmodus aktiv ist und 
@@ -545,11 +376,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_file_2(
-
-const char  *s)  /* */
+GLOBAL void show_status_file_2(const char *s)
 {
-   if ( (bOutOpened || bTestmode) && !bBeQuiet )
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "(%s) ", s);
 }
 
@@ -560,7 +389,7 @@ const char  *s)  /* */
 /*******************************************************************************
 *
 *  show_status_percent():
-*     Ausgabe von Informationen auf die Standardausgabe
+*     show status about progress during pass2()
 *
 *  Notes:
 *     (aber nur falls ein Outfile geoeffnet wurde, der Testmodus aktiv ist und 
@@ -571,20 +400,16 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_percent(
-
-_ULONG    Pass1Lines,  /* */
-_ULONG    Pass2Lines)  /* */
+GLOBAL void show_status_percent(_ULONG Pass1Lines, _ULONG Pass2Lines)
 {
-   int   percent;     /* */
-
+   int percent;
 
    percent = 0;
    
    if (Pass1Lines > 0)
       percent = (int)( (100 * Pass2Lines) / Pass1Lines);
 
-   if ( (bOutOpened || bTestmode) && !bBeQuiet && percent != last_percent)
+   if ((bOutOpened || bTestmode) && !bBeQuiet && percent != last_percent)
    {
       if (bVerbose)
          fprintf(stdout, "\n%3d%% ", percent);
@@ -614,11 +439,9 @@ _ULONG    Pass2Lines)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_errors(
-
-const char  *s)  /* */
+GLOBAL void show_status_errors(const char *s)
 {
-   if ( (bOutOpened || bTestmode) && !bBeQuiet )
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "%s\n", s);
 }
 
@@ -639,11 +462,19 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void show_logln_message(
-
-const char  *s)  /* */
+GLOBAL void show_logln_message(const char *s)
 {
-   UNUSED(s);
+   if ((bOutOpened || bTestmode) && !bBeQuiet)
+   {
+      /*
+       * suppress cases were output has already been written to stderr
+       */
+       if ((!bNoLogfile || !no_stderr_output) && fLogfile != stderr)
+       {
+          fprintf(stdout, "%s\n", s);
+          fflush(stdout);
+       }
+   }
 }
 
 
@@ -864,19 +695,12 @@ GLOBAL _BOOL break_action(void)
 *
 ******************************************|************************************/
 
-LOCAL void show_version(void)
+LOCAL NOINLINE void show_version(void)
 {
-                                          /* v6.4.1[vj]: commented out (wished by Ulrich Kretschmer) */
-/* fprintf(stdout, "\n%s\n", strPrgname); */
-
-   fprintf(stdout, "UDO Version %s.%s %s for %s, %s %s\n",
-      UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, compile_date, compile_time);
-            
+   fprintf(stdout, "UDO %s, %s %s\n", UDO_VERSION_STRING_OS, compile_date, compile_time);
    fprintf(stdout, "%s\n", COPYRIGHT);
-   sprintf(sInfMsg, "UDO is Open Source (see %s for further information).\n", UDO_URL);
-   fprintf(stdout, sInfMsg);
+   fprintf(stdout, "UDO is Open Source (see %s for further information).\n", UDO_URL);
 }
-
 
 
 
@@ -892,31 +716,9 @@ LOCAL void show_version(void)
 *
 ******************************************|************************************/
 
-LOCAL void show_usage(void)
+LOCAL NOINLINE void show_usage(void)
 {
-   char   s[256];  /* */
-   
-   sprintf(s, Usage[eLanguage], strPrgname);
-   fprintf(stdout, "%s\n", s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  show_use_help():
-*     show a hint on "--help"
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void show_use_help(void)
-{
-   fprintf(stdout, "%s\n", Use_Help[eLanguage]);
+   fprintf(stdout, _("usage: %s [-acdDghHilmnpPqrstvwWxy@] [-o outfile] file\n"), strPrgname);
 }
 
 
@@ -933,32 +735,71 @@ LOCAL void show_use_help(void)
 *
 ******************************************|************************************/
 
+LOCAL const char *const help_strings[] = {
+	N_("formats:"),
+	N_("-a,    --asc           convert to ASCII"),
+	N_("       --amg           convert to AmigaGuide"),
+	N_("--aqv, --quickview     convert to Apple QuickView"),
+	N_("-c,    --c             generate C sourcecode"),
+	N_("       --drc           convert to David's Readme Compiler format"),
+	N_("-f     --pdflatex      generate PDFLaTeX sourcecode"),
+	N_("-g,    --helptag       convert to HP Helptag SGML"),
+	N_("-h,    --html          convert to HTML"),
+	N_("       --hah           convert to HTML Apple Help"),
+	N_("-hh,   --htmlhelp      convert to HTML-Help"),
+	N_("-i,    --info          convert to GNU Texinfo"),
+	N_("       --ipf           convert to OS/2 IPF format"),
+	N_("       --lyx           convert to LyX"),
+	N_("-m,    --man           convert to a manualpage"),
+	N_("-n,    --nroff         convert to nroff"),
+	N_("-p,    --pchelp        convert to Pure C Help"),
+	N_("-P,    --pascal        generate Pascal sourcecode"),
+	N_("       --ps            convert to PostScript"),
+	N_("-r,    --rtf           convert to RTF"),
+	N_("-s,    --stg           convert to ST-Guide"),
+	N_("-t,    --tex           convert to LaTeX"),
+	N_("-u,    --udo           collect all files and save in UDO format"),
+	N_("-v,    --vision        convert to Turbo Vision Help"),
+	N_("-w,    --win           convert to WinHelp"),
+	N_("-4,    --win4          convert to WinHelp4"),
+	N_("-x,    --linuxdoc      convert to Linuxdoc SGML"),
+	N_("output files:"),
+	N_("       --force-long    save always long filenames"),
+	N_("       --force-short   save always short filenames"),
+	N_("-d,    --no-idxfile    don't generate index file (.ux?)"),
+	N_("-y,    --no-hypfile    don't generate hyphen file (.uh?)"),
+	N_("-l,    --no-logfile    don't generate logfile (.ul?)"),
+	N_("       --map           generate C header file with jump id's for WinHelp"),
+	N_("       --map-pas       generate Pascal header file with jump id's for WinHelp"),
+	N_("       --map-vb        generate VB header file with jump id's for WinHelp"),
+	N_("       --map-gfa       generate GFA header file with jump id's for WinHelp"),
+	N_("-o F,  --outfile F     write to file F"),
+	N_("       --save-upr      create project file (.upr)"),
+	N_("       --tree          generate tree file (.ut?)"),
+	N_("others:"),
+	N_("       --check         activate checkings"),
+	N_("-D sym,--define sym    set symbol <sym>"),
+	N_("-H,    --hold          press key when udo finishes"),
+	N_("-q,    --quiet         suppress output to stdout and stderr"),
+	N_("       --test          use test mode (no outfile will be saved)"),
+	N_("       --verbose       verbose mode"),
+	N_("-W,    --no-warnings   suppress warnings"),
+	N_("-Wl,   --no-warningslines   suppress warnings for line lengths"),
+	N_("-@ F                   read options from file F"),
+	N_("       --help          show this helppage and exit"),
+	N_("       --version       show version of UDO and exit"),
+	
+};
+
 LOCAL void show_help(void)
 {
+   size_t i;
+   
    show_version();
    show_usage();
-   fprintf(stdout, "\n%s\n", Prog_Help[eLanguage]);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  show_unknown():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void show_unknown(
-
-const char  *s)  /* */
-{
-   fprintf(stdout, "%s: %s %s\n", strPrgname, No_Option[eLanguage], s);
+   fprintf(stdout, "\n");
+   for (i = 0; i < ArraySize(help_strings); i++)
+   	  fprintf(stdout, "%s\n", _(help_strings[i]));
 }
 
 
@@ -975,23 +816,126 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void wait_on_keypress(void)
+LOCAL NOINLINE void wait_on_keypress(void)
 {
-   char   input[256];  /* */
-
+   char input[256];
 
    if (bHoldKey)
    {
-      if (eLanguage == DEUTSCH)
-         fprintf(stdout, "\n<RETURN> druecken...\n");
-      else
-         fprintf(stdout, "\nPress <RETURN>...\n");
-         
-      fgets(input, 256, stdin);
+      fprintf(stdout, _("\nPress <RETURN>...\n"));
+      fgets(input, (int)sizeof(input), stdin);
    }
 }
 
 
+
+
+
+/*******************************************************************************
+*
+*  getcliopt():
+*     evaluate command line commands
+*
+*  Return:
+*     0: no error
+*    >0: error
+*
+******************************************|************************************/
+
+LOCAL NOINLINE _BOOL read_cliopt_file(const char *name);
+
+LOCAL NOINLINE _BOOL getcliopt(int *counter, const char *arg, const char *argnext, const _BOOL from_file)
+{
+   register int   i;
+   _BOOL        found = FALSE;
+
+   i = 0;
+
+   while ( (cliopt[i].longname[0] != EOS) && (found == FALSE) )
+   {
+      if (strcmp(arg, cliopt[i].longname) == 0 ||
+          (cliopt[i].shortname[0] != EOS && strcmp(arg, cliopt[i].shortname) == 0)
+         )
+      {
+         found = TRUE;
+
+         if (cliopt[i].var != NULL)
+         {
+            switch (cliopt[i].type)
+            {
+            case 'b':                     /* _BOOL */
+               *(_BOOL *)cliopt[i].var = cliopt[i].val;
+               break;
+               
+            case 'c':                     /* char */
+               *(char *)cliopt[i].var = 0;
+               
+               if (cliopt[i].needs2)
+               {
+                  if (argnext != NULL)
+                  {
+                     *counter = *counter + 1;
+                     strcpy((char *)cliopt[i].var, argnext);
+                  }
+               }
+               else
+               {
+                  strcpy((char *)cliopt[i].var, "");
+               }
+               break;
+            }  /* switch () */
+         }
+      }
+
+      i++;
+   }
+
+   if (!found)
+   {
+      if (arg[0] != '-')                  /* no option */ 
+      {
+         strcpy(infile.full, arg);
+         found = TRUE;
+      }
+      else
+      {
+                                          /* --- read options from file --- */
+         if ( (strcmp(arg, "-@") == 0) && !from_file)
+         {
+            if (argnext != NULL)
+            {
+               *counter = *counter + 1;
+               found = read_cliopt_file(argnext);
+            }
+            else                          /* <???> Fehlermeldung */
+            {
+               found = FALSE;
+            }
+         }
+         else if (strcmp(arg, "-D") == 0 ||
+           strcmp(arg, "--define") == 0)
+         {
+         	/* --- set symbol --- */
+            if (argnext != NULL)
+            {
+               *counter = *counter + 1;
+               add_udosymbol(argnext);
+               found = TRUE;
+            }
+            else                          /* <???> Fehlermeldung */
+            {
+               found = FALSE;
+            }
+         }
+         else
+         {
+            fprintf(stdout, _("%s: unknown option! %s\n"), strPrgname, arg);
+         }
+      }
+   }
+
+   return found;
+}
 
 
 
@@ -1008,20 +952,17 @@ LOCAL void wait_on_keypress(void)
 
 #define   MAX_FILE_ARGV   256
 
-LOCAL _BOOL read_cliopt_file(
-
-const char  *name)                      /* ^ filename */
+LOCAL NOINLINE _BOOL read_cliopt_file(const char *name)
 {
    char     *fargv[MAX_FILE_ARGV + 1],  /* array of argument values */
             *ptr,                       /* ^ into read string */
             *mp;                        /* */
    FILE     *file;                      /* ^ file */
    char      opt[256];                  /* read buffer */
-   int       sl;                        /* string length */
-   int       counter = -1;              /* */
-   int       i;                         /* counter for chars in ptr */
+   size_t    sl;                        /* string length */
+   int       counter = -1;
+   int i;
    
-
    file = fopen(name, "r");
    
    if (!file)
@@ -1029,7 +970,7 @@ const char  *name)                      /* ^ filename */
 
    while (fgets(opt, 256, file))          /* read file in blocks of 256 */
    {
-      sl = (int) strlen(opt);
+      sl = strlen(opt);
       
       while (sl > 0 && opt[sl - 1] < ' ') /* TRIM right */
       {
@@ -1042,13 +983,13 @@ const char  *name)                      /* ^ filename */
       while (*ptr != EOS && (*ptr == ' ' || *ptr == '\t') )
          ptr++;
          
-      sl = (int) strlen(ptr);
+      sl = strlen(ptr);
       
       while (sl > 0)
       {
          if (counter + 1 < MAX_FILE_ARGV)
          {
-            for (i = 0; i < sl; i++)      /* find end of 'token' */
+            for (i = 0; i < (int)sl; i++)      /* find end of 'token' */
             {
                if (ptr[i] == ' ' || ptr[i] == '\t')
                   break;
@@ -1065,12 +1006,14 @@ const char  *name)                      /* ^ filename */
                                           /* copy the found argument from string into array */
                   strncpy(fargv[counter], ptr, i);
                   fargv[counter][i] = EOS;/* close C string! */
-                  ptr += i + 1;           /* shorten string */
+                  while (ptr[i] == ' ' || ptr[i] == '\t')
+                     i++;
+                  ptr += i;               /* shorten string */
                }
             }
          }
          
-         sl -= i + 1;                     /* decrease string length counter */
+         sl -= i;                         /* decrease string length counter */
       }
    }
 
@@ -1102,122 +1045,6 @@ const char  *name)                      /* ^ filename */
 
 /*******************************************************************************
 *
-*  getcliopt():
-*     evaluate command line commands
-*
-*  Return:
-*     0: no error
-*    >0: error
-*
-******************************************|************************************/
-
-LOCAL _BOOL getcliopt(
-
-int              *counter,        /* */
-const char       *arg,            /* */
-const char       *argnext,        /* */
-const _BOOL     from_file)      /* */
-{
-   register int   i;              /* */
-   _BOOL        found = FALSE;  /* */
-
-   i = 0;
-
-   while ( (cliopt[i].longname[0] != EOS) && (found == FALSE) )
-   {
-      if (    strcmp(arg, cliopt[i].longname) == 0 
-           || (cliopt[i].shortname[0] != EOS && strcmp(arg, cliopt[i].shortname) == 0)
-         )
-      {
-         found = TRUE;
-
-         if (cliopt[i].var != NULL)
-         {
-            switch (cliopt[i].type)
-            {
-            case 'b':                     /* _BOOL */
-               *(_BOOL *)cliopt[i].var = cliopt[i].val;
-               break;
-               
-            case 'c':                     /* char */
-               *(char *)cliopt[i].var = 0;
-               
-               if (cliopt[i].needs2)
-               {
-                  if (argnext != NULL)
-                  {
-                     *counter = *counter + 1;
-                     strcpy((char *)cliopt[i].var, argnext);
-                  }
-               }
-               else
-               {
-                  strcpy((char *)cliopt[i].var, "");
-               }
-               
-            }  /* switch () */
-         }
-      }
-
-      i++;
-   }   
-
-
-   if (!found)
-   {
-      if (    (arg[0] != '-')             /* no option */ 
-           && (arg[0] != '%')             /* no shell placeholder */
-	                                  /* no shell program name */
-           && (my_stricmp(arg, "udo") != 0)
-         )
-      {
-         strcpy(infile.full, arg);
-         found = TRUE;
-      }
-      else
-      {
-                                          /* --- read options from file --- */
-         if ( (strcmp(arg, "-@") == 0) && !from_file)
-         {
-            if (argnext != NULL)
-            {
-               *counter = *counter + 1;
-               found = read_cliopt_file(argnext);
-            }
-            else                          /* <???> Fehlermeldung */
-            {
-               found = FALSE;
-            }
-         }
-         else if (strcmp(arg, "-D") == 0) /* --- set symbol --- */
-         {
-            if (argnext != NULL)
-            {
-               *counter = *counter + 1;
-               add_udosymbol(argnext);
-               found = TRUE;
-            }
-            else                          /* <???> Fehlermeldung */
-            {
-               found = FALSE;
-            }
-         }
-         else
-         {
-            show_unknown(arg);
-         }
-      }
-   }
-
-   return found;
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  main():
 *     THE main routine
 *
@@ -1227,27 +1054,29 @@ const _BOOL     from_file)      /* */
 *
 ******************************************|************************************/
 
-int main(
-
-int          argc,     /* # of arguments from command line */
-const char  *argv[])   /* arguments */
+int main(int argc, const char **argv)
 {
-   int       i;        /* */
-   char      nam[32],  /* */
-            *ptr;      /* */
-   _BOOL   cliok;    /* */
-
+   int       i;
+   char      nam[32];
+   _BOOL   cliok;
 
    init_um();                             /* init UDO memory management first, */
                                           /* or um_malloc() cannot be used! */
 
 
-   /* --- get program name --- */
-
 #ifdef __TOS__
    Pdomain(1);
 #endif
 
+#ifdef HAVE_SETLOCALE
+   setlocale(LC_ALL, "");
+#endif
+
+#ifdef ENABLE_NLS
+	bindtextdomain(GETTEXT_PACKAGE, xs_get_locale_dir());
+	textdomain(GETTEXT_PACKAGE);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+#endif
 
    /* --- init global variables --- */
    
@@ -1264,8 +1093,6 @@ const char  *argv[])   /* arguments */
 
    outfile.file = stdout;
    infile.file  = stdin;
-
-   eLanguage = ENGLISH;                   /* default is English */
 
    desttype         = TOASC;
    bNoLogfile       = FALSE;
@@ -1297,25 +1124,6 @@ const char  *argv[])   /* arguments */
    outfile.full[0] = EOS;
    infile.full[0]  = EOS;
    sLogfull[0]     = EOS;
-
-
-   if ( (ptr = getenv("LANG")) != NULL)
-   {
-      if (strstr(ptr, "german"))
-         eLanguage = DEUTSCH;
-   }
-
-   if ( (ptr = getenv("LC_ALL")) != NULL)
-   {
-      if (strstr(ptr, "german"))
-         eLanguage = DEUTSCH;
-   }
-
-   if ( (ptr = getenv("LC_MESSAGES")) != NULL)
-   {
-      if (strstr(ptr, "german"))
-         eLanguage = DEUTSCH;
-   }
 
 
    /* --- now evaluate command line parameters --- */
@@ -1354,7 +1162,7 @@ const char  *argv[])   /* arguments */
       {
          show_version();
          show_usage();
-         show_use_help();
+         fprintf(stdout, _("          use --help for more information\n"));
       }
       else
       {
@@ -1365,13 +1173,9 @@ const char  *argv[])   /* arguments */
             fsplit(outfile.full, outfile.driv, outfile.path, outfile.name, outfile.suff);
             
             if (strcmp(outfile.name, "!") == 0)
-            {
                dest_adjust();
-            }
             else
-            {
                dest_special_adjust();
-            }
          }
          else
          {
@@ -1390,6 +1194,10 @@ const char  *argv[])   /* arguments */
       }
    }
 
+#ifdef ENABLE_NLS
+   xs_locale_exit();
+#endif
+
    exit_um();                             /* clean up allocated memory */
 
    wait_on_keypress();
@@ -1399,6 +1207,3 @@ const char  *argv[])   /* arguments */
 
    return 0;
 }
-
-
-/* +++ EOF +++ */

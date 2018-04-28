@@ -138,21 +138,18 @@ const char  *src,          /* */
 size_t       max,          /* */
 const char  *place)        /* */
 {
-   char      errbuf[120];  /* */
    size_t    slen;         /* temp buffer for the length of src */
    
    
    if (dest == NULL)
    {
-      sprintf(errbuf, "um_strcpy: dest is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strcpy: dest is NULL: %s", place);
       return dest;
    }
    
    if (src == NULL)
    {
-      sprintf(errbuf, "um_strcpy: src is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strcpy: src is NULL: %s", place);
       dest[0] = EOS;
       return dest;
    }
@@ -166,8 +163,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strcpy: buffer overrun prevented: %s: %ul>%ul", place, slen + 1, max);
-      loglnposprintf("Warning", errbuf);
+      warning_buffer_overrun(place, "", slen + 1, max);
       return dest;
    }
 }
@@ -199,14 +195,12 @@ const char  *place)        /* */
 
    if (dest == NULL)
    {
-      sprintf(errbuf, "um_strncpy: dest is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strncpy: dest is NULL: %s", place);
       return dest;
    }
    if (src == NULL)
    {
-      sprintf(errbuf, "um_strncpy: src is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strncpy: src is NULL: %s", place);
       dest[0] = EOS;
       return dest;
    }
@@ -218,8 +212,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strncpy: buffer overrun prevented: %s: %ul>%ul", place, n + 1, max);
-      loglnposprintf("Warning", errbuf);
+      warning_buffer_overrun(place, "", n + 1, max);
       return dest;
    }
 }
@@ -252,14 +245,12 @@ const char  *place)        /* */
 
    if (dest == NULL)
    {
-      sprintf(errbuf, "um_strcat: dest is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strcat: dest is NULL: %s", place);
       return dest;
    }
    if (src == NULL)
    {
-      sprintf(errbuf, "um_strcat: src is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strcat: src is NULL: %s", place);
       return dest;
    }
 
@@ -273,8 +264,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strcat: buffer overrun prevented: %s: %ul>%ul", place, dlen + slen + 1, max);
-      loglnposprintf("Warning", errbuf);
+      warning_buffer_overrun(place, "", dlen + slen + 1, max);
       return dest;
    }
 }
@@ -301,20 +291,17 @@ size_t       n,            /* */
 size_t       max,          /* */
 const char  *place)        /* */
 {
-   char      errbuf[120];  /* */
    size_t    dlen;         /* */
 
 
    if (dest == NULL)
    {
-      sprintf(errbuf, "um_strncat: dest is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strncat: dest is NULL: %s", place);
       return dest;
    }
    if (src == NULL)
    {
-      sprintf(errbuf, "um_strncat: src is NULL: %s", place);
-      loglnposprintf("Warning", errbuf);
+      warning_message("um_strncat: src is NULL: %s", place);
       return dest;
    }
 
@@ -327,8 +314,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strncat: buffer overrun prevented: %s: %ul>%ul", place, dlen + n + 1, max);
-      loglnposprintf("Warning", errbuf);
+      warning_buffer_overrun(place, "", dlen + n + 1, max);
       return dest;
    }
 }

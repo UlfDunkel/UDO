@@ -67,6 +67,7 @@
 #include "udoport.h"
 #include "version.h"
 #include "constant.h"
+#include "udointl.h"
 #include "udo_type.h"
 #include "commands.h"
 #include "chr.h"
@@ -1485,7 +1486,7 @@ GLOBAL void check_verb_style(void)
    case TOTEX:
    case TOPDL:
       if (styleflag.verbatim)
-         warning_split_verb();
+         warning_message(_("please use (!V) and (!v) in one paragraph"));
    }
 }
 

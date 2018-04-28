@@ -69,11 +69,12 @@
 #include "import.h"
 #include <stdio.h>
 #include <string.h>
-#include <time.h>                         /* v6.5.19 */
+#include <time.h>
 #include <stdlib.h>
 #include "udoport.h"
 #include "constant.h"
 #include "udo_type.h"
+#include "udointl.h"
 #include "commands.h"
 #include "chr.h"
 #include "file.h"
@@ -83,10 +84,10 @@
 #include "toc.h"
 #include "udo.h"
 #include "img.h"
+#include "udomem.h"
 
 #include "export.h"
 #include "par.h"
-#include "udomem.h"
 
 
 
@@ -98,7 +99,32 @@
 *
 ******************************************|************************************/
 
-#define MAX_PARAMETERS  9                 /* */
+/*
+ * # placeholder per paragraph.
+ * limited only by encoding in add_placeholder()
+ * (3 * 6 bits = 2 ^ 18)
+ */
+#define  MAXPHOLDS      0x40000L
+
+#define MAX_PARAMETERS  9                 /* # of macro parameters */
+
+
+
+
+
+/*******************************************************************************
+*
+*     TYPE DEFINITIONS
+*
+******************************************|************************************/
+
+typedef struct _placeholder               /* general placeholder */
+{
+   char      magic[7];                    /* a control magic <ESC><0xB0 + nr> */
+   char     *entry;                       /* the whole command */
+   char     *text;                        /* text only (required by toklen()) */
+} PLACEHOLDER;
+
 
 
 
@@ -120,9 +146,15 @@ LOCAL MACROS   *macros[MAXMACROS];        /* Array auf Zeiger mit Makros */
 LOCAL DEFS     *defs[MAXDEFS];            /* Array auf Zeiger mit defines */
 
    /* --- Platzhalter --- */
+LOCAL PLACEHOLDER *phold;                 /* array of placeholders */
+LOCAL size_t    phold_alloc;              /* size of array */
+LOCAL size_t    phold_counter;            /* # of used placeholders */
+
 LOCAL SPECCMD   speccmd[MAXSPECCMDS + 1];
 LOCAL int       speccmd_counter;
 
+LOCAL unsigned char const encode_chars[64] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#=";
+LOCAL int decode_chars[128];
 
 
 
@@ -1844,20 +1876,20 @@ _BOOL      inside_b4_macro)    /* */
                {
                   if (wnode[0] != EOS)
                   {
-                     error_xlink_win_topic();
+                     error_message(_("xlink needs WinHelp destination topic"));
                      linkerror = !replace_once(s, Param[0], Param[1]);
                   }
                   
                   if (wfile[0] != EOS)
                   {
-                     error_xlink_win_file();
+                     error_message(_("xlink needs WinHelp destination file"));
                      linkerror = !replace_once(s, Param[0], Param[1]);
                   }
                }
             }
             else
             {
-               error_xlink_win_syntax();
+               error_message(_("use (!xlink [text] [topic@foo.hlp])"));
                linkerror = !replace_once(s, Param[0], Param[1]);
             }
             
@@ -3992,7 +4024,7 @@ const char  *entry)         /* */
    {
       if (parms > MAX_PARAMETERS)
       {
-         error_too_many_parameters();
+         error_message(_("too many parameters used"));
          return;
       }   
 
@@ -4251,30 +4283,38 @@ char             *s)              /* */
 
 GLOBAL void reset_placeholders(void)
 {
-   int   i;  /* counter */
+   size_t i;
 
-
-   if (phold_counter >= 0)
+   for (i = 0; i < phold_counter; i++)
    {
-      for (i = 0; i < phold_counter; i++)
+#if 0
+      /* fuer debug-zwecke: */
+      if (phold[i].magic[0] != EOS)
       {
-         if (phold[i].entry != NULL)
-         {
-            um_free(phold[i].entry);
-            phold[i].entry = NULL;
-         }
+         char s[1024];
+         _UWORD c1, c2, c3;
+         _UWORD j;
+         
+         c1 = decode_chars[phold[i].magic[2]];
+         c2 = decode_chars[phold[i].magic[3]];
+         c3 = decode_chars[phold[i].magic[4]];
+         j = (((c1 << 6) + c2) << 6) + c3;
+         warning_message(_("not replaced %3lu:%3lu: %c%c%c %s %s\n"), i, j, phold[i].magic[2], phold[i].magic[3], phold[i].magic[4], phold[i].entry, phold[i].text);
+      }
+#endif
+      if (phold[i].entry != NULL)
+      {
+         um_free(phold[i].entry);
+         phold[i].entry = NULL;
+      }
 
-         if (phold[i].text != NULL)
-         {
-            um_free(phold[i].text);
-            phold[i].text= NULL;
-         }
-
-         phold[i].magic[0] = EOS;
+      if (phold[i].text != NULL)
+      {
+         um_free(phold[i].text);
+         phold[i].text= NULL;
       }
    }
-
-   phold_counter = -1;
+   phold_counter = 0;
 }
 
 
@@ -4292,58 +4332,57 @@ GLOBAL void reset_placeholders(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL add_placeholder(
-
-char       *entry,    /* */
-char       *rawtext)  /* */
+GLOBAL _BOOL add_placeholder(const char *entry, const char *rawtext)
 {
-   size_t   el,       /* entry length */
-            tl;       /* text length */
-   char    *eptr,     /* */
-           *tptr;     /* */
-           
-
-   if (phold_counter < MAXPHOLDS)
+   char  *eptr, *tptr;
+   unsigned char c1, c2, c3;
+   size_t counter;
+   PLACEHOLDER *new_phold;
+   
+   counter = phold_counter;
+   if (counter >= MAXPHOLDS)
+      return FALSE;
+   /*
+    * when encoding, be sure not to generate
+    * \033, '~' or \177 characters,
+    * or any sequence of characters that
+    * might be interpreted as an UDO command
+    */
+   c1 = encode_chars[((counter >> 12) & 0x3f)];
+   c2 = encode_chars[((counter >>  6) & 0x3f)];
+   c3 = encode_chars[((counter      ) & 0x3f)];
+   if (counter >= phold_alloc)
    {
-      phold_counter++;
-
-      el = strlen(entry);
+      size_t new_alloc = phold_alloc + 100;
       
-      eptr = (char *)(um_malloc(el * sizeof(char) + 1));
-      
-      if (eptr == NULL)
+      new_phold = (PLACEHOLDER *)realloc(phold, new_alloc * sizeof(PLACEHOLDER));
+      if (new_phold == NULL)
       {
-         error_malloc_failed();
-         phold_counter--;
          return FALSE;
       }
-
-      tl = strlen(rawtext);
-      
-      tptr = (char *)(um_malloc(tl * sizeof(char) + 1));
-      
-      if (tptr == NULL)
-      {
-         error_malloc_failed();
-         um_free(eptr);
-         phold_counter--;
-         return FALSE;
-      }
-
-      sprintf(phold[phold_counter].magic, "\033%c%04i\033", C_PHOLD_MAGIC, phold_counter + OFFSET_PHOLD);
-
-      phold[phold_counter].entry = eptr;
-      phold[phold_counter].text  = tptr;
-
-      strcpy(phold[phold_counter].entry, entry);
-      strcpy(phold[phold_counter].text, rawtext);
-
-      return TRUE;
+      phold = new_phold;
+      phold_alloc = new_alloc;
    }
-   else
-      error_too_many_placeholder();   
+   eptr = strdup(entry);
+   if (eptr == NULL)
+   {
+      return FALSE;
+   }
+   
+   tptr = strdup(rawtext);
+   if (tptr == NULL)
+   {
+      free(eptr);
+      return FALSE;
+   }
+   
+   sprintf(phold[counter].magic, "\033%c%c%c%c\033", C_PHOLD_MAGIC, c1, c2, c3);
 
-   return FALSE;
+   phold[counter].entry = eptr;
+   phold[counter].text = tptr;
+   
+   phold_counter++;
+   return TRUE;
 }
 
 
@@ -4361,16 +4400,11 @@ char       *rawtext)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL insert_placeholder(
-
-char        *s,        /* */
-const char  *rep,      /* */
-char        *entry,    /* */
-char        *rawtext)  /* */
+GLOBAL _BOOL insert_placeholder(char *s, const char *rep, const char *entry, const char *rawtext)
 {
    if (add_placeholder(entry, rawtext))
    {
-      if (replace_once(s, rep, phold[phold_counter].magic))
+      if (replace_once(s, rep, phold[phold_counter - 1].magic))
          return TRUE;
    }
 
@@ -4391,34 +4425,27 @@ char        *rawtext)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_placeholders(
-
-char             *s)              /* ^ line */
+GLOBAL void replace_placeholders(char *s)
 {
-   register int   i;              /* counter */
-   int            replaced = -1;  /* */
+   register size_t i;
+   size_t replaced = 0;
 
-   
-   if (phold_counter >= 0)
+   if (phold_counter > 0)
    {
       if (strstr(s, ESC_PHOLD_MAGIC) == NULL)
          return;
 
       /* PL10: Rueckwaerts ersetzen, da ein Platzhalter auch in */
       /* einem Platzhalter stecken kann! */
-      
-      for (i = phold_counter; i >= 0; i--)
+      for (i = phold_counter; i > 0; )
       {
-         if (phold[i].magic[0] != EOS)
+         --i;
+         if (replace_once(s, phold[i].magic, phold[i].entry))
          {
-            if (replace_once(s, phold[i].magic, phold[i].entry))
-            {
-               phold[i].magic[0] = EOS;   /* clear magic */
-               replaced++;
-            }
+            phold[i].magic[0] = EOS;
+            replaced++;
          }
       }
-      
       if (replaced == phold_counter)
          reset_placeholders();
    }
@@ -4438,19 +4465,16 @@ char             *s)              /* ^ line */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_placeholders_text(
-
-char             *s)  /* */
+GLOBAL void replace_placeholders_text(char *s)
 {
-   register int   i;  /* counter */
-   
+   register size_t i;
 
-   if (phold_counter >= 0)
+   if (phold_counter > 0)
    {
       if (strstr(s, ESC_PHOLD_MAGIC) == NULL)
          return;
 
-      for (i = 0; i <= phold_counter; i++)
+      for (i = 0; i < phold_counter; i++)
          replace_once(s, phold[i].magic, phold[i].text);
    }
 }
@@ -4470,18 +4494,24 @@ char             *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL size_t pholdlen(
-
-int   i)  /* # of desired placeholder */
+GLOBAL size_t pholdlen(const char *ptr)
 {
-   if (i >= 0 && i <= MAXPHOLDS)
+   _UWORD c1, c2, c3;
+   _UWORD i;
+   
+   c1 = decode_chars[(unsigned char)ptr[0]];
+   c2 = decode_chars[(unsigned char)ptr[1]];
+   c3 = decode_chars[(unsigned char)ptr[2]];
+   i = (((c1 << 6) + c2) << 6) + c3;
+   
+   if (i < phold_counter)
    {
       if (phold[i].text != NULL)
       {
-         return(strlen(phold[i].text));
+         return strlen(phold[i].text);
       }
    }
-
+   
    return 0;
 }
 
@@ -4499,24 +4529,20 @@ int   i)  /* # of desired placeholder */
 *
 ******************************************|************************************/
 
-GLOBAL void c_internal_index(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+GLOBAL void c_internal_index(char *s, const _BOOL inside_b4_macro)
 {
-   int          nr;               /* */
-   _BOOL      flag;             /* */
-   _BOOL      has_idx,          /* */
-                has_index;        /* */
+   int          nr;
+   _BOOL      flag;
+   _BOOL      has_idx,
+                has_index;
 
-
-   has_idx   = (strstr(s, "(!idx")   != NULL);
-   has_index = (strstr(s, "(!index") != NULL);
+   has_idx = strstr(s, "(!idx") != NULL;
+   has_index = strstr(s, "(!index") != NULL;
 
    if (has_idx)
    {
       do
-      {   
+      {
          nr = get_nr_of_parameters(CMD_IDX, s);
 
          switch (nr)
@@ -4524,36 +4550,30 @@ const _BOOL   inside_b4_macro)  /* */
          case 0:
             flag = FALSE;
             break;
-            
          case 1:
             flag = c_single_index(s, inside_b4_macro);
             break;
-            
          case 2:
             flag = c_double_index(s, inside_b4_macro);
             break;
-            
          case 3:
             flag = c_tripple_index(s, inside_b4_macro);
             break;
-            
          case 4:
             flag = c_quadruple_index(s, inside_b4_macro);
             break;
-            
          default:
             error_wrong_nr_parameters("!idx");
             flag = FALSE;
+            break;
          }
-
       } while (flag == TRUE);
    }
 
-
-   if (has_index)                         /* r6pl6: Unterstuetzung fuer (!index [...]) */
+   if (has_index)
    {
       do
-      {   
+      {
          nr = get_nr_of_parameters("index", s);
 
          switch (nr)
@@ -4561,17 +4581,15 @@ const _BOOL   inside_b4_macro)  /* */
          case 0:
             flag = FALSE;
             break;
-            
          case 1:
             flag = c_index(s, inside_b4_macro);
             break;
-            
          default:
             error_wrong_nr_parameters("!index");
             flag = FALSE;
+            break;
          }
-
-      }  while (flag == TRUE);
+      } while (flag == TRUE);
    }
 }
 
@@ -4589,12 +4607,9 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void c_commands_inside(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+GLOBAL void c_commands_inside(char *s, const _BOOL inside_b4_macro)
 {
-   if (strstr(s, "(!") == NULL)           /* wrong format */
+   if (strstr(s, "(!") == NULL)
       return;
 
    c_link(s, inside_b4_macro);
@@ -4602,14 +4617,13 @@ const _BOOL   inside_b4_macro)  /* */
    c_xlink(s, inside_b4_macro);
    c_ilink(s, inside_b4_macro);
    c_plink(s, inside_b4_macro);
-   c_plabel(s, inside_b4_macro);          /* New in V6.5.9 [NHz] */
+   c_plabel(s, inside_b4_macro);
    c_nolink(s, inside_b4_macro);
    c_comment(s, inside_b4_macro);
    c_internal_index(s, inside_b4_macro);
-   c_internal_time(s, inside_b4_macro);   /* V 6.5.19 */
+   c_internal_time(s, inside_b4_macro);
    c_internal_image(s, inside_b4_macro);
    c_internal_raw(s, inside_b4_macro);
-
 }
 
 
@@ -4626,9 +4640,7 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_hyphens(
-
-char      *s)  /* ^ character */
+GLOBAL void replace_hyphens(char *s)
 {
    _UWORD   h;  /* hyphen index */
 
@@ -4661,7 +4673,7 @@ char      *s)  /* ^ character */
 
 GLOBAL void add_hyphen(void)
 {
-   HYPHEN  *p;  /* ^ hyphen structure */
+   HYPHEN *p;
 
 
    switch (desttype)
@@ -4793,7 +4805,7 @@ GLOBAL _BOOL add_macro(void)
 
    if (strlen(token[1]) > MACRO_NAME_LEN) /* macro name too long? */
    {
-      error_long_macro_name(MACRO_NAME_LEN);
+      error_message(_("macro name longer than %d characters"), MACRO_NAME_LEN);
       return FALSE;
    }
 
@@ -4834,7 +4846,7 @@ GLOBAL _BOOL add_macro(void)
 
    if (strlen(entry) > MACRO_CONT_LEN)     /* macro content too long? */
    {
-      error_long_macro_cont(MACRO_CONT_LEN);
+      error_message(_("macro contents longer than %d characters"), MACRO_CONT_LEN);
       um_free(p);
       return FALSE;
    }
@@ -4935,7 +4947,7 @@ GLOBAL _BOOL add_define(void)
 
    if (strlen(token[1]) > DEFINE_NAME_LEN)/* definition name too long? */   
    {
-      error_long_define_name(DEFINE_NAME_LEN);
+      error_message(_("definition name longer than %d characters"), DEFINE_NAME_LEN);
       return FALSE;
    }
 
@@ -4963,7 +4975,7 @@ GLOBAL _BOOL add_define(void)
 
    if (strlen(entry) > DEFINE_CONT_LEN)    /* definition content too long? */
    {
-      error_long_define_cont(DEFINE_CONT_LEN);
+      error_message(_("definition contents longer than %d characters"), DEFINE_CONT_LEN);
       um_free(p);
       return FALSE;
    }
@@ -5008,17 +5020,16 @@ GLOBAL _BOOL add_define(void)
 
 GLOBAL void init_module_par(void)
 {
-   int   i;  /* counter */
+   int i;
 
-   phold_counter= -1;                     /* first of all, everything should be empty */
+   for (i = 0; i < 64; i++)
+      decode_chars[encode_chars[i]] = i;
 
-   for (i = 0; i < MAXPHOLDS; i++)
-   {
-      phold[i].magic[0] = EOS;
-      phold[i].entry    = NULL;
-      phold[i].text     = NULL;
-   }
-
+   /* first of all, everything should be empty */
+   phold_counter = 0;
+   phold_alloc = 0;
+   phold = NULL;
+   
    hyphen_counter = 0;
    
    for (i = 0; i < MAXHYPHEN; i++)

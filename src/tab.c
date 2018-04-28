@@ -82,6 +82,7 @@
 #include "udoport.h"
 #include "version.h"
 #include "constant.h"
+#include "udointl.h"
 #include "udo_type.h"
 #include "commands.h"
 #include "chr.h"
@@ -439,7 +440,7 @@ char       *s)    /* */
 
    if (tab_h >= MAX_TAB_H)
    {
-      error_table_height();
+      error_message(_("too many rows used"));
       s[0] = EOS;
       return FALSE;
    }
@@ -452,7 +453,7 @@ char       *s)    /* */
    {
       if (tab_label[tab_h] >= MAX_TAB_LABEL)
       {
-         error_table_label();
+         error_message(_("too many labels used in table"));
          s[0] = EOS;
          return FALSE;
       }
@@ -543,7 +544,7 @@ char       *s)    /* */
          }
          else
          {
-            error_table_cell_width();     /*r6pl2: Laenge testen und meckern */
+            error_message(_("table cell contains too many characters"));
             return FALSE;
          }
       }
@@ -555,7 +556,7 @@ char       *s)    /* */
 
    if (cells_counter > MAX_TAB_ROWS)
    {
-      error_table_width();
+      error_message(_("too many columns used"));
    }
 
    if (cells_counter > tab_w)

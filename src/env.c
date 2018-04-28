@@ -103,6 +103,7 @@
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"
+#include "udointl.h"
 #include "commands.h"
 #include "abo.h"
 #include "cfg.h"
@@ -298,7 +299,7 @@ const char  *s)   /* */
    
    if (strstr(s, "!short"))               /* check local attributes */
    {
-      warning_msg_solo("'!short' is a deprecated attribute for environments. Please use '!compressed' instead.");
+      warning_message(_("'!short' is a deprecated attribute for environments. Please use '!compressed' instead."));
       bEnvCompressed[el] = TRUE;
    }
    else if (strstr(s, "!compressed") != NULL)
@@ -333,7 +334,7 @@ LOCAL _BOOL check_iEnvLevel(void)
 {
    if (iEnvLevel >= MAXENVLEVEL - 1)
    {
-      error_too_many_env();
+      error_message(_("too many environments used"));
       return FALSE;
    }
    
@@ -3080,7 +3081,7 @@ GLOBAL void c_item(void)
    
    if ( (iItemLevel == 0) && (iEnumLevel == 0) && (iDescLevel == 0) && (iListLevel == 0) )
    {
-      error_item_outside_env();
+      error_message(_("'!item' outside environment"));
    }
 
    bEnv1stPara[iEnvLevel] = TRUE;

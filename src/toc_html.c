@@ -65,6 +65,7 @@
 #include <ctype.h>
 #include "udoport.h"
 #include "constant.h"
+#include "udointl.h"
 #include "udo_type.h"
 #include "chr.h"
 #include "file.h"
@@ -215,7 +216,7 @@ GLOBAL _BOOL set_html_navigation(void)
       return TRUE;
    }
 
-   error_unknown_html_navigation(inhalt);
+   error_message(_("unknown html_navigation: %s"), inhalt);
 
    return FALSE;
 }
@@ -292,7 +293,7 @@ GLOBAL void set_html_header_date(void)
         || isdigit(html_header_date_zone[5] == 0)
       )
    {
-      error_wrong_header_date(html_header_date_zone);
+      error_message(_("wrong argument for !html_header_date: %s, e.g. +01:00"), html_header_date_zone);
       return;
    }
 
@@ -318,8 +319,7 @@ GLOBAL void set_html_header_date(void)
 
 GLOBAL void set_html_header_links(void)
 {
-   char  *kind;  /* */
-                 /* */
+   char *kind;
    char   possible[] = "navigation chapter";
 
 
@@ -327,7 +327,7 @@ GLOBAL void set_html_header_links(void)
 
    if (html_header_links_kind[0] == EOS)
    {
-      error_empty_header_links();
+      error_message(_("empty !html_header_links"));
       return;
    }
 
@@ -336,7 +336,7 @@ GLOBAL void set_html_header_links(void)
    while (kind != NULL)
    {
       if (strstr(possible, kind) == NULL)
-         error_argument_header_links(kind);
+         error_message(_("unknown linktype (!html_header_links): %s"), kind);
          
       kind = strtok(NULL, " ");
    }

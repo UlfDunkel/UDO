@@ -65,6 +65,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "file.h"
+#include "udointl.h"
 
 #include "export.h"
 #include "udomem.h"                       /* memory management */

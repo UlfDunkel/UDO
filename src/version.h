@@ -121,13 +121,16 @@
 #define UDO_REL     "7"
 #define UDO_SUBVER  "04"
 #define UDO_BUILD   "(1296)"
+#define UDO_VERSION_STRING "Version " UDO_REL "." UDO_SUBVER " " UDO_BUILD
+#define UDO_VERSION_STRING_OS UDO_VERSION_STRING " for " UDO_OS
+
 #define UDO_URL     "http://www.udo-open-source.org/"
 #define UDO_MADE    "Made with UDO"
 
    /* --- Copyright Meldung --- */
 
-#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2014 by The UDO Community"
-#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) since 2001 by The UDO Community\t(!nl)\n"
+#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2018 by The UDO Community"
+#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn (!nl)\nCopyright (!copyright) 2001-2018 by The UDO Community (!nl)\n"
 
    /* --- Zeichensaetze --- */
 
@@ -459,6 +462,5 @@
 #ifndef SYSTEM_CHARSET
 #error  "SYSTEM_CHARSET not defined!"
 #endif
-
 
 #endif   /* VERSION_H */

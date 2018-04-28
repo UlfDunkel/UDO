@@ -95,15 +95,6 @@ typedef struct _defs                      /* !define structure */
    _BOOL   vars;                        /* optional parameters */
    } DEFS, *pDEFS;
 
-typedef struct _placeholder               /* general placeholder */
-   {
-   char      magic[10];                   /* a control magic <ESC><0xB0 + nr> */
-   char     *entry;                       /* the whole command */
-   char     *text;                        /* text only (required by toklen()) */
-   _BOOL   replaced;                    /* TRUE: PH has already been replaced */
-   } PLACEHOLDER;
-
-
 typedef struct _speccmd                   /* special format command placeholder */
    {
    char      magic[6];                    /* a control magic <ESC><0xB0 + nr> */
@@ -126,9 +117,6 @@ typedef struct _speccmd                   /* special format command placeholder 
 GLOBAL _UWORD         hyphen_counter;      /* # of loaded hyphenation rules */
 GLOBAL _UWORD         macro_counter;       /* # of loaded macros */
 GLOBAL _UWORD         define_counter;      /* # of loaded definitions */
-
-GLOBAL PLACEHOLDER   phold[MAXPHOLDS + 1];/* array of placeholders */
-GLOBAL int           phold_counter;       /* # of placeholders */
 
 
 
@@ -159,10 +147,10 @@ GLOBAL void replace_speccmds(char *s);
 GLOBAL void reset_placeholders(void);
 
    /*  */
-GLOBAL _BOOL add_placeholder(char *entry, char *rawtext);
+GLOBAL _BOOL add_placeholder(const char *entry, const char *rawtext);
 
    /*  */
-GLOBAL _BOOL insert_placeholder(char *s, const char *rep, char *entry, char *rawtext);
+GLOBAL _BOOL insert_placeholder(char *s, const char *rep, const char *entry, const char *rawtext);
 
    /* replace the internal placeholder commands by human-readable content */
 GLOBAL void replace_placeholders(char *s);
@@ -170,8 +158,11 @@ GLOBAL void replace_placeholders(char *s);
    /*  */
 GLOBAL void replace_placeholders_text(char *s);
 
+   /* handle links and other internal commands */
+GLOBAL void reset_placeholders(void);
+
    /* return length of placeholder text */
-GLOBAL size_t pholdlen(int i);
+GLOBAL size_t pholdlen(const char *p);
 
    /*  */
 GLOBAL void c_internal_index(char *s, const _BOOL inside_b4_macro);
@@ -202,6 +193,3 @@ GLOBAL void init_module_par(void);
 
    /* release all arrays used in this module */
 GLOBAL void exit_module_par(void);
-
-
-/* +++ EOF +++ */

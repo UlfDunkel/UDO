@@ -36,6 +36,7 @@ udo_SOURCES = \
 	udo2ps.h \
 	udo_type.h \
 	udocmd.h \
+	udointl.c udointl.h \
 	udomem.c udomem.h \
 	unicode.h u_dos.h u_hp.h u_iso.h u_mac.h u_mswin.h u_next.h u_tos.h u_udo.h u_utf.h \
 	version.h \

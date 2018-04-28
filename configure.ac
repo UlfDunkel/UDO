@@ -878,6 +878,30 @@ AC_DEFINE_UNQUOTED([BZ2_VERSION_FROM_CONFIGURE], "$ac_bz2_version", [The version
 # need a small subset of Glib (mainly memory functions),
 # and we don't want to depend on Glib in that case.
 
+###############################################################################
+#
+#       Gettext support
+#
+###############################################################################
+
+AH_TEMPLATE([GETTEXT_PACKAGE], [define to the name of the gettext package])
+
+AC_PROG_INTLTOOL
+GETTEXT_PACKAGE=udo
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+AC_DEFINE_UNQUOTED(PACKAGE, "$GETTEXT_PACKAGE")
+AC_SUBST(GETTEXT_PACKAGE)
+
+ALL_LINGUAS="`grep -v '^#' "$srcdir/po/LINGUAS" | tr '\n' ' '`"
+AC_SUBST([CONFIG_STATUS_DEPENDENCIES],['$(top_srcdir)/po/LINGUAS'])
+AM_GLIB_GNU_GETTEXT
+XGETTEXT="$XGETTEXT --from-code=UTF-8"
+AM_GLIB_DEFINE_LOCALEDIR([LOCALEDIR])
+MKINSTALLDIRS="$INSTALL_DIRS"
+AC_SUBST(MKINSTALLDIRS)
+
+
+
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GLIB_LIBS)
@@ -901,10 +925,15 @@ if test "$GCC" = "yes" -a "$enable_fatal_warnings" = "yes"; then
 fi
 ])
 
+AC_CONFIG_COMMANDS([pofiles],[
+	sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile
+      ])
+
 AC_OUTPUT([
 	Makefile
 	src/Makefile
 	doc/Makefile
 	doc/en/Makefile
 	doc/de/Makefile
+	po/Makefile.in
 ])

@@ -161,6 +161,7 @@
 #include "constant.h"                     /* WICHTIGE Makros! */
 #include "commands.h"                     /* UDO-Kommandos */
 #include "udo_type.h"                     /* diverse Typen */
+#include "udointl.h"
 
 #include "abo.h"                          /* Ausgabe einer Infoseite */
 #include "cfg.h"                          /* Konfiguration lesen/schreiben */
@@ -1185,9 +1186,9 @@ size_t      length)  /* length of centered string */
    size_t   sl,      /* string length */
             add;     /* */
 
-   if (length > 255)                      /* avoid buffer overflow */
+   if (length >= sizeof(s))               /* avoid buffer overflow */
    {
-      printf("Warning: stringcenter(): length must not exceed 255!\n");
+      warning_message(_("stringcenter(): length must not exceed %d!"), (int)sizeof(s) - 1);
       return;
    }
 
@@ -1234,9 +1235,9 @@ size_t      length)  /* length of centered string */
             add;     /* */
             
 
-   if (length > 255)                      /* avoid buffer overflow */
+   if (length >= sizeof(s))               /* avoid buffer overflow */
    {
-      printf("Warning: strcenter(): length must not exceed 255!\n");
+      warning_message(_("strcenter(): length must not exceed %d!"), (int)sizeof(s) - 1);
       return;
    }
 
@@ -1280,14 +1281,11 @@ GLOBAL void outlncenter(
 
 char     *s)         /* ^ original string */
 {
-   char   tmp[512];  /* string buffer */
-
+   char tmp[512];
    
-   strcpy(tmp, s);                        /* copy string for conversion */
-
-   strcenter(tmp, zDocParwidth);          /* convert string */
-
-   outln(tmp);                            /* output centered string */
+   strcpy(tmp, s);
+   strcenter(tmp, zDocParwidth);
+   outln(tmp);
 }
 
 
@@ -1314,9 +1312,9 @@ char       *s)         /* ^ original string */
    
    sl = strlen(s);                        /* get length of string */
    
-   if (sl > 512)
+   if (sl >= sizeof(tmp))
    {
-      printf("Warning: outlncenterfill(): string must not be longer than 512 characters\n");
+      warning_message(_("outlncenterfill(): string must not be longer than %d characters"), (int)sizeof(tmp) - 1);
       return;
    }
 
@@ -1326,19 +1324,11 @@ char       *s)         /* ^ original string */
 
    sl = strlen(tmp);                      /* get length of converted string */
 
-   if (sl > 512)
-   {
-      printf("Warning: outlncenterfill(): centered string must not be longer than 512 characters\n");
-      return;
-   }
-
-   
    while (sl < zDocParwidth)              /* fill right part of centered string */
    {
-      strcat(tmp, " ");                   /* with spaces */
+      strcat(tmp, " ");
       sl++;
    }
-
    outln(tmp);                            /* output converted string */
 }
 
@@ -1432,7 +1422,7 @@ size_t       len)        /* */
 
    if (len > MAXBLANKPOS)                 /* string too long! */
    {
-      printf("Warning: outlncenterfill(): string must not be longer than %d characters\n", MAXBLANKPOS - 1);
+      warning_message(_("strjustify(): string must not be longer than %d characters"), MAXBLANKPOS - 1);
       return;
    }
 
@@ -1563,7 +1553,7 @@ LOCAL void cmd_outside_preamble(void)
 {
    if (bInsideDocument)
    {
-      error_outside_preamble(token[0]);
+      error_message(_("%s ignored outside preamble"), token[0]);
    }
 }
 
@@ -1585,7 +1575,7 @@ LOCAL void cmd_inside_preamble(void)
 {
    if (!bInsideDocument)   
    {
-      error_inside_preamble(token[0]);
+      error_message(_("%s ignored inside preamble"), token[0]);
    }
 }
 
@@ -2783,7 +2773,7 @@ LOCAL void sort_idxlist(void)
 
    show_status_info("");
    show_status_info("");
-   show_status_info("Sorting index...");
+   show_status_info(_("Sorting index..."));
 
    idxlist = idxlist_sort(idxlist);
 }
@@ -5523,18 +5513,14 @@ LOCAL void c_break(void)
 
 LOCAL void c_error(void)
 {
-   char   e[512];  /* */
+   char e[512];
    
-   
-   tokcpy2(e, 512);
-   error_error(e);
+   tokcpy2(e, sizeof(e));
+   error_message("%s", e);
 
    bBreakInside = TRUE;
-   
    if (bInsideDocument)
-   {
       c_end_document();
-   }
    
    bFatalErrorDetected = TRUE;
 }
@@ -5596,7 +5582,7 @@ LOCAL void c_fussy(void)
 
 LOCAL void c_code_source(void)
 {
-   char   s[256];  /* */
+   char s[256];
    int    i = 0;   /* counter for udocharset[] */
 
    if (token[1][0] == EOS)                /* this command needs a parameter */
@@ -7377,7 +7363,7 @@ LOCAL void c_input(void)
    {
       if (iUdopass != PASS1)
       {
-         error_no_udoinputpath();
+         error_message(_("$UDOINPUTPATH not set!"));
       }
       
       return;
@@ -7713,9 +7699,7 @@ LOCAL void insert_nl_token_buffer(void)
 *
 ******************************************|************************************/
 
-GLOBAL size_t toklen(
-
-char       *s)     /* */
+GLOBAL size_t toklen(char *s)
 {
    char     n[5];  /* */
    int      i;     /* */
@@ -7746,17 +7730,9 @@ char       *s)     /* */
          {
          case C_PHOLD_MAGIC:
             ptr++;
-            
-            n[0] = *(ptr++);              /* Laenge des Linktexts addieren */
-            n[1] = *(ptr++);
-            n[2] = *(ptr++);
-            n[3] = *ptr;
-            n[4] = '\0';
-            
-            i = atoi(n);
-            len += pholdlen(i - OFFSET_PHOLD);
-            
-            ptr++;                        /* skip ESC */
+            len += pholdlen(ptr);
+            /* skip phold_counter */
+            ptr += 3;
             break;
             
             
@@ -7851,12 +7827,9 @@ char       *s)     /* */
 *
 ******************************************|************************************/
 
-GLOBAL void tokcat(
-
-char             *s,            /* */
-size_t            maxlen)       /* maximum size of buffer in <s> */
+GLOBAL void tokcat(char *s, size_t maxlen)
 {
-   register int   i;            /* counter */
+   register int   i;
    char           errbuf[128];  /* */
    size_t         m = 0;        /* Laenge des bisherigen Strings mitzaehlen */
    
@@ -7875,12 +7848,10 @@ size_t            maxlen)       /* maximum size of buffer in <s> */
       }
    }
 
-   if (m >= maxlen)                       /* buffer limit reached or exceeded */
+   /* buffer limit reached or exceeded? */
+   if (m >= maxlen)
    {
-      sprintf(errbuf, "Buffer overrun prevented (tokcat): %d>=%d", m, maxlen);
-      loglnposprintf ("Warning", errbuf);
-      
-      /* <???> Check if it is a good idea to even quit UDO here! */
+      warning_buffer_overrun("tokcat", "", m + 1, maxlen);
    }
 }
 
@@ -8083,14 +8054,11 @@ const char    *t)          /* the too long word */
 *
 ******************************************|************************************/
 
-GLOBAL void str2tok(
-
-char           *s)                 /* */
+GLOBAL void str2tok(char *s)
 {
-   char        *tok;               /* */
-   char         tmp[LINELEN + 1];  /* */
+   char        *tok;
+   char         tmp[LINELEN + 1];
    const char  *sep = " \t";       /* space and tab */
-
 
    if (token_counter >= MAX_TOKENS)
    {
@@ -8101,17 +8069,16 @@ char           *s)                 /* */
    um_strcpy(tmp, s, LINELEN + 1, "str2tok[1]");
 
    tok = strtok(tmp, sep);
-
-   while ( (tok != NULL) && (token_counter < MAX_TOKENS) )
+   while ((tok != NULL) && (token_counter < MAX_TOKENS))
    {
       um_strcpy(token[token_counter], tok, MAX_TOKEN_LEN + 1, "str2tok[2]");
       token_counter++;
       tok = strtok(NULL, sep);
    }
 
-   if (token_counter >= MAX_TOKENS)       /* [vj] new in v6.3.7: warning if tokens exceeded */
+   if (token_counter >= MAX_TOKENS)
    {
-      loglnposprintf("Error", "str2tok: maximum token number exceeded without further checking");
+      error_too_many_tokens();
    }
 }
 
@@ -8798,40 +8765,25 @@ _BOOL           reset_internals)        /* */
             if (token[i][0] != EOS)
             {
                strcat(z, token[i]);
-
-                                    /* this line has placeholders */
-                                    /* one of which is currently handled */
-               if ( (phold_counter >= 0) && (!strcmp(token[i], phold[i].magic)) )
-                  ;                 /* don't insert space character after placeholders! */
-                  
-               else if (i == 0 && use_justification)
+               if (i == 0 && use_justification)
                   strcat(z, INDENT_S);
                else
                   strcat(z, " ");
 
-               /* New in r6pl15 [NHz] */
                /* Capture first blank in string for a better appearance */
-
                if ((inside_env) && (desttype == TOKPS))
                {
-                  _BOOL   replaced_blank = TRUE;  /* */
-
+                  _BOOL replaced_blank;
 
                   do
                   {
-                     replaced_blank = qreplace_once (z, "( ", 2L, "(", 1L );
-                  }
-                  while (replaced_blank);
+                     replaced_blank = qreplace_once (z, "( ", 2, "(", 1);
+                  } while (replaced_blank);
                }
-
-               len_zeile += (len_token + 1);
-
-            } /* if (token[i][0] != EOS) */
-
+               len_zeile += len_token + 1;
+            }
             newline = FALSE;
-
-         } /* if ((len_zeile + len_token) <= umbruch) */
-
+         }
          else
          {
             /* Die Zeile wird zu lang, also zur Ausgabe vorbereiten */
@@ -8845,7 +8797,6 @@ _BOOL           reset_internals)        /* */
             case TOSTG:
             case TOAMG:
             case TOPCH:
-
                /* Schauen, ob das "ueberhaengende" Wort in den Trennvorschlaegen steckt */
                replace_hyphens(token[i]);
                str2silben(token[i]);
@@ -9681,7 +9632,7 @@ char             *s)                    /* */
    {
       if (token[i][0] == META_C && token[i][1] != QUOTE_C)
       {
-         error_unknown_command(token[i]);
+         error_message(_("unknown command: %s"), token[i]);
          reset_token = TRUE;
          break;
       }
@@ -9939,7 +9890,7 @@ const char  *name)    /* */
    if (!file)
       return;
 
-   show_status_info("Reading hyphen file...");
+   show_status_info(_("Reading hyphen file..."));
 
    while (fgets(z, 256,file))
       add_hyplist_item(z);
@@ -9950,11 +9901,11 @@ const char  *name)    /* */
       return;
    
 
-   show_status_info("Sorting hyphen file...");
+   show_status_info(_("Sorting hyphen file..."));
 
    hyplist = hyplist_sort(hyplist);
 
-   show_status_info("Writing hyphen file...");
+   show_status_info(_("Writing hyphen file..."));
 
    file = myFwopen(name, TOASC);
 
@@ -10724,7 +10675,7 @@ _BOOL   ignore)  /* TRUE: ignore all lines until "!else" or "!endif" */
    }
    else
    {
-      error_too_many_if(sFileNames[iFilesOpened], uiFileLines[iFilesOpened]);
+      error_message(_("too many !if"));
    }
 }
 
@@ -10742,18 +10693,16 @@ _BOOL   ignore)  /* TRUE: ignore all lines until "!else" or "!endif" */
 *
 ******************************************|************************************/
 
-LOCAL void pop_if_stack(void)
+LOCAL _BOOL pop_if_stack(void)
 {
    if (counter_if_stack > 0)
    {
-      if_stack[counter_if_stack].kind   = IF_NONE;
+      if_stack[counter_if_stack].kind = IF_NONE;
       if_stack[counter_if_stack].ignore = FALSE;
       counter_if_stack--;
+      return TRUE;
    }
-   else
-   {
-      error_endif_without_if();
-   }   
+   return FALSE;
 }
 
 
@@ -10778,7 +10727,7 @@ LOCAL void toggle_if_stack(void)
    }
    else
    {
-      error_else_without_if();
+      error_end_without_begin("!else", "!if...");
    }
 }
 
@@ -10999,7 +10948,8 @@ int          pnr)           /* */
 
    if (strstr(zeile, "!endif") != NULL)
    {
-      pop_if_stack();
+      if (!pop_if_stack())
+         error_end_without_begin("!endif", "!if...");
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
       return;
@@ -11007,7 +10957,8 @@ int          pnr)           /* */
 
    if (strstr(zeile, "!end_ignore") != NULL)
    {
-      pop_if_stack();
+      if (!pop_if_stack())
+         error_end_without_begin("!end_ignore", "!begin_ignore");
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
       return;
@@ -11243,8 +11194,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
             return TRUE;
          }
       }
-      
-      error_no_language(s);
+      error_message(_("language %s not supported"), s);
       return TRUE;
    }
 
@@ -12403,7 +12353,7 @@ char           *datei)           /* */
    {
       if (strcmp(sFileNames[i], tmp_datei) == 0)
       {
-         error_fatal_error("Recursive include detected");
+         fatal_message(_("Recursive !include detected"));
          bFatalErrorDetected = TRUE;
          myTextClose(file);
          return FALSE;
@@ -12971,6 +12921,11 @@ char           *datei)           /* */
                   {
                      c_code_source();
                   }
+                  else if (strcmp(token[0], "!code") == 0)
+                  {
+                     warning_message(_("!code is deprecated, use !code_source instead"));
+                     c_code_source();
+                  }
                   else if (strcmp(token[0], "!code_target") == 0)
                   {
                      c_code_target();
@@ -13108,7 +13063,7 @@ char       *zeile)        /* */
       if (len > zDocParwidth)
       {
          warning_long_destline(outfile.full, outlines + 1, (int) len);
-         note_long_sourceline();
+         note_message(bNoWarningsLines ? NULL : _("check this paragraph"));
       }
    }
 
@@ -13503,8 +13458,8 @@ char     *zeile)  /* */
          {
             if (pflag[PASS2].env == ENV_TABLE)
             {
-                                          /* Es kann nur eine geben */
-               error_table_inside_table();
+               /* Es kann nur eine geben */
+               error_message(_("UDO cannot handle nested tables"));
                zeile[0] = EOS;
             }
             else
@@ -13964,12 +13919,12 @@ char           *datei)            /* */
    {
       if (!b1stQuote)
       {
-         error_odd_dblquotes();
+         error_message(_("odd number of \"\""));
       }
       
       if (!b1stApost)
       {
-         error_odd_quotes();
+         error_message(_("odd number of ''"));
       }
    }
 
@@ -14987,7 +14942,7 @@ GLOBAL _BOOL udo
       {
          if (strcmp(outfile.full, infile.full) == 0)
          {
-            error_infile_outfile(outfile.full);
+            error_message(_("source and destination file are equal: <%s>"), outfile.full);
             bErrorDetected = TRUE;
             
             if (bLogopened)   fclose(fLogfile);
@@ -15061,7 +15016,7 @@ GLOBAL _BOOL udo
 
    logln_warnings_errors();
 
-   show_status_pass("Pass 1:");
+   show_status_pass(_("Pass 1:"));
 
    clear_if_stack();
 
@@ -15369,28 +15324,28 @@ GLOBAL _BOOL udo
    {
       show_status_info("");
       show_status_info("");
-      sprintf(sInfMsg, "Output written to %s", outfile.full);
+      sprintf(sInfMsg, _("Output written to %s"), outfile.full);
       show_status_info(sInfMsg);
    }
    
    show_status_info("");   
    show_status_info("");   
 
-   if ( (val = get_warning_counter()) > 0)
+   if ((val = get_warning_counter()) > 0)
    {
-      sprintf(sInfMsg, "Warnings: %d", val);
+      sprintf(sInfMsg, _("Warnings: %d"), val);
       show_status_errors(sInfMsg);
    }
    
-   if ( (val = get_note_counter()) > 0)
+   if ((val = get_note_counter()) > 0)
    {
-      sprintf(sInfMsg, "Notes:    %d", val);
+      sprintf(sInfMsg, _("Notes:    %d"), val);
       show_status_errors(sInfMsg);
    }
    
-   if ( (val = get_error_counter()) > 0)
+   if ((val = get_error_counter()) > 0)
    {
-      sprintf(sInfMsg, "Errors:   %d", val);
+      sprintf(sInfMsg, _("Errors:   %d"), val);
       show_status_errors(sInfMsg);
    }
 
@@ -15755,7 +15710,7 @@ char        *datei)        /* */
       {
          if (strcmp(outfile.full, infile.full) == 0)
          {
-            error_infile_outfile(outfile.full);
+            error_message(_("source and destination file are equal: <%s>"), outfile.full);
             bErrorDetected = TRUE;
             
             if (bLogopened)    fclose(fLogfile);
@@ -15821,7 +15776,7 @@ char        *datei)        /* */
 
    logln_warnings_errors();
 
-   show_status_pass("Pass 1...");
+   show_status_pass(_("Pass 1..."));
 
    clear_if_stack();
 

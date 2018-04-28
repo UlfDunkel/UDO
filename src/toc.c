@@ -161,6 +161,7 @@
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"
+#include "udointl.h"
 #include "commands.h"
 #include "abo.h"
 #include "chr.h"
@@ -4568,7 +4569,7 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
          strcpy(buffer, "html_hb_line[5]");
       }
             
-      if (lab[li]->name != EOS)
+      if (lab[li]->name != 0)
       {
          um_strcpy(s, lab[li]->name, 512, buffer);
 
@@ -7010,10 +7011,12 @@ const char   *filename)       /* */
       }
    }
    
-                                          /* ..sortieren */
+   show_status_info(_("Sorting index..."));
+   /* ..sortieren */
    qsort(html_index, num_index, sizeof(HTML_IDX), comp_index);
-
-   for (i = 0; i < num_index; i++)        /* ..und ausgeben */
+   
+   /* ..und ausgeben */
+   for (i = 0; i < num_index; i++)
    {
       get_html_filename(html_index[i].toc_index, htmlname, &html_merge);
       
@@ -13880,7 +13883,7 @@ GLOBAL void set_mapping(void)
    }
    else
    {
-      error_wrong_mapping();
+      error_message(_("mapping not numeric or not of type integer"));
    }
 }
 
@@ -14227,7 +14230,7 @@ const _BOOL   invisible)  /* TRUE: node is invisible */
 
    if (tocptr->name[0] == EOS)            /* r5pl14 */
    {
-      error_fatal_error("missing node name");
+      fatal_message("missing node name");
       bFatalErrorDetected = TRUE;
       um_free(tocptr);
       return NULL;
@@ -16714,7 +16717,7 @@ GLOBAL _BOOL check_module_toc_pass1(void)
    case TOAMG:
    case TOTEX:
    case TOPDL:
-      show_status_info("Checking nodes, labels and aliases...");
+      show_status_info(_("Checking nodes, labels and aliases..."));
       
       for (i = 1; i <= p1_lab_counter; i++)
       {
@@ -16722,35 +16725,34 @@ GLOBAL _BOOL check_module_toc_pass1(void)
          {
             if (strcmp(lab[i]->name, lab[j]->name) == 0)
             {
-               sprintf(s, "label \"%s\" used twice", lab[i]->name);
-               fatal_message(s);
+               error_message(_("label \"%s\" used twice"), lab[i]->name);
 
                sNode[0] = EOS;
-               strcpy(sTyp, "as a label");
+               strcpy(sTyp, _("as a label"));
                
                if (lab[i]->is_node)
-                  strcpy(sTyp, "as a node");
+                  strcpy(sTyp, _("as a node"));
                
                if (lab[i]->is_alias)
-                  strcpy(sTyp, "as an alias");
+                  strcpy(sTyp, _("as an alias"));
 
                if (!lab[i]->is_node)
-                  sprintf(sNode, " in node '%s'", toc[lab[i]->tocindex]->name);
+                  sprintf(sNode, _(" in node '%s'"), toc[lab[i]->tocindex]->name);
                
                sprintf(s, "1. %s%s", sTyp, sNode);
                note_message(s);
 
                sNode[0] = EOS;
-               strcpy(sTyp, "as a label");
+               strcpy(sTyp, _("as a label"));
 
                if (lab[j]->is_node)
-                  strcpy(sTyp, "as a node");
+                  strcpy(sTyp, _("as a node"));
 
                if (lab[j]->is_alias)
-                  strcpy(sTyp, "as an alias");
+                  strcpy(sTyp, _("as an alias"));
 
                if (!lab[j]->is_node)
-                  sprintf(sNode, " in node '%s'", toc[lab[j]->tocindex]->name);
+                  sprintf(sNode, _(" in node '%s'"), toc[lab[j]->tocindex]->name);
 
                sprintf(s, "2. %s%s", sTyp, sNode);
                note_message(s);
@@ -16772,7 +16774,7 @@ GLOBAL _BOOL check_module_toc_pass1(void)
    case TOMHH:
       if (!html_merge_node1)
       {
-         show_status_info("Checking HTML file names...");
+         show_status_info(_("Checking HTML file names..."));
 
          for (i = 0; i < p1_toc_counter; i++)
          {
@@ -16818,12 +16820,11 @@ GLOBAL _BOOL check_module_toc_pass1(void)
 
                if (checkString && strcmp(toc[i]->filename, toc[j]->filename) == 0)
                {
-                  sprintf(s, "file name \"%s\" used in \"%s\" and \"%s\"",
+                  error_message(_("file name \"%s\" used in \"%s\" and \"%s\""),
                      toc[i]->filename,
                      toc[i]->name,
                      toc[j]->name);
 
-                  fatal_message(s);
                   ret = FALSE;
                }
             }
@@ -16851,11 +16852,9 @@ GLOBAL _BOOL check_module_toc_pass1(void)
 GLOBAL _BOOL check_module_toc_pass2(void)
 {
    int    i;       /* counter */
-   char   s[512];  /* */
-   
    
    show_status_info("");
-   show_status_info("Checking usage of labels and aliases...");
+   show_status_info(_("Checking usage of labels and aliases..."));
    
    for (i = 1; i < p1_lab_counter; i++)
    {
@@ -16863,11 +16862,9 @@ GLOBAL _BOOL check_module_toc_pass2(void)
       {
          if (!lab[i]->is_node)
          {
-            sprintf(s, "label/alias '%s' in node '%s' wasn't referenced",
+            note_message(_("label/alias '%s' in node '%s' wasn't referenced"),
                lab[i]->name,
                toc[lab[i]->tocindex]->name);
-
-            note_message(s);
          }
       }
    }
