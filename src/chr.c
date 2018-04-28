@@ -157,6 +157,7 @@
 #include "udo.h"
 #include "chr_all.h"
 #include "chr_ttf.h"
+#include "udomem.h"
 
 #include "export.h"
 #include "chr.h"
@@ -173,73 +174,31 @@
 #include "u_udo.h"                        /* u_CODE_UDO[] */
 
 
-
-
-
-/*******************************************************************************
-*
-*     INCLUDE ERRORS
-*
-******************************************|************************************/
-
-#ifndef MAXTEX7BIT
-#error  "MAXTEX7BIT not defined!"
-#endif
-
-#ifndef MAXRTF7BIT
-#error  "MAXRTF7BIT not defined!"
-#endif
-
-#ifndef MAXWIN7BIT
-#error  "MAXWIN7BIT not defined!"
-#endif
-
-#ifndef MAXHTML7BIT
-#error  "MAXHTML7BIT not defined!"
-#endif
-
-#ifndef MAXLDS7BIT
-#error  "MAXLDS7BIT not defined!"
-#endif
-
-#ifndef MAXHTAG7BIT
-#error  "MAXHTAG7BIT not defined!"
-#endif
-
-
-
-
-
-
-
-
-
-
 /*******************************************************************************
 *
 *     TYPE DEFINITIONS
 *
 ******************************************|************************************/
 
-   typedef struct _quotecommand
-   {
-   char     *cmd;                         /* String PL6: vorher _UBYTE */
+typedef struct _quotecommand
+{
+   const char *cmd;                       /* String PL6: vorher _UBYTE */
    size_t    cmdlen;                      /* Laenge des Kommandos (need speed ;-))*/
-   char     *abb;                         /* Kommandoabkuerzung */
+   const char *abb;                       /* Kommandoabkuerzung */
    size_t    abblen;                      /* Laenge der Abkuerzung */
    _BOOL   skip_brackets;               /* don't quote command content in [] */
-   } QUOTECOMMAND;
+} QUOTECOMMAND;
 
 
-   typedef struct _chartable
-   {
-   _UWORD   uname;                         /* Unicode name for character */
-   char   *ascii;                         /* ASCII (7bit!) representation, if any */
-   char   *ansi;                          /* Ansi, used for WinHelp, RTF, etc. */
-   char   *tex;                           /* TeX */
-   char   *html;                          /* HTML */
-   char   *ps;                            /* PostScript */
-   }  CHARTABLE;
+typedef struct _chartable
+{
+   _UWORD  uname;                         /* Unicode name for character */
+   const char *ascii;                     /* ASCII (7bit!) representation, if any */
+   const char *rtf;                       /* Used for WinHelp, RTF, etc. */
+   const char *tex;                       /* TeX */
+   const char *html;                      /* HTML */
+   const char *ps;                        /* PostScript */
+} CHARTABLE;
 
 
 
@@ -253,7 +212,6 @@
 ******************************************|************************************/
 
 LOCAL _BOOL   last_aqc_verb;            /* */
-LOCAL int       texinfo_np_counter;       /* Non-Printable-Texinfo-Node-Counter ;-) */
 
 
 
@@ -341,7 +299,7 @@ LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
 
 
 
-CHARTABLE   chrtab[][6] =                 /* sorted alphabetically ;-) */
+static CHARTABLE const chrtab[] =           /* sorted alphabetically ;-) */
 {
 /*  Unicode name                          ASCII    Ansi                 TeX               HTML        PS         */
 /* ------------------------------------------------------------------------------------------------------------- */
@@ -1496,19 +1454,19 @@ int               type)           /* CHRTAB_... (CHR.H) */
       {
          j = 0;
          
-         while (chrtab[j]->uname != U_NIL)/* check for end of table! */
+         while (chrtab[j].uname != U_NIL)/* check for end of table! */
          {
                                           /* identical Unicode name found! */
-            if (chrtab[j]->uname == pUtrg[idx])
+            if (chrtab[j].uname == pUtrg[idx])
             {
             
                switch (type)
                {
                case CHRTAB_ASCII:
                                           /* we have do replace something */
-                  if (chrtab[j]->ascii[0] != EOS)
+                  if (chrtab[j].ascii[0] != EOS)
                   {                       /* add replacement string to buffer */
-                     strcat(sbuf,chrtab[j]->ascii);
+                     strcat(sbuf,chrtab[j].ascii);
                      break;
                   }
                   
@@ -1516,9 +1474,9 @@ int               type)           /* CHRTAB_... (CHR.H) */
                
                case CHRTAB_ANSI:
                                           /* we have do replace something */
-                  if (chrtab[j]->ansi[0] != EOS)
+                  if (chrtab[j].rtf[0] != EOS)
                   {                       /* add replacement string to buffer */
-                     strcat(sbuf,chrtab[j]->ansi);
+                     strcat(sbuf,chrtab[j].rtf);
                      break;
                   }
                   
@@ -1526,9 +1484,9 @@ int               type)           /* CHRTAB_... (CHR.H) */
                
                case CHRTAB_HTML:
                                           /* we have do replace something */
-                  if (chrtab[j]->html[0] != EOS)
+                  if (chrtab[j].html[0] != EOS)
                   {                       /* add replacement string to buffer */
-                     strcat(sbuf,chrtab[j]->html);
+                     strcat(sbuf,chrtab[j].html);
                      break;
                   }
                   
@@ -4134,14 +4092,14 @@ _BOOL           all)            /* */
                j = 0;
          
                                           /* check for end of table! */
-               while (chrtab[j]->uname != U_NIL)
+               while (chrtab[j].uname != U_NIL)
                {
                                           /* identical Unicode name found! */
-                  if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
+                  if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
                   {
-                     if (chrtab[j]->tex[0] != EOS)
+                     if (chrtab[j].tex[0] != EOS)
                      {
-                        ptr_quoted = chrtab[j]->tex;
+                        ptr_quoted = chrtab[j].tex;
                         found = TRUE;
                         break;
                      }
@@ -4235,14 +4193,14 @@ _BOOL           all)            /* */
          
             j = 0;
                                           /* check for end of table! */
-            while (chrtab[j]->uname != U_NIL)
+            while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
+               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
                {
-                  if (chrtab[j]->ansi[0] != EOS)
+                  if (chrtab[j].rtf[0] != EOS)
                   {
-                     ptr_quoted = chrtab[j]->ansi;
+                     ptr_quoted = chrtab[j].rtf;
                      found = TRUE;
                      break;
                   }
@@ -4283,14 +4241,14 @@ _BOOL           all)            /* */
             j = 0;
         
                                           /* check for end of table! */
-            while (chrtab[j]->uname != U_NIL)
+            while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
+               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
                {
-                  if (chrtab[j]->ps[0] != EOS)
+                  if (chrtab[j].ps[0] != EOS)
                   {
-                     ptr_quoted = chrtab[j]->ps;
+                     ptr_quoted = chrtab[j].ps;
                      found = TRUE;
                      break;
                   }
@@ -4346,14 +4304,14 @@ _BOOL           all)            /* */
             j = 0;
         
                                           /* check for end of table! */
-            while (chrtab[j]->uname != U_NIL)
+            while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
+               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
                {
-                  if (chrtab[j]->ansi[0] != EOS)
+                  if (chrtab[j].rtf[0] != EOS)
                   {
-                     ptr_quoted = chrtab[j]->ansi;
+                     ptr_quoted = chrtab[j].rtf;
                      found = TRUE;
                      break;
                   }
@@ -4410,15 +4368,15 @@ _BOOL           all)            /* */
             j = 0;                        /* search chrtab[] from first entry */
              
                                           /* check for end of table! */
-            while (chrtab[j]->uname != U_NIL)
+            while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (chrtab[j]->uname == pUtrg[idx])
+               if (chrtab[j].uname == pUtrg[idx])
                {
                                           /* valid HTML entity found? */
-                  if (chrtab[j]->html[0] != EOS)
+                  if (chrtab[j].html[0] != EOS)
                   {
-                     ptr_quoted = chrtab[j]->html;
+                     ptr_quoted = chrtab[j].html;
                      found = TRUE;
                      break;
                   }
@@ -4468,14 +4426,14 @@ _BOOL           all)            /* */
             j = 0;
         
                                           /* check for end of table! */
-            while (chrtab[j]->uname != U_NIL)
+            while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
+               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
                {
-                  if (chrtab[j]->html[0] != EOS)
+                  if (chrtab[j].html[0] != EOS)
                   {
-                     ptr_quoted = chrtab[j]->html;
+                     ptr_quoted = chrtab[j].html;
                      found = TRUE;
                      break;
                   }
@@ -4511,14 +4469,14 @@ _BOOL           all)            /* */
             j = 0;
         
                                           /* check for end of table! */
-            while (chrtab[j]->uname != U_NIL)
+            while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
+               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
                {
-                  if (chrtab[j]->html[0] != EOS)
+                  if (chrtab[j].html[0] != EOS)
                   {
-                     ptr_quoted = chrtab[j]->html;
+                     ptr_quoted = chrtab[j].html;
                      found = TRUE;
                      break;
                   }
@@ -4687,7 +4645,6 @@ char             *s)              /* ^ string */
 GLOBAL void init_module_chars(void)
 {
    last_aqc_verb      = FALSE;            /* */
-   texinfo_np_counter = 0;                /* */
 }
 
 
