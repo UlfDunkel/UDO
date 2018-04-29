@@ -232,15 +232,13 @@ LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 };
 
 
-/*      ############################################################
-        #
-        # Automatisches Quoten von kritischen Zeichen dort, wo kein
-        # (!V)/(!v) benutzt wird und kein !tex, !=tex etc. am
-        # Zeilenanfang steht.
-        #
-        ############################################################    */
-
-
+/* ############################################################
+   #
+   # Automatisches Quoten von kritischen Zeichen dort, wo kein
+   # (!V)/(!v) benutzt wird und kein !tex, !=tex etc. am
+   # Zeilenanfang steht.
+   #
+   ############################################################   */
 
 /* Es wird zwar unten mit strncmp() getestet, ob das Kommando */
 /* gequotet werden muss, allerdings muss nach dem Kommando */
@@ -248,53 +246,51 @@ LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 /* TRUE liefert. Daher muessen hier sowohl !node als auch */
 /* !node* angegeben werden! */
 
-# define        MAXQUOTECMD     41
-
-LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
+LOCAL const QUOTECOMMAND quotecommand[] =
 {
-   {"!node",              5, "!n",     2       , FALSE},
-   {"!subnode",           8, "!sn",    3       , FALSE},
-   {"!subsubnode",       11, "!ssn",   4       , FALSE},
-   {"!subsubsubnode",    14, "!sssn",  5       , FALSE},
-   {"!pnode",             6, "!p",     2       , FALSE},
-   {"!psubnode",          9, "!ps",    3       , FALSE},
-   {"!psubsubnode",      12, "!pss",   4       , FALSE},
-   {"!psubsubsubnode",   15, "!psss",  5       , FALSE},
-   {"!node*",             6, "!n*",    3       , FALSE},
-   {"!subnode*",          9, "!sn*",   4       , FALSE},
-   {"!subsubnode*",      12, "!ssn*",  5       , FALSE},
-   {"!subsubsubnode*",   15, "!sssn*", 6       , FALSE},
-   {"!pnode*",            7, "!p*",    3       , FALSE},
-   {"!psubnode*",        10, "!ps*",   4       , FALSE},
-   {"!psubsubnode*",     13, "!pss*",  5       , FALSE},
-   {"!psubsubsubnode*",  16, "!psss*", 6       , FALSE},
-   {"!begin_node",       11, "!bn",    3       , FALSE},
-   {"!begin_pnode",      12, "!bp",    3       , FALSE},
-   {"!begin_node*",      12, "!bn*",   4       , FALSE},
-   {"!begin_pnode*",     13, "!bp*",   4       , FALSE},
-   {"!item",              5, "!i",     2       , FALSE},
-   {"!index",             6, "!x",     2       , FALSE},
-   {"!image",             6, "",       0       , FALSE},
-   {"!image*",            7, "",       0       , FALSE},
-   {"!table_caption",    14, "",       0       , FALSE},
-   {"!table_caption*",   15, "",       0       , FALSE},      /* r6pl1 */
-   {"!begin_xlist",      12, "!bxl",   4       , FALSE},      /* wegen des Inhalts der eckigen Klammern!  */
-   {"!begin_blist",      12, "!bbl",   4       , FALSE},      /* Fehlen die hier, so bekommt c_begin_list */
-   {"!begin_ilist",      12, "!bil",   4       , FALSE},      /* einen String, der c_vars(), aber nicht   */
-   {"!begin_tlist",      12, "!btl",   4       , FALSE},      /* auto_quote_chars() durchlaufen hat!!!    */
-   {"!begin_enumerate",  16, "!be",    3       , FALSE},
-   {"!heading",           8, "!h",     2       , FALSE},
-   {"!subheading",       11, "!sh",    3       , FALSE},
-   {"!subsubheading",    14, "!ssh",   4       , FALSE},
-   {"!subsubsubheading", 17, "!sssh",  5       , FALSE},
-   {"!macro",             6, "",       0       , FALSE},
-   {"!hyphen",            7, "",       0       , FALSE},
-   {"!label",             6, "",       0       , FALSE},
-   {"!label*",            7, "",       0       , FALSE},
-   {"!alias",             6, "",       0       , FALSE},
-   {"!docinfo",           8, "",       0       , TRUE },
+   { "!node",                             5, "!n",          2, FALSE },
+   { "!subnode",                          8, "!sn",         3, FALSE },
+   { "!subsubnode",                      11, "!ssn",        4, FALSE },
+   { "!subsubsubnode",                   14, "!sssn",       5, FALSE },
+   { "!pnode",                            6, "!p",          2, FALSE },
+   { "!psubnode",                         9, "!ps",         3, FALSE },
+   { "!psubsubnode",                     12, "!pss",        4, FALSE },
+   { "!psubsubsubnode",                  15, "!psss",       5, FALSE },
+   { "!node*",                            6, "!n*",         3, FALSE },
+   { "!subnode*",                         9, "!sn*",        4, FALSE },
+   { "!subsubnode*",                     12, "!ssn*",       5, FALSE },
+   { "!subsubsubnode*",                  15, "!sssn*",      6, FALSE },
+   { "!pnode*",                           7, "!p*",         3, FALSE },
+   { "!psubnode*",                       10, "!ps*",        4, FALSE },
+   { "!psubsubnode*",                    13, "!pss*",       5, FALSE },
+   { "!psubsubsubnode*",                 16, "!psss*",      6, FALSE },
+   { "!begin_node",                      11, "!bn",         3, FALSE },
+   { "!begin_pnode",                     12, "!bp",         3, FALSE },
+   { "!begin_node*",                     12, "!bn*",        4, FALSE },
+   { "!begin_pnode*",                    13, "!bp*",        4, FALSE },
+   { "!item",                             5, "!i",          2, FALSE },
+   { "!index",                            6, "!x",          2, FALSE },
+   { "!image",                            6, "",            0, FALSE },
+   { "!image*",                           7, "",            0, FALSE },
+   { "!table_caption",                   14, "",            0, FALSE },
+   { "!table_caption*",                  15, "",            0, FALSE },
+   { "!begin_xlist",                     12, "!bxl",        4, FALSE }, /* wegen des Inhalts der eckigen Klammern! */
+   { "!begin_blist",                     12, "!bbl",        4, FALSE }, /* Fehlen die hier, so bekommt c_begin_list */
+   { "!begin_ilist",                     12, "!bil",        4, FALSE }, /* einen String, der c_vars(), aber nicht */
+   { "!begin_tlist",                     12, "!btl",        4, FALSE }, /* auto_quote_chars() durchlaufen hat!!! */
+   { "!begin_enumerate",                 16, "!be",         3, FALSE },
+   { "!heading",                          8, "!h",          2, FALSE },
+   { "!subheading",                      11, "!sh",         3, FALSE },
+   { "!subsubheading",                   14, "!ssh",        4, FALSE },
+   { "!subsubsubheading",                17, "!sssh",       5, FALSE },
+   { "!macro",                            6, "",            0, FALSE },
+   { "!hyphen",                           7, "",            0, FALSE },
+   { "!label",                            6, "!l",          2, FALSE },
+   { "!label*",                           7, "!l*",         3, FALSE },
+   { "!alias",                            6, "!a",          2, FALSE },
+   { "!docinfo",                          8, "",            0, TRUE },
 };
-
+#define MAXQUOTECMD ArraySize(quotecommand)
 
 
 
