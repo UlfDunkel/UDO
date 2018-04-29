@@ -174,6 +174,7 @@
 #include "sty.h"
 #include "tp.h"
 #include "udo.h"
+#include "upr.h"
 #include "gui.h"
 #include "debug.h"
 #include "udomem.h"

@@ -83,6 +83,7 @@
 #include "sty.h"
 #include "toc.h"
 #include "udo.h"
+#include "upr.h"
 #include "img.h"
 #include "udomem.h"
 

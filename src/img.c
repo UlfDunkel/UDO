@@ -77,6 +77,7 @@
 #include "str.h"
 #include "sty.h"
 #include "udo.h"
+#include "upr.h"
 #include "img_html.h"                     /* graphic data for GIF (used in HTML) */
 #include "img_win.h"                      /* graphic data for BMP (used in WinHelp) */
 #include "img_stg.h"                      /* graphic data for IMG (used in ST-Guide) */

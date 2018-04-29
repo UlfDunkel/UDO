@@ -549,30 +549,4 @@ GLOBAL _BOOL udo2udo (char *datei);
 GLOBAL void init_vars(void);
 
 
-   /* --- project file entry manager --- */
-
-   /* ? */
-GLOBAL void save_upr_entry_infile(const char *filename);
-   /* ? */
-GLOBAL void save_upr_entry_outfile(const char *filename);
-   /* ? */
-GLOBAL void save_upr_entry_image(const char *filename);
-
-/* Changed in r6pl15 [NHz] */
-/* Extra parameter line */
-   /* ? */
-GLOBAL void save_upr_entry_node(const int level, const char *filename, const char *title, const long line);
-   /* ? */
-GLOBAL void save_upr_entry_heading(const int level, const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
-   /* ? */
-GLOBAL void save_upr_entry_alias(const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
-   /* ? */
-GLOBAL void save_upr_entry_label(const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
-   /* ? */
-GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
-
-
 #endif  /* __UDO_H__ */
-
-
-/* +++ EOF +++ */
