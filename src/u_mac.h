@@ -82,7 +82,7 @@
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_MAC[] =             /* CODE_MAC */
+static _UWORD const u_CODE_MAC[] =             /* CODE_MAC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -365,7 +365,7 @@ static _UWORD   u_CODE_MAC[] =             /* CODE_MAC */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_MAC_lig[][3] =        /* CODE_MAC character ligatures */
+static _UWORD const CODE_MAC_lig[][3] =        /* CODE_MAC character ligatures */
 {
    {0x0080, U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x0080  U_LatinCapitalLetterAWithDiaeresis */
    {0x0085, U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x0085  U_LatinCapitalLetterOWithDiaeresis */
@@ -405,7 +405,7 @@ static _UWORD   CODE_MAC_lig[][3] =        /* CODE_MAC character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_MAC[] =          /* CODE_MAC */
+static _UWORD const sort_CODE_MAC[] =          /* CODE_MAC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -693,7 +693,7 @@ static _UWORD   sort_CODE_MAC[] =          /* CODE_MAC */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_MAC_CE[] =          /* CODE_MAC_CE */
+static _UWORD const u_CODE_MAC_CE[] =          /* CODE_MAC_CE */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -969,7 +969,7 @@ static _UWORD   u_CODE_MAC_CE[] =          /* CODE_MAC_CE */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_MAC_CE_lig[][3] =     /* CODE_MAC_CE character ligatures */
+static _UWORD const CODE_MAC_CE_lig[][3] =     /* CODE_MAC_CE character ligatures */
 {
    {0x00C4, U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x80   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    {0x00D6, U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x85   0x00D6   LATIN CAPITAL LETTER O WITH DIAERESIS */
@@ -995,7 +995,7 @@ static _UWORD   CODE_MAC_CE_lig[][3] =     /* CODE_MAC_CE character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_MAC_CE[] =       /* CODE_MAC_CE */
+static _UWORD const sort_CODE_MAC_CE[] =       /* CODE_MAC_CE */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1256,6 +1256,3 @@ static _UWORD   sort_CODE_MAC_CE[] =       /* CODE_MAC_CE */
    U_LatinCapitalLetterG,                 /* 0xFE   0x0122   LATIN CAPITAL LETTER G WITH CEDILLA */
    U_Caron                                /* 0xFF   0x02C7   CARON */
 };
-
-
-/* +++ EOF +++ */

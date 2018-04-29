@@ -507,37 +507,6 @@ static CHARTABLE const chrtab[] =           /* sorted alphabetically ;-) */
 
 /*******************************************************************************
 *
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-   /* convert (UDO's) universal characters into miscellaneous encodings */
-LOCAL void uni2misc(char *s);
-
-LOCAL void specials2ascii(char *s);
-LOCAL void specials2ipf(char *s);
-LOCAL void specials2info(char *s);
-LOCAL void specials2win(char *s);
-LOCAL void specials2rtf(char *s);
-LOCAL void texvar2ascii(char *s);
-
-   /* replace single or double quotation marks from UDO format to system characters */
-LOCAL void c_quotes_apostrophes(char *s, const char *aon, const char *aoff, const char *qon, const char *qoff );
-
-LOCAL void str2manbold(char *d, const char *s);
-LOCAL void str2manunder(char *d, const char *s);
-
-
-
-
-
-
-
-
-
-
-/*******************************************************************************
-*
 *     LOCAL FUNCTIONS
 *
 ******************************************|************************************/
@@ -556,12 +525,9 @@ LOCAL void str2manunder(char *d, const char *s);
 *
 ******************************************|************************************/
 
-LOCAL void uni2misc(
-
-char             *s)  /* ^ string */
+LOCAL void uni2misc(char *s)
 {
-   register int   i;  /* counter */
-
+   register int i;
 
    if (s[0] == EOS)                       /* empty string */
       return;
@@ -573,51 +539,48 @@ char             *s)  /* ^ string */
    {
    case TOTEX:
    case TOPDL:
-      for (i = 0; i < UNITABLESIZE; i++)
+      for (i = 0; i < (int)UNITABLESIZE; i++)
          replace_all(s, unitab[i].uni, unitab[i].tex);
-
       break;
 
    case TOHAH:
    case TOHTM:
    case TOMHH:
       if (html_ignore_8bit)
+      {
          recode_udo(s);
+      }
       else
       {
-         for (i = 0; i < UNITABLESIZE; i++)
+         for (i = 0; i < (int)UNITABLESIZE; i++)
             replace_all(s, unitab[i].uni, unitab[i].html);
       }
-      
       break;
 
    case TOLDS:
    case TOHPH:
-      for (i = 0; i < UNITABLESIZE; i++)
+      for (i = 0; i < (int)UNITABLESIZE; i++)
          replace_all(s, unitab[i].uni, unitab[i].html);
-
       break;
 
    case TOWIN:
    case TOWH4:
    case TOAQV:
    case TORTF:
-      for (i = 0; i < UNITABLESIZE; i++)
+      for (i = 0; i < (int)UNITABLESIZE; i++)
          replace_all(s, unitab[i].uni, unitab[i].win);
-
       break;
 
    case TOPCH:
       recode_udo(s);
-
       if (no_umlaute)                     /* target encoding must not use umlauts */
-         recode_chrtab(s,CHRTAB_ASCII);   /* convert all umlauts to pure ASCII */
-
+         recode_chrtab(s, CHRTAB_ASCII);  /* convert all umlauts to pure ASCII */
       break;
 
    case TOLYX:
-      for (i = 0; i < UNITABLESIZE; i++)
+      for (i = 0; i < (int)UNITABLESIZE; i++)
          replace_all(s, unitab[i].uni, unitab[i].lyx);
+      break;
    }
 }
 
@@ -636,10 +599,7 @@ char             *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void recode_always(
-
-char  *zeile,     /* ^ text line */
-int    char_set)  /* isn't this identical to iCharset??? */
+LOCAL void recode_always(char *zeile, int char_set)
 {
    switch (char_set)
    {
@@ -651,42 +611,48 @@ int    char_set)  /* isn't this identical to iCharset??? */
 
 #if !defined(__MACOS__) && !defined(__MACOSX__)
    case CODE_MAC:
+      mac2iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __TOS__
    case CODE_TOS:
+      tos2iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __MSDOS__
    case CODE_437:
+      cp437iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __MSDOS850__
    case CODE_850:
+      cp850iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __HPUX_ROMAN8__
    case CODE_HP8:
+      hp82iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __NEXTSTEP__
    case CODE_NEXT:
+      next2iso(zeile);
       iso2system(zeile);
       break;
 #endif
    }
 }
-#endif  /* #if 0 */
+#endif
 
 
 
@@ -713,13 +679,10 @@ int    char_set)  /* isn't this identical to iCharset??? */
 *
 ******************************************|************************************/
 
-GLOBAL char *unicode2char(
-
-_UWORD       unicode,  /* ^ 1st string for comparison */
-char       *cbuf)
+GLOBAL const char *unicode2char(_UWORD unicode, char *cbuf)
 {
    int      i = 0;    /* counter */
-   _UWORD  (*pumap);   /* ^ to u_CODE_xxx[] arrays */
+   const _UWORD  *pumap;   /* ^ to u_CODE_xxx[] arrays */
    
             
    if (unicode == U_NIL)                  /* nothing to do */
@@ -727,7 +690,7 @@ char       *cbuf)
    
    if (iEncodingTarget == CODE_UTF8)      /* Unicode first! */
    {
-      bstr_to_utf8(unicode,cbuf);
+      bstr_to_utf8(unicode, cbuf);
       return cbuf;
    }
 
@@ -766,14 +729,10 @@ char       *cbuf)
 *
 ******************************************|************************************/
 
-GLOBAL _UWORD utf8_to_bstr(
-
-const char  *sz,        /* */
-int          len)       /* */
+GLOBAL _UWORD utf8_to_bstr(const char *sz, int len)
 {
    int       i = 0;     /* */
    _UWORD     temp = 0;  /* */
-   
    
    while (i < len)
    {
@@ -869,17 +828,13 @@ int          len)       /* */
 *
 ******************************************|************************************/
 
-GLOBAL _UWORD utf8_to_uchar(
-
-const char  *sz,            /* */
-int         *length)        /* return value for # of used UTF-8 bytes */
+GLOBAL _UWORD utf8_to_uchar(const char *sz, int *length)
 {
    int       i = 0;         /* ^ into string */
    _UWORD     temp = 0;      /* buffer for Unicode codepoint value */
    _BOOL   done = FALSE;  /* TRUE: 1st Unicode char found */
    
-   
-   while (i < strlen(sz))                 /* whole string */
+   while (sz[i] != '\0')                 /* whole string */
    {
       if ((sz[i] & 0x80) == 0)            /* 0000 0000-0000 007F 0xxxxxxx */
       {
@@ -999,15 +954,11 @@ int         *length)        /* return value for # of used UTF-8 bytes */
 *
 ******************************************|************************************/
 
-GLOBAL char *bstr_to_utf8(
-
-_UWORD      ucode,  /* */
-char      *utf)    /* */
+GLOBAL char *bstr_to_utf8(_UWORD ucode, char *utf)
 {
-   _ULONG   temp;   /* */
+   _ULONG   temp;
    
-   
-   memset(utf,0,9);                       /* clear buffer */
+   memset(utf, 0, 7);                     /* clear buffer */
    temp = (_ULONG)ucode;
    
    if (temp < 0x0080)                     /* 0000 0000-0000 007F -> 0xxxxxxx */
@@ -1080,31 +1031,16 @@ char      *utf)    /* */
 *
 ******************************************|************************************/
 
-GLOBAL void convert_sz(
-
-char  *s)  /* ^ string */
+GLOBAL void convert_sz(char *s)
 {
-   _UWORD        (*pUtrg);         /* ^ encoding table for target encoding */
-   
-
-   if (html_ignore_8bit)                  /* ignore any conversion */
-      return;
-   
-   pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
-   
-   if (!pUtrg)                            /* Unicode? */
-      return;                             /* no recoding! */
-   
 #ifdef __TOS__
    replace_char(s, '\341', '\236');       /* from DOS(?):0xE1 to TOS:0x9E */
 #else
 # if !defined(__MSDOS__) && !defined(__MSDOS850__)
-
-   if (desttype != TOSTG || desttype == TOPCH)
-      replace_char(s, '\236', '\341');    /* from TOS:0x9E to DOS(?):0xE1 */
-# else
+   replace_char(s, '\236', '\341');       /* from TOS:0x9E to DOS(?):0xE1 */
+#else
    UNUSED(s);
-# endif
+#endif
 #endif
 }
 
@@ -1122,12 +1058,11 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void recode_udo(
-
-char             *s)        /* ^ string */
+GLOBAL void recode_udo(char *s)
 {
-   register int   i = 0;    /* counter */
-   char           cbuf[8];  /* char */
+   register int i = 0;    /* counter */
+   char cbuf[8];  /* char */
+   const char *repl;
 
    if (s[0] == EOS)                       /* empty string */
       return;
@@ -1135,12 +1070,12 @@ char             *s)        /* ^ string */
    if (strstr(s, "(!") == NULL)           /* no UDO command header found */
       return;
 
-   while (u_CODE_UDO[i]->udo[0] != EOS)   /* check whole table */
+   while (u_CODE_UDO[i].udo != NULL)      /* check whole table */
    {
                                           /* get recoded replacement char(s) */
-      unicode2char(u_CODE_UDO[i]->unicode,cbuf);
+      repl = unicode2char(u_CODE_UDO[i].unicode, cbuf);
                                           /* replace all existances */
-      replace_all(s, u_CODE_UDO[i]->udo, cbuf);
+      replace_all(s, u_CODE_UDO[i].udo, repl);
       
       if (strstr(s, "(!") == NULL)        /* no further UDO command header found */
          break;
@@ -1149,9 +1084,8 @@ char             *s)        /* ^ string */
    }
 
    if (no_umlaute)                        /* target encoding must not use umlauts */
-      recode_chrtab(s,CHRTAB_ASCII);      /* convert all umlauts to pure ASCII */
+      recode_chrtab(s, CHRTAB_ASCII);     /* convert all umlauts to pure ASCII */
 }
-
 
 
 
@@ -1176,18 +1110,15 @@ char             *s)        /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void recode(
-
-char        *zeile,             /* ^ line */
-int          char_set)          /* iCharset */
+GLOBAL void recode(char *zeile, int char_set)
 {
-   char     *ptr;               /* */
-   _UWORD     idx;               /* */
-   _UWORD   (*pUsrc);            /* ^ encoding table for source encoding */
-   _UWORD   (*pUtrg);            /* ^ encoding table for target encoding */
-   char      sSource[42] = "";  /* source encoding name, human-readable */
-   char      sTarget[42] = "";  /* target encoding name, human-readable */
-   _UWORD     i;                 /* counter */
+   char     *ptr;
+   _UWORD     idx;
+   const _UWORD *pUsrc;          /* ^ encoding table for source encoding */
+   const _UWORD *pUtrg;          /* ^ encoding table for target encoding */
+   char      sSource[42];       /* source encoding name, human-readable */
+   char      sTarget[42];       /* target encoding name, human-readable */
+   _UWORD    i;                 /* counter */
    _BOOL   found = FALSE;     /* TRUE: char found */
    
 
@@ -1210,6 +1141,7 @@ int          char_set)          /* iCharset */
    case TOAMG:                            /* AmigaGuide */
    case TOWIN:                            /* Windows Help */
       iEncodingTarget = CODE_CP1252;
+      break;
    }
       
                                           /* nothing to do */   
@@ -1246,7 +1178,7 @@ int          char_set)          /* iCharset */
       memset(sbuf,0,LINELEN);
       memset(cbuf,0,9);
       
-      for (j = 0; j < strlen(zeile); j++)
+      for (j = 0; zeile[j] != EOS; j++)
       {
          idx = (_UBYTE)zeile[j];
          
@@ -1315,7 +1247,7 @@ int          char_set)          /* iCharset */
          }
       }
       
-      strcpy(zeile,sbuf);                 /* restore line */
+      strcpy(zeile, sbuf);                /* restore line */
 
       if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
          recode_udo(zeile);
@@ -1333,10 +1265,10 @@ int          char_set)          /* iCharset */
       int   j;              /* counter */
       
       
-      memset(sbuf,0,LINELEN);
-      memset(cbuf,0,9);
+      memset(sbuf, 0, sizeof(sbuf));
+      memset(cbuf, 0, sizeof(cbuf));
       
-      for (j = 0; j < strlen(zeile); j++)
+      for (j = 0; zeile[j] != EOS; j++)
       {
          idx = (_UBYTE)zeile[j];
          
@@ -1417,14 +1349,11 @@ int          char_set)          /* iCharset */
 *
 ******************************************|************************************/
 
-GLOBAL void recode_chrtab(
-
-char             *s,              /* ^ string */
-int               type)           /* CHRTAB_... (CHR.H) */
+GLOBAL void recode_chrtab(char *s, int type)
 {
    register int   i = 0;          /* counter for string */
    register int   j = 0;          /* counter for chrtab[] */
-   _UWORD        (*pUtrg);         /* ^ encoding table for target encoding */
+   const _UWORD   *pUtrg;         /* ^ encoding table for target encoding */
    _UWORD          idx;            /* Unicode index of char */
    char           sbuf[LINELEN];  /* buffer the whole string */
    char           cbuf[2];        /* buffer for one char */
@@ -1442,7 +1371,7 @@ int               type)           /* CHRTAB_... (CHR.H) */
    memset(sbuf,0,LINELEN);
    memset(cbuf,0,2);
 
-   for (i = 0; i < strlen(s); i++)        /* */
+   for (i = 0; s[i] != EOS; i++)
    {
       idx = (_UBYTE)s[i];                  /* get Unicode index of char */
       
@@ -1462,7 +1391,7 @@ int               type)           /* CHRTAB_... (CHR.H) */
                                           /* we have do replace something */
                   if (chrtab[j].ascii[0] != EOS)
                   {                       /* add replacement string to buffer */
-                     strcat(sbuf,chrtab[j].ascii);
+                     strcat(sbuf, chrtab[j].ascii);
                      break;
                   }
                   
@@ -1472,7 +1401,7 @@ int               type)           /* CHRTAB_... (CHR.H) */
                                           /* we have do replace something */
                   if (chrtab[j].rtf[0] != EOS)
                   {                       /* add replacement string to buffer */
-                     strcat(sbuf,chrtab[j].rtf);
+                     strcat(sbuf, chrtab[j].rtf);
                      break;
                   }
                   
@@ -1482,7 +1411,7 @@ int               type)           /* CHRTAB_... (CHR.H) */
                                           /* we have do replace something */
                   if (chrtab[j].html[0] != EOS)
                   {                       /* add replacement string to buffer */
-                     strcat(sbuf,chrtab[j].html);
+                     strcat(sbuf, chrtab[j].html);
                      break;
                   }
                   
@@ -1497,7 +1426,7 @@ int               type)           /* CHRTAB_... (CHR.H) */
       else
       {
          cbuf[0] = s[i];                  /* convert char to string */
-         strcat(sbuf,cbuf);               /* add to buffer */
+         strcat(sbuf, cbuf);              /* add to buffer */
       }
    }
    
@@ -1512,7 +1441,8 @@ int               type)           /* CHRTAB_... (CHR.H) */
                                           /* replace it (e.g. by '&amp;') */
          replace_all(s, html7bit[i].quoted, cbuf);
       }
-   }      
+      break;
+   }
 
 
       
@@ -1548,29 +1478,21 @@ int               type)           /* CHRTAB_... (CHR.H) */
 *
 ******************************************|************************************/
 
-GLOBAL int calc_ttf_twip(
-
-const char *s,       /* ^ string */
-const int   font,    /* */
-const int   style)   /* */
+GLOBAL int calc_ttf_twip(const char *s, const int font, const int style)
 {
-   int      pixel,   /* */
-            twip;    /* */
-   size_t   i;       /* counter */
-   char     d[512];  /* */
+   int pixel, twip;
+   size_t i;
+   char d[512];
    
-   
-   if (s[0] == EOS)                       /* empty string */
-      return (0);
+   if (s[0] == EOS)
+      return 0;
 
-   strcpy(d, s);                          /* copy string */
-/*   recode_always(d, iCharset); */
+   strcpy(d, s);
    strcat(d, "W");                        /* Breitenausgleiche */
 
    pixel = 0;
-
    switch (font)
-   {       
+   {
    case TTF_TIMES:
       switch (style)
       {
@@ -1580,7 +1502,6 @@ const int   style)   /* */
             pixel += width_times_11_bold[(_UBYTE)d[i]];
             pixel++;
          }
-         
          break;
          
       case TTF_ITALIC:
@@ -1589,7 +1510,6 @@ const int   style)   /* */
             pixel += width_times_11_italic[(_UBYTE)d[i]];
             pixel++;
          }
-         
          break;
 
       default:
@@ -1598,8 +1518,8 @@ const int   style)   /* */
             pixel += width_times_11_regular[(_UBYTE)d[i]];
             pixel++;
          }
+         break;
       }
-      
       break;
 
    case TTF_COURIER:
@@ -1611,7 +1531,6 @@ const int   style)   /* */
             pixel += width_courier_10_bold[(_UBYTE)d[i]];
             pixel++;
          }
-         
          break;
 
       case TTF_ITALIC:
@@ -1620,7 +1539,6 @@ const int   style)   /* */
             pixel += width_courier_10_italic[(_UBYTE)d[i]];
             pixel++;
          }
-         
          break;
 
       default:
@@ -1629,8 +1547,8 @@ const int   style)   /* */
             pixel += width_courier_10_regular[(_UBYTE)d[i]];
             pixel++;
          }
+         break;
       }
-      
       break;
 
    default:
@@ -1642,7 +1560,6 @@ const int   style)   /* */
             pixel += width_arial_10_bold[(_UBYTE)d[i]];
             pixel++;
          }
-         
          break;
          
       case TTF_ITALIC:
@@ -1651,25 +1568,26 @@ const int   style)   /* */
             pixel += width_arial_10_italic[(_UBYTE)d[i]];
             pixel++;
          }
-
          break;
          
       default:
-         for (i = 0; i <strlen(d); i++)
+         for (i = 0; i < strlen(d); i++)
          {
             pixel += width_arial_10_regular[(_UBYTE)d[i]];
             pixel++;
          }
+         break;
       }
+      break;
    }
 
-   /* pt   = pixel * 72 / 100                     */
+   /* pt = pixel * 72 / 100                       */
    /* twip = pixel * 72 / 100 * 20 = pixel * 14.4 */
    /* passt aber nicht, daher etwas mehr!         */
 
    twip = (int)(pixel * 14.4);
 
-   return(twip);
+   return twip;
 }
 
 
@@ -1698,11 +1616,9 @@ const int   style)   /* */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_udo_quotes(
-
-char  *s)  /* ^ string */
+GLOBAL void replace_udo_quotes(char *s)
 {
-   qreplace_all(s, "!/", 2, "!", 1);      /* */
+   qreplace_all(s, "!/", 2, "!", 1);
 }
 
 
@@ -1724,9 +1640,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_all_copyright(
-
-char  *s)  /* ^ string */
+GLOBAL void replace_all_copyright(char *s)
 {
    if (desttype == TOPCH)                 /* Pure C Help */
    {
@@ -1751,11 +1665,9 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void delete_all_divis(
-
-char  *s)  /* ^ string */
+GLOBAL void delete_all_divis(char *s)
 {
-   qdelete_all(s, DIVIS_S, DIVIS_S_LEN);  /* */
+   qdelete_all(s, DIVIS_S, DIVIS_S_LEN);
 }
 
 
@@ -1775,9 +1687,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void indent2space(
-
-char  *s)  /* ^ string */
+GLOBAL void indent2space(char *s)
 {
 #if (INDENT_S_LEN==1)
    replace_char(s, INDENT_C, ' ');
@@ -1803,9 +1713,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void space2indent(
-
-char  *s)  /* ^ string */
+GLOBAL void space2indent(char *s)
 {
 #if (INDENT_S_LEN==1)
    replace_char(s, ' ', INDENT_C);
@@ -1831,9 +1739,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void nbsp2space(
-
-char  *s)  /* ^ string */
+GLOBAL void nbsp2space(char *s)
 {
 #if (NBSP_S_LEN==1)
    replace_char(s, NBSP_C, ' ');
@@ -1859,9 +1765,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void space2nbsp(
-
-char  *s)  /* ^ string */
+GLOBAL void space2nbsp(char *s)
 {
 #if (NBSP_S_LEN==1)
    replace_char(s, ' ', NBSP_C);
@@ -1884,17 +1788,16 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void label2tex(
-
-char  *s)  /* ^ string which has already adjusted special chars for LaTeX */
+GLOBAL void label2tex(char *s)
 {
-   qreplace_all(s, "{\\\"a}", 4, "ae",   2);
-   qreplace_all(s, "{\\\"o}", 4, "oe",   2);
-   qreplace_all(s, "{\\\"u}", 4, "ue",   2);
-   qreplace_all(s, "{\\\"s}", 4, "ss",   2);
-   qreplace_all(s, "{\\\"A}", 4, "Ae",   2);
-   qreplace_all(s, "{\\\"O}", 4, "Oe",   2);
-   qreplace_all(s, "{\\\"U}", 4, "Ue",   2);
+   qreplace_all(s, "{\\\"a}", 5, "ae",   2);
+   qreplace_all(s, "{\\\"o}", 5, "oe",   2);
+   qreplace_all(s, "{\\\"u}", 5, "ue",   2);
+   qreplace_all(s, "{\\\"s}", 5, "ss",   2);
+   qreplace_all(s, "{\\ss}",  5, "ss",   2);
+   qreplace_all(s, "{\\\"A}", 5, "Ae",   2);
+   qreplace_all(s, "{\\\"O}", 5, "Oe",   2);
+   qreplace_all(s, "{\\\"U}", 5, "Ue",   2);
    qreplace_all(s, "\\_",     2, "-",    1);
    qreplace_all(s, "_",       1, "-",    1);
    qreplace_all(s, "#",       1, "035-", 4);
@@ -1907,9 +1810,48 @@ char  *s)  /* ^ string which has already adjusted special chars for LaTeX */
    qreplace_all(s, "}",       1, "125-", 4);
 
    qdelete_all(s, "\\", 1);
-
    qreplace_all(s, "\"'",     2, "'",    1);
    qreplace_all(s, "\"`",     2, "`",    1);
+}
+
+
+
+/*******************************************************************************
+*
+*  label2lyx():
+*     replace or remove all chars which are not allowed in a Lyx label "\label{...}"
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void label2lyx(char *s)
+{
+   qreplace_all(s, "{\\\"a}", 5, "ae", 2);
+   qreplace_all(s, "{\\\"o}", 5, "oe", 2);
+   qreplace_all(s, "{\\\"u}", 5, "ue", 2);
+   qreplace_all(s, "{\\\"s}", 5, "ss", 2);
+   qreplace_all(s, "{\\ss}",  5, "ss", 2);
+   qreplace_all(s, "{\\\"A}", 5, "Ae", 2);
+   qreplace_all(s, "{\\\"O}", 5, "Oe", 2);
+   qreplace_all(s, "{\\\"U}", 5, "Ue", 2);
+   qreplace_all(s, "\\_",  2, "-",  1);
+   qreplace_all(s, "_", 1, "-",  1);
+   qreplace_all(s, "#", 1, "035-",  4);
+   qreplace_all(s, "$", 1, "036-",  4);
+   qreplace_all(s, "%", 1, "037-",  4);
+   qreplace_all(s, "&", 1, "038-",  4);
+   qreplace_all(s, "\\SpecialChar ~\n", 15, "~", 1);
+   qreplace_all(s, "~", 1, "126-",  4);
+   qreplace_all(s, "^", 1, "094-",  4);
+   qreplace_all(s, "{", 1, "123-",  4);
+   qreplace_all(s, "}", 1, "125-",  4);
+
+   qdelete_all(s, "\\", 1);
+   qreplace_all(s, "\"'",  2, "'",  1);
+   qreplace_all(s, "\"`",  2, "`",  1);
+   indent2space(s);
 }
 
 
@@ -1937,14 +1879,10 @@ char  *s)  /* ^ string which has already adjusted special chars for LaTeX */
 *
 ******************************************|************************************/
 
-GLOBAL void label2html(
-
-char     *s)               /* ^ to label name */
+GLOBAL void label2html(char *s)
 {
-   char  *ptr,             /* ^ to current char in string */
-          val[16];         /* char value */
-   char   one[2]= {0, 0};  /* hex value buffer */
-
+   char *ptr, val[16];
+   char one[2] = { 0, 0 };  /* hex value buffer */
 
    ptr = s;
 
@@ -1952,22 +1890,16 @@ char     *s)               /* ^ to label name */
    {
       if (*ptr >= 'a' && *ptr <= 'z')
          goto LABEL2HTML_NEXT;
-
       if (*ptr >= 'A' && *ptr <= 'Z')
          goto LABEL2HTML_NEXT;
-
       if (*ptr >= '0' && *ptr <= '9')
          goto LABEL2HTML_NEXT;
-
       if (*ptr == '-')
          goto LABEL2HTML_NEXT;
-
       if (*ptr == '_')
          goto LABEL2HTML_NEXT;
-
       if (*ptr == ':')
          goto LABEL2HTML_NEXT;
-
       if (*ptr == '.')
          goto LABEL2HTML_NEXT;
 
@@ -1982,9 +1914,9 @@ LABEL2HTML_NEXT:
    /* Labelname muss mit einem Buchstaben beginnen (siehe Spec) */
    if (*s >= 'a' && *s <= 'z')
       return;
-
    if (*s >= 'A' && *s <= 'Z')
       return;
+   strinsert(s, "UDO_");
 }
 
 
@@ -2005,24 +1937,22 @@ LABEL2HTML_NEXT:
 *
 ******************************************|************************************/
 
-GLOBAL void node2winhelp(
-
-char       *n)            /* ^ node name */
+GLOBAL void node2winhelp(char *n)
 {
-   char     t[512] = "";  /* buffer for converted node name */
-   char     v[32]  = "";  /* buffer for hex values */
-   size_t   i;            /* ^ into string */
+   char     t[512];  /* buffer for converted node name */
+   char     v[32];   /* buffer for hex values */
+   size_t   i;       /* ^ into string */
 
-
-   if (n[0] == EOS)                       /* empty string */
+   if (n[0] == EOS)
       return;
 
-   recode_chrtab(n,CHRTAB_ASCII);
+   recode_chrtab(n, CHRTAB_ASCII);
    replace_udo_quotes(n);
    delete_all_divis(n);
 
-   for (i = 0; i < strlen(n); i++)
-   {       
+   t[0] = EOS;  
+   for (i = 0; n[i] != '\0'; i++)
+   {
       if ( (n[i] >= '0' && n[i] <= '9') || (n[i] >= 'a' && n[i] <= 'z') || (n[i] >= 'A' && n[i] <= 'Z') )
       {
          chrcat(t, n[i]);
@@ -2038,8 +1968,13 @@ char       *n)            /* ^ node name */
       }
    }
 
-   if (strlen(t) > 80)                    /* Windows Help Compiler doesn't like */
-      t[81] = EOS;                        /* longer names in the index */
+   /*
+    * Workaround.
+    * Windows Help Compiler doesn't like
+    * longer names in the index
+    */
+   if (strlen(t) > 80)
+      t[81] = EOS;
 
    strcpy(n, t);
 }
@@ -2058,31 +1993,26 @@ char       *n)            /* ^ node name */
 *
 ******************************************|************************************/
 
-GLOBAL void node2WinAutoID(
-
-char        *id,      /* ID */
-const char  *n)       /* name */
+GLOBAL void node2WinAutoID(char *id, const char *n)
 {
    char      s[512];  /* buffer for name */
    size_t    i;       /* pointer into name buffer */
 
-
    id[0] = EOS;                           /* clear ID */
 
-   if (n[0] == EOS)                       /* empty name */
+   if (n[0] == EOS)
       return;
 
-   strcpy(s, n);                          /* copy name */
-   recode_chrtab(s,CHRTAB_ANSI);
-   recode_chrtab(s,CHRTAB_ASCII);
+   strcpy(s, n);
+   recode_chrtab(s, CHRTAB_ANSI);
+   recode_chrtab(s, CHRTAB_ASCII);
    replace_udo_quotes(s);
    delete_all_divis(s);
 
    id[0] = EOS;                           /* clear ID  (again???) */
-
-   for (i = 0; i < strlen(s); i++)        /* search for allowed characters */
+   for (i = 0; s[i] != '\0'; i++)         /* search for allowed characters */
    {
-      if ( (s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '_' )
+      if ((s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '_')
       {
          chrcat(id, s[i]);
       }
@@ -2416,9 +2346,7 @@ char  *s)  /* ^ string to be used as label or node */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_2at_by_1at(
-
-char  *s)  /* ^ string to be used as label or node */
+GLOBAL void replace_2at_by_1at(char *s)
 {
    qreplace_all(s, "@@", 2, "@", 1);
 }
@@ -2438,9 +2366,7 @@ char  *s)  /* ^ string to be used as label or node */
 ******************************************|************************************/
 
 
-GLOBAL void replace_1at_by_2at(
-
-char  *s)  /* ^ string to be used as label or node */
+GLOBAL void replace_1at_by_2at(char *s)
 {
    qreplace_all(s, "@", 1, "@@", 2);
 }
@@ -2468,27 +2394,25 @@ char  *s)  /* ^ string to be used as label or node */
 *
 ******************************************|************************************/
 
-GLOBAL void node2vision(
-
-char       *n)            /* ^ string */
+GLOBAL void node2vision(char *n)
 {
-   char     t[512] = "",  /* buffer for topic string */
-            v[32]  = "";  /* buffer for hex values */
+   char     t[512],       /* buffer for topic string */
+            v[32];        /* buffer for hex values */
    size_t   i;            /* pointer into string */
-   
 
-   if (n[0] == EOS)                       /* empty string */
+   if (n[0] == EOS)
       return;
 
-   recode_chrtab(n,CHRTAB_ASCII);
+   recode_chrtab(n, CHRTAB_ASCII);
    replace_udo_quotes(n);
    delete_all_divis(n);
    replace_udo_tilde(n);
    replace_udo_nbsp(n);
 
+   t[0] = EOS;  
    for (i = 0; i < strlen(n); i++)
    {
-      if ( (n[i] >= '0' && n[i] <= '9') || (n[i] >= 'a' && n[i] <= 'z') || (n[i] >= 'A' && n[i] <= 'Z') )
+      if ((n[i] >= '0' && n[i] <= '9') || (n[i] >= 'a' && n[i] <= 'z') || (n[i] >= 'A' && n[i] <= 'Z'))
       {
          chrcat(t, n[i]);
       }
@@ -2527,21 +2451,19 @@ char       *n)            /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void node2texinfo(
-
-char        *s)       /* ^ string (chapter title) */
+GLOBAL void node2texinfo(char *s)
 {
-   size_t    sl,      /* */
-             i;       /* */
-   char      d[512],  /* */
-             a[32],   /* */
-             c;       /* */
+   size_t    sl,
+             i;
+   char      d[512],
+             a[32],
+             c;
    _BOOL   has_an;  /* has_alphanumeric */
 
-   if (s[0] == EOS)                       /* empty string */
+   if (s[0] == EOS)
       return;
 
-   replace_udo_quotes(s);
+   /* replace_udo_quotes(s); */
    delete_all_divis(s);
 
    qreplace_all(s, "@dots{}",  7, "...", 3);
@@ -2554,7 +2476,7 @@ char        *s)       /* ^ string (chapter title) */
    {
       c = s[i];
 
-      if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') )
+      if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
       {
          has_an = TRUE;
          break;
@@ -2562,19 +2484,18 @@ char        *s)       /* ^ string (chapter title) */
    }
 
    if (has_an)
-   {                                      /* Die folgenden Zeichen mag Info nicht in einem String */      
+   {                                      /* Die folgenden Zeichen mag Info nicht in einem String */
       qdelete_all(s, ",",  1);
       qdelete_all(s, ";",  1);
       qdelete_all(s, ":",  1);
       qdelete_all(s, "'",  1);
       qdelete_all(s, "`",  1);
       qdelete_all(s, "\"", 1);
-      qdelete_all(s, ")",  1);
-      qdelete_all(s, "(",  1);
+      qreplace_all(s, ")", 1, "29", 2);
+      qreplace_all(s, "(", 1, "28", 2);
 
-                                          /* Einen Punkt am Ende des Titels mag Info gar nicht */
+      /* Einen Punkt am Ende des Titels mag Info gar nicht */
       sl = strlen(s);
-      
       while (sl > 0 && s[sl - 1] == '.')
       {
          s[sl - 1] = EOS;
@@ -2583,11 +2504,11 @@ char        *s)       /* ^ string (chapter title) */
 
       qreplace_all(s, ". ", 2, ".", 1);
 
-                                          /* Nun noch die doppelten Leerzeichen herausschmeissen */       
-      while ( qreplace_all(s, "  ", 2, " ", 1) )
+      /* Nun noch die doppelten Leerzeichen herausschmeissen */
+      while (qreplace_all(s, "  ", 2, " ", 1))
          ;
    }
-   else                                   /* PL15: ASCII-Codes einsetzen */
+   else
    {
       sl = strlen(s);
       strcpy(d, s);
@@ -2598,8 +2519,8 @@ char        *s)       /* ^ string (chapter title) */
          sprintf(a, "%d-", d[i]);
          strcat(s, a);
       }
-
-      s[strlen(s) - 1] = EOS;             /* Noch das letzte "-" entfernen */
+      /* Noch das letzte "-" entfernen */
+      s[strlen(s) - 1] = EOS;
    }
 }
 
@@ -2617,17 +2538,13 @@ char        *s)       /* ^ string (chapter title) */
 *
 ******************************************|************************************/
 
-GLOBAL void c_tilde(
-
-char  *s)  /* ^ string */
+GLOBAL void c_tilde(char *s)
 {
-                                          /* Tilde ~ */
-   qreplace_all(s, "!~", 2, TILDE_S, TILDE_S_LEN);
+   qreplace_all(s, "!~", 2, TILDE_S, TILDE_S_LEN);     /* Tilde ~ */
 #if (NBSP_S_LEN==1)
-   replace_char(s, '~', NBSP_C);          /* non breaking space */
+   replace_char(s, '~', NBSP_C);                       /* non breaking space */
 #else
-                                          /* non breaking space */
-   qreplace_all(s, "~", 1, NBSP_S, NBSP_S_LEN);
+   qreplace_all(s, "~", 1, NBSP_S, NBSP_S_LEN);        /* non breaking space */
 #endif
 }
 
@@ -2645,9 +2562,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_udo_tilde(
-
-char  *s)  /* ^ string */
+GLOBAL void replace_udo_tilde(char *s)
 {
    switch (desttype)
    {
@@ -2670,6 +2585,7 @@ char  *s)  /* ^ string */
 #else
       qreplace_all(s, TILDE_S, TILDE_S_LEN, "~", 1);
 #endif
+      break;
    }
 }
 
@@ -2687,9 +2603,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_udo_nbsp(
-
-char  *s)  /* ^ string */
+GLOBAL void replace_udo_nbsp(char *s)
 {
    switch (desttype)
    {
@@ -2725,10 +2639,11 @@ char  *s)  /* ^ string */
       
    default:
 #if (NBSP_S_LEN==1)
-      replace_all(s, NBSP_S, " ");
+      replace_char(s, NBSP_C, ' ');
 #else
       qreplace_all(s, NBSP_S, NBSP_S_LEN, " ", 1);
 #endif
+      break;
    }
 }
 
@@ -2746,9 +2661,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void convert_tilde(
-
-char  *s)  /* ^ string */
+GLOBAL void convert_tilde(char *s)
 {
    c_tilde(s);
    replace_udo_tilde(s);
@@ -2769,15 +2682,17 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void c_divis(
-
-char  *s)  /* ^ string */
+GLOBAL void c_divis(char *s)
 {
    switch (desttype)
    {
    case TOTEX:
    case TOPDL:
       qreplace_all(s, "!-", 2, "\\-", 2);
+      break;
+      
+   case TOLYX:
+      replace_all(s, "!-", "\\SpecialChar \\-\n");
       break;
       
    case TORTF:
@@ -2798,19 +2713,18 @@ char  *s)  /* ^ string */
 
    case TOHAH:
    case TOHTM:
-      if (html_use_hyphenation == TRUE)
+   case TOMHH:
+      if (html_use_hyphenation)
          qreplace_all(s, "!-", 2, "&shy;", 5);
       else
          qdelete_all(s, "!-", 2);
-
       break;
 
    default:
       qdelete_all(s, "!-", 2);
+      break;
    }
 }
-
-
 
 
 
@@ -2824,9 +2738,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void specials2ascii(
-
-char  *s)  /* ^ string */
+LOCAL void specials2ascii(char *s)
 {
    qreplace_all(s, "!..",    3,            "...",     3);
 
@@ -2854,19 +2766,15 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void specials2html(
-
-char  *s)  /* ^ string */
+LOCAL void specials2html(char *s)
 {
-                                          /* Doesn't work in CAB :-( */
+   /* Doesn't work in CAB :-( */
 /* qreplace_all(s, "!..",    3,            "&hellip;", 8); */
    qreplace_all(s, "!..",    3,            "...",      3);
-   
    qreplace_all(s, "(---)",  5,            TEMPO_S,    TEMPO_S_LEN);
    qreplace_all(s, "(--)",   4,            TEMPO_S2,   TEMPO_S2_LEN);
    qreplace_all(s, "---",    3,            "&mdash;",  7);
    qreplace_all(s, "--",     2,            "&ndash;",  7);
-   
    qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "---",      3);
    qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--",       2);
 }
@@ -2885,20 +2793,15 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void specials2ps(
-
-char  *s)  /* ^ string */
+LOCAL void specials2ps(char *s)
 {
    qreplace_all(s, "(---)",  5,            TEMPO_S,  TEMPO_S_LEN);
    qreplace_all(s, "(--)",   4,            TEMPO_S2, TEMPO_S2_LEN);
    qreplace_all(s, "---",    3,            "\\230",  4);
    qreplace_all(s, "--",     2,            "\\227",  4);
-   
    qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "---",    3);
    qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--",     2);
-                                          /* according to table in ud2ps.h */
    qreplace_all(s, "!..",    3,            "\\214",  4);
-   qreplace_all(s, COPY_S,   COPY_S_LEN,   "\\251",  4);
 }
 
 
@@ -2915,17 +2818,13 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void specials2ipf(
-
-char  *s)  /* ^ string */
+LOCAL void specials2ipf(char *s)
 {
    qreplace_all(s, "!&per.&per.", 11, "&per.&per.&per.", 15);
-
    qreplace_all(s, "(---)",       5,            TEMPO_S,  TEMPO_S_LEN);
    qreplace_all(s, "(--)",        4,            TEMPO_S2, TEMPO_S2_LEN);
    qreplace_all(s, "---",         3,            "-",      1);
    qreplace_all(s, "--",          2,            "-",      1);
-
    qreplace_all(s, TEMPO_S,       TEMPO_S_LEN,  "---",    3);
    qreplace_all(s, TEMPO_S2,      TEMPO_S2_LEN, "--",     2);
 }
@@ -2944,17 +2843,13 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void specials2info(
-
-char  *s)  /* ^ string */
+LOCAL void specials2info(char *s)
 {
    qreplace_all(s, "!..",    3, "@dots{}", 7);
-
    qreplace_all(s, "(---)",  5,            TEMPO_S,    TEMPO_S_LEN);
    qreplace_all(s, "(--)",   4,            TEMPO_S2,   TEMPO_S2_LEN);
    qreplace_all(s, "---",    3,            "@minus{}", 8);
    qreplace_all(s, "--",     2,            "@minus{}", 8);
-   
    qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "---",      3);
    qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--",       2);
 }
@@ -2973,9 +2868,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void specials2win(
-
-char  *s)  /* ^ string */
+LOCAL void specials2win(char *s)
 {
    qreplace_all(s, "!..",    3,            "\\'85",  4);
 
@@ -2983,7 +2876,18 @@ char  *s)  /* ^ string */
    qreplace_all(s, "(--)",   4,            TEMPO_S2, TEMPO_S2_LEN);
    qreplace_all(s, "---",    3,            "\\'97",  4);
    qreplace_all(s, "--",     2,            "\\'96",  4);
-   
+   qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "---",    3);
+   qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--",     2);
+}
+
+LOCAL void specials2win4(char *s)
+{
+   qreplace_all(s, "!..",    3,            "{\\f1 \\'85}",  10);
+
+   qreplace_all(s, "(---)",  5,            TEMPO_S,  TEMPO_S_LEN);
+   qreplace_all(s, "(--)",   4,            TEMPO_S2, TEMPO_S2_LEN);
+   qreplace_all(s, "---",    3,            "{\\f1 \\'97}",  10);
+   qreplace_all(s, "--",     2,            "{\\f1 \\'96}",  10);
    qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "---",    3);
    qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--",     2);
 }
@@ -3002,9 +2906,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void specials2rtf(
-
-char  *s)  /* ^ string */
+LOCAL void specials2rtf(char *s)
 {
    qreplace_all(s, "!..",    3,            "\\'85",    4);
 
@@ -3012,7 +2914,6 @@ char  *s)  /* ^ string */
    qreplace_all(s, "(--)",   4,            TEMPO_S2,   TEMPO_S2_LEN);
    qreplace_all(s, "---",    3,            "\\emdash", 7);
    qreplace_all(s, "--",     2,            "\\endash", 7);
-
    qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "---",      3);
    qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--",       2);
 }
@@ -3035,9 +2936,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void winspecials2ascii(
-
-char  *s)  /* ^ string */
+GLOBAL void winspecials2ascii(char *s)
 {
    qreplace_all(s, "\\'85", 4, "...", 3);
    qreplace_all(s, "\\'97", 4, "-",   1);
@@ -3062,20 +2961,24 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void texvar2ascii(
-
-char  *s)  /* ^ string */
+LOCAL void texvar2ascii(char *s)
 {
-   if (strstr(s, "(!") == NULL)           /* no command start block found */
+   if (strstr(s, "(!") == NULL)
       return;
 
    qreplace_all(s, "(!TeX)",        6, "TeX",     3);
    qreplace_all(s, "(!LaTeX)",      8, "LaTeX",   5);
    qreplace_all(s, "(!LaTeXe)",     9, "LaTeX2e", 7);
    qreplace_all(s, "(!copyright)", 12, "(c)",     3);
-
+   qreplace_all(s, "(!registered)",13, "(r)",     3);
    qreplace_all(s, "(!alpha)",      8, "alpha",   5);
    qreplace_all(s, "(!beta)",       7, "beta",    4);
+   qreplace_all(s, "(!euro)",       7, "EUR",     3);
+   qreplace_all(s, "(!pound)",      8, "GBP",     3);
+   qreplace_all(s, "(!reg)",        6, "(r)",     3);
+   qreplace_all(s, "(!tm)",         5, "(tm)",    4);
+   if (lang.degree != NULL)
+      replace_all(s, "(!deg)", lang.degree);
 }
 
 
@@ -3100,9 +3003,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void c_rtf_quotes(
-
-char  *s)  /* ^ string */
+GLOBAL void c_rtf_quotes(char *s)
 {
    qreplace_all(s, "\\lquote",     7, "\\lquote ",     8);
    qreplace_all(s, "\\ldblquote", 10, "\\ldblquote ", 11);
@@ -3123,31 +3024,36 @@ char  *s)  /* ^ string */
 *  c_quotes_apostrophes():
 *     replace single or double quotation marks from UDO format to system quotation marks
 *
+*  Parameters:
+*    aon : opening single quote
+*    aoff: closing single quote
+*    qon : opening double quote
+*    qoff: closing single quote
+*
 *  return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void c_quotes_apostrophes(
-
-char        *s,     /* ^ string */
-const char  *aon,   /* ^ opening single quote */
-const char  *aoff,  /* ^ closing single quote */
-const char  *qon,   /* ^ opening double quote */
-const char  *qoff)  /* ^ closing single quote */
+LOCAL void c_quotes_apostrophes(char *s, const char *aon, const char *aoff, const char *qon, const char *qoff)
 {
-   while (strstr(s, "''") != NULL)
+   if (no_quotes)
    {
-      (b1stApost) ? replace_once(s, "''", aon) : replace_once(s, "''", aoff);
-      
-      b1stApost = !b1stApost;
-   }
-   
-   while (strstr(s, "\"\"") != NULL)
+      qreplace_all(s, "\"\"", 2, "\"", 1);
+      qreplace_all(s, "''", 2, "'", 1);
+   } else
    {
-      (b1stQuote) ? replace_once(s, "\"\"", qon) : replace_once(s, "\"\"", qoff);
-      
-      b1stQuote = !b1stQuote;
+      while (strstr(s, "''") != NULL)
+      {
+         b1stApost = !b1stApost;
+         replace_once(s, "''", b1stApost ? aon : aoff);
+      }
+
+      while (strstr(s, "\"\"") != NULL)
+      {
+         b1stQuote = !b1stQuote;
+         replace_once(s, "\"\"", b1stQuote ? qon : qoff);
+      }
    }
 }
 
@@ -3166,14 +3072,15 @@ const char  *qoff)  /* ^ closing single quote */
 *
 ******************************************|************************************/
 
-GLOBAL void c_vars(
-
-char *s)  /* ^ string */
+GLOBAL void c_vars(char *s)
 {
+   char *str;
+   char cbuf[8];
+   const char *repl;
+   
    replace_all(s, "(!today)", lang.today);
    replace_all(s, "(!short_today)", lang.short_today);
 
-   
    /* === quotation marks === */
    
    qreplace_all(s, "(\"\")", 4, TEMPO_S,  TEMPO_S_LEN);
@@ -3192,7 +3099,6 @@ char *s)  /* ^ string */
          c_quotes_apostrophes(s, "`", "'", "``", "''");
          break;
       }
-      
       qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\\symbol{34}\\symbol{34}", 22);
       qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "\\symbol{39}\\symbol{39}", 22);
       break;
@@ -3205,13 +3111,13 @@ char *s)  /* ^ string */
             "'", "'",
             "\\begin_inset"INDENT_S"Quotes"INDENT_S"gld\\end_inset"INDENT_S,
             "\\begin_inset"INDENT_S"Quotes"INDENT_S"grd\\end_inset"INDENT_S);
-         break;                          
+         break;
       case TOFRA:
          c_quotes_apostrophes(s,
             "'", "'",
             "\\begin_inset"INDENT_S"Quotes"INDENT_S"fld\\end_inset"INDENT_S,
             "\\begin_inset"INDENT_S"Quotes"INDENT_S"frd\\end_inset"INDENT_S);
-         break;                          
+         break;
       default:
          c_quotes_apostrophes(s,
             "'", "'",
@@ -3219,65 +3125,47 @@ char *s)  /* ^ string */
             "\\begin_inset"INDENT_S"Quotes"INDENT_S"erd\\end_inset"INDENT_S);
          break;
       }
-      
+      replace_all(s, TEMPO_S, "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"symbol{34}"INDENT_S"\\backslash"INDENT_S"symbol{34}\\end_inset"INDENT_S);
+      replace_all(s, TEMPO_S2, "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"symbol{39}"INDENT_S"\\backslash"INDENT_S"symbol{39}\\end_inset"INDENT_S);
       break;
       
    case TORTF:
-      if (no_quotes)
-      {
-         qreplace_all(s, "\"\"", 2, "\"", 1);
-         qreplace_all(s, "''",   2, "'",  1);
-      }
-      else
-      {                                   /* PL6 */
-         /* Ohne schliessende Leerzeichen, damit nicht Tokens daraus werden! */
-         /* Die Leerzeichen werden in c_rtf_quotes() hinzugefuegt! */
-         
-         c_quotes_apostrophes(s, "\\lquote", "\\rquote", "\\ldblquote", "\\rdblquote");
-      }
-      
+      /* Ohne schliessende Leerzeichen, damit nicht Tokens daraus werden! */
+      /* Die Leerzeichen werden in c_rtf_quotes() hinzugefuegt! */
+      c_quotes_apostrophes(s, "\\lquote", "\\rquote", "\\ldblquote", "\\rdblquote");
       qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
       qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
       break;
       
    case TOWIN:
    case TOAQV:
-      if (no_quotes)
+      switch (destlang)
       {
-         qreplace_all(s, "\"\"", 2, "\"", 1);
-         qreplace_all(s, "''", 2, "'", 1);
+      case TOGER:
+         c_quotes_apostrophes(s, "{\\'91}", "{\\'92}", "{\\'84}", "{\\'93}");
+         break;
+      default:
+         c_quotes_apostrophes(s, "\\'91", "\\'92", "\\'93", "\\'94");
+         break;
       }
-      else
-      {
-         switch (destlang)
-         {
-         case TOGER:
-            c_quotes_apostrophes(s, "{\\'91}", "{\\'92}", "{\\'84}", "{\\'93}");
-            break;
-         default:
-            c_quotes_apostrophes(s, "\\'91", "\\'92", "\\'93", "\\'94");
-            break;
-         }
-      }
-      
       qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
       qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
       break;
       
-   case TOLDS:     
+   case TOLDS:
       c_quotes_apostrophes(s, "`", "'", "``", "''");
       qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
       qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
       break;
       
-   case TOHPH:     
+   case TOHPH:
       c_quotes_apostrophes(s, "`", "'", "<quote>", "<\\quote>");
       qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
       qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
       break;
       
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:                            /*r6pl5*/
+   case TOHAH:
+   case TOHTM:
    case TOMHH:
       switch (html_quotes)
       {
@@ -3286,32 +3174,29 @@ char *s)  /* ^ string */
          break;
       case QUOTES_TAGS:
       default:
-         c_quotes_apostrophes(s, "<q>", "</q>", "<q>", "</q>");
+         c_quotes_apostrophes(s, "`", "'", "<q>", "</q>");
+         break;
       }
-      
       qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "&quot;&quot;", 12);
       qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",            2);
       break;
       
-   case TOKPS:                            /* Changed in V6.5.6 [NHz] */
-      {       
-         switch (destlang)
-         {
-         case TOGER:                      /* according to table in ud2ps.h */
-            c_quotes_apostrophes(s, "\\220", "\\221", "\\226", "\\225");
-            break;
-         case TOFRA:                      /* according to table in ud2ps.h */
-            c_quotes_apostrophes(s, "\\222", "\\223", "\\253", "\\273");
-            break;
-         case TONOR:
-            c_quotes_apostrophes(s, "\\<", "\\>", "\\\\\\(", "\\\\\\)");
-            break;
-         default:
-            c_quotes_apostrophes(s, "'", "'", "\"", "\"");
-            break;
-         }
+   case TOKPS:
+      switch (destlang)
+      {
+      case TOGER:                      /* according to table in ud2ps.h */
+         c_quotes_apostrophes(s, "\\220", "\\221", "\\226", "\\225");
+         break;
+      case TOFRA:                      /* according to table in ud2ps.h */
+         c_quotes_apostrophes(s, "\\222", "\\223", "\\253", "\\273");
+         break;
+      case TONOR:
+         c_quotes_apostrophes(s, "\\<", "\\>", "\\\\\\(", "\\\\\\)");
+         break;
+      default:
+         c_quotes_apostrophes(s, "'", "'", "\"", "\"");
+         break;
       }
-      
       qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
       qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
       break;
@@ -3330,41 +3215,54 @@ char *s)  /* ^ string */
    {
    case TOTEX:
    case TOPDL:
-      qreplace_all(s, "!..",           3, "\\ldots ",        7);
+      qreplace_all(s, "!..",           3, "\\ldots{}",       8);
       qreplace_all(s, "(---)",         5, "-{}-{}-",         7);
       qreplace_all(s, "(--)",          4, "-{}-",            4);
-      qreplace_all(s, "(!grin)",       7, "\\verb/;-)/",    10);
-      qreplace_all(s, "(!laugh)",      8, "\\verb/:-)/",    10);
+      /*
+       * this used to replace "(!grin)" with "\\verb+;-)+",
+       * but that doesnt work if it is used together
+       * with text attributes like (!B)
+       */
+      /* str = um_strdup_printf("\\verb%c;-)%c", cTexVerb, cTexVerb); */
+      str = strdup(";-)");
+      replace_all(s, "(!grin)",           str);
+      free(str);
+      /* str = um_strdup_printf("\\verb%c:-)%c", cTexVerb, cTexVerb); */
+      str = strdup(":-)");
+      replace_all(s,  "(!laugh)",         str);
+      free(str);
       qreplace_all(s, "(!TeX)",        6, "\\TeX{}",         6);
       qreplace_all(s, "(!LaTeX)",      8, "\\LaTeX{}",       8);
       qreplace_all(s, "(!LaTeXe)",     9, "\\LaTeXe{}",      9);
       qreplace_all(s, "(!copyright)", 12, "\\copyright{}",  12);
+      qreplace_all(s, "(!registered)", 13, "\\textregistered{}", 17);
       qreplace_all(s, "(!alpha)",      8, "$\\alpha$",       8);
       qreplace_all(s, "(!beta)",       7, "$\\beta$",        7);
-      
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",       7, "\\euro",          5);
-      qreplace_all(s, "(!pound)",      8, "GBP",             3);
-      qreplace_all(s, "(!reg)",        6, "\\registered{}", 13);
-      qreplace_all(s, "(!tm)",         5, "\\trademark{}",  12);
+      qreplace_all(s, "(!euro)",       7, "\\euro{}",        7);
+      qreplace_all(s, "(!pound)",      8, "\\pounds{}",      9);
+      qreplace_all(s, "(!reg)",        6, "\\textregistered{}", 17);
+      qreplace_all(s, "(!tm)",         5, "\\texttrademark{}",  16);
       qreplace_all(s, "(!deg)",        6, "$^{o}$",          6);
       break;
       
    case TOLYX:
+      replace_all(s, "!..", "\\SpecialChar"INDENT_S"\\ldots{}"INDENT_S);
+      replace_all(s, "(---)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"-{}-{}-\\end_inset"INDENT_S);
+      replace_all(s, "(--)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"-{}-\\end_inset"INDENT_S);
       replace_all(s, "(!grin)", "\\family"INDENT_S"typewriter"INDENT_S";-)\\family"INDENT_S"default"INDENT_S);
       replace_all(s, "(!laugh)", "\\family"INDENT_S"typewriter"INDENT_S":-)\\family"INDENT_S"default"INDENT_S);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",  7, "EUR",   3);
-      qreplace_all(s, "(!pound)", 8, "GBP",   3);
-      qreplace_all(s, "(!reg)",   6, "(r)",   3);
-      qreplace_all(s, "(!tm)",    5, "(tm)",  4);
-
-      if (lang.degree != NULL)
-         replace_all(s, "(!deg)", lang.degree);
-
-      specials2ascii(s);
-      texvar2ascii(s);
+      replace_all(s, "(!TeX)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"TeX\\end_inset"INDENT_S);
+      replace_all(s, "(!LaTeX)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"LaTeX\\end_inset"INDENT_S);
+      replace_all(s, "(!LaTeXe)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"LaTeXe\\end_inset"INDENT_S);
+      replace_all(s, "(!copyright)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"copyright\\end_inset"INDENT_S);
+      replace_all(s, "(!registered)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"textregistered\\end_inset"INDENT_S);
+      replace_all(s, "(!alpha)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"$"INDENT_S"\\backslash"INDENT_S"alpha$\\end_inset"INDENT_S);
+      replace_all(s, "(!beta)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"$"INDENT_S"\\backslash"INDENT_S"beta$\\end_inset"INDENT_S);
+      replace_all(s, "(!euro)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"euro\\end_inset"INDENT_S);
+      replace_all(s, "(!pound)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"pounds\\end_inset"INDENT_S);
+      replace_all(s, "(!reg)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"textregistered\\end_inset"INDENT_S);
+      replace_all(s, "(!tm)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"\\backslash"INDENT_S"texttrademark\\end_inset"INDENT_S);
+      replace_all(s, "(!deg)", "\\begin_inset"INDENT_S"ERT"INDENT_S"status"INDENT_S"Inlined"INDENT_S"$^{o}$\\end_inset"INDENT_S);
       break;
       
    case TOINF:
@@ -3372,16 +3270,6 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!laugh)",      8, "@code{:-)}",   10);
       qreplace_all(s, "(!TeX)",        6, "@TeX{}",        6);
       qreplace_all(s, "(!copyright)", 12, "@copyright{}", 12);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",       7, "EUR",   3);
-      qreplace_all(s, "(!pound)",      8, "GBP",   3);
-      qreplace_all(s, "(!reg)",        6, "(r)",   3);
-      qreplace_all(s, "(!tm)",         5, "(tm)",  4);
-
-      if (lang.degree != NULL)
-         replace_all(s, "(!deg)", lang.degree);
-
       specials2info(s);
       texvar2ascii(s);
       break;
@@ -3389,46 +3277,50 @@ char *s)  /* ^ string */
    case TOSTG:
    case TOAMG:
    case TOPCH:
-      qreplace_all(s, "(!copyright)", 12, COPY_S,  COPY_S_LEN);
+      repl = unicode2char(U_CopyrightSign, cbuf);
+      replace_all(s, "(!copyright)", repl);
+      repl = unicode2char(U_RegisteredSign, cbuf);
+      replace_all(s, "(!registered)", repl);
+      replace_all(s, "(!reg)", repl);
       qreplace_all(s, "(!grin)",       7, ";-)",   3);
       qreplace_all(s, "(!laugh)",      8, ":-)",   3);
-      qreplace_all(s, "(!alpha)",      8, ALPHA_S, ALPHA_S_LEN);
-      qreplace_all(s, "(!beta)",       7, BETA_S,  BETA_S_LEN);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",       7, "EUR",   3);
-      qreplace_all(s, "(!pound)",      8, "GBP",   3);
-      qreplace_all(s, "(!reg)",        6, "(r)",   3);
-      qreplace_all(s, "(!tm)",         5, "(tm)",  4);
-
-      if (lang.degree != NULL)
-         replace_all(s, "(!deg)", lang.degree);
-
+      repl = unicode2char(U_GreekSmallLetterAlpha, cbuf);
+      if (*repl == '\0')
+         repl = "alpha";
+      replace_all(s, "(!alpha)", repl);
+      repl = unicode2char(U_GreekSmallLetterBeta, cbuf);
+      if (*repl == '\0')
+         repl = unicode2char(U_LatinSmallLetterSharpS, cbuf);
+      if (*repl == '\0')
+         repl = "beta";
+      replace_all(s, "(!beta)", repl);
       specials2ascii(s);
       texvar2ascii(s);
       break;
       
    case TOKPS:
-      qreplace_all(s, "(!copyright)", 12, COPY_S,  COPY_S_LEN);
-      qreplace_all(s, "(!grin)",       7, ";-\\)", 4); /* New in r6pl15 [NHz] */
+      repl = unicode2char(U_CopyrightSign, cbuf);
+      replace_all(s, "(!copyright)", repl);
+      repl = unicode2char(U_RegisteredSign, cbuf);
+      replace_all(s, "(!registered)", repl);
+      replace_all(s, "(!reg)", repl);
+      qreplace_all(s, "(!grin)",       7, ";-\\)", 4);
       qreplace_all(s, "(!laugh)",      8, ":-\\)", 4);
-      qreplace_all(s, "(!alpha)",      8, ALPHA_S, ALPHA_S_LEN);
-      qreplace_all(s, "(!beta)",       7, BETA_S,  BETA_S_LEN);
-
-                                          /* New in V6.5.8 [NHz] */
+      repl = unicode2char(U_GreekSmallLetterAlpha, cbuf);
+      if (*repl == '\0')
+         repl = "alpha";
+      replace_all(s, "(!alpha)", repl);
+      repl = unicode2char(U_GreekSmallLetterBeta, cbuf);
+      if (*repl == '\0')
+         repl = unicode2char(U_LatinSmallLetterSharpS, cbuf);
+      if (*repl == '\0')
+         repl = "beta";
+      replace_all(s, "(!beta)", repl);
       qreplace_all(s, "(!euro)",       7, "\\200", 4);
       qreplace_all(s, "(!pound)",      8, "\\243", 4);
-      qreplace_all(s, "(!reg)",        6, "\\256", 3);
       qreplace_all(s, "(!tm)",         5, "\\215", 4);
       qreplace_all(s, "(!deg)",        6, "\\201", 4);
-
-/*    For future use, but commented because of some problems */
-/*    qreplace_all(s, "\\(--\\)", 6, "--", 2);
-*/
-                                          /* Changed in V6.5.5 [NHz] */
       specials2ps(s);
-/*    specials2ascii(s);
-*/
       texvar2ascii(s);
       break;
       
@@ -3436,23 +3328,21 @@ char *s)  /* ^ string */
    case TODRC:
    case TOMAN:
    case TONRO:
-   case TOTVH:                            /* PL10 */
-   case TOSRC:                            /* PL16 */
+   case TOTVH:
+   case TOSRC:
    case TOSRP:
       qreplace_all(s, "(!grin)",  7, ";-)",   3);
       qreplace_all(s, "(!laugh)", 8, ":-)",   3);
-      qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
-      qreplace_all(s, "(!beta)",  7, BETA_S,  BETA_S_LEN);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",  7, "EUR",   3);
-      qreplace_all(s, "(!pound)", 8, "GBP",   3);
-      qreplace_all(s, "(!reg)",   6, "(r)",   3);
-      qreplace_all(s, "(!tm)",    5, "(tm)",  4);
-
-      if (lang.degree != NULL)
-         replace_all(s, "(!deg)", lang.degree);
-
+      repl = unicode2char(U_GreekSmallLetterAlpha, cbuf);
+      if (*repl == '\0')
+         repl = "alpha";
+      replace_all(s, "(!alpha)", repl);
+      repl = unicode2char(U_GreekSmallLetterBeta, cbuf);
+      if (*repl == '\0')
+         repl = unicode2char(U_LatinSmallLetterSharpS, cbuf);
+      if (*repl == '\0')
+         repl = "beta";
+      replace_all(s, "(!beta)", repl);
       specials2ascii(s);
       texvar2ascii(s);
       break;
@@ -3460,18 +3350,16 @@ char *s)  /* ^ string */
    case TOIPF:
       qreplace_all(s, "(!grin)",  7, ";-)",       3);
       qreplace_all(s, "(!laugh)", 8, "&colon.-)", 9);
-      qreplace_all(s, "(!alpha)", 8, ALPHA_S,     ALPHA_S_LEN);
-      qreplace_all(s, "(!beta)",  7, BETA_S,      BETA_S_LEN);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",  7, "EUR",       3);
-      qreplace_all(s, "(!pound)", 8, "GBP",       3);
-      qreplace_all(s, "(!reg)",   6, "(r)",       3);
-      qreplace_all(s, "(!tm)",    5, "(tm)",      4);
-
-      if (lang.degree != NULL)
-         replace_all(s, "(!deg)", lang.degree);
-
+      repl = unicode2char(U_GreekSmallLetterAlpha, cbuf);
+      if (*repl == '\0')
+         repl = "alpha";
+      replace_all(s, "(!alpha)", repl);
+      repl = unicode2char(U_GreekSmallLetterBeta, cbuf);
+      if (*repl == '\0')
+         repl = unicode2char(U_LatinSmallLetterSharpS, cbuf);
+      if (*repl == '\0')
+         repl = "beta";
+      replace_all(s, "(!beta)", repl);
       specials2ipf(s);
       texvar2ascii(s);
       break;
@@ -3479,11 +3367,10 @@ char *s)  /* ^ string */
    case TORTF:
       qreplace_all(s, "(!grin)",       7, "{\\f1 ;-)}", 9);
       qreplace_all(s, "(!laugh)",      8, "{\\f1 :-)}", 9);
-      qreplace_all(s, "(!alpha)",      8, "alpha",      5);
-      qreplace_all(s, "(!beta)",       7, "beta",       4);
+      qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
+      qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
       qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
-
-                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!registered)",13, "\\'AE",      4);
       qreplace_all(s, "(!euro)",       7, "\\'80",      4);
       qreplace_all(s, "(!pound)",      8, "\\'A3",      4);
       qreplace_all(s, "(!reg)",        6, "\\'AE",      4);
@@ -3500,12 +3387,11 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
       qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
       qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",       7, "EUR",        3);
-      qreplace_all(s, "(!pound)",      8, "GBP",        3);
+      qreplace_all(s, "(!registered)",13, "\\'AE",      4);
+      qreplace_all(s, "(!euro)",       7, "\\'80",      4);
+      qreplace_all(s, "(!pound)",      8, "\\'A3",      4);
       qreplace_all(s, "(!reg)",        6, "\\'AE",      4);
-      qreplace_all(s, "(!tm)",         5, "(tm)",       4);
+      qreplace_all(s, "(!tm)",         5, "\\'99",      4);
       qreplace_all(s, "(!deg)",        6, "\\'B0",      4);
       specials2win(s);
       texvar2ascii(s);
@@ -3517,52 +3403,37 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
       qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
       qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
-
-                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!registered)",13, "\\'AE",      4);
       qreplace_all(s, "(!euro)",       7, "\\'80",      4);
       qreplace_all(s, "(!pound)",      8, "\\'A3",      4);
       qreplace_all(s, "(!reg)",        6, "\\'AE",      4);
-      qreplace_all(s, "(!tm)",         5, "(tm)",       4);
+      qreplace_all(s, "(!tm)",         5, "\\'99",      4);
       qreplace_all(s, "(!deg)",        6, "\\'B0",      4);
-      specials2ascii(s);
+      specials2win4(s);
       texvar2ascii(s);
       break;
       
-   case TOHAH:                            /* V6.5.17 */
+   case TOHAH:
    case TOHTM:
    case TOMHH:
       qreplace_all(s, "(!grin)",       7, "<TT>;-)</TT>", 12);
       qreplace_all(s, "(!laugh)",      8, "<TT>:-)</TT>", 12);
       qreplace_all(s, "(!copyright)", 12, "&copy;",        6);
-
-                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!registered)",13, "&#174;",        6);
       qreplace_all(s, "(!euro)",       7, "&euro;",        6);
       qreplace_all(s, "(!pound)",      8, "&pound;",       7);
-      qreplace_all(s, "(!reg)",        6, "&reg;",         5);
-      qreplace_all(s, "(!tm)",         5, "&trade;",       7);
-      qreplace_all(s, "(!deg)",        6, "&deg;",         5);
-      
-                                          /* Changed in r6pl15 [NHz] */
+      qreplace_all(s, "(!reg)",        6, "&#174;",        6);
+      qreplace_all(s, "(!tm)",         5, "&#8482;",       7);
+      qreplace_all(s, "(!deg)",        6, "&#176;",        6);
+      qreplace_all(s, "(!alpha)",      8, "&#x3B1;",       7);
+      qreplace_all(s, "(!beta)",       7, "&#x3B2;",       7);
       specials2html(s);
-      
-/*    specials2ascii(s);
-*/
       texvar2ascii(s);
       break;
       
    case TOLDS:
       qreplace_all(s, "(!grin)",  7, "<tt/;-)/", 8);
       qreplace_all(s, "(!laugh)", 8, "<tt/:-)/", 8);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",  7, "EUR",      3);
-      qreplace_all(s, "(!pound)", 8, "GBP",      3);
-      qreplace_all(s, "(!reg)",   6, "(r)",      3);
-      qreplace_all(s, "(!tm)",    5, "(tm)",     4);
-
-      if (lang.degree != NULL)
-         replace_all(s, "(!deg)", lang.degree);
-
       specials2ascii(s);
       texvar2ascii(s);
       break;
@@ -3570,23 +3441,11 @@ char *s)  /* ^ string */
    case TOHPH:
       qreplace_all(s, "(!grin)",  7, "<ex>;-)<\\ex>", 12);
       qreplace_all(s, "(!laugh)", 8, "<ex>:-)<\\ex>", 12);
-
-                                          /* New in V6.5.8 [NHz] */
-      qreplace_all(s, "(!euro)",  7, "EUR",            3);
-      qreplace_all(s, "(!pound)", 8, "GBP",            3);
-      qreplace_all(s, "(!reg)",   6, "(r)",            3);
-      qreplace_all(s, "(!tm)",    5, "(tm)",           4);
-
-      if (lang.degree != NULL)
-         replace_all(s, "(!deg)", lang.degree);
-
       specials2ascii(s);
       texvar2ascii(s);
       break;
    }
 }
-
-
 
 
 
@@ -3600,24 +3459,19 @@ char *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void str2manbold(
-
-char        *d,          /* ^ reformatted string */
-const char  *s)          /* ^ string */
+LOCAL void str2manbold(char *d, const char *s)
 {
-   size_t    i;          /* counter */
-   char      c[2] = "";  /* char buffer */
-
+   size_t i;
+   char  c[2] = { 0,0 };  /* char buffer */
 
    d[0] = EOS;                            /* clear result string */
 
-   if (s[0] == EOS)                       /* empty string */
+   if (s[0] == EOS)
       return;
 
    for (i = 0; i < strlen(s); i++)
    {
       c[0] = s[i];
-      
       strcat(d, c);
       strcat(d, "\010");
       strcat(d, c);
@@ -3638,18 +3492,14 @@ const char  *s)          /* ^ string */
 *
 ******************************************|************************************/
 
-LOCAL void str2manunder(
-
-char        *d,          /* ^ reformatted string */
-const char  *s)          /* ^ string */
+LOCAL void str2manunder(char *d, const char *s)
 {
-   size_t    i;          /* counter */
-   char      c[2] = "";  /* char buffer */
-
+   size_t i;
+   char c[2] = { 0, 0 };  /* char buffer */
 
    d[0] = EOS;                            /* clear result string */
 
-   if (s[0] == EOS)                       /* empty string */
+   if (s[0] == EOS)
       return;
 
    for (i = 0; i < strlen(s); i++)
@@ -3710,21 +3560,18 @@ char       *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void c_man_styles(
-
-char        *s)               /* ^ string */
+GLOBAL void c_man_styles(char *s)
 {
    char     *ptr;             /* ^ to STYLEMAGIC in string */
-   char      alt[512],        /* */
-             neu[512];        /* */
+   char      alt[512],
+             neu[512];
    char     *start;           /* buffer for start of style in string */
-   char      s_char[2] = "";  /* */
+   char      s_char[2] = { 0, 0 };
    _BOOL   bold_active;     /* TRUE: bold style on, FALSE: bold style off */
    _BOOL   under_active;    /* TRUE: underlined on, FALSE: underlined off */
-   _BOOL   replace_it;      /* */
+   _BOOL   replace_it;
    
-
-   if (s[0] == EOS)                       /* empty string */
+   if (s[0] == EOS)
       return;
 
    bold_active  = styleflag.bold;
@@ -3732,13 +3579,12 @@ char        *s)               /* ^ string */
    replace_it   = FALSE;
 
    ptr = strstr(s, STYLEMAGIC);           /* see Notes above! */
-
    if (ptr == NULL)                       /* no style found */
       return;
 
    start = ptr;
 
-   alt[0] = EOS;                          /* clear buffer */
+   alt[0] = EOS;
 
    do
    {
@@ -3752,7 +3598,7 @@ char        *s)               /* ^ string */
       }
       else if (ptr[0] == STYLEMAGIC[0] && ptr[1] == STYLEMAGIC[1])
       {
-         switch (ptr[2])         
+         switch (ptr[2])
          {
          case C_BOLD_ON:
             bold_active = TRUE;
@@ -3792,8 +3638,7 @@ char        *s)               /* ^ string */
          replace_it = FALSE;
       }
 
-      ptr++;          
-      
+      ptr++;
    } while (ptr[0] != EOS);
 }
 
@@ -3811,36 +3656,32 @@ char        *s)               /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void auto_quote_chars(
-
-char             *s,              /* ^ string */
-_BOOL           all)            /* */
+GLOBAL void auto_quote_chars(char *s, _BOOL all)
 {
-   register int   i,              /* */
+   register int   i,
                   j;              /* counter for chrtab[] */
    int            len;            /* indicates length of found Unicode char */
    _UWORD          idx;
-   _UWORD        (*pUtrg);         /* ^ encoding table for target encoding */
+   const _UWORD    *pUtrg;         /* ^ encoding table for target encoding */
    char          *ptr,            /* ^ position in string s */
                  *oldptr;         /* buffer for ptr */
-   const char    *ptr_quoted;     /* */
-   char           s_temp[32];     /* */
-   char           s_buf[32];      /* */
-   char           s_char[2];      /* */
-   _BOOL        aqc_verb;       /* */
-   _BOOL        found = FALSE;  /* */
-   size_t         cmplen,         /* */
-                  sl_verb_on,     /* */
-                  sl_verb_off;    /* */
+   const char    *ptr_quoted;
+   char           s_temp[32];
+   char           s_buf[32];
+   char           s_char[2];
+   _BOOL        aqc_verb;
+   _BOOL        found = FALSE;
+   size_t         cmplen,
+                  sl_verb_on,
+                  sl_verb_off;
 
-
-   if (s[0] == EOS)                       /* empty string */
+   if (s[0] == EOS)
       return;
 
    pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
 
    if (no_umlaute)
-      recode_chrtab(s,CHRTAB_ASCII);
+      recode_chrtab(s, CHRTAB_ASCII);
 
    switch (desttype)
    {
@@ -3857,31 +3698,34 @@ _BOOL           all)            /* */
       if (bDocUniversalCharsetOn)
          recode_udo(s);
 
-      /* r6pl2: Neue Version: immer quoten */
-      /* nicht auf !raw !stg testen, da dies im wichtigen pass2() */
-      /* nicht auftreten kann, da vorher die Zeilen mit */
-      /* c_special_commands() bearbeitet werden. */
-
       switch (desttype)
       {
       case TOSTG:                         /* ST-Guide */
+         /*
+          * wrong place. doing that here
+          * - requires us to undo this replacement in each and every stg command
+          * - caused wrong calculations in table output
+          * - prevents autoreferences from working
+          * - prevents !index command from working
+          * ...
+          */
+#if 0
          replace_1at_by_2at(s);
-         return;
+#endif
+         break;
 
       case TOINF:
          qreplace_all(s, "@", 1, "@@", 2);
          qreplace_all(s, "}", 1, "@}", 2);
          qreplace_all(s, "{", 1, "@{", 2);
-         return;
+         break;
 
-      case TOTVH:                         /* r5pl10 */
+      case TOTVH:
          qreplace_all(s, "{", 1, "{{", 2);
-         return;
+         break;
       }
-
       return;
-   }       
-
+   }
 
    ptr = s;
 
@@ -3890,13 +3734,11 @@ _BOOL           all)            /* */
       /* Wenn in der Zeile ein Kommando steht, dann nur den Rest */
       /* quoten, wenn das Kommando einen Parameter enthaelt, */
       /* der gequotet werden muss! */
-
       if (s[0] == META_C && s[1] >= 'a' && s[1] <= 'z')
       {
-         for (i = 0; i < MAXQUOTECMD; i++)
+         for (i = 0; i < (int)MAXQUOTECMD; i++)
          {
             cmplen = quotecommand[i].cmdlen;
-
             if (strncmp(s, quotecommand[i].cmd, cmplen) == 0)
             {
                /* Das naechste Zeichen muss aber Space oder Tab sein! */
@@ -3910,7 +3752,7 @@ _BOOL           all)            /* */
 
             if ((cmplen = quotecommand[i].abblen) > 0)
             {
-               /*r6pl12: Abkuerzungen auch beachten */
+               /* Abkuerzungen auch beachten */
                if (strncmp(s, quotecommand[i].abb, cmplen) == 0)
                {
                   /* Das naechste Zeichen muss aber Space oder Tab sein! */
@@ -3931,18 +3773,17 @@ _BOOL           all)            /* */
          {                                /* don't quote content inside [] */
             if (quotecommand[i].skip_brackets)
             {
-               while (*ptr != ']')
+               while (*ptr && *ptr != ']')
                   ptr++;
             }
          }
       }
    }
 
-
    ptr_quoted = NULL;
    s_temp[0] = EOS;
    s_char[1] = EOS;
-   aqc_verb = last_aqc_verb;              /* Pl13: vorher = TRUE */
+   aqc_verb = last_aqc_verb;
 
    sl_verb_on = CMD_STYLELEN;
    sl_verb_off = CMD_STYLELEN;
@@ -3952,7 +3793,6 @@ _BOOL           all)            /* */
       /* PL13: Innerhalb (!V)...(!v) Leerzeichen durch interne  */
       /* feste Leerzeichen ersetzen, damit token_output() nicht */
       /* \verb+...+ umbricht. */
-
       if (desttype == TOTEX || desttype == TOPDL)
       {
          if (aqc_verb || styleflag.verbatim)
@@ -3967,19 +3807,14 @@ _BOOL           all)            /* */
 
       /* Das Alphabet und die Ziffern muessen nie gequotet werden! */
       /* Also einfach den ganzen Rotz ueberspringen */
-
       if (ptr[0] == ' ')                  /* space */
          goto NO_QUOTE_NEEDED;
-
       if (ptr[0] >= 'a' && ptr[0] <= 'z') /* [a..z] */
          goto NO_QUOTE_NEEDED;
-
       if (ptr[0] >= 'A' && ptr[0] <= 'Z') /* [A..Z] */
          goto NO_QUOTE_NEEDED;
-
       if (ptr[0] >= '0' && ptr[0] <= '9') /* [0..9] */
          goto NO_QUOTE_NEEDED;
-
 
       if ((desttype == TOTEX || desttype == TOPDL) && !all)
       {
@@ -4022,13 +3857,12 @@ _BOOL           all)            /* */
          goto NO_QUOTE_NEEDED;
       }
 
-
       /* Sonderbehandlung fuer Platzhalter, welche spaeter */
       /* gequotet werden (macro, define, link, index) */
       /* PL6: aber nicht in verbatim-Umgebungen! */
 
       /* Dabei beruecksichtigen, dass Klammern innerhalb */
-      /* durch ein Ausrufungszeichen gequotet werden. */              
+      /* durch ein Ausrufungszeichen gequotet werden. */
 
       if (pflag[PASS2].env != ENV_VERBATIM)
       {
@@ -4037,15 +3871,14 @@ _BOOL           all)            /* */
             oldptr = ptr;                 /* Pointer sichern */
             ptr++;
 
-            while (ptr[0] != EOS && ptr[0] != ')' )
+            while (ptr[0] != EOS && ptr[0] != ')')
             {
-               if (ptr[0] == '!' && ptr[1] == ')' )
+               if (ptr[0] == '!' && ptr[1] == ')')
                {
                   ptr++;                  /* gequotete Klammer ueberspringen */
                }
-
                ptr++;
-            }       
+            }
 
             if (ptr[0] == EOS)
             {
@@ -4053,7 +3886,6 @@ _BOOL           all)            /* */
                /* ist etwas schiefgelaufen oder aber es handelte */
                /* sich gar nicht um einen Parameter (z.B. "(!)") */
                /* In dem Falle den alten Pointer restaurieren */
-
                ptr = oldptr;
                ptr++;
             }
@@ -4065,12 +3897,11 @@ _BOOL           all)            /* */
          }
       }
 
-
       switch (desttype)
       {
       case TOTEX:
       case TOPDL:
-         if ((all) || (!styleflag.verbatim && !aqc_verb) )
+         if (all || (!styleflag.verbatim && !aqc_verb))
          {
             found = FALSE;
             
@@ -4091,7 +3922,7 @@ _BOOL           all)            /* */
                while (chrtab[j].uname != U_NIL)
                {
                                           /* identical Unicode name found! */
-                  if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
+                  if (chrtab[j].uname == pUtrg[idx])
                   {
                      if (chrtab[j].tex[0] != EOS)
                      {
@@ -4108,7 +3939,7 @@ _BOOL           all)            /* */
             {
                for (i = 0; i < MAXTEX7BIT; i++)
                {
-                  if (( /*(_UBYTE)*/ ptr[0]) == tex7bit[i].c)
+                  if (ptr[0] == tex7bit[i].c)
                   {
                      ptr_quoted = tex7bit[i].quoted;
                      found = TRUE;
@@ -4119,9 +3950,9 @@ _BOOL           all)            /* */
 
             if (!found)
             {
-               if ((_UBYTE) ptr[0] >= 127)
+               if (idx >= 127)
                {
-                  warning_no_texchar(ptr[0]);     /* PL12 */
+                  warning_message(_("%x maybe not available in LaTeX"), idx);
                   sprintf(s_temp, "$\\symbol{%d}$", idx);
                   ptr_quoted = s_temp;
                }
@@ -4131,10 +3962,9 @@ _BOOL           all)            /* */
 
       case TOLYX:
          found = FALSE;
-
          for (i = 0; i < MAXLYX7BIT; i++)
          {
-            if (( /*(_UBYTE)*/ ptr[0]) == lyx7bit[i].c)
+            if (ptr[0] == lyx7bit[i].c)
             {
                ptr_quoted = lyx7bit[i].quoted;
                found = TRUE;
@@ -4145,10 +3975,9 @@ _BOOL           all)            /* */
 
       case TOIPF:
          found = FALSE;
-
          for (i = 0; i < MAXIPF7BIT; i++)
          {
-            if (( /*(_UBYTE)*/ ptr[0]) == ipf7bit[i].c)
+            if (ptr[0] == ipf7bit[i].c)
             {
                ptr_quoted = ipf7bit[i].quoted;
                found = TRUE;
@@ -4159,9 +3988,7 @@ _BOOL           all)            /* */
 
       case TORTF:
          found = FALSE;
-
          idx = (_UBYTE)*ptr;               /* get value of current char */
-         
          if (idx > 127)
          {
             if (!pUtrg)                   /* target is Unicode */
@@ -4170,11 +3997,11 @@ _BOOL           all)            /* */
                idx = utf8_to_uchar(ptr, &len);
 
                                           /* format it for RTF (format "\uN" where N is decimal) */
-               sprintf(s_temp, "\\u%d", idx);
+               sprintf(s_temp, "\\u%u", idx);
 
                ptr_quoted = s_temp;       /* set ^ to temp string */
 
-               strncpy(s_buf,ptr,len);    /* copy all used Unicode bytes from line to another buffer */
+               strncpy(s_buf, ptr, len);  /* copy all used Unicode bytes from line to another buffer */
                s_buf[len] = 0;            /* close C string */
 
                cmplen = strlen(ptr_quoted);
@@ -4192,7 +4019,7 @@ _BOOL           all)            /* */
             while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
+               if (chrtab[j].uname == pUtrg[idx])
                {
                   if (chrtab[j].rtf[0] != EOS)
                   {
@@ -4215,7 +4042,7 @@ _BOOL           all)            /* */
          {
             for (i = 0; i < MAXRTF7BIT; i++)
             {
-               if (( ptr[0]) == rtf7bit[i].c)
+               if (ptr[0] == rtf7bit[i].c)
                {
                   ptr_quoted = rtf7bit[i].quoted;
                   found = TRUE;
@@ -4223,13 +4050,10 @@ _BOOL           all)            /* */
                }
             }
          }
-         
          break;
-
 
       case TOKPS:
          found = FALSE;
-
          idx = (_UBYTE)*ptr;
 
          if (idx > 127)
@@ -4240,7 +4064,7 @@ _BOOL           all)            /* */
             while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
+               if (pUtrg && chrtab[j].uname == pUtrg[idx])
                {
                   if (chrtab[j].ps[0] != EOS)
                   {
@@ -4259,33 +4083,6 @@ _BOOL           all)            /* */
                ptr_quoted = s_temp;
             }
          }
-
-         /* Changed in V6.5.5 [NHz] */
-#if 0
-         else
-         {
-            LOCAL QUOTEINFO const   ps7bit[] =
-            {
-               { '[',  "\\["  },
-               { ']',  "\\]"  },
-
-               { '(',  "\\("  },
-               { ')',  "\\)"  },
-               { '\\', "\\\\" }
-            };
-
-
-            for (i = 0; i < sizeof(ps7bit) / sizeof(ps7bit[0]); i++)
-            {
-               if ((ptr[0]) == ps7bit[i].c)
-               {
-                  ptr_quoted = ps7bit[i].quoted;
-                  found = TRUE;
-                  break;
-               }
-            }
-         }
-#endif
          break;
 
       case TOWIN:
@@ -4303,7 +4100,7 @@ _BOOL           all)            /* */
             while (chrtab[j].uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j].uname == pUtrg[idx]) )
+               if (pUtrg && chrtab[j].uname == pUtrg[idx])
                {
                   if (chrtab[j].rtf[0] != EOS)
                   {
@@ -4326,7 +4123,7 @@ _BOOL           all)            /* */
          {
             for (i = 0; i < MAXWIN7BIT; i++)
             {
-               if ((/*(_UBYTE)*/ ptr[0]) == win7bit[i].c)
+               if (ptr[0] == win7bit[i].c)
                {
                   ptr_quoted = win7bit[i].quoted;
                   found = TRUE;
@@ -4344,8 +4141,7 @@ _BOOL           all)            /* */
          }
          break;
          
-
-      case TOHAH:                         /* HTML Apple Help (since V6.5.17) */
+      case TOHAH:                         /* HTML Apple Help */
       case TOHTM:                         /* HTML */
       case TOMHH:                         /* Microsoft HTML Help */
       
@@ -4406,11 +4202,8 @@ _BOOL           all)            /* */
                   }
                }
             }
-            
-         }  /* if (idx > 127) ... else */
-         
+         }
          break;
-         
 
       case TOLDS:
          found = FALSE;
@@ -4444,7 +4237,7 @@ _BOOL           all)            /* */
          {
             for (i = 0; i < MAXLDS7BIT; i++)
             {
-               if ((ptr[0]) == lds7bit[i].c)
+               if (ptr[0] == lds7bit[i].c)
                {
                   ptr_quoted = lds7bit[i].quoted;
                   found = TRUE;
@@ -4454,7 +4247,6 @@ _BOOL           all)            /* */
          }
          break;
          
-
       case TOHPH:
          found = FALSE;
 
@@ -4463,7 +4255,6 @@ _BOOL           all)            /* */
          if (idx > 127)
          {
             j = 0;
-        
                                           /* check for end of table! */
             while (chrtab[j].uname != U_NIL)
             {
@@ -4495,16 +4286,14 @@ _BOOL           all)            /* */
                }
             }
          }
-
-      }  /* switch (desttype) */
-
+         break;
+      }
 
       if (ptr_quoted != NULL && ptr_quoted[0] != EOS)
       {
          s_char[0] = ptr[0];
          cmplen = strlen(ptr_quoted);
          qreplace_once(ptr, s_char, 1, ptr_quoted, cmplen);
-
          ptr = ptr + cmplen - 1;
          s_temp[0] = EOS;
          ptr_quoted = NULL;
@@ -4515,22 +4304,18 @@ NO_QUOTE_NEEDED:
    }
 
    if (bDocUniversalCharsetOn)
-   {
       uni2misc(s);
-   }
 
    if (iUdopass == PASS2)
    {
-      last_aqc_verb = aqc_verb;           /* PL13: Status sichern */
+      last_aqc_verb = aqc_verb;
    }
    else
    {
-      /* r6pl9: In pass1() werden nur Kommandozeilen beachtet. */
       /* Wird last_aqc_verb nicht zurueckgesetzt, dann kracht es! */
       last_aqc_verb = FALSE;
    }
-
-} /* auto_quote_chars */
+}
 
 
 
@@ -4546,25 +4331,16 @@ NO_QUOTE_NEEDED:
 *
 ******************************************|************************************/
 
-GLOBAL void auto_quote_texindex(
-
-char  *s)  /* ^ string */
+GLOBAL void auto_quote_texindex(char *s)
 {
-   if (desttype == TOTEX || desttype == TOPDL)
+   if (desttype == TOTEX || desttype == TOPDL || desttype == TOLYX)
    {
-#if 0
-      qreplace_all(s, "{\\\"a}", 5, "\\\"a", 3);     /* {\"a} -> \"a */
-      qreplace_all(s, "{\\\"o}", 5, "\\\"o", 3);     /* {\"o} -> \"o */
-      qreplace_all(s, "{\\\"u}", 5, "\\\"u", 3);     /* {\"u} -> \"u */
-      qreplace_all(s, "{\\\"A}", 5, "\\\"A", 3);     /* {\"A} -> \"A */
-      qreplace_all(s, "{\\\"O}", 5, "\\\"O", 3);     /* {\"O} -> \"O */
-      qreplace_all(s, "{\\\"U}", 5, "\\\"U", 3);     /* {\"U} -> \"U */
-#endif
-      qreplace_all(s, "\"`",     2, "\"\"`", 3);     /* "` -> \"` */
-      qreplace_all(s, "\"'",     2, "\"\"'", 3);     /* "' -> \"' */
+      qreplace_all(s, "\"",      1, "\"\"",  2);     /* " ->  "" */
       qreplace_all(s, "!",       1, "\"!",   2);     /* !  -> "! */
       qreplace_all(s, "@",       1, "\"@",   2);     /* @  -> "@ */
       qreplace_all(s, "|",       1, "\"|",   2);     /* |  -> "| */
+      qreplace_all(s, "{",       1, "\"{",   2);     /* {  -> "{ */
+      qreplace_all(s, "}",       1, "\"}",   2);     /* }  -> "} */
    }
 }
 
@@ -4582,22 +4358,19 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void auto_quote_linedraw(
-
-char             *s)              /* ^ string */
+GLOBAL void auto_quote_linedraw(char *s)
 {
-   register int   i;              /* */
-   char          *ptr,            /* */
-                 *quoted;         /* */
-   char           sTemp[32];      /* */
-   char           sChar[2] = "";  /* */
-
+   register int   i;
+   char          *ptr;
+   const char *quoted;
+   char           sTemp[32];
+   char           sChar[2] = { 0, 0 };
 
    ptr = s;
 
    while (ptr[0] != EOS)
    {
-      if ( ((_UBYTE)ptr[0]) > 127)
+      if (((_UBYTE)ptr[0]) > 127)
       {
          sprintf(sTemp, "\\'%X", (_UBYTE)ptr[0]);
          sChar[0] = ptr[0];
@@ -4605,10 +4378,10 @@ char             *s)              /* ^ string */
          ptr += 3;
       }
       else
-      {       
+      {
          for (i = 0; i < MAXRTF7BIT; i++)
          {
-            if ( (ptr[0]) == rtf7bit[i].c)
+            if (ptr[0] == rtf7bit[i].c)
             {
                quoted = rtf7bit[i].quoted;
                sChar[0] = ptr[0];
@@ -4620,8 +4393,7 @@ char             *s)              /* ^ string */
       }
 
       ptr++;
-
-   }  /* while */
+   }
 }
 
 
@@ -4640,7 +4412,7 @@ char             *s)              /* ^ string */
 
 GLOBAL void init_module_chars(void)
 {
-   last_aqc_verb      = FALSE;            /* */
+   last_aqc_verb = FALSE;
 }
 
 
@@ -4660,9 +4432,7 @@ GLOBAL void init_module_chars(void)
 *
 ******************************************|************************************/
 
-GLOBAL _UWORD *chr_codepage(
-
-int   encoding)  /* # of encoding */
+GLOBAL const _UWORD *chr_codepage(int encoding)
 {
    switch (encoding)
    {
@@ -4761,8 +4531,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_CP1252:
    default:
-      return u_CODE_CP1252;
+      break;
    }
+   return u_CODE_CP1252;
 }
 
 
@@ -4779,9 +4550,7 @@ int   encoding)  /* # of encoding */
 *
 ******************************************|************************************/
 
-GLOBAL void *chr_ligatures(
-
-int   encoding)  /* # of encoding */
+GLOBAL lig_array *chr_ligatures(int encoding)
 {
    switch (encoding)
    {
@@ -4880,8 +4649,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_CP1252:
    default:
-      return CODE_CP1252_lig;
+      break;
    }
+   return CODE_CP1252_lig;
 }
 
 
@@ -4902,9 +4672,7 @@ int   encoding)  /* # of encoding */
 *
 ******************************************|************************************/
 
-GLOBAL _UWORD *chr_sort_codepage(
-
-int   encoding)  /* # of encoding */
+GLOBAL const _UWORD *chr_sort_codepage(int encoding)
 {
    switch (encoding)
    {
@@ -5003,8 +4771,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_CP1252:
    default:
-      return sort_CODE_CP1252;
+      break;
    }
+   return sort_CODE_CP1252;
 }
 
 
@@ -5021,9 +4790,7 @@ int   encoding)  /* # of encoding */
 *
 ******************************************|************************************/
 
-GLOBAL void *chr_usort_codepage(
-
-int   encoding)  /* # of encoding */
+GLOBAL usort_array *chr_usort_codepage(int encoding)
 {
    switch (encoding)
    {
@@ -5031,8 +4798,9 @@ int   encoding)  /* # of encoding */
       return sort_CODE_UTF;
    
    default:
-      return NULL;
+      break;
    }
+   return NULL;
 }
 
 
@@ -5052,9 +4820,7 @@ int   encoding)  /* # of encoding */
 *
 ******************************************|************************************/
 
-GLOBAL char *chr_codepage_name(
-
-int   encoding)  /* # of encoding */
+GLOBAL const char *chr_codepage_name(int encoding)
 {
    /* Length: 1234567890123456789012345678901234567890 */
    
@@ -5174,9 +4940,7 @@ int   encoding)  /* # of encoding */
 *
 ******************************************|************************************/
 
-GLOBAL char *chr_codepage_charset_name(
-
-int   encoding)  /* # of encoding */
+GLOBAL const char *chr_codepage_charset_name(int encoding)
 {
    switch (encoding)
    {
@@ -5277,9 +5041,7 @@ int   encoding)  /* # of encoding */
       return "UTF-8";
    
    default:
-      return "ISO-8859-1";
+      break;
    }
+   return "ISO-8859-1";
 }
-
-
-/* +++ EOF +++ */

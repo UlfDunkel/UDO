@@ -51,8 +51,8 @@
 /*KEY _NAME="unicode definitions" */
 /*END*/
 
-#ifndef __UNICODE
-#define __UNICODE
+#ifndef __UNICODE_H__
+#define __UNICODE_H__
 
 /*******************************************************************************
 *
@@ -1012,7 +1012,7 @@
 #define U_GreekCapitalLetterTheta                       0x0398
 #define U_GreekCapitalLetterIota                        0x0399
 #define U_GreekCapitalLetterKappa                       0x039A
-#define U_GreekCapitalLetterLamda                       0x039B
+#define U_GreekCapitalLetterLambda                      0x039B
 #define U_GreekCapitalLetterMu                          0x039C
 #define U_GreekCapitalLetterNu                          0x039D
 #define U_GreekCapitalLetterXi                          0x039E
@@ -1044,7 +1044,7 @@
 #define U_GreekSmallLetterTheta                         0x03B8
 #define U_GreekSmallLetterIota                          0x03B9
 #define U_GreekSmallLetterKappa                         0x03BA
-#define U_GreekSmallLetterLamda                         0x03BB
+#define U_GreekSmallLetterLambda                        0x03BB
 #define U_GreekSmallLetterMu                            0x03BC
 #define U_GreekSmallLetterNu                            0x03BD
 #define U_GreekSmallLetterXi                            0x03BE
@@ -2598,6 +2598,8 @@
    /* ... */                                         /* 0x2311 .. 0x231F */
 #define U_TopHalfIntegral                               0x2320
 #define U_BottomHalfIntegral                            0x2321
+#define U_Frown                                         0x2322
+#define U_Smile                                         0x2323
 
 
    /* ------ 2400-243F: Control Pictures ------ */
@@ -3125,7 +3127,7 @@
 /* ------------------- */
 /* As soon as Unicode constants > 0xFFFF are defined, */
 /* the relevant tables must no longer use _UWORD, */
-/* but have to switch to ULONG. */
+/* but have to switch to _ULONG. */
 
 
    /* ====== More Unicode character groups defined in general ====== */
@@ -3143,7 +3145,4 @@
    /* ------ F0000-FFFFD: Supplementary Private Use Area-A ------ */
    /* ------ 100000-10FFFD: Supplementary Private Use Area-B ------ */
 
-#endif      /* #ifndef __UNICODE */
-
-
-/* +++ EOF +++ */
+#endif /* __UNICODE_H__ */

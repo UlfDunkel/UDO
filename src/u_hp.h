@@ -63,7 +63,7 @@
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_HP8[] =             /* CODE_HP8 */
+static _UWORD const u_CODE_HP8[] =             /* CODE_HP8 */
 {
    U_NIL,                                 /* 0x00  NULl */
    U_NIL,                                 /* 0x01  Start Of Heading */
@@ -339,7 +339,7 @@ static _UWORD   u_CODE_HP8[] =             /* CODE_HP8 */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_HP8_lig[][3] =        /* CODE_HP8 character ligatures */
+static _UWORD const CODE_HP8_lig[][3] =        /* CODE_HP8 character ligatures */
 {
    {0x00CB, U_LatinCapitalLetterE, U_LatinSmallLetterE},      /* 0xa5 = 0x00CB: LATIN CAPITAL LETTER E WITH DIAERESIS */
    {0x00CF, U_LatinCapitalLetterI, U_LatinSmallLetterE},      /* 0xa7 = 0x00CF: LATIN CAPITAL LETTER I WITH DIAERESIS */
@@ -378,7 +378,7 @@ static _UWORD   CODE_HP8_lig[][3] =        /* CODE_HP8 character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_HP8[] =          /* CODE_HP8 */
+static _UWORD const sort_CODE_HP8[] =          /* CODE_HP8 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -639,6 +639,3 @@ static _UWORD   sort_CODE_HP8[] =          /* CODE_HP8 */
    U_PlusMinusSign,                       /* 0xfe = 0x00B1: PLUS-MINUS SIGN */
    U_NIL                                  /* 0xff  */
 };
-
-
-/* +++ EOF +++ */

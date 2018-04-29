@@ -64,7 +64,7 @@
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_TOS[] =             /* CODE_TOS */
+static _UWORD const u_CODE_TOS[] =             /* CODE_TOS */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -347,7 +347,7 @@ static _UWORD   u_CODE_TOS[] =             /* CODE_TOS */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_TOS_lig[][3] =        /* CODE_TOS character ligatures */
+static _UWORD const CODE_TOS_lig[][3] =        /* CODE_TOS character ligatures */
 {
    {0x0081, U_LatinCapitalLetterU, U_LatinCapitalLetterE},    /* 0x0081  U_LatinSmallLetterUWithDiaeresis */
    {0x0084, U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x0084  U_LatinSmallLetterAWithDiaeresis */
@@ -382,7 +382,7 @@ static _UWORD   CODE_TOS_lig[][3] =        /* CODE_TOS character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_TOS[] =          /* CODE_TOS */
+static _UWORD const sort_CODE_TOS[] =          /* CODE_TOS */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -650,6 +650,3 @@ static _UWORD   sort_CODE_TOS[] =          /* CODE_TOS */
    0x00fe,                                /* 0xfe  U_SuperscriptThree */
    0x00ff                                 /* 0xff  U_Macron */
 };
-
-
-/* +++ EOF +++ */

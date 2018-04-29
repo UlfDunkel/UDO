@@ -106,7 +106,7 @@
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_LATIN1[] =          /* CODE_LATIN1 */
+static _UWORD const u_CODE_LATIN1[] =          /* CODE_LATIN1 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -383,7 +383,7 @@ static _UWORD   u_CODE_LATIN1[] =          /* CODE_LATIN1 */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_LATIN1_lig[][3] =     /* CODE_LATIN1 character ligatures */
+static _UWORD const CODE_LATIN1_lig[][3] =     /* CODE_LATIN1 character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    { U_LatinCapitalLetterAWithRingAbove,  U_LatinCapitalLetterA, U_LatinCapitalLetterO },  /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
@@ -420,7 +420,7 @@ static _UWORD   CODE_LATIN1_lig[][3] =     /* CODE_LATIN1 character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_LATIN1[] =       /* CODE_LATIN1 */
+static _UWORD const sort_CODE_LATIN1[] =       /* CODE_LATIN1 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -706,7 +706,7 @@ static _UWORD   sort_CODE_LATIN1[] =       /* CODE_LATIN1 */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_LATIN2[] =          /* CODE_LATIN2 */
+static _UWORD const u_CODE_LATIN2[] =          /* CODE_LATIN2 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -983,7 +983,7 @@ static _UWORD   u_CODE_LATIN2[] =          /* CODE_LATIN2 */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_LATIN2_lig[][3] =     /* CODE_LATIN2 character ligatures */
+static _UWORD const CODE_LATIN2_lig[][3] =     /* CODE_LATIN2 character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    { U_LatinCapitalLetterAWithRingAbove,  U_LatinCapitalLetterA, U_LatinCapitalLetterO },  /* 0xC5   0x0139   LATIN CAPITAL LETTER L WITH ACUTE */
@@ -1014,7 +1014,7 @@ static _UWORD   CODE_LATIN2_lig[][3] =     /* CODE_LATIN2 character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_LATIN2[] =       /* CODE_LATIN2 */
+static _UWORD const sort_CODE_LATIN2[] =       /* CODE_LATIN2 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1300,7 +1300,7 @@ static _UWORD   sort_CODE_LATIN2[] =       /* CODE_LATIN2 */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_LATIN3[] =          /* CODE_LATIN3 */
+static _UWORD const u_CODE_LATIN3[] =          /* CODE_LATIN3 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1570,7 +1570,7 @@ static _UWORD   u_CODE_LATIN3[] =          /* CODE_LATIN3 */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_LATIN3_lig[][3] =     /* CODE_LATIN3 character ligatures */
+static _UWORD const CODE_LATIN3_lig[][3] =     /* CODE_LATIN3 character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    { U_LatinCapitalLetterEWithDiaeresis,  U_LatinCapitalLetterE, U_LatinCapitalLetterE },  /* 0xCB   0x00CB   LATIN CAPITAL LETTER E WITH DIAERESIS */
@@ -1600,7 +1600,7 @@ static _UWORD   CODE_LATIN3_lig[][3] =     /* CODE_LATIN3 character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_LATIN3[] =       /* CODE_LATIN3 */
+static _UWORD const sort_CODE_LATIN3[] =       /* CODE_LATIN3 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1879,7 +1879,7 @@ static _UWORD   sort_CODE_LATIN3[] =       /* CODE_LATIN3 */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_LATIN4[] =          /* CODE_LATIN4 */
+static _UWORD const u_CODE_LATIN4[] =          /* CODE_LATIN4 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -2156,7 +2156,7 @@ static _UWORD   u_CODE_LATIN4[] =          /* CODE_LATIN4 */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_LATIN4_lig[][3] =     /* CODE_LATIN4 character ligatures */
+static _UWORD const CODE_LATIN4_lig[][3] =     /* CODE_LATIN4 character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    { U_LatinCapitalLetterAWithRingAbove,  U_LatinCapitalLetterA, U_LatinCapitalLetterO },  /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
@@ -2190,7 +2190,7 @@ static _UWORD   CODE_LATIN4_lig[][3] =     /* CODE_LATIN4 character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_LATIN4[] =       /* CODE_LATIN4 */
+static _UWORD const sort_CODE_LATIN4[] =       /* CODE_LATIN4 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -2476,7 +2476,7 @@ static _UWORD   sort_CODE_LATIN4[] =       /* CODE_LATIN4 */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_CYRILLIC[] =        /* CODE_CYRILLIC */
+static _UWORD const u_CODE_CYRILLIC[] =        /* CODE_CYRILLIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -2755,7 +2755,7 @@ static _UWORD   u_CODE_CYRILLIC[] =        /* CODE_CYRILLIC */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_CYRILLIC_lig[][3] =   /* CODE_CYRILLIC character ligatures */
+static _UWORD const CODE_CYRILLIC_lig[][3] =   /* CODE_CYRILLIC character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -2773,7 +2773,7 @@ static _UWORD   CODE_CYRILLIC_lig[][3] =   /* CODE_CYRILLIC character ligatures 
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_CYRILLIC[] =     /* CODE_CYRILLIC */
+static _UWORD const sort_CODE_CYRILLIC[] =     /* CODE_CYRILLIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3059,7 +3059,7 @@ static _UWORD   sort_CODE_CYRILLIC[] =     /* CODE_CYRILLIC */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_ARABIC[] =          /* CODE_ARABIC */
+static _UWORD const u_CODE_ARABIC[] =          /* CODE_ARABIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3337,7 +3337,7 @@ static _UWORD   u_CODE_ARABIC[] =          /* CODE_ARABIC */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_ARABIC_lig[][3] =     /* CODE_ARABIC character ligatures */
+static _UWORD const CODE_ARABIC_lig[][3] =     /* CODE_ARABIC character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -3355,7 +3355,7 @@ static _UWORD   CODE_ARABIC_lig[][3] =     /* CODE_ARABIC character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_ARABIC[] =       /* CODE_ARABIC */
+static _UWORD const sort_CODE_ARABIC[] =       /* CODE_ARABIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3642,7 +3642,7 @@ static _UWORD   sort_CODE_ARABIC[] =       /* CODE_ARABIC */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_GREEK[] =           /* CODE_GREEK */
+static _UWORD const u_CODE_GREEK[] =           /* CODE_GREEK */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -3851,7 +3851,7 @@ static _UWORD   u_CODE_GREEK[] =           /* CODE_GREEK */
    U_GreekCapitalLetterTheta,             /* 0xC8   0x0398   GREEK CAPITAL LETTER THETA */
    U_GreekCapitalLetterIota,              /* 0xC9   0x0399   GREEK CAPITAL LETTER IOTA */
    U_GreekCapitalLetterKappa,             /* 0xCA   0x039A   GREEK CAPITAL LETTER KAPPA */
-   U_GreekCapitalLetterLamda,             /* 0xCB   0x039B   GREEK CAPITAL LETTER LAMDA */
+   U_GreekCapitalLetterLambda,            /* 0xCB   0x039B   GREEK CAPITAL LETTER LAMBDA */
    U_GreekCapitalLetterMu,                /* 0xCC   0x039C   GREEK CAPITAL LETTER MU */
    U_GreekCapitalLetterNu,                /* 0xCD   0x039D   GREEK CAPITAL LETTER NU */
    U_GreekCapitalLetterXi,                /* 0xCE   0x039E   GREEK CAPITAL LETTER XI */
@@ -3885,7 +3885,7 @@ static _UWORD   u_CODE_GREEK[] =           /* CODE_GREEK */
    U_GreekSmallLetterTheta,               /* 0xE8   0x03B8   GREEK SMALL LETTER THETA */
    U_GreekSmallLetterIota,                /* 0xE9   0x03B9   GREEK SMALL LETTER IOTA */
    U_GreekSmallLetterKappa,               /* 0xEA   0x03BA   GREEK SMALL LETTER KAPPA */
-   U_GreekSmallLetterLamda,               /* 0xEB   0x03BB   GREEK SMALL LETTER LAMDA */
+   U_GreekSmallLetterLambda,              /* 0xEB   0x03BB   GREEK SMALL LETTER LAMBDA */
    U_GreekSmallLetterMu,                  /* 0xEC   0x03BC   GREEK SMALL LETTER MU */
    U_GreekSmallLetterNu,                  /* 0xED   0x03BD   GREEK SMALL LETTER NU */
    U_GreekSmallLetterXi,                  /* 0xEE   0x03BE   GREEK SMALL LETTER XI */
@@ -3922,7 +3922,7 @@ static _UWORD   u_CODE_GREEK[] =           /* CODE_GREEK */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_GREEK_lig[][3] =      /* CODE_GREEK character ligatures */
+static _UWORD const CODE_GREEK_lig[][3] =      /* CODE_GREEK character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -3940,7 +3940,7 @@ static _UWORD   CODE_GREEK_lig[][3] =      /* CODE_GREEK character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_GREEK[] =        /* CODE_GREEK */
+static _UWORD const sort_CODE_GREEK[] =        /* CODE_GREEK */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -4148,7 +4148,7 @@ static _UWORD   sort_CODE_GREEK[] =        /* CODE_GREEK */
    U_GreekCapitalLetterTheta,             /* 0xC8   0x0398   GREEK CAPITAL LETTER THETA */
    U_GreekCapitalLetterIota,              /* 0xC9   0x0399   GREEK CAPITAL LETTER IOTA */
    U_GreekCapitalLetterKappa,             /* 0xCA   0x039A   GREEK CAPITAL LETTER KAPPA */
-   U_GreekCapitalLetterLamda,             /* 0xCB   0x039B   GREEK CAPITAL LETTER LAMDA */
+   U_GreekCapitalLetterLambda,            /* 0xCB   0x039B   GREEK CAPITAL LETTER LAMBDA */
    U_GreekCapitalLetterMu,                /* 0xCC   0x039C   GREEK CAPITAL LETTER MU */
    U_GreekCapitalLetterNu,                /* 0xCD   0x039D   GREEK CAPITAL LETTER NU */
    U_GreekCapitalLetterXi,                /* 0xCE   0x039E   GREEK CAPITAL LETTER XI */
@@ -4180,7 +4180,7 @@ static _UWORD   sort_CODE_GREEK[] =        /* CODE_GREEK */
    U_GreekCapitalLetterTheta,             /* 0xE8   0x03B8   GREEK SMALL LETTER THETA */
    U_GreekCapitalLetterIota,              /* 0xE9   0x03B9   GREEK SMALL LETTER IOTA */
    U_GreekCapitalLetterKappa,             /* 0xEA   0x03BA   GREEK SMALL LETTER KAPPA */
-   U_GreekCapitalLetterLamda,             /* 0xEB   0x03BB   GREEK SMALL LETTER LAMDA */
+   U_GreekCapitalLetterLambda,            /* 0xEB   0x03BB   GREEK SMALL LETTER LAMBDA */
    U_GreekCapitalLetterMu,                /* 0xEC   0x03BC   GREEK SMALL LETTER MU */
    U_GreekCapitalLetterNu,                /* 0xED   0x03BD   GREEK SMALL LETTER NU */
    U_GreekCapitalLetterXi,                /* 0xEE   0x03BE   GREEK SMALL LETTER XI */
@@ -4226,7 +4226,7 @@ static _UWORD   sort_CODE_GREEK[] =        /* CODE_GREEK */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_HEBREW[] =          /* CODE_HEBREW */
+static _UWORD const u_CODE_HEBREW[] =          /* CODE_HEBREW */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -4503,7 +4503,7 @@ static _UWORD   u_CODE_HEBREW[] =          /* CODE_HEBREW */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_HEBREW_lig[][3] =     /* CODE_HEBREW character ligatures */
+static _UWORD const CODE_HEBREW_lig[][3] =     /* CODE_HEBREW character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -4521,7 +4521,7 @@ static _UWORD   CODE_HEBREW_lig[][3] =     /* CODE_HEBREW character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_HEBREW[] =       /* CODE_HEBREW */
+static _UWORD const sort_CODE_HEBREW[] =       /* CODE_HEBREW */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -4807,7 +4807,7 @@ static _UWORD   sort_CODE_HEBREW[] =       /* CODE_HEBREW */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_TURKISH[] =         /* CODE_TURKISH */
+static _UWORD const u_CODE_TURKISH[] =         /* CODE_TURKISH */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -5084,7 +5084,7 @@ static _UWORD   u_CODE_TURKISH[] =         /* CODE_TURKISH */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_TURKISH_lig[][3] =    /* CODE_TURKISH character ligatures */
+static _UWORD const CODE_TURKISH_lig[][3] =    /* CODE_TURKISH character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    { U_LatinCapitalLetterAWithRingAbove,  U_LatinCapitalLetterA, U_LatinCapitalLetterO },  /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
@@ -5121,7 +5121,7 @@ static _UWORD   CODE_TURKISH_lig[][3] =    /* CODE_TURKISH character ligatures *
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_TURKISH[] =      /* CODE_TURKISH */
+static _UWORD const sort_CODE_TURKISH[] =      /* CODE_TURKISH */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -5407,7 +5407,7 @@ static _UWORD   sort_CODE_TURKISH[] =      /* CODE_TURKISH */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_NORDIC[] =          /* CODE_NORDIC */
+static _UWORD const u_CODE_NORDIC[] =          /* CODE_NORDIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -5684,7 +5684,7 @@ static _UWORD   u_CODE_NORDIC[] =          /* CODE_NORDIC */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_NORDIC_lig[][3] =     /* CODE_NORDIC character ligatures */
+static _UWORD const CODE_NORDIC_lig[][3] =     /* CODE_NORDIC character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    { U_LatinCapitalLetterAWithRingAbove,  U_LatinCapitalLetterA, U_LatinCapitalLetterO },  /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
@@ -5720,7 +5720,7 @@ static _UWORD   CODE_NORDIC_lig[][3] =     /* CODE_NORDIC character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_NORDIC[] =       /* CODE_NORDIC */
+static _UWORD const sort_CODE_NORDIC[] =       /* CODE_NORDIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -6006,7 +6006,7 @@ static _UWORD   sort_CODE_NORDIC[] =       /* CODE_NORDIC */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_THAI[] =            /* CODE_THAI */
+static _UWORD const u_CODE_THAI[] =            /* CODE_THAI */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -6283,7 +6283,7 @@ static _UWORD   u_CODE_THAI[] =            /* CODE_THAI */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_THAI_lig[][3] =       /* CODE_THAI character ligatures */
+static _UWORD const CODE_THAI_lig[][3] =       /* CODE_THAI character ligatures */
 {
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
@@ -6301,7 +6301,7 @@ static _UWORD   CODE_THAI_lig[][3] =       /* CODE_THAI character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_THAI[] =         /* CODE_THAI */
+static _UWORD const sort_CODE_THAI[] =         /* CODE_THAI */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -6587,7 +6587,7 @@ static _UWORD   sort_CODE_THAI[] =         /* CODE_THAI */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_BALTIC[] =          /* CODE_BALTIC */
+static _UWORD const u_CODE_BALTIC[] =          /* CODE_BALTIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -6864,7 +6864,7 @@ static _UWORD   u_CODE_BALTIC[] =          /* CODE_BALTIC */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_BALTIC_lig[][3] =     /* CODE_BALTIC character ligatures */
+static _UWORD const CODE_BALTIC_lig[][3] =     /* CODE_BALTIC character ligatures */
 {
    { U_LatinCapitalLetterOSlash,          U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0xA8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
    { U_LatinCapitalLigatureAE,            U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xAF   0x00C6   LATIN CAPITAL LETTER AE */
@@ -6896,7 +6896,7 @@ static _UWORD   CODE_BALTIC_lig[][3] =     /* CODE_BALTIC character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_BALTIC[] =       /* CODE_BALTIC */
+static _UWORD const sort_CODE_BALTIC[] =       /* CODE_BALTIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -7183,7 +7183,7 @@ static _UWORD   sort_CODE_BALTIC[] =       /* CODE_BALTIC */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_CELTIC[] =          /* CODE_CELTIC */
+static _UWORD const u_CODE_CELTIC[] =          /* CODE_CELTIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -7460,7 +7460,7 @@ static _UWORD   u_CODE_CELTIC[] =          /* CODE_CELTIC */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_CELTIC_lig[][3] =     /* CODE_CELTIC character ligatures */
+static _UWORD const CODE_CELTIC_lig[][3] =     /* CODE_CELTIC character ligatures */
 {
    { U_LatinCapitalLetterYWithDiaeresis,  U_LatinCapitalLetterY, U_LatinCapitalLetterE },  /* 0xAF   0x0178   LATIN CAPITAL LETTER Y WITH DIAERESIS */
    { U_LatinCapitalLetterWWithDiaeresis,  U_LatinCapitalLetterW, U_LatinCapitalLetterE },  /* 0xBD   0x1E84   LATIN CAPITAL LETTER W WITH DIAERESIS */
@@ -7500,7 +7500,7 @@ static _UWORD   CODE_CELTIC_lig[][3] =     /* CODE_CELTIC character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_CELTIC[] =       /* CODE_CELTIC */
+static _UWORD const sort_CODE_CELTIC[] =       /* CODE_CELTIC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -7787,7 +7787,7 @@ static _UWORD   sort_CODE_CELTIC[] =       /* CODE_CELTIC */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_LATIN9[] =          /* CODE_LATIN9 */
+static _UWORD const u_CODE_LATIN9[] =          /* CODE_LATIN9 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -8064,7 +8064,7 @@ static _UWORD   u_CODE_LATIN9[] =          /* CODE_LATIN9 */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_LATIN9_lig[][3] =     /* CODE_LATIN9 character ligatures */
+static _UWORD const CODE_LATIN9_lig[][3] =     /* CODE_LATIN9 character ligatures */
 {
    { U_LatinCapitalLigatureOE,            U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0xBC   0x0152   LATIN CAPITAL LIGATURE OE */
    { U_LatinSmallLigatureOE,              U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0xBD   0x0153   LATIN SMALL LIGATURE OE */
@@ -8104,7 +8104,7 @@ static _UWORD   CODE_LATIN9_lig[][3] =     /* CODE_LATIN9 character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_LATIN9[] =       /* CODE_LATIN9 */
+static _UWORD const sort_CODE_LATIN9[] =       /* CODE_LATIN9 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -8390,7 +8390,7 @@ static _UWORD   sort_CODE_LATIN9[] =       /* CODE_LATIN9 */
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_LATIN10[] =         /* CODE_LATIN10 */
+static _UWORD const u_CODE_LATIN10[] =         /* CODE_LATIN10 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -8667,7 +8667,7 @@ static _UWORD   u_CODE_LATIN10[] =         /* CODE_LATIN10 */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_LATIN10_lig[][3] =    /* CODE_LATIN10 character ligatures */
+static _UWORD const CODE_LATIN10_lig[][3] =    /* CODE_LATIN10 character ligatures */
 {
    { U_LatinCapitalLigatureOE,            U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0xBC   0x0152   LATIN CAPITAL LIGATURE OE */
    { U_LatinSmallLigatureOE,              U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0xBD   0x0153   LATIN SMALL LIGATURE OE */
@@ -8702,7 +8702,7 @@ static _UWORD   CODE_LATIN10_lig[][3] =    /* CODE_LATIN10 character ligatures *
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_LATIN10[] =      /* CODE_LATIN10 */
+static _UWORD const sort_CODE_LATIN10[] =      /* CODE_LATIN10 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -8964,6 +8964,3 @@ static _UWORD   sort_CODE_LATIN10[] =      /* CODE_LATIN10 */
    U_LatinCapitalLetterT,                 /* 0xFE   0x021B   LATIN SMALL LETTER T WITH COMMA BELOW */
    U_LatinCapitalLetterY                  /* 0xFF   0x00FF   LATIN SMALL LETTER Y WITH DIAERESIS */
 };
-
-
-/* +++ EOF +++ */

@@ -64,7 +64,7 @@
 *
 ******************************************|************************************/
 
-static _UWORD   u_CODE_NEXT[] =            /* CODE_NEXT */
+static _UWORD const u_CODE_NEXT[] =            /* CODE_NEXT */
 {
    U_NIL,                                 /* 0x00  NULl */
    U_NIL,                                 /* 0x01  Start Of Heading */
@@ -339,7 +339,7 @@ static _UWORD   u_CODE_NEXT[] =            /* CODE_NEXT */
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_NEXT_lig[][3] =       /* CODE_NEXT character ligatures */
+static _UWORD const CODE_NEXT_lig[][3] =       /* CODE_NEXT character ligatures */
 {
    {0x00C4, U_LatinCapitalLetterA, U_LatinSmallLetterE},      /* 85 = 0x00C4: LATIN CAPITAL LETTER A WITH DIAERESIS */
    {0x00C5, U_LatinCapitalLetterA, U_LatinSmallLetterO},      /* 86 = 0x00C5: LATIN CAPITAL LETTER A WITH RING ABOVE */
@@ -377,7 +377,7 @@ static _UWORD   CODE_NEXT_lig[][3] =       /* CODE_NEXT character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_NEXT[] =         /* CODE_NEXT */
+static _UWORD const sort_CODE_NEXT[] =         /* CODE_NEXT */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -637,6 +637,3 @@ static _UWORD   sort_CODE_NEXT[] =         /* CODE_NEXT */
    U_NIL,                                 /* FE */
    U_NIL                                  /* FF */
 };
-
-
-/* +++ EOF +++ */

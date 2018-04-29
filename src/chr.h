@@ -61,9 +61,6 @@
 #define __UDOCHR__
 
 
-
-
-
 /*******************************************************************************
 *
 *     INCLUDE FILES
@@ -104,8 +101,7 @@
 #define KPS_NODENAME      5
 
 
-   /* new in v6.5.19 [fd] */
-   /* this is a list of UDO supported special HTML characters */
+/* this is a list of UDO supported special HTML characters */
 #define HTML_SPEC_HELLIP  0
 #define HTML_SPEC_MDASH   1
 #define HTML_SPEC_NDASH   2
@@ -113,7 +109,7 @@
 #define HTML_SPEC_MAX     4
 
 
-   /* --- indicators for usage of recode_chrtab() --- */
+/* --- indicators for usage of recode_chrtab() --- */
 #define CHRTAB_ASCII      0
 #define CHRTAB_ANSI       1
 #define CHRTAB_TEX        2
@@ -141,34 +137,35 @@ GLOBAL _UWORD utf8_to_uchar(const char *sz, int *length);
 GLOBAL char *bstr_to_utf8(_UWORD ucode, char *s);
 
    /* get char(s!) from Unicode value */
-GLOBAL char *unicode2char(_UWORD unicode, char *s);
+GLOBAL const char *unicode2char(_UWORD unicode, char *cbuf);
 
 
-GLOBAL void convert_sz(char * s);
+GLOBAL void convert_sz(char *s);
 
    /* recode a line into another encoding */
 GLOBAL void recode(char *zeile, int char_set);
 
    /* convert (UDO's) universal characters into target encoding */
-GLOBAL void recode_udo(char * s);
+GLOBAL void recode_udo(char *s);
 
    /* recode a string from chrtab[] via Unicode name to another encoding */
-GLOBAL void recode_chrtab(char * s, int type);
+GLOBAL void recode_chrtab(char *s, int type);
 
 GLOBAL int calc_ttf_twip(const char *s, const int font, const int style);
 
-GLOBAL void replace_udo_quotes(char * s);
+GLOBAL void replace_udo_quotes(char *s);
 GLOBAL void replace_all_copyright(char *s);
 
 GLOBAL void delete_all_divis(char *s);
 
-GLOBAL void indent2space(char * s);
-GLOBAL void space2indent(char * s);
-GLOBAL void nbsp2space(char * s);
-GLOBAL void space2nbsp(char * s);
+GLOBAL void indent2space(char *s);
+GLOBAL void space2indent(char *s);
+GLOBAL void nbsp2space(char *s);
+GLOBAL void space2nbsp(char *s);
 
-GLOBAL void label2tex(char * s);
-GLOBAL void label2html(char * s);
+GLOBAL void label2tex(char *s);
+GLOBAL void label2lyx(char *s);
+GLOBAL void label2html(char *s);
 
 GLOBAL void node2winhelp(char *n);
 GLOBAL void node2WinAutoID(char *id, const char *n);
@@ -185,8 +182,8 @@ GLOBAL void node2postscript(char *s, _BOOL text);
 
 GLOBAL void node2stg(char *s);
 GLOBAL void index2stg(char *s);
-GLOBAL void replace_2at_by_1at(char * s);
-GLOBAL void replace_1at_by_2at(char * s);
+GLOBAL void replace_2at_by_1at(char *s);
+GLOBAL void replace_1at_by_2at(char *s);
 
 GLOBAL void node2vision(char *n);
 GLOBAL void node2texinfo(char *s);
@@ -194,44 +191,43 @@ GLOBAL void node2texinfo(char *s);
 GLOBAL void c_umlaute(char *s);
 
 GLOBAL void c_tilde(char *s);
-GLOBAL void replace_udo_tilde(char * s);
-GLOBAL void replace_udo_nbsp(char * s);
-GLOBAL void convert_tilde(char * s);
+GLOBAL void replace_udo_tilde(char *s);
+GLOBAL void replace_udo_nbsp(char *s);
+GLOBAL void convert_tilde(char *s);
 
 GLOBAL void c_divis(char *s);
 
-GLOBAL void winspecials2ascii(char * s);
-GLOBAL void c_rtf_quotes(char * s);
+GLOBAL void winspecials2ascii(char *s);
+GLOBAL void c_rtf_quotes(char *s);
 GLOBAL void c_vars(char *s);
 
-GLOBAL void c_man_styles(char * s);
+GLOBAL void c_man_styles(char *s);
 
    /* convert special characters for relevant target encodings */
 GLOBAL void auto_quote_chars(char *s, _BOOL all);
-GLOBAL void auto_quote_texindex(char * s);
-GLOBAL void auto_quote_linedraw(char * s);
+GLOBAL void auto_quote_texindex(char *s);
+GLOBAL void auto_quote_linedraw(char *s);
 
 GLOBAL void init_module_chars(void);
 
    /* get ^ to desired codepage */
-GLOBAL _UWORD *chr_codepage(int encoding);
+GLOBAL const _UWORD *chr_codepage(int encoding);
 
    /* get ^ to desired codepage for sorting purposes */
-GLOBAL _UWORD *chr_sort_codepage(int encoding);
+GLOBAL const _UWORD *chr_sort_codepage(int encoding);
 
    /* get ^ to desired Unicode sorting table */
-GLOBAL void *chr_usort_codepage(int encoding);
+typedef const _UWORD usort_array[2];
+GLOBAL usort_array *chr_usort_codepage(int encoding);
 
    /* get ^ to desired table of ligatures */
-GLOBAL void *chr_ligatures(int encoding);
+typedef const _UWORD lig_array[3];
+GLOBAL lig_array *chr_ligatures(int encoding);
 
    /* get human-readable name of desired codepage */
-GLOBAL char *chr_codepage_name(int encoding);
+GLOBAL const char *chr_codepage_name(int encoding);
 
    /* get Content-Type charset name of desired codepage for HTML */
-GLOBAL char *chr_codepage_charset_name(int encoding);
+GLOBAL const char *chr_codepage_charset_name(int encoding);
 
 #endif   /* __UDOCHR__ */
-
-
-/* +++ EOF +++ */

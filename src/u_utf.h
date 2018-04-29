@@ -67,7 +67,7 @@
 *
 ******************************************|************************************/
 
-static _UWORD   CODE_UTF_lig[][3] =        /* CODE_UTF character ligatures */
+static _UWORD const CODE_UTF_lig[][3] =        /* CODE_UTF character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,          U_LatinCapitalLetterA,     U_LatinCapitalLetterE      },  /* 0x00C4 */
    { U_LatinCapitalLetterAWithRingAbove,          U_LatinCapitalLetterA,     U_LatinCapitalLetterO      },  /* 0x00C5 */
@@ -145,7 +145,7 @@ static _UWORD   CODE_UTF_lig[][3] =        /* CODE_UTF character ligatures */
 *
 ******************************************|************************************/
 
-static _UWORD   sort_CODE_UTF[][2] =       /* CODE_UTF */
+static _UWORD const sort_CODE_UTF[][2] =       /* CODE_UTF */
 {
    { U_LatinCapitalLetterAWithGrave                , U_LatinCapitalLetterA }, /* 0x00C0 */
    { U_LatinCapitalLetterAWithAcute                , U_LatinCapitalLetterA }, /* 0x00C1 */
@@ -531,7 +531,7 @@ static _UWORD   sort_CODE_UTF[][2] =       /* CODE_UTF */
    { U_GreekSmallLetterTheta                       , U_GreekCapitalLetterTheta            },  /* 0x03B8 */
    { U_GreekSmallLetterIota                        , U_GreekCapitalLetterIota             },  /* 0x03B9 */
    { U_GreekSmallLetterKappa                       , U_GreekCapitalLetterKappa            },  /* 0x03BA */
-   { U_GreekSmallLetterLamda                       , U_GreekCapitalLetterLamda            },  /* 0x03BB */
+   { U_GreekSmallLetterLambda                      , U_GreekCapitalLetterLambda           },  /* 0x03BB */
    { U_GreekSmallLetterMu                          , U_GreekCapitalLetterMu               },  /* 0x03BC */
    { U_GreekSmallLetterNu                          , U_GreekCapitalLetterNu               },  /* 0x03BD */
    { U_GreekSmallLetterXi                          , U_GreekCapitalLetterXi               },  /* 0x03BE */
@@ -722,6 +722,3 @@ static _UWORD   sort_CODE_UTF[][2] =       /* CODE_UTF */
 
    { 0x0000, U_NIL}  /* list terminator */
 };
-
-
-/* +++ EOF +++ */

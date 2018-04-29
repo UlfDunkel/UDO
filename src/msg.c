@@ -1652,25 +1652,6 @@ GLOBAL void warning_no_isochar(const char c)
 
 /*******************************************************************************
 *
-*  warning_no_texchar():
-*     warning message: %s not available in LaTeX
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void warning_no_texchar(const char c)
-{
-   warning_message(_("%c maybe not available in LaTeX"), c);
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  warning_node_too_deep():
 *     warning message: structure depth exceeded, using subsubsubsubnode
 *

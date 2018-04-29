@@ -92,7 +92,7 @@ GLOBAL void error_read_jpeg(const char *s);
 GLOBAL void error_open_pass1(const char *s);
 GLOBAL void error_open_pass2(const char *s);
 GLOBAL void error_mkdir(const char *s);
-GLOBAL void error_malloc_failed(size_t);
+GLOBAL void error_malloc_failed(size_t size);
 GLOBAL void error_empty_docinfo(void);
 GLOBAL void error_unknown_color(const char *s);
 
@@ -144,7 +144,6 @@ GLOBAL void warning_short_destline(const char *s, const _UWORD lnr, const int ll
 GLOBAL void warning_cannot_recode(const char c, const char *scs, const char *dcs);
 GLOBAL void warning_cannot_recode_utf8(const char *utf, const char *dcs);
 GLOBAL void warning_no_isochar(const char c);
-GLOBAL void warning_no_texchar(const char c);
 GLOBAL void warning_buffer_overrun(const char *func, const char *place, size_t n, size_t max);
 
 GLOBAL void warning_node_too_deep(void);

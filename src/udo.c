@@ -6943,8 +6943,8 @@ GLOBAL void c_include(void)
          um_strcpy(name, token[1], 512, "c_include[1]");
       }
 
-      b1stQuote = TRUE;
-      b1stApost = TRUE;
+      b1stQuote = FALSE;
+      b1stApost = FALSE;
 
       token_reset();
       replace_macros(name);
@@ -13922,14 +13922,16 @@ char           *datei)            /* */
 
    if (!bNoLogfile)
    {
-      if (!b1stQuote)
+      if (b1stQuote)
       {
          error_message(_("odd number of \"\""));
+         b1stQuote = FALSE;
       }
       
-      if (!b1stApost)
+      if (b1stApost)
       {
          error_message(_("odd number of ''"));
+         b1stApost = FALSE;
       }
    }
 
@@ -14791,8 +14793,8 @@ GLOBAL _BOOL udo
    bBreakInside           = FALSE;
    bInsideDocument        = FALSE;
    bInsidePopup           = FALSE;
-   b1stQuote              = TRUE;
-   b1stApost              = TRUE;
+   b1stQuote              = FALSE;
+   b1stApost              = FALSE;
    iCharset               = SYSTEM_CHARSET;
    bDocUniversalCharsetOn = FALSE;
    
@@ -14844,8 +14846,8 @@ GLOBAL _BOOL udo
          bBreakInside    = FALSE;
          bInsideDocument = FALSE;
          bInsidePopup    = FALSE;
-         b1stQuote       = TRUE;
-         b1stApost       = TRUE;
+         b1stQuote       = FALSE;
+         b1stApost       = FALSE;
          iCharset        = SYSTEM_CHARSET;
 
          init_vars_spec();
@@ -15552,8 +15554,8 @@ char        *datei)        /* */
    bBreakInside           = FALSE;
    bInsideDocument        = FALSE;
    bInsidePopup           = FALSE;
-   b1stQuote              = TRUE;
-   b1stApost              = TRUE;
+   b1stQuote              = FALSE;
+   b1stApost              = FALSE;
    iCharset               = SYSTEM_CHARSET;
    bDocUniversalCharsetOn = FALSE;
 
@@ -15581,8 +15583,8 @@ char        *datei)        /* */
          bBreakInside    = FALSE;
          bInsideDocument = FALSE;
          bInsidePopup    = FALSE;
-         b1stQuote       = TRUE;
-         b1stApost       = TRUE;
+         b1stQuote       = FALSE;
+         b1stApost       = FALSE;
          iCharset        = SYSTEM_CHARSET;
 
          init_vars_spec();

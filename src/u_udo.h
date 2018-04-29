@@ -68,14 +68,14 @@
 
 typedef struct _udo2utf
 {
-   char   *udo;                           /* UDO universal character string */
-   _UWORD   unicode;                       /* Unicode */
-   _UWORD   uni2ascii;                     /* 7-bit ASCII Unicode */
-   char   *win;                           /* */
-   char   *tex;                           /* */
-   char   *html;                          /* */
-   char   *lyx;                           /* */
-}  UDO2UTF;
+   const char *udo;                       /* UDO universal character string */
+   _UWORD unicode;                        /* Unicode */
+   _UWORD uni2ascii;                      /* 7-bit ASCII Unicode */
+   const char *win;                       /* */
+   const char *tex;                       /* */
+   const char *html;                      /* */
+   const char *lyx;                       /* */
+} UDO2UTF;
 
 
 
@@ -88,7 +88,7 @@ typedef struct _udo2utf
 *
 ******************************************|************************************/
 
-const UDO2UTF   u_CODE_UDO[][7] =         /* CODE_UDO */
+static UDO2UTF const u_CODE_UDO[] =            /* CODE_UDO */
 {
    /* UDO       Unicode                               7-bit Unicode           Windows  TeX        HTML        LyX    */
    /* -------------------------------------------------------------------------------------------------------------- */
@@ -172,8 +172,5 @@ const UDO2UTF   u_CODE_UDO[][7] =         /* CODE_UDO */
    { "(!'Y)",   U_LatinCapitalLetterYWithAcute,       U_LatinCapitalLetterY,  "\\'DD", "\\'{Y}",  "&Yacute;", "\0xDD" },
    { "(!'y)",   U_LatinSmallLetterYWithAcute,         U_LatinSmallLetterY,    "\\'FD", "\\'{y}",  "&yacute;", "\0xFD" },
    
-   { "",        U_NIL,                                U_NIL,                  "",      "",        "",         ""      }  /* list terminator */
+   { NULL,      U_NIL,                                U_NIL,                  "",      "",        "",         ""      }  /* list terminator */
 };
-
-
-/* +++ EOF +++ */

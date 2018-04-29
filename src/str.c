@@ -1406,9 +1406,9 @@ char  *zeile)  /* ^ string */
    int       i = 0;               /* counter for table entries */
    int       j = 0;               /* counter for chars of <zeile> */
    int       len = 0;             /* indicator for byte length of UTF char */
-   _UWORD   (*plig)[3];            /* ^ to CODE_xxx_lig[][] arrays */
-   _UWORD   (*psort);              /* ^ to sort_CODE_xxx[] arrays */
-   _UWORD   (*pusort)[2];          /* ^ to sort_CODE_UTF[] array */
+   const _UWORD (*plig)[3];            /* ^ to CODE_xxx_lig[][] arrays */
+   const _UWORD (*psort);              /* ^ to sort_CODE_xxx[] arrays */
+   const _UWORD (*pusort)[2];          /* ^ to sort_CODE_UTF[] array */
    char      sbuf[LINELEN] = "";  /* line buffer */
    char      cbuf[9] = "";        /* chars buffer */
    char      lgc[2] = "";         /* ligature char buffer */
@@ -1601,8 +1601,8 @@ char       *s2)           /* ^ 2nd string for comparison */
             c2;           /* Unicode char value (up to 4 bytes!) */
    char     lgc[2] = "";  /* ligature char buffer */
    char     lig[3] = "";  /* ligature string buffer */
-   _UWORD  (*psort);       /* ^ to sort_CODE_xxx[] arrays */
-   _UWORD  (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
+   const _UWORD *psort;       /* ^ to sort_CODE_xxx[] arrays */
+   const _UWORD (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
    char    *psbuf;        /* ^ char begin */
    size_t   len1,         /* length of original 1st string */
             len2;         /* length of original 2nd string */
@@ -1718,8 +1718,8 @@ char       *s2)             /* ^ 2nd string for comparison */
    int      len = 0;        /* indicator for byte length of UTF char */
    size_t   c1,             /* Unicode char value (up to 4 bytes!) */
             c2;             /* Unicode char value (up to 4 bytes!) */
-   _UWORD  (*pusort)[2];     /* ^ to sort_CODE_xxx[] arrays */
-   _UWORD  (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
+   const _UWORD  (*pusort)[2];     /* ^ to sort_CODE_xxx[] arrays */
+   const _UWORD  (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
    size_t   len1,           /* length of original 1st string */
             len2;           /* length of original 2nd string */
    char     sbuf[LINELEN];  /* line buffer */
