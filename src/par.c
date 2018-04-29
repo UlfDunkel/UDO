@@ -118,12 +118,27 @@
 *
 ******************************************|************************************/
 
+typedef struct _macros                    /* !macro structur */
+{
+   char     name[ MACRO_NAME_LEN + 1];   /* macro name */
+   char     *entry;                       /* macro content */
+   _BOOL   vars;                        /* optional parameters */
+} MACROS;
+
+
 typedef struct _placeholder               /* general placeholder */
 {
    char      magic[7];                    /* a control magic <ESC><0xB0 + nr> */
    char     *entry;                       /* the whole command */
    char     *text;                        /* text only (required by toklen()) */
 } PLACEHOLDER;
+
+
+typedef struct _speccmd                   /* special format command placeholder */
+{
+   char      magic[7];                    /* a control magic <ESC><0xB0 + nr> */
+   char     *entry;                       /* the whole command */
+} SPECCMD;
 
 
 
@@ -156,7 +171,6 @@ LOCAL int       speccmd_counter;
 LOCAL unsigned char const encode_chars[64] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#=";
 LOCAL int decode_chars[128];
 LOCAL char const macro_allowed_name[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
-
 
 
 
@@ -628,11 +642,13 @@ LOCAL _BOOL convert_link_pch(char *s, const char *p0, char *p1, char *p2, const 
 
 LOCAL _BOOL convert_link_tex(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
-   char s_entry[1024];
+   char *s_entry;
    int       li,
              ti;
-   _BOOL   isnode;
+   _BOOL isnode;
+   _BOOL flag;
    char nodename[256];
+   _BOOL ret;
    
    convert_tilde(p1);
    convert_tilde(p2);
@@ -642,14 +658,22 @@ LOCAL _BOOL convert_link_tex(char *s, const char *p0, char *p1, char *p2, const 
    
    label2tex(p2);
 
-   is_node_link(p2, nodename, &ti, &isnode, &li);
+   flag = is_node_link(p2, nodename, &ti, &isnode, &li);
 
-   sprintf(s_entry, "%s (%s \\ref{%s})", p1, lang.see, p2);
-
-   if (insert_placeholder(s, p0, s_entry, p1))
-      return TRUE;
-
-   return FALSE;
+   if (flag)
+   {
+      s_entry = um_strdup_printf("%s (%s \\ref{%s})", p1, lang.see, p2);
+   }
+   else
+   {
+      /* Node, Alias oder Label nicht definiert */
+      error_undefined_link(link);
+      s_entry = strdup(p1);
+   }
+   
+   ret = insert_placeholder(s, p0, s_entry, p1);
+   free(s_entry);
+   return ret;
 }
 
 
@@ -1308,33 +1332,30 @@ LOCAL void c_link(char *s, _BOOL inside_b4_macro)
 *
 ******************************************|************************************/
 
-LOCAL void c_url(
-
-char        *s,                  /* */
-_BOOL      inside_b4_macro)    /* */
+LOCAL void c_url(char *s, _BOOL inside_b4_macro)
 {
-   int       pnr = 0,            /* */
-             url_len,            /* */
-             i;                  /* counter */
-   char      s_entry[4096],      /* */
-             url_rtf[2048],      /* */
-             rtf0[4];            /* */
-   _BOOL   linkerror = FALSE;  /* */
-   _BOOL   target = FALSE;     /* TRUE: explicit target has been found */
-   _BOOL   class = FALSE;      /* TRUE: CSS class name found */
+   int       pnr = 0;
+   int       url_len;
+   int       i;
+   char      *s_entry;
+   char      url_rtf[2048];
+   char      rtf0[4];
+   _BOOL   linkerror = FALSE;
+   char *target;
+   char *css_class;
    
-   char      rtf1[] = "00d0c9ea79f9bace118c8200aa004ba90b0200000003000000";
-   char      rtf2[] = "e0c9ea79f9bace118c8200aa004ba90b";
-   char      rtf3[] = "000000";
-   char      rtf4[] = "0000";
-
+   static char const rtf1[] = "00d0c9ea79f9bace118c8200aa004ba90b0200000003000000";
+   static char const rtf2[] = "e0c9ea79f9bace118c8200aa004ba90b";
+   static char const rtf3[] = "000000";
+   static char const rtf4[] = "0000";
 
    while (!linkerror && ((pnr = get_parameters(s, "url", 2, 4)) >= 2))
    {
       del_whitespaces(Param[1]);          /* adjust URL */
 
-      if (Param[2][0] == EOS)             /* if title is empty, use URL as title */
-         um_strcpy(Param[2], Param[1], 1024, "c_url[1]");
+      /* if title is empty, use URL as title */
+      if (Param[2][0] == EOS)
+         strcpy(Param[2], Param[1]);
       
       if (inside_b4_macro)
       {
@@ -1352,122 +1373,87 @@ _BOOL      inside_b4_macro)    /* */
       {
          switch (desttype)
          {
+         case TOSTG:
+         case TOAMG:
+            convert_tilde(Param[1]);
+            convert_tilde(Param[2]);
+            
+            replace_udo_quotes(Param[2]);
+            replace_udo_quotes(Param[1]);
+            
+            node2stg(Param[2]);
+            node2stg(Param[1]);
+            
+            s_entry = um_strdup_printf("@{\"%s\" RX \"%s\"}", Param[1], Param[2]);
+            linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
+            break;
+            
          case TOHAH:
          case TOHTM:
          case TOMHH:
             convert_tilde(Param[1]);
-            
-/* fd:2010-05-25: faded because this is already done above
-            if (Param[2][0] == EOS)
-               um_strcpy(Param[2], Param[1], 1024, "c_url[TOHTM|1]");
-*/
-            
             replace_udo_quotes(Param[4]);
             replace_udo_quotes(Param[3]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
             
             if (Param[4][0] != EOS)       /* CSS class used */
-               class = TRUE;
-            
-            if (Param[3][0] != EOS)       /* target used */
-               target = TRUE;
-
-            if (html_frames_layout)
-            {
-               if (class && target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
-               else if (class)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
-               else if (target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
-               else
-                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\">%s</a>", Param[2], Param[1]);
-            }
+               css_class = um_strdup_printf(" class=\"%s\"", Param[4]);
             else
-            {
-               if (class && target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
-               else if (class)
-                  sprintf(s_entry, "<a href=\"%s\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
-               else if (target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
-               else
-                  sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
-            }
-            
-            if (strlen(s_entry) >= 4096)  /* vj: For debugging reasons */
-               printf("c_url: s_entry buffer overrus after sprintf\n");
+               css_class = strdup("");
 
+            if (Param[3][0] != EOS)       /* target used */
+               target = um_strdup_printf(" target=\"%s\"", Param[3]);
+            else if (html_frames_layout)
+               target = um_strdup_printf(" target=\"%s\"", "_top");
+            else
+               target = strdup("");
+
+            s_entry = um_strdup_printf("<a href=\"%s\"%s%s>%s</a>", Param[2], target, css_class, Param[1]);
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
+            free(target);
+            free(css_class);
             break;
 
-
-            /* New in r6pl15 [NHz] */
-            /* Weblink for Postscript/PDF */
          case TOKPS:
             convert_tilde(Param[1]);
-            
-/* fd:2010-05-25: faded because this is already done above
-            if (Param[2][0] == EOS)
-               strcpy(Param[2], Param[1]);
-*/
-            
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
             
-            /* Changed in V6.5.5 [NHz] */
             c_divis(Param[1]);
-            c_vars(Param[1]);
+            /* c_vars(Param[1]); */
             
-            /* Changed: Fixed bug #0000062 in V 6.5.8 [NHz] */
             node2postscript(Param[1], KPS_CONTENT);
-            
             replace_all(Param[1], KPSPO_S, "(");
             replace_all(Param[1], KPSPC_S, ")");
-            
-            sprintf(s_entry, ") udoshow (%s) (%s) 0 0 255 WebLink (", Param[1], Param[2]);
+            s_entry = um_strdup_printf(") udoshow (%s) (%s) 0 0 255 WebLink (", Param[1], Param[2]);
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
             break;
 
-
-            /* Deleted bug in V6.5.8 [NHz] */
-            /* Weblink for WinHelp4 */
+         case TOWIN:
          case TOWH4:
+         case TOAQV:
             convert_tilde(Param[1]);
-            
-/* fd:2010-05-25: faded because this is already done above
-            if (Param[2][0] == EOS)
-               strcpy(Param[2], Param[1]);
-*/            
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
-            
-            sprintf(s_entry, "{\\ul %s}{\\v !ExecFile(%s)}", Param[1], Param[2]);
+            s_entry = um_strdup_printf("{\\uldb %s}{\\v !ShellExecuteA(0, \"open\", \"%s\", \"\", \"\", 1)}", Param[1], Param[2]);
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
             break;
 
-            /* New in r6pl15 [NHz] */
-            /* Weblink for Richtext Format */
          case TORTF:
             convert_tilde(Param[1]);
-
-            /* New in r6.2pl1 [NHz] / Bug #00000029 */
             c_rtf_quotes(Param[1]);
-
-/* fd:2010-05-25: faded because this is already done above
-            if (Param[2][0] == EOS)
-               strcpy(Param[2], Param[1]);
-*/
-            
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
 
-            /* Changed in r6.2pl1 [NHz] */
             auto_quote_chars(Param[2], TRUE);
             url_len = (int)strlen(Param[2]);
 
-            rtf0[0]    = EOS;
+            rtf0[0] = EOS;
             url_rtf[0] = EOS;
 
             for (i = 0; i < url_len;i++)
@@ -1475,38 +1461,41 @@ _BOOL      inside_b4_macro)    /* */
                if (Param[2][i] == '\\')
                {
                   i += 2;
-                  rtf0[0]=EOS;
-                  strncpy(rtf0, Param[2]+i, 2);
+                  rtf0[0] = EOS;
+                  strncpy(rtf0, Param[2] + i, 2);
                   i++;
-               }
-               else
+               } else
+               {
                   sprintf(rtf0, "%x", (int)Param[2][i]); 
-                  
+               }
                strcat(url_rtf, rtf0);
                strcat(url_rtf, "00");
             }
 
-            sprintf(s_entry, 
-                    "{\\field{\\*\\fldinst {HYPERLINK \"%s\"}{{\\*\\datafield %s%s%x%s%s%s}}}\n{\\fldrslt {\\cs15\\ul\\cf2 %s}}}", 
-                    Param[2], rtf1, rtf2, (url_len+1)*2, rtf3, url_rtf, rtf4, Param[1]);
-
+            s_entry = um_strdup_printf("{\\field{\\*\\fldinst {HYPERLINK \"%s\"}{{\\*\\datafield %s%s%x%s%s%s}}}\n{\\fldrslt {\\cs15\\ul\\cf2 %s}}}",
+               Param[2], rtf1, rtf2, (url_len+1)*2, rtf3, url_rtf, rtf4, Param[1]);
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
             break;
 
-
-         default:
+         case TOINF:
             convert_tilde(Param[1]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
+            s_entry = um_strdup_printf("@uref{%s, %s}", Param[2], Param[1]);
+            linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
+            break;
             
+         default:
+            convert_tilde(Param[1]);
+            replace_udo_quotes(Param[1]);
+            replace_udo_quotes(Param[2]);
             linkerror = !insert_placeholder(s, Param[0], Param[1], Param[1]);
-
-         }   /*switch*/
-         
-      }   /* if (no_urls) */
-
-   }   /* while */
+            break;
+         }
+      }
+   }
 
    if (linkerror)
    {
@@ -1539,33 +1528,24 @@ _BOOL      inside_b4_macro)    /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_xlink(
-
-char        *s,                  /* */
-_BOOL      inside_b4_macro)    /* */
+LOCAL void c_xlink(char *s, _BOOL inside_b4_macro)
 {
-   int       pnr = 0;            /* */
-   char      s_entry[1024];      /* */
-   char      wnode[1024],        /* */
-             wfile[1024],        /* */
-            *ptr;                /* */
-   _BOOL   linkerror = FALSE;  /* */
-   _BOOL   target = FALSE;     /* TRUE: explicit target has been found */
-   _BOOL   class = FALSE;      /* TRUE: CSS class name found */
-   
+   int       pnr = 0;
+   char      *s_entry;
+   char      wnode[1024],
+             wfile[1024],
+            *ptr;
+   _BOOL   linkerror = FALSE;
+   char *target;
+   char *css_class;
 
    while (!linkerror && ((pnr = get_parameters(s, "xlink", 2, 4)) >= 2))
    {
       del_whitespaces(Param[1]);
 
       /* PL6: Wird ein leerer Parameter benutzt, dann den ersten auch als zweiten verwenden. */
-      
       if (Param[2][0] == EOS)
-/*       && desttype != TOHTM && desttype != TOMHH && desttype != TOHAH) */
-      {
          strcpy(Param[2], Param[1]);
-      }
-
 
       if (inside_b4_macro)
       {
@@ -1597,62 +1577,45 @@ _BOOL      inside_b4_macro)    /* */
             node2stg(Param[2]);
             node2stg(Param[1]);
             
-            sprintf(s_entry, "@{\"%s\" link \"%s\"}", Param[1], Param[2]);
-
+            {
+            	const char *cmd;
+            	if (strcmp(Param[3], "_new") == 0)
+            	  cmd = "ALINK";
+            	else
+            	  cmd = "LINK";
+                s_entry = um_strdup_printf("@{\"%s\" %s \"%s\"}", Param[1], cmd, Param[2]);
+            }
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
             break;
-            
             
          case TOHAH:
          case TOHTM:
          case TOMHH:
             convert_tilde(Param[1]);
-            
-/* fd:2010-05-25: faded because this is already done above
-            if (Param[2][0] == EOS)
-               strcpy(Param[2], Param[1]);
-*/
-            
-             replace_udo_quotes(Param[4]);
+            replace_udo_quotes(Param[4]);
             replace_udo_quotes(Param[3]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
             
             if (Param[4][0] != EOS)       /* CSS class used */
-               class = TRUE;
-            
-            if (Param[3][0] != EOS)       /* target used */
-               target = TRUE;
-
-            if (html_frames_layout)
-            {
-               if (class && target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
-               else if (class)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
-               else if (target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
-               else
-                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\">%s</a>", Param[2], Param[1]);
-            }
+               css_class = um_strdup_printf(" class=\"%s\"", Param[4]);
             else
-            {
-               if (class && target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
-               else if (class)
-                  sprintf(s_entry, "<a href=\"%s\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
-               else if (target)
-                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
-               else
-                  sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
-            }
-            
-            if (strlen(s_entry) >= 4096)  /* for debugging reasons */
-               printf("c_xlink: s_entry buffer overrus after sprintf\n");
+               css_class = strdup("");
 
+            if (Param[3][0] != EOS)       /* target used */
+               target = um_strdup_printf(" target=\"%s\"", Param[3]);
+            else if (html_frames_layout)
+               target = um_strdup_printf(" target=\"%s\"", "_top");
+            else
+               target = strdup("");
+
+            s_entry = um_strdup_printf("<a href=\"%s\"%s%s>%s</a>", Param[2], target, css_class, Param[1]);
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
+            free(target);
+            free(css_class);
             break;
-            
             
          case TOLDS:
             convert_tilde(Param[1]);
@@ -1661,45 +1624,45 @@ _BOOL      inside_b4_macro)    /* */
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
 
-            sprintf(s_entry, "<htmlurl url=\"%s\" name=\"%s\">", Param[2], Param[1]);
+            s_entry = um_strdup_printf("<htmlurl url=\"%s\" name=\"%s\">", Param[2], Param[1]);
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
             break;
             
-            case TOPCH:
+         case TOPCH:
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
             
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
 
-            sprintf(s_entry, "\\#%s\\#", Param[1]);
+            s_entry = um_strdup_printf("\\#%s\\#", Param[1]);
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
             break;
-         
+
          case TOWIN:
          case TOWH4:
          case TOAQV:
-            /* PL8: Der erste Teil muss auch angepasst werden */
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
-         
+            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
 
-            ptr = strchr(Param[2], '@');
-            
+            ptr = strrchr(Param[2], '@');
             if (ptr != NULL)
             {
                ptr[0] = EOS;
-               
                strcpy(wnode, Param[2]);
                strcpy(wfile, ptr+1);
                
                if (wnode[0] != EOS && wfile[0] != EOS)
                {
                   node2winhelp(wnode);
-                  sprintf(s_entry, "{\\uldb %s}{\\v %s@%s}", Param[1], wnode, wfile);
+                  s_entry = um_strdup_printf("{\\uldb %s}{\\v %s@%s}", Param[1], wnode, wfile);
                   linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+                  free(s_entry);
                }
                else
                {
@@ -1721,32 +1684,22 @@ _BOOL      inside_b4_macro)    /* */
                error_message(_("use (!xlink [text] [topic@foo.hlp])"));
                linkerror = !replace_once(s, Param[0], Param[1]);
             }
-            
             break;
 
-
-            /* New in r6pl15 [NHz] */
-            /* Filelink for Postscript */
          case TOKPS:
             convert_tilde(Param[1]);
-            
-/* fd:2010-05-25: faded because this is already done above
-            if (Param[2][0] == EOS)
-               strcpy(Param[2], Param[1]);
-*/
             
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
 
-            /* Changed in V6.5.6 [NHz] */
             c_divis(Param[1]);
-            c_vars(Param[1]);
+            /* c_vars(Param[1]); */
             auto_quote_chars(Param[1], TRUE);
             
-            sprintf(s_entry, ") udoshow (%s) (%s) %s 255 0 0 FileLink (", Param[1], Param[2], "/Null");
+            s_entry = um_strdup_printf(") udoshow (%s) (%s) %s 255 0 0 FileLink (", Param[1], Param[2], "/Null");
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
+            free(s_entry);
             break;
-
 
          default:
             convert_tilde(Param[1]);
@@ -1755,12 +1708,10 @@ _BOOL      inside_b4_macro)    /* */
             replace_udo_quotes(Param[2]);
             
             linkerror = !insert_placeholder(s, Param[0], Param[1], Param[1]);
-            
-         }   /*switch*/
-            
-      }   /* if (no_xlinks) */
-
-   }   /* while */
+            break;
+         }
+      }
+   }
 
    if (linkerror)
    {
@@ -1790,7 +1741,7 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
 {
    int          pnr = 0;
    char         s_entry[1024],
-                img_entry[1024],
+               *img_entry,
                 old_entry[1024],
                 link[1024];
    char        *ptr;
@@ -1863,23 +1814,21 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
          {
             if (no_images)
             {
-               strcpy(img_entry, Param[2]);
+               img_entry = strdup(Param[2]);
             }
             else
             {
+               char border[20];
+               strcpy(border, " border=\"0\"");
+#if 0
                if (html_doctype == HTML5)
-               {
-                  sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s>",
-                     Param[1], Param[2], Param[2], closer);
-               }
-               else
-               {
-                  sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s>",
-                     Param[1], Param[2], Param[2], closer);
-               }
+                  *border = EOS;
+#endif
+               img_entry = um_strdup_printf("<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s>",
+                  Param[1], Param[2], Param[2], border, xhtml_closer);
             }
-
             flag = replace_once(ptr, old_entry, img_entry);
+            free(img_entry);
          }
          
          if (!flag)
@@ -1918,13 +1867,14 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
          {
             if (no_images)
             {
-               strcpy(img_entry, Param[2]);
+               img_entry = strdup(Param[2]);
             }
             else
             {
-               sprintf(img_entry, "\\{bmc %s\\}", Param[1]);
+               img_entry = um_strdup_printf("\\{bmc %s\\}", Param[1]);
             }
             flag = replace_once(ptr, old_entry, img_entry);
+            free(img_entry);
          }
          
          if (!flag)
@@ -1997,7 +1947,7 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
 LOCAL void c_plink(char *s, const _BOOL inside_b4_macro)
 {
    int          pnr = 0;
-   char         s_entry[1024];
+   char        *s_entry;
    char         n[512];
    _BOOL      linkerror = FALSE;
 
@@ -2018,8 +1968,9 @@ LOCAL void c_plink(char *s, const _BOOL inside_b4_macro)
       {
       case TOTEX:
          label2tex(Param[2]);
-         sprintf(s_entry, "%s (%s %s \\pageref{%s})", Param[1], lang.see, lang.page, Param[2]);
+         s_entry = um_strdup_printf("%s (%s %s \\pageref{%s})", Param[1], lang.see, lang.page, Param[2]);
          linkerror = !replace_once(s, Param[0], s_entry);
+         free(s_entry);
          break;
          
       case TOPDL:
@@ -2027,25 +1978,26 @@ LOCAL void c_plink(char *s, const _BOOL inside_b4_macro)
          break;
          
       case TOLYX:
-         sprintf(s_entry,
-                 "%s (%s %s \n\\begin_inset LatexDel \\pageref{%s}\n\n\\end_inset\n\n)",
-                 Param[1], lang.see, lang.page, Param[2]);
-                 
+         s_entry = um_strdup_printf(
+               "%s (%s %s \\begin_inset LatexCommand \\pageref{%s}\\end_inset)",
+               Param[1], lang.see, lang.page, Param[2]);
          if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
          {
             linkerror = TRUE;
             replace_once(s, Param[0], s_entry);
          }
+         free(s_entry);
          break;
          
       case TORTF:
          um_strcpy(n, Param[2], 512, "c_plink[1]");
          node2winhelp(n);
          
-         sprintf(s_entry, 
+         s_entry = um_strdup_printf(
                  "%s (%s %s {\\field{\\*\\fldinst {PAGEREF %s }}{\\fldrslt {\\lang1024 x}}})",
                  Param[1], lang.see, lang.page, n);
          linkerror = !replace_once(s, Param[0], s_entry);
+         free(s_entry);
          break;
          
       default:
@@ -2078,7 +2030,7 @@ LOCAL void c_plink(char *s, const _BOOL inside_b4_macro)
 LOCAL void c_plabel(char *s, const _BOOL inside_b4_macro)
 {
    int          pnr = 0;
-   char         s_entry[1024],
+   char        *s_entry,
                 n[512];
    _BOOL      linkerror = FALSE;
 
@@ -2101,8 +2053,9 @@ LOCAL void c_plabel(char *s, const _BOOL inside_b4_macro)
       case TORTF:
          um_strcpy(n, Param[2], 512, "c_plabel[1]");
          node2winhelp(n);
-         sprintf(s_entry, "{\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}", n, Param[1], n);
+         s_entry = um_strdup_printf("{\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}", n, Param[1], n);
          linkerror = !replace_once(s, Param[0], s_entry);
+         free(s_entry);
          break;                    
          
       default:
@@ -2155,7 +2108,6 @@ LOCAL void c_nolink(char *s, const _BOOL inside_b4_macro)
       {
       case TOSTG:
       case TOAMG:
-         replace_2at_by_1at(Param[1]);
          sprintf(s_entry, "@{\"%s\" ignore}", Param[1]);
          if (!insert_placeholder(s, Param[0], s_entry, Param[1]))
          {
@@ -2198,7 +2150,7 @@ LOCAL void c_nolink(char *s, const _BOOL inside_b4_macro)
 LOCAL void c_comment(char *s, const _BOOL inside_b4_macro)
 {
    int          pnr = 0;
-   char         s_entry[1024];
+   char        *s_entry;
    _BOOL      linkerror = FALSE;
    
    while (!linkerror && (pnr = get_parameters(s, "comment", 1, 1)) == 1)
@@ -2219,48 +2171,49 @@ LOCAL void c_comment(char *s, const _BOOL inside_b4_macro)
       case TOHAH:
       case TOHTM:
       case TOMHH:
-         sprintf(s_entry, "<!-- %s -->", Param[1]);
+         s_entry = um_strdup_printf("<!-- %s -->", Param[1]);
          if (!insert_placeholder(s, Param[0], s_entry, Param[1]))
          {
             linkerror = TRUE;
             replace_once(s, Param[0], Param[1]);
          }
+         free(s_entry);
          break;
 
       case TOSRC:
       case TOSRP:
-         sprintf(s_entry, "%s %s %s", sSrcRemOn, Param[1], sSrcRemOff);
-         
+         s_entry = um_strdup_printf("%s %s %s", sSrcRemOn, Param[1], sSrcRemOff);
          if (!insert_placeholder(s, Param[0], s_entry, Param[1]))
          {
             linkerror = TRUE;
             replace_once(s, Param[0], Param[1]);
          }
-         
+         free(s_entry);
          break;
 
       case TOWIN:
       case TOWH4:
       case TORTF:
       case TOAQV:
-         sprintf(s_entry, "{\\*\\%s}", Param[1]);
+         s_entry = um_strdup_printf("{\\*\\%s}", Param[1]);
          if (!insert_placeholder(s, Param[0], s_entry, Param[1]))
          {
             linkerror = TRUE;
             replace_once(s, Param[0], Param[1]);
          }
+         free(s_entry);
          break;
 
       default:
          if (use_comments)
          {
-            sprintf(s_entry, "(%s)", Param[1]);
-            
+            s_entry = um_strdup_printf("(%s)", Param[1]);
             if (!replace_once(s, Param[0], s_entry))
             {
                linkerror = TRUE;
                replace_once(s, Param[0], Param[1]);
             }
+            free(s_entry);
          }
          else
          {
@@ -2294,12 +2247,11 @@ LOCAL void c_comment(char *s, const _BOOL inside_b4_macro)
 
 LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro)
 {
-   char         s_tidx[1024],
-                s_entry[256],
-                upr_entry[512];
-   char         keyword[256];
+   char         s_tidx[1024];
+   char        *s_entry;
+   char         keyword[1024];
    _BOOL      ret = TRUE;
-   
+
    if (get_parameters(s, "index", 1, 1) )
    {
       strcpy(s_tidx, Param[1]);
@@ -2315,9 +2267,8 @@ LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro)
       }
 
       /* Set index in project file */
-      sprintf(upr_entry, "%s", Param[1]); 
-
-      save_upr_entry_index(1, sCurrFileName, upr_entry, uiCurrFileLine);
+      if (bUseUPRfile)
+         save_upr_entry_index(1, sCurrFileName, Param[1], uiCurrFileLine);
 
       if (no_index)
       {
@@ -2332,66 +2283,66 @@ LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro)
          case TOTEX:
          case TOPDL:
             auto_quote_texindex(s_tidx);
-            sprintf(s_entry, "\\index{%s}", s_tidx);
-            ret = delete_once(s, Param[0]);
-            break;
-            
-            
-         case TORTF:
-            sprintf(s_entry, "{\\xe\\v %s}", Param[1]);
-
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("\\index{%s}", s_tidx);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
+            free(s_entry);
+            break;
             
-/*          ret = delete_once(s, Param[0]); */
+         case TOLYX:
+            auto_quote_texindex(s_tidx);
+            s_entry = um_strdup_printf("\n\\begin_inset"INDENT_S"LatexCommand"INDENT_S"\\index{%s}\n\\end_inset\n\n", s_tidx);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
+            break;
+            
+         case TORTF:
+            s_entry = um_strdup_printf("{\\xe\\v %s}", Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
             break;
             
          case TOWIN:
          case TOWH4:
          case TOAQV:
             convert_tilde(Param[1]);
-            
             del_internal_styles(Param[1]);
-            
             replace_udo_quotes(Param[1]);
-            
             strcpy(keyword, Param[1]);
-            
             winspecials2ascii(keyword);
-            
-            sprintf(s_entry, "{K{\\footnote K %s}}", keyword);
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("{K{\\footnote K %s}}", keyword);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
-            
             
          case TOSTG:
          case TOAMG:
             delete_all_divis(Param[1]);
-            
             convert_tilde(Param[1]);
-            
             del_internal_styles(Param[1]);
-            
             replace_udo_quotes(Param[1]);
-            
             if (iUdopass == PASS2 && bInsideDocument)
             {
                index2stg(Param[1]);
                voutlnf("@index \"%s\"", Param[1]);
             }
-            
-            ret = delete_once(s, Param[0]);   /*r6pl9: Soll nicht angezeigt werden*/
+            ret = delete_once(s, Param[0]);
             break;
-            
             
          case TOINF:
             if (iUdopass == PASS2 && bInsideDocument)
@@ -2399,49 +2350,39 @@ LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro)
                voutlnf("@cindex %s", Param[1]);
                add_idxlist_item(Param[1], "", "");
             }
-            
             ret = delete_once(s, Param[0]);
             break;
             
-            
          case TOHPH:
-            sprintf(s_entry, "<idx>%s<\\idx>", Param[1]);
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("<idx>%s<\\idx>", Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
-            
             
          case TOASC:
             delete_all_divis(Param[1]);
-            
             convert_tilde(Param[1]);
-            
             replace_udo_quotes(Param[1]);
-            
             if (iUdopass == PASS2)
                add_idxlist_item(Param[1], "", "");
-            
             ret = delete_once(s, Param[0]);
             break;
             
-            
+         case TOHAH:
          case TOMHH:
-            if (iUdopass == PASS2)
+            if (iUdopass == PASS2 && bInsideDocument)
                output_htmlhelp_index(1, Param[1], "", "");
-            
             ret = delete_once(s, Param[0]);
             break;
-
 
          default:
             ret = delete_once(s, Param[0]);
+            break;
          }
-
       }
    }
 
@@ -2468,24 +2409,17 @@ LOCAL _BOOL c_index(char *s, const _BOOL inside_b4_macro)
 *     Indexbefehle direkt ausgeben, nicht am Anfang der Zieldatei die
 *     gesamten Indizes landen.
 *
-*     r6pl2: Stilbefehle und Umlaute werden umgewandelt.
-*
 *  return:
 *     ???
 *
 ******************************************|************************************/
 
-LOCAL _BOOL c_single_index(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL _BOOL c_single_index(char *s, const _BOOL inside_b4_macro)
 {
-   char         s_tidx[256],      /* */
-                s_entry[256],     /* */
-                upr_entry[512];   /* */
-   char         keyword[256];     /* */
-   _BOOL      ret = TRUE;       /* */
-   
+   char         s_tidx[1024],
+               *s_entry;
+   char         keyword[1024];
+   _BOOL      ret = TRUE;
 
    if (get_parameters(s, "idx", 1, 1) )
    {
@@ -2496,19 +2430,14 @@ const _BOOL   inside_b4_macro)  /* */
          if (desttype != TOSTG)
          {
             auto_quote_chars(Param[1], TRUE);   
-            auto_quote_chars(s_tidx, TRUE);   
+            auto_quote_chars(s_tidx, TRUE);
          }
-
          adjust_params_inside(Param[1]);
       }
 
-      /* New in r6pl15 [NHz] */
-
       /* Set index in project file */
-
-      sprintf(upr_entry, "%s", Param[1]); 
-
-      save_upr_entry_index(1, sCurrFileName, upr_entry, uiCurrFileLine);
+      if (bUseUPRfile)
+         save_upr_entry_index(1, sCurrFileName, Param[1], uiCurrFileLine);
 
       if (no_index)
       {
@@ -2520,113 +2449,101 @@ const _BOOL   inside_b4_macro)  /* */
 
          switch (desttype)
          {
-            case TOTEX:
-            case TOPDL:
-               auto_quote_texindex(s_tidx);
-               sprintf(s_entry, "%s\\index{%s}", Param[1], s_tidx);
-               ret = replace_once(s, Param[0], s_entry);
-               break;
-               
-               
-            case TORTF:
-               sprintf(s_entry, "{\\xe\\v %s}%s", Param[1], Param[1]);
-               ret = replace_once(s, Param[0], s_entry);
-               break;
-               
-               
-            case TOWIN:
-            case TOWH4:
-            case TOAQV:
-               convert_tilde(Param[1]);
-               
-               del_internal_styles(Param[1]);
-               
-               replace_udo_quotes(Param[1]);
-               
-               strcpy(keyword, Param[1]);
-               
-               winspecials2ascii(keyword);
-               
-               sprintf(s_entry, "{K{\\footnote K %s}}%s", keyword, Param[1]);
-               
-               if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
-               {
-                  ret = FALSE;
-                  replace_once(s, Param[0], s_entry);
-               }
-               
-               break;
-               
-               
-            case TOSTG:
-            case TOAMG:
-               delete_all_divis(Param[1]);
-               
-               convert_tilde(Param[1]);
-               
-               del_internal_styles(Param[1]);
-               
-               replace_udo_quotes(Param[1]);
-               
-               if (iUdopass == PASS2 && bInsideDocument)
-               {
-                  index2stg(Param[1]);
-                  voutlnf("@index \"%s\"", Param[1]);
-               }
-               
-               ret = replace_once(s, Param[0], Param[1]);
-               break;
-               
-               
-            case TOINF:
-               if (iUdopass == PASS2 && bInsideDocument)
-               {
-                  voutlnf("@cindex %s", Param[1]);
-                  add_idxlist_item(Param[1], "", "");
-               }
-               
-               ret = replace_once(s, Param[0], Param[1]);
-               break;
-               
-               
-            case TOHPH:
-               sprintf(s_entry, "<idx>%s<\\idx>%s", Param[1], Param[1]);
-               
-               if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
-               {
-                  ret = FALSE;
-                  replace_once(s, Param[0], s_entry);
-               }
-               
-               break;
-               
-               
-            case TOASC:
-               delete_all_divis(Param[1]);
-               
-               convert_tilde(Param[1]);
-               
-               replace_udo_quotes(Param[1]);
-               
-               if (iUdopass == PASS2)
-                  add_idxlist_item(Param[1], "", "");
+         case TOTEX:
+         case TOPDL:
+            auto_quote_texindex(s_tidx);
+            s_entry = um_strdup_printf("%s\\index{%s}", Param[1], s_tidx);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
+            break;
 
-               ret = replace_once(s, Param[0], Param[1]);
-               break;
-               
-               
-            case TOMHH:
-               if (iUdopass == PASS2)
-                  output_htmlhelp_index(1, Param[1], "", "");
+         case TOLYX:
+            auto_quote_texindex(s_tidx);
+            s_entry = um_strdup_printf("%s\n\\begin_inset"INDENT_S"LatexCommand"INDENT_S"\\index{%s}\n\\end_inset\n\n", Param[1], s_tidx);
+            ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
+            break;
+            
+         case TORTF:
+            s_entry = um_strdup_printf("{\\xe\\v %s}%s", Param[1], Param[1]);
+            ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
+            break;
 
-               ret = replace_once(s, Param[0], Param[1]);
-               break;
-               
-               
-            default:
-               ret = replace_once(s, Param[0], Param[1]);
+         case TOWIN:
+         case TOWH4:
+         case TOAQV:
+            convert_tilde(Param[1]);
+            del_internal_styles(Param[1]);
+            replace_udo_quotes(Param[1]);
+            strcpy(keyword, Param[1]);
+            winspecials2ascii(keyword);
+            s_entry = um_strdup_printf("{K{\\footnote K %s}}%s", keyword, Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
+            break;
+
+         case TOSTG:
+         case TOAMG:
+            delete_all_divis(Param[1]);
+            convert_tilde(Param[1]);
+            del_internal_styles(Param[1]);
+            replace_udo_quotes(Param[1]);
+            if (iUdopass == PASS2 && bInsideDocument)
+            {
+               index2stg(Param[1]);
+               voutlnf("@index \"%s\"", Param[1]);
+            }
+            ret = replace_once(s, Param[0], Param[1]);
+            break;
+
+         case TOINF:
+            if (iUdopass == PASS2 && bInsideDocument)
+            {
+               voutlnf("@cindex %s", Param[1]);
+               add_idxlist_item(Param[1], "", "");
+            }
+            ret = replace_once(s, Param[0], Param[1]);
+            break;
+
+         case TOHPH:
+            s_entry = um_strdup_printf("<idx>%s<\\idx>%s", Param[1], Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
+            break;
+
+         case TOASC:
+            delete_all_divis(Param[1]);
+            convert_tilde(Param[1]);
+            replace_udo_quotes(Param[1]);
+            if (iUdopass == PASS2)
+               add_idxlist_item(Param[1], "", "");
+            ret = replace_once(s, Param[0], Param[1]);
+            break;
+
+         case TOHAH:
+         case TOMHH:
+            if (iUdopass == PASS2 && bInsideDocument)
+               output_htmlhelp_index(1, Param[1], "", "");
+            ret = replace_once(s, Param[0], Param[1]);
+            break;
+
+         default:
+            ret = replace_once(s, Param[0], Param[1]);
+            break;
          }
-
       }
    }
 
@@ -2653,38 +2570,33 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL c_double_index(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL _BOOL c_double_index(char *s, const _BOOL inside_b4_macro)
 {
-   char         s_entry[1024],    /* */
-                upr_entry[512];   /* */
-   _BOOL      ret = TRUE;       /* */
-   
+   char        *s_entry;
+   _BOOL      ret = TRUE;
 
    if (get_parameters(s, "idx", 2, 2) )
    {
-
       if (inside_b4_macro)
       {
-         if (desttype!=TOSTG)
+         if (desttype != TOSTG)
          {
             auto_quote_chars(Param[1], TRUE);   
             auto_quote_chars(Param[2], TRUE);   
-         }   
-
+         }
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
       }
 
-      /* New in r6pl15 [NHz] */
-
       /* Set index in project file */
-
-      sprintf(upr_entry, "%s:%s", Param[1], Param[2]); 
-
-      save_upr_entry_index(2, sCurrFileName, upr_entry, uiCurrFileLine);
+      if (bUseUPRfile)
+      {
+         char *upr_entry;
+         
+         upr_entry = um_strdup_printf("%s:%s", Param[1], Param[2]);
+         save_upr_entry_index(2, sCurrFileName, upr_entry, uiCurrFileLine);
+         free(upr_entry);
+      }
 
       if (no_index)
       {
@@ -2699,65 +2611,64 @@ const _BOOL   inside_b4_macro)  /* */
          case TOTEX:
          case TOPDL:
             auto_quote_texindex(Param[2]);
-            sprintf(s_entry, "%s\\index{%s}", Param[1], Param[2]);
-            ret = replace_once(s, Param[0], s_entry);
+            s_entry = um_strdup_printf("%s\\index{%s}", Param[1], Param[2]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
             break;
             
+         case TOLYX:
+            auto_quote_texindex(Param[2]);
+            s_entry = um_strdup_printf("%s\n\\begin_inset"INDENT_S"LatexCommand"INDENT_S"\\index{%s}\n\\end_inset\n\n", Param[1], Param[2]);
+            ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
+            break;
             
          case TORTF:
-            sprintf(s_entry, "{\\xe\\v %s}%s", Param[2], Param[1]);
+            s_entry = um_strdup_printf("{\\xe\\v %s}%s", Param[2], Param[1]);
             ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
             break;
-            
             
          case TOWIN:
          case TOWH4:
          case TOAQV:
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
-            
             del_internal_styles(Param[1]);
             del_internal_styles(Param[2]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
-            
             winspecials2ascii(Param[2]);
-            
-            sprintf(s_entry, "{K{\\footnote K %s}}%s", Param[2], Param[1]);
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("{K{\\footnote K %s}}%s", Param[2], Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
-            
             
          case TOSTG:
          case TOAMG:
             delete_all_divis(Param[1]);
             delete_all_divis(Param[2]);
-            
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
-            
             del_internal_styles(Param[1]);
             del_internal_styles(Param[2]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
-            
             if (iUdopass == PASS2 && bInsideDocument)
             {
                index2stg(Param[2]);
                voutlnf("@index \"%s\"", Param[2]);
             }
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
-            
             
          case TOINF:
             if (iUdopass == PASS2 && bInsideDocument)
@@ -2765,49 +2676,41 @@ const _BOOL   inside_b4_macro)  /* */
                voutlnf("@cindex %s", Param[2]);
                add_idxlist_item(Param[2], "", "");
             }
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
             
-            
          case TOHPH:
-            sprintf(s_entry, "<idx>%s<\\idx>%s", Param[2], Param[1]);
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("<idx>%s<\\idx>%s", Param[2], Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
             
          case TOASC:
             delete_all_divis(Param[1]);
             delete_all_divis(Param[2]);
-            
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
-            
             if (iUdopass == PASS2)
                add_idxlist_item(Param[2], "", "");
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
             
-            
+         case TOHAH:
          case TOMHH:
-            if (iUdopass == PASS2)
+            if (iUdopass == PASS2 && bInsideDocument)
                output_htmlhelp_index(1, Param[2], "", "");
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
-            
             
          default:
             ret = replace_once(s, Param[0], Param[1]);
+            break;
          }
       }
    }
@@ -2835,39 +2738,35 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL c_tripple_index(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL _BOOL c_tripple_index(char *s, const _BOOL inside_b4_macro)
 {
-   char         s_entry[1024],    /* */
-                upr_entry[512];   /* */
-   _BOOL      ret = TRUE;       /* */
+   char        *s_entry;
+   _BOOL      ret = TRUE;
    
-
    if (get_parameters(s, "idx", 3, 3) )
    {
       if (inside_b4_macro)
       {
-         if (desttype!=TOSTG)
+         if (desttype != TOSTG)
          {
             auto_quote_chars(Param[1], TRUE);   
             auto_quote_chars(Param[2], TRUE);   
             auto_quote_chars(Param[3], TRUE);   
          }
-
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
          adjust_params_inside(Param[3]);
       }
 
-      /* New in r6pl15 [NHz] */
-
       /* Set index in project file */
-
-      sprintf(upr_entry, "%s:%s:%s", Param[1], Param[2], Param[3]); 
-
-      save_upr_entry_index(3, sCurrFileName, upr_entry, uiCurrFileLine);
+      if (bUseUPRfile)
+      {
+         char *upr_entry;
+         
+         upr_entry = um_strdup_printf("%s:%s:%s", Param[1], Param[2], Param[3]);
+         save_upr_entry_index(3, sCurrFileName, upr_entry, uiCurrFileLine);
+         free(upr_entry);
+      }
 
       if (no_index)
       {
@@ -2883,35 +2782,47 @@ const _BOOL   inside_b4_macro)  /* */
          case TOPDL:
             auto_quote_texindex(Param[2]);
             auto_quote_texindex(Param[3]);
-            
             if (use_mirrored_indices)
             {
-               sprintf(s_entry, "%s\\index{%s!%s}\\index{%s!%s}",
+               s_entry = um_strdup_printf("%s\\index{%s!%s}\\index{%s!%s}",
                   Param[1], Param[2], Param[3], Param[3], Param[2]);
             }
             else
             {
-               sprintf(s_entry, "%s\\index{%s!%s}", Param[1], Param[2], Param[3]);
+               s_entry = um_strdup_printf("%s\\index{%s!%s}", Param[1], Param[2], Param[3]);
             }
-            
-            ret = replace_once(s, Param[0], s_entry);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
             break;
             
+         case TOLYX:
+            auto_quote_texindex(Param[2]);
+            auto_quote_texindex(Param[3]);
+            if (use_mirrored_indices)
+               s_entry = um_strdup_printf("%s\n\\begin_inset"INDENT_S"LatexCommand"INDENT_S"\\index{%s!%s}\n\\end_inset\n\n\\begin_inset"INDENT_S"LatexCommand"INDENT_S"\\index{%s!%s}\n\\end_inset\n\n", Param[1], Param[2], Param[3], Param[3], Param[2]);
+            else
+               s_entry = um_strdup_printf("%s\n\\begin_inset"INDENT_S"LatexCommand"INDENT_S"\\index{%s!%s}\n\\end_inset\n\n", Param[1], Param[2], Param[3]);
+            ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
+            break;
             
          case TORTF:
             if (use_mirrored_indices)
             {
-               sprintf(s_entry, "{\\xe\\v %s\\:%s}{\\xe\\v %s\\:%s}%s",
+               s_entry = um_strdup_printf("{\\xe\\v %s\\:%s}{\\xe\\v %s\\:%s}%s",
                   Param[2], Param[3], Param[3], Param[2], Param[1]);
             }
             else
             {
-               sprintf(s_entry, "{\\xe\\v %s\\:%s}%s", Param[2], Param[3], Param[1]);
+               s_entry = um_strdup_printf("{\\xe\\v %s\\:%s}%s", Param[2], Param[3], Param[1]);
             }
-            
             ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
             break;
-            
             
          case TOWIN:
          case TOWH4:
@@ -2919,146 +2830,120 @@ const _BOOL   inside_b4_macro)  /* */
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
             convert_tilde(Param[3]);
-            
             del_internal_styles(Param[1]);
             del_internal_styles(Param[2]);
             del_internal_styles(Param[3]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[3]);
-            
             winspecials2ascii(Param[2]);
             winspecials2ascii(Param[3]);
-            
             if (use_mirrored_indices)
             {
-               sprintf(s_entry, "{K{\\footnote K %s, %s}}{K{\\footnote K %s, %s}}%s",
+               s_entry = um_strdup_printf("{K{\\footnote K %s, %s}}{K{\\footnote K %s, %s}}%s",
                   Param[2], Param[3], Param[3], Param[2], Param[1]);
             }
             else
             {
-               sprintf(s_entry, "{K{\\footnote K %s, %s}}%s", Param[2], Param[3], Param[1]);
+               s_entry = um_strdup_printf("{K{\\footnote K %s, %s}}%s", Param[2], Param[3], Param[1]);
             }
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
-            
             
          case TOSTG:
          case TOAMG:
             delete_all_divis(Param[1]);
             delete_all_divis(Param[2]);
             delete_all_divis(Param[3]);
-            
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
             convert_tilde(Param[3]);
-            
             del_internal_styles(Param[1]);
             del_internal_styles(Param[2]);
             del_internal_styles(Param[3]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[3]);
-            
             if (iUdopass == PASS2 && bInsideDocument)
             {
                index2stg(Param[2]);
                index2stg(Param[3]);
                voutlnf("@index \"%s, %s\"", Param[2], Param[3]);
-               
                if (use_mirrored_indices)
-               {
                   voutlnf("@index \"%s, %s\"", Param[3], Param[2]);
-               }
             }
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
             
-            
          case TOINF:
-            if (iUdopass==PASS2 && bInsideDocument)
+            if (iUdopass == PASS2 && bInsideDocument)
             {
                voutlnf("@cindex %s, %s", Param[2], Param[3]);
                add_idxlist_item(Param[2], Param[3], "");
-               
                if (use_mirrored_indices)
                {
                   voutlnf("@cindex %s, %s", Param[3], Param[2]);
                   add_idxlist_item(Param[3], Param[2], "");
                }
             }
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
             
-            
          case TOHPH:
-            sprintf(s_entry, "<idx>%s, %s<\\idx>%s", Param[2], Param[3], Param[1]);
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("<idx>%s, %s<\\idx>%s", Param[2], Param[3], Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
-            
             
          case TOASC:
             delete_all_divis(Param[1]);
             delete_all_divis(Param[2]);
             delete_all_divis(Param[3]);
-            
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
             convert_tilde(Param[3]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[3]);
-            
             if (iUdopass == PASS2)
             {
                add_idxlist_item(Param[2], Param[3], "");
-               
                if (use_mirrored_indices)
                   add_idxlist_item(Param[3], Param[2], "");
             }
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
             
-            
+         case TOHAH:
          case TOMHH:
-            if (iUdopass == PASS2)
+            if (iUdopass == PASS2 && bInsideDocument)
                output_htmlhelp_index(2, Param[2], Param[3], "");
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
-            
             
          default:
             ret = replace_once(s, Param[0], Param[1]);
+            break;
          }
       }
    }
 
    if (!ret)
-   {   error_replace_param("!idx");
+   {
+      error_replace_param("!idx");
       return FALSE;
    }
 
    return TRUE;
-
 }
 
 
@@ -3075,28 +2960,22 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL c_quadruple_index(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL _BOOL c_quadruple_index(char *s, const _BOOL inside_b4_macro)
 {
-   char         s_entry[1024],    /* */
-                upr_entry[512];   /* */
-   _BOOL      ret = TRUE;       /* */
-   
+   char         *s_entry;
+   _BOOL      ret = TRUE;
 
    if (get_parameters(s, "idx", 4, 4) )
    {
       if (inside_b4_macro)
       {
-         if (desttype!=TOSTG)
+         if (desttype != TOSTG)
          {
             auto_quote_chars(Param[1], TRUE);   
             auto_quote_chars(Param[2], TRUE);
             auto_quote_chars(Param[3], TRUE);
             auto_quote_chars(Param[4], TRUE);
          }
-
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
          adjust_params_inside(Param[3]);
@@ -3104,10 +2983,14 @@ const _BOOL   inside_b4_macro)  /* */
       }
 
       /* Set index in project file */
-
-      sprintf(upr_entry, "%s:%s:%s:%s", Param[1], Param[2], Param[3], Param[4]); 
-
-      save_upr_entry_index(4, sCurrFileName, upr_entry, uiCurrFileLine);
+      if (bUseUPRfile)
+      {
+         char *upr_entry;
+         
+         upr_entry = um_strdup_printf("%s:%s:%s:%s", Param[1], Param[2], Param[3], Param[4]);
+         save_upr_entry_index(4, sCurrFileName, upr_entry, uiCurrFileLine);
+         free(upr_entry);
+      }
 
       if (no_index)
       {
@@ -3124,17 +3007,29 @@ const _BOOL   inside_b4_macro)  /* */
             auto_quote_texindex(Param[2]);
             auto_quote_texindex(Param[3]);
             auto_quote_texindex(Param[4]);
-            
-            sprintf(s_entry, "%s\\index{%s!%s!%s}", Param[1], Param[2], Param[3], Param[4]);
-            ret = replace_once(s, Param[0], s_entry);
+            s_entry = um_strdup_printf("%s\\index{%s!%s!%s}", Param[1], Param[2], Param[3], Param[4]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
+            {
+               ret = FALSE;
+               replace_once(s, Param[0], s_entry);
+            }
+            free(s_entry);
             break;
             
+         case TOLYX:
+            auto_quote_texindex(Param[2]);
+            auto_quote_texindex(Param[3]);
+            auto_quote_texindex(Param[4]);
+            s_entry = um_strdup_printf("%s\n\\begin_inset"INDENT_S"LatexCommand"INDENT_S"\\index{%s!%s!%s}\n\\end_inset\n\n", Param[1], Param[2], Param[3], Param[4]);
+            ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
+            break;
             
          case TORTF:
-            sprintf(s_entry, "{\\xe\\v %s\\:%s\\:%s}%s", Param[2], Param[3], Param[4], Param[1]);
+            s_entry = um_strdup_printf("{\\xe\\v %s\\:%s\\:%s}%s", Param[2], Param[3], Param[4], Param[1]);
             ret = replace_once(s, Param[0], s_entry);
+            free(s_entry);
             break;
-            
             
          case TOWIN:
          case TOWH4:
@@ -3143,31 +3038,26 @@ const _BOOL   inside_b4_macro)  /* */
             convert_tilde(Param[2]);
             convert_tilde(Param[3]);
             convert_tilde(Param[4]);
-            
             del_internal_styles(Param[1]);
             del_internal_styles(Param[2]);
             del_internal_styles(Param[3]);
             del_internal_styles(Param[4]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[3]);
             replace_udo_quotes(Param[4]);
-            
             winspecials2ascii(Param[2]);
             winspecials2ascii(Param[3]);
             winspecials2ascii(Param[4]);
             
-            sprintf(s_entry, "{K{\\footnote K %s, %s, %s}}%s", Param[2], Param[3], Param[4], Param[1]);
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("{K{\\footnote K %s, %s, %s}}%s", Param[2], Param[3], Param[4], Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
-            
             
          case TOSTG:
          case TOAMG:
@@ -3179,12 +3069,10 @@ const _BOOL   inside_b4_macro)  /* */
             convert_tilde(Param[2]);
             convert_tilde(Param[3]);
             convert_tilde(Param[4]);
-            
             del_internal_styles(Param[1]);
             del_internal_styles(Param[2]);
             del_internal_styles(Param[3]);
             del_internal_styles(Param[4]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[3]);
@@ -3197,10 +3085,8 @@ const _BOOL   inside_b4_macro)  /* */
                index2stg(Param[4]);
                voutlnf("@index \"%s, %s, %s\"", Param[2], Param[3], Param[4]);
             }
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
-            
             
          case TOINF:
             if (iUdopass == PASS2 && bInsideDocument)
@@ -3208,62 +3094,54 @@ const _BOOL   inside_b4_macro)  /* */
                voutlnf("@cindex %s, %s, %s", Param[2], Param[3], Param[4]);
                add_idxlist_item(Param[2], Param[3], Param[4]);
             }
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
             
-            
          case TOHPH:
-            sprintf(s_entry, "<idx>%s, %s, %s<\\idx>%s", Param[2], Param[3], Param[4], Param[1]);
-            
-            if (!insert_placeholder(s, Param[0], s_entry, s_entry) )
+            s_entry = um_strdup_printf("<idx>%s, %s, %s<\\idx>%s", Param[2], Param[3], Param[4], Param[1]);
+            if (!insert_placeholder(s, Param[0], s_entry, s_entry))
             {
                ret = FALSE;
                replace_once(s, Param[0], s_entry);
             }
-            
+            free(s_entry);
             break;
-            
             
          case TOASC:
             delete_all_divis(Param[1]);
             delete_all_divis(Param[2]);
             delete_all_divis(Param[3]);
             delete_all_divis(Param[4]);
-            
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
             convert_tilde(Param[3]);
             convert_tilde(Param[4]);
-            
             replace_udo_quotes(Param[1]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[3]);
             replace_udo_quotes(Param[4]);
-            
             if (iUdopass == PASS2)
                add_idxlist_item(Param[2], Param[3], Param[4]);
-               
             ret = replace_once(s, Param[0], Param[1]);
             break;
             
-            
+         case TOHAH:
          case TOMHH:
-            if (iUdopass == PASS2)
+            if (iUdopass == PASS2 && bInsideDocument)
                output_htmlhelp_index(3, Param[2], Param[3], Param[4]);
-            
             ret = replace_once(s, Param[0], Param[1]);
             break;
-            
             
          default:
             ret = replace_once(s, Param[0], Param[1]);
+            break;
          }
       }
    }
 
    if (!ret)
-   {   error_replace_param("!idx");
+   {
+      error_replace_param("!idx");
       return FALSE;
    }
 
@@ -3284,34 +3162,29 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_internal_time(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL void c_internal_time(char *s, const _BOOL inside_b4_macro)
 {
    char         str[1024];        /* */
    _BOOL      flag;             /* */
    time_t       uhrzeit;          /* */
    struct tm   *timeptr;          /* */
 
-
    flag = FALSE;
 
-   while (!flag && (get_parameters(s, "time", 1, 1) == 1) )
+   while (!flag && (get_parameters(s, "time", 1, 1) == 1))
    {
       if (inside_b4_macro)
          adjust_params_inside(Param[1]);
 
-      time( &uhrzeit);
-      timeptr = localtime (&uhrzeit);
+      time(&uhrzeit);
+      timeptr = localtime(&uhrzeit);
       
       if (strlen(&Param[1][0]) > 1000)
-         strcpy (str, "time parameter too long");
+         strcpy(str, "time parameter too long");
       else
-         strftime(str, 1024, Param[1], timeptr);
+         strftime(str, sizeof(str), Param[1], timeptr);
 
       flag = !insert_placeholder(s, Param[0], str, Param[1]);
-
    }
 
    if (flag)
@@ -3335,54 +3208,39 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_internal_image(
-
-char           *s,                 /* */
-const _BOOL   inside_b4_macro)   /* */
+LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro)
 {
-   int          pnr = 0,           /* */
-                count;             /* */
-   char         s_entry[1024],     /* */
-                sImgSize[80],      /* */
-                sImgName[512];     /* */
-   _BOOL      flag;              /* */
-   _UWORD        uiW,               /* */
-                uiH;               /* */
-   char         closer[8] = "\0";  /* single tag closer mark in XHTML */
-
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
+   int          pnr = 0;
+   char        *s_entry,
+                sImgSize[80],
+                sImgName[512];
+   _BOOL      flag;
+   _UWORD        uiW, uiH;
    
    flag = FALSE;
    
-   count = get_nr_of_parameters("img",s); /* V 6.5.18 */
-   
-                                          /* V 6.5.18 */
-   while (!flag && ((pnr = get_parameters(s, "img", count, count)) == 2 || pnr == 3) )
+   while (!flag && ((pnr = get_parameters(s, "img", 2, 3)) >= 2))
    {
       if (inside_b4_macro)
       {
-         /* Fixed bug #0000055 in V6.5.2 [NHz] */
-/*       if (desttype != TOSTG)
+         if (desttype != TOSTG)
          {
             auto_quote_chars(Param[2], TRUE);   
+            auto_quote_chars(Param[3], TRUE);   
          }
-*/
-   
          adjust_params_inside(Param[1]);
          adjust_params_inside(Param[2]);
-         adjust_params_inside(Param[3]);  /* V 6.5.18 */
+         adjust_params_inside(Param[3]);
       }
-   
+
       fsplit(Param[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
-   
+
       replace_udo_quotes(Param[2]);
-      replace_udo_quotes(Param[3]);       /* V 6.5.18 */
-   
+      replace_udo_quotes(Param[3]);
+
       switch (desttype)
       {
-      case TOHAH:                         /* V6.5.17 */
+      case TOHAH:
       case TOHTM:
       case TOMHH:
          strcpy(tmp_suff, sDocImgSuffix);
@@ -3429,56 +3287,39 @@ const _BOOL   inside_b4_macro)   /* */
          
          if (no_images)                   /*r6pl2*/
          {
-            strcpy(s_entry, Param[2]);
+            s_entry = strdup(Param[2]);
          }
-         else                             /* Feature-Wunsch 0000070 V6.5.18 */
+         else
          {
-            if (Param[3][0] != EOS)
-            {
+               char border[20];
+               strcpy(border, " border=\"0\"");
+#if 0
                if (html_doctype == HTML5)
-               {
-                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s>",
-                     Param[1], Param[2], Param[3], sImgSize, closer);
-               }
-               else
-               {
-                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-                     Param[1], Param[2], Param[3], sImgSize, closer);
-               }
-            }
-            else
-            {
-               if (html_doctype == HTML5)
-               {
-                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s>",
-                     Param[1], Param[2], Param[2], sImgSize, closer);
-               }
-               else
-               {
-                  sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-                     Param[1], Param[2], Param[2], sImgSize, closer);
-               }
-            }
+                  *border = EOS;
+#endif
+            if (Param[3][0] == EOS)
+               strcpy(Param[3], Param[2]);
+            s_entry = um_strdup_printf("<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s>",
+                Param[1], Param[2], Param[3], border, sImgSize, xhtml_closer);
          }
-         
          flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         free(s_entry);
          break;
          
       case TOHPH:
          strcpy(tmp_suff, sDocImgSuffix);
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
          replace_char(Param[1], "\\", "/");
-         
-         if (no_images)                   /*r6pl2*/
+         if (no_images)
          {
-            strcpy(s_entry, Param[2]);
+            s_entry = strdup(Param[2]);
          }
          else
          {
-            sprintf(s_entry, "<graphic>%s<\\graphic>", Param[1]);
+            s_entry = um_strdup_printf("<graphic>%s<\\graphic>", Param[1]);
          }
-         
          flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         free(s_entry);
          break;
          
       case TOWIN:
@@ -3487,55 +3328,49 @@ const _BOOL   inside_b4_macro)   /* */
          strcpy(tmp_suff, ".bmp");
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
          replace_char(Param[1], "\\", "/");
-         
-         if (no_images)                   /*r6pl2*/
+         if (no_images)
          {
-            strcpy(s_entry, Param[2]);
+            s_entry = strdup(Param[2]);
          }
          else
          {
-            sprintf(s_entry, " \\{bmc %s\\}", Param[1]);
+            s_entry = um_strdup_printf(" \\{bmc %s\\}", Param[1]);
          }
-         
          flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         free(s_entry);
          break;
          
-      case TOIPF:                         /*r6pl8*/
+      case TOIPF:
          strcpy(tmp_suff, ".bmp");
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-         
-         if (no_images)                   /*r6pl2*/
+         if (no_images)
          {
-            strcpy(s_entry, Param[2]);
+            s_entry = strdup(Param[2]);
          }
          else
          {
-            sprintf(s_entry, "\n:artwork runin name='%s'.\n", Param[1]);
+            s_entry = um_strdup_printf("\n:artwork runin name='%s'.\n", Param[1]);
          }
-         
          flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         free(s_entry);
          break;
          
-      /* New in r6.3pl3 [NHz] */
       case TORTF:
-         strcpy(s_entry, "");
-         
-         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         flag = !insert_placeholder(s, Param[0], "", Param[2]);
          break;
-      
-      /* New in V6.5.5 [NHz] */
+
       case TOKPS:
-         strcpy(s_entry, Param[2]);
-         c_vars(s_entry);
+         s_entry = strdup(Param[2]);
+         /* c_vars(s_entry); */
          replace_all(s_entry, KPSPC_S, ")");
          replace_all(s_entry, KPSPO_S, "(");
-         
          flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         free(s_entry);
          break;
 
       default:
-         strcpy(s_entry, Param[2]);
-         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         flag = !insert_placeholder(s, Param[0], Param[2], Param[2]);
+         break;
       }
    }
    
@@ -3545,10 +3380,8 @@ const _BOOL   inside_b4_macro)   /* */
       error_replace_param("!img");
    }
    
-   if (pnr != 0 && pnr == 1)
-   {
+   if (pnr != 0 && pnr < 2)
       error_wrong_nr_parameters("!img");
-   }
 }
 
 
@@ -3565,16 +3398,11 @@ const _BOOL   inside_b4_macro)   /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL c_single_raw(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL _BOOL c_single_raw(char *s, const _BOOL inside_b4_macro)
 {
-   _BOOL      flag;             /* */
-
+   _BOOL flag;
 
    UNUSED(inside_b4_macro);
-   
    if (get_parameters(s, "raw", 1, 1))
    {
       flag = insert_placeholder(s, Param[0], Param[1], Param[1]);
@@ -3605,22 +3433,16 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL c_double_raw(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL _BOOL c_double_raw(char *s, const _BOOL inside_b4_macro)
 {
-   _BOOL      flag;             /* */
-
+   _BOOL flag;
 
    UNUSED(inside_b4_macro);
-   
    if (get_parameters(s, "raw", 2, 2))
    {
       if (str_for_desttype(Param[1]))
       {
          flag = insert_placeholder(s, Param[0], Param[2], Param[2]);
-
          if (!flag)
          {
             delete_once(s, Param[0]);
@@ -3651,20 +3473,16 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void c_internal_raw(
-
-char           *s,                /* */
-const _BOOL   inside_b4_macro)  /* */
+LOCAL void c_internal_raw(char *s, const _BOOL inside_b4_macro)
 {
-   int          nr;               /* */
-   _BOOL      flag;             /* */
+   int nr;
+   _BOOL flag;
    
-
    if (strstr(s, "(!raw") == NULL)
       return;
 
    do
-   {   
+   {
       nr = get_nr_of_parameters("raw", s);
 
       switch (nr)
@@ -3672,20 +3490,17 @@ const _BOOL   inside_b4_macro)  /* */
       case 0:
          flag = FALSE;
          break;
-         
       case 1:
          flag = c_single_raw(s, inside_b4_macro);
          break;
-         
       case 2:
          flag = c_double_raw(s, inside_b4_macro);
          break;
-         
       default:
          error_wrong_nr_parameters("!raw");
          flag = FALSE;
+         break;
       }
-
    } while (flag);
 }
 
@@ -3704,9 +3519,7 @@ const _BOOL   inside_b4_macro)  /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL md_uses_parameters(
-
-const char  *s)  /* ^ to macro/definition string */
+LOCAL _BOOL md_uses_parameters(const char *s)
 {
    if (strstr(s, "(!0)") != NULL)
       return TRUE;
@@ -3887,9 +3700,7 @@ GLOBAL void reset_speccmds(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL add_speccmd(
-
-char       *entry)  /* */
+GLOBAL _BOOL add_speccmd(const char *entry)
 {
    size_t   sl;     /* */
    char    *ptr;    /* */
@@ -3949,18 +3760,12 @@ char       *entry)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL insert_speccmd(
-
-char        *s,      /* */
-const char  *rep,    /* */
-char        *entry)  /* */
+GLOBAL _BOOL insert_speccmd(char *s, const char *rep, const char *entry)
 {
    if (add_speccmd(entry))
    {
       if (replace_once(s, rep, speccmd[speccmd_counter].magic))
-      {
          return TRUE;
-      }
    }
 
    return FALSE;
@@ -3983,9 +3788,7 @@ char        *entry)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void replace_speccmds(
-
-char             *s)              /* */
+GLOBAL void replace_speccmds(char *s)
 {
    register int   i;              /* */
    int            replaced = -1;  /* */
@@ -3994,7 +3797,6 @@ char             *s)              /* */
    {
       if (strstr(s, ESC_SPECCMD_MAGIC) == NULL)
          return;
-
 
       /* PL10: Rueckwaerts ersetzen, da ein Platzhalter auch in */
       /* einem Platzhalter stecken kann! */
@@ -4499,17 +4301,14 @@ GLOBAL void add_hyphen(void)
 *
 ******************************************|************************************/
 
-GLOBAL void replace_macros(
-
-char      *s)  /* ^ found macro string "(!%s)" in document */
+GLOBAL void replace_macros(char *s)
 {
-   _UWORD   i;  /* counter */
-   
+   _UWORD i;
 
-   if (strstr(s, "(!") == NULL)           /* wrong format */
+   if (strstr(s, "(!") == NULL)
       return;
 
-   for (i = 0; i < macro_counter; i++)    /* check all macros */
+   for (i = 0; i < macro_counter; i++)
    {
       if (macros[i] != NULL)              /* valid macro */
       {
@@ -4540,9 +4339,10 @@ char      *s)  /* ^ found macro string "(!%s)" in document */
 
 GLOBAL _BOOL add_macro(void)
 {
-   int      i;           /* counter */
-   MACROS  *p;           /* ^ to macro */
-   char     entry[512];  /* string buffer */
+   int      i;
+   MACROS  *p;
+   char *entry;
+   size_t   entry_len;
 
    if (macro_counter >= MAXMACROS)        /* check # of macros overflow */
    {
@@ -4570,51 +4370,63 @@ GLOBAL _BOOL add_macro(void)
       return FALSE;
    }
 
-   entry[0] = EOS;                         /* erase string buffer */
-
-   if (token_counter >= 2)                 /* "!macro" and at least on other token */
+   entry_len = 0;
+   for (i = 2; i < token_counter; i++)
    {
-      for (i = 2; i < token_counter; i++)  /* skip "!macro" */
+      entry_len += strlen(token[i]);
+      if (i < token_counter - 1)
       {
-                                           /* get macro name */
-         um_strcat(entry, token[i], 512, "add_macro[1]");
-         
-         if (i < token_counter - 1)        /* get macro content */
-            um_strcat(entry, " ", 512, "add_macro[2]");
+         entry_len += 1;
+      }
+   }
+   if (entry_len > MACRO_CONT_LEN)         /* macro content too long? */
+   {
+      error_message(_("macro contents longer than %d characters"), MACRO_CONT_LEN);
+      return FALSE;
+   }
+   
+   entry_len = MACRO_CONT_LEN;
+   entry = (char *)malloc((entry_len + 1) * sizeof(*entry));
+   if (entry == NULL)
+   {
+      return FALSE;
+   }
+   
+   entry[0] = EOS;
+   for (i = 2; i < token_counter; i++)
+   {
+      strcat(entry, token[i]);
+      if (i < (token_counter - 1))
+      {
+         strcat(entry, " ");
       }
    }
 
-
-/* fd:2010-05-08: faded for macros!
+   /*
+    * FIXME: die folgenden routinen koennen immer
+    * noch einen buffer overrun verursachen
+    */
    auto_quote_chars(entry, FALSE);
-*/
-
    replace_macros(entry);                  /* macros may use macros - resolve them here */
    replace_defines(entry);                 /* macros may use defines - resolve them here */
    
    c_divis(entry);
    c_vars(entry);
 
+   entry_len = strlen(entry);
+   entry = realloc(entry, (entry_len + 1) * sizeof(*entry));
+   /* copy collected content to structure */
+   p->entry = entry;
 
-   if (strlen(entry) > MACRO_CONT_LEN)     /* macro content too long? */
+   if (md_uses_parameters(p->entry))       /* macro uses parameters */
    {
-      error_message(_("macro contents longer than %d characters"), MACRO_CONT_LEN);
-      free(p);
-      return FALSE;
-   }
-
-                                           /* copy collected content to structure */
-   um_strcpy(p->entry, entry, MACRO_CONT_LEN + 1, "add_macro[3]");
-
-   if (md_uses_parameters(p->entry) )      /* macro uses parameters */
-   {
-      um_strcpy(p->name, token[1], MACRO_NAME_LEN + 1, "add_macro[4]");
+      strcpy(p->name, token[1]);
       p->vars = TRUE;
    }
    else                                    /* normal macro */
    {
       sprintf(p->name, "(!%s)", token[1]);
-      token[1][0]= EOS;
+      token[1][0] = EOS;
       p->vars = FALSE;
    }
 
@@ -4638,17 +4450,14 @@ GLOBAL _BOOL add_macro(void)
 *
 ******************************************|************************************/
 
-GLOBAL void replace_defines(
-
-char      *s)  /* ^ found definition string "(!%s)" in document */
+GLOBAL void replace_defines(char *s)
 {
-   _UWORD   i;  /* counter */
+   _UWORD i;
 
-
-   if (strstr(s, "(!") == NULL)           /* wrong format */
+   if (strstr(s, "(!") == NULL)
       return;
 
-   for (i = 0; i < define_counter; i++)   /* check all definitions */
+   for (i = 0; i < define_counter; i++)
    {
       if (defs[i] != NULL)                /* valid definition */
       {
@@ -4680,10 +4489,9 @@ char      *s)  /* ^ found definition string "(!%s)" in document */
 
 GLOBAL _BOOL add_define(void)
 {
-   int    i;           /* counter */
-   DEFS  *p;           /* ^ to definition */
-   char   entry[512];  /* string buffer */
-
+   int i;
+   DEFS *p;
+   char entry[512];
 
    if (define_counter >= MAXDEFS)         /* check # of definitions overflow */
    {
@@ -4842,7 +4650,10 @@ GLOBAL void exit_module_par(void)
 */
 
    reset_placeholders();
+   if (phold != NULL)
+   {
+      free(phold);
+      phold = NULL;
+   }
+   phold_alloc = 0;
 }
-
-
-/* +++ EOF +++ */

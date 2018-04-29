@@ -213,31 +213,46 @@ GLOBAL _BOOL set_html_navigation(void)
 *
 ******************************************|************************************/
 
-GLOBAL void set_html_doctype(void)
+GLOBAL void set_html_doctype(int type)
 {
-   char   s[512];  /* string buffer */
+   html_doctype = type;
+   if (type >= XHTML_STRICT)
+   {
+      xhtml_closer = " /";
+      xhtml_br = "<br />";
+      xhtml_hr = "<hr />";
+   } else
+   {
+      xhtml_closer = "";
+      xhtml_br = "<br>";
+      xhtml_hr = "<hr>";
+   }
+}
 
 
-   tokcpy2(s, 512);
+GLOBAL void c_set_html_doctype(void)
+{
+   char s[512];
 
-   if (strcmp(s, "5") == 0)
-      html_doctype = HTML5;
+   tokcpy2(s, sizeof(s));
 
    if (strcmp(s, "Old") == 0)
-      html_doctype = HTML_OLD;
+      set_html_doctype(HTML_OLD);
+
+   if (strcmp(s, "5") == 0)
+      set_html_doctype(HTML5);
 
    if (strcmp(s, "Strict") == 0)
-      html_doctype = HTML_STRICT;
+      set_html_doctype(HTML_STRICT);
 
    if (strcmp(s, "Transitional") == 0)
-      html_doctype = HTML_TRANS;
+      set_html_doctype(HTML_TRANS);
 
    if (strcmp(s, "XHTML Strict") == 0)
-      html_doctype = XHTML_STRICT;
+      set_html_doctype(XHTML_STRICT);
 
    if (strcmp(s, "XHTML Transitional") == 0)
-      html_doctype = XHTML_TRANS;
-
+      set_html_doctype(XHTML_TRANS);
 }
 
 

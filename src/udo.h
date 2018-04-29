@@ -339,6 +339,9 @@ GLOBAL char        html_name_prefix[512]; /* Prefix fuer HTML-Dateinamen */
 /* New in r6pl16 [NHz] */
 GLOBAL _BOOL     html_use_hyphenation;  /* Lange Woerter sollen durch (!-) getrennt werden */
 GLOBAL int         html_doctype;          /* Welche DTD soll benutzt werden? */
+GLOBAL const char *xhtml_closer;
+GLOBAL const char *xhtml_br;
+GLOBAL const char *xhtml_hr;
 
 /* New feature #0000054 in V6.5.2 [NHz] */
 GLOBAL _BOOL     html_header_date;      /* Ausgabe des Datums im Element <meta> */

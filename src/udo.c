@@ -11860,7 +11860,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
                                           /* New in r6pl16 [NHz] */
       if (strcmp(token[0], "!html_doctype") == 0)
       {
-         set_html_doctype();
+         c_set_html_doctype();
          return TRUE;
       }
       
@@ -16447,7 +16447,7 @@ GLOBAL void init_vars(void)
    html_use_folders          = FALSE;
    html_transparent_buttons  = FALSE;
    html_use_hyphenation      = FALSE;
-   html_doctype              = HTML_TRANS;
+   set_html_doctype(HTML_TRANS);
    html_header_date          = FALSE;
    html_header_date_zone[0]  = EOS;
    html_header_links         = FALSE;

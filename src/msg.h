@@ -92,7 +92,7 @@ GLOBAL void error_read_jpeg(const char *s);
 GLOBAL void error_open_pass1(const char *s);
 GLOBAL void error_open_pass2(const char *s);
 GLOBAL void error_mkdir(const char *s);
-GLOBAL void error_malloc_failed(void);
+GLOBAL void error_malloc_failed(size_t);
 GLOBAL void error_empty_docinfo(void);
 GLOBAL void error_unknown_color(const char *s);
 

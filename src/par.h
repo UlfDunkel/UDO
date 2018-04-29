@@ -80,27 +80,12 @@ typedef struct _hyphen                    /* hyphenated word */
    } HYPHEN, *pHYPHEN;
 
 
-typedef struct _macros                    /* !macro structur */
-   {
-   char      name[ MACRO_NAME_LEN + 1];   /* macro name */
-   char      entry[MACRO_CONT_LEN + 1];   /* macro content */
-   _BOOL   vars;                        /* optional parameters */
-   } MACROS, *pMACROS;
-
-
 typedef struct _defs                      /* !define structure */
    {
    char      name[ DEFINE_NAME_LEN + 1];  /* definition name, formatted as (!%s) */
    char      entry[DEFINE_CONT_LEN + 1];  /* definition content */
    _BOOL   vars;                        /* optional parameters */
    } DEFS, *pDEFS;
-
-typedef struct _speccmd                   /* special format command placeholder */
-   {
-   char      magic[6];                    /* a control magic <ESC><0xB0 + nr> */
-   char     *entry;                       /* the whole command */
-   _BOOL   replaced;                    /* TRUE: PH has already been replaced */
-   } SPECCMD;
 
 #endif   /* UDO_PAR_H */
 
@@ -132,10 +117,10 @@ GLOBAL _UWORD         define_counter;      /* # of loaded definitions */
 GLOBAL void reset_speccmds(void);
 
    /* insert special format commands into the text as placeholders */
-GLOBAL _BOOL add_speccmd(char *entry);
+GLOBAL _BOOL add_speccmd(const char *entry);
 
    /* insert special format command placeholders into the text */
-GLOBAL _BOOL insert_speccmd(char *s, const char *rep, char *entry);
+GLOBAL _BOOL insert_speccmd(char *s, const char *rep, const char *entry);
 
    /* replace special format command placeholders in the text */
 GLOBAL void replace_speccmds(char *s);

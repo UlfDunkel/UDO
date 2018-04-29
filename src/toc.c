@@ -3969,40 +3969,28 @@ _UWORD      *height)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void html_index_giflink(
-
-const int    idxEnabled,        /* */
-const int    idxDisabled,       /* */
-const char  *sep,               /* */
-_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
-                                /* FALSE: output GUI navigation bar in page footer */
+LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head)
 {
-   char      sTarget[64],       /* */
-             sFile[64],         /* */
-             sGifSize[80],      /* */
-             sGifName[256];     /* */
-   _UWORD     uiW,               /* */
-             uiH;               /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
+   char      sTarget[64],
+             *sFile,
+             sGifSize[80],
+             sGifName[256];
+   _UWORD    uiW, uiH;
    char      sIDName[32];       /* string buffer for anchor ID name */
 
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
    
    sTarget[0] = sGifSize[0] = EOS;
    
    if (html_frames_layout)
    {
       sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
-      sprintf(sFile, "%s%s", html_name_prefix, FRAME_FILE_CON);
+      sFile = um_strdup_printf("%s%s%s", html_name_prefix, FRAME_FILE_CON, outfile.suff);
    }
    else
    {
       sTarget[0] = EOS;
-      strcpy(sFile, old_outfile.name);
+      sFile = um_strdup_printf("%s%s", old_outfile.name, old_outfile.suff);
    }
-   
    
    if (uses_tableofcontents)
    {
@@ -4012,31 +4000,29 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       else
          strcpy(sIDName, "UDO_nav_up_FOOT");
 
-      if (no_images)                      /*r6pl2*/
+      if (no_images)
       {
          voutlnf("%s<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
             sep, sIDName, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
       }
       else
       {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
          get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
-
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         if (html_doctype == HTML5)
-         {
-            voutf("<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-               sIDName, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
-         }
-         else
-         {
-            voutf("<a id=\"%s\" href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-               sIDName, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
-         }
+         voutlnf("<a id=\"%s\" href=\"%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
+            sIDName, sFile, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, border, sGifSize, xhtml_closer);
       }
    }
    else
@@ -4047,24 +4033,23 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       }
       else
       {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
          get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
-         
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
-         if (html_doctype == HTML5)
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\"%s>", sGifName, sGifSize);
-         }
-         else
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
-         }
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", sGifName, border, sGifSize, xhtml_closer);
       }
    }
+   free(sFile);
 }
 
 
@@ -4081,23 +4066,14 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
 *
 ******************************************|************************************/
 
-LOCAL void html_home_giflink(
-
-const int    idxEnabled,        /* */
-const int    idxDisabled,       /* */
-const char  *sep,               /* */
-_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
-                                /* FALSE: output GUI navigation bar in page footer */
+LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head)
 {
-   char      sTarget[64],       /* */
-             sFile[64];         /* */
-   char      sGifSize[128],     /* */
-             sGifName[256];     /* */
+   char      sTarget[64],
+             *sFile;
+   char      sGifSize[128],
+             sGifName[256];
    char      sIDName[32];       /* string buffer for anchor ID name */
-   _UWORD     uiW,               /* */
-             uiH;               /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-
+   _UWORD     uiW, uiH;
 
    switch (idxEnabled)
    {
@@ -4115,6 +4091,7 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    
    default:
       strcpy(sIDName, "UDO_nav_up");
+      break;
    }
    
    /* mark ID as unique */
@@ -4123,43 +4100,36 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    else
       strcat(sIDName, "_FOOT");
    
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
    if (toc[p2_toc_counter]->toctype == TOC_TOC)
    {
-   /* r6pl7: Im Inhaltsverzeichnis Link auf !html_backpage mit Home-Symbol */
+      /* Im Inhaltsverzeichnis Link auf !html_backpage mit Home-Symbol */
       sTarget[0] = EOS;
-   
+
       if (html_frames_layout)
-      {
          sprintf(sTarget, " target=\"_top\"");
-      }
-   
+
       if (no_images)
       {
          voutlnf("%s%s", sep, lang.html_home);
       }
       else
-      {                                   /* Button disabled ausgeben */
+      {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
+         /* Button disabled ausgeben */
          get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
-
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
-         if (html_doctype == HTML5)
-         {
-            voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s>",
-               sGifName, lang.html_home, lang.html_home, sGifSize, closer);
-         }
-         else
-         {
-            voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
-               sGifName, lang.html_home, lang.html_home, sGifSize, closer);
-         }
+         voutlnf("<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s>",
+            sGifName, lang.html_home, lang.html_home, border, sGifSize, xhtml_closer);
       }
    }
    else
@@ -4167,39 +4137,37 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       if (html_frames_layout)
       {
          sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
-         sprintf(sFile, "%s%s", html_name_prefix, FRAME_FILE_CON);
+         sFile = um_strdup_printf("%s%s%s", html_name_prefix, FRAME_FILE_CON, outfile.suff);
       }
       else
       {
          sTarget[0] = EOS;
-         strcpy(sFile, old_outfile.name);
+         sFile = um_strdup_printf("%s%s", old_outfile.name, old_outfile.suff);
       }
-   
-      if (no_images)                      /*r6pl2*/
+
+      if (no_images)
       {
-         voutlnf("%s<a id=\"%s\" href=\"%s%s\"%s>%s</a>", sep, sIDName, sFile, outfile.suff, sTarget, lang.html_home);
+         voutlnf("%s<a id=\"%s\" href=\"%s\"%s>%s</a>", sep, sIDName, sFile, sTarget, lang.html_home);
       }
       else
       {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
          get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
-         
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
-         if (html_doctype == HTML5)
-         {
-            voutf("<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-               sIDName, sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
-         }
-         else
-         {
-            voutf("<a id=\"%s\" href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-               sIDName, sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
-         }
+         voutlnf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
+            sIDName, sFile, sTarget, sGifName, lang.html_home, lang.html_home, border, sGifSize, xhtml_closer);
       }
+      free(sFile);
    }
 }
 
@@ -4217,26 +4185,17 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
 *
 ******************************************|************************************/
 
-LOCAL void html_back_giflink(
-
-const int    idxEnabled,        /* */
-const int    idxDisabled,       /* */
-const char  *sep,               /* */
-_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
-                                /* FALSE: output GUI navigation bar in page footer */
+LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head)
 {
-   char      target[64],        /* */
-             backpage[256],     /* */
-             href[256],         /* */
-             alt[256],          /* */
-            *tok;               /* */
-   char      sGifSize[128],     /* */
-             sGifName[256];     /* */
+   char      target[64],
+             backpage[256],
+             href[256],
+             alt[256],
+            *tok;
+   char      sGifSize[128],
+             sGifName[256];
    char      sIDName[32];       /* string buffer for anchor ID name */
-   _UWORD     uiW,               /* */
-             uiH;               /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-   
+   _UWORD     uiW, uiH;
    
    switch (idxEnabled)
    {
@@ -4254,6 +4213,7 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    
    default:
       strcpy(sIDName, "UDO_nav_up");
+      break;
    }
    
    /* mark ID as unique */
@@ -4262,20 +4222,16 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    else
       strcat(sIDName, "_FOOT");
    
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
    target[0] = sGifName[0] = EOS;
    
    if (sDocHtmlBackpage[0] != EOS)
    {
-                                          /* New in r6pl16 [NHz] */
       strcpy(backpage, sDocHtmlBackpage);
       tok = strtok(backpage, "\'");
       strcpy(href, tok);
       del_right_spaces(href);
       tok = strtok(NULL, "\'");
-   
+
       if (tok != NULL)
       {
          strcpy(alt, tok);
@@ -4288,33 +4244,28 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       {
          sprintf(target, " target=\"_top\"");
       }
-   
-                                          /* Changed in r6pl16 [NHz] */
+
       if (no_images)
       {
          voutlnf("%s<a name=\"%s\" href=\"%s\"%s>%s</a>", sep, sIDName, href, target, alt);
-      }                                   /* changed */
+      }
       else
       {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
          get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
-   
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
-         if (html_doctype == HTML5)
-         {
-            voutf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-               sIDName, href, target, sGifName, alt, alt, sGifSize, closer);
-         }
-         else
-         {
-                                          /* Changed in r6pl16 [NHz] */
-            voutf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-               sIDName, href, target, sGifName, alt, alt, sGifSize, closer);
-         }
+         voutlnf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
+            sIDName, href, target, sGifName, alt, alt, border, sGifSize, xhtml_closer);
       }
    }
    else
@@ -4324,28 +4275,25 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
          voutlnf("%s^^^", sep);
       }
       else
-      {                                   /* Diabled Button ausgeben */
+      {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
+         /* Disabled Button ausgeben */
          get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
-         
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
-         if (html_doctype == HTML5)
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\"%s>", sGifName, sGifSize);
-         }
-         else
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
-         }
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", sGifName, border, sGifSize, xhtml_closer);
       }
    }
 }
-
-
 
 
 
@@ -4359,32 +4307,24 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
 *
 ******************************************|************************************/
 
-LOCAL void html_hb_line(
-
-_BOOL      head)              /*  TRUE: output GUI navigation bar in page header; */
-                                /* FALSE: output GUI navigation bar in page footer */
+LOCAL void html_hb_line(_BOOL head)
 {
-   int       i,                 /* */
-             ti,                /* */
-             li;                /* */
-   char      s[512],            /* */
-             anchor[512],       /* */
-             sGifSize[128],     /* */
-             sGifFile[128],     /* */
-             sTarget[64],       /* */
-            *colptr;            /* */
-   _BOOL   old_autorefoff;    /* */
-   _BOOL   for_main_file;     /* */
-   _UWORD     uiW,               /* */
-             uiH;               /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
+   int       i,
+             ti,
+             li;
+   char      s[512],
+             anchor[512],
+             sGifSize[128],
+             sGifFile[128],
+             sTarget[64],
+            *colptr;
+   _BOOL   old_autorefoff;
+   _BOOL   for_main_file;
+   _UWORD     uiW, uiH;
    char      buffer[32] = "";
    
    /* set global flag */
    head_foot = head;
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
    
    /* Herausfinden, fuer welchen Node die Kopf- und Fusszeile */
    /* ausgegeben werden soll. Beim Mergen ist der Index nicht */
@@ -4477,43 +4417,36 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       {
          if (!((no_footers || toc[ti]->ignore_footer) && (no_bottomlines || toc[ti]->ignore_bottomline)))
          {
-            if (html_doctype < XHTML_STRICT)
-               outln(HTML_HR);
-            else
-               outln(XHTML_HR);
+         	outln(xhtml_hr);
+         	outln("");
          }
       }
    }
    
-   
 #if 1
    colptr = NULL;
-   
    if (html_modern_layout)
       colptr = html_modern_backcolor;
-      
    if (html_frames_layout)
       colptr = html_frames_backcolor;
-   
    if (colptr)
    {
       s[0] = EOS;
-      
       if (colptr[0] != EOS)
       {
          sprintf(s, " bgcolor=\"%s\"", colptr);
       }
-      
-      voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\"%s>");
+      voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\"%s>", s);
       voutlnf("<tr>");
-
+#if 0
       if (html_doctype == HTML5)
       {
-         voutlnf("<td class=\"UDO_td_valign_top\">", s);
+         voutlnf("<td class=\"UDO_td_valign_top\">");
       }
       else
+#endif
       {
-         voutlnf("<td valign=\"top\">", s);
+         voutlnf("<td valign=\"top\">");
       }
    }
 #endif
@@ -4521,14 +4454,11 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    /* ------------------------------------------------ */
    /* Verweis auf die Homepage erzeugen                */
    /* ------------------------------------------------ */
-   
    html_home_giflink(GIF_HM_INDEX, GIF_NOHM_INDEX, "[ ", head);
-   
    
    /* ------------------------------------------------ */
    /* Verweis auf das uebergeordnete Kapitel erzeugen  */
    /* ------------------------------------------------ */
-   
    switch (toc[ti]->toctype)
    {
    case TOC_TOC:                          /* Verweis auf Backpage erzeugen */
@@ -4536,16 +4466,15 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       break;
 
    case TOC_NODE1:                        /* Weiter nach oben geht es nicht */
+      /* Verweis auf index.htm erzeugen */
       html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ", head);
       break;
-   
    
    case TOC_NODE2:                        /* Verweis auf aktuellen !node */
    case TOC_NODE3:                        /* Verweis auf aktuellen !subnode */
    case TOC_NODE4:                        /* Verweis auf aktuellen !subsubnode */
    case TOC_NODE5:                        /* Verweis auf aktuellen !subsubsubnode */
    case TOC_NODE6:                        /* Verweis auf aktuellen !subsubsubsubnode */
-   
       switch (toc[ti]->toctype)
       {
       case TOC_NODE2:
@@ -4584,9 +4513,8 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    
          out(s);
       }
-      
+      break;
    }
-   
    
    /* --------------------------------------------------- */
    /* Verweis auf die vorherige Seite erzeugen            */
@@ -4598,43 +4526,38 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    /* !html_merge_node5:  der letzte !subsubsubnode       */
    /* !html_merge_node6:  der letzte !subsubsubsubnode    */
    /* --------------------------------------------------- */
-   
    if (for_main_file)
    {
-#if 1
-      if (no_images)                      /* Deaktivierten Link/Bild ausgeben */
+      /* Deaktivierten Link/Bild ausgeben */
+      if (no_images)
       {
          outln("| &lt;&lt;&lt;");
       }
       else
       {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
          get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
          sGifSize[0] = EOS;
-         
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
-         if (html_doctype == HTML5)
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\"%s>", s, sGifSize);
-         }
-         else
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
-         }
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", s, border, sGifSize, xhtml_closer);
       }
-#else
-      html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ", head);
-#endif
    }
    else
    {
       i = toc[ti]->prev_index;
-   
+
       if (i == 0)
-      {                                   /* Erster Node -> Zurueck zum Hauptfile */
+      {
+         /* Erster Node -> Zurueck zum Hauptfile */
          html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ", head);
       }
       else
@@ -4658,38 +4581,31 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
          }
          else
          {
-#if 1
-            if (no_images)                /* disabled nach links */
+            /* disabled nach links */
+            if (no_images)
             {
                outln("| &lt;&lt;&lt;");
             }
             else
             {
+      	       char border[20];
+      	 
+      	       strcpy(border, " border=\"0\"");
+#if 0
+               if (html_doctype == HTML5)
+                   border[0] = EOS;
+#endif
                get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
                sGifSize[0] = EOS;
-               
                if (uiW != 0 && uiH != 0)
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
-               
-               if (html_doctype == HTML5)
-               {
-                  voutf("<img src=\"%s\" alt=\"\" title=\"\"%s>", s, sGifSize);
-               }
-               else
-               {
-                  voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
-               }
+               voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", s, border, sGifSize, xhtml_closer);
             }
-#else
-                                          /* Frueher Link auf die Startseite */
-            html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ", head);
-#endif
          }
       }
    }
-   
    
    /* ------------------------------------------- */
    /* Verweis auf die nachfolgende Seite erzeugen */
@@ -4778,29 +4694,28 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       out(s);
    }
    else
-   {                                      /* disabled nach rechts */
+   {
+      /* disabled nach rechts */
       if (no_images)
       {
          outln("| &gt;&gt;&gt;");
       }
       else
       {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
          get_giflink_data(GIF_NORG_INDEX, s, &uiW, &uiH);
          sGifSize[0] = EOS;
-         
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
-         if (html_doctype == HTML5)
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\"%s>", s, sGifSize);
-         }
-         else
-         {
-            voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
-         }
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", s, border, sGifSize, xhtml_closer);
       }
    }
    
@@ -4808,29 +4723,37 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
    {
       if (iDocHtmlSwitchLanguage >= 0 && sDocHtmlSwitchLanguage[0] != EOS)
       {
-#if 1
+#if 0
          if (html_doctype == HTML5)
          {
             outln("</td><td class=\"UDO_td_valign_top UDO_td_align_right\">");
          }
          else
+#endif
          {
             outln("</td><td valign=\"top\" align=\"right\">");
          }
-#endif
          if (no_images)
          {
             switch (iDocHtmlSwitchLanguage)
             {
             case TOGER:
                voutlnf("<a href=\"%s\">Deutsch</a>", sDocHtmlSwitchLanguage);
-                  break;
+               break;
             case TOENG:
                voutlnf("<a href=\"%s\">English</a>", sDocHtmlSwitchLanguage);
+               break;
             }
          }
          else
          {
+      	 char border[20];
+      	 
+      	 strcpy(border, " border=\"0\"");
+#if 0
+         if (html_doctype == HTML5)
+            border[0] = EOS;
+#endif
             if (html_frames_layout)
             {
                strcpy(sTarget, " target=\"_top\"");
@@ -4846,45 +4769,23 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
             {
             case TOGER:
                get_giflink_data(GIF_GER_INDEX, sGifFile, &uiW, &uiH);
-               
                if (uiW != 0 && uiH != 0)
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
-               
-               if (html_doctype == HTML5)
-               {
-                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"Deutsche Version dieses Dokuments\" %s%s></a>",
-                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
-               }
-               else
-               {
-                                          /* Changed in r6pl16 [NHz] */
-                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"Deutsche Version dieses Dokuments\" border=\"0\"%s%s></a>",
-                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
-               }
-               
+               voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"Deutsche Version dieses Dokuments\"%s%s%s></a>",
+                  sDocHtmlSwitchLanguage, sTarget, sGifFile, border, sGifSize, xhtml_closer);
                break;
                
             case TOENG:
                get_giflink_data(GIF_ENG_INDEX, sGifFile, &uiW, &uiH);
-               
                if (uiW != 0 && uiH != 0)
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
-               
-               if (html_doctype == HTML5)
-               {
-                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"English version of this document\" %s%s></a>",
-                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
-               }
-               else
-               {
-                                          /* Changed in r6pl16 [NHz] */
-                  voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"English version of this document\" border=\"0\"%s%s></a>",
-                     sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
-               }
+               voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"English version of this document\"%s%s%s></a>",
+                  sDocHtmlSwitchLanguage, sTarget, sGifFile, border, sGifSize, xhtml_closer);
+               break;
             }
          }
       }
@@ -4907,18 +4808,13 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
       if (!html_modern_layout && !html_frames_layout)
       {
          outln("");
-         
-         if (html_doctype < XHTML_STRICT)
-            outln(HTML_HR);
-         else
-            outln(XHTML_HR);
+         outln(xhtml_hr);
+         outln("");
       }
    }
    
    bDocAutorefOff = old_autorefoff;
 }
-
-
 
 
 
@@ -4934,27 +4830,27 @@ _BOOL      head)              /*  TRUE: output GUI navigation bar in page header
 
 LOCAL void html_node_bar_modern(void)
 {
-   register int   i;                 /* */
-   int            li;                /* */
-   _UWORD          uiW,               /* */
-                  uiH;               /* */
-   char           the_ref[1024],     /* */
-                 *ptrImg,            /* */
-                 *ptr;               /* */
-   char          *noImg = "";        /* */
-   char           sGifSize[80],      /* */
-                  sAlignOn[128],     /* */
-                  sAlignOff[128];    /* */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   register int   i;
+   int            li;
+   _UWORD          uiW, uiH;
+   char           the_ref[1024],
+                 *ptr;
+   const char    *ptrImg;
+   const char    *noImg = "";
+   char           sGifSize[80],
+                  sAlignOn[128],
+                  sAlignOff[128];
+   char border[20];
 
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
    sGifSize[0] = EOS;
    
+   strcpy(border, " border=\"0\"");
+#if 0
+   if (html_doctype == HTML5)
+      border[0] = EOS;
+#endif
+
 #if 1
-   /* Changed in V6.5.9 [NHz] */
    voutlnf("<table id=\"UDO_menu\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", html_modern_width);
    
    switch (html_modern_alignment)
@@ -4964,92 +4860,62 @@ LOCAL void html_node_bar_modern(void)
       sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
       break;
    case ALIGN_CENT:
+#if 0
       if (html_doctype == HTML5)
       {
          sprintf(sAlignOn, "<tr><td class=\"UDO_td_align_center\">%s", sHtmlPropfontStart);
       }
       else
+#endif
       {
          sprintf(sAlignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
       }
-
       sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
       break;
    case ALIGN_RIGH:
+#if 0
       if (html_doctype == HTML5)
       {
          sprintf(sAlignOn, "<tr><td class=\"UDO_td_align_right\">%s", sHtmlPropfontStart);
       }
       else
+#endif
       {
          sprintf(sAlignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
       }
-
       sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
+      break;
    }
 #else
    strcpy(sAlignOn, "<center>");
    strcpy(sAlignOff, "</center>");
 #endif
    
-   
-   
    if (p2_toc_counter == 0 && titdat.authoricon_active != NULL)
    {
       if (titdat.authoriconActiveWidth != 0 && titdat.authoriconActiveHeight != 0)
-      {
          sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconActiveWidth, titdat.authoriconActiveHeight);
-      }
-      
-      if (html_doctype == HTML5)
-      {
-         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\"%s></a>%s",
-            sAlignOn, 
-            old_outfile.name, 
-            outfile.suff, 
-            titdat.authoricon_active, 
-            sGifSize, 
-            sAlignOff);
-      }
-      else
-      {
-         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-            sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, closer, sAlignOff);
-      }
+      voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\"%s%s%s></a>%s",
+         sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, border, sGifSize, xhtml_closer, sAlignOff);
    }
    else
    {
       if (titdat.authoricon != NULL)
       {
          if (titdat.authoriconWidth != 0 && titdat.authoriconHeight != 0)
-         {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
-         }
          
-         if (html_doctype == HTML5)
-         {
-            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\"%s></a>%s",
-               sAlignOn, 
-               old_outfile.name, 
-               outfile.suff, 
-               titdat.authoricon, 
-               sGifSize, 
-               sAlignOff);
-         }
-         else
-         {
-            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-               sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, closer, sAlignOff);
-         }
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\"%s%s%s></a>%s",
+            sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, border, sGifSize, xhtml_closer, sAlignOff);
       }
    }
    
-   if (toc[0]->icon != NULL)              /*r6pl13*/
+   if (toc[0]->icon != NULL)
    {
       ptrImg = noImg;
       uiW = uiH = 0;
       
-      if (toc[0]->icon != NULL)           /* fd:20071114: ??? */
+      if (toc[0]->icon != NULL)
       {
          ptrImg = toc[0]->icon;
          uiW = toc[0]->uiIconWidth;
@@ -5071,32 +4937,9 @@ LOCAL void html_node_bar_modern(void)
          sGifSize[0] = EOS;
          
          if (uiW != 0 && uiH != 0)
-         {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-         }
-         
-         if (html_doctype == HTML5)
-         {
-            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\"%s></a>%s",
-               sAlignOn, 
-               old_outfile.name, 
-               outfile.suff, 
-               ptrImg, 
-               sGifSize, 
-               sAlignOff);
-         }
-         else
-         {
-                                          /*r6pl13*/
-            voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-               sAlignOn, 
-               old_outfile.name, 
-               outfile.suff, 
-               ptrImg, 
-               sGifSize, 
-               closer, 
-               sAlignOff);
-         }
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\"%s%s%s></a>%s",
+            sAlignOn, old_outfile.name, outfile.suff, ptrImg, border, sGifSize, xhtml_closer, sAlignOff);
       }
    }
    
@@ -5138,14 +4981,9 @@ LOCAL void html_node_bar_modern(void)
                if (ptr != NULL)
                {
                   strinsert(ptr, toc[i]->icon_text);
-                  
-                  if (html_doctype < XHTML_STRICT)
-                     strinsert(ptr, "<br>");
-                  else
-                     strinsert(ptr, "<br />");
+                  strinsert(ptr, xhtml_br);
                }
             }
-                                          /*r6pl3*/
             voutlnf("%s%s%s", sAlignOn, the_ref, sAlignOff);
          }
       }
@@ -5154,12 +4992,8 @@ LOCAL void html_node_bar_modern(void)
          break;
       }
    }
-   
-#if 1
    outln("</table>");
-#endif
-   
-}       /* html_node_bar_modern */
+}
 
 
 
@@ -5177,19 +5011,12 @@ LOCAL void html_node_bar_modern(void)
 
 GLOBAL void html_save_frameset(void)
 {
-   char   add[1024],         /* */
-          add2[256],         /* */
-          s[512],            /* */
-          f1[512],           /* */
-          f2[512];           /* */
-   char   closer[8] = "\0";  /* single tag closer mark in XHTML */
-   
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   
-   /* New in r6pl16 [NHz] */
+   char   add[1024],
+          add2[256],
+          s[512],
+          f1[512],
+          f2[512];
+
    if (html_doctype >= XHTML_STRICT)
    {
       outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
@@ -5208,7 +5035,6 @@ GLOBAL void html_save_frameset(void)
    
    if (titdat.htmltitle != NULL && titdat.htmltitle[0] != EOS)
    {
-                                          /*r6pl5*/
       voutlnf("<title>%s</title>", titdat.htmltitle);
    }
    else
@@ -5219,38 +5045,35 @@ GLOBAL void html_save_frameset(void)
    outln("</head>");
    
    add[0] = EOS;
-   
    if (html_frames_noborder)
       strcat(add, " border=\"0\" frameborder=\"0\" framespacing=\"0\"");
    
    add2[0] = EOS;
-   
    if (html_frames_noresize)
       strcat(add2, " noresize=\"noresize\"");
-   
    if (html_frames_noscroll)
       strcat(add2, " scrolling=\"no\"");
    
-   if (html_frames_toc_title == NULL)     /* Change in 6.5.16 [GS] */
+   if (html_frames_toc_title == NULL)
    {
       sprintf(f1, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s%s>",
-      html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2, closer);
+         html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2, xhtml_closer);
    }
    else
    {
       sprintf(f1, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s%s>",
-      html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, html_frames_toc_title, add2, closer);
+         html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, html_frames_toc_title, add2, xhtml_closer);
    }
    
-   if (html_frames_con_title == NULL)     /* Change in 6.5.16 [GS] */
+   if (html_frames_con_title == NULL)
    {
       sprintf(f2, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s>",
-      html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, closer);
+         html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, xhtml_closer);
    }
    else
    {
       sprintf(f2, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s>",
-      html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, html_frames_con_title, closer);
+         html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, html_frames_con_title, xhtml_closer);
    }
    
    switch (html_frames_position)
@@ -5260,28 +5083,24 @@ GLOBAL void html_save_frameset(void)
       outln(f1);
       outln(f2);
       break;
-   
    case POS_RIGHT:
       voutlnf("<frameset cols=\"*,%s\"%s>", html_frames_width, add);
       outln(f2);
       outln(f1);
       break;
-   
    case POS_TOP:
       voutlnf("<frameset rows=\"%s,*\"%s>", html_frames_height, add);
       outln(f1);
       outln(f2);
       break;
-   
    case POS_BOTTOM:
       voutlnf("<frameset rows=\"*,%s\"%s>", html_frames_height, add);
       outln(f2);
       outln(f1);
+      break;
    }
    
    outln("</frameset>");
-   
-   /* New in r6pl15 [NHz] */
    
    /* Noframes for browsers who do not know frames */
    outln("<noframes>");
@@ -5290,11 +5109,9 @@ GLOBAL void html_save_frameset(void)
    c_tableofcontents();
    
    /* Set both to FALSE in order that the title page and the
-   
    table of contents will be written in the frame again */
    
    called_maketitle = FALSE;
-   
    called_tableofcontents = FALSE;
    outln("</noframes>");
    outln("</html>");
@@ -5347,7 +5164,7 @@ GLOBAL void html_save_frameset(void)
       sprintf(s, " vlink=\"%s\"", html_frames_vlinkcolor);
       strcat(add, s);
    }
-                                          /* Changed in r6pl16 [NHz] */
+
    voutlnf("<body%s class=\"frame_toc\">", add);
    
    outln(sHtmlPropfontStart);
@@ -5360,8 +5177,7 @@ GLOBAL void html_save_frameset(void)
    
    sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_CON);
    html_make_file();
-   
-}       /* html_save_frameset */ 
+}
 
 
 
@@ -5379,28 +5195,28 @@ GLOBAL void html_save_frameset(void)
 
 LOCAL void html_node_bar_frames(void)
 {
-   register int   i;                 /* */
-   int            li;                /* */
-   _UWORD          uiW,               /* */
-                  uiH;               /* */
-   char           the_ref[1024],     /* */
-                 *ptr,               /* */
-                 *ptrImg,            /* */
-                  sGifSize[80];      /* */
-   char           alignOn[128],      /* */
-                  alignOff[128],     /* */
-                  divOn[38],         /* */
-                  divOff[32],        /* */
-                  rowOn[16],         /* */
-                  rowOff[16];        /* */
-   char          *noImg= "";         /* */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   register int   i;
+   int            li;
+   _UWORD          uiW, uiH;
+   char           the_ref[1024],
+                 *ptr,
+                  sGifSize[80];
+   const char    *ptrImg;
+   char           alignOn[128],
+                  alignOff[128],
+                  divOn[32],
+                  divOff[32],
+                  rowOn[16],
+                  rowOff[16];
+   const char    *noImg= "";
+   char border[20];
 
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   
+   strcpy(border, " border=\"0\"");
+#if 0
+   if (html_doctype == HTML5)
+      border[0] = EOS;
+#endif
+
    switch (html_frames_position)
    {
    case POS_LEFT:
@@ -5414,49 +5230,51 @@ LOCAL void html_node_bar_frames(void)
          sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
          break;
       case ALIGN_CENT:
+#if 0
          if (html_doctype == HTML5)
          {
             sprintf(alignOn, "<tr><td class=\"UDO_td_align_center\">%s", sHtmlPropfontStart);
          }
          else
+#endif
          {
             sprintf(alignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
          }
-
          sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
          break;
       case ALIGN_RIGH:
+#if 0
          if (html_doctype == HTML5)
          {
             sprintf(alignOn, "<tr><td class=\"UDO_td_align_right\">%s", sHtmlPropfontStart);
          }
          else
+#endif
          {
             sprintf(alignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
          }
-
          sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
+         break;
       }
-      
       outln(divOn);
       outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
       outln(rowOn);
       break;
       
    default:
+#if 0
       if (html_doctype == HTML5)
       {
          sprintf(alignOn, "<td class=\"td_nowrap\">%s", sHtmlPropfontStart);
       }
       else
+#endif
       {
          sprintf(alignOn, "<td nowrap=\"nowrap\">%s", sHtmlPropfontStart);
       }
-      
       sprintf(alignOff, "%s</td>", sHtmlPropfontEnd);
       strcpy(rowOn, "<tr>");
       strcpy(rowOff, "</tr>");
-      
       switch (html_frames_alignment)
       {
       case ALIGN_LEFT:
@@ -5464,72 +5282,46 @@ LOCAL void html_node_bar_frames(void)
          divOff[0] = EOS;
          break;
       case ALIGN_CENT:
+#if 0
          if (html_doctype == HTML5)
          {
             strcpy(divOn, "<div class=\"UDO_div_align_center\">");
          }
          else
+#endif
          {
             strcpy(divOn, "<div align=\"center\">");
          }
-
          strcpy(divOff, "</div>");
          break;
       case ALIGN_RIGH:
+#if 0
          if (html_doctype == HTML5)
          {
             strcpy(divOn, "<div class=\"UDO_div_align_right\">");
          }
          else
+#endif
          {
             strcpy(divOn, "<div align=\"right\">");
          }
-         
          strcpy(divOff, "</div>");
+         break;
       }
-      
       outln(divOn);
       outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
       outln(rowOn);
+      break;
    }
-   
    
    if (titdat.authoricon != NULL)
    {
       sGifSize[0] = EOS;
-      
       if (titdat.authoriconWidth != 0 && titdat.authoriconHeight != 0)
-      {
          sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
-      }
-      
-      if (html_doctype == HTML5)
-      {
-         voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\"%s></a>%s",
-            alignOn, 
-            html_name_prefix, 
-            FRAME_FILE_CON, 
-            outfile.suff,
-            FRAME_NAME_CON, 
-            titdat.authoricon, 
-            "" /*sDocImgSuffix*/, 
-            sGifSize, 
-            alignOff);
-      }
-      else
-      {
-         voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
-            alignOn, 
-            html_name_prefix, 
-            FRAME_FILE_CON, 
-            outfile.suff,
-            FRAME_NAME_CON, 
-            titdat.authoricon, 
-            "" /*sDocImgSuffix*/, 
-            sGifSize, 
-            closer, 
-            alignOff);
-      }
+      voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\"%s%s%s></a>%s",
+         alignOn, html_name_prefix, FRAME_FILE_CON, outfile.suff,
+         FRAME_NAME_CON, titdat.authoricon, "" /*sDocImgSuffix*/, border, sGifSize, xhtml_closer, alignOff);
    }
    
    for (i = 1; i <= p1_toc_counter; i++)
@@ -5562,13 +5354,12 @@ LOCAL void html_node_bar_frames(void)
             }
             
             string2reference(the_ref, li, FALSE, ptrImg, uiW, uiH);
-   
+
             /* Im Inhaltsverzeichnis DARF nicht <a href="#..."> stehen! */
             /* kleiner Zwischenhack, da Frames mit gemergten Nodes wohl */
             /* niemand ernsthaft verwenden werden wird. */
             
-            ptr= strstr(the_ref, "href=\"#");
-            
+            ptr = strstr(the_ref, "href=\"#");
             if (ptr != NULL)
             {
                ptr += 6;
@@ -5580,18 +5371,12 @@ LOCAL void html_node_bar_frames(void)
             if (ptrImg != noImg && toc[i]->icon_text != NULL)
             {
                ptr = strstr(the_ref, "</a>");
-               
                if (ptr != NULL)
                {
                   strinsert(ptr, toc[i]->icon_text);
-                  
-                  if (html_doctype < XHTML_STRICT)
-                     strinsert(ptr, "<br>");
-                  else
-                     strinsert(ptr, "<br />");
+                  strinsert(ptr, xhtml_br);
                }
             }
-            
             voutlnf("%s%s%s", alignOn, the_ref, alignOff);
          }
       }
@@ -5600,7 +5385,6 @@ LOCAL void html_node_bar_frames(void)
          break;
       }
    }
-   
    outln(rowOff);
    outln("</table>");
    outln(divOff);
@@ -5622,8 +5406,7 @@ LOCAL void html_node_bar_frames(void)
 
 GLOBAL void html_headline(void)
 {
-   char   bgCmd[512];  /* */
-   
+   char bgCmd[512];
    
    if (html_modern_layout)
    {
@@ -5637,54 +5420,54 @@ GLOBAL void html_headline(void)
       
       if (html_modern_backcolor[0] != EOS)
       {
+#if 0
          if (html_doctype == HTML5)
          {
             voutlnf("<td class=\"UDO_td_valign_top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
-               html_modern_width,         /* */
-               html_modern_backcolor,     /* */
-               bgCmd,                     /* */
-               sHtmlPropfontStart);       /* */
+               html_modern_width,
+               html_modern_backcolor,
+               bgCmd,
+               sHtmlPropfontStart);
          }
          else
+#endif
          {
             voutlnf("<td valign=\"top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
-               html_modern_width,         /* */
-               html_modern_backcolor,     /* */
-               bgCmd,                     /* */
-               sHtmlPropfontStart);       /* */
+               html_modern_width,
+               html_modern_backcolor,
+               bgCmd,
+               sHtmlPropfontStart);
          }
       }
       else
       {
+#if 0
          if (html_doctype == HTML5)
          {
             voutlnf("<td class=\"UDO_td_valign_top\" width=\"%s\"%s>%s", 
-               html_modern_width,         /* */
+               html_modern_width,
                bgCmd,                     /* */
                sHtmlPropfontStart);       /* */
          }
          else
+#endif
          {
-            voutlnf("<td valign=\"top\" width=\"%s\"%s>%s", 
-               html_modern_width,         /* */
-               bgCmd,                     /* */
-               sHtmlPropfontStart);       /* */
+            voutlnf("<td valign=\"top\" width=\"%s\"%s>%s",
+               html_modern_width,
+               bgCmd,
+               sHtmlPropfontStart);
          }
       }
       
       html_node_bar_modern();
       voutlnf("%s</td>", sHtmlPropfontEnd);
-
 #if 0
-                                          /*r6pl3*/
-      outln("<td valign=\"top\" width=\"8\">&nbsp;</td>");
-#endif
-
       if (html_doctype == HTML5)
       {
          voutlnf("<td class=\"UDO_td_valign_top\" width=\"100%%\">%s", sHtmlPropfontStart);
       }
       else
+#endif
       {
          voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
       }
@@ -5693,26 +5476,24 @@ GLOBAL void html_headline(void)
    if (!no_headlines)
       html_hb_line(TRUE);
 
-#if 1
    if (html_modern_layout || html_frames_layout)
    {
-      outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n<tr>");
-      
+      outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
+      outln("<tr>");
+#if 0
       if (html_doctype == HTML5)
       {
          voutlnf("<td class=\"UDO_td_valign_top\" width=\"8\">&nbsp;</td>");
          voutlnf("<td class=\"UDO_td_valign_top\" width=\"100%%\">%s", sHtmlPropfontStart);
       }
       else
+#endif
       {
          voutlnf("<td valign=\"top\" width=\"8\">&nbsp;</td>");
          voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
       }
    }
-#endif
 }
-
-
 
 
 
@@ -5737,7 +5518,6 @@ GLOBAL void html_bottomline(void)
 #endif
       if (!no_bottomlines)
          html_hb_line(FALSE);
-
       voutlnf("%s</td></tr>", sHtmlPropfontEnd);
       outln("</table>");
       return;
@@ -5752,17 +5532,13 @@ GLOBAL void html_bottomline(void)
 #endif
       if (!no_bottomlines)
          html_hb_line(FALSE);
-      
       return;
    }
 
    html_footer();
-   
    if (!no_bottomlines)
       html_hb_line(FALSE);
 }
-
-
 
 
 
@@ -5810,8 +5586,8 @@ GLOBAL void html_bottomline(void)
 *     address being placed visibly in web pages, to let email addresses harvester 
 *     bots not find their email addresses for spam purposes. To avoid the complexity
 *     to distinguish mail addresses from URLs and to give the user full control over
-*     the output, the contact_link is used as it was setted by
-*     !docinfo [webmaster_contact_link]. So mail addresses must be set as
+*     the output, the contact_link is used as it was set by
+*     !docinfo [contact_link]. So mail addresses must be set as
 *     "mailto:webmaster@example.com".
 *
 *  return:
@@ -5821,16 +5597,13 @@ GLOBAL void html_bottomline(void)
 
 GLOBAL void html_footer(void)
 {
-   _BOOL   has_counter,       /* */
-             has_main_counter;  /* */
-   char      s[512];            /* */
-   int       has_content = 0;   /* flags */
+   _BOOL   has_counter,
+             has_main_counter;
+   char      s[512];
+   int       has_content = 0;
    
-   
-                                          /* Changed in V6.5.9 [NHz] */
-   has_counter = (toc[p2_toc_counter]->counter_command != NULL);
-
-   has_main_counter = (sCounterCommand[0] != EOS);
+   has_counter = toc[p2_toc_counter]->counter_command != NULL;
+   has_main_counter = sCounterCommand[0] != EOS;
    
    if (!has_counter && !has_main_counter)
       if (no_footers || toc[p2_toc_counter]->ignore_footer)
@@ -9243,32 +9016,30 @@ GLOBAL void c_end_node(void)
 *  tocline_make_bold():
 *     make TOC entry line bold
 *
-*  Notes:
-*     r6pl6: Kapitel werden direkt referenziert. Der zeitraubende Weg 
-*     ueber auto_references() entfaellt.
-*
 *  return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void tocline_make_bold(
-
-char *s, 
-const int depth)
+LOCAL void tocline_make_bold(char *s, const int depth)
 {
-   if (depth > 1)                         /* r6pl5: >1 statt ==1 */
+   char *str;
+   
+   if (depth > 1)
    {
       switch (desttype)
       {
       case TOHAH:
       case TOHTM:
       case TOMHH:
-         qreplace_once(s, "<li>", 4, "<li><b>", 7);
-         qreplace_last(s, "</a>", 4, "</a></b>", 8);
+         str = um_strdup_printf("%s<a ", BOLD_ON);
+         replace_once(s, "<a ", str);
+         free(str);
+         str = um_strdup_printf("</a>%s", BOLD_OFF);
+         replace_last(s, "</a>", str);
+         free(str);
+         c_internal_styles(s);
          break;
-         
-         
       case TOWIN:
       case TOWH4:
       case TOAQV:
@@ -9276,7 +9047,6 @@ const int depth)
          strcat(s, BOLD_OFF);
          c_win_styles(s);
          break;
-
 /*    case TOKPS:
          strinsert(s, "14 changeFontSize Bon ");
          strcat(s, " Boff 11 changeFontSize changeBaseFont");
@@ -9302,27 +9072,24 @@ const int depth)
 *
 ******************************************|************************************/
 
-LOCAL void tocline_handle_1st(
-
-_BOOL  *f)  /* */
+LOCAL void tocline_handle_1st(_BOOL *first)
 {
-   if (*f)                                /* first */
+   if (*first)
    {
       switch (desttype)
-      { 
+      {
       case TOINF:
          outln("@menu");
          break;
-         
       case TOHAH:
       case TOHTM:
       case TOMHH:
       case TOTEX:
       case TOPDL:
          outln(toc_list_top);
+         break;
       }
-      
-      *f = FALSE;                         /* done */
+      *first = FALSE;
    }
 }
 
@@ -11774,28 +11541,19 @@ const int   depth)     /* */
 *
 ******************************************|************************************/
 
-LOCAL void do_toptoc(
-
-const int    currdepth)                 /* current node depth */
+LOCAL void do_toptoc(const int currdepth)
 {
-   char      s[512],                    /* */
-             sIndent[512],              /* */
-             sTarget[64],               /* */
-             sFile[64];                 /* */
-   char      sSmartSep[64] = " &gt; ";  /* default separator string */
-   char      closer[8] = "\0";          /* single tag closer mark in XHTML */
-
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
+   char      s[512],
+             sIndent[512],
+             sTarget[64],
+             *sFile;
+   const char *sSmartSep = "&gt;";  /* default separator string */
+   char border[20];
    
    if (html_navigation_separator[0] != 0) /* check if valid userdef separator exists */
    {
-      strcpy(sSmartSep, " ");             /* overwrite local default */
-      strcat(sSmartSep, html_navigation_separator);
-      strcat(sSmartSep, " ");
+      sSmartSep = html_navigation_separator;
    }
-   
    
    if (!use_auto_toptocs)
       return;
@@ -11820,43 +11578,35 @@ const int    currdepth)                 /* current node depth */
    
    switch (desttype)
    {
-   case TOHAH:                            /* V6.5.17 */
+   case TOHAH:
    case TOHTM:
    case TOMHH:
+  	 strcpy(border, " border=\"0\"");
+#if 0
+   if (html_doctype == HTML5)
+      border[0] = EOS;
+#endif
+
       if (no_images || no_auto_toptocs_icons)
       {
          strcpy(sIndent, "&nbsp;");
       }
       else
       {
-         if (html_doctype == HTML5)
-         {
-            sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\">", 
-               GIF_FS_NAME, 
-               uiGifFsWidth, 
-               uiGifFsHeight);
-         }
-         else
-         {
-            sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>", 
-               GIF_FS_NAME, 
-               uiGifFsWidth, 
-               uiGifFsHeight, 
-               closer);
-         }
+         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>",
+            GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight, border, xhtml_closer);
       }
-   
+
       if (html_frames_layout)
       {
          sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
-         sprintf(sFile, "%s%s", html_name_prefix, FRAME_FILE_CON);
+         sFile = um_strdup_printf("%s%s%s", html_name_prefix, FRAME_FILE_CON, outfile.suff);
       }
       else
       {
          sTarget[0] = EOS;
-         strcpy(sFile, old_outfile.name);
+         sFile = um_strdup_printf("%s%s", old_outfile.name, old_outfile.suff);
       }
-   
    
       /* --- Level 1 --- */
       
@@ -11875,16 +11625,16 @@ const int    currdepth)                 /* current node depth */
          {
             if (html_doctype == HTML5)
             {
-               voutlnf("<span class=\"UDO_span_tt\">+&nbsp;</span>&nbsp;<a href=\"%s%s\"%s>%s</a>", 
-                  sFile, outfile.suff, sTarget, s);
+               voutlnf("<span class=\"UDO_span_tt\">+&nbsp;</span>&nbsp;<a href=\"%s\"%s>%s</a>", 
+                  sFile, sTarget, s);
             }
             else
             {
-               voutlnf("<tt>+&nbsp;</tt>&nbsp;<a href=\"%s%s\"%s>%s</a>", 
-                  sFile, outfile.suff, sTarget, s);
+               voutlnf("<tt>+&nbsp;</tt>&nbsp;<a href=\"%s\"%s>%s</a>", 
+                  sFile, sTarget, s);
             }
          }
-         else if (html_navigation_line)   /* new v6.5.19[fd] */
+         else if (html_navigation_line)
          {
                                           /* open CSS class div */
             outln("<div class=\"UDO_nav_line\">");
@@ -11894,93 +11644,42 @@ const int    currdepth)                 /* current node depth */
                                           /* if userdef image exists */ 
                if (html_navigation_image_fspec[0] != 0)
                {
-                  if (html_doctype == HTML5)
-                  {
-                                          /* don't close the nav line already! */
-                     voutf("<img src=\"%s\" alt=\"\" title=\"\">&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                                          /* folder image file name */
+                     /* don't close the nav line already! */
+                     voutf("<img src=\"%s\" alt=\"\" title=\"\"%s%s>&nbsp;&nbsp;<a href=\"%s\"%s>%s</a>",
+                                         /* folder image file name */
                         html_navigation_image_fspec,
-                        sFile,            /* file name */
-                        outfile.suff,     /* file suffix */
-                        sTarget,          /* a href target */
-                        s);               /* node name */
-                  }
-                  else
-                  {
-                                          /* don't close the nav line already! */
-                     voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                                          /* folder image file name */
-                        html_navigation_image_fspec,
-                        closer,           /* XHTML single tag closer (if any) */
-                        sFile,            /* file name */
-                        outfile.suff,     /* file suffix */
-                        sTarget,          /* a href target */
-                        s);               /* node name */
-                  }
+                        border,
+                        xhtml_closer,    /* XHTML single tag closer (if any) */
+                        sFile,           /* file name */
+                        sTarget,         /* a href target */
+                        s);              /* node name */
                }
                else
                {
-                  if (html_doctype == HTML5)
-                  {
-                                          /* don't close the nav line already! */
-                     voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\">&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                        GIF_FO_NAME,      /* folder image file name */
-                        uiGifFoWidth,     /* folder image width */
-                        uiGifFoHeight,    /* folder image height */
-                        sFile,            /* file name */
-                        outfile.suff,     /* file suffix */
-                        sTarget,          /* a href target */
-                        s);               /* node name */
-                  }
-                  else
-                  {
-                                          /* don't close the nav line already! */
-                     voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                        GIF_FO_NAME,      /* folder image file name */
-                        uiGifFoWidth,     /* folder image width */
-                        uiGifFoHeight,    /* folder image height */
-                        closer,           /* XHTML single tag closer (if any) */
-                        sFile,            /* file name */
-                        outfile.suff,     /* file suffix */
-                        sTarget,          /* a href target */
-                        s);               /* node name */
-                  }
+                     /* don't close the nav line already! */
+                     voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>&nbsp;&nbsp;<a href=\"%s\"%s>%s</a>",
+                        GIF_FO_NAME,     /* folder image file name */
+                        uiGifFoWidth,    /* folder image width */
+                        uiGifFoHeight,   /* folder image height */
+                        border,
+                        xhtml_closer,    /* XHTML single tag closer (if any) */
+                        sFile,           /* file name */
+                        sTarget,         /* a href target */
+                        s);              /* node name */
                }
             }
             else
             {
-               voutf("<a href=\"%s%s\"%s>%s</a>",
+               voutf("<a href=\"%s\"%s>%s</a>",
                      sFile,               /* file name */
-                     outfile.suff,        /* file suffix */
                      sTarget,             /* a href target */
                      s);                  /* node name */
             }
          }
          else
          {
-            if (html_doctype == HTML5)
-            {
-               voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\">&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                  GIF_FO_NAME,            /* folder image file name */
-                  uiGifFoWidth,           /* folder image width */
-                  uiGifFoHeight,          /* folder image height */
-                  sFile,                  /* file name */
-                  outfile.suff,           /* file suffix */
-                  sTarget,                /* a href target */
-                  s);                     /* node name */
-            }
-            else
-            {
-               voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                  GIF_FO_NAME,            /* folder image file name */
-                  uiGifFoWidth,           /* folder image width */
-                  uiGifFoHeight,          /* folder image height */
-                  closer,                 /* XHTML single tag closer (if any) */
-                  sFile,                  /* file name */
-                  outfile.suff,           /* file suffix */
-                  sTarget,                /* a href target */
-                  s);                     /* node name */
-            }
+               voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>&nbsp;<a href=\"%s\"%s>%s</a>",
+                  GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, border, xhtml_closer, sFile, sTarget, s);
          }
       }
    
@@ -11997,12 +11696,12 @@ const int    currdepth)                 /* current node depth */
             if (html_doctype == HTML5)
             {
                voutlnf("<br%s><span class=\"UDO_span_tt\">|--+&nbsp;</span>&nbsp;%s", 
-                  closer, s);
+                  xhtml_closer, s);
             }
             else
             {
                voutlnf("<br%s><tt>|--+&nbsp;</tt>&nbsp;%s", 
-                  closer, s);
+                  xhtml_closer, s);
             }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
@@ -12011,26 +11710,15 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            if (html_doctype == HTML5)
-            {
-               voutlnf("<br>%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\">&nbsp;%s", 
+               voutf("<br%s>", xhtml_closer);
+               voutlnf("%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>&nbsp;%s", 
                   sIndent, 
                   GIF_FO_NAME, 
                   uiGifFoWidth, 
-                  uiGifFoHeight, 
+                  uiGifFoHeight,
+                  border,
+                  xhtml_closer, 
                   s);
-            }
-            else
-            {
-               voutlnf("<br%s>%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s", 
-                  closer, 
-                  sIndent, 
-                  GIF_FO_NAME, 
-                  uiGifFoWidth, 
-                  uiGifFoHeight, 
-                  closer, 
-                  s);
-            }
          }
       }
    
@@ -12047,12 +11735,12 @@ const int    currdepth)                 /* current node depth */
             if (html_doctype == HTML5)
             {
                voutlnf("<br%s><span class=\"UDO_span_tt\">&nbsp;&nbsp;&nbsp;|--+&nbsp;</span>&nbsp;%s", 
-                  closer, s);
+                  xhtml_closer, s);
             }
             else
             {
                voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", 
-                  closer, s);
+                  xhtml_closer, s);
             }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
@@ -12061,28 +11749,16 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            if (html_doctype == HTML5)
-            {
-               voutlnf("<br>%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\">&nbsp;%s",
+            voutf("<br%s>", xhtml_closer);
+               voutlnf("%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>&nbsp;%s",
                   sIndent, 
                   sIndent, 
                   GIF_FO_NAME, 
                   uiGifFoWidth, 
-                  uiGifFoHeight, 
+                  uiGifFoHeight,
+                  border,
+                  xhtml_closer,
                   s);
-            }
-            else
-            {
-               voutlnf("<br%s>%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
-                  closer,
-                  sIndent, 
-                  sIndent, 
-                  GIF_FO_NAME, 
-                  uiGifFoWidth, 
-                  uiGifFoHeight, 
-                  closer,
-                  s);
-            }
          }
       }
    
@@ -12099,12 +11775,12 @@ const int    currdepth)                 /* current node depth */
             if (html_doctype == HTML5)
             {
                voutlnf("<br%s><span class=\"UDO_span_tt\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</span>&nbsp;%s",
-                  closer, s);
+                  xhtml_closer, s);
             }
             else
             {
                voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
-                  closer, s);
+                  xhtml_closer, s);
             }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
@@ -12113,30 +11789,17 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            if (html_doctype == HTML5)
-            {
-               voutlnf("<br>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\">&nbsp;%s",
+                   voutf("<br%s>", xhtml_closer);
+               voutlnf("%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>&nbsp;%s",
                   sIndent, 
                   sIndent, 
                   sIndent, 
                   GIF_FO_NAME, 
                   uiGifFoWidth, 
-                  uiGifFoHeight, 
+                  uiGifFoHeight,
+                  border,
+                  xhtml_closer,
                   s);
-            }
-            else
-            {
-               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
-                  closer,
-                  sIndent, 
-                  sIndent, 
-                  sIndent, 
-                  GIF_FO_NAME, 
-                  uiGifFoWidth, 
-                  uiGifFoHeight, 
-                  closer,
-                  s);
-            }
          }
       }
       
@@ -12153,12 +11816,12 @@ const int    currdepth)                 /* current node depth */
             if (html_doctype == HTML5)
             {
                voutlnf("<br%s><span class=\"UDO_span_tt\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</span>&nbsp;%s",
-                  closer, s);
+                  xhtml_closer, s);
             }
             else
             {
                voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
-                  closer, s);
+                  xhtml_closer, s);
             }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
@@ -12167,30 +11830,17 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            if (html_doctype == HTML5)
-            {
-               voutlnf("<br>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\">&nbsp;%s",
+                   voutf("<br%s>", xhtml_closer);
+               voutlnf("%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>&nbsp;%s",
                   sIndent, 
                   sIndent, 
                   sIndent, 
                   GIF_FO_NAME, 
                   uiGifFoWidth, 
-                  uiGifFoHeight, 
+                  uiGifFoHeight,
+                  border,
+                  xhtml_closer,
                   s);
-            }
-            else
-            {
-               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
-                  closer,
-                  sIndent, 
-                  sIndent, 
-                  sIndent, 
-                  GIF_FO_NAME, 
-                  uiGifFoWidth, 
-                  uiGifFoHeight, 
-                  closer,
-                  s);
-            }
          }
       }
       
@@ -12206,12 +11856,12 @@ const int    currdepth)                 /* current node depth */
             if (html_doctype == HTML5)
             {
                voutlnf("<br%s><span class=\"UDO_span_tt\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</span>&nbsp;%s",
-                  closer, s);
+                  xhtml_closer, s);
             }
             else
             {
                voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
-                  closer, s);
+                  xhtml_closer, s);
             }
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
@@ -12220,34 +11870,20 @@ const int    currdepth)                 /* current node depth */
          }
          else
          {
-            if (html_doctype == HTML5)
-            {
-               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" %s>&nbsp;%s",
-                  closer,
+                   voutf("<br%s>", xhtml_closer);
+               voutlnf("%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\"%s%s>&nbsp;%s",
                   sIndent, 
                   sIndent, 
                   sIndent, 
                   GIF_FO_NAME, 
                   uiGifFoWidth, 
-                  uiGifFoHeight, 
-                  closer,
+                  uiGifFoHeight,
+                  border,
+                  xhtml_closer,
                   s);
-            }
-            else
-            {
-               voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
-                  closer,
-                  sIndent, 
-                  sIndent, 
-                  sIndent, 
-                  GIF_FO_NAME, 
-                  uiGifFoWidth, 
-                  uiGifFoHeight, 
-                  closer,
-                  s);
-            }
          }
       }
+      free(sFile);
 
       if (html_navigation_line)
       {
@@ -12257,11 +11893,8 @@ const int    currdepth)                 /* current node depth */
          outln("</div> <!-- UDO_nav_line -->\n");
       }
 
-      if (html_doctype < XHTML_STRICT)
-         outln(HTML_HR);
-      else
-         outln(XHTML_HR);
-      
+      outln(xhtml_hr);
+      outln("");
       break;
    
    case TOWIN:
@@ -12735,12 +12368,11 @@ LOCAL void output_appendix_line(void)
 
 GLOBAL void c_tableofcontents(void)
 {
-   char   n[256],         /* */
-          name[256],      /* */
-          hlp_name[256];  /* */
-   int    i;              /* */
-   int    depth;          /* */
-
+   char   name[256],
+          hlp_name[256];
+   char *n;
+   int    i;
+   int    depth;
 
    if (called_tableofcontents)
       return;
@@ -12750,12 +12382,11 @@ GLOBAL void c_tableofcontents(void)
    check_endnode();
 
    depth = get_toccmd_depth();
-   
-   if (depth == 0)                        /* use default values */
+   if (depth == 0)
    {
-      if (use_compressed_tocs)            /* show only 1st TOC level */
+      if (use_compressed_tocs)
          depth = 1;
-      else                                /* show all TOC levels */
+      else
          depth = 9;
    }
 
@@ -12772,38 +12403,33 @@ GLOBAL void c_tableofcontents(void)
    case TOLYX:
       outln("\\layout LaTeX");
       outln("\\pagebreak_top \\pagebreak_bottom");
-      outln("\\begin_inset LatexDel \\tableofcontents");
+      outln("\\begin_inset LatexCommand \\tableofcontents");
       outln("\\end_inset");
       break;
       
    case TOINF:
       outln("@ifinfo");
-      n[0] = EOS;
-      
+      n = NULL;
       if (toc[1] != NULL)
       {
          strcpy(name, toc[1]->name);
          node2texinfo(name);
-         sprintf(n, "@node Top, %s, (dir), (dir)", name);
+         n = um_strdup_printf("@node Top, %s, (dir), (dir)", name);
       }
-
       output_helpid(0);
       outln(n);
+      free(n);
 
       if (called_maketitle)
       {
          if (titdat.title != NULL)
             voutlnf("@center %s @*", titdat.title);
-
          if (titdat.program != NULL)
             voutlnf("@center %s @*", titdat.program);
-
          if (titdat.version != NULL)
             voutlnf("@center %s @*", titdat.version);
-
          if (titdat.date != NULL)
             voutlnf("@center %s @*", titdat.date);
-
          if (titdat.author != NULL)
          {
             outln("@sp 1");
@@ -12811,7 +12437,6 @@ GLOBAL void c_tableofcontents(void)
             outln("@sp 1");
             voutlnf("@center %s @*", titdat.author);
          }
-
          if (address_counter > 0)
          {
             for (i = 1; i <= address_counter; i++)
@@ -12822,13 +12447,12 @@ GLOBAL void c_tableofcontents(void)
                }
             }
          }
-
          outln("@center ");
          outln("@sp 1");
       }
 
       outln(lang.contents);
-      outln("");                      
+      outln("");
 
       if (toc_available)
       {
@@ -12849,9 +12473,9 @@ GLOBAL void c_tableofcontents(void)
       outln("");
       
       if (toc_title[0] != EOS)
-      	strcpy(n, toc_title);
+      	n = toc_title;
       else
-        strcpy(n, lang.contents);
+        n = lang.contents;
       if (desttype == TOSTG)
       {
          voutlnf("@node Main \"%s\"", n);
@@ -12891,9 +12515,9 @@ GLOBAL void c_tableofcontents(void)
    case TOTVH:
       outln("");
       if (toc_title[0] != EOS)
-      	strcpy(n, toc_title);
+      	n = toc_title;
       else
-        strcpy(n, lang.contents);
+        n = lang.contents;
       voutlnf(".topic %s", n);
       output_helpid(0);
       out("  ");
@@ -12916,9 +12540,9 @@ GLOBAL void c_tableofcontents(void)
 
    case TOASC:
       if (toc_title[0] != EOS)
-      	strcpy(n, toc_title);
+      	n = toc_title;
       else
-        strcpy(n, lang.contents);
+        n = lang.contents;
       if (toc_available)
       {
          if (use_style_book)
@@ -12954,8 +12578,8 @@ GLOBAL void c_tableofcontents(void)
       check_endnode();
 
       outln("{");
-      node2NrWinhelp(n, 0);
-      voutlnf("#{\\footnote # %s}", n);
+      node2NrWinhelp(name, 0);
+      voutlnf("#{\\footnote # %s}", name);
       output_helpid(0);
       voutlnf("${\\footnote $ %s}", lang.contents);
       voutlnf("K{\\footnote K %s}", lang.contents);
@@ -12983,8 +12607,9 @@ GLOBAL void c_tableofcontents(void)
       if (toc_available)
       {
          outln("\\keepn");
-         sprintf(n, "\\fs%d", iDocPropfontSize + 14);
+         n = um_strdup_printf("\\fs%d", iDocPropfontSize + 14);
          voutlnf("{%s\\b %s}\\par\\pard\\par", n, toc_title[0] != EOS ? toc_title : lang.contents);
+         free(n);
          toc_output(TOC_NODE1, depth, FALSE);
       }
 
@@ -13046,15 +12671,13 @@ GLOBAL void c_tableofcontents(void)
 
       if (toc_available)
       {
+         const char *a_name = "name";
+         
+#if 0
          if (html_doctype == HTML5)
-         {
-            voutlnf("\n<h1><a id=\"%s\"></a>%s</h1>\n", HTML_LABEL_CONTENTS, lang.contents);
-         }
-         else
-         {
-            voutlnf("\n<h1><a name=\"%s\"></a>%s</h1>\n", HTML_LABEL_CONTENTS, lang.contents);
-         }
-
+            a_name = "id";
+#endif
+         voutlnf("<h1><a %s=\"%s\">%s</a></h1>", a_name, HTML_LABEL_CONTENTS, lang.contents);
          add_label(HTML_LABEL_CONTENTS, FALSE, FALSE);
          toc_output(TOC_NODE1, depth, FALSE);
       }

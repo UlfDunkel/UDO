@@ -112,27 +112,33 @@ LOCAL int note_counter;
 
 LOCAL void loglnpos(const char *we, const char *format, va_list args)
 {
-   char      z[512];         /* */
-   char      msg[512];
-   char      lineinfo[100];  /* */
-   _UWORD     realstart;      /* */
+   char *txt, *msg;
+   char lineinfo[100];
+   _UWORD realstart;
    
-   if (uiMultiLines > 0)                  /* New in v6.5.5 to get a proper message with multilines */
+   if (uiCurrFileLine > 0)
    {
-                                          /* Special: we are on a multiline */
-      realstart = uiCurrFileLine - uiMultiLines;
-      sprintf(lineinfo, "%u-%u", realstart, uiCurrFileLine);
-   }
-   else
-   {
-      sprintf(lineinfo, "%u", uiCurrFileLine);
-   }
-   
-   vsprintf(msg, format, args);
-   sprintf(z, "%s: %s %s: %s", we, sCurrFileName, lineinfo, msg);
-   logln(z);
+		if (uiMultiLines > 0)
+		{
+		   realstart = uiCurrFileLine - uiMultiLines;
+		   sprintf(lineinfo, "%lu-%lu: ", realstart, uiCurrFileLine);
+		}
+		else
+		{
+		   sprintf(lineinfo, "%lu: ", uiCurrFileLine);
+		}
+	} else
+	{
+		lineinfo[0] = EOS;
+	}
 
-   show_logln_message(z);                 /* Ausgabe ans GUI weiterreichen */
+   msg = um_strdup_vprintf(format, args);
+   txt = um_strdup_printf("%s: %s %s%s", we, sCurrFileName, lineinfo, msg);
+   logln(txt);
+
+   show_logln_message(txt);               /* Ausgabe ans GUI weiterreichen */
+   free(txt);
+   free(msg);
 }
 
 
@@ -184,17 +190,21 @@ LOCAL const char *my_strerror(int err_no)
 LOCAL void errno_logln(const char *s)
 {
    const char *p;
-   char buf[512];
-   
+   char *buf;
+
    p = my_strerror(errno);
    
    if (s[0] != EOS)
    {
-      sprintf(buf, "%s: %s", s, p);
-      p = buf;
+      buf = um_strdup_printf("%s: %s", s, p);
    }
-   logln(p);
-   show_logln_message(p);
+   else
+   {
+      buf = strdup(p);
+   }
+   logln(buf);
+   show_logln_message(buf);
+   free(buf);
 }
 
 
@@ -313,12 +323,13 @@ GLOBAL void logln(const char *s)
 GLOBAL void vloglnf(const char *fmt, ...)
 {
    va_list ap;
-   char s[512];
+   char *s;
 
    va_start(ap, fmt);
-   vsprintf(s, fmt, ap);
+   s = um_strdup_vprintf(fmt, ap);
    va_end(ap);
    logln(s);
+   free(s);
 }
 
 
@@ -451,10 +462,11 @@ GLOBAL void logln_interrupted(void)
 
 GLOBAL void logln_file_generated(const char *kind, const char *filename, const char *suff)
 {
-   char m[512];
-   
-   sprintf(m, _("%s written to %s%s"), kind, filename, suff);
+   char *m;
+
+   m = um_strdup_printf(_("%s written to %s%s"), kind, filename, suff);
    logln(m);
+   free(m);
 }
 
 
@@ -837,9 +849,9 @@ GLOBAL void error_mkdir(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void error_malloc_failed(void)
+GLOBAL void error_malloc_failed(size_t size)
 {
-   fatal_message(_("memory allocation failed"));
+   fatal_message(_("failed to allocate %lu bytes"), (unsigned long) size);
 }
 
 
@@ -1509,13 +1521,14 @@ GLOBAL void error_node6_not_allowed(void)
 
 GLOBAL void warning_long_destline(const char *s, const _UWORD lnr, const int ll)
 {
-   char m[512];
+   char *m;
 
    if (!bNoWarnings && !bNoWarningsLines)
    {
-      sprintf(m, _("Warning: %s %u: overfull line: %d"), s, lnr, ll);
+      m = um_strdup_printf(_("Warning: %s %lu: overfull line: %d"), s, lnr, ll);
       logln(m);
       show_logln_message(m);
+      free(m);
    }
    warning_counter++;
 }
@@ -1558,13 +1571,14 @@ GLOBAL void note_short_sourceline(const char *s)
 
 GLOBAL void warning_short_destline(const char *s, _UWORD lnr, const int ll, const char *w)
 {
-   char m[512];
+   char *m;
 
    if (!bNoWarnings && !bNoWarningsLines)
    {
-      sprintf(m, _("Warning: %s %u: too short line: %d: %s"), s, lnr, ll, w);
+      m = um_strdup_printf(_("Warning: %s %u: too short line: %d: %s"), s, lnr, ll, w);
       logln(m);
       show_logln_message(m);
+      free(m);
    }
    warning_counter++;
 }

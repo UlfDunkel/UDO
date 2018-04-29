@@ -55,7 +55,8 @@
 GLOBAL _BOOL set_html_navigation(void);
 
    /* sets the variable html_doctype */
-GLOBAL void set_html_doctype(void);
+GLOBAL void set_html_doctype(int type);
+GLOBAL void c_set_html_doctype(void);
 
    /* sets HTML header date */
 GLOBAL void set_html_header_date(void);

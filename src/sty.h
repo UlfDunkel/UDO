@@ -72,12 +72,10 @@ typedef struct _styleflag                 /* various style control flags */
    _BOOL   twriter;                     /* (!T)...(!t) */
    _BOOL   insert;                      /* (!INS)...(!ins) */
    _BOOL   deleted;                     /* (!DEL)...(!del) */
-   _BOOL   colour;                      /* (!<colorname>)...(!coloff) */
+   _BOOL   color;                       /* (!<colorname>)...(!coloff) */
    _BOOL   sup;                         /* (!SUP)...(!sup) */
    _BOOL   sub;                         /* (!SUB)...(!sub) */
 }  STYLEFLAG;
-
-#endif /* UDO_STY_H */
 
 
 
@@ -89,7 +87,11 @@ typedef struct _styleflag                 /* various style control flags */
 *
 ******************************************|************************************/
 
-#define STYLELEN         4                 /* length of placeholder string */
+/*
+ * length of internal placeholder string
+ * may not exceed CMD_STYLELEN or you get buffer overflows at least in c_styles()
+ */
+#define STYLELEN         4
 
 #define FNOTEFILE  "FOOTNOTE."
 
@@ -118,14 +120,12 @@ typedef struct _styleflag                 /* various style control flags */
 /* don't use            13                 -> CR (Carriage Return) */
 #define C_TWRITER_ON    14
 #define C_TWRITER_OFF   15
-                                          /* New in V6.5.9 [NHz] */
 #define C_INSERT_ON     16
 #define C_INSERT_OFF    17
 #define C_DELETED_ON    18
 #define C_DELETED_OFF   19
-                                          /* New in V6.5.9 [NHz] */
 #define C_COLOR_BLACK   20
-/* don't use            21                -> ??? */
+/* don't use            21                -> Vertical space */
 #define C_COLOR_SILVER  22
 #define C_COLOR_GRAY    23
 #define C_COLOR_WHITE   24
@@ -165,7 +165,7 @@ typedef struct _styleflag                 /* various style control flags */
 *
 d******************************************|************************************/
 
-GLOBAL STYLEFLAG   styleflag;             /* Flags fuer die Stilpaare */
+GLOBAL STYLEFLAG   styleflag;             /* flags of currently active styles */
 
 GLOBAL char        STYLEMAGIC[8];
 GLOBAL char        BOLD_ON[8],
@@ -174,15 +174,11 @@ GLOBAL char        FOOT_ON[8],
                    FOOT_OFF[8];
 GLOBAL char        ITALIC_ON[8],
                    ITALIC_OFF[8];
-GLOBAL char        TWRITER_ON[8],
-                   TWRITER_OFF[8];
-GLOBAL char        UNDER_ON[8],
-                   UNDER_OFF[8];
-GLOBAL char        INSERT_ON[8],          /* New in V6.5.9 [NHz] */
-                   INSERT_OFF[8];
-GLOBAL char        DELETED_ON[8],
-                   DELETED_OFF[8];
-GLOBAL char        COLOR_BLACK[8],        /* New in V6.5.9 [NHz] */
+GLOBAL char        TWRITER_ON[8], TWRITER_OFF[8];
+GLOBAL char        UNDER_ON[8], UNDER_OFF[8];
+GLOBAL char        INSERT_ON[8], INSERT_OFF[8];
+GLOBAL char        DELETED_ON[8], DELETED_OFF[8];
+GLOBAL char        COLOR_BLACK[8],
                    COLOR_SILVER[8],
                    COLOR_GRAY[8],
                    COLOR_WHITE[8],
@@ -199,7 +195,7 @@ GLOBAL char        COLOR_BLACK[8],        /* New in V6.5.9 [NHz] */
                    COLOR_TEAL[8],
                    COLOR_AQUA[8],
                    COLOR_OFF[8];
-GLOBAL char        SUP_ON[8],             /* New in V6.5.20 [GS] */
+GLOBAL char        SUP_ON[8],
                    SUP_OFF[8];
 GLOBAL char        SUB_ON[8],
                    SUB_OFF[8];
@@ -236,4 +232,4 @@ GLOBAL void check_styles_asc_next_line(void);
 GLOBAL void init_module_sty(void);
 
 
-/* +++ EOF +++ */
+#endif /* UDO_STY_H */
