@@ -5790,62 +5790,6 @@ GLOBAL void html_footer(void)
 
 /*******************************************************************************
 *
-*  udofile_adjust_index():
-*     compose filename
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void udofile_adjust_index(void)
-{
-#if HAVE_TMPNAM
-   char   t[512];  /* */
-   
-
-   if (tmpnam(t) != NULL)
-      strcpy(udofile.full, t);
-   else
-      strcpy(udofile.full, "_udoind.tmp");
-
-#else
-   char  *tp;  /* */
-
-
-   tp = NULL;
-
-   if ((tp = getenv("TEMP")) == NULL)
-   {
-      if ((tp = getenv("TMP")) == NULL)
-         tp = getenv("TMPDIR");
-   }
-
-   if (tp != NULL)
-   {
-      fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
-      strcpy(udofile.driv, tmp_driv);
-      strcpy(udofile.path, tmp_path);
-   }
-   else
-   {
-      strcpy(udofile.driv, outfile.driv);
-      strcpy(udofile.path, outfile.path);
-   }
-
-   strcpy(udofile.name, "_udoind");
-   strcpy(udofile.suff, ".tmp");
-
-   sprintf(udofile.full, "%s%s%s%s", udofile.driv, udofile.path, udofile.name, udofile.suff);
-#endif
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  comp_index_html():
 *     Compares two index entries.
 *
@@ -5942,9 +5886,7 @@ GLOBAL _BOOL save_html_index(void)
    if (num_index == 0)                    /* index file will not be created */
       return FALSE;
 
-   udofile_adjust_index();                /* create temp. file name */
-
-   uif = myFwopen(udofile.full, TOASC);   /* create temporary index file */
+   uif = udofile_tmpname("_udoind");      /* create temp. file name */
 
    if (!uif)                              /* no file pointer */
       return FALSE;
