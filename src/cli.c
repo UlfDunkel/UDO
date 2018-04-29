@@ -306,8 +306,9 @@ GLOBAL void show_status_pass(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_udo2udo(const char *s)
+GLOBAL void show_status_udo2udo(FILE_LINENO Pass2Lines, const char *s)
 {
+   UNUSED(Pass2Lines);
    if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "Reading %s\n", s);
 }
@@ -330,8 +331,9 @@ GLOBAL void show_status_udo2udo(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_node(const char *numbers)
+GLOBAL void show_status_node(const char *numbers, const char *name)
 {
+   UNUSED(name);
    if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "%s", numbers);
 }
@@ -353,8 +355,9 @@ GLOBAL void show_status_node(const char *numbers)
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_file_1(const char *s)
+GLOBAL void show_status_file_1(FILE_LINENO Pass1Lines, const char *s)
 {
+   UNUSED(Pass1Lines);
    UNUSED(s);
 }
 
@@ -376,8 +379,9 @@ GLOBAL void show_status_file_1(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_file_2(const char *s)
+GLOBAL void show_status_file_2(FILE_LINENO Pass2Lines, const char *s)
 {
+   UNUSED(Pass2Lines);
    if ((bOutOpened || bTestmode) && !bBeQuiet)
       fprintf(stdout, "(%s) ", s);
 }
@@ -400,7 +404,7 @@ GLOBAL void show_status_file_2(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void show_status_percent(_ULONG Pass1Lines, _ULONG Pass2Lines)
+GLOBAL void show_status_percent(FILE_LINENO Pass1Lines, FILE_LINENO Pass2Lines)
 {
    int percent;
 
@@ -623,42 +627,6 @@ GLOBAL void multitasking_interrupt(void)
 ******************************************|************************************/
 
 GLOBAL void unregistered_copyright(void)
-{
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  cursor_working():
-*     dummy function
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void cursor_working(void)
-{
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  cursor_active():
-*     dummy function
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void cursor_active(void)
 {
 }
 

@@ -7226,7 +7226,7 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
    if (bVerbose)
    {
       sprintf(sInfMsg, "[%s] ", numbers);
-      show_status_node(sInfMsg);
+      show_status_node(sInfMsg, name);
    }
    
    if (no_numbers || invisible)

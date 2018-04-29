@@ -39,28 +39,28 @@
 *
 *  2010:
 *    fd  Feb 22: - header adjusted
-                 - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
-/*   ######################################################################
+/* ######################################################################
    # Variablen
    ######################################################################   */
 GLOBAL _BOOL no_stderr_output;
 
 
-/*   ######################################################################
+/* ######################################################################
    # Funktionen
    ######################################################################   */
 
 GLOBAL void show_status_info(const char *s);
 GLOBAL void show_status_loginfo(const char *s);
-GLOBAL void show_status_node(const char *s);
-GLOBAL void show_status_file_1(const char *s);
-GLOBAL void show_status_file_2(const char *s);
-GLOBAL void show_status_percent (_ULONG Pass1Lines, _ULONG Pass2Lines );
+GLOBAL void show_status_node(const char *numbers, const char *name);
+GLOBAL void show_status_file_1(FILE_LINENO Pass1Lines, const char *s);
+GLOBAL void show_status_file_2(FILE_LINENO Pass2Lines, const char *s);
+GLOBAL void show_status_percent(FILE_LINENO Pass1Lines, FILE_LINENO Pass2Lines);
 GLOBAL void show_status_pass(const char *s);
-GLOBAL void show_status_udo2udo(const char *s);
+GLOBAL void show_status_udo2udo(FILE_LINENO Pass2Lines, const char *s);
 GLOBAL void show_status_errors(const char *s);
 
 GLOBAL void show_logln_message(const char *s);
@@ -73,9 +73,4 @@ GLOBAL void warning_err_idxfile(void);
 GLOBAL void warning_err_destination(void);
 GLOBAL void multitasking_interrupt(void);
 GLOBAL void unregistered_copyright(void);
-GLOBAL void cursor_working(void);
-GLOBAL void cursor_active(void);
 GLOBAL _BOOL break_action(void);
-
-
-/* +++ EOF +++ */

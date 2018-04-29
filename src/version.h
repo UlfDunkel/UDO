@@ -108,7 +108,6 @@
 
 #define USE_HTML_FOLDERS     0            /* Ordnerstruktur erzeugen?       */
 #define USE_OLD_BUILD_FILE   1            /* build_search_file() benutzen?  */
-#define USE_MYTEXTFILE       0            /* Eigene Dateiroutinen benutzen? */
 
 
    /* --- Debugging-Flags --- */

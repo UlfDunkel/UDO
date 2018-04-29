@@ -43,31 +43,29 @@
 ******************************************|************************************/
 
 #ifndef __UDOFILE__
-#define   __UDOFILE__
+#define __UDOFILE__
 
 #include "version.h"
 #include "udo_type.h"
 
-/*   ############################################################
+/* ############################################################
    # Typen
    ############################################################   */
 typedef struct _mytextfile
 {
    FILE   *file;
-   fpos_t   filelen;
    char   *buffer;
-   char   *bufptr;
-   char   *bufend;
-}   MYTEXTFILE;
+}  MYTEXTFILE;
 
-
-/*   ############################################################
+/* ############################################################
    # Globale Routinen
    ############################################################   */
 
+GLOBAL int uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
+
 GLOBAL MYTEXTFILE *myTextOpen ( const char *filename );
-GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf );
-GLOBAL int myTextClose ( MYTEXTFILE *tf );
+GLOBAL _BOOL myTextGetline ( char *string, size_t n, MYTEXTFILE *tf );
+GLOBAL _BOOL myTextClose ( MYTEXTFILE *tf );
 
 
 #ifndef __MACOS__
@@ -79,19 +77,16 @@ GLOBAL void fsplit( const char *sour, char *destDrive, char *destFolders, char *
 GLOBAL FILE * myFwopen ( const char *filename, const int filetype );
 GLOBAL FILE * myFwbopen ( const char *filename, const int filetype );
 
-GLOBAL MYFILE *my_fopen ( const char *filename, const char *mode );
-GLOBAL _BOOL my_fclose ( MYFILE *myfile );
-
 GLOBAL void path_adjust_separator(char *s);
 
 
 #if USE_HTML_FOLDERS
 
-GLOBAL _BOOL my_mkdir(char *s);
+GLOBAL _BOOL my_mkdir(const char *s);
 
 #endif /* USE_HTML_FOLDERS */
 
-/*   ##############################################################
+/* ##############################################################
    # MO: Funktion zum Setzen von Dateityp und -creator.
    # Uebergeben werden die von UDO definierten Kennungen fuer die
    # verschiedenen Dateiformate.
@@ -105,7 +100,3 @@ extern void SetFileType( const char *fileName, int fileKind);
 
 
 #endif /* __UDOFILE__ */
-
-
-/* +++ EOF +++ */
-

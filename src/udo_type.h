@@ -45,7 +45,7 @@
 *  2010:
 *    fd  Jan 23: - converted all German umlauts in comments into plain ASCII
 *                - file tidied up
-*                - SHOW_VARAIABLE -> SHOW_VAR
+*                - SHOW_VARIABLE -> SHOW_VAR
 *    fd  Feb 19: LANG adjusted
 *    fd  May 19: new: LANG.degree
 *  2013:
@@ -98,11 +98,26 @@
 *
 ******************************************|************************************/
 
+typedef int FILE_ID;
+typedef _ULONG FILE_LINENO;
+
+typedef struct {
+	FILE_ID id;
+	FILE_LINENO line;
+} FILE_LOCATION;
+
+typedef struct _filelist FILELIST;
+struct _filelist {
+	FILELIST *next;
+	FILE_ID id;
+	char name[1];
+};
+
 typedef struct _passflags                 /* several flags for pass1() and pass2() */
 {
    _BOOL   inside_apx;                  /* !begin_appendix aktiv? */
    int       ignore_line;                 /* Zeile nicht bearbeiten? */
-   int       env;                         /* ENV_NONE, ENV_RAW etc. */   /*r6pl2*/
+   int       env;                         /* ENV_NONE, ENV_RAW etc. */
    _BOOL   env1st;
 }  PASSFLAGS;
 
@@ -128,7 +143,7 @@ typedef struct _lang                      /* language strings */
    char   exit[64];                       /* Beenden (WinHelp) */
    char   unknown[64];                    /* Unbekannt, Unknown etc. */
    char   update[64];                     /* Last updated on (HTML) */
-   char   lcid[64];                       /* LCID fuer WinHelp4 */
+   char   lcid[64];                       /* LCID fuer WinHelp4 & HtmlHelp */
    char   html_home[64];                  /* "Home" */
    char   html_prev[64];                  /* "Zurueck" */
    char   html_next[64];                  /* "Weiter" */
@@ -137,13 +152,12 @@ typedef struct _lang                      /* language strings */
    char   translator[64];                 /* "Translator" */
    char   distributor[64];                /* "Distributor" */
    char   degree[64];                     /* "degree" */
-   char   copyright[64];                  /* "Distributor" */
+   char   copyright[64];                  /* "Copyright" */
 
    /* --- these are filled in by UDO! --- */
    
    char   today[64];                      /* 28. Februar 1995 */
    char   short_today[64];                /* 28.02.1995 */
-   
 }  LANG;
 
 
@@ -155,7 +169,6 @@ typedef struct _myfile                    /* file information */
    char   path[MYFILE_PATH_LEN + 1];      /* Pfad */
    char   name[MYFILE_NAME_LEN + 1];      /* Dateiname */
    char   suff[MYFILE_SUFF_LEN + 1];      /* Endung */
-   int    opened;                         /* Datei geoeffnet? */
 }  MYFILE;
 
                                           /* New in V6.5.19 */
@@ -166,6 +179,3 @@ typedef struct _show_variable             /* */
 
 
 #endif   /* UDO_TYPE_H */
-
-/* +++ EOF +++ */
-

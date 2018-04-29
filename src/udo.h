@@ -139,7 +139,6 @@ GLOBAL int         iDocLinedrawSize;      /* Fontgroesse fuer linedraw-Umgebung 
 
 GLOBAL char        sCurrFileName[512];    /* Gerade aktive Datei */
 GLOBAL _UWORD       uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
-GLOBAL _UWORD       uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
 
 GLOBAL _BOOL     b1stQuote;             /* flag for "real" double quotation marks */
 GLOBAL _BOOL     b1stApost;             /* flag for 'real' single quotation marks */

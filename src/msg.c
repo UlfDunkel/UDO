@@ -72,6 +72,7 @@
 #include "toc.h"
 #include "gui.h"
 #include "udomem.h"
+#include "file.h"
 
 #include "export.h"
 #include "msg.h"

@@ -12363,7 +12363,7 @@ char           *datei)           /* */
 
    if (bVerbose)
    {
-      show_status_file_1(tmp_datei);
+      show_status_file_1(lPass1Lines, tmp_datei);
    }
 
    iFilesOpened++;
@@ -12373,16 +12373,11 @@ char           *datei)           /* */
    strcpy(sCurrFileName, tmp_datei);
    uiCurrFileLine = 0;
 
-   while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
+   while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
-/*                                           Here we need to add possible splitted line numbers
-      uiFileLines[iFilesOpened]++;           v6.5.5 [vj]
-*/
-      
+      /* Here we need to add possible splitted line numbers */
       uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
-
       uiCurrFileLine = uiFileLines[iFilesOpened];
-
       lPass1Lines++;
 
       if (break_action())
@@ -12393,18 +12388,8 @@ char           *datei)           /* */
          return FALSE;
       }
 
-#if 0
-      /* Was passiert bei den rekursiven Aufrufen mit goto? */
-      if (zeile[0]=='#')
-      {
-         goto PASS1_READ_NEXT_LINE;
-      }
-#endif
-
-
       len = strlen(zeile);
-      
-      while ( (len > 0) && (((_UBYTE)zeile[len - 1]) <= 32) )
+      while (len > 0 && (((_UBYTE)zeile[len - 1]) <= 32))
       {
          zeile[len - 1] = EOS;
          len--;
@@ -13760,7 +13745,7 @@ char           *datei)            /* */
    
    if (bVerbose)
    {
-      show_status_file_2(tmp_datei);
+      show_status_file_2(lPass2Lines, tmp_datei);
    }
 
    iFilesOpened++;
@@ -13786,11 +13771,9 @@ char           *datei)            /* */
 
    save_upr_entry_infile(tmp_datei, iFilesOpened);
 
-   while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
+   while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
-                                          /* v6.5.5 [vj] */
       uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
-      
       uiCurrFileLine = uiFileLines[iFilesOpened];
       lPass2Lines++;
       
@@ -15234,7 +15217,7 @@ char           *datei)                       /* */
 
    if (bVerbose)
    {
-      show_status_udo2udo(tmp_datei);
+      show_status_udo2udo(lPass2Lines, tmp_datei);
    }
 
    iFilesOpened++;
@@ -16011,13 +15994,9 @@ LOCAL void init_modules(void)
 
 LOCAL void exit_modules(void)
 {
-   cursor_working();
-
    exit_module_toc();                     /* 6.3.19[vj] for speedup there isn't done free(), um_exit() will do this */
    exit_module_par();                     /* 6.3.19[vj] for speedup there isn't done free(), um_exit() will do this */
    exit_module_tp();                      /* 6.3.19[vj] Needs to be checked, if um_exit() can do a faster cleanup here */
-
-   cursor_active();
 }
 
 
@@ -16129,9 +16108,6 @@ const char  *date_string)  /* date in __DATE__ format */
 GLOBAL void init_vars(void)
 {
    register int   i;  /* counter */
-
-
-   cursor_working();                      /* UI: busy */
 
 
    /*   -------------------------------------------------- */
@@ -16296,8 +16272,6 @@ GLOBAL void init_vars(void)
 
    uses_udolink = FALSE;
    uses_toplink = FALSE;
-
-   cursor_active();
 
    /*   ---------------------------------------------------- */
    /*   Variablen fuer Compile-Zeit und Datum initialisieren */
