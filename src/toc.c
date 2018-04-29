@@ -13487,7 +13487,7 @@ GLOBAL void set_chapter_image(void)
 
    if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
    {
-      replace_char(s, "\\", "/");
+      replace_char(s, '\\', '/');
    }
 
    ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
@@ -13546,7 +13546,7 @@ GLOBAL void set_chapter_icon(void)
 
    if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
    {
-      replace_char(s, "\\", "/");
+      replace_char(s, '\\', '/');
    }
 
    ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
@@ -13622,7 +13622,7 @@ GLOBAL void set_chapter_icon_active(void)
 
    if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
    {
-      replace_char(s, "\\", "/");
+      replace_char(s, '\\', '/');
    }
 
    ptr = (char *)malloc(1 + strlen(s) * sizeof(char));

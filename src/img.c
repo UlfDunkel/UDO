@@ -836,7 +836,7 @@ const _BOOL   visible)        /* */
          outln("");
          outln("\\newdimen\\grwd \\newdimen\\grht");
          
-         replace_char(datei, "\\", "/");
+         replace_char(datei, '\\', '/');
          
          sprintf(n, "\\centerline{\\hbox to %.2f mm{\\vbox to %.2f mm{\\vfil\\special{graphic img %s}}\\hfil}}",
             tex_wmm,
@@ -865,7 +865,7 @@ const _BOOL   visible)        /* */
       if (*datei == ':')
          datei++;
          
-      replace_char(datei, ":", "\\");     /* MO: solange HypC nicht existiert */
+      replace_char(datei, ':', '\\');     /* MO: solange HypC nicht existiert */
 #endif
 
       img_cw = scanwidth / 8;
@@ -982,9 +982,9 @@ const int      border)            /* */
    if (*datei == ':')
       datei++;
    
-   replace_char(datei, ":", "/");
+   replace_char(datei, ':', '/');
 #else
-   replace_char(datei, "\\", "/");
+   replace_char(datei, '\\', '/');
 #endif
 
    inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
@@ -1318,7 +1318,7 @@ const _BOOL   visible)
       
       if (iTexVersion == TEX_EMTEX || iTexVersion == TEX_MIKTEX)
       {   
-         replace_char(datei, "\\", "/");
+         replace_char(datei, '\\', '/');
          outln("");
 
          uc4ToInt(bmpheader.biWidth,  &width);
@@ -1375,7 +1375,7 @@ const _BOOL   visible)
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      replace_char(datei, "\\", "/");
+      replace_char(datei, '\\', '/');
 
                                           /* PL12: Bilder umgebungsabhaengig positionieren */
       alignOn[0]  = EOS;
@@ -1517,7 +1517,7 @@ const _BOOL   visible)        /* */
          width  = mspheader.msp_width_hi  * 256 + mspheader.msp_width_lo;
          height = mspheader.msp_height_hi * 256 + mspheader.msp_height_lo;
 
-         replace_char(datei, "\\", "/");
+         replace_char(datei, '\\', '/');
          outln("");
          
 #if IMAGEDEBUG
@@ -1649,7 +1649,7 @@ const _BOOL   visible)        /* */
             return(FALSE);
          }
 
-         replace_char(datei, "\\", "/");
+         replace_char(datei, '\\', '/');
          outln("");
 
          left  = pcxheader.pcx_left_hi  * 256 + pcxheader.pcx_left_lo;
@@ -1756,9 +1756,9 @@ const _BOOL   visible)        /* */
    
 #if __MACOS__
    if (*datei == ':') datei++;
-      replace_char(datei, ":", "/");
+      replace_char(datei, ':', '/');
 #else
-   replace_char(datei, "\\", "/");
+   replace_char(datei, '\\', '/');
 #endif
 
    switch (desttype)
@@ -1910,9 +1910,9 @@ const _BOOL   visible)        /* */
 
 #if __MACOS__
    if (*datei == ':') datei++;
-      replace_char(datei, ":", "/");
+      replace_char(datei, ':', '/');
 #else
-   replace_char(datei, "\\", "/");
+   replace_char(datei, '\\', '/');
 #endif
 
    outln("\\mbox{");

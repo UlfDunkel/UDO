@@ -39,33 +39,31 @@
 *
 *  2010:
 *    fd  Feb 22: - header adjusted
-                 - void, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
-/*   ############################################################
+/* ############################################################
    # Typen
    ############################################################   */
 
-/* New in r6pl15 [NHz] */
 struct size_brackets
 {
    size_t format;
    size_t content;
 };
 
-/*   ############################################################
+/* ############################################################
    # Variablen
    ############################################################   */
 
-/*   ############################################################
+/* ############################################################
    # Funktionen
    ############################################################   */
 
 GLOBAL char *chrcat (char *dest, const char c);
 GLOBAL char *strinsert ( char *string, const char *insert);
 
-GLOBAL void replace_char ( char *string, const char *replace, const char *by );
+GLOBAL void replace_char ( char *string, const char replace, const char by );
 
 GLOBAL int replace_once ( char *source, const char *replace, const char *by);
 GLOBAL int replace_last ( char *source, const char *replace, const char *by);
@@ -97,7 +95,6 @@ GLOBAL void tabs2spaces (char *s, const int tw);
 GLOBAL char *itoroman ( int value, char *string );
 GLOBAL void my_strupr ( char *string );
 GLOBAL void my_strlwr ( char *string );
-GLOBAL void str_din_5007_1 ( char *string );   /* New V6.5.20 [gs] */
 
 GLOBAL _UWORD str_flatten(char *zeile);
 GLOBAL int str_UTF_sort_cmp(char *s1, char *s2);
@@ -113,6 +110,3 @@ GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *plac
 GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place);
 
 GLOBAL char *um_physical_strcpy(const char *src, size_t morealloc, const char *place);
-
-
-/* +++ EOF +++ */

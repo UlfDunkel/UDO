@@ -802,7 +802,7 @@ GLOBAL void set_html_bgsound(void)
       del_whitespaces(loop);
    }
 
-   replace_char(filename, "\\", "/");
+   replace_char(filename, '\\', '/');
 
    if (loop[0] == EOS)
       sprintf(dest, "\"%s\" loop=\"infinitive\"", filename);
@@ -863,7 +863,7 @@ GLOBAL void set_html_backimage(void)
 /* strncat(dest, sTemp, MAX_IMAGE_LEN); */
 
                                           /* Hier muessen immer / benutzt werden! */
-   replace_char(dest, "\\", "/");
+   replace_char(dest, '\\', '/');
 }
 
 
@@ -1036,7 +1036,7 @@ GLOBAL void set_html_style(void)
       styleptr->href[lang] = EOS;
 
                                           /* always use / characters here! */
-      replace_char(styleptr->href, "\\", "/");
+      replace_char(styleptr->href, '\\', '/');
    }
    else
       strcpy(styleptr->href, token[1]);
@@ -1142,7 +1142,7 @@ GLOBAL void set_html_script(void)
       scriptptr->href[lang] = EOS;
 
                                           /* always use / characters here! */
-      replace_char(scriptptr->href, "\\", "/");
+      replace_char(scriptptr->href, '\\', '/');
    }
    else
       strcpy(scriptptr->href, token[1]);
@@ -1214,7 +1214,7 @@ GLOBAL void set_html_favicon(void)
 /* strncat(dest, sTemp, MAX_IMAGE_LEN); */
 
                                           /* Hier muessen immer / benutzt werden! */
-   replace_char(dest, "\\", "/");
+   replace_char(dest, '\\', '/');
 }
 
 
@@ -1524,7 +1524,7 @@ GLOBAL void set_html_modern_backimage(void)
    }
 
                                           /* Hier muessen immer / benutzt werden! */
-   replace_char(html_modern_backimage, "\\", "/");
+   replace_char(html_modern_backimage, '\\', '/');
 }
 
 
@@ -1729,7 +1729,7 @@ GLOBAL void set_html_frames_backimage(void)
    }
 
                                           /* Hier muessen immer / benutzt werden! */
-   replace_char(html_frames_backimage, "\\", "/");
+   replace_char(html_frames_backimage, '\\', '/');
 }
 
 

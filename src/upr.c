@@ -355,10 +355,10 @@ GLOBAL void save_upr_entry_index(const int level, const char *filename, const ch
    if (bUseUPRfile && bUPRopened)
    {
       buf = strdup(title);
-      replace_char(buf, TILDE_S, "~");
-      replace_char(buf, NBSP_S, "~");
-      replace_char(buf, INDENT_S, " ");
-      replace_char(buf, DIVIS_S, "-");
+      replace_char(buf, TILDE_C, '~');
+      replace_char(buf, NBSP_C, '~');
+      replace_char(buf, INDENT_C, ' ');
+      replace_char(buf, DIVIS_C, '-');
       fprintf(fUPRfile, "index\t%d\t%s\t%lu\t%s\n", level, filename, line, buf);
       free(buf);
    }

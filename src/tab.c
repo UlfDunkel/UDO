@@ -484,7 +484,7 @@ char       *s)    /* */
       return TRUE;
    }
 
-   replace_char(s, "\t", " ");            /* Nun aus der Zeile die Felder auslesen */
+   replace_char(s, '\t', ' ');            /* Nun aus der Zeile die Felder auslesen */
    qdelete_all(s, "!-", 2);
 
    recode_udo(s);                         /* these have never ever been handled in UDO tables before! */

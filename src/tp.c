@@ -577,7 +577,7 @@ GLOBAL _BOOL set_docinfo(void)
             
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
-               replace_char(titdat.authorimage, "\\", "/");    /*r6pl4*/
+               replace_char(titdat.authorimage, '\\', '/');
                                           /* r6pl9: Ausmasse nicht ermitteln -> da */
                                           /* ueber c_html_image_output() ausgegeben wird  */
             }
@@ -617,7 +617,7 @@ GLOBAL _BOOL set_docinfo(void)
             
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
-               replace_char(titdat.authoricon, "\\", "/");
+               replace_char(titdat.authoricon, '\\', '/');
                
                if (my_stricmp(sDocImgSuffix, ".gif") == 0)
                {                          /* r6pl9: Ausmasse ermitteln */
@@ -668,7 +668,7 @@ GLOBAL _BOOL set_docinfo(void)
             
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
-               replace_char(titdat.authoricon_active, "\\", "/");
+               replace_char(titdat.authoricon_active, '\\', '/');
                
                if (my_stricmp(sDocImgSuffix, ".gif") == 0)
                {                          /* r6pl9: Ausmasse ermitteln */
@@ -716,7 +716,7 @@ GLOBAL _BOOL set_docinfo(void)
             
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
-               replace_char(titdat.programimage, "\\", "/");   /*r6pl4*/
+               replace_char(titdat.programimage, '\\', '/');
                                           /* r6pl9: Ausmasse nicht ermitteln -> da */
                                           /* ueber c_html_image_output() ausgegeben wird  */
             }

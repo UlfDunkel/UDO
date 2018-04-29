@@ -1792,7 +1792,7 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
       case TOMHH:
          strcpy(tmp_suff, sDocImgSuffix);
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-         replace_char(Param[1], "\\", "/");
+         replace_char(Param[1], '\\', '/');
          
          strcpy(s_entry, Param[3]);
          c_tilde(s_entry);
@@ -1846,7 +1846,7 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
       case TOAQV:
          strcpy(tmp_suff, ".bmp");
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-         replace_char(Param[1], "\\", "/");
+         replace_char(Param[1], '\\', '/');
          
          strcpy(s_entry, Param[3]);
          c_tilde(s_entry);
@@ -3284,9 +3284,9 @@ LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro)
             sprintf(sImgSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         replace_char(Param[1], "\\", "/");
+         replace_char(Param[1], '\\', '/');
          
-         if (no_images)                   /*r6pl2*/
+         if (no_images)
          {
             s_entry = strdup(Param[2]);
          }
@@ -3310,7 +3310,7 @@ LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro)
       case TOHPH:
          strcpy(tmp_suff, sDocImgSuffix);
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-         replace_char(Param[1], "\\", "/");
+         replace_char(Param[1], '\\', '/');
          if (no_images)
          {
             s_entry = strdup(Param[2]);
@@ -3328,7 +3328,7 @@ LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro)
       case TOAQV:
          strcpy(tmp_suff, ".bmp");
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-         replace_char(Param[1], "\\", "/");
+         replace_char(Param[1], '\\', '/');
          if (no_images)
          {
             s_entry = strdup(Param[2]);

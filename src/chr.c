@@ -1100,12 +1100,12 @@ char  *s)  /* ^ string */
       return;                             /* no recoding! */
    
 #ifdef __TOS__
-   replace_char(s, "\341", "\236");       /* from DOS(?):0xE1 to TOS:0x9E */
+   replace_char(s, '\341', '\236');       /* from DOS(?):0xE1 to TOS:0x9E */
 #else
 # if !defined(__MSDOS__) && !defined(__MSDOS850__)
 
    if (desttype != TOSTG || desttype == TOPCH)
-      replace_char(s, "\236", "\341");    /* from TOS:0x9E to DOS(?):0xE1 */
+      replace_char(s, '\236', '\341');    /* from TOS:0x9E to DOS(?):0xE1 */
 # else
    UNUSED(s);
 # endif
@@ -1784,7 +1784,7 @@ GLOBAL void indent2space(
 char  *s)  /* ^ string */
 {
 #if (INDENT_S_LEN==1)
-   replace_char(s, INDENT_S, " ");
+   replace_char(s, INDENT_C, ' ');
 #else
    qreplace_all(s, INDENT_S, INDENT_S_LEN, " ", 1);
 #endif
@@ -1812,7 +1812,7 @@ GLOBAL void space2indent(
 char  *s)  /* ^ string */
 {
 #if (INDENT_S_LEN==1)
-   replace_char(s, " ", INDENT_S);
+   replace_char(s, ' ', INDENT_C);
 #else
    qreplace_all(s, " ", 1, INDENT_S, INDENT_S_LEN);
 #endif
@@ -1840,7 +1840,7 @@ GLOBAL void nbsp2space(
 char  *s)  /* ^ string */
 {
 #if (NBSP_S_LEN==1)
-   replace_char(s, NBSP_S, " ");
+   replace_char(s, NBSP_C, ' ');
 #else
    qreplace_all(s, NBSP_S, NBSP_S_LEN, " ", 1);
 #endif
@@ -1868,7 +1868,7 @@ GLOBAL void space2nbsp(
 char  *s)  /* ^ string */
 {
 #if (NBSP_S_LEN==1)
-   replace_char(s, " ", NBSP_S);
+   replace_char(s, ' ', NBSP_C);
 #else
    qreplace_all(s, " ", 1, NBSP_S, NBSP_S_LEN);
 #endif
@@ -2628,7 +2628,7 @@ char  *s)  /* ^ string */
                                           /* Tilde ~ */
    qreplace_all(s, "!~", 2, TILDE_S, TILDE_S_LEN);
 #if (NBSP_S_LEN==1)
-   replace_char(s, "~", NBSP_S);          /* non breaking space */
+   replace_char(s, '~', NBSP_C);          /* non breaking space */
 #else
                                           /* non breaking space */
    qreplace_all(s, "~", 1, NBSP_S, NBSP_S_LEN);
@@ -2670,7 +2670,7 @@ char  *s)  /* ^ string */
       
    default:
 #if (TILDE_S_LEN==1)
-      replace_char(s, TILDE_S, "~");
+      replace_char(s, TILDE_C, '~');
 #else
       qreplace_all(s, TILDE_S, TILDE_S_LEN, "~", 1);
 #endif
@@ -2700,7 +2700,7 @@ char  *s)  /* ^ string */
    case TOTEX:
    case TOPDL:
 #if (NBSP_S_LEN==1)
-      replace_char(s, NBSP_S, "~");
+      replace_char(s, NBSP_C, '~');
 #else
       qreplace_all(s, NBSP_S, NBSP_S_LEN, "~", 1);
 #endif

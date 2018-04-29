@@ -330,7 +330,7 @@ GLOBAL char *strinsert(char *string, const char *insert)
 *
 ******************************************|************************************/
 
-GLOBAL void replace_char(char *string, const char *search, const char *replace)
+GLOBAL void replace_char(char *string, const char search, const char replace)
 {
    char *ptr;
    
@@ -338,8 +338,8 @@ GLOBAL void replace_char(char *string, const char *search, const char *replace)
 
    while (*ptr != EOS)                    /* check whole edit string */
    {
-      if (*ptr == *search)                /* character found! */
-        *ptr = *replace;                  /* replace it */
+      if (*ptr == search)                 /* character found! */
+        *ptr = replace;                   /* replace it */
       ptr++;
    }
 }
@@ -1431,7 +1431,7 @@ char  *zeile)  /* ^ string */
       memset(sbuf,0,LINELEN);
       memset(cbuf,0,9);
       
-      for (j = 0; j < strlen(zeile); j++)
+      for (j = 0; zeile[j] != EOS; j++)
       {
          idx = (_UBYTE)zeile[j];           /* get Unicode codepoint */
          found = FALSE;
@@ -1755,7 +1755,7 @@ char       *s2)             /* ^ 2nd string for comparison */
          memset(sbuf,0,LINELEN);
          memset(cbuf,0,9);
       
-         for (j = 0; j < strlen(zeile); j++)
+         for (j = 0; zeile[j] != EOS; j++)
          {
             idx = (_UBYTE)zeile[j];
          
@@ -1938,6 +1938,3 @@ char         *s2)           /* ^ 2nd string for comparison */
 
    return (c1 < c2) ? -1 : 1;
 }
-
-
-/* +++ EOF +++ */

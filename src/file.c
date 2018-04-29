@@ -922,9 +922,9 @@ GLOBAL void path_adjust_separator(
 char  *s)  /* */
 {
 #if USE_SLASH
-   replace_char(s, "\\", "/");
+   replace_char(s, '\\', '/');
 #else
-   replace_char(s, "/", "\\");
+   replace_char(s, '/', '\\');
 #endif
 }
 
