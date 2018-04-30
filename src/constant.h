@@ -208,9 +208,6 @@
 #define MAXSTYLES         65536           /* max. Anzahl an Stylesheets insgesamt / New in V6.5.9 [NHz] */
 #define MAXSCRIPTS        65536           /* max. # of Javascript files */
 #endif
-                        
-#define OFFSET_REF           33           /* ESC/Magic/#+offset/ESC */
-#define MAXREFERENCES       200           /* maximal soviel Referenzen pro Absatz */
 
 #define MAXSILBEN            32           /* max. Silben in einem Wort */
 

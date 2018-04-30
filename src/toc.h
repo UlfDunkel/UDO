@@ -238,13 +238,6 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
 
 
 
-typedef struct _reference                 /* auto-reference placeholders */
-{
-   char   magic[6];                       /* Eine Steuermarke <ESC><0x80+nr> */
-   char   entry[MAX_TOKEN_LEN * 2];       /* ergibt max. 256 Zeichen */
-   
-}  REFERENCE;
-
 #endif /* __UDOTOC__ */
 
 

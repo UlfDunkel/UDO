@@ -177,6 +177,7 @@
 #include "upr.h"
 #include "gui.h"
 #include "debug.h"
+#include "cfg.h"
 #include "udomem.h"
 
 #include "export.h"
@@ -188,12 +189,16 @@
 
 /*******************************************************************************
 *
-*     EXTERNAL REFERENCES
+*     MACRO DEFINITIONS
 *
 ******************************************|************************************/
 
-extern _ULONG   footnote_cnt;              /* UDO.H: footnote counter */
-
+/*
+ * max. references per paragraph,
+ * only limited by encoding in add_placeholder()
+ * (3 * 6 bits = 2 ^ 18)
+ */
+#define MAXREFERENCES       0x40000L
 
 
 
@@ -204,6 +209,7 @@ extern _ULONG   footnote_cnt;              /* UDO.H: footnote counter */
 *
 ******************************************|************************************/
 
+#define TOCL_NONE  0
 #define TOCL_HTM   1                      /* used for use_toc_list_commands */
 #define TOCL_TEX   2                      /* dito */
 
@@ -231,6 +237,49 @@ LOCAL const char  *HTML_LABEL_CONTENTS = "UDOTOC";
 
 /*******************************************************************************
 *
+*     TYPE DEFINITIONS
+*
+******************************************|************************************/
+
+typedef struct _reference                 /* auto-reference placeholders */
+{
+   char   magic[7];                       /* Eine Steuermarke <ESC><0x80+nr> */
+   char   entry[MAX_TOKEN_LEN * 2];       /* ergibt max. 256 Zeichen */
+} REFERENCE;
+
+
+typedef struct   _hmtl_index              /* index output for HTML */
+{
+   int       toc_index;                   /* # of found label for TOC */
+   _BOOL   is_node;                     /* the label is the caption (?) */
+   char      tocname[512];                /* label or node name */
+   char      sortname[512];               /* 'flattened' label or node name */
+   _UWORD     codepoint;                   /* Unicode codepoint for sorting purposes */
+} HTML_INDEX;
+
+typedef struct _tWinMapData
+{
+   char   remOn[16],                      /* */
+          remOff[16];                     /* */
+   char   cmd[32];                        /* #define const */
+   char   varOp[16];                      /*  = */
+   char   hexPre[16],                     /* */
+          hexSuf[16];                     /* 0x $ */
+   char   compiler[32];                   /* C, Pascal, Visual-Basic, ... */
+   }  tWinMapData;
+
+typedef struct _hmtl_idx
+{
+   int    toc_index;
+   char   tocname[512];
+} HTML_IDX;
+
+
+
+
+
+/*******************************************************************************
+*
 *     LOCAL VARIABLES
 *
 ******************************************|************************************/
@@ -246,8 +295,9 @@ LOCAL LABEL     *lab[MAXLABELS];          /* Array mit Zeigern auf Labels */
 LOCAL int        p1_lab_counter;          /* Zaehler */
 LOCAL int        p2_lab_counter;          /* Zaehler, 2. Durchgang */
 
-LOCAL REFERENCE   refs[MAXREFERENCES+1];  /* Referenzen   */
-LOCAL int         refs_counter;           /* Zaehler */
+LOCAL REFERENCE *refs;                    /* Referenzen */
+LOCAL size_t     refs_counter;            /* # of used references */
+LOCAL size_t     refs_alloc;              /* # of allocated references */
 
                                           /* absolut */
 LOCAL int         p1_toc_n1, p1_toc_n2, p1_toc_n3, p1_toc_n4, p1_toc_n5, p1_toc_n6;
@@ -301,42 +351,7 @@ LOCAL char        footer_buffer[512];     /* Puffer fuer den Footer */ /*r6pl2 *
 
 LOCAL char        html_target[64];
 
-
-
-
-
-
-/*******************************************************************************
-*
-*     TYPE DEFINITIONS
-*
-******************************************|************************************/
-
-typedef struct   _hmtl_index              /* index output for HTML */
-   {
-   int       toc_index;                   /* # of found label for TOC */
-   _BOOL   is_node;                     /* the label is the caption (?) */
-   char      tocname[512];                /* label or node name */
-   char      sortname[512];               /* 'flattened' label or node name */
-   _UWORD     codepoint;                   /* Unicode codepoint for sorting purposes */
-   }  HTML_INDEX;
-
-typedef struct _tWinMapData
-   {
-   char   remOn[16],                      /* */
-          remOff[16];                     /* */
-   char   cmd[32];                        /* #define const */
-   char   varOp[16];                      /*  = */
-   char   hexPre[16],                     /* */
-          hexSuf[16];                     /* 0x $ */
-   char   compiler[32];                   /* C, Pascal, Visual-Basic, ... */
-   }  tWinMapData;
-
-typedef struct _hmtl_idx                  /* */
-   {
-   int    toc_index;                      /* */
-   char   tocname[512];                   /* */
-   } HTML_IDX;
+LOCAL char encode_chars[64] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#=";
 
 
 
@@ -817,18 +832,15 @@ LOCAL void output_aliasses(void)
 
 GLOBAL void reset_refs(void)
 {
-   register int   i;  /* counter */
-   
-   if (refs_counter >= 0)
+   register size_t i;
+
+   for (i = 0; i < refs_counter; i++)
    {
-      for (i = 0; i <= refs_counter; i++)
-      {
-         refs[i].entry[0]= EOS;
-         refs[i].magic[0]= EOS;
-      }
+      refs[i].entry[0] = EOS;
+      refs[i].magic[0] = EOS;
    }
    
-   refs_counter = -1;
+   refs_counter = 0;
 }
 
 
@@ -845,33 +857,43 @@ GLOBAL void reset_refs(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL add_ref(
-
-const char  *r)  /* */
+LOCAL _BOOL add_ref(const char *r)
 {
-   if (refs_counter < MAXREFERENCES)
-   {
-      refs_counter++;
-      
-                                          /* r5pl8 */
-      if (refs_counter + OFFSET_REF == (int)'~')
-      {
-         refs_counter++;
-      }
-      
-                                          /* r5pl8 */
-      if (refs_counter + OFFSET_REF == (int)127)
-      {
-         refs_counter++;
-      }
-      
-      sprintf(refs[refs_counter].magic, "\033%c%c\033", C_REF_MAGIC, refs_counter+OFFSET_REF);
-      strcpy(refs[refs_counter].entry, r);
-      
-      return TRUE;
-   }
+   size_t counter;
+   unsigned char c1, c2, c3;
+   REFERENCE *new_refs;
    
-   return FALSE;
+   counter = refs_counter;
+   if (counter >= MAXREFERENCES)
+      return FALSE;
+   
+   /*
+    * when encoding, be sure not to generate
+    * \033, '~' or \177 characters,
+    * or any sequence of characters that
+    * might me interpreted as an UDO command
+    */
+   c1 = encode_chars[((counter >> 12) & 0x3f)];
+   c2 = encode_chars[((counter >>  6) & 0x3f)];
+   c3 = encode_chars[((counter      ) & 0x3f)];
+   if (counter >= refs_alloc)
+   {
+      size_t new_alloc = refs_alloc + 100;
+      new_refs = (REFERENCE *)realloc(refs, new_alloc * sizeof(REFERENCE));
+      if (new_refs == NULL)
+      {
+         return FALSE;
+      }
+      refs = new_refs;
+      refs_alloc = new_alloc;
+   }
+
+   sprintf(refs[counter].magic, "\033%c%c%c%c\033", C_REF_MAGIC, c1, c2, c3);
+   strcpy(refs[counter].entry, r);
+   
+   refs_counter++;
+   
+   return TRUE;
 }
 
 
@@ -887,19 +909,13 @@ const char  *r)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void replace_refs(
-
-char             *s)  /* */
+LOCAL void replace_refs(char *s)
 {
-   register int   i;  /* */
+   register size_t i;
    
-   
-   if (refs_counter >= 0)
+   for (i = 0; i < refs_counter; i++)
    {
-      for (i = 0; i <= refs_counter; i++)
-      {
-         replace_once(s, refs[i].magic, refs[i].entry);
-      }
+      replace_once(s, refs[i].magic, refs[i].entry);
    }
 }
 
@@ -1508,7 +1524,7 @@ const _UWORD       uiHeight)      /* image height */
             add_ref(lab[found_lab]->name);
          }
    
-         replace_once(found_pos, lab[found_lab]->name, refs[refs_counter].magic);
+         replace_once(found_pos, lab[found_lab]->name, refs[refs_counter - 1].magic);
    
       }  /* found_lab>=0 */
    
@@ -16618,6 +16634,10 @@ GLOBAL void init_module_toc(void)
 
    html_frames_toc_title = NULL;
    html_frames_con_title = NULL;
+
+   refs_counter = 0;
+   refs_alloc = 0;
+   refs = NULL;
 }
 
 
@@ -16666,52 +16686,11 @@ char **var)
 
 GLOBAL void exit_module_toc(void)
 {
-/*
-   r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu ueberpruefen,
-   ob sich hieraus ein Geschwindigkeitsvorteil erlangen laesst. Wird der
-   Speicher hier nicht freigegeben, wird das spaeter um_exit tun,
-   das die Speicherbereiche viel effizienter freigeben kann.
-   
-   Bitte nicht loeschen, da er spaeter vielleicht wieder rein kommt!
-
-   register int   i;  / counter /
-
-
-   for (i = MAXTOCS - 1; i >= 0; i--)
+   reset_refs();
+   if (refs != NULL)
    {
-      if (toc[i] != NULL)
-      {
-         free_toc_data(&(toc[i]->keywords));
-         free_toc_data(&(toc[i]->description));
-         free_toc_data(&(toc[i]->robots));
-         free_toc_data(&(toc[i]->helpid));
-         free_toc_data(&(toc[i]->image));
-         free_toc_data(&(toc[i]->icon));
-         free_toc_data(&(toc[i]->icon_active));
-         free_toc_data(&(toc[i]->icon_text));
-
-         free(toc[i]);
-         
-         toc[i] = NULL;
-      }
+      free(refs);
+      refs = NULL;
    }
-
-   for (i = MAXLABELS - 1; i >= 0; i--)
-   {
-      if (lab[i] != NULL)
-      {
-         free(lab[i]);
-      }
-   }
-
-                                          / New in V6.5.9 [NHz] /
-   for (i = MAXSTYLES - 1; i >= 0; i--)
-   {
-      if (style[i] != NULL)
-      {
-         free(style[i]);
-      }
-   }
-*/
-
-}       /* exit_module_toc */
+   refs_alloc = 0;
+}
