@@ -209,19 +209,6 @@
 #define MAXSCRIPTS        65536           /* max. # of Javascript files */
 #endif
                         
-#define MAXHYPHEN          4096           /* max. Trennregeln mit !hyphen */   /* PL6 */
-
-#if 0
-#define MAXMACROS           130           /* max. Makros (!macro) */
-#define MAXDEFS             130           /* max. Makros (!define) */
-#else
-#define MAXMACROS          1024           /* max. Makros (!macro) */
-#define MAXDEFS            1024           /* max. Makros (!define) */
-#endif
-
-#define OFFSET_SPECCMD       33           /* ESC/Magic/#+offset/ESC */
-#define MAXSPECCMDS         200           /* max. Platzhalter pro Absatz */
-
 #define OFFSET_REF           33           /* ESC/Magic/#+offset/ESC */
 #define MAXREFERENCES       200           /* maximal soviel Referenzen pro Absatz */
 

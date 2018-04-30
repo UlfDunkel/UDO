@@ -53,53 +53,11 @@
 
 /*******************************************************************************
 *
-*     MACRO DEFINITIONS
-*
-******************************************|************************************/
-
-#define HYPHEN_LEN        128             /* length of a word */
-#define MACRO_NAME_LEN     32             /* length of a macro name */
-#define MACRO_CONT_LEN    256             /* length of a macro content */
-#define DEFINE_NAME_LEN    32             /* length of a definition name */
-#define DEFINE_CONT_LEN   256             /* length of a definition content */
-
-
-
-
-
-/*******************************************************************************
-*
-*     TYPE DEFINITIONS
-*
-******************************************|************************************/
-
-typedef struct _hyphen                    /* hyphenated word */
-   {
-   char   hyphen[HYPHEN_LEN + 1];         /* word with hyphen marks */
-   char   solo[  HYPHEN_LEN + 1];         /* same word, but without !- */
-   } HYPHEN, *pHYPHEN;
-
-
-typedef struct _defs                      /* !define structure */
-   {
-   char      name[ DEFINE_NAME_LEN + 1];  /* definition name, formatted as (!%s) */
-   char      entry[DEFINE_CONT_LEN + 1];  /* definition content */
-   _BOOL   vars;                        /* optional parameters */
-   } DEFS, *pDEFS;
-
-#endif   /* UDO_PAR_H */
-
-
-
-
-
-/*******************************************************************************
-*
 *     GLOBAL VARIABLES
 *
 ******************************************|************************************/
 
-GLOBAL _UWORD         hyphen_counter;      /* # of loaded hyphenation rules */
+GLOBAL size_t         hyphen_counter;      /* # of loaded hyphenation rules */
 GLOBAL _UWORD         macro_counter;       /* # of loaded macros */
 GLOBAL _UWORD         define_counter;      /* # of loaded definitions */
 
@@ -175,3 +133,7 @@ GLOBAL void init_module_par(void);
 
    /* release all arrays used in this module */
 GLOBAL void exit_module_par(void);
+
+void sort_hyphens(void);
+
+#endif /* UDO_PAR_H */

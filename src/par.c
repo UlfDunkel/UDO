@@ -107,7 +107,19 @@
  */
 #define  MAXPHOLDS      0x40000L
 
+/*
+ * # special commands per paragraph.
+ * limited only by encoding in add_speccmd()
+ * (3 * 6 bits = 2 ^ 18)
+ */
+#define MAXSPECCMDS     0x40000L
+
 #define MAX_PARAMETERS  9                 /* # of macro parameters */
+#define HYPHEN_LEN        128             /* length of a word */
+#define MACRO_NAME_LEN     64             /* length of a macro name */
+#define MACRO_CONT_LEN   4096             /* length of a macro content */
+#define DEFINE_NAME_LEN    64             /* length of a definition name */
+#define DEFINE_CONT_LEN  4096             /* length of a definition content */
 
 
 
@@ -119,12 +131,27 @@
 *
 ******************************************|************************************/
 
+typedef struct _hyphen                    /* hyphenated word */
+{
+   char   hyphen[HYPHEN_LEN + 1];         /* word with hyphen marks */
+   char   solo[HYPHEN_LEN + 1];           /* same word, but without !- */
+} HYPHEN;
+
+
 typedef struct _macros                    /* !macro structur */
 {
-   char     name[ MACRO_NAME_LEN + 1];   /* macro name */
+   char     *name;                        /* macro name */
    char     *entry;                       /* macro content */
    _BOOL   vars;                        /* optional parameters */
 } MACROS;
+
+
+typedef struct _defs                      /* !define structure */
+{
+   char     *name;                        /* definition name, formatted as (!%s) */
+   char     *entry;                       /* definition content */
+   _BOOL   vars;                        /* optional parameters */
+} DEFS;
 
 
 typedef struct _placeholder               /* general placeholder */
@@ -155,19 +182,23 @@ typedef struct _speccmd                   /* special format command placeholder 
 LOCAL char      Param[MAX_PARAMETERS + 1][1024];
 LOCAL char      Space[MAX_PARAMETERS + 1][64];
 
-LOCAL HYPHEN   *hyphen[MAXHYPHEN];        /* Array mit Zeigern auf Trennregeln */
+LOCAL HYPHEN  **hyphen;                   /* Array mit Zeigern auf Trennregeln */
+LOCAL size_t    hyphen_alloc;             /* size of allocated hyphen array */
 
-LOCAL MACROS   *macros[MAXMACROS];        /* Array auf Zeiger mit Makros */
+LOCAL MACROS  **macros;                   /* Array auf Zeiger mit Makros */
+LOCAL size_t    macros_alloc;             /* size of allocated macro array */
 
-LOCAL DEFS     *defs[MAXDEFS];            /* Array auf Zeiger mit defines */
+LOCAL DEFS    **defs;                     /* Array auf Zeiger mit defines */
+LOCAL size_t    defs_alloc;               /* size of allocated defines array */
 
    /* --- Platzhalter --- */
 LOCAL PLACEHOLDER *phold;                 /* array of placeholders */
 LOCAL size_t    phold_alloc;              /* size of array */
 LOCAL size_t    phold_counter;            /* # of used placeholders */
 
-LOCAL SPECCMD   speccmd[MAXSPECCMDS + 1];
-LOCAL int       speccmd_counter;
+LOCAL SPECCMD  *speccmd;
+LOCAL size_t    speccmd_alloc;
+LOCAL size_t    speccmd_counter;
 
 LOCAL unsigned char const encode_chars[64] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#=";
 LOCAL int decode_chars[128];
@@ -3635,24 +3666,19 @@ LOCAL void replace_variables(char *s, const char *cmd, const char *entry)
 
 GLOBAL void reset_speccmds(void)
 {
-   int   i;  /* counter */
-   
+   size_t i;
 
-   if (speccmd_counter >= 0)
+   for (i = 0; i < speccmd_counter; i++)
    {
-      for (i = 0; i < speccmd_counter; i++)
+      if (speccmd[i].entry != NULL)
       {
-         if (speccmd[i].entry != NULL)
-         {
-            free(speccmd[i].entry);
-            speccmd[i].entry = NULL;
-         }
-
-         speccmd[i].magic[0] = EOS;
+         free(speccmd[i].entry);
+         speccmd[i].entry = NULL;
       }
+      speccmd[i].magic[0] = EOS;
    }
 
-   speccmd_counter = -1;
+   speccmd_counter = 0;
 }
 
 
@@ -3675,44 +3701,50 @@ GLOBAL void reset_speccmds(void)
 
 GLOBAL _BOOL add_speccmd(const char *entry)
 {
-   size_t   sl;     /* */
-   char    *ptr;    /* */
+   char *ptr;
+   size_t counter;
+   unsigned char c1, c2, c3;
+   SPECCMD *new_speccmd;
    
+   counter = speccmd_counter;
+   if (counter >= MAXSPECCMDS)
+      return FALSE;
+   
+   /*
+    * when encoding, be sure not to generate
+    * \033, '~' or \177 characters,
+    * or any sequence of characters that
+    * might me interpreted as an UDO command
+    */
+   c1 = encode_chars[((counter >> 12) & 0x3f)];
+   c2 = encode_chars[((counter >>  6) & 0x3f)];
+   c3 = encode_chars[((counter      ) & 0x3f)];
 
-   if (speccmd_counter < MAXSPECCMDS)
+   if (counter >= speccmd_alloc)
    {
-      speccmd_counter++;
-
-      sl = strlen(entry);
+      size_t new_alloc = speccmd_alloc + 100;
       
-      ptr = (char *)(malloc(sl * sizeof(char) + 1));
-      
-      if (ptr == NULL)
+      new_speccmd = (SPECCMD *)realloc(speccmd, new_alloc * sizeof(SPECCMD));
+      if (new_speccmd == NULL)
       {
-         speccmd_counter--;
          return FALSE;
       }
-
-      if (speccmd_counter + OFFSET_SPECCMD == (int)'~')
-      {
-         speccmd_counter++;
-      }
-      
-      if (speccmd_counter + OFFSET_SPECCMD == (int)127)
-      {
-         speccmd_counter++;
-      }
-
-      sprintf(speccmd[speccmd_counter].magic, "\033%c%c\033", C_SPECCMD_MAGIC, speccmd_counter + OFFSET_SPECCMD);
-
-      speccmd[speccmd_counter].entry = ptr;
-
-      strcpy(speccmd[speccmd_counter].entry, entry);
-
-      return TRUE;
+      speccmd = new_speccmd;
+      speccmd_alloc = new_alloc;
    }
-
-   return FALSE;
+   ptr = strdup(entry);
+   if (ptr == NULL)
+   {
+      return FALSE;
+   }
+   
+   sprintf(speccmd[counter].magic, "\033%c%c%c%c\033", C_SPECCMD_MAGIC, c1, c2, c3);
+   
+   speccmd[counter].entry = ptr;
+   
+   speccmd_counter++;
+   
+   return TRUE;
 }
 
 
@@ -3737,7 +3769,7 @@ GLOBAL _BOOL insert_speccmd(char *s, const char *rep, const char *entry)
 {
    if (add_speccmd(entry))
    {
-      if (replace_once(s, rep, speccmd[speccmd_counter].magic))
+      if (replace_once(s, rep, speccmd[speccmd_counter - 1].magic))
          return TRUE;
    }
 
@@ -3763,30 +3795,28 @@ GLOBAL _BOOL insert_speccmd(char *s, const char *rep, const char *entry)
 
 GLOBAL void replace_speccmds(char *s)
 {
-   register int   i;              /* */
-   int            replaced = -1;  /* */
+   register size_t i;
+   size_t replaced;
 
-   if (speccmd_counter >= 0)
+   if (speccmd_counter > 0)
    {
       if (strstr(s, ESC_SPECCMD_MAGIC) == NULL)
          return;
-
+      
+      replaced = 0;
       /* PL10: Rueckwaerts ersetzen, da ein Platzhalter auch in */
       /* einem Platzhalter stecken kann! */
-      
-      for (i = speccmd_counter; i >= 0; i--)
+      for (i = speccmd_counter; i > 0; )
       {
-         if (replace_once(s, speccmd[i].magic, speccmd[i].entry))
+         --i;
+         if ( replace_once(s, speccmd[i].magic, speccmd[i].entry) )
          {
             speccmd[i].magic[0] = EOS;
             replaced++;
          }
       }
-      
       if (replaced == speccmd_counter)
-      {
          reset_speccmds();
-      }
    }
 }
 
@@ -4171,15 +4201,11 @@ GLOBAL void c_commands_inside(char *s, const _BOOL inside_b4_macro)
 
 GLOBAL void replace_hyphens(char *s)
 {
-   _UWORD   h;  /* hyphen index */
-
-        
-   if (hyphen_counter == 0)
-      return;
-
-   for (h = 0; h < hyphen_counter; h++)   /* check whole list of hyphenated words */
+   size_t h;  /* hyphen index */
+   
+   for (h = 0; h < hyphen_counter; h++)
    {
-      if (hyphen[h] != NULL)              /* add hyphens to word */
+      if (hyphen[h] != NULL)
       {
          replace_all(s, hyphen[h]->solo, hyphen[h]->hyphen);
       }
@@ -4203,43 +4229,47 @@ GLOBAL void replace_hyphens(char *s)
 GLOBAL void add_hyphen(void)
 {
    HYPHEN *p;
-
-
+   HYPHEN **new_hyphen;
+   
+   if (token_counter <= 1)
+   {
+      error_missing_parameter("!hyphen");
+      return;
+   }
+   
    switch (desttype)
    {
    case TOWIN:
    case TOWH4:
    case TOAQV:
    case TORTF:
-   case TOHAH:                            /* V6.5.17 */
+   case TOHAH:
    case TOHTM:
    case TOMHH:
       return;                             /* these formats don't support hyphenation rules (yet) */
    }
-
-
-   if (hyphen_counter >= MAXHYPHEN)       /* check # of hyphens overflow */
+   
+   if (hyphen_counter >= hyphen_alloc)
    {
-      error_too_many_hyphens();
-      return;
+      size_t new_alloc = hyphen_alloc + 100;
+      
+      new_hyphen = (HYPHEN **)realloc(hyphen, new_alloc * sizeof(HYPHEN *));
+      if (new_hyphen == NULL)
+      {
+         return;
+      }
+      hyphen = new_hyphen;
+      hyphen_alloc = new_alloc;
    }
-
-   if (token_counter <= 1)                /* only "!hyphen" in the line? */
-   {
-      error_missing_parameter("!hyphen");
-      return;
-   }
-
-                                          /* create space for hyphen structure */
+   
    p = (HYPHEN *)malloc(sizeof(HYPHEN));
-
    if (p == NULL)                         /* no free memory? */
    {
       return;
    }
 
    tokcpy2(p->hyphen, HYPHEN_LEN + 1);    /* copy   hyphenated word */
-   tokcpy2(p->solo,   HYPHEN_LEN + 1);    /* buffer hyphenated word */
+   tokcpy2(p->solo, HYPHEN_LEN + 1);      /* buffer hyphenated word */
 
    switch (desttype)
    {
@@ -4248,12 +4278,12 @@ GLOBAL void add_hyphen(void)
       /* Die Tokens sind leider vorher schon durch c_vars gelaufen */
       /* Dabei wurden auch (!ck) usw. bereits in "ck umgewandelt */
       /* Problem: replace_hyphens() findet Dru"cker dann nicht */
-
       qdelete_all(p->solo, "\\-", 2);
       break;
 
    default:
       delete_all_divis(p->solo);
+      break;
    }
 
    hyphen[hyphen_counter] = p;
@@ -4262,6 +4292,39 @@ GLOBAL void add_hyphen(void)
 
 
 
+
+
+/*******************************************************************************
+*
+*  sort_hyphens():
+*     sort list of hyphens, such that longer matches get replaced first
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL int hyphen_compare(const void *_p, const void *_q)
+{
+	const HYPHEN *p = *((const HYPHEN *const *)_p);
+	const HYPHEN *q = *((const HYPHEN *const *)_q);
+	size_t l1, l2;
+	
+	l1 = strlen(p->hyphen);
+	l2 = strlen(q->hyphen);
+	if (l1 < l2)
+		return 1;
+	if (l1 > l2)
+		return -1;
+	return strcmp(p->hyphen, q->hyphen);
+}
+
+
+void sort_hyphens(void)
+{
+	if (hyphen_counter > 1)
+		qsort(hyphen, hyphen_counter, sizeof(HYPHEN *), hyphen_compare);
+}
 
 
 /*******************************************************************************
@@ -4295,8 +4358,6 @@ GLOBAL void replace_macros(char *s)
 
 
 
-
-
 /*******************************************************************************
 *
 *  add_macro():
@@ -4315,13 +4376,9 @@ GLOBAL _BOOL add_macro(void)
    int      i;
    MACROS  *p;
    char *entry;
+   MACROS **new_macros;
+   size_t   name_len;
    size_t   entry_len;
-
-   if (macro_counter >= MAXMACROS)        /* check # of macros overflow */
-   {
-      error_too_many_macros();
-      return FALSE;
-   }
 
    if (token_counter <= 1)                /* only "!macro" in the line? */
    {
@@ -4329,20 +4386,25 @@ GLOBAL _BOOL add_macro(void)
       return FALSE;
    }
 
-   if (strlen(token[1]) > MACRO_NAME_LEN) /* macro name too long? */
+   name_len = strlen(token[1]) + 1;
+   if (name_len > MACRO_NAME_LEN)         /* macro name too long? */
    {
       error_message(_("macro name longer than %d characters"), MACRO_NAME_LEN);
       return FALSE;
    }
 
-                                          /* create space for a macro */
-   p = (MACROS *)malloc(sizeof(MACROS));
-
-   if (p == NULL)                         /* no free memory! */
+   if (macro_counter >= macros_alloc)
    {
-      return FALSE;
+      size_t new_alloc = macros_alloc + 100;
+      new_macros = (MACROS **)realloc(macros, new_alloc * sizeof(MACROS *));
+      if (new_macros == NULL)
+      {
+         return FALSE;
+      }
+      macros = new_macros;
+      macros_alloc = new_alloc;
    }
-
+   
    entry_len = 0;
    for (i = 2; i < token_counter; i++)
    {
@@ -4388,9 +4450,26 @@ GLOBAL _BOOL add_macro(void)
 
    entry_len = strlen(entry);
    entry = realloc(entry, (entry_len + 1) * sizeof(*entry));
+   
+   /* create space for a macro */
+   p = (MACROS *)malloc(sizeof(MACROS));
+   if (p == NULL)                         /* no free memory! */
+   {
+      return FALSE;
+   }
+
    /* copy collected content to structure */
    p->entry = entry;
 
+   /* copy name to structure */
+   p->name = (char *)malloc((name_len + 4) * sizeof(*p->name));
+   if (p->name == NULL)
+   {
+      free(p->entry);
+      free(p);
+      return FALSE;
+   }
+   
    if (md_uses_parameters(p->entry))       /* macro uses parameters */
    {
       strcpy(p->name, token[1]);
@@ -4464,72 +4543,105 @@ GLOBAL _BOOL add_define(void)
 {
    int i;
    DEFS *p;
-   char entry[512];
-
-   if (define_counter >= MAXDEFS)         /* check # of definitions overflow */
-   {
-      error_too_many_defines();
-      return FALSE;
-   }
-
+   char *entry;
+   size_t entry_len;
+   size_t name_len;
+   DEFS **new_defs;
+   
    if (token_counter <= 1)                /* only "!define" in the line? */   
    {
       error_missing_parameter(CMD_DEFINE);
       return FALSE;
    }
 
-   if (strlen(token[1]) > DEFINE_NAME_LEN)/* definition name too long? */   
+   name_len = strlen(token[1]) + 1;
+   if (name_len > DEFINE_NAME_LEN)
    {
       error_message(_("definition name longer than %d characters"), DEFINE_NAME_LEN);
       return FALSE;
    }
-
-   p = (DEFS *)malloc(sizeof(DEFS));    /* create space for a definition */
-
-   if (p == NULL)                          /* no free memory! */
+   
+   if (define_counter >= defs_alloc)
+   {
+      size_t new_alloc = defs_alloc + 100;
+      
+      new_defs = (DEFS **)realloc(defs, new_alloc * sizeof(DEFS *));
+      if (new_defs == NULL)
+      {
+         return FALSE;
+      }
+      defs = new_defs;
+      defs_alloc = new_alloc;
+   }
+   
+   entry_len = 0;
+   for (i = 2; i < token_counter; i++)
+   {
+      entry_len += strlen(token[i]);
+      if (i < token_counter - 1)
+      {
+         entry_len += 1;
+      }
+   }
+   
+   /* muss leider erstmal drin bleiben, da
+    * sonst lokale buffer ueberschrieben werden */
+   if (entry_len > DEFINE_CONT_LEN)
+   {
+      error_message(_("definition contents longer than %d characters"), DEFINE_CONT_LEN);
+      return FALSE;
+   }
+   
+   entry = (char *)malloc((entry_len + 1) * sizeof(*entry));
+   if (entry == NULL)
    {
       return FALSE;
    }
-
-   entry[0] = EOS;                         /* erase string buffer */
-
-   if (token_counter >= 2)                 /* "!define" + at least one other token */
+   
+   entry[0] = EOS;
+   for (i = 2; i < token_counter; i++)
    {
-      for (i = 2; i < token_counter; i++)  /* skip "!define" */
+      strcat(entry, token[i]);
+      if (i < (token_counter - 1))
       {
-                                           /* get definition name */
-         um_strcat(entry, token[i], 512, "add_define[1]");
-         
-         if (i < token_counter - 1)        /* get definition content */ 
-            um_strcat(entry, " ", 512, "add_define[2]");
+         strcat(entry, " ");
       }
    }
-
-   if (strlen(entry) > DEFINE_CONT_LEN)    /* definition content too long? */
+   
+   p = (DEFS *) malloc(sizeof(DEFS));
+   
+   if (p == NULL)
    {
-      error_message(_("definition contents longer than %d characters"), DEFINE_CONT_LEN);
+      free(entry);
+      return FALSE;
+   }
+
+   p->entry = entry;
+
+   p->name = (char *) malloc((name_len + 4) * sizeof(char));
+   if (p->name == NULL)
+   {
+      free(p->entry);
       free(p);
       return FALSE;
    }
+   
+   /* Schauen, ob der !define Parameter enthalten soll */
 
-                                           /* copy collected content to structure */
-   um_strcpy(p->entry, entry, MACRO_CONT_LEN + 1, "add_define[3]");
-
-
-   /* --- check if !define uses parameters --- */
-
-   if (md_uses_parameters(p->entry) )      /* definition uses parameters */
+   if (md_uses_parameters(p->entry))       /* definition uses parameters */
    {
-      um_strcpy(p->name, token[1], MACRO_NAME_LEN+1, "add_define[4]");
+      /* Definition mit Parametern */
+      strcpy(p->name, token[1]);
       p->vars = TRUE;
    }
    else                                    /* normal definition */
    {
+      /* normale Definition */
       sprintf(p->name, "(!%s)", token[1]);
       token[1][0] = EOS;
       p->vars = FALSE;
    }
-
+   
    defs[define_counter] = p;
    define_counter++;
 
@@ -4562,20 +4674,21 @@ GLOBAL void init_module_par(void)
    phold_alloc = 0;
    phold = NULL;
    
+   speccmd_counter = 0;
+   speccmd_alloc = 0;
+   speccmd = NULL;
+   
    hyphen_counter = 0;
+   hyphen_alloc = 0;
+   hyphen = NULL;
    
-   for (i = 0; i < MAXHYPHEN; i++)
-      hyphen[i] = NULL;
-
    macro_counter = 0;
+   macros_alloc = 0;
+   macros = NULL;
    
-   for (i = 0; i < MAXMACROS; i++)
-      macros[i] = NULL;
-
    define_counter = 0;
-   
-   for (i = 0; i < MAXDEFS; i++)
-      defs[i] = NULL;
+   defs_alloc = 0;
+   defs = NULL;
 }
 
 
@@ -4594,33 +4707,47 @@ GLOBAL void init_module_par(void)
 
 GLOBAL void exit_module_par(void)
 {
-/*
-   r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu ueberpruefen,
-   ob sich hieraus ein Geschwindigkeitsvorteil erlangen laesst. Wird der
-   Speicher hier nicht freigegeben, wird das spaeter um_exit tun,
-   das die Speicherbereiche viel effizienter freigeben kann.
-   Bitte nicht loeschen, da er spaeter vielleicht wieder rein kommt!
+   size_t d;
 
-   int   i;
-
-   for (i = MAXMACROS - 1; i >= 0; i--)
+   for (d = 0; d < macro_counter; d++)
    {
-      if (macros[i] != NULL)
-         free(macros[i]);
+      free(macros[d]->name);
+      free(macros[d]->entry);
+      free(macros[d]);
    }
-
-   for (i = MAXDEFS - 1; i >= 0; i--)
+   if (macros != NULL)
    {
-      if (defs[i] != NULL)
-         free(defs[i]);
+      free(macros);
+      macros = NULL;
    }
+   macros_alloc = 0; 
+   macro_counter = 0;
 
-   for (i = MAXHYPHEN - 1; i >= 0; i--)
+   for (d = 0; d < define_counter; d++)
    {
-      if (hyphen[i] != NULL)
-         free(hyphen[i]);
+      free(defs[d]->name);
+      free(defs[d]->entry);
+      free(defs[d]);
    }
-*/
+   if (defs != NULL)
+   {
+      free(defs);
+      defs = NULL;
+   }
+   defs_alloc = 0;
+   define_counter = 0;
+
+   for (d = 0; d < hyphen_counter; d++)
+   {
+      free(hyphen[d]);
+   }
+   if (hyphen != NULL)
+   {
+      free(hyphen);
+      hyphen = NULL;
+   }
+   hyphen_counter = 0;
+   hyphen_alloc = 0;
 
    reset_placeholders();
    if (phold != NULL)
@@ -4629,4 +4756,12 @@ GLOBAL void exit_module_par(void)
       phold = NULL;
    }
    phold_alloc = 0;
+
+   reset_speccmds();
+   if (speccmd != NULL)
+   {
+      free(speccmd);
+      speccmd = NULL;
+   }
+   speccmd_alloc = 0;
 }

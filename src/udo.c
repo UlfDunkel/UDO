@@ -14598,6 +14598,8 @@ GLOBAL _BOOL udo(char *datei)
          init_module_img_pass2();
          init_udosymbol_pass2();
 
+         sort_hyphens();
+         
                                           /* richtigen Einsatz von !if testen */
                                           /*r6pl4: && !bBreakInside */
          if (!bBreakHappened && !bBreakInside)
@@ -14786,9 +14788,9 @@ GLOBAL _BOOL udo(char *datei)
       vloglnf("Subsubsubnodes:       %d", all_subsubsubnodes);
       vloglnf("Subsubsubsubnodes:    %d", all_subsubsubsubnodes);
       vloglnf("Subsubsubsubsubnodes: %d", all_subsubsubsubsubnodes);
-      vloglnf("Macros:               %d", macro_counter);
-      vloglnf("Defines:              %d", define_counter);
-      vloglnf("Hyphens:              %d", hyphen_counter);
+      vloglnf("Macros:               %u", macro_counter);
+      vloglnf("Defines:              %u", define_counter);
+      vloglnf("Hyphens:              %lu", (unsigned long)hyphen_counter);
       logln("");
       vloglnf("started:  %s", timer_start);
       vloglnf("finished: %s", timer_stop);
@@ -15324,9 +15326,9 @@ char        *datei)        /* */
       vloglnf("Subsubsubnodes:       %d", all_subsubsubnodes);
       vloglnf("Subsubsubsubnodes:    %d", all_subsubsubsubnodes);
       vloglnf("Subsubsubsubsubnodes: %d", all_subsubsubsubsubnodes);
-      vloglnf("Macros:               %d", macro_counter);
-      vloglnf("Defines:              %d", define_counter);
-      vloglnf("Hyphens:              %d", hyphen_counter);
+      vloglnf("Macros:               %u", macro_counter);
+      vloglnf("Defines:              %u", define_counter);
+      vloglnf("Hyphens:              %lu", (unsigned long)hyphen_counter);
       logln("");
       vloglnf("started:  %s", timer_start);
       vloglnf("finished: %s", timer_stop);
