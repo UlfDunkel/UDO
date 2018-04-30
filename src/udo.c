@@ -6065,30 +6065,41 @@ LOCAL void c_udolink(void)
 
 LOCAL void c_toplink(void)
 {
-   char   closer[8] = "\0";  /* single tag closer mark in XHTML */
-   
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-   strcpy(closer, " /");
+   char sGifSize[64];
+   _UWORD w, h, bitcnt;
    
    uses_toplink = TRUE;
    
-   switch (desttype)
+   switch (iUdopass)
    {
-   case TOHAH:      /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-                                          /* width and height set to 24 to fix bug #0000005 [voja] */
-      if (html_doctype == HTML5)
-      {
-         voutlnf("<p><a href=\"#\"><img src=\"%s\" alt=\"\" title=\"\" width=\"24\" height=\"24\"%s></a></p>", 
-            GIF_TP_NAME, closer);
-      }
-      else
-      {
-         voutlnf("<p><a href=\"#\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\" width=\"24\" height=\"24\"%s></a></p>", 
-            GIF_TP_NAME, closer);
-      }
+   case PASS1:
+      break;
+   case PASS2:
+      sGifSize[0] = EOS;
+	   switch (desttype)
+	   {
+	   case TOHAH:
+	   case TOHTM:
+	   case TOMHH:
+	      if (!no_images)
+	      {
+            char border[20];
+	      strcpy(border, " border=\"0\"");
+#if 0
+          if (html_doctype == HTML5)
+              border[0] = EOS;
+#endif
+	      	get_picture_size(GIF_TP_NAME, NULL, &w, &h, &bitcnt);
+	      	if (w != 0 && h != 0)
+	      	   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", w, h);
+	         voutlnf("<p><a href=\"#\"><img src=\"%s\" alt=\"\" title=\"\"%s%s%s></a></p>", GIF_TP_NAME, border, sGifSize, xhtml_closer);
+	      }
+	      break;
+	   }
+	   break;
+	case PASSU:
+	   /* outln("!toplink"); */
+	   break;
    }
 }
 
@@ -12524,7 +12535,7 @@ LOCAL _BOOL pass1(const char *datei)
                   }
                   else if (strcmp(token[0], "!alias") == 0 || strcmp(token[0], "!a") == 0)
                   {
-                     tokcpy2(tmp, 512);
+                     tokcpy2(tmp, sizeof(tmp));
                      add_alias(tmp, bInsidePopup);
                   }
                   else if (strcmp(token[0], "!index") == 0 || strcmp(token[0], "!x") == 0)
@@ -12542,6 +12553,14 @@ LOCAL _BOOL pass1(const char *datei)
                   else if (strcmp(token[0], "!jumpid") == 0)   /* Alter Kommandoname */
                   {
                      set_helpid();
+                  }
+                  else if (strcmp(token[0], "!udolink") == 0)
+                  {
+                     c_udolink();
+                  }
+                  else if (strcmp(token[0], "!toplink") == 0)
+                  {
+                     c_toplink();
                   }
                   else if (strcmp(token[0], "!html_img_suffix") == 0)
                   {
@@ -12629,21 +12648,19 @@ LOCAL _BOOL pass1(const char *datei)
                   }
                   else if (strcmp(token[0], "!end_appendix") == 0)
                   {
-                     ;
-                     /* pflag[PASS1].inside_apx = FALSE; */ /* 0.44 */
+                     /* pflag[PASS1].inside_apx = FALSE; */
                   }
                   else if (pass1_check_main_commands())
                   {
-                     zeile[0] = EOS;
+                     token[0][0] = EOS;
                   }
                   else if (pass1_check_everywhere_commands())
                   {
-                     zeile[0] = EOS;
+                     token[0][0] = EOS;
                   }
-                  
-               }  /* if ((bInsideDocument) && (token[0][0] != EOS) ) */
+               }
 
-
+               
                /* Kommandos, die nur im Vorspann erlaubt sind */
                if (!bInsideDocument && token[0][0] != EOS)
                {
@@ -14615,7 +14632,10 @@ GLOBAL _BOOL udo(char *datei)
                                           /*r6pl4: && !bBreakInside */
          if (!bBreakHappened && !bBreakInside)
          {
-            show_status_pass("Pass 2...");
+            if (desttype == TOUDO)
+               show_status_pass("udo2udo...");
+            else
+               show_status_pass(_("Pass 2..."));
 
             /* Die folgende if-Abfrage ist nur ein Workaround,
              * damit -vor allem bei der HTML-Ausgabe- die
@@ -14636,142 +14656,132 @@ GLOBAL _BOOL udo(char *datei)
             clear_if_stack();
             output_preamble();
             
-            iUdopass = PASS2;
-
-            if ( (desttype == TOHTM || desttype == TOHAH) && html_frames_layout)
+            if (desttype == TOUDO)
             {
-               html_save_frameset();
-            }
-
-            if (pass2(datei))
+               iUdopass = PASSU;
+               if (passU(datei))
+               {
+                  ret= TRUE;
+               }
+            } else
             {
-               if (bCalledBeginDocument && !bCalledEndDocument)
+               iUdopass = PASS2;
+               
+               if ((desttype == TOHTM || desttype == TOHAH) && html_frames_layout)
                {
-                  error_missing_end(CMD_END_DOCUMENT);
-                  c_end_document();
+                  html_save_frameset();
                }
-               
-               if (bCheckMisc)
+   
+               if (pass2(datei))
                {
-                                          /* Diverse Ueberpruefungen auf Wunsch durchfuehren */
-                  check_modules_pass2();
-               }
-               
-               outln("");
-               outln("");
-               
-               ret = TRUE;
-
-               if (bOutOpened)
-               {
-                  switch (desttype)
+                  if (bCalledBeginDocument && !bCalledEndDocument)
                   {
-                  case TOPCH:
-                     save_pchelp_commandfile();
-                     break;
-                     
-                  case TOAQV:
-                  case TOWIN:
-                  case TOWH4:
-                     if (desttype == TOWH4)
+                     error_missing_end(CMD_END_DOCUMENT);
+                     c_end_document();
+                  }
+                  
+                  if (bCheckMisc)
+                  {
+                     /* Diverse Ueberpruefungen auf Wunsch durchfuehren */
+                     check_modules_pass2();
+                  }
+                  outln("");
+                  outln("");
+                  
+                  ret = TRUE;
+                  
+                  if (bOutOpened)
+                  {
+                     switch (desttype)
                      {
-                        save_winhelp4_project();
-                        bCntSaved = save_winhelp4_cnt();
-                     }
-                     else
-                     {
-                        save_winhelp_project();
-                     }
-                     
-                     if (bUseIdMapFileC)
-                     {
-                        bMapSavedC = save_winhelp_map_c();
-                     }
-                     
-                     if (bUseIdMapFilePas)
-                     {
-                        bMapSavedPas = save_winhelp_map_pas();
-                     }
-                     
-                     if (bUseIdMapFileVB)
-                     {
-                        bMapSavedVB = save_winhelp_map_vb();
-                     }
-                     
-                     if (bUseIdMapFileGFA)
-                     {
-                        bMapSavedGFA = save_winhelp_map_gfa();
-                     }
-                     
-                     break;
-                     
-                  case TORTF:
-                     break;
-                     
-                  case TOHAH:
-                  case TOHTM:
-                     break;
-                     
-                  case TOMHH:
-                     bHhcSaved = save_htmlhelp_contents(file_lookup(sHhcfull));
-                     bHhkSaved = save_htmlhelp_index(file_lookup(sHhkfull));
-                     
-                     save_htmlhelp_project();
-                     
-                     if (bUseIdMapFileC)
-                     {
-                        strcpy(outfile.full, old_outfile.full);
-                        bMapSavedC = save_htmlhelp_map();
-                        save_htmlhelp_alias ();
-                     }
-                     
-                     break;
-                     
-                  case TOSTG:
-                  case TOAMG:
-                     break;
+                     case TOPCH:
+                        save_pchelp_commandfile();
+                        break;
                         
-                  case TOIPF:
-                     break;
+                     case TOAQV:
+                     case TOWIN:
+                     case TOWH4:
+                        if (desttype == TOWH4)
+                        {
+                           save_winhelp4_project();
+                           bCntSaved = save_winhelp4_cnt();
+                        }
+                        else
+                        {
+                           save_winhelp_project();
+                        }
+                        if (bUseIdMapFileC)
+                        {
+                           bMapSavedC = save_winhelp_map_c();
+                        }
+                        if (bUseIdMapFilePas)
+                        {
+                           bMapSavedPas = save_winhelp_map_pas();
+                        }
+                        if (bUseIdMapFileVB)
+                        {
+                           bMapSavedVB = save_winhelp_map_vb();
+                        }
+                        if (bUseIdMapFileGFA)
+                        {
+                           bMapSavedGFA = save_winhelp_map_gfa();
+                        }
+                        break;
                         
-                  case TOLYX:
-                     break;
+                     case TORTF:
+                        break;
                         
-                  case TOPDL:
-                     break;
+                     case TOHAH:
+                     case TOHTM:
+                        break;
+                        
+                     case TOMHH:
+                        bHhcSaved = save_htmlhelp_contents(file_lookup(sHhcfull));
+                        bHhkSaved = save_htmlhelp_index(file_lookup(sHhkfull));
+                        save_htmlhelp_project();
+                        if (bUseIdMapFileC)
+                        {
+                           strcpy(outfile.full, old_outfile.full);
+                           bMapSavedC = save_htmlhelp_map();
+                           save_htmlhelp_alias();
+                        }
+                        break;
+                        
+                     case TOSTG:
+                     case TOAMG:
+                        break;
+                        
+                     case TOIPF:
+                        break;
+                        
+                     case TOLYX:
+                        break;
+                        
+                     case TOPDL:
+                        break;
+                     }
                   }
                }
+            }
 
-               get_timestr(timer_stop);
-
-            }  /* if (pass2() ) */
-
-         }  /* if (!bBreakHappened) */
-
-      }  /* if (malloc...() ) */
-      
-   }  /* if ( pass1(datei) && (!bCheckMisc || check_modules_pass1()) ) */
+            get_timestr(timer_stop);
+         }
+      }
+   }
 
 
 
    /* Hier geht's weiter, wenn schon pass1() versagte */
-   switch (desttype)
-   {
-   case TOHTM:
-   case TOMHH:
-   case TOHAH:
-                                          /* Alten Filenamen zurueckholen */
-      strcpy(outfile.full, old_outfile.full);
-      strcpy(outfile.driv, old_outfile.driv);
-      strcpy(outfile.path, old_outfile.path);
-      strcpy(outfile.name, old_outfile.name);
-      strcpy(outfile.suff, old_outfile.suff);
-      
-      sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
-   }   
 
+   /* Alten Filenamen zurueckholen */
+   strcpy(outfile.full, old_outfile.full);
+   strcpy(outfile.driv, old_outfile.driv);
+   strcpy(outfile.path, old_outfile.path);
+   strcpy(outfile.name, old_outfile.name);
+   strcpy(outfile.suff, old_outfile.suff);
+   sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
 
-   /* --- Hier Informationen ueber das erzeugte File ausgeben. --- */
+   /* Hier Informationen ueber das erzeugte File ausgeben. */
 
    if (!bNoLogfile)
    {
@@ -14910,7 +14920,6 @@ LOCAL _BOOL passU(const char *datei)
    char         zeile[LINELEN],
                 zeileBak[LINELEN];
    char         tmp_datei[MYFILE_FULL_LEN];
-   int          i;
    size_t       len;
    _BOOL      inc_done;
    const char  *orgBeg = "##### start of ";
@@ -14944,19 +14953,6 @@ LOCAL _BOOL passU(const char *datei)
       show_status_udo2udo(lPass2Lines, tmp_datei);
    }
 
-   if (bUseTreefile)
-   {
-      if (bTreeopened)
-      {
-         for (i = 0; i < (iFilesOpened - 1); i++)
-         {
-            fprintf(fTreefile, "|----");
-         }
-         
-         fprintf(fTreefile, "%s\n", tmp_datei);
-      }
-   }
-
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
       uiFiles[iFilesOpened].loc.line += 1 + uiMultiLines;
@@ -14981,6 +14977,14 @@ LOCAL _BOOL passU(const char *datei)
       strcpy(zeileBak, zeile);
 
       token_reset();
+      
+      /* Spezielle (verbatim, raw, table sourcecode) Umgebungen testen. */
+      /* Gesucht wird nur nach !begin... bzw !end... */
+      if (zeile[0] != '#')
+      {
+         pass2_check_environments(zeile);
+      }
+
       replace_defines(zeile);
       str2tok(zeile);
 
@@ -15064,324 +15068,6 @@ LOCAL _BOOL passU(const char *datei)
    multitasking_interrupt();
 
    return !bFatalErrorDetected;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  udo2udo():
-*     output UDO source text to UDO format
-*
-*  Return:
-*      TRUE: everything worked fine
-*     FALSE: some error occured
-*
-******************************************|************************************/
-
-GLOBAL _BOOL udo2udo(
-
-char        *datei)        /* */
-{
-   _BOOL   ret = FALSE;
-   int       i;
-   FILE     *file;
-   char      tmp[512];
-   
-   get_timestr(timer_start);
-
-   init_modules();
-   init_udosymbol_pass1();
-   set_format_flags();
-
-   bFatalErrorDetected = FALSE;
-   bErrorDetected      = FALSE;
-   bBreakHappened      = FALSE;
-   bBreakInside        = FALSE;
-   bOutOpened          = FALSE;
-   
-   outlines = 0;
-
-   fLogfile  = stderr;   bLogopened  = FALSE;
-   fTreefile = stderr;   bTreeopened = FALSE;   bTreeSaved = FALSE;
-   
-
-   /* Erstmal testen, ob die Datei vorhanden ist, damit nicht unnoetig Dateien angelegt werden. */
-
-   strcpy(tmp, datei);
-
-   build_include_filename(tmp, ".ui");
-
-   file = fopen(tmp, "r");
-   
-   if (!file)
-   {
-      error_open_infile(tmp);
-      return FALSE;
-   }
-   
-   fclose(file);
-
-
-   if (!bNoLogfile)
-   {   
-      if (outfile.full[0] != EOS)
-      {
-         if (sLogfull == 0)
-            logfile_adjust();
-
-         fLogfile = myFwopen(file_lookup(sLogfull), TOASC);
-         
-         if (!fLogfile)
-         {
-            fLogfile = stderr;
-            warning_err_logfile();
-            bErrorDetected = TRUE;
-            return FALSE;
-         }
-         
-         bLogopened = TRUE;
-         save_upr_entry_outfile(file_lookup(sLogfull));
-      }
-   }
-
-
-   if (bUseTreefile)
-   {
-      if (outfile.full[0] != EOS)
-      {
-         if (sTreefull != 0)
-         {
-            fTreefile = myFwopen(file_lookup(sTreefull), TOASC);
-            
-            if (!fTreefile)
-            {
-               fTreefile = stderr;
-               warning_err_treefile();
-               bErrorDetected = TRUE;
-               return FALSE;
-            }
-            
-            bTreeopened = TRUE;
-            save_upr_entry_outfile(file_lookup(sTreefull));
-         }
-      }
-   }
-
-
-   if (outfile.full[0] != EOS)
-   {
-      if ( (strcmp(outfile.full, "~") == 0) || (strcmp(outfile.full, "!") == 0) )
-      {
-         dest_adjust();
-      }
-
-      if (!bTestmode)
-      {
-         if (strcmp(outfile.full, infile.full) == 0)
-         {
-            error_message(_("source and destination file are equal: <%s>"), outfile.full);
-            bErrorDetected = TRUE;
-            
-            if (bLogopened)    fclose(fLogfile);
-            if (bTreeopened)   fclose(fTreefile);
-            
-            return FALSE;
-         }
-
-         outfile.file = myFwopen(outfile.full, desttype);
-         
-         if (outfile.file == NULL)
-         {
-            error_open_outfile(outfile.full);
-            warning_err_destination();
-            bErrorDetected = TRUE;
-            
-            if (bLogopened)    fclose(fLogfile);
-            if (bTreeopened)   fclose(fTreefile);
-            
-            return FALSE;
-         }
-         
-         bOutOpened = TRUE;
-         save_upr_entry_outfile(outfile.full);
-      }
-   }
-
-
-   for (i = 0; i < MAXENVLEVEL; iEnvIndent[i++]= 0)
-      ;
-
-   switch (desttype)
-   {
-   case TOHTM:
-   case TOMHH:
-   case TOHAH:
-      strcpy(outfile.full, old_outfile.full);
-      strcpy(outfile.driv, old_outfile.driv);
-      strcpy(outfile.path, old_outfile.path);
-      strcpy(outfile.name, old_outfile.name);
-      strcpy(outfile.suff, old_outfile.suff);
-      
-      sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
-   }
-
-   init_vars_spec();
-
-   destlang = TOGER;
-
-   init_lang();
-
-   bBreakInside           = FALSE;
-   bInsideDocument        = FALSE;
-   bInsidePopup           = FALSE;
-   b1stQuote              = FALSE;
-   b1stApost              = FALSE;
-   iCharset               = SYSTEM_CHARSET;
-   bDocUniversalCharsetOn = FALSE;
-
-   show_udo_intro();
-
-   logln_warnings_errors();
-
-   show_status_pass(_("Pass 1..."));
-
-   clear_if_stack();
-
-   iUdopass = PASS1;
-
-   if (pass1(datei))
-   {
-      if (malloc_token_output_buffer())   /* Speicher anfordern */
-      {
-         check_parwidth();
-
-         /* itemchar wird erst nach pass1() gesetzt */
-         /* bei !no_umlaute wird kein 8bit-Zeichen mehr verwendet */
-         
-         init_env_itemchar();
-
-         bBreakInside    = FALSE;
-         bInsideDocument = FALSE;
-         bInsidePopup    = FALSE;
-         b1stQuote       = FALSE;
-         b1stApost       = FALSE;
-         iCharset        = SYSTEM_CHARSET;
-
-         init_vars_spec();
-         init_module_toc_pass2();
-         init_module_tp_pass2();
-         init_module_img_pass2();
-         init_udosymbol_pass2();
-
-                                          /* richtigen Einsatz von !if testen */
-                                          /*r6pl4: && !bBreakInside */
-         if (!bBreakHappened && !bBreakInside)
-         {
-            if (counter_if_stack > 0)
-            {
-               error_missing_endif(file_lookup(if_stack[counter_if_stack].loc.id), if_stack[counter_if_stack].loc.line);
-               bBreakHappened = TRUE;
-               ret = FALSE;
-            }
-         }
-
-                                          /*r6pl4: && !bBreakInside */
-         if (!bBreakHappened && !bBreakInside)
-         {
-            show_status_pass("udo2udo...");
-            clear_if_stack();
-            iUdopass = PASSU;
-
-            if (passU(datei) )
-            {
-               ret = TRUE;
-               get_timestr(timer_stop);
-
-            }   /* if (pass2() ) */
-
-         }   /* if (!bBreakHappened) */
-
-      }   /* if (malloc...() ) */
-
-   }   /* if (pass1() ) */
-
-
-   /* --- Hier Informationen ueber das erzeugte File ausgeben. --- */
-
-   if (!bNoLogfile)
-   {
-      logln_information();
-      vloglnf("source file: %s", infile.full);
-      logln("");
-      vloglnf("Warnings:             %d", get_warning_counter());
-      vloglnf("Notes:                %d", get_note_counter());
-      vloglnf("Errors:               %d", get_error_counter());
-      logln("");
-      vloglnf("Nodes:                %d", all_nodes);
-      vloglnf("Subnodes:             %d", all_subnodes);
-      vloglnf("Subsubnodes:          %d", all_subsubnodes);
-      vloglnf("Subsubsubnodes:       %d", all_subsubsubnodes);
-      vloglnf("Subsubsubsubnodes:    %d", all_subsubsubsubnodes);
-      vloglnf("Subsubsubsubsubnodes: %d", all_subsubsubsubsubnodes);
-      vloglnf("Macros:               %u", macro_counter);
-      vloglnf("Defines:              %u", define_counter);
-      vloglnf("Hyphens:              %lu", (unsigned long)hyphen_counter);
-      logln("");
-      vloglnf("started:  %s", timer_start);
-      vloglnf("finished: %s", timer_stop);
-      logln("");
-
-      if (bTreeSaved)
-         logln_file_generated("Tree file", file_lookup(sTreefull), "");
-
-      if (outfile.full[0] != EOS)
-      {
-         if (bBreakHappened)
-         {
-            logln_interrupted();
-         }
-         else if (!bTestmode)
-         {
-            logln_file_generated("Output", outfile.full, "");
-         }
-      }
-
-      if (bFatalErrorDetected)
-      {
-         logln("UDO stopped because of fatal error(s)");
-      }
-
-   }
-
-
-   if (bLogopened && fLogfile != NULL)
-   {
-      fclose(fLogfile);
-   }
-   
-   if (bTreeopened && fTreefile != NULL)
-   {
-      fclose(fTreefile);
-   }
-   
-   if (bOutOpened && outfile.file != NULL)
-   {
-      fclose(outfile.file);
-      outfile.file = NULL;
-      bOutOpened = FALSE;
-   }
-
-   print_results();
-   
-   exit_modules();
-   free_token_output_buffer();
-
-   init_udo_vars();
-
-   return ret;
 }
 
 

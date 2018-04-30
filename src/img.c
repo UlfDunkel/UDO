@@ -78,14 +78,13 @@
 #include "sty.h"
 #include "toc.h"
 #include "udo.h"
-#include "upr.h"
 #include "udomem.h"
-#include "lang.h"
-#include "img_html.h"					/* graphic data for GIF (used in HTML) */
-#include "img_win.h"					/* graphic data for BMP (used in WinHelp) */
-#include "img_stg.h"					/* graphic data for IMG (used in ST-Guide) */
-#include "img_eps.h"					/* graphic data for PS (used in PostScript) */
-#include "img_png.h"					/* graphic data for PNG (used in PDFLaTex) */
+#include "upr.h"
+#include "img_html.h"                     /* graphic data for GIF (used in HTML) */
+#include "img_win.h"                      /* graphic data for BMP (used in WinHelp) */
+#include "img_stg.h"                      /* graphic data for IMG (used in ST-Guide) */
+#include "img_eps.h"                      /* graphic data for PS (used in PostScript) */
+#include "img_png.h"                      /* graphic data for PNG (used in PDFLaTex) */
 
 #include "export.h"
 #include "img.h"

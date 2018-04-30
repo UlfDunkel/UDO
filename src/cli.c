@@ -1152,14 +1152,7 @@ int main(int argc, const char **argv)
             bNoHypfile = TRUE;
          }
 
-         if (desttype == TOUDO)
-         {
-            udo2udo(infile.full);
-         }
-         else
-         {
-            udo(infile.full);             /* <???> informativeren Exitcode ermitteln */
-         }
+         udo(infile.full);                /* <???> informativeren Exitcode ermitteln */
       }
    }
 

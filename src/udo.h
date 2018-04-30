@@ -78,8 +78,6 @@ extern char   compile_time[];
 
 
 
-
-
 /*******************************************************************************
 *
 *     GLOBAL UNINITIALIZED VARIABLES
@@ -509,8 +507,6 @@ GLOBAL void build_image_filename(char *d, const char *suff);
 
    /* ? */
 GLOBAL _BOOL udo (char *datei);
-   /* ? */
-GLOBAL _BOOL udo2udo (char *datei);
    /* ? */
 GLOBAL void init_udo_vars(void);
 
