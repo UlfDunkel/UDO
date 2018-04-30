@@ -219,10 +219,6 @@
 #define MAXDEFS            1024           /* max. Makros (!define) */
 #endif
 
-#define MAX_UDOSYMBOLS      128           /* r6pl5: vorher 32 */
-#define MAX_UDOSYMBOL_LEN    32           /* PL10 */
-
-
 #define OFFSET_SPECCMD       33           /* ESC/Magic/#+offset/ESC */
 #define MAXSPECCMDS         200           /* max. Platzhalter pro Absatz */
 

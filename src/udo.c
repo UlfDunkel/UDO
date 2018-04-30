@@ -180,6 +180,7 @@
 #include "tp.h"                           /* Titelseite (!maketitle) */
 
 #include "gui.h"                          /* Funktionen GUI-/CLI-Version */
+#include "udosym.h"                       /* Symbole */
 #include "debug.h"                        /* Debugging */
 #include "udomem.h"                       /* Memory-Management */
 #include "upr.h"
@@ -2190,136 +2191,10 @@ LOCAL _BOOL check_on(void)
 
 LOCAL _BOOL check_off(void)
 {
-   char   n[512];  /* */
+   char n[512];
    
-   
-   tokcpy2(n, 512);
-   return (strstr(n, "off") != NULL);
-}
-
-
-
-
-
-
-/*   ############################################################
-   #
-   # Symbole (Commandline-Definitionen) verwalten
-   #
-   ############################################################ */
-
-/*******************************************************************************
-*
-*  del_udosymbol():
-*     ???
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void del_udosymbol(
-
-const char       *s)              /* */
-{
-   _BOOL        found = FALSE;  /* */
-   register int   i,              /* */
-                  j;              /* */
-                  
-
-   if (udosymbol_counter >= 0 && s[0] != EOS)
-   {
-      for (i = 0; i <= udosymbol_counter; i++)
-      {
-         if (strstr(s, udosymbol[i]) != NULL)
-         {
-            for (j = i; j < udosymbol_counter; j++)
-            {
-               strcpy(udosymbol[j], udosymbol[j + 1]);
-            }
-            
-            udosymbol[udosymbol_counter][0] = EOS;
-            udosymbol_counter--;
-            found = TRUE;
-         }
-      }
-   }
-
-   if (!found)
-   {
-      error_unset_symbol(s);
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  add_udosymbol():
-*     ???
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void add_udosymbol(
-
-const char  *s)  /* */
-{
-   if (udosymbol_counter < MAX_UDOSYMBOLS)
-   {
-      if (s[0] != EOS)
-      {
-         udosymbol_counter++;
-         strcpy(udosymbol[udosymbol_counter], s);
-      }
-      else
-      {
-         error_missing_parameter(CMD_SET);
-      }
-   }
-   else
-   {
-      error_too_many_symbols();
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  udosymbol_set():
-*     ???
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL _BOOL udosymbol_set(
-
-const char       *s)  /* */
-{
-   register int   i;  /* */
-   
-
-   if (udosymbol_counter >= 0)
-   {
-      for (i = 0; i <= udosymbol_counter; i++)
-      {
-         if (strstr(s, udosymbol[i]) != NULL)
-         {
-            return TRUE;
-         }
-      }
-   }
-
-   return FALSE;
+   tokcpy2(n, sizeof(n));
+   return strstr(n, "off") != NULL;
 }
 
 
@@ -2338,10 +2213,9 @@ const char       *s)  /* */
 
 LOCAL void c_set(void)
 {
-   char   s[512];  /* */
+   char s[512];
    
-
-   tokcpy2(s, 512);
+   tokcpy2(s, sizeof(s));
    add_udosymbol(s);
 }
 
@@ -2361,10 +2235,9 @@ LOCAL void c_set(void)
 
 LOCAL void c_unset(void)
 {
-   char   s[512];  /* */
+   char s[512];
    
-
-   tokcpy2(s, 512);
+   tokcpy2(s, sizeof(s));
    del_udosymbol(s);
 }
 
@@ -2384,20 +2257,16 @@ LOCAL void c_unset(void)
 
 GLOBAL void c_hline(void)
 {
-   int    indent;  /* */
-   char   n[128];  /* */
-   
+   int indent;
+   char  n[128];
    
    switch (desttype)
    {
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      if (html_doctype < XHTML_STRICT)
-         outln(HTML_HR);
-      else
-         outln(XHTML_HR);
-         
+      outln(xhtml_hr);
+      outln("");
       break;
       
    case TOWIN:
@@ -14493,6 +14362,7 @@ GLOBAL _BOOL udo(char *datei)
    get_timestr(timer_start);
 
    init_modules();
+   init_udosymbol_pass1();
    set_format_flags();
 
    bFatalErrorDetected = FALSE;
@@ -14727,6 +14597,7 @@ GLOBAL _BOOL udo(char *datei)
          init_module_toc_pass2();
          init_module_tp_pass2();
          init_module_img_pass2();
+         init_udosymbol_pass2();
 
                                           /* richtigen Einsatz von !if testen */
                                           /*r6pl4: && !bBreakInside */
@@ -15221,6 +15092,7 @@ char        *datei)        /* */
    get_timestr(timer_start);
 
    init_modules();
+   init_udosymbol_pass1();
    set_format_flags();
 
    bFatalErrorDetected = FALSE;
@@ -15401,6 +15273,7 @@ char        *datei)        /* */
          init_module_toc_pass2();
          init_module_tp_pass2();
          init_module_img_pass2();
+         init_udosymbol_pass2();
 
                                           /* richtigen Einsatz von !if testen */
                                           /*r6pl4: && !bBreakInside */
@@ -15780,7 +15653,7 @@ LOCAL void init_modules(void)
 
 /*******************************************************************************
 *
-*  init_modules():
+*  exit_modules():
 *     exit various modules
 *
 *  Return:
@@ -15790,9 +15663,10 @@ LOCAL void init_modules(void)
 
 LOCAL void exit_modules(void)
 {
-   exit_module_toc();                     /* 6.3.19[vj] for speedup there isn't done free(), um_exit() will do this */
-   exit_module_par();                     /* 6.3.19[vj] for speedup there isn't done free(), um_exit() will do this */
-   exit_module_tp();                      /* 6.3.19[vj] Needs to be checked, if um_exit() can do a faster cleanup here */
+   exit_module_toc();
+   exit_module_par();
+   exit_module_tp();
+   exit_udosymbol();
 }
 
 
@@ -15954,10 +15828,7 @@ GLOBAL void init_udo_vars(void)
    token_reset();
 
    /* clear all symbols */
-   udosymbol_counter= -1;
-   
-   for (i = 0; i < MAX_UDOSYMBOLS; udosymbol[i++][0] = EOS)
-      ;
+   init_udosymbol();
 
 
    /*   -------------------------------------------------- */

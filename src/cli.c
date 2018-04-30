@@ -81,6 +81,7 @@
 #include "cfg.h"
 #include "msg.h"
 #include "udo.h"
+#include "udosym.h"
 #include "udomem.h"
 #include "img.h"
 #ifdef HAVE_SETLOCALE

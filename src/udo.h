@@ -199,10 +199,6 @@ GLOBAL char        token[MAX_TOKENS][MAX_TOKEN_LEN + 1];
 GLOBAL int         token_counter;
 GLOBAL _BOOL     tokens_contain_item;
 
-GLOBAL char        udosymbol[MAX_UDOSYMBOLS][MAX_UDOSYMBOL_LEN + 1];
-GLOBAL int         udosymbol_counter;
-
-
 GLOBAL _BOOL     use_auto_subtocs;      /* create sub TOCs automatically? */
 GLOBAL _BOOL     use_auto_subsubtocs;
 GLOBAL _BOOL     use_auto_subsubsubtocs;
@@ -452,16 +448,6 @@ GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd);
 
    /* ? */
 GLOBAL _BOOL get_html_color(const char *s, char *h);
-
-
-   /* --- commandline symbol manager --- */
-
-   /* ? */
-GLOBAL void del_udosymbol(const char *s);
-   /* ? */
-GLOBAL void add_udosymbol(const char *s);
-   /* ? */
-GLOBAL _BOOL udosymbol_set(const char *s);
 
 
    /* --- index and TOC manager --- */
