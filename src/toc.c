@@ -1720,7 +1720,7 @@ GLOBAL _BOOL check_output_raw_header(void)
       }
       else
       {
-         if (sDocRawHeaderFilename = 0)
+         if (sDocRawHeaderFilename != 0)
          {
             return output_raw_file(file_lookup(sDocRawHeaderFilename));
          }
@@ -2609,7 +2609,7 @@ const _BOOL   invisible)      /* */
                 cbb[512];       /* */
    int          ci,             /* */
                 ui;             /* */
-   char         hlp_name[256];  /* */
+   char         hlp_name[256 + 10];
    
    const char *btn_disable = "!{\\footnote ! DisableButton(\"BTN_UP\") }";
    const char *btn_enable  = "!{\\footnote ! EnableButton(\"BTN_UP\");";
@@ -3143,7 +3143,7 @@ _BOOL     keywords)             /* */
    /* New feature #0000054 in V6.5.2 [NHz] */
    if (html_header_date)
    {
-      char     zone[10] = "+00:00";  /* */
+      char     zone[20] = "+00:00";  /* */
       time_t   uhrzeit;              /* */
       int      hour_local,           /* */
                min_local,            /* */
@@ -3637,7 +3637,7 @@ LOCAL void output_html_doctype(void)
 LOCAL _BOOL html_new_file(void)
 {
    char   t[512],        /* */
-          xml_lang[15],  /* */
+          xml_lang[80],
           xml_ns[40];    /* */
           
    
@@ -3784,7 +3784,7 @@ GLOBAL void output_html_header(
 
 const char  *t)                 /* */
 {
-   char      xml_lang[15],      /* */
+   char      xml_lang[80],
              xml_ns[40];        /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
@@ -5804,8 +5804,8 @@ const void  *_p2)              /* */
    char      p2_tocname[512];  /* buffer for 2nd entry name in TOC */
 
                                           /* cast the pointers to right structure */
-   HTML_INDEX *p1 = (HTML_INDEX *)_p1;
-   HTML_INDEX *p2 = (HTML_INDEX *)_p2;
+   const HTML_INDEX *p1 = (const HTML_INDEX *)_p1;
+   const HTML_INDEX *p2 = (const HTML_INDEX *)_p2;
 
    strcpy(p1_tocname, p1->sortname);      /* copy the entry names */
    strcpy(p2_tocname, p2->sortname);
@@ -6790,9 +6790,9 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
    int          ti,              /* */
                 ui,              /* */
                 chapter,         /* */
-                nr1,             /* */
-                nr2,             /* */
-                nr3,             /* */
+                nr1 = 0,
+                nr2 = 0,
+                nr3 = 0,
                 nr4,             /* */
                 nr5,             /* */
                 nr6;             /* */
@@ -9578,31 +9578,30 @@ _BOOL           apx)                  /* TRUE: appendix output */
    _BOOL        first = TRUE;         /* */
    _BOOL        output_done = FALSE;  /* */
    _BOOL        old;                  /* */
-   int            p2_n1,                /* buffers */
-                  p2_n2,
-                  p2_n3,
-                  p2_n4,
-                  p2_n5,
-                  p2_n6;
+   int            p2_n1 = 0,
+                  p2_n2 = 0,
+                  p2_n3 = 0,
+                  p2_n4 = 0,
+                  p2_n5 = 0;
    int            start;                /* for() loop start point */
-   int            depth1;               /* buffers for TOC_NODE... */
-   int            depth2;
-   int            depth3;
-   int            depth4;
-   int            depth5;
-   int            depth6;
+   int            depth1 = TOC_NODE1;               /* buffers for TOC_NODE... */
+   int            depth2 = TOC_NODE2;
+   int            depth3 = TOC_NODE3;
+   int            depth4 = TOC_NODE4;
+   int            depth5 = TOC_NODE5;
+   int            depth6 = TOC_NODE6;
    _BOOL        last1 = FALSE;        /* TRUE: this node is last node */
    _BOOL        last2 = FALSE;        /* TRUE: this node is last subnode */
    _BOOL        last3 = FALSE;        /* TRUE: this node is last subsubnode */
    _BOOL        last4 = FALSE;        /* TRUE: this node is last subsubsubnode */
    _BOOL        last5 = FALSE;        /* TRUE: this node is last subsubsubsubnode */
    _BOOL        last6 = FALSE;        /* TRUE: this node is last subsubsubsubsubnode */
-   char          *form_x1;
-   char          *form_x2;
-   char          *form_x3;
-   char          *form_x4;
-   char          *form_x5;
-   char          *form_x6;
+   char          *form_x1 = form_t1_n1;
+   char          *form_x2 = form_t1_n2;
+   char          *form_x3 = form_t1_n3;
+   char          *form_x4 = form_t1_n4;
+   char          *form_x5 = form_t1_n5;
+   char          *form_x6 = form_t1_n6;
 
    
    if (desttype == TOLYX)                 /* LYX doesn't support !toc */
@@ -9858,7 +9857,6 @@ _BOOL           apx)                  /* TRUE: appendix output */
          p2_n3 = p2_apx_n3;
          p2_n4 = p2_apx_n4;
          p2_n5 = p2_apx_n5;
-         p2_n6 = p2_apx_n6;
       }
       else
       {
@@ -9867,7 +9865,6 @@ _BOOL           apx)                  /* TRUE: appendix output */
          p2_n3 = p2_toc_n3;
          p2_n4 = p2_toc_n4;
          p2_n5 = p2_toc_n5;
-         p2_n6 = p2_toc_n6;
       }
       
       start = last_n5_index;
@@ -11415,9 +11412,12 @@ NEXT_TOC:
          if (!apx_available)
             outln("");
       }
-   
+      outln("");
+      break;
+      
    default:
       outln("");
+      break;
    }
 
 DONE:   
@@ -12308,7 +12308,7 @@ LOCAL void output_appendix_line(void)
 GLOBAL void c_tableofcontents(void)
 {
    char   name[256],
-          hlp_name[256];
+          hlp_name[256 + 10];
    char *n;
    int    i;
    int    depth;
@@ -13447,47 +13447,33 @@ GLOBAL void set_mapping(void)
 
 GLOBAL void set_chapter_image(void)
 {
-   char   s[512],  /* */
-         *ptr;     /* */
-   
+   _UWORD bitcnt;
+   char s[MYFILE_FULL_LEN], *ptr;
    
    if (!check_toc_and_token())
       return;
    
    fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
-   sprintf(s, "%s%s%s", tmp_driv, tmp_path, tmp_name);
+   sprintf(s, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, sDocImgSuffix);
 
    if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
-   {
       replace_char(s, '\\', '/');
-   }
-
-   ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
-
-   if (!ptr)
-   {  
+   
+   ptr = strdup(s);
+   
+   if (ptr == NULL)
+   {
       bFatalErrorDetected = TRUE;
       return;
    }
 
-   strcpy(ptr, s);
    toc[p1_toc_counter]->image = ptr;
 
    if (desttype != TOHTM && desttype != TOMHH && desttype != TOHAH)
       return;
 
-
-   /* Ausmasse des Icons ermitteln, falls es ein GIF ist */
-   /* In s[] steht noch der Dateiname ohne Endung */
-   
-   if (strcmp(sDocImgSuffix, ".gif") != 0)
-      return;
-
-   strinsert(s, old_outfile.path);
-   strinsert(s, old_outfile.driv);
-   strcat(s, ".gif");
-   path_adjust_separator(s);
-   get_gif_size(s, &toc[p1_toc_counter]->uiImageWidth, &toc[p1_toc_counter]->uiImageHeight);
+   /* Ausmasse des Icons ermitteln */
+   get_picture_size(s, NULL, &toc[p1_toc_counter]->uiImageWidth, &toc[p1_toc_counter]->uiImageHeight, &bitcnt);
 }
 
 
@@ -13506,64 +13492,33 @@ GLOBAL void set_chapter_image(void)
 
 GLOBAL void set_chapter_icon(void)
 {
-   char   s[512],  /* */
-         *ptr;     /* */
-   
+   char s[MYFILE_FULL_LEN], *ptr;
+   _UWORD bitcnt;
    
    if (!check_toc_and_token())
       return;
    
    fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
    sprintf(s, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, sDocImgSuffix);
-
+   
    if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
-   {
       replace_char(s, '\\', '/');
-   }
 
-   ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
-
-   if (!ptr)
+   ptr = strdup(s);
+   
+   if (ptr == NULL)
    {
       bFatalErrorDetected = TRUE;
       return;
    }
 
-   strcpy(ptr, s);
    toc[p1_toc_counter]->icon = ptr;
 
-   if (desttype != TOHTM && desttype != TOHAH)
+   if (desttype != TOHTM)
       return;
 
-   /* Ausmasse des Icons ermitteln, falls es ein GIF ist */
-   /* In s[] steht noch der Dateiname ohne Endung */
-   
-   if (strcmp(sDocImgSuffix, ".gif") == 0)
-   {
-      strinsert(s, old_outfile.path);
-      strinsert(s, old_outfile.driv);
-      path_adjust_separator(s);
-      
-      if (!get_gif_size(s, &toc[p1_toc_counter]->uiIconWidth, &toc[p1_toc_counter]->uiIconHeight))
-      {
-         error_read_gif (s);
-      }
-   }
-
-   /* Ausmasse des Icons ermitteln, falls es ein JPEG ist */
-   /* In s[] steht noch der Dateiname ohne Endung */
-   
-   if ((strcmp(sDocImgSuffix, ".jpg") == 0) || (strcmp(sDocImgSuffix, ".jpeg") == 0))
-   {
-      strinsert(s, old_outfile.path);
-      strinsert(s, old_outfile.driv);
-      path_adjust_separator(s);
-
-      if (!get_jpg_size(s, &toc[p1_toc_counter]->uiIconWidth, &toc[p1_toc_counter]->uiIconHeight))
-      {
-         error_read_jpeg(s);
-      }
-   }
+   /* Ausmasse des Icons ermitteln */
+   get_picture_size(s, NULL, &toc[p1_toc_counter]->uiIconWidth, &toc[p1_toc_counter]->uiIconHeight, &bitcnt);
 }
 
 
@@ -13582,45 +13537,33 @@ GLOBAL void set_chapter_icon(void)
 
 GLOBAL void set_chapter_icon_active(void)
 {
-   char   s[512],  /* */
-         *ptr;     /* */
-   
+   char s[MYFILE_FULL_LEN], *ptr;
+   _UWORD bitcnt;
    
    if (!check_toc_and_token())
       return;
    
    fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
    sprintf(s, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, sDocImgSuffix);
-
+   
    if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
-   {
       replace_char(s, '\\', '/');
-   }
 
-   ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
-
-   if (!ptr)
+   ptr = strdup(s);
+   
+   if (ptr == NULL)
    {
       bFatalErrorDetected = TRUE;
       return;
    }
 
-   strcpy(ptr, s);
    toc[p1_toc_counter]->icon_active = ptr;
 
-   if (desttype != TOHTM && desttype != TOHAH)
+   if (desttype != TOHTM)
       return;
 
-   /* Ausmasse des Icons ermitteln, falls es ein GIF ist */
-   /* In s[] steht noch der Dateiname ohne Endung */
-   
-   if (strcmp(sDocImgSuffix, ".gif") != 0)
-      return;
-
-   strinsert(s, old_outfile.path);
-   strinsert(s, old_outfile.driv);
-   path_adjust_separator(s);
-   get_gif_size(s, &toc[p1_toc_counter]->uiIconActiveWidth, &toc[p1_toc_counter]->uiIconActiveHeight);
+   /* Ausmasse des Icons ermitteln */
+   get_picture_size(s, NULL, &toc[p1_toc_counter]->uiIconActiveWidth, &toc[p1_toc_counter]->uiIconActiveHeight, &bitcnt);
 }
 
 

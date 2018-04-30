@@ -398,8 +398,8 @@ GLOBAL void c_pch_styles(char *s)
 GLOBAL void c_rtf_styles(char *s)
 {
    char *ptr;
-   char time_insert[50];
-   char time_delete[50];
+   char time_insert[52];
+   char time_delete[52];
    char fs[20];
    size_t l;
    long time;
@@ -832,7 +832,7 @@ GLOBAL void c_internal_styles(char *s)
 
       if (change_date[0] == EOS)
       {
-         char     zone[10] = "+00:00";  /* */
+         char     zone[20] = "+00:00";  /* */
          time_t   uhrzeit;              /* */
          int      hour_local,           /* */
                   min_local,            /* */

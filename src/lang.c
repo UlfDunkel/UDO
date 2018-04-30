@@ -75,16 +75,17 @@
 #include <time.h>
 #include "udoport.h"
 
-#include "version.h"                      /* IMPORTANT macros! */ 
-#include "constant.h"                     /* IMPORTANT macros! */
-#include "udo_type.h"                     /* several type definitions */
-#include "chr.h"                          /* character code maps */
-#include "toc.h"                          /* !node, !alias, !label, !toc */
-#include "udo.h"                          /* global prototypes */
-#include "lang_utf.h"                     /* localized strings */
+#include "version.h"					/* IMPORTANT macros! */
+#include "constant.h"					/* IMPORTANT macros! */
+#include "udo_type.h"					/* several type definitions */
+#include "chr.h"						/* character code maps */
+#include "toc.h"						/* !node, !alias, !label, !toc */
+#include "udo.h"						/* global prototypes */
+#include "udointl.h"
+#include "lang_utf.h"					/* localized strings */
 
 #include "export.h"
-
+#include "lang.h"
 
 
 
@@ -109,7 +110,7 @@
 *
 ******************************************|************************************/
 
-GLOBAL void init_lang_date(void)
+static void init_lang_date(void)
 {
    time_t      timer;                  /* */
    struct tm  *zeit;                   /* */
@@ -233,7 +234,7 @@ GLOBAL void init_lang_date(void)
 GLOBAL void init_lang(void)
 {
    int    i = 0;    /* counter for MONTHS[] */
-   LANG  *plang;    /* ^ LANG structure in UDOSTRINGS[] */
+   const LANG  *plang;  /* ^ LANG structure in UDOSTRINGS[] */
    int    iEncBuf;  /* buffer for iEncodingSource */
 
 
@@ -244,7 +245,7 @@ GLOBAL void init_lang(void)
       if (UDOSTRINGS[i].lan == destlang)  /* desired language found */
       {
                                           /* get ^ to strings */
-         plang = (LANG*)&UDOSTRINGS[i].udostring;
+         plang = &UDOSTRINGS[i].udostring;
                                           /* copy these strings! */
          memcpy(&lang, plang, sizeof(LANG));
          break;                           /* done! */
@@ -294,6 +295,3 @@ GLOBAL void init_lang(void)
    
    toc_init_lang();
 }
-
-
-/* +++ EOF +++ */

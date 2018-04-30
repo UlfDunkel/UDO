@@ -79,10 +79,10 @@
 
 typedef struct _profile
 {
-   char    *key;
-   char     type;
-   void    *val;                          /* nicht const, da gecastet wird */
-   size_t   maxlen;
+   const char  *key;
+   char         type;
+   void        *val;                          /* nicht const, da gecastet wird */
+   size_t       maxlen;
 }  PROFILE;
 
 
@@ -347,7 +347,7 @@ GLOBAL int read_profile(void)
    file = fopen(profilefull, "r");        /* try to open profile */
    
    if (!file)                             /* failed */
-      return (CFG_READ_NOT_FOUND);
+      return CFG_READ_NOT_FOUND;
       
 
    memset(&config, 0, sizeof(CONFIG));    /* reset all profile parameters */
@@ -395,6 +395,7 @@ GLOBAL int read_profile(void)
                      
                   case 'i':               /* integer */
                      *(int *)profile[i].val = atoi(proval);
+                     break;
                   }
                   
                   found = TRUE;
@@ -455,7 +456,7 @@ GLOBAL int write_profile(void)
    file = myFwopen(profilefull, TOASC);   /* try to open profile */
 
    if (file == NULL)                      /* failed */
-      return (CFG_WRITE_NOT_SAVED);
+      return CFG_WRITE_NOT_SAVED;
    
    i = 0;
    
@@ -481,6 +482,7 @@ GLOBAL int write_profile(void)
          
       case '-':                            /* ??? */
          fprintf(file, "\n");
+         break;
       }
       
       i++;
@@ -674,6 +676,3 @@ const char  *prgos)      /* ^ program OS */
 
    profilefull[0] = EOS;
 }
-
-
-/* +++ EOF +++ */

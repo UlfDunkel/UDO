@@ -65,21 +65,21 @@
 #define TOINF                 8           /* GNU-Texinfo */
 #define TOTVH                 9           /* Turbo-Vision-Help */
 #define TOLDS                10           /* Linuxdoc-SGML */
-#define TOAQV                11           /* Apple-QuickView */   /* PL6 */
-#define TOHPH                12           /* HP Helptag SGML */   /* PL10 */
-#define TOLYX                13           /* LyX */   /* PL13 */
-#define TONRO                14           /* nroff, was auch immer */   /* PL15 */
-#define TOSRC                15           /* C-Sourcecode */   /* PL16 */
-#define TOSRP                16           /* Pascal-Sourcecode */   /* Pl16 */
-#define TOIPF                17           /* OS/2-IPF-Format */   /* r6pl2 */
-#define TODRC                18           /* Dave's Readme Compiler */   /* r6pl2 */
-#define TOMHH                19           /* HTMLHelp */   /* r6pl2 */
-#define TOPDL                20           /* PDFLaTeX */   /* r6pl8 */
-#define TOWH4                21           /* WinHelp4 */   /* r6pl8 */
-#define TOUDO                22           /* UDO-Format */   /* r6pl9 */
-#define TOKPS                23           /* Krueger's PostScript */   /* r6pl11 */
-#define TOAMG                24           /* AmigaGuide */   /* r6pl12 */
-#define TOHAH                25           /* HTML Apple Help */   /* V6.5.17 */
+#define TOAQV                11           /* Apple-QuickView */
+#define TOHPH                12           /* HP Helptag SGML */
+#define TOLYX                13           /* LyX */
+#define TONRO                14           /* nroff, was auch immer */
+#define TOSRC                15           /* C-Sourcecode */
+#define TOSRP                16           /* Pascal-Sourcecode */
+#define TOIPF                17           /* OS/2-IPF-Format */
+#define TODRC                18           /* Dave's Readme Compiler */
+#define TOMHH                19           /* HTMLHelp */
+#define TOPDL                20           /* PDFLaTeX */
+#define TOWH4                21           /* WinHelp4 */
+#define TOUDO                22           /* UDO-Format */
+#define TOKPS                23           /* Krueger's PostScript */
+#define TOAMG                24           /* AmigaGuide */
+#define TOHAH                25           /* HTML Apple Help */
 
 #define MAXDESTTYPE          26           /* Anzahl Ausgabeformate */
 
@@ -87,7 +87,7 @@
 #define TOGER                 0           /* German */
 #define TOENG                 1           /* English */
 #define TOFRA                 2           /* French */
-#define TOITA                 3           /* Italan */
+#define TOITA                 3           /* Italian */
 #define TOSPA                 4           /* Spanish */
 #define TOSWE                 5           /* Swedish */
 #define TOPOR                 6           /* Portugese */
@@ -124,6 +124,7 @@
 #define FTHHK                39           /* Filetype HTML-Help-Index      (HTML) */
 #define FTHHC                40           /* Filetype HTML-Help-Contents   (HTML) */
 #define FTCNT                41           /* Filetype WinHelp-Contents   (ASCII) */
+#define FTPNG                42           /* Filetype PNG */
 
 
 
@@ -138,7 +139,7 @@
 #define MAXENVLEVEL          10           /* max. Umgebungstiefe */
 
 
-#define ENV_NONE           0x00           /* keine Umgebung */   /*r6pl2*/
+#define ENV_NONE           0x00           /* keine Umgebung */
 #define ENV_ITEM           0x01           /* itemize */
 #define ENV_ENUM           0x02           /* enumerate */
 #define ENV_DESC           0x03           /* description */
@@ -148,13 +149,13 @@
 #define ENV_RIGH           0x07           /* flushright */
 #define ENV_LEFT           0x08           /* flushleft */
                                           /* --- Platz fuer neue --- */
-#define ENV_VERBATIM       0x10           /* verbatim */   /*r6pl2*/
-#define ENV_RAW            0x11           /* raw */   /*r6pl2*/
-#define ENV_TABLE          0x12           /* table */   /*r6pl2*/
-#define ENV_SOURCECODE     0x13           /* sourcecode */   /*r6pl2*/
-#define ENV_COMMENT        0x14           /* comment */   /*r6pl2*/
-#define ENV_LINEDRAW       0x15           /* linedraw */   /*r6pl5*/
-#define ENV_PREFORMATTED   0x16           /* wie verbatim */   /*r6pl5*/
+#define ENV_VERBATIM       0x10           /* verbatim */
+#define ENV_RAW            0x11           /* raw */
+#define ENV_TABLE          0x12           /* table */
+#define ENV_SOURCECODE     0x13           /* sourcecode */
+#define ENV_COMMENT        0x14           /* comment */
+#define ENV_LINEDRAW       0x15           /* linedraw */
+#define ENV_PREFORMATTED   0x16           /* wie verbatim */
 
 #define LIST_NORMAL           0           /* Listen-Typ */
 #define LIST_BOLD             1
@@ -284,7 +285,6 @@
 #define HTML_MODERN_COLOR_VLINK 8
 #define HTML_MODERN_COLOR_ALINK 9
 
-/* New in r6pl16 [NHz] */
 #define HTML_OLD              0           /* HTML 3.2 */
 #define HTML_STRICT           1           /* HTML 4.01 */
 #define HTML_TRANS            2           /* HTML 4.01 Transitional */
@@ -326,6 +326,8 @@
 #define IMG_FC_NAME            "udo_fc.img"
 #define IMG_FO_NAME            "udo_fo.img"
 #define IMG_MW_NAME            "udo_mw.img"
+#define EPS_MW_NAME            "udo_mw.eps"
+#define PNG_MW_NAME            "udo_mw.png"
 
 #define WIN_TITLE_NODE_NAME    "UDON0000" /* vgl. chr.c: node2NrWinhelp() */
 #define WIN_UDO_NODE_NAME      "UDONFFFF" /* vgl. chr.c: node2NrWinhelp() */
@@ -412,7 +414,6 @@
 #define TEMPO_S_LEN           4
 #define TEMPO_S2_LEN          4
 
-/* New in V6.5.5 [NHz] */
 #define KPSPO_S                "\033\007\003\033"      /* Parenthesis for Postscript */
 #define KPSPO_S_LEN           4
 #define KPSPC_S                "\033\007\004\033"
@@ -520,5 +521,3 @@
 #endif   /* USE_LATIN1_CHARSET */
 
 #endif /* CONSTANT_H */
-
-/* +++ EOF +++ */

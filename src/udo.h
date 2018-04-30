@@ -190,7 +190,6 @@ GLOBAL _BOOL     bErrorDetected;        /* Fehler aufgetreten? */
 GLOBAL _BOOL     bBreakHappened;        /* wuenscht User Abbruch */
 GLOBAL _BOOL     bBreakInside;          /* !break gelesen */
 
-GLOBAL _BOOL     udo_running;           /* Ist UDO gerade am werkeln? */
 GLOBAL _BOOL     uses_udolink;          /* Wird !udolink benutzt? */
 GLOBAL _BOOL     uses_toplink;          /* Wird !toplink benutzt? */
 
@@ -211,7 +210,7 @@ GLOBAL _BOOL     use_auto_subsubsubsubtocs;
 GLOBAL _BOOL     use_auto_subsubsubsubsubtocs;
 
 GLOBAL _BOOL     use_auto_toptocs;      /* autom. Ueber-Toc's anlegen? */
-GLOBAL _BOOL     no_auto_toptocs_icons; /* ... aber ohne Icons */   /*r6pl13*/
+GLOBAL _BOOL     no_auto_toptocs_icons; /* ... aber ohne Icons */
 GLOBAL _BOOL     use_compressed_tocs;   /* Kurze Inhaltsverzeichnisse default? */
 
 GLOBAL _BOOL     use_compressed_envs;   /* compress all supporting environments */
@@ -235,11 +234,10 @@ GLOBAL _BOOL     use_label_inside_index;/* Labels in den Index uebernehmen? */
 GLOBAL _BOOL     use_udo_index;         /* Soll UDO einen Index ausgeben? */
 GLOBAL _BOOL     use_mirrored_indices;  /* !index I1 !! I2 auch spiegeln? */
 GLOBAL _BOOL     use_comments;          /* Kommentare ausgeben (!rem [...]) */
-GLOBAL _BOOL     use_auto_helpids;      /* HelpIDs automatisch generieren? */      /* r6pl13 */
+GLOBAL _BOOL     use_auto_helpids;      /* HelpIDs automatisch generieren? */
 
 GLOBAL _BOOL     no_umlaute;            /* Umlaute durch ae etc. ersetzen? */
 GLOBAL _BOOL     no_headlines;          /* Keine Titelzeilen? */
-GLOBAL _BOOL     no_titles;             /* Keine Ueberschriften? */
 GLOBAL _BOOL     no_bottomlines;        /* Keine Fusszeilen? */
 GLOBAL _BOOL     no_popup_headlines;    /* In Popups nie eine Titelzeile? */
 GLOBAL _BOOL     no_footers;            /* Keine speziellen Fusszeilen? */
@@ -352,9 +350,9 @@ GLOBAL int         table_alignment;       /* Ausrichtung der Tabellen */
 
 GLOBAL char        sDocWinPrefixID[64];   /* Prefix fuer autom. Help-IDs */
 
-GLOBAL char        sDrcBcolor[3];         /* DRC-Farbe fuer bold r6pl5 */
-GLOBAL char        sDrcIcolor[3];         /* DRC-Farbe fuer italic r6pl5 */
-GLOBAL char        sDrcUcolor[3];         /* DRC-Farbe fuer underlined r6pl5 */
+GLOBAL char        sDrcBcolor[3];         /* DRC-Farbe fuer bold */
+GLOBAL char        sDrcIcolor[3];         /* DRC-Farbe fuer italic */
+GLOBAL char        sDrcUcolor[3];         /* DRC-Farbe fuer underlined */
 GLOBAL int         iDrcFlags;             /* DRC-Flags fuer EDIT, SAVE, PRINT, ... */
 
 GLOBAL int         iManPageLines;         /* ausgegebene Zeilen pro Seite */
@@ -433,9 +431,9 @@ GLOBAL void stringcenter(char *string, size_t length);
    /* ? */
 GLOBAL void strcenter(char *string, size_t length);
    /* ? */
-GLOBAL void outlncenter(char *s);
+GLOBAL void outlncenter(const char *s);
    /* ? */
-GLOBAL void outlncenterfill(char *s);
+GLOBAL void outlncenterfill(const char *s);
    /* ? */
 GLOBAL void strright(char *string, size_t length);
    /* ? */
@@ -476,17 +474,6 @@ GLOBAL void print_index(void);
 GLOBAL void output_htmlhelp_index(const int count, const char *x0, const char *x1, const char *x2);
 
 
-   /* --- miscellaneous --- */
-
-   /* ? */
-GLOBAL void c_debug(void);
-   /* ? */
-GLOBAL void c_udolink(void);
-   /* ? */
-GLOBAL void c_toplink(void);
-
-
-
    /* --- include --- */
 
    /* ? */
@@ -496,9 +483,9 @@ GLOBAL void c_include(void);
    /* --- token manager --- */
 
    /* ? */
-GLOBAL void str2tok(char *s);
+GLOBAL void str2tok(const char *s);
    /* ? */
-GLOBAL size_t toklen(char *s);
+GLOBAL size_t toklen(const char *s);
    /* ? */
 GLOBAL void tokcat(char *s, size_t maxlen);
    /* ? */

@@ -50,7 +50,7 @@
 ******************************************|************************************/
 
 #ifndef UDO_IMG_H
-#define   UDO_IMG_H
+#define UDO_IMG_H
 
 
 
@@ -81,7 +81,7 @@
 ******************************************|************************************/
 
 typedef struct _bmpheader
-   {
+{
    _UBYTE   bfType[2];          /*  0 */   /* File ID ('BM') */
    _UBYTE   bfSize[4];          /*  2 */   /* File size */
    _UBYTE   reserved1[2];       /*  6 */
@@ -98,22 +98,25 @@ typedef struct _bmpheader
    _UBYTE   biYPels[4];         /* 42 */   /* vertikale Aufloesung */
    _UBYTE   biClrUsed[4];       /* 46 */   /* Zahl der benutzten Farben */
    _UBYTE   biClrImp[4];        /* 50 */   /* Zahl der wichtigen Farben */
-   } BMPHEADER;
+} BMPHEADER;
 
 
 typedef struct _gifheader
-   {
+{
    _UBYTE   gif_signature[3];              /* GIF */
    _UBYTE   gif_version[3];                /* 87a oder 89a */
    _UBYTE   gif_width_lo;                  /* Breite Low-Byte */
    _UBYTE   gif_width_hi;                  /*        High-Byte */
    _UBYTE   gif_height_lo;                 /* Hoehe Low-Byte */
    _UBYTE   gif_height_hi;                 /*       High-Byte */
-   } GIFHEADER;
+   _UBYTE   flags;
+   _UBYTE   gif_background;
+   _UBYTE   gif_ratio;
+} GIFHEADER;
 
 
 typedef struct _imgheader
-   {
+{
    _UBYTE   im_version[2];
    _UBYTE   im_headerlength[2];            /* header length in words */
    _UBYTE   im_nplanes[2];                 /* # of planes */
@@ -126,11 +129,11 @@ typedef struct _imgheader
    _UBYTE   im_scanwidth_lo;
    _UBYTE   im_nlines_hi;                  /* height in pixels */
    _UBYTE   im_nlines_lo;
-   } IMGHEADER;
+} IMGHEADER;
 
 
 typedef struct _jpgheader
-   {
+{
    _UBYTE   SOI[2];                        /* Start of Image (SOI) Marker */
    _UBYTE   APP0[2];                       /* Applicaion (APP0) Marker    */
    _UBYTE   APPO_lenght[2];
@@ -139,21 +142,21 @@ typedef struct _jpgheader
    _UBYTE   APP0_Units[1];
    _UBYTE   APP0_X_Density[2];
    _UBYTE   APP0_Y_Density[2];
-   } JPGHEADER;
+} JPGHEADER;
 
 
 typedef struct _mspheader
-   {
+{
    _UBYTE   msp_res[4];         /*  0 */   /* Magic 'LinS' */
    _UBYTE   msp_width_lo;       /*  4 */   /* Breite */
    _UBYTE   msp_width_hi;
    _UBYTE   msp_height_lo;      /*  6 */   /* Hoehe */
    _UBYTE   msp_height_hi;
-   } MSPHEADER;
+} MSPHEADER;
 
 
 typedef struct _pcxheader
-   {
+{
    _UBYTE   pcx_res[4];         /*  0 */
    _UBYTE   pcx_left_lo;
    _UBYTE   pcx_left_hi;
@@ -163,11 +166,14 @@ typedef struct _pcxheader
    _UBYTE   pcx_right_hi;
    _UBYTE   pcx_lower_lo;
    _UBYTE   pcx_lower_hi;
-   } PCXHEADER;
+   _UBYTE   encoding[2];
+   _UBYTE   planes[2];
+   _UBYTE   bitsperpixel[2];
+} PCXHEADER;
 
 
 typedef struct _pngheader
-   {
+{
    _UBYTE   png_res1[1];                   /* 0x89 */
    _UBYTE   png_signature[3];              /* PNG */
    _UBYTE   png_res2[12];                  /* <???> */
@@ -177,11 +183,7 @@ typedef struct _pngheader
    _UBYTE   png_res4[2];                   /* Fuer groessere Bilder? */
    _UBYTE   png_height_hi;                 /* Hoehe Low-Byte */
    _UBYTE   png_height_lo;                 /*       High-Byte */
-   } PNGHEADER;
-
-#endif   /* UDO_IMG_H */
-
-
+} PNGHEADER;
 
 
 
@@ -193,39 +195,39 @@ typedef struct _pngheader
 
    /* --- UDO HTML navigation images flags --- */
 
-GLOBAL _BOOL   bGifHmSaved, 
+GLOBAL _BOOL   bGifHmSaved,
                  bGifNoHmSaved;
-GLOBAL _BOOL   bGifUpSaved, 
+GLOBAL _BOOL   bGifUpSaved,
                  bGifNoUpSaved;
-GLOBAL _BOOL   bGifLfSaved, 
+GLOBAL _BOOL   bGifLfSaved,
                  bGifNoLfSaved;
-GLOBAL _BOOL   bGifRgSaved, 
+GLOBAL _BOOL   bGifRgSaved,
                  bGifNoRgSaved;
 GLOBAL _BOOL   bGifTpSaved;
 GLOBAL _BOOL   bGifFoSaved;
 GLOBAL _BOOL   bGifFcSaved;
 GLOBAL _BOOL   bGifFsSaved;
 GLOBAL _BOOL   bGifMwSaved;
-GLOBAL _BOOL   bGifGerSaved, 
-                  bGifEngSaved;
+GLOBAL _BOOL   bGifGerSaved,
+                 bGifEngSaved;
 
    /* --- UDO HTML navigation images names --- */
    
-GLOBAL char   sGifHmFull[512],            /* go to homepage */
-              sGifNoHmFull[512];
-GLOBAL char   sGifUpFull[512],            /* go up one chapter */
-              sGifNoUpFull[512];
-GLOBAL char   sGifLfFull[512],            /* go to previous page */
-              sGifNoLfFull[512];
-GLOBAL char   sGifRgFull[512],            /* go to next page */
-              sGifNoRgFull[512];
-GLOBAL char   sGifTpFull[512];            /* Anfang der Seite */
-GLOBAL char   sGifFoFull[512];            /* "Folder, opened" */
-GLOBAL char   sGifFcFull[512];            /* "Folder, closed" */
-GLOBAL char   sGifFsFull[512];            /* "Folder, spacer" */
-GLOBAL char   sGifMwFull[512];            /* Logo: "Made with UDO" */
-GLOBAL char   sGifGerFull[512];           /* Flagge "Deutsch" */
-GLOBAL char   sGifEngFull[512];           /* Flagge "Englisch" */
+GLOBAL FILE_ID sGifHmFull;                /* go to homepage */
+GLOBAL FILE_ID sGifNoHmFull;
+GLOBAL FILE_ID sGifUpFull;                /* go up one chapter */
+GLOBAL FILE_ID sGifNoUpFull;
+GLOBAL FILE_ID sGifLfFull;                /* go to previous page */
+GLOBAL FILE_ID sGifNoLfFull;
+GLOBAL FILE_ID sGifRgFull;                /* go to next page */
+GLOBAL FILE_ID sGifNoRgFull;
+GLOBAL FILE_ID sGifTpFull;                /* top of page */
+GLOBAL FILE_ID sGifFoFull;                /* "Folder, opened" */
+GLOBAL FILE_ID sGifFcFull;                /* "Folder, closed" */
+GLOBAL FILE_ID sGifFsFull;                /* "Folder, spacer" */
+GLOBAL FILE_ID sGifMwFull;                /* Logo: "Made with UDO" */
+GLOBAL FILE_ID sGifGerFull;               /* Flag "German" */
+GLOBAL FILE_ID sGifEngFull;               /* Flag "English" */
 
 
    /* --- UDO HTML navigation images sizes --- */
@@ -254,9 +256,9 @@ GLOBAL _BOOL   bBmpMwSaved;
 
    /* --- UDO BMP navigation images names --- */
    
-GLOBAL char   sBmpFoFull[512];            /* "Folder, opened" */
-GLOBAL char   sBmpFcFull[512];            /* "Folder, closed" */
-GLOBAL char   sBmpMwFull[512];            /* Logo: "Made with UDO" */
+GLOBAL FILE_ID sBmpFoFull;            /* "Folder, opened" */
+GLOBAL FILE_ID sBmpFcFull;            /* "Folder, closed" */
+GLOBAL FILE_ID sBmpMwFull;            /* Logo: "Made with UDO" */
 
 
 
@@ -270,11 +272,17 @@ GLOBAL _BOOL   bImgMwSaved;
 
    /* --- UDO ST-Guide navigation images names --- */
 
-GLOBAL char   sImgFoFull[512];            /* "Folder, opened" */
-GLOBAL char   sImgFcFull[512];            /* "Folder, closed" */
-GLOBAL char   sImgMwFull[512];            /* Logo: "Made with UDO" */
+GLOBAL FILE_ID sImgFoFull;                /* "Folder, opened" */
+GLOBAL FILE_ID sImgFcFull;                /* "Folder, closed" */
+GLOBAL FILE_ID sImgMwFull;                /* Logo: "Made with UDO" */
 
 
+
+GLOBAL FILE_ID sEpsMwFull;                /* Logo: "Made with UDO" */
+GLOBAL _BOOL bEpsMwSaved;
+
+GLOBAL FILE_ID sPngMwFull;                /* Logo: "Made with UDO" */
+GLOBAL _BOOL bPngMwSaved;
 
 
 
@@ -284,29 +292,21 @@ GLOBAL char   sImgMwFull[512];            /* Logo: "Made with UDO" */
 *
 ******************************************|************************************/
 
-GLOBAL void save_win_bmps(void);
-GLOBAL void save_rtf_bmps(void);
-GLOBAL void save_html_gifs(void);
-GLOBAL void save_stg_imgs(void);
-
-GLOBAL _BOOL c_img_output(const char *name, const char *caption, const _BOOL visible);
-GLOBAL void c_html_image_output(const char *name, const char *caption, const char *suffix, const int border);
-GLOBAL void c_bmp_output(const char *name, const char *caption, const _BOOL visible);
-GLOBAL _BOOL c_msp_output(const char *name, const char *caption, const _BOOL visible);
-GLOBAL _BOOL c_pcx_output(const char *name, const char *caption, const _BOOL visible);
-GLOBAL void c_eps_output(const char *name, const char *caption, const char *suffix, const _BOOL visible);
-GLOBAL void c_png_output(const char *name, const char *caption, const char *suffix, const _BOOL visible);
+GLOBAL _BOOL c_img_output(const char *name, const char *caption, _BOOL visible);
+GLOBAL void c_html_image_output(const char *name, const char *caption);
+GLOBAL void c_bmp_output(const char *name, const char *caption, _BOOL visible);
+GLOBAL _BOOL c_msp_output(const char *name, const char *caption, _BOOL visible);
+GLOBAL _BOOL c_pcx_output(const char *name, const char *caption, _BOOL visible);
+GLOBAL void c_eps_output(const char *name, const char *caption, _BOOL visible);
+GLOBAL void c_png_output(const char *name, const char *caption, _BOOL visible);
 
 GLOBAL void set_image_counter(const int i);
 
 GLOBAL void set_image_alignment(void);
 
-GLOBAL _BOOL get_gif_size(const char *filename, _UWORD *uiW, _UWORD *uiH);
-GLOBAL _BOOL get_jpg_size(const char *filename, _UWORD *uiW, _UWORD *uiH);
-GLOBAL _BOOL get_png_size(const char *filename, _UWORD *uiW, _UWORD *uiH);
+GLOBAL _BOOL get_picture_size(const char *name, char *found, _UWORD *uiW, _UWORD *uiH, _UWORD *bitcnt);
 
 GLOBAL void init_module_img_pass2(void);
 GLOBAL void init_module_img(void);
 
-
-/* +++ EOF +++ */
+#endif   /* UDO_IMG_H */

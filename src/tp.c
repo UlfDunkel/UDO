@@ -101,9 +101,8 @@
 *
 ******************************************|************************************/
 
-LOCAL _BOOL init_docinfo_data(char *data, char **var, int allow_empty);
+LOCAL _BOOL init_docinfo_data(const char *data, char **var, int allow_empty);
 LOCAL void init_titdat(void);
-LOCAL void free_titdat(char **var);
 
 
 
@@ -228,11 +227,33 @@ GLOBAL _BOOL set_mainlayout(void)
 
 /*******************************************************************************
 *
+*  free_titdat():
+*     reset all content of titdat[]
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void free_titdat(char **var)
+{
+   if (*var != NULL)
+   {
+      free(*var);
+      *var = NULL;
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
 *  set_doclayout():
 *     Setzen von Informationen fuer das Layout (neue Version)
 *
 *  Notes:
-*     New in r6pl15 [NHz]:
 *     Die Daten stehen in token[]. Ich habe die Funktion hier herein
 *     gepackt, da ich keine neue C-Datei eroeffnen wollte.
 *
@@ -246,17 +267,15 @@ GLOBAL _BOOL set_mainlayout(void)
 
 GLOBAL _BOOL set_doclayout(void)
 {
-   char   s[512],        /* */
-         *cont_format,   /* */
-         *cont_content,  /* */
-         *data,          /* */
-          format[512],   /* */
-          content[512];  /* */
-   char  *page,          /* */
-          page2[2];      /* */
-                         /* */
-   struct size_brackets   contlen;
-
+   char   s[512],
+         *cont_format,
+         *cont_content,
+         *data,
+          format[512],
+          content[512];
+   char  *page,
+          page2[2];
+   struct size_brackets contlen;
 
    tokcpy2(s, 512);
 
@@ -446,7 +465,7 @@ GLOBAL _BOOL set_doclayout(void)
 
 LOCAL _BOOL init_docinfo_data(
 
-char       *data,         /* ^ to content */
+const char     *data,         /* ^ to content */
 char      **var,          /* ^^ to variable */
 int         allow_empty)  /* TRUE: empty data are okay, FALSE: throw error message */
 {
@@ -512,30 +531,20 @@ int         allow_empty)  /* TRUE: empty data are okay, FALSE: throw error messa
 
 GLOBAL _BOOL set_docinfo(void)
 {
-   char     s[512],              /* */
-           *cont,                /* */
-           *data,                /* */
-            inhalt[512],         /* */
-           *buffer;              /* */
-   char     sDriv[512],          /* */
-            sPath[512],          /* */
-            sFile[512],          /* */
-            sSuff[512];          /* */
-   size_t   contlen;             /* */
-   char     udo_macro[]="UDO_",  /* */
-            macro_tmp[512];      /* V6.5.9 */
+   char     s[512],
+           *cont,
+           *data,
+            inhalt[512],
+           *buffer;
+   char     sDriv[512],
+            sPath[512],
+            sFile[512],
+            sSuff[512];
+   size_t   contlen;
+   _UWORD    bitcnt;
    
-   
-   tokcpy2(s, 512);                       /* */
-   
-   contlen = strlen(token[1]);            /* New in V6.5.9 [NHz] */
-   
-   um_strncpy(macro_tmp, token[1] + 1, contlen - 2, 500, "set_docinfo[1]");
-   um_strncpy(token[1], udo_macro, 5, 10, "set_docinfo[2]");
-   um_strncat(token[1], macro_tmp, (long)(contlen-2L), 500, "set_docinfo[3]");
-   add_define();
-   
-   if (desttype == TOKPS)                 /* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
+   tokcpy2(s, sizeof(s));
+   if (desttype == TOKPS)
       node2postscript(s, KPS_PS2DOCINFO);
    
    contlen = get_brackets_ptr(s, &cont, &data);
@@ -546,18 +555,18 @@ GLOBAL _BOOL set_docinfo(void)
       return FALSE;
    }
    
-   inhalt[0] = EOS; 
+   inhalt[0] = EOS;
    strncpy(inhalt, cont, contlen);
    inhalt[contlen] = EOS;
    del_whitespaces(inhalt);
    
-   if (desttype == TOKPS)                 /* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
+   if (desttype == TOKPS)
       node2postscript(data, KPS_DOCINFO2PS);
    
    
    /* --- authorimage --- */
    
-   if (strcmp(inhalt,"authorimage") == 0)
+   if (strcmp(inhalt, "authorimage") == 0)
    {
       del_whitespaces(data);
       
@@ -568,18 +577,16 @@ GLOBAL _BOOL set_docinfo(void)
       else
       {
          path_adjust_separator(data);
-         buffer = (char *) malloc(strlen(data) * sizeof(char) + 1);
-         
-         if (buffer)
+         change_sep_suffix(data, sDocImgSuffix);
+         buffer = strdup(data);
+         if (buffer != NULL)
          {
-            strcpy(buffer, data);
             titdat.authorimage = buffer;
-            
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
                replace_char(titdat.authorimage, '\\', '/');
-                                          /* r6pl9: Ausmasse nicht ermitteln -> da */
-                                          /* ueber c_html_image_output() ausgegeben wird  */
+               /* Ausmasse nicht ermitteln -> da */
+               /* ueber c_html_image_output() ausgegeben wird  */
             }
          }
          else
@@ -594,7 +601,7 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- authoricon --- */
    
-   if (strcmp(inhalt,"authoricon") == 0)  /*r6pl6*/
+   if (strcmp(inhalt, "authoricon") == 0)
    {
       del_whitespaces(data);
       
@@ -603,34 +610,20 @@ GLOBAL _BOOL set_docinfo(void)
          error_empty_docinfo();
       }
       else
-      {                                   /* r6pl12: Endung abschneiden und mit !html_img_suffix ersetzen */
+      {
+         /* Endung abschneiden und mit !html_img_suffix ersetzen */
          fsplit(data, sDriv, sPath, sFile, sSuff);
          sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
          path_adjust_separator(data);
          
-         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
-         
-         if (buffer)
+         buffer = strdup(data);
+         if (buffer != NULL)
          {
-            strcpy(buffer, data);
             titdat.authoricon = buffer;
-            
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
                replace_char(titdat.authoricon, '\\', '/');
-               
-               if (my_stricmp(sDocImgSuffix, ".gif") == 0)
-               {                          /* r6pl9: Ausmasse ermitteln */
-                  strinsert(data, old_outfile.path);
-                  strinsert(data, old_outfile.driv);
-                  /* strcat(data, ".gif"); */
-                  path_adjust_separator(data);
-                  
-                  if (!get_gif_size(data, &titdat.authoriconWidth, &titdat.authoriconHeight))
-                  {
-                     error_read_gif(data);
-                  }
-               }
+               get_picture_size(data, NULL, &titdat.authoriconWidth, &titdat.authoriconHeight, &bitcnt);
             }
          }
          else
@@ -638,14 +631,13 @@ GLOBAL _BOOL set_docinfo(void)
             bFatalErrorDetected = TRUE;
          }
       }
-      
       return TRUE;
    }
    
    
    /* --- authoricon_active --- */
    
-   if (strcmp(inhalt, "authoricon_active") == 0)     /*r6pl13*/
+   if (strcmp(inhalt, "authoricon_active") == 0)
    {
       del_whitespaces(data);
       
@@ -654,34 +646,20 @@ GLOBAL _BOOL set_docinfo(void)
          error_empty_docinfo();
       }
       else
-      {                                   /* r6pl12: Endung abschneiden und mit !html_img_suffix ersetzen */
+      {
+         /* Endung abschneiden und mit !html_img_suffix ersetzen */
          fsplit(data, sDriv, sPath, sFile, sSuff);
          sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
          path_adjust_separator(data);
          
-         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
-         
-         if (buffer)
+         buffer = strdup(data);
+         if (buffer != NULL)
          {
-            strcpy(buffer, data);
             titdat.authoricon_active = buffer;
-            
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
                replace_char(titdat.authoricon_active, '\\', '/');
-               
-               if (my_stricmp(sDocImgSuffix, ".gif") == 0)
-               {                          /* r6pl9: Ausmasse ermitteln */
-                  strinsert(data, old_outfile.path);
-                  strinsert(data, old_outfile.driv);
-                  /* strcat(data, ".gif"); */
-                  path_adjust_separator(data);
-                  
-                  if (!get_gif_size(data, &titdat.authoriconActiveWidth, &titdat.authoriconActiveHeight))
-                  {
-                     error_read_gif(data);
-                  }
-               }
+               get_picture_size(data, NULL, &titdat.authoriconActiveWidth, &titdat.authoriconActiveHeight, &bitcnt);
             }
          }
          else
@@ -689,7 +667,7 @@ GLOBAL _BOOL set_docinfo(void)
             bFatalErrorDetected = TRUE;
          }
       }
-     
+      
       return TRUE;
    }
    
@@ -707,18 +685,16 @@ GLOBAL _BOOL set_docinfo(void)
       else
       {
          path_adjust_separator(data);
-         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
-         
-         if (buffer)
+         change_sep_suffix(data, sDocImgSuffix);
+         buffer = strdup(data);
+         if (buffer != NULL)
          {
-            strcpy(buffer, data);
             titdat.programimage = buffer;
-            
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
                replace_char(titdat.programimage, '\\', '/');
-                                          /* r6pl9: Ausmasse nicht ermitteln -> da */
-                                          /* ueber c_html_image_output() ausgegeben wird  */
+               /* Ausmasse nicht ermitteln -> da */
+               /* ueber c_html_image_output() ausgegeben wird  */
             }
          }
          else
@@ -733,8 +709,9 @@ GLOBAL _BOOL set_docinfo(void)
    
    /* --- title --- */
    
-   if (strcmp(inhalt,"title") == 0)
+   if (strcmp(inhalt, "title") == 0)
    {
+      free_titdat(&(titdat.title));
       init_docinfo_data(data, &(titdat.title), FALSE);
       return TRUE;
    }
@@ -742,8 +719,9 @@ GLOBAL _BOOL set_docinfo(void)
    
    /* --- program --- */
    
-   if (strcmp(inhalt,"program") == 0)
+   if (strcmp(inhalt, "program") == 0)
    {
+      free_titdat(&(titdat.program));
       init_docinfo_data(data, &(titdat.program), FALSE);
       return TRUE;
    }
@@ -751,8 +729,9 @@ GLOBAL _BOOL set_docinfo(void)
    
    /* --- version --- */
    
-   if (strcmp(inhalt,"version") == 0)
+   if (strcmp(inhalt, "version") == 0)
    {
+      free_titdat(&(titdat.version));
       init_docinfo_data(data, &(titdat.version), FALSE);
       return TRUE;
    }
@@ -760,8 +739,9 @@ GLOBAL _BOOL set_docinfo(void)
    
    /* --- date --- */
    
-   if (strcmp(inhalt,"date") == 0)
+   if (strcmp(inhalt, "date") == 0)
    {
+      free_titdat(&(titdat.date));
       init_docinfo_data(data, &(titdat.date), FALSE);
       return TRUE;
    }
@@ -769,8 +749,9 @@ GLOBAL _BOOL set_docinfo(void)
    
    /* --- author --- */
    
-   if (strcmp(inhalt,"author") == 0)
+   if (strcmp(inhalt, "author") == 0)
    {
+      free_titdat(&(titdat.author));
       init_docinfo_data(data, &(titdat.author), FALSE);
       return TRUE;
    }
@@ -785,16 +766,15 @@ GLOBAL _BOOL set_docinfo(void)
          address_counter++;
          init_docinfo_data(data, &(titdat.address[address_counter]), FALSE);
       }
-      
       return TRUE;
    }
 
    
    /* --- keywords --- */
    
-   /* New in r6pl15 [NHz] */
-   if (strcmp(inhalt,"keywords") == 0)
+   if (strcmp(inhalt, "keywords") == 0)
    {
+      free_titdat(&(titdat.keywords));
       init_docinfo_data(data, &(titdat.keywords), FALSE);
       return TRUE;
    }
@@ -802,9 +782,9 @@ GLOBAL _BOOL set_docinfo(void)
    
    /* --- description --- */
    
-   /* New in r6pl15 [NHz] */
-   if (strcmp(inhalt,"description") == 0)
+   if (strcmp(inhalt, "description") == 0)
    {
+      free_titdat(&(titdat.description));
       init_docinfo_data(data, &(titdat.description), FALSE);
       return TRUE;
    }
@@ -812,9 +792,9 @@ GLOBAL _BOOL set_docinfo(void)
    
    /* --- robots --- */
    
-   /* New in V6.5.17 */
-   if (strcmp(inhalt,"robots") == 0)
+   if (strcmp(inhalt, "robots") == 0)
    {
+      free_titdat(&(titdat.robots));
       init_docinfo_data(data, &(titdat.robots), FALSE);
       
       if (strcmp(titdat.robots,"none") != 0)
@@ -854,8 +834,9 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- company --- */
 
-   if (strcmp(inhalt,"company") == 0)     /* New in V6.5.2 [NHz] */
+   if (strcmp(inhalt, "company") == 0)
    {
+      free_titdat(&(titdat.company));
       init_docinfo_data(data, &(titdat.company), FALSE);
       return TRUE;
    }
@@ -863,8 +844,9 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- category --- */
    
-   if (strcmp(inhalt, "category") == 0)   /* New in V6.5.2 [NHz] */
+   if (strcmp(inhalt, "category") == 0)
    {
+      free_titdat(&(titdat.category));
       init_docinfo_data(data, &(titdat.category), FALSE);
       return TRUE;
    }
@@ -872,9 +854,9 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- stgdatabase --- */
    
-                                          /* Spezialitaeten fuer ST-Guide *//*r6pl4*/
    if (strcmp(inhalt, "stgdatabase") == 0)
    {
+      free_titdat(&(titdat.stg_database));
       init_docinfo_data(data, &(titdat.stg_database), TRUE);
       return TRUE;
    }
@@ -882,9 +864,9 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- drcstatusline --- */
    
-                                          /* Spezialitaeten fuer DRC *//*r6pl4*/
-   if (strcmp(inhalt, "drcstatusline") == 0) 
+   if (strcmp(inhalt, "drcstatusline") == 0)
    {
+      free_titdat(&(titdat.drc_statusline));
       init_docinfo_data(data, &(titdat.drc_statusline), FALSE);
       return TRUE;
    }
@@ -892,8 +874,9 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- htmltitle --- */
    
-   if (strcmp(inhalt, "htmltitle") == 0)  /* Spezialitaeten fuer HTML */
+   if (strcmp(inhalt, "htmltitle") == 0)
    {
+      free_titdat(&(titdat.htmltitle));
       init_docinfo_data(data, &(titdat.htmltitle), FALSE);
       return TRUE;
    }
@@ -908,6 +891,7 @@ GLOBAL _BOOL set_docinfo(void)
    }
    if (strcmp(inhalt, "domain_name") == 0)
    {
+      free_titdat(&(titdat.domain_name));
       init_docinfo_data(data, &(titdat.domain_name), FALSE);
       return TRUE;
    }
@@ -924,18 +908,16 @@ GLOBAL _BOOL set_docinfo(void)
    {
       del_whitespaces(data);              /* nicht init_...!!! */
       convert_tilde(data);
-      
       if (data[0] == EOS)
       {
          error_empty_docinfo();
       }
       else
       {
-         buffer = (char*)malloc(strlen(data) * sizeof(char) + 1);
-         
-         if (buffer)
+         buffer = strdup(data);
+         if (buffer != NULL)
          {
-            strcpy(buffer, data);
+         	free_titdat(&(titdat.domain_link));
             titdat.domain_link = buffer;
          }
          else
@@ -943,7 +925,6 @@ GLOBAL _BOOL set_docinfo(void)
             bFatalErrorDetected = TRUE;
          }
       }
-
       return TRUE;
    }
    
@@ -957,6 +938,7 @@ GLOBAL _BOOL set_docinfo(void)
    }
    if (strcmp(inhalt, "contact_name") == 0)
    {
+      free_titdat(&(titdat.contact_name));
       init_docinfo_data(data, &(titdat.contact_name), FALSE);
       return TRUE;
    }
@@ -971,6 +953,7 @@ GLOBAL _BOOL set_docinfo(void)
    }
    if (strcmp(inhalt, "contact_link") == 0)
    {
+      free_titdat(&(titdat.contact_link));
       init_docinfo_data(data, &(titdat.contact_link), FALSE);
       return TRUE;
    }
@@ -978,8 +961,9 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- appletitle --- */
 
-   if (strcmp(inhalt,"appletitle") == 0)  /* Spezialitaeten fuer HTML Apple Help V6.5.17 */
+   if (strcmp(inhalt,"appletitle") == 0)
    {
+      free_titdat(&(titdat.appletitle));
       init_docinfo_data(data, &(titdat.appletitle), TRUE);
       return TRUE;
    }
@@ -987,8 +971,9 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- appleicon --- */
    
-   if (strcmp(inhalt,"appleicon") == 0)   /* Spezialitaeten fuer HTML Apple Help V6.5.17 */
+   if (strcmp(inhalt,"appleicon") == 0)
    {
+      free_titdat(&(titdat.appleicon));
       init_docinfo_data(data, &(titdat.appleicon), TRUE);
       return TRUE;
    }
@@ -998,6 +983,7 @@ GLOBAL _BOOL set_docinfo(void)
    
    if (strcmp(inhalt,"translator") == 0)
    {
+      free_titdat(&(titdat.translator));
       init_docinfo_data(data, &(titdat.translator), TRUE);
       return TRUE;
    }
@@ -1006,6 +992,7 @@ GLOBAL _BOOL set_docinfo(void)
    
    if (strcmp(inhalt,"distributor") == 0)
    {
+      free_titdat(&(titdat.distributor));
       init_docinfo_data(data, &(titdat.distributor), TRUE);
       return TRUE;
    }
@@ -1031,10 +1018,10 @@ GLOBAL _BOOL set_docinfo(void)
 
 GLOBAL void c_maketitle(void)
 {
-   int       i;                 /* counter var. */
-   char      n[512],            /* */
-             s1[128],           /* */
-             s2[128];           /* */
+   int       i;
+   char      n[512],
+             s1[128],
+             s2[256];
    _BOOL   has_author,        /* flag */
              has_program,       /* flag */
              has_title,         /* flag */
@@ -1043,35 +1030,29 @@ GLOBAL void c_maketitle(void)
              has_authorimage,   /* flag */
              has_programimage,  /* flag */
              has_address,       /* flag */
-             has_company,       /* flag; New in V6.5.2 [NHz] */
+             has_company,       /* flag */
              has_translator,    /* flag */
              has_distributor;   /* flag */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
    if (called_maketitle)                  /* this function has been used already? */
    {
-      error_called_twice("!maketitle");   /*r6pl2*/
+      error_called_twice("!maketitle");
       return;
    }
 
    called_maketitle = TRUE;               /* set flag when this function is used */
 
-   has_author       = (titdat.author       != NULL);
-   has_authorimage  = (titdat.authorimage  != NULL);
-   has_address      = (address_counter     >  0);
-   has_program      = (titdat.program      != NULL);
-   has_programimage = (titdat.programimage != NULL);
-   has_title        = (titdat.title        != NULL);
-   has_version      = (titdat.version      != NULL);
-   has_date         = (titdat.date         != NULL);
-                                          /* New in V6.5.2 [NHz] */
-   has_company      = (titdat.company      != NULL);
-   has_translator   = (titdat.translator   != NULL);
-   has_distributor  = (titdat.distributor  != NULL);
+   has_author       = titdat.author       != NULL;
+   has_authorimage  = titdat.authorimage  != NULL;
+   has_address      = address_counter     > 0;
+   has_program      = titdat.program      != NULL;
+   has_programimage = titdat.programimage != NULL;
+   has_title        = titdat.title        != NULL;
+   has_version      = titdat.version      != NULL;
+   has_date         = titdat.date         != NULL;
+   has_company      = titdat.company      != NULL;
+   has_translator   = titdat.translator   != NULL;
+   has_distributor  = titdat.distributor  != NULL;
 
    if ( !(    has_author
            || has_authorimage
@@ -1081,10 +1062,9 @@ GLOBAL void c_maketitle(void)
            || has_version
            || has_date
            || has_address
-           || has_company                 /* New in V6.5.2 [NHz] */
+           || has_company
            || has_translator
-           || has_distributor
-          )
+           || has_distributor)
       )
    {
       error_message(_("no title data available"));
@@ -1094,8 +1074,8 @@ GLOBAL void c_maketitle(void)
 
    switch (desttype)                      /* which output format? */
    {
-   case TOTEX:                            /* TeX */
-   case TOPDL:                            /* */
+   case TOTEX:
+   case TOPDL:
       outln("\\begin{titlepage}");
       outln("\\begin{center}");
       
@@ -1104,28 +1084,35 @@ GLOBAL void c_maketitle(void)
          voutlnf("{\\Large %s} \\\\", titdat.title);
          outln("\\bigskip");
       }
-
+      
       if (has_programimage)
       {
-         switch (iTexVersion)
+         if (desttype == TOTEX)
          {
-         case TEX_LINDNER:
-         case TEX_STRUNK:
+            switch (iTexVersion)
+            {
+            case TEX_LINDNER:
+            case TEX_STRUNK:
+               c_begin_center();
+               c_img_output(titdat.programimage, "", FALSE);
+               c_end_center();
+               break;
+            case TEX_EMTEX:
+            case TEX_MIKTEX:
+               c_begin_center();
+               c_msp_output(titdat.programimage, "", FALSE);
+               c_end_center();
+               break;
+            case TEX_TETEX:
+               c_begin_center();
+               c_eps_output(titdat.programimage, "", FALSE);
+               c_end_center();
+               break;
+            }
+         } else
+         {
             c_begin_center();
-            c_img_output(titdat.programimage, "", FALSE);
-            c_end_center();
-            break;
-            
-         case TEX_EMTEX:
-         case TEX_MIKTEX:                 /* V6.5.20 [CS] */
-            c_begin_center();
-            c_msp_output(titdat.programimage, "", FALSE);
-            c_end_center();
-            break;
-            
-         case TEX_TETEX:
-            c_begin_center();
-            c_eps_output(titdat.programimage, "", ".eps", FALSE);
+            c_png_output(titdat.programimage, "", FALSE);
             c_end_center();
          }
       }
@@ -1135,7 +1122,7 @@ GLOBAL void c_maketitle(void)
          voutlnf("{\\Huge %s} \\\\", titdat.program);
          outln("\\bigskip");
       }
-
+      
       if (has_version)
       {
          voutlnf("{\\large %s} \\\\", titdat.version);
@@ -1149,29 +1136,39 @@ GLOBAL void c_maketitle(void)
 
       if (has_author || has_authorimage)
       {
-         voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.by);
+         outln("\\vfill");
+         voutlnf("%s\\\\", lang.by);
+         outln("\\medskip");
       }
 
       if (has_authorimage)
       {
-         switch (iTexVersion)
+         if (desttype == TOTEX)
          {
-         case TEX_LINDNER:
-         case TEX_STRUNK:
+            switch (iTexVersion)
+            {
+            case TEX_LINDNER:
+            case TEX_STRUNK:
+               c_begin_center();
+               c_img_output(titdat.authorimage, "", FALSE);
+               c_end_center();
+               break;
+            case TEX_EMTEX:
+            case TEX_MIKTEX:
+               c_begin_center();
+               c_msp_output(titdat.authorimage, "", FALSE);
+               c_end_center();
+               break;
+            case TEX_TETEX:
+               c_begin_center();
+               c_eps_output(titdat.authorimage, "", FALSE);
+               c_end_center();
+               break;
+            }
+         } else
+         {
             c_begin_center();
-            c_img_output(titdat.authorimage, "", FALSE);
-            c_end_center();
-            break;
-            
-         case TEX_EMTEX:
-            c_begin_center();
-            c_msp_output(titdat.authorimage, "", FALSE);
-            c_end_center();
-            break;
-            
-         case TEX_TETEX:
-            c_begin_center();
-            c_eps_output(titdat.authorimage, "", ".eps", FALSE);
+            c_png_output(titdat.authorimage, "", FALSE);
             c_end_center();
          }
       }
@@ -1181,11 +1178,11 @@ GLOBAL void c_maketitle(void)
          voutlnf("%s \\\\", titdat.author);
       }
 
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
-         auto_quote_chars(lang.fur, FALSE);
-         voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.fur);
+         outln("\\vfill");
+         voutlnf("%s\\\\", lang.fur);
+         outln("\\medskip");
          voutlnf("%s \\\\", titdat.company);
       }
 
@@ -1199,61 +1196,109 @@ GLOBAL void c_maketitle(void)
             }
          }
       }
-
+      
       if (has_translator)
       {
-         auto_quote_chars(lang.translator, FALSE);
-         voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.translator);
+         outln("\\vfill");
+         voutlnf("%s\\\\", lang.translator);
+         outln("\\medskip");
          voutlnf("%s \\\\", titdat.translator);
       }
 
       if (has_distributor)
       {
-         auto_quote_chars(lang.distributor, FALSE);
-         voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.distributor);
+         outln("\\vfill");
+         voutlnf("%s\\\\", lang.distributor);
+         outln("\\medskip");
          voutlnf("%s \\\\", titdat.distributor);
       }
 
       outln("\\end{center}");
       outln("\\end{titlepage}");
       break;
-
-   case TOLYX:                            /* */
+      
+   case TOLYX:
       outln("\\layout Title");
       outln("\\fill_top");
       outln("");
       
       if (has_title)
       {
-         voutlnf("\\layout Section*\n\\align center\n%s\n\\newline\n", titdat.title);
+         outln("\\layout Section*");
+         outln("\\align center");
+         voutlnf("%s", titdat.title);
+         outln("\\newline");
+         outln("");
+      }
+      
+      if (has_programimage)
+      {
+         c_begin_center();
+         c_eps_output(titdat.programimage, "", FALSE);
+         c_end_center();
       }
       
       if (has_program)
       {
-         voutlnf("\\size giant %s\n", titdat.program);
+         voutlnf("\\size giant %s", titdat.program);
+         outln("");
       }
       
       if (has_version)
       {
-         voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.version);
+         outln("\\layout Subsection*");
+         outln("\\align center");
+         voutlnf("%s", titdat.version);
+         outln("");
       }
       
       if (has_date)
       {
-         voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.date);
+         outln("\\layout Subsection*");
+         outln("\\align center");
+         voutlnf("%s", titdat.date);
+         outln("");
+      }
+      
+      if (has_author || has_authorimage)
+      {
+         outln("\\fill_bottom");
+         outln("\\layout Subsubsection*");
+         outln("\\align center");
+         outln("");
+         voutlnf("%s", lang.by);
+         outln("");
+      }
+      
+      if (has_authorimage)
+      {
+         outln("\\align center");
+         c_eps_output(titdat.authorimage, "", FALSE);
+         outln("");
       }
       
       if (has_author)
       {
-         voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.by);
-         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.author);
+         outln("\\fill_bottom");
+         outln("\\layout Subsection*");
+         outln("\\align center");
+         outln("");
+         voutlnf("%s", titdat.author);
+         outln("");
       }
       
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
-         voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.fur);
-         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.company);
+         outln("\\fill_bottom");
+         outln("\\layout Subsubsection*");
+         outln("\\align center");
+         voutlnf("%s", lang.fur);
+         outln("");
+         outln("\\layout Subsection*");
+         outln("\\align center");
+         outln("");
+         voutlnf("%s", titdat.company);
+         outln("");
       }
       
       if (has_address)
@@ -1262,26 +1307,46 @@ GLOBAL void c_maketitle(void)
          {
             if (titdat.address[i] != NULL)
             {
-               voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.address[i]);
+               outln("\\layout Subsection*");
+               outln("\\align center");
+               voutlnf("%s", titdat.address[i]);
+               outln("");
             }
          }
       }
       
       if (has_translator)
       {
-         voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.translator);
-         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.translator);
+         outln("\\fill_bottom");
+         outln("\\layout Subsubsection*");
+         outln("\\align center");
+         outln("");
+         voutlnf("%s", lang.translator);
+         outln("");
+         outln("\\layout Subsection*");
+         outln("\\align center");
+         outln("");
+         voutlnf("%s", titdat.translator);
+         outln("");
       }
       
       if (has_distributor)
       {
-         voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.distributor);
-         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.distributor);
+         outln("\\fill_bottom");
+         outln("\\layout Subsubsection*");
+         outln("\\align center");
+         outln("");
+         voutlnf("%s", lang.distributor);
+         outln("");
+         outln("\\layout Subsection*");
+         outln("\\align center");
+         outln("");
+         voutlnf("%s", titdat.distributor);
+         outln("");
       }
-      
       break;
-
-   case TOINF:                            /* */
+      
+   case TOINF:
       outln("@titlepage");
       outln("@sp 1");
       
@@ -1317,7 +1382,6 @@ GLOBAL void c_maketitle(void)
          voutlnf("@center %s", titdat.author);
       }
       
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          outln("@sp 10");
@@ -1356,7 +1420,7 @@ GLOBAL void c_maketitle(void)
       outln("@end titlepage");
       break;
 
-   case TOSTG:                            /* ST-Guide */
+   case TOSTG:
       outln("");
       voutlnf("@node \"%s\"", lang.title);
       stg_headline("", lang.title);
@@ -1372,7 +1436,7 @@ GLOBAL void c_maketitle(void)
       if (has_programimage)
       {
          strcpy(n, titdat.programimage);
-         change_sep_suffix(n, ".img");    /* PL6 */
+         change_sep_suffix(n, ".img");
          c_begin_center();
          c_img_output(n, "", FALSE);
          c_end_center();
@@ -1399,7 +1463,7 @@ GLOBAL void c_maketitle(void)
       if (has_authorimage)
       {
          strcpy(n, titdat.authorimage);
-         change_sep_suffix(n, ".img");    /* PL6 */
+         change_sep_suffix(n, ".img");
          c_begin_center();
          c_img_output(n, "", FALSE);
          c_end_center();
@@ -1411,7 +1475,6 @@ GLOBAL void c_maketitle(void)
          outlncenter(titdat.author);
       }
 
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          outln("");
@@ -1449,7 +1512,7 @@ GLOBAL void c_maketitle(void)
 
       outln("@autorefon");
       outln("");
-
+      
       if (uses_tableofcontents)
       {
          outln("");
@@ -1460,7 +1523,7 @@ GLOBAL void c_maketitle(void)
       outln("");
       break;
 
-   case TOAMG:                            /* */
+   case TOAMG:
       outln("");
       voutlnf("@node \"%s\" \"%s\"", lang.title, titleprogram);
       stg_headline("", lang.title);
@@ -1492,7 +1555,6 @@ GLOBAL void c_maketitle(void)
          outlncenter(titdat.author);
       }
 
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          outln("");
@@ -1540,34 +1602,29 @@ GLOBAL void c_maketitle(void)
       outln("");
       break;
 
-   case TOPCH:                            /* PC-Help */
+   case TOPCH:
       /* Titelseite erfolgt bei PC-HELP bei tableofcontents... */
       break;
 
-   case TODRC:                            /* */
+   case TODRC:
       n[0] = EOS;
-      
       if (has_title)
       {
          strcat(n, titdat.title);
          strcat(n, " ");
       }
-      
       if (has_program)
       {
          strcat(n, titdat.program);
       }
-      
       del_whitespaces(n);
-      
       if (n[0] == EOS)
       {
          strcpy(n, lang.unknown);
       }
-      
       voutlnf("%%%% 1, %s", n);
 
-      /*r6pl5: Eigene Titelseitenroutine, damit die Zentrierung klappt */
+      /* Eigene Titelseitenroutine, damit die Zentrierung klappt */
       if (has_title)
       {
          outlncenterfill(titdat.title);
@@ -1594,7 +1651,6 @@ GLOBAL void c_maketitle(void)
          outlncenterfill(titdat.author);
       }
 
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          outln("");
@@ -1612,7 +1668,6 @@ GLOBAL void c_maketitle(void)
                outlncenterfill(titdat.address[i]);
             }
          }
-         
          outln("");
       }
       
@@ -1631,12 +1686,12 @@ GLOBAL void c_maketitle(void)
          outln("");
          outlncenterfill(titdat.distributor);
       }
-
+      
       outln("");
       break;
-
-   case TOASC:                            /* ASCII */
-   case TOMAN:                            /* */
+      
+   case TOASC:
+   case TOMAN:
       if (has_title)
       {
          outlncenter(titdat.title);
@@ -1663,7 +1718,6 @@ GLOBAL void c_maketitle(void)
          outlncenter(titdat.author);
       }
 
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          outln("");
@@ -1681,7 +1735,6 @@ GLOBAL void c_maketitle(void)
                outlncenter(titdat.address[i]);
             }
          }
-         
          outln("");
       }
       
@@ -1708,11 +1761,10 @@ GLOBAL void c_maketitle(void)
       {
          c_newpage();
       }
-      
       break;
 
-   case TOSRC:                            /* */
-   case TOSRP:                            /* */
+   case TOSRC:
+   case TOSRP:
       memset(n, '#', 62);
       n[62] = EOS;
       voutlnf("%s  %s", sSrcRemOn, n);
@@ -1750,8 +1802,7 @@ GLOBAL void c_maketitle(void)
       if (has_author)
       {
          outln("    #");
-         
-/* YYY fd:20071108: the next output should be localized! */
+         /* YYY fd:20071108: the next output should be localized! */
          strcpy(s1, "Copyright (C) by");
          stringcenter(s1, 60);
          voutlnf("    # %s", s1);
@@ -1761,7 +1812,6 @@ GLOBAL void c_maketitle(void)
          voutlnf("    # %s", s1);
       }
       
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          outln("    #");
@@ -1785,7 +1835,6 @@ GLOBAL void c_maketitle(void)
                voutlnf("    # %s", s1);
             }
          }
-         
          outln("    #");
       }
       
@@ -1816,55 +1865,66 @@ GLOBAL void c_maketitle(void)
       voutlnf("    %s %s", n, sSrcRemOff);
       break;
 
-   case TORTF:                            /* RTF */
+   case TORTF:
       outln(rtf_par);
-      outln("\\qc ");
       
       if (has_title)
       {
-         voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 14, titdat.title, rtf_par, rtf_par);
+         voutlnf("\\qc{\\fs%d %s}%s%s", iDocPropfontSize + 14, titdat.title, rtf_par, rtf_parpard);
+      }
+      
+      if (has_programimage)
+      {
+         outln(rtf_par);
+         c_begin_center();
+         c_bmp_output(titdat.programimage, "", FALSE);
+         c_end_center();
       }
       
       if (has_program)
       {
-         voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 38, titdat.program, rtf_par, rtf_par);
+         voutlnf("\\qc{\\fs%d %s}%s%s", iDocPropfontSize + 38, titdat.program, rtf_par, rtf_parpard);
       }
       
       if (has_version)
       {
-         voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.version, rtf_par);
+         voutlnf("\\qc{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.version, rtf_parpard);
       }
       
       if (has_date)
       {
-         voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.date, rtf_par);
+         voutlnf("\\qc{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.date, rtf_parpard);
       }
       
       if (has_author || has_address)
       {
-         /* New in V6.5.2 [NHz] */
-         if (has_company)
-            for (i = 0; i < (22 - address_counter); i++)
-               out(rtf_par);
-         else
-            for (i = 0; i < (25 - address_counter); i++)
-               out(rtf_par);
-               
+         for (i = 0; i < ((has_company ? 22 : 25) - address_counter); i++)
+            out(rtf_par);
          outln(rtf_par);
       }
       
-      if (has_author)
+      if (has_author || has_authorimage)
       {
-         voutlnf("%s%s%s", lang.by, rtf_par, rtf_par);
-         voutlnf("%s%s", titdat.author, rtf_par);
+         voutlnf("\\qc{%s}%s%s", lang.by, rtf_par, rtf_parpard);
       }
       
-      /* New in V6.5.2 [NHz] */
+      if (has_authorimage)
+      {
+         outln(rtf_par);
+         c_begin_center();
+         c_bmp_output(titdat.authorimage, "", FALSE);
+         c_end_center();
+      }
+
+      if (has_author)
+      {
+         voutlnf("\\qc{%s}%s", titdat.author, rtf_parpard);
+      }
+      
       if (has_company)
       {
-         auto_quote_chars(lang.fur, FALSE);
-         voutlnf("%s %s%s%s", rtf_par, lang.fur, rtf_par, rtf_par);
-         voutlnf("%s%s", titdat.company, rtf_par);
+         voutlnf("%s \\qc{%s}%s%s", rtf_par, lang.fur, rtf_par, rtf_parpard);
+         voutlnf("\\qc{%s}%s", titdat.company, rtf_parpard);
       }
       
       if (has_address)
@@ -1873,40 +1933,38 @@ GLOBAL void c_maketitle(void)
          {
             if (titdat.address[i] != NULL)
             {
-               voutlnf("%s%s", titdat.address[i], rtf_par);
+               voutlnf("\\qc{%s}%s", titdat.address[i], rtf_parpard);
             }
          }
       }
       
       if (has_translator)
       {
-         auto_quote_chars(lang.translator, FALSE);
-         voutlnf("%s %s%s%s", rtf_par, lang.translator, rtf_par, rtf_par);
-         voutlnf("%s%s", titdat.translator, rtf_par);
+         voutlnf("%s \\qc{%s}%s%s", rtf_par, lang.translator, rtf_par, rtf_par);
+         voutlnf("\\qc{%s}%s", titdat.translator, rtf_par);
       }
       
       if (has_distributor)
       {
-         auto_quote_chars(lang.distributor, FALSE);
-         voutlnf("%s %s%s%s", rtf_par, lang.distributor, rtf_par, rtf_par);
-         voutlnf("%s%s", titdat.distributor, rtf_par);
+         voutlnf("%s \\qc{%s}%s%s", rtf_par, lang.distributor, rtf_par, rtf_par);
+         voutlnf("\\qc{%s}%s", titdat.distributor, rtf_par);
       }
       
       outln("\\ql");
       outln("\\page");
       break;
 
-   case TOWIN:                            /* */
-   case TOWH4:                            /* */
+   case TOWIN:
+   case TOWH4:
       check_endnode();
-
-      outln("");              
-      outln("{");     
+      
+      outln("");
+      outln("{");
       voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
       voutlnf("${\\footnote $ %s}", lang.title);
       voutlnf("K{\\footnote K %s}", lang.title);
       
-      if (!no_buttons)        /* r6pl8 */
+      if (!no_buttons)
       {
          outln(win_browse);
          outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
@@ -1919,7 +1977,7 @@ GLOBAL void c_maketitle(void)
 
       if (has_programimage)
       {
-         outln("\\par");
+         outln(rtf_par);
          c_begin_center();
          c_bmp_output(titdat.programimage, "", FALSE);
          c_end_center();
@@ -1943,7 +2001,7 @@ GLOBAL void c_maketitle(void)
 
       if (has_authorimage)
       {
-         outln("\\par");
+         outln(rtf_par);
          c_begin_center();
          c_bmp_output(titdat.authorimage, "", FALSE);
          c_end_center();
@@ -1954,10 +2012,8 @@ GLOBAL void c_maketitle(void)
          voutlnf("\\qc{%s}\\par\\pard", titdat.author);
       }
 
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
-         auto_quote_chars(lang.fur, FALSE);
          voutlnf("\\par\\qc{%s}\\par\\pard", lang.fur);
          voutlnf("\\qc{%s}\\par\\pard", titdat.company);
       }
@@ -1968,21 +2024,28 @@ GLOBAL void c_maketitle(void)
          {
             if (titdat.address[i] != NULL)
             {
-               voutlnf("\\qc{%s}\\par\\pard", titdat.address[i]);
+               if (strncmp(titdat.address[i], "http://", 7) == 0)
+               {
+                  voutlnf("\\qc{{\\uldb %s}{\\v !ShellExecuteA(0, \"open\", \"%s\", \"\", \"\", 1)}}\\par\\pard", titdat.address[i], titdat.address[i]);
+               } else if (strchr(titdat.address[i], '@') != NULL)
+               {
+                  voutlnf("\\qc{{\\uldb %s}{\\v !ShellExecuteA(0, \"open\", \"mailto:%s\", \"\", \"\", 1)}}\\par\\pard", titdat.address[i], titdat.address[i]);
+               } else
+               {
+                  voutlnf("\\qc{%s}\\par\\pard", titdat.address[i]);
+               }
             }
          }
       }
 
       if (has_translator)
       {
-         auto_quote_chars(lang.translator, FALSE);
          voutlnf("\\par\\qc{%s}\\par\\pard", lang.translator);
          voutlnf("\\qc{%s}\\par\\pard", titdat.translator);
       }
 
       if (has_distributor)
       {
-         auto_quote_chars(lang.distributor, FALSE);
          voutlnf("\\par\\qc{%s}\\par\\pard", lang.distributor);
          voutlnf("\\qc{%s}\\par\\pard", titdat.distributor);
       }
@@ -1998,16 +2061,16 @@ GLOBAL void c_maketitle(void)
       outln("}\\page");
       break;
       
-   case TOAQV:                            /* */
+   case TOAQV:
       check_endnode();
-
-      outln("");              
-      outln("{");     
+      
+      outln("");
+      outln("{");
       voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
       voutlnf("${\\footnote $ %s}", lang.title);
       voutlnf("K{\\footnote K %s}", lang.title);
 
-      if (!no_buttons)        /* r6pl8 */
+      if (!no_buttons)
       {
          outln(win_browse);
          outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
@@ -2020,7 +2083,7 @@ GLOBAL void c_maketitle(void)
 
       if (has_programimage)
       {
-         outln("\\par");
+         outln(rtf_par);
          c_begin_center();
          c_bmp_output(titdat.programimage, "", FALSE);
          c_end_center();
@@ -2033,10 +2096,10 @@ GLOBAL void c_maketitle(void)
 
       if (has_version)
          voutlnf("\\qc %s\\par\\pard", titdat.version);
-         
+      
       if (has_date)
          voutlnf("\\qc %s\\par\\pard", titdat.date);
-         
+      
       if (has_author || has_authorimage)
       {
          voutlnf("\\par\\qc %s\\par\\pard", lang.by);
@@ -2044,7 +2107,7 @@ GLOBAL void c_maketitle(void)
 
       if (has_authorimage)
       {
-         outln("\\par");
+         outln(rtf_par);
          c_begin_center();
          c_bmp_output(titdat.authorimage, "", FALSE);
          c_end_center();
@@ -2055,10 +2118,8 @@ GLOBAL void c_maketitle(void)
          voutlnf("\\qc %s\\par\\pard", titdat.author);
       }
       
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
-         auto_quote_chars(lang.fur, FALSE);
          voutlnf("\\par\\qc %s\\par\\pard", lang.fur);
          voutlnf("\\qc %s\\par\\pard", titdat.company);
       }
@@ -2076,59 +2137,61 @@ GLOBAL void c_maketitle(void)
 
       if (has_translator)
       {
-         auto_quote_chars(lang.translator, FALSE);
          voutlnf("\\par\\qc %s\\par\\pard", lang.translator);
          voutlnf("\\qc %s\\par\\pard", titdat.translator);
       }
       
       if (has_distributor)
       {
-         auto_quote_chars(lang.distributor, FALSE);
          voutlnf("\\par\\qc %s\\par\\pard", lang.distributor);
          voutlnf("\\qc %s\\par\\pard", titdat.distributor);
       }
       
       outln("\\par\\par");
-         
+      
       if (uses_tableofcontents)
       {
          voutlnf("\\qc {\\uldb %s}{\\v %s}\\par\\pard", lang.contents, lang.contents);
       }
-         
+      
       outln("}\\page");
       break;
-         
+      
    case TOHAH:                            /* Apple-Help (HTML); New in V6.5.17 */
-   case TOHTM:                            /* HTML */
-   case TOMHH:                            /*        ; New in V6.5.9 [NHz] */
+   case TOHTM:
+   case TOMHH:
       outln("<div id=\"udo_titlepage\">");
 
       if (has_title)
       {
+#if 0
          if (html_doctype == HTML5)
          {
             voutlnf("<h2 class=\"UDO_h2_align_center\">%s</h2>", titdat.title);
          }
          else
+#endif
          {
             voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
          }
       }
-
+      
       if (has_programimage)
       {
          c_begin_center();
-         c_html_image_output(titdat.programimage, "", sDocImgSuffix, 0);
+         c_html_image_output(titdat.programimage, "");
          c_end_center();
       }
       
       if (has_program)
       {
+#if 0
          if (html_doctype == HTML5)
          {
             voutlnf("<h1 class=\"UDO_h1_align_center\">%s</h1>", titdat.program);
          }
          else
+#endif
          {
             voutlnf("<h1 align=\"center\">%s</h1>", titdat.program);
          }
@@ -2136,11 +2199,13 @@ GLOBAL void c_maketitle(void)
       
       if (has_version || has_date || has_author || has_address)
       {
+#if 0
          if (html_doctype == HTML5)
          {
             outln("<p class=\"UDO_p_align_center\">");
          }
          else
+#endif
          {
             outln("<p align=\"center\">");
          }
@@ -2148,32 +2213,33 @@ GLOBAL void c_maketitle(void)
       
       if (has_version)
       {
-         voutlnf("%s<br%s>", titdat.version, closer);
+         voutlnf("%s%s", titdat.version, xhtml_br);
       }
       
       if (has_date)
       {
-         voutlnf("%s<br%s>", titdat.date, closer);
+         voutlnf("%s%s", titdat.date, xhtml_br);
       }
       
       if (has_author || has_authorimage)
       {
-         voutlnf("<br%s>%s<br%s>", closer, lang.by, closer);
+         voutlnf("%s%s%s", xhtml_br, lang.by, xhtml_br);
       }
       
       if (has_authorimage)
       {
          c_begin_center();
-         c_html_image_output(titdat.authorimage, "", sDocImgSuffix, 0);
+         c_html_image_output(titdat.authorimage, "");
          c_end_center();
-         
          if (has_author || has_address)
          {
+#if 0
             if (html_doctype == HTML5)
             {
                outln("<p class=\"UDO_p_align_center\">");
             }
             else
+#endif
             {
                outln("<p align=\"center\">");
             }
@@ -2182,40 +2248,48 @@ GLOBAL void c_maketitle(void)
       
       if (has_author)
       {
-         voutlnf("%s<br%s>", titdat.author, closer);
+         voutlnf("%s%s", titdat.author, xhtml_br);
       }
-
-      /* New in V6.5.2 [NHz] */
+      
       if (has_company)
       {
-         auto_quote_chars(lang.fur, FALSE);
-         voutlnf("<br%s>%s<br%s>", closer, lang.fur, closer);
-         voutlnf("%s<br%s>", titdat.company, closer);
+         voutlnf("%s%s%s", xhtml_br, lang.fur, xhtml_br);
+         voutlnf("%s%s", titdat.company, xhtml_br);
       }
-
+      
       if (has_address)
       {
          for (i = 1; i <= address_counter; i++)
          {
             if (titdat.address[i] != NULL)
             {
-               voutlnf("%s<br%s>", titdat.address[i], closer);
+               if (strncmp(titdat.address[i], "http://", 7) == 0)
+               {
+                  if (html_frames_layout)
+                     voutlnf("<a href=\"%s\" target=\"_top\">%s</a>%s", titdat.address[i], titdat.address[i], xhtml_br);
+                  else
+                     voutlnf("<a href=\"%s\">%s</a>%s", titdat.address[i], titdat.address[i], xhtml_br);
+               } else if (strchr(titdat.address[i], '@') != NULL)
+               {
+                  voutlnf("<a href=\"mailto:%s\">%s</a>%s", titdat.address[i], titdat.address[i], xhtml_br);
+               } else
+               {
+                  voutlnf("%s%s", titdat.address[i], xhtml_br);
+               }
             }
          }
       }
 
       if (has_translator)
       {
-         auto_quote_chars(lang.translator, FALSE);
-         voutlnf("<br%s>%s<br%s>", closer, lang.translator, closer);
-         voutlnf("%s<br%s>", titdat.translator, closer);
+         voutlnf("%s%s%s", xhtml_br, lang.translator, xhtml_br);
+         voutlnf("%s%s", titdat.translator, xhtml_br);
       }
 
       if (has_distributor)
       {
-         auto_quote_chars(lang.distributor, FALSE);
-         voutlnf("<br%s>%s<br%s>", closer, lang.distributor, closer);
-         voutlnf("%s<br%s>", titdat.distributor, closer);
+         voutlnf("%s%s%s", xhtml_br, lang.distributor, xhtml_br);
+         voutlnf("%s%s", titdat.distributor, xhtml_br);
       }
 
       if (has_version || has_date || has_author || has_address || has_translator || has_distributor)
@@ -2225,22 +2299,18 @@ GLOBAL void c_maketitle(void)
 
       if (uses_tableofcontents)
       {
-         if (html_doctype < XHTML_STRICT)
-            outln(HTML_HR);
-         else
-            outln(XHTML_HR);
+         outln(xhtml_hr);
+         outln("");
       }
 
-      /* New in V6.5.9 [NHz] */
       outln("</div>");
-
       break;
 
-   case TOTVH:                            /* */
+   case TOTVH:
       outln("");
       voutlnf(".topic %s=0", lang.title);
       outln("");
-
+      
       if (has_title)
       {
          outlncenter(titdat.title);
@@ -2267,7 +2337,6 @@ GLOBAL void c_maketitle(void)
          outlncenter(titdat.author);
       }
 
-      /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          outln("");
@@ -2308,7 +2377,7 @@ GLOBAL void c_maketitle(void)
 
       if (uses_tableofcontents)
       {
-         sprintf(s1, "%s", lang.contents);       /* PL10: Leerzeichen davor */
+         sprintf(s1, "%s", lang.contents);
          sprintf(s2, "{%s:%s}", lang.contents, lang.contents);
          strcpy(n, lang.contents);
          strcenter(n, zDocParwidth);
@@ -2318,10 +2387,8 @@ GLOBAL void c_maketitle(void)
 
       outln("");
       break;
-
-   /* New in r6pl15 [NHz] */
-   /* Title-Page for Postscript */
-   case TOKPS:                            /* */
+      
+   case TOKPS:
       outln("/acty acty 50 sub def");
       outln("newline");
       
@@ -2329,6 +2396,13 @@ GLOBAL void c_maketitle(void)
       {
          outln("14 changeFontSize");
          voutlnf("(%s) Center setAlign", titdat.title);
+      }
+      
+      if (has_programimage)
+      {
+         c_begin_center();
+         c_eps_output(titdat.programimage, "", FALSE);
+         c_end_center();
       }
       
       if (has_program)
@@ -2352,7 +2426,7 @@ GLOBAL void c_maketitle(void)
          outln("11 changeFontSize");
       }
       
-      if (has_author)
+      if (has_author || has_authorimage)
       {
          outln("currentpoint exch pop lowermargin 125 add lt");
          outln("{");
@@ -2363,14 +2437,23 @@ GLOBAL void c_maketitle(void)
          outln("} ifelse");
          outln("newline");
          voutlnf("(%s) Center setAlign newline", lang.by);
-         voutlnf("(%s) Center setAlign", titdat.author);
       }
       
-      /* New in V6.5.2 [NHz] */
+      if (has_authorimage)
+      {
+         c_begin_center();
+         c_eps_output(titdat.authorimage, "", FALSE);
+         c_end_center();
+      }
+      
+      if (has_author)
+      {
+         voutlnf("(%s) Center setAlign", titdat.author);
+      }
+
       if (has_company)
       {
          outln("newline");
-         auto_quote_chars(lang.fur, FALSE);
          voutlnf("(%s) Center setAlign newline", lang.fur);
          voutlnf("(%s) Center setAlign", titdat.company);
       }
@@ -2385,14 +2468,12 @@ GLOBAL void c_maketitle(void)
                voutlnf("(%s) Center setAlign newline", titdat.address[i]);
             }
          }
-         
          outln("newline");
       }
       
       if (has_translator)
       {
          outln("newline");
-         auto_quote_chars(lang.translator, FALSE);
          voutlnf("(%s) Center setAlign newline", lang.translator);
          voutlnf("(%s) Center setAlign", titdat.translator);
       }
@@ -2400,18 +2481,14 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("newline");
-         auto_quote_chars(lang.distributor, FALSE);
          voutlnf("(%s) Center setAlign newline", lang.distributor);
          voutlnf("(%s) Center setAlign", titdat.distributor);
       }
       
       c_newpage();
-      
-      /* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
       outln("newline");
       break;
-
-   }  /* switch (desttype) */
+   }
 }
 
 
@@ -2430,9 +2507,8 @@ GLOBAL void c_maketitle(void)
 
 GLOBAL void pch_titlepage(void)
 {
-   int   i;  /* counter */
+   int i;
    
-
    if (titdat.title != NULL)
    {
       outlncenter(titdat.title);
@@ -2463,7 +2539,7 @@ GLOBAL void pch_titlepage(void)
       outlncenter(titdat.author);
    }
 
-   if (titdat.company != NULL)            /* New in V6.5.2 [NHz] */
+   if (titdat.company != NULL)
    {
       outln("");
       outlncenter(lang.fur);
@@ -2517,45 +2593,44 @@ GLOBAL void pch_titlepage(void)
 
 LOCAL void init_titdat(void)
 {
-   int   i;  /* counter */
-
-
-   titdat.title   = NULL;
+   int i;
+   
+   titdat.title = NULL;
    titdat.program = NULL;
-   titdat.date    = NULL;
+   titdat.date = NULL;
    titdat.version = NULL;
-   titdat.author  = NULL;
+   titdat.author = NULL;
 
    for (i = 0; i < MAXADDRESS; i++)
    {
       titdat.address[i] = NULL;
    }
-
-   titdat.keywords               = NULL;  /* New in r6pl15 [NHz] */
-   titdat.description            = NULL;  /* New in r6pl15 [NHz] */
-   titdat.robots                 = NULL;  /* New in V6.5.17 */
-   titdat.company                = NULL;  /* New in V6.5.2 [NHz] */
-   titdat.category               = NULL;  /* New in V6.5.2 [NHz] */
-   titdat.htmltitle              = NULL;
-   titdat.domain_name            = NULL;
-   titdat.domain_link            = NULL;
-   titdat.contact_name           = NULL;
-   titdat.contact_link           = NULL;
-   titdat.programimage           = NULL;
-   titdat.appletitle             = NULL;  /* V6.5.17 */
-   titdat.appleicon              = NULL;  /* V6.5.17 */
-   titdat.authorimage            = NULL;
-   titdat.authoricon             = NULL;
-   titdat.authoricon_active      = NULL;
-   titdat.authoriconWidth        = 0;
-   titdat.authoriconHeight       = 0;
-   titdat.authoriconActiveWidth  = 0;
+   
+   titdat.keywords = NULL;
+   titdat.description = NULL;
+   titdat.robots = NULL;
+   titdat.company = NULL;
+   titdat.category = NULL;
+   titdat.htmltitle = NULL;
+   titdat.domain_name = NULL;
+   titdat.domain_link = NULL;
+   titdat.contact_name = NULL;
+   titdat.contact_link = NULL;
+   titdat.programimage = NULL;
+   titdat.appletitle = NULL;
+   titdat.appleicon = NULL;
+   titdat.authorimage = NULL;
+   titdat.authoricon = NULL;
+   titdat.authoricon_active = NULL;
+   titdat.authoriconWidth = 0;
+   titdat.authoriconHeight = 0;
+   titdat.authoriconActiveWidth = 0;
    titdat.authoriconActiveHeight = 0;
 
-   titdat.drc_statusline         = NULL;
-   titdat.stg_database           = NULL;
-   titdat.translator             = NULL;
-   titdat.distributor            = NULL;
+   titdat.drc_statusline = NULL;
+   titdat.stg_database = NULL;
+   titdat.translator = NULL;
+   titdat.distributor = NULL;
 }
 
 
@@ -2574,13 +2649,14 @@ LOCAL void init_titdat(void)
 
 GLOBAL void init_module_tp(void)
 {
-   uses_maketitle   = FALSE;
+   uses_maketitle = FALSE;
    called_maketitle = FALSE;
-   address_counter  = 0;
+   address_counter = 0;
 
-   titleprogram[0]  = EOS;
-
+   titleprogram[0] = EOS;
+   
    init_titdat();
+   set_mainlayout();
 }
 
 
@@ -2611,33 +2687,8 @@ GLOBAL void init_module_tp_pass2(void)
    {
       strcat(titleprogram, titdat.program);
    }
-
+   
    del_whitespaces(titleprogram);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  free_titdat():
-*     reset all content of titdat[]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void free_titdat(
-
-char **var)  /* ^^ to string in titdat.[] */
-{
-   if (*var != NULL)
-   {
-      free(*var);
-      *var = NULL;
-   }
 }
 
 
@@ -2689,6 +2740,3 @@ GLOBAL void exit_module_tp(void)
    free_titdat(&(titdat.translator));    
    free_titdat(&(titdat.distributor));    
 }
-
-
-/* +++ EOF +++ */

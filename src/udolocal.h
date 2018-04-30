@@ -57,10 +57,10 @@
 
 typedef struct _udoswitch                 /* ---- table of functions ---- */
 {
-   char     *magic;                       /* UDO command */
+   const char *magic;                     /* UDO command */
    _BOOL  *flag;                        /* relevant switch */
    char      partype;                     /* parameter type */
-   char     *parcmd;                      /* parameter command */
+   const char *parcmd;                    /* parameter command */
    void     *parval;                      /* parameter variable */
 }  UDOSWITCH;
 
@@ -115,6 +115,8 @@ LOCAL void sort_idxlist(void);
 LOCAL void print_ascii_index(void);
 LOCAL void print_info_index(void);
 LOCAL void c_index(void);
+LOCAL void c_toplink(void);
+LOCAL void c_udolink(void);
 
    /* headings */
 LOCAL void c_heading(void);

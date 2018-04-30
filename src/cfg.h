@@ -49,6 +49,8 @@
 #ifndef __UDOCFG__
 #define __UDOCFG__
 
+#include "version.h"
+
 #define   CFG_READ_OK          0
 #define   CFG_READ_NOT_FOUND   1
 #define   CFG_READ_ERROR       2
@@ -86,15 +88,15 @@ typedef struct _config
    _BOOL   bDestAdjustName;
    _BOOL   bDestAdjustSuff;
    _BOOL   bDestLowerFile;
-   _BOOL bDestLowerPath;
+   _BOOL   bDestLowerPath;
 
    _BOOL   bUseLogfile;
    _BOOL   bUseHypfile;
    _BOOL   bUseTreefile;
    _BOOL   bUseUPRfile;
    _BOOL   bShowStatus;
-   _BOOL bForceLong;      /*r6pl2*/
-   _BOOL bForceShort;   /*r6pl13*/
+   _BOOL bForceLong;
+   _BOOL bForceShort;
 
 #ifdef __TOS__
    APPCFG   dedit, dview;
@@ -126,23 +128,21 @@ typedef struct _config
    APPCFG   ps;
 
    int      desttype;
-   char   strSourcefile[CFG_MAX_FILE_LEN+1];
-   char   strDestfile[CFG_MAX_FILE_LEN+1];
+   char     strSourcefile[CFG_MAX_FILE_LEN+1];
+   char     strDestfile[CFG_MAX_FILE_LEN+1];
 
-   _BOOL   bDestView;
-   _BOOL   bNoWarnings;
-   _BOOL   bCheckMisc;
-   _BOOL bAskQuit;
-   _BOOL bWarnOver;
+   _BOOL  bDestView;
+   _BOOL  bNoWarnings;
+   _BOOL  bCheckMisc;
+   _BOOL  bAskQuit;
+   _BOOL  bWarnOver;
 
    char   strSymbol[CFG_MAX_SYMBOL][CFG_MAX_SYMBOL_LEN];
-   _BOOL   bUseSymbol[CFG_MAX_SYMBOL];
+   _BOOL  bUseSymbol[CFG_MAX_SYMBOL];
    
 #endif /* __TOS__ */
 
 }   CONFIG;
-
-#endif   /* __UDOCFG__ */
 
 /*   ############################################################
    # Variablen
@@ -162,5 +162,4 @@ GLOBAL int write_profile(void);
 
 GLOBAL void init_module_config ( const char *pfname, const char *prgname, const char *prgos );
 
-
-/* +++ EOF +++ */
+#endif   /* __UDOCFG__ */

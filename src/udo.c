@@ -255,7 +255,7 @@ typedef void (*CMDPROC)(void);
 typedef struct _udocommand                /* ---- Funktionentabelle ---- */
 {
    const char *magic;                     /* UDO-Kommando */
-   char     *macut;                       /* Shortcut des Kommandos */
+   const char *macut;                     /* Shortcut des Kommandos */
    CMDPROC   proc;                        /* zugehoerige Routine */
    _BOOL   reset;                       /* Tokens danach loeschen? */
    int       pos;                         /* Erlaubnis Vorspann/Hauptteil */
@@ -266,12 +266,12 @@ typedef struct _udocommand                /* ---- Funktionentabelle ---- */
 typedef struct _udocolor                  /* colors (according to W3C HTML3.2 DTD */
 {
    int    val;
-   char  *name;
-   char  *html;
-   char  *drc;
-   char  *wintext;
-   char  *winback;
-   char  *wh4back;
+   const char  *name;
+   const char  *html;
+   const char  *drc;
+   const char  *wintext;
+   const char  *winback;
+   const char  *wh4back;
 }  UDOCOLOR;
 
 #define MAX_UDOCOLOR 17
@@ -279,7 +279,7 @@ typedef struct _udocolor                  /* colors (according to W3C HTML3.2 DT
 
 typedef struct _udocharset               /* list of encoding mnemonics */
 {
-   char  *magic;                          /* encoding mnemonic */
+   const char  *magic;                    /* encoding mnemonic */
    int    codepage;                       /* relevant encoding # */
 }   UDOCHARSET;
 
@@ -930,7 +930,6 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
    { "!no_effects",                  &no_effects,                  '\0', "",          NULL },
    { "!no_quotes",                   &no_quotes,                   '\0', "",          NULL },
    { "!no_preamble",                 &no_preamble,                 '\0', "",          NULL },
-   { "!no_titles",                   &no_titles,                   '\0', "",          NULL },
    { "!no_headlines",                &no_headlines,                '\0', "",          NULL },
    { "!no_bottomlines",              &no_bottomlines,              '\0', "",          NULL },
    { "!no_popup_headlines",          &no_popup_headlines,          '\0', "",          NULL },
@@ -943,7 +942,7 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
 
 typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
 {
-   char  *magic;                          /* UDO-Kommando */
+   const char  *magic;                    /* UDO-Kommando */
    int    langval;                        /* zugehoerige Sprache */
 }  UDOLANGUAGE;
 
@@ -1273,9 +1272,7 @@ size_t      length)  /* length of centered string */
 *
 ******************************************|************************************/
 
-GLOBAL void outlncenter(
-
-char     *s)         /* ^ original string */
+GLOBAL void outlncenter(const char *s)
 {
    char tmp[512];
    
@@ -1298,13 +1295,10 @@ char     *s)         /* ^ original string */
 *
 ******************************************|************************************/
 
-GLOBAL void outlncenterfill(
-
-char       *s)         /* ^ original string */
+GLOBAL void outlncenterfill(const char *s)
 {
    char     tmp[513];  /* string buffer */
    size_t   sl;        /* string length */
-
    
    sl = strlen(s);                        /* get length of string */
    
@@ -1345,15 +1339,11 @@ char       *s)         /* ^ original string */
 *
 ******************************************|************************************/
 
-GLOBAL void strright(
-
-char       *string,  /* ^ original string */
-size_t      length)  /* length of right-justified string */
+GLOBAL void strright(char *string, size_t length)
 {
    char     s[256];  /* string buffer */
    size_t   sl,      /* string length */
-            add;     /* */
-            
+            add;     /* number of spaces to add */
 
    sl = toklen(string);                   /* get length of string */
 
@@ -1366,16 +1356,9 @@ size_t      length)  /* length of right-justified string */
       return;
    }
 
-#if 1
-   /* Diese Methode ist um Faktor 5 schneller als sprintf() */
-
    add = length - sl;
-   memset(s, ' ', add + 1);
-   s[add + 1] = EOS;
+   memset(s, ' ', add);
    strcpy(s + add, string);
-#else
-   sprintf(s, "%*s", length, string);
-#endif
 
    strcpy(string, s);
 }
@@ -1396,22 +1379,18 @@ size_t      length)  /* length of right-justified string */
 
 #define MAXBLANKPOS  256
 
-LOCAL size_t    blankpos[MAXBLANKPOS+1];  /* Positionen der Blanks */
-LOCAL _BOOL   justify_from_right;       /* Blanks rechts einfuegen? */
+LOCAL size_t   blankpos[MAXBLANKPOS+1];  /* Positionen der Blanks */
+LOCAL _BOOL  justify_from_right;       /* Blanks rechts einfuegen? */
 
-LOCAL void strjustify(
-
-char        *s,          /* ^ original string */
-size_t       len)        /* */
+LOCAL void strjustify(char *s, size_t len)
 {
    size_t    sl,         /* string length */
-             tl,         /* */
-             i;          /* counter */
-   int       count,      /* */
-             pos,        /* */
-             j;          /* */
-   _BOOL   is_verbed;  /* */
-   
+             tl,
+             i;
+   int       count,
+             pos,
+             j;
+   _BOOL   is_verbed;
 
    if (s[0] == ' ' || s[0] == EOS)        /* string starts with space or is empty? */
       return;
@@ -5422,25 +5401,6 @@ LOCAL void c_tunix(void)
 
 /*******************************************************************************
 *
-*  c_debug():
-*     do nothing
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void c_debug(void)
-{
-   return;
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  c_nop():
 *     do nothing but toggle the _BOOL nop_detected
 *
@@ -6085,119 +6045,140 @@ LOCAL void c_smallskip(void)
 *
 ******************************************|************************************/
 
-GLOBAL void c_udolink (void)
+LOCAL void c_udolink(void)
 {
-   char      sTemp[64],         /* */
-             nodename[512],     /* */
-             sGifSize[80];      /* */
-   _BOOL   inside_center,     /* */
-             inside_right;      /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
+   char      sTemp[64],
+             nodename[512],
+             sGifSize[80];
+   _BOOL   inside_center,
+             inside_right;
+   char border[20];
    
    uses_udolink = TRUE;
    
-                                          /*r6pl5*/
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-                                          /*r6pl5*/
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   
-   tokcpy2(nodename, 512);
-   
-   switch (desttype)
+   switch (iUdopass)
    {
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-      sGifSize[0] = EOS;
-      
-      if (uiGifMwWidth != 0 && uiGifMwHeight != 0)
-      {
-         sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiGifMwWidth, uiGifMwHeight);
-      }
-      
-      strcpy(sTemp, "<p>");
-      
-      if (inside_center)
-      {
-         if (html_doctype == HTML5)
-         {
-            strcpy(sTemp, "<p class=\"UDO_p_align_center\">");
-         }
-         else
-         {
-            strcpy(sTemp, "<p align=\"center\">");
-         }
-      }
-         
-      if (inside_right)
-      {
-         if (html_doctype == HTML5)
-         {
-            strcpy(sTemp, "<p class=\"UDO_p_align_right\">");
-         }
-         else
-         {
-            strcpy(sTemp, "<p align=\"right\">");
-         }
-      }
-         
-      if (nodename[0] == EOS)
-      {
-         if (html_doctype == HTML5)
-         {
-            voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-               sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize, closer);
-         }
-         else
-         {
-            voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-               sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize, closer);
-         }
-      }
-      else
-      {
-         auto_references(nodename, TRUE, GIF_MW_NAME, uiGifMwWidth, uiGifMwHeight);
-         voutlnf("%s%s", sTemp, nodename);
-      }
-      
-      outln("</p>\n");
-      bParagraphOpen = FALSE;
+   case PASS1:
       break;
-      
-   case TOWIN:
-   case TOWH4:
-      strcpy(sTemp, "ql");
-      if (inside_center)
-         strcpy(sTemp, "qc");
-         
-      if (inside_right)
-         strcpy(sTemp, "qr");
-         
-      voutlnf("\\%s{\\{bmc %s\\}}\\par\\par\\pard", sTemp, BMP_MW_NAME);
-      break;
-      
-   case TOSTG:
-   case TOAMG:
-      if (!no_images)
-      {
-         voutlnf("@limage %s 0", IMG_MW_NAME);
-      }
-      
-      break;
-      
-   case TORTF:
-      if (!no_images)
-      {                                   /* Fixed bug #0000017 in V6.4.1 [NHz] */
-         c_bmp_output(sBmpMwFull, "", TRUE);
-      }
-      
-   }
    
-}  /* c_udolink */
+   case PASS2:
+	   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+	   inside_right = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+	   
+	   tokcpy2(nodename, sizeof(nodename));
+	   
+	   switch (desttype)
+	   {
+	   case TOHAH:
+	   case TOHTM:
+	   case TOMHH:
+	      sGifSize[0] = EOS;
+	      if (uiGifMwWidth != 0 && uiGifMwHeight != 0)
+	      {
+	         sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiGifMwWidth, uiGifMwHeight);
+	      }
+	      
+	      strcpy(sTemp, "<p>");
+	      strcpy(border, " border=\"0\"");
+#if 0
+          if (html_doctype == HTML5)
+          {
+		      if (inside_center)
+            		strcpy(sTemp, "<p class=\"UDO_p_align_center\">");
+		      if (inside_right)
+            		strcpy(sTemp, "<p class=\"UDO_p_align_right\">");
+              border[0] = EOS;
+	      } else
+#endif
+	      {
+	      	if (inside_center)
+		         strcpy(sTemp, "<p align=\"center\">");
+		      if (inside_right)
+		         strcpy(sTemp, "<p align=\"right\">");
+		  }
+		  	      
+	      if (nodename[0] == EOS)
+	      {
+	         voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
+	            sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, border, sGifSize, xhtml_closer);
+	      }
+	      else
+	      {
+	         auto_references(nodename, TRUE, GIF_MW_NAME, uiGifMwWidth, uiGifMwHeight);
+	         voutlnf("%s%s", sTemp, nodename);
+	      }
+	      outln("</p>");
+	      bParagraphOpen = FALSE;
+	      break;
+	      
+	   case TOWIN:
+	   case TOWH4:
+	      strcpy(sTemp, "ql");
+	      if (inside_center)
+	         strcpy(sTemp, "qc");
+	      if (inside_right)
+	         strcpy(sTemp, "qr");
+	      voutlnf("\\%s{\\{%s %s\\}}\\par\\par\\pard", sTemp, bDocInlineBitmaps ? "bmc" : "bmcwd", BMP_MW_NAME);
+	      break;
+	      
+	   case TOSTG:
+	   case TOAMG:
+	      if (!no_images)
+	         voutlnf("@limage \"%s\" 0", IMG_MW_NAME);
+	      break;
+	      
+	   case TORTF:
+	      if (!no_images)
+	         c_bmp_output(BMP_MW_NAME, "", TRUE);
+	      break;
+	
+	   case TOLYX:
+	      if (!no_images)
+	         c_eps_output(EPS_MW_NAME, "", TRUE);
+	      break;
+	   
+	   case TOPDL:
+	      if (!no_images)
+	         c_png_output(PNG_MW_NAME, "", TRUE);
+	      break;
+	      
+	   case TOTEX:
+	      if (!no_images)
+	      {
+	         switch (iTexVersion)
+	         {
+	         case TEX_LINDNER:
+	         case TEX_STRUNK:
+	            c_img_output(IMG_MW_NAME, "", TRUE);
+	            break;
+	         case TEX_EMTEX:
+	/*
+	            if (!c_msp_output(filename, "", TRUE))
+	               c_pcx_output(filename, "", TRUE);
+	*/
+	            break;
+	         case TEX_MIKTEX:
+	            c_eps_output(EPS_MW_NAME, "", TRUE);
+	            break;
+	         case TEX_TETEX:
+	            c_eps_output(EPS_MW_NAME, "", TRUE);
+	            break;
+	         }
+	      }
+	      break;
+	   
+	   case TOIPF:
+	      if (!no_images)
+	         c_bmp_output(BMP_MW_NAME, "", TRUE);
+	      break;
+	   }
+	   break;
+	
+	case PASSU:
+	   /* outln("!udolink"); */
+	   break;
+	}
+}
 
 
 
@@ -6214,7 +6195,7 @@ GLOBAL void c_udolink (void)
 *
 ******************************************|************************************/
 
-GLOBAL void c_toplink(void)
+LOCAL void c_toplink(void)
 {
    char   closer[8] = "\0";  /* single tag closer mark in XHTML */
    
@@ -6780,7 +6761,6 @@ const _BOOL   visible)        /* */
       c_img_output(filename, caption, visible);
       break;
       
-      
    case TOTEX:
       qreplace_all(filename, "$\\backslash$", 12, "\\", 1);
       c_internal_styles(caption);
@@ -6793,45 +6773,37 @@ const _BOOL   visible)        /* */
       case TEX_STRUNK:
          c_img_output(filename, caption, visible);
          break;
-         
       case TEX_EMTEX:
-      case TEX_MIKTEX:                    /* V6.5.20 [CS] */
-         if (!c_msp_output(filename, caption, visible) )
+      case TEX_MIKTEX:
+         if (!c_msp_output(filename, caption, visible))
             c_pcx_output(filename, caption, visible);
-         
          break;
-         
       case TEX_TETEX:
-         c_eps_output(filename, caption, ".eps", visible);
+         c_eps_output(filename, caption, visible);
+         break;
       }
-      
       break;
-      
       
    case TOPDL:
       c_internal_styles(caption);
-/*    build_image_filename(filename, ".png");
-*/
       qreplace_all(filename, "\\_", 2, "_", 1);
-      c_png_output(filename, caption, ".png", visible);
+      c_png_output(filename, caption, visible);
       break;
-      
       
    case TOLYX:
       replace_all(filename, "\\backslash"INDENT_S, "\\");
       c_internal_styles(caption);
       indent2space(caption);
-      c_eps_output(filename, caption, ".eps", visible);
+      c_eps_output(filename, caption, visible);
       break;
-      
       
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      del_internal_styles(caption);       /*r6pl3*/
-      c_html_image_output(filename, caption, sDocImgSuffix, 0);
+      del_internal_styles(caption);
+      change_sep_suffix(filename, sDocImgSuffix);
+      c_html_image_output(filename, caption);
       break;
-      
       
    case TOWIN:
    case TOWH4:
@@ -6841,24 +6813,19 @@ const _BOOL   visible)        /* */
       c_bmp_output(filename, caption, visible);
       break;
       
-      
    case TOIPF:
       qreplace_all(filename, "&per.", 5, ".", 1);
-                                          /*r6pl6*/
       c_bmp_output(filename, caption, visible);
       break;
-      
       
    case TORTF:
       qreplace_all(filename, "\\\\", 2, "\\", 1);
       c_rtf_quotes(caption);
       c_win_styles(caption);
-                                          /*r6pl6*/
       c_bmp_output(filename, caption, visible);
       break;
       
-      
-   case TOHPH:                            /* <???> */
+   case TOHPH:
       break;
    }
 }
@@ -7701,13 +7668,10 @@ LOCAL void insert_nl_token_buffer(void)
 *
 ******************************************|************************************/
 
-GLOBAL size_t toklen(char *s)
+GLOBAL size_t toklen(const char *s)
 {
-   char     n[5];  /* */
-   int      i;     /* */
-   size_t   len;   /* */
-   char    *ptr;   /* */
-   
+   size_t   len;
+   const char *ptr;
 
    if (s[0] == EOS)
       return 0;
@@ -7722,25 +7686,24 @@ GLOBAL size_t toklen(char *s)
    {
       switch (*ptr)
       {
-      case DIVIS_C:                       /* Laenge 0 */
+      case DIVIS_C:
+         /* Laenge 0 */
          break;
 
       case ESC_C:
          ptr++;
-         
          switch (*ptr)
          {
          case C_PHOLD_MAGIC:
             ptr++;
+            /* Laenge des Linktexts addieren */
             len += pholdlen(ptr);
             /* skip phold_counter */
             ptr += 3;
             break;
             
-            
          case C_STYLE_MAGIC:
             ptr++;
-            
             switch (desttype)
             {
             case TOTEX:
@@ -7750,63 +7713,69 @@ GLOBAL size_t toklen(char *s)
             case TOWIN:
             case TOWH4:
             case TOAQV:
-            case TOHPH:                   /* <???> */
+            case TOHPH:
             case TOIPF:
                break;
-               
+            
             default:
                switch (*ptr)
                {
                case C_FOOT_ON:
-                  len+= 2;                /* " (" */
+                  len += 2;               /* " (" */
                   ptr++;
                   break;
-                  
                case C_FOOT_OFF:
-                  len+= 1;                /* ")" */
+                  len += 1;               /* ")" */
                   ptr++;
+                  break;
                }
+               break;
             }
             
-                                          /* skip ESC sequences */
+            /* skip ESC sequences */
             while (*ptr != EOS && *ptr != ESC_C)
                ptr++;
-            
             break;
-            
-            
+
          default:
-                                          /* skip ESC sequences */
+            /* skip ESC sequences */
             while (*ptr != EOS && *ptr != ESC_C)
                ptr++;
-               
             break;
          }
-         
          break;
-
 
       case '!':
-         switch (*(ptr + 1))              /* Naechstes Zeichen betrachten */
+         /* Naechstes Zeichen betrachten */
+         switch (*(ptr + 1))
          {
-         case '/':                        /* !/ = UDO-Quote, Laenge 1 */
+         case '/':
+            /* !/ = UDO-Quote, Laenge 1 */
             len++;
             ptr++;
             break;
-            
-         case '-':                        /* !- = UDO-Trennmarke, Laenge 0 */
+         case '-':
+            /* !- = UDO-Trennmarke, Laenge 0 */
             ptr++;
             break;
-            
-         default:                         /* nur ! zaehlen */
+         default:
+            /* nur ! zaehlen */
             len++;
+            break;
          }
-         
          break;
-         
 
+	  case '@':
+	  	if (desttype == TOSTG && ptr[1] == '@')
+	  	   ptr++;
+	  	len++;
+	  	break;
+      case NBSP_C:
+      case TILDE_C:
+      case INDENT_C:
       default:
          len++;
+         break;
       }
 
       ptr++;
@@ -7832,7 +7801,6 @@ GLOBAL size_t toklen(char *s)
 GLOBAL void tokcat(char *s, size_t maxlen)
 {
    register int   i;
-   char           errbuf[128];  /* */
    size_t         m = 0;        /* Laenge des bisherigen Strings mitzaehlen */
    
    
@@ -8056,7 +8024,7 @@ const char    *t)          /* the too long word */
 *
 ******************************************|************************************/
 
-GLOBAL void str2tok(char *s)
+GLOBAL void str2tok(const char *s)
 {
    char        *tok;
    char         tmp[LINELEN + 1];
@@ -8078,7 +8046,7 @@ GLOBAL void str2tok(char *s)
       tok = strtok(NULL, sep);
    }
 
-   if (token_counter >= MAX_TOKENS)
+   if (token_counter > MAX_TOKENS)
    {
       error_too_many_tokens();
    }
@@ -8105,12 +8073,10 @@ GLOBAL void str2tok(char *s)
 
 GLOBAL void token_reset(void)
 {
-   register int   i;  /* counter */
-   
+   register int i;
 
-   for (i = 0; i <= token_counter; token[i++][0] = EOS)
-      ;
-      
+   for (i = 0; i < token_counter; i++)
+      token[i][0] = EOS;
    token_counter = 0;
    tokens_contain_item = FALSE;
 }
@@ -8134,19 +8100,14 @@ GLOBAL void token_reset(void)
 *
 ******************************************|************************************/
 
-LOCAL void to_check_rtf_quote_indent(
-
-char     *s)      /* */
+LOCAL void to_check_rtf_quote_indent(char *s)
 {
-   char   t[80];  /* */
-   int    i,      /* counter */
-          val;    /* */
-          
+   char   t[80];
+   int    i, val;
 
    if (iEnvLevel > 0)
    {
       val = 0;
-      
       for (i = 0; i <= iEnvLevel; i++)
       {
          if (iEnvType[i] == ENV_QUOT)
@@ -8163,12 +8124,12 @@ char     *s)      /* */
             sprintf(t, "\\ri%d ", val);
             strcat(s, t);
             break;
-            
          case TOWIN:
          case TOWH4:
          case TOAQV:
             sprintf(t, "\\ri%d ", val);
             strcat(s, t);
+            break;
          }
       }
    }
@@ -8193,18 +8154,13 @@ char     *s)      /* */
 *
 ******************************************|************************************/
 
-LOCAL void to_check_quote_indent(
-
-size_t  *u)    /* # of spaces to indent a line */
+LOCAL void to_check_quote_indent(size_t *u)
 {
-   int   i,    /* counter */
-         val;  /* */
-         
+   int   i, val;
 
    if (iEnvLevel > 0)
    {
       val = 0;
-      
       for (i = 0; i <= iEnvLevel; i++)
       {
          if (iEnvType[i] == ENV_QUOT)
@@ -8227,6 +8183,7 @@ size_t  *u)    /* # of spaces to indent a line */
          case TOSRC:
          case TOSRP:
             *u -= val;
+            break;
          }
       }
    }
@@ -9566,7 +9523,7 @@ char             *s)                    /* */
       if (token[i][0] == META_C && token[i][1] != QUOTE_C)
       {
                                           /* Sequentielle Suche */
-         for (j = 0; j < sizeof(udoCmdSeq) / sizeof(udoCmdSeq[0]); j++)
+         for (j = 0; j < (int)(sizeof(udoCmdSeq) / sizeof(udoCmdSeq[0])); j++)
          {
             if (    (strcmp(token[i], udoCmdSeq[j].magic) == 0) 
                  || (udoCmdSeq[j].macut[0] != EOS && strcmp(token[i], udoCmdSeq[j].macut) == 0)
@@ -12393,6 +12350,7 @@ LOCAL _BOOL pass1(const char *datei)
    }
    
    /* Rekursive Includes testen */
+   id = file_listadd(tmp_datei);
    for (i = 0; i < iFilesOpened; i++)
    {
       if (uiFiles[i].loc.id == id)
@@ -13906,7 +13864,7 @@ LOCAL void save_winhelp_project(void)
 {
    FILE  *hpjfile;        /* */
    char   n[512],         /* */
-          hlp_name[256],  /* */
+          hlp_name[256 + 10],
           bc[128];        /* */
 
    if (bTestmode)
@@ -14084,7 +14042,7 @@ LOCAL void save_winhelp4_project(void)
 {
    FILE  *hpjfile;        /* */
    char   n[512],         /* */
-          hlp_name[256];  /* */
+          hlp_name[256 + 10];
 
 
    if (bTestmode)
@@ -14698,8 +14656,6 @@ GLOBAL _BOOL udo(char *datei)
 
    init_vars_spec();
 
-   udo_running = TRUE;
-
    destlang = TOGER;
 
    iEncodingSource        = -1;
@@ -14855,8 +14811,6 @@ GLOBAL _BOOL udo(char *datei)
                         save_winhelp_project();
                      }
                      
-                     save_win_bmps();   /*r6pl5*/
-                     
                      if (bUseIdMapFileC)
                      {
                         bMapSavedC = save_winhelp_map_c();
@@ -14880,12 +14834,10 @@ GLOBAL _BOOL udo(char *datei)
                      break;
                      
                   case TORTF:
-                     save_rtf_bmps();   /*r6pl6*/
                      break;
                      
-                  case TOHAH:      /* V6.5.17 */
+                  case TOHAH:
                   case TOHTM:
-                     save_html_gifs();
                      break;
                      
                   case TOMHH:
@@ -14893,7 +14845,6 @@ GLOBAL _BOOL udo(char *datei)
                      bHhkSaved = save_htmlhelp_index(file_lookup(sHhkfull));
                      
                      save_htmlhelp_project();
-                     save_html_gifs();
                      
                      if (bUseIdMapFileC)
                      {
@@ -14906,7 +14857,16 @@ GLOBAL _BOOL udo(char *datei)
                      
                   case TOSTG:
                   case TOAMG:
-                     save_stg_imgs();
+                     break;
+                        
+                  case TOIPF:
+                     break;
+                        
+                  case TOLYX:
+                     break;
+                        
+                  case TOPDL:
+                     break;
                   }
                }
 
@@ -14923,9 +14883,6 @@ GLOBAL _BOOL udo(char *datei)
 
 
    /* Hier geht's weiter, wenn schon pass1() versagte */
-   udo_running = FALSE;
-
-
    switch (desttype)
    {
    case TOHTM:
@@ -14967,27 +14924,29 @@ GLOBAL _BOOL udo(char *datei)
       vloglnf("finished: %s", timer_stop);
       logln("");
 
-      if (bGifHmSaved)    logln_file_generated("GIF",                          sGifHmFull,   "");
-      if (bGifUpSaved)    logln_file_generated("GIF",                          sGifUpFull,   "");
-      if (bGifLfSaved)    logln_file_generated("GIF",                          sGifLfFull,   "");
-      if (bGifRgSaved)    logln_file_generated("GIF",                          sGifRgFull,   "");
-      if (bGifNoHmSaved)  logln_file_generated("GIF",                          sGifNoHmFull, "");
-      if (bGifNoUpSaved)  logln_file_generated("GIF",                          sGifNoUpFull, "");
-      if (bGifNoLfSaved)  logln_file_generated("GIF",                          sGifNoLfFull, "");
-      if (bGifNoRgSaved)  logln_file_generated("GIF",                          sGifNoRgFull, "");
-      if (bGifTpSaved)    logln_file_generated("GIF",                          sGifTpFull,   "");
-      if (bGifFoSaved)    logln_file_generated("GIF",                          sGifFoFull,   "");
-      if (bGifFcSaved)    logln_file_generated("GIF",                          sGifFcFull,   "");
-      if (bGifFsSaved)    logln_file_generated("GIF",                          sGifFsFull,   "");
-      if (bGifMwSaved)    logln_file_generated("GIF",                          sGifMwFull,   "");
-      if (bGifGerSaved)   logln_file_generated("GIF",                          sGifGerFull,  "");
-      if (bGifEngSaved)   logln_file_generated("GIF",                          sGifEngFull,  "");
-      if (bBmpFoSaved)    logln_file_generated("BMP",                          sBmpFoFull,   "");
-      if (bBmpFcSaved)    logln_file_generated("BMP",                          sBmpFcFull,   "");
-      if (bBmpMwSaved)    logln_file_generated("BMP",                          sBmpMwFull,   "");
-      if (bImgFoSaved)    logln_file_generated("IMG",                          sImgFoFull,   "");
-      if (bImgFcSaved)    logln_file_generated("IMG",                          sImgFcFull,   "");
-      if (bImgMwSaved)    logln_file_generated("IMG",                          sImgMwFull,   "");
+      if (bGifHmSaved)    logln_file_generated("GIF",                          file_lookup(sGifHmFull),   "");
+      if (bGifUpSaved)    logln_file_generated("GIF",                          file_lookup(sGifUpFull),   "");
+      if (bGifLfSaved)    logln_file_generated("GIF",                          file_lookup(sGifLfFull),   "");
+      if (bGifRgSaved)    logln_file_generated("GIF",                          file_lookup(sGifRgFull),   "");
+      if (bGifNoHmSaved)  logln_file_generated("GIF",                          file_lookup(sGifNoHmFull), "");
+      if (bGifNoUpSaved)  logln_file_generated("GIF",                          file_lookup(sGifNoUpFull), "");
+      if (bGifNoLfSaved)  logln_file_generated("GIF",                          file_lookup(sGifNoLfFull), "");
+      if (bGifNoRgSaved)  logln_file_generated("GIF",                          file_lookup(sGifNoRgFull), "");
+      if (bGifTpSaved)    logln_file_generated("GIF",                          file_lookup(sGifTpFull),   "");
+      if (bGifFoSaved)    logln_file_generated("GIF",                          file_lookup(sGifFoFull),   "");
+      if (bGifFcSaved)    logln_file_generated("GIF",                          file_lookup(sGifFcFull),   "");
+      if (bGifFsSaved)    logln_file_generated("GIF",                          file_lookup(sGifFsFull),   "");
+      if (bGifMwSaved)    logln_file_generated("GIF",                          file_lookup(sGifMwFull),   "");
+      if (bGifGerSaved)   logln_file_generated("GIF",                          file_lookup(sGifGerFull),  "");
+      if (bGifEngSaved)   logln_file_generated("GIF",                          file_lookup(sGifEngFull),  "");
+      if (bBmpFoSaved)    logln_file_generated("BMP",                          file_lookup(sBmpFoFull),   "");
+      if (bBmpFcSaved)    logln_file_generated("BMP",                          file_lookup(sBmpFcFull),   "");
+      if (bBmpMwSaved)    logln_file_generated("BMP",                          file_lookup(sBmpMwFull),   "");
+      if (bImgFoSaved)    logln_file_generated("IMG",                          file_lookup(sImgFoFull),   "");
+      if (bImgFcSaved)    logln_file_generated("IMG",                          file_lookup(sImgFcFull),   "");
+      if (bImgMwSaved)    logln_file_generated("IMG",                          file_lookup(sImgMwFull),   "");
+      if (bEpsMwSaved)    logln_file_generated("EPS",                          file_lookup(sEpsMwFull),   "");
+      if (bPngMwSaved)    logln_file_generated("PNG",                          file_lookup(sPngMwFull),   "");
       if (bCmdSaved)      logln_file_generated("Pure C command file",          file_lookup(sCmdfull),     "");
       if (bHpjSaved)      logln_file_generated("WinHelp project",              file_lookup(sHpjfull),     "");
       if (bCntSaved)      logln_file_generated("WinHelp4 contents",            file_lookup(sCntfull),     "");
@@ -15002,7 +14961,6 @@ GLOBAL _BOOL udo(char *datei)
       if (bIdxSaved)      logln_file_generated("Index file",                   file_lookup(sIdxfull),     "");
       if (bTreeSaved)     logln_file_generated("Tree file",                    file_lookup(sTreefull),    "");
       if (bUPRSaved)      logln_file_generated("Project file",                 file_lookup(sUPRfull),     "");
-
 
       if (outfile.full[0] != EOS)
       {
@@ -15021,7 +14979,7 @@ GLOBAL _BOOL udo(char *datei)
          logln("UDO stopped because of fatal error(s)");
       }
 
-   }   /* if (!bNoLogfile) */
+   }
 
    if (bLogopened  && fLogfile     != NULL)   fclose(fLogfile);
    if (bHypopened  && fHypfile     != NULL)   fclose(fHypfile);
@@ -15399,8 +15357,6 @@ char        *datei)        /* */
 
    init_vars_spec();
 
-   udo_running = TRUE;
-
    destlang = TOGER;
 
    init_lang();
@@ -15477,9 +15433,6 @@ char        *datei)        /* */
       }   /* if (malloc...() ) */
 
    }   /* if (pass1() ) */
-
-
-   udo_running = FALSE;
 
 
    /* --- Hier Informationen ueber das erzeugte File ausgeben. --- */
@@ -16308,27 +16261,52 @@ GLOBAL void dest_special_adjust(void)
    sHhkfull = file_listadd(filename);
    sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".upr");
    sUPRfull = file_listadd(filename);
-   sprintf(sGifHmFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_HM_NAME);
-   sprintf(sGifUpFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_UP_NAME);
-   sprintf(sGifLfFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_LF_NAME);
-   sprintf(sGifRgFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_RG_NAME);
-   sprintf(sGifNoHmFull, "%s%s%s",   outfile.driv, outfile.path, GIF_NOHM_NAME);
-   sprintf(sGifNoUpFull, "%s%s%s",   outfile.driv, outfile.path, GIF_NOUP_NAME);
-   sprintf(sGifNoLfFull, "%s%s%s",   outfile.driv, outfile.path, GIF_NOLF_NAME);
-   sprintf(sGifNoRgFull, "%s%s%s",   outfile.driv, outfile.path, GIF_NORG_NAME);
-   sprintf(sGifTpFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_TP_NAME);
-   sprintf(sGifFoFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_FO_NAME);
-   sprintf(sGifFcFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_FC_NAME);
-   sprintf(sGifFsFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_FS_NAME);
-   sprintf(sGifMwFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_MW_NAME);
-   sprintf(sGifGerFull,  "%s%s%s",   outfile.driv, outfile.path, GIF_GER_NAME);
-   sprintf(sGifEngFull,  "%s%s%s",   outfile.driv, outfile.path, GIF_ENG_NAME);
-   sprintf(sBmpFoFull,   "%s%s%s",   outfile.driv, outfile.path, BMP_FO_NAME);
-   sprintf(sBmpFcFull,   "%s%s%s",   outfile.driv, outfile.path, BMP_FC_NAME);
-   sprintf(sBmpMwFull,   "%s%s%s",   outfile.driv, outfile.path, BMP_MW_NAME);
-   sprintf(sImgFoFull,   "%s%s%s",   outfile.driv, outfile.path, IMG_FO_NAME);
-   sprintf(sImgFcFull,   "%s%s%s",   outfile.driv, outfile.path, IMG_FC_NAME);
-   sprintf(sImgMwFull,   "%s%s%s",   outfile.driv, outfile.path, IMG_MW_NAME);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_HM_NAME);
+   sGifHmFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_UP_NAME);
+   sGifUpFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_LF_NAME);
+   sGifLfFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_RG_NAME);
+   sGifRgFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_NOHM_NAME);
+   sGifNoHmFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_NOUP_NAME);
+   sGifNoUpFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_NOLF_NAME);
+   sGifNoLfFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_NORG_NAME);
+   sGifNoRgFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_TP_NAME);
+   sGifTpFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_FO_NAME);
+   sGifFoFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_FC_NAME);
+   sGifFcFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_FS_NAME);
+   sGifFsFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_MW_NAME);
+   sGifMwFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_GER_NAME);
+   sGifGerFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, GIF_ENG_NAME);
+   sGifEngFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, BMP_FO_NAME);
+   sBmpFoFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, BMP_FC_NAME);
+   sBmpFcFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, BMP_MW_NAME);
+   sBmpMwFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, IMG_FO_NAME);
+   sImgFoFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, IMG_FC_NAME);
+   sImgFcFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, IMG_MW_NAME);
+   sImgMwFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, EPS_MW_NAME);
+   sEpsMwFull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, PNG_MW_NAME);
+   sPngMwFull = file_listadd(filename);
 }
 
 

@@ -82,11 +82,11 @@
 *
 ******************************************|************************************/
 
-#define MYFILE_FULL_LEN   512             /* */
-#define MYFILE_DRIV_LEN    16             /* */
-#define MYFILE_PATH_LEN   256             /* */
-#define MYFILE_NAME_LEN   256             /* */
-#define MYFILE_SUFF_LEN    32             /* */
+#define MYFILE_DRIV_LEN    16
+#define MYFILE_PATH_LEN   256
+#define MYFILE_NAME_LEN   256
+#define MYFILE_SUFF_LEN    32
+#define MYFILE_FULL_LEN   (MYFILE_DRIV_LEN + MYFILE_PATH_LEN + MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1)
 
 
 

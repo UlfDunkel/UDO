@@ -48,7 +48,5 @@
 *
 ******************************************|************************************/
 
-   /* Datum-Strings fuer die ausgewaehlte Sprache setzen (destlang) */
-GLOBAL void init_lang_date(void);
    /* Diverse Strings fuer die ausgewaehlte Sprache setzen (destlang) */
 GLOBAL void init_lang(void);

@@ -223,7 +223,7 @@ LOCAL _BOOL   last_aqc_verb;            /* */
 *
 ******************************************|************************************/
 
-LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
+LOCAL const char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 {
    "&hellip;",
    "&mdash;",

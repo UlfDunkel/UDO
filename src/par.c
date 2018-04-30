@@ -759,6 +759,7 @@ LOCAL _BOOL convert_link_lyx(char *s, const char *p0, char *p1, char *p2, const 
    _BOOL   isnode;
    char nodename[256];
 
+   UNUSED(link);
    is_node_link(p2, nodename, &ti, &isnode, &li);
 
    sprintf(s_entry,
@@ -794,6 +795,7 @@ LOCAL _BOOL convert_link_tvh(char *s, const char *p0, char *p1, char *p2, const 
    _BOOL isnode;
    char nodename[256];
    
+   UNUSED(link);
    is_node_link(p2, nodename, &ti, &isnode, &li);
 
    node2vision(p2);
@@ -3213,10 +3215,10 @@ LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro)
 {
    int          pnr = 0;
    char        *s_entry,
-                sImgSize[80],
-                sImgName[512];
+                sGifSize[80],
+                sGifName[512];
    _BOOL      flag;
-   _UWORD        uiW, uiH;
+   _UWORD        uiW, uiH, bitcnt;
    
    flag = FALSE;
    
@@ -3247,45 +3249,15 @@ LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro)
          strcpy(tmp_suff, sDocImgSuffix);
          sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
          path_adjust_separator(Param[1]);
-         
-         uiW = uiH = 0;
-         sImgSize[0] = EOS;
-         
-         if (!no_img_size)
-         {
-            if (my_stricmp(tmp_suff, ".gif") == 0)
-            {
-               strcpy(sImgName, Param[1]);
-               strinsert(sImgName, old_outfile.path);
-               strinsert(sImgName, old_outfile.driv);
-               path_adjust_separator(sImgName);
-         
-               if (!get_gif_size(sImgName, &uiW, &uiH))
-               {
-                  error_read_gif(sImgName);
-               }
-            }
-            else if (my_stricmp(tmp_suff, ".png") == 0)
-            {
-               strcpy(sImgName, Param[1]);
-               strinsert(sImgName, old_outfile.path);
-               strinsert(sImgName, old_outfile.driv);
-               path_adjust_separator(sImgName);
-         
-               if (!get_png_size(sImgName, &uiW, &uiH))
-               {
-                  error_read_png(sImgName);
-               }
-            }
-         }
-         
+         sGifSize[0] = EOS;
+         strcpy(sGifName, Param[1]);
+         get_picture_size(sGifName, NULL, &uiW, &uiH, &bitcnt);
          if (uiW != 0 && uiH != 0)
          {
-            sprintf(sImgSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
          replace_char(Param[1], '\\', '/');
-         
          if (no_images)
          {
             s_entry = strdup(Param[2]);
@@ -3301,7 +3273,7 @@ LOCAL void c_internal_image(char *s, const _BOOL inside_b4_macro)
             if (Param[3][0] == EOS)
                strcpy(Param[3], Param[2]);
             s_entry = um_strdup_printf("<img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s>",
-                Param[1], Param[2], Param[3], border, sImgSize, xhtml_closer);
+                Param[1], Param[2], Param[3], border, sGifSize, xhtml_closer);
          }
          flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
          free(s_entry);

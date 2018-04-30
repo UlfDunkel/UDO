@@ -52,6 +52,9 @@
 *
 ******************************************|************************************/
 
+#ifndef UDO_TP_H
+#define UDO_TP_H
+
 /*******************************************************************************
 *
 *     TYPE DEFINITIONS
@@ -60,14 +63,8 @@
 
 
 #define MAXADDRESS   20
-#define MAXPAPERSIZE  6                   /* New in r6pl15 [NHz] */
+#define MAXPAPERSIZE  6
 
-
-
-
-
-#ifndef UDO_TP_H
-#define UDO_TP_H
 
 /*******************************************************************************
 *
@@ -97,19 +94,19 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
    _UWORD   authoriconHeight;              /* */
    _UWORD   authoriconActiveWidth;         /* */
    _UWORD   authoriconActiveHeight;        /* */
-   char   *keywords;                      /* New in r6pl15 [NHz] */
-   char   *description;                   /* New in r6pl15 [NHz] */
-   char   *robots;                        /* New in V6.5.17 */
-   char   *company;                       /* New in V6.5.2 [NHz] */
-   char   *category;                      /* New in V6.5.2 [NHz] */
+   char   *keywords;
+   char   *description;
+   char   *robots;
+   char   *company;
+   char   *category;
    char   *drc_statusline;
    char   *stg_database;
-   char   *htmltitle;                     /* <title>         */
+   char   *htmltitle;                     /* <title> */
    char   *translator;                    /* translator name */
    char   *distributor;                   /* distributor name */
    char   *degree;                        /* unused??? */
    char   *copyright;                     /* copyright */
-}   TITLEDATA;
+} TITLEDATA;
 
 
 
@@ -119,23 +116,21 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
 *
 *  Paper Format
 *
-*  Note: New in r6pl15 [NHz]
-*
 ******************************************|************************************/
 
 typedef struct                            /* Paper Format */
 {
-   char     *paper;                       /* paper format */
+   const char *paper;                     /* paper format */
    _UWORD     width_mm10;                  /* width  in 10th of a mm */
    _UWORD     height_mm10;                 /* height in 10th of a mm */
-   _UWORD     width_pt;                    /* */
-   _UWORD     height_pt;                   /* */
-   _UWORD     margintop_pt;                /* */
-   _UWORD     marginleft_pt;               /* */
-   _UWORD     marginright_pt;              /* */
-   _UWORD     marginbottom_pt;             /* */
-   _UWORD     width_twips;                 /* */
-   _UWORD     height_twips;                /* */
+   _UWORD     width_pt;
+   _UWORD     height_pt;
+   _UWORD     margintop_pt;
+   _UWORD     marginleft_pt;
+   _UWORD     marginright_pt;
+   _UWORD     marginbottom_pt;
+   _UWORD     width_twips;
+   _UWORD     height_twips;
    _BOOL   landscape;                   /* TRUE: landscape, FALSE: portrait */
 } PAPERFORMAT;
 
@@ -153,26 +148,24 @@ typedef struct                            /* ---- Layoutinfos ---- */
 {
    char   *paper;                         /* Papierformat */
    char   *pagemode;                      /* HowToOpen */
-   char   *viewerpreferences;             /* */
-   char   *pagelayout;                    /* */
-   char   *fitwindow;                     /* */
-   char   *openpage;                      /* */
-   char   *hidetoolbar;                   /* */
-   char   *hidemenubar;                   /* */
-   char   *propfontname;                  /* */
-   _UWORD   propfontsize;                  /* */
-   char   *monofontname;                  /* */
-   _UWORD   monofontsize;                  /* */
-   _UWORD   node1size;                     /* New in r6pl16 [NHz] */
-   _UWORD   node2size;                     /* New in r6pl16 [NHz] */
-   _UWORD   node3size;                     /* New in r6pl16 [NHz] */
-   _UWORD   node4size;                     /* New in r6pl16 [NHz] */
+   char   *viewerpreferences;
+   char   *pagelayout;
+   char   *fitwindow;
+   char   *openpage;
+   char   *hidetoolbar;
+   char   *hidemenubar;
+   char   *propfontname;
+   _UWORD   propfontsize;
+   char   *monofontname;
+   _UWORD   monofontsize;
+   _UWORD   node1size;
+   _UWORD   node2size;
+   _UWORD   node3size;
+   _UWORD   node4size;
    _UWORD   node5size;
    _UWORD   node6size;
 }  LAYOUTDATA;
 
-
-#endif /* UDO_TP_H */
 
 
 
@@ -184,14 +177,14 @@ typedef struct                            /* ---- Layoutinfos ---- */
 *
 ******************************************|************************************/
 
-GLOBAL int          address_counter;      /* */
-GLOBAL _BOOL      called_maketitle;     /* */
-GLOBAL _BOOL      uses_maketitle;       /* */
+GLOBAL int          address_counter;
+GLOBAL _BOOL      called_maketitle;
+GLOBAL _BOOL      uses_maketitle;
 
-GLOBAL TITLEDATA    titdat;               /* */
-GLOBAL LAYOUTDATA   laydat;               /* New in r6pl15 [NHz] */
+GLOBAL TITLEDATA    titdat;
+GLOBAL LAYOUTDATA   laydat;
 
-GLOBAL char         titleprogram[512];    /* */
+GLOBAL char         titleprogram[512];
 
 
 
@@ -203,15 +196,15 @@ GLOBAL char         titleprogram[512];    /* */
 *
 ******************************************|************************************/
    
-GLOBAL _BOOL set_show_variable(void);   /* New V6.5.19 */
-GLOBAL _BOOL set_mainlayout(void);      /* New in r6pl16 [NHz] */
-GLOBAL _BOOL set_doclayout(void);       /* New in r6pl15 [NHz] */
+GLOBAL _BOOL set_show_variable(void);
+GLOBAL _BOOL set_mainlayout(void);
+GLOBAL _BOOL set_doclayout(void);
 GLOBAL _BOOL set_docinfo(void);
-GLOBAL void    c_maketitle(void);
-GLOBAL void    pch_titlepage(void);
+GLOBAL void c_maketitle(void);
+GLOBAL void pch_titlepage(void);
 
-GLOBAL void    init_module_tp(void);      /* */
-GLOBAL void    init_module_tp_pass2(void);/* */
-GLOBAL void    exit_module_tp(void);      /* */
+GLOBAL void init_module_tp(void);
+GLOBAL void init_module_tp_pass2(void);
+GLOBAL void exit_module_tp(void);
 
-/* +++ EOF (tp.h) +++ */
+#endif /* UDO_TP_H */

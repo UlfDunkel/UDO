@@ -1400,7 +1400,7 @@ LOCAL void table_output_html(void)
             else
                um_strcat(css, "\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
             
-            if (css)
+            if (css[0])
                um_strcat(addition, css, TAB_ADDITION_LEN, "table_output_html[3-1-5]");
          }
          else
@@ -1424,7 +1424,7 @@ LOCAL void table_output_html(void)
             if (!addition_has_valign)
                um_strcat(css, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-2-3]");
             
-            if (css)
+            if (css[0])
                um_strcat(addition, css, TAB_ADDITION_LEN, "table_output_html[3-2-4]");
          }
          
