@@ -198,14 +198,13 @@
 *
 ******************************************|************************************/
 
-#if !__AddLFToNL__
-# define NL "\n"
+#ifdef __MACOS__
+# define NL "\n\r"                   /* solange es keinen HCP auf dem Mac gibt notwendig */
 #else
-# define NL "\n\r"                        /* MO */
+# define NL "\n"
 #endif
 
-   /* -- IF-Stack fuer !if-Umgebungen sowie Flags fuer pass1() und pass2() --- */
-
+/* IF-Stack fuer !if-Umgebungen sowie Flags fuer pass1() und pass2() */
 #define IF_NONE        0
 #define IF_GENERAL     1
 #define IF_DEST        2
@@ -255,12 +254,12 @@ typedef void (*CMDPROC)(void);
 
 typedef struct _udocommand                /* ---- Funktionentabelle ---- */
 {
-   const char *magic;                     /* UDO-Kommando */
-   const char *macut;                     /* Shortcut des Kommandos */
-   CMDPROC   proc;                        /* zugehoerige Routine */
-   _BOOL   reset;                       /* Tokens danach loeschen? */
-   int       pos;                         /* Erlaubnis Vorspann/Hauptteil */
-}  UDOCOMMAND;
+   const char *magic;                     /* command name, including leading "!" */
+   const char *macut;                     /* abbreviation, including leading "!" (optional) */
+   CMDPROC     proc;                      /* function to be called in pass2() */
+   _BOOL     reset;                       /* clear tokens after command? */
+   int         pos;                       /* possible postions (CMD_* above) */
+} UDOCOMMAND;
 
 
 

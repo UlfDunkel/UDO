@@ -182,8 +182,4 @@ typedef unsigned long   _ULONG;           /* unsigned 32 bit integer */
 *
 ******************************************|************************************/
 
-#ifdef __MACOS__
-#define __AddLFToNL__ 0                   /* solange es keinen HCP auf dem Mac gibt notwendig */
-#endif
-
 #endif   /* PORTAB_H */
