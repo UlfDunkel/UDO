@@ -19,6 +19,7 @@ MV=		mv
 HC31=		hcp.exe
 HCRTF=		hcrtf
 HHC=		hhc
+CHMC=		chmc
 PCHELP=		hc
 LATEX=		latex
 PDFLATEX=	pdflatex
@@ -1223,13 +1224,17 @@ htmlhelp: .stamp.htmlhelp
 		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(HTMLHELP_DIR)"; \
 		$(UDO) --htmlhelp --check --force-short -o "$(HTMLHELP_DIR)udo.html" -l $(srcdir)/udo.u || exit 1; \
 		$(RM) "$(HTMLHELP_DIR)udo.hhp"; \
-		$(CP) udo$(OUTPUT_LANG).hhp "$(HTMLHELP_DIR)"; \
+		$(CP) $(srcdir)/udo$(OUTPUT_LANG).hhp "$(HTMLHELP_DIR)"; \
 		$(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).chm; \
-		if test "`type $(HHC) 2>/dev/null`" = ""; then \
+		hhc="`type -p $(CHMC) 2>/dev/null`"; \
+		if test "$$hhc" = ""; then \
+		 hhc="`type -p $(HHC) 2>/dev/null`"; \
+		fi; \
+		if test "$$hhc" = ""; then \
 		 echo "HTML Help Compiler ($(HHC)) not found" >& 2; \
 		 else \
 		(cd $(HTMLHELP_DIR); \
-		 $(HHC) udo$(OUTPUT_LANG).hhp; \
+		 "$$hhc" udo$(OUTPUT_LANG).hhp; \
 		); \
 		$(CP) $(HTMLHELP_DIR)udo$(VER).chm $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER).chm || exit 1; \
 		: $(RMDIRHIER) "$(HTMLHELP_DIR)"; \
@@ -1279,8 +1284,9 @@ win4 winhelp4: .stamp.winhelp4
 		 $(CP) $(WIN4HPJ) "$(WINHELP4_DIR)udo$(VER)4.hpj"; \
 		 $(CP) $(srcdir)/images/help.ico "$(WINHELP4_DIR)help.ico"; \
 		 $(CP) $(srcdir)/images/*.bmp "$(WINHELP4_DIR)images"; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/UDO$*4.HLP $(BIN_DIR)/$(OUTPUT_LANG)/UDO$*4.CNT; \
 		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.hlp $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.cnt; \
-		 chmod -f +w $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.FTS 2>/dev/null; \
+		 chmod -f +w $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/UDO$(VER)4.FTS 2>/dev/null; \
 		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.gid $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.GID; \
 		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.FTS; \
 		 if test "`type $(HCRTF) 2>/dev/null`" = ""; then \
@@ -1292,7 +1298,9 @@ win4 winhelp4: .stamp.winhelp4
 		   $(HCRTF) -x -NG udo$(VER)4.hpj; \
 		   $(HCRTF) -x -NG udo$(VER)4.hpj; \
 		   ); \
-		   $(CP) "$(WINHELP4_DIR)udo$(VER)4.hlp" $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.hlp || exit 1; \
+		   if test -f "$(WINHELP4_DIR)"UDO*4.HLP -a ! -f "$(WINHELP4_DIR)udo$(VER)4.hlp"; then \
+			mv "$(WINHELP4_DIR)"UDO*4.HLP "$(WINHELP4_DIR)udo$(VER)4.hlp"; \
+		   fi; \
 		   $(CP) "$(WINHELP4_DIR)udo$(VER)4.cnt" $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.cnt || exit 1; \
 		   : $(RMDIRHIER) "$(WINHELP4_DIR)"; \
 		 fi \
