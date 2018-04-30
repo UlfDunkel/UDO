@@ -125,7 +125,7 @@ GLOBAL _BOOL     bForceShort;           /* Immer kurze Dateinamen? */
 
 GLOBAL size_t      zDocParwidth;          /* PL6: max. Zeilenbreite */
 
-GLOBAL int         iTexVersion;           /* Lindner-, Strunk-, emTex? */   
+GLOBAL int         iTexVersion;           /* Lindner-, Strunk-, emTex? */
 GLOBAL int         iTexDPI;               /* Aufloesung fuer Images */
 GLOBAL _BOOL     bTex2e;                /* LaTeX2e wird benutzt? */
 GLOBAL char        cTexVerb;              /* Zeichen fuer \verb */
@@ -137,8 +137,8 @@ GLOBAL int         bDocTabwidth;          /* Tab-Width fuer verbatim-Umgebung */
 GLOBAL int         iDocVerbatimSize;      /* Fontgroesse fuer verbatim-Umgebung */
 GLOBAL int         iDocLinedrawSize;      /* Fontgroesse fuer linedraw-Umgebung */
 
-GLOBAL char        sCurrFileName[512];    /* Gerade aktive Datei */
-GLOBAL _UWORD       uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
+GLOBAL char        sCurrFileName[MYFILE_FULL_LEN + 1];    /* Gerade aktive Datei */
+GLOBAL FILE_LINENO uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
 
 GLOBAL _BOOL     b1stQuote;             /* flag for "real" double quotation marks */
 GLOBAL _BOOL     b1stApost;             /* flag for 'real' single quotation marks */
@@ -154,36 +154,34 @@ GLOBAL MYFILE      old_outfile;
 GLOBAL _BOOL     bOutOpened;            /* File geoeffnet? */
 
 GLOBAL FILE       *fLogfile;
-GLOBAL char        sLogfull[MYFILE_FULL_LEN + 1];
+GLOBAL FILE_ID sLogfull;
 GLOBAL _BOOL     bLogopened;            /* Logfile geoeffnet? */
 
 GLOBAL FILE       *fHypfile;
-GLOBAL char        sHypfull[MYFILE_FULL_LEN + 1];
+GLOBAL FILE_ID     sHypfull;
 GLOBAL _BOOL     bHypopened;            /* Hyphenfile geoeffnet? */
 GLOBAL _BOOL     bHypfailed;            /* Hypfile oeffnen gescheitert */
 
 GLOBAL FILE       *fTreefile;
-GLOBAL char        sTreefull[MYFILE_FULL_LEN + 1];
+GLOBAL FILE_ID     sTreefull;
 GLOBAL _BOOL     bTreeopened;           /* Treefile geoeffnet? */
 
 GLOBAL FILE       *fIdxfile;
-GLOBAL char        sIdxfull[MYFILE_FULL_LEN + 1];
+GLOBAL FILE_ID     sIdxfull;
 GLOBAL _BOOL     bIdxopened;            /* Indexfile geoeffnet? */
 GLOBAL _BOOL     bIdxfailed;            /* Indexfile oeffnen gescheitert*/
 
 GLOBAL FILE       *fUPRfile;
-GLOBAL char        sUPRfull[MYFILE_FULL_LEN + 1];
+GLOBAL FILE_ID     sUPRfull;
 GLOBAL _BOOL     bUPRopened;            /* Logfile geoeffnet? */
 
-GLOBAL char        sInfMsg[256];          /* Zur Information */
-
-GLOBAL char        sCmdfull[512];         /* Name der CMD-Datei fuer PCH */
-GLOBAL char        sHpjfull[512];         /* Name der HPJ-Datei fuer Win */
-GLOBAL char        sCntfull[512];         /* Name der CNT-Datei fuer Win4 */
-GLOBAL char        sMapNoSuff[512];       /* Name der Map-Datei fuer Win ohne Suffix */
-GLOBAL char        sHhpfull[512];         /* Name der HHP-Datei fuer HTML Help */
-GLOBAL char        sHhcfull[512];         /* Name der HHC-Datei fuer HTML Help */
-GLOBAL char        sHhkfull[512];         /* Name der HHK-Datei fuer HTML Help */
+GLOBAL FILE_ID     sCmdfull;              /* Name der CMD-Datei fuer PCH */
+GLOBAL FILE_ID     sHpjfull;              /* Name der HPJ-Datei fuer Win */
+GLOBAL FILE_ID     sCntfull;              /* Name der CNT-Datei fuer Win4 */
+GLOBAL const char  *sMapNoSuff;           /* Name der Map-Datei fuer Win ohne Suffix */
+GLOBAL FILE_ID     sHhpfull;              /* Name der HHP-Datei fuer HTML Help */
+GLOBAL FILE_ID     sHhcfull;              /* Name der HHC-Datei fuer HTML Help */
+GLOBAL FILE_ID     sHhkfull;              /* Name der HHK-Datei fuer HTML Help */
 
 GLOBAL PASSFLAGS   pflag[3];              /* Flags fuer die Durchlaeufe */
 
@@ -295,7 +293,7 @@ GLOBAL char        html_navigation_image_fspec[128];
                                           /* Links zum Wechseln? */
 GLOBAL char        sDocHtmlSwitchLanguage[256];
 GLOBAL int         iDocHtmlSwitchLanguage;/* ... und der Wert der Sprache */
-GLOBAL char        sCounterCommand[512];  /* CounterCommand for all files V6.5.9 */
+GLOBAL FILE_ID     sCounterCommand;       /* CounterCommand for all files V6.5.9 */
 
 GLOBAL int         html_nodesize;         /* Default: 1 -> <H1> */
 GLOBAL char        sDocHtmlBackpage[512]; /* Ruecksprung im Index */
@@ -314,7 +312,7 @@ GLOBAL int         html_modern_alignment; /* Ausrichtung linke Spalte */
                                           /* background color of left column */
 GLOBAL char        html_modern_backcolor[16];
                                           /* Image der linken Spalte */
-GLOBAL char        html_modern_backimage[512];
+GLOBAL FILE_ID     html_modern_backimage;
 GLOBAL char        html_frames_width[16]; /* Breite des linken Frames */
 GLOBAL char        html_frames_height[16];/* Breite des oberen Frames */
 GLOBAL int         html_frames_position;  /* Position des Frames */
@@ -330,24 +328,21 @@ GLOBAL char        html_frames_alinkcolor[16];
                                           /* Linkfarbe der linken Spalte */
 GLOBAL char        html_frames_vlinkcolor[16];
                                           /* Image des linken Frames */
-GLOBAL char        html_frames_backimage[512];
+GLOBAL FILE_ID     html_frames_backimage;
 GLOBAL int         html_button_alignment; /* Ausrichtung der Buttons */
 GLOBAL int         html_quotes;           /* define HTML formatting of quotes */
 GLOBAL char        html_name_prefix[512]; /* Prefix fuer HTML-Dateinamen */
 
-/* New in r6pl16 [NHz] */
 GLOBAL _BOOL     html_use_hyphenation;  /* Lange Woerter sollen durch (!-) getrennt werden */
 GLOBAL int         html_doctype;          /* Welche DTD soll benutzt werden? */
 GLOBAL const char *xhtml_closer;
 GLOBAL const char *xhtml_br;
 GLOBAL const char *xhtml_hr;
 
-/* New feature #0000054 in V6.5.2 [NHz] */
 GLOBAL _BOOL     html_header_date;      /* Ausgabe des Datums im Element <meta> */
                                           /* date zone */
 GLOBAL char        html_header_date_zone[10];
 
-/* New feature #0000053 in V6.5.2 [NHz] */
 GLOBAL _BOOL     html_header_links;     /* Ausgabe der Daten im Element <link> */
                                           /* Welche Links sollen ausgegeben werden? */
 GLOBAL char        html_header_links_kind[50];
@@ -369,10 +364,9 @@ GLOBAL char        sDocManType[32];       /* Typ (1), (C), ... */
 GLOBAL char        sDocNroffType[32];     /* dito fuer nroff */
 
 GLOBAL char        sDocImgSuffix[32];     /* gif, jpg, jpeg, ... */
-GLOBAL char        sDocBackImage[128];    /*r6pl5*/
-GLOBAL char        sDocStyle[128];        /* r6pl15 [NHz] */
-GLOBAL char        sDocScript[128];       /* r6pl15 [NHz] */
-GLOBAL char        sDocFavIcon[128];      /* r6pl15 [NHz] */
+GLOBAL FILE_ID     sDocBackImage;
+GLOBAL FILE_ID     sDocScript;
+GLOBAL FILE_ID     sDocFavIcon;
 GLOBAL char        sDocBackColor[32];
 GLOBAL char        sDocTextColor[32];
 GLOBAL char        sDocLinkColor[32];
@@ -380,8 +374,8 @@ GLOBAL char        sDocAlinkColor[32];
 GLOBAL char        sDocVlinkColor[32];
 GLOBAL char        sDocVerbatimBackColor[32];
 
-GLOBAL char        sDocRawHeaderFilename[512];     /*r6pl10*/
-GLOBAL char        sDocRawFooterFilename[512];     /*r6pl10*/
+GLOBAL FILE_ID     sDocRawHeaderFilename;
+GLOBAL FILE_ID     sDocRawFooterFilename;
 
 GLOBAL _BOOL     bDocInlineBitmaps;     /* {bmcwd statt {bmc verwenden? */
 GLOBAL _BOOL     bDocHighCompression;
@@ -389,7 +383,6 @@ GLOBAL _BOOL     bDocMediumCompression;
 
 GLOBAL int         iDocCharwidth;         /* Zeichenbreiten-Konstanten */
 
-/* New in V6.5.9 [NHz] */
 GLOBAL char        sDocColour[512];       /* additional colors for RTF */
                                           /* Proportional- und Monospacedfont */
 GLOBAL char        sDocPropfont[MAXZEILE + 1];
@@ -403,8 +396,9 @@ GLOBAL _BOOL     bDocNoTables;          /* Keine echten RTF-Tabellen anlegen? */
 
 GLOBAL _BOOL     bCalledIndex;          /* !index ignorieren und keinen Index? */
 
-GLOBAL _ULONG       footnote_cnt;          /* footnote counter */
+GLOBAL _ULONG      footnote_cnt;          /* footnote counter */
 
+extern FILE_LINENO outlines;
 
 
 
@@ -545,7 +539,7 @@ GLOBAL _BOOL udo (char *datei);
    /* ? */
 GLOBAL _BOOL udo2udo (char *datei);
    /* ? */
-GLOBAL void init_vars(void);
+GLOBAL void init_udo_vars(void);
 
 
 #endif  /* __UDO_H__ */

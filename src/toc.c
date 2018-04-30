@@ -1714,15 +1714,15 @@ GLOBAL _BOOL check_output_raw_header(void)
 {
    if (!toc[p2_toc_counter]->ignore_raw_header)
    {
-      if (toc[p2_toc_counter]->raw_header_filename!=NULL)
+      if (toc[p2_toc_counter]->raw_header_filename != 0)
       {
-         return(output_raw_file(toc[p2_toc_counter]->raw_header_filename));
+         return output_raw_file(file_lookup(toc[p2_toc_counter]->raw_header_filename));
       }
       else
       {
-         if (sDocRawHeaderFilename[0] != EOS)
+         if (sDocRawHeaderFilename = 0)
          {
-            return(output_raw_file(sDocRawHeaderFilename));
+            return output_raw_file(file_lookup(sDocRawHeaderFilename));
          }
       }
    }
@@ -1762,15 +1762,15 @@ _BOOL   lastNode)    /* */
    
    if (!toc[p2_toc_counter-offset]->ignore_raw_footer)
    {
-      if (toc[p2_toc_counter-offset]->raw_footer_filename != NULL)
+      if (toc[p2_toc_counter-offset]->raw_footer_filename != 0)
       {
-         return(output_raw_file(toc[p2_toc_counter-offset]->raw_footer_filename));
+         return output_raw_file(file_lookup(toc[p2_toc_counter-offset]->raw_footer_filename));
       }
       else
       {
-         if (sDocRawFooterFilename[0] != EOS)
+         if (sDocRawFooterFilename != 0)
          {
-            return(output_raw_file(sDocRawFooterFilename));
+            return output_raw_file(file_lookup(sDocRawFooterFilename));
          }
       }
    }
@@ -3021,8 +3021,8 @@ LOCAL _BOOL html_make_file(void)
 #if 0
    if (html_use_folders)
    {       
-      if (toc[ti]->dirname[0] != EOS)
-         sprintf(outfile.path, "%s%s", old_outfile.path, toc[ti]->dirname);
+      if (toc[ti]->dirname != 0)
+         sprintf(outfile.path, "%s%s", old_outfile.path, file_lookup(toc[ti]->dirname));
       else
          sprintf(outfile.path, "%s%04X", old_outfile.path, toc[ti]->n1);
    
@@ -3546,27 +3546,21 @@ _BOOL     keywords)             /* */
       }
    }
 
-/* if (sDocStyle[0] != EOS)     
-      voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\"%s>", sDocStyle, closer);
-*/
-
    /* Link for overall javascript-file */
-   if (sDocScript[0] != EOS)
+   if (sDocScript != 0)
    {
-      voutlnf("<script language=\"JavaScript\" src=\"%s\" type=\"text/javascript\">", sDocScript);
+      voutlnf("<script language=\"JavaScript\" src=\"%s\" type=\"text/javascript\">", file_lookup(sDocScript));
       outln("</script>");
    }
 
    /* New in r6pl15 [NHz] */
    /* Link for overall FavIcon */
-   if (sDocFavIcon[0] != EOS)
-      voutlnf("<link rel=\"shortcut icon\" href=\"%s\"%s>", sDocFavIcon, closer);
+   if (sDocFavIcon != 0)
+      voutlnf("<link rel=\"shortcut icon\" href=\"%s\"%s>", file_lookup(sDocFavIcon), closer);
    
-        /* New in V6.5.20 [GS] */
-        if (toc[p2_toc_counter]->bgsound[0] != '\0')
-                voutlnf("<bgsound src=%s>", toc[p2_toc_counter]->bgsound);
-
-}  /* output_html_meta */
+   if (toc[p2_toc_counter]->bgsound != 0)
+      voutlnf("<bgsound src=%s>", file_lookup(toc[p2_toc_counter]->bgsound));
+}
 
 
 
@@ -3721,9 +3715,9 @@ LOCAL _BOOL html_new_file(void)
    {
       out("<body");
       
-      if (toc[p2_toc_counter]->backimage[0]!=EOS)
+      if (toc[p2_toc_counter]->backimage != 0)
       {
-         voutf(" background=\"%s\"", toc[p2_toc_counter]->backimage);
+         voutf(" background=\"%s\"", file_lookup(toc[p2_toc_counter]->backimage));
       }
       
       if (toc[p2_toc_counter]->backcolor[0] != EOS)
@@ -3836,11 +3830,11 @@ const char  *t)                 /* */
    
    out("<body");
    
-   if (sDocBackImage[0] != EOS)
+   if (sDocBackImage != 0)
    {
-      if (!no_images)                     /*r6pl2*/
+      if (!no_images)
       {
-         voutf(" background=\"%s\"", sDocBackImage);
+         voutf(" background=\"%s\"", file_lookup(sDocBackImage));
       }
    }
    
@@ -5136,9 +5130,9 @@ GLOBAL void html_save_frameset(void)
    outln("</head>");
    add[0] = EOS;
    
-   if (html_frames_backimage[0] != EOS)
+   if (html_frames_backimage != 0)
    {
-      sprintf(s, " background=\"%s\"", html_frames_backimage);
+      sprintf(s, " background=\"%s\"", file_lookup(html_frames_backimage));
       strcat(add, s);
    }
    
@@ -5413,8 +5407,8 @@ GLOBAL void html_headline(void)
    {
       bgCmd[0] = EOS;
       
-      if (html_modern_backimage[0] != EOS)
-         sprintf(bgCmd, " background=\"%s\"", html_modern_backimage);
+      if (html_modern_backimage != 0)
+         sprintf(bgCmd, " background=\"%s\"", file_lookup(html_modern_backimage));
 
       outln("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">");
       outln("<tr>");
@@ -5603,8 +5597,8 @@ GLOBAL void html_footer(void)
    char      s[512];
    int       has_content = 0;
    
-   has_counter = toc[p2_toc_counter]->counter_command != NULL;
-   has_main_counter = sCounterCommand[0] != EOS;
+   has_counter = toc[p2_toc_counter]->counter_command != 0;
+   has_main_counter = sCounterCommand != 0;
    
    if (!has_counter && !has_main_counter)
       if (no_footers || toc[p2_toc_counter]->ignore_footer)
@@ -5632,14 +5626,14 @@ GLOBAL void html_footer(void)
    
    if (has_counter)                       /* r6pl4: Counterkommando ausgeben */
    {
-      outln(toc[p2_toc_counter]->counter_command);
+      outln(file_lookup(toc[p2_toc_counter]->counter_command));
    }
-   else if (has_main_counter)             /* New in V6.5.9 [NHz] */
+   else if (has_main_counter)
    {
-      outln(sCounterCommand);
+      outln(file_lookup(sCounterCommand));
    }
    
-   if (no_footers)                        /* New in V6.5.9 [NHz] */
+   if (no_footers)
       return;
    
    if (footer_buffer[0] != EOS)
@@ -7225,6 +7219,8 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
    
    if (bVerbose)
    {
+	  char sInfMsg[256];
+	  
       sprintf(sInfMsg, "[%s] ", numbers);
       show_status_node(sInfMsg, name);
    }
@@ -8350,8 +8346,8 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
       if (show_variable.source_filename)
       {
          voutlnf("<!-- %s: %li -->", 
-               toc[p2_toc_counter]->source_filename, 
-               toc[p2_toc_counter]->source_line);
+               file_lookup(toc[p2_toc_counter]->source_location.id),
+               toc[p2_toc_counter]->source_location.line);
       }
    
       break;
@@ -13133,32 +13129,20 @@ GLOBAL void set_ignore_bottomline(void)
 
 GLOBAL void set_raw_header_filename(void)
 {
-   char  *ptr,     /* */
-          s[512];  /* */
-   
+   char s[MYFILE_FULL_LEN + 1];
    
    if (!check_toc_and_token())
       return;
 
-   um_strcpy(s, token[1], 512, "set_raw_header_filename[1]");
+   um_strcpy(s, token[1], sizeof(s), "set_raw_header_filename[1]");
 
    if (p1_toc_counter == 0)
    {
-      um_strcpy(sDocRawHeaderFilename, s, 512, "set_raw_header_filename[2]");
+      sDocRawHeaderFilename = file_listadd(s);
    }
    else
    {
-      ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
-      
-      if (!ptr)
-      { 
-         bFatalErrorDetected = TRUE;
-      }
-      else
-      {
-         strcpy(ptr, s);
-         toc[p1_toc_counter]->raw_header_filename = ptr;
-      }
+      toc[p1_toc_counter]->raw_header_filename = file_listadd(s);
    }
 }
 
@@ -13178,32 +13162,20 @@ GLOBAL void set_raw_header_filename(void)
 
 GLOBAL void set_raw_footer_filename(void)
 {
-   char  *ptr,     /* */
-          s[512];  /* */
-   
+   char s[MYFILE_FULL_LEN + 1];
    
    if (!check_toc_and_token())
       return;
 
-   um_strcpy(s, token[1], 512, "set_raw_footer_filename[1]");
+   um_strcpy(s, token[1], sizeof(s), "set_raw_footer_filename[1]");
 
    if (p1_toc_counter == 0)
    {
-      um_strcpy(sDocRawFooterFilename, s, 512, "set_raw_footer_filename[2]");
+      sDocRawFooterFilename = file_listadd(s);
    }
    else
    {
-      ptr = (char *)malloc(1 + strlen(s) * sizeof(char));
-      
-      if (!ptr)
-      {
-         bFatalErrorDetected = TRUE;
-      }
-      else
-      {
-         strcpy(ptr, s);
-         toc[p1_toc_counter]->raw_footer_filename = ptr;
-      }
+      toc[p1_toc_counter]->raw_footer_filename = file_listadd(s);
    }
 }
 
@@ -13841,18 +13813,18 @@ const _BOOL   invisible)  /* TRUE: node is invisible */
    tocptr->ignore_title        = FALSE;   /*r6pl13*/
    tocptr->ignore_headline     = FALSE;
    tocptr->ignore_bottomline   = FALSE;
-   tocptr->raw_header_filename = NULL;    /*r6pl10*/
-   tocptr->raw_footer_filename = NULL;    /*r6pl10*/
+   tocptr->raw_header_filename = 0;
+   tocptr->raw_footer_filename = 0;
    tocptr->ignore_raw_header   = FALSE;   /*r6pl10*/
    tocptr->ignore_raw_footer   = FALSE;   /*r6pl10*/
    tocptr->ignore_footer       = FALSE;   /*r6pl2*/
    tocptr->filename[0]         = EOS;
-   tocptr->dirname[0]          = EOS;
-   tocptr->counter_command     = NULL;
+   tocptr->dirname = 0;
+   tocptr->counter_command = 0;
    tocptr->keywords            = NULL;
    tocptr->description         = NULL;    /*r6pl5*/
    tocptr->robots              = NULL;    /*V6.5.17*/
-   tocptr->bgsound[0]          = '\0';    /* V6.5.20 [GS] */
+   tocptr->bgsound = 0;
    tocptr->helpid              = NULL;
    tocptr->image               = NULL;
    tocptr->uiImageWidth        = 0;
@@ -13872,14 +13844,22 @@ const _BOOL   invisible)  /* TRUE: node is invisible */
    tocptr->count_n6            = 0;       /*r6pl8*/
 #endif
    
-                                          /* V6.5.18 */
-   strcpy(tocptr->source_filename, sCurrFileName);
+   if (sCurrFileName[0] == EOS)
+   {
+   	  /* should only happen when called by add_toc_to_toc(),
+   	     because the input file has not yet been opened */
+   	  tocptr->source_location.id = 0;
+   	  tocptr->source_location.line = 0;
+   } else
+   {
+	   tocptr->source_location.id = file_listadd(sCurrFileName);
+   	   tocptr->source_location.line = uiCurrFileLine;
+   }
    
    tocptr->toctype             = toctype;
-   tocptr->source_line         = uiCurrFileLine;
    tocptr->mapping             = -1;
 
-   strcpy(tocptr->backimage,  sDocBackImage);
+   tocptr->backimage = sDocBackImage;
    strcpy(tocptr->backcolor,  sDocBackColor);
    strcpy(tocptr->textcolor,  sDocTextColor);
    strcpy(tocptr->linkcolor,  sDocLinkColor);
@@ -15042,12 +15022,12 @@ GLOBAL _BOOL save_winhelp4_cnt(void)
    _BOOL        n5HadChildren = FALSE;  /* */
    
 
-   cntfile = myFwopen(sCntfull, FTCNT);
+   cntfile = myFwopen(file_lookup(sCntfull), FTCNT);
 
    if (cntfile == NULL)
       return FALSE;
 
-   save_upr_entry_outfile(sCntfull);
+   save_upr_entry_outfile(file_lookup(sCntfull));
 
    if (p1_toc_counter >= 0)
       goto DONE;
@@ -16680,21 +16660,21 @@ GLOBAL void init_module_toc(void)
    html_frames_linkcolor[0]  = EOS;       /*r6pl9*/
    html_frames_alinkcolor[0] = EOS;       /*r6pl9*/
    html_frames_vlinkcolor[0] = EOS;       /*r6pl9*/
-   html_frames_position      = POS_LEFT;  /*r6pl9*/
-   html_frames_backimage[0]  = EOS;
-   html_name_prefix[0]       = EOS;       /*r6pl12*/
+   html_frames_position = POS_LEFT;
+   html_frames_backimage = 0;
+   html_name_prefix[0] = EOS;
 
-   p1_toctype = TOC_NONE;                 /*r6pl5*/
-   p2_toctype = TOC_NONE;                 /*r6pl5*/
+   p1_toctype = TOC_NONE;
+   p2_toctype = TOC_NONE;
 
-   sHtmlPropfontStart[0] = EOS;           /*r6pl7*/
-   sHtmlPropfontEnd[0]   = EOS;           /*r6pl7*/
+   sHtmlPropfontStart[0] = EOS;
+   sHtmlPropfontEnd[0] = EOS;
 
-   sHtmlMonofontStart[0] = EOS;           /*r6pl7*/
-   sHtmlMonofontEnd[0]   = EOS;           /*r6pl7*/
+   sHtmlMonofontStart[0] = EOS;
+   sHtmlMonofontEnd[0]   = EOS;
 
-   html_frames_toc_title = NULL;          /* 6.5.16 */
-   html_frames_con_title = NULL;          /* 6.5.16 */
+   html_frames_toc_title = NULL;
+   html_frames_con_title = NULL;
 }
 
 
@@ -16758,7 +16738,6 @@ GLOBAL void exit_module_toc(void)
    {
       if (toc[i] != NULL)
       {
-         free_toc_data(&(toc[i]->counter_command));
          free_toc_data(&(toc[i]->keywords));
          free_toc_data(&(toc[i]->description));
          free_toc_data(&(toc[i]->robots));
@@ -16767,8 +16746,6 @@ GLOBAL void exit_module_toc(void)
          free_toc_data(&(toc[i]->icon));
          free_toc_data(&(toc[i]->icon_active));
          free_toc_data(&(toc[i]->icon_text));
-         free_toc_data(&(toc[i]->raw_header_filename));
-         free_toc_data(&(toc[i]->raw_footer_filename));
 
          free(toc[i]);
          

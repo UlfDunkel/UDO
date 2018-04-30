@@ -51,14 +51,14 @@ GLOBAL void save_upr_entry_image(const char *filename);
 
 /* Extra parameter line */
    /* ? */
-GLOBAL void save_upr_entry_node(const int level, const char *filename, const char *title, long line);
+GLOBAL void save_upr_entry_node(const int level, const char *filename, const char *title, FILE_LINENO line);
    /* ? */
-GLOBAL void save_upr_entry_heading(const int level, const char *filename, const char *title, long line);
+GLOBAL void save_upr_entry_heading(const int level, const char *filename, const char *title, FILE_LINENO line);
    /* ? */
-GLOBAL void save_upr_entry_alias(const char *filename, const char *title, long line);
+GLOBAL void save_upr_entry_alias(const char *filename, const char *title, FILE_LINENO line);
    /* ? */
-GLOBAL void save_upr_entry_label(const char *filename, const char *title, long line);
+GLOBAL void save_upr_entry_label(const char *filename, const char *title, FILE_LINENO line);
    /* ? */
-GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, long line);
+GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, FILE_LINENO line);
 
 #endif /* __UPR_H__ */

@@ -462,9 +462,6 @@ GLOBAL void set_html_filename_prefix(void)
 
 GLOBAL void set_html_dirname(void)
 {
-   char  *ptr;  /* */
-   
-
    switch (desttype)
    {
    case TOHTM:
@@ -485,9 +482,7 @@ GLOBAL void set_html_dirname(void)
 
    if (tmp_path[0] != EOS)
    {
-      ptr = toc[p1_toc_counter]->dirname;
-      ptr[0] = EOS;
-      strncat(ptr, tmp_name, MAX_FILENAME_LEN);
+      toc[p1_toc_counter]->dirname = file_listadd(tmp_name);
    }
 }
 
@@ -761,12 +756,10 @@ GLOBAL void set_html_robots(void)
 
 GLOBAL void set_html_bgsound(void)
 {
-   char  *ptr,            /* */
-         *dest;           /* */
-   char   filename[512];  /* */
-   char   loop [40],      /* */
-          sTemp[1024];    /* */
-   
+   char  *ptr;
+   char   filename[MYFILE_FULL_LEN + 1];
+   char   loop[40];
+   char sTemp[MYFILE_FULL_LEN * 2];
    
    if (desttype != TOHTM)
       return;
@@ -774,18 +767,16 @@ GLOBAL void set_html_bgsound(void)
    if (!check_toc_and_counters())
       return;
 
-   dest = toc[p1_toc_counter]->bgsound;
-
    if (token[1][0] == '\"')
    {
-      tokcpy2(sTemp, 1024);
+      tokcpy2(sTemp, sizeof(sTemp));
       ptr = strchr(sTemp + 1, '\"');      /* find second quote character (") */
 
       if (ptr)
       { 
          ptr[0] = EOS;
          strcpy(filename, sTemp + 1);
-         um_strcpy(loop, ptr + 1, 40, "set_html_bgsound[1]");
+         um_strcpy(loop, ptr + 1, sizeof(loop), "set_html_bgsound[1]");
          del_whitespaces(loop);
       }
       else
@@ -796,18 +787,19 @@ GLOBAL void set_html_bgsound(void)
    }
    else
    {
-      um_strcpy(filename, token[1], 512, "set_html_bgsound[2]");
+      um_strcpy(filename, token[1], sizeof(filename), "set_html_bgsound[2]");
       token[1][0] = EOS;
-      tokcpy2(loop, 40);
+      tokcpy2(loop, sizeof(loop));
       del_whitespaces(loop);
    }
 
    replace_char(filename, '\\', '/');
 
    if (loop[0] == EOS)
-      sprintf(dest, "\"%s\" loop=\"infinitive\"", filename);
+      sprintf(sTemp, "\"%s\" loop=\"infinitive\"", filename);
    else
-      sprintf(dest, "\"%s\" loop=\"%s\"", filename, loop);
+      sprintf(sTemp, "\"%s\" loop=\"%s\"", filename, loop);
+   toc[p1_toc_counter]->bgsound = file_listadd(sTemp);
 }
 
 
@@ -826,44 +818,38 @@ GLOBAL void set_html_bgsound(void)
 
 GLOBAL void set_html_backimage(void)
 {
-   char  *ptr,         /* */
-         *dest;        /* */
-   char   sTemp[512];  /* */
-   
+   char  *ptr;
+   char filename[MYFILE_FULL_LEN + 1];
+   char   sTemp[MYFILE_FULL_LEN + 3];
    
    if (!check_toc_and_counters())
       return;
 
-   if (p1_toc_counter == 0)
-      dest = sDocBackImage;
-   else
-      dest = toc[p1_toc_counter]->backimage;
-
    if (token[1][0] == '\"')
    {
-      tokcpy2(sTemp, 512);
+      tokcpy2(sTemp, sizeof(sTemp));
       ptr = strchr(sTemp + 1, '\"');      /* find second quote character (") */
 
       if (ptr)
       {
          ptr[0] = EOS;
-         strcpy(dest, sTemp + 1);
+         strcpy(filename, sTemp + 1);
       }
       else
-      { 
-         strcpy(dest, sTemp);
+      {
+         strcpy(filename, sTemp);
       }
    }
    else
    {
-      strcpy(dest, token[1]);
+      strcpy(filename, token[1]);
    }
 
-/* dest[0] = EOS; */
-/* strncat(dest, sTemp, MAX_IMAGE_LEN); */
-
-                                          /* Hier muessen immer / benutzt werden! */
-   replace_char(dest, '\\', '/');
+   replace_char(filename, '\\', '/');
+   if (p1_toc_counter == 0)
+      sDocBackImage = file_listadd(filename);
+   else
+      toc[p1_toc_counter]->backimage = file_listadd(filename);
 }
 
 
@@ -1176,45 +1162,39 @@ GLOBAL void set_html_script(void)
 
 GLOBAL void set_html_favicon(void)
 {
-   char  *ptr,         /* */
-         *dest;        /* */
-   char   sTemp[512];  /* */
-   
+   char filename[MYFILE_FULL_LEN + 1];
+   char sTemp[MYFILE_FULL_LEN + 3];
+   char *ptr;
    
    if (!check_toc_and_counters())
       return;
 
-   if (p1_toc_counter == 0)
-      dest = sDocFavIcon;
-   else
-      dest = toc[p1_toc_counter]->favicon_name;
-
-
    if (token[1][0] == '\"')
    {
-      tokcpy2(sTemp, 512);
+      tokcpy2(sTemp, sizeof(sTemp));
       ptr = strchr(sTemp + 1, '\"');      /* find second quote character (") */
 
       if (ptr)
-      {  
+      {
          ptr[0] = EOS;
-         strcpy(dest, sTemp + 1);
+         strcpy(filename, sTemp + 1);
       }
       else
       {
-         strcpy(dest, sTemp);
+         strcpy(filename, sTemp);
       }
    }
    else
    {
-      strcpy(dest, token[1]);
+      strcpy(filename, token[1]);
    }
 
-/* dest[0] = EOS; */
-/* strncat(dest, sTemp, MAX_IMAGE_LEN); */
+   replace_char(filename, '\\', '/');
 
-                                          /* Hier muessen immer / benutzt werden! */
-   replace_char(dest, '\\', '/');
+   if (p1_toc_counter == 0)
+      sDocFavIcon = file_listadd(filename);
+   else
+      toc[p1_toc_counter]->favicon_name = file_listadd(filename);
 }
 
 
@@ -1288,31 +1268,19 @@ char        *hc)          /* */
 
 GLOBAL void set_html_counter_command(void)
 {
-   char   k[512],  /* */
-         *ptr;     /* */
-   
+   char k[MYFILE_FULL_LEN];
    
    if (!check_toc_and_counters())
       return;
 
-   tokcpy2(k, 512);
+   tokcpy2(k, sizeof(k));
 
    if (p1_toc_counter == 0)
    {
-      strcpy(sCounterCommand, k);
-      return;
-   }
-
-   ptr = (char *)malloc(1 + strlen(k) * sizeof(char));
-
-   if (!ptr)
+      sCounterCommand = file_listadd(k);
+   } else
    {
-      bFatalErrorDetected = TRUE;
-   }
-   else
-   { 
-      strcpy(ptr, k);
-      toc[p1_toc_counter]->counter_command = ptr;
+      toc[p1_toc_counter]->counter_command = file_listadd(k);
    }
 }
 
@@ -1496,35 +1464,35 @@ GLOBAL void set_html_modern_alignment(void)
 
 GLOBAL void set_html_modern_backimage(void)
 {
-   char  *ptr;         /* */
-   char   sTemp[512];  /* */
-   
+   char  *ptr;
+   char   sTemp[MYFILE_FULL_LEN + 3];
+   char filename[MYFILE_FULL_LEN + 1];
    
    if (!check_toc_and_counters())
       return;
 
    if (token[1][0] == '\"')
    {
-      tokcpy2(sTemp, 512);
+      tokcpy2(sTemp, sizeof(sTemp));
       ptr = strchr(sTemp+1, '\"');        /* find second quote character (") */
 
       if (ptr)
       {
          ptr[0] = EOS;
-         um_strcpy(html_modern_backimage, sTemp + 1, 512, "set_html_modern_backimage[1]");
+         strcpy(filename, sTemp + 1);
       }
       else
-      { 
-         um_strcpy(html_modern_backimage, sTemp, 512, "set_html_modern_backimage[2]");
+      {
+         strcpy(filename, sTemp);
       }
    }
    else
    {
-      um_strcpy(html_modern_backimage, token[1], 512, "set_html_modern_backimage[3]");
+      um_strcpy(filename, token[1], sizeof(filename), "set_html_modern_backimage[3]");
    }
 
-                                          /* Hier muessen immer / benutzt werden! */
-   replace_char(html_modern_backimage, '\\', '/');
+   replace_char(filename, '\\', '/');
+   html_modern_backimage = file_listadd(filename);
 }
 
 
@@ -1701,35 +1669,35 @@ GLOBAL void set_html_frames_alignment(void)
 
 GLOBAL void set_html_frames_backimage(void)
 {
-   char  *ptr;         /* */
-   char   sTemp[512];  /* */
-   
+   char  *ptr;
+   char   sTemp[MYFILE_FULL_LEN + 3];
+   char   filename[MYFILE_FULL_LEN + 1];
    
    if (!check_toc_and_counters())
       return;
 
    if (token[1][0] == '\"')
    {
-      tokcpy2(sTemp, 512);
+      tokcpy2(sTemp, sizeof(sTemp));
       ptr = strchr(sTemp + 1, '\"');      /* find second quote character (") */
 
       if (ptr)
       {
          ptr[0] = EOS;
-         um_strcpy(html_frames_backimage, sTemp+1, 512, "set_html_frames_backimage[1]");
+         strcpy(filename, sTemp + 1);
       }
       else
       {
-         um_strcpy(html_frames_backimage, sTemp, 512, "set_html_frames_backimage[2]");
+         strcpy(filename, sTemp);
       }
    }
    else
    {
-      um_strcpy(html_frames_backimage, token[1], 512, "set_html_frames_backimage[3]");
+      um_strcpy(filename, token[1], sizeof(filename), "set_html_frames_backimage[3]");
    }
 
-                                          /* Hier muessen immer / benutzt werden! */
-   replace_char(html_frames_backimage, '\\', '/');
+   replace_char(filename, '\\', '/');
+   html_frames_backimage = file_listadd(filename);
 }
 
 

@@ -248,7 +248,7 @@ LOCAL int convert_title(char *buf, const char *title)
 *
 ******************************************|************************************/
 
-GLOBAL void save_upr_entry_node(const int level, const char *filename, const char *title, long line)
+GLOBAL void save_upr_entry_node(const int level, const char *filename, const char *title, FILE_LINENO line)
 {
    char buf[LINELEN];
    
@@ -273,7 +273,7 @@ GLOBAL void save_upr_entry_node(const int level, const char *filename, const cha
 *
 ******************************************|************************************/
 
-GLOBAL void save_upr_entry_heading(const int level, const char *filename, const char *title, long line)
+GLOBAL void save_upr_entry_heading(const int level, const char *filename, const char *title, FILE_LINENO line)
 {
    char buf[LINELEN];
    
@@ -298,7 +298,7 @@ GLOBAL void save_upr_entry_heading(const int level, const char *filename, const 
 *
 ******************************************|************************************/
 
-GLOBAL void save_upr_entry_alias(const char *filename, const char *title, long line)
+GLOBAL void save_upr_entry_alias(const char *filename, const char *title, FILE_LINENO line)
 {
    char buf[LINELEN];
    
@@ -323,7 +323,7 @@ GLOBAL void save_upr_entry_alias(const char *filename, const char *title, long l
 *
 ******************************************|************************************/
 
-GLOBAL void save_upr_entry_label(const char *filename, const char *title, long line)
+GLOBAL void save_upr_entry_label(const char *filename, const char *title, FILE_LINENO line)
 {
    char buf[LINELEN];
    
@@ -348,7 +348,7 @@ GLOBAL void save_upr_entry_label(const char *filename, const char *title, long l
 *
 ******************************************|************************************/
 
-GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, long line)
+GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, FILE_LINENO line)
 {
    char *buf;
    

@@ -47,6 +47,3 @@
 #endif
 
 #define GLOBAL
-
-
-/* +++ EOF +++ */

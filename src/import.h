@@ -52,6 +52,3 @@
 #define GLOBAL extern
 
 #endif  /* __IMPORT__ */
-
-
-/* +++ EOF +++ */

@@ -63,6 +63,10 @@ typedef struct _mytextfile
 
 GLOBAL int uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
 
+void init_module_files(void);
+void exit_module_files(void);
+
+
 GLOBAL MYTEXTFILE *myTextOpen ( const char *filename );
 GLOBAL _BOOL myTextGetline ( char *string, size_t n, MYTEXTFILE *tf );
 GLOBAL _BOOL myTextClose ( MYTEXTFILE *tf );
@@ -78,6 +82,9 @@ GLOBAL FILE * myFwopen ( const char *filename, const int filetype );
 GLOBAL FILE * myFwbopen ( const char *filename, const int filetype );
 
 GLOBAL void path_adjust_separator(char *s);
+
+FILE_ID file_listadd(const char *name);
+const char *file_lookup(FILE_ID id);
 
 
 #if USE_HTML_FOLDERS

@@ -634,3 +634,68 @@ GLOBAL _BOOL my_mkdir(const char *s)
 	return ret;
 }
 #endif /* USE_HTML_FOLDERS */
+
+
+FILE_ID file_listadd(const char *name)
+{
+	FILELIST *f;
+	size_t len;
+	
+	if (name == NULL || *name == '\0')
+	{
+		return 0;
+	}
+	
+	for (f = filelist; f != NULL; f = f->next)
+		if (strcmp(f->name, name) == 0)
+		{
+			return f->id;
+		}
+	len = strlen(name);
+	f = (FILELIST *)malloc(sizeof(*f) + len);
+	if (f == NULL)
+		return 0;
+	++last_fileid;
+	f->id = last_fileid;
+	strcpy(f->name, name);
+	f->next = filelist;
+	filelist = f;
+	return f->id;
+}
+
+
+const char *file_lookup(FILE_ID id)
+{
+	FILELIST *f;
+
+	if (id != 0)
+	{
+		for (f = filelist; f != NULL; f = f->next)
+			if (f->id == id)
+			{
+				return f->name;
+			}
+	}
+	return "<no filename>";
+}
+
+
+void init_module_files(void)
+{
+	filelist = NULL;
+	last_fileid = 0;
+}
+
+
+void exit_module_files(void)
+{
+	FILELIST *f, *next;
+	
+	for (f = filelist; f != NULL; f = next)
+	{
+		next = f->next;
+		free(f);
+	}
+	filelist = NULL;
+	last_fileid = 0;
+}

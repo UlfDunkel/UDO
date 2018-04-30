@@ -497,7 +497,7 @@ GLOBAL void show_logln_message(const char *s)
 
 GLOBAL void warning_err_logfile(void)
 {
-   error_open_logfile(sLogfull);
+   error_open_logfile(file_lookup(sLogfull));
 }
 
 
@@ -516,7 +516,7 @@ GLOBAL void warning_err_logfile(void)
 
 GLOBAL void warning_err_treefile(void)
 {
-   error_open_treefile(sTreefull);
+   error_open_treefile(file_lookup(sTreefull));
 }
 
 
@@ -535,7 +535,7 @@ GLOBAL void warning_err_treefile(void)
 
 GLOBAL void warning_err_uprfile(void)
 {
-   error_open_uprfile(sUPRfull);
+   error_open_uprfile(file_lookup(sUPRfull));
 }
 
 
@@ -554,7 +554,7 @@ GLOBAL void warning_err_uprfile(void)
 
 GLOBAL void warning_err_hypfile(void)
 {
-   error_open_hypfile(sHypfull);
+   error_open_hypfile(file_lookup(sHypfull));
 }
 
 
@@ -573,7 +573,7 @@ GLOBAL void warning_err_hypfile(void)
 
 GLOBAL void warning_err_idxfile(void)
 {
-   error_open_idxfile(sIdxfull);
+   error_open_idxfile(file_lookup(sIdxfull));
 }
 
 
@@ -1048,7 +1048,7 @@ int main(int argc, const char **argv)
    
    /* --- init global variables --- */
    
-   init_vars();
+   init_udo_vars();
    sprintf(nam, "UDO Version %s", UDO_REL);
    
 #ifdef __WIN32__
@@ -1091,7 +1091,7 @@ int main(int argc, const char **argv)
 
    outfile.full[0] = EOS;
    infile.full[0]  = EOS;
-   sLogfull[0]     = EOS;
+   sLogfull = 0;
 
 
    /* --- now evaluate command line parameters --- */

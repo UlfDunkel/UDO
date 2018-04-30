@@ -115,8 +115,8 @@ LOCAL void loglnpos(const char *we, const char *format, va_list args)
 {
    char *txt, *msg;
    char lineinfo[100];
-   _UWORD realstart;
-   
+   FILE_LINENO realstart;
+
    if (uiCurrFileLine > 0)
    {
 		if (uiMultiLines > 0)
@@ -1386,7 +1386,7 @@ GLOBAL void error_undefined_link(const char *l)
 *
 ******************************************|************************************/
 
-GLOBAL void error_missing_endif(const char *s, _UWORD l)
+GLOBAL void error_missing_endif(const char *s, FILE_LINENO l)
 {
    error_missing_end("!endif");
    note_message(_("last '!if': <%s> line %lu"), s, l);
@@ -1520,7 +1520,7 @@ GLOBAL void error_node6_not_allowed(void)
 *
 ******************************************|************************************/
 
-GLOBAL void warning_long_destline(const char *s, const _UWORD lnr, const int ll)
+GLOBAL void warning_long_destline(const char *s, FILE_LINENO lnr, const int ll)
 {
    char *m;
 
@@ -1570,13 +1570,13 @@ GLOBAL void note_short_sourceline(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void warning_short_destline(const char *s, _UWORD lnr, const int ll, const char *w)
+GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll, const char *w)
 {
    char *m;
 
    if (!bNoWarnings && !bNoWarningsLines)
    {
-      m = um_strdup_printf(_("Warning: %s %u: too short line: %d: %s"), s, lnr, ll, w);
+      m = um_strdup_printf(_("Warning: %s %lu: too short line: %d: %s"), s, lnr, ll, w);
       logln(m);
       show_logln_message(m);
       free(m);

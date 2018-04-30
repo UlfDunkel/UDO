@@ -212,7 +212,7 @@
 #define IF_SET         4
 #define IF_OS          5
 
-#define MAX_IF_STACK  32                  /*r6pl2: 32 statt 10, auf Nummer sicher */
+#define MAX_IF_STACK  32
 
 #define CMD_ALWAYS          0             /* used in UDO function table */
 #define CMD_ONLY_PREAMBLE   1
@@ -228,36 +228,33 @@
 *
 ******************************************|************************************/
 
-typedef struct _if_stack_item             /* */
+typedef struct _if_stack_item
 {
-   int       kind;                        /* */
-   _BOOL   ignore;                      /* */
-   char      filename[512];               /* */
-   _UWORD     fileline;                    /* */
-}  IF_STACK_ITEM;
+   int       kind;
+   _BOOL   ignore;
+   FILE_LOCATION loc;
+} IF_STACK_ITEM;
 
-
-typedef struct _hyplist                   /* */
+typedef struct _hyplist
 {
-   char              data[128];           /* */
-   struct _hyplist  *next;                /* */
-}  HYPLIST;
+   char              data[128];
+   struct _hyplist  *next;
+} HYPLIST;
 
 typedef struct _idxlist
 {
-   char              letter;              /* Hier soll der Eintrag einsortiert werden */
-   int               depth;               /* Indextiefe: 1, 2 oder 3 */
-                                          /* In diesem Kapitel gesetzt */
-   char              chapter[MAX_NODE_LEN + 1];
-   char              idx[3][128];         /* Die Index-Daten */
+   char              letter;                    /* Hier soll der Eintrag einsortiert werden */
+   int               depth;                     /* Indextiefe: 1, 2 oder 3 */
+   char              chapter[MAX_NODE_LEN + 1]; /* In diesem Kapitel gesetzt */
+   char              idx[3][128];               /* Die Index-Daten */
    struct _idxlist  *next;
-}  IDXLIST;
+} IDXLIST;
 
 typedef void (*CMDPROC)(void);
 
 typedef struct _udocommand                /* ---- Funktionentabelle ---- */
 {
-   char     *magic;                       /* UDO-Kommando */
+   const char *magic;                     /* UDO-Kommando */
    char     *macut;                       /* Shortcut des Kommandos */
    CMDPROC   proc;                        /* zugehoerige Routine */
    _BOOL   reset;                       /* Tokens danach loeschen? */
@@ -544,7 +541,7 @@ LOCAL _BOOL   format_uses_output_buffer;
 LOCAL _BOOL   format_protect_commands;
 
 LOCAL _BOOL   out_lf_needed;            /* Fehlt noch ein Linefeed? */
-LOCAL _UWORD     outlines;                 /* Anzahl gesicherter Zeilen */
+FILE_LINENO outlines;                  /* Anzahl gesicherter Zeilen */
 
 LOCAL char     *tobuffer;                 /* Puffer fuer token_output() */
 LOCAL size_t    tomaxlen;                 /* spaeteste Umbruchstelle in t_o() */
@@ -575,23 +572,19 @@ LOCAL _BOOL   bHhpSaved,
                 bHhcSaved, 
                 bHhkSaved;
 
-LOCAL int       iFilesOpened;             /* Anzahl geoeffneter Files */
-                                          /* Zeilen geoeffneter Files */
-LOCAL _UWORD     uiFileLines[MAXFILECOUNTER];
-                                          /* Namen geoeffneter Files */
-LOCAL char      sFileNames[MAXFILECOUNTER][512 + 1];
+LOCAL int       iFilesOpened;             /* depth of !include stack */
+LOCAL struct {
+   FILE_LOCATION loc;                /* Zeilen geoeffneter Files */
+   MYTEXTFILE *file;
+} uiFiles[MAXFILECOUNTER+1];
 
 LOCAL IF_STACK_ITEM   if_stack[MAX_IF_STACK + 1];
 LOCAL int             counter_if_stack;
 
-LOCAL _ULONG     lPass1Lines,              /* fuer die Prozentangabe */ 
-                lPass2Lines;
+LOCAL FILE_LINENO lPass1Lines, lPass2Lines;        /* fuer die Prozentangabe */
 
-LOCAL HYPLIST  *hyplist;                  /* */
-LOCAL IDXLIST  *idxlist;                  /* */
-
-
-
+LOCAL HYPLIST  *hyplist;
+LOCAL IDXLIST  *idxlist;
 
 
 /*******************************************************************************
@@ -6961,6 +6954,7 @@ GLOBAL void c_include(void)
          
       case PASSU:
          passU(name);
+         break;
       }
       
       multitasking_interrupt();
@@ -7020,6 +7014,7 @@ LOCAL void c_include_verbatim(void)
          outln("!begin_verbatim");
          passU(name);
          outln("!end_verbatim");
+         break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
@@ -7079,6 +7074,7 @@ LOCAL void c_include_preformatted(void)
          outln("!begin_preformatted");
          passU(name);
          outln("!end_preformatted");
+         break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
@@ -7140,6 +7136,7 @@ LOCAL void c_include_linedraw(void)
          outln("!begin_linedraw");
          passU(name);
          outln("!end_linedraw");
+         break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
@@ -7199,6 +7196,7 @@ LOCAL void c_include_raw(void)
          outln("!begin_raw");
          passU(name);
          outln("!end_raw");
+         break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
@@ -7258,6 +7256,7 @@ LOCAL void c_include_src(void)
          outln("!begin_sourcecode");
          passU(name);
          outln("!end_sourcecode");
+         break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
@@ -7319,6 +7318,7 @@ LOCAL void c_include_comment(void)
          outln("!begin_comment");
          passU(name);
          outln("!end_comment");
+         break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
@@ -7402,6 +7402,7 @@ LOCAL void c_input(void)
          
       case PASSU:
          passU(path);
+         break;
       }
       
       multitasking_interrupt();
@@ -7906,9 +7907,9 @@ const char   *s)  /* ^ to the (too long) word */
    {   
       if (outfile.full[0] != EOS)
       {
-         if (sHypfull[0] != EOS)         
+         if (sHypfull != 0)         
          {
-            fHypfile = myFwopen(sHypfull, TOASC);
+            fHypfile = myFwopen(file_lookup(sHypfull), TOASC);
             
             if (fHypfile == NULL)
             {
@@ -7922,7 +7923,7 @@ const char   *s)  /* ^ to the (too long) word */
             
             bHypopened = TRUE;
             
-            save_upr_entry_outfile(sHypfull);
+            save_upr_entry_outfile(file_lookup(sHypfull));
          }
       }
    }
@@ -10608,6 +10609,80 @@ LOCAL void output_preamble(void)
 
 /*******************************************************************************
 *
+*  clear_file_stack():
+*     clear stack of !include files
+*
+******************************************|************************************/
+
+LOCAL void clear_file_stack(void)
+{
+   int i;
+   
+   iFilesOpened = 0;
+   for (i = 0; i < MAXFILECOUNTER; i++)
+   {
+      uiFiles[i].loc.line = 0;
+      uiFiles[i].loc.id = 0;
+      uiFiles[i].file = NULL;
+   }
+}
+
+
+/*******************************************************************************
+*
+*  push_file_stack():
+*     push current file onto stack of includes
+*
+******************************************|************************************/
+
+LOCAL _BOOL push_file_stack(const char *filename, MYTEXTFILE *file)
+{
+   if (iFilesOpened >= MAXFILECOUNTER)
+   {
+      error_message(_("too many files opened"));
+      return FALSE;
+   }
+   iFilesOpened++;
+   uiFiles[iFilesOpened].loc.line = 0;
+   uiFiles[iFilesOpened].loc.id = file_listadd(filename);
+   uiFiles[iFilesOpened].file = file;
+   
+   strcpy(sCurrFileName, filename);
+   uiCurrFileLine = 0;
+   return TRUE;
+}
+
+
+/*******************************************************************************
+*
+*  pop_file_stack():
+*     pop file from stack of includes and make it current
+*
+******************************************|************************************/
+
+LOCAL _BOOL pop_file_stack(void)
+{
+   if (iFilesOpened > 0)
+   {
+      myTextClose(uiFiles[iFilesOpened].file);
+      iFilesOpened--;
+      if (iFilesOpened == 0)
+      {
+         sCurrFileName[0] = EOS;
+         uiCurrFileLine = 0;
+      } else
+      {
+      	strcpy(sCurrFileName, file_lookup(uiFiles[iFilesOpened].loc.id));
+      	uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
+      }
+      return TRUE;
+   }
+   return FALSE;
+}
+
+
+/*******************************************************************************
+*
 *  clear_if_stack():
 *     clear stack of !if environments
 *
@@ -10617,7 +10692,7 @@ LOCAL void output_preamble(void)
 *     Abfragen auf Befehle fuer format- und/oder sprachabhaengige Umgebungen. 
 *     Trifft die Funktion auf einen dieser Befehle, so werden Flags, die in 
 *     pass1() und pass2() beachtet werden, gesetzt, und die Zeile geleert, 
-*     so dass sie nicht weiter bearbeitet wird. (r5pl6)
+*     so dass sie nicht weiter bearbeitet wird.
 *
 *  return:
 *     -
@@ -10626,16 +10701,15 @@ LOCAL void output_preamble(void)
 
 LOCAL void clear_if_stack(void)
 {
-   register int   i;  /* counter */
-   
+   register int i;
 
    for (i = 0; i < MAX_IF_STACK; i++)
    {
-      if_stack[i].kind        = IF_NONE;
-      if_stack[i].fileline    = 0;
-      if_stack[i].filename[0] = EOS;
+      if_stack[i].kind = IF_NONE;
+      if_stack[i].ignore = FALSE;
+      if_stack[i].loc.line = 0;
+      if_stack[i].loc.id = 0;
    }
-   
    counter_if_stack = 0;
 }
 
@@ -10659,20 +10733,15 @@ LOCAL void clear_if_stack(void)
 *
 ******************************************|************************************/
 
-LOCAL void push_if_stack(
-
-int       kind,    /* IF_DEST, IF_LANG, IF_SET, IF_OS, IF_GENERAL */
-_BOOL   ignore)  /* TRUE: ignore all lines until "!else" or "!endif" */
+LOCAL void push_if_stack(int kind, _BOOL ignore)
 {
    if (counter_if_stack < MAX_IF_STACK)
    {
       counter_if_stack++;
       
-      if_stack[counter_if_stack].kind     = kind;
-      if_stack[counter_if_stack].ignore   = ignore;
-      if_stack[counter_if_stack].fileline = uiFileLines[iFilesOpened];
-      
-      strcpy(if_stack[counter_if_stack].filename, sFileNames[iFilesOpened]);
+      if_stack[counter_if_stack].kind = kind;
+      if_stack[counter_if_stack].ignore = ignore;
+      if_stack[counter_if_stack].loc = uiFiles[iFilesOpened].loc;
    }
    else
    {
@@ -10749,9 +10818,8 @@ LOCAL void toggle_if_stack(void)
 
 LOCAL _BOOL is_if_stack_ignore(void)
 {
-   register int   i;  /* counter */
+   register int i;
    
-
    if (counter_if_stack > 0)
    {
       for (i = 1; i <= counter_if_stack; i++)
@@ -10759,11 +10827,12 @@ LOCAL _BOOL is_if_stack_ignore(void)
          if (if_stack[i].ignore)
             return TRUE;
       }
-      
-      return FALSE;                       /* all environments are valid */
+      /* all environments are valid */
+      return FALSE;
    }
 
-   return FALSE;                          /* no active environment at all */
+   /* no active environment at all */
+   return FALSE;
 }
 
 
@@ -10783,10 +10852,7 @@ LOCAL _BOOL is_if_stack_ignore(void)
 *
 ******************************************|************************************/
 
-LOCAL void pass_check_free_line(
-
-char  *zeile,  /* */
-int    pnr)    /* */
+LOCAL void pass_check_free_line(char *zeile, int pnr)
 {
    if (pnr == PASS2 && token_counter > 0)
    {
@@ -10795,8 +10861,6 @@ int    pnr)    /* */
    
    zeile[0] = EOS;
 }
-
-
 
 
 
@@ -10813,18 +10877,10 @@ int    pnr)    /* */
 *
 ******************************************|************************************/
 
-LOCAL void pass_check_if(
-
-char        *zeile,         /* */
-int          pnr)           /* */
+LOCAL void pass_check_if(char *zeile, int pnr)
 {
-   _BOOL   ignore,        /* */
-             match;         /* */
-   _BOOL   matches_lang,  /* */
-             matches_dest,  /* */
-             matches_symb,  /* */
-             matches_os;    /* */
-             
+   _BOOL   ignore, match;
+   _BOOL   matches_lang, matches_dest, matches_symb, matches_os;
 
    if (strstr(zeile, "!ifdest") != NULL)
    {
@@ -12307,52 +12363,39 @@ char  *zeile)  /* */
 *
 ******************************************|************************************/
 
-#define USE_PASS1_OUTPUT   0   
+#define USE_PASS1_OUTPUT   0
 
-LOCAL _BOOL pass1(
-
-char           *datei)           /* */
+LOCAL _BOOL pass1(const char *datei)
 {
-   MYTEXTFILE  *file;            /* */
-   char         zeile[LINELEN],  /* */
-                tmp_datei[256],  /* */
-                old_datei[256];  /* */
-   char         tmp[512];        /* */
-   size_t       len;             /* */
-   int          i;               /* counter */
-   int          protect = 0;     /* flag: 1 = '!macro' found; 2 = '!define' found */
+   MYTEXTFILE  *file;
+   char         zeile[LINELEN];
+   char         tmp_datei[MYFILE_FULL_LEN];
+   char         tmp[512];
+   size_t       len;
+   int          i;
+   int          start_if_stack;
+   FILE_ID id;
 
-
-   if (iFilesOpened >= MAXFILECOUNTER)
-   {
-      error_too_many_files();
-      return FALSE;
-   }
-
-   strcpy(old_datei, datei);
    strcpy(tmp_datei, datei);
 
-   build_include_filename(tmp_datei, ".ui");
-   
    file = myTextOpen(tmp_datei);
-
+   
    if (file == NULL)
    {
-      strcpy(tmp_datei, old_datei);
+      build_include_filename(tmp_datei, ".ui");
       file = myTextOpen(tmp_datei);
    }
-
+   
    if (file == NULL)
    {
       bErrorDetected = TRUE;
-
       return FALSE;
    }
-
-                                          /* r5pl14: Rekursive Includes testen */
+   
+   /* Rekursive Includes testen */
    for (i = 0; i < iFilesOpened; i++)
    {
-      if (strcmp(sFileNames[i], tmp_datei) == 0)
+      if (uiFiles[i].loc.id == id)
       {
          fatal_message(_("Recursive !include detected"));
          bFatalErrorDetected = TRUE;
@@ -12361,30 +12404,29 @@ char           *datei)           /* */
       }
    }
 
+   start_if_stack = counter_if_stack;
+   
+   if (push_file_stack(tmp_datei, file) == FALSE)
+   {
+      myTextClose(file);
+      return FALSE;
+   }
+
    if (bVerbose)
    {
       show_status_file_1(lPass1Lines, tmp_datei);
    }
 
-   iFilesOpened++;
-   uiFileLines[iFilesOpened] = 0;
-   strcpy(sFileNames[iFilesOpened], tmp_datei);
-
-   strcpy(sCurrFileName, tmp_datei);
-   uiCurrFileLine = 0;
-
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
       /* Here we need to add possible splitted line numbers */
-      uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
-      uiCurrFileLine = uiFileLines[iFilesOpened];
+      uiFiles[iFilesOpened].loc.line += 1 + uiMultiLines;
+      uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
       lPass1Lines++;
 
       if (break_action())
       {
-         iFilesOpened--;
-         myTextClose(file);
-         strcpy(sCurrFileName, sFileNames[iFilesOpened]);
+         pop_file_stack();
          return FALSE;
       }
 
@@ -12400,14 +12442,12 @@ char           *datei)           /* */
          recode(zeile, iCharset);
       }
 
-      if ((zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS1].env == ENV_NONE) )
+      if (zeile[0] != '#' && zeile[0] != EOS && pflag[PASS1].env == ENV_NONE)
       {
          pass_check_if(zeile, PASS1);
       }
 
-
-
-      if ( (zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS1].ignore_line == 0) )
+      if (zeile[0] != '#' && zeile[0] != EOS && pflag[PASS1].ignore_line == 0)
       {
          pass1_check_environments(zeile);
       }
@@ -12415,93 +12455,75 @@ char           *datei)           /* */
 
       if (zeile[0] != EOS)
       {
-         if ((pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_NONE) )
+         if (pflag[PASS1].ignore_line == 0 &&
+             (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_TABLE))
          {
             del_whitespaces(zeile);
 
-                                          /* fix for bug #77: */
-                                          /* when inside document and no command line: */
-            if ( (bInsideDocument) && (zeile[0] != META_C) )
-               replace_macros(zeile);     /* replace macros right here because they might contain */
-                                          /*  PASS1 commands, like !node, etc. */
-
-            if ((zeile[0] == META_C) && (zeile[1] != QUOTE_C) )
+            /* fix for bug #77: */
+            /* replace macros right here because they might contain */
+            /*  PASS1 commands, like !node, etc. */
+#if 0
+				/*
+				   commented out for several reasons:
+				   - using macros to define section commands just is not supported.
+				     when replacing macros here, someone will surely
+				     try to do something like !macro MYMACRO !macro ...
+				   - auto_quote_chars has not been called yet, so the macro
+				     would get unconverted parameters, which would lead
+				     to different node names in pass1() and pass2()
+				   - replace_macros() is called below again, which would make it
+				     impossible to quote macro names
+				   - this would be similar trying to do a "#define x #include y"
+				     in C, which is not allowed either (guess why)
+				   - conclusion: the bug is not that is does not work in pass1(),
+				     but that is DOES work in pass2()
+				   [tho]
+				 */
+            if (bInsideDocument && zeile[0] != META_C)
+               replace_macros(zeile);
+#endif
+            
+            if (zeile[0] == META_C && zeile[1] != QUOTE_C)
             {
                /* Erster Parameter von !macro und !define darf nicht gequotet werden! */
-               
                if (!bInsideDocument)
                {
-                  protect = 0;            /* reset protector */
-                  
-                  if (strncmp(zeile, "!macro",  6) == 0)
-                     protect = 1;
-                  else if (strncmp(zeile, "!define", 7) == 0)
-                     protect = 2;
-                  
-                  if (protect)
-                  {
-                     token_reset();
-                     
-                     if (strstr(zeile, "!\\") != NULL)
-                     {
-                        char   tmp_zeile[512];  /* */
-                        long   lang;            /* */
-
-                        do
-                        {
-                           myTextGetline(tmp_zeile, LINELEN, file);
-
-                           lang = strlen(zeile);
-
-                           zeile[lang - 2] = EOS;
-
-                           strcat(zeile, tmp_zeile);
-
-                                          /* v6.5.5 [vj] */
-                           uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
-                           uiCurrFileLine = uiFileLines[iFilesOpened];
-
-                           lPass1Lines++;
-                           
-                        } while (strstr(tmp_zeile, "!\\") != NULL);
-                        
-                     }  /* if (strstr(zeile, "!\\" != NULL) */
-
-
-                     str2tok(zeile);
-                     
-                     switch (protect)
-                     {
-                     case 1:
-                        add_macro();
-                        break;
-                        
-                     case 2:
-                        add_define();
-                     }
-                     
-                     zeile[0] = EOS;
-                  }
-
-                  if (strncmp(zeile, CMD_SET, 4) == 0)
+                  if (strncmp(zeile, CMD_DEFINE, 7) == 0)
                   {
                      token_reset();
                      str2tok(zeile);
-                     zeile[0] = EOS;
-                     tokcpy2(zeile, LINELEN);
-                     add_udosymbol(zeile);
+                     add_define();
                      zeile[0] = EOS;
                   }
 
-                  if (strncmp(zeile, CMD_UNSET, 6) == 0)
+                  if (strncmp(zeile, CMD_MACRO, 6) == 0)
                   {
                      token_reset();
                      str2tok(zeile);
-                     zeile[0] = EOS;
-                     tokcpy2(zeile, LINELEN);
-                     del_udosymbol(zeile);
+                     add_macro();
                      zeile[0] = EOS;
                   }
+               }
+               
+               if (strncmp(zeile, CMD_SET, 4) == 0)
+               {
+                  token_reset();
+                  str2tok(zeile);
+                  zeile[0] = EOS;
+                  tokcpy2(zeile, LINELEN);
+                  add_udosymbol(zeile);
+                  zeile[0] = EOS;
+               }
+
+               if (strncmp(zeile, CMD_UNSET, 6) == 0)
+               {
+                  token_reset();
+                  str2tok(zeile);
+                  zeile[0] = EOS;
+                  tokcpy2(zeile, LINELEN);
+                  del_udosymbol(zeile);
+                  zeile[0] = EOS;
                }
 
                /* <???> Problem/Bug: Falls man Makros wie !macro INC !include ... */
@@ -12512,44 +12534,27 @@ char           *datei)           /* */
 
                if (zeile[0] != EOS)
                {
-                  /* New in r6pl15 [NHz] */
-
                   /* Set node name for project file */
+                  strcpy(current_node_name_sys, zeile);
 
-/*                if ((strstr(zeile, "node") != NULL) || (strstr(zeile, "heading") != NULL) )
-*/
-
-/*                   6.3.10 [vj]: used um_strcpy to prevent buffer overrun known as the "bInsideAppendix-Bug"
-
-                     6.3.11 [vj]: the len of current_node_name_sys is defined as CNNS_LEN in constant.h
-                     Perhaps we should habe a look, if this copy function can be done
-                     in an if, because this copy needs time <????>
- */
-                  um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
-
-                  if (no_umlaute)
-                     recode_chrtab(zeile,CHRTAB_ASCII);
-                  
                   auto_quote_chars(zeile, FALSE);
                   replace_macros(zeile);
                   replace_defines(zeile);
 
                   c_divis(zeile);
                   c_vars(zeile);
-                  c_tilde(zeile);         /* r5pl9 */
-                  c_styles(zeile);        /* r6pl2 */
+                  c_tilde(zeile);
+                  c_styles(zeile);
                   c_internal_index(zeile, FALSE);
                }
-
 
                /* Dies darf nicht mit in die obige Klammer! */
                token_reset();
                str2tok(zeile);
 
-
-               if ((bInsideDocument) && (token[0][0] != EOS) )
+               if (bInsideDocument && token[0][0] != EOS)
                {
-                                          /* Kommandos, die nur im Hauptteil erlaubt sind */
+                  /* Kommandos, die nur im Hauptteil erlaubt sind */
                   if (strcmp(token[0], "!node") == 0 || strcmp(token[0], "!n") == 0)
                   {
                      add_nodetype_to_toc(TOC_NODE1, NODE_NORMAL, NODE_VISIBLE);
@@ -12813,8 +12818,8 @@ char           *datei)           /* */
                }  /* if ((bInsideDocument) && (token[0][0] != EOS) ) */
 
 
-                                          /* Kommandos, die nur im Vorspann erlaubt sind */
-               if ( (!bInsideDocument) && (token[0][0] != EOS) )
+               /* Kommandos, die nur im Vorspann erlaubt sind */
+               if (!bInsideDocument && token[0][0] != EOS)
                {
                   if (strcmp(token[0], CMD_BEGIN_DOCUMENT) == 0)
                   {
@@ -12827,38 +12832,29 @@ char           *datei)           /* */
                   else if (strcmp(token[0], "!docinfo") == 0)
                   {
                      if (set_docinfo())
-                     {
                         token[0][0] = EOS;
-                     }
                   }
                   else if (strcmp(token[0], "!doclayout") == 0)
                   {
                      if (set_doclayout())
-                     {
                         token[0][0] = EOS;
-                     }
                   }
                   else if (strcmp(token[0], "!show_variable") == 0)
                   {
                      if (set_show_variable())
-                     {
                         token[0][0] = EOS;
-                     }
                   }
                   else if (pass1_check_preamble_commands())
                   {
-                     zeile[0] = EOS;
+                     token[0][0] = EOS;
                   }
                   else if (pass1_check_everywhere_commands())
                   {
-                     zeile[0] = EOS;
+                     token[0][0] = EOS;
                   }
+               }
 
-               }  /* if ( (!bInsideDocument) && (token[0][0] != EOS) ) */
-
-
-
-                                          /* Kommandos, die ueberall erlaubt sind... */
+               /* Kommandos, die ueberall erlaubt sind... */
                if (token[0][0] != EOS)
                {
                   if (strcmp(token[0], "!nop") == 0)
@@ -12944,48 +12940,29 @@ char           *datei)           /* */
                   {
                      zeile[0] = EOS;
                   }
-
-               }
-
-            }   /* if (zeile[0]==META_C) */
-
-         }   /* if (!pflag[PASS1].ignore_line...) */
-         
-         else
-         {
-            if ( (pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_TABLE) )
-            {
-               token_reset();
-               str2tok(zeile);
-
-               if ( strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0 )
-               {
-                  tokcpy2(tmp, 512);
-                  replace_udo_quotes(tmp);
-                  add_label(tmp, FALSE, bInsidePopup);
                }
             }
          }
-         
-      }  /* if (zeile[0] != EOS) */
+      }
+   }
 
-   }  /* while (fgets) */
-
-
-   iFilesOpened--;
+   /* richtigen Einsatz von !if testen */
+   if (!bBreakHappened && !bBreakInside)
+   {
+      if (counter_if_stack > start_if_stack)
+      {
+         error_missing_endif(file_lookup(if_stack[counter_if_stack].loc.id), if_stack[counter_if_stack].loc.line);
+      }
+   }
    
-   myTextClose(file);
-   
-   strcpy(sCurrFileName, sFileNames[iFilesOpened]);
+   pop_file_stack();
 
    token_reset();
 
    multitasking_interrupt();
 
-   return (!bFatalErrorDetected);
+   return !bFatalErrorDetected;
 }
-
-
 
 
 
@@ -13703,64 +13680,49 @@ char  *zeile)  /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL pass2(
-
-char           *datei)            /* */
+LOCAL _BOOL pass2(const char *datei)
 {
-   MYTEXTFILE  *file;             /* */
-   char         zeile[LINELEN];   /* */
-   char         tmp_datei[256],   /* */
-                old_datei[256];   /* */
-   int          i;                /* */
-   size_t       len;              /* */
-   
+   MYTEXTFILE  *file;
+   char         zeile[LINELEN];
+   char         tmp_datei[MYFILE_FULL_LEN];
+   size_t       len;
 
-   if (iFilesOpened >= MAXFILECOUNTER)
-   {
-      error_too_many_files();
-      return FALSE;
-   }
-
-   strcpy(old_datei, datei);
    strcpy(tmp_datei, datei);
 
-   build_include_filename(tmp_datei, ".ui");
-
    file = myTextOpen(tmp_datei);
-
+   
    if (file == NULL)
    {
-      strcpy(tmp_datei, old_datei);
+      build_include_filename(tmp_datei, ".ui");
       file = myTextOpen(tmp_datei);
 
       if (file == NULL)
       {
-         error_open_pass2(tmp_datei);
-         bErrorDetected= TRUE;
+         error_open_pass2(datei);
+         bErrorDetected = TRUE;
          return FALSE;
       }
    }
 
+   if (push_file_stack(tmp_datei, file) == FALSE)
+   {
+      myTextClose(file);
+      return FALSE;
+   }
+
    show_status_percent(lPass1Lines, lPass2Lines);
-   
    if (bVerbose)
    {
       show_status_file_2(lPass2Lines, tmp_datei);
    }
 
-   iFilesOpened++;
-   uiFileLines[iFilesOpened]= 0;
-   
-   strcpy(sFileNames[iFilesOpened], tmp_datei);
-   strcpy(sCurrFileName, tmp_datei);
-   
-   uiCurrFileLine = 0;
-
    if (bUseTreefile)
    {
       if (bTreeopened)
       {
-         for (i = 0; i < iFilesOpened; i++)
+         int i;
+         
+         for (i = 0; i < (iFilesOpened - 1); i++)
          {
             fprintf(fTreefile, "|----");
          }
@@ -13773,35 +13735,26 @@ char           *datei)            /* */
 
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
-      uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
-      uiCurrFileLine = uiFileLines[iFilesOpened];
+      uiFiles[iFilesOpened].loc.line += 1 + uiMultiLines;
+      uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
       lPass2Lines++;
-      
       show_status_percent(lPass1Lines, lPass2Lines);
 
       if (break_action())
       {
-         iFilesOpened--;
-         
-         myTextClose(file);
-         strcpy(sCurrFileName, sFileNames[iFilesOpened]);
-         
+         pop_file_stack();
          return FALSE;
       }
 
-
       /* --- remove all line feed and whitespace characters at the end of line --- */
-      
       len = strlen(zeile);
-      
-      while ( (len > 0) && (((_UBYTE)zeile[len - 1]) <= 32) )
+      while (len > 0 && (((_UBYTE)zeile[len - 1]) <= 32))
       {
          zeile[len - 1] = EOS;
          len--;
       }
 
-
-                                          /* don't recode twice! */
+      /* don't recode twice! */
       if (my_stricmp(tmp_datei,udofile.full))
       {
          recode(zeile, iCharset);
@@ -13809,37 +13762,27 @@ char           *datei)            /* */
 
       if (pflag[PASS2].env == ENV_NONE)
       {
-                                          /* Befehle wie !raw [tex] bearbeiten */
-                                          /* r5pl17 */
+         /* Befehle wie !raw [tex] bearbeiten */
          if (pflag[PASS2].ignore_line == 0)
          {
             c_check_raw(zeile);
          }
       }
 
-      if ( (zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS2].env == ENV_NONE) )
+      if (zeile[0] != '#' && zeile[0] != EOS && pflag[PASS2].env == ENV_NONE)
       {
          pass_check_if(zeile, PASS2);
       }
 
-#if 0
-      if (pflag[PASS2].ignore_line > 0)
-      {
-         goto AFTER_IGNORED;
-      }
-#endif
-
       /* Spezielle Umgebungen (verbatim, raw, table, sourcecode) testen. */
       /* Gesucht wird nur nach !begin... bzw !end... */
-      
       if (zeile[0] != '#' && pflag[PASS2].ignore_line == 0)
       {
-         (void)pass2_check_environments(zeile);
+         pass2_check_environments(zeile);
       }
 
       /* Ausgabe/Bearbeitung der aktuellen Zeile, falls eine */
       /* spezielle Umgebung aktiv ist */
-      
       if (pflag[PASS2].ignore_line == 0)
       {
          pass2_check_env_output(zeile);
@@ -13847,12 +13790,9 @@ char           *datei)            /* */
 
       /* Keine spezielle Umgebung aktiv, also Zeile auswerten und */
       /* beim Auftreten einer Leerzeile den Absatz ausgeben */
-      
-      if (    (pflag[PASS2].ignore_line == 0)
-           && (pflag[PASS2].env == ENV_NONE)
-         )
+      if (pflag[PASS2].ignore_line == 0 && pflag[PASS2].env == ENV_NONE)
       {
-         if (zeile[0] != EOS )
+         if (zeile[0] != EOS)
          {
             if (zeile[0] != '#')
             {
@@ -13863,11 +13803,6 @@ char           *datei)            /* */
                
                auto_quote_chars(zeile, FALSE);
 
-               /* Changed in V6.5.5 [NHz]
-                * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
-                *             closes bug #0000059
-                */
-                
                c_commands_inside(zeile, TRUE);
 
                replace_macros(zeile);
@@ -13876,27 +13811,19 @@ char           *datei)            /* */
                c_tilde(zeile);
                c_styles(zeile);
 
-               /* v6.5.7 [vj] old position and parameters (see above)
-                * please keep this comment for information;
-                * v6.5.9 [NHz] put in again, otherwise commands inside
-                * macros are not translated; I think we need both
-                */
-                
                c_commands_inside(zeile, FALSE);
 
                replace_defines(zeile);
-
                tokenize(zeile);
             }
          }
-         else if (token_counter > 0)      /* Leerzeile */
-         {  
+         else if (token_counter > 0)
+         {
+            /* Leerzeile */
             token_output(TRUE);
          }
       }
-      
-   }   /* while (fgets) */
-
+   }
 
    if (token_counter > 0)
    {
@@ -13918,14 +13845,11 @@ char           *datei)            /* */
       }
    }
 
-
-   iFilesOpened--;
-   strcpy(sCurrFileName, sFileNames[iFilesOpened]);
-   myTextClose(file);
+   pop_file_stack();
 
    multitasking_interrupt();
 
-   return (!bFatalErrorDetected);
+   return !bFatalErrorDetected;
 }
 
 
@@ -13944,17 +13868,17 @@ char           *datei)            /* */
 
 LOCAL void save_pchelp_commandfile(void)
 {
-   FILE  *cmdfile;  /* */
+   FILE  *cmdfile;
 
    if (bTestmode)
       return;
    
-   cmdfile = myFwopen(sCmdfull, TOASC);
+   cmdfile = myFwopen(file_lookup(sCmdfull), TOASC);
 
    if (!cmdfile)
       return;
 
-   save_upr_entry_outfile(sCmdfull);
+   save_upr_entry_outfile(file_lookup(sCmdfull));
 
    fprintf(cmdfile, "-V\n\n");
    fprintf(cmdfile, "%s.HLP\n\n", outfile.name);
@@ -13988,12 +13912,12 @@ LOCAL void save_winhelp_project(void)
    if (bTestmode)
       return;
    
-   hpjfile = myFwopen(sHpjfull, FTHPJ);
+   hpjfile = myFwopen(file_lookup(sHpjfull), FTHPJ);
 
    if (!hpjfile)
       return;
 
-   save_upr_entry_outfile(sHpjfull);
+   save_upr_entry_outfile(file_lookup(sHpjfull));
 
    if (desttype == TOAQV)
    {
@@ -14166,12 +14090,12 @@ LOCAL void save_winhelp4_project(void)
    if (bTestmode)
       return;
    
-   hpjfile = myFwopen(sHpjfull, FTHPJ);
+   hpjfile = myFwopen(file_lookup(sHpjfull), FTHPJ);
 
    if (!hpjfile)
       return;
    
-   save_upr_entry_outfile(sHpjfull);
+   save_upr_entry_outfile(file_lookup(sHpjfull));
 
    sprintf(hlp_name, "`%s.hlp'", outfile.name);
 
@@ -14291,12 +14215,12 @@ LOCAL void save_htmlhelp_project(void)
    if (bTestmode)
       return;
 
-   hhpfile = myFwopen(sHhpfull, FTHHP);
+   hhpfile = myFwopen(file_lookup(sHhpfull), FTHHP);
 
    if (!hhpfile)
       return;
 
-   save_upr_entry_outfile(sHhpfull);
+   save_upr_entry_outfile(file_lookup(sHhpfull));
 
    fprintf(hhpfile, "[OPTIONS]\n");
                                 
@@ -14537,6 +14461,8 @@ LOCAL void set_format_flags(void)
 
 LOCAL void show_udo_intro(void)
 {
+   char sInfMsg[256];
+   
    show_status_info("");
    sprintf(sInfMsg, "This is UDO Version %s.%s %s for %s", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
    show_status_loginfo(sInfMsg);
@@ -14550,21 +14476,38 @@ LOCAL void show_udo_intro(void)
 
 
 
-/*******************************************************************************
-*
-*  call_dummy():
-*     dummy routine
-*
-*  Return:
-*     int value
-*
-******************************************|************************************/
-
-LOCAL int call_dummy(void)
+static NOINLINE void print_results(void)
 {
-   int   i = 42;
-
-   return i;
+	char sInfMsg[256];
+	int val;
+	
+   if (!bTestmode && !bFatalErrorDetected)
+   {
+      sprintf(sInfMsg, _("Output (%lu lines) written to %s"), outlines, outfile.full);
+      show_status_info(sInfMsg);
+   } else if (bTestmode)
+   {
+      sprintf(sInfMsg, _("Output: %lu lines"), outlines);
+      show_status_info(sInfMsg);
+   }
+   
+   if ((val = get_warning_counter()) > 0)
+   {
+      sprintf(sInfMsg, _("Warnings: %d"), val);
+      show_status_errors(sInfMsg);
+   }
+   
+   if ((val = get_note_counter()) > 0)
+   {
+      sprintf(sInfMsg, _("Notes:    %d"), val);
+      show_status_errors(sInfMsg);
+   }
+   
+   if ((val = get_error_counter()) > 0)
+   {
+      sprintf(sInfMsg, _("Errors:   %d"), val);
+      show_status_errors(sInfMsg);
+   }
 }
 
 
@@ -14582,17 +14525,13 @@ LOCAL int call_dummy(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL udo
-
-(char       *datei)        /* */
+GLOBAL _BOOL udo(char *datei)
 {
-   _BOOL   ret = FALSE;  /* */
-   int       i,            /* */
-             val;          /* */
-   FILE     *file;         /* */
-   char      tmp[512];     /* */
+   _BOOL   ret = FALSE;
+   int       i;
+   FILE     *file;
+   char      tmp[512];
    
-
    get_timestr(timer_start);
 
    init_modules();
@@ -14634,13 +14573,10 @@ GLOBAL _BOOL udo
    {   
       if (outfile.full[0] != EOS)
       {
-         if (sLogfull[0] == EOS)
-         {
+         if (sLogfull == 0)
             logfile_adjust();
-         }
 
-         fLogfile = myFwopen(sLogfull, TOASC);
-         
+         fLogfile = myFwopen(file_lookup(sLogfull), TOASC);
          if (fLogfile == NULL)
          {
             fLogfile = stderr;
@@ -14648,10 +14584,8 @@ GLOBAL _BOOL udo
             bErrorDetected = TRUE;
             return FALSE;
          }
-         
          bLogopened = TRUE;
-         
-         save_upr_entry_outfile(sLogfull);
+         save_upr_entry_outfile(file_lookup(sLogfull));
       }
    }
 
@@ -14661,9 +14595,9 @@ GLOBAL _BOOL udo
    {
       if (outfile.full[0] != EOS)
       {
-         if (sTreefull[0] != EOS)         
+         if (sTreefull != 0)         
          {
-            fTreefile = myFwopen(sTreefull, TOASC);
+            fTreefile = myFwopen(file_lookup(sTreefull), TOASC);
             
             if (fTreefile == NULL)
             {
@@ -14674,7 +14608,7 @@ GLOBAL _BOOL udo
             }
             
             bTreeopened = TRUE;
-            save_upr_entry_outfile(sTreefull);
+            save_upr_entry_outfile(file_lookup(sTreefull));
          }
       }
    }
@@ -14683,9 +14617,9 @@ GLOBAL _BOOL udo
    {
       if (outfile.full[0] != EOS)
       {
-         if (sUPRfull[0] != EOS)
+         if (sUPRfull != 0)
          {
-            fUPRfile = myFwopen(sUPRfull, TOASC);
+            fUPRfile = myFwopen(file_lookup(sUPRfull), TOASC);
             
             if (fUPRfile == NULL)
             {
@@ -14696,7 +14630,7 @@ GLOBAL _BOOL udo
             }
             
             bUPRopened = TRUE;
-            save_upr_entry_outfile(sUPRfull);
+            save_upr_entry_outfile(file_lookup(sUPRfull));
          }
       }
    }
@@ -14844,7 +14778,7 @@ GLOBAL _BOOL udo
          {
             if (counter_if_stack > 0)
             {
-               error_missing_endif(if_stack[counter_if_stack].filename, if_stack[counter_if_stack].fileline);
+               error_missing_endif(file_lookup(if_stack[counter_if_stack].loc.id), if_stack[counter_if_stack].loc.line);
                bBreakHappened = TRUE;
                ret = FALSE;
             }
@@ -14955,8 +14889,8 @@ GLOBAL _BOOL udo
                      break;
                      
                   case TOMHH:
-                     bHhcSaved = save_htmlhelp_contents(sHhcfull);
-                     bHhkSaved = save_htmlhelp_index(sHhkfull);
+                     bHhcSaved = save_htmlhelp_contents(file_lookup(sHhcfull));
+                     bHhkSaved = save_htmlhelp_index(file_lookup(sHhkfull));
                      
                      save_htmlhelp_project();
                      save_html_gifs();
@@ -15054,20 +14988,20 @@ GLOBAL _BOOL udo
       if (bImgFoSaved)    logln_file_generated("IMG",                          sImgFoFull,   "");
       if (bImgFcSaved)    logln_file_generated("IMG",                          sImgFcFull,   "");
       if (bImgMwSaved)    logln_file_generated("IMG",                          sImgMwFull,   "");
-      if (bCmdSaved)      logln_file_generated("Pure C command file",          sCmdfull,     "");
-      if (bHpjSaved)      logln_file_generated("WinHelp project",              sHpjfull,     "");
-      if (bCntSaved)      logln_file_generated("WinHelp4 contents",            sCntfull,     "");
+      if (bCmdSaved)      logln_file_generated("Pure C command file",          file_lookup(sCmdfull),     "");
+      if (bHpjSaved)      logln_file_generated("WinHelp project",              file_lookup(sHpjfull),     "");
+      if (bCntSaved)      logln_file_generated("WinHelp4 contents",            file_lookup(sCntfull),     "");
       if (bMapSavedC)     logln_file_generated("WinHelp map for C",            sMapNoSuff,   ".hpc");
       if (bMapSavedPas)   logln_file_generated("WinHelp map for Pascal",       sMapNoSuff,   ".hpp");
       if (bMapSavedVB)    logln_file_generated("WinHelp map for Visual Basic", sMapNoSuff,   ".hpb");
       if (bMapSavedGFA)   logln_file_generated("WinHelp map for GFA Basic",    sMapNoSuff,   ".hpg");
-      if (bHhpSaved)      logln_file_generated("HTML Help project",            sHhpfull,     "");
-      if (bHhcSaved)      logln_file_generated("HTML Help contents",           sHhcfull,     "");
-      if (bHhkSaved)      logln_file_generated("HTML Help index",              sHhkfull,     "");
-      if (bHypSaved)      logln_file_generated("Hyphen file",                  sHypfull,     "");
-      if (bIdxSaved)      logln_file_generated("Index file",                   sIdxfull,     "");
-      if (bTreeSaved)     logln_file_generated("Tree file",                    sTreefull,    "");
-      if (bUPRSaved)      logln_file_generated("Project file",                 sUPRfull,     "");
+      if (bHhpSaved)      logln_file_generated("HTML Help project",            file_lookup(sHhpfull),     "");
+      if (bHhcSaved)      logln_file_generated("HTML Help contents",           file_lookup(sHhcfull),     "");
+      if (bHhkSaved)      logln_file_generated("HTML Help index",              file_lookup(sHhkfull),     "");
+      if (bHypSaved)      logln_file_generated("Hyphen file",                  file_lookup(sHypfull),     "");
+      if (bIdxSaved)      logln_file_generated("Index file",                   file_lookup(sIdxfull),     "");
+      if (bTreeSaved)     logln_file_generated("Tree file",                    file_lookup(sTreefull),    "");
+      if (bUPRSaved)      logln_file_generated("Project file",                 file_lookup(sUPRfull),     "");
 
 
       if (outfile.full[0] != EOS)
@@ -15089,38 +15023,6 @@ GLOBAL _BOOL udo
 
    }   /* if (!bNoLogfile) */
 
-
-   if (!bTestmode && !bFatalErrorDetected)
-   {
-      show_status_info("");
-      show_status_info("");
-      sprintf(sInfMsg, _("Output written to %s"), outfile.full);
-      show_status_info(sInfMsg);
-   }
-   
-   show_status_info("");   
-   show_status_info("");   
-
-   if ((val = get_warning_counter()) > 0)
-   {
-      sprintf(sInfMsg, _("Warnings: %d"), val);
-      show_status_errors(sInfMsg);
-   }
-   
-   if ((val = get_note_counter()) > 0)
-   {
-      sprintf(sInfMsg, _("Notes:    %d"), val);
-      show_status_errors(sInfMsg);
-   }
-   
-   if ((val = get_error_counter()) > 0)
-   {
-      sprintf(sInfMsg, _("Errors:   %d"), val);
-      show_status_errors(sInfMsg);
-   }
-
-   call_dummy();
-
    if (bLogopened  && fLogfile     != NULL)   fclose(fLogfile);
    if (bHypopened  && fHypfile     != NULL)   fclose(fHypfile);
    if (bIdxopened  && fIdxfile     != NULL)   fclose(fIdxfile);
@@ -15133,22 +15035,21 @@ GLOBAL _BOOL udo
       bOutOpened  = FALSE;
    }
 
+   print_results();
+   
    exit_modules();
    free_token_output_buffer();
 
-
-   /* --- Hyphenfile sortieren und Dupes entfernen --- */
-
+   /* Hyphenfile sortieren und Dupes entfernen */
    if (!bNoHypfile && bDocSortHyphenFile)
    {
-      sort_hypfile(sHypfull);
+      sort_hypfile(file_lookup(sHypfull));
    }
 
-   init_vars();
+   init_udo_vars();
 
    return ret;
-   
-}  /* udo() */
+}
 
 
 
@@ -15173,66 +15074,51 @@ GLOBAL _BOOL udo
 *
 ******************************************|************************************/
 
-LOCAL _BOOL passU(
-
-char           *datei)                       /* */
+LOCAL _BOOL passU(const char *datei)
 {
-   MYTEXTFILE  *file;                        /* */
-   char         zeile[LINELEN],              /* */
-                zeileBak[LINELEN];           /* */
-   char         tmp_datei[256],              /* */
-                old_datei[256];              /* */
-   int          i;                           /* */
-   size_t       len;                         /* */
-   _BOOL      inc_done;                    /* */
-   const char  *orgBeg = "##### start of ";  /* */
-   const char  *orgEnd = "##### end of ";    /* */
+   MYTEXTFILE  *file;
+   char         zeile[LINELEN],
+                zeileBak[LINELEN];
+   char         tmp_datei[MYFILE_FULL_LEN];
+   int          i;
+   size_t       len;
+   _BOOL      inc_done;
+   const char  *orgBeg = "##### start of ";
+   const char  *orgEnd = "##### end of ";
    
-   
-   if (iFilesOpened >= MAXFILECOUNTER)
-   {
-      error_too_many_files();
-      return FALSE;
-   }
-
-   strcpy(old_datei, datei);
    strcpy(tmp_datei, datei);
 
-   build_include_filename(tmp_datei, ".ui");
-
    file = myTextOpen(tmp_datei);
-
-   if (!file)
+   
+   if (file == NULL)
    {
-      strcpy(tmp_datei, old_datei);
+      build_include_filename(tmp_datei, ".ui");
       file = myTextOpen(tmp_datei);
 
-      if (!file)
+      if (file == NULL)
       {
-         error_open_pass2(tmp_datei);
+         error_open_pass2(datei);
          bErrorDetected = TRUE;
          return FALSE;
       }
    }
 
+   if (push_file_stack(tmp_datei, file) == FALSE)
+   {
+      myTextClose(file);
+      return FALSE;
+   }
+   
    if (bVerbose)
    {
       show_status_udo2udo(lPass2Lines, tmp_datei);
    }
 
-   iFilesOpened++;
-   uiFileLines[iFilesOpened] = 0;
-   
-   strcpy(sFileNames[iFilesOpened], tmp_datei);
-   strcpy(sCurrFileName, tmp_datei);
-   
-   uiCurrFileLine= 0;
-
    if (bUseTreefile)
    {
       if (bTreeopened)
       {
-         for (i = 0; i < iFilesOpened; i++)
+         for (i = 0; i < (iFilesOpened - 1); i++)
          {
             fprintf(fTreefile, "|----");
          }
@@ -15241,44 +15127,37 @@ char           *datei)                       /* */
       }
    }
 
-   while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
+   while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
-                                          /* v6.5.5 [vj] */
-      uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
-      uiCurrFileLine = uiFileLines[iFilesOpened];
+      uiFiles[iFilesOpened].loc.line += 1 + uiMultiLines;
+      uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
+      lPass2Lines++;
 
       if (break_action())
       {
-         iFilesOpened--;
-         myTextClose(file);
-         strcpy(sCurrFileName, sFileNames[iFilesOpened]);
+         pop_file_stack();
          return FALSE;
       }
 
-
-      /* --- remove all line feed and whitespace characters at the end of line --- */
-
+      /* remove all line feed and whitespace characters at the end of line */
       len = strlen(zeile);
-      
-      while ( (len > 0) && (((_UBYTE)zeile[len - 1]) <= 32) )
+      while (len > 0 && (((_UBYTE)zeile[len - 1]) <= 32))
       {
-         zeile[len - 1]= EOS;
+         zeile[len - 1] = EOS;
          len--;
       }
 
-
-      strcpy(zeileBak, zeile);            /* copy the line to be output later */
+      /* copy the line to be output later */
+      strcpy(zeileBak, zeile);
 
       token_reset();
       replace_defines(zeile);
       str2tok(zeile);
 
       inc_done = FALSE;
-      
       if (pflag[PASSU].env == ENV_NONE)
       {
          replace_defines(zeile);
-         
          if (!inc_done && strcmp(token[0], "!include") == 0)
          {
             inc_done = TRUE;
@@ -15348,17 +15227,13 @@ char           *datei)                       /* */
       {
          outln(zeileBak);
       }
+   }
 
-   }   /* while (fgets) */
-
-
-   iFilesOpened--;
-   strcpy(sCurrFileName, sFileNames[iFilesOpened]);
-   myTextClose(file);
+   pop_file_stack();
 
    multitasking_interrupt();
 
-   return (!bFatalErrorDetected);
+   return !bFatalErrorDetected;
 }
 
 
@@ -15380,13 +15255,11 @@ GLOBAL _BOOL udo2udo(
 
 char        *datei)        /* */
 {
-   _BOOL   ret = FALSE;  /* */
-   int       i,            /* */
-             val;          /* */
-   FILE     *file;         /* */
-   char      tmp[512];     /* */
+   _BOOL   ret = FALSE;
+   int       i;
+   FILE     *file;
+   char      tmp[512];
    
-
    get_timestr(timer_start);
 
    init_modules();
@@ -15425,12 +15298,10 @@ char        *datei)        /* */
    {   
       if (outfile.full[0] != EOS)
       {
-         if (sLogfull[0] == EOS)
-         {
+         if (sLogfull == 0)
             logfile_adjust();
-         }
 
-         fLogfile = myFwopen(sLogfull, TOASC);
+         fLogfile = myFwopen(file_lookup(sLogfull), TOASC);
          
          if (!fLogfile)
          {
@@ -15441,7 +15312,7 @@ char        *datei)        /* */
          }
          
          bLogopened = TRUE;
-         save_upr_entry_outfile(sLogfull);
+         save_upr_entry_outfile(file_lookup(sLogfull));
       }
    }
 
@@ -15450,9 +15321,9 @@ char        *datei)        /* */
    {
       if (outfile.full[0] != EOS)
       {
-         if (sTreefull[0] != EOS)
+         if (sTreefull != 0)
          {
-            fTreefile = myFwopen(sTreefull, TOASC);
+            fTreefile = myFwopen(file_lookup(sTreefull), TOASC);
             
             if (!fTreefile)
             {
@@ -15463,7 +15334,7 @@ char        *datei)        /* */
             }
             
             bTreeopened = TRUE;
-            save_upr_entry_outfile(sTreefull);
+            save_upr_entry_outfile(file_lookup(sTreefull));
          }
       }
    }
@@ -15581,7 +15452,7 @@ char        *datei)        /* */
          {
             if (counter_if_stack > 0)
             {
-               error_missing_endif(if_stack[counter_if_stack].filename, if_stack[counter_if_stack].fileline);
+               error_missing_endif(file_lookup(if_stack[counter_if_stack].loc.id), if_stack[counter_if_stack].loc.line);
                bBreakHappened = TRUE;
                ret = FALSE;
             }
@@ -15637,7 +15508,7 @@ char        *datei)        /* */
       logln("");
 
       if (bTreeSaved)
-         logln_file_generated("Tree file", sTreefull, "");
+         logln_file_generated("Tree file", file_lookup(sTreefull), "");
 
       if (outfile.full[0] != EOS)
       {
@@ -15656,37 +15527,8 @@ char        *datei)        /* */
          logln("UDO stopped because of fatal error(s)");
       }
 
-   }   /* if (!nologfile) */
-
-
-   if (!bTestmode)
-   {
-      show_status_info("");
-      show_status_info("");
-      sprintf(sInfMsg, "Output written to %s", outfile.full);
-      show_status_info(sInfMsg);
    }
 
-   show_status_info("");   
-   show_status_info("");   
-
-   if ( (val = get_warning_counter()) > 0)
-   {
-      sprintf(sInfMsg, "Warnings: %d", val);
-      show_status_errors(sInfMsg);
-   }
-   
-   if ( (val = get_note_counter()) > 0)
-   {
-      sprintf(sInfMsg, "Notes:    %d", val);
-      show_status_errors(sInfMsg);
-   }
-   
-   if ( (val = get_error_counter()) > 0)
-   {
-      sprintf(sInfMsg, "Errors:   %d", val);
-      show_status_errors(sInfMsg);
-   }
 
    if (bLogopened && fLogfile != NULL)
    {
@@ -15705,14 +15547,15 @@ char        *datei)        /* */
       bOutOpened = FALSE;
    }
 
+   print_results();
+   
    exit_modules();
    free_token_output_buffer();
 
-   init_vars();
+   init_udo_vars();
 
    return ret;
-
-}   /* udo2udo() */
+}
 
 
 
@@ -16097,7 +15940,7 @@ const char  *date_string)  /* date in __DATE__ format */
 
 /*******************************************************************************
 *
-*  init_vars():
+*  init_udo_vars():
 *     initialize (many!) variables
 *
 *  Return:
@@ -16105,14 +15948,15 @@ const char  *date_string)  /* date in __DATE__ format */
 *
 ******************************************|************************************/
 
-GLOBAL void init_vars(void)
+GLOBAL void init_udo_vars(void)
 {
-   register int   i;  /* counter */
+   register int i;
 
-
-   /*   -------------------------------------------------- */
-   /*   UDOs Kontrollvariablen initialisieren              */
-   /*   -------------------------------------------------- */
+   init_module_files();
+   
+   /* -------------------------------------------------- */
+   /* UDOs Kontrollvariablen initialisieren              */
+   /* -------------------------------------------------- */
 
    bNopDetected = FALSE;
 
@@ -16127,8 +15971,8 @@ GLOBAL void init_vars(void)
    bInsideAppendix = FALSE;
    bInsideDocument = FALSE;
    
-   bDescDDOpen     = FALSE;
-   bParagraphOpen  = FALSE;
+   bDescDDOpen = FALSE;
+   bParagraphOpen = FALSE;
 
    out_lf_needed = FALSE;
 
@@ -16141,18 +15985,11 @@ GLOBAL void init_vars(void)
    bHypSaved = FALSE;
    bUPRSaved = FALSE;
 
-   iFilesOpened = 0;
-   
-   for (i = 0; i < MAXFILECOUNTER; i++)
-   {
-      uiFileLines[i] = 0;
-      sFileNames[i][0] = EOS;
-   }
+   clear_file_stack();
 
    silben_counter = 0;
-   
-   for (i = 0; i < MAXSILBEN; silbe[i++][0] = EOS)
-      ;
+   for (i = 0; i < MAXSILBEN; i++)
+      silbe[i][0] = EOS;
 
    memset(&styleflag, FALSE, sizeof(STYLEFLAG));
 
@@ -16174,14 +16011,12 @@ GLOBAL void init_vars(void)
    /*   Dokumentvariablen und -flags initialisieren        */
    /*   -------------------------------------------------- */
 
-   for (i = 0; i < MAXSWITCH; *(udoswitch[i++].flag) = FALSE)
-      ;
+   for (i = 0; i < (int)MAXSWITCH; i++)
+      *(udoswitch[i].flag) = FALSE;
 
    bDocSortHyphenFile = FALSE;
-   
-   zDocParwidth = 70;                     /* Fuer ST-Guide 75 nehmen? */
-   bDocTabwidth =  8;
-   
+   zDocParwidth = 70;
+   bDocTabwidth = 8;
    iDocVerbatimSize = VERB_NORMAL;
    iDocLinedrawSize = VERB_NORMAL;
 
@@ -16189,80 +16024,78 @@ GLOBAL void init_vars(void)
    html_merge_node2          = FALSE;
    html_merge_node3          = FALSE;
    html_merge_node4          = FALSE;
-   html_no_xlist             = FALSE;
-   html_ignore_8bit          = FALSE;
-   html_navigation_line      = FALSE;
-   html_navigation_image     = FALSE;
-   html_modern_layout        = FALSE;
-   html_modern_alignment     = ALIGN_CENT;
-   html_frames_layout        = FALSE;
-   html_frames_noresize      = FALSE;
-   html_frames_noborder      = FALSE;
-   html_frames_noscroll      = FALSE;
-   html_frames_alignment     = ALIGN_CENT;
-   html_nodesize             = 1;
-   html_button_alignment     = ALIGN_CENT;
-   html_quotes               = QUOTES_TAGS;
-   html_use_folders          = FALSE;
-   html_transparent_buttons  = FALSE;
-   html_use_hyphenation      = FALSE;
+   html_no_xlist = FALSE;
+   html_ignore_8bit = FALSE;
+   html_navigation_line = FALSE;
+   html_navigation_image = FALSE;
+   html_modern_layout = FALSE;
+   html_modern_alignment = ALIGN_CENT;
+   html_frames_layout = FALSE;
+   html_frames_noresize = FALSE;
+   html_frames_noborder = FALSE;
+   html_frames_noscroll = FALSE;
+   html_frames_alignment = ALIGN_CENT;
+   html_nodesize = 1;
+   html_quotes = QUOTES_TAGS;
+   html_button_alignment = ALIGN_CENT;
+   html_use_folders = FALSE;
+   html_transparent_buttons = FALSE;
+   html_use_hyphenation = FALSE;
    set_html_doctype(HTML_TRANS);
-   html_header_date          = FALSE;
-   html_header_date_zone[0]  = EOS;
-   html_header_links         = FALSE;
+   html_header_date = FALSE;
+   html_header_date_zone[0] = EOS;
+   html_header_links = FALSE;
    html_header_links_kind[0] = EOS;
    
-   sDocHtmlBackpage[0]       = EOS;
-   sDocHtmlPropfontName[0]   = EOS;
-   sDocHtmlPropfontSize[0]   = EOS;
+   sDocHtmlBackpage[0] = EOS;
+   sDocHtmlPropfontName[0] = EOS;
+   sDocHtmlPropfontSize[0] = EOS;
    sDocHtmlSwitchLanguage[0] = EOS;
-   iDocHtmlSwitchLanguage    = -1;
+   iDocHtmlSwitchLanguage = -1;
 
    image_alignment = ALIGN_LEFT;
    table_alignment = ALIGN_CENT;
-
    strcpy(sDocImgSuffix, ".gif");
    
-   sDocBackImage[0]         = EOS;
-   sDocStyle[0]             = EOS;
-   sDocScript[0]            = EOS;
-   sDocFavIcon[0]           = EOS;
+   sDocBackImage = 0;
+   sDocScript = 0;
+   sDocFavIcon = 0;
    sDocBackColor[0]         = EOS;
    sDocTextColor[0]         = EOS;
    sDocLinkColor[0]         = EOS;
    sDocAlinkColor[0]        = EOS;
    sDocVlinkColor[0]        = EOS;
    sDocVerbatimBackColor[0] = EOS;
-   sDocRawHeaderFilename[0] = EOS;
-   sDocRawFooterFilename[0] = EOS;
-   sDocWinPrefixID[0]       = EOS;
+   sDocRawHeaderFilename = 0;
+   sDocRawFooterFilename = 0;
+   sDocWinPrefixID[0] = EOS;
 
-   iTexVersion  = TEX_NONE;
-   iTexDPI      = 100;
-   cTexVerb     = VERB_C;
-   bTex2e       = TRUE;
+   iTexVersion = TEX_NONE;
+   iTexDPI = 100;
+   cTexVerb = VERB_C;
+   bTex2e = TRUE;
    bCalledIndex = TRUE; 
-   iDrcFlags    = 0;
+   iDrcFlags = 0;
 
-   iManPageLines  = 0;
+   iManPageLines = 0;
    iManPageLength = 0;
-   iManPagePages  = 0;
+   iManPagePages = 0;
    sDocManType[0] = EOS;
 
-   bDocSloppy          = FALSE;
-   bDocAutorefOff      = FALSE;
+   bDocSloppy = FALSE;
+   bDocAutorefOff = FALSE;
    bDocAutorefItemsOff = FALSE;
 
-   bDocInlineBitmaps     = FALSE;
-   iDocCharwidth         = 150;
-   bDocHighCompression   = FALSE;
+   bDocInlineBitmaps = FALSE;
+   iDocCharwidth = 150;
+   bDocHighCompression = FALSE;
    bDocMediumCompression = FALSE;
-   bDocNoTables          = FALSE;
-   bDocRtfKeepTablesOn   = FALSE;
-   bDocWinOldKeywords    = FALSE;
+   bDocNoTables = FALSE;
+   bDocRtfKeepTablesOn = FALSE;
+   bDocWinOldKeywords = FALSE;
 
-   sDocPropfont[0]     = EOS;
-   sDocMonofont[0]     = EOS;
+   sDocPropfont[0] = EOS;
+   sDocMonofont[0] = EOS;
    sDocPropfontSize[0] = EOS;
    sDocMonofontSize[0] = EOS;
 
@@ -16273,20 +16106,18 @@ GLOBAL void init_vars(void)
    uses_udolink = FALSE;
    uses_toplink = FALSE;
 
-   /*   ---------------------------------------------------- */
-   /*   Variablen fuer Compile-Zeit und Datum initialisieren */
-   /*   ---------------------------------------------------- */
-
+   /* ---------------------------------------------------- */
+   /* Variablen fuer Compile-Zeit und Datum initialisieren */
+   /* ---------------------------------------------------- */
    if (compile_date[0] == '\0')
    {
-      char   date[11] = __DATE__;
+      char date[11] = __DATE__;
 
       if (date[4] == ' ')
          date[4] = '0';
 
       sprintf(compile_date, "%c%c%c%c-%02i-%c%c", date[7], date[8], date[9], date[10], getMonth(date), date[4], date[5]);
    }
-   
    if (compile_time[0] == '\0')
    {
       strcpy(compile_time, __TIME__);
@@ -16309,101 +16140,96 @@ GLOBAL void init_vars(void)
 
 LOCAL void logfile_adjust(void)
 {
-   char   suff[MYFILE_SUFF_LEN + 1];  /* */
+   char suff[MYFILE_SUFF_LEN + 1];
+   char filename[MYFILE_FULL_LEN + 1];
 
    switch (desttype)
    {
    case TONRO:
       strcpy(suff, ".ul1");
       break;
-      
    case TOWH4:
       strcpy(suff, ".ul4");
       break;
-      
    case TOASC:
       strcpy(suff, ".ula");
       break;
-      
    case TOSRC:
       strcpy(suff, ".ulc");
       break;
-      
    case TODRC:
       strcpy(suff, ".uld");
       break;
-      
    case TOPDL:
       strcpy(suff, ".ulf");
       break;
-      
    case TOHPH:
-   case TOAMG:
       strcpy(suff, ".ulg");
       break;
-      
+   case TOAMG: /* Dupe! */
+      strcpy(suff, ".ulg");
+      break;
    case TOHTM:
-   case TOHAH:
-   case TOMHH:
       strcpy(suff, ".ulh");
       break;
-      
+   case TOHAH: /* Dupe! */
+      strcpy(suff, ".ulh");
+      break;
+   case TOMHH: /* Dupe! */
+      strcpy(suff, ".ulh");
+      break;
    case TOINF:
-   case TOIPF:
       strcpy(suff, ".uli");
       break;
-      
+   case TOIPF: /* Dupe! */
+      strcpy(suff, ".uli");
+      break;
    case TOLYX:
       strcpy(suff, ".ull");
       break;
-      
    case TOMAN:
       strcpy(suff, ".ulm");
       break;
-      
    case TOPCH:
-   case TOSRP:
-   case TOKPS:
       strcpy(suff, ".ulp");
       break;
-      
+   case TOSRP: /* Dupe! */
+      strcpy(suff, ".ulp");
+      break;
+   case TOKPS: /* Dupe! */
+      strcpy(suff, ".ulp");
+      break;
    case TOAQV:
       strcpy(suff, ".ulq");
       break;
-      
    case TORTF:
       strcpy(suff, ".ulr");
       break;
-      
    case TOSTG:
       strcpy(suff, ".uls");
       break;
-      
    case TOTEX:
       strcpy(suff, ".ult");
       break;
-      
    case TOUDO:
       strcpy(suff, ".ulu");
       break;
-      
    case TOTVH:
       strcpy(suff, ".ulv");
       break;
-      
    case TOWIN:
       strcpy(suff, ".ulw");
       break;
-      
    case TOLDS:
       strcpy(suff, ".ulx");
       break;
-      
    default:
       strcpy(suff, ".log");
+      break;
    }
 
-   sprintf(sLogfull, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, suff);
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, suff);
+   sLogfull = file_listadd(filename);
 }
 
 
@@ -16422,29 +16248,32 @@ LOCAL void logfile_adjust(void)
 
 GLOBAL void dest_special_adjust(void)
 {
+	char filename[MYFILE_FULL_LEN + 1];
+	
    /* -------------------------------------------------- */
    /* Endung und Dateinamen des Logfiles setzen */
    /* -------------------------------------------------- */
-   sLogfull[0] = EOS;
+   sLogfull = 0;
    logfile_adjust();
 
    /* -------------------------------------------------- */
    /* Endung des Treefiles setzen (wie logfile, nur 't') */
    /* -------------------------------------------------- */
-   strcpy(sTreefull, sLogfull);
-   sTreefull[strlen(sTreefull) - 2] = 't';
+   strcpy(filename, file_lookup(sLogfull));
+   filename[strlen(filename) - 2] = 't';
+   sTreefull = file_listadd(filename);
 
    /* -------------------------------------------------- */
    /* Endung des Indexfiles setzen (wie oben, nur 'x') */
    /* -------------------------------------------------- */
-   strcpy(sIdxfull, sLogfull);
-   sIdxfull[strlen(sIdxfull) - 2] = 'x';
+   strcpy(filename, file_lookup(sLogfull));
+   filename[strlen(filename) - 2] = 'x';
+   sIdxfull = file_listadd(filename);
    
    /* ------------------------------------------------- */
    /* Endung des Hypfiles setzen (wie logfile, nur 'h') */
    /* ------------------------------------------------- */
-   sHypfull[0] = EOS;
-   
+   sHypfull = 0;
    switch (desttype)
    {
    case TOASC:
@@ -16453,22 +16282,32 @@ GLOBAL void dest_special_adjust(void)
    case TOSTG:
    case TOAMG:
    case TOPCH:
-      strcpy(sHypfull, sLogfull);
-      sHypfull[strlen(sHypfull) - 2] = 'h';
+      strcpy(filename, file_lookup(sLogfull));
+      filename[strlen(filename) - 2] = 'h';
+      sHypfull = file_listadd(filename);
+      break;
    }
 
    /* -------------------------------------------------- */
    /* Restliche Dateinamen setzen */
    /* -------------------------------------------------- */
    
-   sprintf(sCmdfull,     "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".cmd");
-   sprintf(sMapNoSuff,   "%s%s%s",   outfile.driv, outfile.path, outfile.name);
-   sprintf(sHpjfull,     "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hpj");
-   sprintf(sCntfull,     "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".cnt");
-   sprintf(sHhpfull,     "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hhp");
-   sprintf(sHhcfull,     "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hhc");
-   sprintf(sHhkfull,     "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hhk");
-   sprintf(sUPRfull,     "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".upr");
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".cmd");
+   sCmdfull = file_listadd(filename);
+   sprintf(filename, "%s%s%s", outfile.driv, outfile.path, outfile.name);
+   sMapNoSuff = file_lookup(file_listadd(filename));
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hpj");
+   sHpjfull = file_listadd(filename);
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".cnt");
+   sCntfull = file_listadd(filename);
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hhp");
+   sHhpfull = file_listadd(filename);
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hhc");
+   sHhcfull = file_listadd(filename);
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".hhk");
+   sHhkfull = file_listadd(filename);
+   sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".upr");
+   sUPRfull = file_listadd(filename);
    sprintf(sGifHmFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_HM_NAME);
    sprintf(sGifUpFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_UP_NAME);
    sprintf(sGifLfFull,   "%s%s%s",   outfile.driv, outfile.path, GIF_LF_NAME);
@@ -16621,6 +16460,3 @@ GLOBAL void dest_adjust(void)
 
    dest_special_adjust();   
 }
-
-
-/* +++ EOF +++ */

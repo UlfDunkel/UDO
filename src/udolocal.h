@@ -230,7 +230,7 @@ LOCAL _BOOL pass1_check_everywhere_commands(void);
 LOCAL void pass1_check_environments(char *zeile);
 
    /* parse lines and create TOCs (pass 1) */
-LOCAL _BOOL pass1(char *datei);
+LOCAL _BOOL pass1(const char *datei);
 
    /* parse lines and convert them (pass 2) */
 LOCAL void output_verbatim_line(char *zeile);
@@ -238,7 +238,7 @@ LOCAL void output_linedraw_line(char *zeile);
 LOCAL void output_comment_line(char *zeile);
 LOCAL void c_comment(void);
 
-LOCAL _BOOL pass2 (char *datei);
+LOCAL _BOOL pass2 (const char *datei);
 
    /* create files for several target formats */
 LOCAL void save_pchelp_commandfile(void);
@@ -251,7 +251,7 @@ LOCAL void set_format_flags(void);
 
    /* more misc. */
 LOCAL void show_udo_intro(void);
-LOCAL _BOOL passU(char *datei);
+LOCAL _BOOL passU(const char *datei);
 
    /* set strings for target language */
 LOCAL void get_timestr(char *t);
@@ -274,7 +274,3 @@ LOCAL _BOOL check_modules_pass2(void);
 
    /* adjust file names and extensions */
 LOCAL void logfile_adjust(void);
-
-
-/* +++ EOF +++ */
-

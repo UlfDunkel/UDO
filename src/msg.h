@@ -124,7 +124,7 @@ GLOBAL void error_too_many_alias(void);
 GLOBAL void error_too_many_files(void);
 GLOBAL void error_replace_param(const char *s);
 GLOBAL void error_undefined_link(const char *l);
-GLOBAL void error_missing_endif(const char *s, const _UWORD l);
+GLOBAL void error_missing_endif(const char *s, FILE_LINENO line);
 GLOBAL void error_no_charset(const char *s);
 GLOBAL void error_node2_not_allowed(void);
 GLOBAL void error_node3_not_allowed(void);
@@ -136,10 +136,10 @@ GLOBAL void error_node6_not_allowed(void);
    /* --- warnings (tiny syntax errors) --- */
 
 GLOBAL void note_long_sourceline(void);
-GLOBAL void warning_long_destline(const char *s, const _UWORD lnr, const int ll);
+GLOBAL void warning_long_destline(const char *s, FILE_LINENO lnr, const int ll);
 
 GLOBAL void note_short_sourceline(const char *s);
-GLOBAL void warning_short_destline(const char *s, const _UWORD lnr, const int ll, const char *w);
+GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll, const char *w);
 
 GLOBAL void warning_cannot_recode(const char c, const char *scs, const char *dcs);
 GLOBAL void warning_cannot_recode_utf8(const char *utf, const char *dcs);

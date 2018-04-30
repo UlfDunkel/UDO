@@ -167,14 +167,13 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    _BOOL   appendix;                    /* TRUE = Steht im Anhang */
    int       toctype;                     /* !node, !subnode, !subsubnode, !subsubsubnode, !subsubsubsubnode */
                                           /* Filename der Sourcecodedatei */   /* V6.5.18 */
-   char      source_filename[MYFILE_FULL_LEN];
-   long      source_line;                 /* Zeile im Sourcecode ab der der Node beginnt */   /* V6.5.18 */
-   char      filename[MAX_FILENAME_LEN+1];/* HTML-Filename */   /* r5pl3 */
-   char      dirname[MAX_FILENAME_LEN+1]; /* HTML-Verzeichnisname */   /* r6pl6 */
+   FILE_LOCATION source_location;
+   char      filename[MAX_FILENAME_LEN+1];    /* HTML-Filename */
+   FILE_ID   dirname;                         /* HTML-Verzeichnisname */
    char     *keywords;                    /* HTML-Keywords */   /* r5pl3 */
    char     *description;                 /* HTML-Description */   /* r6pl5 */
    char     *robots;                      /* HTML-Robots */   /* V6.5.17 */
-   char     *counter_command;             /* HTML-Kommandos fuer Counter */   /* r5pl4 */
+   FILE_ID   counter_command;                 /* HTML-Kommandos fuer Counter */
    char      backcolor[MAX_COLOR_LEN+1];  /* HTML <BODY BGCOLOR=...> */   /* r6pl1 */
    char      textcolor[MAX_COLOR_LEN+1];  /* HTML <BODY TEXT=...> */   /* r6pl1 */
    char      linkcolor[MAX_COLOR_LEN+1];  /* HTML <BODY LINK=...> */   /* r6pl1 */
@@ -191,16 +190,10 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
                                           /* HTML <BODY VLINK=...> */   /* r6pl12 */
    char      modern_vlinkcolor[MAX_COLOR_LEN + 1];
                                           /* HTML <BODY BACKGROUND=...> */   /* r6pl1 */
-   char      backimage[MAX_IMAGE_LEN + 1];
-                                          /* HTML <style> r6pl15 [NHz] */
-   char      style_name[MAX_IMAGE_LEN + 1];
-                                          /* HTML < SCRIPT> r6pl15 [NHz] */
-   char      script_name[MAX_IMAGE_LEN + 1];
-                                          /* HTML < FAVICON> r6pl15 [NHz] */
-   char      favicon_name[MAX_IMAGE_LEN + 1];
-                                          /* HTML < bgsound> V6.5.20 [GS] */
-   char      bgsound[MYFILE_FULL_LEN + 1];
-
+   FILE_ID   backimage;                       /* HTML <BODY BACKGROUND=...> */
+   FILE_ID   script_name;                     /* HTML <SCRIPT> */
+   FILE_ID   favicon_name;                    /* HTML <FAVICON> */
+   FILE_ID   bgsound;                         /* HTML <bgsound> */
    char     *image;                       /* Grafik anstelle Kapitelnamen */
    _UWORD     uiImageWidth;                /* Breite und Hoehe des Bildes */ 
    _UWORD     uiImageHeight;
@@ -235,8 +228,8 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    _BOOL   ignore_headline;             /* don't create a header line */
    _BOOL   ignore_bottomline;           /* don't create a bottom line */
    _BOOL   ignore_footer;               /* don't create a footer line */
-   char     *raw_header_filename;         /* */
-   char     *raw_footer_filename;         /* */
+   FILE_ID   raw_header_filename;             /* file to include in header */
+   FILE_ID   raw_footer_filename;             /* file to include in footer */
    _BOOL   ignore_raw_header;           /* don't read user-defined header */
    _BOOL   ignore_raw_footer;           /* don't read user-defined footer */
    _BOOL   has_children;                /* TRUE: this node has subnode(s) */
