@@ -55,20 +55,6 @@
 
 /*******************************************************************************
 *
-*     INCLUDE FILES
-*
-******************************************|************************************/
-
-#ifndef __CONSTANT_H
-#include "constant.h"
-#endif
-
-
-
-
-
-/*******************************************************************************
-*
 *     MACRO DEFINITIONS
 *
 ******************************************|************************************/
@@ -271,6 +257,8 @@ GLOBAL int       p1_style_counter;        /* Zaehler */
 GLOBAL char     *html_frames_toc_title;
 GLOBAL char     *html_frames_con_title;
 
+GLOBAL _BOOL	stg_need_endnode;
+
 
 
 
@@ -288,6 +276,7 @@ GLOBAL void reset_refs(void);
 GLOBAL void auto_references(char *s, const _BOOL for_toc, const char *pic, const _UWORD uiWidth, const _UWORD uiHeight);
 
 GLOBAL void check_endnode(void);
+void stg_out_endnode(void);
 
 GLOBAL _BOOL check_output_raw_header(void);
 GLOBAL _BOOL check_output_raw_footer(_BOOL lastNode);

@@ -7467,13 +7467,10 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOSTG:
+      stg_out_endnode();
       set_inside_node(nodetype);
-      
       bInsidePopup = popup;
-      replace_2at_by_1at(name);
       node2stg(name);
-   
-      outln("");
       
       if (!do_index)
          outln("@indexoff");
@@ -7485,7 +7482,7 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
 
       if (!do_index)
          outln("@indexon");
-   
+      
       if (!popup)
       {
          switch (nodetype)
@@ -7533,21 +7530,15 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOAMG:
+      stg_out_endnode();
       set_inside_node(nodetype);
       
-      replace_2at_by_1at(name);
       node2stg(name);
-   
-      outln("");
       
       if (titleprogram[0] != EOS)
-      {
          voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
-      }
       else
-      {
          voutlnf("@node \"%s\" \"%s\"", name, name);
-      }
    
       switch (nodetype)
       {
@@ -12302,6 +12293,18 @@ LOCAL void output_appendix_line(void)
 *
 ******************************************|************************************/
 
+void stg_out_endnode(void)
+{
+	if (stg_need_endnode)
+	{
+      outln("@endnode");
+      outln("");
+      outln("");
+      stg_need_endnode = FALSE;
+	}
+}
+
+
 GLOBAL void c_tableofcontents(void)
 {
    char   name[256],
@@ -12406,8 +12409,8 @@ GLOBAL void c_tableofcontents(void)
 
    case TOSTG:
    case TOAMG:
-      outln("");
-      
+      stg_out_endnode();
+
       if (toc_title[0] != EOS)
       	n = toc_title;
       else
@@ -12444,8 +12447,13 @@ GLOBAL void c_tableofcontents(void)
          toc_output(TOC_NODE1, depth, TRUE);
       }
       
+#if 0
+		/* no @endnode here, so the user can add raw cmds to TOC page */
       outln("@endnode");
       outln("");
+      outln("");
+#endif
+	  stg_need_endnode = TRUE;
       break;
 
    case TOTVH:
@@ -16573,6 +16581,8 @@ GLOBAL void init_module_toc(void)
 #if USE_NAME_HASH
    memset(hash, 0, sizeof(hash));
 #endif
+   
+   stg_need_endnode = FALSE;
 }
 
 

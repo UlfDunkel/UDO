@@ -81,7 +81,6 @@
 #include "file.h"
 #include "img.h"
 #include "msg.h"
-#include "par.h"
 #include "str.h"
 #include "sty.h"
 #include "toc.h"
@@ -1421,7 +1420,7 @@ GLOBAL void c_maketitle(void)
       break;
 
    case TOSTG:
-      outln("");
+      stg_out_endnode();
       voutlnf("@node \"%s\"", lang.title);
       stg_headline("", lang.title);
       outln("");
@@ -1519,12 +1518,17 @@ GLOBAL void c_maketitle(void)
          outlncenter(lang.contents);
       }
       
+#if 0
+		/* no @endnode here, so the user can add raw cmds to title page */
       outln("@endnode");
       outln("");
+      outln("");
+#endif
+	  stg_need_endnode = TRUE;
       break;
 
    case TOAMG:
-      outln("");
+      stg_out_endnode();
       voutlnf("@node \"%s\" \"%s\"", lang.title, titleprogram);
       stg_headline("", lang.title);
       outln("");
@@ -1598,8 +1602,13 @@ GLOBAL void c_maketitle(void)
          outlncenter(lang.contents);
       }
       
+#if 0
+		/* no @endnode here, so the user can add raw cmds to title page */
       outln("@endnode");
       outln("");
+      outln("");
+#endif
+	  stg_need_endnode = TRUE;
       break;
 
    case TOPCH:
