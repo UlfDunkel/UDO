@@ -283,7 +283,7 @@ GLOBAL _BOOL check_output_raw_footer(_BOOL lastNode);
 
 GLOBAL void man_headline(void);
 GLOBAL void man_bottomline(void);
-GLOBAL void stg_headline(const char *numbers, const char *nodename);
+GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup);
 GLOBAL void tvh_headline(const char *s);
 GLOBAL void output_html_header(const char *t);
 GLOBAL void html_save_frameset(void);

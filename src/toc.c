@@ -391,8 +391,6 @@ LOCAL void stg_header(const char *numbers, const char *nodename, _BOOL is_popup)
 LOCAL void pch_headline(char *s);
    /* output bottomline for PC-HELP */
 LOCAL void pch_bottomline(void);
-   /* output header for PC-HELP */
-LOCAL void output_pch_header(const char *numbers, const char *name);
 
    /* output bottomline for Turbo-Vision-Help */
 LOCAL void tvh_bottomline(void);
@@ -449,7 +447,7 @@ LOCAL void toc_output(int nodetype, const int depth, _BOOL apx);
    /* wrapper for toc_output() */
 LOCAL void do_toc(int nodetype, const int depth);
    /* outputs the breadcrumb navigation links for the current chapter */
-LOCAL void do_toptoc(const int current_node);
+LOCAL void do_toptoc(const int current_node, _BOOL popup);
    /* get the user-defined TOC depth, set by the !depth command */
 LOCAL int get_toccmd_depth(void);
    /* initialize a new TOC entry */
@@ -1922,20 +1920,16 @@ GLOBAL void man_bottomline(void)
 *
 ******************************************|************************************/
 
-GLOBAL void stg_headline(
-
-const char  *numbers,      /* */
-const char  *nodename)     /* */
+GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
 {
-   char      n[512],       /* */
-             s[512];       /* */
-   size_t    i,            /* counter */
-             sooft,        /* */
-             platz_links,  /* */
-             sl;           /* */
+   char      n[512],
+             s[512];
+   size_t    i,
+             sooft,
+             platz_links,
+             sl;
    
-   
-   do_toptoc(toc[p2_toc_counter]->toctype);
+   do_toptoc(toc[p2_toc_counter]->toctype, popup);
    
    if (no_headlines)
       return;
@@ -2030,7 +2024,7 @@ LOCAL void stg_header(const char *numbers, const char *nodename, _BOOL is_popup)
    }
    
    if (!is_popup)
-      stg_headline(numbers, nodename);
+      stg_headline(numbers, nodename, is_popup);
 }
 
 
@@ -2242,15 +2236,11 @@ LOCAL void pch_bottomline(void)
 *
 ******************************************|************************************/
 
-LOCAL void output_pch_header(
-
-const char       *numbers,  /* */
-const char       *name)     /* */
+LOCAL void output_pch_header(const char *numbers, const char *name, _BOOL popup)
 {
-   char           n[256],   /* */
-                  q[256];   /* */
-   int            start;    /* */
-   register int   i;        /* */
+   char    n[256], q[256];
+   int            start;
+   register int   i;
 
    
    outln("");
@@ -2303,7 +2293,7 @@ const char       *name)     /* */
    
    outln(")");
    
-   do_toptoc(toc[p2_toc_counter]->toctype);
+   do_toptoc(toc[p2_toc_counter]->toctype, popup);
    
    sprintf(n, "%s%s", numbers, name);
    pch_headline(n);
@@ -2316,7 +2306,7 @@ const char       *name)     /* */
 
 /*******************************************************************************
 *
-*  output_pch_header():
+*  tvh_headline():
 *     Headline fuer Turbo-Vision-Help
 *
 *  return:
@@ -2588,10 +2578,7 @@ const char  *name)     /* */
 *
 ******************************************|************************************/
 
-LOCAL void win_headline(
-
-char     *name,    /* */
-_BOOL   popup)   /* */
+LOCAL void win_headline(char *name, _BOOL popup)
 {
    char   n[512],  /* */
           fs[32];  /* */
@@ -2621,7 +2608,7 @@ _BOOL   popup)   /* */
    if (!popup)
       outln("\\keepn");
    
-   do_toptoc(toc[ti]->toctype);    /*r6pl5*/
+   do_toptoc(toc[ti]->toctype, popup);
    
    sprintf(fs, "\\fs%d", iDocPropfontSize + 14);
    
@@ -8203,7 +8190,7 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
       if (numbers[0] != EOS)
          strcat(numbers, " ");
          
-      output_pch_header(numbers, name);
+      output_pch_header(numbers, name, popup);
       break;
    
    
@@ -8302,7 +8289,7 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
          }
       }
    
-      do_toptoc(nodetype);
+      do_toptoc(nodetype, popup);
    
       if (!flag && !toc[ti]->ignore_title)
       {
@@ -11468,7 +11455,7 @@ const int   depth)     /* */
 *
 ******************************************|************************************/
 
-LOCAL void do_toptoc(const int currdepth)
+LOCAL void do_toptoc(const int currdepth, _BOOL popup)
 {
    char      s[512],
              sIndent[512],
@@ -11827,6 +11814,8 @@ LOCAL void do_toptoc(const int currdepth)
    case TOWIN:
    case TOWH4:
    case TOAQV:
+     if (popup)
+        return;
       if (currdepth == TOC_NODE1)
       {
          /* Hier muesste ein Verweis auf den ersten Node hin */
@@ -11875,6 +11864,8 @@ LOCAL void do_toptoc(const int currdepth)
    
    case TOSTG:
    case TOAMG:
+     if (popup)
+        return;
       if (currdepth >= TOC_NODE1 && uses_tableofcontents)
       {
          if (!no_images && !no_auto_toptocs_icons)
@@ -12436,7 +12427,7 @@ GLOBAL void c_tableofcontents(void)
          voutlnf("@toc \"%s\"", lang.title);
 
       output_helpid(0);
-      stg_headline("", lang.contents);
+      stg_headline("", lang.contents, FALSE);
 
       if (toc_available)
          toc_output(TOC_NODE1, depth, FALSE);

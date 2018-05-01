@@ -1422,7 +1422,7 @@ GLOBAL void c_maketitle(void)
    case TOSTG:
       stg_out_endnode();
       voutlnf("@node \"%s\"", lang.title);
-      stg_headline("", lang.title);
+      stg_headline("", lang.title, FALSE);
       outln("");
       outln("@autorefoff");
       
@@ -1530,7 +1530,7 @@ GLOBAL void c_maketitle(void)
    case TOAMG:
       stg_out_endnode();
       voutlnf("@node \"%s\" \"%s\"", lang.title, titleprogram);
-      stg_headline("", lang.title);
+      stg_headline("", lang.title, FALSE);
       outln("");
 
       if (has_title)
