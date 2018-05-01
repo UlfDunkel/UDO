@@ -3148,43 +3148,34 @@ LOCAL _BOOL html_make_file(void)
 *
 ******************************************|************************************/
 
-LOCAL void output_html_meta(
-
-_BOOL     keywords)             /* */
+LOCAL void output_html_meta(_BOOL keywords)
 {
-   int      ti = 0,               /* */
-            i,                    /* */
-            li,                   /* */
-            j,                    /* */
-            html_merge;           /* */
-   STYLE   *styleptr;             /* */
-   SCRIPT  *scriptptr;            /* */
-   char     s[512],               /* buffer for charset and label name */
-            htmlname[512],        /* */
-            sTarget[512] = "\0";  /* */
-   char     backpage[256],        /* */
-            href[256],            /* */
-            alt[256],             /* */
-           *tok;                  /* */
-   char     closer[8] = "\0";     /* single tag closer mark in XHTML */
+   int      ti = 0,
+            i,
+            li,
+            j,
+            html_merge;
+   STYLE  *styleptr;
+   char    s[512];               /* buffer for charset and label name */
+   char    htmlname[512],
+           sTarget[512] = "\0";
+   char    backpage[256],
+           href[256],
+           alt[256],
+          *tok;
 
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
                                           /* get right charset name */
    strcpy(s, chr_codepage_charset_name(iEncodingTarget));
-     
-
+   
    if (html_doctype != HTML5)
    {
-      voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, closer);
-      voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, closer);
-      voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", closer);
-      voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", closer);
+      voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, xhtml_closer);
+      voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, xhtml_closer);
+      voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", xhtml_closer);
+      voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", xhtml_closer);
    }
    else
-      voutlnf("<meta charset='%s'%s>", s, closer);
+      voutlnf("<meta charset='%s'%s>", s, xhtml_closer);
 
    /* New feature #0000054 in V6.5.2 [NHz] */
    if (html_header_date)
@@ -3236,16 +3227,16 @@ _BOOL     keywords)             /* */
       }
    
       voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\"%s>", 
-         iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone, closer);
+         iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone, xhtml_closer);
    }
 
    /* Changed in V6.5.5 [NHz] */
    voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s %s for %s\"%s>",
-      UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, closer);
+      UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, xhtml_closer);
 
    if (titdat.author != NULL)
    {
-      voutlnf("<meta name=\"Author\" content=\"%s\"%s>", titdat.author, closer);
+      voutlnf("<meta name=\"Author\" content=\"%s\"%s>", titdat.author, xhtml_closer);
    }
 
    if (keywords)
@@ -3256,7 +3247,7 @@ _BOOL     keywords)             /* */
       {
          if (toc[ti]->keywords != NULL)
          {
-            voutlnf("<meta name=\"Keywords\" content=\"%s\"%s>", toc[ti]->keywords, closer);
+            voutlnf("<meta name=\"Keywords\" content=\"%s\"%s>", toc[ti]->keywords, xhtml_closer);
          }
 
          /* New in V6.5.9 [NHz] */
@@ -3264,32 +3255,32 @@ _BOOL     keywords)             /* */
          {
             if (titdat.keywords != NULL)
             {
-               voutlnf("<meta name=\"Keywords\" content=\"%s\"%s>", titdat.keywords, closer);
+               voutlnf("<meta name=\"Keywords\" content=\"%s\"%s>", titdat.keywords, xhtml_closer);
             }
          }
 
          if (toc[ti]->description != NULL)
          {
-            voutlnf("<meta name=\"Description\" content=\"%s\"%s>", toc[ti]->description, closer);
+            voutlnf("<meta name=\"Description\" content=\"%s\"%s>", toc[ti]->description, xhtml_closer);
          }
          else                             /* New in V6.5.9 [NHz] [docinfo] */
          {
             if (titdat.description != NULL)
             {
-               voutlnf("<meta name=\"Description\" content=\"%s\"%s>", titdat.description, closer);
+               voutlnf("<meta name=\"Description\" content=\"%s\"%s>", titdat.description, xhtml_closer);
             }
          }
 
          /* New in V6.5.17 */
          if (toc[ti]->robots != NULL)
          {
-            voutlnf("<meta name=\"robots\" content=\"%s\"%s>", toc[ti]->robots, closer);
+            voutlnf("<meta name=\"robots\" content=\"%s\"%s>", toc[ti]->robots, xhtml_closer);
          }
          else
          {
             if (titdat.robots != NULL)
             {
-               voutlnf("<meta name=\"robots\" content=\"%s\"%s>", titdat.robots, closer);
+               voutlnf("<meta name=\"robots\" content=\"%s\"%s>", titdat.robots, xhtml_closer);
             }
          }
       }
@@ -3299,24 +3290,24 @@ _BOOL     keywords)             /* */
    if (titdat.contact_name != NULL)
    {
       if (html_doctype != HTML5)
-         voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.contact_name, closer);
+         voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.contact_name, xhtml_closer);
       
 	   if (titdat.contact_link == NULL)
       {
          if (html_doctype != HTML5)
-            voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
+            voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, xhtml_closer);
 
          /* New in r6pl16 [NHz] */
-         voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
+         voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, xhtml_closer);
       }
    }
    if (titdat.contact_link != NULL)
    {
       if (html_doctype != HTML5)
-         voutlnf("<link rev=\"made\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, closer);
+         voutlnf("<link rev=\"made\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, xhtml_closer);
 
       /* New in r6pl16 [NHz] */
-      voutlnf("<link rel=\"author\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, closer);
+      voutlnf("<link rel=\"author\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, xhtml_closer);
    }
 
    /* New in r6pl15 [NHz] */
@@ -3349,21 +3340,21 @@ _BOOL     keywords)             /* */
             if (strcmp(old_outfile.name, outfile.name) != 0)
             {
                voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\"%s>",
-                  old_outfile.name, outfile.suff, sTarget, lang.html_start, closer);
+                  old_outfile.name, outfile.suff, sTarget, lang.html_start, xhtml_closer);
 
                /* Special for CAB */
                voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  old_outfile.name, outfile.suff, sTarget, lang.html_start, closer);
+                  old_outfile.name, outfile.suff, sTarget, lang.html_start, xhtml_closer);
                
                if (uses_tableofcontents)
                {
                                           /* New in r6pl15 [NHz] */
                   voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\"%s>",
-                     old_outfile.name, outfile.suff, sTarget, lang.contents, closer);
+                     old_outfile.name, outfile.suff, sTarget, lang.contents, xhtml_closer);
 
                   /* Special for CAB */
                   voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\"%s>", 
-                     old_outfile.name, outfile.suff, sTarget, lang.contents, closer);
+                     old_outfile.name, outfile.suff, sTarget, lang.contents, xhtml_closer);
                }
             }
          }
@@ -3401,7 +3392,7 @@ _BOOL     keywords)             /* */
                strcpy(alt, href);
 
             /* Special for CAB */
-            voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\"%s>", href, alt, closer);
+            voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\"%s>", href, alt, xhtml_closer);
          }
 
          /* New in r6pl15 [NHz] */
@@ -3421,12 +3412,12 @@ _BOOL     keywords)             /* */
             if (strchr(htmlname, '.') != NULL)
             {
                voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, closer);
+                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
             }
             else
             {
                voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
             }
          }
 
@@ -3444,20 +3435,20 @@ _BOOL     keywords)             /* */
             if (strchr(htmlname, '.') != NULL)
             {
                voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, closer);
+                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
                
                /* Special for CAB */
                voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, closer);
+                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
             }
             else
             {
                voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\"%s>",
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
                
                /* Special for CAB */
                voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
             }
          }
 
@@ -3475,12 +3466,12 @@ _BOOL     keywords)             /* */
             if (strchr(htmlname, '.') != NULL)
             {
                voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, closer);
+                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
             }
             else
             {
                voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
             }
          }
          
@@ -3506,12 +3497,12 @@ _BOOL     keywords)             /* */
             if (strchr(htmlname, '.') != NULL)
             {
                voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\"%s>",
-                  html_name_prefix, htmlname, sTarget, s, closer);
+                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
             }
             else
             {
                voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\"%s>",
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
             }
          }
       }
@@ -3531,41 +3522,18 @@ _BOOL     keywords)             /* */
       if (strcmp(htmlname, outfile.name) != 0)
       {
          voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\"%s>",
-            htmlname, outfile.suff, sTarget, s, closer);
+            htmlname, outfile.suff, sTarget, s, xhtml_closer);
       }
    }
 
-   /* fd:2014-06-18: new */
-   /* Link for overall and file-related javascript files */
-
-   for (j = 1; j <= p1_script_counter; j++)
-   {
-      scriptptr = script[j];
-      
-      if (scriptptr->href != NULL && (scriptptr->tocindex == 0 || scriptptr->tocindex == p2_toc_counter))
-      {
-         char  this_script[512];  /* */
-         
-         strcpy(this_script, "<script type=\"text/javascript\" src=\"");
-         strcat(this_script, scriptptr->href);
-         strcat(this_script, "\"></script>");
-         
-         outln(this_script);
-      }
-   }
-
-   /* New in r6pl15 [NHz] */
    /* Link for overall and file-related stylesheet-file */
-   /* Changed in V6.5.9 [NHz] */
-
    for (j = 0; j < p1_style_counter; j++)
    {
       styleptr = style[j];
       
       if (styleptr->href != NULL && (styleptr->tocindex == 0 || styleptr->tocindex == p2_toc_counter))
       {
-         char  this_style[512];  /* */
-
+         char  this_style[512];
          
          strcpy(this_style, "<link rel=\"");
 
@@ -3587,7 +3555,7 @@ _BOOL     keywords)             /* */
             strcat(this_style, styleptr->title);
          }
          
-         strcat(this_style, "\">");       /* fd:20071114: tag closed */
+         strcat(this_style, "\">");
          outln(this_style);
       }
    }
@@ -3599,13 +3567,12 @@ _BOOL     keywords)             /* */
       outln("</script>");
    }
 
-   /* New in r6pl15 [NHz] */
    /* Link for overall FavIcon */
    if (sDocFavIcon != 0)
-      voutlnf("<link rel=\"shortcut icon\" href=\"%s\"%s>", file_lookup(sDocFavIcon), closer);
+      voutlnf("<link rel=\"shortcut icon\" href=\"%s\"%s>", file_lookup(sDocFavIcon), xhtml_closer);
    
    if (toc[p2_toc_counter]->bgsound != 0)
-      voutlnf("<bgsound src=%s>", file_lookup(toc[p2_toc_counter]->bgsound));
+      voutlnf("<bgsound src=\"%s\">", file_lookup(toc[p2_toc_counter]->bgsound));
 }
 
 
@@ -3626,35 +3593,30 @@ LOCAL void output_html_doctype(void)
 {
    char   s[512];  /* buffer */
    
-                                          /* get right charset name */   
+                                          /* get right charset name */
    strcpy(s, chr_codepage_charset_name(iEncodingTarget));
    
-   switch (html_doctype)                  /* Changed in r6pl16 [NHz] */
+   switch (html_doctype)
    {
    case HTML_OLD:
       outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">");
       break;
-      
    case HTML_STRICT:
       outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"");
       outln("        \"http://www.w3.org/TR/html4/strict.dtd\">");
       break;
-      
    case HTML_TRANS:
       outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"");
       outln("        \"http://www.w3.org/TR/html4/loose.dtd\">");
       break;
-   
    case HTML5:
       outln("<!DOCTYPE HTML>");
       break;
-      
    case XHTML_STRICT:
       voutlnf("<?xml version=\"1.0\" encoding=\"%s\"?>", s);
       outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
       outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
       break;
-      
    case XHTML_TRANS:
       voutlnf("<?xml version=\"1.0\" encoding=\"%s\"?>", s);
       outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"");
@@ -3662,7 +3624,7 @@ LOCAL void output_html_doctype(void)
       break;
    }
    
-   if (html_header_date)                  /* fixed in v6.5.19 */
+   if (html_header_date)
       voutlnf("<!-- last modified on %s -->", lang.short_today);
 }
 

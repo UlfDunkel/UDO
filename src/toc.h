@@ -138,15 +138,6 @@ typedef struct _label                     /* jump labels to be referenced */
 
 
 
-typedef struct _script                    /* javascript files */
-{
-   char   href[MAX_LABEL_LEN  + 1];       /* javascript file reference */
-   int    scriptindex;                    /* script[1]==1, script[2]==2 etc. */
-   int    tocindex;                       /* belongs to node "toc[tocindex]" */
-} SCRIPT;
-
-
-
 typedef struct _tocitem                   /* entries for the Table Of Contents (TOC) */
 {
    char      name[MAX_NODE_LEN + 1];      /* Der Eintrag selber */
@@ -277,11 +268,8 @@ GLOBAL int       p2_toc_counter;
 GLOBAL STYLE   **style;                   /* Array mit Zeigern auf Stylesheets */
 GLOBAL int       p1_style_counter;        /* Zaehler */
 
-GLOBAL SCRIPT   *script[MAXSCRIPTS];      /* ^ array for javascript files */
-GLOBAL int       p1_script_counter;       /* counter */
-
-GLOBAL char     *html_frames_toc_title;   /* V6.5.16 [GS] */
-GLOBAL char     *html_frames_con_title;   /* V6.5.16 [GS] */
+GLOBAL char     *html_frames_toc_title;
+GLOBAL char     *html_frames_con_title;
 
 
 
@@ -315,6 +303,7 @@ GLOBAL void html_bottomline(void);
 GLOBAL void html_footer(void);
 GLOBAL _BOOL save_html_index(void);
 GLOBAL void add_pass1_index_udo(void);
+
 GLOBAL void hh_headline(void);
 GLOBAL void hh_bottomline(void);
 GLOBAL _BOOL save_htmlhelp_contents(const char* filename);
@@ -367,12 +356,9 @@ GLOBAL void c_end_node(void);
 
 GLOBAL void c_toc(void);
 GLOBAL void c_subtoc(void);
-/*   GLOBAL void c_subsubtoc(void); */
-/*   GLOBAL void c_subsubsubtoc(void); */
 
 GLOBAL void c_listoffigures(void);
 GLOBAL void c_listoftables(void);
-   /* outputs an auto-generated Table Of Contents */
 GLOBAL void c_tableofcontents(void);
 
 GLOBAL _BOOL bookmarks_ps(void);

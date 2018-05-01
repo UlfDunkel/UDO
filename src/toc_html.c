@@ -1087,60 +1087,39 @@ GLOBAL void set_html_style(void)
 
 GLOBAL void set_html_script(void)
 {
-   SCRIPT  *scriptptr;   /* */
-   char     sTemp[512];  /* */
-   int      i;           /* */
-   long     lang;        /* */
-   
-   
+   char sTemp[MYFILE_FULL_LEN + 3];
+   char filename[MYFILE_FULL_LEN + 1];
+   char *ptr;
+      
    if (!check_toc_and_counters())
       return;
 
-                                          /* list overflow? */
-   if (p1_script_counter + 1 >= MAXSCRIPTS)
+   if (token[1][0] == '\"')
    {
-      error_too_many_label();
-      return;
-   }
+      tokcpy2(sTemp, sizeof(sTemp));
+      ptr = strchr(sTemp + 1, '\"');      /* find second quote character (") */
 
-   scriptptr = (SCRIPT *)malloc(sizeof(SCRIPT) + 1);
-
-   if (scriptptr == NULL)                 /* no memory? */
-   {
-      return;
-   }
-
-   p1_script_counter++;
-   
-   script[p1_script_counter] = scriptptr;
-   
-   scriptptr->href[0] = EOS;
-
-   tokcpy2(sTemp, 512);
-
-   if (sTemp[0] == '\'')
-   {
-      lang = strcspn(sTemp + 1, "'");
-      strncpy(scriptptr->href, sTemp + 1, lang);
-      scriptptr->href[lang] = EOS;
-
-                                          /* always use / characters here! */
-      replace_char(scriptptr->href, '\\', '/');
-   }
-   else
-      strcpy(scriptptr->href, token[1]);
-
-   for (i = 1; i < p1_script_counter; i++) /* check if this CSS file has already been included */
-   {
-      if (!strcmp(scriptptr->href, script[i]->href))
+      if (ptr)
       {
-         p1_script_counter--;
-         return;
+         ptr[0] = EOS;
+         strcpy(filename, sTemp + 1);
+      }
+      else
+      {
+         strcpy(filename, sTemp);
       }
    }
+   else
+   {
+      strcpy(filename, token[1]);
+   }
 
-   scriptptr->scriptindex = p1_script_counter;
-   scriptptr->tocindex    = p1_toc_counter;
+   replace_char(filename, '\\', '/');
+
+   if (p1_toc_counter == 0)
+      sDocScript = file_listadd(filename);
+   else
+      toc[p1_toc_counter]->script_name = file_listadd(filename);
 }
 
 
