@@ -261,233 +261,221 @@ typedef struct _udocommand                /* ---- Funktionentabelle ---- */
    int         pos;                       /* possible postions (CMD_* above) */
 } UDOCOMMAND;
 
-
-
-typedef struct _udocolor                  /* colors (according to W3C HTML3.2 DTD */
-{
-   int    val;
-   const char  *name;
-   const char  *html;
-   const char  *drc;
-   const char  *wintext;
-   const char  *winback;
-   const char  *wh4back;
-}  UDOCOLOR;
-
 #define MAX_UDOCOLOR 17
 
 
 typedef struct _udocharset               /* list of encoding mnemonics */
 {
-   const char  *magic;                    /* encoding mnemonic */
-   int    codepage;                       /* relevant encoding # */
-}   UDOCHARSET;
+   const char *magic;                    /* encoding mnemonic */
+   int    codepage;                      /* relevant encoding # */
+} UDOCHARSET;
 
 
-UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
+LOCAL UDOCHARSET const udocharset[] =                 /* list of encoding mnemonics */
 {
-   {"sys",                 SYSTEM_CHARSET},
+   { "sys",                 SYSTEM_CHARSET},
 
-   {"utf-8",               CODE_UTF8     },
-   {"utf8",                CODE_UTF8     },
+   { "utf-8",               CODE_UTF8     },
+   { "utf8",                CODE_UTF8     },
    
-   {"cp1250",              CODE_CP1250   },
-   {"ms-ee",               CODE_CP1250   },
-   {"windows-1250",        CODE_CP1250   },
+   { "cp1250",              CODE_CP1250   },
+   { "ms-ee",               CODE_CP1250   },
+   { "windows-1250",        CODE_CP1250   },
    
-   {"cp1251",              CODE_CP1251   },
-   {"ms-cyrl",             CODE_CP1251   },
-   {"windows-1251",        CODE_CP1251   },
-   {"russian",             CODE_CP1251   },
+   { "cp1251",              CODE_CP1251   },
+   { "ms-cyrl",             CODE_CP1251   },
+   { "windows-1251",        CODE_CP1251   },
+   { "russian",             CODE_CP1251   },
    
-   {"cp1252",              CODE_CP1252   },
-   {"ms-ansi",             CODE_CP1252   },
-   {"windows-1252",        CODE_CP1252   },
-   {"WIN",                 CODE_CP1252   },
+   { "cp1252",              CODE_CP1252   },
+   { "ms-ansi",             CODE_CP1252   },
+   { "windows-1252",        CODE_CP1252   },
+   { "WIN",                 CODE_CP1252   },
+   { "iso",                 CODE_CP1252   }, /* Version 6.xx compatibility, deprecated */
 
-   {"cp1253",              CODE_CP1253   },
-   {"greek",               CODE_CP1253   },
-   {"ms-greek",            CODE_CP1253   },
-   {"windows-1253",        CODE_CP1253   },
+   { "cp1253",              CODE_CP1253   },
+   { "greek",               CODE_CP1253   },
+   { "ms-greek",            CODE_CP1253   },
+   { "windows-1253",        CODE_CP1253   },
    
-   {"CP1254",              CODE_CP1254   },
-   {"ms-turk",             CODE_CP1254   },
-   {"turkish",             CODE_CP1254   },
-   {"windows-1254",        CODE_CP1254   },
+   { "CP1254",              CODE_CP1254   },
+   { "ms-turk",             CODE_CP1254   },
+   { "turkish",             CODE_CP1254   },
+   { "windows-1254",        CODE_CP1254   },
 
-   {"cp1255",              CODE_CP1255   },
-   {"hebrew" ,             CODE_CP1255   },
-   {"ms-hebr",             CODE_CP1255   },
-   {"windows-1255",        CODE_CP1255   },
+   { "cp1255",              CODE_CP1255   },
+   { "hebrew" ,             CODE_CP1255   },
+   { "ms-hebr",             CODE_CP1255   },
+   { "windows-1255",        CODE_CP1255   },
 
-   {"cp1256",              CODE_CP1256   },
-   {"arabic" ,             CODE_CP1256   },
-   {"ms-arab",             CODE_CP1256   },
-   {"windows-1256",        CODE_CP1256   },
+   { "cp1256",              CODE_CP1256   },
+   { "arabic" ,             CODE_CP1256   },
+   { "ms-arab",             CODE_CP1256   },
+   { "windows-1256",        CODE_CP1256   },
 
-   {"cp1257",              CODE_CP1257   },
-   {"baltic",              CODE_CP1257   },
-   {"winbaltrim",          CODE_CP1257   },
-   {"windows-1257",        CODE_CP1257   },
+   { "cp1257",              CODE_CP1257   },
+   { "baltic",              CODE_CP1257   },
+   { "winbaltrim",          CODE_CP1257   },
+   { "windows-1257",        CODE_CP1257   },
 
-   {"cp1258",              CODE_CP1258   },
-   {"windows-1258",        CODE_CP1258   },
+   { "cp1258",              CODE_CP1258   },
+   { "windows-1258",        CODE_CP1258   },
 
-   {"iso-8859-1",          CODE_LATIN1   },
-   {"iso-ir-100",          CODE_LATIN1   },
-   {"iso8859-1",           CODE_LATIN1   },
-   {"iso_8859-1",          CODE_LATIN1   },
-   {"latin1",              CODE_LATIN1   },
-   {"l1",                  CODE_LATIN1   },
-   {"csisolatin1",         CODE_LATIN1   },
+   { "iso-8859-1",          CODE_LATIN1   }, /* beware: UDO6 used CP1252 here */
+   { "iso-ir-100",          CODE_LATIN1   },
+   { "iso8859-1",           CODE_LATIN1   },
+   { "iso_8859-1",          CODE_LATIN1   },
+   { "latin1",              CODE_LATIN1   }, /* beware: UDO6 used CP1252 here */
+   { "l1",                  CODE_LATIN1   },
+   { "csisolatin1",         CODE_LATIN1   },
    
-   {"iso-8859-2",          CODE_LATIN2   },
-   {"iso-ir-101",          CODE_LATIN2   },
-   {"iso8859-2",           CODE_LATIN2   },
-   {"iso_8859-2",          CODE_LATIN2   },
-   {"latin2",              CODE_LATIN2   },
-   {"l2",                  CODE_LATIN2   },
-   {"csisolatin2",         CODE_LATIN2   },
+   { "iso-8859-2",          CODE_LATIN2   },
+   { "iso-ir-101",          CODE_LATIN2   },
+   { "iso8859-2",           CODE_LATIN2   },
+   { "iso_8859-2",          CODE_LATIN2   },
+   { "latin2",              CODE_LATIN2   },
+   { "l2",                  CODE_LATIN2   },
+   { "csisolatin2",         CODE_LATIN2   },
    
-   {"iso-8859-3",          CODE_LATIN3   },
-   {"iso-ir-109",          CODE_LATIN3   },
-   {"iso8859-3",           CODE_LATIN3   },
-   {"iso_8859-3",          CODE_LATIN3   },
-   {"latin3",              CODE_LATIN3   },
-   {"l3",                  CODE_LATIN3   },
-   {"csisolatin3",         CODE_LATIN3   },
+   { "iso-8859-3",          CODE_LATIN3   },
+   { "iso-ir-109",          CODE_LATIN3   },
+   { "iso8859-3",           CODE_LATIN3   },
+   { "iso_8859-3",          CODE_LATIN3   },
+   { "latin3",              CODE_LATIN3   },
+   { "l3",                  CODE_LATIN3   },
+   { "csisolatin3",         CODE_LATIN3   },
    
-   {"iso-8859-4",          CODE_LATIN4   },
-   {"iso-ir-110",          CODE_LATIN4   },
-   {"iso8859-4",           CODE_LATIN4   },
-   {"iso_8859-4",          CODE_LATIN4   },
-   {"latin4",              CODE_LATIN4   },
-   {"l4",                  CODE_LATIN4   },
-   {"csisolatin4",         CODE_LATIN4   },
+   { "iso-8859-4",          CODE_LATIN4   },
+   { "iso-ir-110",          CODE_LATIN4   },
+   { "iso8859-4",           CODE_LATIN4   },
+   { "iso_8859-4",          CODE_LATIN4   },
+   { "latin4",              CODE_LATIN4   },
+   { "l4",                  CODE_LATIN4   },
+   { "csisolatin4",         CODE_LATIN4   },
    
-   {"iso-8859-5",          CODE_CYRILLIC },
-   {"iso-ir-144",          CODE_CYRILLIC },
-   {"iso8859-5",           CODE_CYRILLIC },
-   {"iso_8859-5",          CODE_CYRILLIC },
-   {"cyrillic",            CODE_CYRILLIC },
-   {"csisolatincyrillic",  CODE_CYRILLIC },
+   { "iso-8859-5",          CODE_CYRILLIC },
+   { "iso-ir-144",          CODE_CYRILLIC },
+   { "iso8859-5",           CODE_CYRILLIC },
+   { "iso_8859-5",          CODE_CYRILLIC },
+   { "cyrillic",            CODE_CYRILLIC },
+   { "csisolatincyrillic",  CODE_CYRILLIC },
    
-   {"iso-8859-6",          CODE_ARABIC   },
-   {"iso-ir-127",          CODE_ARABIC   },
-   {"iso8859-6",           CODE_ARABIC   },
-   {"iso_8859-6",          CODE_ARABIC   },
-   {"arabic",              CODE_ARABIC   },
-   {"csisolatinarabic",    CODE_ARABIC   },
-   {"asmo-708",            CODE_ARABIC   },
-   {"ecma-114",            CODE_ARABIC   },
+   { "iso-8859-6",          CODE_ARABIC   },
+   { "iso-ir-127",          CODE_ARABIC   },
+   { "iso8859-6",           CODE_ARABIC   },
+   { "iso_8859-6",          CODE_ARABIC   },
+   { "arabic",              CODE_ARABIC   },
+   { "csisolatinarabic",    CODE_ARABIC   },
+   { "asmo-708",            CODE_ARABIC   },
+   { "ecma-114",            CODE_ARABIC   },
    
-   {"iso-8859-7",          CODE_GREEK    },
-   {"iso-ir-126",          CODE_GREEK    },
-   {"iso8859-7",           CODE_GREEK    },
-   {"iso_8859-7",          CODE_GREEK    },
-   {"greek",               CODE_GREEK    },
-   {"greek8",              CODE_GREEK    },
-   {"csisolatingreek",     CODE_GREEK    },
-   {"ecma-118",            CODE_GREEK    },
-   {"elot_928",            CODE_GREEK    },
+   { "iso-8859-7",          CODE_GREEK    },
+   { "iso-ir-126",          CODE_GREEK    },
+   { "iso8859-7",           CODE_GREEK    },
+   { "iso_8859-7",          CODE_GREEK    },
+   { "greek",               CODE_GREEK    },
+   { "greek8",              CODE_GREEK    },
+   { "csisolatingreek",     CODE_GREEK    },
+   { "ecma-118",            CODE_GREEK    },
+   { "elot_928",            CODE_GREEK    },
    
-   {"iso-8859-8",          CODE_HEBREW   },
-   {"iso-ir-138",          CODE_HEBREW   },
-   {"iso8859-8",           CODE_HEBREW   },
-   {"iso_8859-8",          CODE_HEBREW   },
-   {"hebrew",              CODE_HEBREW   },
-   {"csisolatinhebrew",    CODE_HEBREW   },
+   { "iso-8859-8",          CODE_HEBREW   },
+   { "iso-ir-138",          CODE_HEBREW   },
+   { "iso8859-8",           CODE_HEBREW   },
+   { "iso_8859-8",          CODE_HEBREW   },
+   { "hebrew",              CODE_HEBREW   },
+   { "csisolatinhebrew",    CODE_HEBREW   },
    
-   {"iso-8859-9",          CODE_TURKISH  },
-   {"iso-ir-148",          CODE_TURKISH  },
-   {"iso8859-9",           CODE_TURKISH  },
-   {"iso_8859-9",          CODE_TURKISH  },
-   {"latin5",              CODE_TURKISH  },
-   {"l5",                  CODE_TURKISH  },
-   {"csisolatin5",         CODE_TURKISH  },
-   {"turkish",             CODE_TURKISH  },
+   { "iso-8859-9",          CODE_TURKISH  },
+   { "iso-ir-148",          CODE_TURKISH  },
+   { "iso8859-9",           CODE_TURKISH  },
+   { "iso_8859-9",          CODE_TURKISH  },
+   { "latin5",              CODE_TURKISH  },
+   { "l5",                  CODE_TURKISH  },
+   { "csisolatin5",         CODE_TURKISH  },
+   { "turkish",             CODE_TURKISH  },
    
-   {"iso-8859-10",         CODE_NORDIC   },
-   {"iso-ir-157",          CODE_NORDIC   },
-   {"iso8859-10",          CODE_NORDIC   },
-   {"iso_8859-10",         CODE_NORDIC   },
-   {"latin6",              CODE_NORDIC   },
-   {"l6",                  CODE_NORDIC   },
-   {"csisolatin6",         CODE_NORDIC   },
-   {"nordic",              CODE_NORDIC   },
+   { "iso-8859-10",         CODE_NORDIC   },
+   { "iso-ir-157",          CODE_NORDIC   },
+   { "iso8859-10",          CODE_NORDIC   },
+   { "iso_8859-10",         CODE_NORDIC   },
+   { "latin6",              CODE_NORDIC   },
+   { "l6",                  CODE_NORDIC   },
+   { "csisolatin6",         CODE_NORDIC   },
+   { "nordic",              CODE_NORDIC   },
    
-   {"iso-8859-11",         CODE_THAI     },
-   {"iso8859-11",          CODE_THAI     },
-   {"iso_8859-11",         CODE_THAI     },
-   {"thai",                CODE_THAI     },
+   { "iso-8859-11",         CODE_THAI     },
+   { "iso8859-11",          CODE_THAI     },
+   { "iso_8859-11",         CODE_THAI     },
+   { "thai",                CODE_THAI     },
    
-   {"iso-8859-13",         CODE_BALTIC   },
-   {"iso-ir-179",          CODE_BALTIC   },
-   {"iso8859-13",          CODE_BALTIC   },
-   {"iso_8859-13",         CODE_BALTIC   },
-   {"latin7",              CODE_BALTIC   },
-   {"l7",                  CODE_BALTIC   },
-   {"csisolatin7",         CODE_BALTIC   },
-   {"baltic",              CODE_BALTIC   },
+   { "iso-8859-13",         CODE_BALTIC   },
+   { "iso-ir-179",          CODE_BALTIC   },
+   { "iso8859-13",          CODE_BALTIC   },
+   { "iso_8859-13",         CODE_BALTIC   },
+   { "latin7",              CODE_BALTIC   },
+   { "l7",                  CODE_BALTIC   },
+   { "csisolatin7",         CODE_BALTIC   },
+   { "baltic",              CODE_BALTIC   },
    
-   {"iso-8859-14",         CODE_CELTIC   },
-   {"iso-ir-199",          CODE_CELTIC   },
-   {"iso8859-14",          CODE_CELTIC   },
-   {"iso_8859-14",         CODE_CELTIC   },
-   {"latin8",              CODE_CELTIC   },
-   {"l8",                  CODE_CELTIC   },
-   {"csisolatin8",         CODE_BALTIC   },
-   {"iso-celtic",          CODE_CELTIC   },
-   {"celtic",              CODE_CELTIC   },
+   { "iso-8859-14",         CODE_CELTIC   },
+   { "iso-ir-199",          CODE_CELTIC   },
+   { "iso8859-14",          CODE_CELTIC   },
+   { "iso_8859-14",         CODE_CELTIC   },
+   { "latin8",              CODE_CELTIC   },
+   { "l8",                  CODE_CELTIC   },
+   { "csisolatin8",         CODE_BALTIC   },
+   { "iso-celtic",          CODE_CELTIC   },
+   { "celtic",              CODE_CELTIC   },
    
-   {"iso-8859-15",         CODE_LATIN9   },
-   {"iso-ir-203",          CODE_LATIN9   },
-   {"iso8859-15",          CODE_LATIN9   },
-   {"iso_8859-15",         CODE_LATIN9   },
-   {"latin9",              CODE_LATIN9   },
-   {"l9",                  CODE_LATIN9   },
-   {"csisolatin9",         CODE_LATIN9   },
+   { "iso-8859-15",         CODE_LATIN9   },
+   { "iso-ir-203",          CODE_LATIN9   },
+   { "iso8859-15",          CODE_LATIN9   },
+   { "iso_8859-15",         CODE_LATIN9   },
+   { "latin9",              CODE_LATIN9   },
+   { "l9",                  CODE_LATIN9   },
+   { "csisolatin9",         CODE_LATIN9   },
    
-   {"iso-8859-16",         CODE_LATIN10  },
-   {"iso-ir-226",          CODE_LATIN10  },
-   {"iso8859-16",          CODE_LATIN10  },
-   {"iso_8859-16",         CODE_LATIN10  },
-   {"latin10",             CODE_LATIN10  },
-   {"l10",                 CODE_LATIN10  },
-   {"csisolatin10",        CODE_LATIN10  },
+   { "iso-8859-16",         CODE_LATIN10  },
+   { "iso-ir-226",          CODE_LATIN10  },
+   { "iso8859-16",          CODE_LATIN10  },
+   { "iso_8859-16",         CODE_LATIN10  },
+   { "latin10",             CODE_LATIN10  },
+   { "l10",                 CODE_LATIN10  },
+   { "csisolatin10",        CODE_LATIN10  },
    
-   {"mac",                 CODE_MAC      },
-   {"macintosh",           CODE_MAC      },
-   {"macroman",            CODE_MAC      },
-   {"csmacintosh",         CODE_MAC      },
+   { "mac",                 CODE_MAC      }, /* Version 6.xx compatibility, deprecated */
+   { "macintosh",           CODE_MAC      },
+   { "macroman",            CODE_MAC      },
+   { "csmacintosh",         CODE_MAC      },
    
-   {"mac_ce",              CODE_MAC_CE   },
-   {"maccentraleurope",    CODE_MAC_CE   },
+   { "mac_ce",              CODE_MAC_CE   },
+   { "maccentraleurope",    CODE_MAC_CE   },
    
-   {"tos",                 CODE_TOS      },
-   {"atari",               CODE_TOS      },
-   {"atarist",             CODE_TOS      },
+   { "tos",                 CODE_TOS      }, /* non-standard iconv name(s); iconv does not know about Atari codepage */
+   { "atari",               CODE_TOS      },
+   { "atarist",             CODE_TOS      },
    
-   {"437",                 CODE_437      },
-   {"cp437",               CODE_437      },
-   {"ibm437",              CODE_437      },
-   {"cspc8codepage437",    CODE_437      },
-   {"dos",                 CODE_437      },
+   { "437",                 CODE_437      },
+   { "cp437",               CODE_437      },
+   { "ibm437",              CODE_437      },
+   { "cspc8codepage437",    CODE_437      },
+   { "dos",                 CODE_437      }, /* Version 6.xx compatibility, deprecated */
    
-   {"850",                 CODE_850      },
-   {"cp850",               CODE_850      },
-   {"ibm850",              CODE_850      },
-   {"cspc850multilingual", CODE_850      },
-   {"os2",                 CODE_850      },
+   { "850",                 CODE_850      },
+   { "cp850",               CODE_850      },
+   { "ibm850",              CODE_850      },
+   { "cspc850multilingual", CODE_850      },
+   { "os2",                 CODE_850      }, /* Version 6.xx compatibility, deprecated */
    
-   {"hp8",                 CODE_HP8      },
-   {"hp-roman8",           CODE_HP8      },
-   {"r8",                  CODE_HP8      },
-   {"roman8",              CODE_HP8      },
-   {"cshproman8",          CODE_HP8      },
+   { "hp8",                 CODE_HP8      }, /* Version 6.xx compatibility, deprecated */
+   { "hp-roman8",           CODE_HP8      },
+   { "r8",                  CODE_HP8      },
+   { "roman8",              CODE_HP8      },
+   { "cshproman8",          CODE_HP8      },
    
-   {"next",                CODE_NEXT     },
-   {"nextstep",            CODE_NEXT     },
+   { "next",                CODE_NEXT     },
+   { "nextstep",            CODE_NEXT     },
    
    {"", -1}                              /* list terminator */
 };
@@ -502,26 +490,32 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
 *
 ******************************************|************************************/
 
-                                          /* WinHelp4 BGR -> dezimal */
-LOCAL UDOCOLOR udocolor[MAX_UDOCOLOR + 1] =
+/*
+ * Builtin color table for default text/background/linkcolor.
+ * The mnemonic are according to W3C HTML3.2 DTD,
+ * and should match the style commands, (!green) etc.
+ * For RTF output, the color numbers MUST match those written
+ * out to the \colortbl in env.c.
+ */
+UDOCOLOR const udocolor[MAX_UDOCOLOR] =
 {
-   {BC_BLACK,   "black",   "#000000", "\003@", "",      ",0,(0,0,0),(0,0,0)",             ",(r0),(r0)"              },
-   {BC_SILVER,  "silver",  "#C0C0C0", "\003G", "\\cf2", ",0,(192,192,192),(192,192,192)", ",(r12632256),(r12632256)"},
-   {BC_GRAY,    "gray",    "#808080", "\003H", "\\cf3", ",0,(128,128,128),(128,128,128)", ",(r8421504),(r8421504)"  },
-   {BC_WHITE,   "white",   "#FFFFFF", "\003O", "\\cf4", "",                               ""                        },
-   {BC_MAROON,  "maroon",  "#800000", "\003D", "\\cf5", ",0,(128,0,0),(128,0,0)",         ",(r128),(r128)"          },
-   {BC_RED,     "red",     "#FF0000", "\003L", "\\cf6", ",0,(255,0,0),(255,0,0)",         ",(r255),(r255)"          },
-   {BC_PURPLE,  "purple",  "#800080", "\003E", "\\cf7", ",0,(128,0,128),(128,0,128)",     ",(r8388736),(r8388736)"  },
-   {BC_FUCHSIA, "fuchsia", "#FF00FF", "\003M", "\\cf8", ",0,(255,0,255),(255,0,255)",     ",(r16711935),(r16711935)"},
-   {BC_GREEN,   "green",   "#008000", "\003B", "\\cf9", ",0,(0,128,0),(0,128,0)",         ",(r32768),(r32768)"      },
-   {BC_LIME,    "lime",    "#00FF00", "\003J", "\\cf10", ",0,(0,255,0),(0,255,0)",        ",(r65280),(r65280)"      },
-   {BC_OLIVE,   "olive",   "#808000", "\003J", "\\cf11", ",0,(128,128,0),(128,128,0)",    ",(r32896),(r32896)"      },
-   {BC_YELLOW,  "yellow",  "#FFFF00", "\003N", "\\cf12", ",0,(255,255,0),(255,255,0)",    ",(r65535),(r65535)"      },
-   {BC_NAVY,    "navy",    "#000080", "\003A", "\\cf13", ",0,(0,0,128),(0,0,128)",        ",(r8388608),(r8388608)"  },
-   {BC_BLUE,    "blue",    "#0000FF", "\003I", "\\cf14", ",0,(0,0,255),(0,0,255)",        ",(r16711680),(r16711680)"},
-   {BC_TEAL,    "teal",    "#008080", "\003B", "\\cf15", ",0,(0,128,128),(0,128,128)",    ",(r8421376),(r8421376)"  },
-   {BC_AQUA,    "aqua",    "#00FFFF", "\003C", "\\cf16", ",0,(0,255,255),(0,255,255)",    ",(r16776960),(r16776960)"},
-   {BC_NONE,    "none",    "",        "",      "",       "",                              ""                        },
+   { BC_BLACK,   "black",   { 0,   0,   0,   0 }, "\003@", "\\cf1" },
+   { BC_SILVER,  "silver",  { 0, 192, 192, 192 }, "\003G", "\\cf2" },
+   { BC_GRAY,    "gray",    { 0, 128, 128, 128 }, "\003H", "\\cf3" },
+   { BC_WHITE,   "white",   { 0, 255, 255, 255 }, "\003O", "\\cf4" },
+   { BC_MAROON,  "maroon",  { 0, 128,   0,   0 }, "\003D", "\\cf5" },
+   { BC_RED,     "red",     { 0, 255,   0,   0 }, "\003L", "\\cf6" },
+   { BC_PURPLE,  "purple",  { 0, 128,   0, 128 }, "\003E", "\\cf7" },
+   { BC_FUCHSIA, "fuchsia", { 0, 255,   0, 255 }, "\003M", "\\cf8" },
+   { BC_GREEN,   "green",   { 0,   0, 128,   0 }, "\003B", "\\cf9" },
+   { BC_LIME,    "lime",    { 0,   0, 255,   0 }, "\003J", "\\cf10" },
+   { BC_OLIVE,   "olive",   { 0, 128, 128,   0 }, "\003J", "\\cf11" },
+   { BC_YELLOW,  "yellow",  { 0, 255, 255,   0 }, "\003N", "\\cf12" },
+   { BC_NAVY,    "navy",    { 0,   0,   0, 128 }, "\003A", "\\cf13" },
+   { BC_BLUE,    "blue",    { 0,   0,   0, 255 }, "\003I", "\\cf14" },
+   { BC_TEAL,    "teal",    { 0,   0, 128, 128 }, "\003B", "\\cf15" },
+   { BC_AQUA,    "aqua",    { 0,   0, 255, 255 }, "\003C", "\\cf16" },
+   { BC_NONE,    "none",    { 0,   0,   0,   0 }, "",      "" }
 };
 
 
@@ -553,8 +547,7 @@ LOCAL _BOOL   use_output_buffer;        /* Erst puffern, dann ausgeben? */
 LOCAL char      timer_start[16];          /* Uhrzeiten fuer Start und Stopp */
 LOCAL char      timer_stop[16];
 
-                                          /* Ein Array mit Silben */
-LOCAL char      silbe[MAXSILBEN][MAX_TOKEN_LEN + 1];
+LOCAL char      silbe[MAXSILBEN][MAX_TOKEN_LEN + 1]; /* Ein Array mit Silben */
 LOCAL int       silben_counter;           /* Der passende Zaehler */
 
 LOCAL _BOOL   bHypSaved;
@@ -564,13 +557,13 @@ LOCAL _BOOL   bCmdSaved;
 LOCAL _BOOL   bHpjSaved;
 LOCAL _BOOL   bCntSaved;
 LOCAL _BOOL   bUPRSaved;
-LOCAL _BOOL   bMapSavedC, 
-                bMapSavedPas, 
-                bMapSavedVB, 
-                bMapSavedGFA;
-LOCAL _BOOL   bHhpSaved, 
-                bHhcSaved, 
-                bHhkSaved;
+LOCAL _BOOL   bMapSavedC;
+LOCAL _BOOL   bMapSavedPas;
+LOCAL _BOOL   bMapSavedVB;
+LOCAL _BOOL   bMapSavedGFA;
+LOCAL _BOOL   bHhpSaved;
+LOCAL _BOOL   bHhcSaved;
+LOCAL _BOOL   bHhkSaved;
 
 LOCAL int       iFilesOpened;             /* depth of !include stack */
 LOCAL struct {
@@ -745,7 +738,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!win_charwidth",                "",        c_win_charwidth,           TRUE,  CMD_ALWAYS },
    { "!wh4_charwidth",                "",        c_wh4_charwidth,           TRUE,  CMD_ALWAYS },
    { "!rtf_charwidth",                "",        c_rtf_charwidth,           TRUE,  CMD_ALWAYS },
-   { "!rtf_add_colour",               "",        c_rtf_add_colour,          TRUE,  CMD_ONLY_PREAMBLE },   /* in V6.5.9 [NHz] */
+   { "!rtf_add_colour",               "",        c_rtf_add_color,           TRUE,  CMD_ONLY_PREAMBLE },
    { "!rtf_keep_tables",              "",        c_rtf_keep_tables,         TRUE,  CMD_ALWAYS },
    { "!html_img_suffix",              "",        c_html_img_suffix,         TRUE,  CMD_ALWAYS },
    { "!html_nodesize",                "",        c_html_nodesize,           TRUE,  CMD_ALWAYS },
@@ -942,7 +935,7 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
 
 typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
 {
-   const char  *magic;                    /* UDO-Kommando */
+   const char *magic;                     /* UDO-Kommando */
    int    langval;                        /* zugehoerige Sprache */
 }  UDOLANGUAGE;
 
@@ -1011,9 +1004,7 @@ GLOBAL char compile_time[9]  = "\0";
 *
 ******************************************|************************************/
 
-GLOBAL void outln(
-
-const char  *s)  /* */
+GLOBAL void outln(const char *s)
 {
    if (desttype == TOMAN && iManPageLength > 0)
    {
@@ -1062,21 +1053,16 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void voutlnf(
-
-const char *fmt,  /* */
-            ...)  /* */
+GLOBAL void voutlnf(const char *fmt, ...)
 {
-   va_list  ap;   /* */
+   va_list ap;
 
-   
    if (!bTestmode)
    {
       va_start(ap, fmt);
       vfprintf(outfile.file, fmt, ap);
       va_end(ap);
    }
-   
    outln("");
 }
 
@@ -1097,15 +1083,12 @@ const char *fmt,  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void out(
-
-const char  *s)  /* */
+GLOBAL void out(const char *s)
 {
    if (!bTestmode)
    {
       fprintf(outfile.file, "%s", s);
    }
-   
    out_lf_needed = TRUE;
 }
 
@@ -1126,12 +1109,9 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void voutf(
-
-const char  *fmt,  /* */
-             ...)  /* */
+GLOBAL void voutf(const char *fmt, ...)
 {
-   va_list   ap;   /* */
+   va_list ap;
 
    if (!bTestmode)
    {
@@ -1139,7 +1119,6 @@ const char  *fmt,  /* */
       vfprintf(outfile.file, fmt, ap);
       va_end(ap);
    }
-   
    out_lf_needed = TRUE;
 }
 
@@ -1172,14 +1151,11 @@ const char  *fmt,  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void stringcenter(
-
-char       *string,  /* ^ original string */
-size_t      length)  /* length of centered string */
+GLOBAL void stringcenter(char *string, size_t length)
 {
-   char     s[256];  /* */
+   char  s[256];
    size_t   sl,      /* string length */
-            add;     /* */
+            add;     /* number of spaces to add */
 
    if (length >= sizeof(s))               /* avoid buffer overflow */
    {
@@ -1188,18 +1164,12 @@ size_t      length)  /* length of centered string */
    }
 
    sl = toklen(string);                   /* get real length of string */
-
    if (sl >= length)                      /* too long? */
       return;
    
    add = (length - sl) / 2;               /* compute additional space */
-   
-   memset(s, ' ', add + 1);               /* fill left part of buffer with spaces */
-
-   s[add + 1] = EOS;                      /* close C string buffer! */
-
+   memset(s, ' ', add);                   /* fill left part of buffer with spaces */
    strcpy(s + add, string);               /* add string to buffer (so it's centered) */
-   
    strcpy(string, s);                     /* return centered string */
 }
 
@@ -1220,16 +1190,12 @@ size_t      length)  /* length of centered string */
 *
 ******************************************|************************************/
 
-GLOBAL void strcenter(
-
-char       *string,  /* ^ original string */
-size_t      length)  /* length of centered string */
+GLOBAL void strcenter(char *string, size_t length)
 {
-   char     s[256];  /* */
+   char  s[256];
    size_t   sl,      /* string length */
-            add;     /* */
-            
-
+            add;     /* number of spaces to add */
+   
    if (length >= sizeof(s))               /* avoid buffer overflow */
    {
       warning_message(_("strcenter(): length must not exceed %d!"), (int)sizeof(s) - 1);
@@ -1237,7 +1203,7 @@ size_t      length)  /* length of centered string */
    }
 
    sl = toklen(string);                   /* get real length of string */
-
+   
    if (sl == length)                      /* nothing to do? */
       return;
    
@@ -1246,13 +1212,9 @@ size_t      length)  /* length of centered string */
       string[length] = EOS;               /* cut off string! */
       return;
    }
-
-   add = (length - sl) / 2;               /* compute additional space */
    
-   memset(s, ' ', add + 1);               /* fill left part of buffer with spaces */
-
-   s[add + 1] = EOS;                      /* close C string buffer! */
-
+   add = (length - sl) / 2;               /* compute additional space */
+   memset(s, ' ', add);                   /* fill left part of buffer with spaces */
    strcpy(s + add, string);               /* add string to buffer (so it's centered) */
    
    strcpy(string, s);                     /* return centered string */
@@ -1392,10 +1354,11 @@ LOCAL void strjustify(char *s, size_t len)
              j;
    _BOOL   is_verbed;
 
-   if (s[0] == ' ' || s[0] == EOS)        /* string starts with space or is empty? */
+   /* string starts with space or is empty? */
+   if (s[0] == ' ' || s[0] == EOS)
       return;
-
-   if (len > MAXBLANKPOS)                 /* string too long! */
+   
+   if (len > MAXBLANKPOS)
    {
       warning_message(_("strjustify(): string must not be longer than %d characters"), MAXBLANKPOS - 1);
       return;
@@ -1409,9 +1372,9 @@ LOCAL void strjustify(char *s, size_t len)
    sl = strlen(s);
 
    count = -1;
-
+   
    is_verbed = styleflag.verbatim;
-
+   
    for (i = 0; i < sl; i++)
    {
       if (!is_verbed)                     /* Nur die, die nicht in (!V)...(!v) stehen */
@@ -1422,7 +1385,7 @@ LOCAL void strjustify(char *s, size_t len)
             blankpos[count] = i;
          }
       }
-
+      
       if (s[i] == STYLEMAGIC[0] && s[i + 1] == STYLEMAGIC[1])
       {
          switch (s[i + 2])
@@ -1430,32 +1393,28 @@ LOCAL void strjustify(char *s, size_t len)
          case C_VERB_ON:
             is_verbed = TRUE;
             break;
-            
          case C_VERB_OFF:
             is_verbed = FALSE;
+            break;
          }
-         
          i += 4;
       }
    }
-
+   
    if (count < 0)
       return;
 
    if (justify_from_right)
    {
       pos = count;
-
       while (tl < len)
       {
          strinsert(s + blankpos[pos], " ");
          tl++;
-         
          for (j = pos; j <= count; j++)
             blankpos[j]++;
          
          pos--;
-         
          if (pos < 0)
             pos = count;
       }
@@ -1463,19 +1422,16 @@ LOCAL void strjustify(char *s, size_t len)
    else
    {
       pos = 0;
-      
       while (tl < len)
       {
          strinsert(s + blankpos[pos], " ");
          tl++;
-         
          for (j = pos; j <= count; j++)
             blankpos[j]++;
          
          pos++;
-         
          if (pos > count)
-            pos= 0;
+            pos = 0;
       }
    }
 
@@ -1496,18 +1452,13 @@ LOCAL void strjustify(char *s, size_t len)
 *
 ******************************************|************************************/
 
-GLOBAL void output_ascii_line(
-
-const char    *c,       /* das Zeichen, aus dem die Linie bestehen soll */
-const size_t   len)     /* die Laenge der Linie */
+GLOBAL void output_ascii_line(const char *c, const size_t len)
 {
-   char        s[512];  /* buffer */
-
+   char s[512];
    
-   memset(s, c[0], len);                  /* fill buffer with character */
-   s[len] = EOS;                          /* close C string! */
-   
-   outln(s);                              /* output */
+   memset(s, c[0], len);
+   s[len] = EOS;
+   outln(s);
 }
 
 
@@ -1569,13 +1520,10 @@ LOCAL void cmd_inside_preamble(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL str_for_destlang(
-
-const char       *s)             /* ^ token string */
+LOCAL _BOOL str_for_destlang(const char *s)
 {
    _BOOL        flag = FALSE;  /* return value */
-   register int   i;             /* counter */
-   
+   register int i;
 
    for (i = 0; i < MAXLANGUAGE; i++)
    {
@@ -1591,10 +1539,9 @@ const char       *s)             /* ^ token string */
 
    if (strstr(s, "all") != NULL)
       flag = TRUE;
-      
    if (strstr(s, "none") != NULL)
       flag = FALSE;
-
+   
    return flag;
 }
 
@@ -1613,34 +1560,32 @@ const char       *s)             /* ^ token string */
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL str_for_desttype(
-
-const char  *s)             /* ^ token string */
+GLOBAL _BOOL str_for_desttype(const char *s)
 {
    _BOOL   flag = FALSE;  /* return value */
 
-   switch (desttype)                      /* list sorted by token string! */
+   switch (desttype)
    {
    case TOAMG: flag = (strstr(s, "amg")   !=NULL); break;
    case TOAQV: flag = (strstr(s, "aqv")   !=NULL); break;
    case TOASC: flag = (strstr(s, "asc")   !=NULL); break;
    case TODRC: flag = (strstr(s, "drc")   !=NULL); break;
    case TOHAH: flag = (strstr(s, "hah")   !=NULL); break;
-   case TOMHH: flag = (strstr(s, "hh")    !=NULL); break;
    case TOHPH: flag = (strstr(s, "htag")  !=NULL); break;
    case TOHTM: flag = (strstr(s, "html")  !=NULL); break;
    case TOINF: flag = (strstr(s, "info")  !=NULL); break;
    case TOIPF: flag = (strstr(s, "ipf")   !=NULL); break;
+   case TOKPS: flag = (strstr(s, "ps")    !=NULL); break;
    case TOLDS: flag = (strstr(s, "ldoc")  !=NULL); break;
    case TOLYX: flag = (strstr(s, "lyx")   !=NULL); break;
    case TOMAN: flag = (strstr(s, "man")   !=NULL); break;
+   case TOMHH: flag = (strstr(s, "hh")    !=NULL); break;
    case TONRO: flag = (strstr(s, "nroff") !=NULL); break;
-   case TOSRP: flag = (strstr(s, "pas")   !=NULL); break;
    case TOPCH: flag = (strstr(s, "pch")   !=NULL); break;
    case TOPDL: flag = (strstr(s, "pdf")   !=NULL); break;
-   case TOKPS: flag = (strstr(s, "ps")    !=NULL); break;
    case TORTF: flag = (strstr(s, "rtf")   !=NULL); break;
    case TOSRC: flag = (strstr(s, "src")   !=NULL); break;
+   case TOSRP: flag = (strstr(s, "pas")   !=NULL); break;
    case TOSTG: flag = (strstr(s, "stg")   !=NULL); break;
    case TOTEX: flag = (strstr(s, "tex")   !=NULL); break;
    case TOTVH: flag = (strstr(s, "tvh")   !=NULL); break;
@@ -1651,10 +1596,9 @@ const char  *s)             /* ^ token string */
 
    if (strstr(s, "all") != NULL)
       flag = TRUE;
-      
    if (strstr(s, "none") != NULL)
       flag = FALSE;
-
+   
    return flag;
 }
 
@@ -1673,35 +1617,31 @@ const char  *s)             /* ^ token string */
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_for_desttype(
-
-_BOOL          *schalter,      /* */
-const char       *cmd)           /* */
+GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd)
 {
-   register int   i;             /* counter */
+   register int i;
    _BOOL        flag = FALSE;  /* return value */
    
-
-   if (token_counter <= 1)                /* at least TWO tokens expected */
+   if (token_counter <= 1)
    {
       error_missing_parameter(cmd);
    }
    else
    {
-      for (i = 0; i < token_counter; i++) /* check token */
+      for (i = 0; i < token_counter; i++)
       {
-         if ( (flag = str_for_desttype(token[i])) == TRUE)
+         if ((flag = str_for_desttype(token[i])) == TRUE)
             break;
       }
    }
 
    /* Problem: Default-Werte z.B. fuer Texinfo werden bei */
    /* !no_umlaute [asc] uberschrieben. Daher Schalter nur */
-   /* noch im positiven Falle setzen. (r5pl16) */
+   /* noch im positiven Falle setzen. */
 
    if (flag)
-      *schalter= TRUE;
-
+      *schalter = TRUE;
+   
    return flag;
 }
 
@@ -1720,12 +1660,9 @@ const char       *cmd)           /* */
 *
 ******************************************|************************************/
 
-LOCAL _BOOL str_for_os(
-
-const char  *s)     /* ^ token string */
+LOCAL _BOOL str_for_os(const char *s)
 {
    _BOOL   flag;  /* return value */
-
 
    flag = FALSE;
 
@@ -1802,27 +1739,45 @@ const char  *s)     /* ^ token string */
 ******************************************|************************************/
 
 
-LOCAL int get_color(void)
+LOCAL int find_color(const char *name)
 {
-   char           n[1024];  /* */
-   register int   i;        /* counter */
-
-
-   tokcpy2(n, 1024);
+   register int i;
 
    for (i = 0; i < MAX_UDOCOLOR; i++)
    {
-      if (strstr(n, udocolor[i].name) != NULL)
-      {
+      if (my_stricmp(name, udocolor[i].name) == 0)
          return i;
-      }
    }
 
-   return BC_WHITE;
+   error_message(_("unknown color: %s"), name);
+   return -1;
+}
+
+
+LOCAL int get_color(void)
+{
+   char n[1024];
+
+   tokcpy2(n, sizeof(n));
+   qdelete_once(n, "[", 1);
+   qdelete_last(n, "]", 1);
+
+   return find_color(n);
 }
 
 
 
+
+const char *html_color_string(const struct rgb *color)
+{
+	static char s[10];
+	
+	if (color->set)
+      	sprintf(s, "#%02x%02x%02x", color->r, color->g, color->b);
+	else
+		s[0] = '\0';
+	return s;
+}
 
 
 /*******************************************************************************
@@ -1835,29 +1790,51 @@ LOCAL int get_color(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL get_html_color(
-
-const char       *s,  /* */
-char             *h)  /* */
+GLOBAL _BOOL get_html_color(const char *s, struct rgb_and_color *rgb)
 {
-   register int   i;  /* counter */
+   int color;
 
-
-   h[0] = EOS;                            /* clear buffer */
-
-   for (i = 0; i < MAX_UDOCOLOR; i++)
-   {
-      if (strstr(s, udocolor[i].name) != NULL)
+	if ((color = find_color(s)) >= 0)
+	{
+      if (color != BC_NONE)
       {
-         strcpy(h, udocolor[i].html);
-         return TRUE;
+        rgb->rgb = udocolor[color].rgb;
+        rgb->rgb.set = TRUE;
+      } else
+      {
+        rgb->rgb.set = FALSE;
       }
+      rgb->color = color;
+      return TRUE;
    }
 
    return FALSE;
 }
 
 
+GLOBAL _BOOL get_html_color_or_rgb(const char *s, struct rgb_and_color *rgb)
+{
+   int r, g, b;
+   _BOOL ret;
+   struct rgb_and_color color;
+   
+   memset(&color, 0, sizeof(color));
+   if (s[0] == '#')
+   {
+      ret = sscanf(s, "#%02x%02x%02x", &r, &g, &b) == 3;
+      color.rgb.r = r;
+      color.rgb.g = g;
+      color.rgb.b = b;
+      color.rgb.set = ret;
+      color.color = 0;
+   }
+   else
+   {
+      ret = get_html_color(s, &color);
+   }
+   *rgb = color;
+	return ret;
+}
 
 
 
@@ -1871,24 +1848,14 @@ char             *h)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void get_drc_color(
-
-const char       *s,  /* */
-char             *h)  /* */
+LOCAL void get_drc_color(char *h)
 {
-   register int   i;  /* counter */
-
-
-   h[0] = EOS;                            /* clear buffer */
-
-   for (i = 0; i < MAX_UDOCOLOR; i++)
-   {
-      if (strstr(s, udocolor[i].name) != NULL)
-      {
-         strcpy(h, udocolor[i].drc);
-         return;
-      }
-   }
+   int color;
+   
+   h[0] = EOS;
+   if ((color = get_color()) >= 0)
+      if (color != BC_NONE)
+         strcpy(h, udocolor[color].drc);
 }
 
 
@@ -1907,11 +1874,7 @@ char             *h)  /* */
 
 LOCAL void c_drc_bcolor(void)
 {
-   char   color[256];  /* */
-
-
-   tokcpy2(color, 256);
-   get_drc_color(color, sDrcBcolor);
+   get_drc_color(sDrcBcolor);
 }
 
 
@@ -1930,11 +1893,7 @@ LOCAL void c_drc_bcolor(void)
 
 LOCAL void c_drc_icolor(void)
 {
-   char   color[256];  /* */
-
-
-   tokcpy2(color, 256);
-   get_drc_color(color, sDrcIcolor);
+   get_drc_color(sDrcIcolor);
 }
 
 
@@ -1953,10 +1912,7 @@ LOCAL void c_drc_icolor(void)
 
 LOCAL void c_drc_ucolor(void)
 {
-   char   color[256];  /* */
-
-   tokcpy2(color, 256);
-   get_drc_color(color, sDrcUcolor);
+   get_drc_color(sDrcUcolor);
 }
 
 
@@ -1975,10 +1931,9 @@ LOCAL void c_drc_ucolor(void)
 
 LOCAL void c_drc_flags(void)
 {
-   char   s[256];  /* */
-
-
-   tokcpy2(s, 256);
+   char s[256];
+   
+   tokcpy2(s, sizeof(s));
    iDrcFlags = atoi(s);
 
    if (iDrcFlags < 0 || iDrcFlags > 64)
@@ -1994,26 +1949,34 @@ LOCAL void c_drc_flags(void)
 /*******************************************************************************
 *
 *  set_win_backcolor():
-*     ??? (description missing)
+*     Copy to <s> the color definition used to define the background color
+*     in a Windows Help-Project file.
 *
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void set_win_backcolor(
-
-char       *s,  /* */
-const int   c)  /* */
+LOCAL void set_win_backcolor(struct rgb_and_color *color, int c)
 {
-   s[0] = EOS;
-
-   if (c >= 0 || c < MAX_UDOCOLOR)
-   {
-      strcpy(s, udocolor[c].winback);
-   }
+   color->color = c;
+   color->rgb = udocolor[color->color].rgb;
+   color->rgb.set = c != BC_NONE;
 }
 
+static const char *win_color_string(struct rgb_and_color *color)
+{
+    static char s[20];
+    s[0] = EOS;
+    if (color->rgb.set && color->color != BC_NONE)
+   {
+   	if (desttype == TOWH4)
+   	   sprintf(s, "(r%lu)", (((unsigned long)udocolor[color->color].rgb.g * 256LU) + udocolor[color->color].rgb.b) * 256LU + udocolor[color->color].rgb.r);
+   	else
+   		sprintf(s, "(%u,%u,%u)", udocolor[color->color].rgb.r, udocolor[color->color].rgb.g, udocolor[color->color].rgb.b);
+   }
+   return s;
+}
 
 
 
@@ -2021,132 +1984,18 @@ const int   c)  /* */
 /*******************************************************************************
 *
 *  set_win_textcolor():
-*     ??? (description missing)
+*     Copy to <s> the rtf command needed to switch to color <c>
 *
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void set_win_textcolor(
-
-char       *s,  /* */
-const int   c)  /* */
+LOCAL void set_win_textcolor(struct rgb_and_color *color, const int c)
 {
-   s[0] = EOS;
-
-   if (c >= 0 || c < MAX_UDOCOLOR)
-   {
-      strcpy(s, udocolor[c].wintext);
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_win_linkcolor():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_win_linkcolor(
-
-char       *s,  /* */
-const int   c)  /* */
-{
-   s[0] = EOS;
-
-   if (c >= 0 || c < MAX_UDOCOLOR)
-   {
-      strcpy(s, udocolor[c].wintext);
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_wh4_backcolor():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_wh4_backcolor(
-
-char       *s,  /* */
-const int   c)  /* */
-{
-   s[0] = EOS;
-
-   if (c >= 0 || c < MAX_UDOCOLOR)
-   {
-      strcpy(s, udocolor[c].wh4back);
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_wh4_textcolor():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_wh4_textcolor(
-
-char       *s,  /* */
-const int   c)  /* */
-{
-   s[0] = EOS;
-
-   if (c >= 0 || c < MAX_UDOCOLOR)
-   {
-      strcpy(s, udocolor[c].wintext);
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_wh4_linkcolor():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_wh4_linkcolor(
-
-char       *s,  /* */
-const int   c)  /* */
-{
-   s[0] = EOS;
-
-   if (c >= 0 || c < MAX_UDOCOLOR)
-   {
-      strcpy(s, udocolor[c].wintext);
-   }
+   color->color = c;
+   color->rgb = udocolor[color->color].rgb;
+   color->rgb.set = c != BC_NONE;
 }
 
 
@@ -2166,11 +2015,10 @@ const int   c)  /* */
 
 LOCAL _BOOL check_on(void)
 {
-   char   n[512];  /* */
+   char n[512];
    
-   
-   tokcpy2(n, 512);
-   return (strstr(n, "on") != NULL);
+   tokcpy2(n, sizeof(n));
+   return strstr(n, "on") != NULL;
 }
 
 
@@ -2195,6 +2043,7 @@ LOCAL _BOOL check_off(void)
    tokcpy2(n, sizeof(n));
    return strstr(n, "off") != NULL;
 }
+
 
 
 
@@ -2271,8 +2120,16 @@ GLOBAL void c_hline(void)
    case TOWIN:
    case TOWH4:
    case TOAQV:
+   case TORTF:
       strcpy_indent(n);
       voutlnf("%s\\sl30\\brdrt\\brdrs \\par\\pard\\par", n);
+      break;
+      
+   case TOTEX:
+   case TOPDL:
+      break;
+      
+   case TOLYX:
       break;
       
    case TOSTG:
@@ -2295,10 +2152,8 @@ GLOBAL void c_hline(void)
    case TOTVH:
       strcpy_indent(n);
       indent2space(n);
-      
       if (n[0] == EOS)
          strcpy(n, " ");
-      
       out(n);
       output_ascii_line("\304", zDocParwidth - strlen(n));
       outln("");
@@ -2315,6 +2170,7 @@ GLOBAL void c_hline(void)
       
    case TOKPS:
       outln("hline");
+      break;
    }
 }
 
@@ -2334,46 +2190,34 @@ GLOBAL void c_hline(void)
 *
 ******************************************|************************************/
 
-LOCAL int idxlist_compare(
-
-IDXLIST  *p,         /* */
-IDXLIST  *q)         /* */
+LOCAL int idxlist_compare(IDXLIST *p, IDXLIST *q)
 {
-   char   ps[1024],  /* */
-          qs[1024];  /* */
-          
-
+   char ps[3 * (128 + 2) + MAX_NODE_LEN + 1];
+   char qs[3 * (128 + 2) + MAX_NODE_LEN + 1];
+   
    ps[0] = EOS;
    qs[0] = EOS;
 
-   um_strcat(ps, p->idx[0], 1024, "idxlist_compare [1]");
-   um_strcat(ps, ", ",      1024, "idxlist_compare [2]");
-   
+   strcat(ps, p->idx[0]);
+   strcat(ps, ", ");
    if (p->depth > 0)
-      um_strcat(ps, p->idx[1], 1024, "idxlist_compare [3]");
-      
-   um_strcat(ps, ", ", 1024, "idxlist_compare [5]");
-   
+      strcat(ps, p->idx[1]);
+   strcat(ps, ", ");
    if (p->depth > 1)
-      um_strcat(ps, p->idx[2], 1024, "idxlist_compare [4]");
-      
-   um_strcat(ps, ", ",       1024, "idxlist_compare [6]");        
-   um_strcat(ps, p->chapter, 1024, "idxlist_compare [7]");
+      strcat(ps, p->idx[2]);
+   strcat(ps, ", ");
+   strcat(ps, p->chapter);
 
-   um_strcat(qs, q->idx[0], 1024, "idxlist_compare [8]");
-   um_strcat(qs, ", ",      1024, "idxlist_compare [9]");
-
+   strcat(qs, q->idx[0]);
+   strcat(qs, ", ");
    if (q->depth > 0)
-      um_strcat(qs, q->idx[1], 1024, "idxlist_compare [9]");
-   
-   um_strcat(qs, ", ", 1024, "idxlist_compare [11]");
-   
+      strcat(qs, q->idx[1]);
+   strcat(qs, ", ");
    if (q->depth > 1)
-      um_strcat(qs, q->idx[2], 1024, "idxlist_compare [10]");
+      strcat(qs, q->idx[2]);
+   strcat(qs, ", ");
+   strcat(qs, q->chapter);
    
-   um_strcat(qs, ", ",       1024, "idxlist_compare [12]");        
-   um_strcat(qs, q->chapter, 1024, "idxlist_compare [10]");
-
    return my_stricmp(ps, qs);
 }
 
@@ -2391,14 +2235,9 @@ IDXLIST  *q)         /* */
 *
 ******************************************|************************************/
 
-LOCAL IDXLIST *idxlist_merge(
-
-IDXLIST     *p,     /* */
-IDXLIST     *q)     /* */
+LOCAL IDXLIST *idxlist_merge(IDXLIST *p, IDXLIST *q)
 {
-   IDXLIST  *r,     /* */
-             head;  /* */
-             
+   IDXLIST *r, head;
 
    for (r = &head; p && q; )
    {
@@ -2415,7 +2254,6 @@ IDXLIST     *q)     /* */
    }
    
    r->next = (p ? p : q);
-   
    return head.next;
 }
 
@@ -5682,31 +5520,17 @@ LOCAL void c_rtf_keep_tables(void)
 
 LOCAL void c_verbatim_backcolor(void)
 {
-   char      color[256];  /* */
-   _BOOL   ret;         /* */
-
-
-   if (token[1][0] == EOS)                /* no parameter? */
+   _BOOL   ret;
+   struct rgb_and_color color;
+   
+   if (token[1][0] == EOS)
       return;
 
-   color[0] = EOS;
-
-   if (token[1][0] == '#')
-   {
-      um_strcpy(color, token[1], 256, "c_verbatim_backcolor[1]");
-      ret = TRUE;
-   }
-   else
-   {
-      ret = get_html_color(token[1], color);
-   }
+   ret = get_html_color_or_rgb(token[1], &color);
 
    if (ret)
    {
-      strcpy(sDocVerbatimBackColor, color);
-   }
-   else
-   {   error_unknown_color(token[1]);
+      sDocVerbatimBackColor = color;
    }
 }
 
@@ -6231,7 +6055,7 @@ LOCAL void c_rtf_charwidth(void)
 
 /*******************************************************************************
 *
-*  c_rtf_add_colour():
+*  c_rtf_add_color():
 *     add colors to RTF file header
 *
 *  return:
@@ -6239,7 +6063,7 @@ LOCAL void c_rtf_charwidth(void)
 *
 ******************************************|************************************/
 
-LOCAL void c_rtf_add_colour(void)
+LOCAL void c_rtf_add_color(void)
 {
    um_strncpy(sDocColour, token[1], 50, 512, "c_rtf_add_colour[1]");
 
@@ -11119,7 +10943,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 
 
 
-   /* --- spezielle Schalter --- */
+   /* spezielle Schalter */
 
    switch (desttype)
    {
@@ -11175,9 +10999,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
          bTex2e = FALSE; 
          return TRUE; 
       } 
-      
       break;
-
 
    case TOPDL:
       if (strncmp(token[0], "!pdf", 4) != 0)
@@ -11198,71 +11020,60 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
          bDocHighCompression = FALSE;
          return TRUE;
       }
-      
       break;
-
 
    case TOMAN:
       if (strcmp(token[0], "!man_lpp") == 0)
       {
          iManPageLength = atoi(token[1]);
-         
          if (iManPageLength < 0)
-         {
             iManPageLength = 0;
-         }
-         
          return TRUE;
       }
       
       if (strcmp(token[0], "!man_type") == 0)
       {
-         tokcpy2(sDocManType, 32);
+         tokcpy2(sDocManType, sizeof(sDocManType));
          return TRUE;
       }
-      
       break;
-
 
    case TONRO:
       if (strcmp(token[0], "!nroff_type") == 0)
       {
-         tokcpy2(sDocNroffType, 32);
+         tokcpy2(sDocNroffType, sizeof(sDocNroffType));
          return TRUE;
       }
-      
       break;
       
-
    case TODRC:
       if (strcmp(token[0], "!drc_flags") == 0)
-      {
          c_drc_flags();
-      }
-      
       break;
-
 
    case TOWIN:
    case TOAQV:
-      if (strcmp(token[0], "!win_backcolor") == 0)
+      if (strcmp(token[0], "!win_backcolor") == 0 ||
+          strcmp(token[0], "!win_background") == 0)
       {
-         c = get_color();
-         set_win_backcolor(sDocBackColor, c);
+         if ((c = get_color()) < 0)
+            c = BC_WHITE;
+         set_win_backcolor(&sDocBackColor, c);
          return TRUE;
       }
 
       if (strcmp(token[0], "!win_textcolor") == 0)
       {
-         c = get_color();
-         set_win_textcolor(sDocTextColor, c);
+         if ((c = get_color()) < 0)
+            c = BC_BLACK;
+         set_win_textcolor(&sDocTextColor, c);
          return TRUE;
       }
       
       if (strcmp(token[0], "!win_linkcolor") == 0)
       {
-         c = get_color();
-         set_win_linkcolor(sDocLinkColor, c);
+         if ((c = get_color()) >= 0)
+            set_win_textcolor(&sDocLinkColor, c);
          return TRUE;
       }
       
@@ -11288,32 +11099,25 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!win_propfont") == 0)
       {
-         tokcpy2(sDocPropfont, MAXZEILE + 1);
+         tokcpy2(sDocPropfont, sizeof(sDocPropfont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!win_monofont") == 0)
       {
-         tokcpy2(sDocMonofont, MAXZEILE + 1);
+         tokcpy2(sDocMonofont, sizeof(sDocMonofont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!win_propfont_size") == 0)
       {
-         tokcpy2(sDocPropfontSize, 16);
+         tokcpy2(sDocPropfontSize, sizeof(sDocPropfontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!win_monofont_size") == 0)
       {
-         tokcpy2(sDocMonofontSize, 16);
-         return TRUE;
-      }
-      
-      if (strcmp(token[0], "!win_background") == 0)
-      {
-         c = get_color();
-         set_win_backcolor(sDocBackColor, c);
+         tokcpy2(sDocMonofontSize, sizeof(sDocMonofontSize));
          return TRUE;
       }
       
@@ -11325,32 +11129,33 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!win_prefix_helpids") == 0)
       {
-         tokcpy2(sDocWinPrefixID, 64);
+         tokcpy2(sDocWinPrefixID, sizeof(sDocWinPrefixID));
          return TRUE;
       }
-      
       break;
 
-
    case TOWH4:
-      if (strcmp(token[0], "!wh4_backcolor") == 0)
+      if (strcmp(token[0], "!wh4_backcolor") == 0 ||
+          strcmp(token[0], "!wh4_background") == 0)
       {
-         c = get_color();
-         set_wh4_backcolor(sDocBackColor, c);
+         if ((c = get_color()) < 0)
+            c = BC_WHITE;
+         set_win_backcolor(&sDocBackColor, c);
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_textcolor") == 0)
       {
-         c = get_color();
-         set_wh4_textcolor(sDocTextColor, c);
+         if ((c = get_color()) < 0)
+            c = BC_BLACK;
+         set_win_textcolor(&sDocTextColor, c);
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_linkcolor") == 0)
       {
-         c = get_color();
-         set_wh4_linkcolor(sDocLinkColor, c);
+         if ((c = get_color()) >= 0)
+            set_win_textcolor(&sDocLinkColor, c);
          return TRUE;
       }
       
@@ -11376,32 +11181,25 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!wh4_propfont") == 0)
       {
-         tokcpy2(sDocPropfont, MAXZEILE + 1);
+         tokcpy2(sDocPropfont, sizeof(sDocPropfont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_monofont") == 0)
       {
-         tokcpy2(sDocMonofont, MAXZEILE + 1);
+         tokcpy2(sDocMonofont, sizeof(sDocMonofont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_propfont_size") == 0)
       {
-         tokcpy2(sDocPropfontSize, 16);
+         tokcpy2(sDocPropfontSize, sizeof(sDocPropfontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_monofont_size") == 0)
       {
-         tokcpy2(sDocMonofontSize, 16);
-         return TRUE;
-      }
-      
-      if (strcmp(token[0], "!wh4_background") == 0)
-      {
-         c = get_color();
-         set_win_backcolor(sDocBackColor, c);
+         tokcpy2(sDocMonofontSize, sizeof(sDocMonofontSize));
          return TRUE;
       }
       
@@ -11413,12 +11211,10 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!wh4_prefix_helpids") == 0)
       {
-         tokcpy2(sDocWinPrefixID, 64);
+         tokcpy2(sDocWinPrefixID, sizeof(sDocWinPrefixID));
          return TRUE;
       }
-      
       break;
-
 
    case TORTF:
       if (strcmp(token[0], "!rtf_no_tables") == 0)
@@ -11429,33 +11225,32 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!rtf_monofont") == 0)
       {
-         tokcpy2(sDocMonofont, MAXZEILE + 1);
+         tokcpy2(sDocMonofont, sizeof(sDocMonofont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!rtf_propfont") == 0)
       {
-         tokcpy2(sDocPropfont, MAXZEILE + 1);
+         tokcpy2(sDocPropfont, sizeof(sDocPropfont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!rtf_monofont_size") == 0)
       {
-         tokcpy2(sDocMonofontSize, 16);
+         tokcpy2(sDocMonofontSize, sizeof(sDocMonofontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!rtf_propfont_size") == 0)
       {
-         tokcpy2(sDocPropfontSize, 16);
+         tokcpy2(sDocPropfontSize, sizeof(sDocPropfontSize));
          return TRUE;
       }
-      
       break;
-
 
    case TOHAH:
    case TOHTM:
+   case TOMHH:
       if (strncmp(token[0], "!html", 5) != 0)
          return FALSE;
       
@@ -11522,7 +11317,6 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
          return TRUE;
       }
       
-                                          /* New V 6.5.20 [gs] */
       if (strcmp(token[0], "!html_navigation") == 0)
       {
          if (set_html_navigation())
@@ -11543,7 +11337,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!html_backpage") == 0)
       {
-         tokcpy2(sDocHtmlBackpage, 512);
+         tokcpy2(sDocHtmlBackpage, sizeof(sDocHtmlBackpage));
          return TRUE;
       }
       
@@ -11583,22 +11377,18 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
          return TRUE;
       }
       
-                                          /* Deleted in V6.5.9 [NHz] */
-/*    if (strcmp(token[0], "!html_style_name") == 0)
+      if (strcmp(token[0], "!html_style_name") == 0)
       {
          set_html_style();
          return TRUE;
       }
-*/
       
-/*
       if (strcmp(token[0], "!html_script_name") == 0)
       {
          set_html_script();
          return TRUE;
       }
-*/
-                                          /* New in r6pl15 [NHz] */
+      
       if (strcmp(token[0], "!html_favicon_name") == 0)
       {
          set_html_favicon();
@@ -11619,7 +11409,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!html_modern_backcolor") == 0)
       {
-         set_html_special_color(html_modern_backcolor);
+         set_html_special_color(&html_modern_backcolor);
          return TRUE;
       }
       
@@ -11649,31 +11439,31 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!html_frames_backcolor") == 0)
       {
-         set_html_special_color(html_frames_backcolor);
+         set_html_special_color(&html_frames_backcolor);
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_frames_textcolor") == 0)
       {
-         set_html_special_color(html_frames_textcolor);
+         set_html_special_color(&html_frames_textcolor);
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_frames_linkcolor") == 0)
       {
-         set_html_special_color(html_frames_linkcolor);
+         set_html_special_color(&html_frames_linkcolor);
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_frames_alinkcolor") == 0)
       {
-         set_html_special_color(html_frames_alinkcolor);
+         set_html_special_color(&html_frames_alinkcolor);
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_frames_vlinkcolor") == 0)
       {
-         set_html_special_color(html_frames_vlinkcolor);
+         set_html_special_color(&html_frames_vlinkcolor);
          return TRUE;
       }
       
@@ -11709,25 +11499,25 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!html_propfont_name") == 0)
       {
-         tokcpy2(sDocHtmlPropfontName, 64);
+         tokcpy2(sDocHtmlPropfontName, sizeof(sDocHtmlPropfontName));
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_propfont_size") == 0)
       {
-         tokcpy2(sDocHtmlPropfontSize, 16);
+         tokcpy2(sDocHtmlPropfontSize, sizeof(sDocHtmlPropfontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_monofont_name") == 0)
       {
-         tokcpy2(sDocHtmlMonofontName, 64);
+         tokcpy2(sDocHtmlMonofontName, sizeof(sDocHtmlMonofontName));
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_monofont_size") == 0)
       {
-         tokcpy2(sDocHtmlMonofontSize, 16);
+         tokcpy2(sDocHtmlMonofontSize, sizeof(sDocHtmlMonofontSize));
          return TRUE;
       }
       
@@ -11743,56 +11533,49 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
          return TRUE;
       }
       
-                                          /* New in r6pl16 [NHz] */
       if (strcmp(token[0], "!html_use_hyphenation") == 0)
       {
          html_use_hyphenation = TRUE;
          return TRUE;
       }
       
-                                          /* New in r6pl16 [NHz] */
       if (strcmp(token[0], "!html_doctype") == 0)
       {
          c_set_html_doctype();
          return TRUE;
       }
       
-                                          /* New feature #0000054 in V6.5.2 [NHz] */
       if (strcmp(token[0], "!html_header_date") == 0)
       {
          set_html_header_date();
          return TRUE;
       }
       
-                                          /* New feature #0000053 in V6.5.2 [NHz] */
       if (strcmp(token[0], "!html_header_links") == 0)
       {
          set_html_header_links();
          return TRUE;
       }
       
-                                          /* New in V6.5.9 [NHz] */
       if (strcmp(token[0], "!html_counter_command") == 0)
       {
          set_html_counter_command();
          return TRUE;
       }
       
-                                          /* New in V6.5.16 [GS] */
       if (strcmp(token[0], "!html_frames_toc_title") == 0)
       {
          set_html_frames_toc_title();
          return TRUE;
       }
       
-                                          /* New in V6.5.16 [GS] */
       if (strcmp(token[0], "!html_frames_con_title") == 0)
       {
          set_html_frames_con_title();
          return TRUE;
       }
-
-   }  /* switch */
+      break;
+   }
 
    return FALSE;
 }
@@ -11814,20 +11597,17 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 
 LOCAL _BOOL pass1_check_main_commands(void)
 {
-   /* --- spezielle Schalter (nur im Hauptteil erlaubt) --- */
+   /* spezielle Schalter (nur im Hauptteil erlaubt) */
 
    switch (desttype)
    {
    case TOMHH:
-                                          /* New in 6.5.10 [vj]: !html_name is read in HTML-Help output */
       if (strcmp(token[0], "!html_name") == 0)
       {
          set_html_filename();
          return TRUE;
       }
-      
       break;
-      
       
    case TOHAH:
    case TOHTM:
@@ -11839,44 +11619,37 @@ LOCAL _BOOL pass1_check_main_commands(void)
          set_html_filename();
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_dirname") == 0)
       {
          set_html_dirname();
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_keywords") == 0)
       {
          set_html_keywords();
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_description") == 0)
       {
          set_html_description();
          return TRUE;
       }
-      
-                                          /* New V 6.5.17 */
       if (strcmp(token[0], "!html_robots") == 0)
       {
          set_html_robots();
          return TRUE;
       }
-      
-                                          /* New V 6.5.20 [GS]*/
       if (strcmp(token[0], "!html_bgsound") == 0)
       {
          set_html_bgsound();
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_counter_command") == 0)
       {
          set_html_counter_command();
          return TRUE;
       }
+      break;
    }
 
    return FALSE;
@@ -11899,145 +11672,115 @@ LOCAL _BOOL pass1_check_main_commands(void)
 
 LOCAL _BOOL pass1_check_everywhere_commands(void)
 {
-   /* --- spezielle Schalter (ueberall erlaubt) --- */
+   /* spezielle Schalter (ueberall erlaubt) */
 
    switch (desttype)
    {
    case TOHAH:
    case TOHTM:
-      if (strncmp(token[0], "!html", 5) != 0)
-         return FALSE;
-      
       if (strcmp(token[0], "!html_img_suffix") == 0)
       {
          c_html_img_suffix();
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_backcolor") == 0)
       {
          set_html_color(HTML_COLOR_BACK);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_textcolor") == 0)
       {
          set_html_color(HTML_COLOR_TEXT);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_linkcolor") == 0)
       {
          set_html_color(HTML_COLOR_LINK);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_alinkcolor") == 0)
       {
          set_html_color(HTML_COLOR_ALINK);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_vlinkcolor") == 0)
       {
          set_html_color(HTML_COLOR_VLINK);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!html_backimage") == 0)
       {
          set_html_backimage();
          return TRUE;
       }
-      
-                                          /* Changed in V6.5.9 [NHz] [style] */
       if (strcmp(token[0], "!html_style_name") == 0)
       {
          set_html_style();
          return TRUE;
       }
-      
-                                          /* fd:2014-06-18: CMD_ALWAYS */
       if (strcmp(token[0], "!html_script_name") == 0)
       {
          set_html_script();
          return TRUE;
       }
-
       break;
 
-
    case TOMHH:
-      if (strncmp(token[0], "!hh", 3) != 0)
+      if (strcmp(token[0], "!hh_img_suffix") == 0)
       {
-         return FALSE;
+         c_html_img_suffix();
+         return TRUE;
       }
-
       if (strcmp(token[0], "!hh_backcolor") == 0)
       {
          set_html_color(HTML_COLOR_BACK);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!hh_textcolor") == 0)
       {
          set_html_color(HTML_COLOR_TEXT);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!hh_linkcolor") == 0)
       {
          set_html_color(HTML_COLOR_LINK);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!hh_alinkcolor") == 0)
       {
          set_html_color(HTML_COLOR_ALINK);
          return TRUE;
       }
-      
       if (strcmp(token[0], "!hh_vlinkcolor") == 0)
       {
          set_html_color(HTML_COLOR_VLINK);
          return TRUE;
       }
-      
-      if (strcmp(token[0], "!hh_backimage") == 0)
+      if (strcmp(token[0], "!html_style_name") == 0)
       {
-         set_html_backimage();
+         set_html_style();
          return TRUE;
       }
+      break;
       
-      break;                              /* fd:2010-01-29: break wasn't set until now?!? */
-      
-
    case TODRC:
-      if (strncmp(token[0], "!drc", 4) != 0)
-      {
-         return FALSE;
-      }
-      
       if (strcmp(token[0], "!drc_bcolor") == 0)
       {
          c_drc_bcolor();
          return TRUE;
       }
-      
       if (strcmp(token[0], "!drc_icolor") == 0)
       {
          c_drc_icolor();
          return TRUE;
       }
-      
       if (strcmp(token[0], "!drc_ucolor") == 0)
       {
          c_drc_ucolor();
          return TRUE;
       }
-      
-   }  /* switch */
-
+      break;
+   }
 
    return FALSE;
 }
@@ -12056,9 +11799,7 @@ LOCAL _BOOL pass1_check_everywhere_commands(void)
 *
 ******************************************|************************************/
 
-LOCAL void pass1_check_environments(
-
-char  *zeile)  /* */
+LOCAL void pass1_check_environments(char *zeile)
 {
                                           /* Verbatim-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_VERBATIM)
@@ -13892,8 +13633,8 @@ LOCAL void save_winhelp_project(void)
    }
 
    fprintf(hpjfile, "\n[WINDOWS]\n");
-   fprintf(hpjfile, "main=,(20,20,708,960)%s\n", sDocBackColor);
-   fprintf(hpjfile, "win1=\"UDO%s\",(200,200,800,800)%s\n", UDO_REL, sDocBackColor);
+   fprintf(hpjfile, "main=\"\",(20,20,708,960),0,%s,%s\n", win_color_string(&sDocBackColor), "(192,192,192)");
+   fprintf(hpjfile, "win1=\"UDO%s\",(573,71,437,500),0,(255,255,231),(192,192,192),1\n", UDO_REL);
 
    fprintf(hpjfile, "\n[FILES]\n");
    fprintf(hpjfile, "%s.rtf\n", outfile.name);
@@ -13903,9 +13644,9 @@ LOCAL void save_winhelp_project(void)
       fprintf(hpjfile, "\n[MAP]\n");
       fprintf(hpjfile, "#include <%s.hpc>\n", outfile.name);
    }
-
+   
    fclose(hpjfile);
-
+   
    bHpjSaved = TRUE;
 }
 
@@ -13925,7 +13666,7 @@ LOCAL void save_winhelp_project(void)
 
 LOCAL void save_winhelp4_project(void)
 {
-   FILE  *hpjfile;        /* */
+   FILE  *hpjfile;
    char   n[512],         /* */
           hlp_name[256 + 10];
 
@@ -14019,8 +13760,8 @@ LOCAL void save_winhelp4_project(void)
    }
 
    fprintf(hpjfile, "\n[WINDOWS]\n");
-   fprintf(hpjfile, "main=\"\",(20,20,540,880),0%s\n", sDocBackColor);
-   fprintf(hpjfile, "win1=\"UDO%s\",(573,71,437,462),4,(r15204351),(r15204351),1\n", UDO_REL);
+   fprintf(hpjfile, "main=\"\",(20,20,540,880),0,%s,%s\n", win_color_string(&sDocBackColor), "(r12632256)");
+   fprintf(hpjfile, "win1=\"UDO%s\",(573,71,437,500),4,(r15204351),(r12632256),1\n", UDO_REL);
 
    fprintf(hpjfile, "\n[FILES]\n");
    fprintf(hpjfile, "%s.rtf\n", outfile.name);
@@ -14028,11 +13769,11 @@ LOCAL void save_winhelp4_project(void)
    if (bUseIdMapFileC)
    {
       fprintf(hpjfile, "\n[MAP]\n");
-      fprintf(hpjfile, "#include <%s.hpc>\n", outfile.name);
+      fprintf(hpjfile, "#include \"%s.hpc\"\n", outfile.name);
    }
-
+   
    fclose(hpjfile);
-
+   
    bHpjSaved = TRUE;
 }
 
@@ -14052,21 +13793,20 @@ LOCAL void save_winhelp4_project(void)
 
 LOCAL void save_htmlhelp_project(void)
 {
-   FILE  *hhpfile;       /* */
-   char   sTitle[1024];  /* */
+   FILE  *hhpfile;
+   char   sTitle[1024];
 
    if (bTestmode)
       return;
 
    hhpfile = myFwopen(file_lookup(sHhpfull), FTHHP);
-
-   if (!hhpfile)
+   if (hhpfile == NULL)
       return;
 
    save_upr_entry_outfile(file_lookup(sHhpfull));
 
    fprintf(hhpfile, "[OPTIONS]\n");
-                                
+   
    strcpy(sTitle, titleprogram);          /* Windows-Umlaute benutzen, also nicht "titleprogram"! */
    recode_chrtab(sTitle,CHRTAB_HTML);
    
@@ -15571,16 +15311,17 @@ GLOBAL void init_udo_vars(void)
    sDocBackImage = 0;
    sDocScript = 0;
    sDocFavIcon = 0;
-   sDocBackColor[0]         = EOS;
-   sDocTextColor[0]         = EOS;
-   sDocLinkColor[0]         = EOS;
-   sDocAlinkColor[0]        = EOS;
-   sDocVlinkColor[0]        = EOS;
-   sDocVerbatimBackColor[0] = EOS;
+   sDocBackColor.rgb.set = FALSE;
+   sDocTextColor.rgb.set = FALSE;
+   sDocLinkColor.rgb.set = FALSE;
+   sDocAlinkColor.rgb.set = FALSE;
+   sDocVlinkColor.rgb.set = FALSE;
+   sDocVerbatimBackColor.rgb.set = FALSE;
    sDocRawHeaderFilename = 0;
    sDocRawFooterFilename = 0;
    sDocWinPrefixID[0] = EOS;
-
+   sCounterCommand = 0;
+   
    iTexVersion = TEX_NONE;
    iTexDPI = 100;
    cTexVerb = VERB_C;
@@ -15596,7 +15337,7 @@ GLOBAL void init_udo_vars(void)
    bDocSloppy = FALSE;
    bDocAutorefOff = FALSE;
    bDocAutorefItemsOff = FALSE;
-
+   
    bDocInlineBitmaps = FALSE;
    iDocCharwidth = 150;
    bDocHighCompression = FALSE;
@@ -15762,9 +15503,8 @@ GLOBAL void dest_special_adjust(void)
 	char filename[MYFILE_FULL_LEN + 1];
 	
    /* -------------------------------------------------- */
-   /* Endung und Dateinamen des Logfiles setzen */
+   /* Endung und Dateinamen des Logfiles setzen          */
    /* -------------------------------------------------- */
-   sLogfull = 0;
    logfile_adjust();
 
    /* -------------------------------------------------- */
@@ -15773,9 +15513,9 @@ GLOBAL void dest_special_adjust(void)
    strcpy(filename, file_lookup(sLogfull));
    filename[strlen(filename) - 2] = 't';
    sTreefull = file_listadd(filename);
-
+   
    /* -------------------------------------------------- */
-   /* Endung des Indexfiles setzen (wie oben, nur 'x') */
+   /* Endung des Indexfiles setzen (wie oben, nur 'x')   */
    /* -------------------------------------------------- */
    strcpy(filename, file_lookup(sLogfull));
    filename[strlen(filename) - 2] = 'x';
@@ -15800,9 +15540,8 @@ GLOBAL void dest_special_adjust(void)
    }
 
    /* -------------------------------------------------- */
-   /* Restliche Dateinamen setzen */
+   /* Restliche Dateinamen setzen                        */
    /* -------------------------------------------------- */
-   
    sprintf(filename, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".cmd");
    sCmdfull = file_listadd(filename);
    sprintf(filename, "%s%s%s", outfile.driv, outfile.path, outfile.name);
@@ -15883,39 +15622,39 @@ GLOBAL void dest_special_adjust(void)
 
 GLOBAL void dest_adjust(void)
 {
-   char   html_suff[12],   /* */
-          texi_suff[12],   /* */
-          sgml_suff[12],   /* */
-          guide_suff[12];  /* */
+   char   html_suff[12],
+          texi_suff[12],
+          sgml_suff[12],
+          guide_suff[12];
 
-#if   USE_LONG_FILENAMES
+#if USE_LONG_FILENAMES
    if (!bForceShort)
    {
-      strcpy(html_suff,  ".html");
-      strcpy(texi_suff,  ".texi");
-      strcpy(sgml_suff,  ".sgml");
+      strcpy(html_suff, ".html");
+      strcpy(texi_suff, ".texi");
+      strcpy(sgml_suff, ".sgml");
       strcpy(guide_suff, ".guide");
    }
    else
    {
-      strcpy(html_suff,  ".htm");
-      strcpy(texi_suff,  ".tex");
-      strcpy(sgml_suff,  ".sgm");
+      strcpy(html_suff, ".htm");
+      strcpy(texi_suff, ".tex");
+      strcpy(sgml_suff, ".sgm");
       strcpy(guide_suff, ".gui");
    }
 #else
    if (bForceLong)
    {
-      strcpy(html_suff,  ".html");
-      strcpy(texi_suff,  ".texi");
-      strcpy(sgml_suff,  ".sgml");
+      strcpy(html_suff, ".html");
+      strcpy(texi_suff, ".texi");
+      strcpy(sgml_suff, ".sgml");
       strcpy(guide_suff, ".guide");
    }
    else
    {
-      strcpy(html_suff,  ".htm");
-      strcpy(texi_suff,  ".tex");
-      strcpy(sgml_suff,  ".sgm");
+      strcpy(html_suff, ".htm");
+      strcpy(texi_suff, ".tex");
+      strcpy(sgml_suff, ".sgm");
       strcpy(guide_suff, ".gui");
    }
 #endif
@@ -15925,7 +15664,7 @@ GLOBAL void dest_adjust(void)
       strcpy(outfile.driv, infile.driv);
       strcpy(outfile.path, infile.path);
    }
-
+   
    if (!config.bDestAdjustSuff)
    {
       strcpy(outfile.name, infile.name);
@@ -15934,59 +15673,92 @@ GLOBAL void dest_adjust(void)
    switch (desttype)
    {
    case TOASC:
-      strcpy(outfile.suff, ".txt");      break;
+      strcpy(outfile.suff, ".txt");
+      break;
    case TODRC:
-      strcpy(outfile.suff, ".drc");      break;
+      strcpy(outfile.suff, ".drc");
+      break;
    case TOMAN:
-      strcpy(outfile.suff, ".man");      break;
+      strcpy(outfile.suff, ".man");
+      break;
    case TONRO:
-      strcpy(outfile.suff, ".1");        break;
+      strcpy(outfile.suff, ".1");
+      break;
    case TOSTG:
-      strcpy(outfile.suff, ".stg");      break;
+      strcpy(outfile.suff, ".stg");
+      break;
    case TOAMG:
-      strcpy(outfile.suff, guide_suff);  break;
+      strcpy(outfile.suff, guide_suff);
+      break;
    case TOTEX:
+      strcpy(outfile.suff, ".tex");
+      break;
    case TOPDL:
-      strcpy(outfile.suff, ".tex");      break;
+      strcpy(outfile.suff, ".tex");
+      break;
    case TOINF:
-      strcpy(outfile.suff, texi_suff);   break;
+      strcpy(outfile.suff, texi_suff);
+      break;
    case TOIPF:
-      strcpy(outfile.suff, ".ipf");      break;
+      strcpy(outfile.suff, ".ipf");
+      break;
    case TORTF:
+      strcpy(outfile.suff, ".rtf");
+      break;
    case TOAQV:
+      strcpy(outfile.suff, ".rtf");
+      break;
    case TOWIN:
+      strcpy(outfile.suff, ".rtf");
+      break;
    case TOWH4:
-      strcpy(outfile.suff, ".rtf");      break;
+      strcpy(outfile.suff, ".rtf");
+      break;
    case TOPCH:
-      strcpy(outfile.suff, ".scr");      break;
+      strcpy(outfile.suff, ".scr");
+      break;
    case TOTVH:
-      strcpy(outfile.suff, ".txt");      break;
+      strcpy(outfile.suff, ".txt");
+      break;
    case TOHAH:
+      strcpy(outfile.suff, html_suff);
+      break;
    case TOHTM:
+      strcpy(outfile.suff, html_suff);
+      break;
    case TOMHH:
-      strcpy(outfile.suff, html_suff);   break;
+      strcpy(outfile.suff, html_suff);
+      break;
    case TOLDS:
+      strcpy(outfile.suff, sgml_suff);
+      break;
    case TOHPH:
-      strcpy(outfile.suff, sgml_suff);   break;
+      strcpy(outfile.suff, sgml_suff);
+      break;
    case TOLYX:
-      strcpy(outfile.suff, ".lyx");      break;
+      strcpy(outfile.suff, ".lyx");
+      break;
    case TOSRC:
-      strcpy(outfile.suff, ".c");        break;
+      strcpy(outfile.suff, ".c");
+      break;
    case TOSRP:
-      strcpy(outfile.suff, ".pas");      break;
+      strcpy(outfile.suff, ".pas");
+      break;
    case TOUDO:
-      strcpy(outfile.suff, ".udo");      break;
+      strcpy(outfile.suff, ".udo");
+      break;
    case TOKPS:
-      strcpy(outfile.suff, ".ps");       break;
+      strcpy(outfile.suff, ".ps");
+      break;
    default:
       outfile.suff[0] = EOS;
+      break;
    }
 
    if (config.bDestLowerFile)
    {
       my_strlwr(outfile.name);
    }
-   
    if (config.bDestLowerPath)
    {
       my_strlwr(outfile.path);
@@ -15994,5 +15766,5 @@ GLOBAL void dest_adjust(void)
 
    sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
 
-   dest_special_adjust();   
+   dest_special_adjust();
 }

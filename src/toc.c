@@ -412,15 +412,12 @@ LOCAL void output_html_doctype(void);
 LOCAL _BOOL html_make_file(void);
    /*  */
 LOCAL _BOOL html_new_file(void);
-LOCAL void get_giflink_data(const int index, char *name, _UWORD *width, _UWORD *height);
 LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head);
    /* create and output HOME link for HTML navigation bar */
 LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head);
    /* create and output link to 'back page' for HTML navigation bar */
 LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep, _BOOL head);
    /* create and output HTML head and bottom bar lines */
-LOCAL void html_hb_line(_BOOL head);
-   /*  */
 LOCAL void html_node_bar_modern(void);
    /*  */
 LOCAL void html_node_bar_frames(void);
@@ -3736,29 +3733,29 @@ LOCAL _BOOL html_new_file(void)
          voutf(" background=\"%s\"", file_lookup(toc[p2_toc_counter]->backimage));
       }
       
-      if (toc[p2_toc_counter]->backcolor[0] != EOS)
+      if (toc[p2_toc_counter]->backcolor.set)
       {
-         voutf(" bgcolor=\"%s\"", toc[p2_toc_counter]->backcolor);
+         voutf(" bgcolor=\"%s\"", html_color_string(&toc[p2_toc_counter]->backcolor));
       }
       
-      if (toc[p2_toc_counter]->textcolor[0] != EOS)
+      if (toc[p2_toc_counter]->textcolor.set)
       {
-         voutf(" text=\"%s\"", toc[p2_toc_counter]->textcolor);
+         voutf(" text=\"%s\"", html_color_string(&toc[p2_toc_counter]->textcolor));
       }
       
-      if (toc[p2_toc_counter]->linkcolor[0] != EOS)
+      if (toc[p2_toc_counter]->linkcolor.set)
       {
-         voutf(" link=\"%s\"", toc[p2_toc_counter]->linkcolor);
+         voutf(" link=\"%s\"", html_color_string(&toc[p2_toc_counter]->linkcolor));
       }
       
-      if (toc[p2_toc_counter]->alinkcolor[0] != EOS)
+      if (toc[p2_toc_counter]->alinkcolor.set)
       {
-         voutf(" alink=\"%s\"", toc[p2_toc_counter]->alinkcolor);
+         voutf(" alink=\"%s\"", html_color_string(&toc[p2_toc_counter]->alinkcolor));
       }
       
-      if (toc[p2_toc_counter]->vlinkcolor[0] != EOS)
+      if (toc[p2_toc_counter]->vlinkcolor.set)
       {
-         voutf(" vlink=\"%s\"", toc[p2_toc_counter]->vlinkcolor);
+         voutf(" vlink=\"%s\"", html_color_string(&toc[p2_toc_counter]->vlinkcolor));
       }
       
       outln(">");
@@ -3854,34 +3851,33 @@ const char  *t)                 /* */
       }
    }
    
-   if (sDocBackColor[0] != EOS)
+   if (sDocBackColor.rgb.set)
    {
-      voutf(" bgcolor=\"%s\"", sDocBackColor);
+      voutf(" bgcolor=\"%s\"", html_color_string(&sDocBackColor.rgb));
    }
    
-   if (sDocTextColor[0] != EOS)
+   if (sDocTextColor.rgb.set)
    {
-      voutf(" text=\"%s\"", sDocTextColor);
+      voutf(" text=\"%s\"", html_color_string(&sDocTextColor.rgb));
    }
    
-   if (sDocLinkColor[0] != EOS)
+   if (sDocLinkColor.rgb.set)
    {
-      voutf(" link=\"%s\"", sDocLinkColor);
+      voutf(" link=\"%s\"", html_color_string(&sDocLinkColor.rgb));
    }
    
-   if (sDocAlinkColor[0] != EOS)
+   if (sDocAlinkColor.rgb.set)
    {
-      voutf(" alink=\"%s\"", sDocAlinkColor);
+      voutf(" alink=\"%s\"", html_color_string(&sDocAlinkColor.rgb));
    }
    
-   if (sDocVlinkColor[0] != EOS)
+   if (sDocVlinkColor.rgb.set)
    {
-      voutf(" vlink=\"%s\"", sDocVlinkColor);
+      voutf(" vlink=\"%s\"", html_color_string(&sDocVlinkColor.rgb));
    }
    
    voutlnf(">");
-   
-   check_output_raw_header();             /*r6pl10*/
+   check_output_raw_header();
    
    voutlnf("%s", sHtmlPropfontStart);
 }
@@ -3900,74 +3896,64 @@ const char  *t)                 /* */
 *
 ******************************************|************************************/
 
-LOCAL void get_giflink_data(
-
-const int   index,   /* */
-char       *name,    /* */
-_UWORD      *width,   /* */
-_UWORD      *height)  /* */
+LOCAL void get_giflink_data(const int index, const char **name, _UWORD *width, _UWORD *height)
 {
-   name[0] = EOS;                         /* clear name */
-   
-   *width  = *height = 0;
+   *width = *height = 0;
    
    switch (index)
    {
    case GIF_HM_INDEX:                     /* Home */
-      strcpy(name, GIF_HM_NAME);
-      *width  = uiGifHmWidth;
+      *name = GIF_HM_NAME;
+      *width = uiGifHmWidth;
       *height = uiGifHmHeight;
       break;
    case GIF_UP_INDEX:                     /* Up */
-      strcpy(name, GIF_UP_NAME);
-      *width  = uiGifUpWidth;
+      *name = GIF_UP_NAME;
+      *width = uiGifUpWidth;
       *height = uiGifUpHeight;
       break;
    case GIF_LF_INDEX:                     /* Left */
-      strcpy(name, GIF_LF_NAME);
-      *width  = uiGifLfWidth;
+      *name = GIF_LF_NAME;
+      *width = uiGifLfWidth;
       *height = uiGifLfHeight;
       break;
    case GIF_RG_INDEX:                     /* Right */
-      strcpy(name, GIF_RG_NAME);
-      *width  = uiGifRgWidth;
+      *name = GIF_RG_NAME;
+      *width = uiGifRgWidth;
       *height = uiGifRgHeight;
       break;
    case GIF_NOHM_INDEX:                   /* Home (disabled) */
-      strcpy(name, GIF_NOHM_NAME);
-      *width  = uiGifNoHmWidth;
+      *name = GIF_NOHM_NAME;
+      *width = uiGifNoHmWidth;
       *height = uiGifNoHmHeight;
       break;
    case GIF_NOUP_INDEX:                   /* Up (disabled) */
-      strcpy(name, GIF_NOUP_NAME);
-      *width  = uiGifNoUpWidth;
+      *name = GIF_NOUP_NAME;
+      *width = uiGifNoUpWidth;
       *height = uiGifNoUpHeight;
       break;
-   case GIF_NOLF_INDEX:                   /* LEft (disabled) */
-      strcpy(name, GIF_NOLF_NAME);
-      *width  = uiGifNoLfWidth;
+   case GIF_NOLF_INDEX:                   /* Left (disabled) */
+      *name = GIF_NOLF_NAME;
+      *width = uiGifNoLfWidth;
       *height = uiGifNoLfHeight;
       break;
    case GIF_NORG_INDEX:                   /* Right (disabled) */
-      strcpy(name, GIF_NORG_NAME);
-      *width  = uiGifNoRgWidth;
+      *name = GIF_NORG_NAME;
+      *width = uiGifNoRgWidth;
       *height = uiGifNoRgHeight;
       break;
    case GIF_GER_INDEX:                    /* German */
-      strcpy(name, GIF_GER_NAME);
-      *width  = uiGifGerWidth;
+      *name = GIF_GER_NAME;
+      *width = uiGifGerWidth;
       *height = uiGifGerHeight;
       break;
    case GIF_ENG_INDEX:                    /* English */
-      strcpy(name, GIF_ENG_NAME);
-      *width  = uiGifEngWidth;
+      *name = GIF_ENG_NAME;
+      *width = uiGifEngWidth;
       *height = uiGifEngHeight;
       break;
    }
 }
-
-
-
 
 
 /*******************************************************************************
@@ -3984,8 +3970,8 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
 {
    char      sTarget[64],
              *sFile,
-             sGifSize[80],
-             sGifName[256];
+             sGifSize[80];
+   const char *sGifName;
    _UWORD    uiW, uiH;
    char      sIDName[32];       /* string buffer for anchor ID name */
 
@@ -4025,7 +4011,7 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
          if (html_doctype == HTML5)
             border[0] = EOS;
 #endif
-         get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
+         get_giflink_data(idxEnabled, &sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
@@ -4051,7 +4037,7 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
          if (html_doctype == HTML5)
             border[0] = EOS;
 #endif
-         get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
+         get_giflink_data(idxDisabled, &sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
@@ -4081,8 +4067,8 @@ LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const 
 {
    char      sTarget[64],
              *sFile;
-   char      sGifSize[128],
-             sGifName[256];
+   char      sGifSize[128];
+   const char *sGifName;
    char      sIDName[32];       /* string buffer for anchor ID name */
    _UWORD     uiW, uiH;
 
@@ -4133,7 +4119,7 @@ LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const 
             border[0] = EOS;
 #endif
          /* Button disabled ausgeben */
-         get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
+         get_giflink_data(idxDisabled, &sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
@@ -4169,7 +4155,7 @@ LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const 
          if (html_doctype == HTML5)
             border[0] = EOS;
 #endif
-         get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
+         get_giflink_data(idxEnabled, &sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
@@ -4203,8 +4189,8 @@ LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const 
              href[256],
              alt[256],
             *tok;
-   char      sGifSize[128],
-             sGifName[256];
+   char      sGifSize[128];
+   const char *sGifName;
    char      sIDName[32];       /* string buffer for anchor ID name */
    _UWORD     uiW, uiH;
    
@@ -4233,7 +4219,7 @@ LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const 
    else
       strcat(sIDName, "_FOOT");
    
-   target[0] = sGifName[0] = EOS;
+   target[0] = EOS;
    
    if (sDocHtmlBackpage[0] != EOS)
    {
@@ -4269,7 +4255,7 @@ LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const 
          if (html_doctype == HTML5)
             border[0] = EOS;
 #endif
-         get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
+         get_giflink_data(idxEnabled, &sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
@@ -4295,7 +4281,7 @@ LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const 
             border[0] = EOS;
 #endif
          /* Disabled Button ausgeben */
-         get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
+         get_giflink_data(idxDisabled, &sGifName, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
@@ -4326,9 +4312,9 @@ LOCAL void html_hb_line(_BOOL head)
    char      s[512],
              anchor[512],
              sGifSize[128],
-             sGifFile[128],
-             sTarget[64],
-            *colptr;
+             sTarget[64];
+   const char *colptr;
+   const char *sGifFile;
    _BOOL   old_autorefoff;
    _BOOL   for_main_file;
    _UWORD     uiW, uiH;
@@ -4408,12 +4394,12 @@ LOCAL void html_hb_line(_BOOL head)
    }
    
    for_main_file = (toc[ti]->toctype == TOC_TOC);
-   
+
    /* ------------------------------------------- */
    /* ignore_headline/ignore_bottomline testen    */
    /* ------------------------------------------- */
    
-   if (head && toc[ti]->ignore_headline)  /* r5pl12 */
+   if (head && toc[ti]->ignore_headline)
       return;
    
    if (!head && toc[ti]->ignore_bottomline)
@@ -4437,9 +4423,9 @@ LOCAL void html_hb_line(_BOOL head)
 #if 1
    colptr = NULL;
    if (html_modern_layout)
-      colptr = html_modern_backcolor;
+      colptr = html_color_string(&html_modern_backcolor);
    if (html_frames_layout)
-      colptr = html_frames_backcolor;
+      colptr = html_color_string(&html_frames_backcolor);
    if (colptr)
    {
       s[0] = EOS;
@@ -4553,13 +4539,13 @@ LOCAL void html_hb_line(_BOOL head)
          if (html_doctype == HTML5)
             border[0] = EOS;
 #endif
-         get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
+         get_giflink_data(GIF_NOLF_INDEX, &sGifFile, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", s, border, sGifSize, xhtml_closer);
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", sGifFile, border, sGifSize, xhtml_closer);
       }
    }
    else
@@ -4606,13 +4592,13 @@ LOCAL void html_hb_line(_BOOL head)
                if (html_doctype == HTML5)
                    border[0] = EOS;
 #endif
-               get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
+               get_giflink_data(GIF_NOLF_INDEX, &sGifFile, &uiW, &uiH);
                sGifSize[0] = EOS;
                if (uiW != 0 && uiH != 0)
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
-               voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", s, border, sGifSize, xhtml_closer);
+               voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", sGifFile, border, sGifSize, xhtml_closer);
             }
          }
       }
@@ -4720,13 +4706,13 @@ LOCAL void html_hb_line(_BOOL head)
          if (html_doctype == HTML5)
             border[0] = EOS;
 #endif
-         get_giflink_data(GIF_NORG_INDEX, s, &uiW, &uiH);
+         get_giflink_data(GIF_NORG_INDEX, &sGifFile, &uiW, &uiH);
          sGifSize[0] = EOS;
          if (uiW != 0 && uiH != 0)
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", s, border, sGifSize, xhtml_closer);
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\"%s%s%s>", sGifFile, border, sGifSize, xhtml_closer);
       }
    }
    
@@ -4779,7 +4765,7 @@ LOCAL void html_hb_line(_BOOL head)
             switch (iDocHtmlSwitchLanguage)
             {
             case TOGER:
-               get_giflink_data(GIF_GER_INDEX, sGifFile, &uiW, &uiH);
+               get_giflink_data(GIF_GER_INDEX, &sGifFile, &uiW, &uiH);
                if (uiW != 0 && uiH != 0)
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
@@ -4789,7 +4775,7 @@ LOCAL void html_hb_line(_BOOL head)
                break;
                
             case TOENG:
-               get_giflink_data(GIF_ENG_INDEX, sGifFile, &uiW, &uiH);
+               get_giflink_data(GIF_ENG_INDEX, &sGifFile, &uiW, &uiH);
                if (uiW != 0 && uiH != 0)
                {
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
@@ -5152,27 +5138,27 @@ GLOBAL void html_save_frameset(void)
       strcat(add, s);
    }
    
-   if (html_frames_backcolor[0] != EOS)
+   if (html_frames_backcolor.set)
    {
-      sprintf(s, " bgcolor=\"%s\"", html_frames_backcolor);
+      sprintf(s, " bgcolor=\"%s\"", html_color_string(&html_frames_backcolor));
       strcat(add, s);
    }
    
-   if (html_frames_linkcolor[0] != EOS)
+   if (html_frames_linkcolor.set)
    {
-      sprintf(s, " link=\"%s\"", html_frames_linkcolor);
+      sprintf(s, " link=\"%s\"", html_color_string(&html_frames_linkcolor));
       strcat(add, s);
    }
    
-   if (html_frames_alinkcolor[0] != EOS)
+   if (html_frames_alinkcolor.set)
    {
-      sprintf(s, " alink=\"%s\"", html_frames_alinkcolor);
+      sprintf(s, " alink=\"%s\"", html_color_string(&html_frames_alinkcolor));
       strcat(add, s);
    }
    
-   if (html_frames_vlinkcolor[0] != EOS)
+   if (html_frames_vlinkcolor.set)
    {
-      sprintf(s, " vlink=\"%s\"", html_frames_vlinkcolor);
+      sprintf(s, " vlink=\"%s\"", html_color_string(&html_frames_vlinkcolor));
       strcat(add, s);
    }
 
@@ -5429,14 +5415,14 @@ GLOBAL void html_headline(void)
       outln("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">");
       outln("<tr>");
       
-      if (html_modern_backcolor[0] != EOS)
+      if (html_modern_backcolor.set)
       {
 #if 0
          if (html_doctype == HTML5)
          {
             voutlnf("<td class=\"UDO_td_valign_top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
                html_modern_width,
-               html_modern_backcolor,
+               html_color_string(&html_modern_backcolor),
                bgCmd,
                sHtmlPropfontStart);
          }
@@ -5445,7 +5431,7 @@ GLOBAL void html_headline(void)
          {
             voutlnf("<td valign=\"top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
                html_modern_width,
-               html_modern_backcolor,
+               html_color_string(&html_modern_backcolor),
                bgCmd,
                sHtmlPropfontStart);
          }
@@ -5457,8 +5443,8 @@ GLOBAL void html_headline(void)
          {
             voutlnf("<td class=\"UDO_td_valign_top\" width=\"%s\"%s>%s", 
                html_modern_width,
-               bgCmd,                     /* */
-               sHtmlPropfontStart);       /* */
+               bgCmd,
+               sHtmlPropfontStart);
          }
          else
 #endif
@@ -13702,15 +13688,11 @@ GLOBAL void toc_init_lang(void)
 *
 ******************************************|************************************/
 
-LOCAL TOCITEM *init_new_toc_entry(
-
-const int       toctype,    /* */
-const _BOOL   invisible)  /* TRUE: node is invisible */
+LOCAL TOCITEM *init_new_toc_entry(const int toctype, _BOOL invisible)
 {
-   TOCITEM     *tocptr;     /* ^ into toc[] structure */
+   TOCITEM *tocptr;
 
-
-   if (p1_toc_counter >= MAXTOCS)         /* r5pl2 */
+   if (p1_toc_counter >= MAXTOCS)
    {
       error_too_many_node();
       bBreakInside = TRUE;
@@ -13819,19 +13801,17 @@ const _BOOL   invisible)  /* TRUE: node is invisible */
    tocptr->mapping             = -1;
 
    tocptr->backimage = sDocBackImage;
-   strcpy(tocptr->backcolor,  sDocBackColor);
-   strcpy(tocptr->textcolor,  sDocTextColor);
-   strcpy(tocptr->linkcolor,  sDocLinkColor);
-   strcpy(tocptr->alinkcolor, sDocAlinkColor);
-   strcpy(tocptr->vlinkcolor, sDocVlinkColor);
+   tocptr->backcolor = sDocBackColor.rgb;
+   tocptr->textcolor = sDocTextColor.rgb;
+   tocptr->linkcolor = sDocLinkColor.rgb;
+   tocptr->alinkcolor = sDocAlinkColor.rgb;
+   tocptr->vlinkcolor = sDocVlinkColor.rgb;
 
-   /* r5pl15: Texinfo kennt keine versteckten Nodes, daher fuer */
-   /* Texinfo das invisible-Flag immer aus FALSE setzen. */
-   
+   /* Texinfo kennt keine versteckten Nodes, daher fuer */
+   /* Texinfo das invisible-Flag immer auf FALSE setzen. */
    if (desttype == TOINF)
-      tocptr->invisible = FALSE;
-   else
-      tocptr->invisible = invisible;
+      invisible = FALSE;
+   tocptr->invisible = invisible;
 
    p1_toctype = toctype;
 
@@ -16607,22 +16587,21 @@ GLOBAL void init_module_toc(void)
 
    no_auto_toptocs_icons = FALSE;         /*r6pl13*/
 
-   strcpy(html_modern_width, "128");      /*r6pl8*/
-   
-   html_modern_backcolor[0]  = EOS;       /*r6pl6*/
+   strcpy(html_modern_width, "128");
+   html_modern_backcolor.set = FALSE;
 
-   strcpy(html_frames_width, "128");      /*r6pl8*/
-   strcpy(html_frames_height, "64");      /*r6pl9*/
+   strcpy(html_frames_width, "128");
+   strcpy(html_frames_height, "64");
    
-   html_frames_backcolor[0]  = EOS;       /*r6pl6*/
-   html_frames_textcolor[0]  = EOS;       /*r6pl9*/
-   html_frames_linkcolor[0]  = EOS;       /*r6pl9*/
-   html_frames_alinkcolor[0] = EOS;       /*r6pl9*/
-   html_frames_vlinkcolor[0] = EOS;       /*r6pl9*/
+   html_frames_backcolor.set = FALSE;
+   html_frames_textcolor.set = FALSE;
+   html_frames_linkcolor.set = FALSE;
+   html_frames_alinkcolor.set = FALSE;
+   html_frames_vlinkcolor.set = FALSE;
    html_frames_position = POS_LEFT;
    html_frames_backimage = 0;
    html_name_prefix[0] = EOS;
-
+   
    p1_toctype = TOC_NONE;
    p2_toctype = TOC_NONE;
 
@@ -16630,7 +16609,7 @@ GLOBAL void init_module_toc(void)
    sHtmlPropfontEnd[0] = EOS;
 
    sHtmlMonofontStart[0] = EOS;
-   sHtmlMonofontEnd[0]   = EOS;
+   sHtmlMonofontEnd[0] = EOS;
 
    html_frames_toc_title = NULL;
    html_frames_con_title = NULL;

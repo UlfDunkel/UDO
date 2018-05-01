@@ -94,7 +94,6 @@ GLOBAL void error_open_pass2(const char *s);
 GLOBAL void error_mkdir(const char *s);
 GLOBAL void error_malloc_failed(size_t size);
 GLOBAL void error_empty_docinfo(void);
-GLOBAL void error_unknown_color(const char *s);
 
 
    /* --- severe syntax errors --- */

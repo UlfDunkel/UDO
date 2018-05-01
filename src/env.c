@@ -829,11 +829,10 @@ GLOBAL void output_begin_verbatim(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      if (sDocVerbatimBackColor[0] != EOS)
+      if (sDocVerbatimBackColor.rgb.set)
       {
-         voutlnf("<table width=\"100%%\" bgcolor=\"%s\"><tr><td>%s", sDocVerbatimBackColor, sHtmlMonofontStart);
+         voutlnf("<table width=\"100%%\" bgcolor=\"%s\"><tr><td>%s", html_color_string(&sDocVerbatimBackColor.rgb), sHtmlMonofontStart);
       }
-      
       switch (iDocVerbatimSize)
       {
       case VERB_TINY:
@@ -966,11 +965,10 @@ GLOBAL void output_end_verbatim(void)
          outln("</font>");
       }
       
-      if (sDocVerbatimBackColor[0] != EOS)
+      if (sDocVerbatimBackColor.rgb.set)
       {
          voutlnf("%s</td></tr></table>", sHtmlMonofontEnd);
       }
-      
       break;
       
       
@@ -5138,7 +5136,8 @@ GLOBAL void c_begin_document(void)
       else
          iDocMonofontSize = 10 * 2;       /* Courier New 10pt */
 
-      outln(sDocTextColor);
+      if (sDocTextColor.color != BC_NONE)
+      	 outln(udocolor[sDocTextColor.color].wintext);
       break;
       
 

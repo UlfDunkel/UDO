@@ -880,25 +880,6 @@ GLOBAL void error_empty_docinfo(void)
 
 /*******************************************************************************
 *
-*  error_unknown_color():
-*     program error message: unknown color
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_unknown_color(const char *s)
-{
-   error_message(_("unknown color: %s"), s);
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  error_syntax_error():
 *     grobe Syntaxfehler
 *

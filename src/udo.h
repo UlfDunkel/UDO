@@ -76,6 +76,7 @@
 extern char   compile_date[];
 extern char   compile_time[];
 
+extern UDOCOLOR const udocolor[];
 
 
 /*******************************************************************************
@@ -302,7 +303,7 @@ GLOBAL int         iDocHtmlMonofontSize;
 GLOBAL char        html_modern_width[16]; /* Breite der linken Spalte */
 GLOBAL int         html_modern_alignment; /* Ausrichtung linke Spalte */
                                           /* background color of left column */
-GLOBAL char        html_modern_backcolor[16];
+GLOBAL struct rgb  html_modern_backcolor;
                                           /* Image der linken Spalte */
 GLOBAL FILE_ID     html_modern_backimage;
 GLOBAL char        html_frames_width[16]; /* Breite des linken Frames */
@@ -310,15 +311,15 @@ GLOBAL char        html_frames_height[16];/* Breite des oberen Frames */
 GLOBAL int         html_frames_position;  /* Position des Frames */
 GLOBAL int         html_frames_alignment; /* Ausrichtung linker Frame */
                                           /* Backfarbe des linken Frames */
-GLOBAL char        html_frames_backcolor[16];
+GLOBAL struct rgb  html_frames_backcolor;
                                           /* Textfarbe des linken Frames */
-GLOBAL char        html_frames_textcolor[16];
+GLOBAL struct rgb  html_frames_textcolor;
                                           /* Linkfarbe der linken Spalte */
-GLOBAL char        html_frames_linkcolor[16];
+GLOBAL struct rgb  html_frames_linkcolor;
                                           /* Linkfarbe der linken Spalte */
-GLOBAL char        html_frames_alinkcolor[16];
+GLOBAL struct rgb  html_frames_alinkcolor;
                                           /* Linkfarbe der linken Spalte */
-GLOBAL char        html_frames_vlinkcolor[16];
+GLOBAL struct rgb  html_frames_vlinkcolor;
                                           /* Image des linken Frames */
 GLOBAL FILE_ID     html_frames_backimage;
 GLOBAL int         html_button_alignment; /* Ausrichtung der Buttons */
@@ -359,12 +360,12 @@ GLOBAL char        sDocImgSuffix[32];     /* gif, jpg, jpeg, ... */
 GLOBAL FILE_ID     sDocBackImage;
 GLOBAL FILE_ID     sDocScript;
 GLOBAL FILE_ID     sDocFavIcon;
-GLOBAL char        sDocBackColor[32];
-GLOBAL char        sDocTextColor[32];
-GLOBAL char        sDocLinkColor[32];
-GLOBAL char        sDocAlinkColor[32];
-GLOBAL char        sDocVlinkColor[32];
-GLOBAL char        sDocVerbatimBackColor[32];
+GLOBAL struct rgb_and_color sDocBackColor;
+GLOBAL struct rgb_and_color sDocTextColor;
+GLOBAL struct rgb_and_color sDocLinkColor;
+GLOBAL struct rgb_and_color sDocAlinkColor;
+GLOBAL struct rgb_and_color sDocVlinkColor;
+GLOBAL struct rgb_and_color sDocVerbatimBackColor;
 
 GLOBAL FILE_ID     sDocRawHeaderFilename;
 GLOBAL FILE_ID     sDocRawFooterFilename;
@@ -445,7 +446,9 @@ GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd);
    /* --- colors --- */
 
    /* ? */
-GLOBAL _BOOL get_html_color(const char *s, char *h);
+GLOBAL _BOOL get_html_color(const char *s, struct rgb_and_color *rgb);
+GLOBAL _BOOL get_html_color_or_rgb(const char *s, struct rgb_and_color *rgb);
+const char *html_color_string(const struct rgb *color);
 
 
    /* --- index and TOC manager --- */

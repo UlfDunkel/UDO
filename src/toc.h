@@ -174,40 +174,29 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    char     *description;                 /* HTML-Description */   /* r6pl5 */
    char     *robots;                      /* HTML-Robots */   /* V6.5.17 */
    FILE_ID   counter_command;                 /* HTML-Kommandos fuer Counter */
-   char      backcolor[MAX_COLOR_LEN+1];  /* HTML <BODY BGCOLOR=...> */   /* r6pl1 */
-   char      textcolor[MAX_COLOR_LEN+1];  /* HTML <BODY TEXT=...> */   /* r6pl1 */
-   char      linkcolor[MAX_COLOR_LEN+1];  /* HTML <BODY LINK=...> */   /* r6pl1 */
-   char      alinkcolor[MAX_COLOR_LEN+1]; /* HTML <BODY ALINK=...> */   /* r6pl1 */
-   char      vlinkcolor[MAX_COLOR_LEN+1]; /* HTML <BODY VLINK=...> */   /* r6pl1 */
-                                          /* HTML <BODY BGCOLOR=...> */   /* r6pl12 */
-   char      modern_backcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY TEXT=...> */   /* r6pl12 */
-   char      modern_textcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY LINK=...> */   /* r6pl12 */
-   char      modern_linkcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY ALINK=...> */   /* r6pl12 */
-   char      modern_alinkcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY VLINK=...> */   /* r6pl12 */
-   char      modern_vlinkcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY BACKGROUND=...> */   /* r6pl1 */
+   struct rgb backcolor;                      /* HTML <BODY BGCOLOR=...> */
+   struct rgb textcolor;                      /* HTML <BODY TEXT=...> */
+   struct rgb linkcolor;                      /* HTML <BODY LINK=...> */
+   struct rgb alinkcolor;                     /* HTML <BODY ALINK=...> */
+   struct rgb vlinkcolor;                     /* HTML <BODY VLINK=...> */
    FILE_ID   backimage;                       /* HTML <BODY BACKGROUND=...> */
    FILE_ID   script_name;                     /* HTML <SCRIPT> */
    FILE_ID   favicon_name;                    /* HTML <FAVICON> */
    FILE_ID   bgsound;                         /* HTML <bgsound> */
-   char     *image;                       /* Grafik anstelle Kapitelnamen */
-   _UWORD     uiImageWidth;                /* Breite und Hoehe des Bildes */ 
+   char     *image;                           /* Grafik anstelle Kapitelnamen */
+   _UWORD     uiImageWidth;                   /* Breite und Hoehe des Bildes */ 
    _UWORD     uiImageHeight;
-   char     *icon;                        /* Icon fuer modernes Layout */
-   _UWORD     uiIconWidth;                 /* Breite und Hoehe des Icons */ 
+   char     *icon;                            /* Icon fuer modernes Layout */
+   _UWORD     uiIconWidth;                    /* Breite und Hoehe des Icons */ 
    _UWORD     uiIconHeight;
-   char     *icon_active;                 /* Icon fuer    -""- (aktive Seite) */
-   _UWORD     uiIconActiveWidth;           /* Breite und Hoehe des Icons */ 
+   char     *icon_active;                     /* Icon fuer    -""- (aktive Seite) */
+   _UWORD     uiIconActiveWidth;              /* Breite und Hoehe des Icons */ 
    _UWORD     uiIconActiveHeight;
-   char     *icon_text;                   /* Icontext fuer modernes Layout */
-   char     *helpid;                      /* Eine Jump-ID, wie ein Alias */
-   int       mapping;                     /* Eine Jump-ID fuer WinHelp/IPF */
-   _BOOL   invisible;                   /* TRUE = Nicht ins Inhaltsverzeichnis */
-   _BOOL   converted;                   /* Bereits Makros etc. angepasst? */
+   char     *icon_text;                       /* Icontext fuer modernes Layout */
+   char     *helpid;                          /* Eine Jump-ID, wie ein Alias */
+   int       mapping;                         /* Eine Jump-ID fuer WinHelp/IPF */
+   _BOOL   invisible;                         /* TRUE = Nicht ins Inhaltsverzeichnis */
+   _BOOL   converted;                         /* Bereits Makros etc. angepasst? */
    int       labindex;                    /* lab[]-Position */
    int       prev_index;                  /* toc[]-Position des HTML-Vorgaengers */
    int       next_index;                  /* toc[]-Position des HTML-Nachfolgers */

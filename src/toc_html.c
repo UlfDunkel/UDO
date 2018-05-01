@@ -866,98 +866,69 @@ GLOBAL void set_html_backimage(void)
 *
 ******************************************|************************************/
 
-GLOBAL void set_html_color(
-
-const int    which)       /* */
+GLOBAL void set_html_color(const int which)
 {
-   char      color[256],  /* */
-            *ptr;         /* */
-   _BOOL   ret;         /* */
-   
+   struct rgb_and_color color;
+   _BOOL   ret;
    
    if (!check_toc_and_counters())
       return;
 
-   color[0] = EOS;
-
    qdelete_once(token[1], "[", 1);
    qdelete_last(token[1], "]", 1);
 
-   if (token[1][0] == '#')
-   {
-      um_strcpy(color, token[1], 256, "set_html_color[1]");
-      ret = TRUE;
-   }
-   else
-   { 
-      ret = get_html_color(token[1], color);
-   }
+   ret = get_html_color_or_rgb(token[1], &color);
 
    if (ret)
    {
       if (p1_toc_counter == 0)
       {
-         ptr = sDocBackColor;             /* default */
-         
          switch (which)
          {
          case HTML_COLOR_BACK:
-            ptr = sDocBackColor;   
+            sDocBackColor = color;
             break;
-            
          case HTML_COLOR_TEXT:
-            ptr = sDocTextColor;  
+            sDocTextColor = color;
             break;
-            
          case HTML_COLOR_LINK:
-            ptr = sDocLinkColor;   
+            sDocLinkColor = color;
             break;
-            
          case HTML_COLOR_ALINK:
-            ptr = sDocAlinkColor;  
+            sDocAlinkColor = color;
             break;
-            
          case HTML_COLOR_VLINK:
-            ptr = sDocVlinkColor;  
+            sDocVlinkColor = color;
+            break;
+         default:
+            sDocBackColor = color;
+            break;
          }
       }
       else
       {
-         ptr = toc[p1_toc_counter]->backcolor;
-         
          switch (which)
          {
          case HTML_COLOR_BACK:
-            ptr = toc[p1_toc_counter]->backcolor; 
+            toc[p1_toc_counter]->backcolor = color.rgb;
             break;
-            
          case HTML_COLOR_TEXT:
-            ptr = toc[p1_toc_counter]->textcolor;  
+            toc[p1_toc_counter]->textcolor = color.rgb;
             break;
-            
          case HTML_COLOR_LINK:
-            ptr = toc[p1_toc_counter]->linkcolor;   
+            toc[p1_toc_counter]->linkcolor = color.rgb;
             break;
-            
          case HTML_COLOR_ALINK:
-            ptr = toc[p1_toc_counter]->alinkcolor;  
+            toc[p1_toc_counter]->alinkcolor = color.rgb;
             break;
-            
          case HTML_COLOR_VLINK:
-            ptr = toc[p1_toc_counter]->vlinkcolor; 
+            toc[p1_toc_counter]->vlinkcolor = color.rgb;
+            break;
+         default:
+            toc[p1_toc_counter]->backcolor = color.rgb;
+            break;
          }
       }
-      
-      ptr[0] = EOS;
-
-      if (color[0] != EOS)
-      { 
-         strncat(ptr, color, MAX_COLOR_LEN);
-      }
-   }
-   else
-   {  
-      error_unknown_color(token[1]);
    }
 }
 
@@ -977,7 +948,7 @@ const int    which)       /* */
 
 GLOBAL void set_html_style(void)
 {
-   STYLE  *styleptr;    /* */
+   STYLE  *styleptr;
    char    sTemp[512],  /* */
           *ptr;         /* */
    int     i;           /* */
@@ -1211,44 +1182,22 @@ GLOBAL void set_html_favicon(void)
 *
 ******************************************|************************************/
 
-GLOBAL void set_html_special_color(
-
-char        *hc)          /* */
+GLOBAL void set_html_special_color(struct rgb *rgb)
 {
-   char      color[256];  /* */
-   _BOOL   ret;         /* */
-   
+   struct rgb_and_color color;
+   _BOOL   ret;
    
    if (!check_toc_and_counters())
       return;
 
-   color[0] = EOS;
-
    qdelete_once(token[1], "[", 1);
    qdelete_last(token[1], "]", 1);
 
-   if (token[1][0] == '#')
-   { 
-      um_strcpy(color, token[1], 256, "set_html_special_color [1]");
-      ret = TRUE;
-   }
-   else
-   {  
-      ret = get_html_color(token[1], color);
-   }
+   ret = get_html_color_or_rgb(token[1], &color);
 
    if (ret)
-   { 
-      hc[0] = EOS;
-      
-      if (color[0] != EOS)
-      { 
-         strncat(hc, color, MAX_COLOR_LEN);
-      }
-   }
-   else
-   { 
-      error_unknown_color(token[1]);
+   {
+      *rgb = color.rgb;
    }
 }
 

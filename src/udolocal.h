@@ -83,19 +83,10 @@ LOCAL _BOOL str_for_os(const char *s);
 
    /* color handling */
 LOCAL int get_color(void);
-LOCAL void get_drc_color(const char *s, char *h);
 LOCAL void c_drc_bcolor(void);
 LOCAL void c_drc_icolor(void);
 LOCAL void c_drc_ucolor(void);
 LOCAL void c_drc_flags(void);
-
-LOCAL void set_win_backcolor (char *s, const int c);
-LOCAL void set_win_textcolor (char *s, const int c);
-LOCAL void set_win_linkcolor (char *s, const int c);
-
-LOCAL void set_wh4_backcolor (char *s, const int c);
-LOCAL void set_wh4_textcolor (char *s, const int c);
-LOCAL void set_wh4_linkcolor (char *s, const int c);
 
    /* check if a command uses [on] or [off] */
 LOCAL _BOOL check_on(void);
@@ -110,7 +101,7 @@ LOCAL void cmd_outside_preamble(void);
 LOCAL void cmd_inside_preamble(void);
 
    /* miscellaneous */
-LOCAL int idxlist_compare (IDXLIST *p, IDXLIST *q);
+LOCAL int idxlist_compare(IDXLIST *p, IDXLIST *q);
 LOCAL void sort_idxlist(void);
 LOCAL void print_ascii_index(void);
 LOCAL void print_info_index(void);
@@ -163,8 +154,7 @@ LOCAL void c_tex_verb(void);
 LOCAL void c_win_charwidth(void);
 LOCAL void c_wh4_charwidth(void);
 LOCAL void c_rtf_charwidth(void);
-/* New in V6.5.9 [NHz] */
-LOCAL void c_rtf_add_colour(void);
+LOCAL void c_rtf_add_color(void);
 LOCAL void c_html_img_suffix(void);
 LOCAL void c_html_nodesize(void);
 
@@ -177,7 +167,6 @@ LOCAL void c_linedrawsize(void);
 LOCAL void c_check_raw(char *s);
 
    /* general image handling */
-LOCAL void convert_image(const _BOOL visible);
 LOCAL void c_image(void);
 LOCAL void c_image_nonr(void);
 
@@ -191,68 +180,15 @@ LOCAL void c_include_comment(void);
 
 LOCAL void c_input(void);
 
-   /* hyphenation */
-LOCAL void str2silben(char *s);
-
-   /* token management */
-LOCAL void check_parwidth(void);
-LOCAL _BOOL malloc_token_output_buffer(void);
-LOCAL void free_token_output_buffer(void);
-LOCAL void insert_nl_token_buffer(void);
-
-LOCAL void output_hyphen_line(const char *s);
-LOCAL void warning_short_line(const size_t len, const char *t);
-
-LOCAL void to_check_rtf_quote_indent(char *s);
-LOCAL void to_check_quote_indent(size_t *u);
-
-   /* sort hyphen file and remove dupes */
-LOCAL int hyplist_compare (HYPLIST *p, HYPLIST *q);
-LOCAL HYPLIST *hyplist_merge (HYPLIST *p, HYPLIST *q);
-LOCAL HYPLIST *hyplist_sort (HYPLIST *p);
-LOCAL HYPLIST * new_hyplist_item(void);
-LOCAL _BOOL add_hyplist_item(const char *s);
-LOCAL void sort_hypfile(const char *name);
-
-   /* check commands for formats or languages */
-LOCAL void clear_if_stack(void);
-LOCAL void push_if_stack(int kind, _BOOL ignore);
-LOCAL void toggle_if_stack(void);
-LOCAL _BOOL is_if_stack_ignore(void);
-LOCAL void pass_check_free_line(char *zeile, int pnr);
-LOCAL void pass_check_if (char *zeile, int pnr);
-
-   /* get + set switches */
-LOCAL void get_switch_par(const UDOSWITCH *us);
-LOCAL _BOOL pass1_check_preamble_commands(void);
-LOCAL _BOOL pass1_check_main_commands(void);
-LOCAL _BOOL pass1_check_everywhere_commands(void);
-
-   /* check special environments */
-LOCAL void pass1_check_environments(char *zeile);
-
    /* parse lines and create TOCs (pass 1) */
 LOCAL _BOOL pass1(const char *datei);
 
    /* parse lines and convert them (pass 2) */
-LOCAL void output_verbatim_line(char *zeile);
-LOCAL void output_linedraw_line(char *zeile);
-LOCAL void output_comment_line(char *zeile);
 LOCAL void c_comment(void);
 
-LOCAL _BOOL pass2 (const char *datei);
-
-   /* create files for several target formats */
-LOCAL void save_pchelp_commandfile(void);
-LOCAL void save_winhelp_project(void);
-LOCAL void save_winhelp4_project(void);
-LOCAL void save_htmlhelp_project(void);
-
-   /* set important format-dependent conversion flags */
-LOCAL void set_format_flags(void);
+LOCAL _BOOL pass2(const char *datei);
 
    /* more misc. */
-LOCAL void show_udo_intro(void);
 LOCAL _BOOL passU(const char *datei);
 
    /* set strings for target language */

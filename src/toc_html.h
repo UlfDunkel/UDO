@@ -107,7 +107,7 @@ GLOBAL void set_html_script(void);
 GLOBAL void set_html_favicon(void);
 
    /* sets special color for HTML */
-GLOBAL void set_html_special_color(char *hc);
+GLOBAL void set_html_special_color(struct rgb *rgb);
 
    /* sets counter_command */
 GLOBAL void set_html_counter_command(void);

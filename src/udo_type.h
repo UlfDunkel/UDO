@@ -98,6 +98,16 @@
 *
 ******************************************|************************************/
 
+struct rgb {
+	unsigned char set;
+	unsigned char r, g, b;
+};
+
+struct rgb_and_color {
+	struct rgb rgb;
+	int color;
+};
+
 typedef int FILE_ID;
 typedef _ULONG FILE_LINENO;
 
@@ -112,6 +122,15 @@ struct _filelist {
 	FILE_ID id;
 	char name[1];
 };
+
+typedef struct _udocolor
+{
+   int val;
+   const char *name;
+   struct rgb rgb;
+   char drc[3];
+   const char *wintext;
+} UDOCOLOR;
 
 typedef struct _passflags                 /* several flags for pass1() and pass2() */
 {
