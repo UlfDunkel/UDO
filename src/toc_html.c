@@ -84,6 +84,15 @@
 
 /*******************************************************************************
 *
+*     LOCAL VARIABLES
+*
+******************************************|************************************/
+
+LOCAL int p1_style_alloc;
+
+
+/*******************************************************************************
+*
 *     LOCAL PROCEDURES
 *
 ******************************************|************************************/
@@ -949,100 +958,117 @@ GLOBAL void set_html_color(const int which)
 GLOBAL void set_html_style(void)
 {
    STYLE  *styleptr;
-   char    sTemp[512],  /* */
-          *ptr;         /* */
-   int     i;           /* */
-   long    lang;        /* */
-   
+   char    sTemp[MYFILE_FULL_LEN + 3],
+          *ptr;
+   int     i;
+   size_t len;
+   STYLE **new_style;
    
    if (!check_toc_and_counters())
       return;
 
-   if (p1_style_counter + 1 >= MAXSTYLES) /* list overflow? */
+   tokcpy2(sTemp, sizeof(sTemp));
+
+   if (sTemp[0] == '\'')
    {
-      error_too_many_label();
-      return;
+      len = strcspn(sTemp + 1, "'");
+      memmove(sTemp, sTemp + 1, len);
+      sTemp[len] = EOS;
    }
 
-   styleptr = (STYLE *)malloc(sizeof(STYLE) + 1);
+   if (sTemp[0] == EOS)
+      return;
+
+   replace_char(sTemp, '\\', '/');
+
+   for (i = 0; i < p1_style_counter; i++)
+   {
+      if (strcmp(sTemp, style[i]->href) == 0)
+      {
+         /*
+          * FIXME: this prevents using the same style sheet on
+          * different pages; the conncection should be
+          * be the other way around (e.g. have have
+          * a style sheet idx in the toc entry rather than
+          * having a toc index in the style sheet)
+          */
+         warning_message(_("style sheet %s already used in node %s"), sTemp, toc[style[i]->tocindex]->name);
+         return;
+      }
+   }
+
+   if (p1_style_counter >= p1_style_alloc)
+   {
+      int new_alloc = p1_style_alloc + 1024;
+      
+      new_style = (STYLE **)realloc(style, new_alloc * sizeof(STYLE *));
+      if (new_style == NULL)
+      {
+         return;
+      }
+      style = new_style;
+      p1_style_alloc = new_alloc;
+   }
+
+   styleptr = (STYLE *)malloc(sizeof(STYLE));
 
    if (styleptr == NULL)                  /* no memory? */
    {
       return;
    }
-
-                                          /* Set style in project file (not yet) */
-/* if (!isn) */                           /* Only labels which aren't nodes */
-/*    save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine); */
-
-   p1_style_counter++;
+   memset(styleptr, 0, sizeof(*styleptr));
    
    style[p1_style_counter] = styleptr;
+   p1_style_counter++;
    
-   styleptr->href[0]   = EOS;
-   styleptr->media[0]  = EOS;
-   styleptr->title[0]  = EOS;
+   styleptr->href = strdup(sTemp);
+   styleptr->media[0] = EOS;
+   styleptr->title[0] = EOS;
    styleptr->alternate = FALSE;
 
-   tokcpy2(sTemp, 512);
-
-   if (sTemp[0] == '\'')
-   {
-      lang = strcspn(sTemp + 1, "'");
-      strncpy(styleptr->href, sTemp + 1, lang);
-      styleptr->href[lang] = EOS;
-
-                                          /* always use / characters here! */
-      replace_char(styleptr->href, '\\', '/');
-   }
-   else
-      strcpy(styleptr->href, token[1]);
-
-   for (i = 1; i < p1_style_counter; i++) /* check if this CSS file has already been included */
-   {
-      if (!strcmp(styleptr->href, style[i]->href))
-      {
-         p1_style_counter--;
-         return;
-      }
-   }
-
    ptr = strstr(sTemp, "media=");
-   
    if (ptr != NULL)
    {
-      lang = strcspn(ptr + 6, " \0");
-      strncpy(styleptr->media, ptr + 6, lang);
-      styleptr->media[lang] = EOS;
+      len = strcspn(ptr + 6, " ");
+      strncpy(styleptr->media, ptr + 6, len);
+      styleptr->media[len] = EOS;
+      memmove(ptr, ptr + 6 + len, strlen(ptr + 6 + len) + 1);
    }
    
    ptr = strstr(sTemp, "title=");
-   
    if (ptr != NULL)
    {
       if (strchr(ptr + 6, '\''))
       {
-         lang = strcspn(ptr + 7, "'");
-         strncpy(styleptr->title, ptr + 7, lang);
+         len = strcspn(ptr + 7, "'");
+         strncpy(styleptr->title, ptr + 7, len);
+         memmove(ptr, ptr + 7 + len, strlen(ptr + 6 + len) + 1);
       }
       else
       {
-         lang = strcspn(ptr + 6, " \0");
-         strncpy(styleptr->title, ptr + 6, lang);
+         len = strcspn(ptr + 6, " ");
+         strncpy(styleptr->title, ptr + 6, len);
+         memmove(ptr, ptr + 6 + len, strlen(ptr + 6 + len) + 1);
       }
 
-      styleptr->title[lang] = EOS;
+      styleptr->title[len] = EOS;
    }
 
    ptr = strstr(sTemp, "alternate");
-
    if (ptr != NULL)
+   {
       styleptr->alternate = TRUE;
-   else
-      styleptr->alternate = FALSE;
-
-   styleptr->styleindex = p1_style_counter;
-   styleptr->tocindex   = p1_toc_counter;
+      len = strcspn(ptr + 9, " ");
+      memmove(ptr, ptr + 9 + len, strlen(ptr + 9 + len) + 1);
+   }
+   
+   del_whitespaces(sTemp);
+   styleptr->filename = strdup(sTemp);
+   
+   /*
+    * FIXME: see comments above
+    */
+   styleptr->tocindex = p1_toc_counter;
 }
 
 
@@ -1724,4 +1750,29 @@ GLOBAL void set_html_quotes(void)
 }
 
 
-/* +++ EOF +++ */
+
+GLOBAL void init_module_toc_html(void)
+{
+   p1_style_alloc = 0;
+   p1_style_counter = 0;
+   style = NULL;
+}
+
+
+
+GLOBAL void exit_module_toc_html(void)
+{
+   int i;
+   
+   for (i = 0; i < p1_style_counter; i++)
+   {
+      free(style[i]->href);
+      free(style[i]->filename);
+      free(style[i]);
+   }
+   if (style != NULL)
+      free(style);
+   p1_style_alloc = 0;
+   p1_style_counter = 0;
+   style = NULL;
+}

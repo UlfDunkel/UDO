@@ -101,6 +101,17 @@
 *
 ******************************************|************************************/
 
+typedef struct _style                     /* style sheets */
+{
+   char  *href;                           /* Quelle eines Stylesheets */
+   char  *filename;                       /* filename only of stylsheet */
+   char   media[MAX_LABEL_LEN + 1];       /* fuer welches Medium */
+   char   title[MAX_LABEL_LEN + 1];       /* Titel eines Stylesheets */
+   int    alternate;                      /* Alternate Stylesheet? */
+   int    tocindex;                       /* Gehoert zum Node "toc[tocindex]" */
+} STYLE;
+
+
 typedef struct _label                     /* jump labels to be referenced */
 {
    char      name[MAX_LABEL_LEN + 1];     /* label name */
@@ -124,18 +135,6 @@ typedef struct _label                     /* jump labels to be referenced */
     struct _label *next_hash;
 #endif
 } LABEL;
-
-
-
-typedef struct _style                     /* style sheets */
-{
-   char   href[MAX_LABEL_LEN  + 1];       /* Quelle eines Stylesheets */
-   char   media[MAX_LABEL_LEN + 1];       /* fuer welches Medium */
-   char   title[MAX_LABEL_LEN + 1];       /* Titel eines Stylesheets */
-   int    alternate;                      /* Alternate Stylesheet? */
-   int    styleindex;                     /* style[1]==1, style[2]==2 etc. */
-   int    tocindex;                       /* Gehoert zum Node "toc[tocindex]" */
-} STYLE;
 
 
 
@@ -275,8 +274,7 @@ GLOBAL TOCITEM  *toc[MAXTOCS];            /* Zeiger auf Inhaltsverzeichnis */
 GLOBAL int       p1_toc_counter;          /* Zaehler fuer das toc[]-Array */
 GLOBAL int       p2_toc_counter;
 
-                                          /* New in V6.5.9 [NHz] */
-GLOBAL STYLE    *style[MAXSTYLES];        /* Array mit Zeigern auf Stylesheets */
+GLOBAL STYLE   **style;                   /* Array mit Zeigern auf Stylesheets */
 GLOBAL int       p1_style_counter;        /* Zaehler */
 
 GLOBAL SCRIPT   *script[MAXSCRIPTS];      /* ^ array for javascript files */

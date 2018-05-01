@@ -3558,7 +3558,7 @@ _BOOL     keywords)             /* */
    /* Link for overall and file-related stylesheet-file */
    /* Changed in V6.5.9 [NHz] */
 
-   for (j = 1; j <= p1_style_counter; j++)
+   for (j = 0; j < p1_style_counter; j++)
    {
       styleptr = style[j];
       

@@ -148,4 +148,6 @@ GLOBAL void set_html_button_alignment(void);
    /* sets html_quotes variable */
 GLOBAL void set_html_quotes(void);
 
-/* +++ EOF +++ */
+
+GLOBAL void init_module_toc_html(void);
+GLOBAL void exit_module_toc_html(void);

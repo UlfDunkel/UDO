@@ -15083,6 +15083,7 @@ LOCAL void init_modules(void)
    init_module_sty();                     /* Stile etc. */
    init_module_tab();                     /* Tabellensatz */
    init_module_toc();                     /* Inhaltsverzeichnis(se) */
+   init_module_toc_html();
    init_module_tp();                      /* Titelseite */
 
    init_vars_spec();
@@ -15105,6 +15106,7 @@ LOCAL void init_modules(void)
 LOCAL void exit_modules(void)
 {
    exit_module_toc();
+   exit_module_toc_html();
    exit_module_par();
    exit_module_tp();
    exit_udosymbol();
