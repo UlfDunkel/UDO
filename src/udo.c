@@ -12289,7 +12289,7 @@ LOCAL _BOOL pass1(const char *datei)
                   else if (strcmp(token[0], "!alias") == 0 || strcmp(token[0], "!a") == 0)
                   {
                      tokcpy2(tmp, sizeof(tmp));
-                     add_alias(tmp, bInsidePopup);
+                     add_alias(tmp, bInsidePopup, FALSE);
                   }
                   else if (strcmp(token[0], "!index") == 0 || strcmp(token[0], "!x") == 0)
                   {
@@ -12457,15 +12457,17 @@ LOCAL _BOOL pass1(const char *datei)
                   {
                      bNopDetected = !bNopDetected;
                   }
-                  else if (    (strcmp(token[0], "!label*") == 0)
-                            || (strcmp(token[0], "!label")  == 0)
-                            || (strcmp(token[0], "!l*")     == 0)
-                            || (strcmp(token[0], "!l")      == 0)
-                          )
+                  else if (strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0)
                   {
-                     tokcpy2(tmp, 512);
+                     tokcpy2(tmp, sizeof(tmp));
                      replace_udo_quotes(tmp);
-                     add_label(tmp, FALSE, bInsidePopup);
+                     add_label(tmp, FALSE, bInsidePopup, FALSE, FALSE);
+                  }
+                  else if (strcmp(token[0], "!label*") == 0 || strcmp(token[0], "!l*") == 0)
+                  {
+                     tokcpy2(tmp, sizeof(tmp));
+                     replace_udo_quotes(tmp);
+                     add_label(tmp, FALSE, bInsidePopup, TRUE, FALSE);
                   }
                   else if (strcmp(token[0], "!include") == 0)
                   {

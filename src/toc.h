@@ -50,11 +50,8 @@
 *
 ******************************************|************************************/
 
-/*******************************************************************************
-*
-*     MACRO DEFINITIONS
-*
-******************************************|************************************/
+#ifndef __UDOTOC__
+#define __UDOTOC__
 
 /*******************************************************************************
 *
@@ -80,7 +77,6 @@
 #define MAX_NODE_LEN       199            /* v6.3.9 (old: 128) */
 #define MAX_FILENAME_LEN    64
 #define MAX_IMAGE_LEN      128
-#define MAX_COLOR_LEN       16
 #define MAX_HELPID_LEN      16
 
 #define TOC_TOC    0                      /* table of content */
@@ -94,6 +90,8 @@
 
 
 
+#define USE_NAME_HASH 1
+
 
 
 
@@ -102,9 +100,6 @@
 *     TYPE DEFINITIONS
 *
 ******************************************|************************************/
-
-#ifndef __UDOTOC__
-#define __UDOTOC__
 
 typedef struct _label                     /* jump labels to be referenced */
 {
@@ -125,12 +120,13 @@ typedef struct _label                     /* jump labels to be referenced */
    _BOOL   ignore_links;                /* don't link to this label */
    _BOOL   ignore_index;                /* don't index this label (node only!) */
    _BOOL   referenced;                  /* TRUE: label has been referenced */
-   
-}  LABEL,  *pLABEL;
+#if USE_NAME_HASH
+    struct _label *next_hash;
+#endif
+} LABEL;
 
 
 
-                                          /* New in V6.5.9 [NHz] */
 typedef struct _style                     /* style sheets */
 {
    char   href[MAX_LABEL_LEN  + 1];       /* Quelle eines Stylesheets */
@@ -139,8 +135,7 @@ typedef struct _style                     /* style sheets */
    int    alternate;                      /* Alternate Stylesheet? */
    int    styleindex;                     /* style[1]==1, style[2]==2 etc. */
    int    tocindex;                       /* Gehoert zum Node "toc[tocindex]" */
-   
-}  STYLE, *pSTYLE;
+} STYLE;
 
 
 
@@ -149,8 +144,7 @@ typedef struct _script                    /* javascript files */
    char   href[MAX_LABEL_LEN  + 1];       /* javascript file reference */
    int    scriptindex;                    /* script[1]==1, script[2]==2 etc. */
    int    tocindex;                       /* belongs to node "toc[tocindex]" */
-   
-}  SCRIPT, *pSCRIPT;
+} SCRIPT;
 
 
 
@@ -224,13 +218,6 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    _BOOL   has_children;                /* TRUE: this node has subnode(s) */
 
 }  TOCITEM, *pTOCITEM;
-
-
-
-#endif /* __UDOTOC__ */
-
-
-
 
 
 
@@ -401,8 +388,8 @@ GLOBAL void c_alias(void);
 
    /* --- misc. --- */
 
-GLOBAL _BOOL add_label(const char *label, const _BOOL isn, const _BOOL isp);
-GLOBAL _BOOL add_alias(const char *alias, const _BOOL isp);
+GLOBAL int add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links);
+GLOBAL int add_alias(const char *alias, const _BOOL isp, _BOOL referenced);
 
 GLOBAL void string2reference(char *ref, int li, const _BOOL for_toc, const char *pic, const _UWORD uiW, const _UWORD uiH);
 
@@ -462,5 +449,4 @@ GLOBAL void init_module_toc_pass2(void);
 GLOBAL void init_module_toc(void);
 GLOBAL void exit_module_toc(void);
 
-
-/* +++ EOF +++ */
+#endif /* __UDOTOC__ */

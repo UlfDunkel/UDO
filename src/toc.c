@@ -193,6 +193,11 @@
 *
 ******************************************|************************************/
 
+#if USE_NAME_HASH
+#define HASH_SIZE 9973
+LOCAL LABEL *hash[HASH_SIZE];
+#endif
+
 /*
  * max. references per paragraph,
  * only limited by encoding in add_placeholder()
@@ -223,13 +228,13 @@
 *
 ******************************************|************************************/
 
-LOCAL const char  *FRAME_NAME_TOC = "UDOtoc";
-LOCAL const char  *FRAME_NAME_CON = "UDOcon";
+LOCAL const char *FRAME_NAME_TOC = "UDOtoc";
+LOCAL const char *FRAME_NAME_CON = "UDOcon";
 
-LOCAL const char  *FRAME_FILE_TOC = "00toc";
-LOCAL const char  *FRAME_FILE_CON = "00con";
+LOCAL const char *FRAME_FILE_TOC = "00toc";
+LOCAL const char *FRAME_FILE_CON = "00con";
 
-LOCAL const char  *HTML_LABEL_CONTENTS = "UDOTOC";
+LOCAL const char *HTML_LABEL_CONTENTS = "UDOTOC";
 
 
 
@@ -470,6 +475,24 @@ LOCAL _BOOL add_toc_to_toc(void);
 *
 ******************************************|************************************/
 
+#if USE_NAME_HASH
+LOCAL _UWORD hash_val(const char *name)
+{
+   _UWORD val;
+    
+   val = 0;
+   while (*name != '\0')
+   {
+      val += (_UWORD)(unsigned char)(*name);
+      name++;
+   }
+   return val % HASH_SIZE;
+}
+#endif /* USE_NAME_HASH */
+
+
+
+
 /*******************************************************************************
 *
 *  check_toc_counters():
@@ -530,24 +553,22 @@ LOCAL _BOOL check_toc_and_token(void)
 *  is_node_link():
 *     Zu welchem Node gehoert ein Label (fuer ST-Guide, Texinfo, Pure-C-Help)
 *
-*  Return:
+* @link: link text name
+* @node: node name which uses this label
+* @isnode: TRUE: is node, FALSE: is label or alias
+* @ti: TOC index of node/label/alias
+* @li: LAB index of node/label/alias
+*
+* @Return:
 *      TRUE: label exists
 *     FALSE: label doesn't exist
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_node_link(
-
-const char       *link,          /* ^ link text name */
-char             *node,          /* ^ node name which uses this label */
-int              *ti,            /* TOC index of node/label/alias */
-_BOOL          *isnode,        /* TRUE: is label, FALSE: is node or alias */
-int              *li)            /* LAB index of node/label/alias */
+GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, int *li)
 {
-   register int   i;             /* counter*/
-   _BOOL        ret = FALSE;   /* TRUE: label exists, FALSE: label does not exist*/
-
-
+   _BOOL ret = FALSE;
+   
    node[0] = EOS;
    *isnode = FALSE;
 
@@ -556,24 +577,48 @@ int              *li)            /* LAB index of node/label/alias */
       return FALSE;
    }
    
-   for (i = 1; i <= p1_lab_counter; i++)
+#if USE_NAME_HASH
    {
-      if (strcmp(lab[i]->name, link) == 0)
+      _UWORD hash_index;
+      LABEL *l;
+        
+      hash_index = hash_val(link);
+      l = hash[hash_index];
+      while (l != NULL)
       {
-         if (lab[i]->is_node)
+         if (strcmp(l->name, link) == 0)
          {
-            *isnode = TRUE;
+            *isnode = l->is_node;
+            *li = l->labindex;
+            *ti = l->tocindex;
+            l->referenced = TRUE;
+            strcpy(node, toc[*ti]->name);
+            ret = TRUE;
+            break;
          }
-         
-         *li = i;
-         *ti = lab[i]->tocindex;
-         lab[i]->referenced = TRUE;
-         strcpy(node, toc[*ti]->name);
-         ret = TRUE;
-         break;
+         l = l->next_hash;
       }
    }
+#else
+   {
+      int i;
    
+      for (i = 1; i <= p1_lab_counter; i++)
+      {
+         if (strcmp(lab[i]->name, link) == 0)
+         {
+            *isnode = lab[i]->is_node;
+            *li = i;
+            *ti = lab[i]->tocindex;
+            lab[i]->referenced = TRUE;
+            strcpy(node, toc[*ti]->name);
+            ret = TRUE;
+            break;
+         }
+      }
+   }
+#endif
+
    return ret;
 }
 
@@ -12607,7 +12652,7 @@ GLOBAL void c_tableofcontents(void)
             a_name = "id";
 #endif
          voutlnf("<h1><a %s=\"%s\">%s</a></h1>", a_name, HTML_LABEL_CONTENTS, lang.contents);
-         add_label(HTML_LABEL_CONTENTS, FALSE, FALSE);
+         add_label(HTML_LABEL_CONTENTS, FALSE, FALSE, TRUE, TRUE);
          toc_output(TOC_NODE1, depth, FALSE);
       }
       
@@ -12867,17 +12912,35 @@ GLOBAL void c_alias(void)
 }
 
 
-
+LOCAL void set_labelname(LABEL *label, const char *name)
+{
+   strcpy(label->name, name);
+   replace_udo_quotes(label->name);
+   label->len = strlen(label->name);
+#if USE_NAME_HASH
+   {
+      _UWORD hash_index;
+        
+      hash_index = hash_val(label->name);
+      label->next_hash = hash[hash_index];
+      hash[hash_index] = label;
+   }
+#endif
+}
 
 
 /*******************************************************************************
 *
-*  add_label():
-*     add a label to the internal list of labels
+*  make_label():
+*     add a label or alias to the internal list of labels
+*
+*  @label: label name string
+*  @isn: TRUE: chapter (node), FALSE: label or alias
+*  @isa: TRUE: alias, FALSE: label
+*  @isp: TRUE: popup
+*  @ignore_index: TRUE: does not appear in index
 *
 *  Notes:
-*     tocindex: position of label in toc[]
-*
 *     Labels are now added in all formats, because else *toc_output() would output
 *     wrong results because it directly references using the label index.
 *
@@ -12887,14 +12950,9 @@ GLOBAL void c_alias(void)
 *
 ******************************************|************************************/
 
-GLOBAL int add_label(
-
-const char     *label,   /* ^ label name string */
-const _BOOL   isn,     /* TRUE: chapter (node), FALSE: label only */
-const _BOOL   isp)     /* TRUE: popup */
+LOCAL int make_label(const char *label, const _BOOL isn, const _BOOL isa, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links, _BOOL referenced)
 {
-   LABEL       *labptr;  /* ^ to label structure in memory */
-
+   LABEL   *labptr;  /* ^ to label structure in memory */
 
    if (p1_lab_counter + 1 >= MAXLABELS)   /* list overflow? */
    {
@@ -12902,46 +12960,30 @@ const _BOOL   isp)     /* TRUE: popup */
       return FALSE;
    }
 
-                                          /* label empty or too long? */
    if (label[0] == EOS || strlen(label) > MAX_LABEL_LEN)
       return FALSE;
 
                                           /* get space for new label */
-   labptr = (LABEL *)malloc(sizeof(LABEL) + 1);
+   labptr = (LABEL *)malloc(sizeof(LABEL));
 
    if (labptr == NULL)                    /* no more memory? */
    {
        return FALSE;
    }
 
-
-   /* --- set label in project file --- */
-
-   if (!isn)                              /* only labels which are not nodes */
-      save_upr_entry_label(sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-
    p1_lab_counter++;
    lab[p1_lab_counter] = labptr;
 
-   strcpy(labptr->name, label);
-   replace_udo_quotes(labptr->name);
+   set_labelname(labptr, label);
 
-   labptr->len          = strlen(labptr->name);
-   labptr->labindex     = p1_lab_counter;
-   labptr->is_node      = isn;
-   labptr->is_alias     = FALSE;
-   labptr->is_popup     = isp;
-   labptr->tocindex     = p1_toc_counter;
-   labptr->ignore_links = FALSE;
-   labptr->referenced   = FALSE;
-
-                                          /* check for labels which should not be listed in index */
-   if (    (strcmp(token[0],"!label*") == 0)
-        || (strcmp(token[0],"!l*")     == 0)
-      )
-      labptr->ignore_index = TRUE;
-   else
-      labptr->ignore_index = FALSE;
+   labptr->labindex = p1_lab_counter;
+   labptr->is_node = isn;
+   labptr->is_alias = isa;
+   labptr->is_popup = isp;
+   labptr->tocindex = p1_toc_counter;
+   labptr->ignore_links = ignore_links;
+   labptr->ignore_index = ignore_index;
+   labptr->referenced = referenced;
 
    if (pflag[PASS1].inside_apx)
    {
@@ -12966,11 +13008,38 @@ const _BOOL   isp)     /* TRUE: popup */
       labptr->n6       = p1_toc_n6;
    }
 
+   /* set label in project file */
+   if (isa)
+      save_upr_entry_alias(sCurrFileName, current_node_name_sys, uiCurrFileLine);
+   else if (!isn) /* only labels which are not nodes */
+      save_upr_entry_label(sCurrFileName, current_node_name_sys, uiCurrFileLine);
+
    return p1_lab_counter;
 }
 
 
 
+
+
+/*******************************************************************************
+*
+*  add_label():
+*     add a label to the internal list of labels
+*
+*  Notes:
+*     Labels are now added in all formats, because else *toc_output() would output
+*     wrong results because it directly references using the label index.
+*
+*  Return:
+*     - 0: error
+*     - p1_lab_counter
+*
+******************************************|************************************/
+
+GLOBAL int add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links)
+{
+   return make_label(label, isn, FALSE, isp, ignore_index, ignore_links, FALSE);
+}
 
 
 /*******************************************************************************
@@ -12987,76 +13056,9 @@ const _BOOL   isp)     /* TRUE: popup */
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL add_alias(
-
-const char     *alias,   /* */
-const _BOOL   isp)     /* */
+GLOBAL int add_alias(const char *alias, const _BOOL isp, _BOOL referenced)
 {
-   LABEL       *labptr;  /* */
-
-
-   /* r5pl9: Aliase fuer alle Formate sichern */
-
-   if (p1_lab_counter + 1 >= MAXLABELS)   /* list overflow? */
-   {
-      error_too_many_alias();
-      return FALSE;
-   }
-
-   if (alias[0] == EOS)                   /* rel6pl2: Leeren Alias abweisen */
-      return FALSE;
-
-   labptr = (LABEL *)malloc(sizeof(LABEL) + 1);
-
-   if (labptr == NULL)                    /* memory overflow? */
-   {
-      return FALSE;
-   }
-
-                                          /* Set alias in project file */
-   save_upr_entry_alias (sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-
-   p1_lab_counter++;
-   
-   lab[p1_lab_counter]  = labptr;
-
-   strcpy(labptr->name, alias);
-   replace_udo_quotes(labptr->name);
-   
-   labptr->len          = strlen(labptr->name);
-   labptr->labindex     = p1_lab_counter;
-   labptr->is_node      = FALSE;
-   labptr->is_alias     = TRUE;
-   labptr->is_popup     = isp;
-   labptr->tocindex     = p1_toc_counter;
-   labptr->ignore_links = FALSE;
-   labptr->ignore_index = FALSE;
-   labptr->referenced   = FALSE;
-
-   if (pflag[PASS1].inside_apx)
-   {
-      labptr->appendix = TRUE;
-      
-      labptr->n1 = p1_apx_n1;
-      labptr->n2 = p1_apx_n2;
-      labptr->n3 = p1_apx_n3;
-      labptr->n4 = p1_apx_n4;
-      labptr->n5 = p1_apx_n5;
-      labptr->n6 = p1_apx_n6;
-   }
-   else
-   {
-      labptr->appendix = FALSE;
-      
-      labptr->n1 = p1_toc_n1;
-      labptr->n2 = p1_toc_n2;
-      labptr->n3 = p1_toc_n3;
-      labptr->n4 = p1_toc_n4;
-      labptr->n5 = p1_toc_n5;
-      labptr->n6 = p1_toc_n6;
-   }
-
-   return TRUE;
+   return make_label(alias, FALSE, TRUE, isp, FALSE, FALSE, referenced);
 }
 
 
@@ -14380,7 +14382,7 @@ const _BOOL   invisible)   /* */
       get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
    }
 
-   li = add_label(tocptr->name, TRUE, popup);
+   li = add_label(tocptr->name, TRUE, popup, FALSE, FALSE);
 
    if (li > 0)                            /* and not li>=0, V6.5.17 [GS] */
       tocptr->labindex = li;
@@ -16605,6 +16607,10 @@ GLOBAL void init_module_toc(void)
    refs_counter = 0;
    refs_alloc = 0;
    refs = NULL;
+
+#if USE_NAME_HASH
+   memset(hash, 0, sizeof(hash));
+#endif
 }
 
 
