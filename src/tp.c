@@ -124,7 +124,6 @@ LOCAL void init_titdat(void);
 *     Setzen von Informationen fuer Variablen
 *
 *  Notes:
-*     New in V6.5.19 [NHz]
 *     Die Daten stehen in token[]. Ich habe die Funktion hier herein
 *     gepackt, da ich keine neue C-Datei eroeffnen wollte.
 *     
@@ -144,9 +143,9 @@ GLOBAL _BOOL set_show_variable(void)
    size_t   contlen;      /* */
    
    
-   tokcpy2(s, 512);
+   tokcpy2(s, sizeof(s));
 
-   contlen = strlen(token[1]);            /* New in V6.5.9 [NHz] */
+   contlen = strlen(token[1]);
 
    contlen = get_brackets_ptr(s, &cont, &data);
 
@@ -180,7 +179,6 @@ GLOBAL _BOOL set_show_variable(void)
 *     Setzen von Informationen fuer das Layout (neue Version)
 *
 *  Notes:
-*     New in r6pl16 [NHz]
 *     Die Daten stehen in token[]. Ich habe die Funktion hier herein
 *     gepackt, da ich keine neue C-Datei eroeffnen wollte.
 *     Hier werden Vorgaben gemacht, wenn der Nutzer keine Angaben zum
@@ -193,7 +191,6 @@ GLOBAL _BOOL set_show_variable(void)
 
 GLOBAL _BOOL set_mainlayout(void)
 {
-                                          /* Fixed Bug #40 in r6.3pl16 [NHz] */
    init_docinfo_data("A4PORTRAIT", &(laydat.paper), FALSE);
 
    init_docinfo_data("Times New Roman", &(laydat.propfontname), FALSE);
@@ -276,67 +273,79 @@ GLOBAL _BOOL set_doclayout(void)
           page2[2];
    struct size_brackets contlen;
 
-   tokcpy2(s, 512);
-
+   tokcpy2(s, sizeof(s));
+   
    contlen = get_two_brackets_ptr(s, &cont_format, &cont_content, &data);
-
+   
    if (contlen.format == 0 || contlen.content == 0 || cont_content == NULL || cont_format == NULL || data == NULL)
-   { 
+   {
       error_syntax_error();
       return FALSE;
    }
 
-   format[0] = EOS; 
+   format[0] = EOS;
    strncpy(format, cont_format, contlen.format);
    format[contlen.format] = EOS;
    del_whitespaces(format);
 
-   content[0] = EOS;        
+   content[0] = EOS;
    strncpy(content, cont_content, contlen.content);
    content[contlen.content] = EOS;
    del_whitespaces(content);
 
    if (strcmp(content, "paper") == 0)
-   { 
-      if (str_for_desttype(format))       /* Layout festlegen */
+   {
+      if (str_for_desttype(format))
+      {
+         /* Layout festlegen */
+         free_titdat(&(laydat.paper));
          init_docinfo_data(data, &(laydat.paper), FALSE);
-
+      }
       return TRUE;
    }
-
+   
    if (strcmp(content, "propfontname") == 0)
-   { 
-      if (str_for_desttype(format))       /* Set proportional font */
+   {
+      if (str_for_desttype(format))
+      {
+         /* Set proportional font */
+         free_titdat(&(laydat.propfontname));
          init_docinfo_data(data, &(laydat.propfontname), FALSE);
-
+      }
       return TRUE;
    }
-
+   
    if (strcmp(content, "propfontsize") == 0)
-   {  
-      if (str_for_desttype(format))       /* Set size of proportional font */
+   {
+      if (str_for_desttype(format))
+      {
+         /* Set size of proportional font */
          laydat.propfontsize = atoi(data);
-
+      }
       return TRUE;
    }
 
    if (strcmp(content, "monofontname") == 0)
-   { 
-      if (str_for_desttype(format))       /* Set aquidistant font */
+   {
+      if (str_for_desttype(format))
+      {
+         /* Set aquidistant font */
+         free_titdat(&(laydat.monofontname));
          init_docinfo_data(data, &(laydat.monofontname), FALSE);
-
+      }
       return TRUE;
    }
-
+   
    if (strcmp(content, "monofontsize") == 0)
-   {    
-      if (str_for_desttype(format))       /* Set size of the aquidistant font */
+   {
+      if (str_for_desttype(format))
+      {
+         /* Set size of the aquidistant font */
          laydat.monofontsize = atoi(data);
-
+      }
       return TRUE;
    }
-
-                                          /* New in r6pl16 [NHz] */
+   
    if (strcmp(content, "node1size") == 0)
    {  
       if (str_for_desttype(format))       /* Set size of node */
@@ -384,9 +393,11 @@ GLOBAL _BOOL set_doclayout(void)
 
       return TRUE;
    }
-                                          /* Specialties for Postscript */
+   
+   /* Specialities for Postscript */
    if (strcmp(content, "openMode") == 0)
    {
+      free_titdat(&(laydat.pagemode));
       if (strstr(data, "Outlines"))
          init_docinfo_data("/UseOutlines", &(laydat.pagemode), FALSE);
       else if (strstr(data, "Thumbs"))
@@ -395,29 +406,32 @@ GLOBAL _BOOL set_doclayout(void)
          init_docinfo_data("/FullScreen", &(laydat.pagemode), FALSE);
       else
          init_docinfo_data("/UseNone", &(laydat.pagemode), FALSE);
-
+      
+      free_titdat(&(laydat.openpage));
       page = strstr(data, "Page=");
-
       if (page != NULL)
       {
          page2[0] = *(page + 5);
          page2[1] = EOS;
-
          init_docinfo_data(page2, &(laydat.openpage), FALSE);
-      }
-      else
+      } else
+      {
          init_docinfo_data("1", &(laydat.openpage), FALSE);
-
+      }
+      
+      free_titdat(&(laydat.hidetoolbar));
       if (strstr(data, "HideToolbar"))
          init_docinfo_data("true", &(laydat.hidetoolbar), FALSE);
       else
          init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
 
+      free_titdat(&(laydat.hidemenubar));
       if (strstr(data, "HideMenubar"))
          init_docinfo_data("true", &(laydat.hidemenubar), FALSE);
       else
          init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
 
+      free_titdat(&(laydat.viewerpreferences));
       if (strstr(data, "OneColumn"))
          init_docinfo_data("/OneColumn", &(laydat.viewerpreferences), FALSE);
       else if (strstr(data, "ColumnLeft"))
@@ -426,12 +440,13 @@ GLOBAL _BOOL set_doclayout(void)
          init_docinfo_data("/TwoColumnRight", &(laydat.viewerpreferences), FALSE);
       else
          init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
-
+      
+      free_titdat(&(laydat.fitwindow));
       if (strstr(data, "Title"))
          init_docinfo_data("true", &(laydat.fitwindow), FALSE);
       else
          init_docinfo_data("false", &(laydat.fitwindow), FALSE);
-
+      
       return TRUE;
    }
 
@@ -1977,6 +1992,8 @@ GLOBAL void c_maketitle(void)
       {
          outln(win_browse);
          outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
+         for (i = 0; i < iNumWinButtons; i++)
+            voutlnf("!{\\footnote ! DisableButton(\"%s\") }", sDocWinButtonName[i]);
       }
 
       if (has_title)

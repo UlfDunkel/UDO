@@ -400,11 +400,6 @@ LOCAL void output_vision_header(const char *numbers, const char *name);
    /* output nodeline for TeXinfo */
 LOCAL void output_texinfo_node(const char *name);
 
-   /* output topline for WinHelp */
-LOCAL void win_headline(char *name, _BOOL popup);
-   /* output header for WinHelp */
-LOCAL void output_win_header(const char *name, const _BOOL insivisble);
-
    /* get filename for HTML according to current node */
 LOCAL char *get_html_filename(const int tocindex, char *s, int *html_merge);
    /* output HTML meta data in the HTML head section */
@@ -563,13 +558,15 @@ LOCAL _BOOL check_toc_and_token(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, int *li)
+GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, _BOOL *isalias, _BOOL *ispopup, int *li)
 {
    _BOOL ret = FALSE;
    
    node[0] = EOS;
    *isnode = FALSE;
-
+   *isalias = FALSE;
+   *ispopup = FALSE;
+   
    if (link[0] == EOS)
    {
       return FALSE;
@@ -587,6 +584,8 @@ GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, 
          if (strcmp(l->name, link) == 0)
          {
             *isnode = l->is_node;
+            *isalias = l->is_alias;
+            *ispopup = l->is_popup;
             *li = l->labindex;
             *ti = l->tocindex;
             l->referenced = TRUE;
@@ -606,6 +605,8 @@ GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, 
          if (strcmp(lab[i]->name, link) == 0)
          {
             *isnode = lab[i]->is_node;
+            *isalias = lab[i]->is_alias;
+            *ispopup = lab[i]->is_popup;
             *li = i;
             *ti = lab[i]->tocindex;
             lab[i]->referenced = TRUE;
@@ -2580,26 +2581,23 @@ const char  *name)     /* */
 
 LOCAL void win_headline(char *name, _BOOL popup)
 {
-   char   n[512],  /* */
-          fs[32];  /* */
-   int    ti;      /* */
-   
+   char   fs[32];
+   int    ti;
    
    ti = p2_toc_counter;
    
    if (use_chapter_images)
-   {       
-      if (ti >= 0 && toc[ti]->image != NULL)
+   {
+      if (toc[ti]->image != NULL)
       {
-         um_strcpy(n, toc[ti]->image, 512, "win_headline[1]");
-         c_begin_center();                /* r6pl1 */
-         c_bmp_output(n, "", FALSE);
-         c_end_center();                  /* r6pl1 */
+         c_begin_center();
+         c_bmp_output(toc[ti]->image, "", FALSE);
+         c_end_center();
          return;
       }
    }
    
-                                          /* r5pl16: Headlines wirklich unterdruecken */
+   /* supress headlines if requested */
    if (no_headlines || toc[ti]->ignore_headline || (no_popup_headlines && popup))
       return;
    
@@ -2613,13 +2611,81 @@ LOCAL void win_headline(char *name, _BOOL popup)
    sprintf(fs, "\\fs%d", iDocPropfontSize + 14);
    
    if (popup)
-      voutlnf("{%s{\\b %s}}\\par\\pard\\par", fs, name);
+      /* voutlnf("{%s{\\b %s}}\\par\\pard\\par", fs, name) */;
    else
       voutlnf("{%s{\\b\\sa20\\sb20 %s}}\\par\\pard\\par", fs, name);
 }
 
 
 
+LOCAL void enable_win_button(const char *button, _BOOL enable, const char *nodename)
+{
+   char    hlp_name[256];
+
+   if (enable)
+   {
+      if (desttype == TOAQV)
+      {
+         strcpy(hlp_name, "qchPath");
+      }
+      else
+      {
+         strcpy(hlp_name, "`'");
+      }
+      voutlnf("!{\\footnote ! EnableButton(\"%s\");", button);
+      voutlnf("ChangeButtonBinding(\"%s\", \"JumpID(%s, `%s') \") }", button, hlp_name, nodename);
+   } else
+   {
+      voutlnf("!{\\footnote ! DisableButton(\"%s\") }", button);
+   }
+}
+
+
+LOCAL void check_win_buttons(int ci)
+{
+   int i;
+    
+   for (i = 0; i < iNumWinButtons; i++)
+   {
+      if (sDocWinButtonName[i][0] != '\0')
+      {
+         if (toc[ci]->win_button[i] != NULL)
+         {
+            char s[512];
+            int ti;
+            int li;
+            _BOOL isnode;
+            _BOOL isalias;
+            _BOOL ispopup;
+            
+            if (is_node_link(toc[ci]->win_button[i], s, &ti, &isnode, &isalias, &ispopup, &li))
+            {
+               if (desttype == TOWIN || desttype == TOWH4 || desttype == TOAQV)
+               {
+                  if (isnode)
+                  {
+                     node2NrWinhelp(s, li);
+                  } else if (isalias)
+                  {
+                     alias2NrWinhelp(s, li);
+                  } else
+                  {
+                     label2NrWinhelp(s, li);
+                  }
+                  enable_win_button(sDocWinButtonName[i], TRUE, s);
+               }
+            } else
+            {
+               error_undefined_link(toc[ci]->win_button[i]);
+            }
+         } else
+         {
+            if (desttype == TOWIN || desttype == TOWH4 || desttype == TOAQV)
+               enable_win_button(sDocWinButtonName[i], FALSE, NULL);
+         }
+      }
+   }
+}
 
 
 /*******************************************************************************
@@ -2632,69 +2698,41 @@ LOCAL void win_headline(char *name, _BOOL popup)
 *
 ******************************************|************************************/
 
-LOCAL void output_win_header(
-
-const char     *name,           /* */
-const _BOOL   invisible)      /* */
+LOCAL void output_win_header(const char *name, const _BOOL invisible)
 {
-   char         n[512],         /* */
-                f[512],         /* */
-                cbb[512];       /* */
-   int          ci,             /* */
-                ui;             /* */
-   char         hlp_name[256 + 10];
+   char  n[512], f[512];
+   int ci, ui;
    
-   const char *btn_disable = "!{\\footnote ! DisableButton(\"BTN_UP\") }";
-   const char *btn_enable  = "!{\\footnote ! EnableButton(\"BTN_UP\");";
-   const char *btn_change  = "ChangeButtonBinding(\"BTN_UP\", \"JumpID(%s, `%s') \") }";
-
-   
-   if (desttype == TOAQV)                 /* r5pl6 */
-      strcpy(hlp_name, "qchPath");
-   else
-      sprintf(hlp_name, "`%s.hlp'", outfile.name);
-   
-   um_strcpy(n, name, 512, "output_win_header[1]");
-
-   del_internal_styles(n);                /* r5pl3 */
+   strcpy(n, name);
+   del_internal_styles(n);
    
    outln("{");
    
-                                          /* r5pl10 */
    if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
    {
-      um_strcpy(f, n, 512, "output_win_header[2]");
+      strcpy(f, n);
       winspecials2ascii(f);
       voutlnf("K{\\footnote K %s}", f);
    }
    
    if (bDocWinOldKeywords)
    {
-      um_strcpy(f, n, 512, "output_win_header[3]");
+      strcpy(f, n);
       node2winhelp(f);
       voutlnf("#{\\footnote # %s}", f);
    }
    
-                                          /* r6pl2 */
    node2NrWinhelp(f, toc[p2_toc_counter]->labindex);
-
    voutlnf("#{\\footnote # %s}", f);
-
-   if (toc[p2_toc_counter]->mapping>=0)
-   {
-      voutlnf("#{\\footnote # %d}", toc[p2_toc_counter]->mapping);
-   }
+   if (toc[p2_toc_counter]->mapping != 0)
+      voutlnf("#{\\footnote # %u}", toc[p2_toc_counter]->mapping);
+   voutlnf("${\\footnote $ %s}", n);
    
-   voutlnf("${\\footnote $ %s}", n);      /* r5pl3 */
-   
-   if (!no_buttons)                       /* r6pl8 */
+   if (!no_buttons)
    {
-      if (!invisible)                     /* r5pl12: versteckte Kapitel nicht mit in die Browse-Sequence einbinden */
-      {
+      if (!invisible)                     /* versteckte Kapitel nicht mit in die Browse-Sequence einbinden */
          outln(win_browse);
-      }
    
-      cbb[0] = EOS;
       ci = p2_toc_counter;
       ui = 0;
       
@@ -2722,24 +2760,19 @@ const _BOOL   invisible)      /* */
          if (called_tableofcontents)
          {
             node2NrWinhelp(n, 0);
-                                          /* r5pl6 */
-            sprintf(cbb, btn_change, hlp_name, n);
-            outln(btn_enable);
-            outln(cbb);
+            enable_win_button("BTN_UP", TRUE, n);
          }
          else
          {
-            outln(btn_disable);
+            enable_win_button("BTN_UP", FALSE, NULL);
          }
       }
       else
       {
          node2NrWinhelp(n, toc[ui]->labindex);
-                                          /* r5pl6 */
-         sprintf(cbb, btn_change, hlp_name, n);
-         outln(btn_enable);
-         outln(cbb);
+         enable_win_button("BTN_UP", TRUE, n);
       }
+      check_win_buttons(ci);
    }
 }
 
@@ -7219,6 +7252,8 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
    
    do_index = (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
    
+   if (desttype != TOWIN && desttype != TOWH4 && desttype != TOAQV && bCheckMisc)
+      check_win_buttons(p2_toc_counter);
    
    switch (desttype)
    {
@@ -12298,8 +12333,7 @@ void stg_out_endnode(void)
 
 GLOBAL void c_tableofcontents(void)
 {
-   char   name[256],
-          hlp_name[256 + 10];
+   char   name[256];
    char *n;
    int    i;
    int    depth;
@@ -12522,20 +12556,12 @@ GLOBAL void c_tableofcontents(void)
       if (!no_buttons)
       {
          outln(win_browse);
-
-         if (desttype == TOAQV)
-            strcpy(hlp_name, "qchPath");
-         else
-            sprintf(hlp_name, "`%s.hlp'", outfile.name);
-
-         if (called_maketitle)
+         enable_win_button("BTN_UP", called_maketitle, WIN_TITLE_NODE_NAME);
          {
-            outln("!{\\footnote ! EnableButton(\"BTN_UP\");");
-            voutlnf("ChangeButtonBinding(\"BTN_UP\", \"JumpID(%s, `%s')\") }", hlp_name, WIN_TITLE_NODE_NAME);
-         }
-         else
-         {
-            outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
+            int i;
+            
+            for (i = 0; i < iNumWinButtons; i++)
+               enable_win_button(sDocWinButtonName[i], FALSE, NULL);
          }
       }
 
@@ -13346,6 +13372,51 @@ GLOBAL void set_helpid(void)
 
 
 
+
+
+/*******************************************************************************
+*
+*  set_win_button():
+*     ???
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void win_set_button(void)
+{
+   char *ptr;
+   int i;
+    
+   if (token[1][0] == EOS || token[2][0] == EOS)
+   {
+      error_wrong_nr_parameters(token[0]);
+      return;
+   }
+    
+   for (i = 0; i < iNumWinButtons; i++)
+      if (strcmp(token[1], sDocWinButtonName[i]) == 0)
+         break;
+   if (i >= iNumWinButtons)
+   {
+       error_message(_("windows button %s not defined"), token[1]);
+       return;
+   }
+    
+   /* <???> Hier pruefen, ob nur A-Z, a-z, 0-9 und _ benutzt werden */
+
+   ptr = strdup(token[2]);
+    
+   if (ptr == NULL)
+   {
+      bFatalErrorDetected = TRUE;
+   }
+   else
+   {
+      toc[p1_toc_counter]->win_button[i] = ptr;
+   }
+}
 
 
 /*******************************************************************************

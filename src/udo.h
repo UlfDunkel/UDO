@@ -345,6 +345,9 @@ GLOBAL int         image_alignment;       /* Ausrichtung der Bilder */
 GLOBAL int         table_alignment;       /* Ausrichtung der Tabellen */
 
 GLOBAL char        sDocWinPrefixID[64];   /* Prefix fuer autom. Help-IDs */
+GLOBAL char        sDocWinButtonName[MAX_WIN_BUTTONS][64];
+GLOBAL char        sDocWinButtonText[MAX_WIN_BUTTONS][64];
+GLOBAL int         iNumWinButtons;
 
 GLOBAL char        sDrcBcolor[3];         /* DRC-Farbe fuer bold */
 GLOBAL char        sDrcIcolor[3];         /* DRC-Farbe fuer italic */

@@ -140,9 +140,9 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    FILE_LOCATION source_location;
    char      filename[MAX_FILENAME_LEN+1];    /* HTML-Filename */
    FILE_ID   dirname;                         /* HTML-Verzeichnisname */
-   char     *keywords;                    /* HTML-Keywords */   /* r5pl3 */
-   char     *description;                 /* HTML-Description */   /* r6pl5 */
-   char     *robots;                      /* HTML-Robots */   /* V6.5.17 */
+   char     *keywords;                        /* HTML-Keywords */
+   char     *description;                     /* HTML-Description */
+   char     *robots;                          /* HTML-Robots */
    FILE_ID   counter_command;                 /* HTML-Kommandos fuer Counter */
    struct rgb backcolor;                      /* HTML <BODY BGCOLOR=...> */
    struct rgb textcolor;                      /* HTML <BODY TEXT=...> */
@@ -165,6 +165,7 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    char     *icon_text;                       /* Icontext fuer modernes Layout */
    char     *helpid;                          /* Eine Jump-ID, wie ein Alias */
    int       mapping;                         /* Eine Jump-ID fuer WinHelp/IPF */
+   char     *win_button[MAX_WIN_BUTTONS];
    _BOOL   invisible;                         /* TRUE = Nicht ins Inhaltsverzeichnis */
    _BOOL   converted;                         /* Bereits Makros etc. angepasst? */
    int       labindex;                    /* lab[]-Position */
@@ -180,20 +181,21 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    int       count_n4;                    /* # of contained subsubsubnodes */
    int       count_n5;                    /* # of contained subsubsubsubnodes */
    int       count_n6;                    /* # of contained subsubsubsubsubnodes */
-   _BOOL   ignore_subtoc;               /* ignore !use_auto_subtoc */
-   _BOOL   ignore_links;                /* don't link to this page */
-   _BOOL   ignore_index;                /* don't add this to the index page */
-   _BOOL   ignore_title;                /* don't create title for this node */
-   _BOOL   ignore_headline;             /* don't create a header line */
-   _BOOL   ignore_bottomline;           /* don't create a bottom line */
-   _BOOL   ignore_footer;               /* don't create a footer line */
+   _BOOL   ignore_subtoc;                   /* ignore !use_auto_subtoc */
+   _BOOL   ignore_links;                    /* don't link to this page */
+   _BOOL   ignore_index;                    /* don't add this to the index page */
+   _BOOL   ignore_title;                    /* don't create title for this node */
+   _BOOL   ignore_headline;                 /* don't create a header line */
+   _BOOL   ignore_bottomline;               /* don't create a bottom line */
+   _BOOL   ignore_footer;                   /* don't create a footer line */
    FILE_ID   raw_header_filename;             /* file to include in header */
    FILE_ID   raw_footer_filename;             /* file to include in footer */
-   _BOOL   ignore_raw_header;           /* don't read user-defined header */
-   _BOOL   ignore_raw_footer;           /* don't read user-defined footer */
-   _BOOL   has_children;                /* TRUE: this node has subnode(s) */
+   _BOOL   ignore_raw_header;               /* don't read user-defined header */
+   _BOOL   ignore_raw_footer;               /* don't read user-defined footer */
+   _BOOL   has_children;                    /* TRUE: this node has subnode(s) */
+} TOCITEM;
 
-}  TOCITEM, *pTOCITEM;
+
 
 
 
@@ -269,7 +271,7 @@ GLOBAL _BOOL	stg_need_endnode;
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, int *li);
+GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, _BOOL *isalias, _BOOL *ispopup, int *li);
 GLOBAL int getLabelIndexFromTocIndex(int *li, const int ti);
 
 GLOBAL void reset_refs(void);
@@ -382,6 +384,7 @@ GLOBAL void set_ignore_index(void);
 GLOBAL void set_ignore_subtoc(void);
 GLOBAL void set_ignore_popup_title(void);
 GLOBAL void set_helpid(void);
+GLOBAL void win_set_button(void);
 GLOBAL void set_mapping(void);
 
 GLOBAL void set_chapter_image(void);

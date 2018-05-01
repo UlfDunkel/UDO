@@ -665,6 +665,8 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!listsubsubsubsubsubheading",   "!lsssssh",c_listsubsubsubsubsubheading, TRUE,  CMD_ONLY_MAINPART },
    { "!jumpid",                       "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!win_helpid",                   "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!win_make_button",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_set_button",               "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!wh4_helpid",                   "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!mapping",                      "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!html_name",                    "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
@@ -10769,14 +10771,13 @@ const UDOSWITCH  *us)   /* */
 
 LOCAL _BOOL pass1_check_preamble_commands(void)
 {
-   register int   i;       /* */
-   int            c;       /* */
-   char           s[256];  /* */
+   register int i;
+   int c;
+   char s[256];
 
+   /* Allgemeine globale Schalter (im Vorspann erlaubt) */
 
-   /* --- Allgemeine globale Schalter (im Vorspann erlaubt) --- */
-
-   for (i = 0; i < MAXSWITCH; i++)
+   for (i = 0; i < (int)MAXSWITCH; i++)
    {
       if (strcmp(token[0], udoswitch[i].magic) == 0)
       {
@@ -10784,17 +10785,12 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
          {
             get_switch_par(&(udoswitch[i]));
          }
-         
          return TRUE;
       }
    }
 
-
-
-
-
-   /* --- Allgemeine lokale Schalter --- */
-
+   /* Allgemeine lokale Schalter */
+   
    if (strcmp(token[0], "!toc_offset") == 0)
    {
       if (token[1][0] == EOS)
@@ -10889,7 +10885,6 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       {
          set_table_counter(atoi(token[1]));
       }
-      
       return TRUE;
    }
 
@@ -10903,23 +10898,18 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       {
          set_image_counter(atoi(token[1]));
       }
-      
       return TRUE;
    }
 
    if (strcmp(token[0], "!language") == 0)
    {
-      tokcpy2(s, 256);                    /* r6pl2: str... auf s statt token[1] */
-      
-      for (i = 0; i < MAXLANGUAGE; i++)
+      tokcpy2(s, sizeof(s));
+      for (i = 0; i < (int)MAXLANGUAGE; i++)
       {
-                                          /* r6pl2: strstr statt strcmp */
          if (strstr(s, udolanguage[i].magic) != NULL)
          {
             destlang = udolanguage[i].langval;
-            
             init_lang();
-            
             return TRUE;
          }
       }
@@ -10951,9 +10941,19 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       return TRUE;
    }
 
-
-
-
+   if (strcmp(token[0], "!win_make_button")==0)
+   {
+      if (iNumWinButtons < MAX_WIN_BUTTONS)
+      {
+         strcpy(sDocWinButtonName[iNumWinButtons], token[1]);
+         strcpy(sDocWinButtonText[iNumWinButtons], token[2]);
+         iNumWinButtons++;
+      } else
+      {
+         error_message(_("more than %d buttons defined"), MAX_WIN_BUTTONS);
+      }
+      return TRUE;
+   }
 
    /* spezielle Schalter */
 
@@ -11768,6 +11768,11 @@ LOCAL _BOOL pass1_check_everywhere_commands(void)
          set_html_color(HTML_COLOR_VLINK);
          return TRUE;
       }
+      if (strcmp(token[0], "!hh_backimage") == 0)
+      {
+         set_html_backimage();
+         return TRUE;
+      }
       if (strcmp(token[0], "!html_style_name") == 0)
       {
          set_html_style();
@@ -12314,6 +12319,10 @@ LOCAL _BOOL pass1(const char *datei)
                   else if (strcmp(token[0], "!toplink") == 0)
                   {
                      c_toplink();
+                  }
+                  else if (strcmp(token[0], "!win_set_button") == 0)
+                  {
+                     win_set_button();
                   }
                   else if (strcmp(token[0], "!html_img_suffix") == 0)
                   {
@@ -13502,47 +13511,42 @@ LOCAL void save_pchelp_commandfile(void)
 
 LOCAL void save_winhelp_project(void)
 {
-   FILE  *hpjfile;        /* */
-   char   n[512],         /* */
-          hlp_name[256 + 10],
-          bc[128];        /* */
-
+   FILE  *hpjfile;
+   char   n[512],
+          hlp_name[256],
+          bc[128];
+   int i;
+   
    if (bTestmode)
       return;
    
    hpjfile = myFwopen(file_lookup(sHpjfull), FTHPJ);
-
-   if (!hpjfile)
+   if (hpjfile == NULL)
       return;
 
    save_upr_entry_outfile(file_lookup(sHpjfull));
 
+   /*
+    * "qchPath" is a global variable in WinHelp() that contains the
+    * full path to the current helpfile. We could use that also for
+    * the Windows version, but specifying an empty string will
+    * work there, too.
+    */
    if (desttype == TOAQV)
-   {
       strcpy(hlp_name, "qchPath");
-   }
    else
-   {
-      sprintf(hlp_name, "`%s.hlp'", outfile.name);
-   }
-
+      strcpy(hlp_name, "`'");
+   
    fprintf(hpjfile, "[OPTIONS]\n");
    strcpy(n, titleprogram);
    del_right_spaces(n);
-   recode_chrtab(n,CHRTAB_ANSI);
-   
-/* fd:2010-02-17: no longer required thanks to new recode() method:
-
-   if (desttype == TOWIN && iCharset != CODE_437) 
-   {
-      ansi2dos(n);
-   }
-*/
-   
+   if (desttype != TOWIN)
+      recode_chrtab(n, CHRTAB_ANSI);
    qdelete_all(n, "\\~", 2);
    qdelete_all(n, "~", 1);
-
-   if (strlen(n) > 50)                    /* Title-Option darf maximal 50 Zeichen lang sein */
+   
+   /* Title-Option darf maximal 50 Zeichen lang sein */
+   if (strlen(n) > 50)
    {
       n[50] = EOS;
    }
@@ -13551,104 +13555,106 @@ LOCAL void save_winhelp_project(void)
    {
       fprintf(hpjfile, "Title=%s\n", n);
    }
-
-   if (titdat.author != NULL)             /* Pl12 */
+   
+   if (titdat.author != NULL)
    {
       strcpy(n, titdat.author);
-      recode_chrtab(n,CHRTAB_ANSI);
-      
-/* fd:2010-02-17: no longer required thanks to new recode() method:
-
-      if (desttype == TOWIN && iCharset != CODE_437)
-      {
-         ansi2dos(n);
-      }
-*/
-      
+      if (desttype != TOWIN)
+         recode_chrtab(n, CHRTAB_ANSI);
       qdelete_all(n, "\\~", 2);
       qdelete_all(n, "~", 1);
-      fprintf(hpjfile, "Copyright=(c) by %s\n", n);
+      fprintf(hpjfile, "Copyright=Copyright (\251) by %s\n", n);
    }
-
+   
    fprintf(hpjfile, "ErrorLog= %s.err\n", outfile.name);
-
-   fprintf(hpjfile, "Warning=3\n");       /* Weitere Optionen einbauen. Versteht QuickView die? */
+   
+   /* Weitere Optionen einbauen. Versteht QuickView die? */
+   fprintf(hpjfile, "Warning=3\n");
    fprintf(hpjfile, "Report=TRUE\n");
 
    if (bDocHighCompression)
    {
       fprintf(hpjfile, "Compress=HIGH\n");
    }
-   
    if (bDocMediumCompression)
    {
       fprintf(hpjfile, "Compress=MEDIUM\n");
    }
 
-
+   fprintf(hpjfile, "\n[WINDOWS]\n");
+   fprintf(hpjfile, "main=\"\",(20,20,708,960),0,%s,%s\n", win_color_string(&sDocBackColor), "(192,192,192)");
+   fprintf(hpjfile, "win1=\"UDO%s\",(573,71,437,500),0,(255,255,231),(192,192,192),1\n", UDO_REL);
+   
    fprintf(hpjfile, "\n[CONFIG]\n");
 
-   if (!no_buttons)                       /* r6pl7 */
+   if (!no_buttons)
    {
-      if (    (get_toc_counter() > 1) 
-           || (get_toc_counter() > 0 && called_tableofcontents)
-         )
+      if (get_toc_counter() > 1 ||
+         (get_toc_counter() > 0 && called_tableofcontents))
       {
          if (desttype == TOAQV)
          {
-                                          /* Defaultmenuezeile anzeigen */
+            /* show default menu */
             fprintf(hpjfile, "Std20Menus()\n");
-                                          /* Defaultbuttons anzeigen */
+            /* show default buttons */
             fprintf(hpjfile, "Std20Buttons()\n");
-                                          /* immer "Up" bei QuickView */
-            sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")", "&Up", hlp_name, WIN_TITLE_NODE_NAME);
-            
-            fprintf(hpjfile, "%s\n", n);
          }
          else
          {
-                                          /* << und >> anzeigen */
+            /* enable browse buttons "<<" and ">>" */
             fprintf(hpjfile, "BrowseButtons()\n");
-            
-            sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")", lang.up, hlp_name, WIN_TITLE_NODE_NAME);
-
-            fprintf(hpjfile, "%s\n", n);
+         }
+   
+         if (desttype == TOAQV)
+         {
+            /* QuickView always needs "&Up" regardless of language */
+            fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")\n", "&Up", hlp_name, WIN_TITLE_NODE_NAME);
+         }
+         else
+         {
+            fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")\n", lang.up, hlp_name, WIN_TITLE_NODE_NAME);
+            /* create user defined buttons */
+            for (i = 0; i < iNumWinButtons; i++)
+            {
+               if (sDocWinButtonName[i][0] != '\0')
+               {
+                  fprintf(hpjfile, "CreateButton(\"%s\", \"%s\", \"JumpID(%s, `%s')\")\n",
+                     sDocWinButtonName[i], sDocWinButtonText[i], hlp_name, WIN_TITLE_NODE_NAME);
+               }
+            }
 #if 0
-                                          /* WinHelp: Knopf zum Beenden einbauen */
-            sprintf(n, "CreateButton(\"BTN_EXIT\", \"%s\", \"Exit()\")", lang.exit);
-            fprintf(hpjfile, "%s\n", n);
+            /* WinHelp: Knopf zum Beenden einbauen */
+            fprintf(hpjfile, "CreateButton(\"BTN_EXIT\", \"%s\", \"Exit()\")\n", lang.exit);
 #endif
          }
 
          if (called_tableofcontents)
          {
             node2NrWinhelp(bc, 0);
-            sprintf(n, "ChangeButtonBinding(\"BTN_CONTENTS\", \"JumpID(%s, `%s')\")", hlp_name, bc);
-            fprintf(hpjfile, "%s\n", n);
+            fprintf(hpjfile, "ChangeButtonBinding(\"BTN_CONTENTS\", \"JumpID(%s, `%s')\")\n", hlp_name, bc);
          }
       }
-
+      
       if (use_about_udo)
-      {                                   /*r6pl5: Button fuer UDO einbauen */
-         sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(%s, `%s')\")", UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
-         fprintf(hpjfile, "%s\n", n);
-
-         if (desttype == TOAQV)           /* AQV kann kein zweites Fenster */
+      {
+         /* append "UDO" button */
+         fprintf(hpjfile, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(%s, `%s')\")\n", UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
+         
+         /* and also add it to the menu of Winhelp */
+         if (desttype == TOAQV)
          {
-            sprintf(n, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(%s, `%s')\")", UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
-            fprintf(hpjfile, "%s\n", n);
+            /* AQV kann kein zweites Fenster */
+            fprintf(hpjfile, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(%s, `%s')\")\n", UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
          }
          else
          {
-            sprintf(n, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(`%s.hlp>win1', `%s')\")", UDO_REL, outfile.name, WIN_UDO_NODE_NAME);
-            fprintf(hpjfile, "%s\n", n);
+            fprintf(hpjfile, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(`>win1', `%s')\")\n", UDO_REL, WIN_UDO_NODE_NAME);
          }
       }
    }
-
-   fprintf(hpjfile, "\n[WINDOWS]\n");
-   fprintf(hpjfile, "main=\"\",(20,20,708,960),0,%s,%s\n", win_color_string(&sDocBackColor), "(192,192,192)");
-   fprintf(hpjfile, "win1=\"UDO%s\",(573,71,437,500),0,(255,255,231),(192,192,192),1\n", UDO_REL);
+   
+   /* Macro used for !url */
+   fprintf(hpjfile, "RegisterRoutine(\"shell32.dll\", \"ShellExecuteA\", \"USSSSU\")\n");
 
    fprintf(hpjfile, "\n[FILES]\n");
    fprintf(hpjfile, "%s.rtf\n", outfile.name);
@@ -13681,52 +13687,45 @@ LOCAL void save_winhelp_project(void)
 LOCAL void save_winhelp4_project(void)
 {
    FILE  *hpjfile;
-   char   n[512],         /* */
-          hlp_name[256 + 10];
-
-
+   char   n[512];
+   int i;
+   
    if (bTestmode)
       return;
    
    hpjfile = myFwopen(file_lookup(sHpjfull), FTHPJ);
-
-   if (!hpjfile)
+   if (hpjfile == NULL)
       return;
    
    save_upr_entry_outfile(file_lookup(sHpjfull));
 
-   sprintf(hlp_name, "`%s.hlp'", outfile.name);
-
    fprintf(hpjfile, "; This file is maintained by UDO. Do not modify this file directly.\n\n");
    fprintf(hpjfile, "[OPTIONS]\n");
    fprintf(hpjfile, "HCW=0\n");
-   fprintf(hpjfile, "HLP=.\\%s.hlp\n", outfile.name);
-   fprintf(hpjfile, "CNT=.\\%s.cnt\n", outfile.name);
-   fprintf(hpjfile, "%s\n", lang.lcid);
-   
+   fprintf(hpjfile, "HLP=%s.hlp\n", outfile.name);
+   fprintf(hpjfile, "CNT=%s.cnt\n", outfile.name);
+   fprintf(hpjfile, "LCID=%s 0x0 0x0\n", lang.lcid);
    strcpy(n, titleprogram);
-   
    del_right_spaces(n);
-   recode_chrtab(n,CHRTAB_ANSI);
-   
+   recode_chrtab(n, CHRTAB_ANSI);
    qdelete_all(n, "\\~", 2);
    qdelete_all(n, "~", 1);
-
+   
    if (n[0] != EOS)
    {
       fprintf(hpjfile, "TITLE=%s\n", n);
    }
-
-   if (titdat.author != NULL)             /* Pl12 */
+   
+   if (titdat.author != NULL)
    {
       strcpy(n, titdat.author);
-      recode_chrtab(n,CHRTAB_ANSI);
+      recode_chrtab(n, CHRTAB_ANSI);
       qdelete_all(n, "\\~", 2);
       qdelete_all(n, "~", 1);
-      fprintf(hpjfile, "COPYRIGHT=(c) by %s\n", n);
+      fprintf(hpjfile, "COPYRIGHT=Copyright (\251) by %s\n", n);
    }
-
-   fprintf(hpjfile, "ERRORLOG= %s.err\n", outfile.name);
+   
+   fprintf(hpjfile, "ERRORLOG=%s.err\n", outfile.name);
    fprintf(hpjfile, "REPORT=TRUE\n");
 
    if (bDocHighCompression)
@@ -13739,43 +13738,50 @@ LOCAL void save_winhelp4_project(void)
       fprintf(hpjfile, "COMPRESS=8 Zeck\n");
    }
 
-
-   fprintf(hpjfile, "\n[CONFIG]\n");
-
-   if (!no_buttons)                       /* r6pl7 */
-   {
-      if (    (get_toc_counter() > 1)
-           || (get_toc_counter() > 0 && called_tableofcontents)
-         )
-      {
-                                          /* << und >> anzeigen */
-         fprintf(hpjfile, "BrowseButtons()\n");
-         sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")", lang.up, hlp_name, WIN_TITLE_NODE_NAME);
-         fprintf(hpjfile, "%s\n", n);
-      }
-
-      if (use_about_udo)
-      {                                   /*r6pl5: Button fuer UDO einbauen */
-         sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(`%s.hlp>win1', `%s')\")", UDO_REL, outfile.name, WIN_UDO_NODE_NAME);
-         fprintf(hpjfile, "%s\n", n);
-
-         sprintf(n, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(`%s.hlp>win1', `%s')\")", UDO_REL, outfile.name, WIN_UDO_NODE_NAME);
-         fprintf(hpjfile, "%s\n", n);
-      }
-
-#if 0
-      if (called_tableofcontents)         /* Damit beim Klick auf Inhalt die Auswahlbox kommt */
-      {
-         node2NrWinhelp(bc, 0);
-         sprintf(n, "ChangeButtonBinding(\"BTN_CONTENTS\", \"JumpID(%s, `%s')\")", hlp_name, bc);
-         fprintf(hpjfile, "%s\n", n);
-      }
-#endif
-   }
-
    fprintf(hpjfile, "\n[WINDOWS]\n");
    fprintf(hpjfile, "main=\"\",(20,20,540,880),0,%s,%s\n", win_color_string(&sDocBackColor), "(r12632256)");
    fprintf(hpjfile, "win1=\"UDO%s\",(573,71,437,500),4,(r15204351),(r12632256),1\n", UDO_REL);
+   
+   fprintf(hpjfile, "\n[CONFIG]\n");
+   if (!no_buttons)
+   {
+      if (get_toc_counter() > 1 ||
+         (get_toc_counter() > 0 && called_tableofcontents))
+      {
+         /* << und >> anzeigen */
+         fprintf(hpjfile, "BrowseButtons()\n");
+         fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(`', `%s')\")\n", lang.up, WIN_TITLE_NODE_NAME);
+         
+         /* create user defined buttons */
+         for (i = 0; i < iNumWinButtons; i++)
+         {
+            if (sDocWinButtonName[i][0] != '\0')
+            {
+               fprintf(hpjfile, "CreateButton(\"%s\", \"%s\", \"JumpID(`', `%s')\")\n",
+                  sDocWinButtonName[i], sDocWinButtonText[i], WIN_TITLE_NODE_NAME);
+            }
+         }
+      }
+      
+      if (use_about_udo)
+      {
+         /* append "UDO" button */
+         fprintf(hpjfile, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(`>win1', `%s')\")\n", UDO_REL, WIN_UDO_NODE_NAME);
+
+         /* and also add it to the menu of Winhelp */
+         fprintf(hpjfile, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(`>win1', `%s')\")\n", UDO_REL, WIN_UDO_NODE_NAME);
+      }
+
+      /* if we created our own table-of-contents, redirect the button there */
+      if (called_tableofcontents)
+      {
+         node2NrWinhelp(n, 0);
+         fprintf(hpjfile, "ChangeButtonBinding(\"BTN_CONTENTS\", \"JumpID(`', `%s')\")\n", n);
+      }
+   }
+   
+   /* Macro used for !url */
+   fprintf(hpjfile, "RegisterRoutine(\"shell32.dll\", \"ShellExecuteA\", \"USSSSU\")\n");
 
    fprintf(hpjfile, "\n[FILES]\n");
    fprintf(hpjfile, "%s.rtf\n", outfile.name);
@@ -13831,7 +13837,7 @@ LOCAL void save_htmlhelp_project(void)
    
    if (bHhcSaved)
       fprintf(hhpfile, "Contents file=%s.hhc\n", old_outfile.name);
-      
+   
    if (bHhkSaved)
       fprintf(hhpfile, "Index file=%s.hhk\n", old_outfile.name);
       
@@ -15336,6 +15342,9 @@ GLOBAL void init_udo_vars(void)
    sDocRawHeaderFilename = 0;
    sDocRawFooterFilename = 0;
    sDocWinPrefixID[0] = EOS;
+   sDocWinButtonName[0][0] = EOS;
+   sDocWinButtonText[0][0] = EOS;
+   iNumWinButtons = 0;
    sCounterCommand = 0;
    
    iTexVersion = TEX_NONE;

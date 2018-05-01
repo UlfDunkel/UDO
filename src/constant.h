@@ -196,6 +196,8 @@
 
 #define MAXFILECOUNTER       16           /* max. gleichzeitig geoeffnete Files */
 
+#define MAX_WIN_BUTTONS      10
+
 
 #ifdef __TOS__
 #define MAXTOCS           16383           /* max. Eintraege im Inhaltsverzeichnis r6pl13: vorher 4096 */
