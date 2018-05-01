@@ -1222,6 +1222,8 @@ htmlhelp: .stamp.htmlhelp
 		$(CP) $(srcdir)/images/*.gif "$(HTMLHELP_DIR)"; \
 		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}.gif "$(HTMLHELP_DIR)"; \
 		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(HTMLHELP_DIR)"; \
+		$(CP) $(srcdir)/images/favicon.ico $(HTMLHELP_DIR); \
+		$(CP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(HTMLHELP_DIR); \
 		$(UDO) --htmlhelp --check --force-short -o "$(HTMLHELP_DIR)udo.html" -l $(srcdir)/udo.u || exit 1; \
 		$(RM) "$(HTMLHELP_DIR)udo.hhp"; \
 		$(CP) $(srcdir)/udo$(OUTPUT_LANG).hhp "$(HTMLHELP_DIR)"; \
@@ -1287,8 +1289,8 @@ win4 winhelp4: .stamp.winhelp4
 		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/UDO$*4.HLP $(BIN_DIR)/$(OUTPUT_LANG)/UDO$*4.CNT; \
 		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.hlp $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.cnt; \
 		 chmod -f +w $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/UDO$(VER)4.FTS 2>/dev/null; \
-		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.gid $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.GID; \
-		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.FTS; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo*4.gid $(BIN_DIR)/$(OUTPUT_LANG)/UDO*4.GID; \
+		 $(RM) $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.fts $(BIN_DIR)/$(OUTPUT_LANG)/udo*4.FTS; \
 		 if test "`type $(HCRTF) 2>/dev/null`" = ""; then \
 		   echo "WinHelp4 Help Compiler ($(HCRTF)) not found" >& 2; \
 		 else \
@@ -1301,6 +1303,7 @@ win4 winhelp4: .stamp.winhelp4
 		   if test -f "$(WINHELP4_DIR)"UDO*4.HLP -a ! -f "$(WINHELP4_DIR)udo$(VER)4.hlp"; then \
 			mv "$(WINHELP4_DIR)"UDO*4.HLP "$(WINHELP4_DIR)udo$(VER)4.hlp"; \
 		   fi; \
+		   $(CP) "$(WINHELP4_DIR)udo$(VER)4.hlp" $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.hlp || exit 1; \
 		   $(CP) "$(WINHELP4_DIR)udo$(VER)4.cnt" $(BIN_DIR)/$(OUTPUT_LANG)/udo$(VER)4.cnt || exit 1; \
 		   : $(RMDIRHIER) "$(WINHELP4_DIR)"; \
 		 fi \
