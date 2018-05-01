@@ -731,6 +731,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!code_target",                  "",        c_code_target,             TRUE,  CMD_ALWAYS },
    { "!autoref",                      "",        c_autoref,                 TRUE,  CMD_ALWAYS },
    { "!autoref_items",                "",        c_autoref_items,           TRUE,  CMD_ALWAYS },
+   { "!stg_limage",                   "",        c_limage,                  TRUE,  CMD_ALWAYS },
    { "!hline",                        "",        c_hline,                   TRUE,  CMD_ONLY_MAINPART },
    { "!table_caption",                "",        c_table_caption,           TRUE,  CMD_ONLY_MAINPART },
    { "!table_caption*",               "",        c_table_caption_nonr,      TRUE,  CMD_ONLY_MAINPART },
@@ -5341,22 +5342,22 @@ LOCAL void c_code_target(void)
 
 LOCAL void c_autoref(void)
 {
-   _BOOL   newoff;  /* */
-
-   if (token_counter <= 1)                /* this command needs a parameter */
+   _BOOL newoff;
+   
+   if (token_counter <= 1)
    {
       error_missing_parameter(CMD_AUTOREF);
       return;
    }
-
+   
    newoff = check_off();
-
+   
    if (newoff && bDocAutorefOff)
    {
       error_not_active(CMD_AUTOREF);
       return;
    }
-
+   
    if (!newoff && !bDocAutorefOff)
    {
       error_still_active(CMD_AUTOREF);
@@ -5364,7 +5365,7 @@ LOCAL void c_autoref(void)
    }
 
    bDocAutorefOff = newoff;
-
+   
    switch (desttype)
    {
    case TOSTG:
@@ -5373,7 +5374,20 @@ LOCAL void c_autoref(void)
          outln("@autorefoff");
       else
          outln("@autorefon");
+      break;
    }
+}
+
+
+LOCAL void c_limage(void)
+{
+   if (token_counter <= 1)
+   {
+      error_missing_parameter("!stg_limage");
+      return;
+   }
+   
+   bStgLimage = !check_off();
 }
 
 
@@ -5395,23 +5409,22 @@ LOCAL void c_autoref(void)
 
 LOCAL void c_autoref_items(void)
 {
-   _BOOL   newoff;  /* */
+   _BOOL newoff;
    
-
-   if (token_counter <= 1)                /* this command needs a parameter */
+   if (token_counter <= 1)
    {
       error_missing_parameter(CMD_AUTOREF_ITEMS);
       return;
    }
-
+   
    newoff = check_off();
-
+   
    if (newoff && bDocAutorefItemsOff)
    {
       error_not_active(CMD_AUTOREF_ITEMS);
       return;
    }
-
+   
    if (!newoff && !bDocAutorefItemsOff)
    {
       error_still_active(CMD_AUTOREF_ITEMS);
@@ -5446,15 +5459,14 @@ LOCAL void c_autoref_items(void)
 
 LOCAL void c_universal_charset(void)
 {
-   _BOOL   newon;  /* */
+   _BOOL newon;
    
-   
-   if (token_counter <= 1)                /* this command needs a parameter */
+   if (token_counter <= 1)
    {
       error_missing_parameter(CMD_UNIVERSAL_CHARSET);
       return;
    }
-
+   
    newon = check_on();
 
    if (iUdopass < PASS2)                  /* don't react twice on the same switch! */
@@ -5841,7 +5853,7 @@ LOCAL void c_udolink(void)
 	         {
 	         case TEX_LINDNER:
 	         case TEX_STRUNK:
-	            c_img_output(IMG_MW_NAME, "", TRUE);
+	            c_img_output(IMG_MW_NAME, "", TRUE, TRUE);
 	            break;
 	         case TEX_EMTEX:
 	/*
@@ -6461,7 +6473,7 @@ const _BOOL   visible)        /* */
    case TOAMG:
       c_internal_styles(caption);
       change_sep_suffix(filename, ".img");
-      c_img_output(filename, caption, visible);
+      c_img_output(filename, caption, visible, bStgLimage);
       break;
       
    case TOTEX:
@@ -6474,7 +6486,7 @@ const _BOOL   visible)        /* */
       {
       case TEX_LINDNER:
       case TEX_STRUNK:
-         c_img_output(filename, caption, visible);
+         c_img_output(filename, caption, visible, bStgLimage);
          break;
       case TEX_EMTEX:
       case TEX_MIKTEX:
@@ -15337,6 +15349,7 @@ GLOBAL void init_udo_vars(void)
    bDocSloppy = FALSE;
    bDocAutorefOff = FALSE;
    bDocAutorefItemsOff = FALSE;
+   bStgLimage = TRUE;
    
    bDocInlineBitmaps = FALSE;
    iDocCharwidth = 150;

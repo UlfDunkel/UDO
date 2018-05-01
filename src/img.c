@@ -952,7 +952,7 @@ LOCAL void get_image_alignment(_BOOL *inside_left, _BOOL *inside_center, _BOOL *
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL c_img_output(const char *name, const char *caption, _BOOL visible)
+GLOBAL _BOOL c_img_output(const char *name, const char *caption, _BOOL visible, _BOOL limage)
 {
    IMGHEADER    imghead;        /* IMG file header */
    char         n[256],         /* */
@@ -1092,7 +1092,7 @@ GLOBAL _BOOL c_img_output(const char *name, const char *caption, _BOOL visible)
       
 
       outln("");
-      sprintf(n, "@limage %s %d", datei, img_xoff);
+      sprintf(n, "%s \"%s\" %d", limage ? "@limage" : "@image", datei, img_xoff);
       outln(n);
 
       if (caption[0] != EOS)

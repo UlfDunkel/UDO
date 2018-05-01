@@ -4658,29 +4658,28 @@ LOCAL void output_tex_environments(void)
 
 LOCAL void output_rtf_colortbl(void)
 {
-   outln("\t{\\colortbl;");
-   outln("\t\\red0\\green0\\blue0;");     /* \cf1:  black */   /*r6pl5: siehe HTML 3.2 DTD */
-   outln("\t\\red192\\green192\\blue192;"); /* \cf2:  silver */
-   outln("\t\\red128\\green128\\blue128;"); /* \cf3:  gray */
-   outln("\t\\red255\\green255\\blue255;"); /* \cf4:  white */
-   outln("\t\\red128\\green0\\blue0;");   /* \cf5:  maroon */
-   outln("\t\\red255\\green0\\blue0;");   /* \cf6:  red */
-   outln("\t\\red128\\green0\\blue128;"); /* \cf7:  purple */
-   outln("\t\\red255\\green0\\blue255;"); /* \cf8:  fuchsia */
-   outln("\t\\red0\\green128\\blue0;");   /* \cf9:  green */
-   outln("\t\\red0\\green255\\blue0;");   /* \cf10: lime */
-   outln("\t\\red128\\green128\\blue0;"); /* \cf11: olive */
-   outln("\t\\red255\\green255\\blue0;"); /* \cf12: yellow */
-   outln("\t\\red0\\green0\\blue128;");   /* \cf13: navy */
-   outln("\t\\red0\\green0\\blue255;");   /* \cf14: blue */
-   outln("\t\\red0\\green128\\blue128;"); /* \cf15: teal */
-   outln("\t\\red0\\green255\\blue255;"); /* \cf16: aqua */
+   outln("{\\colortbl;");                 /* \cf0:  default */
+   outln("\\red0\\green0\\blue0;");       /* \cf1:  black */
+   outln("\\red192\\green192\\blue192;"); /* \cf2:  silver */
+   outln("\\red128\\green128\\blue128;"); /* \cf3:  gray */
+   outln("\\red255\\green255\\blue255;"); /* \cf4:  white */
+   outln("\\red128\\green0\\blue0;");     /* \cf5:  maroon */
+   outln("\\red255\\green0\\blue0;");     /* \cf6:  red */
+   outln("\\red128\\green0\\blue128;");   /* \cf7:  purple */
+   outln("\\red255\\green0\\blue255;");   /* \cf8:  fuchsia */
+   outln("\\red0\\green128\\blue0;");     /* \cf9:  green */
+   outln("\\red0\\green255\\blue0;");     /* \cf10: lime */
+   outln("\\red128\\green128\\blue0;");   /* \cf11: olive */
+   outln("\\red255\\green255\\blue0;");   /* \cf12: yellow */
+   outln("\\red0\\green0\\blue128;");     /* \cf13: navy */
+   outln("\\red0\\green0\\blue255;");     /* \cf14: blue */
+   outln("\\red0\\green128\\blue128;");   /* \cf15: teal */
+   outln("\\red0\\green255\\blue255;");   /* \cf16: aqua */
    
-                                          /* New in V6.5.9 [NHz] */
    if (sDocColour[0] != EOS)
       outln(sDocColour);
    
-   outln("\t}");
+   outln("}");
 }
 
 
@@ -4699,9 +4698,8 @@ LOCAL void output_rtf_colortbl(void)
 
 GLOBAL void c_begin_document(void)
 {
-   char   s[512];  /* */
-   int    i;       /* counter */
-   
+   char   s[512];
+   int    i;
 
    if (bCalledBeginDocument)
    {
@@ -4715,7 +4713,7 @@ GLOBAL void c_begin_document(void)
    {
    case TOPDL:
       outln("\\pdfinfo {");
-         
+      
       if (titdat.title != NULL)
          voutlnf("  /Title (%s)", titdat.title);
       else
@@ -5261,10 +5259,9 @@ GLOBAL void c_begin_document(void)
       outln("/leftmargin    90 def");
 */
       outln("/linespacing  1.5 def");
-      outln("0 0 0 setBaseColor");        /* New in r6pl15 [NHz] */
+      outln("0 0 0 setBaseColor");
       outln("setup");
 
-                                          /* New in r6pl15 [NHz] */
       if (    (strstr(laydat.propfontname, "Helvetica"))
            || (strstr(laydat.propfontname, "Arial"))
            || (strstr(laydat.propfontname, "sans-serif"))

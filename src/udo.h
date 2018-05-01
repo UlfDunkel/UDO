@@ -251,6 +251,7 @@ GLOBAL _BOOL     no_sourcecode;         /* Sourcecode-Umgebung nicht ausgeben? *
 GLOBAL _BOOL     no_table_lines;        /* Tabellen ohne Linien ausgeben? */
 
 GLOBAL _BOOL     bDocAutorefOff;        /* Nicht autom. referenzieren? */
+GLOBAL _BOOL     bStgLimage;            /* use @limage for !image */
 GLOBAL _BOOL     bDocAutorefItemsOff;   /* Items nicht autom. referenzieren? */
 GLOBAL _BOOL     bDocUniversalCharsetOn;/* Universellen Zeichensatz benutzen? */
 GLOBAL _BOOL     bDocRtfKeepTablesOn;   /* Tabellen zusammenhalten? */

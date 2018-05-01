@@ -1963,40 +1963,28 @@ const char  *nodename)     /* */
 *
 ******************************************|************************************/
 
-LOCAL void stg_header(
-
-const char  *numbers,   /* */
-const char  *nodename,  /* */
-_BOOL      is_popup)  /* */
+LOCAL void stg_header(const char *numbers, const char *nodename, _BOOL is_popup)
 {
-   char      n[512];    /* */
-   int       ti;        /* */
-   _BOOL   flag;      /* */
-   
+   int     ti;
+   _BOOL   flag;
    
    output_aliasses();
    
    ti = p2_toc_counter;
    
-   if (ti >= 0)
-   {
-      if (toc[ti]->ignore_links)
-         outln("@noref");
+   if (toc[ti]->ignore_links)
+      outln("@noref");
    
-      if (use_chapter_images && toc[ti]->image != NULL)
-      {       
-         strcpy(n, toc[ti]->image);
-         change_sep_suffix(n, ".img");
-         c_begin_center();                /* R6r5pl1 */
-         flag = c_img_output(n, "", FALSE);
-         c_end_center();
-
-         if (flag)
-            return;
-      }
+   if (use_chapter_images && toc[ti]->image != NULL)
+   {
+      c_begin_center();
+      flag = c_img_output(toc[ti]->image, "", FALSE, TRUE);
+      c_end_center();
+      if (flag)
+         return;
    }
    
-   if (!is_popup)  
+   if (!is_popup)
       stg_headline(numbers, nodename);
 }
 

@@ -139,6 +139,7 @@ LOCAL void c_fussy(void);
 
 LOCAL void c_autoref(void);
 LOCAL void c_autoref_items(void);
+LOCAL void c_limage(void);
 
 LOCAL void c_universal_charset(void);
 LOCAL void c_rtf_keep_tables(void);

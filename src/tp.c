@@ -1094,7 +1094,7 @@ GLOBAL void c_maketitle(void)
             case TEX_LINDNER:
             case TEX_STRUNK:
                c_begin_center();
-               c_img_output(titdat.programimage, "", FALSE);
+               c_img_output(titdat.programimage, "", FALSE, TRUE);
                c_end_center();
                break;
             case TEX_EMTEX:
@@ -1150,7 +1150,7 @@ GLOBAL void c_maketitle(void)
             case TEX_LINDNER:
             case TEX_STRUNK:
                c_begin_center();
-               c_img_output(titdat.authorimage, "", FALSE);
+               c_img_output(titdat.authorimage, "", FALSE, TRUE);
                c_end_center();
                break;
             case TEX_EMTEX:
@@ -1438,7 +1438,7 @@ GLOBAL void c_maketitle(void)
          strcpy(n, titdat.programimage);
          change_sep_suffix(n, ".img");
          c_begin_center();
-         c_img_output(n, "", FALSE);
+         c_img_output(n, "", FALSE, TRUE);
          c_end_center();
       }
       
@@ -1465,7 +1465,7 @@ GLOBAL void c_maketitle(void)
          strcpy(n, titdat.authorimage);
          change_sep_suffix(n, ".img");
          c_begin_center();
-         c_img_output(n, "", FALSE);
+         c_img_output(n, "", FALSE, TRUE);
          c_end_center();
       }
 
