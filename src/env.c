@@ -166,30 +166,6 @@ LOCAL const PAPERFORMAT paperSize[MAXPAPERSIZE]=
 
 /*******************************************************************************
 *
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-LOCAL int strlen_prev_indent(void);
-LOCAL void strcat_prev_indent(char *s);
-LOCAL void strcpy_prev_indent(char *s);
-
-LOCAL void set_env_compressed(const int el, const char *s);
-LOCAL _BOOL check_iEnvLevel(void);
-LOCAL _BOOL check_env_end(const int etype, const int ekind, const char *ecomm);
-
-LOCAL void end_env_output_line(const int el);
-
-LOCAL char *itoenum(int level, int *count, char *string);
-LOCAL char *strcat_blanks(char *string, int count);
-LOCAL void add_description(void);
-
-LOCAL void c_begin_list(int listkind);
-LOCAL void c_end_list(int listkind);
-
-
-/*******************************************************************************
-*
 *     LOCAL FUNCTIONS
 *
 ******************************************|************************************/
@@ -256,10 +232,7 @@ LOCAL void c_end_list(int listkind);
 *
 ******************************************|************************************/
 
-LOCAL void set_env_compressed(
-
-const int    el,  /* */
-const char  *s)   /* */
+LOCAL void set_env_compressed(const int el, const char *s)
 {
    if (strstr(s, "!not_compressed"))      /* don't inherit compressed flag from outer environment */
    {
@@ -356,24 +329,24 @@ LOCAL _BOOL check_iEnvLevel(void)
 *     When e.g. !end_enumerate follows !begin_itemize, an error message
 *     has to be thrown.
 *
+*  Parameters:
+*     etype:   ENV_ITEM, ENV_ENUM etc.
+*     ekind:   LIST_NORMAL, LIST_BOLD etc.
+*     ecomm:   used command (for error message)
+*
 *  Return:
 *     TRUE: all OK
 *    FALSE: wrong !end_*
 *
 ******************************************|************************************/
 
-LOCAL _BOOL check_env_end(
-
-const int    etype,  /* ENV_ITEM, ENV_ENUM, etc. */
-const int    ekind,  /* LIST_NORMAL, LIST_BOLD, etc. */
-const char  *ecomm)  /* used command (for error message) */
+LOCAL _BOOL check_env_end(const int etype, const int ekind, const char *ecomm)
 {
    if (iEnvLevel <= 0)
       return TRUE;
    
-
-   if (    (iEnvType[iEnvLevel] != etype)
-        || (iEnvType[iEnvLevel] == etype && env_kind[iEnvLevel] != ekind)
+   if (  (iEnvType[iEnvLevel] != etype)
+      || (iEnvType[iEnvLevel] == etype && env_kind[iEnvLevel] != ekind)
       )
    {
       switch (iEnvType[iEnvLevel])
@@ -407,9 +380,10 @@ const char  *ecomm)  /* used command (for error message) */
             
          default:
             error_wrong_end(CMD_BEGIN_XLIST, ecomm);
+            break;
          }
+         break;
       }
-      
       return FALSE;
    }
 
@@ -432,13 +406,11 @@ const char  *ecomm)  /* used command (for error message) */
 
 GLOBAL void check_environments_node(void)
 {
-   int   i;  /* counter */
-
+   int i;
    
    if (iEnvLevel <= 0)
       return;
    
-
    for (i = iEnvLevel; i >= 1; i--)
    {
       switch (iEnvType[i])
@@ -472,8 +444,8 @@ GLOBAL void check_environments_node(void)
             
          default:
             error_missing_end(CMD_END_XLIST);
+            break;
          }
-         
          break;
          
       case ENV_QUOT:
@@ -490,6 +462,7 @@ GLOBAL void check_environments_node(void)
          
       case ENV_LEFT:
          error_missing_end(CMD_END_LEFT);
+         break;
       }
    }
 
@@ -545,7 +518,9 @@ GLOBAL void check_environments_node(void)
             
          default:
             c_end_xlist();
+            break;
          }
+         break;
       }
    }
 }
@@ -571,23 +546,23 @@ GLOBAL void check_environments_node(void)
 *     iEnvLevel cannot be used here, because it has already been decreased in the
 *     relevant !end_* routines.
 *
+*  Parameters:
+*     el:   environment level to check
+*
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void end_env_output_line(
-
-const int    el)            /* environment level to check */
+LOCAL void end_env_output_line(const int el)
 {
-   _BOOL   flag = FALSE;  /* */
+   _BOOL   flag = FALSE;
    
    switch (el)
    {
    case 0:                                /* only possible on output_end_verbatim() */
       if (iEnvLevel == 0 || (iEnvLevel > 0 && !bEnvCompressed[iEnvLevel]) )
          flag = TRUE;
-         
       break;
       
    case 1:                               /* Letzte Umgebung, also Leerzeile, falls komprimiert */
@@ -599,6 +574,7 @@ const int    el)            /* environment level to check */
                                          /* nicht komprimiert ist.                     */
       if (bEnvCompressed[el] && !bEnvCompressed[el - 1])
          flag = TRUE;
+      break;
    }
    
    if (flag)
@@ -615,11 +591,8 @@ const int    el)            /* environment level to check */
       case TOHAH:
       case TOHTM:
       case TOMHH:
-#if 0   /* r6pl6*/
-         outln("</p>");   
-#endif
          break;
-
+         
       case TOIPF:
          /* Hier keine Leerzeile */
          break;
@@ -632,8 +605,12 @@ const int    el)            /* environment level to check */
          outln("newline");
          break;
 
+      case TOUDO:
+         break;
+      
       default:
          outln("");
+         break;
       }
    }
 }
@@ -664,16 +641,17 @@ const int    el)            /* environment level to check */
 *        3.
 *       (c)
 *
+*  Parameters:
+*     level:   enumeration level
+*     count:   item counter
+*     string:  string buffer
+*
 *  Return:
 *     formatted number string
 *
 ******************************************|************************************/
 
-LOCAL char *itoenum(
-
-int    level,   /* enumeration level */
-int   *count,   /* item counter */
-char  *string)  /* ^ string buffer */
+LOCAL char *itoenum(int level, int *count, char *string)
 {
    switch (level)
    {
@@ -684,12 +662,12 @@ char  *string)  /* ^ string buffer */
       
    case 2:
    case 6:
-      if (*count > 26)                    /* Buchstabenbereich checken */
+      /* Buchstabenbereich checken */
+      if (*count > 26)
       {
          error_item_many_enum();
          *count = 1;
       }
-      
       sprintf(string, "(%c)", 'a' - 1 + *count);
       break;
       
@@ -699,13 +677,14 @@ char  *string)  /* ^ string buffer */
       break;
       
    case 4:
-      if (*count > 26)                    /* Buchstabenbereich checken */
+      /* Buchstabenbereich checken */
+      if (*count > 26)
       {
          error_item_many_enum();
          *count = 1;
       }
-      
       sprintf(string, "%c.", 'A' - 1 + *count);
+      break;
    }
 
    return string;
@@ -750,27 +729,23 @@ GLOBAL void output_begin_verbatim(void)
          
       case VERB_HUGE:
          outln("\\begin{huge}");
+         break;
       }
-      
       outln("\\begin{verbatim}");
       break;
 
-      
    case TOINF:
       outln("@example");
       break;
       
-
    case TOIPF:
       outln(":xmp.");
       break;
 
-      
    case TOAQV:
    case TOWIN:
    case TOWH4:
       out(win_verb_on);
-      
       switch (iDocVerbatimSize)
       {
       case VERB_TINY:
@@ -791,16 +766,14 @@ GLOBAL void output_begin_verbatim(void)
          
       case VERB_HUGE:
          voutf("\\fs%d", iDocMonofontSize + 6);
+         break;
       }
-      
       out(" ");
       break;
-      
       
    case TORTF:
       out(rtf_pardplain);
       out(rtf_verb);
-      
       switch (iDocVerbatimSize)
       {
       case VERB_TINY:
@@ -821,10 +794,9 @@ GLOBAL void output_begin_verbatim(void)
          
       case VERB_HUGE:
          voutf("\\fs%d ", iDocMonofontSize + 8);
+         break;
       }
-      
       break;
-      
       
    case TOHAH:
    case TOHTM:
@@ -849,9 +821,9 @@ GLOBAL void output_begin_verbatim(void)
          
       case VERB_HUGE:
          outln("<font size=+2>");
+         break;
       }
-      
-      out("<pre>");                       /*r6pl5: vorher outln(), was zu einer Leerzeile zuviel fuehrte */
+      out("<pre>");
       break;
       
    case TONRO:
@@ -862,14 +834,22 @@ GLOBAL void output_begin_verbatim(void)
       outln("<verb>");
       break;
       
-      
    case TOHPH:
       outln("<ex>");
       break;
       
-      
    case TOKPS:
       outln("Von");
+      break;
+   
+   case TOSRC:
+   case TOSRP:
+      outln(sSrcRemOn);
+      break;
+      
+   case TOUDO:
+      outln("!begin_verbatim");
+      break;
    }
 }
 
@@ -897,7 +877,6 @@ GLOBAL void output_end_verbatim(void)
    case TOTEX:
    case TOPDL:
       outln("\\end{verbatim}");
-      
       switch (iDocVerbatimSize)
       {
       case VERB_TINY:
@@ -914,20 +893,17 @@ GLOBAL void output_end_verbatim(void)
          
       case VERB_HUGE:
          outln("\\end{huge}");
+         break;
       }
-      
       break;
-      
       
    case TOINF:
       outln("@end example");
       break;
       
-      
    case TOIPF:
       outln(":exmp.");
       break;
-      
       
    case TOAQV:
    case TOWIN:
@@ -935,18 +911,15 @@ GLOBAL void output_end_verbatim(void)
       outln(win_verb_off);
       break;
       
-      
    case TORTF:
       outln(rtf_pardplain);
       voutlnf("%s\\fs%d", rtf_norm, iDocPropfontSize);
       break;
       
-      
    case TOHAH:
    case TOHTM:
    case TOMHH:
       outln("</pre>");
-      
       switch (iDocVerbatimSize)
       {
       case VERB_TINY:
@@ -963,6 +936,7 @@ GLOBAL void output_end_verbatim(void)
          
       case VERB_HUGE:
          outln("</font>");
+         break;
       }
       
       if (sDocVerbatimBackColor.rgb.set)
@@ -971,21 +945,26 @@ GLOBAL void output_end_verbatim(void)
       }
       break;
       
-      
    case TOLDS:
       outln("</verb>");
       break;
-      
       
    case TOHPH:
       outln("<\\ex>");
       break;
       
-      
    case TOKPS:
       outln("Voff");
       break;
       
+   case TOSRC:
+   case TOSRP:
+      outln(sSrcRemOff);
+      break;
+   
+   case TOUDO:
+      outln("!end_verbatim");
+      break;
       
    default:
       break;
@@ -997,6 +976,59 @@ GLOBAL void output_end_verbatim(void)
 
 
 
+
+/*******************************************************************************
+*
+*  output_begin_preformatted():
+*     begin preformatted environment
+*
+*  Notes:
+*     The routine is called by pass2()().
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void output_begin_preformatted(void)
+{
+   switch(desttype)
+   {
+   case TOUDO:
+      outln("!begin_preformatted");
+      break;
+   default:
+      output_begin_verbatim();
+      break;
+   }
+}
+
+
+/*******************************************************************************
+*
+*  output_end_preformatted():
+*     begin preformatted environment
+*
+*  Notes:
+*     The routine is called by pass2()().
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void output_end_preformatted(void)
+{
+   switch(desttype)
+   {
+   case TOUDO:
+      outln("!end_preformatted");
+      break;
+   default:
+      output_end_verbatim();
+      break;
+   }
+}
 
 /*******************************************************************************
 *
@@ -1013,37 +1045,42 @@ GLOBAL void output_end_verbatim(void)
 
 GLOBAL void output_begin_linedraw(void)
 {
-   if (desttype != TORTF)
+   switch (desttype)
    {
+   case TORTF:
+      out(rtf_pardplain);
+      out(rtf_linedraw);
+   
+      switch (iDocLinedrawSize)
+      {
+      case VERB_TINY:
+         voutf("\\fs%d ", iDocMonofontSize - 8);
+         break;
+      case VERB_SMALL:
+         voutf("\\fs%d ", iDocMonofontSize - 4);
+         break;
+      case VERB_NORMAL:
+         voutf("\\fs%d ", iDocMonofontSize);
+         break;
+      case VERB_LARGE:
+         voutf("\\fs%d ", iDocMonofontSize + 4);
+         break;
+      case VERB_HUGE:
+         voutf("\\fs%d ", iDocMonofontSize + 8);
+         break;
+      }
+      pre_linedraw_charset = iCharset;
+      break;
+   
+   case TOUDO:
+      outln("!begin_linedraw");
+      break;
+   
+   default:
       pre_linedraw_charset = iCharset;
       iCharset = CODE_437;
       output_begin_verbatim();
-      return;
-   }
-
-   out(rtf_pardplain);
-   out(rtf_linedraw);
-
-   switch (iDocLinedrawSize)
-   {
-   case VERB_TINY:
-      voutf("\\fs%d ", iDocMonofontSize - 8);
       break;
-      
-   case VERB_SMALL:
-      voutf("\\fs%d ", iDocMonofontSize - 4);
-      break;
-      
-   case VERB_NORMAL:
-      voutf("\\fs%d ", iDocMonofontSize);
-      break;
-      
-   case VERB_LARGE:
-      voutf("\\fs%d ", iDocMonofontSize + 4);
-      break;
-      
-   case VERB_HUGE:
-      voutf("\\fs%d ", iDocMonofontSize + 8);
    }
 }
 
@@ -1066,8 +1103,17 @@ GLOBAL void output_begin_linedraw(void)
 
 GLOBAL void output_end_linedraw(void)
 {
-   output_end_verbatim();
-   iCharset = pre_linedraw_charset;
+   switch (desttype)
+   {
+   case TOUDO:
+      outln("!end_linedraw");
+      break;
+   
+   default:
+      output_end_verbatim();
+      iCharset = pre_linedraw_charset;
+      break;
+   }
 }
 
 
@@ -1089,13 +1135,23 @@ GLOBAL void output_end_linedraw(void)
 
 GLOBAL void output_begin_sourcecode(void)
 {
-   if (desttype != TOSRC && desttype != TOSRP)
+   switch (desttype)
    {
+   case TOSRC:
+   case TOSRP:
+      break;
+   
+   case TOUDO:
+      outln("!begin_sourcecode");
+      break;
+   
+   default:
       if (!no_sourcecode)
       {
          c_begin_quote();
          output_begin_verbatim();
       }
+      break;
    }
 }
 
@@ -1116,20 +1172,25 @@ GLOBAL void output_begin_sourcecode(void)
 *
 ******************************************|************************************/
 
-
-
 GLOBAL void output_end_sourcecode(void)
 {
-   if (desttype != TOSRC && desttype != TOSRP)
+   switch (desttype)
    {
+   case TOSRC:
+   case TOSRP:
+      outln("");
+      break;
+   case TOUDO:
+      outln("!end_sourcecode");
+      break;
+   default:
       if (!no_sourcecode)
       {
          output_end_verbatim();
          c_end_quote();
       }
+      break;
    }
-
-   outln("");
 }
 
 
@@ -1151,7 +1212,12 @@ GLOBAL void output_end_sourcecode(void)
 
 GLOBAL void output_begin_comment(void)
 {
-   return;
+   switch (desttype)
+   {
+   case TOUDO:
+      outln(CMD_BEGIN_COMMENT);
+      break;
+   }
 }
 
 
@@ -1173,7 +1239,12 @@ GLOBAL void output_begin_comment(void)
 
 GLOBAL void output_end_comment(void)
 {
-   return;
+   switch (desttype)
+   {
+   case TOUDO:
+      outln(CMD_END_COMMENT);
+      break;
+   }
 }
 
 
@@ -1190,12 +1261,9 @@ GLOBAL void output_end_comment(void)
 *
 ******************************************|************************************/
 
-LOCAL char *strcat_blanks(
-
-char     *string,   /* */
-int       count)    /* */
+LOCAL char *strcat_blanks(char *string, int count)
 {
-   char   li[128];  /* */
+   char li[128];
 
    switch (desttype)
    {
@@ -1216,6 +1284,7 @@ int       count)    /* */
 
       li[count] = EOS;
       strcat(string, li);
+      break;
    }
    
    return string;
@@ -1240,9 +1309,7 @@ int       count)    /* */
 
 LOCAL int strlen_prev_indent(void)
 {
-   int   i,   /* counter */
-         il;  /* */
-         
+   int i, il;
 
    il = 0;
 
@@ -1273,9 +1340,7 @@ LOCAL int strlen_prev_indent(void)
 
 GLOBAL int strlen_indent(void)
 {
-   int   i,   /* counter */
-         il;  /* */
-         
+   int i, il;
 
    il = 0;
 
@@ -1305,19 +1370,15 @@ GLOBAL int strlen_indent(void)
 *
 ******************************************|************************************/
 
-LOCAL void strcat_prev_indent(
-
-char     *s)        /* */
+LOCAL void strcat_prev_indent(char *s)
 {
-   int    il;       /* */
-   char   sil[64];  /* */
-
+   int il;
+   char sil[64];
 
    il = strlen_prev_indent();
 
    if (il == 0)
       return;
-   
    
    switch (desttype)
    {
@@ -1350,7 +1411,7 @@ char     *s)        /* */
 
 /*******************************************************************************
 *
-*  strcat_prev_indent():
+*  strcat_indent():
 *     concatenate spaces to <s> for the previous environment
 *
 *  Notes:
@@ -1362,19 +1423,15 @@ char     *s)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL void strcat_indent(
-
-char     *s)        /* */
+GLOBAL void strcat_indent(char *s)
 {
-   int    il;       /* */
-   char   sil[64];  /* */
-
+   int il;
+   char sil[64];
 
    il = strlen_indent();
 
    if (il == 0)
       return;
-   
 
    switch (desttype)
    {
@@ -1422,9 +1479,7 @@ char     *s)        /* */
 *
 ******************************************|************************************/
 
-LOCAL void strcpy_prev_indent(
-
-char  *s)  /* */
+LOCAL void strcpy_prev_indent(char *s)
 {
    s[0] = EOS;
    strcat_prev_indent(s);
@@ -1444,9 +1499,7 @@ char  *s)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL void strcpy_indent(
-
-char  *s)  /* */
+GLOBAL void strcpy_indent(char *s)
 {
    s[0] = EOS;
    strcat_indent(s);
@@ -1474,13 +1527,12 @@ char  *s)  /* */
 
 GLOBAL void c_begin_quote(void)
 {
-   char   quote[1024],  /* */
-         *ptr,          /* */
-          title[512];   /* */
-   int    j,            /* */
-          k;            /* */
-   long   lang;         /* */
-
+   char   quote[1024],
+         *ptr,
+          title[512];
+   int    j,
+          k;
+   size_t len;
 
    if (!check_iEnvLevel())
       return;
@@ -1504,10 +1556,9 @@ GLOBAL void c_begin_quote(void)
       outln("\\begin{quote}");
       break;
       
-      
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Quote");
       break;
-      
       
    case TOINF:
       outln("@quotation");
@@ -1520,7 +1571,6 @@ GLOBAL void c_begin_quote(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-                                          /* Changed in V6.5.9 [NHz] [blockquote] */
       um_strcpy(quote, "<blockquote", 1020, "c_begin_quote[1]");
       
       if (token[1][0] == '[')
@@ -1533,10 +1583,10 @@ GLOBAL void c_begin_quote(void)
             
             if (ptr != NULL)
             {
-               lang = strcspn(ptr, " ");
+               len = strcspn(ptr, " ");
                
                um_strcat(quote, " id=\"", 1020, "c_begin_quote[2]");
-               um_strncat(quote, ptr + 3, lang, 1020, "c_begin_quote[3]");
+               um_strncat(quote, ptr + 3, len, 1020, "c_begin_quote[3]");
                um_strcat(quote, "\"", 1020, "c_begin_quote[4]");
             }
             
@@ -1544,10 +1594,10 @@ GLOBAL void c_begin_quote(void)
             
             if (ptr != NULL)
             {
-               lang = strcspn(ptr, " ");
+               len = strcspn(ptr, " ");
                
                um_strcat(quote, " class=\"", 1020, "c_begin_quote[5]");
-               um_strncat(quote, ptr + 6, lang, 1020, "c_begin_quote[6]");
+               um_strncat(quote, ptr + 6, len, 1020, "c_begin_quote[6]");
                um_strcat(quote, "\"", 1020, "c_begin_quote[7]");
             }
             
@@ -1555,10 +1605,10 @@ GLOBAL void c_begin_quote(void)
             
             if (ptr != NULL)
             {
-               lang = strcspn(ptr, " ");
+               len = strcspn(ptr, " ");
                
                um_strcat(quote, " cite=\"", 1020, "c_begin_quote[8]");
-               um_strncat(quote, ptr + 5, lang, 1020, "c_begin_quote[9]");
+               um_strncat(quote, ptr + 5, len, 1020, "c_begin_quote[9]");
                um_strcat(quote, "\"", 1020, "c_begin_quote[10]");
             }
             
@@ -1566,10 +1616,10 @@ GLOBAL void c_begin_quote(void)
             
             if (ptr != NULL)
             {
-               lang = strcspn(ptr, " ");
+               len = strcspn(ptr, " ");
                
                um_strcat(quote, " lang=\"", 1020, "c_begin_quote[11]");
-               um_strncat(quote, ptr + 5, lang, 1020, "c_begin_quote[12]");
+               um_strncat(quote, ptr + 5, len, 1020, "c_begin_quote[12]");
                um_strcat(quote, "\"", 1020, "c_begin_quote[13]");
             }
             
@@ -1583,9 +1633,9 @@ GLOBAL void c_begin_quote(void)
                {
                   um_strcpy(title, ptr + 7, 512, "c_begin_quote[15]");
                   
-                  lang = strlen(title);
+                  len = strlen(title);
                   
-                  if (title[lang-1L] == '\'')
+                  if (title[len - 1] == '\'')
                      goto no_blanks;
                      
                   k = j;
@@ -1597,17 +1647,17 @@ GLOBAL void c_begin_quote(void)
                      um_strcat(title, token[k], 512, "c_begin_quote[17]");
                   } while(strrchr(token[k], '\'') == NULL);
                   
-                  lang = strlen(title);
+                  len = strlen(title);
 
                   no_blanks:
-                  title[lang - 1L] = EOS;
+                  title[len - 1] = EOS;
                   
-                  um_strncat(quote, title, lang, 1020, "c_begin_quote[18]");
+                  um_strncat(quote, title, len, 1020, "c_begin_quote[18]");
                }
                else
                {
-                  lang = strcspn(ptr + 6, " ");
-                  um_strncat(quote, ptr + 6, lang, 1020, "c_begin_quote[19]");
+                  len = strcspn(ptr + 6, " ");
+                  um_strncat(quote, ptr + 6, len, 1020, "c_begin_quote[19]");
                }
                
                um_strcat(quote, "\"", 1020, "c_begin_quote[20]");
@@ -1621,13 +1671,13 @@ GLOBAL void c_begin_quote(void)
 */
       break;
       
-      
-   case TOLDS:                            /* siehe token_output() */
+   case TOLDS:
+      /* siehe token_output() */
       break;
-      
       
    case TOIPF:
       voutlnf(":lm margin=%d.", quot_level * ENV_IND_ASC_QUOT + 1);
+      break;
    }
 
    switch (desttype)
@@ -1644,6 +1694,7 @@ GLOBAL void c_begin_quote(void)
       
    default:
       iEnvIndent[iEnvLevel] = ENV_IND_ASC_QUOT;
+      break;
    }
 }
 
@@ -1687,16 +1738,17 @@ GLOBAL void c_end_quote(void)
       outln("");
       break;
       
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Standard");
       break;
       
    case TOINF:
       outln("@end quotation");
       break;
-
+      
    case TONRO:
-   outln(".RE");
-   break;
+      outln(".RE");
+      break;
       
    case TORTF:
    case TOWIN:
@@ -1706,7 +1758,6 @@ GLOBAL void c_end_quote(void)
       {
          outln("\\li0\\ri0\\fi0 ");
       }
-      
       break;
       
    case TOHAH:
@@ -1715,11 +1766,13 @@ GLOBAL void c_end_quote(void)
       outln("</blockquote>");
       break;
       
-   case TOLDS:                            /* siehe token_output() */
+   case TOLDS:
+      /* siehe token_output() */
       break;
       
    case TOIPF:
       voutlnf(":lm margin=%d.", quot_level*ENV_IND_ASC_QUOT+1);
+      break;
    }
 }
 
@@ -1757,9 +1810,10 @@ GLOBAL void c_begin_center(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   /*r6pl6:   !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt */
-   /*         und eine Anpassung unheimlich problematisch ist   */
-   
+   /*
+    * !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt
+    * und eine Anpassung unheimlich problematisch ist
+    */
    switch (desttype)
    {
    case TOHTM:
@@ -1770,6 +1824,7 @@ GLOBAL void c_begin_center(void)
    
    default:
       set_env_compressed(iEnvLevel, token[1]);
+      break;
    }
 
    cent_level++;
@@ -1782,14 +1837,16 @@ GLOBAL void c_begin_center(void)
       break;
       
    case TOIPF:
-      outln(":lines align=center.");      /* r6pl7*/
+      outln(":lines align=center.");
       break;
 
    case TONRO:
       outln(".ad c");
       break;
       
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Standard");
+      outln("\\align center");
       break;
    }
 }
@@ -1807,9 +1864,7 @@ GLOBAL void c_begin_center(void)
 GLOBAL void c_end_center(void)
 {
    if (cent_level == 0)
-   {
       error_end_without_begin(CMD_END_CENTER, CMD_BEGIN_CENTER);
-   }
    
    if (iEnvLevel > 0)
    {
@@ -1818,9 +1873,7 @@ GLOBAL void c_end_center(void)
    }
 
    if (cent_level > 0)
-   {
       cent_level--;
-   }
 
    switch (desttype)
    {
@@ -1831,14 +1884,15 @@ GLOBAL void c_end_center(void)
       break;
       
    case TOIPF:
-      outln(":elines.");                  /* r6pl7*/
+      outln(":elines.");
       break;
 
    case TONRO:
       outln(".na");
       break;
       
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Standard");
       break;
    }
 }
@@ -1877,9 +1931,10 @@ GLOBAL void c_begin_flushright(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   /*r6pl6:   !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt */
-   /*         und eine Anpassung unheimlich problematisch ist   */
-   
+   /*
+    * !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt
+    * und eine Anpassung unheimlich problematisch ist
+    */
    switch (desttype)
    {
    case TOHTM:
@@ -1901,7 +1956,9 @@ GLOBAL void c_begin_flushright(void)
       outln("\\begin{flushright}");
       break;
       
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Standard");
+      outln("\\align right");
       break;
 
    case TONRO:
@@ -1914,7 +1971,8 @@ GLOBAL void c_begin_flushright(void)
       break;
       
    case TOIPF:
-      outln(":lines align=right.");       /* r6pl7*/
+      outln(":lines align=right.");
+      break;
    }
 }
 
@@ -1935,9 +1993,7 @@ GLOBAL void c_begin_flushright(void)
 GLOBAL void c_end_flushright(void)
 {
    if (flushright_level == 0)
-   {
       error_end_without_begin(CMD_END_RIGHT, CMD_BEGIN_RIGHT);
-   }
    
    if (iEnvLevel > 0)
    {
@@ -1946,9 +2002,7 @@ GLOBAL void c_end_flushright(void)
    }
 
    if (flushright_level > 0)
-   {
       flushright_level--;
-   }
 
    switch (desttype)
    {
@@ -1958,7 +2012,8 @@ GLOBAL void c_end_flushright(void)
       outln("");
       break;
       
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Standard");
       break;
       
    case TOINF:
@@ -1971,7 +2026,8 @@ GLOBAL void c_end_flushright(void)
       break;
       
    case TOIPF:
-      outln(":elines.");                  /* r6pl7*/
+      outln(":elines.");
+      break;
    }
 }
 
@@ -2009,9 +2065,10 @@ GLOBAL void c_begin_flushleft(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
 
-   /*r6pl6:   !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt */
-   /*         und eine Anpassung unheimlich problematisch ist   */
-   
+   /*
+    * !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt
+    * und eine Anpassung unheimlich problematisch ist
+    */
    switch (desttype)
    {
    case TOHTM:
@@ -2033,7 +2090,9 @@ GLOBAL void c_begin_flushleft(void)
       outln("\\begin{flushleft}");
       break;
       
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Standard");
+      outln("\\align left");
       break;
 
    case TONRO:
@@ -2046,7 +2105,8 @@ GLOBAL void c_begin_flushleft(void)
       break;
       
    case TOIPF:
-      outln(":lines align=left.");        /* r6pl7*/
+      outln(":lines align=left.");
+      break;
    }
 }
 
@@ -2067,9 +2127,7 @@ GLOBAL void c_begin_flushleft(void)
 GLOBAL void c_end_flushleft(void)
 {
    if (flushleft_level == 0)
-   {
       error_end_without_begin(CMD_END_LEFT, CMD_BEGIN_LEFT);
-   }
    
    if (iEnvLevel > 0)
    {
@@ -2078,9 +2136,7 @@ GLOBAL void c_end_flushleft(void)
    }
 
    if (flushleft_level > 0)
-   {
       flushleft_level--;
-   }
 
    switch (desttype)
    {
@@ -2089,19 +2145,19 @@ GLOBAL void c_end_flushleft(void)
       outln("\\end{flushleft}");
       outln("");
       break;
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\layout Standard");
       break;
    case TOINF:
       outln("@end flushleft");
       outln("");
       break;
-
    case TONRO:
       outln(".na");
       break;
-
    case TOIPF:
-      outln(":elines.");                  /* r6pl7*/
+      outln(":elines.");
+      break;
    }
 }
 
@@ -2129,7 +2185,6 @@ GLOBAL void c_begin_itemize(void)
    iEnvType[iEnvLevel]    = ENV_ITEM;
    env_kind[iEnvLevel]    = 0;
    iEnvIndent[iEnvLevel]  = 0;
-   
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
@@ -2142,43 +2197,33 @@ GLOBAL void c_begin_itemize(void)
    case TOTEX:
    case TOPDL:
       outln("\\begin{itemize}");
-      
       if (bEnvCompressed[iEnvLevel])
       {
          outln("\\itemsep 0pt");
          outln("\\parsep 0pt");
          outln("\\parskip 0pt");
       }
-      
       break;
-      
       
    case TOLYX:
       if (iEnvLevel > 1)
-      {
          outln("\\begin_deeper");
-      }
-      
       break;
-      
       
    case TOINF:
       out("@itemize ");
-      
       switch (iItemLevel)
       {
       case 1:
       case 3:
          outln("@bullet");
          break;
-         
       case 2:
       case 4:
          outln("@minus");
+         break;
       }
-      
       break;
-      
       
    case TOHAH:
    case TOHTM:
@@ -2206,28 +2251,24 @@ GLOBAL void c_begin_itemize(void)
       outln("<ul>");
       break;
       
-      
    case TOHPH:
       outln("<list>");
       break;
       
-      
    case TOLDS:
       outln("<itemize>");
       break;
-      
       
    case TOIPF:
       if (bEnvCompressed[iEnvLevel])
          outln(":ul compact.");
       else
          outln(":ul.");
-      
       break;
-      
       
    case TOKPS:
       voutlnf("/off%d (000) addStrSpaceLeft", iEnvLevel);
+      break;
    }
    
    switch (desttype)
@@ -2244,6 +2285,7 @@ GLOBAL void c_begin_itemize(void)
       
    default:
       iEnvIndent[iEnvLevel] = ENV_IND_ASC_ITEM;
+      break;
    }
 }
 
@@ -2268,11 +2310,9 @@ GLOBAL void c_begin_enumerate(void)
    
 
    if (!check_iEnvLevel())
-   {
       return;
-   }
    
-   tokcpy2(sNumStart,256);                /* get optional enumeration start value */
+   tokcpy2(sNumStart, 256);               /* get optional enumeration start value */
 
    numStart = atoi(sNumStart);
    
@@ -2282,7 +2322,6 @@ GLOBAL void c_begin_enumerate(void)
    env_kind[iEnvLevel]    = 0;
    enum_count[iEnvLevel]  = numStart;
    iEnvIndent[iEnvLevel]  = 0;
-
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
@@ -2295,29 +2334,21 @@ GLOBAL void c_begin_enumerate(void)
    case TOTEX:
    case TOPDL:
       outln("\\begin{enumerate}");
-      
       if (bEnvCompressed[iEnvLevel])
       {
          outln("\\itemsep 0pt");
          outln("\\parsep 0pt");
          outln("\\parskip 0pt");
       }
-      
       break;
-      
       
    case TOLYX:
       if (iEnvLevel > 1)
-      {
          outln("\\begin_deeper");
-      }
-      
       break;
-      
       
    case TOINF:
       out("@enumerate ");
-      
       switch (iEnumLevel)
       {
       case 1:
@@ -2334,10 +2365,9 @@ GLOBAL void c_begin_enumerate(void)
          
       case 4:
          outln("A");
+         break;
       }
-      
       break;
-      
       
    case TOHAH:
    case TOHTM:
@@ -2366,7 +2396,7 @@ GLOBAL void c_begin_enumerate(void)
          
       out("\n<ol");
       
-      switch (iEnumLevel)                 /*r6pl5: HTML 3.2 Moeglichkeiten nutzen */
+      switch (iEnumLevel)                 /* HTML 3.2 Moeglichkeiten nutzen */
       {
       case 1:
       case 5:
@@ -2383,6 +2413,7 @@ GLOBAL void c_begin_enumerate(void)
          
       case 4:
          outln(" type=A");
+         break;
       }
       
       if (numStart)                       /* add start value, if required */
@@ -2393,28 +2424,24 @@ GLOBAL void c_begin_enumerate(void)
       outln(">");
       break;
       
-      
    case TOHPH:
       outln("<list>");
       break;
       
-      
    case TOLDS:
       outln("<enum>");
       break;
-      
       
    case TOIPF:
       if (bEnvCompressed[iEnvLevel])
          outln(":ol compact.");
       else
          outln(":ol.");
-      
       break;
-      
       
    case TOKPS:
       voutlnf("/off%d (000) addStrSpaceLeft", iEnvLevel);
+      break;
    }
 
    switch (desttype)
@@ -2434,6 +2461,7 @@ GLOBAL void c_begin_enumerate(void)
          iEnvIndent[iEnvLevel] = 4 + ENV_IND_ASC_ENUM;
       else
          iEnvIndent[iEnvLevel] = ENV_IND_ASC_ENUM;
+      break;
    }
 }
 
@@ -2473,30 +2501,22 @@ GLOBAL void c_begin_description(void)
    case TOTEX:
    case TOPDL:
       outln("\\begin{description}");
-      
       if (bEnvCompressed[iEnvLevel])
       {
          outln("\\itemsep 0pt");
          outln("\\parsep 0pt");
          outln("\\parskip 0pt");
       }
-      
       break;
-      
       
    case TOLYX:
       if (iEnvLevel > 1)
-      {
          outln("\\begin_deeper");
-      }
-      
       break;
-      
       
    case TOINF:
       outln("@table @strong");
       break;
-      
       
    case TOHAH:
    case TOHTM:
@@ -2506,31 +2526,27 @@ GLOBAL void c_begin_description(void)
       bParagraphOpen = FALSE;             /* <p> not opened yet! */
       break;
       
-      
    case TOHPH:
       outln("<list>");
       break;
       
-      
    case TOLDS:
       outln("<descrip>");
       break;
-      
       
    case TOIPF:
       if (bEnvCompressed[iEnvLevel])
          outln(":dl compact break=none tsize=4.");
       else
          outln(":dl break=none tsize=4.");
-      
       break;
       
-      
-   case TOKPS:                            /* New in r6pl15 [NHz] */
+   case TOKPS:
       outln("Bon");
       outln("/offDesc (000000) addStrSpaceLeft");
       outln("Boff");
       outln("description");
+      break;
    }
 
    switch (desttype)
@@ -2547,6 +2563,7 @@ GLOBAL void c_begin_description(void)
       
    default:
       iEnvIndent[iEnvLevel] = ENV_IND_ASC_DESC;
+      break;
    }
 }
 
@@ -2567,19 +2584,16 @@ GLOBAL void c_begin_description(void)
 *
 ******************************************|************************************/
 
-LOCAL void c_begin_list(
-
-int       listkind)           /* List type */
+LOCAL void c_begin_list(int listkind)
 {
    char   sWidth[256],       /* buffer for tokens */
           sCompressed[256],  /* buffer for compare strings */
          *ptr;               /* ^ into sWidth */
-   int    ll;                /* */
-   
+   int    ll;
 
    if (!check_iEnvLevel())
       return;
-
+   
    switch (desttype)
    {
    case TOLDS:
@@ -2595,6 +2609,7 @@ int       listkind)           /* List type */
          c_begin_description();
          return;
       }
+      break;
    }
 
    iEnvLevel++;
@@ -2606,7 +2621,6 @@ int       listkind)           /* List type */
    bEnv1stPara[iEnvLevel] = TRUE;
    
    iListLevel++;
-   
    
    /* get additional token and check for "!short", "!compressed" and "!not_compressed" */
    /* "!short" is deprecated and throws a warning in set_env_compressed() */
@@ -2696,7 +2710,7 @@ int       listkind)           /* List type */
    qdelete_all(sWidth, "!-", 2);
    replace_udo_quotes(sWidth);
 
-                                          /* check the compressed flag */
+   /* check the compressed flag */
    set_env_compressed(iEnvLevel, sCompressed);
 
    switch (desttype)
@@ -2719,6 +2733,7 @@ int       listkind)           /* List type */
          
       default:
          out("\\begin{xlist}");
+         break;
       }
       
       voutlnf("{%s}", sWidth);
@@ -2729,30 +2744,22 @@ int       listkind)           /* List type */
          outln("\\parsep 0pt");
          outln("\\parskip 0pt");
       }
-      
       break;
-      
       
    case TOLYX:
       if (iEnvLevel > 1)
-      {
          outln("\\begin_deeper");
-      }
-      
       break;
-      
       
    case TOINF:
       outln("@table @asis");
       break;
-      
       
    case TOHAH:
    case TOHTM:
    case TOMHH:
       outln("<table>");
       break;
-      
       
    case TOSTG:
    case TOAMG:
@@ -2761,23 +2768,21 @@ int       listkind)           /* List type */
    case TOMAN:
    case TOPCH:
    case TOTVH:
+      ll = (int) strlen(sWidth);
+      iEnvIndent[iEnvLevel] = ll + 3;
+      break;
+      
    case TOKPS:
-   {
-                                          /* Changed in r6pl15 [NHz] */
-      char   space[50];  /* */
-      int    i;          /* */
-   
-                                          /* Changed in r6pl16 [NHz] */
-      space[0] = EOS;
-      ll= (int) strlen(sWidth);
-      
-      iEnvIndent[iEnvLevel] = (int) strlen(sWidth) + 3;
-      
-      for (i = 0; i < iEnvIndent[iEnvLevel]; i++)
-         strcat(space, "0");
-
-      if (desttype == TOKPS)
+      ll = (int) strlen(sWidth);
+      iEnvIndent[iEnvLevel] = ll + 3;
       {
+         char space[50];
+         int i;
+         
+         space[0] = EOS;
+         for (i = 0; i < iEnvIndent[iEnvLevel]; i++)
+            strcat(space, "0");
+
          switch (listkind)
          {
          case LIST_BOLD:
@@ -2790,8 +2795,8 @@ int       listkind)           /* List type */
             
          case LIST_TYPEWRITER:
             outln("Von");
+            break;
          }
-         
 /*       voutlnf("/offList (%s00) addStrSpaceLeft", space);
 */
          outln("/offCount offCount 1 add def");
@@ -2810,63 +2815,58 @@ int       listkind)           /* List type */
             
          case LIST_TYPEWRITER:
             outln("Voff");
+            break;
          }
       }
-      
       break;
-   }
-   
-   
+      
    case TOIPF:
       if (bEnvCompressed[iEnvLevel])
-      {
          voutlnf(":dl compact break=none tsize=%d.", (int)strlen(sWidth)+4);
-      }
       else
-      {
          voutlnf(":dl break=none tsize=%d.", (int)strlen(sWidth)+4);
-      }
-      
       break;
-      
       
    case TORTF:
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      recode_chrtab(sWidth,CHRTAB_ANSI);
+      recode_chrtab(sWidth, CHRTAB_ANSI);
       
-      ll = (int)toklen(sWidth);
+      ll = (int) toklen(sWidth);
 
       if (desttype == TORTF)
+      {
          iEnvIndent[iEnvLevel] = ll * iDocCharwidth;
-      
+      }
       else
-      {   
+      {
 #if 1
          iEnvIndent[iEnvLevel] = ll * iDocCharwidth;
 #else
          switch (listkind)
          {
          case LIST_BOLD:
-            ll= calc_ttf_twip(sWidth, TTF_TIMES, TTF_BOLD);
+            ll = calc_ttf_twip(sWidth, TTF_TIMES, TTF_BOLD);
             break;
             
          case LIST_ITALIC:
-            ll= calc_ttf_twip(sWidth, TTF_TIMES, TTF_ITALIC);
+            ll = calc_ttf_twip(sWidth, TTF_TIMES, TTF_ITALIC);
             break;
             
          case LIST_TYPEWRITER:
-            ll= calc_ttf_twip(sWidth, TTF_COURIER, TTF_REGULAR);
+            ll = calc_ttf_twip(sWidth, TTF_COURIER, TTF_REGULAR);
             break;
             
          default:
-            ll= calc_ttf_twip(sWidth, TTF_TIMES, TTF_REGULAR);
+            ll = calc_ttf_twip(sWidth, TTF_TIMES, TTF_REGULAR);
+            break;
          }
-      
+         
          iEnvIndent[iEnvLevel] = ll;
 #endif
       }
+      break;
    }
 }
 
@@ -2967,17 +2967,16 @@ GLOBAL void c_begin_tlist(void)
 
 LOCAL void add_description(void)
 {
-   int       i;                 /* */
-   size_t    sl;                /* */
-   _BOOL   finished = FALSE;  /* */
-   _BOOL   no_bracket;        /* */
-   char     *found,             /* */
-            *ptr;               /* */
-            
+   int       i;
+   size_t    sl;
+   _BOOL   finished = FALSE;
+   _BOOL   no_bracket;
+   char     *found,
+            *ptr;
+   
+   sl = strlen(token[1]);
 
-   sl= strlen(token[1]);
-
-                                          /* Alles im ersten Token? */
+   /* Alles im ersten Token? */
    if (sl > 1 && token[1][sl - 1] == ']' && token[1][sl - 2] != '!')
    {
       replace_all(token[1], "!]", "]");
@@ -2997,7 +2996,7 @@ LOCAL void add_description(void)
    {
       if (token[i][0] != EOS)
       {
-         if ( (found = strchr(token[i], ']')) == NULL)
+         if ((found = strchr(token[i], ']')) == NULL)
          {
             um_strcat(token[0], token[i], MAX_TOKEN_LEN+1, "add_description [2]");
             um_strcat(token[0], " ", MAX_TOKEN_LEN+1, "add_description [3]");
@@ -3015,9 +3014,10 @@ LOCAL void add_description(void)
             }
                
             if (found == NULL)
-            {                             /* wie oben */
+            {
+               /* wie oben */
                um_strcat(token[0], token[i], MAX_TOKEN_LEN+1, "add_description [4]");
-               um_strcat(token[0], " " , MAX_TOKEN_LEN+1, "add_description [5]");
+               um_strcat(token[0], " ", MAX_TOKEN_LEN+1, "add_description [5]");
                token[i][0] = EOS;
                i++;
             }
@@ -3064,23 +3064,21 @@ LOCAL void add_description(void)
 
 GLOBAL void c_item(void)
 {
-   char     s[512],       /* */
-            li[128],      /* */
-            ri[128];      /* */
-   char     sBig[1024],   /* */
-            sTemp[1024],  /* */
-            sAdd[128];    /* */
-   size_t   tl,           /* */
-            sl,           /* */
-            i;            /* */
-   int      ll,           /* */
-            lp;           /* */
+   char     s[MAX_TOKEN_LEN + 512],
+            li[128],
+            ri[128];
+   char     sBig[MAX_TOKEN_LEN + 100],
+            sTemp[MAX_TOKEN_LEN + 1],
+            sAdd[128];
+   size_t   tl,
+            sl,
+            i;
+   int      ll,
+            lp;
    
    
-   if ( (iItemLevel == 0) && (iEnumLevel == 0) && (iDescLevel == 0) && (iListLevel == 0) )
-   {
+   if (iItemLevel == 0 && iEnumLevel == 0 && iDescLevel == 0 && iListLevel == 0)
       error_message(_("'!item' outside environment"));
-   }
 
    bEnv1stPara[iEnvLevel] = TRUE;
 
@@ -3090,22 +3088,19 @@ GLOBAL void c_item(void)
    {
    case TOTEX:
    case TOPDL:
-      um_strcpy(token[0], "\\item", MAX_TOKEN_LEN+1, "c_item[1]");
-      
+      strcpy(token[0], "\\item");
       switch (iEnvType[iEnvLevel])
       {
       case ENV_DESC:
       case ENV_LIST:
          if (token[1][0] == '[')
             add_description();
+         break;
       }
-      
       break;
-      
       
    case TOLYX:
       token[0][0] = EOS;
-      
       switch (iEnvType[iEnvLevel])
       {
       case ENV_ITEM:
@@ -3126,6 +3121,7 @@ GLOBAL void c_item(void)
       case ENV_LIST:
          outln("\\layout List");
          outln("");
+         break;
       }
       
       switch (iEnvType[iEnvLevel])
@@ -3137,7 +3133,6 @@ GLOBAL void c_item(void)
             delete_once(token[0], "[");
             delete_last(token[0], "]");
          }
-         
          space2nbsp(token[0]);
          break;
          
@@ -3148,7 +3143,6 @@ GLOBAL void c_item(void)
             delete_once(token[0], "[");
             delete_last(token[0], "]");
          }
-         
          space2nbsp(token[0]);
          
          switch (env_kind[iEnvLevel])
@@ -3161,15 +3155,19 @@ GLOBAL void c_item(void)
          case LIST_ITALIC:
             strinsert(token[0], "\\shape italic ");
             um_strcat(token[0], "\\shape default ", MAX_TOKEN_LEN+1, "c_item[3]");
+            break;
+            
+         case LIST_TYPEWRITER:
+            strinsert(token[0], "\\family typewriter ");
+            um_strcat(token[0], "\\family default ", MAX_TOKEN_LEN+1, "!item");
+            break;
          }
+         break;
       }
-      
       break;
-
-      
+   
    case TOINF:
-      um_strcpy(token[0], "@item ", MAX_TOKEN_LEN+1, "c_item[4]");
-      
+      strcpy(token[0], "@item ");
       switch (iEnvType[iEnvLevel])
       {
       case ENV_DESC:
@@ -3180,12 +3178,10 @@ GLOBAL void c_item(void)
             delete_once(token[0], "[");
             delete_last(token[0], "]");
          }
-         
          um_strcat(token[0], "\n", MAX_TOKEN_LEN+1, "c_item[5]");
+         break;
       }
-      
       break;
-
 
    case TOSTG:
    case TOAMG:
@@ -3199,21 +3195,18 @@ GLOBAL void c_item(void)
       case ENV_ITEM:
          token[0][0] = EOS;
          tl = strlen_indent();
-         
          if (tl > 1)
          {
             memset(sAdd, ' ', (size_t) (tl-1));
-            sAdd[tl-1] = EOS;
+            sAdd[tl - 1] = EOS;
             um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[6]");
-            token[0][tl-2] = itemchar[iItemLevel][0];
+            token[0][tl - 2] = itemchar[iItemLevel][0];
          }
-         
          break;
          
       case ENV_ENUM:
          enum_count[iEnvLevel]++;
          itoenum(iEnumLevel, &(enum_count[iEnvLevel]), s);
-         
          sl = strlen(s);
          token[0][0] = EOS;
          tl = strlen_indent();
@@ -3221,24 +3214,18 @@ GLOBAL void c_item(void)
          if (tl > 1)
          {
             memset(sAdd, ' ', (size_t) (tl-1));
-            sAdd[tl-1] = EOS;
+            sAdd[tl - 1] = EOS;
             um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[7]");
-            
             for (i = 0; i < sl; i++)
             {
                token[0][tl-sl-1+i] = s[i];
             }
          }
-         
          break;
-         
 
       case ENV_DESC:
-#if 1    /* Neue Version mit !autoref_items-Unterstuetzung */
          token[0][0] = EOS;
-         
          strcpy_prev_indent(li);
-         
          if (token[1][0] == '[')
          {
             add_description();
@@ -3248,19 +3235,14 @@ GLOBAL void c_item(void)
                delete_once(token[0], "[");
                delete_last(token[0], "]");
                del_internal_styles(token[0]);
-               um_strcpy(sTemp, token[0], 1024, "c_item[8]");
+               strcpy(sTemp, token[0]);
                replace_all(sTemp, "\"", "\\\"");
-               replace_2at_by_1at(sTemp);   /* r6pl1 */
                sprintf(sBig, "@{B}@{\"%s\" ignore}@{b}", sTemp);
                
                if (insert_placeholder(sBig, sBig, sBig, token[0]))
-               {
                   sprintf(token[0], " %s%s", li, sBig);
-               }
                else
-               {
                   token[0][0] = EOS;
-               }
             }
             else
             {
@@ -3270,22 +3252,10 @@ GLOBAL void c_item(void)
                strinsert(token[0], " ");
             }
          }
-#else    /* Alte Version, ohne !autoref_items-Unterstuetzung */
-         um_strcpy(token[0], " ", MAX_TOKEN_LEN+1, "c_item[9]");
-         strcat_prev_indent(token[0]);
-         
-         if (token[1][0] == '[')
-         {
-            add_description();
-            replace_once(token[0], "[", BOLD_ON);
-            replace_last(token[0], "]", BOLD_OFF);
-         }
-#endif
          break;
 
       case ENV_LIST:
          token[0][0] = EOS;
-         
          if (token[1][0] == '[')
          {
             add_description();
@@ -3296,18 +3266,7 @@ GLOBAL void c_item(void)
          ri[0] = EOS;
          ll = iEnvIndent[iEnvLevel] - 2;
 
-                                          /* PL16: Das leidige @@-Problem beim ST-Guide */
-         if (desttype == TOSTG)
-         {
-            um_strcpy(sBig, token[0], 1024, "c_item[10]");
-            replace_2at_by_1at(sBig);
-            
-            tl = toklen(sBig);
-         }
-         else
-         {
-            tl = toklen(token[0]);
-         }
+         tl = toklen(token[0]);
 
          sAdd[0] = EOS;
          
@@ -3320,11 +3279,11 @@ GLOBAL void c_item(void)
 
          strcpy_prev_indent(li);
 
-                                          /* Hier fuer den ST-Guide noch !autoref_items supporten */
+         /* Hier fuer den ST-Guide noch !autoref_items supporten */
          if (desttype == TOSTG && bDocAutorefItemsOff)
          {
             del_internal_styles(token[0]);
-            um_strcpy(sTemp, token[0], 1024, "c_item[11]");
+            strcpy(sTemp, token[0]);
             replace_all(sTemp, "\"", "\\\"");
             sprintf(sBig, "@{\"%s\" ignore}", sTemp);
             
@@ -3338,6 +3297,7 @@ GLOBAL void c_item(void)
             case LIST_ITALIC:
                strinsert(sBig, "@{I}");
                strcat(sBig, "@{i}");
+               break;
             }
 
             if (insert_placeholder(sBig, sBig, sBig, token[0]))
@@ -3352,43 +3312,43 @@ GLOBAL void c_item(void)
                token[0][0] = EOS;
             }
             
-            um_strcpy(token[0], sBig, 1024, "c_item[12]");
+            um_strcpy(token[0], sBig, MAX_TOKEN_LEN + 1, "c_item[12]");
          }
          else
          {
             switch (env_kind[iEnvLevel])
-             {
-             case LIST_BOLD:
-                sprintf(s, " %s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);
-                break;
-                
-             case LIST_ITALIC:
-                sprintf(s, " %s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);
-                break;
-                
-             default:
-                sprintf(s, " %s%s%s", li, token[0], ri);
-             }
+            {
+            case LIST_BOLD:
+               sprintf(s, " %s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);
+               break;
+               
+            case LIST_ITALIC:
+               sprintf(s, " %s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);
+               break;
+               
+            default:
+               sprintf(s, " %s%s%s", li, token[0], ri);
+               break;
+            }
 
             um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[13]");
             um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[14]");
          }
 
-      }   /* switch (iEnvType[iEnvLevel]) */
+         break;
+      }
       
       if (use_justification)
       {
          space2indent(token[0]);
       }
-      
       break;
-      
       
    case TONRO:
       switch (iEnvType[iEnvLevel])
       {
       case ENV_ITEM:
-         um_strcpy(token[0], ".TP\n.B o\n", MAX_TOKEN_LEN+1, "c_item[15]");
+         strcpy(token[0], ".TP\n.B o\n");
          break;
          
       case ENV_ENUM:
@@ -3398,18 +3358,16 @@ GLOBAL void c_item(void)
          break;
          
       case ENV_DESC:
-         um_strcpy(token[0], ".TP\n", MAX_TOKEN_LEN+1, "c_item[16]");
-         
+         strcpy(token[0], ".TP\n");
          if (token[1][0] == '[')
          {
             add_description();
             replace_once(token[0], "[", ".B ");
             replace_last(token[0], "]", "\n");
          }
+         break;
       }
-      
       break;
-
 
    case TORTF:
    case TOWIN:
@@ -3419,26 +3377,25 @@ GLOBAL void c_item(void)
       {
       case ENV_ITEM:
          ll = strlen_indent();
-         sprintf(sBig, "\\pard\\ \\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab ", ll-167, ll, ll, ll, itemchar[iItemLevel]);
+         sprintf(sBig, "\\pard\\ \\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab", ll-167, ll, ll, ll, itemchar[iItemLevel]);
          break;
          
       case ENV_ENUM:
          enum_count[iEnvLevel]++;
-         ll= strlen_indent();
+         ll = strlen_indent();
          itoenum(iEnumLevel, &(enum_count[iEnvLevel]), s);
-         sprintf(sBig, "\\pard\\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab ", ll-167, ll, ll, ll, s);
+         sprintf(sBig, "\\pard\\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab", ll-167, ll, ll, ll, s);
          break;
          
       case ENV_DESC:
          token[0][0] = EOS;
          sBig[0] = EOS;
-         
          if (token[1][0] == '[')          /* there is a description title! */
          {
             add_description();
             replace_once(token[0], "[", BOLD_ON);
             replace_last(token[0], "]", BOLD_OFF);
-            um_strcpy(sBig, token[0], 1024, "c_item[17]");
+            um_strcpy(sBig, token[0], sizeof(sBig), "c_item[17]");
             
             if (desttype == TORTF)        /* RTF formatting: "{<descriptionTitle>\par }" */
             {
@@ -3452,7 +3409,6 @@ GLOBAL void c_item(void)
             {
                c_win_styles(sBig);
                replace_udo_quotes(sBig);
-               
                if (!bDocAutorefItemsOff)
                {
                   auto_references(sBig, FALSE, "", 0, 0);
@@ -3463,37 +3419,31 @@ GLOBAL void c_item(void)
          ll = strlen_indent();
          strcpy(sTemp, sBig);
          
-                                          /* output adjustment for description: */
-                                          /* "\n"       = newline (for better readability of the file) */
-                                          /* "\\pard"   = reset paragraph parameters */
-                                          /* "\\qj"     = justified alignment */
-                                          /* "\\fi-xxx" = first line (left) indent */
-                                          /* "\\lixxx"  = left indent of paragraph */
-                                          
-                                          /* output description title: */
-                                          /* "%s"       = description title */
-                                          
-                                          /* output paragraph adjustment for description content: */
-                                          /* "\n"       = newline (for better readability of the file) */
-                                          /* "\\pard"   = reset paragraph parameters */
-                                          /* "\\qj"     = justified alignment */
-                                          /* "\\lixxx"  = left indent of paragraph */
-
-         sprintf(sBig, "\n\\pard \\qj \\fi-%d\\li%d %s\n\\pard \\qj \\li%d ", 567, ll, sTemp, ll);
-         break;
+         /* output adjustment for description: */
+         /* "\\pard"   = reset paragraph parameters */
+         /* "\\qj"     = justified alignment */
+         /* "\\fi-xxx" = first line (left) indent */
+         /* "\\lixxx"  = left indent of paragraph */
          
+         /* output description title: */
+         /* "%s"       = description title */
+         
+         /* output paragraph adjustment for description content: */
+         /* "\\pard"   = reset paragraph parameters */
+         /* "\\qj"     = justified alignment */
+         /* "\\lixxx"  = left indent of paragraph */
+         sprintf(sBig, "\\pard\\qj\\fi-%d\\li%d %s\\pard\\qj\\li%d ", 567, ll, sTemp, ll);
+         break;
          
       case ENV_LIST:
          token[0][0] = EOS;
          sBig[0] = EOS;
-         
          if (token[1][0] == '[')
          {
             add_description();
             delete_once(token[0], "[");
             delete_last(token[0], "]");
-            um_strcpy(sBig, token[0], 1024, "c_item[18]");
-            
+            um_strcpy(sBig, token[0], sizeof(sBig), "c_item[18]");
             if (desttype == TORTF)
             {
                c_rtf_styles(sBig);
@@ -3504,14 +3454,12 @@ GLOBAL void c_item(void)
             {
                c_win_styles(sBig);
                replace_udo_quotes(sBig);
-               
                if (!bDocAutorefItemsOff)
                {
                   auto_references(sBig, FALSE, "", 0, 0);
                }
             }
          }
-         
          ll = strlen_indent();
          
          if (iEnvLevel > 1)
@@ -3526,29 +3474,32 @@ GLOBAL void c_item(void)
 #endif
          }
          else
+         {
             lp = ll;
+         }
          
          strcpy(sTemp, sBig);
          
          switch (env_kind[iEnvLevel])
          {
          case LIST_NORMAL:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj %s\\tab ", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj %s\\tab", ll, lp, ll, sTemp);
             break;
             
          case LIST_BOLD:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\b %s}\\tab ", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\b %s}\\tab", ll, lp, ll, sTemp);
             break;
             
          case LIST_ITALIC:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\i %s}\\tab ", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\i %s}\\tab", ll, lp, ll, sTemp);
             break;
             
          case LIST_TYPEWRITER:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\f1 %s}\\tab ", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\f1 %s}\\tab", ll, lp, ll, sTemp);
+            break;
          }
-         
-      }  /* switch (iEnvType[iEnvLevel]) */
+         break;
+      }
       
       if (insert_placeholder(sBig, sBig, sBig, sBig))
       {
@@ -3558,14 +3509,12 @@ GLOBAL void c_item(void)
       {
          token[0][0] = EOS;
       }
-      
       break;
-
 
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      switch (iEnvType[iEnvLevel])        /* which kind of environment item? */
+      switch (iEnvType[iEnvLevel])
       {
       case ENV_ITEM:                      /* <ul> list item */
       case ENV_ENUM:                      /* <ol> list item */
@@ -3574,33 +3523,23 @@ GLOBAL void c_item(void)
             if (!bEnvCompressed[iEnvLevel])
                out("</p>");
                
-            outln("</li>");               /* r6pl6: </li> ausgeben */
+            outln("</li>");
          }
-         
-         bEnv1stItem[iEnvLevel] = FALSE;  /* switch off 1st Item state anyway */
-         
-         strcpy(sBig, "<li>");            /* output <li> */
-
+         strcpy(sBig, "<li>");
          if (!bEnvCompressed[iEnvLevel])
             strcat(sBig, "<p>");          /* output <p> */
 
          bEnv1stPara[iEnvLevel] = TRUE;   /* 1st paragraph */
          break;
-
          
-      case ENV_DESC:                      /* New in V6.5.11 [NHz] */
+      case ENV_DESC:
          if (bDescDDOpen)                 /* handle still open <dd> tag first: */
          {
             if (bParagraphOpen)           /* paragraph still open? */
             {
                                           /* additional linefeed? */
                if (bEnvCompressed[iEnvLevel])
-               {
-                  if (html_doctype < XHTML_STRICT)
-                    outln("<br>");
-                   else
-                     outln("<br />");
-               }
+                  outln(xhtml_br);
                else                       /* close paragraph */
                   outln("</p>\n");
             }
@@ -3620,7 +3559,7 @@ GLOBAL void c_item(void)
             add_description();
             replace_once(token[0], "[", BOLD_ON);
             replace_last(token[0], "]", BOLD_OFF);
-            um_strcpy(sBig, token[0], 1024, "c_item[20]");
+            um_strcpy(sBig, token[0], sizeof(sBig), "c_item[20]");
             replace_udo_quotes(sBig);
             
             if (!bDocAutorefItemsOff)
@@ -3628,22 +3567,21 @@ GLOBAL void c_item(void)
             
             c_internal_styles(sBig);
             strinsert(sBig, "<dt>");
-            um_strcat(sBig, "</dt>\n<dd>\n", 1024, "c_item[21]");
+            um_strcat(sBig, "</dt>\n<dd>\n", sizeof(sBig), "c_item[21]");
          }
          else
          {
-            um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>\n", 1024, "c_item[22]");
+            strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>\n");
          }
 
          bDescDDOpen = TRUE;              /* open DD flag */
          
          if (!bEnvCompressed[iEnvLevel])
-            um_strcat(sBig, "<p>", 1024, "c_item[22]");
+            um_strcat(sBig, "<p>", sizeof(sBig), "c_item[22]");
 
          bParagraphOpen = TRUE;
          
          bEnv1stPara[iEnvLevel] = TRUE;
-         bEnv1stItem[iEnvLevel] = TRUE;
          break;
 
       case ENV_LIST:
@@ -3653,7 +3591,6 @@ GLOBAL void c_item(void)
          if (!bEnv1stItem[iEnvLevel])
          {
             voutlnf("%s</td></tr>\n", sHtmlPropfontEnd);
-            bEnv1stItem[iEnvLevel] = FALSE;
             bParagraphOpen = FALSE;
          }
          
@@ -3662,7 +3599,7 @@ GLOBAL void c_item(void)
             add_description();
             
             switch (env_kind[iEnvLevel])
-            {   
+            {
             case LIST_NORMAL:
                delete_once(token[0], "[");
                delete_last(token[0], "]");
@@ -3681,9 +3618,10 @@ GLOBAL void c_item(void)
             case LIST_TYPEWRITER:
                replace_once(token[0], "[", TWRITER_ON);
                replace_last(token[0], "]", TWRITER_OFF);
+               break;
             }
             
-            um_strcpy(sBig, token[0], 1024, "c_item[23]");
+            um_strcpy(sBig, token[0], sizeof(sBig), "c_item[23]");
             replace_udo_quotes(sBig);
             
             if (!bDocAutorefItemsOff)
@@ -3691,27 +3629,28 @@ GLOBAL void c_item(void)
             
             c_internal_styles(sBig);
             strinsert(sBig, sHtmlPropfontStart);
-            
+#if 0
             if (html_doctype == HTML5)
             {
                strinsert(sBig, "<tr><td class=\"UDO_td_nowrap UDO_td_valign_top\">");
             }
             else
+#endif
             {
                strinsert(sBig, "<tr><td nowrap=\"nowrap\" valign=\"top\">");
             }
-
             strcat(sBig, sHtmlPropfontEnd);
             
+#if 0
             if (html_doctype == HTML5)
             {
                strcat(sBig, "</td>\n<td class=\"UDO_td_valign_top\">");
             }
             else
+#endif
             {
                strcat(sBig, "</td>\n<td valign=\"top\">");
             }
-
             strcat(sBig, sHtmlPropfontStart);
          }
          else
@@ -3720,10 +3659,8 @@ GLOBAL void c_item(void)
          }
          
          bParagraphOpen = TRUE;
-         bEnv1stItem[iEnvLevel] = FALSE;
-         
-      }  /* switch (iEnvType[iEnvLevel]) */
-
+         break;
+      }
       
       if (insert_placeholder(sBig, sBig, sBig, sBig))
       {
@@ -3733,18 +3670,16 @@ GLOBAL void c_item(void)
       {
          token[0][0] = EOS;
       }
-
       break;
-
 
    case TOLDS:
       switch (iEnvType[iEnvLevel])
       {
       case ENV_ITEM:
       case ENV_ENUM:
-         um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[25]");
+         strcpy(token[0], "<item>");
          break;
-       
+         
       case ENV_DESC:
          token[0][0] = EOS;
          
@@ -3758,13 +3693,12 @@ GLOBAL void c_item(void)
          }
          else
          {
-            um_strcpy(token[0], "<tag> </tag>", MAX_TOKEN_LEN+1, "c_item[27]");
+            strcpy(token[0], "<tag> </tag>");
          }
-         
          break;
-       
+         
       case ENV_LIST:   /* Hier genau wie bei ASCII */
-         um_strcpy(token[0], " ", MAX_TOKEN_LEN+1, "c_item[28]");
+         strcpy(token[0], " ");
          
          if (token[1][0] == '[')
          {
@@ -3783,24 +3717,21 @@ GLOBAL void c_item(void)
          }
 
          strcpy_prev_indent(li);
-         sprintf(s, "%s%s", li, token[0]);
-         um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[30]");
-         
-      }  /* switch (iEnvType[iEnvLevel]) */
-      
+         strinsert(token[0], li);
+         break;
+      }
       break;
-      
 
    case TOHPH:
       switch (iEnvType[iEnvLevel])
       {
       case ENV_ITEM:
       case ENV_ENUM:
-         um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[31]");
+         strcpy(token[0], "<item>");
          break;
-       
+         
       case ENV_DESC:
-         um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[32]");
+         strcpy(token[0], "<item>");
          
          if (token[1][0] == '[')
          {
@@ -3810,13 +3741,12 @@ GLOBAL void c_item(void)
          }
          else
          {
-            um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[33]");
+            strcpy(token[0], "<item>");
          }
-         
          break;
-       
+         
       case ENV_LIST:   /* Hier genau wie bei ASCII */
-         um_strcpy(token[0], " ", MAX_TOKEN_LEN+1, "c_item[34]");
+         strcpy(token[0], " ");
          
          if (token[1][0] == '[')
          {
@@ -3835,12 +3765,10 @@ GLOBAL void c_item(void)
          }
 
          strcpy_prev_indent(li);
-         sprintf(s, "%s%s", li, token[0]);
-         um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[36]");
+         strinsert(token[0], li);
+         break;
       }
-      
       break;
-
 
    case TOIPF:
       switch (iEnvType[iEnvLevel])
@@ -3849,9 +3777,9 @@ GLOBAL void c_item(void)
       case ENV_ENUM:
          strcpy(token[0], ":li.");
          break;
-          
+         
       case ENV_DESC:
-         um_strcpy(token[0], ":dt.", MAX_TOKEN_LEN+1, "c_item[37]");
+         strcpy(token[0], ":dt.");
          
          if (token[1][0] == '[')
          {
@@ -3859,19 +3787,18 @@ GLOBAL void c_item(void)
             replace_once(token[0], "[", BOLD_ON);
             replace_last(token[0], "]", BOLD_OFF);
          }
-         
          um_strcat(token[0], "\n:dd.", MAX_TOKEN_LEN+1, "c_item[38]");
          break;
 
       case ENV_LIST:
-         um_strcpy(token[0], ":dt.", MAX_TOKEN_LEN+1, "c_item[39]");
+         strcpy(token[0], ":dt.");
          
          if (token[1][0]=='[')
          {
             add_description();
             
             switch (env_kind[iEnvLevel])
-            {   
+            {
             case LIST_NORMAL:
                delete_once(token[0], "[");
                delete_last(token[0], "]");
@@ -3890,30 +3817,28 @@ GLOBAL void c_item(void)
             case LIST_TYPEWRITER:
                replace_once(token[0], "[", TWRITER_ON);
                replace_last(token[0], "]", TWRITER_OFF);
+               break;
             }
          }
          
          um_strcat(token[0], "\n:dd.", MAX_TOKEN_LEN+1, "c_item[40]");
+         break;
       }
-      
       break;
-      
    
    case TOKPS:
       switch (iEnvType[iEnvLevel])
       {
       case ENV_ITEM:
-         um_strcpy(token[0], itemchar[iItemLevel], MAX_TOKEN_LEN+1, "c_item[41]");
+         strcpy(token[0], itemchar[iItemLevel]);
          break;
          
       case ENV_ENUM:
          enum_count[iEnvLevel]++;
          itoenum(iEnumLevel, &(enum_count[iEnvLevel]), s);
-                                          /* Changed in V6.5.5 [NHz] */
          sprintf(token[0], "%s\n%s%d.%s off%d writeBeforeLeft\n%s", KPSPC_S, KPSPO_S, enum_count[iEnvLevel], KPSPC_S, iEnvLevel, KPSPO_S);
          break;
 
-                                          /* New in r6pl15 [NHz] */
       case ENV_DESC:
          token[0][0] = EOS;
          strcpy_prev_indent(li);
@@ -3945,14 +3870,12 @@ GLOBAL void c_item(void)
                                           /* "offDesc"         = ??? */
                                           /* "writeBeforeLeft" = ??? */
                                           /* "newline"         = newline :-) */
-                                          
-            sprintf(s, "%s udoshow Bon %s%s%s offDesc writeBeforeLeft Boff newline", KPSPC_S, KPSPO_S, token[0], KPSPC_S);
-            um_strcpy(token[0], s,    MAX_TOKEN_LEN + 1, "c_item[42]");
-            um_strcat(token[0], sAdd, MAX_TOKEN_LEN + 1, "c_item[43]");
+            
+            sprintf(s, "%s udoshow Bon %s%s%s offDesc writeBeforeLeft Boff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
+            um_strcpy(token[0], s, MAX_TOKEN_LEN + 1, "!item");
+            um_strcat(token[0], sAdd, MAX_TOKEN_LEN + 1, "!item");
          }
-         
          break;
-         
          
       case ENV_LIST:
          token[0][0] = EOS;
@@ -3983,37 +3906,33 @@ GLOBAL void c_item(void)
          switch (env_kind[iEnvLevel])
          {
          case LIST_BOLD:
-                                          /* Changed in V6.5.5 [NHz] */
             sprintf(s, "%s udoshow Bon %s%s%s offList offCountS get writeBeforeLeft Boff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
             break;
          case LIST_ITALIC:
-                                          /* Changed in V6.5.5 [NHz] */
             sprintf(s, "%s udoshow Ion %s%s%s offList offCountS get writeBeforeLeft Ioff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
             break;
          case LIST_TYPEWRITER:
-                                          /* Changed in V6.5.5 [NHz] */
             sprintf(s, "%s udoshow Von %s%s%s offList offCountS get writeBeforeLeft Voff  %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
             break;
          default:
-                                          /* Changed in V6.5.5 [NHz] */
             sprintf(s, "%s udoshow %s%s%s offList offCountS get writeBeforeLeft %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
+            break;
          }
 
-         um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[44]");
-         um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[45]");
+         um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "!item");
+         um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "!item");
+         break;
       }
       
       if (use_justification)
       {
          space2indent(token[0]);
       }
-      
-   }  /* switch (desttype) */
+      break;
+   }
    
-/*   bEnv1stItem[iEnvLevel] = FALSE;
-*/
-
-}  /* c_item() */
+   bEnv1stItem[iEnvLevel] = FALSE;
+}
 
 
 
@@ -4029,9 +3948,7 @@ GLOBAL void c_item(void)
 *
 ******************************************|************************************/
 
-LOCAL void c_end_list(
-
-int   listkind)  /* */
+LOCAL void c_end_list(int listkind)
 {
    switch (desttype)
    {
@@ -4048,6 +3965,7 @@ int   listkind)  /* */
          c_end_description();
          return;
       }
+      break;
    }
 
    switch (listkind)
@@ -4066,6 +3984,7 @@ int   listkind)  /* */
       
    default:
       check_env_end(ENV_LIST, listkind, CMD_END_XLIST);
+      break;
    }
 
    if (iListLevel == 0)
@@ -4086,6 +4005,7 @@ int   listkind)  /* */
          
       default:
          error_end_without_begin(CMD_END_XLIST, CMD_BEGIN_XLIST);
+         break;
       }
    }
    
@@ -4120,25 +4040,19 @@ int   listkind)  /* */
          
       default:
          outln("\\end{xlist}");
+         break;
       }
-      
       outln("");
       break;
       
-      
    case TOLYX:
       if (iEnvLevel > 0)
-      {
          outln("\\end_deeper");
-      }
-      
       break;
-      
       
    case TOINF:
       outln("@end table");
       break;
-      
       
    case TOHAH:
    case TOHTM:
@@ -4146,44 +4060,32 @@ int   listkind)  /* */
       voutlnf("%s", sHtmlPropfontEnd);
       
       if (bParagraphOpen)
-      {
          if (!bEnvCompressed[iEnvLevel])
-         {
-/*            outln("</p>"); */
-            outln("");
-         }
-      }
+            out("</p>");
 
       outln("</td></tr>\n</table>\n");
-
       bParagraphOpen = FALSE;
       break;
-      
       
    case TORTF:
    case TOWIN:
    case TOWH4:
    case TOAQV:
       if (iEnvLevel == 0)
-      {
          outln("\\pard\\");
-      }
-      
       break;
       
-      
-   case TOIPF:                            /*r6pl3*/
+   case TOIPF:
       outln(":edl.");
       break;
       
-      
-                                          /* New in r6pl15 [NHz] */
    case TOKPS:
 /*    outln("offList subOffFromLeft");
 */
       outln("offList offCountS get subOffFromLeft");
       outln("/offCount offCount 1 sub def");
       outln("/offCountS offCount 4 add def");
+      break;
    }
    
    end_env_output_line(iEnvLevel + 1);
@@ -4286,7 +4188,7 @@ GLOBAL void c_end_description(void)
       error_end_without_begin(CMD_END_DESCRIPTION, CMD_BEGIN_DESCRIPTION);
    }
 
-   check_env_end (ENV_DESC, 0, CMD_END_DESCRIPTION);
+   check_env_end(ENV_DESC, 0, CMD_END_DESCRIPTION);
 
    if (iEnvLevel > 0)
    {
@@ -4309,10 +4211,7 @@ GLOBAL void c_end_description(void)
       
    case TOLYX:
       if (iEnvLevel > 0)
-      {
          outln("\\end_deeper");
-      }
-      
       break;
       
    case TOINF:
@@ -4326,19 +4225,17 @@ GLOBAL void c_end_description(void)
       {
                                           /* check previous environment */
          if (bEnvCompressed[iEnvLevel + 1])
-         {
-            if (html_doctype < XHTML_STRICT)
-               outln("<br>\n");
-            else
-               outln("<br />\n");
-         }
+            outln(xhtml_br);
          else
-            outln("</p>\n");
+            outln("</p>");
+         outln("");
       }
       
       bParagraphOpen = FALSE;
       
-      outln("</dd>\n</dl>\n");            /* Changed in V6.5.11 [NHz] */
+      if (!bEnv1stItem[iEnvLevel + 1])
+         outln("</dd>");
+      outln("</dl>");
       bDescDDOpen = FALSE;                /* close DD flag anyway */
       break;
       
@@ -4355,19 +4252,17 @@ GLOBAL void c_end_description(void)
    case TOWH4:
    case TOAQV:
       if (iEnvLevel == 0)
-      {
          outln("\\pard\\");
-      }
-      
       break;
       
-   case TOIPF:                            /*r6pl3*/
+   case TOIPF:
       outln(":edl.");
       break;
       
-   case TOKPS:                            /* New in r6pl15 [NHz] */
+   case TOKPS:
       outln("description");
       outln("offDesc subOffFromLeft");
+      break;
    }
 
    end_env_output_line(iEnvLevel + 1);
@@ -4416,11 +4311,8 @@ GLOBAL void c_end_enumerate(void)
       break;
       
    case TOLYX:
-      if (iEnvLevel>0)
-      {
+      if (iEnvLevel > 0)
          outln("\\end_deeper");
-      }
-      
       break;
       
    case TOINF:
@@ -4433,8 +4325,7 @@ GLOBAL void c_end_enumerate(void)
    case TOMHH:
       if (!bEnvCompressed[iEnvLevel + 1])
          out("</p>");
-         
-      outln("</li>");                     /* r6pl6: Mit </li> */
+      outln("</li>");
       outln("</ol>\n");
       bParagraphOpen = FALSE;             /* no additional </p> in ENV_DESC */
       break;
@@ -4452,19 +4343,17 @@ GLOBAL void c_end_enumerate(void)
    case TOWH4:
    case TOAQV:
       if (iEnvLevel == 0)
-      {
          outln("\\pard\\");
-      }
-      
       break;
       
-   case TOIPF:                            /*r6pl3*/
+   case TOIPF:
       outln(":eol.");
       break;
       
    case TOKPS:
       voutlnf("off%d subOffFromLeft", iEnvLevel + 1);
       outln("newline");
+      break;
    }
 
    end_env_output_line(iEnvLevel + 1);
@@ -4512,64 +4401,50 @@ GLOBAL void c_end_itemize(void)
       outln("");
       break;
       
-      
    case TOLYX:
       if (iEnvLevel > 0)
-      {
          outln("\\end_deeper");
-      }
-      
       break;
-      
       
    case TOINF:
       outln("@end itemize");
       outln("");
       break;
       
-      
    case TOHAH:
    case TOHTM:
    case TOMHH:
       if (!bEnvCompressed[iEnvLevel + 1])
          out("</p>");
-         
-      outln("</li>");                     /* r6pl6: mit </li> */
+      outln("</li>");
       outln("</ul>\n");
       bParagraphOpen = FALSE;             /* no additional </p> in ENV_DESC */
       break;
-      
       
    case TOHPH:
       outln("<\\list>");
       break;
       
-      
    case TOLDS:
       outln("</itemize>");
       break;
-      
       
    case TORTF:
    case TOAQV:
    case TOWIN:
    case TOWH4:
       if (iEnvLevel == 0)
-      {
          outln("\\pard\\");
-      }
-      
       break;
       
-      
-   case TOIPF:                            /*r6pl3*/
+   case TOIPF:
       outln(":eul.");
       break;
-      
       
    case TOKPS:
       voutlnf("off%d subOffFromLeft", iEnvLevel+1);
       outln("newline");
+      break;
    }
 
    end_env_output_line(iEnvLevel + 1);
@@ -4591,6 +4466,8 @@ GLOBAL void c_end_itemize(void)
 
 LOCAL void output_tex_environments(void)
 {
+   outln("");
+
    outln("\\def\\hidelink#1{}");          /* V6.5.20 [CS] */
    outln("");
    
@@ -4724,34 +4601,31 @@ GLOBAL void c_begin_document(void)
       else
          outln("  /Author (undefined)");
          
-      voutlnf("  /Creator (UDO Version %s.%s %s for %s)", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
+      voutlnf("  /Creator (UDO %s)", UDO_VERSION_STRING_OS);
       voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
       voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
-         
+      
       if (titdat.description != NULL)
          voutlnf("  /Subject (%s)", titdat.description);
       else
          outln("  /Subject (undefined)");
-            
-      if (titdat.keywords != NULL)        /* Set by !docinfo [keywords] foo */
+      
+      if (titdat.keywords != NULL)
          voutlnf("  /Keywords (%s)", titdat.keywords);
       else
          outln("  /Keywords (undefined)");
-            
+      
       outln("}");
       
       output_tex_environments();
       break;
-      
 
    case TOTEX:
       output_tex_environments();
       break;
       
-      
-   case TOLYX:                            /* <???> */
+   case TOLYX:
       break;
-      
       
    case TOINF:
       outln("\\input texinfo @c-*-texinfo-*-");
@@ -4761,19 +4635,15 @@ GLOBAL void c_begin_document(void)
       auto_quote_chars(s, TRUE);
       
       if (s[0] == EOS)
-      {
          strcpy(s, lang.unknown);
-      }
       
       voutlnf("@settitle %s", s);
       outln("@c %**end of header");
       break;
       
-      
    case TOMAN:
       man_headline();
       break;
-      
       
    case TONRO:
       sprintf(s, ".TH ");
@@ -4808,10 +4678,8 @@ GLOBAL void c_begin_document(void)
          strcat(s, titdat.author);
          strcat(s, "\"");
       }
-      
       outln(s);
       break;
-      
       
    case TOSTG:
    case TOAMG:
@@ -4829,12 +4697,11 @@ GLOBAL void c_begin_document(void)
          voutlnf("@database \"%s\"", lang.unknown);
       }
       
-
       if (titdat.author != NULL)
       {
          voutlnf("@author \"%s\"", titdat.author);
-      }
-
+	  }
+	  
       if (titdat.version != NULL)
       {
          if (titdat.date != NULL)
@@ -4845,28 +4712,22 @@ GLOBAL void c_begin_document(void)
       else
       {
          if (titdat.date != NULL)
-         {
             voutlnf("@$VER: %s", titdat.date);
-         }
       }
 
-                                          /* 6/1: immer ausgeben */
       voutlnf("@width %d", (int) zDocParwidth);
       
       if (uses_maketitle)
       {
-         voutlnf("@default %s", lang.title);
+         voutlnf("@default \"%s\"", lang.title);
       }
       else
       {
          if (uses_tableofcontents)
-         {
-            outln("@default Main");       /*r6pl5: Main statt lang.contents */
-         }
+            outln("@default \"Main\"");
       }
-      
+      outln("");
       break;
-      
       
    case TOHAH:
    case TOHTM:
@@ -4886,14 +4747,11 @@ GLOBAL void c_begin_document(void)
             output_html_header(lang.unknown);
          }
       }
-
       html_headline();
-
       break;
       
-      
    case TORTF:
-                                          /* RTF-HEADER */
+      /* RTF-HEADER */
       if (sDocPropfont[0] == EOS)
          strcpy(sDocPropfont, "Times New Roman");
       
@@ -4913,8 +4771,7 @@ GLOBAL void c_begin_document(void)
       else
          iDocMonofontSize = 10 * 2;       /* Courier New 10pt */
 
-                                          /* New in r6pl16 [NHz] */
-                                          /* Size of nodes */
+      /* Size of nodes */
       if (laydat.node1size != 0)
          laydat.node1size *= 2;
       else
@@ -4935,23 +4792,21 @@ GLOBAL void c_begin_document(void)
       else
          laydat.node4size = iDocPropfontSize;
 
-      voutlnf("\t{%s\\fs%d\\snext0 Normal;}",   rtf_norm,  iDocPropfontSize);
-      voutlnf("\t{%s\\fs%d\\snext1 Verbatim;}", rtf_verb,  iDocMonofontSize);
-      voutlnf("\t{%s\\fs%d\\snext2 Chapter;}",  rtf_chapt, iDocPropfontSize + 28);
+      voutlnf("{%s\\fs%d\\snext0 Normal;}",   rtf_norm,  iDocPropfontSize);
+      voutlnf("{%s\\fs%d\\snext1 Verbatim;}", rtf_verb,  iDocMonofontSize);
+      
+      voutlnf("{%s\\fs%d\\snext2 Chapter;}",  rtf_chapt, iDocPropfontSize + 28);
+      voutlnf("{%s\\fs%d\\snext3 Node1;}",    rtf_node1,     laydat.node1size);
+      voutlnf("{%s\\fs%d\\snext4 Node2;}",    rtf_node2,     laydat.node2size);
+      voutlnf("{%s\\fs%d\\snext5 Node3;}",    rtf_node3,     laydat.node3size);
+      voutlnf("{%s\\fs%d\\snext6 Node4;}",    rtf_node4,     laydat.node4size);
+      voutlnf("{%s\\fs%d\\snext7 Chapter*;}", rtf_inv_chapt, iDocPropfontSize + 28);
 
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("\t{%s\\fs%d\\snext3 Node1;}",    rtf_node1,     laydat.node1size);
-      voutlnf("\t{%s\\fs%d\\snext4 Node2;}",    rtf_node2,     laydat.node2size);
-      voutlnf("\t{%s\\fs%d\\snext5 Node3;}",    rtf_node3,     laydat.node3size);
-      voutlnf("\t{%s\\fs%d\\snext6 Node4;}",    rtf_node4,     laydat.node4size);
-      voutlnf("\t{%s\\fs%d\\snext7 Chapter*;}", rtf_inv_chapt, iDocPropfontSize + 28);
-
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("\t{%s\\fs%d\\snext8 Node1*;}",    rtf_inv_node1, laydat.node1size);
-      voutlnf("\t{%s\\fs%d\\snext9 Node2*;}",    rtf_inv_node2, laydat.node2size);
-      voutlnf("\t{%s\\fs%d\\snext10 Node3*;}",   rtf_inv_node3, laydat.node3size);
-      voutlnf("\t{%s\\fs%d\\snext11 Node4*;}",   rtf_inv_node4, laydat.node4size);
-      voutlnf("\t{%s\\fs%d\\snext13 LineDraw;}", rtf_linedraw,  iDocMonofontSize);
+      voutlnf("{%s\\fs%d\\snext8 Node1*;}",    rtf_inv_node1, laydat.node1size);
+      voutlnf("{%s\\fs%d\\snext9 Node2*;}",    rtf_inv_node2, laydat.node2size);
+      voutlnf("{%s\\fs%d\\snext10 Node3*;}",   rtf_inv_node3, laydat.node3size);
+      voutlnf("{%s\\fs%d\\snext11 Node4*;}",   rtf_inv_node4, laydat.node4size);
+      voutlnf("{%s\\fs%d\\snext13 LineDraw;}", rtf_linedraw,  iDocMonofontSize);
 
       output_rtf_colortbl();
 
@@ -4959,22 +4814,21 @@ GLOBAL void c_begin_document(void)
       outln("\\paperw11904\\paperh16836");
       outln("\\margl1134\\margr1134\\margt1984\\margb1984");
 
-                                          /* New '\widowctrl' in r6pl15 [NHz] */
       outln("\\pgnstart1\\ftnbj\\ftnrestart\\facingp\\margmirror\\makeback\\widowctrl");
       outln("\\sectd\\pgndec\\headery1134\\footery1134\\cols1\\colsx567\\pgndec");
 
-                                          /* New in V6.5.9 [NHz] */
-      voutlnf("{\\*\\revtbl \n\t{Unknown;}\n\t{UDO Version %s.%s %s;}\n}", UDO_REL, UDO_SUBVER, UDO_BUILD);
+      outln("{\\*\\revtbl ");
+      outln("{Unknown;}");
+      voutlnf("{UDO %s;}", UDO_VERSION_STRING_OS);
+      outln("}");
 
-      voutlnf("\\f0\\fs%d", iDocPropfontSize);   
+      voutlnf("\\f0\\fs%d", iDocPropfontSize);
 
-      if (!check_output_raw_header())     /* New in V6.5.9 [NHz];
-                                             hier muss auch der Fussteil uebergeben werden, sonst
-                                             funktioniert es in RTF nicht? */
+      if (!check_output_raw_header())
       {
          if (titleprogram[0] != EOS)
          {
-            if (!no_headlines)            /* r6pl6*/
+            if (!no_headlines)
             {
                voutlnf("{\\headerl\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s \\chpgn\\tab %s}\\par}", iDocPropfontSize, lang.page, titleprogram);
                voutlnf("{\\headerr\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s\\tab %s \\chpgn}\\par}", iDocPropfontSize, titleprogram, lang.page);
@@ -4982,13 +4836,10 @@ GLOBAL void c_begin_document(void)
          }
       }
       
-      outln("{\\info");                   /* PL9: Infoblock ausgeben */
-
+      outln("{\\info");
 
       /* ---- \author ---- */
-      
       s[0] = EOS;
-      
       if (titdat.author != NULL)
       {
          strcpy(s, titdat.author);
@@ -5001,93 +4852,61 @@ GLOBAL void c_begin_document(void)
             auto_quote_chars(s, TRUE);
          }
       }
-      
       if (s[0] != EOS)
-      {
-         voutlnf("\t{\\author %s}", s);
-      }
-
+         voutlnf("{\\author %s}", s);
 
       /* ---- \title ---- */
-      
       if (titleprogram[0] != EOS)
-      {
-         voutlnf("\t{\\title %s}", titleprogram);
-      }
+         voutlnf("{\\title %s}", titleprogram);
 
-                                          /* New in V6.5.2 [NHz] */
       /* ---- \description ---- */
-      
-      if (titdat.description != NULL)     /* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+      if (titdat.description != NULL)
       {
          if (titdat.description[0] != EOS)
-         {
-            voutlnf("\t{\\subject %s}", titdat.description);
-         }
+            voutlnf("{\\subject %s}", titdat.description);
       }
 
-                                          /* New in V6.5.2 [NHz] */
       /* ---- \keywords ---- */
-      
-      if (titdat.keywords != NULL)        /* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+      if (titdat.keywords != NULL)
       {
          if (titdat.keywords[0] != EOS)
-         {
-            voutlnf("\t{\\keywords %s}", titdat.keywords);
-         }
+            voutlnf("{\\keywords %s}", titdat.keywords);
       }
 
-                                          /* New in V6.5.2 [NHz] */
       /* ---- \company ---- */
-      
-      if (titdat.company != NULL)         /* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+      if (titdat.company != NULL)
       {
          if (titdat.company[0] != EOS)
-         {
-            voutlnf("\t{\\*\\company %s}", titdat.company);
-         }
+            voutlnf("{\\*\\company %s}", titdat.company);
       }
 
-                                          /* New in V6.5.2 [NHz] */
       /* ---- \category ---- */
-      
-      if (titdat.category != NULL)        /* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+      if (titdat.category != NULL)
       {
          if (titdat.category[0] != EOS)
-         {
-            voutlnf("\t{\\*\\category %s}", titdat.category);
-         }
+            voutlnf("{\\*\\category %s}", titdat.category);
       }
 
       /* ---- \translator ---- */
-
       if (titdat.translator != NULL)
       {
          if (titdat.translator[0] != EOS)
-         {
-            voutlnf("\t{\\*\\translator %s}", titdat.translator);
-         }
+            voutlnf("{\\*\\translator %s}", titdat.translator);
       }
 
       /* ---- \distributor ---- */
-      
       if (titdat.distributor != NULL)
       {
          if (titdat.distributor[0] != EOS)
-         {
-            voutlnf("\t{\\*\\distributor %s}", titdat.distributor);
-         }
+            voutlnf("{\\*\\distributor %s}", titdat.distributor);
       }
 
       /* ---- About UDO ---- */
-      
-      voutlnf("\t{\\doccomm UDO Version %s.%s %s}", UDO_REL, UDO_SUBVER, UDO_BUILD);
+      voutlnf("{\\doccomm UDO %s, %s %s}", UDO_VERSION_STRING_OS, compile_date, compile_time);
 
       /* ---- Erstellungsdatum & Sonstiges ---- */
-      
-      voutlnf("\t{\\creatim\\yr%d\\mo%d\\dy%d\\hr%d\\min%d}", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin);
-      
-      outln("\t{\\version1}{\\nofpages0}{\\nofwords0}{\\nofchars0}{\\edmins0}");
+      voutlnf("{\\creatim\\yr%d\\mo%d\\dy%d\\hr%d\\min%d}", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin);
+      outln("{\\version1}{\\nofpages0}{\\nofwords0}{\\nofchars0}{\\edmins0}");
       outln("}");
 
       outln(rtf_pardplain);
@@ -5098,13 +4917,13 @@ GLOBAL void c_begin_document(void)
       voutlnf("%s\\fs%d", rtf_norm, iDocPropfontSize);
       break;
       
-      
    case TOWIN:
    case TOWH4:
    case TOAQV:
       if (sDocPropfont[0] == EOS)
       {
-         strcpy(sDocPropfont, (desttype == TOWH4) ? "MS Sans Serif" : "Times New Roman");
+         /* MS Sans Serif is Bitmap font and looks ugly in larger sizes */
+         strcpy(sDocPropfont, /* desttype == TOWH4 ? "MS Sans Serif" : */ "Times New Roman");
       }
       
       if (sDocMonofont[0] == EOS)
@@ -5114,9 +4933,9 @@ GLOBAL void c_begin_document(void)
       
       outln("{\\rtf1\\ansi \\deff0");
       outln("{\\fonttbl");
-      voutlnf(" {\\f0\\fswiss %s;}", sDocPropfont);
-      voutlnf(" {\\f1\\fswiss %s;}", sDocMonofont);
-      outln(" {\\f2\\ftech Symbol;}");
+      voutlnf("{\\f0\\fswiss %s;}", sDocPropfont);
+      voutlnf("{\\f1\\fswiss %s;}", sDocMonofont);
+      outln("{\\f2\\ftech Symbol;}");
       outln("}");
       
       output_rtf_colortbl();
@@ -5127,7 +4946,7 @@ GLOBAL void c_begin_document(void)
          iDocPropfontSize = 8 * 2;        /* MS Sans Serif 8pt */
       else
          iDocPropfontSize = 11 * 2;       /* Times New Roman 11pt */
-      voutlnf("\\f0\\fs%d", iDocPropfontSize);   
+      voutlnf("\\f0\\fs%d", iDocPropfontSize);
 
       if (sDocMonofontSize[0] != EOS)
          iDocMonofontSize = atoi(sDocMonofontSize) * 2;
@@ -5137,12 +4956,10 @@ GLOBAL void c_begin_document(void)
       if (sDocTextColor.color != BC_NONE)
       	 outln(udocolor[sDocTextColor.color].wintext);
       break;
-      
 
    case TOLDS:
       outln("<!doctype linuxdoc system>");
       outln("");
-      
       if (use_style_book)
       {
          outln("<book>");
@@ -5154,16 +4971,14 @@ GLOBAL void c_begin_document(void)
          outln("");
       }
 
-      if (titleprogram != NULL)
+      if (titleprogram[0] != EOS)
          voutlnf("<title>%s", titleprogram);
 
       if (titdat.author != NULL || address_counter > 0)
       {
          out("<author>");
-         
          if (titdat.author != NULL)
             out(titdat.author);
-         
          if (address_counter > 0)
          {
             for (i = 1; i <= address_counter; i++)
@@ -5175,15 +4990,12 @@ GLOBAL void c_begin_document(void)
                }
             }
          }
-         
          outln("");
       }
       
       if (titdat.date != NULL)
          voutlnf("<date>%s", titdat.date);
-      
       break;
-
 
    case TOHPH:
       outln("<helpvolume>");
@@ -5196,26 +5008,18 @@ GLOBAL void c_begin_document(void)
 
       outln("<\\metainfo>");
       break;
-      
 
    case TOIPF:
       outln(":userdoc.");
-      outln(":docprof toc=1234.");        /*r6pl2*/
-      
+      outln(":docprof toc=1234.");
       if (titleprogram[0] != EOS)
-      {
          voutlnf(":title.%s", titleprogram);
-      }
       else
-      {
          voutlnf(":title.%s", lang.unknown);
-      }
       break;
       
-      
    case TOKPS:
-                                          /* New in r6pl16 [NHz] */
-                                          /* Size of nodes */
+      /* Size of nodes */
       if (laydat.node1size == 0)
          laydat.node1size = laydat.propfontsize + 7;
 
@@ -5233,9 +5037,6 @@ GLOBAL void c_begin_document(void)
 
       if (laydat.paper != NULL)
       {
-         int   i;  /* counter */
-         
-
          for (i = 0; i < MAXPAPERSIZE; i++)
          {
             if (strcmp(laydat.paper, paperSize[i].paper) == 0)
@@ -5262,12 +5063,11 @@ GLOBAL void c_begin_document(void)
       outln("0 0 0 setBaseColor");
       outln("setup");
 
-      if (    (strstr(laydat.propfontname, "Helvetica"))
-           || (strstr(laydat.propfontname, "Arial"))
-           || (strstr(laydat.propfontname, "sans-serif"))
-         )
+      if (strstr(laydat.propfontname, "Helvetica") != NULL ||
+          strstr(laydat.propfontname, "Arial") != NULL ||
+          strstr(laydat.propfontname, "sans-serif") != NULL)
          voutlnf("/basefont %d def", 1);
-         
+      
       voutlnf("/fontsize %d def", laydat.propfontsize);
       outln("basefont setBaseFont");
       
@@ -5280,13 +5080,12 @@ GLOBAL void c_begin_document(void)
       else
          outln("/Titeltext (not defined) def");
       
-                                          /* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
       if (titdat.author != NULL)
          voutlnf("/FootAuthor (\\251 %s) def", titdat.author);
       else
          outln("/FootAuthor (not defined) def");
       
-                                          /* Document info */
+      /* Document info */
       if (titdat.title != NULL && titdat.program != NULL)
          voutlnf("[ /Title (%s %s)", titdat.title, titdat.program);
       else if (titdat.title != NULL)
@@ -5301,21 +5100,21 @@ GLOBAL void c_begin_document(void)
       else
          outln("  /Author (undefined)");
       
-                                          /* Changed: Fixed bug #0000062 in V6.5.8 [NHz] */
       if (titdat.description != NULL)
          voutlnf("  /Subject (%s)", titdat.description);
       else
          outln("  /Subject (udefined)");
-         
-      if (titdat.keywords)                /* Set by !docinfo [keywords] foo */
+      
+      if (titdat.keywords != NULL)
          voutlnf("  /Keywords (%s)", titdat.keywords);
       
-      voutlnf("  /Creator (UDO Version %s.%s %s for %s)", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
+      voutlnf("  /Creator (UDO %s)", UDO_VERSION_STRING_OS);
       voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
       voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
-      outln("/DOCINFO pdfmark\n");
-
-                                          /* How to open a PDF-document */
+      outln("/DOCINFO pdfmark");
+      outln("");
+      
+      /* How to open a PDF-document */
       voutlnf("%s %s %s %s %s %s HowToOpen\n",
                    laydat.pagemode,
                    laydat.openpage,
@@ -5323,14 +5122,12 @@ GLOBAL void c_begin_document(void)
                    laydat.hidemenubar,
                    laydat.viewerpreferences,
                    laydat.fitwindow);
-
       bookmarks_ps();
-      
-   }  /* switch (desttype) */
+      break;
+   }
    
    bCalledBeginDocument = TRUE;
-
-}  /* c_begin_document() */
+}
 
 
 
@@ -5348,8 +5145,7 @@ GLOBAL void c_begin_document(void)
 
 GLOBAL void c_end_document(void)
 {
-   char   n[128];  /* */
-   
+   char   n[128];
    
    if (bCalledEndDocument)
    {
@@ -5362,7 +5158,7 @@ GLOBAL void c_end_document(void)
       error_end_without_begin(CMD_END_DOCUMENT, CMD_BEGIN_DOCUMENT);
    }
 
-   check_styleflags();                    /* PL16 */
+   check_styleflags();
    check_endnode();
 
    if (use_about_udo)
@@ -5375,32 +5171,35 @@ GLOBAL void c_end_document(void)
    {
    case TOHTM:
    case TOHAH:
-      if (!no_index)
+      if (!no_index && use_udo_index)
       {
          save_html_index();
          check_endnode();
       }
-      
       html_bottomline();
+      break;
    }
 
    if (bInsideAppendix)
    {
+      if (!bCalledEndAppendix)
+         error_missing_end(CMD_END_APPENDIX);
       bInsideAppendix = FALSE;
 
       switch (desttype)
-      {   
+      {
       case TOTEX:
       case TOPDL:
          outln("\\end{appendix}");
          outln("");
          break;
          
-      case TOLYX:                         /* <???> */
+      case TOLYX:
          break;
          
       default:
          outln("");
+         break;
       }
    }
 
@@ -5417,10 +5216,8 @@ GLOBAL void c_end_document(void)
       outln("");
       break;
       
-      
-   case TOLYX:                            /* <???> */
+   case TOLYX:
       break;
-      
       
    case TOINF:
       if (called_tableofcontents)
@@ -5430,10 +5227,8 @@ GLOBAL void c_end_document(void)
          outln("@contents");
          outln("@end iftex");
       }
-      
       outln("@bye");
       break;
-      
       
    case TOMAN:
       if (iManPageLength > 0)
@@ -5443,9 +5238,7 @@ GLOBAL void c_end_document(void)
             man_bottomline();
          }
       }
-      
       break;
-      
       
    case TORTF:
    case TOWIN:
@@ -5455,7 +5248,6 @@ GLOBAL void c_end_document(void)
       outln("");
       break;
       
-      
    case TOHAH:
    case TOHTM:
    case TOMHH:
@@ -5464,7 +5256,6 @@ GLOBAL void c_end_document(void)
       outln("\n</body>");
       outln("</html>");
       break;
-      
       
    case TOLDS:
       if (use_style_book)
@@ -5477,55 +5268,44 @@ GLOBAL void c_end_document(void)
          outln("</article>");
          outln("");
       }
-      
       break;
-      
       
    case TOHPH:
       outln("<\\helpvolume>");
       break;
       
-   
    case TOSRC:
    case TOSRP:
       if (use_about_udo)
       {
-         memset(n, '#', 62);   n[62] = EOS;
+         memset(n, '#', 62);
+         n[62] = EOS;
          outln("");
          voutlnf("%s  %s", sSrcRemOn, n);
-         voutlnf("    # @(#) %s%s - made with UDO Version %s.%s %s for %s", outfile.name, outfile.suff, UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
+         voutlnf("    # @(#) %s%s - made with UDO %s", outfile.name, outfile.suff, UDO_VERSION_STRING_OS);
          voutlnf("    %s %s", n, sSrcRemOff);
       }
-      
       break;
-      
       
    case TODRC:
-      outln("%%");                        /*r6pl5*/
+      outln("%%");
       break;
-      
       
    case TOIPF:
       outln(":euserdoc.");
       break;         
       
-      
    case TOKPS:
       outln("newpage");
-
-      if (use_about_udo)                  /* New in r6pl15 [NHz] */
+      if (use_about_udo)
       {
          outln("/NodeName (About UDO) def");
          outln("/acty acty 50 sub def");
          outln("actx acty moveto");
-         
-         if (destlang == TOGER)
-            voutlnf("(Version %s.%s %s) (%s) (%s) aboutUDO_ger", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, UDO_URL);
-         else
-            voutlnf("(Version %s.%s %s) (%s) (%s) aboutUDO_eng", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, UDO_URL);
-            
+         voutlnf("(%s) (%s) (%s) %s", UDO_VERSION_STRING, UDO_OS, UDO_URL, destlang == TOGER ? "aboutUDO_ger" : "aboutUDO_eng");
          outln("newpage");
       }
+      break;
    }
 
    bCalledEndDocument = TRUE;
@@ -5547,7 +5327,7 @@ GLOBAL void c_end_document(void)
 
 GLOBAL void c_begin_appendix(void)
 {
-   if (bCalledBeginAppendix)              /* PL6 */
+   if (bCalledBeginAppendix)
    {
       error_called_twice(CMD_BEGIN_APPENDIX);
       return;
@@ -5562,14 +5342,16 @@ GLOBAL void c_begin_appendix(void)
       outln("\\begin{appendix}");
       break;
       
-   case TOLYX:                            /* <???> */
+   case TOLYX:
+      outln("\\start_of_appendix");
       break;
       
    default:
       outln("");
+      break;
    }
 
-   bCalledBeginAppendix = TRUE;           /* PL6 */
+   bCalledBeginAppendix = TRUE;
 }
 
 
@@ -5588,7 +5370,7 @@ GLOBAL void c_begin_appendix(void)
 
 GLOBAL void c_end_appendix(void)
 {
-   if (bCalledEndAppendix)                /* PL6 */
+   if (bCalledEndAppendix)
    {
       error_called_twice(CMD_END_APPENDIX);
       return;
@@ -5601,7 +5383,7 @@ GLOBAL void c_end_appendix(void)
    
    /* Sonst nichts ausgeben, der Rest wird in c_end_document erledigt! */
 
-   bCalledEndAppendix = TRUE;             /* PL6 */
+   bCalledEndAppendix = TRUE;
 }
 
 
@@ -5620,7 +5402,7 @@ GLOBAL void c_end_appendix(void)
 
 GLOBAL void init_module_env(void)
 {
-   int   i;  /* counter */
+   int i;
 
    for (i = 0; i < MAXENVLEVEL; i++)
    {
@@ -5674,11 +5456,12 @@ GLOBAL void init_env_itemchar(void)
    case TOTVH:
       strcpy(itemchar[1], ".");
       
-      if (!no_umlaute)                    /* PL6 */
+      if (!no_umlaute)
       {
          if (desttype == TOSTG)
+         {
             strcpy(itemchar[1], "\371");
-         else
+         } else
          {
 #ifdef __TOS__
             strcpy(itemchar[1], "\371");
@@ -5692,10 +5475,8 @@ GLOBAL void init_env_itemchar(void)
 #if defined(__MACOS__) || defined(__MACOSX__) || defined(__BEOS__)
             strcpy(itemchar[1], "\245");
 #endif
-         } /* if (desttype == TOSTG) */
-
-      }   /* if (!no_umlaute) PL6 */
-
+         }
+      }
       strcpy(itemchar[2], "-");
       strcpy(itemchar[3], "*");
       strcpy(itemchar[4], ".");
@@ -5703,7 +5484,6 @@ GLOBAL void init_env_itemchar(void)
       strcpy(itemchar[6], itemchar[2]);
       break;
    
-
    case TORTF:
       strcpy(itemchar[1], "\\bullet");
       strcpy(itemchar[2], "-");
@@ -5713,9 +5493,9 @@ GLOBAL void init_env_itemchar(void)
       strcpy(itemchar[6], itemchar[2]);
       break;
 
-
    case TOWIN:
    case TOAQV:
+      /* FIXME: UTF8 */
       strcpy(itemchar[1], "{\\f2 \\'B7}");
       strcpy(itemchar[2], "\\'96");
       strcpy(itemchar[3], "\\'95");
@@ -5724,8 +5504,8 @@ GLOBAL void init_env_itemchar(void)
       strcpy(itemchar[6], itemchar[2]);
       break;
 
-
    case TOWH4:
+      /* FIXME: UTF8 */
       strcpy(itemchar[1], "{\\f2 \\'B7}");
       strcpy(itemchar[2], "-");
       strcpy(itemchar[3], "\\'95");
@@ -5734,17 +5514,13 @@ GLOBAL void init_env_itemchar(void)
       strcpy(itemchar[6], itemchar[2]);
       break;
 
-
    case TOKPS:
-                                          /* Changed in V6.5.6 [NHz] */
       sprintf(itemchar[1], "%s\n/bullet off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
       sprintf(itemchar[2], "%s\n/endash off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
       sprintf(itemchar[3], "%s\n/asterix off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
       sprintf(itemchar[4], "%s\n/periodcentered off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
       strcpy(itemchar[5], itemchar[1]);
       strcpy(itemchar[6], itemchar[2]);
+      break;
    }
 }
-
-
-/* +++ EOF +++ */

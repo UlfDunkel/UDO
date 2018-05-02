@@ -116,6 +116,9 @@ GLOBAL void check_environments_node(void);
 GLOBAL void output_begin_verbatim(void);
 GLOBAL void output_end_verbatim(void);
 
+GLOBAL void output_begin_preformatted(void);
+GLOBAL void output_end_preformatted(void);
+
 GLOBAL void output_begin_linedraw(void);
 GLOBAL void output_end_linedraw(void);
 
@@ -167,6 +170,3 @@ GLOBAL void c_end_appendix(void);
 
 GLOBAL void init_module_env(void);
 GLOBAL void init_env_itemchar(void);
-
-
-/* +++ EOF +++ */
