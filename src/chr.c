@@ -1339,6 +1339,33 @@ GLOBAL void recode(char *zeile, int char_set)
 
 
 
+GLOBAL void html2sys(char *s)
+{
+   register int i;
+   char one[2];
+   
+   if (s[0] == EOS)
+      return;
+   
+   strcpy(one, " ");
+   
+   for (i = 0; chrtab[i].uname != U_NIL; i++)
+   {
+      if (chrtab[i].uname < 0x100)
+      {
+         one[0] = chrtab[i].uname;
+         replace_all(s, chrtab[i].html, one);
+      }
+   }
+
+   for (i = 0; i < MAXHTML7BIT; i++)
+   {
+      one[0] = html7bit[i].c;
+      replace_all(s, html7bit[i].quoted, one);
+   }
+}
+
+
 /*******************************************************************************
 *
 *  recode_chrtab():

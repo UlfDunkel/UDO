@@ -139,6 +139,7 @@ GLOBAL void recode_udo(char *s);
 
    /* recode a string from chrtab[] via Unicode name to another encoding */
 GLOBAL void recode_chrtab(char *s, int type);
+GLOBAL void html2sys(char *s);
 
 GLOBAL int calc_ttf_twip(const char *s, const int font, const int style);
 

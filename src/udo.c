@@ -6604,20 +6604,19 @@ LOCAL void c_image_nonr(void)
 
 GLOBAL void c_include(void)
 {
-   char   name[512];  /* */
+   char name[MYFILE_FULL_LEN];
    
-
    if (token[1][0] != EOS)
    {
-      if (token[1][0] == '\"')            /*r6pl2*/
+      if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_include[1]");
+         um_strcpy(name, token[1], sizeof(name), "c_include[1]");
       }
 
       b1stQuote = FALSE;
@@ -6631,16 +6630,13 @@ GLOBAL void c_include(void)
       case PASS1:
          pass1(name);
          break;
-         
       case PASS2:
          pass2(name);
          break;
-         
       case PASSU:
          passU(name);
          break;
       }
-      
       multitasking_interrupt();
    }
 }
@@ -6661,20 +6657,19 @@ GLOBAL void c_include(void)
 
 LOCAL void c_include_verbatim(void)
 {
-   char   name[512];  /* */
-   
+   char name[MYFILE_FULL_LEN];
 
    if (token[1][0] != EOS)
    {
-      if (token[1][0] == '\"')            /*r6pl2*/
+      if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_include_verbatim[1]");
+         um_strcpy(name, token[1], sizeof(name), "c_include_verbatim[1]");
       }
       
       token_reset();
@@ -6687,22 +6682,23 @@ LOCAL void c_include_verbatim(void)
       case PASS1:
          pass1(name);
          break;
-         
       case PASS2:
          output_begin_verbatim();
          pass2(name);
          output_end_verbatim();
          break;
-         
       case PASSU:
-         outln("!begin_verbatim");
+         output_begin_verbatim();
+         /*
+          * FIXME: doesnt work when the include file contains a '!end_verbatim' command,
+          * because that will already end the '!begin_verbatim' from above
+          */
          passU(name);
-         outln("!end_verbatim");
+         output_end_verbatim();
          break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
-
       multitasking_interrupt();
    }
 }
@@ -6723,20 +6719,19 @@ LOCAL void c_include_verbatim(void)
 
 LOCAL void c_include_preformatted(void)
 {
-   char   name[512];  /* */
-
+   char name[MYFILE_FULL_LEN];
 
    if (token[1][0] != EOS)
    {
-      if (token[1][0] == '\"')            /*r6pl2*/
+      if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_include_preformatted[1]");
+         um_strcpy(name, token[1], sizeof(name), "c_include_preformatted[1]");
       }
       
       token_reset();
@@ -6750,19 +6745,18 @@ LOCAL void c_include_preformatted(void)
          pass1(name);
          break;
       case PASS2:
-         output_begin_verbatim();
+         output_begin_preformatted();
          pass2(name);
-         output_end_verbatim();
+         output_end_preformatted();
          break;
       case PASSU:
-         outln("!begin_preformatted");
+         output_begin_preformatted();
          passU(name);
-         outln("!end_preformatted");
+         output_end_preformatted();
          break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
-
       multitasking_interrupt();
    }
 }
@@ -6783,20 +6777,19 @@ LOCAL void c_include_preformatted(void)
 
 LOCAL void c_include_linedraw(void)
 {
-   char   name[512];  /* */
-   
+   char name[MYFILE_FULL_LEN];
 
    if (token[1][0] != EOS)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_include_linedraw[1]");
+         um_strcpy(name, token[1], sizeof(name), "c_include_linedraw[1]");
       }
       
       token_reset();
@@ -6809,22 +6802,19 @@ LOCAL void c_include_linedraw(void)
       case PASS1:
          pass1(name);
          break;
-         
       case PASS2:
          output_begin_linedraw();
          pass2(name);
          output_end_linedraw();
          break;
-         
       case PASSU:
-         outln("!begin_linedraw");
+         output_begin_linedraw();
          passU(name);
-         outln("!end_linedraw");
+         output_end_linedraw();
          break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
-      
       multitasking_interrupt();
    }
 }
@@ -6845,20 +6835,19 @@ LOCAL void c_include_linedraw(void)
 
 LOCAL void c_include_raw(void)
 {
-   char   name[512];  /* */
-   
+   char name[MYFILE_FULL_LEN];
 
    if (token[1][0] != EOS)
    {
-      if (token[1][0] == '\"')            /*r6pl2*/
+      if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_include_raw[1]");
+         um_strcpy(name, token[1], sizeof(name), "c_include_raw[1]");
       }
 
       token_reset();
@@ -6871,11 +6860,9 @@ LOCAL void c_include_raw(void)
       case PASS1:
          pass1(name);
          break;
-         
       case PASS2:
          pass2(name);
          break;
-         
       case PASSU:
          outln("!begin_raw");
          passU(name);
@@ -6884,7 +6871,6 @@ LOCAL void c_include_raw(void)
       }
       
       pflag[iUdopass].env = ENV_NONE;
-      
       multitasking_interrupt();
    }
 }
@@ -6905,20 +6891,19 @@ LOCAL void c_include_raw(void)
 
 LOCAL void c_include_src(void)
 {
-   char   name[512];  /* */
-   
+   char name[MYFILE_FULL_LEN];
 
    if (token[1][0] != EOS)
    {
-      if (token[1][0] == '\"')            /*r6pl2*/
+      if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_include_src[1]");
+         um_strcpy(name, token[1], sizeof(name), "c_include_src[1]");
       }
 
       token_reset();
@@ -6937,14 +6922,13 @@ LOCAL void c_include_src(void)
          output_end_sourcecode();
          break;
       case PASSU:
-         outln("!begin_sourcecode");
+         output_begin_sourcecode();
          passU(name);
-         outln("!end_sourcecode");
+         output_end_sourcecode();
          break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
-
       multitasking_interrupt();
    }
 }
@@ -6965,48 +6949,43 @@ LOCAL void c_include_src(void)
 
 LOCAL void c_include_comment(void)
 {
-   char   name[512];  /* */
-   
+   char name[MYFILE_FULL_LEN];
 
    if (token[1][0] != EOS)
    {
-      if (token[1][0] == '\"')            /*r6pl2*/
+      if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_include_comment[1]");
+         um_strcpy(name, token[1], sizeof(name), "c_include_comment[1]");
       }
 
       token_reset();
       replace_macros(name);
       
       pflag[iUdopass].env = ENV_COMMENT;
-
       switch (iUdopass)
       {
       case PASS1:
          pass1(name);
          break;
-         
       case PASS2:
          output_begin_comment();
          pass2(name);
          output_end_comment();
          break;
-         
       case PASSU:
-         outln("!begin_comment");
+         output_begin_comment();
          passU(name);
-         outln("!end_comment");
+         output_end_comment();
          break;
       }
       
       pflag[iUdopass].env = ENV_NONE;
-
       multitasking_interrupt();
    }
 }
@@ -7027,22 +7006,19 @@ LOCAL void c_include_comment(void)
 
 LOCAL void c_input(void)
 {
-   char    *tmp,        /* */
-            path[512],  /* */
-            name[512];  /* */
-   size_t   sl;         /* */
-   
+   char    *tmp,
+            path[MYFILE_FULL_LEN],
+            name[MYFILE_FULL_LEN];
+   size_t   sl;
 
    tmp = getenv("UDOINPUTPATH");
-   
    if (tmp != NULL)
    {
-      strcpy(path, tmp);
+      um_strcpy(path, tmp, sizeof(path) - 1, "!input");
       sl = strlen(path);
-      
-      if (path[sl - 1] != '\\' && path[sl - 1] != '/')
+      if (sl > 0 && path[sl - 1] != '\\' && path[sl - 1] != '/')
       {
-         um_strcat(path, "/", 512, "c_input [1]");
+         um_strcat(path, "/", sizeof(path), "!input");
       }
    }
    else
@@ -7051,27 +7027,25 @@ LOCAL void c_input(void)
       {
          error_message(_("$UDOINPUTPATH not set!"));
       }
-      
       return;
    }
 
-
    if (token[1][0] != EOS)
    {
-      if (token[1][0] == '\"')            /*r6pl2*/
+      if (token[1][0] == '\"')
       {
-         tokcpy2(name, 512);
+         tokcpy2(name, sizeof(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], 512, "c_input [2]");
+         um_strcpy(name, token[1], sizeof(name), "!input");
       }
 
       token_reset();
       replace_macros(name);
-      um_strcat(path, name, 512, "c_input [3]");
+      um_strcat(path, name, 512, "!input");
       path_adjust_separator(path);
       
       switch (iUdopass)
@@ -7079,16 +7053,13 @@ LOCAL void c_input(void)
       case PASS1:
          pass1(path);
          break;
-         
       case PASS2:
          pass2(path);
          break;
-         
       case PASSU:
          passU(path);
          break;
       }
-      
       multitasking_interrupt();
    }
 }
@@ -7107,44 +7078,37 @@ LOCAL void c_input(void)
 *
 ******************************************|************************************/
 
-LOCAL void str2silben(
-
-char       *s)                       /* */
+LOCAL void str2silben(const char *s)
 {
-   size_t   i,                       /* */
-            sl,                      /* */
-            yl;                      /* */
-   char     syl[MAX_TOKEN_LEN + 1];  /* */
-
+   size_t   i,
+            sl,
+            yl;
+   char     syl[MAX_TOKEN_LEN + 1];
    
    silben_counter = -1;
    
-                                          /* Kein Trennzeichen enthalten? */
-   if ( (strchr(s, '-') == NULL) && (strchr(s, DIVIS_C) == NULL) )
+   /* Kein Trennzeichen enthalten? */
+   if ((strchr(s, '-') == NULL) && (strchr(s, DIVIS_C) == NULL))
       return;
-                                    
-   if ((s[0] == '-') && (s[1] == EOS) )   /* Token besteht nur aus einem Bindestrich? */
+   
+   /* Token besteht nur aus einem Bindestrich? */
+   if ((s[0] == '-') && (s[1] == EOS))
       return;
 
    /* <???> Ist das Leeren nicht ueberfluessig, wenn silbe[] */
    /* ueber strcpy() gesetzt und silben_counter benutzt wird? */
-   
-   for (i = 0; i < MAXSILBEN; silbe[i++][0] = EOS)
-   {
-      ;
-   }
+   for (i = 0; i < MAXSILBEN; i++)
+      silbe[i][0] = EOS;
    
    syl[0] = EOS;
    yl = 0;
    
-   /* <???> Schleife optimierbar ueber while (*ptr!=EOS) */
-   
-   sl= strlen(s);
+   sl = strlen(s);
    
    for (i = 0; i < sl; i++)
    {
-      syl[yl + 1] = EOS;                  /* vorher: chrcat() */
-      syl[yl]     = s[i];
+      syl[yl + 1] = EOS;
+      syl[yl] = s[i];
       yl++;
       
       switch (s[i])
@@ -7152,13 +7116,14 @@ char       *s)                       /* */
       case '-':
       case '/':
          if (i > 0)
-         {                                /* Nur dann trennen, wenn das naechste Zeichen */
-                                          /* keine Zahl, kein Komma und kein ')',']','}' ist */
-            if (   ( (s[i + 1] < '0') || (s[i + 1] > '9') )
-                 &&  (s[i + 1] != ',')
-                 &&  (s[i + 1] != ')')
-                 &&  (s[i + 1] != ']')
-                 &&  (s[i + 1] != '}')
+         {
+            /* Nur dann trennen, wenn das naechste Zeichen */
+            /* keine Zahl, kein Komma und kein ')',']','}' ist */
+            if (((s[i + 1] < '0') || (s[i + 1] > '9'))
+                && (s[i + 1] != ',')
+                && (s[i + 1] != ')')
+                && (s[i + 1] != ']')
+                && (s[i + 1] != '}')
                )
             {
                silben_counter++;
@@ -7167,14 +7132,14 @@ char       *s)                       /* */
                yl = 0;
             }
          }
-         
          break;
          
       case DIVIS_C:
          silben_counter++;
          strcpy(silbe[silben_counter], syl);
          syl[0] = EOS;
-         yl     = 0;
+         yl = 0;
+         break;
       }
    }
    
@@ -7199,9 +7164,9 @@ char       *s)                       /* */
 *
 ******************************************|************************************/
 
-LOCAL void check_parwidth (void)
+LOCAL void check_parwidth(void)
 {
-   if (zDocParwidth == 0)
+   if (zDocParwidth <= 0)
       zDocParwidth = tomaxlen;
 
    if (zDocParwidth < 20)
@@ -13828,10 +13793,10 @@ LOCAL void save_htmlhelp_project(void)
    fprintf(hhpfile, "[OPTIONS]\n");
    
    strcpy(sTitle, titleprogram);          /* Windows-Umlaute benutzen, also nicht "titleprogram"! */
-   recode_chrtab(sTitle,CHRTAB_HTML);
-   
+   html2sys(sTitle);
+
    fprintf(hhpfile, "Title=%s\n", sTitle);
-   fprintf(hhpfile, "Compatibility=1.0\n");
+   fprintf(hhpfile, "Compatibility=1.1 or later\n");
    fprintf(hhpfile, "Compiled file=%s.chm\n", old_outfile.name);
    fprintf(hhpfile, "Error log file=%s.log\n", old_outfile.name);
    
@@ -13842,79 +13807,23 @@ LOCAL void save_htmlhelp_project(void)
       fprintf(hhpfile, "Index file=%s.hhk\n", old_outfile.name);
       
    fprintf(hhpfile, "Default topic=%s%s\n", old_outfile.name, outfile.suff);
-   fprintf(hhpfile, "Display compile progress=Yes\n");
+   fprintf(hhpfile, "Display compile progress=No\n");
    fprintf(hhpfile, "Flat=Yes\n");
    fprintf(hhpfile, "Full-text search=Yes\n");
    fprintf(hhpfile, "Auto Index=Yes\n");
-   fprintf(hhpfile, "Language=");
-   
-   switch (destlang)
-   {
-   case TOCZE:
-      fprintf(hhpfile, "0x405\n");
-      break;
-
-   case TODAN:
-      fprintf(hhpfile, "0x406\n");
-      break;
-
-   case TODUT:
-      fprintf(hhpfile, "0x413\n");
-      break;
-
-   case TOFIN:
-      fprintf(hhpfile, "0x40b\n");
-      break;
-
-   case TOFRA:
-      fprintf(hhpfile, "0x40c\n");
-      break;
-      
-   case TOGER:
-      fprintf(hhpfile, "0x407\n");
-      break;
-
-   case TOITA:
-      fprintf(hhpfile, "0x410\n");
-      break;
-      
-   case TOJAP:
-      fprintf(hhpfile, "0x411\n");
-      break;
-      
-   case TONOR:
-      fprintf(hhpfile, "0x414\n");
-      break;
-
-   case TOPOL:
-      fprintf(hhpfile, "0x415\n");
-      break;
-
-   case TOPOR:
-      fprintf(hhpfile, "0x816\n");
-      break;
-
-   case TOSPA:
-      fprintf(hhpfile, "0x40a\n");
-      break;
-      
-   case TOSWE:
-      fprintf(hhpfile, "0x41d\n");
-      break;
-
-   case TORUS:
-      fprintf(hhpfile, "0x419\n");
-      break;
-
-
-   default:
-   case TOENG:
-      fprintf(hhpfile, "0x409\n");
-   }
-   
+   fprintf(hhpfile, "Language=%s\n", lang.lcid);
+   fprintf(hhpfile, "Default Window=main\n");
    fprintf(hhpfile, "\n");
    fprintf(hhpfile, "[FILES]\n");
    fprintf(hhpfile, "%s%s\n", old_outfile.name, outfile.suff);
+   /* FIXME: have to output all style sheet filenames here */
+   fprintf(hhpfile, "\n");
+   fprintf(hhpfile, "[WINDOWS]\n");
+   fprintf(hhpfile, "main=,\"%s%s\",\"%s%s\",\"%s%s\",\"%s%s\",,,,,0x63520,,0x00304e,,,,,,,,0\n",
+      bHhcSaved ? old_outfile.name : "", bHhcSaved ? ".hhc" : "",
+      bHhkSaved ? old_outfile.name : "", bHhkSaved ? ".hhk" : "",
+      old_outfile.name, outfile.suff,
+      old_outfile.name, outfile.suff);
 
    if (bUseIdMapFileC)
    {
@@ -13946,30 +13855,27 @@ LOCAL void save_htmlhelp_project(void)
 
 LOCAL void set_format_flags(void)
 {
-   /*   Bei manchen Formaten ist es fuer die Laengenberechnung */
-   /*   einer Zeile enorm wichtig, die Laenge ohne UDO- */
-   /*   Spezialitaeten zu kennen (STG, PCH, ASC...) */
-   /*   Bei manchen ist es hingegen wurscht, wie lang eine */
-   /*   Zeile wird (RTF, HTML, WinHelp, ...) */
-   
+   /* Bei manchen Formaten ist es fuer die Laengenberechnung */
+   /* einer Zeile enorm wichtig, die Laenge ohne UDO- */
+   /* Spezialitaeten zu kennen (STG, PCH, ASC...) */
+   /* Bei manchen ist es hingegen wurscht, wie lang eine */
+   /* Zeile wird (RTF, HTML, WinHelp, ...) */
    format_needs_exact_toklen = FALSE;
 
-   /*   Bei den Formaten, bei denen referenziert wird und bei */
-   /*   denen die Laenge einer Ausgabezeile egal ist, sollte */
-   /*   erst dann referenziert werden, wenn der ganze Absatz */
-   /*   moeglichst in einer Zeile enthalten ist, damit nicht */
-   /*   durch einen vorzeitigen Umbruch Links verloren gehen. */
-   
+   /* Bei den Formaten, bei denen referenziert wird und bei */
+   /* denen die Laenge einer Ausgabezeile egal ist, sollte */
+   /* erst dann referenziert werden, wenn der ganze Absatz */
+   /* moeglichst in einer Zeile enthalten ist, damit nicht */
+   /* durch einen vorzeitigen Umbruch Links verloren gehen. */
    format_uses_output_buffer = FALSE;
 
 
-   /*   Die Kommandos einiger Formate muessen vor der Veraen- */
-   /*   derung durch die Referenzierung geschuetzt werden. */
-   /*   z.B. WinHelp und HTML. Dort waere es fatal, wuerde UDO */
-   /*   \li, \footnote oder dergleichen referenzieren! */
-   
+   /* Die Kommandos einiger Formate muessen vor der Veraen- */
+   /* derung durch die Referenzierung geschuetzt werden. */
+   /* z.B. WinHelp und HTML. Dort waere es fatal, wuerde UDO */
+   /* \li, \footnote oder dergleichen referenzieren! */
    format_protect_commands = FALSE;
-
+   
    switch (desttype)
    {
    case TOASC:
@@ -13980,7 +13886,7 @@ LOCAL void set_format_flags(void)
       format_needs_exact_toklen = TRUE;
       break;
       
-   case TOHAH:                            /* V6.5.17 */
+   case TOHAH:
    case TOHTM:
    case TOMHH:
       format_uses_output_buffer = TRUE;
@@ -13996,7 +13902,7 @@ LOCAL void set_format_flags(void)
       format_protect_commands = TRUE;
       break;
       
-   case TOINF:                            /* <???> */
+   case TOINF:
       break;
       
    case TOLDS:
@@ -14033,8 +13939,10 @@ LOCAL void set_format_flags(void)
    case TOWIN:
    case TOWH4:
    case TOAQV:
+      format_needs_exact_toklen = TRUE;
       format_uses_output_buffer = TRUE;
       format_protect_commands = TRUE;
+      break;
    }
 
 
