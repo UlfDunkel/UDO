@@ -11977,6 +11977,21 @@ LOCAL _BOOL pass1(const char *datei)
       show_status_file_1(lPass1Lines, tmp_datei);
    }
 
+   if (!in_about_udo)
+   {
+      if (bUseTreefile)
+      {
+         if (bTreeopened)
+         {
+            for (i = 0; i < (iFilesOpened - 1); i++)
+               fprintf(fTreefile, "|----");
+            fprintf(fTreefile, "%s\n", tmp_datei);
+         }
+      }
+   
+      save_upr_entry_infile(tmp_datei, iFilesOpened);
+   }
+   
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
       /* Here we need to add possible splitted line numbers */
@@ -12548,14 +12563,11 @@ LOCAL _BOOL pass1(const char *datei)
 *
 ******************************************|************************************/
 
-LOCAL void output_verbatim_line(
-
-char       *zeile)        /* */
+LOCAL void output_verbatim_line(char *zeile)
 {
-   char     indent[128];  /* */
-   size_t   len;          /* */
+   char     indent[128];
+   size_t   len;
    
-
    if (zeile[0] == '#')
    {
       recode(zeile, iCharset);             /* r6pl2: sonst werden UDO-Kommentare in verbatim-Umgebungen */
@@ -13287,23 +13299,6 @@ LOCAL _BOOL pass2(const char *datei)
    {
       show_status_file_2(lPass2Lines, tmp_datei);
    }
-
-   if (bUseTreefile)
-   {
-      if (bTreeopened)
-      {
-         int i;
-         
-         for (i = 0; i < (iFilesOpened - 1); i++)
-         {
-            fprintf(fTreefile, "|----");
-         }
-         
-         fprintf(fTreefile, "%s\n", tmp_datei);
-      }
-   }
-
-   save_upr_entry_infile(tmp_datei, iFilesOpened);
 
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
@@ -14102,7 +14097,6 @@ GLOBAL _BOOL udo(char *datei)
    }
 
 
-
    if (bUseTreefile)
    {
       if (outfile.full[0] != EOS)
@@ -14246,20 +14240,23 @@ GLOBAL _BOOL udo(char *datei)
       {
 /*       use_about_udo = TRUE; */         /* UDO is now Open Source */
       }
-
-      if (use_about_udo)
-      {
-         add_pass1_about_udo();
-      }
-
+      
       switch (desttype)
       {
       case TOHTM:
       case TOHAH:
-         if (!no_index)
+      /* not for HtmlHelp because index is saved directly as html and no node is generated */
+         if (!no_index && bCalledIndex && use_udo_index)
             add_pass1_index_udo();
+         break;
       }
-
+      
+      if (use_about_udo && desttype != TOUDO)
+      {
+         in_about_udo = TRUE;
+         add_pass1_about_udo();
+         in_about_udo = FALSE;
+      }
 
       if (malloc_token_output_buffer())   /* Speicher anfordern */
       {
