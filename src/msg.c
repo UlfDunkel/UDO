@@ -1225,7 +1225,7 @@ GLOBAL void error_no_charset(const char *s)
 
 /*******************************************************************************
 *
-*  error_node2_not_allowed():
+*  error_node_not_allowed():
 *     error message: use !node first (structure gap) or use !begin_node & !end_node
 *
 *  return:
@@ -1233,85 +1233,15 @@ GLOBAL void error_no_charset(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void error_node2_not_allowed(void)
+GLOBAL void error_node_not_allowed(int level)
 {
-   fatal_message("use !node first (structure gap) or use !begin_node & !end_node");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_node3_not_allowed():
-*     error message: use !subnode first (structure gap) or use !begin_node & !end_node
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_node3_not_allowed(void)
-{
-   fatal_message("use !subnode first (structure gap) or use !begin_node & !end_node");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_node4_not_allowed():
-*     error message: use !subsubnode first (structure gap) or use !begin_node & !end_node
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_node4_not_allowed(void)
-{
-   fatal_message("use !subsubnode first (structure gap) or use !begin_node & !end_node");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_node5_not_allowed():
-*     error message: use !subsubsubnode first (structure gap) or use !begin_node & !end_node
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_node5_not_allowed(void)
-{
-   fatal_message("use !subsubsubnode first (structure gap) or use !begin_node & !end_node");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_node6_not_allowed():
-*     error message: use !subsubsubsubnode first (structure gap) or use !begin_node & !end_node
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_node6_not_allowed(void)
-{
-   fatal_message("use !subsubsubsubnode first (structure gap) or use !begin_node & !end_node");
+   char sub[6 * 3 + 1];
+   int i;
+   
+   *sub = '\0';
+   for (i = TOC_NODE2; i < level; i++)
+      strcat(sub, "sub");
+   fatal_message(_("use !%snode first (structure gap)"), sub);
 }
 
 

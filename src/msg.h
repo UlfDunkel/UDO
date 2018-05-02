@@ -116,11 +116,7 @@ GLOBAL void error_replace_param(const char *s);
 GLOBAL void error_undefined_link(const char *l);
 GLOBAL void error_missing_endif(const char *s, FILE_LINENO line);
 GLOBAL void error_no_charset(const char *s);
-GLOBAL void error_node2_not_allowed(void);
-GLOBAL void error_node3_not_allowed(void);
-GLOBAL void error_node4_not_allowed(void);
-GLOBAL void error_node5_not_allowed(void);
-GLOBAL void error_node6_not_allowed(void);
+GLOBAL void error_node_not_allowed(int level);
 
 
    /* --- warnings (tiny syntax errors) --- */

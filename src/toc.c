@@ -13778,7 +13778,7 @@ GLOBAL _BOOL add_nodetype_to_toc(TOCTYPE nodetype, _BOOL popup, _BOOL invisible)
    case TOC_NODE6:
       if (last_n5_index == 0)
       {
-         error_node6_not_allowed();
+         error_node_not_allowed(TOC_NODE6);
          return FALSE;
       }
 
@@ -13787,7 +13787,7 @@ GLOBAL _BOOL add_nodetype_to_toc(TOCTYPE nodetype, _BOOL popup, _BOOL invisible)
    case TOC_NODE5:
       if (last_n4_index == 0)
       {
-         error_node5_not_allowed();
+         error_node_not_allowed(TOC_NODE5);
          return FALSE;
       }
 
@@ -13796,7 +13796,7 @@ GLOBAL _BOOL add_nodetype_to_toc(TOCTYPE nodetype, _BOOL popup, _BOOL invisible)
    case TOC_NODE4:
       if (last_n3_index == 0)
       {
-         error_node4_not_allowed();
+         error_node_not_allowed(TOC_NODE4);
          return FALSE;
       }
       
@@ -13805,7 +13805,7 @@ GLOBAL _BOOL add_nodetype_to_toc(TOCTYPE nodetype, _BOOL popup, _BOOL invisible)
    case TOC_NODE3:
       if (last_n2_index == 0)
       {
-         error_node3_not_allowed();
+         error_node_not_allowed(TOC_NODE3);
          return FALSE;
       }
       
@@ -13814,7 +13814,7 @@ GLOBAL _BOOL add_nodetype_to_toc(TOCTYPE nodetype, _BOOL popup, _BOOL invisible)
    case TOC_NODE2:
       if (last_n1_index == 0)
       {
-         error_node2_not_allowed();
+         error_node_not_allowed(TOC_NODE2);
          return FALSE;
       }
    }
