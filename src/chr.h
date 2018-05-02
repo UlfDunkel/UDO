@@ -90,17 +90,6 @@
 #define TTF_10PT          0
 #define TTF_11PT          1
 
-   /* New in r6pl16 [NHz] */
-#define KPS_CONTENT       0
-#define KPS_BOOKMARK      1
-#define KPS_NAMEDEST      2
-
-   /* New: Fixed bug #0000040 in r6.2pl2 [NHz] */
-#define KPS_PS2DOCINFO    3
-#define KPS_DOCINFO2PS    4
-#define KPS_NODENAME      5
-
-
 /* this is a list of UDO supported special HTML characters */
 #define HTML_SPEC_HELLIP  0
 #define HTML_SPEC_MDASH   1
@@ -167,26 +156,8 @@ GLOBAL void label2tex(char *s);
 GLOBAL void label2lyx(char *s);
 GLOBAL void label2html(char *s);
 
-GLOBAL void node2winhelp(char *n);
-GLOBAL void node2WinAutoID(char *id, const char *n);
-GLOBAL void node2NrWinhelp(char *s, int i);
-GLOBAL void alias2NrWinhelp(char *s, int i);
-GLOBAL void label2NrWinhelp(char *s, int i);
-
-GLOBAL void node2NrIPF(char *s, int i);
-GLOBAL void alias2NrIPF(char *s, int i);
-GLOBAL void label2NrIPF(char *s, int i);
-
-GLOBAL void node2pchelp (char *n);
-GLOBAL void node2postscript(char *s, _BOOL text);
-
-GLOBAL void node2stg(char *s);
-GLOBAL void index2stg(char *s);
 GLOBAL void replace_2at_by_1at(char *s);
 GLOBAL void replace_1at_by_2at(char *s);
-
-GLOBAL void node2vision(char *n);
-GLOBAL void node2texinfo(char *s);
 
 GLOBAL void c_umlaute(char *s);
 
@@ -229,5 +200,12 @@ GLOBAL const char *chr_codepage_name(int encoding);
 
    /* get Content-Type charset name of desired codepage for HTML */
 GLOBAL const char *chr_codepage_charset_name(int encoding);
+
+   /* --- create nodenames --- */
+
+GLOBAL void node2winhelp(char *n);
+GLOBAL void node2WinAutoID(char *id, const char *n);
+GLOBAL void node2vision(char *n);
+GLOBAL void node2texinfo(char *s);
 
 #endif   /* __UDOCHR__ */

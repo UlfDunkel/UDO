@@ -1145,44 +1145,6 @@ GLOBAL void error_too_many_node(void)
 
 /*******************************************************************************
 *
-*  error_too_many_label():
-*     error message: too many labels used
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_too_many_label(void)
-{
-   error_message("too many labels used");
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  error_too_many_alias():
-*     error message: too many aliases used
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_too_many_alias(void)
-{
-   error_message("too many aliases used");
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  error_replace_param():
 *     error message: couldn't replace (%s ...)
 *

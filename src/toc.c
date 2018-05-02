@@ -129,6 +129,7 @@
 *  2013:
 *    fd  Oct 23: HTML output now supports HTML5
 *    fd  Nov 02: HTML5 output of <img> tags cleaned
+*    tho Dec 04: WinHelp4: links to pnodes should now be displayed in a popup
 *  2014:
 *    ggs Apr 20: Add Node6
 *    fd  Jun 20: HTML output of navigation bars now writes UDO_nav_xx IDs to anchors
@@ -255,7 +256,7 @@ typedef struct _reference                 /* auto-reference placeholders */
 
 typedef struct   _hmtl_index              /* index output for HTML */
 {
-   int       toc_index;                   /* # of found label for TOC */
+   TOCIDX    toc_index;                   /* # of found label for TOC */
    _BOOL   is_node;                     /* the label is the caption (?) */
    char      tocname[512];                /* label or node name */
    char      sortname[512];               /* 'flattened' label or node name */
@@ -275,8 +276,8 @@ typedef struct _tWinMapData
 
 typedef struct _hmtl_idx
 {
-   int    toc_index;
-   char   tocname[512];
+   TOCIDX toc_index;
+   char tocname[512];
 } HTML_IDX;
 
 
@@ -293,43 +294,44 @@ LOCAL _BOOL    toc_available;           /* Inhaltsverzeichnis existiert */
 LOCAL _BOOL    apx_available;           /* Anhang existiert */
 LOCAL _BOOL    head_foot;               /* TRUE: HEAD output, FALSE: FOOT */
 
-LOCAL int        p1_toctype;              /* Typ des aktuellen Kapitels */
-LOCAL int        p2_toctype;              /* Typ des aktuellen Kapitels */
+LOCAL TOCTYPE    p1_toctype;              /* Typ des aktuellen Kapitels */
+LOCAL TOCTYPE    p2_toctype;              /* Typ des aktuellen Kapitels */
 
-LOCAL LABEL     *lab[MAXLABELS];          /* Array mit Zeigern auf Labels */
-LOCAL int        p1_lab_counter;          /* Zaehler */
-LOCAL int        p2_lab_counter;          /* Zaehler, 2. Durchgang */
+LOCAL LABEL    **label_table;             /* Array mit Zeigern auf Labels */
+LOCAL LABIDX     p1_lab_counter;          /* used labels, pass 1; contains last used slot # (1 less than number of entries) */
+LOCAL LABIDX     p2_lab_counter;          /* used labels, pass 2; contains last used slot # (1 less than number of entries) */
+LOCAL LABIDX     p1_lab_alloc;            /* # of allocated labels */
 
 LOCAL REFERENCE *refs;                    /* Referenzen */
 LOCAL size_t     refs_counter;            /* # of used references */
 LOCAL size_t     refs_alloc;              /* # of allocated references */
 
                                           /* absolut */
-LOCAL int         p1_toc_n1, p1_toc_n2, p1_toc_n3, p1_toc_n4, p1_toc_n5, p1_toc_n6;
-LOCAL int         p1_apx_n1, p1_apx_n2, p1_apx_n3, p1_apx_n4, p1_apx_n5, p1_apx_n6;
+LOCAL TOCIDX      p1_toc_n1, p1_toc_n2, p1_toc_n3, p1_toc_n4, p1_toc_n5, p1_toc_n6;
+LOCAL TOCIDX      p1_apx_n1, p1_apx_n2, p1_apx_n3, p1_apx_n4, p1_apx_n5, p1_apx_n6;
 
                                           /* Anzeige */
-LOCAL int         p1_toc_nr1, p1_toc_nr2, p1_toc_nr3, p1_toc_nr4, p1_toc_nr5, p1_toc_nr6;
-LOCAL int         p1_apx_nr1, p1_apx_nr2, p1_apx_nr3, p1_apx_nr4, p1_apx_nr5, p1_apx_nr6;
+LOCAL TOCIDX      p1_toc_nr1, p1_toc_nr2, p1_toc_nr3, p1_toc_nr4, p1_toc_nr5, p1_toc_nr6;
+LOCAL TOCIDX      p1_apx_nr1, p1_apx_nr2, p1_apx_nr3, p1_apx_nr4, p1_apx_nr5, p1_apx_nr6;
 
-LOCAL int         p2_toc_n1, p2_toc_n2, p2_toc_n3, p2_toc_n4, p2_toc_n5, p2_toc_n6;
-LOCAL int         p2_apx_n1, p2_apx_n2, p2_apx_n3, p2_apx_n4, p2_apx_n5, p2_apx_n6;
+LOCAL TOCIDX      p2_toc_n1, p2_toc_n2, p2_toc_n3, p2_toc_n4, p2_toc_n5, p2_toc_n6;
+LOCAL TOCIDX      p2_apx_n1, p2_apx_n2, p2_apx_n3, p2_apx_n4, p2_apx_n5, p2_apx_n6;
 
-LOCAL int         curr_n1_index;
-LOCAL int         curr_n2_index;
-LOCAL int         curr_n3_index;
-LOCAL int         curr_n4_index;
-LOCAL int         curr_n5_index;
-LOCAL int         curr_n6_index;
+LOCAL TOCIDX      curr_n1_index;
+LOCAL TOCIDX      curr_n2_index;
+LOCAL TOCIDX      curr_n3_index;
+LOCAL TOCIDX      curr_n4_index;
+LOCAL TOCIDX      curr_n5_index;
+LOCAL TOCIDX      curr_n6_index;
 
-LOCAL int         last_n1_index;          /* toc[]-Indizes fuer Titelzeilen */
-LOCAL int         last_n2_index;
-LOCAL int         last_n3_index;
-LOCAL int         last_n4_index;
-LOCAL int         last_n5_index;
-LOCAL int         last_n6_index;
+LOCAL TOCIDX      last_n1_index;          /* toc[]-Indizes fuer Titelzeilen */
+LOCAL TOCIDX      last_n2_index;
+LOCAL TOCIDX      last_n3_index;
+LOCAL TOCIDX      last_n4_index;
+LOCAL TOCIDX      last_n5_index;
+LOCAL TOCIDX      last_n6_index;
 
-LOCAL int         active_nodetype;        /* Flag fuer check_endnode() */
+LOCAL TOCTYPE     active_nodetype;        /* Flag fuer check_endnode() */
 
 LOCAL char        form_t1_n1[80], form_t1_n2[80], form_t1_n3[80], form_t1_n4[80], form_t1_n5[80], form_t1_n6[80];
 LOCAL char        form_t2_n2[80], form_t2_n3[80], form_t2_n4[80], form_t2_n5[80], form_t2_n6[80];
@@ -402,8 +404,6 @@ LOCAL void output_texinfo_node(const char *name);
 
    /* get filename for HTML according to current node */
 LOCAL char *get_html_filename(const int tocindex, char *s, int *html_merge);
-   /* output HTML meta data in the HTML head section */
-LOCAL void output_html_meta(_BOOL keywords);
    /* output HTML doctype in HTML header */
 LOCAL void output_html_doctype(void);
    /* create new HTML file and output header and meta information */
@@ -421,10 +421,7 @@ LOCAL void html_node_bar_modern(void);
 LOCAL void html_node_bar_frames(void);
 
    /* sets active_nodetype variable */
-LOCAL void set_inside_node(int nodetype);
-
-   /* create a new node of the requested depth */
-LOCAL void make_nodetype(int nodetype, const _BOOL popup, const _BOOL invisible);
+LOCAL void set_inside_node(TOCTYPE nodetype);
 
    /* make TOC entry line bold */
 LOCAL void tocline_make_bold(char *s, const int depth);
@@ -442,12 +439,10 @@ LOCAL void toc_output(int nodetype, const int depth, _BOOL apx);
    /* wrapper for toc_output() */
 LOCAL void do_toc(int nodetype, const int depth);
    /* outputs the breadcrumb navigation links for the current chapter */
-LOCAL void do_toptoc(const int current_node, _BOOL popup);
+LOCAL void do_toptoc(const TOCTYPE current_node, _BOOL popup);
    /* get the user-defined TOC depth, set by the !depth command */
 LOCAL int get_toccmd_depth(void);
    /* initialize a new TOC entry */
-LOCAL TOCITEM *init_new_toc_entry(const int toctype, const _BOOL invisible);
-   /* add TOC page (indexudo) to toc[0] */
 LOCAL _BOOL add_toc_to_toc(void);
    /* exit TOC module */
 /* LOCAL void free_toc_data(char **var ); */
@@ -548,8 +543,10 @@ LOCAL _BOOL check_toc_and_token(void)
 *
 * @link: link text name
 * @node: node name which uses this label
-* @isnode: TRUE: is node, FALSE: is label or alias
 * @ti: TOC index of node/label/alias
+* @isnode: TRUE: is node, FALSE: is label or alias
+* @isalias TRUE: is alias, FALSE: is label
+* @ispopup: TRUE: is a popup
 * @li: LAB index of node/label/alias
 *
 * @Return:
@@ -558,7 +555,7 @@ LOCAL _BOOL check_toc_and_token(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, _BOOL *isalias, _BOOL *ispopup, int *li)
+GLOBAL _BOOL is_node_link(const char *link, char *node, TOCIDX *ti, _BOOL *isnode, _BOOL *isalias, _BOOL *ispopup, LABIDX *li)
 {
    _BOOL ret = FALSE;
    
@@ -598,18 +595,18 @@ GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, 
    }
 #else
    {
-      int i;
-   
+      LABIDX i;
+      
       for (i = 1; i <= p1_lab_counter; i++)
       {
-         if (strcmp(lab[i]->name, link) == 0)
+         if (strcmp(label_table[i]->name, link) == 0)
          {
-            *isnode = lab[i]->is_node;
-            *isalias = lab[i]->is_alias;
-            *ispopup = lab[i]->is_popup;
+            *isnode = label_table[i]->is_node;
+            *isalias = label_table[i]->is_alias;
+            *ispopup = label_table[i]->is_popup;
             *li = i;
-            *ti = lab[i]->tocindex;
-            lab[i]->referenced = TRUE;
+            *ti = label_table[i]->tocindex;
+            label_table[i]->referenced = TRUE;
             strcpy(node, toc[*ti]->name);
             ret = TRUE;
             break;
@@ -635,13 +632,10 @@ GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, 
 *
 ******************************************|************************************/
 
-GLOBAL int getLabelIndexFromTocIndex(
-
-int        *li,  /* */
-const int   ti)  /* */
+GLOBAL LABIDX getLabelIndexFromTocIndex(LABIDX *li, const TOCIDX ti)
 {
    *li = toc[ti]->labindex;
-    return *li;
+   return *li;
 }
 
 
@@ -658,14 +652,11 @@ const int   ti)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void output_helpid(
-
-int      tocindex)  /* */
+LOCAL void output_helpid(TOCIDX tocindex)
 {
-   char  s[256];    /* */
-
-   s[0] = '\0';
+   char s[256];
    
+   s[0] = '\0';
    if (toc[tocindex]->helpid != NULL)
    {
       um_strcpy(s, toc[tocindex]->helpid, 256, "output_helpid[1]");
@@ -740,10 +731,10 @@ int      tocindex)  /* */
 
 LOCAL void output_aliasses(void)
 {
-   register int   i;             /* */
-   int            start;         /* */
-   char           s[256],        /* */
-                  keyword[256];  /* */
+   register LABIDX i;
+   LABIDX start;
+   char           s[MAX_LABEL_LEN * 2 + 1];
+   char keyword[MAX_LABEL_LEN * 2 + 1];
    
    /* Fuer Pure C Help und Turbo Vision Help werden die Aliasse zusammen */
    /* mit *nodes ausgegeben */
@@ -760,12 +751,12 @@ LOCAL void output_aliasses(void)
    for (i = start; i <= p1_lab_counter; i++)
    {
                                           /* r5pl6: aktuellen Zaehler mit Alias-Zugehoerigkeit vergleichen */
-      if (lab[i]->is_alias && p2_toc_counter == lab[i]->tocindex)
+      if (label_table[i]->is_alias && p2_toc_counter == label_table[i]->tocindex)
       {
          switch (desttype)
          {
          case TOSTG:
-            strcpy(s, lab[i]->name);
+            strcpy(s, label_table[i]->name);
             node2stg(s);
             convert_tilde(s);
             voutlnf("@alias \"%s\"", s);
@@ -774,7 +765,7 @@ LOCAL void output_aliasses(void)
          case TOWIN:
          case TOWH4:
          case TOAQV:
-            um_strcpy(s, lab[i]->name, 256, "output_aliasses[1]");
+            um_strcpy(s, label_table[i]->name, 256, "output_aliasses[1]");
             del_internal_styles(s);
             convert_tilde(s);
             
@@ -790,7 +781,7 @@ LOCAL void output_aliasses(void)
             
             if (bDocWinOldKeywords)
             {
-               um_strcpy(s, lab[i]->name, 256, "output_aliasses[3]");
+               um_strcpy(s, label_table[i]->name, 256, "output_aliasses[3]");
                del_internal_styles(s);
                node2winhelp(s);
                voutlnf("#{\\footnote # %s}", s);
@@ -799,7 +790,7 @@ LOCAL void output_aliasses(void)
             break;
             
          case TORTF:
-            um_strcpy(s, lab[i]->name, 256, "output_aliasses[4]");
+            um_strcpy(s, label_table[i]->name, 256, "output_aliasses[4]");
             del_internal_styles(s);
             convert_tilde(s);
             
@@ -815,7 +806,7 @@ LOCAL void output_aliasses(void)
          case TOHAH:                      /* V6.5.17 */
          case TOHTM:
          case TOMHH:
-            um_strcpy(s, lab[i]->name, 256, "output_aliasses [6]");
+            um_strcpy(s, label_table[i]->name, 256, "output_aliasses [6]");
             convert_tilde(s);
             
             label2html(s);                /* r6pl2 */
@@ -832,14 +823,14 @@ LOCAL void output_aliasses(void)
             break;
             
          case TOLDS:
-            um_strcpy(s, lab[i]->name, 256, "output_aliasses[7]");
+            um_strcpy(s, label_table[i]->name, 256, "output_aliasses[7]");
             convert_tilde(s);
             voutlnf("<label id=\"%s\">", s);
             break;
             
          case TOTEX:                      /* r5pl9 */
          case TOPDL:
-            um_strcpy(s, lab[i]->name, 256, "output_aliasses[8]");
+            um_strcpy(s, label_table[i]->name, 256, "output_aliasses[8]");
             convert_tilde(s);
             label2tex(s);
             voutlnf("\\label{%s}", s);
@@ -967,38 +958,36 @@ LOCAL void replace_refs(char *s)
 /*******************************************************************************
 *
 *  string2reference():
-*     ??? (description missing)
+* @ref: the reference to create
+* @display: the string to display
+* @li: the index of the label
+* @for_toc: TRUE if for any table-of-contents
+* @pic: constant for GUI navigation image, e.g. GIF_UP_NAME
+* @uiW: GUI navigation image width
+* @uiH: GUInavigation image height
 *
-*  return:
-*     -
+*     ??? (description missing)
 *
 ******************************************|************************************/
 
-void string2reference(
-
-char           *ref,                 /* */
-int li,
-const _BOOL   for_toc,             /* */
-const char     *pic,                 /* constant for GUI navigation image, e.g. GIF_UP_NAME */
-const _UWORD     uiW,                 /* GUI navigation image width */
-const _UWORD     uiH)                 /* GUI navigation image height */
+GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
+                             const char *pic, const _UWORD uiW, const _UWORD uiH)
 {
-   const LABEL   *l = lab[li];
-   char         s[512],              /* */
-                n[512],              /* */
-                sNoSty[512],         /* */
-                hfn[512],            /* */
-                sGifSize[80];        /* */
+   char         s[512],
+                n[512],
+                sNoSty[512],
+                hfn[MYFILE_FULL_LEN + 1],
+                sGifSize[80];
    char         sIDName[32];         /* string buffer for anchor ID name, e.g. "id=\"UDO_nav_lf\" " */
-   int          ti,                  /* */
-                ui;                  /* */
+   TOCIDX       ti;
+   TOCIDX       ui;
    _BOOL      same_file = FALSE;   /* TRUE: reference is in same file */
-   char        *htmlfilename,        /* */
-                                     /* */
-                suff[MYFILE_SUFF_LEN + 1];
-   char         closer[8] = "\0";    /* single tag closer mark in XHTML */
+   char        *htmlfilename;
+   char         suff[MYFILE_SUFF_LEN + 1];
+   LABEL       *l;
    
-   
+   l = label_table[li];
+    
    if (!strcmp(pic, GIF_UP_NAME))
       strcpy(sIDName, " id=\"UDO_nav_up");
    else if (!strcmp(pic, GIF_LF_NAME))
@@ -1017,9 +1006,6 @@ const _UWORD     uiH)                 /* GUI navigation image height */
          strcat(sIDName, "_FOOT\"");
    }
 
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
    ref[0] = EOS;
    
    switch (desttype)
@@ -1109,7 +1095,7 @@ const _UWORD     uiH)                 /* GUI navigation image height */
       else
       {
          ti = l->tocindex;
-         um_strcpy(n, lab[toc[ti]->labindex]->name, 512, "string2reference[5]");
+         um_strcpy(n, label_table[toc[ti]->labindex]->name, 512, "string2reference[5]");
       }
       
       replace_udo_tilde(n);
@@ -1266,12 +1252,12 @@ const _UWORD     uiH)                 /* GUI navigation image height */
                if (html_doctype == HTML5)
                {
                   sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>", 
-                     sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+                     sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, xhtml_closer);
                }
                else
                {
                   sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
-                     sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+                     sIDName, htmlfilename, suff, html_target, pic, n, n, sGifSize, xhtml_closer);
                }
             }
             else
@@ -1279,12 +1265,12 @@ const _UWORD     uiH)                 /* GUI navigation image height */
             	if (html_doctype == HTML5)
             	{
                   sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s></a>",
-                     sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+                     sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, xhtml_closer);
             	}
             	else
             	{
                   sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
-                     sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+                     sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, xhtml_closer);
                }
             }
          }
@@ -1408,25 +1394,22 @@ const char       *pic,           /* also images can be referenced (used in strin
 const _UWORD       uiWidth,       /* image width */
 const _UWORD       uiHeight)      /* image height */
 {
-   register int   i;             /* counter */
-   char           the_ref[512],  /* */
-                 *pos,           /* */
-                 *ptr,           /* */
-                 *found_pos,     /* */
-                 *searchpos;     /* */
-   char           nextchar,      /* */
-                  prevchar;      /* */
-   int            found_lab;     /* */
-   size_t         found_len,     /* */
-                  ll;            /* */
-   _BOOL        ref_it;        /* */
-   _BOOL        ignore_it;     /* */
-   _BOOL        next_ok,       /* */
-                  prev_ok;       /* */
-   _BOOL        found_one,     /* */
-                  found_ok;      /* */
-   LABEL         *labptr;        /* */
-   
+   register LABIDX i;
+   char           the_ref[512],
+                 *pos,
+                 *ptr,
+                 *found_pos,
+                 *searchpos;
+   unsigned char  nextchar,
+                  prevchar;
+   LABIDX         found_lab;
+   size_t         found_len,
+                  ll;
+   _BOOL        ref_it;
+   _BOOL        ignore_it;
+   _BOOL        next_ok, prev_ok;
+   _BOOL        found_one, found_ok;
+   LABEL         *labptr;
    
    if (bDocAutorefOff)                    /* it's so simple! */
       return;
@@ -1444,13 +1427,13 @@ const _UWORD       uiHeight)      /* image height */
    
    do
    {
-      found_lab = -1;
-      found_len =  0;
-      found_pos =  s;
+      found_lab = 0;
+      found_len = 0;
+      found_pos = s;
    
-      for (i = 1; i < MAXLABELS; i++)
+      for (i = 1; i <= p1_lab_counter; i++)
       {
-         labptr = lab[i];
+         labptr = label_table[i];
    
          if (labptr == NULL)
             break;
@@ -1505,7 +1488,7 @@ const _UWORD       uiHeight)      /* image height */
    
                      if (prev_ok && next_ok)
                      {
-                        found_lab = i;
+                        found_lab = labptr->labindex;
                         found_len = ll;
                         found_pos = pos;
                         found_ok  = TRUE;
@@ -1538,18 +1521,18 @@ const _UWORD       uiHeight)      /* image height */
    
       }  /* for */
    
-      if (found_lab >= 0)
+      if (found_lab != 0)
       {
          ref_it = TRUE;
                                           /* r6pl9 */
-         lab[found_lab]->referenced = TRUE;
+         label_table[found_lab]->referenced = TRUE;
    
          /* Hier dafuer sorgen, dass nicht innerhalb eines Nodes */
          /* referenziert wird, wenn man nicht im Inhaltsverzeichnis ist */
    
          if (!for_toc)
          {
-            if (p2_toc_counter == lab[found_lab]->tocindex)
+            if (p2_toc_counter == label_table[found_lab]->tocindex)
             {
                ref_it = FALSE;
             }
@@ -1562,15 +1545,14 @@ const _UWORD       uiHeight)      /* image height */
          }
          else
          {
-            add_ref(lab[found_lab]->name);
+            add_ref(label_table[found_lab]->name);
          }
    
-         replace_once(found_pos, lab[found_lab]->name, refs[refs_counter - 1].magic);
-   
-      }  /* found_lab>=0 */
-   
-   }  while (found_lab>=0);
-   
+         replace_once(found_pos, label_table[found_lab]->name, refs[refs_counter - 1].magic);
+      }
+      
+   }  while (found_lab != 0);
+
    replace_refs(s);
 }
 
@@ -1803,19 +1785,16 @@ GLOBAL _BOOL check_output_raw_header(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL check_output_raw_footer(
-
-_BOOL   lastNode)    /* */
+GLOBAL _BOOL check_output_raw_footer(_BOOL lastNode)
 {
-   int    offset = 1;  /* */
-   
+   TOCIDX offset = 1;
    
    if (lastNode)
       offset = 0;
    
    /* p2_toc_counter bereits hochgezaehlt, daher 1 abziehen, */
-   /* aber nur dann, wenn es nicht der letzte Node ist (bei  */
-   /* !end_document tritt das auf) !!! */
+   /* aber nur dann, wenn es nicht der letzte Node ist (bei */
+   /* !end_document tritt das auf) */
    
    if (!toc[p2_toc_counter-offset]->ignore_raw_footer)
    {
@@ -1832,7 +1811,7 @@ _BOOL   lastNode)    /* */
       }
    }
    
-   return(FALSE);
+   return FALSE;
 }
 
 
@@ -1854,10 +1833,10 @@ _BOOL   lastNode)    /* */
 
 GLOBAL void man_headline(void)
 {
-   char     n[256];   /* */
-   char     s1[256];  /* */
-   size_t   spaces,   /* */
-            s1l;      /* */
+   char     n[256];
+   char     s1[256];
+   size_t   spaces,
+            s1l;
    
    if (no_headlines)
       return;
@@ -1865,7 +1844,7 @@ GLOBAL void man_headline(void)
    if (titdat.program == NULL)
       return;
    
-   if (sDocManType[0]!=EOS)
+   if (sDocManType[0] != EOS)
       sprintf(s1, "%s%s(%s)%s", BOLD_ON, titdat.program, sDocManType, BOLD_OFF);
    else
       sprintf(s1, "%s%s%s", BOLD_ON, titdat.program, BOLD_OFF);
@@ -1879,6 +1858,7 @@ GLOBAL void man_headline(void)
    c_internal_styles(n);
    
    fprintf(outfile.file, " %s\n\n", n);
+   outlines += 2;
    
    iManPageLines = 2;
 }
@@ -1899,12 +1879,12 @@ GLOBAL void man_headline(void)
 
 GLOBAL void man_bottomline(void)
 {
-   char n[256];  /* */
-   
+   char n[256];
 
    sprintf(n, "- %d -", iManPagePages+1);
-   strcenter(n, zDocParwidth);     
+   strcenter(n, zDocParwidth);
    fprintf(outfile.file, "\n%s\n\n", n);
+   outlines += 3;
 }
 
 
@@ -1938,17 +1918,15 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
    strcpy(s, numbers);
    
    if (s[0] != EOS)
-      um_strcat(s, " ", 512, "stg_headline [1]");
+      um_strcat(s, " ", sizeof(s), "!stg_headline");
    
    if (nodename[0] == EOS)
-      tokcat(s, 512);
+      tokcat(s, sizeof(s));
    else
-      um_strcat(s, nodename, 512, "stg_headline [2]");
+      um_strcat(s, nodename, sizeof(s), "!stg_headline");
    
    replace_udo_quotes(s);
    delete_all_divis(s);
-   
-   replace_2at_by_1at(s);
    
    if (titdat.program != NULL)
       sl = strlen(titdat.program);
@@ -1960,8 +1938,8 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
    if (toklen(s) > platz_links)
    {
       n[0] = EOS;
-      strncat(n, s, platz_links - 4);     /*r6pl4: 2 Leerzeichen */
-      strcat(n, "...  ");
+      strncat(n, s, platz_links - 4);
+      strcat(n, "... ");
    }
    else
    {
@@ -1969,17 +1947,16 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
       sooft = zDocParwidth - toklen(s) - sl;
    
       for (i = 0; i < sooft; i++)
-         strcat(n, " ");                  /* <???>: Optimierbar! */
+         strcat(n, " ");
    }
    
-   replace_1at_by_2at(s);
-   
-   if (titdat.program!=NULL)
+   if (titdat.program != NULL)
       strcat(n, titdat.program);
    
    c_internal_styles(n);
    replace_udo_tilde(n);
    replace_udo_nbsp(n);
+   replace_1at_by_2at(n);
    
    if (desttype == TOSTG)
       voutlnf("@{U}%s@{u}", n);
@@ -2005,7 +1982,7 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
 
 LOCAL void stg_header(const char *numbers, const char *nodename, _BOOL is_popup)
 {
-   int     ti;
+   TOCIDX    ti;
    _BOOL   flag;
    
    output_aliasses();
@@ -2042,22 +2019,18 @@ LOCAL void stg_header(const char *numbers, const char *nodename, _BOOL is_popup)
 *
 ******************************************|************************************/
 
-LOCAL void pch_headline(
-
-char       *s)            /* */
+LOCAL void pch_headline(char *s)
 {
-   char     n[512];       /* */
-   size_t   i,            /* */
-            sooft,        /* */
-            platz_links,  /* */
-            pl;           /* */
-            
+   char     n[512];
+   size_t   i,
+            sooft,
+            platz_links,
+            pl;
    
    if (no_headlines)
       return;
    
    pl = 0;
-   
    if (titdat.program!=NULL)
       pl = strlen(titdat.program);
    
@@ -2076,15 +2049,16 @@ char       *s)            /* */
    
       for (i = 0; i < sooft; i++)
       {
-         strcat(n, " ");                  /* <???> optimierbar */
+         strcat(n, " ");
       }
    }
    
-   if (titdat.program != NULL)            /* r5pl6: Abfragen, ob Programmname vorhanden ist */
+   /* program name specified? */
+   if (titdat.program != NULL)
    {
       if (uses_tableofcontents)
       {
-         strcat(n, PCH_LINK);    
+         strcat(n, PCH_LINK);
          strcat(n, titdat.program);
          strcat(n, PCH_LINK);
       }
@@ -2101,7 +2075,6 @@ char       *s)            /* */
    replace_udo_nbsp(n);
    
    outln(n);
-   
    output_ascii_line("-", zDocParwidth);
 }
 
@@ -2121,22 +2094,16 @@ char       *s)            /* */
 
 LOCAL void pch_bottomline(void)
 {
-   int    ci,      /* */
-          pi,      /* */
-          ni,      /* */
-          ui;      /* */
-   char   s[256];  /* */
-   char  *up,      /* */                  /*r6pl2: ueber Zeiger, Umkopieren unnoetig */
-         *pp,      /* */
-         *np;      /* */
-         
+   TOCIDX ci, pi, ni, ui;
+   char  s[256];
+   char  *up, *pp, *np;
    
    if (no_bottomlines)
       return;
    
    up = pp = np = NULL;
    
-   if (uses_tableofcontents)              /*r6pl2*/
+   if (uses_tableofcontents)
    {
       up = lang.contents;
       pp = lang.contents;
@@ -2241,7 +2208,7 @@ LOCAL void output_pch_header(const char *numbers, const char *name, _BOOL popup)
 {
    char    n[256], q[256];
    int            start;
-   register int   i;
+   register LABIDX i;
 
    
    outln("");
@@ -2254,19 +2221,19 @@ LOCAL void output_pch_header(const char *numbers, const char *name, _BOOL popup)
    #endif
 */
    
-   for (i = start; i < MAXLABELS; i++)
+   for (i = start; i <= p1_lab_counter; i++)
    {
-      if (lab[i] != NULL)
+      if (label_table[i] != NULL)
       {
-         if (lab[i]->tocindex == p2_toc_counter)
+         if (label_table[i]->tocindex == p2_toc_counter)
          {
-            strcpy(q, lab[i]->name);
+            strcpy(q, label_table[i]->name);
             node2pchelp(q);
             sprintf(n, "  capsensitive(\"%s\")", q);
 
-            if (i + 1 < MAXLABELS && lab[i+1] != NULL)
+            if (i + 1 <= p1_lab_counter)
             {
-               if (lab[i+1]->tocindex == p2_toc_counter)
+               if (label_table[i+1]->tocindex == p2_toc_counter)
                {
                   strcat(n, ",");
                }
@@ -2280,7 +2247,7 @@ LOCAL void output_pch_header(const char *numbers, const char *name, _BOOL popup)
          else
          {
                                           /* r5pl6 */
-            if (lab[i]->tocindex>p2_toc_counter)
+            if (label_table[i]->tocindex>p2_toc_counter)
             {
                break;
             }
@@ -2355,17 +2322,9 @@ const char  *s)       /* */
 
 LOCAL void tvh_bottomline(void)
 {
-   int    ci,        /* */
-          pi,        /* */
-          ni,        /* */
-          ui;        /* */
-   char   up[256],   /* */
-          pp[256],   /* */
-          np[256];   /* */
-   char   up2[256],  /* */
-          pp2[256],  /* */
-          np2[256];  /* */
-   
+   TOCIDX ci, pi, ni, ui;
+   char  up[256], pp[256], np[256];
+   char  up2[256], pp2[256], np2[256];
    
    if (no_bottomlines)
       return;
@@ -2374,7 +2333,6 @@ LOCAL void tvh_bottomline(void)
    
    strcpy(up, lang.contents);
    strcpy(pp, lang.contents);
-   
    np[0] = EOS;
    
    ci = p2_toc_counter;
@@ -2444,32 +2402,28 @@ LOCAL void tvh_bottomline(void)
 *
 ******************************************|************************************/
 
-LOCAL void output_vision_header(
-
-const char       *numbers,  /* */
-const char       *name)     /* */
+LOCAL void output_vision_header(const char *numbers, const char *name)
 {
-   char           n[512],   /* */
-                  l[512];   /* */
-   register int   i;        /* */
-   size_t         nl;       /* */
-   
+   char           n[512],
+                  l[512];
+   register LABIDX i;
+   size_t nl;
    
    strcpy(n, ".topic ");
    
-   for (i = 1; i < MAXLABELS; i++)
+   for (i = 1; i <= p1_lab_counter; i++)
    {
-      if (lab[i] != NULL)
+      if (label_table[i] != NULL)
       {
-         if (lab[i]->tocindex == p2_toc_counter)
+         if (label_table[i]->tocindex == p2_toc_counter)
          {
-            strcpy(l, lab[i]->name);
+            strcpy(l, label_table[i]->name);
             node2vision(l);
             strcat(n, l);
             strcat(n, ",");
          }
                                           /* r5pl6 */
-         else if (lab[i]->tocindex > p2_toc_counter)
+         else if (label_table[i]->tocindex > p2_toc_counter)
                break;
       }
       else
@@ -2503,23 +2457,14 @@ const char       *name)     /* */
 *
 ******************************************|************************************/
 
-LOCAL void output_texinfo_node(
-
-const char  *name)     /* */
+LOCAL void output_texinfo_node(const char *name)
 {
-   int       ci,       /* */
-             pi,       /* */
-             ni,       /* */
-             ui;       /* */
-   char      n[512],   /* */
-             pp[256],  /* */
-             np[256],  /* */
-             up[256];  /* */
-   
+   TOCIDX ci, pi, ni, ui;
+   char n[512], pp[256], np[256], up[256];
    
    strcpy(n, name);
    strcpy(up, "Top");
-   strcpy(np, "");                        /* r5pl8: vorher "Top" */
+   strcpy(np, "");
    strcpy(pp, "Top");
    
    ci = p2_toc_counter;
@@ -2582,7 +2527,7 @@ const char  *name)     /* */
 LOCAL void win_headline(char *name, _BOOL popup)
 {
    char   fs[32];
-   int    ti;
+   TOCIDX ti;
    
    ti = p2_toc_counter;
    
@@ -2641,7 +2586,7 @@ LOCAL void enable_win_button(const char *button, _BOOL enable, const char *noden
 }
 
 
-LOCAL void check_win_buttons(int ci)
+LOCAL void check_win_buttons(TOCIDX ci)
 {
    int i;
     
@@ -2652,8 +2597,8 @@ LOCAL void check_win_buttons(int ci)
          if (toc[ci]->win_button[i] != NULL)
          {
             char s[512];
-            int ti;
-            int li;
+            TOCIDX ti;
+            LABIDX li;
             _BOOL isnode;
             _BOOL isalias;
             _BOOL ispopup;
@@ -2701,7 +2646,7 @@ LOCAL void check_win_buttons(int ci)
 LOCAL void output_win_header(const char *name, const _BOOL invisible)
 {
    char  n[512], f[512];
-   int ci, ui;
+   TOCIDX ci, ui;
    
    strcpy(n, name);
    del_internal_styles(n);
@@ -2732,7 +2677,7 @@ LOCAL void output_win_header(const char *name, const _BOOL invisible)
    {
       if (!invisible)                     /* versteckte Kapitel nicht mit in die Browse-Sequence einbinden */
          outln(win_browse);
-   
+      
       ci = p2_toc_counter;
       ui = 0;
       
@@ -2796,11 +2741,7 @@ LOCAL void output_win_header(const char *name, const _BOOL invisible)
 *
 ******************************************|************************************/
 
-LOCAL char *get_html_filename(
-
-const int   tocindex,            /* */
-char       *s,                   /* */
-int        *html_merge)          /* TRUE = If the nodes are merge */
+LOCAL char *get_html_filename(const TOCIDX tocindex, char *s, int *html_merge)
 {
    /*
       The buffer in tmp_n? is with 17 chars a bit small.
@@ -2818,20 +2759,19 @@ char        tmp_n1[MAX_TMP_NX],  /* */
             tmp_n4[MAX_TMP_NX],  /* */
             tmp_n5[MAX_TMP_NX],  /* */
             tmp_n6[MAX_TMP_NX];  /* */
-int         ti;                  /* */
-int         hexwidth;            /* */    /* r6pl2 */
-
-
+   TOCIDX ti;
+   int hexwidth;
+   
 #if USE_LONG_FILENAMES
    if (!bForceShort)
-      hexwidth = 3;                       /* -> 001002003004.html */
+      hexwidth = 3;                       /* -> 001002003004005.html */
    else
-      hexwidth = 2;                       /* -> 01020304.htm */
+      hexwidth = 2;                       /* -> 0102030405.htm */
 #else
-   if (bForceLong)                        /*r6pl2*/
-      hexwidth = 3;                       /* -> 001002003004.html */
+   if (bForceLong)
+      hexwidth = 3;                       /* -> 001002003004005.html */
    else
-      hexwidth = 2;                       /* -> 01020304.htm */
+      hexwidth = 2;                       /* -> 0102030405.htm */
 #endif
 
    ti = tocindex;
@@ -3170,11 +3110,11 @@ LOCAL _BOOL html_make_file(void)
 
 LOCAL void output_html_meta(_BOOL keywords)
 {
-   int      ti = 0,
-            i,
-            li,
-            j,
-            html_merge;
+   TOCIDX  ti = 0;
+   TOCIDX  i;
+   int     j;
+   LABIDX  li;
+   int html_merge;
    STYLE  *styleptr;
    char    s[512];               /* buffer for charset and label name */
    char    htmlname[512],
@@ -3424,8 +3364,8 @@ LOCAL void output_html_meta(_BOOL keywords)
          {
             li = toc[1]->labindex;        /* First Node -> No Link */
 
-            strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
+            strcpy(s, label_table[li]->name);
+            get_html_filename(label_table[li]->tocindex, htmlname, &html_merge);
 
             /* Special for CAB */
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
@@ -3448,8 +3388,8 @@ LOCAL void output_html_meta(_BOOL keywords)
          if (i > 0)
          {
             li = toc[i]->labindex;
-            strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
+            strcpy(s, label_table[li]->name);
+            get_html_filename(label_table[li]->tocindex, htmlname, &html_merge);
 
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
             if (strchr(htmlname, '.') != NULL)
@@ -3479,8 +3419,8 @@ LOCAL void output_html_meta(_BOOL keywords)
          if (i > 1)
          {
             li = toc[i]->labindex;
-            strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
+            strcpy(s, label_table[li]->name);
+            get_html_filename(label_table[li]->tocindex, htmlname, &html_merge);
 
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
             if (strchr(htmlname, '.') != NULL)
@@ -3509,8 +3449,8 @@ LOCAL void output_html_meta(_BOOL keywords)
             else
                li = toc[p1_toc_counter]->labindex;
             
-            strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
+            strcpy(s, label_table[li]->name);
+            get_html_filename(label_table[li]->tocindex, htmlname, &html_merge);
 
             /* Special for CAB */
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
@@ -3535,8 +3475,8 @@ LOCAL void output_html_meta(_BOOL keywords)
    if (use_about_udo)
    {
       li = toc[p1_toc_counter]->labindex;
-      strcpy(s, lab[li]->name);
-      get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
+      strcpy(s, label_table[li]->name);
+      get_html_filename(label_table[li]->tocindex, htmlname, &html_merge);
 
                                           /* Changed in r6pl16 [NHz] */
       if (strcmp(htmlname, outfile.name) != 0)
@@ -4321,9 +4261,9 @@ LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const 
 
 LOCAL void html_hb_line(_BOOL head)
 {
-   int       i,
-             ti,
-             li;
+   TOCIDX    i;
+   TOCIDX    ti;
+   LABIDX    li;
    char      s[512],
              anchor[512],
              sGifSize[128],
@@ -4342,7 +4282,7 @@ LOCAL void html_hb_line(_BOOL head)
    /* ausgegeben werden soll. Beim Mergen ist der Index nicht */
    /* immer gleich dem Nodezaehler im 2. Durchlauf! */
    
-   /* Um das Tildenproblem zu loesen, muss ueber lab[] */
+   /* Um das Tildenproblem zu loesen, muss ueber label_table[] */
    /* gegangen werden, da nur dort die Tilden noch nicht */
    /* bearbeitet wurden und nur so die Referenzen fuer die */
    /* Kopfzeilen gefunden werden! */
@@ -4510,16 +4450,16 @@ LOCAL void html_hb_line(_BOOL head)
          strcpy(buffer, "html_hb_line[5]");
       }
             
-      if (lab[li]->name != 0)
+      if (label_table[li]->name != 0)
       {
-         um_strcpy(s, lab[li]->name, 512, buffer);
+         um_strcpy(s, label_table[li]->name, 512, buffer);
 
          string2reference(anchor, li, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
-         replace_once(s, lab[li]->name, anchor);
+         replace_once(s, label_table[li]->name, anchor);
 
          if (no_images)
          {
-            replace_once(s, lab[li]->name, " ^^^");
+            replace_once(s, label_table[li]->name, " ^^^");
             strinsert(s, "| ");
          }
    
@@ -4577,15 +4517,15 @@ LOCAL void html_hb_line(_BOOL head)
          if (i > 0)
          {
             li = toc[i]->labindex;
-            um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
+            um_strcpy(s, label_table[li]->name, 512, "html_hb_line[5]");
 
             string2reference(anchor, li, TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
-            replace_once(s, lab[li]->name, anchor);
+            replace_once(s, label_table[li]->name, anchor);
 
             if (no_images)
             {
                                           /* [voja][R6PL17] deleted the + at "+replace_once" call */
-               replace_once(s, lab[li]->name, " &lt;&lt;&lt;");
+               replace_once(s, label_table[li]->name, " &lt;&lt;&lt;");
                strinsert(s, "| ");
             }
             
@@ -4692,14 +4632,14 @@ LOCAL void html_hb_line(_BOOL head)
    if (i > 0)
    {
       li = toc[i]->labindex;
-      um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
+      um_strcpy(s, label_table[li]->name, 512, "html_hb_line[5]");
 
       string2reference(anchor, li, TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
-      replace_once(s, lab[li]->name, anchor);
+      replace_once(s, label_table[li]->name, anchor);
 
       if (no_images)
       {
-         replace_once(s, lab[li]->name, " &gt;&gt;&gt;");
+         replace_once(s, label_table[li]->name, " &gt;&gt;&gt;");
          strinsert(s, "| ");
       }
    
@@ -4842,8 +4782,8 @@ LOCAL void html_hb_line(_BOOL head)
 
 LOCAL void html_node_bar_modern(void)
 {
-   register int   i;
-   int            li;
+   register TOCIDX i;
+   LABIDX         li;
    _UWORD          uiW, uiH;
    char           the_ref[1024],
                  *ptr;
@@ -5207,8 +5147,8 @@ GLOBAL void html_save_frameset(void)
 
 LOCAL void html_node_bar_frames(void)
 {
-   register int   i;
-   int            li;
+   register TOCIDX i;
+   LABIDX         li;
    _UWORD          uiW, uiH;
    char           the_ref[1024],
                  *ptr,
@@ -5870,7 +5810,7 @@ GLOBAL _BOOL save_html_index(void)
 {
    FILE        *uif;              /* ^ to temporary index file */
    size_t       i;                /* counter */
-   int          j;                /* counter */
+   LABIDX       j;                /* counter */
    int          html_merge;       /* */
    size_t       num_index;        /* # of entries in index file */
    HTML_INDEX  *html_index;       /* ^ to HTML_INDEX array */
@@ -5891,7 +5831,7 @@ GLOBAL _BOOL save_html_index(void)
    
    for (j = 1; j <= p1_lab_counter; j++)  /* check all collected labels */
    {
-      if (lab[j] != NULL && lab[j]->ignore_index == FALSE)
+      if (label_table[j] != NULL && label_table[j]->ignore_index == FALSE)
          num_index++;
    }
    
@@ -5927,14 +5867,14 @@ GLOBAL _BOOL save_html_index(void)
    
    for (j = 1; j <= p1_lab_counter; j++)
    {
-      if (lab[j] != NULL  && lab[j]->ignore_index == FALSE)
+      if (label_table[j] != NULL  && label_table[j]->ignore_index == FALSE)
       {
-         html_index[num_index].toc_index = lab[j]->tocindex;
-         html_index[num_index].is_node   = lab[j]->is_node;
+         html_index[num_index].toc_index = label_table[j]->tocindex;
+         html_index[num_index].is_node   = label_table[j]->is_node;
 
                                           /* set ^ to name field in structure */
          tocname = html_index[num_index].tocname;
-         strcpy(tocname, lab[j]->name);   /* copy name to structure */
+         strcpy(tocname, label_table[j]->name);   /* copy name to structure */
 
          replace_macros(tocname);
          c_internal_styles(tocname);
@@ -6220,38 +6160,28 @@ GLOBAL void hh_bottomline(void)
 *
 ******************************************|************************************/
 
-LOCAL void print_htmlhelp_contents(
-
-FILE        *file,           /* */
-const char  *indent,         /* */
-const int    ti)             /* */
+LOCAL void print_htmlhelp_contents(FILE *file, const char *indent, const TOCIDX ti)
 {
-   char      filename[512],  /* */
-             tocname[512];   /* */
-   int       html_merge;     /* */
+   char      filename[MYFILE_FULL_LEN],
+             tocname[512];
+   int       html_merge;
    
-   
-   if (ti > 0)
+   if (ti != 0)
    {
       get_html_filename(ti, filename, &html_merge);
-      um_strcpy(tocname, toc[ti]->name, 512, "print_htmlhelp_contents[1]");
+      strcpy(tocname, toc[ti]->name);
    }
    else
    {
       strcpy(filename, old_outfile.name);
-      
       tocname[0] = EOS;
-   
       if (tocname[0] == EOS && titleprogram[0] != EOS)
-         um_strcpy(tocname, titleprogram, 512, "print_htmlhelp_contents[2]");
-      
+         strcpy(tocname, titleprogram);
       if (tocname[0] == EOS && called_tableofcontents)
-         um_strcpy(tocname, lang.contents, 512, "print_htmlhelp_contents[3]");
-      
+         strcpy(tocname, lang.contents);
       if (tocname[0] == EOS && called_maketitle)
-         um_strcpy(tocname, lang.title, 512, "print_htmlhelp_contents[4]");
+         strcpy(tocname, lang.title);
    }
-
    del_html_styles(tocname);
 
    fprintf(file, "%s<li><object type=\"text/sitemap\">\n", indent);
@@ -6275,12 +6205,10 @@ const int    ti)             /* */
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL save_htmlhelp_contents(
-
-const char       *filename)            /* */
+GLOBAL _BOOL save_htmlhelp_contents(const char *filename)
 {
-   FILE          *file;                /* */
-   register int   i;                   /* */
+   FILE *file;
+   register TOCIDX i;
    _BOOL        last_n = TRUE;       /* */
    _BOOL        last_sn = FALSE;     /* */
    _BOOL        last_ssn = FALSE;    /* */
@@ -6289,10 +6217,9 @@ const char       *filename)            /* */
    _BOOL        last_sssssn = FALSE; /* */
    _BOOL        inApx = FALSE;       /* */
    
-   
    file = myFwopen(filename, FTHHC);
 
-   if (!file)
+   if (file == NULL)
       return FALSE;
 
    save_upr_entry_outfile(filename);
@@ -6642,35 +6569,25 @@ const void  *_p2)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL save_htmlhelp_index(
-
-const char   *filename)       /* */
+GLOBAL _BOOL save_htmlhelp_index(const char *filename)
 {
-   FILE      *file;           /* */
-   size_t     i;              /* */
-   int        j;              /* */
-   int        html_merge;     /* */
-   size_t     num_index;      /* */
-   HTML_IDX  *html_index;     /* */
-   char       htmlname[512];  /* */
-   char      *tocname;        /* */
+   FILE      *file;
+   size_t     i;
+   LABIDX     j;
+   int        html_merge;
+   size_t     num_index;
+   HTML_IDX  *html_index;
+   char       htmlname[MYFILE_FULL_LEN];
+   char      *tocname;
    
+   if (no_index)
+      return FALSE;  /* Index-File wird nicht gewuenscht */
    
+   /* erstmal zaehlen wieviel wir brauchen */
    num_index = 0;
-   
-#if 0
-   for (i = 1; i <= p1_toc_counter; i++)
-   {
-      if (toc[i] != NULL && !toc[i]->invisible)
-      num_index++;
-   }
-#endif
-
-   for (j = 1; j <= p1_lab_counter; j++)  /* erstmal zaehlen wieviel wir brauchen */
-   {
-      if (lab[j] != NULL)
+   for (j = 1; j <= p1_lab_counter; j++)
+      if (label_table[j] != NULL)
          num_index++;
-    }
 
    if (num_index == 0)
       return FALSE;                       /* Index-File wird nicht gebraucht */
@@ -6720,11 +6637,11 @@ const char   *filename)       /* */
 
    for (j = 1; j <= p1_lab_counter; j++)  /* array aufbauen.. */
    {
-      if (lab[j] != NULL)
+      if (label_table[j] != NULL)
       {
-         html_index[num_index].toc_index = lab[j]->tocindex;
+         html_index[num_index].toc_index = label_table[j]->tocindex;
          tocname = html_index[num_index].tocname;
-         strcpy(tocname, lab[j]->name);
+         strcpy(tocname, label_table[j]->name);
          replace_macros(tocname);
          c_internal_styles(tocname);
 /*       replace_udo_quotes(tocname); */
@@ -6786,17 +6703,13 @@ const char   *filename)       /* */
 *
 ******************************************|************************************/
 
-LOCAL void make_nodetype(
-
-int             nodetype,        /* TOC_NODE... */
-const _BOOL   popup,           /* TRUE: this is a popup node */
-const _BOOL   invisible)       /* TRUE: this is an invisible node */
+LOCAL void make_nodetype(TOCTYPE nodetype, const _BOOL popup, _BOOL invisible)
 {
-   char         n[512],          /* */
-                name[512],       /* */
-                stgname[512],    /* */
-                hx_start[16],    /* */
-                hx_end[16],      /* */
+   char         n[512],
+                name[512],
+                stgname[512],
+                hx_start[16],
+                hx_end[16],
                 sTemp[512];      /* */
    char         numbers[512],    /* */
                 nameNoSty[512],  /* */
@@ -6804,10 +6717,9 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
    char         map[64],         /* */
                 sGifSize[80],    /* */
                 nodename[512];   /* */
-   int          ti,              /* */
-                ui,              /* */
-                chapter,         /* */
-                nr1 = 0,
+   TOCIDX       ti, chapter;
+   TOCIDX       ui;
+   TOCIDX       nr1 = 0,
                 nr2 = 0,
                 nr3 = 0,
                 nr4,             /* */
@@ -6888,7 +6800,7 @@ const _BOOL   invisible)       /* TRUE: this is an invisible node */
       html_mergenode = html_merge_node6;
    }
 
-   
+   ASSERT(p2_lab_counter < p1_lab_counter);
    p2_lab_counter++;
    p2_toctype = nodetype;
    
@@ -8699,9 +8611,7 @@ GLOBAL void c_psubsubsubsubsubnode_iv(void)
 *
 ******************************************|************************************/
 
-LOCAL void set_inside_node(
-
-int   nodetype)  /* TOC_NODE... */
+LOCAL void set_inside_node(TOCTYPE nodetype)
 {
    active_nodetype = nodetype;
 }
@@ -9089,15 +8999,11 @@ TOCITEM  *t)  /* */
 
 GLOBAL _BOOL bookmarks_ps(void)
 {
-   /* 6.3.12 [vj] Added this define for buffer checks, increased value from 128 to 148 (for Ulrich :-)) */
-   #define PS_BOOKM_LEN    148
-   
-   register int   i;                /* */
-   int            li,               /* */
-                  apxstart;         /* */
-   char           s[PS_BOOKM_LEN],  /* */
-                  n[PS_BOOKM_LEN];  /* */
-   
+   TOCIDX i;
+   LABIDX li;
+   TOCIDX apxstart;
+   char s[MAX_NODE_LEN + 1],
+        n[MAX_NODE_LEN + 1];
    
    if (p1_toc_counter <= 0)
       return FALSE;
@@ -9121,8 +9027,8 @@ GLOBAL _BOOL bookmarks_ps(void)
             {
                li = toc[i]->labindex;
 
-               um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
-               um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
+               strcpy(s, label_table[li]->name);
+               strcpy(n, label_table[li]->name);
                
                node2postscript(n, KPS_BOOKMARK);
                node2postscript(s, KPS_NAMEDEST);
@@ -9212,8 +9118,8 @@ GLOBAL _BOOL bookmarks_ps(void)
             {
                li = toc[i]->labindex;
 
-               um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
-               um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
+               strcpy(s, label_table[li]->name);
+               strcpy(n, label_table[li]->name);
 
                node2postscript(n, KPS_BOOKMARK);
                node2postscript(s, KPS_NAMEDEST);
@@ -9302,15 +9208,13 @@ GLOBAL _BOOL bookmarks_ps(void)
 *
 ******************************************|************************************/
 
-LOCAL void toc_link_output(
-
-const int         depth)                /* */
+LOCAL void toc_link_output(const int depth)
 {
-   register int   i;                    /* */
-   char          *htmlfilename,         /* */
-                  hfn[512],             /* */
-                  suff[12],             /* */
-                  sTarget[512] = "\0";  /* */
+   register TOCIDX i;
+   char          *htmlfilename,
+                  hfn[512],
+                  suff[12],
+                  sTarget[512] = "\0";
    char           closer[8] = "\0";     /* single tag closer mark in XHTML */
 
    
@@ -9568,16 +9472,11 @@ const int         depth)                /* */
 *
 ******************************************|************************************/
 
-LOCAL void toc_output(
-
-int               nodetype,             /* TOC_NODE... */
-const int         depth,                /* TOC level depth */
-_BOOL           apx)                  /* TRUE: appendix output */
+LOCAL void toc_output(TOCTYPE nodetype, const int depth, _BOOL apx)
 {
-   register int   i;                    /* */
-   int            li;                   /* */
-   char           n[512],               /* */
-                  ref[512];             /* */
+   register TOCIDX i;
+   LABIDX li;
+   char  n[512], ref[512];
    _BOOL        leerzeile = FALSE;    /* TRUE: output an empty line */
    _BOOL        last_n = FALSE;       /* TRUE: this node is last node */
    _BOOL        last_sn = FALSE;      /* TRUE: this node is last subnode */
@@ -11490,7 +11389,7 @@ const int   depth)     /* */
 *
 ******************************************|************************************/
 
-LOCAL void do_toptoc(const int currdepth, _BOOL popup)
+LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
 {
    char      s[512],
              sIndent[512],
@@ -12932,35 +12831,47 @@ LOCAL void set_labelname(LABEL *label, const char *name)
 *     wrong results because it directly references using the label index.
 *
 *  Return:
-*     - FALSE: error
+*     - 0: error
 *     - p1_lab_counter
 *
 ******************************************|************************************/
 
-LOCAL int make_label(const char *label, const _BOOL isn, const _BOOL isa, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links, _BOOL referenced)
+LOCAL LABIDX make_label(const char *label, const _BOOL isn, const _BOOL isa, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links, _BOOL referenced)
 {
    LABEL   *labptr;  /* ^ to label structure in memory */
+   LABEL **new_label;
+   
+   if (label[0] == EOS)
+      return 0;
 
-   if (p1_lab_counter + 1 >= MAXLABELS)   /* list overflow? */
+   /* get space for table */
+   if (p1_lab_counter >= p1_lab_alloc) /* Noch Platz in der Liste? */
    {
-      error_too_many_label();
-      return FALSE;
+      LABIDX new_alloc = p1_lab_alloc + 1024;
+      
+      /* allocate 1 more than the count, because label_table[0] is unused */
+      new_label = (LABEL **)realloc(label_table, (new_alloc + 1) * sizeof(LABEL *));
+      if (new_label == NULL)
+      {
+         return 0;
+      }
+      if (label_table == NULL)
+          new_label[0] = NULL;
+      label_table = new_label;
+      p1_lab_alloc = new_alloc;
    }
 
-   if (label[0] == EOS || strlen(label) > MAX_LABEL_LEN)
-      return FALSE;
-
-                                          /* get space for new label */
+   /* get space for new label */
    labptr = (LABEL *)malloc(sizeof(LABEL));
-
+   
    if (labptr == NULL)                    /* no more memory? */
    {
-       return FALSE;
+      return 0;
    }
 
    p1_lab_counter++;
-   lab[p1_lab_counter] = labptr;
-
+   label_table[p1_lab_counter] = labptr;
+   
    set_labelname(labptr, label);
 
    labptr->labindex = p1_lab_counter;
@@ -13023,7 +12934,7 @@ LOCAL int make_label(const char *label, const _BOOL isn, const _BOOL isa, const 
 *
 ******************************************|************************************/
 
-GLOBAL int add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links)
+GLOBAL LABIDX add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links)
 {
    return make_label(label, isn, FALSE, isp, ignore_index, ignore_links, FALSE);
 }
@@ -13043,7 +12954,7 @@ GLOBAL int add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL 
 *
 ******************************************|************************************/
 
-GLOBAL int add_alias(const char *alias, const _BOOL isp, _BOOL referenced)
+GLOBAL LABIDX add_alias(const char *alias, const _BOOL isp, _BOOL referenced)
 {
    return make_label(alias, FALSE, TRUE, isp, FALSE, FALSE, referenced);
 }
@@ -13262,8 +13173,7 @@ GLOBAL void set_ignore_title(void)
 
 GLOBAL void set_ignore_links(void)
 {
-   int   li;  /* */
-   
+   LABIDX li;
    
    if (!check_toc_counters())
       return;
@@ -13272,8 +13182,8 @@ GLOBAL void set_ignore_links(void)
 
    li = toc[p1_toc_counter]->labindex;
 
-   if (li > 0)
-      lab[li]->ignore_links = TRUE;
+   if (li != 0)
+      label_table[li]->ignore_links = TRUE;
 }
 
 
@@ -13303,7 +13213,7 @@ GLOBAL void set_ignore_index(void)
    li = toc[p1_toc_counter]->labindex;
 
    if (li > 0)
-      lab[li]->ignore_index = TRUE;
+      label_table[li]->ignore_index = TRUE;
 }
 
 
@@ -13710,7 +13620,7 @@ GLOBAL void toc_init_lang(void)
 *
 ******************************************|************************************/
 
-LOCAL TOCITEM *init_new_toc_entry(const int toctype, _BOOL invisible)
+LOCAL TOCITEM *init_new_toc_entry(const TOCTYPE toctype, _BOOL invisible)
 {
    TOCITEM *tocptr;
 
@@ -13857,17 +13767,12 @@ LOCAL TOCITEM *init_new_toc_entry(const int toctype, _BOOL invisible)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL add_nodetype_to_toc(
-
-int             nodetype,    /* TOC_... */
-const _BOOL   popup,       /* */
-const _BOOL   invisible)   /* */
+GLOBAL _BOOL add_nodetype_to_toc(TOCTYPE nodetype, _BOOL popup, _BOOL invisible)
 {
-   TOCITEM     *tocptr;      /* */
-   int          li;          /* */
-   int          html_merge;  /* */
+   TOCITEM *tocptr;
+   LABIDX li;
+   int html_merge;
 
-   
    switch (nodetype)                      /* check if this node now is allowed */
    {
    case TOC_NODE6:
@@ -14510,9 +14415,7 @@ GLOBAL void toc_end_node(void)
 *
 ******************************************|************************************/
 
-GLOBAL int is_current_node(
-
-int   tocindex)  /* */
+GLOBAL _BOOL is_current_node(TOCIDX tocindex)
 {
    return tocindex == p2_toc_counter;
 }
@@ -14531,10 +14434,11 @@ int   tocindex)  /* */
 *
 ******************************************|************************************/
 
-GLOBAL int get_toc_counter(void)
+GLOBAL TOCIDX get_toc_counter(void)
 {
    return p2_toc_counter;
 }
+
 
 /*
    ############################################################
@@ -14543,7 +14447,6 @@ GLOBAL int get_toc_counter(void)
    #
    ############################################################
 */
-
 /*******************************************************************************
 *
 *  save_the_alias():
@@ -14554,17 +14457,13 @@ GLOBAL int get_toc_counter(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL save_the_alias(
-
-const char       *filename,  /* */
-const char       *suffix,    /* */
-tWinMapData      *data)      /* */
+LOCAL _BOOL save_the_alias(const char *filename, const char *suffix, tWinMapData *data)
 {
-   register int   i;         /* */
-   int            map;       /* */
-   char           hid[256],  /* */
-                  f[512];    /* */
-   FILE          *file;      /* */
+   register TOCIDX i;
+   unsigned int map;
+   char           hid[256],
+                  f[512];
+   FILE          *file;
    
    
    strcpy(f, filename);
@@ -14572,17 +14471,14 @@ tWinMapData      *data)      /* */
 
    file = fopen(f, "w");
    
-   if (!file)
+   if (file == NULL)
       return FALSE;
-
-   if (file != NULL)
-      setvbuf(file, NULL, _IOFBF, 8192);
 
    save_upr_entry_outfile(f);
 
-   fprintf(file, "%s Alias-Datei for %s, made with UDO%s %s\n\n",
+   fprintf(file, "%s alias-file of %s, made with UDO%s %s\n\n",
       data->remOn, 
-      old_outfile.full, 
+      old_outfile.name,
       UDO_REL, 
       data->remOff);
 
@@ -14602,22 +14498,16 @@ tWinMapData      *data)      /* */
          }
       }
 
-      map = -1;
+      map = toc[i]->mapping;
 
-      if (toc[i]->mapping >= 0)
-         map = toc[i]->mapping;
-
-      if (hid[0] != EOS || map >= 0 || desttype == TOWH4)
+      if (hid[0] != EOS || map != 0 || desttype == TOWH4)
       {
-         if (hid[0]==EOS)
+         if (hid[0] == EOS)
          {
             node2NrWinhelp(hid, toc[i]->labindex);
          }
 
          strinsert(hid, sDocWinPrefixID);
-
-         if (map < 0)
-            map = 0x1000 + i;
 
          fprintf(file, "%-*s =%s%s ; %s\n",
             MAX_HELPID_LEN + 1,
@@ -14649,9 +14539,8 @@ tWinMapData      *data)      /* */
 
 GLOBAL _BOOL save_htmlhelp_alias(void)
 {
-   tWinMapData   data;  /* */
-   _BOOL       flag;  /* */
-   
+   tWinMapData   data;
+   _BOOL       flag;
    
    memset(&data, 0, sizeof(data));
    strcpy(data.remOn,  "/*");
@@ -14676,42 +14565,24 @@ GLOBAL _BOOL save_htmlhelp_alias(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL save_the_map(
-
-const char       *filename, 
-const char       *suffix, 
-tWinMapData      *data)
+LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *data)
 {
-   register int   i;
-   int            map;
-   char           hid[256], 
-                  f[512];
-   FILE          *file;
-   
+   register TOCIDX i;
+   unsigned int map;
+   char hid[256], f[512];
+   FILE *file;
    
    strcpy(f, filename);
    strcat(f, suffix);
 
    file = fopen(f, "w");
-   
-   if (!file)
-   {
+   if (file == NULL)
       return FALSE;
-   }
-
-   /* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
-
-   if (file != NULL)
-      setvbuf(file, NULL, _IOFBF, 8192);
 
    save_upr_entry_outfile(f);
-
+   
    fprintf(file, "%s mapping of %s for %s, made with UDO%s %s\n\n",
-      data->remOn, 
-      outfile.full, 
-      data->compiler, 
-      UDO_REL, 
-      data->remOff);
+      data->remOn, outfile.full, data->compiler, UDO_REL, data->remOff);
 
    for (i = 0; i <= p1_toc_counter; i++)
    {
@@ -14729,26 +14600,18 @@ tWinMapData      *data)
          }
       }
 
-      map = -1;
+      map = toc[i]->mapping;
 
-      if (toc[i]->mapping >= 0)
-      {
-         map = toc[i]->mapping;
-      }
-
-      if (hid[0] != EOS || map >= 0 || desttype == TOWH4)
+      if (hid[0] != EOS || map != 0 || desttype == TOWH4)
       {
          if (hid[0] == EOS)
          {
-                                          /* V6.5.20 [CS] */
-            node2WinAutoID(hid, toc[i]->name);
-/* old:     node2NrWinhelp(hid, toc[i]->labindex);
-*/
+            node2NrWinhelp(hid, toc[i]->labindex);
          }
 
          strinsert(hid, sDocWinPrefixID);
 
-         if (map < 0)
+         if (map == 0)
             map = 0x1000 + i;
 
          /* V6.5.20 [CS]
@@ -14776,9 +14639,8 @@ tWinMapData      *data)
             toc[i]->name,
             data->remOff);
 */
-      }  /* if (hid[0] != EOS || map >= 0 || desttype == TOWH4) */
-      
-   }  /* for (i = 0; i <= p1_toc_counter; i++) */
+      }
+   }
 
    fclose(file);
 
@@ -14803,7 +14665,6 @@ GLOBAL _BOOL save_htmlhelp_map(void)
 {
    tWinMapData   data;  /* */
    _BOOL       flag;  /* */
-   
    
    memset(&data, 0, sizeof(data));
    strcpy(data.cmd, "#define");
@@ -14833,10 +14694,9 @@ GLOBAL _BOOL save_htmlhelp_map(void)
 
 GLOBAL _BOOL save_winhelp_map_c(void)
 {
-   tWinMapData   data;  /* */
-   _BOOL       flag;  /* */
-   
-   
+   tWinMapData data;
+   _BOOL flag;
+
    memset(&data, 0, sizeof(data));
    strcpy(data.cmd, "#define");
    strcpy(data.hexPre, "0x");
@@ -14865,9 +14725,8 @@ GLOBAL _BOOL save_winhelp_map_c(void)
 
 GLOBAL _BOOL save_winhelp_map_pas(void)
 {
-   tWinMapData   data;  /* */
-   _BOOL       flag;  /* */
-   
+   tWinMapData data;
+   _BOOL flag;
    
    memset(&data, 0, sizeof(data));
    strcpy(data.cmd, "const");
@@ -14899,9 +14758,8 @@ GLOBAL _BOOL save_winhelp_map_pas(void)
 
 GLOBAL _BOOL save_winhelp_map_vb(void)
 {
-   tWinMapData   data;  /* */
-   _BOOL       flag;  /* */
-   
+   tWinMapData data;
+   _BOOL flag;
    
    memset(&data, 0, sizeof(data));
    strcpy(data.cmd, "Public Const");
@@ -14933,9 +14791,8 @@ GLOBAL _BOOL save_winhelp_map_vb(void)
 
 GLOBAL _BOOL save_winhelp_map_gfa(void)
 {
-   tWinMapData   data;  /* */
-   _BOOL       flag;  /* */
-   
+   tWinMapData data;
+   _BOOL flag;
    
    memset(&data, 0, sizeof(data));
    strcpy(data.cmd, "Public Const");
@@ -14969,27 +14826,24 @@ GLOBAL _BOOL save_winhelp_map_gfa(void)
 
 GLOBAL _BOOL save_winhelp4_cnt(void)
 {
-   FILE          *cntfile;                /* */
-   register int   i;                      /* */
-   int            li,                     /* */
-                  apxstart;               /* */
-   char           sName[512],             /* */
-                  sMisc[512],             /* */
-                  sID[128];               /* */
+   FILE *cntfile;
+   register TOCIDX i;
+   LABIDX li;
+   TOCIDX apxstart;
+   char sName[512], sMisc[512], sID[128];
    _BOOL        n1HadChildren = FALSE;  /* */
    _BOOL        n2HadChildren = FALSE;  /* */
    _BOOL        n3HadChildren = FALSE;  /* */
    _BOOL        n4HadChildren = FALSE;  /* */
    _BOOL        n5HadChildren = FALSE;  /* */
    
-
    cntfile = myFwopen(file_lookup(sCntfull), FTCNT);
-
+   
    if (cntfile == NULL)
       return FALSE;
 
    save_upr_entry_outfile(file_lookup(sCntfull));
-
+   
    if (p1_toc_counter >= 0)
       goto DONE;
 
@@ -15392,6 +15246,7 @@ LOCAL void init_toc_forms_numbers(void)
    {
    case TOAQV:
    case TOWIN:
+   case TORTF:
       strcpy(form_t1_n1, "\\li320\\fi-320\\tx320 %d\\tab{%s}\\par\\pard");
                                           /* 560 */
       strcpy(form_t1_n2, "\\li880\\fi-560\\tx880 %d.%d\\tab{%s}\\par\\pard");
@@ -16203,17 +16058,13 @@ GLOBAL void init_module_toc_pass2(void)
 
 GLOBAL _BOOL check_module_toc_pass1(void)
 {
-   int       i,            /* counter */
-             j;            /* cunter */
-   char      s[512],       /* */
-             sTyp[32],     /* */
-             sNode[256];   /* */
-   _BOOL   ret = TRUE;   /* */
-   _BOOL   checkString;  /* */
+   LABIDX    i, j;
+   char      sTyp[32],
+             sNode[256];
+   _BOOL   ret = TRUE;
+   _BOOL   checkString;
 
-
-   /* --- Schauen, ob bei Hypertextformaten Dinge eindeutig benutzt werden --- */
-
+   /* Schauen, ob bei Hypertextformaten Dinge eindeutig benutzt werden */
    switch (desttype)
    {
    case TOHAH:
@@ -16226,55 +16077,47 @@ GLOBAL _BOOL check_module_toc_pass1(void)
    case TOAMG:
    case TOTEX:
    case TOPDL:
+   case TOLYX:
       show_status_info(_("Checking nodes, labels and aliases..."));
-      
       for (i = 1; i <= p1_lab_counter; i++)
       {
          for (j = i + 1; j <= p1_lab_counter; j++)
          {
-            if (strcmp(lab[i]->name, lab[j]->name) == 0)
+            if (strcmp(label_table[i]->name, label_table[j]->name) == 0)
             {
-               error_message(_("label \"%s\" used twice"), lab[i]->name);
+               error_message(_("label \"%s\" used twice"), label_table[i]->name);
 
                sNode[0] = EOS;
                strcpy(sTyp, _("as a label"));
-               
-               if (lab[i]->is_node)
+               if (label_table[i]->is_node)
                   strcpy(sTyp, _("as a node"));
-               
-               if (lab[i]->is_alias)
+               if (label_table[i]->is_alias)
                   strcpy(sTyp, _("as an alias"));
-
-               if (!lab[i]->is_node)
-                  sprintf(sNode, _(" in node '%s'"), toc[lab[i]->tocindex]->name);
-               
-               sprintf(s, "1. %s%s", sTyp, sNode);
-               note_message(s);
+               if (!label_table[i]->is_node)
+                  sprintf(sNode, _(" in node '%s'"), toc[label_table[i]->tocindex]->name);
+               note_message("1. %s%s", sTyp, sNode);
 
                sNode[0] = EOS;
                strcpy(sTyp, _("as a label"));
-
-               if (lab[j]->is_node)
+               if (label_table[j]->is_node)
                   strcpy(sTyp, _("as a node"));
-
-               if (lab[j]->is_alias)
+               if (label_table[j]->is_alias)
                   strcpy(sTyp, _("as an alias"));
+               if (!label_table[j]->is_node)
+                  sprintf(sNode, _(" in node '%s'"), toc[label_table[j]->tocindex]->name);
 
-               if (!lab[j]->is_node)
-                  sprintf(sNode, _(" in node '%s'"), toc[lab[j]->tocindex]->name);
-
-               sprintf(s, "2. %s%s", sTyp, sNode);
-               note_message(s);
+               note_message("2. %s%s", sTyp, sNode);
 
                ret = FALSE;
             }
          }
       }
+      break;
    }
 
-   /* --- Doppelt vergebene HTML-Dateinamen testen, dabei das Mergen non Nodes beachten --- */
+   /* Doppelt vergebene HTML-Dateinamen testen, dabei das Mergen non Nodes beachten */
    /* Werden Nodes in einer Datei vereint, dann besitzen die unteren Ebenen den */
-   /* gleichen Dateinamen wie die obere Ebene! r6pl13 */
+   /* gleichen Dateinamen wie die obere Ebene! */
 
    switch (desttype)
    {
@@ -16283,8 +16126,9 @@ GLOBAL _BOOL check_module_toc_pass1(void)
    case TOMHH:
       if (!html_merge_node1)
       {
-         show_status_info(_("Checking HTML file names..."));
+         TOCIDX i, j;
 
+         show_status_info(_("Checking HTML file names..."));
          for (i = 0; i < p1_toc_counter; i++)
          {
             for (j = i + 1; j < p1_toc_counter; j++)
@@ -16360,25 +16204,305 @@ GLOBAL _BOOL check_module_toc_pass1(void)
 
 GLOBAL _BOOL check_module_toc_pass2(void)
 {
-   int    i;       /* counter */
+   LABIDX i;
    
    show_status_info("");
    show_status_info(_("Checking usage of labels and aliases..."));
-   
-   for (i = 1; i < p1_lab_counter; i++)
+   for (i = 1; i <= p1_lab_counter; i++)
    {
-      if (!lab[i]->referenced)
+      if (!label_table[i]->referenced)
       {
-         if (!lab[i]->is_node)
+         if (!label_table[i]->is_node)
          {
             note_message(_("label/alias '%s' in node '%s' wasn't referenced"),
-               lab[i]->name,
-               toc[lab[i]->tocindex]->name);
+               label_table[i]->name,
+               toc[label_table[i]->tocindex]->name);
          }
       }
    }
    
    return TRUE;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  node2NrWinhelp():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void node2NrWinhelp(char *s, LABIDX li)
+{
+   sprintf(s, "UDON%05X", li + 1);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  alias2NrWinhelp():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void alias2NrWinhelp(char *s, LABIDX li)
+{
+   sprintf(s, "UDOA%05X", li + 1);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  label2NrWinhelp():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void label2NrWinhelp(char *s, LABIDX li)
+{
+   sprintf(s, "UDOL%05X", li + 1);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  node2NrIPF():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void node2NrIPF(char *s, LABIDX li)
+{
+   sprintf(s, "UDON%05X", li + 1);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  alias2NrIPF():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void alias2NrIPF(char *s, LABIDX li)
+{
+   sprintf(s, "UDOA%05X", li + 1);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  label2NrIPF():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void label2NrIPF(char *s, LABIDX li)
+{
+   sprintf(s, "UDOL%05X", li + 1);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  node2pchelp():
+*     convert quotation marks to a Pure C Help convenient format
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void node2pchelp(char *s)
+{
+   qreplace_all(s, "\"", 1, "_0x20_", 6);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  node2postscript():
+*     adjust label or node for PostScript
+*
+*  Notes:
+*     PostScript doesn't like spaces or other special characters in labels or nodes.
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void node2postscript(char *s, int text)
+{
+   long   talen;  /* */
+
+
+   switch (text)
+   {
+   case KPS_PS2DOCINFO:
+      qreplace_all(s, "\\[", 2, "[", 1);
+      qreplace_all(s, "\\]", 2, "]", 1);
+      break;
+
+   case KPS_DOCINFO2PS:
+      qreplace_all(s, "[", 1, "\\[", 2);
+      qreplace_all(s, "]", 1, "\\]", 2);
+      break;
+
+   case KPS_NODENAME:
+                                          /* v6.5.14 [vj]: titdat.author kann ein Null-Pointer sein
+                                           * => ich berechnet strlen(titdat.author) vor und nehme 0
+                                           *    an, wenn es leer ist.
+                                           */
+      if (titdat.author)
+         talen = strlen(titdat.author);
+      else
+         talen = 0;
+
+      if ((long)strlen(s) > 80L - talen)
+      {
+         s[80L - talen] = EOS;
+         
+         if (s[79L - talen] == '\\')
+            s[79L - talen] = EOS;
+
+         strcat(s, "...\0");
+      }
+      
+      qreplace_all(s, "(", 1, "\\(", 2);
+      qreplace_all(s, ")", 1, "\\)", 2);
+      qreplace_all(s, "[", 1, "\\[", 2);
+      qreplace_all(s, "]", 1, "\\]", 2);
+      break;
+      
+   case KPS_CONTENT:
+      qreplace_all(s, "/", 1, "\\/", 2);
+      qreplace_all(s, "(", 1, "\\(", 2);
+      qreplace_all(s, ")", 1, "\\)", 2);
+      qreplace_all(s, "[", 1, "\\[", 2);
+      qreplace_all(s, "]", 1, "\\]", 2);
+      break;
+
+   case KPS_BOOKMARK:
+      if (strlen(s) > 32L)
+      {
+         s[32] = EOS;
+         if (s[31] == '\\')
+            s[31] = EOS;
+      }
+      qreplace_all(s, "/", 1, "\\/", 2);
+      qreplace_all(s, "\\", 1, "\\\\", 2);
+      qreplace_all(s, "(", 1, "\\(", 2);
+      qreplace_all(s, ")", 1, "\\)", 2);
+      qreplace_all(s, "[", 1, "\\[", 2);
+      qreplace_all(s, "]", 1, "\\]", 2);
+      break;
+      
+   case KPS_NAMEDEST:
+      qreplace_all(s, " ", 1, "_", 1);
+      qdelete_all(s, ";", 1);
+      qdelete_all(s, ":", 1);
+      qdelete_all(s, "/", 1);
+      qdelete_all(s, "\\[", 2);
+      qdelete_all(s, "[", 1);
+      qdelete_all(s, "\\(", 2);
+      qdelete_all(s, "(", 1);
+      qdelete_all(s, "\\]", 2);
+      qdelete_all(s, "]", 1);
+      qdelete_all(s, "\\)", 2);
+      qdelete_all(s, ")", 1);
+      qdelete_all(s, "-", 1);
+      qdelete_last(s, "_", 1);
+      break;
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  node2stg():
+*     replace or remove all chars not allowed in an ST-Guide node
+*
+*  Notes:
+*     @symbol ari "..."
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void node2stg(char *s)
+{
+   qreplace_all(s, "\\", 1, "\\\\", 2);
+   qreplace_all(s, "\"", 1, "\\\"", 2);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  index2stg():
+*     replace or remove all chars not allowed in an ST-Guide label
+*
+*  Notes:
+*     Function is identical to node2stg(), but this may change in the future.
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void index2stg(char *s)
+{
+   qreplace_all(s, "\\", 1, "\\\\", 2);
+   qreplace_all(s, "\"", 1, "\\\"", 2);
 }
 
 
@@ -16397,14 +16521,12 @@ GLOBAL _BOOL check_module_toc_pass2(void)
 
 GLOBAL void init_module_toc(void)
 {
-   register int   i;  /* */
-
+   register int i;
 
    /* -------------------------------------------------------------- */
    /* In diesen Flags merkt sich UDO, welche Art von Node gerade     */
    /* aktiv ist (!node, !subnode, etc.)                              */
    /* -------------------------------------------------------------- */
-   
    active_nodetype = TOC_NONE;
 
 
@@ -16560,16 +16682,13 @@ GLOBAL void init_module_toc(void)
 
 
    /* -------------------------------------------------------------- */
-   /* lab[]-Array mit den Daten der referenzierbaren Stellen des     */
+   /* label_table[]-Array mit den Daten der referenzierbaren Stellen des     */
    /* Dokumentes ausnullen und Zaehler zuruecksetzen.                */
    /* -------------------------------------------------------------- */
-
-   for (i = 0; i < MAXLABELS; i++)
-      lab[i] = NULL;
-      
+   p1_lab_alloc = 0;
+   label_table = NULL;
    p1_lab_counter = 0;
    p2_lab_counter = 0;
-
 
    /* -------------------------------------------------------------- */
    /* Kapitelzaehler zuruecksetzen                                   */
@@ -16693,6 +16812,20 @@ char **var)
 
 GLOBAL void exit_module_toc(void)
 {
+   LABIDX l;
+
+   if (label_table != NULL)
+   {
+	   for (l = 1; l <= p1_lab_counter; l++)
+	   {
+    	  free(label_table[l]);
+	   }
+      free(label_table);
+   }
+   label_table = NULL;
+   p1_lab_counter = 0;
+   p1_lab_alloc = 0;
+   
    reset_refs();
    if (refs != NULL)
    {

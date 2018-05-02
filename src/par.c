@@ -552,8 +552,8 @@ LOCAL _BOOL convert_link_stg(char *s, const char *p0, char *p1, char *p2, const 
 {
    char      nodename[256],
              s_entry[256];
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -574,12 +574,8 @@ LOCAL _BOOL convert_link_stg(char *s, const char *p0, char *p1, char *p2, const 
    {
       node2stg(p1);
       node2stg(p2);
-
-      replace_2at_by_1at(p1);
-      replace_2at_by_1at(p2);
+      node2stg(nodename);
       
-      replace_2at_by_1at(nodename);
-
       /* links auf gleiche node mag ST-Guide nicht */
       if (isnode && is_current_node(ti))
       {
@@ -625,8 +621,8 @@ LOCAL _BOOL convert_link_pch(char *s, const char *p0, char *p1, char *p2, const 
 {
    char      nodename[256],
              s_entry[256];
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -679,8 +675,8 @@ LOCAL _BOOL convert_link_pch(char *s, const char *p0, char *p1, char *p2, const 
 LOCAL _BOOL convert_link_tex(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
    char *s_entry;
-   int       li,
-             ti;
+   LABIDX li;
+   TOCIDX ti;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -733,9 +729,9 @@ LOCAL _BOOL convert_link_pdf(char *s, const char *p0, char *p1, char *p2, const 
 {
    char      nodename[256],
              s_entry[256];
-   int       ti,
-             li,
-             dest;
+   TOCIDX ti;
+   LABIDX li;
+   int dest;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -752,23 +748,18 @@ LOCAL _BOOL convert_link_pdf(char *s, const char *p0, char *p1, char *p2, const 
    if (flag)
    {
       if (isnode)
-         dest = ti;
+         dest = getLabelIndexFromTocIndex(&li, ti);
       else
-         dest= li;
+         dest = li;
       
-      /* Changed in r6.2pl1 [NHz] */
-/* V6.5.20 [CS] Start */
-      sprintf(s_entry, "\\hidelink{\\pdfstartlink goto num %d %s\\pdfendlink}", dest, p1);
-/* old:
-      sprintf(s_entry, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}", dest, p1);
-*/
+      sprintf(s_entry, "{\\leavevmode\\pdfstartlink goto num %u %s\\pdfendlink}", dest, p1);
    }
    else                                   /* Node, Alias oder Label nicht definiert */
    {
       error_undefined_link(link);
       strcpy(s_entry, p1);
    }
-
+   
    if (insert_placeholder(s, p0, s_entry, p1))
       return TRUE;
 
@@ -793,8 +784,8 @@ LOCAL _BOOL convert_link_pdf(char *s, const char *p0, char *p1, char *p2, const 
 LOCAL _BOOL convert_link_lyx(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
    char s_entry[1024];
-   int       li,
-             ti;
+   LABIDX li;
+   TOCIDX ti;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -831,8 +822,8 @@ LOCAL _BOOL convert_link_lyx(char *s, const char *p0, char *p1, char *p2, const 
 LOCAL _BOOL convert_link_tvh(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
    char s_entry[1024];
-   int       li,
-             ti;
+   LABIDX li;
+   TOCIDX ti;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -868,8 +859,8 @@ LOCAL _BOOL convert_link_tvh(char *s, const char *p0, char *p1, char *p2, const 
 LOCAL _BOOL convert_link_info(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
    char nodename[256], s_entry[256];
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -937,8 +928,8 @@ LOCAL _BOOL convert_link_info(char *s, const char *p0, char *p1, char *p2, const
 LOCAL _BOOL convert_link_ipf(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
    char nodename[256], s_entry[256], s_id[256];
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -989,8 +980,8 @@ LOCAL _BOOL convert_link_ipf(char *s, const char *p0, char *p1, char *p2, const 
 LOCAL _BOOL convert_link_ps(char *s, const char *p0, char *p1, char *p2, const char *link)
 {
    char nodename[256], s_entry[256];
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -1054,8 +1045,8 @@ LOCAL _BOOL convert_link_etc(char *s, const char *p0, char *p1, char *p2, const 
 {
    char nodename[256], s_entry[256];
    char lq[16], rq[16];
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -1134,8 +1125,8 @@ LOCAL _BOOL convert_link_win(char *s, const char *p0, char *p1, char *p2, const 
    char s_entry[1024];
    char nodename[1024];
    _BOOL flag;
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -1214,8 +1205,8 @@ LOCAL _BOOL convert_link_html(char *s, const char *p0, char *p1, char *p2, const
    char s_entry[1024];
    char nodename[1024];
    _BOOL flag;
-   int       ti,
-             li;
+   TOCIDX ti;
+   LABIDX li;
    _BOOL isnode;
    _BOOL isalias;
    _BOOL ispopup;
@@ -1807,17 +1798,11 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
    _BOOL      flag;
    _BOOL      linkerror;
    _BOOL      old_autorefoff;    /* */
-   char         closer[8] = "\0";  /* tag closer */
-   
    
    old_autorefoff = bDocAutorefOff;
    bDocAutorefOff = FALSE;
    
    linkerror = FALSE;
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
    while (!linkerror && (pnr = get_parameters(s, "ilink", 3, 3)) == 3)
    {
       strcpy(link, Param[3]);

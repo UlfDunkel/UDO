@@ -65,6 +65,10 @@
 #define MAX_IMAGE_LEN      128
 #define MAX_HELPID_LEN      16
 
+typedef _UWORD LABIDX;
+typedef int TOCIDX;
+typedef int TOCTYPE;
+
 #define TOC_TOC    0                      /* table of content */
 #define TOC_NODE1  1                      /* !node */
 #define TOC_NODE2  2                      /* !subnode */
@@ -73,6 +77,13 @@
 #define TOC_NODE5  5                      /* !subsubsubsubnode */
 #define TOC_NODE6  6                      /* !subsubsubsubsubnode */
 #define TOC_NONE   7                      /* neither nor ... :-) */
+
+#define KPS_CONTENT       0
+#define KPS_BOOKMARK      1
+#define KPS_NAMEDEST      2
+#define KPS_PS2DOCINFO    3
+#define KPS_DOCINFO2PS    4
+#define KPS_NODENAME      5
 
 
 
@@ -94,14 +105,14 @@ typedef struct _style                     /* style sheets */
    char   media[MAX_LABEL_LEN + 1];       /* fuer welches Medium */
    char   title[MAX_LABEL_LEN + 1];       /* Titel eines Stylesheets */
    int    alternate;                      /* Alternate Stylesheet? */
-   int    tocindex;                       /* Gehoert zum Node "toc[tocindex]" */
+   TOCIDX tocindex;                       /* Gehoert zum Node "toc[tocindex]" */
 } STYLE;
 
 
 typedef struct _label                     /* jump labels to be referenced */
 {
    char      name[MAX_LABEL_LEN + 1];     /* label name */
-   int       labindex;                    /* lab[1]==1, lab[2]==2, etc. */
+   LABIDX    labindex;                    /* lab[1]==1, lab[2]==2, etc. */
    size_t    len;                         /* label name len */
    int       n1;                          /* defined in this node */
    int       n2;                          /* ... subnode */
@@ -113,7 +124,7 @@ typedef struct _label                     /* jump labels to be referenced */
    _BOOL   is_node;                     /* label is node title */
    _BOOL   is_popup;                    /* node is a popup node */
    _BOOL   is_alias;                    /* alias name of a node */
-   int       tocindex;                    /* belongs to node "toc[tocindex]" */
+   TOCIDX    tocindex;                    /* belongs to node "toc[tocindex]" */
    _BOOL   ignore_links;                /* don't link to this label */
    _BOOL   ignore_index;                /* don't index this label (node only!) */
    _BOOL   referenced;                  /* TRUE: label has been referenced */
@@ -124,21 +135,21 @@ typedef struct _label                     /* jump labels to be referenced */
 
 
 
-typedef struct _tocitem                   /* entries for the Table Of Contents (TOC) */
+typedef struct _tocitem                       /* entries for the Table Of Contents (TOC) */
 {
-   char      name[MAX_NODE_LEN + 1];      /* Der Eintrag selber */
-   int       n1;                          /* Kapitelnummer (absolut) */
-   int       n2;                          /* Abschnittnummer (absolut) */
-   int       n3;                          /* Unterabschnittnummer   (absolut) */
-   int       n4;                          /* Unterabschnittnummer   (absolut) */
-   int       n5;                          /* Unterabschnittnummer   (absolut) */
-   int       n6;                          /* Unterabschnittnummer   (absolut) */
-   int       nr1,nr2,nr3,nr4,nr5,nr6;     /* Inhaltsverzeichnis-Nummern */
-   _BOOL   appendix;                    /* TRUE = Steht im Anhang */
-   int       toctype;                     /* !node, !subnode, !subsubnode, !subsubsubnode, !subsubsubsubnode */
-                                          /* Filename der Sourcecodedatei */   /* V6.5.18 */
+   char      name[MAX_NODE_LEN + 1];          /* Der Eintrag selber */
+   TOCIDX    n1;                              /* Kapitelnummer (absolut) */
+   TOCIDX    n2;                              /* Abschnittnummer (absolut) */
+   TOCIDX    n3;                              /* Unterabschnittnummer   (absolut) */
+   TOCIDX    n4;                              /* Unterabschnittnummer   (absolut) */
+   TOCIDX    n5;                              /* Unterabschnittnummer   (absolut) */
+   TOCIDX    n6;                              /* Unterabschnittnummer   (absolut) */
+   TOCIDX    nr1,nr2,nr3,nr4,nr5,nr6;         /* Inhaltsverzeichnis-Nummern */
+   _BOOL   appendix;                          /* TRUE = Steht im Anhang */
+   TOCTYPE   toctype;                         /* !node, !subnode etc. */
+                                              /* Filename der Sourcecodedatei */
    FILE_LOCATION source_location;
-   char      filename[MAX_FILENAME_LEN+1];    /* HTML-Filename */
+   char      filename[MAX_FILENAME_LEN+1];    /* HTML-Filename (basename only, without suffix and html_name_prefix) */
    FILE_ID   dirname;                         /* HTML-Verzeichnisname */
    char     *keywords;                        /* HTML-Keywords */
    char     *description;                     /* HTML-Description */
@@ -168,19 +179,19 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    char     *win_button[MAX_WIN_BUTTONS];
    _BOOL   invisible;                         /* TRUE = Nicht ins Inhaltsverzeichnis */
    _BOOL   converted;                         /* Bereits Makros etc. angepasst? */
-   int       labindex;                    /* lab[]-Position */
-   int       prev_index;                  /* toc[]-Position des HTML-Vorgaengers */
-   int       next_index;                  /* toc[]-Position des HTML-Nachfolgers */
-   int       up_n1_index;                 /* toc[]-Position oberhalb */
-   int       up_n2_index;
-   int       up_n3_index;
-   int       up_n4_index;
-   int       up_n5_index;
-   int       count_n2;                    /* # of contained subnodes */
-   int       count_n3;                    /* # of contained subsubnodes */
-   int       count_n4;                    /* # of contained subsubsubnodes */
-   int       count_n5;                    /* # of contained subsubsubsubnodes */
-   int       count_n6;                    /* # of contained subsubsubsubsubnodes */
+   LABIDX    labindex;                        /* lab[]-Position */
+   TOCIDX    prev_index;                      /* toc[]-Position des HTML-Vorgaengers */
+   TOCIDX    next_index;                      /* toc[]-Position des HTML-Nachfolgers */
+   TOCIDX    up_n1_index;                     /* toc[]-Position oberhalb */
+   TOCIDX    up_n2_index;
+   TOCIDX    up_n3_index;
+   TOCIDX    up_n4_index;
+   TOCIDX    up_n5_index;
+   TOCIDX    count_n2;                    /* # of contained subnodes */
+   TOCIDX    count_n3;                    /* # of contained subsubnodes */
+   TOCIDX    count_n4;                    /* # of contained subsubsubnodes */
+   TOCIDX    count_n5;                    /* # of contained subsubsubsubnodes */
+   TOCIDX    count_n6;                    /* # of contained subsubsubsubsubnodes */
    _BOOL   ignore_subtoc;                   /* ignore !use_auto_subtoc */
    _BOOL   ignore_links;                    /* don't link to this page */
    _BOOL   ignore_index;                    /* don't add this to the index page */
@@ -205,53 +216,51 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
 *
 ******************************************|************************************/
 
-GLOBAL int       toc_offset;              /* Offsets fuer Kapitelnumerierung, Default=0 */
-GLOBAL int       subtoc_offset;
-GLOBAL int       subsubtoc_offset;
-GLOBAL int       subsubsubtoc_offset;
-GLOBAL int       subsubsubsubtoc_offset;  /* [GS] */
-GLOBAL int       subsubsubsubsubtoc_offset;  /* [GS] */
+GLOBAL TOCIDX    toc_offset;              /* Offsets fuer Kapitelnumerierung, Default=0 */
+GLOBAL TOCIDX    subtoc_offset;
+GLOBAL TOCIDX    subsubtoc_offset;
+GLOBAL TOCIDX    subsubsubtoc_offset;
+GLOBAL TOCIDX    subsubsubsubtoc_offset;
+GLOBAL TOCIDX    subsubsubsubsubtoc_offset;
 
-GLOBAL int       all_nodes, 
+GLOBAL TOCIDX    all_nodes, 
                  all_subnodes, 
                  all_subsubnodes, 
                  all_subsubsubnodes, 
                  all_subsubsubsubnodes,
                  all_subsubsubsubsubnodes;
 
-GLOBAL _BOOL   bInsideAppendix,         /* Ist UDO im Anhang? */
+GLOBAL _BOOL   bInsideAppendix,            /* Ist UDO im Anhang? */
                  bInsideDocument,         /* Ist UDO im Dokument selber? */
                  bInsidePopup;            /* In einem Popup-Node? */
 
-GLOBAL _BOOL   called_tableofcontents;  /* Wurde toc ausgegeben? (@toc) */
+GLOBAL _BOOL   called_tableofcontents;     /* Wurde toc ausgegeben? (@toc) */
 GLOBAL _BOOL   called_subsubsubsubsubnode;
 
-GLOBAL _BOOL   uses_tableofcontents;    /* !tableofcontents wird benutzt */
+GLOBAL _BOOL   uses_tableofcontents;       /* !tableofcontents wird benutzt */
 GLOBAL char      toc_title[MAX_NODE_LEN + 1];
 
                                           /* 6.3.11 [vj]: This is needed, because current_node_name_sys needs to buffer a lot of stuff! */
 GLOBAL char      current_node_name_sys[CNNS_LEN];
-                                          /* New in r6pl15 [NHz] */
-/* GLOBAL char   current_node_name_sys[MAX_NODE_LEN + 1];
-*/
+
 GLOBAL char      current_chapter_name[MAX_NODE_LEN + 1];
 GLOBAL char      current_chapter_nr[32];
 
-GLOBAL int       subtocs1_depth;          /*r6pl2*/
-GLOBAL int       subtocs2_depth;          /*r6pl2*/
-GLOBAL int       subtocs3_depth;          /*r6pl2*/
+GLOBAL int       subtocs1_depth;
+GLOBAL int       subtocs2_depth;
+GLOBAL int       subtocs3_depth;
 GLOBAL int       subtocs4_depth;
 GLOBAL int       subtocs5_depth;
 
-GLOBAL char      sHtmlPropfontStart[256]; /*r6pl7*/
-GLOBAL char      sHtmlPropfontEnd[16];    /*r6pl7*/
+GLOBAL char      sHtmlPropfontStart[256];
+GLOBAL char      sHtmlPropfontEnd[16];
 
-GLOBAL char      sHtmlMonofontStart[256]; /*r6pl7*/
-GLOBAL char      sHtmlMonofontEnd[16];    /*r6pl7*/
+GLOBAL char      sHtmlMonofontStart[256];
+GLOBAL char      sHtmlMonofontEnd[16];
 
 GLOBAL TOCITEM  *toc[MAXTOCS];            /* Zeiger auf Inhaltsverzeichnis */
-GLOBAL int       p1_toc_counter;          /* Zaehler fuer das toc[]-Array */
-GLOBAL int       p2_toc_counter;
+GLOBAL TOCIDX    p1_toc_counter;          /* Zaehler fuer das toc[]-Array */
+GLOBAL TOCIDX    p2_toc_counter;
 
 GLOBAL STYLE   **style;                   /* Array mit Zeigern auf Stylesheets */
 GLOBAL int       p1_style_counter;        /* Zaehler */
@@ -271,8 +280,8 @@ GLOBAL _BOOL	stg_need_endnode;
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_node_link(const char *link, char *node, int *ti, _BOOL *isnode, _BOOL *isalias, _BOOL *ispopup, int *li);
-GLOBAL int getLabelIndexFromTocIndex(int *li, const int ti);
+GLOBAL _BOOL is_node_link(const char *link, char *node, TOCIDX *ti, _BOOL *isnode, _BOOL *isalias, _BOOL *ispopup, LABIDX *li);
+GLOBAL LABIDX getLabelIndexFromTocIndex(LABIDX *li, const TOCIDX ti);
 
 GLOBAL void reset_refs(void);
 GLOBAL void auto_references(char *s, const _BOOL for_toc, const char *pic, const _UWORD uiWidth, const _UWORD uiHeight);
@@ -363,10 +372,10 @@ GLOBAL void c_alias(void);
 
    /* --- misc. --- */
 
-GLOBAL int add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links);
-GLOBAL int add_alias(const char *alias, const _BOOL isp, _BOOL referenced);
+GLOBAL LABIDX add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links);
+GLOBAL LABIDX add_alias(const char *alias, const _BOOL isp, _BOOL referenced);
 
-GLOBAL void string2reference(char *ref, int li, const _BOOL for_toc, const char *pic, const _UWORD uiW, const _UWORD uiH);
+GLOBAL void string2reference(char *ref, LABIDX li, const _BOOL for_toc, const char *pic, const _UWORD uiW, const _UWORD uiH);
 
  
    /* --- enhance TOC --- */
@@ -392,12 +401,12 @@ GLOBAL void set_chapter_icon(void);
 GLOBAL void set_chapter_icon_active(void);
 GLOBAL void set_chapter_icon_text(void);
 
-GLOBAL _BOOL add_nodetype_to_toc(int nodetype, const _BOOL popup, const _BOOL invisible);
+GLOBAL _BOOL add_nodetype_to_toc(int nodetype, _BOOL popup, _BOOL invisible);
 
 GLOBAL _BOOL toc_begin_node (const _BOOL popup, const _BOOL invisible);
 GLOBAL void toc_end_node(void);
-GLOBAL int is_current_node(int tocindex);
-GLOBAL int get_toc_counter(void);
+GLOBAL _BOOL is_current_node(TOCIDX tocindex);
+GLOBAL TOCIDX get_toc_counter(void);
 GLOBAL void toc_init_lang(void);
 
 
@@ -417,6 +426,23 @@ GLOBAL _BOOL save_winhelp4_cnt(void);
 
 GLOBAL _BOOL check_module_toc_pass1(void);
 GLOBAL _BOOL check_module_toc_pass2(void);
+
+
+   /* --- create nodenames --- */
+
+GLOBAL void node2NrWinhelp(char *s, LABIDX i);
+GLOBAL void alias2NrWinhelp(char *s, LABIDX i);
+GLOBAL void label2NrWinhelp(char *s, LABIDX i);
+
+GLOBAL void node2NrIPF(char *s, LABIDX i);
+GLOBAL void alias2NrIPF(char *s, LABIDX i);
+GLOBAL void label2NrIPF(char *s, LABIDX i);
+
+GLOBAL void node2pchelp(char *n);
+GLOBAL void node2postscript(char *s, int text);
+
+GLOBAL void node2stg(char *s);
+GLOBAL void index2stg(char *s);
 
 
    /* --- module functions --- */
