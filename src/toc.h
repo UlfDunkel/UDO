@@ -105,7 +105,7 @@ typedef struct _style                     /* style sheets */
    char   media[MAX_LABEL_LEN + 1];       /* fuer welches Medium */
    char   title[MAX_LABEL_LEN + 1];       /* Titel eines Stylesheets */
    int    alternate;                      /* Alternate Stylesheet? */
-   TOCIDX tocindex;                       /* Gehoert zum Node "toc[tocindex]" */
+   TOCIDX tocindex;                       /* Gehoert zum Node "toc_table[tocindex]" */
 } STYLE;
 
 
@@ -124,7 +124,7 @@ typedef struct _label                     /* jump labels to be referenced */
    _BOOL   is_node;                     /* label is node title */
    _BOOL   is_popup;                    /* node is a popup node */
    _BOOL   is_alias;                    /* alias name of a node */
-   TOCIDX    tocindex;                    /* belongs to node "toc[tocindex]" */
+   TOCIDX    tocindex;                    /* belongs to node "toc_table[tocindex]" */
    _BOOL   ignore_links;                /* don't link to this label */
    _BOOL   ignore_index;                /* don't index this label (node only!) */
    _BOOL   referenced;                  /* TRUE: label has been referenced */
@@ -180,9 +180,9 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    _BOOL   invisible;                         /* TRUE = Nicht ins Inhaltsverzeichnis */
    _BOOL   converted;                         /* Bereits Makros etc. angepasst? */
    LABIDX    labindex;                        /* lab[]-Position */
-   TOCIDX    prev_index;                      /* toc[]-Position des HTML-Vorgaengers */
-   TOCIDX    next_index;                      /* toc[]-Position des HTML-Nachfolgers */
-   TOCIDX    up_n1_index;                     /* toc[]-Position oberhalb */
+   TOCIDX    prev_index;                      /* toc_table[]-Position des Vorgaengers */
+   TOCIDX    next_index;                      /* toc_table[]-Position des Nachfolgers */
+   TOCIDX    up_n1_index;                     /* toc_table[]-Position oberhalb */
    TOCIDX    up_n2_index;
    TOCIDX    up_n3_index;
    TOCIDX    up_n4_index;
@@ -215,6 +215,8 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
 *     GLOBAL VARIABLES
 *
 ******************************************|************************************/
+
+GLOBAL TOCITEM **toc_table;                  /* Zeiger auf Inhaltsverzeichnis */
 
 GLOBAL TOCIDX    toc_offset;              /* Offsets fuer Kapitelnumerierung, Default=0 */
 GLOBAL TOCIDX    subtoc_offset;
@@ -258,9 +260,8 @@ GLOBAL char      sHtmlPropfontEnd[16];
 GLOBAL char      sHtmlMonofontStart[256];
 GLOBAL char      sHtmlMonofontEnd[16];
 
-GLOBAL TOCITEM  *toc[MAXTOCS];            /* Zeiger auf Inhaltsverzeichnis */
-GLOBAL TOCIDX    p1_toc_counter;          /* Zaehler fuer das toc[]-Array */
-GLOBAL TOCIDX    p2_toc_counter;
+GLOBAL TOCIDX    p1_toc_counter;             /* counter for toc_table[]-array, pass1; contains last used lot # (1 less than number of entries) */
+GLOBAL TOCIDX    p2_toc_counter;             /* counter for toc_table[]-array, pass2; contains last used slot # (1 less than number of entries) */
 
 GLOBAL STYLE   **style;                   /* Array mit Zeigern auf Stylesheets */
 GLOBAL int       p1_style_counter;        /* Zaehler */
@@ -269,7 +270,6 @@ GLOBAL char     *html_frames_toc_title;
 GLOBAL char     *html_frames_con_title;
 
 GLOBAL _BOOL	stg_need_endnode;
-
 
 
 

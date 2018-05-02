@@ -198,13 +198,6 @@
 
 #define MAX_WIN_BUTTONS      10
 
-
-#ifdef __TOS__
-#define MAXTOCS           16383           /* max. Eintraege im Inhaltsverzeichnis r6pl13: vorher 4096 */
-#else
-#define MAXTOCS           32768           /* max. Eintraege im Inhaltsverzeichnis r6pl13: vorher 4096 */
-#endif
-
 #define MAXSILBEN            32           /* max. Silben in einem Wort */
 
 

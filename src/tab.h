@@ -42,11 +42,11 @@
 *
 ******************************************|************************************/
 
-/*   ############################################################
+/* ############################################################
    # globale Variablen
    ############################################################   */
 
-/*   ############################################################
+/* ############################################################
    # globale Funktionen
    ############################################################   */
 GLOBAL void table_reset(void);
@@ -57,11 +57,8 @@ GLOBAL void table_get_header(char *s);
 GLOBAL _BOOL table_add_line(char *s);
 GLOBAL void table_output(void);
 
-GLOBAL void set_table_counter ( const int i );
+GLOBAL void set_table_counter(const int i);
 
 GLOBAL void set_table_alignment(void);
 
 GLOBAL void init_module_tab(void);
-
-
-/* +++ EOF +++ */

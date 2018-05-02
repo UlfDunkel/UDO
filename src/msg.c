@@ -1126,25 +1126,6 @@ GLOBAL void error_too_many_tokens(void)
 
 /*******************************************************************************
 *
-*  error_too_many_node():
-*     error message: too many nodes used
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_too_many_node(void)
-{
-   error_message("too many nodes used");
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  error_replace_param():
 *     error message: couldn't replace (%s ...)
 *

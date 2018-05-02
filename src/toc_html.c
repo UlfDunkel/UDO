@@ -113,7 +113,7 @@ LOCAL _BOOL check_toc_and_counters(void)
    if (p1_toc_counter < 0)
       return FALSE;
       
-   if (toc[p1_toc_counter] == NULL)
+   if (toc_table[p1_toc_counter] == NULL)
       return FALSE;
       
    if (token[1][0] == EOS)
@@ -415,7 +415,7 @@ GLOBAL void set_html_filename(void)
 
    fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
 
-   ptr = toc[p1_toc_counter]->filename;
+   ptr = toc_table[p1_toc_counter]->filename;
    ptr[0] = EOS;
                                           /* Nur den Dateinamen benutzen, nicht den Pfad! */
    strncat(ptr, tmp_name, MAX_FILENAME_LEN);
@@ -491,7 +491,7 @@ GLOBAL void set_html_dirname(void)
 
    if (tmp_path[0] != EOS)
    {
-      toc[p1_toc_counter]->dirname = file_listadd(tmp_name);
+      toc_table[p1_toc_counter]->dirname = file_listadd(tmp_name);
    }
 }
 
@@ -576,9 +576,9 @@ GLOBAL void set_html_keywords(void)
    auto_quote_chars(k, TRUE);
    replace_udo_quotes(k);
 
-   if (toc[p1_toc_counter]->keywords != NULL)
+   if (toc_table[p1_toc_counter]->keywords != NULL)
    {                                      /* r6pl5: Keywords bereits vorhanden, neue anhaengen */
-      oldptr = toc[p1_toc_counter]->keywords;
+      oldptr = toc_table[p1_toc_counter]->keywords;
       
       um_strcpy(oldk, oldptr, MAX_TOKEN_LEN + 1, "\n!html_keywords too long in this line\nset_html_keywords [1]");
       
@@ -593,7 +593,7 @@ GLOBAL void set_html_keywords(void)
       else
       {       
          sprintf(ptr, "%s, %s", oldk, k);
-         toc[p1_toc_counter]->keywords = ptr;
+         toc_table[p1_toc_counter]->keywords = ptr;
       }
    }
    else
@@ -607,7 +607,7 @@ GLOBAL void set_html_keywords(void)
       else
       {
          strcpy(ptr, k);
-         toc[p1_toc_counter]->keywords = ptr;
+         toc_table[p1_toc_counter]->keywords = ptr;
       }
    }
 }
@@ -645,10 +645,10 @@ GLOBAL void set_html_description(void)
    auto_quote_chars(d, TRUE);
    replace_udo_quotes(d);
 
-   if (toc[p1_toc_counter]->description != NULL)
+   if (toc_table[p1_toc_counter]->description != NULL)
    { 
                                           /* r6pl5: description bereits vorhanden, neue anhaengen */
-      oldptr = toc[p1_toc_counter]->description;
+      oldptr = toc_table[p1_toc_counter]->description;
       strcpy(oldd, oldptr);
       newsize = strlen(oldd) + strlen(d) + 2;
 
@@ -661,7 +661,7 @@ GLOBAL void set_html_description(void)
       else
       {       
          sprintf(ptr, "%s %s", oldd, d);
-         toc[p1_toc_counter]->description = ptr;
+         toc_table[p1_toc_counter]->description = ptr;
       }
    }
    else
@@ -675,7 +675,7 @@ GLOBAL void set_html_description(void)
       else
       { 
          strcpy(ptr, d);
-         toc[p1_toc_counter]->description = ptr;
+         toc_table[p1_toc_counter]->description = ptr;
       }
    }
 }
@@ -746,7 +746,7 @@ GLOBAL void set_html_robots(void)
    else
    {
       strcpy(ptr, d);
-      toc[p1_toc_counter]->robots = ptr;
+      toc_table[p1_toc_counter]->robots = ptr;
    }
 }
 
@@ -808,7 +808,7 @@ GLOBAL void set_html_bgsound(void)
       sprintf(sTemp, "\"%s\" loop=\"infinitive\"", filename);
    else
       sprintf(sTemp, "\"%s\" loop=\"%s\"", filename, loop);
-   toc[p1_toc_counter]->bgsound = file_listadd(sTemp);
+   toc_table[p1_toc_counter]->bgsound = file_listadd(sTemp);
 }
 
 
@@ -858,7 +858,7 @@ GLOBAL void set_html_backimage(void)
    if (p1_toc_counter == 0)
       sDocBackImage = file_listadd(filename);
    else
-      toc[p1_toc_counter]->backimage = file_listadd(filename);
+      toc_table[p1_toc_counter]->backimage = file_listadd(filename);
 }
 
 
@@ -919,22 +919,22 @@ GLOBAL void set_html_color(const int which)
          switch (which)
          {
          case HTML_COLOR_BACK:
-            toc[p1_toc_counter]->backcolor = color.rgb;
+            toc_table[p1_toc_counter]->backcolor = color.rgb;
             break;
          case HTML_COLOR_TEXT:
-            toc[p1_toc_counter]->textcolor = color.rgb;
+            toc_table[p1_toc_counter]->textcolor = color.rgb;
             break;
          case HTML_COLOR_LINK:
-            toc[p1_toc_counter]->linkcolor = color.rgb;
+            toc_table[p1_toc_counter]->linkcolor = color.rgb;
             break;
          case HTML_COLOR_ALINK:
-            toc[p1_toc_counter]->alinkcolor = color.rgb;
+            toc_table[p1_toc_counter]->alinkcolor = color.rgb;
             break;
          case HTML_COLOR_VLINK:
-            toc[p1_toc_counter]->vlinkcolor = color.rgb;
+            toc_table[p1_toc_counter]->vlinkcolor = color.rgb;
             break;
          default:
-            toc[p1_toc_counter]->backcolor = color.rgb;
+            toc_table[p1_toc_counter]->backcolor = color.rgb;
             break;
          }
       }
@@ -992,7 +992,7 @@ GLOBAL void set_html_style(void)
           * a style sheet idx in the toc entry rather than
           * having a toc index in the style sheet)
           */
-         warning_message(_("style sheet %s already used in node %s"), sTemp, toc[style[i]->tocindex]->name);
+         warning_message(_("style sheet %s already used in node %s"), sTemp, toc_table[style[i]->tocindex]->name);
          return;
       }
    }
@@ -1119,7 +1119,7 @@ GLOBAL void set_html_script(void)
    if (p1_toc_counter == 0)
       sDocScript = file_listadd(filename);
    else
-      toc[p1_toc_counter]->script_name = file_listadd(filename);
+      toc_table[p1_toc_counter]->script_name = file_listadd(filename);
 }
 
 
@@ -1170,7 +1170,7 @@ GLOBAL void set_html_favicon(void)
    if (p1_toc_counter == 0)
       sDocFavIcon = file_listadd(filename);
    else
-      toc[p1_toc_counter]->favicon_name = file_listadd(filename);
+      toc_table[p1_toc_counter]->favicon_name = file_listadd(filename);
 }
 
 
@@ -1234,7 +1234,7 @@ GLOBAL void set_html_counter_command(void)
       sCounterCommand = file_listadd(k);
    } else
    {
-      toc[p1_toc_counter]->counter_command = file_listadd(k);
+      toc_table[p1_toc_counter]->counter_command = file_listadd(k);
    }
 }
 
