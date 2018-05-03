@@ -110,6 +110,10 @@ LOCAL const PROFILE profile[] =
    {"Save.Treefile",        'b', &(config.bUseTreefile),    0               },
    {"Save.UPRfile",         'b', &(config.bUseUPRfile),     0               },
 
+#if USE_KWSET
+   {"NoFast.Autoref",       'b', &(config.bNoFastAutoref),  0               },
+#endif
+
 #ifdef __TOS__
    {"Source.File",          'c', config.strSourcefile,      CFG_MAX_FILE_LEN},
    {"Dest.File",            'c', config.strDestfile,        CFG_MAX_FILE_LEN},
@@ -526,7 +530,11 @@ const char  *prgos)      /* ^ program OS */
    
    if (profilename[0] == '\0')
    {
+#if defined(__UNIX__) || defined(__unix__)
+      strcpy(profilename, ".udo.ini");
+#else
       strcpy(profilename, "udo.ini");
+#endif
    }
    
    strcpy(programname, prgname);
@@ -564,6 +572,10 @@ const char  *prgos)      /* ^ program OS */
    config.bShowStatus      = TRUE;
    config.bForceLong       = FALSE;
    config.bForceShort      = FALSE;
+
+#if USE_KWSET
+    config.bNoFastAutoref  = FALSE;
+#endif
 
 #ifdef __TOS__
    config.bDestView        = TRUE;

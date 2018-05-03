@@ -23,8 +23,10 @@ udo_SOURCES = \
 	gui.h \
 	img.c img.h img_eps.h img_html.h img_png.h img_stg.h img_win.h \
 	import.h \
+	kwset.c kwset.h \
 	lang.c lang.h lang_utf.h \
 	msg.c msg.h \
+	obstack.c uobstack.h \
 	par.c par.h \
 	udoport.h \
 	str.c str.h \

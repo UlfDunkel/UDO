@@ -513,7 +513,7 @@ LOCAL _BOOL convert_link_lds(char *s, const char *p0, char *p1, char *p2, const 
    strcpy(old_entry, p2);
 
    /* auch Links innerhalb der Seite ermoeglichen */
-   auto_references(s_entry, TRUE, "", 0, 0);
+   gen_references(s_entry, TRUE, "", 0, 0);
    
    /* Trick: Schauen, ob nun "> im Eintrag steht und dann */
    /* ab dort den Link einsetzen. */
@@ -1257,11 +1257,7 @@ LOCAL void c_link(char *s, _BOOL inside_b4_macro)
    int       pnr = 0;
    _BOOL   linkerror;
    char      link[1024];
-   _BOOL   old_autorefoff;
    
-   old_autorefoff = bDocAutorefOff;
-   bDocAutorefOff = FALSE;
-
    linkerror = FALSE;
    while (!linkerror && (pnr = get_parameters(s, "link", 2, 2)) == 2)
    {
@@ -1357,8 +1353,6 @@ LOCAL void c_link(char *s, _BOOL inside_b4_macro)
 
    if (pnr != 0 && pnr != 2)
       error_wrong_nr_parameters("!link");
-   
-   bDocAutorefOff = old_autorefoff;
 }
 
 
@@ -1797,10 +1791,6 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
    char        *ptr;
    _BOOL      flag;
    _BOOL      linkerror;
-   _BOOL      old_autorefoff;    /* */
-   
-   old_autorefoff = bDocAutorefOff;
-   bDocAutorefOff = FALSE;
    
    linkerror = FALSE;
    while (!linkerror && (pnr = get_parameters(s, "ilink", 3, 3)) == 3)
@@ -1848,7 +1838,7 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
          strcpy(old_entry, Param[3]);
          
          /* auch innerhalb des Nodes linken (TRUE)! */
-         auto_references(s_entry, TRUE, "", 0, 0);
+         gen_references(s_entry, TRUE, "", 0, 0);
          
          /* Trick/Hack: Schauen, ob nun "> im Eintrag steht und dann */
          /* ab dort den Image-Eintrag setzen. */
@@ -1902,7 +1892,7 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
          strcpy(old_entry, Param[3]);
          
          /* auch innerhalb des Nodes linken (TRUE)! */
-         auto_references(s_entry, TRUE, "", 0, 0);
+         gen_references(s_entry, TRUE, "", 0, 0);
          
          /* Trick: Schauen, ob nun {\uldb im Eintrag steht und dann */
          /* ab dort den Image-Text einsetzen. */
@@ -1970,8 +1960,6 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
    
    if (pnr != 0 && pnr != 3)
       error_wrong_nr_parameters("!ilink");
-
-   bDocAutorefOff = old_autorefoff;
 }
 
 

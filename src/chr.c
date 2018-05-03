@@ -3265,7 +3265,7 @@ char       *s)  /* ^ string */
 *     convert Manualpages styles (bold + underlined)
 *
 *  Notes:
-*     ptr does always point to the first char of the STYLEMAGIC (\033\001).
+*     ptr does always point to the first char of the ESC_STYLE_MAGIC (\033\001).
 *     UDO replaces commands like (!B) by its own Escape commands first,
 *     formatted as ESC-001-xxx-ESC, where xxx is the relevant style.
 *  
@@ -3276,7 +3276,7 @@ char       *s)  /* ^ string */
 
 GLOBAL void c_man_styles(char *s)
 {
-   char     *ptr;             /* ^ to STYLEMAGIC in string */
+   char     *ptr;             /* ^ to ESC_STYLE_MAGIC in string */
    char      alt[512],
              neu[512];
    char     *start;           /* buffer for start of style in string */
@@ -3292,7 +3292,7 @@ GLOBAL void c_man_styles(char *s)
    under_active = styleflag.underlined;
    replace_it   = FALSE;
 
-   ptr = strstr(s, STYLEMAGIC);           /* see Notes above! */
+   ptr = strstr(s, ESC_STYLE_MAGIC);
    if (ptr == NULL)                       /* no style found */
       return;
 
@@ -3302,7 +3302,7 @@ GLOBAL void c_man_styles(char *s)
 
    do
    {
-      if (ptr[0] != STYLEMAGIC[0] && ptr[0] != STYLEMAGIC[1])
+      if (ptr[0] != ESC_STYLE_MAGIC[0] && ptr[0] != ESC_STYLE_MAGIC[1])
       {
          if (bold_active || under_active)
          {
@@ -3310,7 +3310,7 @@ GLOBAL void c_man_styles(char *s)
             strcat(alt, s_char);
          }
       }
-      else if (ptr[0] == STYLEMAGIC[0] && ptr[1] == STYLEMAGIC[1])
+      else if (ptr[0] == ESC_STYLE_MAGIC[0] && ptr[1] == ESC_STYLE_MAGIC[1])
       {
          switch (ptr[2])
          {

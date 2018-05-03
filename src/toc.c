@@ -183,6 +183,10 @@
 
 #include "export.h"
 #include "toc.h"
+#if USE_KWSET
+#include "kwset.h"
+static kwset_t kwset;
+#endif
 
 
 
@@ -353,8 +357,8 @@ LOCAL char        toc_list_top[64],       /* */
                   toc_list_end[64];       /*r6pl2*/
 LOCAL char        use_toc_list_commands;  /* TOCL_HTM | TOCL_TEX | 0 */
 
-LOCAL char        allowed_next_chars[64]; /* r5pl10 */
-LOCAL char        allowed_prev_chars[64];
+LOCAL char       allowed_next_chars[256];
+LOCAL char       allowed_prev_chars[256];
 
 LOCAL char        footer_buffer[512];     /* Puffer fuer den Footer */ /*r6pl2 */
 
@@ -1305,25 +1309,46 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
 /*******************************************************************************
 *
 *  auto_references():
-*     ??? (description missing)
+*     generate automatic references, depending on the setting of !autoref
 *
 *  return:
 *     -
 *
 ******************************************|************************************/
 
-GLOBAL void auto_references(
+GLOBAL void auto_references(char *s, const _BOOL for_toc, const char *pic, const _UWORD uiWidth, const _UWORD uiHeight)
+{
+   if (desttype == TOINF && !for_toc)
+   {
+      /* Automatische Referenzen werden nur fuer Inhaltsverzeichnisse */
+      /* gesetzt. Andere Referenzen muessen wie bei TeX mit !link */
+      /* manuell erzeugt werden! */
+      return;
+   }
+   
+   if (!bDocAutorefOff)
+   {
+      gen_references(s, for_toc, pic, uiWidth, uiHeight);
+   }
+}
 
-char             *s,             /* ^ string to check */
-const _BOOL     for_toc,       /* TRUE: use auto reference for TOC */
-const char       *pic,           /* also images can be referenced (used in string2reference()) */
-const _UWORD       uiWidth,       /* image width */
-const _UWORD       uiHeight)      /* image height */
+
+/*******************************************************************************
+*
+*  gen_references():
+*     generate automatic references, independing on the setting of !autoref
+*     used for example in TOCs and in (!link)-commands
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void gen_references(char *s, const _BOOL for_toc, const char *pic, const _UWORD uiWidth, const _UWORD uiHeight)
 {
    register LABIDX i;
    char           the_ref[512],
                  *pos,
-                 *ptr,
                  *found_pos,
                  *searchpos;
    unsigned char  nextchar,
@@ -1332,130 +1357,165 @@ const _UWORD       uiHeight)      /* image height */
    size_t         found_len,
                   ll;
    _BOOL        ref_it;
-   _BOOL        ignore_it;
-   _BOOL        next_ok, prev_ok;
-   _BOOL        found_one, found_ok;
-   LABEL         *labptr;
-   
-   if (bDocAutorefOff)                    /* it's so simple! */
-      return;
-   
-   
-   
-   /* Automatische Referenzen werden nur fuer Inhaltsverzeichnisse */
-   /* gesetzt. Andere Referenzen muessen wie bei TeX mit !link */
-   /* manuell erzeugt werden! */
+   _BOOL        found_one;
+   LABEL *labptr;
+   size_t total_len;
+   size_t search_len;
 
-   if (desttype == TOINF && !for_toc)
-      return;
-   
    reset_refs();
    
    do
    {
       found_lab = 0;
-      found_len = 0;
       found_pos = s;
    
-      for (i = 1; i <= p1_lab_counter; i++)
+      total_len = strlen(s);
+
+#if USE_KWSET
+      if (!config.bNoFastAutoref && kwset != NULL)
       {
-         labptr = label_table[i];
+         size_t offset;
+         struct kwsmatch kwsmatch;
    
-         if (labptr == NULL)
-            break;
-   
-                                          /* r5pl15 */
-         if (for_toc || (!for_toc && !labptr->ignore_links))
+         searchpos = s;
+         search_len = total_len;
+         do
          {
-            searchpos = s;
-   
-            found_one = TRUE;
-            found_ok  = FALSE;
-            
-            while (found_one && !found_ok)
+            offset = kwsexec(kwset, searchpos, search_len, &kwsmatch);
+         
+            if (offset != (size_t) -1)
             {
-               ptr = searchpos;
+               pos = searchpos + offset;
+               nextchar = pos[kwsmatch.size[0]];
+               if (pos == s)
+                  prevchar = EOS;
+               else
+                  prevchar = pos[-1];
             
-               while ( (pos = strstr(ptr, labptr->name)) != NULL)
+               if (allowed_prev_chars[prevchar] && allowed_next_chars[nextchar])
                {
-                  ignore_it = FALSE;
+                  found_lab = kwsmatch.index + 1;
+                  /* found_len = kwsmatch.size[0]; */
+                  found_pos = pos;
+                  found_one = FALSE;
+               } else
+               {
+                  searchpos = pos + 1;
+                  search_len = total_len - (searchpos - s);;
+                  found_one = TRUE;
+               }
+            } else
+            {
+               found_one = FALSE;
+            }
+         } while (found_one);
+      } else
+#endif
+      {
+         found_len = 0;
+         for (i = 1; i <= p1_lab_counter; i++)
+         {
+            labptr = label_table[i];
             
-                  if ( pos - 2 >= s)
+            if (for_toc || (!for_toc && !labptr->ignore_links))
+            {
+               searchpos = s;
+               search_len = total_len;
+               
+               do
+               {
+                  if (labptr->len == search_len)
                   {
-                                          /* r5pl9: vorher <' ' */
-                     if (pos[-2] == ESC_C && pos[-1] < BS_C)
+                     if (strcmp(labptr->name, searchpos) == 0)
                      {
-                        ptr = pos + 2;
-                        ignore_it = TRUE;
+                        pos = searchpos;
+                     } else
+                     {
+                        pos = NULL;
+                     }
+                  } else if (labptr->len > search_len)
+                  {
+                     pos = NULL;
+                  } else
+                  {
+                     char *ptr;
+                     _BOOL ignore_it;
+                     
+                     ptr = searchpos;
+      
+                     while ((pos = strstr(ptr, labptr->name)) != NULL)
+                     {
+                        ignore_it = FALSE;
+                     
+                        if ((pos - 2) >= s)
+                        {
+                           if (pos[-2] =='\033' && pos[-1] < '\010')
+                           {
+                              ptr = pos + 2;
+                              ignore_it = TRUE;
+                           }
+                        }
+                     
+                        if (!ignore_it)
+                        {
+                           break;
+                        }
                      }
                   }
-            
-                  if (!ignore_it)
-                     break;
-               }
-   
-               if (pos != NULL)
-               {
-                  found_one = TRUE;
-   
-                  ll = labptr->len;       /* r5pl10: Laenge wird in add_label() vorberechnet */
-   
-                  if (ll > found_len)
+                  
+                  if (pos != NULL)
                   {
-                     nextchar = pos[ll];
-
-                     if (pos == s)
-                        prevchar = EOS;
-                     else
-                        prevchar = pos[-1];
-   
-                     prev_ok = (prevchar == EOS || strchr(allowed_prev_chars, prevchar) != NULL);
-                     next_ok = (nextchar == EOS || strchr(allowed_next_chars, nextchar) != NULL);
-   
-                     if (prev_ok && next_ok)
+                     ll = labptr->len;
+                     
+                     found_one = TRUE;
+                     if (ll > found_len)
                      {
-                        found_lab = labptr->labindex;
-                        found_len = ll;
-                        found_pos = pos;
-                        found_ok  = TRUE;
-                     }
-                     else
+                        nextchar = pos[ll];
+                        if (pos == s)
+                        {
+                           prevchar = EOS;
+                        } else
+                        {
+                           prevchar = pos[-1];
+                        }
+                     
+                        if (allowed_prev_chars[prevchar] && allowed_next_chars[nextchar])
+                        {
+                           found_lab = labptr->labindex;
+                           found_len = ll;
+                           found_pos = pos;
+                           found_one = FALSE; /* um innere schleife zu beenden */
+                        } else
+                        {
+                           searchpos = pos + 1;
+                           search_len = total_len - (searchpos - s);;
+                        }
+                     } else
                      {
                         searchpos = pos + 1;
-                        found_ok  = FALSE;
+                        search_len = total_len - (searchpos - s);;
                      }
-                  }
-                  else
+                  } else
                   {
-                     searchpos = pos + 1;
-                     found_ok  = FALSE;
-                     
-                  }  /* ll > found_len */
-                  
-               }
-               else
-               {
-                  /* pos == NULL */
-                  found_one = FALSE;
-                  found_ok  = FALSE;
-                  searchpos += labptr->len;
-               }
+                     /* pos == NULL */
+                     found_one = FALSE;
+                  }
    
-            }  /* while (!found_and_ok) */
+               } while (found_one);
    
-         }  /* !ignore_links */
+            }
    
-      }  /* for */
-   
+         }
+      }
+
       if (found_lab != 0)
       {
          ref_it = TRUE;
-                                          /* r6pl9 */
          label_table[found_lab]->referenced = TRUE;
-   
+
          /* Hier dafuer sorgen, dass nicht innerhalb eines Nodes */
          /* referenziert wird, wenn man nicht im Inhaltsverzeichnis ist */
-   
+
          if (!for_toc)
          {
             if (p2_toc_counter == label_table[found_lab]->tocindex)
@@ -1463,17 +1523,18 @@ const _UWORD       uiHeight)      /* image height */
                ref_it = FALSE;
             }
          }
-   
+         if (!for_toc && label_table[found_lab]->ignore_links)
+            ref_it = FALSE;
+         
          if (ref_it)
          {
             string2reference(the_ref, found_lab, for_toc, pic, uiWidth, uiHeight);
             add_ref(the_ref);
-         }
-         else
+         } else
          {
             add_ref(label_table[found_lab]->name);
          }
-   
+         
          replace_once(found_pos, label_table[found_lab]->name, refs[refs_counter - 1].magic);
       }
       
@@ -4182,7 +4243,6 @@ LOCAL void html_hb_line(_BOOL head)
              sTarget[64];
    const char *colptr;
    const char *sGifFile;
-   _BOOL   old_autorefoff;
    _BOOL   for_main_file;
    _UWORD     uiW, uiH;
    char      buffer[32] = "";
@@ -4272,9 +4332,6 @@ LOCAL void html_hb_line(_BOOL head)
    if (!head && toc_table[ti]->ignore_bottomline)
       return;
    
-   old_autorefoff = bDocAutorefOff;
-   bDocAutorefOff = FALSE;
-   
    if (!head)
    {
       if (!html_modern_layout && !html_frames_layout)
@@ -4293,6 +4350,7 @@ LOCAL void html_hb_line(_BOOL head)
       colptr = html_color_string(&html_modern_backcolor);
    if (html_frames_layout)
       colptr = html_color_string(&html_frames_backcolor);
+   
    if (colptr)
    {
       s[0] = EOS;
@@ -4429,19 +4487,15 @@ LOCAL void html_hb_line(_BOOL head)
          if (i > 0)
          {
             li = toc_table[i]->labindex;
-            um_strcpy(s, label_table[li]->name, 512, "html_hb_line[5]");
-
+            strcpy(s, label_table[li]->name);
             string2reference(anchor, li, TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
             replace_once(s, label_table[li]->name, anchor);
-
             if (no_images)
             {
-                                          /* [voja][R6PL17] deleted the + at "+replace_once" call */
                replace_once(s, label_table[li]->name, " &lt;&lt;&lt;");
                strinsert(s, "| ");
             }
-            
-            out(s);
+            outln(s);
          }
          else
          {
@@ -4486,7 +4540,6 @@ LOCAL void html_hb_line(_BOOL head)
    else
    {
       i = toc_table[ti]->next_index;
-      
       if (i > 0)
       {
          if (html_merge_node2)
@@ -4676,8 +4729,6 @@ LOCAL void html_hb_line(_BOOL head)
          outln("");
       }
    }
-   
-   bDocAutorefOff = old_autorefoff;
 }
 
 
@@ -9393,7 +9444,6 @@ LOCAL void toc_output(TOCTYPE nodetype, const int depth, _BOOL apx)
    _BOOL        last_sssssn = FALSE;  /* TRUE: this node is last subsubsubsubsubnode */
    _BOOL        first = TRUE;         /* */
    _BOOL        output_done = FALSE;  /* */
-   _BOOL        old;                  /* */
    int            p2_n1 = 0,
                   p2_n2 = 0,
                   p2_n3 = 0,
@@ -9697,10 +9747,6 @@ LOCAL void toc_output(TOCTYPE nodetype, const int depth, _BOOL apx)
    }  /* switch (nodetype) */
    
 
-   old = bDocAutorefOff;
-   bDocAutorefOff = FALSE;
-   
-                                          /* walk through all collected nodes from pass1() */
    for (i = start; i <= p1_toc_counter; i++)
    {
                                           /* nothing to do here! */
@@ -11236,10 +11282,9 @@ NEXT_TOC:
       break;
    }
 
-DONE:   
-   bDocAutorefOff = old;
-
-}  /* toc_output */
+DONE:
+   ;
+}
 
 
 
@@ -11444,7 +11489,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
       if (currdepth >= TOC_NODE2 && last_n1_index > 0)
       {
          strcpy(s, toc_table[last_n1_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
    
          if (no_images)
          {
@@ -11483,7 +11528,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
       if (currdepth >= TOC_NODE3 && last_n2_index > 0)
       {
          strcpy(s, toc_table[last_n2_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
    
          if (no_images)
          {
@@ -11523,7 +11568,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
       if (currdepth >= TOC_NODE4 && last_n3_index > 0)
       {
          strcpy(s, toc_table[last_n3_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
    
          if (no_images)
          {
@@ -11564,7 +11609,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
       if (currdepth >= TOC_NODE5 && last_n4_index > 0)
       {
          strcpy(s, toc_table[last_n4_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
    
          if (no_images)
          {
@@ -11604,7 +11649,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
       if (currdepth >= TOC_NODE6 && last_n5_index > 0)
       {
          strcpy(s, toc_table[last_n5_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
    
          if (no_images)
          {
@@ -11668,35 +11713,35 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
       if (currdepth >= TOC_NODE2 && last_n1_index > 0)
       {
          strcpy(s, toc_table[last_n1_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
          voutlnf("\\{bmc %s\\} %s", BMP_FO_NAME, s);
       }
       
       if (currdepth >= TOC_NODE3 && last_n2_index > 0)
       {
          strcpy(s, toc_table[last_n2_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
          voutlnf("\\par\\li400\\{bmc %s\\} %s", BMP_FO_NAME, s);
       }
       
       if (currdepth >= TOC_NODE4 && last_n3_index > 0)
       {
          strcpy(s, toc_table[last_n3_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
          voutlnf("\\par\\li800\\{bmc %s\\} %s", BMP_FO_NAME, s);
       }
 
       if (currdepth >= TOC_NODE5 && last_n4_index > 0)
       {
          strcpy(s, toc_table[last_n4_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
          voutlnf("\\par\\li1200\\{bmc %s\\} %s", BMP_FO_NAME, s);
       }
       
       if (currdepth >= TOC_NODE6 && last_n5_index > 0)
       {
          strcpy(s, toc_table[last_n5_index]->name);
-         auto_references(s, TRUE, "", 0, 0);
+         gen_references(s, TRUE, "", 0, 0);
          voutlnf("\\par\\li1600\\{bmc %s\\} %s", BMP_FO_NAME, s);
       }
 
@@ -12717,6 +12762,17 @@ LOCAL void set_labelname(LABEL *label, const char *name)
       hash_index = hash_val(label->name);
       label->next_hash = hash[hash_index];
       hash[hash_index] = label;
+   }
+#endif
+#if USE_KWSET
+   if (!config.bNoFastAutoref)
+   {
+      if (kwset != NULL)
+         if (kwsincr(kwset, label->name, label->len, NULL) == FALSE)
+         {
+            kwsfree(kwset);
+            kwset = NULL;
+         }
    }
 #endif
 }
@@ -15846,9 +15902,7 @@ LOCAL void init_toc_forms_no_numbers(void)
 
 GLOBAL void init_module_toc_pass2(void)
 {
-   char   sF[128],  /* */
-          sS[128];  /* */
-   
+   char sF[128], sS[128];
    
    form_t1_n1[0] = EOS;
    form_t1_n2[0] = EOS;
@@ -15876,8 +15930,6 @@ GLOBAL void init_module_toc_pass2(void)
       init_toc_forms_numbers();
 
 
-   /*r6pl5: die Reinkarnation von !use_compressed_tocs */
-   
    if (use_compressed_tocs)
    {
       subtocs1_depth = 1;
@@ -15904,13 +15956,11 @@ GLOBAL void init_module_toc_pass2(void)
 
    /* Die Formatkommando angeben, die fuer die Inhaltsausgabe */
    /* verwendet werden, um die Einrueckungen der Listen zu erzeugen */
-
-   switch (desttype)                      /* r6pl2 */
+   switch (desttype)
    {
    case TOHAH:
    case TOHTM:
    case TOMHH:
-                                          /* Changed in r6pl16 [NHz] */
       strcpy(toc_list_top, "<ul class=\"content\">");
       strcpy(toc_list_end, "</ul>");
       
@@ -15941,13 +15991,11 @@ GLOBAL void init_module_toc_pass2(void)
 
 
    /* Font-Tags vorbestimmen */
-
    sF[0] = 0;
    sS[0] = 0;
-   
    sHtmlPropfontStart[0] = EOS;
-   sHtmlPropfontEnd[0]   = EOS;
-   iDocHtmlPropfontSize  = 0;
+   sHtmlPropfontEnd[0] = EOS;
+   iDocHtmlPropfontSize = 0;
 
    if (sDocHtmlPropfontName[0] != EOS)
    {
@@ -15970,8 +16018,8 @@ GLOBAL void init_module_toc_pass2(void)
    sS[0] = 0;
    
    sHtmlMonofontStart[0] = EOS;
-   sHtmlMonofontEnd[0]   = EOS;
-   iDocHtmlMonofontSize  = 0;
+   sHtmlMonofontEnd[0] = EOS;
+   iDocHtmlMonofontSize = 0;
 
    if (sDocHtmlMonofontName[0] != EOS)
    {
@@ -15981,7 +16029,7 @@ GLOBAL void init_module_toc_pass2(void)
    if (sDocHtmlMonofontSize[0] != EOS)
    {
       sprintf(sS, " size=\"%s\"", sDocHtmlMonofontSize);
-      iDocHtmlMonofontSize= atoi(sDocHtmlMonofontSize);
+      iDocHtmlMonofontSize = atoi(sDocHtmlMonofontSize);
    }
 
    if (sF[0] != EOS || sS[0] != EOS)
@@ -15989,6 +16037,15 @@ GLOBAL void init_module_toc_pass2(void)
       sprintf(sHtmlMonofontStart, "<font%s%s>", sF, sS);
       strcpy(sHtmlMonofontEnd, "</font>");
    }
+
+#if USE_KWSET
+   if (kwset != NULL)
+      if (kwsprep(kwset) == FALSE)
+      {
+         kwsfree(kwset);
+         kwset = NULL;
+      }
+#endif
 }
 
 
@@ -16471,6 +16528,8 @@ GLOBAL void index2stg(char *s)
 
 GLOBAL void init_module_toc(void)
 {
+   register int i;
+
    /* -------------------------------------------------------------- */
    /* In diesen Flags merkt sich UDO, welche Art von Node gerade     */
    /* aktiv ist (!node, !subnode, etc.)                              */
@@ -16652,10 +16711,23 @@ GLOBAL void init_module_toc(void)
    /* gefundenen Label erlaubt sind.                                 */
    /* -------------------------------------------------------------- */
 
-   sprintf(allowed_next_chars, "\033 !\"#$%%&'()*+,-./:;<=>?@[\\]^_`{|}~%c%c%c", TILDE_C, NBSP_C, INDENT_C);
-   
-   strcpy(allowed_prev_chars, allowed_next_chars);
-
+   {
+      const char *s;
+      
+      for (i = 0; i < 256; i++)
+         allowed_next_chars[i] = 0;
+      s = "\033 !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\177";
+      while (*s != EOS)
+      {
+         allowed_next_chars[(unsigned char)*s] = 1;
+         s++;
+      }
+      allowed_next_chars[EOS] = 1;
+      allowed_next_chars[TILDE_C] = 1;
+      allowed_next_chars[NBSP_C] = 1;
+      allowed_next_chars[INDENT_C] = 1;
+      memcpy(allowed_prev_chars, allowed_next_chars, sizeof(allowed_prev_chars));
+   }
 
    uses_tableofcontents = FALSE;
    toc_title[0] = EOS;
@@ -16707,7 +16779,14 @@ GLOBAL void init_module_toc(void)
 #if USE_NAME_HASH
    memset(hash, 0, sizeof(hash));
 #endif
+#if USE_KWSET
+   if (!config.bNoFastAutoref)
+      if ((kwset = kwsalloc(NULL)) == NULL)
+      {
+      }
+#endif
    
+   in_about_udo = FALSE;
    stg_need_endnode = FALSE;
 }
 
@@ -16794,4 +16873,12 @@ GLOBAL void exit_module_toc(void)
       refs = NULL;
    }
    refs_alloc = 0;
+
+#if USE_KWSET
+   if (kwset != NULL)
+   {
+      kwsfree(kwset);
+      kwset = NULL;
+   }
+#endif
 }

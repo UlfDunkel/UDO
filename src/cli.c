@@ -159,6 +159,9 @@ LOCAL const CLIOPT cliopt[] =
    { "--drc",              "",      'b',  FALSE, &desttype,         TODRC },
    { "--force-long",       "",      'b',  FALSE, &bForceLong,       TRUE  },
    { "--force-short",      "",      'b',  FALSE, &bForceShort,      TRUE  },
+#if USE_KWSET
+   { "--no-fastautoref",   "",      'b',  FALSE, &bNoFastAutoref,   TRUE  },
+#endif
    { "--hold",             "-H",    'b',  FALSE, &bHoldKey,         TRUE  },
    { "--help",             "",      'b',  FALSE, &bShowHelp,        TRUE  },
    { "--helptag",          "-g",    'b',  FALSE, &desttype,         TOHPH },
@@ -1052,11 +1055,7 @@ int main(int argc, const char **argv)
    init_udo_vars();
    sprintf(nam, "UDO Version %s", UDO_REL);
    
-#ifdef __WIN32__
-   init_module_config("udo32.ini", nam, UDO_OS);
-#else
-   init_module_config("udo.ini", nam, UDO_OS);
-#endif
+   init_module_config("", nam, UDO_OS);
 
    read_profile();
 
@@ -1080,6 +1079,9 @@ int main(int argc, const char **argv)
    bNoWarningsLines = FALSE;
    bForceLong       = FALSE;
    bForceShort      = FALSE;
+#if USE_KWSET
+   bNoFastAutoref   = FALSE;
+#endif
    bCheckMisc       = FALSE;
    bHoldKey         = FALSE;
    bShowArgs        = FALSE;

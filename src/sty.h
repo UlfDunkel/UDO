@@ -70,6 +70,9 @@ typedef struct _styleflag                 /* various style control flags */
    _BOOL   underlined;                  /* (!U)...(!u) */
    _BOOL   verbatim;                    /* (!V)...(!v) */
    _BOOL   twriter;                     /* (!T)...(!t) */
+   _BOOL   ghost;                       /* (!G)...(!g) */
+   _BOOL   shadow;                      /* (!S)...(!s) */
+   _BOOL   outline;                     /* (!O)...(!o) */
    _BOOL   insert;                      /* (!INS)...(!ins) */
    _BOOL   deleted;                     /* (!DEL)...(!del) */
    _BOOL   color;                       /* (!<colorname>)...(!coloff) */
@@ -124,36 +127,37 @@ typedef struct _styleflag                 /* various style control flags */
 #define C_INSERT_OFF    17
 #define C_DELETED_ON    18
 #define C_DELETED_OFF   19
-#define C_COLOR_BLACK   20
 /* don't use            21                -> Vertical space */
-#define C_COLOR_SILVER  22
-#define C_COLOR_GRAY    23
-#define C_COLOR_WHITE   24
-#define C_COLOR_MAROON  25
-/* don't use            26                -> ESC */
-#define C_COLOR_RED     27
-#define C_COLOR_PURPLE  28
-#define C_COLOR_FUCHSIA 29
-#define C_COLOR_GREEN   30
-#define C_COLOR_LIME    31
-#define C_COLOR_OLIVE   32
-#define C_COLOR_YELLOW  33
-/* don't use            34                -> " */
-#define C_COLOR_NAVY    35
-#define C_COLOR_BLUE    36
-#define C_COLOR_TEAL    37
-/* don't use            38                -> & */
-/* don't use            39                -> ' */
-/* don't use            40                -> ( */
-/* don't use            41                -> ) */
-#define C_COLOR_AQUA    42
-#define C_COLOR_OFF     43
-                                          /* New in V6.5.20 [GS] */
-#define C_SUP_ON        44
-#define C_SUP_OFF       45
-#define C_SUB_ON        46
-/* don't use            47                -> / */
-#define C_SUB_OFF       48
+#define C_GHOST_ON      22
+#define C_GHOST_OFF     23
+#define C_SHADOW_ON     24
+#define C_SHADOW_OFF    25
+/* don't use            26                -> Ctrl-Z */
+/* don't use            27                -> ESC */
+#define C_OUTLINE_ON    28
+#define C_OUTLINE_OFF   29
+/* don't use 32-64 */
+#define C_COLOR_BLACK   65
+#define C_COLOR_SILVER  66
+#define C_COLOR_GRAY    67
+#define C_COLOR_WHITE   68
+#define C_COLOR_MAROON  69
+#define C_COLOR_RED     70
+#define C_COLOR_PURPLE  71
+#define C_COLOR_FUCHSIA 72
+#define C_COLOR_GREEN   73
+#define C_COLOR_LIME    74
+#define C_COLOR_OLIVE   75
+#define C_COLOR_YELLOW  76
+#define C_COLOR_NAVY    77
+#define C_COLOR_BLUE    78
+#define C_COLOR_TEAL    79
+#define C_COLOR_AQUA    80
+#define C_COLOR_OFF     81
+#define C_SUP_ON        82
+#define C_SUP_OFF       83
+#define C_SUB_ON        84
+#define C_SUB_OFF       85
 
 
 
@@ -167,7 +171,6 @@ d******************************************|************************************
 
 GLOBAL STYLEFLAG   styleflag;             /* flags of currently active styles */
 
-GLOBAL char        STYLEMAGIC[8];
 GLOBAL char        BOLD_ON[8],
                    BOLD_OFF[8];
 GLOBAL char        FOOT_ON[8],
@@ -176,6 +179,9 @@ GLOBAL char        ITALIC_ON[8],
                    ITALIC_OFF[8];
 GLOBAL char        TWRITER_ON[8], TWRITER_OFF[8];
 GLOBAL char        UNDER_ON[8], UNDER_OFF[8];
+GLOBAL char        GHOST_ON[8], GHOST_OFF[8];
+GLOBAL char        SHADOW_ON[8], SHADOW_OFF[8];
+GLOBAL char        OUTLINE_ON[8], OUTLINE_OFF[8];
 GLOBAL char        INSERT_ON[8], INSERT_OFF[8];
 GLOBAL char        DELETED_ON[8], DELETED_OFF[8];
 GLOBAL char        COLOR_BLACK[8],
@@ -210,8 +216,6 @@ GLOBAL char        SUB_ON[8],
 *
 ******************************************|************************************/
 
-GLOBAL void del_footnotes(char *s);
-GLOBAL void del_internal_footnotes(char *s);
 GLOBAL void del_html_styles(char *s);
 GLOBAL void del_internal_styles(char *s);
 

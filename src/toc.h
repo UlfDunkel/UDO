@@ -285,6 +285,7 @@ GLOBAL LABIDX getLabelIndexFromTocIndex(LABIDX *li, const TOCIDX ti);
 
 GLOBAL void reset_refs(void);
 GLOBAL void auto_references(char *s, const _BOOL for_toc, const char *pic, const _UWORD uiWidth, const _UWORD uiHeight);
+GLOBAL void gen_references(char *s, const _BOOL for_toc, const char *pic, const _UWORD uiWidth, const _UWORD uiHeight);
 
 GLOBAL void check_endnode(void);
 void stg_out_endnode(void);

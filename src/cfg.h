@@ -98,6 +98,10 @@ typedef struct _config
    _BOOL bForceLong;
    _BOOL bForceShort;
 
+#if USE_KWSET
+    _BOOL bNoFastAutoref;
+#endif
+    
 #ifdef __TOS__
    APPCFG   dedit, dview;
    APPCFG   sedit, sview;

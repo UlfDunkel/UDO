@@ -62,18 +62,22 @@
 #define CMD_UNDER_OFF    "(!u)"
 #define CMD_VERB_ON      "(!V)"
 #define CMD_VERB_OFF     "(!v)"
+#define CMD_GHOST_ON     "(!G)"
+#define CMD_GHOST_OFF    "(!g)"
+#define CMD_SHADOW_ON    "(!S)"
+#define CMD_SHADOW_OFF   "(!s)"
+#define CMD_OUTLINE_ON   "(!O)"
+#define CMD_OUTLINE_OFF  "(!o)"
 #define CMD_STYLELEN     4
 
-/* New in V6.5.9 [NHz] */
 #define CMD_INSERT_ON    "(!INS)"
 #define CMD_INSERT_OFF   "(!ins)"
 #define CMD_DELETED_ON   "(!DEL)"
 #define CMD_DELETED_OFF  "(!del)"
-/* New in V6.5.20 [GS] */
-#define CMD_SUP_ON    "(!SUP)"
-#define CMD_SUP_OFF   "(!sup)"
-#define CMD_SUB_ON    "(!SUB)"
-#define CMD_SUB_OFF   "(!sub)"
+#define CMD_SUP_ON       "(!SUP)"
+#define CMD_SUP_OFF      "(!sup)"
+#define CMD_SUB_ON       "(!SUB)"
+#define CMD_SUB_OFF      "(!sub)"
 
 
 
@@ -82,8 +86,6 @@
 /* --------------------------------------------------   */
 /* Farben                                               */
 /* --------------------------------------------------   */
-/* New in V6.5.9 [NHz] */
-
 #define CMD_COLOR_BLACK    "(!black)"
 #define CMD_COLOR_SILVER   "(!silver)"
 #define CMD_COLOR_GRAY     "(!gray)"
@@ -139,24 +141,21 @@
 
 #define CMD_BEGIN_RAW           "!begin_raw"
 #define CMD_END_RAW             "!end_raw"
-#define CUT_BEGIN_RAW           "!br"
-#define CUT_END_RAW             "!er"
 
 #define CMD_BEGIN_TABLE         "!begin_table"
 #define CMD_END_TABLE           "!end_table"
-#define CUT_BEGIN_TABLE         "!bt"
-#define CUT_END_TABLE           "!et"
 
 #define CMD_BEGIN_VERBATIM      "!begin_verbatim"
 #define CMD_END_VERBATIM        "!end_verbatim"
-#define CUT_BEGIN_VERBATIM      "!bv"
-#define CUT_END_VERBATIM        "!ev"
 
 #define CMD_BEGIN_SOURCECODE    "!begin_sourcecode"
 #define CMD_END_SOURCECODE      "!end_sourcecode"
 
 #define CMD_BEGIN_COMMENT       "!begin_comment"
 #define CMD_END_COMMENT         "!end_comment"
+
+#define CMD_BEGIN_IGNORE        "!begin_ignore"
+#define CMD_END_IGNORE          "!end_ignore"
 
 #define CMD_BEGIN_LINEDRAW      "!begin_linedraw"
 #define CMD_END_LINEDRAW        "!end_linedraw"
@@ -175,6 +174,9 @@
 
 #define CMD_BEGIN_TLIST         "!begin_tlist"
 #define CMD_END_TLIST           "!end_tlist"
+
+#define CMD_BEGIN_NODE          "!begin_node"
+#define CMD_END_NODE            "!end_node"
 
 
 
@@ -313,7 +315,6 @@
 
 #define win_text      "\\f0 "
 #define win_verb      "\\f1 "
-#define win_symb      "\\f2 "
 
 #define win_verb_on   "{\\f1\\keep"
 #define win_verb_off  "}\\pard"
@@ -328,6 +329,3 @@
 /* Fuer Pure-C-Help                                     */
 /* --------------------------------------------------   */
 #define PCH_LINK  "\\#"
-
-
-/* +++ EOF +++ */

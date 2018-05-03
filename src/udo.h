@@ -121,6 +121,9 @@ GLOBAL _BOOL     bNoWarnings;           /* Keine Warnungen ausgeben? */
 GLOBAL _BOOL     bNoWarningsLines;      /* Keine Warnungen ausgeben, bei zu langen oder kurzen Zeilen */
 GLOBAL _BOOL     bForceLong;            /* Immer lange Dateinamen? */
 GLOBAL _BOOL     bForceShort;           /* Immer kurze Dateinamen? */
+#if USE_KWSET
+GLOBAL _BOOL     bNoFastAutoref;        /* use newer, faster version of autoreferencer? */
+#endif
 
 GLOBAL size_t      zDocParwidth;          /* PL6: max. Zeilenbreite */
 

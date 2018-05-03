@@ -92,8 +92,6 @@
 *
 ******************************************|************************************/
 
-LOCAL const char  *stylemagic = "(!";
-
 LOCAL char VERB_ON[8];
 LOCAL char VERB_OFF[8];
 
@@ -207,62 +205,6 @@ LOCAL void footnote2array(char *s)
 
 /*******************************************************************************
 *
-*  del_footnotes():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void del_footnotes(
-
-char     *s)    /* */
-{
-   char  *ptr;  /* */
-
-   if ( (ptr = strstr(s, stylemagic)) == NULL)
-      return;
-
-   qdelete_all(ptr, CMD_FOOT_ON, CMD_STYLELEN);
-   qdelete_all(ptr, CMD_FOOT_OFF, CMD_STYLELEN);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  del_internal_footnotes():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void del_internal_footnotes(
-
-char     *s)    /* */
-{
-   char  *ptr;  /* */
-   
-
-   if ( (ptr = strstr(s, STYLEMAGIC)) == NULL)
-      return;
-   
-
-   delete_all(ptr, FOOT_ON);
-   delete_all(ptr, FOOT_OFF);
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  del_html_styles():
 *     ??? (description missing)
 *
@@ -309,7 +251,7 @@ GLOBAL void del_internal_styles(char *s)
 {
    char *ptr;
 
-   if ((ptr = strstr(s, STYLEMAGIC)) == NULL)
+   if ((ptr = strstr(s, ESC_STYLE_MAGIC)) == NULL)
       return;
 
    qdelete_all(ptr, BOLD_ON,       STYLELEN);
@@ -318,6 +260,12 @@ GLOBAL void del_internal_styles(char *s)
    qdelete_all(ptr, ITALIC_OFF,    STYLELEN);
    qdelete_all(ptr, UNDER_ON,      STYLELEN);
    qdelete_all(ptr, UNDER_OFF,     STYLELEN);
+   qdelete_all(ptr, GHOST_ON,      STYLELEN);
+   qdelete_all(ptr, GHOST_OFF,     STYLELEN);
+   qdelete_all(ptr, SHADOW_ON,     STYLELEN);
+   qdelete_all(ptr, SHADOW_OFF,    STYLELEN);
+   qdelete_all(ptr, OUTLINE_ON,    STYLELEN);
+   qdelete_all(ptr, OUTLINE_OFF,   STYLELEN);
    qdelete_all(ptr, TWRITER_ON,    STYLELEN);
    qdelete_all(ptr, TWRITER_OFF,   STYLELEN);
    qdelete_all(ptr, VERB_ON,       STYLELEN);
@@ -368,7 +316,7 @@ GLOBAL void del_internal_styles(char *s)
 
 GLOBAL void c_pch_styles(char *s)
 {
-   if ( strstr(s, STYLEMAGIC) == NULL)
+   if ( strstr(s, ESC_STYLE_MAGIC) == NULL)
       return;
 
    footnote2ascii(s);
@@ -404,7 +352,7 @@ GLOBAL void c_rtf_styles(char *s)
    size_t l;
    long time;
 
-   if ((ptr = strstr(s, STYLEMAGIC)) == NULL)
+   if ((ptr = strstr(s, ESC_STYLE_MAGIC)) == NULL)
       return;
 
    qreplace_all(ptr, BOLD_ON,       STYLELEN, "{\\b ",  4);
@@ -481,7 +429,7 @@ GLOBAL void c_win_styles(char *s)
    char fs[20];
    size_t l;
    
-   if ((ptr = strstr(s, STYLEMAGIC)) == NULL)
+   if ((ptr = strstr(s, ESC_STYLE_MAGIC)) == NULL)
       return;
 
    qreplace_all(ptr, BOLD_ON,       STYLELEN, "{\\b ",      4);
@@ -554,7 +502,7 @@ GLOBAL void c_internal_styles(char *s)
    char *tex_verb_on;
    char *tex_verb_off;
    
-   if ((ptr = strstr(s, STYLEMAGIC)) == NULL)
+   if ((ptr = strstr(s, ESC_STYLE_MAGIC)) == NULL)
       return;
 
    if (no_effects)
@@ -581,9 +529,6 @@ GLOBAL void c_internal_styles(char *s)
       replace_all(ptr, FOOT_ON, "\\footnote{");
       replace_all(ptr, FOOT_OFF, "}");
 
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "\\[", 2);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "\\]", 2);
-
       qreplace_all(ptr, SUP_ON,  STYLELEN, "$^{\\mbox{", 9);
       qreplace_all(ptr, SUP_OFF, STYLELEN, "}}$", 3);
       qreplace_all(ptr, SUB_ON,  STYLELEN, "$_{\\mbox{", 9);
@@ -606,9 +551,6 @@ GLOBAL void c_internal_styles(char *s)
       replace_all(ptr, FOOT_ON, "\n\\begin_inset"INDENT_S"Foot\ncollapsed"INDENT_S"true\n\n\\layout"INDENT_S"Standard\n\n");
       replace_all(ptr, FOOT_OFF, "\n\\end_inset\n\\layout"INDENT_S"Standard\n");
 
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -624,9 +566,6 @@ GLOBAL void c_internal_styles(char *s)
       qreplace_all(ptr, VERB_ON, STYLELEN,      "@code{",        6);
       qreplace_all(ptr, VERB_OFF, STYLELEN,     "}",             1);
 
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -636,9 +575,6 @@ GLOBAL void c_internal_styles(char *s)
       delete_all(s, VERB_OFF);
 #endif
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
 
       del_internal_styles(s);
       break;
@@ -650,14 +586,22 @@ GLOBAL void c_internal_styles(char *s)
       qreplace_all(ptr, ITALIC_OFF, STYLELEN, "@{i}", 4);
       qreplace_all(ptr, UNDER_ON, STYLELEN,   "@{U}", 4);
       qreplace_all(ptr, UNDER_OFF, STYLELEN,  "@{u}", 4);
+      qreplace_all(ptr, GHOST_ON, STYLELEN,   "@{G}", 4);
+      qreplace_all(ptr, GHOST_OFF, STYLELEN,  "@{g}", 4);
+      qreplace_all(ptr, SHADOW_ON, STYLELEN,  "@{S}", 4);
+      qreplace_all(ptr, SHADOW_OFF, STYLELEN, "@{s}", 4);
+      qreplace_all(ptr, OUTLINE_ON, STYLELEN, "@{O}", 4);
+      qreplace_all(ptr, OUTLINE_OFF, STYLELEN,"@{o}", 4);
 #if 0
       delete_all(s, VERB_ON);
       delete_all(s, VERB_OFF);
 #endif
+      /*
+       * FIXME: would be nice to generate @pnodes from
+       * footnotes, but since styles are only parsed during
+       * pass 2, that would change the TOC after pass 1
+       */
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "@{G}", 4);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "@{g}", 4);
 
       del_internal_styles(s);
       break;
@@ -674,9 +618,6 @@ GLOBAL void c_internal_styles(char *s)
       delete_all(s, VERB_OFF);
 #endif
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "@{G}", 4);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "@{UG}", 5);
 
       del_internal_styles(s);
       break;
@@ -695,9 +636,6 @@ GLOBAL void c_internal_styles(char *s)
 #endif
       footnote2array(s);
 
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -709,9 +647,6 @@ GLOBAL void c_internal_styles(char *s)
       qreplace_all(ptr, UNDER_ON, STYLELEN,  sDrcUcolor, 2);
       qreplace_all(ptr, UNDER_OFF, STYLELEN, "\003@", 2);
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
 
       qreplace_all(ptr, COLOR_BLACK,   STYLELEN, "\003@", 2);
       qreplace_all(ptr, COLOR_SILVER,  STYLELEN, "\003G", 2);
@@ -737,10 +672,6 @@ GLOBAL void c_internal_styles(char *s)
    case TOSRC:
    case TOSRP:
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -751,10 +682,6 @@ GLOBAL void c_internal_styles(char *s)
       delete_all(s, VERB_OFF);
 #endif
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -765,9 +692,6 @@ GLOBAL void c_internal_styles(char *s)
       qreplace_all(ptr, ITALIC_OFF, STYLELEN, "\n", 1);
       footnote2ascii(s);
 
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -777,10 +701,6 @@ GLOBAL void c_internal_styles(char *s)
       delete_all(s, VERB_OFF);
 #endif
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -823,6 +743,12 @@ GLOBAL void c_internal_styles(char *s)
             qreplace_all(ptr, VERB_OFF,    STYLELEN, "</tt>", 5);
             qreplace_all(ptr, TWRITER_ON,  STYLELEN, "<tt>", 4);
             qreplace_all(ptr, TWRITER_OFF, STYLELEN, "</tt>", 5);
+            replace_all(ptr, GHOST_ON,  "<span class=\"UDO_span_ghosted\">");
+            qreplace_all(ptr, GHOST_OFF, STYLELEN, "</span>", 7);
+            replace_all(ptr, SHADOW_ON,  "<span class=\"UDO_span_shadowed\">");
+            qreplace_all(ptr, SHADOW_OFF, STYLELEN, "</span>", 7);
+            replace_all(ptr, OUTLINE_ON,  "<span class=\"UDO_span_outlined\">");
+            qreplace_all(ptr, OUTLINE_OFF, STYLELEN, "</span>", 7);
          }
       }
       
@@ -950,10 +876,6 @@ GLOBAL void c_internal_styles(char *s)
       replace_all(s, TWRITER_ON, "<ex>");
       replace_all(s, TWRITER_OFF, "<\\ex>");
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
-
       del_internal_styles(s);
       break;
       
@@ -969,10 +891,6 @@ GLOBAL void c_internal_styles(char *s)
       qreplace_all(ptr, FOOT_ON,     STYLELEN, "<footnote>",  10);
       qreplace_all(ptr, FOOT_OFF,    STYLELEN, "</footnote>", 11);
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON,  STYLELEN, "[",            1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]",            1);
-
       del_internal_styles(s);
       break;
 
@@ -986,10 +904,6 @@ GLOBAL void c_internal_styles(char *s)
       qreplace_all(ptr, UNDER_ON,    STYLELEN, ":hp5.",  5);
       qreplace_all(ptr, UNDER_OFF,   STYLELEN, ":ehp5.", 6);
       footnote2ascii(s);
-
-      qreplace_all(ptr, DELETED_ON,  STYLELEN, "[",      1);
-      qreplace_all(ptr, DELETED_OFF, STYLELEN, "]",      1);
-
       del_internal_styles(s);
       break;
 
@@ -1064,7 +978,7 @@ GLOBAL void c_styles(char *s)
 {
    char *ptr;
 
-   if ((ptr = strstr(s, stylemagic)) == NULL)
+   if ((ptr = strstr(s, "(!")) == NULL)
       return;
 
    qreplace_all(ptr, CMD_BOLD_ON,       CMD_STYLELEN, BOLD_ON,       STYLELEN);
@@ -1073,6 +987,12 @@ GLOBAL void c_styles(char *s)
    qreplace_all(ptr, CMD_ITALIC_OFF,    CMD_STYLELEN, ITALIC_OFF,    STYLELEN);
    qreplace_all(ptr, CMD_UNDER_ON,      CMD_STYLELEN, UNDER_ON,      STYLELEN);
    qreplace_all(ptr, CMD_UNDER_OFF,     CMD_STYLELEN, UNDER_OFF,     STYLELEN);
+   qreplace_all(ptr, CMD_GHOST_ON,      CMD_STYLELEN, GHOST_ON,      STYLELEN);
+   qreplace_all(ptr, CMD_GHOST_OFF,     CMD_STYLELEN, GHOST_OFF,     STYLELEN);
+   qreplace_all(ptr, CMD_SHADOW_ON,     CMD_STYLELEN, SHADOW_ON,     STYLELEN);
+   qreplace_all(ptr, CMD_SHADOW_OFF,    CMD_STYLELEN, SHADOW_OFF,    STYLELEN);
+   qreplace_all(ptr, CMD_OUTLINE_ON,    CMD_STYLELEN, OUTLINE_ON,    STYLELEN);
+   qreplace_all(ptr, CMD_OUTLINE_OFF,   CMD_STYLELEN, OUTLINE_OFF,   STYLELEN);
    qreplace_all(ptr, CMD_VERB_ON,       CMD_STYLELEN, VERB_ON,       STYLELEN);
    qreplace_all(ptr, CMD_VERB_OFF,      CMD_STYLELEN, VERB_OFF,      STYLELEN);
    qreplace_all(ptr, CMD_FOOT_ON,       CMD_STYLELEN, FOOT_ON,       STYLELEN);
@@ -1139,7 +1059,7 @@ GLOBAL void check_styles(char *s)
    if (s[0] == EOS)                       /* Leerer String? */
       return;
 
-   found = strstr(s, STYLEMAGIC);
+   found = strstr(s, ESC_STYLE_MAGIC);
 
    if (found == NULL)
       return;
@@ -1245,6 +1165,42 @@ GLOBAL void check_styles(char *s)
          styleflag.deleted = FALSE;
          break;
       
+      case C_GHOST_ON:
+         if (styleflag.ghost)
+            error_already_active(CMD_GHOST_ON);
+         styleflag.ghost = TRUE;
+         break;
+         
+      case C_GHOST_OFF:
+         if (!styleflag.ghost)
+            error_not_active(CMD_GHOST_ON);
+         styleflag.ghost = FALSE;
+         break;
+         
+      case C_SHADOW_ON:
+         if (styleflag.shadow)
+            error_already_active(CMD_SHADOW_ON);
+         styleflag.shadow = TRUE;
+         break;
+         
+      case C_SHADOW_OFF:
+         if (!styleflag.shadow)
+            error_not_active(CMD_SHADOW_ON);
+         styleflag.shadow = FALSE;
+         break;
+         
+      case C_OUTLINE_ON:
+         if (styleflag.outline)
+            error_already_active(CMD_OUTLINE_ON);
+         styleflag.outline = TRUE;
+         break;
+         
+      case C_OUTLINE_OFF:
+         if (!styleflag.outline)
+            error_not_active(CMD_OUTLINE_ON);
+         styleflag.outline = FALSE;
+         break;
+         
       case C_COLOR_BLACK:
       case C_COLOR_SILVER:
       case C_COLOR_GRAY:
@@ -1297,7 +1253,7 @@ GLOBAL void check_styles(char *s)
          break;
       }
 
-      found = strstr(ptr + 1, STYLEMAGIC);
+      found = strstr(ptr + 1, ESC_STYLE_MAGIC);
 
    } while (found != NULL);
 }
@@ -1335,6 +1291,15 @@ GLOBAL void check_styleflags(void)
       
    if (styleflag.verbatim)
       error_still_active(CMD_VERB_ON);
+      
+   if (styleflag.ghost)
+      error_still_active(CMD_GHOST_ON);
+      
+   if (styleflag.shadow)
+      error_still_active(CMD_SHADOW_ON);
+      
+   if (styleflag.outline)
+      error_still_active(CMD_OUTLINE_ON);
       
    if (styleflag.insert)
       error_still_active(CMD_INSERT_ON);
@@ -1476,8 +1441,6 @@ GLOBAL void check_styles_asc_next_line(void)
 
 GLOBAL void init_module_sty(void)
 {
-   strcpy(STYLEMAGIC, ESC_STYLE_MAGIC);
-
    sprintf(BOLD_ON,       "%s%c\033", ESC_STYLE_MAGIC, C_BOLD_ON);
    sprintf(BOLD_OFF,      "%s%c\033", ESC_STYLE_MAGIC, C_BOLD_OFF);
    sprintf(ITALIC_ON,     "%s%c\033", ESC_STYLE_MAGIC, C_ITALIC_ON);
@@ -1486,6 +1449,12 @@ GLOBAL void init_module_sty(void)
    sprintf(FOOT_OFF,      "%s%c\033", ESC_STYLE_MAGIC, C_FOOT_OFF);
    sprintf(UNDER_ON,      "%s%c\033", ESC_STYLE_MAGIC, C_UNDER_ON);
    sprintf(UNDER_OFF,     "%s%c\033", ESC_STYLE_MAGIC, C_UNDER_OFF);
+   sprintf(GHOST_ON,      "%s%c\033", ESC_STYLE_MAGIC, C_GHOST_ON);
+   sprintf(GHOST_OFF,     "%s%c\033", ESC_STYLE_MAGIC, C_GHOST_OFF);
+   sprintf(SHADOW_ON,     "%s%c\033", ESC_STYLE_MAGIC, C_SHADOW_ON);
+   sprintf(SHADOW_OFF,    "%s%c\033", ESC_STYLE_MAGIC, C_SHADOW_OFF);
+   sprintf(OUTLINE_ON,    "%s%c\033", ESC_STYLE_MAGIC, C_OUTLINE_ON);
+   sprintf(OUTLINE_OFF,   "%s%c\033", ESC_STYLE_MAGIC, C_OUTLINE_OFF);
    sprintf(VERB_ON,       "%s%c\033", ESC_STYLE_MAGIC, C_VERB_ON);
    sprintf(VERB_OFF,      "%s%c\033", ESC_STYLE_MAGIC, C_VERB_OFF);
    sprintf(TWRITER_ON,    "%s%c\033", ESC_STYLE_MAGIC, C_TWRITER_ON);
