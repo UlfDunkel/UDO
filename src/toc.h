@@ -371,9 +371,10 @@ GLOBAL void c_alias(void);
 GLOBAL LABIDX add_label(const char *label, const _BOOL isn, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links);
 GLOBAL LABIDX add_alias(const char *alias, const _BOOL isp, _BOOL referenced);
 
-GLOBAL void string2reference(char *ref, LABIDX li, const _BOOL for_toc, const char *pic, const _UWORD uiW, const _UWORD uiH);
+GLOBAL void string2reference(char *ref, const char *display, const LABIDX li, const _BOOL for_toc,
+                      const char *pic, const unsigned int uiW, const unsigned int uiH );
 
- 
+
    /* --- enhance TOC --- */
 
 GLOBAL void set_ignore_headline(void);

@@ -1159,7 +1159,7 @@ LOCAL _BOOL convert_link_win(char *s, const char *p0, char *p1, char *p2, const 
          {  sprintf(s_entry, "{\\uldb %s}{\\v %s}", nodename, ref);
          }
 #else
-         string2reference(s_entry, li, TRUE, "", 0, 0);
+         string2reference(s_entry, p1, li, TRUE, "", 0, 0);
 #endif
       }
    } else
@@ -1224,7 +1224,7 @@ LOCAL _BOOL convert_link_html(char *s, const char *p0, char *p1, char *p2, const
       }
       else
       {
-         string2reference(s_entry, li, TRUE, "", 0, 0);
+         string2reference(s_entry, p1, li, TRUE, "", 0, 0);
       }
    } else
    {

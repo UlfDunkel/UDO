@@ -895,7 +895,7 @@ LOCAL void replace_refs(char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
+GLOBAL void string2reference(char *ref, const char *display, const LABIDX li, const _BOOL for_toc,
                              const char *pic, const _UWORD uiW, const _UWORD uiH)
 {
    char         s[512],
@@ -904,6 +904,7 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
                 hfn[MYFILE_FULL_LEN + 1],
                 sGifSize[80];
    char         sIDName[32];         /* string buffer for anchor ID name, e.g. "id=\"UDO_nav_lf\" " */
+   char         d[1024];
    TOCIDX       ti;
    TOCIDX       ui;
    _BOOL      same_file = FALSE;   /* TRUE: reference is in same file */
@@ -935,88 +936,67 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
    }
 #endif
 
-   ref[0] = EOS;
-   
+   strcpy(n, l->name);
+   replace_udo_tilde(n);
+   replace_udo_nbsp(n);
+    
+   strcpy(d, display);
+   replace_udo_tilde(d);
+   replace_udo_nbsp(d);
+    
    switch (desttype)
    {
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      um_strcpy(n, l->name, 512, "string2reference[1]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      
       if (l->is_node)
       {
          node2NrWinhelp(s, l->labindex);
       }
-      else
+      else if (l->is_alias)
       {
-         if (l->is_alias)
-         {
-            alias2NrWinhelp(s, l->labindex);
-         }
-         else
-         {
-            label2NrWinhelp(s, l->labindex);
-         }
+         alias2NrWinhelp(s, l->labindex);
+      } else
+      {
+         label2NrWinhelp(s, l->labindex);
       }
-      
       if (l->is_popup)
       {
-         sprintf(ref, "{\\ul %s}{\\v %s}", n, s);
+         sprintf(ref, "{\\uldb %s}{\\v ! PopupId(`', `%s')}", d, s);
       }
       else
       {
-         sprintf(ref, "{\\uldb %s}{\\v %s}", n, s);
+         sprintf(ref, "{\\uldb %s}{\\v %s}", d, s);
       }
-      
       break;
-
       
-   case TOIPF:                            /* r6pl7 */
-      um_strcpy(n, l->name, 512, "string2reference[2]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      
+   case TOIPF:
       if (l->is_node)
       {
-        node2NrIPF(s, l->labindex);
+         node2NrIPF(s, l->labindex);
       }
       else
       {
-        ui = l->tocindex;
+         ui = l->tocindex;
          node2NrIPF(s, toc_table[ui]->labindex);
       }
-                                          /*r6pl8*/
-      sprintf(ref, ":link refid=%s reftype=hd.%s:elink.", s, n);
+      sprintf(ref, ":link refid=%s reftype=hd.%s:elink.", s, d);
       break;
       
-      
-   case TOSTG:                            /* r5pl16 */
+   case TOSTG:
       if (l->ignore_links)
       {
-         um_strcpy(n, l->name, 512, "string2reference[3]");
-         replace_udo_tilde(n);
-         replace_udo_nbsp(n);
          node2stg(n);
-         sprintf(ref, "@{\"%s\" link \"%s\"}", n, n);
+         sprintf(ref, "@{\"%s\" link \"%s\"}", d, n);
       }
       else
-      {                                   /* wie bei default */
-         strcpy(ref, l->name);
-         replace_udo_tilde(ref);
-         replace_udo_nbsp(ref);
+      {
+         strcpy(ref, d);
+         replace_1at_by_2at(ref);
       }
-      
       break;
       
-      
    case TOAMG:
-      um_strcpy(s, l->name, 512, "string2reference[4]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      
       if (l->is_node)
       {
          strcpy(n, l->name);
@@ -1024,75 +1004,54 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
       else
       {
          ti = l->tocindex;
-         um_strcpy(n, label_table[toc_table[ti]->labindex]->name, 512, "string2reference[5]");
+         strcpy(n, label_table[toc_table[ti]->labindex]->name);
       }
-      
       replace_udo_tilde(n);
       replace_udo_nbsp(n);
       node2stg(n);
-      sprintf(ref, "@{\"%s\" link \"%s\"}", s, n);
+      sprintf(ref, "@{\"%s\" link \"%s\"}", d, n);
       break;
-      
       
    case TOTVH:
-      um_strcpy(n, l->name, 512, "string2reference[6]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      um_strcpy(s, n, 512, "string2reference[7]");
-      node2vision(s);
-      sprintf(ref, "{%s:%s}", n, s);
+      node2vision(d);
+      sprintf(ref, "{%s:%s}", n, d);
       break;
       
-      
    case TOPCH:
-      um_strcpy(n, l->name, 512, "string2reference[8]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      
       if (strchr(n, '"') != NULL)
       {
-         um_strcpy(s, n, 512, "string2reference[9]");
+         strcpy(s, n);
          node2pchelp(s);
-         sprintf(ref, "\\link(\"%s\")%s\\#", s, n);
+         sprintf(ref, "\\link(\"%s\")%s\\#", s, d);
       }
       else
       {
          sprintf(ref, "\\#%s\\#", n);
       }
-      
       if (!for_toc)
-      {                                   /* r5pl10: Referenz als Platzhalter anlegen, damit der */
-                                          /* Blocksatz korrekt wird. */
+      {
+         /*
+          * Referenz als Platzhalter anlegen, damit der
+          * Blocksatz korrekt wird.
+          */
          insert_placeholder(ref, ref, ref, n);
       }
-      
       break;
-      
       
    case TOLDS:
-      um_strcpy(n, l->name, 512, "string2reference[10]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      sprintf(ref, "<ref id=\"%s\" name=\"%s\">", n, n);
+      /* ??? was ist mit '"' im nodenamen oder Text? */
+      sprintf(ref, "<ref id=\"%s\" name=\"%s\">", n, d);
       break;
-      
       
    case TOINF:
-      um_strcpy(n, l->name, 512, "string2reference[11]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
       node2texinfo(n);
-      sprintf(ref, "* %s::", n);
+      qreplace_all(d, "*", 1, "\\*", 2);
+      sprintf(ref, "%s (@pxref{%s})", d, n);
       break;
       
-      
-   case TOHAH:                            /* V6.5.17 */
+   case TOHAH:
    case TOHTM:
    case TOMHH:
-      um_strcpy(n, l->name, 512, "string2reference[12]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      
       strcpy(sNoSty, n);
       del_html_styles(sNoSty);
       label2html(sNoSty);
@@ -1136,18 +1095,15 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
          {
             if (l->is_node || l->is_alias)
             {
-               sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
-                  sIDName, htmlfilename, suff, html_target, n);
+               sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>", sIDName, htmlfilename, suff, html_target, d);
             }
             else
             {
-                                          /* Changed in r6pl16 [NHz] */
-               sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
-                  sIDName, htmlfilename, suff, sNoSty, html_target, n);
+               sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>", sIDName, htmlfilename, suff, sNoSty, html_target, d);
             }
          }
          else
-         {      
+         {
          	char border[20];
          	
          	strcpy(border, " border=\"0\"");
@@ -1162,13 +1118,13 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
             }
             if (l->is_node || l->is_alias)
             {
-               sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>", 
-                   sIDName, htmlfilename, suff, html_target, pic, n, n, border, sGifSize, xhtml_closer);
+               sprintf(ref, "<a%s href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s>%s</a>",
+                  sIDName, htmlfilename, suff, html_target, pic, n, n, border, sGifSize, xhtml_closer, d);
             }
             else
             {
-                sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
-                   sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, border, sGifSize, xhtml_closer);
+               sprintf(ref, "<a%s href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s>%s</a>",
+                  sIDName, htmlfilename, suff, sNoSty, html_target, pic, n, n, border, sGifSize, xhtml_closer, d);
             }
          }
       }
@@ -1178,8 +1134,7 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
          {
             if (same_file)
             {
-               sprintf(ref, "<a%s href=\"#%s\"%s>%s</a>", 
-                  sIDName, sNoSty, html_target, n);
+               sprintf(ref, "<a%s href=\"#%s\"%s>%s</a>", sIDName, sNoSty, html_target, d);
             }
             else
             {
@@ -1195,54 +1150,37 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
                if (do_ins)
                {
                   sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
-                     sIDName, htmlfilename, suff, sNoSty, html_target, n);
+                     sIDName, htmlfilename, suff, sNoSty, html_target, d);
                }
                else
                {
                   sprintf(ref, "<a%s href=\"%s%s\"%s>%s</a>",
-                     sIDName, htmlfilename, suff, html_target, n);
+                     sIDName, htmlfilename, suff, html_target, d);
                }
             }
          }
          else
          {
             sprintf(ref, "<a%s href=\"%s%s#%s\"%s>%s</a>",
-               sIDName, htmlfilename, suff, sNoSty, html_target, n);
+               sIDName, htmlfilename, suff, sNoSty, html_target, d);
          }
       }
       break;
       
    case TOTEX:
-      strcpy(ref, l->name);
-      replace_udo_tilde(ref);
-      replace_udo_nbsp(ref);
+      strcpy(ref, d);
       break;
       
    case TOPDL:
-      um_strcpy(n, l->name, 512, "string2reference[15]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      
-                                          /* Changed in r6.2pl1 [NHz] */
-                                          /* V6.5.20 [CS] Start */
-      sprintf(ref, "%s \\hidelink{\\pdfstartlink goto num %d %s\\pdfendlink}", n, l->labindex, n);
-      
-/* old:
-      sprintf(ref, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
-      l->labindex, n);
-*/
+      sprintf(ref, "{\\leavevmode\\pdfstartlink goto num %u %s\\pdfendlink}", l->labindex, d);
       break;
       
    case TOKPS:
-      um_strcpy(n, l->name, 512, "string2reference[16]");
-      replace_udo_tilde(n);
-      replace_udo_nbsp(n);
-      
       if (strpbrk(n, " :;\\()/") != NULL)
       {
-         um_strcpy(s, n, 512, "string2reference[17]");
-         node2postscript(n, KPS_CONTENT); /* New in r6pl16 [NHz] */
-         node2postscript(s, KPS_NAMEDEST);/* Changed in r6pl16 [NHz] */
+         strcpy(s, n);
+         node2postscript(n, KPS_CONTENT);
+         node2postscript(s, KPS_NAMEDEST);
          sprintf(ref, " (%s) /%s 0 0 0 Link", n, s);
       }
       else
@@ -1252,17 +1190,14 @@ GLOBAL void string2reference(char *ref, const LABIDX li, const _BOOL for_toc,
       
       if (!for_toc)
       {
-                                          /* r5pl10: Referenz als Platzhalter anlegen, damit der */
-                                          /* Blocksatz korrekt wird. */
+         /* Referenz als Platzhalter anlegen, damit der */
+         /* Blocksatz korrekt wird. */
          insert_placeholder(ref, ref, ref, n);
       }
-      
       break;
       
    default:
-      strcpy(ref, l->name);
-      replace_udo_tilde(ref);
-      replace_udo_nbsp(ref);
+      strcpy(ref, d);
       break;
    }
 }
@@ -1493,7 +1428,7 @@ GLOBAL void gen_references(char *s, const _BOOL for_toc, const char *pic, const 
          
          if (ref_it)
          {
-            string2reference(the_ref, found_lab, for_toc, pic, uiWidth, uiHeight);
+            string2reference(the_ref, label_table[found_lab]->name, found_lab, for_toc, pic, uiWidth, uiHeight);
             add_ref(the_ref);
          } else
          {
@@ -1510,8 +1445,6 @@ GLOBAL void gen_references(char *s, const _BOOL for_toc, const char *pic, const 
 
 
 
-
-
 /*******************************************************************************
 *
 *  output_raw_file():
@@ -1522,45 +1455,39 @@ GLOBAL void gen_references(char *s, const _BOOL for_toc, const char *pic, const 
 *
 ******************************************|************************************/
 
-LOCAL _BOOL output_raw_file(
-
-const char     *filename)           /* */
+LOCAL _BOOL output_raw_file(const char *filename)
 {
-   MYTEXTFILE  *file;               /* */
-   char         s[1024],            /* */
-                old_filename[512],  /* */
-                tmp_filename[512];  /* */
-   size_t       len;                /* */
+   MYTEXTFILE  *file;
+   char         s[LINELEN + 1],
+                old_filename[MYFILE_FULL_LEN],
+                tmp_filename[MYFILE_FULL_LEN];
+   size_t       len;
    
-   
-   um_strcpy(old_filename, filename, 512, "output_raw_file[1]");
-   um_strcpy(tmp_filename, filename, 512, "output_raw_file[2]");
+   um_strcpy(old_filename, filename, sizeof(old_filename), "output_raw_file[1]");
+   um_strcpy(tmp_filename, filename, sizeof(tmp_filename), "output_raw_file[2]");
    
    build_include_filename(tmp_filename, "");
    
    file = myTextOpen(tmp_filename);
    
-   if (!file)
+   if (file == NULL)
    {
-      um_strcpy(tmp_filename, old_filename, 512, "output_raw_file[3]");
+      strcpy(tmp_filename, old_filename);
       file = myTextOpen(tmp_filename);
    }
    
-   if (!file)
+   if (file == NULL)
       return FALSE;
    
-   while (myTextGetline(s, 1024, file))
+   while (myTextGetline(s, LINELEN, file))
    {
       len = strlen(s);
-      
-      while ( (len>0) && (((_UBYTE)s[len-1]) <= 32) )
+      while (len > 0 && (((_UBYTE)s[len-1]) <= 32))
       {
-         s[len-1]= EOS;
+         s[len - 1] = EOS;
          len--;
       }
-      
-      replace_macros(s);                  /* New in V6.5.9 [NHz] */
-   
+      replace_macros(s);
       outln(s);
    }
    
@@ -1577,8 +1504,6 @@ const char     *filename)           /* */
 *
 *  check_output_raw_header():
 *     ??? (description missing)
-*
-*  Note: changed in V6.5.9 [NHz]
 *
 *  return:
 *     -
@@ -1601,8 +1526,7 @@ GLOBAL _BOOL check_output_raw_header(void)
          }
       }
    }
-   
-   return(FALSE);
+   return FALSE;
 }
 
 
@@ -1613,8 +1537,6 @@ GLOBAL _BOOL check_output_raw_header(void)
 *
 *  check_output_raw_footer():
 *     ??? (description missing)
-*
-*  Note: changed in V6.5.9 [NHz]
 *
 *  return:
 *     -
@@ -2894,9 +2816,7 @@ LOCAL void output_html_meta(_BOOL keywords)
          iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone, xhtml_closer);
    }
 
-   /* Changed in V6.5.5 [NHz] */
-   voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s %s for %s\"%s>",
-      UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, xhtml_closer);
+   voutlnf("<meta name=\"Generator\" content=\"UDO %s\"%s>", UDO_VERSION_STRING_OS, xhtml_closer);
 
    if (titdat.author != NULL)
    {
@@ -4051,7 +3971,7 @@ LOCAL void html_hb_line(_BOOL head)
    default:                               /* Verweis auf aktuellen !node */
       li = toc_table[last_n_index[toc_table[ti]->toctype - 1]]->labindex;
       strcpy(s, label_table[li]->name);
-      string2reference(anchor, li, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      string2reference(anchor, label_table[li]->name, li, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
       replace_once(s, label_table[li]->name, anchor);
       if (no_images)
       {
@@ -4112,7 +4032,7 @@ LOCAL void html_hb_line(_BOOL head)
          {
             li = toc_table[i]->labindex;
             strcpy(s, label_table[li]->name);
-            string2reference(anchor, li, TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
+            string2reference(anchor, label_table[li]->name, li, TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
             replace_once(s, label_table[li]->name, anchor);
             if (no_images)
             {
@@ -4182,7 +4102,7 @@ LOCAL void html_hb_line(_BOOL head)
    {
       li = toc_table[i]->labindex;
       strcpy(s, label_table[li]->name);
-      string2reference(anchor, li, TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
+      string2reference(anchor, label_table[li]->name, li, TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
       replace_once(s, label_table[li]->name, anchor);
       if (no_images)
       {
@@ -4467,7 +4387,7 @@ LOCAL void html_node_bar_modern(void)
                }
             }
             
-            string2reference(the_ref, li, FALSE, ptrImg, uiW, uiH);
+            string2reference(the_ref, label_table[li]->name, li, FALSE, ptrImg, uiW, uiH);
             
             if (ptrImg != noImg && toc_table[i]->icon_text != NULL)
             {
@@ -4664,7 +4584,7 @@ LOCAL void html_node_bar_frames(void)
                }
             }
             
-            string2reference(the_ref, li, FALSE, ptrImg, uiW, uiH);
+            string2reference(the_ref, label_table[li]->name, li, FALSE, ptrImg, uiW, uiH);
 
             /* Im Inhaltsverzeichnis DARF nicht <a href="#..."> stehen! */
             /* kleiner Zwischenhack, da Frames mit gemergten Nodes wohl */
@@ -7550,7 +7470,7 @@ LOCAL void toc_output(TOCTYPE currdepth, const int depth, _BOOL for_apx)
                   }
    
                   li = toc_table[i]->labindex;
-                  string2reference(ref, li, TRUE, "", 0, 0);
+                  string2reference(ref, label_table[li]->name, li, TRUE, "", 0, 0);
    
                   if (no_numbers)
                   {
