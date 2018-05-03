@@ -83,9 +83,6 @@ GLOBAL _BOOL insert_speccmd(char *s, const char *rep, const char *entry);
    /* replace special format command placeholders in the text */
 GLOBAL void replace_speccmds(char *s);
 
-   /* handle links and other internal commands */
-GLOBAL void reset_placeholders(void);
-
    /*  */
 GLOBAL _BOOL add_placeholder(const char *entry, const char *rawtext);
 

@@ -1216,11 +1216,11 @@ GLOBAL void error_no_charset(const char *s)
 
 GLOBAL void error_node_not_allowed(int level)
 {
-   char sub[6 * 3 + 1];
+   char sub[TOC_MAXDEPTH * 3 + 1];
    int i;
    
    *sub = '\0';
-   for (i = TOC_NODE2; i < level; i++)
+   for (i = 0; i < level; i++)
       strcat(sub, "sub");
    fatal_message(_("use !%snode first (structure gap)"), sub);
 }

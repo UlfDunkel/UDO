@@ -201,12 +201,6 @@ GLOBAL char        token[MAX_TOKENS][MAX_TOKEN_LEN + 1];
 GLOBAL int         token_counter;
 GLOBAL _BOOL     tokens_contain_item;
 
-GLOBAL _BOOL     use_auto_subtocs;      /* create sub TOCs automatically? */
-GLOBAL _BOOL     use_auto_subsubtocs;
-GLOBAL _BOOL     use_auto_subsubsubtocs;
-GLOBAL _BOOL     use_auto_subsubsubsubtocs;
-GLOBAL _BOOL     use_auto_subsubsubsubsubtocs;
-
 GLOBAL _BOOL     use_auto_toptocs;      /* autom. Ueber-Toc's anlegen? */
 GLOBAL _BOOL     no_auto_toptocs_icons; /* ... aber ohne Icons */
 GLOBAL _BOOL     use_compressed_tocs;   /* Kurze Inhaltsverzeichnisse default? */
@@ -261,12 +255,6 @@ GLOBAL _BOOL     bDocRtfKeepTablesOn;   /* Tabellen zusammenhalten? */
 GLOBAL _BOOL     bDocWinOldKeywords;    /* Alte Keywords benutzen? */
 GLOBAL _BOOL     bDocSortHyphenFile;    /* *.uh? sortieren */
 
-GLOBAL _BOOL     html_merge_node1;      /* Nodes nicht splitten? */
-GLOBAL _BOOL     html_merge_node2;      /* Subnodes nicht splitten? */
-GLOBAL _BOOL     html_merge_node3;      /* Subsubnodes nicht splitten? */
-GLOBAL _BOOL     html_merge_node4;      /* Subsubsubnodes nicht splitten? */
-GLOBAL _BOOL     html_merge_node5;      /* Subsubsubsubnodes nicht splitten? */
-GLOBAL _BOOL     html_merge_node6;      /* Subsubsubsubsubnodes nicht splitten? */
 GLOBAL _BOOL     html_no_xlist;         /* xlist- durch description-Umgebung ersetzen? */
 GLOBAL _BOOL     html_ignore_8bit;      /* ae nicht in &auml; wandeln? */
 GLOBAL _BOOL     html_modern_layout;    /* Modernes 2-Spalten-Layout? */

@@ -69,14 +69,18 @@ typedef _UWORD LABIDX;
 typedef int TOCIDX;
 typedef int TOCTYPE;
 
-#define TOC_TOC    0                      /* table of content */
-#define TOC_NODE1  1                      /* !node */
-#define TOC_NODE2  2                      /* !subnode */
-#define TOC_NODE3  3                      /* !subsubnode */
-#define TOC_NODE4  4                      /* !subsubsubnode */
-#define TOC_NODE5  5                      /* !subsubsubsubnode */
-#define TOC_NODE6  6                      /* !subsubsubsubsubnode */
-#define TOC_NONE   7                      /* neither nor ... :-) */
+#define TOC_NODE1    0                    /* !node */
+#define TOC_NODE2    1                    /* !subnode */
+#define TOC_NODE3    2                    /* !subsubnode */
+#define TOC_NODE4    3                    /* !subsubsubnode */
+#define TOC_NODE5    4                    /* !subsubsubsubnode */
+#define TOC_NODE6    5                    /* !subsubsubsubsubnode */
+#define TOC_NODE7    6                    /* !subsubsubsubsubsubnode */
+#define TOC_NODE8    7                    /* !subsubsubsubsubsubsubnode */
+#define TOC_NODE9    8                    /* !subsubsubsubsubsubsubsubnode */
+#define TOC_MAXDEPTH 9
+#define TOC_TOC     (TOC_MAXDEPTH)        /* table of contents */
+#define TOC_NONE    (TOC_MAXDEPTH+1)      /* neither nor ... :-) */
 
 #define KPS_CONTENT       0
 #define KPS_BOOKMARK      1
@@ -114,12 +118,6 @@ typedef struct _label                     /* jump labels to be referenced */
    char      name[MAX_LABEL_LEN + 1];     /* label name */
    LABIDX    labindex;                    /* lab[1]==1, lab[2]==2, etc. */
    size_t    len;                         /* label name len */
-   int       n1;                          /* defined in this node */
-   int       n2;                          /* ... subnode */
-   int       n3;                          /* ... subsubnode */
-   int       n4;                          /* ... subsubsubnode */
-   int       n5;                          /* ... subsubsubsubnode */
-   int       n6;                          /* ... subsubsubsubsubnode */
    _BOOL   appendix;                    /* label is in appendix */
    _BOOL   is_node;                     /* label is node title */
    _BOOL   is_popup;                    /* node is a popup node */
@@ -138,13 +136,8 @@ typedef struct _label                     /* jump labels to be referenced */
 typedef struct _tocitem                       /* entries for the Table Of Contents (TOC) */
 {
    char      name[MAX_NODE_LEN + 1];          /* Der Eintrag selber */
-   TOCIDX    n1;                              /* Kapitelnummer (absolut) */
-   TOCIDX    n2;                              /* Abschnittnummer (absolut) */
-   TOCIDX    n3;                              /* Unterabschnittnummer   (absolut) */
-   TOCIDX    n4;                              /* Unterabschnittnummer   (absolut) */
-   TOCIDX    n5;                              /* Unterabschnittnummer   (absolut) */
-   TOCIDX    n6;                              /* Unterabschnittnummer   (absolut) */
-   TOCIDX    nr1,nr2,nr3,nr4,nr5,nr6;         /* Inhaltsverzeichnis-Nummern */
+   TOCIDX    n[TOC_MAXDEPTH];                 /* Kapitelnummern (absolut) */
+   TOCIDX    nr[TOC_MAXDEPTH];                /* Inhaltsverzeichnis-Nummern */
    _BOOL   appendix;                          /* TRUE = Steht im Anhang */
    TOCTYPE   toctype;                         /* !node, !subnode etc. */
                                               /* Filename der Sourcecodedatei */
@@ -182,16 +175,8 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    LABIDX    labindex;                        /* lab[]-Position */
    TOCIDX    prev_index;                      /* toc_table[]-Position des Vorgaengers */
    TOCIDX    next_index;                      /* toc_table[]-Position des Nachfolgers */
-   TOCIDX    up_n1_index;                     /* toc_table[]-Position oberhalb */
-   TOCIDX    up_n2_index;
-   TOCIDX    up_n3_index;
-   TOCIDX    up_n4_index;
-   TOCIDX    up_n5_index;
-   TOCIDX    count_n2;                    /* # of contained subnodes */
-   TOCIDX    count_n3;                    /* # of contained subsubnodes */
-   TOCIDX    count_n4;                    /* # of contained subsubsubnodes */
-   TOCIDX    count_n5;                    /* # of contained subsubsubsubnodes */
-   TOCIDX    count_n6;                    /* # of contained subsubsubsubsubnodes */
+   TOCIDX    up_n_index[TOC_MAXDEPTH - 1];    /* toc_table[]-Positionen oberhalb */
+   TOCIDX    num_children;                    /* Anzahl enthaltener Subnodes */
    _BOOL   ignore_subtoc;                   /* ignore !use_auto_subtoc */
    _BOOL   ignore_links;                    /* don't link to this page */
    _BOOL   ignore_index;                    /* don't add this to the index page */
@@ -204,6 +189,7 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    _BOOL   ignore_raw_header;               /* don't read user-defined header */
    _BOOL   ignore_raw_footer;               /* don't read user-defined footer */
    _BOOL   has_children;                    /* TRUE: this node has subnode(s) */
+   _BOOL   has_visible_children;            /* TRUE: this node has visible subnode(s) */
 } TOCITEM;
 
 
@@ -217,27 +203,15 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
 ******************************************|************************************/
 
 GLOBAL TOCITEM **toc_table;                  /* Zeiger auf Inhaltsverzeichnis */
+GLOBAL TOCIDX    toc_offset[TOC_MAXDEPTH];   /* Offsets fuer Kapitelnumerierung, Default=0 */
 
-GLOBAL TOCIDX    toc_offset;              /* Offsets fuer Kapitelnumerierung, Default=0 */
-GLOBAL TOCIDX    subtoc_offset;
-GLOBAL TOCIDX    subsubtoc_offset;
-GLOBAL TOCIDX    subsubsubtoc_offset;
-GLOBAL TOCIDX    subsubsubsubtoc_offset;
-GLOBAL TOCIDX    subsubsubsubsubtoc_offset;
-
-GLOBAL TOCIDX    all_nodes, 
-                 all_subnodes, 
-                 all_subsubnodes, 
-                 all_subsubsubnodes, 
-                 all_subsubsubsubnodes,
-                 all_subsubsubsubsubnodes;
+GLOBAL TOCIDX    all_nodes[TOC_MAXDEPTH];
 
 GLOBAL _BOOL   bInsideAppendix,            /* Ist UDO im Anhang? */
-                 bInsideDocument,         /* Ist UDO im Dokument selber? */
-                 bInsidePopup;            /* In einem Popup-Node? */
+                 bInsideDocument;            /* Ist UDO im Dokument selber? */
 
 GLOBAL _BOOL   called_tableofcontents;     /* Wurde toc ausgegeben? (@toc) */
-GLOBAL _BOOL   called_subsubsubsubsubnode;
+GLOBAL TOCTYPE   toc_maxdepth;
 
 GLOBAL _BOOL   uses_tableofcontents;       /* !tableofcontents wird benutzt */
 GLOBAL char      toc_title[MAX_NODE_LEN + 1];
@@ -248,17 +222,16 @@ GLOBAL char      current_node_name_sys[LINELEN];
 GLOBAL char      current_chapter_name[MAX_NODE_LEN + 1];
 GLOBAL char      current_chapter_nr[32];
 
-GLOBAL int       subtocs1_depth;
-GLOBAL int       subtocs2_depth;
-GLOBAL int       subtocs3_depth;
-GLOBAL int       subtocs4_depth;
-GLOBAL int       subtocs5_depth;
+GLOBAL _BOOL   use_auto_subtocs[TOC_MAXDEPTH - 1];   /* autom. Unter-Toc's anlegen? */
+GLOBAL int       subtocs_depth[TOC_MAXDEPTH - 1];
 
 GLOBAL char      sHtmlPropfontStart[256];
 GLOBAL char      sHtmlPropfontEnd[16];
 
 GLOBAL char      sHtmlMonofontStart[256];
 GLOBAL char      sHtmlMonofontEnd[16];
+
+GLOBAL _BOOL   html_merge_node[TOC_MAXDEPTH];         /* Nodes nicht splitten? */
 
 GLOBAL TOCIDX    p1_toc_counter;             /* counter for toc_table[]-array, pass1; contains last used lot # (1 less than number of entries) */
 GLOBAL TOCIDX    p2_toc_counter;             /* counter for toc_table[]-array, pass2; contains last used slot # (1 less than number of entries) */
@@ -270,6 +243,13 @@ GLOBAL char     *html_frames_toc_title;
 GLOBAL char     *html_frames_con_title;
 
 GLOBAL _BOOL	stg_need_endnode;
+
+extern int rtf_structure_height[TOC_MAXDEPTH + 1]; /* +1 fuer use_style_book */
+
+extern int kps_structure_height[TOC_MAXDEPTH + 1]; /* +1 fuer use_style_book */
+
+extern char asc_structure_chars[TOC_MAXDEPTH];
+
 
 
 
@@ -343,6 +323,21 @@ GLOBAL void c_subsubsubsubsubnode_iv(void);
 GLOBAL void c_psubsubsubsubsubnode(void);
 GLOBAL void c_psubsubsubsubsubnode_iv(void);
 
+GLOBAL void c_subsubsubsubsubsubnode(void);
+GLOBAL void c_subsubsubsubsubsubnode_iv(void);
+GLOBAL void c_psubsubsubsubsubsubnode(void);
+GLOBAL void c_psubsubsubsubsubsubnode_iv(void);
+
+GLOBAL void c_subsubsubsubsubsubsubnode(void);
+GLOBAL void c_subsubsubsubsubsubsubnode_iv(void);
+GLOBAL void c_psubsubsubsubsubsubsubnode(void);
+GLOBAL void c_psubsubsubsubsubsubsubnode_iv(void);
+
+GLOBAL void c_subsubsubsubsubsubsubsubnode(void);
+GLOBAL void c_subsubsubsubsubsubsubsubnode_iv(void);
+GLOBAL void c_psubsubsubsubsubsubsubsubnode(void);
+GLOBAL void c_psubsubsubsubsubsubsubsubnode_iv(void);
+
 GLOBAL void c_endnode(void);
 
 GLOBAL void c_begin_node(void);
@@ -402,11 +397,12 @@ GLOBAL void set_chapter_icon(void);
 GLOBAL void set_chapter_icon_active(void);
 GLOBAL void set_chapter_icon_text(void);
 
-GLOBAL _BOOL add_nodetype_to_toc(int nodetype, _BOOL popup, _BOOL invisible);
+GLOBAL _BOOL add_node_to_toc(TOCTYPE nodetype, _BOOL popup, _BOOL invisible);
 
 GLOBAL _BOOL toc_begin_node (const _BOOL popup, const _BOOL invisible);
 GLOBAL void toc_end_node(void);
 GLOBAL _BOOL is_current_node(TOCIDX tocindex);
+GLOBAL _BOOL toc_inside_popup(void);
 GLOBAL TOCIDX get_toc_counter(void);
 GLOBAL void toc_init_lang(void);
 
@@ -448,6 +444,8 @@ GLOBAL void index2stg(char *s);
 
    /* --- module functions --- */
 
+GLOBAL void toc_pass1_begin_appendix(void);
+GLOBAL void toc_pass2_begin_appendix(void);
 GLOBAL void init_module_toc_pass2(void);
 GLOBAL void init_module_toc(void);
 GLOBAL void exit_module_toc(void);

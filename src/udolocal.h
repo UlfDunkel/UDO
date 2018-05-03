@@ -116,6 +116,9 @@ LOCAL void c_subsubheading(void);
 LOCAL void c_subsubsubheading(void);
 LOCAL void c_subsubsubsubheading(void);
 LOCAL void c_subsubsubsubsubheading(void);
+LOCAL void c_subsubsubsubsubsubheading(void);
+LOCAL void c_subsubsubsubsubsubsubheading(void);
+LOCAL void c_subsubsubsubsubsubsubsubheading(void);
 
 LOCAL void c_listheading(void);
 LOCAL void c_listsubheading(void);
@@ -123,6 +126,9 @@ LOCAL void c_listsubsubheading(void);
 LOCAL void c_listsubsubsubheading(void);
 LOCAL void c_listsubsubsubsubheading(void);
 LOCAL void c_listsubsubsubsubsubheading(void);
+LOCAL void c_listsubsubsubsubsubsubheading(void);
+LOCAL void c_listsubsubsubsubsubsubsubheading(void);
+LOCAL void c_listsubsubsubsubsubsubsubsubheading(void);
 
    /* encoding handling */
 LOCAL void c_code_source(void);

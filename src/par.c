@@ -684,15 +684,14 @@ LOCAL _BOOL convert_link_tex(char *s, const char *p0, char *p1, char *p2, const 
    char nodename[256];
    _BOOL ret;
    
-   convert_tilde(p1);
    convert_tilde(p2);
-   
-   replace_udo_quotes(p1);
    replace_udo_quotes(p2);
    
-   label2tex(p2);
-
    flag = is_node_link(p2, nodename, &ti, &isnode, &isalias, &ispopup, &li);
+
+   label2tex(p2);
+   convert_tilde(p1);
+   replace_udo_quotes(p1);
 
    if (flag)
    {
@@ -997,20 +996,15 @@ LOCAL _BOOL convert_link_ps(char *s, const char *p0, char *p1, char *p2, const c
    
    if (flag)
    {
-      if (p2[0] == EOS)
-         strcpy(p2, Param[1]);
-      
-      replace_udo_quotes(p2);
       replace_udo_quotes(p1);
 
       replace_all(p1, "(", "\\(");
       replace_all(p1, ")", "\\)");
       
-      c_vars(p1);
-      
+      /* c_vars(p1); */
       qreplace_all(p1, KPSPC_S, KPSPC_S_LEN, ")", 1);
       qreplace_all(p1, KPSPO_S, KPSPO_S_LEN, "(", 1);
-      
+      node2postscript(p2, KPS_NAMEDEST);
       sprintf(s_entry, ") udoshow (%s) /%s 0 255 0 Link (", p1, p2);
    }
    else

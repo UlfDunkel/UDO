@@ -104,8 +104,6 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
    char   *htmltitle;                     /* <title> */
    char   *translator;                    /* translator name */
    char   *distributor;                   /* distributor name */
-   char   *degree;                        /* unused??? */
-   char   *copyright;                     /* copyright */
 } TITLEDATA;
 
 
@@ -158,12 +156,7 @@ typedef struct                            /* ---- Layoutinfos ---- */
    _UWORD   propfontsize;
    char   *monofontname;
    _UWORD   monofontsize;
-   _UWORD   node1size;
-   _UWORD   node2size;
-   _UWORD   node3size;
-   _UWORD   node4size;
-   _UWORD   node5size;
-   _UWORD   node6size;
+   _UWORD   nodesize[9 /* TOC_MAXDEPTH */ + 1]; /* +1 for use_style_book */
 }  LAYOUTDATA;
 
 

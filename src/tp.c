@@ -96,27 +96,68 @@
 
 /*******************************************************************************
 *
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-LOCAL _BOOL init_docinfo_data(const char *data, char **var, int allow_empty);
-LOCAL void init_titdat(void);
-
-
-
-
-
-
-
-
-
-
-/*******************************************************************************
-*
 *     LOCAL / GLOBAL FUNCTIONS
 *
 ******************************************|************************************/
+
+/*******************************************************************************
+*
+*  init_docinfo_data():
+*     Anpassung der Daten fuer die Titelseite samt Anforderung des benoetigten Speichers
+*
+*  Out:
+*     - TRUE: OK
+*     - error
+*
+******************************************|************************************/
+
+LOCAL _BOOL init_docinfo_data(const char *data, char **var, int allow_empty)
+{
+   char *buffer;
+   size_t len;
+   
+   len = strlen(data) * sizeof(char);
+   len *= 2;                              /* We need space if some text will be replace */
+   len++;                                 /* End of string */
+
+   buffer = (char *)malloc(len);
+
+   if (buffer != NULL)                   /* Check if the buffer could be allocated */
+   {
+      /* First we copy the data to the buffer, this prevents bug #16 with modern compilers */
+      strcpy(buffer, data);
+      
+      del_whitespaces(buffer);
+      c_divis(buffer);
+      c_vars(buffer);
+      c_tilde(buffer);
+      c_styles(buffer);
+      del_internal_styles(buffer);
+      replace_udo_tilde(buffer);
+      replace_udo_nbsp(buffer);
+      replace_udo_quotes(buffer);
+      delete_all_divis(buffer);
+
+      if (buffer[0] == EOS && !allow_empty)
+      {
+         free(buffer);
+         error_empty_docinfo();
+         return FALSE;
+      }
+      
+      *var = buffer;
+
+      return TRUE;
+   }
+
+   /* An error occured when allocating the buffer */
+   bFatalErrorDetected = TRUE;
+   return FALSE;
+}
+
+
+
+
 
 /*******************************************************************************
 *
@@ -191,6 +232,8 @@ GLOBAL _BOOL set_show_variable(void)
 
 GLOBAL _BOOL set_mainlayout(void)
 {
+   int i;
+   
    init_docinfo_data("A4PORTRAIT", &(laydat.paper), FALSE);
 
    init_docinfo_data("Times New Roman", &(laydat.propfontname), FALSE);
@@ -206,13 +249,8 @@ GLOBAL _BOOL set_mainlayout(void)
    init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
    init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
    
-                                          /* New in r6pl16 [NHz] */
-   laydat.node1size = 0;
-   laydat.node2size = 0;
-   laydat.node3size = 0;
-   laydat.node4size = 0;
-   laydat.node5size = 0;
-   laydat.node6size = 0;
+   for (i = 0; i <= TOC_MAXDEPTH; i++)
+      laydat.nodesize[i] = 0;
 
    return TRUE;
 }
@@ -272,7 +310,9 @@ GLOBAL _BOOL set_doclayout(void)
    char  *page,
           page2[2];
    struct size_brackets contlen;
-
+   char node[20];
+   int i;
+   
    tokcpy2(s, sizeof(s));
    
    contlen = get_two_brackets_ptr(s, &cont_format, &cont_content, &data);
@@ -346,52 +386,18 @@ GLOBAL _BOOL set_doclayout(void)
       return TRUE;
    }
    
-   if (strcmp(content, "node1size") == 0)
-   {  
-      if (str_for_desttype(format))       /* Set size of node */
-         laydat.node1size = atoi(data);
-
-      return TRUE;
-   }
-
-   if (strcmp(content, "node2size") == 0)
-   {  
-      if (str_for_desttype(format))       /* Set size of subnode */
-         laydat.node2size = atoi(data);
-
-      return TRUE;
-   }
-
-   if (strcmp(content, "node3size") == 0)
-   {  
-      if (str_for_desttype(format))       /* Set size of subsubnode */
-         laydat.node3size = atoi(data);
-
-      return TRUE;
-   }
-
-   if (strcmp(content, "node4size") == 0)
-   { 
-      if (str_for_desttype(format))       /* Set size of subsubsubnode */
-         laydat.node4size = atoi(data);
-
-      return TRUE;
-   }
-
-   if (strcmp(content, "node5size") == 0)
+   for (i = TOC_NODE1; i < TOC_MAXDEPTH; i++)
    {
-      if (str_for_desttype(format))       /* Set size of subsubsubsubnode */
-         laydat.node5size = atoi(data);
-
-      return TRUE;
-   }
-
-   if (strcmp(content, "node6size") == 0)
-   {
-      if (str_for_desttype(format))       /* Set size of subsubsubsubnode */
-         laydat.node6size = atoi(data);
-
-      return TRUE;
+      sprintf(node, "node%dsize", i + 1);
+      if (strcmp(content, node) == 0)
+      {
+         if (str_for_desttype(format))
+         {
+            /* Set size of node */
+            laydat.nodesize[i + 1] = atoi(data);
+         }
+         return TRUE;
+      }
    }
    
    /* Specialities for Postscript */
@@ -450,77 +456,6 @@ GLOBAL _BOOL set_doclayout(void)
       return TRUE;
    }
 
-   return FALSE;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  init_docinfo_data():
-*     Anpassung der Daten fuer die Titelseite samt Anforderung des benoetigten Speichers
-*
-*  Notes:
-*     [voja][R6PL17] I needed to do the buffer creation first in this function,
-*     else you can't use memmove() with compilers like GCC 3.x and
-*     MS VS .net. An segmentation fault will occur (Bug #0000016).
-*     I guess this is because of better memory protection techniques:
-*     The *data coming in can be an constant(!) value. I think these compilers
-*     write constant variable allocations to a protected memory region.
-*     Writing to this region will crash...
-*
-*  Out:
-*     - TRUE: OK
-*     - error
-*
-******************************************|************************************/
-
-LOCAL _BOOL init_docinfo_data(
-
-const char     *data,         /* ^ to content */
-char      **var,          /* ^^ to variable */
-int         allow_empty)  /* TRUE: empty data are okay, FALSE: throw error message */
-{
-   char    *buffer;       /* */
-   size_t   len;          /* */
-
-   len = strlen(data)*sizeof(char);
-   len *=2;                               /* We need space if some text will be replace */
-   len++;                                 /* End of string */
-
-   buffer = (char *)malloc(len);
-
-   if (buffer)                            /* Check if the buffer could be allocated */
-   {
-      /* First we copy the data to the buffer, this prevents bug #16 with modern compilers */
-      strcpy(buffer, data);
-      
-      del_whitespaces(buffer);            /* Parameter was data */
-      c_divis(buffer);                    /* Parameter was data */
-      c_vars(buffer);                     /* Parameter was data */
-      c_tilde(buffer);                    /* Parameter was data */
-      c_styles(buffer);                   /* Parameter was data */
-      del_internal_styles(buffer);        /* Parameter was data */
-      replace_udo_tilde(buffer);          /* Parameter was data */
-      replace_udo_nbsp(buffer);           /* Parameter was data */
-      replace_udo_quotes(buffer);         /* Parameter was data */
-      delete_all_divis(buffer);           /* Parameter was data */
-
-      if (data[0] == EOS && !allow_empty)
-      {
-         error_empty_docinfo();
-         return FALSE;
-      }
-
-      *var = buffer;
-
-      return TRUE;
-   }
-
-   /* An error occured when allocating the buffer */
-   bFatalErrorDetected = TRUE;
    return FALSE;
 }
 
@@ -2733,24 +2668,23 @@ GLOBAL void init_module_tp_pass2(void)
 
 GLOBAL void exit_module_tp(void)
 {
-   int   i;  /* */
-
-
+   int i;
+   
    free_titdat(&(titdat.title));
    free_titdat(&(titdat.program));
    free_titdat(&(titdat.date));
    free_titdat(&(titdat.version));
-   free_titdat(&(titdat.author));  
+   free_titdat(&(titdat.author));
 
    for (i = address_counter; i >= 1; i--)
    {
       free_titdat(&(titdat.address[i]));
    }
-
-   free_titdat(&(titdat.keywords));       /* New in r6pl15 [NHz] */
-   free_titdat(&(titdat.description));    /* New in r6pl15 [NHz] */
-   free_titdat(&(titdat.company));        /* New in V6.5.2 [NHz] */
-   free_titdat(&(titdat.category));       /* New in V6.5.2 [NHz] */
+   
+   free_titdat(&(titdat.keywords));
+   free_titdat(&(titdat.description));
+   free_titdat(&(titdat.company));
+   free_titdat(&(titdat.category));
    free_titdat(&(titdat.htmltitle));
    free_titdat(&(titdat.domain_name));
    free_titdat(&(titdat.domain_link));
@@ -2761,8 +2695,8 @@ GLOBAL void exit_module_tp(void)
    free_titdat(&(titdat.authoricon));
    free_titdat(&(titdat.authoricon_active));
 
-   free_titdat(&(titdat.drc_statusline));  
-   free_titdat(&(titdat.stg_database));    
-   free_titdat(&(titdat.translator));    
-   free_titdat(&(titdat.distributor));    
+   free_titdat(&(titdat.drc_statusline));
+   free_titdat(&(titdat.stg_database));
+   free_titdat(&(titdat.translator));
+   free_titdat(&(titdat.distributor));
 }

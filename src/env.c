@@ -4758,7 +4758,13 @@ GLOBAL void c_begin_document(void)
       if (sDocMonofont[0] == EOS)
          strcpy(sDocMonofont, "Courier New");
       
-      voutlnf("{\\rtf1\\ansi\n{\\fonttbl\n\t{\\f0\\froman %s;}\n\t{\\f1\\fswiss %s;}\n\t{\\f2\\fmodern MS LineDraw;}\n}", sDocPropfont, sDocMonofont);
+      outln("{\\rtf1\\ansi");
+      outln("{\\fonttbl");
+      voutlnf("{\\f0\\froman\\fcharset0 %s;}", sDocPropfont);
+      voutlnf("{\\f1\\fmodern\\fcharset0 %s;}", sDocMonofont);
+      outln("{\\f2\\fmodern\\fcharset2 MS LineDraw;}");
+      outln("{\\f3\\ftech\\fcharset2 Symbol;}");
+      outln("}");
       outln("{\\stylesheet");
 
       if (sDocPropfontSize[0] != EOS)
@@ -4772,45 +4778,46 @@ GLOBAL void c_begin_document(void)
          iDocMonofontSize = 10 * 2;       /* Courier New 10pt */
 
       /* Size of nodes */
-      if (laydat.node1size != 0)
-         laydat.node1size *= 2;
-      else
-         laydat.node1size = iDocPropfontSize + 14;
-
-      if (laydat.node2size != 0)
-         laydat.node2size *= 2;
-      else
-         laydat.node2size = iDocPropfontSize + 6;
-
-      if (laydat.node3size != 0)
-         laydat.node3size *= 2;
-      else
-         laydat.node3size = iDocPropfontSize;
-
-      if (laydat.node4size != 0)
-         laydat.node4size *= 2;
-      else
-         laydat.node4size = iDocPropfontSize;
-
+      for (i = 0; i < TOC_MAXDEPTH + 1; i++)
+      {
+         if (laydat.nodesize[i] != 0)
+            laydat.nodesize[i] *= 2;
+         else
+            laydat.nodesize[i] = iDocPropfontSize + rtf_structure_height[i];
+      }
+      
       voutlnf("{%s\\fs%d\\snext0 Normal;}",   rtf_norm,  iDocPropfontSize);
       voutlnf("{%s\\fs%d\\snext1 Verbatim;}", rtf_verb,  iDocMonofontSize);
       
-      voutlnf("{%s\\fs%d\\snext2 Chapter;}",  rtf_chapt, iDocPropfontSize + 28);
-      voutlnf("{%s\\fs%d\\snext3 Node1;}",    rtf_node1,     laydat.node1size);
-      voutlnf("{%s\\fs%d\\snext4 Node2;}",    rtf_node2,     laydat.node2size);
-      voutlnf("{%s\\fs%d\\snext5 Node3;}",    rtf_node3,     laydat.node3size);
-      voutlnf("{%s\\fs%d\\snext6 Node4;}",    rtf_node4,     laydat.node4size);
-      voutlnf("{%s\\fs%d\\snext7 Chapter*;}", rtf_inv_chapt, iDocPropfontSize + 28);
-
-      voutlnf("{%s\\fs%d\\snext8 Node1*;}",    rtf_inv_node1, laydat.node1size);
-      voutlnf("{%s\\fs%d\\snext9 Node2*;}",    rtf_inv_node2, laydat.node2size);
-      voutlnf("{%s\\fs%d\\snext10 Node3*;}",   rtf_inv_node3, laydat.node3size);
-      voutlnf("{%s\\fs%d\\snext11 Node4*;}",   rtf_inv_node4, laydat.node4size);
-      voutlnf("{%s\\fs%d\\snext13 LineDraw;}", rtf_linedraw,  iDocMonofontSize);
+      voutlnf("{%s\\fs%d\\snext2 Chapter;}",  rtf_chapt, laydat.nodesize[0]);
+      voutlnf("{%s\\fs%d\\snext3 Node1;}",    rtf_node1, laydat.nodesize[TOC_NODE1 + 1]);
+      voutlnf("{%s\\fs%d\\snext4 Node2;}",    rtf_node2, laydat.nodesize[TOC_NODE2 + 1]);
+      voutlnf("{%s\\fs%d\\snext5 Node3;}",    rtf_node3, laydat.nodesize[TOC_NODE3 + 1]);
+      voutlnf("{%s\\fs%d\\snext6 Node4;}",    rtf_node4, laydat.nodesize[TOC_NODE4 + 1]);
+      voutlnf("{%s\\fs%d\\snext7 Node5;}",    rtf_node5, laydat.nodesize[TOC_NODE5 + 1]);
+      voutlnf("{%s\\fs%d\\snext8 Node6;}",    rtf_node6, laydat.nodesize[TOC_NODE6 + 1]);
+      voutlnf("{%s\\fs%d\\snext9 Node7;}",    rtf_node7, laydat.nodesize[TOC_NODE7 + 1]);
+      voutlnf("{%s\\fs%d\\snext10 Node8;}",   rtf_node8, laydat.nodesize[TOC_NODE8 + 1]);
+      voutlnf("{%s\\fs%d\\snext11 Node9;}",   rtf_node9, laydat.nodesize[TOC_NODE9 + 1]);
+      
+      voutlnf("{%s\\fs%d\\snext12 Chapter*;}",  rtf_inv_chapt, laydat.nodesize[0]);
+      voutlnf("{%s\\fs%d\\snext13 Node1*;}",    rtf_inv_node1, laydat.nodesize[TOC_NODE1 + 1]);
+      voutlnf("{%s\\fs%d\\snext14 Node2*;}",    rtf_inv_node2, laydat.nodesize[TOC_NODE2 + 1]);
+      voutlnf("{%s\\fs%d\\snext15 Node3*;}",    rtf_inv_node3, laydat.nodesize[TOC_NODE3 + 1]);
+      voutlnf("{%s\\fs%d\\snext16 Node4*;}",    rtf_inv_node4, laydat.nodesize[TOC_NODE4 + 1]);
+      voutlnf("{%s\\fs%d\\snext17 Node5*;}",    rtf_inv_node5, laydat.nodesize[TOC_NODE5 + 1]);
+      voutlnf("{%s\\fs%d\\snext18 Node6*;}",    rtf_inv_node6, laydat.nodesize[TOC_NODE6 + 1]);
+      voutlnf("{%s\\fs%d\\snext19 Node7*;}",    rtf_inv_node7, laydat.nodesize[TOC_NODE7 + 1]);
+      voutlnf("{%s\\fs%d\\snext20 Node8*;}",    rtf_inv_node8, laydat.nodesize[TOC_NODE8 + 1]);
+      voutlnf("{%s\\fs%d\\snext21 Node9*;}",    rtf_inv_node9, laydat.nodesize[TOC_NODE9 + 1]);
+      
+      voutlnf("{%s\\fs%d\\snext23 LineDraw;}",  rtf_linedraw,  iDocMonofontSize);
+      voutlnf("{\\*\\cs24\\snext24 Footnote Characters;}");
+      voutlnf("{\\*\\cs25\\snext25{\\*\\updnprop5801}\\up10 Footnote anchor;}");
+      outln("}");
 
       output_rtf_colortbl();
 
-      outln("}");
       outln("\\paperw11904\\paperh16836");
       outln("\\margl1134\\margr1134\\margt1984\\margb1984");
 
@@ -4933,9 +4940,10 @@ GLOBAL void c_begin_document(void)
       
       outln("{\\rtf1\\ansi \\deff0");
       outln("{\\fonttbl");
-      voutlnf("{\\f0\\fswiss %s;}", sDocPropfont);
-      voutlnf("{\\f1\\fswiss %s;}", sDocMonofont);
-      outln("{\\f2\\ftech Symbol;}");
+      voutlnf("{\\f0\\froman %s;}", sDocPropfont);
+      voutlnf("{\\f1\\fmodern %s;}", sDocMonofont);
+      outln("{\\f2\\fmodern\\fcharset2 MS LineDraw;}");
+      outln("{\\f3\\ftech\\fcharset2 Symbol;}");
       outln("}");
       
       output_rtf_colortbl();
@@ -5020,18 +5028,12 @@ GLOBAL void c_begin_document(void)
       
    case TOKPS:
       /* Size of nodes */
-      if (laydat.node1size == 0)
-         laydat.node1size = laydat.propfontsize + 7;
-
-      if (laydat.node2size == 0)
-         laydat.node2size = laydat.propfontsize + 3;
-
-      if (laydat.node3size == 0)
-         laydat.node3size = laydat.propfontsize;
-
-      if (laydat.node4size == 0)
-         laydat.node4size = laydat.propfontsize;
-
+      for (i = 0; i < TOC_MAXDEPTH + 1; i++)
+      {
+         if (laydat.nodesize[i] == 0)
+            laydat.nodesize[i] = laydat.propfontsize + kps_structure_height[i];
+      }
+         
       outln(UDO2PS);                      /* in udo2ps.h definiert (c) by Christian Krueger und Norbert Hanz */
       outln(UDO2PDF);                     /* in udo2pdf.h definiert (c) by Norbert Hanz */
 
@@ -5352,6 +5354,7 @@ GLOBAL void c_begin_appendix(void)
    }
 
    bCalledBeginAppendix = TRUE;
+   toc_pass2_begin_appendix();
 }
 
 
@@ -5496,7 +5499,7 @@ GLOBAL void init_env_itemchar(void)
    case TOWIN:
    case TOAQV:
       /* FIXME: UTF8 */
-      strcpy(itemchar[1], "{\\f2 \\'B7}");
+      strcpy(itemchar[1], "{\\f3 \\'B7}");
       strcpy(itemchar[2], "\\'96");
       strcpy(itemchar[3], "\\'95");
       strcpy(itemchar[4], ".");
@@ -5506,7 +5509,7 @@ GLOBAL void init_env_itemchar(void)
 
    case TOWH4:
       /* FIXME: UTF8 */
-      strcpy(itemchar[1], "{\\f2 \\'B7}");
+      strcpy(itemchar[1], "{\\f3 \\'B7}");
       strcpy(itemchar[2], "-");
       strcpy(itemchar[3], "\\'95");
       strcpy(itemchar[4], ".");

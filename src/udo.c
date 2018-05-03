@@ -605,345 +605,377 @@ LOCAL IDXLIST  *idxlist;
 
 LOCAL const UDOCOMMAND udoCmdSeq[] =
 {
-   { "!node",                         "!n",      c_node,                    TRUE,  CMD_ONLY_MAINPART },
-   { "!subnode",                      "!sn",     c_subnode,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubnode",                   "!ssn",    c_subsubnode,              TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubnode",                "!sssn",   c_subsubsubnode,           TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubnode",             "!ssssn",  c_subsubsubsubnode,        TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubsubnode",          "!sssssn", c_subsubsubsubsubnode,     TRUE,  CMD_ONLY_MAINPART },
-   { "!node*",                        "!n*",     c_node_iv,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!subnode*",                     "!sn*",    c_subnode_iv,              TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubnode*",                  "!ssn*",   c_subsubnode_iv,           TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubnode*",               "!sssn*",  c_subsubsubnode_iv,        TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubnode*",            "!ssssn*", c_subsubsubsubnode_iv,     TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubsubnode*",         "!sssssn*",c_subsubsubsubsubnode_iv,  TRUE,  CMD_ONLY_MAINPART },
-   { "!pnode",                        "!p",      c_pnode,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!psubnode",                     "!ps",     c_psubnode,                TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubnode",                  "!pss",    c_psubsubnode,             TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubsubnode",               "!psss",   c_psubsubsubnode,          TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubsubsubnode",            "!pssss",  c_psubsubsubsubnode,       TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubsubsubsubnode",         "!psssss", c_psubsubsubsubsubnode,    TRUE,  CMD_ONLY_MAINPART },
-   { "!pnode*",                       "!p*",     c_pnode_iv,                TRUE,  CMD_ONLY_MAINPART },
-   { "!psubnode*",                    "!ps*",    c_psubnode_iv,             TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubnode*",                 "!pss*",   c_psubsubnode_iv,          TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubsubnode*",              "!psss*",  c_psubsubsubnode_iv,       TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubsubsubnode*",           "!pssss*", c_psubsubsubsubnode_iv,    TRUE,  CMD_ONLY_MAINPART },
-   { "!psubsubsubsubsubnode*",        "!psssss*",c_psubsubsubsubsubnode_iv, TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_node",                   "!bn",     c_begin_node,              TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_node*",                  "!bn*",    c_begin_node_iv,           TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_pnode",                  "!bp",     c_begin_pnode,             TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_pnode*",                 "!bp*",    c_begin_pnode_iv,          TRUE,  CMD_ONLY_MAINPART },
-   { "!end_node",                     "!en",     c_end_node,                TRUE,  CMD_ONLY_MAINPART },
-   { "!item",                         "!i",      c_item,                    FALSE, CMD_ONLY_MAINPART },
-   { "!begin_itemize",                "!bi",     c_begin_itemize,           TRUE,  CMD_ONLY_MAINPART },
-   { "!end_itemize",                  "!ei",     c_end_itemize,             TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_enumerate",              "!be",     c_begin_enumerate,         TRUE,  CMD_ONLY_MAINPART },
-   { "!end_enumerate",                "!ee",     c_end_enumerate,           TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_description",            "!bd",     c_begin_description,       TRUE,  CMD_ONLY_MAINPART },
-   { "!end_description",              "!ed",     c_end_description,         TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_xlist",                  "!bxl",    c_begin_xlist,             TRUE,  CMD_ONLY_MAINPART },
-   { "!end_xlist",                    "!exl",    c_end_xlist,               TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_blist",                  "!bbl",    c_begin_blist,             TRUE,  CMD_ONLY_MAINPART },
-   { "!end_blist",                    "!ebl",    c_end_blist,               TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_ilist",                  "!bil",    c_begin_ilist,             TRUE,  CMD_ONLY_MAINPART },
-   { "!end_ilist",                    "!eil",    c_end_ilist,               TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_tlist",                  "!btl",    c_begin_tlist,             TRUE,  CMD_ONLY_MAINPART },
-   { "!end_tlist",                    "!etl",    c_end_tlist,               TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_quote",                  "!bq",     c_begin_quote,             TRUE,  CMD_ONLY_MAINPART },
-   { "!end_quote",                    "!eq",     c_end_quote,               TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_center",                 "!bc",     c_begin_center,            TRUE,  CMD_ONLY_MAINPART },
-   { "!end_center",                   "!ec",     c_end_center,              TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_flushright",             "!bfr",    c_begin_flushright,        TRUE,  CMD_ONLY_MAINPART },
-   { "!end_flushright",               "!efr",    c_end_flushright,          TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_flushleft",              "!bfl",    c_begin_flushleft,         TRUE,  CMD_ONLY_MAINPART },
-   { "!end_flushleft",                "!efl",    c_end_flushleft,           TRUE,  CMD_ONLY_MAINPART },
-   { "!label",                        "!l",      c_label,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!label*",                       "!l*",     c_label,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!alias",                        "!a",      c_alias,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!index",                        "!x",      c_index,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!heading",                      "!h",      c_heading,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!subheading",                   "!sh",     c_subheading,              TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubheading",                "!ssh",    c_subsubheading,           TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubheading",             "!sssh",   c_subsubsubheading,        TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubheading",          "!ssssh",  c_subsubsubsubheading,     TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubsubheading",       "!sssssh", c_subsubsubsubsubheading,  TRUE,  CMD_ONLY_MAINPART },
-   { "!listheading",                  "!lh",     c_listheading,             TRUE,  CMD_ONLY_MAINPART },
-   { "!listsubheading",               "!lsh",    c_listsubheading,          TRUE,  CMD_ONLY_MAINPART },
-   { "!listsubsubheading",            "!lssh",   c_listsubsubheading,       TRUE,  CMD_ONLY_MAINPART },
-   { "!listsubsubsubheading",         "!lsssh",  c_listsubsubsubheading,    TRUE,  CMD_ONLY_MAINPART },
-   { "!listsubsubsubsubheading",      "!lssssh", c_listsubsubsubsubheading, TRUE,  CMD_ONLY_MAINPART },
-   { "!listsubsubsubsubsubheading",   "!lsssssh",c_listsubsubsubsubsubheading, TRUE,  CMD_ONLY_MAINPART },
-   { "!jumpid",                       "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!win_helpid",                   "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!win_make_button",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_set_button",               "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!wh4_helpid",                   "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!mapping",                      "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!html_name",                    "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!html_dirname",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!html_keywords",                "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!html_description",             "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!html_robots",                  "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART }, /* new V6.5.17 */
-   { "!html_bgsound",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART }, /* new V6.5.20 */
-   { "!html_backimage",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!html_backcolor",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!html_textcolor",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!html_linkcolor",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!html_alinkcolor",              "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!html_vlinkcolor",              "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!html_verbatim_backcolor",      "",        c_verbatim_backcolor,      TRUE,  CMD_ALWAYS },
-   { "!html_counter_command",         "",        c_tunix,                   TRUE,  CMD_ALWAYS },   /* Changed in V6.5.9 */
-   { "!html_javascript",              "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!hh_backimage",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!hh_backcolor",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!hh_textcolor",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!hh_linkcolor",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!hh_alinkcolor",                "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!hh_vlinkcolor",                "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!hh_verbatim_backcolor",        "",        c_verbatim_backcolor,      TRUE,  CMD_ALWAYS },
-   { "!chapterimage",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!chaptericon",                  "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!chaptericon_active",           "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!chaptericon_text",             "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!newpage",                      "",        c_newpage,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!comment",                      "",        c_comment,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!include",                      "",        c_include,                 TRUE,  CMD_ALWAYS },
-   { "!vinclude",                     "",        c_include_verbatim,        TRUE,  CMD_ONLY_MAINPART },
-   { "!rinclude",                     "",        c_include_raw,             TRUE,  CMD_ALWAYS },
-   { "!sinclude",                     "",        c_include_src,             TRUE,  CMD_ONLY_MAINPART },
-   { "!cinclude",                     "",        c_include_comment,         TRUE,  CMD_ONLY_MAINPART },
-   { "!ldinclude",                    "",        c_include_linedraw,        TRUE,  CMD_ONLY_MAINPART },
-   { "!pinclude",                     "",        c_include_preformatted,    TRUE,  CMD_ONLY_MAINPART },
-   { "!input",                        "",        c_input,                   TRUE,  CMD_ALWAYS },
-   { "!image",                        "",        c_image,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!image*",                       "",        c_image_nonr,              TRUE,  CMD_ONLY_MAINPART },
-   { "!bigskip",                      "",        c_bigskip,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!medskip",                      "",        c_medskip,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!smallskip",                    "",        c_smallskip,               TRUE,  CMD_ONLY_MAINPART },
-   { "!tex_dpi",                      "",        c_tex_dpi,                 TRUE,  CMD_ALWAYS },
-   { "!tex_verb",                     "",        c_tex_verb,                TRUE,  CMD_ALWAYS },
-   { "!maketitle",                    "",        c_maketitle,               TRUE,  CMD_ONLY_MAINPART },
-   { "!tableofcontents",              "",        c_tableofcontents,         TRUE,  CMD_ONLY_MAINPART },
-   { "!toc_title",                    "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!listoffigures",                "",        c_listoffigures,           TRUE,  CMD_ONLY_MAINPART },
-   { "!listoftables",                 "",        c_listoftables,            TRUE,  CMD_ONLY_MAINPART },
-   { "!toc",                          "",        c_toc,                     TRUE,  CMD_ONLY_MAINPART },
-   { "!subtoc",                       "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubtoc",                    "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubtoc",                 "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubtoc",              "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubsubtoc",           "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_appendix",               "",        c_begin_appendix,          TRUE,  CMD_ONLY_MAINPART },
-   { "!end_appendix",                 "",        c_end_appendix,            TRUE,  CMD_ONLY_MAINPART },
-   { "!begin_document",               "",        c_begin_document,          TRUE,  CMD_ONLY_PREAMBLE },
-   { "!end_document",                 "",        c_end_document,            TRUE,  CMD_ONLY_MAINPART },
-   { "!sloppy",                       "",        c_sloppy,                  TRUE,  CMD_ALWAYS },
-   { "!fussy",                        "",        c_fussy,                   TRUE,  CMD_ALWAYS },
-   { "!code_source",                  "",        c_code_source,             TRUE,  CMD_ALWAYS },
-   { "!code_target",                  "",        c_code_target,             TRUE,  CMD_ALWAYS },
-   { "!autoref",                      "",        c_autoref,                 TRUE,  CMD_ALWAYS },
-   { "!autoref_items",                "",        c_autoref_items,           TRUE,  CMD_ALWAYS },
-   { "!stg_limage",                   "",        c_limage,                  TRUE,  CMD_ALWAYS },
-   { "!hline",                        "",        c_hline,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!table_caption",                "",        c_table_caption,           TRUE,  CMD_ONLY_MAINPART },
-   { "!table_caption*",               "",        c_table_caption_nonr,      TRUE,  CMD_ONLY_MAINPART },
-   { "!universal_charset",            "",        c_universal_charset,       TRUE,  CMD_ALWAYS },
-   { "!win_charwidth",                "",        c_win_charwidth,           TRUE,  CMD_ALWAYS },
-   { "!wh4_charwidth",                "",        c_wh4_charwidth,           TRUE,  CMD_ALWAYS },
-   { "!rtf_charwidth",                "",        c_rtf_charwidth,           TRUE,  CMD_ALWAYS },
-   { "!rtf_add_colour",               "",        c_rtf_add_color,           TRUE,  CMD_ONLY_PREAMBLE },
-   { "!rtf_keep_tables",              "",        c_rtf_keep_tables,         TRUE,  CMD_ALWAYS },
-   { "!html_img_suffix",              "",        c_html_img_suffix,         TRUE,  CMD_ALWAYS },
-   { "!html_nodesize",                "",        c_html_nodesize,           TRUE,  CMD_ALWAYS },
-   { "!htag_img_suffix",              "",        c_htag_img_suffix,         TRUE,  CMD_ALWAYS },
-   { "!tabwidth",                     "",        c_tabwidth,                TRUE,  CMD_ALWAYS },
-   { "!verbatimsize",                 "",        c_verbatimsize,            TRUE,  CMD_ALWAYS },
-   { "!linedrawsize",                 "",        c_linedrawsize,            TRUE,  CMD_ALWAYS },
-   { "!set",                          "",        c_set,                     TRUE,  CMD_ALWAYS },
-   { "!unset",                        "",        c_unset,                   TRUE,  CMD_ALWAYS },
-   { "!drc_bcolor",                   "",        c_drc_bcolor,              TRUE,  CMD_ALWAYS },
-   { "!drc_icolor",                   "",        c_drc_icolor,              TRUE,  CMD_ALWAYS },
-   { "!drc_ucolor",                   "",        c_drc_ucolor,              TRUE,  CMD_ALWAYS },
-   { "!use_raw_header",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!use_raw_footer",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!udolink",                      "",        c_udolink,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!toplink",                      "",        c_toplink,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!endnode",                      "",        c_endnode,                 TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_subtoc",                "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_subsubtoc",             "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_subsubsubtoc",          "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_subsubsubsubtoc",       "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_subsubsubsubsubtoc",    "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_links",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_index",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_title",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_headline",              "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_bottomline",            "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_raw_header",            "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!ignore_raw_footer",            "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!macro",                        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!define",                       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!hyphen",                       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!docinfo",                      "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!doclayout",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in r6pl15 [NHz] */
-   { "!toc_offset",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!subtoc_offset",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!subsubtoc_offset",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!subsubsubtoc_offset",          "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!subsubsubsubtoc_offset",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!subsubsubsubsubtoc_offset",    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!table_counter",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!table_alignment",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!image_counter",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!image_alignment",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!tex_lindner",                  "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!tex_strunk",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!tex_emtex",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!tex_miktex",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!tex_tetex",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!tex_2e",                       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_name_prefix",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_no_xlist",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_backpage",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_propfont_name",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_propfont_size",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_monofont_name",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_monofont_size",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_merge_nodes",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_merge_subnodes",          "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_merge_subsubnodes",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_merge_subsubsubnodes",    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_merge_subsubsubsubnodes", "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_merge_subsubsubsubsubnodes", "",     cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_ignore_8bit",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_navigation",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.20 [gs] */
-   { "!html_modern_layout",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_modern_width",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_modern_alignment",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_modern_backcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_modern_backimage",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_layout",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_width",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_alignment",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_height",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_position",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_backcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_textcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_linkcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_alinkcolor",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_vlinkcolor",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_frames_backimage",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_doctype",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },   /* New in r6pl16 [NHz] */
-   { "!html_style_name",              "",        c_tunix,                   TRUE,  CMD_ALWAYS }, /* New in r6pl15 [NHz] */
-   { "!html_script_name",             "",        c_tunix,                   TRUE,  CMD_ALWAYS }, /* New in r6pl15 [NHz] */
-   { "!html_favicon_name",            "",        c_tunix,                   TRUE,  CMD_ALWAYS }, /* New in r6pl15 [NHz] */
-   { "!html_button_alignment",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_quotes",                  "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_switch_language",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_use_hyphenation",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* Fixed Bug #0000048 [NHz] */
-   { "!html_transparent_buttons",     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_use_folders",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_header_date",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New feature #0000054 in V6.5.2 [NHz] */
-   { "!html_header_links",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New feature #0000053 in V6.5.2 [NHz] */
-   { "!html_frames_toc_title",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in V6.5.16 [GS] */
-   { "!html_frames_con_title",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in V6.5.16 [GS] */
-   { "!rtf_propfont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!rtf_monofont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!rtf_propfont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!rtf_monofont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!rtf_no_tables",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_propfont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_monofont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_propfont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_monofont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_backcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_textcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_linkcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_background",               "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_inline_bitmaps",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_high_compression",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_medium_compression",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_old_keywords",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_propfont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_monofont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_propfont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_monofont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_backcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_textcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_background",               "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_inline_bitmaps",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_high_compression",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_medium_compression",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_old_keywords",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!win_prefix_helpids",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!wh4_prefix_helpids",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!pdf_high_compression",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!pdf_medium_compression",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!parwidth",                     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!sort_hyphen_file",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!man_lpp",                      "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!man_type",                     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!drc_flags",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!nroff_type",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!language",                     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!break",                        "",        c_break,                   TRUE,  CMD_ALWAYS },
-   { "!error",                        "",        c_error,                   TRUE,  CMD_ALWAYS },
-   { "!nop",                          "",        c_nop,                     TRUE,  CMD_ALWAYS },
-   { "!show_variable",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },      /* V6.5.19 */
+   { "!node",                         "!n",       c_node,                    TRUE,  CMD_ONLY_MAINPART },
+   { "!subnode",                      "!sn",      c_subnode,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubnode",                   "!ssn",     c_subsubnode,              TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubnode",                "!sssn",    c_subsubsubnode,           TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubnode",             "!ssssn",   c_subsubsubsubnode,        TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubnode",          "!sssssn",  c_subsubsubsubsubnode,     TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubnode",       "!ssssssn", c_subsubsubsubsubsubnode,  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubnode",    "!sssssssn",c_subsubsubsubsubsubsubnode,TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubsubnode", "!ssssssssn",c_subsubsubsubsubsubsubsubnode, TRUE, CMD_ONLY_MAINPART },
+   { "!node*",                        "!n*",      c_node_iv,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!subnode*",                     "!sn*",     c_subnode_iv,              TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubnode*",                  "!ssn*",    c_subsubnode_iv,           TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubnode*",               "!sssn*",   c_subsubsubnode_iv,        TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubnode*",            "!ssssn*",  c_subsubsubsubnode_iv,     TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubnode*",         "!sssssn*", c_subsubsubsubsubnode_iv,  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubnode*",   "!ssssssn*", c_subsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubsubnode*","!sssssssn*", c_subsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubsubsubnode*", "!ssssssssn*", c_subsubsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!pnode",                        "!p",       c_pnode,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!psubnode",                     "!ps",      c_psubnode,                TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubnode",                  "!pss",     c_psubsubnode,             TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubnode",               "!psss",    c_psubsubsubnode,          TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubnode",            "!pssss",   c_psubsubsubsubnode,       TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubnode",         "!psssss",  c_psubsubsubsubsubnode,    TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubsubnode",      "!pssssss", c_psubsubsubsubsubsubnode, TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubsubsubnode",   "!psssssss", c_psubsubsubsubsubsubsubnode, TRUE, CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubsubsubsubnode","!pssssssss", c_psubsubsubsubsubsubsubsubnode, TRUE, CMD_ONLY_MAINPART },
+   { "!pnode*",                       "!p*",      c_pnode_iv,                TRUE,  CMD_ONLY_MAINPART },
+   { "!psubnode*",                    "!ps*",     c_psubnode_iv,             TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubnode*",                 "!pss*",    c_psubsubnode_iv,          TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubnode*",              "!psss*",   c_psubsubsubnode_iv,       TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubnode*",           "!pssss*",  c_psubsubsubsubnode_iv,    TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubnode*",        "!psssss*", c_psubsubsubsubsubnode_iv, TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubsubnode*",     "!pssssss*", c_psubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubsubsubnode*",  "!psssssss*", c_psubsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!psubsubsubsubsubsubsubsubnode*","!pssssssss*", c_psubsubsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!begin_node",                   "!bn",      c_begin_node,              TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_node*",                  "!bn*",     c_begin_node_iv,           TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_pnode",                  "!bp",      c_begin_pnode,             TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_pnode*",                 "!bp*",     c_begin_pnode_iv,          TRUE,  CMD_ONLY_MAINPART },
+   { "!end_node",                     "!en",      c_end_node,                TRUE,  CMD_ONLY_MAINPART },
+   { "!item",                         "!i",       c_item,                    FALSE, CMD_ONLY_MAINPART },
+   { "!begin_itemize",                "!bi",      c_begin_itemize,           TRUE,  CMD_ONLY_MAINPART },
+   { "!end_itemize",                  "!ei",      c_end_itemize,             TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_enumerate",              "!be",      c_begin_enumerate,         TRUE,  CMD_ONLY_MAINPART },
+   { "!end_enumerate",                "!ee",      c_end_enumerate,           TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_description",            "!bd",      c_begin_description,       TRUE,  CMD_ONLY_MAINPART },
+   { "!end_description",              "!ed",      c_end_description,         TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_xlist",                  "!bxl",     c_begin_xlist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_xlist",                    "!exl",     c_end_xlist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_blist",                  "!bbl",     c_begin_blist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_blist",                    "!ebl",     c_end_blist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_ilist",                  "!bil",     c_begin_ilist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_ilist",                    "!eil",     c_end_ilist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_tlist",                  "!btl",     c_begin_tlist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_tlist",                    "!etl",     c_end_tlist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_quote",                  "!bq",      c_begin_quote,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_quote",                    "!eq",      c_end_quote,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_center",                 "!bc",      c_begin_center,            TRUE,  CMD_ONLY_MAINPART },
+   { "!end_center",                   "!ec",      c_end_center,              TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_flushright",             "!bfr",     c_begin_flushright,        TRUE,  CMD_ONLY_MAINPART },
+   { "!end_flushright",               "!efr",     c_end_flushright,          TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_flushleft",              "!bfl",     c_begin_flushleft,         TRUE,  CMD_ONLY_MAINPART },
+   { "!end_flushleft",                "!efl",     c_end_flushleft,           TRUE,  CMD_ONLY_MAINPART },
+   { "!label",                        "!l",       c_label,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!label*",                       "!l*",      c_label,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!alias",                        "!a",       c_alias,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!index",                        "!x",       c_index,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!heading",                      "!h",       c_heading,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!subheading",                   "!sh",      c_subheading,              TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubheading",                "!ssh",     c_subsubheading,           TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubheading",             "!sssh",    c_subsubsubheading,        TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubheading",          "!ssssh",   c_subsubsubsubheading,     TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubheading",       "!sssssh",  c_subsubsubsubsubheading,  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubheading",    "!ssssssh", c_subsubsubsubsubsubheading, TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubheading", "!sssssssh", c_subsubsubsubsubsubsubheading, TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubsubheading","!ssssssssh", c_subsubsubsubsubsubsubsubheading, TRUE, CMD_ONLY_MAINPART },
+   { "!listheading",                  "!lh",      c_listheading,             TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubheading",               "!lsh",     c_listsubheading,          TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubsubheading",            "!lssh",    c_listsubsubheading,       TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubsubsubheading",         "!lsssh",   c_listsubsubsubheading,    TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubsubsubsubheading",      "!lssssh",  c_listsubsubsubsubheading, TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubsubsubsubsubheading",   "!lsssssh", c_listsubsubsubsubsubheading, TRUE, CMD_ONLY_MAINPART },
+   { "!listsubsubsubsubsubsubheading","!lssssssh", c_listsubsubsubsubsubsubheading, TRUE, CMD_ONLY_MAINPART },
+   { "!listsubsubsubsubsubsubsubheading","!lsssssssh", c_listsubsubsubsubsubsubsubheading, TRUE, CMD_ONLY_MAINPART },
+   { "!listsubsubsubsubsubsubsubsubheading","!lssssssssh", c_listsubsubsubsubsubsubsubsubheading, TRUE, CMD_ONLY_MAINPART },
+   { "!jumpid",                       "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!win_helpid",                   "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!win_make_button",              "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_set_button",               "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!wh4_helpid",                   "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!mapping",                      "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_name",                    "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_dirname",                 "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_keywords",                "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_description",             "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_robots",                  "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_bgsound",                 "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_backimage",               "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_backcolor",               "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_textcolor",               "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_linkcolor",               "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_alinkcolor",              "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_vlinkcolor",              "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_verbatim_backcolor",      "",         c_verbatim_backcolor,      TRUE,  CMD_ALWAYS },
+   { "!html_counter_command",         "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_javascript",              "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!hh_backimage",                 "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_backcolor",                 "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_textcolor",                 "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_linkcolor",                 "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_alinkcolor",                "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_vlinkcolor",                "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_verbatim_backcolor",        "",         c_verbatim_backcolor,      TRUE,  CMD_ALWAYS },
+   { "!chapterimage",                 "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!chaptericon",                  "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!chaptericon_active",           "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!chaptericon_text",             "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!newpage",                      "",         c_newpage,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!comment",                      "",         c_comment,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!include",                      "",         c_include,                 TRUE,  CMD_ALWAYS },
+   { "!vinclude",                     "",         c_include_verbatim,        TRUE,  CMD_ONLY_MAINPART },
+   { "!rinclude",                     "",         c_include_raw,             TRUE,  CMD_ALWAYS },
+   { "!sinclude",                     "",         c_include_src,             TRUE,  CMD_ONLY_MAINPART },
+   { "!cinclude",                     "",         c_include_comment,         TRUE,  CMD_ONLY_MAINPART },
+   { "!ldinclude",                    "",         c_include_linedraw,        TRUE,  CMD_ONLY_MAINPART },
+   { "!pinclude",                     "",         c_include_preformatted,    TRUE,  CMD_ONLY_MAINPART },
+   { "!input",                        "",         c_input,                   TRUE,  CMD_ALWAYS },
+   { "!image",                        "",         c_image,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!image*",                       "",         c_image_nonr,              TRUE,  CMD_ONLY_MAINPART },
+   { "!bigskip",                      "",         c_bigskip,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!medskip",                      "",         c_medskip,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!smallskip",                    "",         c_smallskip,               TRUE,  CMD_ONLY_MAINPART },
+   { "!tex_dpi",                      "",         c_tex_dpi,                 TRUE,  CMD_ALWAYS },
+   { "!tex_verb",                     "",         c_tex_verb,                TRUE,  CMD_ALWAYS },
+   { "!maketitle",                    "",         c_maketitle,               TRUE,  CMD_ONLY_MAINPART },
+   { "!tableofcontents",              "",         c_tableofcontents,         TRUE,  CMD_ONLY_MAINPART },
+   { "!toc_title",                    "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!listoffigures",                "",         c_listoffigures,           TRUE,  CMD_ONLY_MAINPART },
+   { "!listoftables",                 "",         c_listoftables,            TRUE,  CMD_ONLY_MAINPART },
+   { "!toc",                          "",         c_toc,                     TRUE,  CMD_ONLY_MAINPART },
+   { "!subtoc",                       "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubtoc",                    "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubtoc",                 "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubtoc",              "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubtoc",           "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubtoc",        "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubtoc",     "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubsubtoc",  "",         c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_appendix",               "",         c_begin_appendix,          TRUE,  CMD_ONLY_MAINPART },
+   { "!end_appendix",                 "",         c_end_appendix,            TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_document",               "",         c_begin_document,          TRUE,  CMD_ONLY_PREAMBLE },
+   { "!end_document",                 "",         c_end_document,            TRUE,  CMD_ONLY_MAINPART },
+   { "!sloppy",                       "",         c_sloppy,                  TRUE,  CMD_ALWAYS },
+   { "!fussy",                        "",         c_fussy,                   TRUE,  CMD_ALWAYS },
+   { "!code",                         "",         c_code_source,             TRUE,  CMD_ALWAYS },
+   { "!code_source",                  "",         c_code_source,             TRUE,  CMD_ALWAYS },
+   { "!code_target",                  "",         c_code_target,             TRUE,  CMD_ALWAYS },
+   { "!autoref",                      "",         c_autoref,                 TRUE,  CMD_ALWAYS },
+   { "!autoref_items",                "",         c_autoref_items,           TRUE,  CMD_ALWAYS },
+   { "!stg_limage",                   "",         c_limage,                  TRUE,  CMD_ALWAYS },
+   { "!hline",                        "",         c_hline,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!table_caption",                "",         c_table_caption,           TRUE,  CMD_ONLY_MAINPART },
+   { "!table_caption*",               "",         c_table_caption_nonr,      TRUE,  CMD_ONLY_MAINPART },
+   { "!universal_charset",            "",         c_universal_charset,       TRUE,  CMD_ALWAYS },
+   { "!win_charwidth",                "",         c_win_charwidth,           TRUE,  CMD_ALWAYS },
+   { "!wh4_charwidth",                "",         c_wh4_charwidth,           TRUE,  CMD_ALWAYS },
+   { "!rtf_charwidth",                "",         c_rtf_charwidth,           TRUE,  CMD_ALWAYS },
+   { "!rtf_add_color",                "",         c_rtf_add_color,           TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_keep_tables",              "",         c_rtf_keep_tables,         TRUE,  CMD_ALWAYS },
+   { "!html_img_suffix",              "",         c_html_img_suffix,         TRUE,  CMD_ALWAYS },
+   { "!html_nodesize",                "",         c_html_nodesize,           TRUE,  CMD_ALWAYS },
+   { "!htag_img_suffix",              "",         c_htag_img_suffix,         TRUE,  CMD_ALWAYS },
+   { "!tabwidth",                     "",         c_tabwidth,                TRUE,  CMD_ALWAYS },
+   { "!verbatimsize",                 "",         c_verbatimsize,            TRUE,  CMD_ALWAYS },
+   { "!linedrawsize",                 "",         c_linedrawsize,            TRUE,  CMD_ALWAYS },
+   { "!set",                          "",         c_set,                     TRUE,  CMD_ALWAYS },
+   { "!unset",                        "",         c_unset,                   TRUE,  CMD_ALWAYS },
+   { "!drc_bcolor",                   "",         c_drc_bcolor,              TRUE,  CMD_ALWAYS },
+   { "!drc_icolor",                   "",         c_drc_icolor,              TRUE,  CMD_ALWAYS },
+   { "!drc_ucolor",                   "",         c_drc_ucolor,              TRUE,  CMD_ALWAYS },
+   { "!use_raw_header",               "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!use_raw_footer",               "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!udolink",                      "",         c_udolink,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!toplink",                      "",         c_toplink,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!endnode",                      "",         c_endnode,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subtoc",                "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubtoc",             "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubtoc",          "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubsubtoc",       "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubsubsubtoc",    "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubsubsubsubtoc", "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubsubsubsubsubtoc","",       c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubsubsubsubsubsubtoc","",    c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_links",                 "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_index",                 "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_title",                 "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_headline",              "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_bottomline",            "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_raw_header",            "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_raw_footer",            "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!macro",                        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!define",                       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!hyphen",                       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!docinfo",                      "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!doclayout",                    "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!toc_offset",                   "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subtoc_offset",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubtoc_offset",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubtoc_offset",          "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubsubtoc_offset",       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubsubsubtoc_offset",    "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubsubsubsubtoc_offset", "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubsubsubsubsubtoc_offset","",       cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubsubsubsubsubsubtoc_offset","",    cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!table_counter",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!table_alignment",              "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!image_counter",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!image_alignment",              "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_lindner",                  "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_strunk",                   "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_emtex",                    "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_miktex",                   "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_tetex",                    "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_2e",                       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_name_prefix",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_no_xlist",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_backpage",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_propfont_name",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_propfont_size",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_monofont_name",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_monofont_size",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_nodes",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subnodes",          "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubnodes",       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubsubnodes",    "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubsubsubnodes", "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubsubsubsubnodes", "",      cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubsubsubsubsubnodes", "",   cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubsubsubsubsubsubnodes", "",cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_ignore_8bit",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_navigation",              "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_layout",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_width",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_alignment",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_backcolor",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_backimage",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_layout",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_width",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_alignment",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_height",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_position",         "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_backcolor",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_textcolor",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_linkcolor",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_alinkcolor",       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_vlinkcolor",       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_backimage",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_doctype",                 "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_style_name",              "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_script_name",             "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_favicon_name",            "",         c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_button_alignment",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_quotes",                  "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_switch_language",         "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_use_hyphenation",         "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_transparent_buttons",     "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_use_folders",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_header_date",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_header_links",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_toc_title",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_con_title",        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_propfont",                 "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_monofont",                 "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_propfont_size",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_monofont_size",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_no_tables",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_propfont",                 "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_monofont",                 "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_propfont_size",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_monofont_size",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_backcolor",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_textcolor",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_linkcolor",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_background",               "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_inline_bitmaps",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_high_compression",         "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_medium_compression",       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_old_keywords",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_propfont",                 "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_monofont",                 "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_propfont_size",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_monofont_size",            "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_backcolor",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_textcolor",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_background",               "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_inline_bitmaps",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_high_compression",         "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_medium_compression",       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_old_keywords",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_prefix_helpids",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_prefix_helpids",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!pdf_high_compression",         "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!pdf_medium_compression",       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!parwidth",                     "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!sort_hyphen_file",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!man_lpp",                      "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!man_type",                     "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!drc_flags",                    "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!nroff_type",                   "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!language",                     "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!break",                        "",         c_break,                   TRUE,  CMD_ALWAYS },
+   { "!error",                        "",         c_error,                   TRUE,  CMD_ALWAYS },
+   { "!nop",                          "",         c_nop,                     TRUE,  CMD_ALWAYS },
+   { "!show_variable",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
 };
 
 
-#define MAXSWITCH  46
-
-LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
+LOCAL const UDOSWITCH udoswitch[] =
 {
-   { "!use_auto_subtocs",            &use_auto_subtocs,            'i',  "!depth",    &subtocs1_depth },
-   { "!use_auto_subsubtocs",         &use_auto_subsubtocs,         'i',  "!depth",    &subtocs2_depth },
-   { "!use_auto_subsubsubtocs",      &use_auto_subsubsubtocs,      'i',  "!depth",    &subtocs3_depth },
-   { "!use_auto_subsubsubsubtocs",   &use_auto_subsubsubsubtocs,   'i',  "!depth",    &subtocs4_depth },
-   { "!use_auto_subsubsubsubsubtocs",&use_auto_subsubsubsubsubtocs,'i',  "!depth",    &subtocs5_depth },
-   { "!use_auto_toptocs",            &use_auto_toptocs,            'b',  "!no_icons", &no_auto_toptocs_icons },
-   { "!use_compressed_tocs",         &use_compressed_tocs,         '\0', "",          NULL },
-   { "!use_compressed_envs",         &use_compressed_envs,         '\0', "",          NULL },
-   { "!use_compressed_descriptions", &use_compressed_descriptions, '\0', "",          NULL },
-   { "!use_compressed_enumerates",   &use_compressed_enumerates,   '\0', "",          NULL },
-   { "!use_compressed_itemizes",     &use_compressed_itemizes,     '\0', "",          NULL },
-   { "!use_compressed_lists",        &use_compressed_lists,        '\0', "",          NULL },
-   { "!use_formfeed",                &use_formfeed,                '\0', "",          NULL },
-   { "!use_chapter_images",          &use_chapter_images,          '\0', "",          NULL },
-   { "!use_about_udo",               &use_about_udo,               '\0', "",          NULL },
-   { "!use_ansi_tables",             &use_ansi_tables,             '\0', "",          NULL },
-   { "!use_style_book",              &use_style_book,              '\0', "",          NULL },
-   { "!use_justification",           &use_justification,           '\0', "",          NULL },
-   { "!use_output_buffer",           &use_output_buffer,           '\0', "",          NULL },
-   { "!use_nodes_inside_index",      &use_nodes_inside_index,      '\0', "",          NULL },
-   { "!use_alias_inside_index",      &use_alias_inside_index,      '\0', "",          NULL },
-   { "!use_label_inside_index",      &use_label_inside_index,      '\0', "",          NULL },
-   { "!use_udo_index",               &use_udo_index,               '\0', "",          NULL },
-   { "!use_mirrored_indices",        &use_mirrored_indices,        '\0', "",          NULL },
-   { "!use_comments",                &use_comments,                '\0', "",          NULL },
-   { "!use_auto_helpids",            &use_auto_helpids,            '\0', "",          NULL },
-   { "!no_index",                    &no_index,                    '\0', "",          NULL },
-   { "!no_images",                   &no_images,                   '\0', "",          NULL },
-   { "!no_img_size",                 &no_img_size,                 '\0', "",          NULL },
-   { "!no_numbers",                  &no_numbers,                  '\0', "",          NULL },
-   { "!no_umlaute",                  &no_umlaute,                  '\0', "",          NULL },
-   { "!no_8bit",                     &no_umlaute,                  '\0', "",          NULL },
-   { "!no_xlinks",                   &no_xlinks,                   '\0', "",          NULL },
-   { "!no_urls",                     &no_urls,                     '\0', "",          NULL },
-   { "!no_links",                    &no_links,                    '\0', "",          NULL },
-   { "!no_verbatim_umlaute",         &no_verbatim_umlaute,         '\0', "",          NULL },
-   { "!no_effects",                  &no_effects,                  '\0', "",          NULL },
-   { "!no_quotes",                   &no_quotes,                   '\0', "",          NULL },
-   { "!no_preamble",                 &no_preamble,                 '\0', "",          NULL },
-   { "!no_headlines",                &no_headlines,                '\0', "",          NULL },
-   { "!no_bottomlines",              &no_bottomlines,              '\0', "",          NULL },
-   { "!no_popup_headlines",          &no_popup_headlines,          '\0', "",          NULL },
-   { "!no_footers",                  &no_footers,                  '\0', "",          NULL },
-   { "!no_buttons",                  &no_buttons,                  '\0', "",          NULL },
-   { "!no_sourcecode",               &no_sourcecode,               '\0', "",          NULL },
-   { "!no_table_lines",              &no_table_lines,              '\0', "",          NULL },
+   { "!use_auto_subtocs",              &use_auto_subtocs[TOC_NODE1], 'i',  "!depth",      &subtocs_depth[TOC_NODE1] },
+   { "!use_auto_subsubtocs",           &use_auto_subtocs[TOC_NODE2], 'i',  "!depth",      &subtocs_depth[TOC_NODE2] },
+   { "!use_auto_subsubsubtocs",        &use_auto_subtocs[TOC_NODE3], 'i',  "!depth",      &subtocs_depth[TOC_NODE3] },
+   { "!use_auto_subsubsubsubtocs",     &use_auto_subtocs[TOC_NODE4], 'i',  "!depth",      &subtocs_depth[TOC_NODE4] },
+   { "!use_auto_subsubsubsubsubtocs",  &use_auto_subtocs[TOC_NODE5], 'i',  "!depth",      &subtocs_depth[TOC_NODE5] },
+   { "!use_auto_subsubsubsubsubsubtocs", &use_auto_subtocs[TOC_NODE6], 'i',"!depth",      &subtocs_depth[TOC_NODE6] },
+   { "!use_auto_subsubsubsubsubsubsubtocs", &use_auto_subtocs[TOC_NODE7], 'i', "!depth",  &subtocs_depth[TOC_NODE7] },
+   { "!use_auto_subsubsubsubsubsubsubsubtocs", &use_auto_subtocs[TOC_NODE8], 'i', "!depth", &subtocs_depth[TOC_NODE8] },
+   { "!use_auto_toptocs",              &use_auto_toptocs,            'b',  "!no_icons",   &no_auto_toptocs_icons },
+   { "!use_compressed_tocs",           &use_compressed_tocs,         '\0', "",            NULL },
+   { "!use_compressed_envs",           &use_compressed_envs,         '\0', "",            NULL },
+   { "!use_compressed_descriptions",   &use_compressed_descriptions, '\0', "",            NULL },
+   { "!use_compressed_enumerates",     &use_compressed_enumerates,   '\0', "",            NULL },
+   { "!use_compressed_itemizes",       &use_compressed_itemizes,     '\0', "",            NULL },
+   { "!use_compressed_lists",          &use_compressed_lists,        '\0', "",            NULL },
+   { "!use_formfeed",                  &use_formfeed,                '\0', "",            NULL },
+   { "!use_chapter_images",            &use_chapter_images,          '\0', "",            NULL },
+   { "!use_about_udo",                 &use_about_udo,               '\0', "",            NULL },
+   { "!use_ansi_tables",               &use_ansi_tables,             '\0', "",            NULL },
+   { "!use_style_book",                &use_style_book,              '\0', "",            NULL },
+   { "!use_justification",             &use_justification,           '\0', "",            NULL },
+   { "!use_output_buffer",             &use_output_buffer,           '\0', "",            NULL },
+   { "!use_nodes_inside_index",        &use_nodes_inside_index,      '\0', "",            NULL },
+   { "!use_alias_inside_index",        &use_alias_inside_index,      '\0', "",            NULL },
+   { "!use_label_inside_index",        &use_label_inside_index,      '\0', "",            NULL },
+   { "!use_udo_index",                 &use_udo_index,               '\0', "",            NULL },
+   { "!use_mirrored_indices",          &use_mirrored_indices,        '\0', "",            NULL },
+   { "!use_comments",                  &use_comments,                '\0', "",            NULL },
+   { "!use_auto_helpids",              &use_auto_helpids,            '\0', "",            NULL },
+   { "!no_index",                      &no_index,                    '\0', "",            NULL },
+   { "!no_images",                     &no_images,                   '\0', "",            NULL },
+   { "!no_img_size",                   &no_img_size,                 '\0', "",            NULL },
+   { "!no_numbers",                    &no_numbers,                  '\0', "",            NULL },
+   { "!no_umlaute",                    &no_umlaute,                  '\0', "",            NULL },
+   { "!no_8bit",                       &no_umlaute,                  '\0', "",            NULL },
+   { "!no_xlinks",                     &no_xlinks,                   '\0', "",            NULL },
+   { "!no_urls",                       &no_urls,                     '\0', "",            NULL },
+   { "!no_links",                      &no_links,                    '\0', "",            NULL },
+   { "!no_verbatim_umlaute",           &no_verbatim_umlaute,         '\0', "",            NULL },
+   { "!no_effects",                    &no_effects,                  '\0', "",            NULL },
+   { "!no_quotes",                     &no_quotes,                   '\0', "",            NULL },
+   { "!no_preamble",                   &no_preamble,                 '\0', "",            NULL },
+   { "!no_headlines",                  &no_headlines,                '\0', "",            NULL },
+   { "!no_bottomlines",                &no_bottomlines,              '\0', "",            NULL },
+   { "!no_popup_headlines",            &no_popup_headlines,          '\0', "",            NULL },
+   { "!no_footers",                    &no_footers,                  '\0', "",            NULL },
+   { "!no_buttons",                    &no_buttons,                  '\0', "",            NULL },
+   { "!no_sourcecode",                 &no_sourcecode,               '\0', "",            NULL },
+   { "!no_table_lines",                &no_table_lines,              '\0', "",            NULL },
 };
+#define MAXSWITCH ArraySize(udoswitch)
 
 
 typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
@@ -3248,20 +3280,25 @@ LOCAL void c_index(void)
 *
 ******************************************|************************************/
 
-LOCAL void c_heading(void)
+LOCAL void c_internal_heading(TOCTYPE level)
 {
-   char      name[512],      /* */
-             n[512],         /* */
-             align[64];      /* */
-   _BOOL   inside_center,  /* */
-             inside_right;   /* */
+   char      name[512],
+             n[512],
+             align[64];
+   _BOOL   inside_center,
+             inside_right;
+   char cmd[3 * TOC_MAXDEPTH + 20];
+   TOCTYPE   i;
    
-
-   tokcpy2(name, 512);
-
+   tokcpy2(name, sizeof(name));
+   
    if (name[0] == EOS)
    {
-      error_missing_parameter(CMD_HEADING);
+      strcpy(cmd, META_S);
+      for (i = TOC_NODE1; i < level; i++)
+         strcat(cmd, "sub");
+      strcat(cmd, "heading");
+      error_missing_parameter(cmd);
       return;
    }
 
@@ -3269,88 +3306,80 @@ LOCAL void c_heading(void)
    replace_udo_quotes(name);
    delete_all_divis(name);
 
+   save_upr_entry_heading(level - TOC_NODE1 + 1, sCurrFileName, current_node_name_sys, uiCurrFileLine);
    check_styles(name);
 
    inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   inside_right = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
 
    switch (desttype)
    {
    case TOTEX:
    case TOPDL:
       c_internal_styles(name);
-      voutlnf("{\\Large{\\bf %s}}", name);
+      switch (level)
+      {
+         case TOC_NODE1: voutlnf("{\\Large{\\bf %s}}", name); break;
+         case TOC_NODE2: voutlnf("{\\large{\\bf %s}}", name); break;
+         case TOC_NODE3:
+         default: voutlnf("{\\normalsize{\\bf %s}}", name); break;
+      }
       outln("");
       break;
-      
       
    case TOINF:
       c_internal_styles(name);
       outln("");
-      voutlnf("@chapheading %s", name);
+      switch (level)
+      {
+         case TOC_NODE1: voutlnf("@chapheading %s", name); break;
+         case TOC_NODE2: voutlnf("@heading %s", name); break;
+         case TOC_NODE3:
+         default: voutlnf("@subheading %s", name); break;
+      }
       outln("");
       break;
-      
       
    case TORTF:
       c_rtf_styles(name);
       c_rtf_quotes(name);
       align[0] = EOS;
-      
       if (inside_center)
          strcpy(align, "\\qc");
-         
       if (inside_right)
          strcpy(align, "\\qr");
-
-                                          /* Bug -> Corrected in r6pl15 [NHz] */
-/*    voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
-*/
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node1size, name);
+      voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.nodesize[level + 1], name);
       break;
-      
       
    case TOWIN:
    case TOWH4:
    case TOAQV:
       c_win_styles(name);
       align[0] = EOS;
-      
       if (inside_center)
          strcpy(align, "\\qc");
-         
       if (inside_right)
          strcpy(align, "\\qr");
-         
-      voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
-      
-/*    voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);
-*/
+      voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + rtf_structure_height[level + 1], name);
       break;
-      
       
    case TOKPS:
       outln("newline");
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%d changeFontSize", laydat.node1size);
-                                          /* New in V6.5.5 [NHz] */
+      voutlnf("%d changeFontSize", laydat.nodesize[level + 1]);
       node2postscript(name, KPS_CONTENT);
       outln("Bon");
       voutlnf("(%s) udoshow", name);
       outln("Boff");
-                                          /* Changed in r6pl15 [NHz] */
       voutlnf("%d changeFontSize", laydat.propfontsize);
       outln("newline");
       break;
-      
       
    case TOHAH:
    case TOHTM:
    case TOMHH:
       c_internal_styles(name);
       n[0] = EOS;
-      
+#if 0
       if (html_doctype == HTML5)
       {
          if (inside_center)
@@ -3360,58 +3389,50 @@ LOCAL void c_heading(void)
             strcpy(n, " class=\"UDO_td_align_right\"");
       }
       else
+#endif
       {      
          if (inside_center)
             strcpy(n, " align=\"center\"");
-      
          if (inside_right)
             strcpy(n, " align=\"right\"");
       }
-         
-      voutlnf("<h%d%s>%s</h%d>", html_nodesize, n, name, html_nodesize);
+      voutlnf("<h%d%s>%s</h%d>", html_nodesize + level, n, name, html_nodesize + level);
       break;
-      
       
    case TOASC:
    case TOPCH:
       c_internal_styles(name);
       outln("");
       outln(name);
-      output_ascii_line("*", strlen(name));
+      output_ascii_line(&asc_structure_chars[level], strlen(name));
       outln("");
       break;
       
-      
    case TOMAN:
-      my_strupr(name);
+      if (level == TOC_NODE1)
+         my_strupr(name);
       sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
       c_internal_styles(n);
       outln(n);
       break;
-      
       
    case TONRO:
       my_strupr(name);
       voutlnf(".SH %s", name);
       break;
       
-      
    case TOSTG:
    case TOAMG:
       sprintf(n, "%s%s%s", UNDER_ON, name, UNDER_OFF);
-      
       if (inside_center)
          strcenter(n, zDocParwidth);
-         
       if (inside_right)
          strright(n, zDocParwidth);
-         
       c_internal_styles(n);
       outln("");
       outln(n);
       outln("");
       break;
-      
       
    case TOTVH:
       c_internal_styles(name);
@@ -3419,992 +3440,66 @@ LOCAL void c_heading(void)
       outln("");
       break;
       
-      
-   case TODRC:                            /* <???> */
-   case TOHPH:                            /* <???> */
-   case TOIPF:                            /* <???> */
-   case TOLYX:                            /* <???> */
+   case TODRC:
+   case TOHPH:
+   case TOIPF:
+   case TOLYX:
       break;
    }
 }
 
 
+LOCAL void c_heading(void)
+{
+   c_internal_heading(TOC_NODE1);
+}
 
-
-
-/*******************************************************************************
-*
-*  c_subheading():
-*     make subheading
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_subheading(void)
 {
-   char      name[512],      /* */
-             n[512],         /* */
-             align[64];      /* */
-   _BOOL   inside_center,  /* */
-             inside_right;   /* */
-   
-
-   tokcpy2(name, 512);
-
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_SUBHEADING);
-      return;
-   }
-
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-
-   check_styles(name);
-
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      c_internal_styles(name);
-                                          /* V6.5.20 [CS] */
-      if (use_style_book)
-         voutlnf("\n\\section*{%s}", name);
-      else
-         voutlnf("\n\\subsection*{%s}", name);
-
-/* old:
-      voutlnf("{\\large{\\bf %s}}", name);
-*/
-      outln("");
-      break;
-      
-      
-   case TOINF:
-      c_internal_styles(name);
-      outln("");
-      voutlnf("@heading %s", name);
-      outln("");
-      break;
-      
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node2size, name);
-/*    voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 6, name);
-*/
-      break;
-      
-      
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-      voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 6, name);
-      break;
-      
-      
-   case TOKPS:
-      outln("newline");
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%d changeFontSize", laydat.node2size);
-                                          /* New in V6.5.5 [NHz] */
-      node2postscript(name, KPS_CONTENT);
-      outln("Bon");
-      voutlnf("(%s) udoshow", name);
-      outln("Boff");
-                                          /* Changed in r6pl15 [NHz] */
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      outln("newline");
-      break;
-      
-      
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      n[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(n, " class=\"UDO_td_align_center\"");
-      
-         if (inside_right)
-            strcpy(n, " class=\"UDO_td_align_right\"");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(n, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(n, " align=\"right\"");
-      }
-         
-      voutlnf("<h%d%s>%s</h%d>", html_nodesize + 1, n, name, html_nodesize + 1);
-      break;
-      
-      
-   case TOASC:
-   case TOPCH:
-      c_internal_styles(name);
-      outln("");
-      outln(name);
-      output_ascii_line("=", strlen(name));
-      outln("");
-      break;
-      
-      
-   case TOMAN:
-      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-      
-   case TONRO:
-      my_strupr(name);
-      voutlnf(".SH %s", name);
-      break;
-      
-      
-   case TOSTG:
-   case TOAMG:
-      sprintf(n, "%s%s%s", UNDER_ON, name, UNDER_OFF);
-      
-      if (inside_center)
-         strcenter(n, zDocParwidth);
-         
-      if (inside_right)
-         strright(n, zDocParwidth);
-         
-      c_internal_styles(n);
-      outln("");
-      outln(n);
-      outln("");
-      break;
-      
-   case TOTVH:
-      c_internal_styles(name);
-      tvh_headline(name);
-      outln("");
-      break;
-      
-      
-   case TODRC:                            /* <???> */
-   case TOHPH:                            /* <???> */
-   case TOIPF:                            /* <???> */
-   case TOLYX:                            /* <???> */
-      break;
-   }
+   c_internal_heading(TOC_NODE2);
 }
 
-
-
-
-
-/*******************************************************************************
-*
-*  c_subsubheading():
-*     make subsubheading
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_subsubheading(void)
 {
-   char      name[512],      /* */
-             n[512],         /* */
-             align[64];      /* */
-   _BOOL   inside_center,  /* */
-             inside_right;   /* */
-   
-
-   tokcpy2(name, 512);
-
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_SUBSUBHEADING);
-      return;
-   }
-
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-
-   check_styles(name);
-
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      c_internal_styles(name);
-                                          /* V6.5.20 [CS] */
-      if (use_style_book)
-         voutlnf("\n\\subsection*{%s}", name);
-      else
-         voutlnf("\n\\subsubsection*{%s}", name);
-/* old:
-      voutlnf("{\\normalsize{\\bf %s}}", name);
-*/
-      outln("");
-      break;
-      
-      
-   case TOINF:
-      c_internal_styles(name);
-      outln("");
-      voutlnf("@subheading %s", name);
-      outln("");
-      break;
-      
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node3size, name);
-/*    voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
-*/
-      break;
-      
-      
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-      voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
-      break;
-      
-      
-   case TOKPS:
-      outln("newline");
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%d changeFontSize", laydat.node3size);
-                                          /* New in V6.5.5 [NHz] */
-      node2postscript(name, KPS_CONTENT);
-      outln("Bon");
-      voutlnf("(%s) udoshow", name);
-      outln("Boff");
-                                          /* Changed in r6pl15 [NHz] */
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      outln("newline");
-      break;
-      
-      
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      n[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(n, " class=\"UDO_td_align_center\"");
-      
-         if (inside_right)
-            strcpy(n, " class=\"UDO_td_align_right\"");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(n, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(n, " align=\"right\"");
-      }
-         
-      voutlnf("<h%d%s>%s</h%d>", html_nodesize + 2, n, name, html_nodesize + 2);
-      break;
-      
-      
-   case TOASC:
-   case TOPCH:
-      c_internal_styles(name);
-      outln("");
-      outln(name);
-      output_ascii_line("-", strlen(name));
-      outln("");
-      break;
-      
-      
-   case TOMAN:
-      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-      
-   case TONRO:
-      my_strupr(name);
-      voutlnf(".SH %s", name);
-      break;
-      
-      
-   case TOSTG:
-   case TOAMG:
-      sprintf(n, "%s%s%s", UNDER_ON, name, UNDER_OFF);
-      
-      if (inside_center)
-         strcenter(n, zDocParwidth);
-         
-      if (inside_right)
-         strright(n, zDocParwidth);
-         
-      c_internal_styles(n);
-      outln("");
-      outln(n);
-      outln("");
-      break;
-      
-      
-   case TOTVH:
-      c_internal_styles(name);
-      tvh_headline(name);
-      outln("");
-      break;
-      
-      
-   case TODRC:                            /* <???> */
-   case TOHPH:                            /* <???> */
-   case TOIPF:                            /* <???> */
-   case TOLYX:                            /* <???> */
-      break;
-   }
+   c_internal_heading(TOC_NODE3);
 }
 
-
-
-
-
-/*******************************************************************************
-*
-*  c_subsubsubheading():
-*     make subsubsubheading
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_subsubsubheading(void)
 {
-   char      name[512],      /* */
-             n[512],         /* */
-             align[64];      /* */
-   _BOOL   inside_center,  /* */
-             inside_right;   /* */
-   
-
-   tokcpy2(name, 512);
-
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_SUBSUBSUBHEADING);
-      return;
-   }
-
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-
-   check_styles(name);
-
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      c_internal_styles(name);
-                                          /* V6.5.20 [CS] */
-      if (use_style_book)
-         voutlnf("\n\\subsubsection*{%s}", name);
-      else
-         voutlnf("\n\\subsubsubsection*{%s}", name);
-/* old:
-      voutlnf("{\\normalsize{\\bf %s}}", name);
-*/
-      outln("");
-      break;
-      
-      
-   case TOINF:
-      c_internal_styles(name);
-      outln("");
-      voutlnf("@subheading %s", name);
-      outln("");
-      break;
-      
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node4size, name);
-      break;
-      
-      
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-      voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
-      break;
-      
-      
-   case TOKPS:
-      outln("newline");
-                                          /* Fixed bug #0000047 [NHz] */
-      voutlnf("%d changeFontSize", laydat.node4size);
-                                          /* New in V6.5.5 [NHz] */
-      node2postscript(name, KPS_CONTENT);
-      outln("Bon");
-      voutlnf("(%s) udoshow", name);
-      outln("Boff");
-                                          /* Changed in r6pl15 [NHz] */
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      outln("newline");
-      break;
-      
-      
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      n[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(n, " class=\"UDO_td_align_center\"");
-      
-         if (inside_right)
-            strcpy(n, " class=\"UDO_td_align_right\"");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(n, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(n, " align=\"right\"");
-      }
-         
-      voutlnf("<h%d%s>%s</h%d>", html_nodesize + 3, n, name, html_nodesize + 3);
-      break;
-      
-      
-   case TOASC:
-   case TOPCH:
-      c_internal_styles(name);
-      outln("");
-      outln(name);
-      outln("");
-      break;
-      
-      
-   case TOMAN:
-      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-      
-   case TONRO:
-      my_strupr(name);
-      voutlnf(".SH %s", name);
-      break;
-      
-      
-   case TOSTG:
-   case TOAMG:
-      sprintf(n, "%s%s%s", UNDER_ON, name, UNDER_OFF);
-      
-      if (inside_center)
-         strcenter(n, zDocParwidth);
-         
-      if (inside_right)
-         strright(n, zDocParwidth);
-         
-      c_internal_styles(n);
-      outln("");
-      outln(n);
-      outln("");
-      break;
-      
-      
-   case TOTVH:
-      c_internal_styles(name);
-      tvh_headline(name);
-      outln("");
-      break;
-      
-      
-   case TODRC:                            /* <???> */
-   case TOHPH:                            /* <???> */
-   case TOIPF:                            /* <???> */
-   case TOLYX:                            /* <???> */
-      break;
-   }
+   c_internal_heading(TOC_NODE4);
 }
 
-
-
-
-/*******************************************************************************
-*
-*  c_subsubsubsubheading():
-*     make subsubsubsubheading
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_subsubsubsubheading(void)
 {
-   char      name[512],      /* */
-             n[512],         /* */
-             align[64];      /* */
-   _BOOL   inside_center,  /* */
-             inside_right;   /* */
-   
-
-   tokcpy2(name, 512);
-
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_SUBSUBSUBSUBHEADING);
-      return;
-   }
-
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-
-   check_styles(name);
-
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      c_internal_styles(name);
-                                          /* V6.5.20 [CS] */
-      if (use_style_book)
-         voutlnf("\n\\subsubsubsection*{%s}", name);
-      else
-         voutlnf("\n\\subsubsubsubsection*{%s}", name);
-/* old:
-      voutlnf("{\\normalsize{\\bf %s}}", name);
-*/
-      outln("");
-      break;
-      
-      
-   case TOINF:
-      c_internal_styles(name);
-      outln("");
-      voutlnf("@subheading %s", name);    /* ToDo:??? */
-      outln("");
-      break;
-      
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node5size, name);
-      break;
-      
-      
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-      voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
-      break;
-      
-      
-   case TOKPS:
-      outln("newline");
-                                          /* Fixed bug #0000047 [NHz] */
-      voutlnf("%d changeFontSize", laydat.node5size);
-                                          /* New in V6.5.5 [NHz] */
-      node2postscript(name, KPS_CONTENT);
-      outln("Bon");
-      voutlnf("(%s) udoshow", name);
-      outln("Boff");
-                                          /* Changed in r6pl15 [NHz] */
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      outln("newline");
-      break;
-      
-      
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      n[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(n, " class=\"UDO_td_align_center\"");
-      
-         if (inside_right)
-            strcpy(n, " class=\"UDO_td_align_right\"");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(n, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(n, " align=\"right\"");
-      }
-         
-      voutlnf("<h%d%s>%s</h%d>", html_nodesize + 4, n, name, html_nodesize + 4);
-      break;
-      
-      
-   case TOASC:
-   case TOPCH:
-      c_internal_styles(name);
-      outln("");
-      outln(name);
-      outln("");
-      break;
-      
-      
-   case TOMAN:
-      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-      
-   case TONRO:
-      my_strupr(name);
-      voutlnf(".SH %s", name);
-      break;
-      
-      
-   case TOSTG:
-   case TOAMG:
-      sprintf(n, "%s%s%s", UNDER_ON, name, UNDER_OFF);
-      
-      if (inside_center)
-         strcenter(n, zDocParwidth);
-         
-      if (inside_right)
-         strright(n, zDocParwidth);
-         
-      c_internal_styles(n);
-      outln("");
-      outln(n);
-      outln("");
-      break;
-      
-      
-   case TOTVH:
-      c_internal_styles(name);
-      tvh_headline(name);
-      outln("");
-      break;
-      
-      
-   case TODRC:                            /* <???> */
-   case TOHPH:                            /* <???> */
-   case TOIPF:                            /* <???> */
-   case TOLYX:                            /* <???> */
-      break;
-   }
+   c_internal_heading(TOC_NODE5);
 }
 
 
-
-
-
-/*******************************************************************************
-*
-*  c_subsubsubsubsubheading():
-*     make subsubsubsubsubheading
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
 LOCAL void c_subsubsubsubsubheading(void)
 {
-   char      name[512],      /* */
-             n[512],         /* */
-             align[64];      /* */
-   _BOOL   inside_center,  /* */
-             inside_right;   /* */
-   
+   c_internal_heading(TOC_NODE6);
+}
 
-   tokcpy2(name, 512);
 
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_SUBSUBSUBSUBHEADING);
-      return;
-   }
+LOCAL void c_subsubsubsubsubsubheading(void)
+{
+   c_internal_heading(TOC_NODE7);
+}
 
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
 
-   check_styles(name);
+LOCAL void c_subsubsubsubsubsubsubheading(void)
+{
+   c_internal_heading(TOC_NODE8);
+}
 
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
 
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      c_internal_styles(name);
-                                          /* V6.5.20 [CS] */
-      if (use_style_book)
-         voutlnf("\n\\subsubsubsection*{%s}", name);
-      else
-         voutlnf("\n\\subsubsubsubsection*{%s}", name);
-/* old:
-      voutlnf("{\\normalsize{\\bf %s}}", name);
-*/
-      outln("");
-      break;
-      
-      
-   case TOINF:
-      c_internal_styles(name);
-      outln("");
-      voutlnf("@subheading %s", name);    /* ToDo:??? */
-      outln("");
-      break;
-      
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-                                          /* Changed in r6pl16 [NHz] */
-      voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node6size, name);
-      break;
-      
-      
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-                                          /* New in r6pl15 [NHz] */
-      align[0] = EOS;
-      
-      if (inside_center)
-         strcpy(align, "\\qc");
-         
-      if (inside_right)
-         strcpy(align, "\\qr");
-         
-      voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
-      break;
-      
-      
-   case TOKPS:
-      outln("newline");
-                                          /* Fixed bug #0000047 [NHz] */
-      voutlnf("%d changeFontSize", laydat.node6size);
-                                          /* New in V6.5.5 [NHz] */
-      node2postscript(name, KPS_CONTENT);
-      outln("Bon");
-      voutlnf("(%s) udoshow", name);
-      outln("Boff");
-                                          /* Changed in r6pl15 [NHz] */
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      outln("newline");
-      break;
-      
-      
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      n[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(n, " class=\"UDO_td_align_center\"");
-      
-         if (inside_right)
-            strcpy(n, " class=\"UDO_td_align_right\"");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(n, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(n, " align=\"right\"");
-      }
-         
-      voutlnf("<h%d%s>%s</h%d>", html_nodesize + 4, n, name, html_nodesize + 4);
-      break;
-      
-      
-   case TOASC:
-   case TOPCH:
-      c_internal_styles(name);
-      outln("");
-      outln(name);
-      outln("");
-      break;
-      
-      
-   case TOMAN:
-      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-      
-   case TONRO:
-      my_strupr(name);
-      voutlnf(".SH %s", name);
-      break;
-      
-      
-   case TOSTG:
-   case TOAMG:
-      sprintf(n, "%s%s%s", UNDER_ON, name, UNDER_OFF);
-      
-      if (inside_center)
-         strcenter(n, zDocParwidth);
-         
-      if (inside_right)
-         strright(n, zDocParwidth);
-         
-      c_internal_styles(n);
-      outln("");
-      outln(n);
-      outln("");
-      break;
-      
-      
-   case TOTVH:
-      c_internal_styles(name);
-      tvh_headline(name);
-      outln("");
-      break;
-      
-      
-   case TODRC:                            /* <???> */
-   case TOHPH:                            /* <???> */
-   case TOIPF:                            /* <???> */
-   case TOLYX:                            /* <???> */
-      break;
-   }
+LOCAL void c_subsubsubsubsubsubsubsubheading(void)
+{
+   c_internal_heading(TOC_NODE9);
 }
 
 
@@ -4421,594 +3516,138 @@ LOCAL void c_subsubsubsubsubheading(void)
 *
 ******************************************|************************************/
 
-LOCAL void c_listheading(void)
+LOCAL void c_internal_listheading(int offset)
 {
-   char      name[512],         /* */
-             sFontBeg[512],     /* */
-             sFontEnd[32],      /* */
-             align[64];         /* */
-   _BOOL   inside_center,     /* */
-             inside_right;      /* */
-   int       iSize;             /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-
+   char      name[512],
+             sFontBeg[512],
+             sFontEnd[32],
+             align[64];
+   _BOOL   inside_center,
+             inside_right;
+   int       iSize;
+   char      cmd[3 * TOC_MAXDEPTH + 20];
+   int       i;
    
-   tokcpy2(name, 512);
+   tokcpy2(name, sizeof(name));
    
    if (name[0] == EOS)
    {
-      error_missing_parameter(CMD_HEADING);
+      strcpy(cmd, "!list");
+      for (i = 3; i > offset; i--)
+         strcat(cmd, "sub");
+      strcat(cmd, "heading");
+      error_missing_parameter(cmd);
       return;
    }
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
    
    convert_tilde(name);
    replace_udo_quotes(name);
    delete_all_divis(name);
    
-   check_styles(name);                    /*r6pl3*/
+   check_styles(name);
    
-                                          /*r6pl5*/
    inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-                                          /*r6pl5*/
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   inside_right = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
    
    switch (desttype)
    {
-   case TOHAH:                            /* V6.5.17 */
+   case TOHAH:
    case TOHTM:
    case TOMHH:
       c_internal_styles(name);
       align[0] = EOS;
-      
+#if 0
       if (html_doctype == HTML5)
       {
          if (inside_center)
-            strcpy(align, "UDO_td_align_center");
+            strcpy(align, " class=\"UDO_td_align_center\"");
       
          if (inside_right)
-            strcpy(align, "UDO_td_align_right");
+            strcpy(align, " class=\"UDO_td_align_right\"");
       }
       else
+#endif
       {      
-         if (inside_center)
-            strcpy(align, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(align, " align=\"right\"");
-      }
-         
+	      if (inside_center)
+	         strcpy(align, " align=\"center\"");
+	      if (inside_right)
+	         strcpy(align, " align=\"right\"");
+	  }
+
       sFontBeg[0] = EOS;
       sFontEnd[0] = EOS;
-      
       if (sDocHtmlPropfontName[0] != EOS)
       {
-         iSize = iDocHtmlPropfontSize + 3;
-         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
+         iSize = iDocHtmlPropfontSize + offset;
+         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, iSize >= 0 ? "+" : "", iSize);
          strcpy(sFontEnd, "</font>");
       }
       
+#if 0
       if (html_doctype == HTML5)
       {
          voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
             align, closer, sFontBeg, name);
       }
       else
+#endif
       {
-         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
+         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;%s%s<b>%s</b>", align, xhtml_br, sFontBeg, name);
       }
       
       if (bEnv1stItem[iEnvLevel])
       {
          voutlnf("%s</td></tr>", sFontEnd);
       }
+      break;
    }
 }
 
 
-
-
-
-/*******************************************************************************
-*
-*  c_listsubheading():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
+LOCAL void c_listheading(void)
+{
+   c_internal_listheading(3);
+}
 
 LOCAL void c_listsubheading(void)
 {
-   char      name[512],         /* */
-             sFontBeg[512],     /* */
-             sFontEnd[32],      /* */
-             align[64];         /* */
-   _BOOL   inside_center,     /* */
-             inside_right;      /* */
-   int       iSize;             /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-   
-   
-   tokcpy2(name, 512);
-   
-   if (name[0] == EOS)
-   {  error_missing_parameter(CMD_HEADING);
-      return;
-   }
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   
-   check_styles(name);                    /*r6pl3*/
-   
-                                          /*r6pl5*/
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-                                          /*r6pl5*/
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   
-   switch (desttype)
-   {
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      align[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(align, "UDO_td_align_center");
-      
-         if (inside_right)
-            strcpy(align, "UDO_td_align_right");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(align, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(align, " align=\"right\"");
-      }
-         
-      sFontBeg[0] = EOS;
-      sFontEnd[0] = EOS;
-      
-      if (sDocHtmlPropfontName[0] != EOS)
-      {
-         iSize = iDocHtmlPropfontSize + 2;
-         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
-         strcpy(sFontEnd, "</font>");
-      }
-      
-      if (html_doctype == HTML5)
-      {
-         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      else
-      {
-         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      
-      if (bEnv1stItem[iEnvLevel])
-      {
-         voutlnf("%s</td></tr>", sFontEnd);
-      }
-   }
+   c_internal_listheading(2);
 }
-
-
-
-
-/*******************************************************************************
-*
-*  c_listsubsubheading():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_listsubsubheading(void)
 {
-   char      name[512],         /* */
-             sFontBeg[512],     /* */
-             sFontEnd[32],      /* */
-             align[64];         /* */
-   _BOOL   inside_center,     /* */
-             inside_right;      /* */
-   int       iSize;             /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-   
-   
-   tokcpy2(name, 512);
-   
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_HEADING);
-      return;
-   }
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   
-   check_styles(name);                    /*r6pl3*/
-   
-                                          /*r6pl5*/
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-                                          /*r6pl5*/
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   
-   switch (desttype)
-   {
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      align[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(align, "UDO_td_align_center");
-      
-         if (inside_right)
-            strcpy(align, "UDO_td_align_right");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(align, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(align, " align=\"right\"");
-      }
-         
-      sFontBeg[0] = EOS;
-      sFontEnd[0] = EOS;
-      
-      if (sDocHtmlPropfontName[0] != EOS)
-      {
-         iSize = iDocHtmlPropfontSize + 1;
-         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
-         strcpy(sFontEnd, "</font>");
-      }
-      
-      if (html_doctype == HTML5)
-      {
-         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      else
-      {
-         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      
-      if (bEnv1stItem[iEnvLevel])
-      {
-         voutlnf("%s</td></tr>", sFontEnd);
-      }
-   }
+   c_internal_listheading(1);
 }
-
-
-
-
-
-/*******************************************************************************
-*
-*  c_listsubsubsubheading():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_listsubsubsubheading(void)
 {
-   char      name[512],         /* */
-             sFontBeg[512],     /* */
-             sFontEnd[32],      /* */
-             align[64];         /* */
-   _BOOL   inside_center,     /* */
-             inside_right;      /* */
-   int       iSize;             /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-
-   tokcpy2(name, 512);
-   
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_HEADING);
-      return;
-   }
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   
-   check_styles(name);                    /*r6pl3*/
-   
-                                          /*r6pl5*/
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-                                          /*r6pl5*/
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   
-   switch (desttype)
-   {
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      align[0] = EOS;
-      
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(align, "UDO_td_align_center");
-      
-         if (inside_right)
-            strcpy(align, "UDO_td_align_right");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(align, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(align, " align=\"right\"");
-      }
-      
-      sFontBeg[0] = EOS;
-      sFontEnd[0] = EOS;
-      
-      if (sDocHtmlPropfontName[0] != EOS)
-      {
-         iSize = iDocHtmlPropfontSize;
-         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
-         strcpy(sFontEnd, "</font>");
-      }
-      
-      if (html_doctype == HTML5)
-      {
-         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      else
-      {
-         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      
-      if (bEnv1stItem[iEnvLevel])
-      {
-         voutlnf("%s</td></tr>", sFontEnd);
-      }
-   }
+   c_internal_listheading(0);
 }
-
-
-
-
-
-/*******************************************************************************
-*
-*  c_listsubsubsubsubheading():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_listsubsubsubsubheading(void)
 {
-   char      name[512],         /* */
-             sFontBeg[512],     /* */
-             sFontEnd[32],      /* */
-             align[64];         /* */
-   _BOOL   inside_center,     /* */
-             inside_right;      /* */
-   int       iSize;             /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-
-   tokcpy2(name, 512);
-   
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_HEADING);
-      return;
-   }
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   
-   check_styles(name);                    /*r6pl3*/
-   
-                                          /*r6pl5*/
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-                                          /*r6pl5*/
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   
-   switch (desttype)
-   {
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      align[0] = EOS;
-
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(align, "UDO_td_align_center");
-      
-         if (inside_right)
-            strcpy(align, "UDO_td_align_right");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(align, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(align, " align=\"right\"");
-      }
-      
-      sFontBeg[0] = EOS;
-      sFontEnd[0] = EOS;
-      
-      if (sDocHtmlPropfontName[0] != EOS)
-      {
-         iSize = iDocHtmlPropfontSize;
-         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
-         strcpy(sFontEnd, "</font>");
-      }
-      
-      if (html_doctype == HTML5)
-      {
-         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      else
-      {
-         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      
-      if (bEnv1stItem[iEnvLevel])
-      {
-         voutlnf("%s</td></tr>", sFontEnd);
-      }
-   }
+   c_internal_listheading(-1);
 }
-
-
-
-
-
-/*******************************************************************************
-*
-*  c_listsubsubsubsubsubheading():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
 
 LOCAL void c_listsubsubsubsubsubheading(void)
 {
-   char      name[512],         /* */
-             sFontBeg[512],     /* */
-             sFontEnd[32],      /* */
-             align[64];         /* */
-   _BOOL   inside_center,     /* */
-             inside_right;      /* */
-   int       iSize;             /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-
-   tokcpy2(name, 512);
-   
-   if (name[0] == EOS)
-   {
-      error_missing_parameter(CMD_HEADING);
-      return;
-   }
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   convert_tilde(name);
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   
-   check_styles(name);                    /*r6pl3*/
-   
-                                          /*r6pl5*/
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-                                          /*r6pl5*/
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   
-   switch (desttype)
-   {
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-      c_internal_styles(name);
-      align[0] = EOS;
-
-      if (html_doctype == HTML5)
-      {
-         if (inside_center)
-            strcpy(align, "UDO_td_align_center");
-      
-         if (inside_right)
-            strcpy(align, "UDO_td_align_right");
-      }
-      else
-      {      
-         if (inside_center)
-            strcpy(align, " align=\"center\"");
-      
-         if (inside_right)
-            strcpy(align, " align=\"right\"");
-      }
-      
-      sFontBeg[0] = EOS;
-      sFontEnd[0] = EOS;
-      
-      if (sDocHtmlPropfontName[0] != EOS)
-      {
-         iSize = iDocHtmlPropfontSize;
-         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
-         strcpy(sFontEnd, "</font>");
-      }
-      
-      if (html_doctype == HTML5)
-      {
-         voutlnf("<tr><td class=\"UDO_td_valign_top %s\" colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      else
-      {
-         voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
-            align, closer, sFontBeg, name);
-      }
-      
-      if (bEnv1stItem[iEnvLevel])
-      {
-         voutlnf("%s</td></tr>", sFontEnd);
-      }
-   }
+   c_internal_listheading(-2);
 }
 
+LOCAL void c_listsubsubsubsubsubsubheading(void)
+{
+   c_internal_listheading(-3);
+}
 
+LOCAL void c_listsubsubsubsubsubsubsubheading(void)
+{
+   c_internal_listheading(-4);
+}
+
+LOCAL void c_listsubsubsubsubsubsubsubsubheading(void)
+{
+   c_internal_listheading(-5);
+}
 
 
 
@@ -5054,19 +3693,14 @@ GLOBAL void c_newpage(void)
          {
             if (!bTestmode)
                fprintf(outfile.file, "\n");
-               
             iManPageLines++;
             outlines++;
          }
-         
          man_bottomline();
-         
          iManPagePages++;
          iManPageLines = 0;
-         
          man_headline();
       }
-      
       break;
       
    case TOASC:
@@ -5074,23 +3708,25 @@ GLOBAL void c_newpage(void)
       {
          out("\014");
       }
-      
       break;
       
    case TOKPS:
       outln("newpage");
       break;
       
-   case TOHAH:
    case TOHTM:
       outln("<span class=\"page-break\"></span>");
+      break;
+      
+   case TOHAH:
+   case TOMHH:
+      outln("<span style=\"page-break-after:always\"></span>");
       break;
       
    case TODRC:
    case TOHPH:
    case TOIPF:
    case TOLYX:
-      /* <???> */
       break;
    }
 }
@@ -5111,7 +3747,6 @@ GLOBAL void c_newpage(void)
 
 LOCAL void c_tunix(void)
 {
-   return;
 }
 
 
@@ -5161,11 +3796,8 @@ LOCAL void c_nop(void)
 LOCAL void c_break(void)
 {
    bBreakInside = TRUE;
-   
    if (bInsideDocument)
-   {
       c_end_document();
-   }
 }
 
 
@@ -8050,7 +6682,7 @@ _BOOL           reset_internals)        /* */
    case TOAMG:                            /* AmigaGuide */
       umbruch = zDocParwidth;
 
-      if (bInsidePopup && zDocParwidth > 60)
+      if (toc_inside_popup() && zDocParwidth > 60)
          umbruch = 60;
       
       break;
@@ -9260,7 +7892,7 @@ char             *s)                    /* */
    
    while (!found && i < token_counter)
    {
-      for (j = 0; j < MAXSWITCH; j++)
+      for (j = 0; j < (int)MAXSWITCH; j++)
       {
          if (token[i][0] == META_C && token[i][1] != QUOTE_C)
          {
@@ -10023,8 +8655,7 @@ const char  *suff)                           /* */
 
 LOCAL void output_preamble(void)
 {
-   char   s[512];  /* */
-
+   char s[512];
 
    if (no_preamble)
       return;
@@ -10035,21 +8666,18 @@ LOCAL void output_preamble(void)
    case TOPDL:
       if (bTex2e)
       {
-                                          /* v6.5.20 [CS] was 11pt */
          strcpy(s, "\\documentclass[10pt]");
-         
          if (use_style_book)
          {
-            strcat(s, "{scrbook}");       /* was: {book} */
+            strcat(s, "{scrbook}");
          }
          else
          {
-            strcat(s, "{scrartcl}");      /* was: {article} */
+            strcat(s, "{scrartcl}");
          }
-         
          outln(s);
-         s[0] = EOS;
          
+         s[0] = EOS;
          if (destlang == TOGER)
          {
             if (iTexVersion == TEX_MIKTEX)
@@ -10084,27 +8712,20 @@ LOCAL void output_preamble(void)
          }
          
                                         
-         outln("\\usepackage{eurosym}");  /* New in V6.5.8 [NHz] */
-                                      
-         outln("\\usepackage{times}");    /* New in V6.5.20 [CS] */
+         outln("\\usepackage{eurosym}");
+         outln("\\usepackage{times}");
          
-                                          /* UTF-8 output? */
+         /* UTF-8 output? */
          if (iEncodingTarget == CODE_UTF8)
             outln("\\usepackage[utf8]{inputenc}");
 
-         if (desttype == TOPDL)           /* r6pl8*/
+         if (desttype == TOPDL)
          {
             outln("\\pdfoutput=1\\relax");
-            
             if (bDocMediumCompression)
-            {
                outln("\\pdfcompresslevel=1");
-            }
-            
             if (bDocHighCompression)
-            {
                outln("\\pdfcompresslevel=9");
-            }
             
             outln("\\pdfpagewidth=\\paperwidth");
             outln("\\pdfpageheight=\\paperheight");
@@ -10143,22 +8764,48 @@ LOCAL void output_preamble(void)
          outln("\\makeindex");
       }
 
-      if (called_subsubsubsubsubnode)
+      if (use_style_book)
       {
-         if (use_style_book)
-         {
-            outln("\\setcounter{tocdepth}{4}");
-            outln("\\setcounter{secnumdepth}{4}");
-         }
-         else
-         {
-            outln("\\setcounter{tocdepth}{5}");
-            outln("\\setcounter{secnumdepth}{5}");
-         }
+         voutlnf("\\setcounter{tocdepth}{%d}", toc_maxdepth - TOC_NODE1 + 1);
+         voutlnf("\\setcounter{secnumdepth}{%d}", toc_maxdepth - TOC_NODE1 + 1);
+      }
+      else
+      {
+         voutlnf("\\setcounter{tocdepth}{%d}", toc_maxdepth - TOC_NODE1 + 2);
+         voutlnf("\\setcounter{secnumdepth}{%d}", toc_maxdepth - TOC_NODE1 + 2);
       }
       
+      outln("\\newcounter{subsubparagraph}[subparagraph]");
+      outln("\\newcounter{subsubsubparagraph}[subsubparagraph]");
+      outln("\\newcounter{subsubsubsubparagraph}[subsubsubparagraph]");
+      outln("\\newcounter{subsubsubsubsubparagraph}[subsubsubsubparagraph]");
+      outln("\\makeatletter");
+      outln("\\renewcommand\\thesubsubparagraph{\\thesubparagraph.\\@arabic\\c@subsubparagraph}");
+      outln("\\renewcommand\\thesubsubsubparagraph{\\thesubsubparagraph.\\@arabic\\c@subsubsubparagraph}");
+      outln("\\renewcommand\\thesubsubsubsubparagraph{\\thesubsubsubparagraph.\\@arabic\\c@subsubsubsubparagraph}");
+      outln("\\renewcommand\\thesubsubsubsubsubparagraph{\\thesubsubsubsubparagraph.\\@arabic\\c@subsubsubsubsubparagraph}");
+      outln("\\newcommand\\subsubparagraph{\\@startsection{subsubparagraph}{6}{\\parindent}%");
+      outln("   {3.25ex \\@plus1ex \\@minus .2ex}%");
+      outln("   {-1em}%");
+      outln("   {\\normalfont\\normalsize\\bfseries}}");
+      outln("\\newcommand\\subsubsubparagraph{\\@startsection{subsubsubparagraph}{7}{\\parindent}%");
+      outln("   {3.25ex \\@plus1ex \\@minus .2ex}%");
+      outln("   {-1em}%");
+      outln("   {\\normalfont\\normalsize\\bfseries}}");
+      outln("\\newcommand\\subsubsubsubparagraph{\\@startsection{subsubsubsubparagraph}{8}{\\parindent}%");
+      outln("   {3.25ex \\@plus1ex \\@minus .2ex}%");
+      outln("   {-1em}%");
+      outln("   {\\normalfont\\normalsize\\bfseries}}");
+      outln("\\newcommand\\subsubsubsubsubparagraph{\\@startsection{subsubsubsubsubparagraph}{9}{\\parindent}%");
+      outln("   {3.25ex \\@plus1ex \\@minus .2ex}%");
+      outln("   {-1em}%");
+      outln("   {\\normalfont\\normalsize\\bfseries}}");
+      outln("\\newcommand*\\l@subsubparagraph{\\@dottedtocline{6}{14em}{7em}}");
+      outln("\\newcommand*\\l@subsubsubparagraph{\\@dottedtocline{7}{16em}{8em}}");
+      outln("\\newcommand*\\l@subsubsubsubparagraph{\\@dottedtocline{8}{18em}{9em}}");
+      outln("\\newcommand*\\l@subsubsubsubsubparagraph{\\@dottedtocline{9}{20em}{10em}}");
+      outln("\\makeatother");
       break;
-      
       
    case TOLYX:
       voutlnf("# This file was created by UDO Version %s.%s %s", UDO_REL, UDO_SUBVER, UDO_BUILD);
@@ -10172,20 +8819,9 @@ LOCAL void output_preamble(void)
       outln("\\papersize default");
       outln("\\paperfontsize 11");
       outln("\\baselinestretch 1.0");
-      
-      if (called_subsubsubsubsubnode)
-      {
-         outln("\\secnumdepth 4");
-         outln("\\tocdepth 4");
-      }
-      else
-      {
-         outln("\\secnumdepth 3");
-         outln("\\tocdepth 3");
-      }
-      
+      voutlnf("\\secnumdepth %d", toc_maxdepth - TOC_NODE1 + 1);
+      voutlnf("\\tocdepth %d", toc_maxdepth - TOC_NODE1 + 1);
       outln("\\paragraph_separation indent");
-      
       
       switch (destlang)
       {
@@ -10202,9 +8838,8 @@ LOCAL void output_preamble(void)
       default:
          outln("\\language german");
          outln("\\quotes_language german");
+         break;
       }
-      
-      
       outln("\\quotes_times 2");
       outln("\\paperorientation portrait");
       outln("\\papercolumns 0");
@@ -10212,7 +8847,6 @@ LOCAL void output_preamble(void)
       outln("\\paperpagestyle headings");
       outln("");
       break;
-      
       
    case TODRC:
       if (titleprogram[0] != EOS)
@@ -10238,17 +8872,16 @@ LOCAL void output_preamble(void)
       }
       else
       {
-         voutlnf("Made with UDO Version %s.%s %s", UDO_REL, UDO_SUBVER, UDO_BUILD);
+         voutlnf("Made with UDO %s", UDO_VERSION_STRING_OS);
       }
-
+      
       if (uses_maketitle)
       {
          voutlnf("%%%%Opening_screen 1");
       }
-
       outln("%%Default_flags 7");
-      
-   }  /* switch (desttype) */
+      break;
+   }
 }
 
 
@@ -10738,18 +9371,14 @@ LOCAL void pass_check_if(char *zeile, int pnr)
 *
 ******************************************|************************************/
 
-LOCAL void get_switch_par(
-
-const UDOSWITCH  *us)   /* */
+LOCAL void get_switch_par(const UDOSWITCH *us)
 {
-   register int   i;    /* counter */
-   int            val;  /* */
-
-
+   register int i;
+   int val;
+   
    if (us->parcmd[0] == EOS)
       return;
    
-
    for (i = 1; i < token_counter; i++)
    {
       if (strcmp(token[i], us->parcmd) == 0)
@@ -10764,13 +9393,11 @@ const UDOSWITCH  *us)   /* */
             if (i + 1 < token_counter)
             {
                val = atoi(token[i + 1]);
-               
                if (us->parval != NULL)
                {
                   *(int *)(us->parval) = val;
                }
             }
-            
             return;
          }
       }
@@ -10797,7 +9424,9 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
    register int i;
    int c;
    char s[256];
-
+   char subs[3 * TOC_MAXDEPTH + 1 + 80];
+   int d, d2;
+   
    /* Allgemeine globale Schalter (im Vorspann erlaubt) */
 
    for (i = 0; i < (int)MAXSWITCH; i++)
@@ -10814,88 +9443,23 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 
    /* Allgemeine lokale Schalter */
    
-   if (strcmp(token[0], "!toc_offset") == 0)
+   for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
    {
-      if (token[1][0] == EOS)
+      strcpy(subs, "!");
+      for (d2 = TOC_NODE1; d2 < d; d2++)
+         strcat(subs, "sub");
+      strcat(subs, "toc_offset");
+      if (strcmp(token[0], subs) == 0)
       {
-         toc_offset = 0;
+         if (token[1][0] == EOS)
+         {
+            toc_offset[d] = 0;
+         } else
+         {
+            toc_offset[d] = atoi(token[1]);
+         }
+         return TRUE;
       }
-      else
-      {
-         toc_offset = atoi(token[1]);
-      }
-      
-      return TRUE;
-   }
-
-   if (strcmp(token[0], "!subtoc_offset") == 0)
-   {
-      if (token[1][0] == EOS)
-      {
-         subtoc_offset = 0;
-      }
-      else
-      {
-         subtoc_offset = atoi(token[1]);
-      }
-      
-      return TRUE;
-   }
-
-   if (strcmp(token[0], "!subsubtoc_offset") == 0)
-   {
-      if (token[1][0] == EOS)
-      {
-         subsubtoc_offset = 0;
-      }
-      else
-      {
-         subsubtoc_offset = atoi(token[1]);
-      }
-      
-      return TRUE;
-   }
-
-   if (strcmp(token[0], "!subsubsubtoc_offset") == 0)
-   {
-      if (token[1][0] == EOS)
-      {
-         subsubsubtoc_offset = 0;
-      }
-      else
-      {
-         subsubsubtoc_offset = atoi(token[1]);
-      }
-      
-      return TRUE;
-   }
-
-   if (strcmp(token[0], "!subsubsubsubtoc_offset") == 0)
-   {
-      if (token[1][0] == EOS)
-      {
-         subsubsubsubtoc_offset = 0;
-      }
-      else
-      {
-         subsubsubsubtoc_offset = atoi(token[1]);
-      }
-      
-      return TRUE;
-   }
-
-   if (strcmp(token[0], "!subsubsubsubsubtoc_offset") == 0)
-   {
-      if (token[1][0] == EOS)
-      {
-         subsubsubsubsubtoc_offset = 0;
-      }
-      else
-      {
-         subsubsubsubsubtoc_offset = atoi(token[1]);
-      }
-      
-      return TRUE;
    }
 
    if (strcmp(token[0], "!table_counter") == 0)
@@ -10942,7 +9506,8 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 
    if (strcmp(token[0], "!parwidth") == 0)
    {
-      zDocParwidth = atoi(token[1]);
+      zDocParwidth = strtol(token[1], NULL, 0);
+      /* FIXME: should check for insane values here */
       return TRUE;
    }
 
@@ -11289,55 +9854,19 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       if (strncmp(token[0], "!html", 5) != 0)
          return FALSE;
       
-      if (strcmp(token[0], "!html_merge_nodes") == 0)
+      /* check !html_merge_nodes, html_merge_subnodes etc. */
+      for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
       {
-         html_merge_node1 = TRUE;
-         html_merge_node2 = TRUE;
-         html_merge_node3 = TRUE;
-         html_merge_node4 = TRUE;
-         html_merge_node5 = TRUE;
-         html_merge_node6 = TRUE;
-         return TRUE;
-      }
-      
-      if (strcmp(token[0], "!html_merge_subnodes") == 0)
-      {
-         html_merge_node2 = TRUE;
-         html_merge_node3 = TRUE;
-         html_merge_node4 = TRUE;
-         html_merge_node5 = TRUE;
-         html_merge_node6 = TRUE;
-         return TRUE;
-      }
-      
-      if (strcmp(token[0], "!html_merge_subsubnodes") == 0)
-      {
-         html_merge_node3 = TRUE;
-         html_merge_node4 = TRUE;
-         html_merge_node5 = TRUE;
-         html_merge_node6 = TRUE;
-         return TRUE;
-      }
-      
-      if (strcmp(token[0], "!html_merge_subsubsubnodes") == 0)
-      {
-         html_merge_node4 = TRUE;
-         html_merge_node5 = TRUE;
-         html_merge_node6 = TRUE;
-         return TRUE;
-      }
-      
-      if (strcmp(token[0], "!html_merge_subsubsubsubnodes") == 0)
-      {
-         html_merge_node5 = TRUE;
-         html_merge_node6 = TRUE;
-         return TRUE;
-      }
-      
-      if (strcmp(token[0], "!html_merge_subsubsubsubsubnodes") == 0)
-      {
-         html_merge_node6 = TRUE;
-         return TRUE;
+         strcpy(s, "!html_merge_");
+         for (d2 = TOC_NODE1; d2 < d; d2++)
+            strcat(s, "sub");
+         strcat(s, "nodes");
+         if (strcmp(token[0], s) == 0)
+         {
+            for (d2 = d; d2 < TOC_MAXDEPTH; d2++)
+               html_merge_node[d2] = TRUE;
+            return TRUE;
+         }
       }
       
       if (strcmp(token[0], "!html_no_xlist") == 0)
@@ -12202,128 +10731,167 @@ LOCAL _BOOL pass1(const char *datei)
                   /* Kommandos, die nur im Hauptteil erlaubt sind */
                   if (strcmp(token[0], "!node") == 0 || strcmp(token[0], "!n") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE1, NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup = FALSE;
+                     add_node_to_toc(TOC_NODE1, NODE_NORMAL, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!node*") == 0 || strcmp(token[0], "!n*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE1, NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup = FALSE;
+                     add_node_to_toc(TOC_NODE1, NODE_NORMAL, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!subnode") == 0 || strcmp(token[0], "!sn") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE2, NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE2, NODE_NORMAL, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!subnode*") == 0 || strcmp(token[0], "!sn*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE2, NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE2, NODE_NORMAL, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!subsubnode") == 0 || strcmp(token[0], "!ssn") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE3, NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE3, NODE_NORMAL, NODE_VISIBLE);
                   }
-                  else  if (strcmp(token[0], "!subsubnode*") == 0 || strcmp(token[0], "!ssn*") == 0)
+                  else if (strcmp(token[0], "!subsubnode*") == 0 || strcmp(token[0], "!ssn*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE3, NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE3, NODE_NORMAL, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!subsubsubnode") == 0 || strcmp(token[0], "!sssn") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE4, NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE4, NODE_NORMAL, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!subsubsubnode*") == 0 || strcmp(token[0], "!sssn*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE4, NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE4, NODE_NORMAL, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!subsubsubsubnode") == 0 || strcmp(token[0], "!ssssn") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE5, NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE5, NODE_NORMAL, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!subsubsubsubnode*") == 0 || strcmp(token[0], "!ssssn*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE5, NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
+                     add_node_to_toc(TOC_NODE5, NODE_NORMAL, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubnode") == 0 || strcmp(token[0], "!sssssn") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE6, NODE_NORMAL, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubnode*") == 0 || strcmp(token[0], "!sssssn*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE6, NODE_NORMAL, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubsubnode") == 0 || strcmp(token[0], "!ssssssn") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE7, NODE_NORMAL, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubsubsubnode*") == 0 || strcmp(token[0], "!ssssssn*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE7, NODE_NORMAL, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubsubsubnode") == 0 || strcmp(token[0], "!sssssssn") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE8, NODE_NORMAL, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubsubsubnode*") == 0 || strcmp(token[0], "!sssssssn*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE8, NODE_NORMAL, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubsubsubsubnode") == 0 || strcmp(token[0], "!ssssssssn") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE9, NODE_NORMAL, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubsubsubsubsubnode*") == 0 || strcmp(token[0], "!ssssssssn*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE9, NODE_NORMAL, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!pnode") == 0 || strcmp(token[0], "!p") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE1, NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE1, NODE_POPUP, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!pnode*") == 0 || strcmp(token[0], "!p*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE1, NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE1, NODE_POPUP, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!psubnode") == 0 || strcmp(token[0], "!ps") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE2, NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE2, NODE_POPUP, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!psubnode*") == 0 || strcmp(token[0], "!ps*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE2, NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE2, NODE_POPUP, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!psubsubnode") == 0 || strcmp(token[0], "!pss") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE3, NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE3, NODE_POPUP, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!psubsubnode*") == 0 || strcmp(token[0], "!pss*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE3, NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE3, NODE_POPUP, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!psubsubsubnode") == 0 || strcmp(token[0], "!psss") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE4, NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE4, NODE_POPUP, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!psubsubsubnode*") == 0 || strcmp(token[0], "!psss*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE4, NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE4, NODE_POPUP, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!psubsubsubsubnode") == 0 || strcmp(token[0], "!pssss") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE5, NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE5, NODE_POPUP, NODE_VISIBLE);
                   }
                   else if (strcmp(token[0], "!psubsubsubsubnode*") == 0 || strcmp(token[0], "!pssss*") == 0)
                   {
-                     add_nodetype_to_toc(TOC_NODE5, NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
+                     add_node_to_toc(TOC_NODE5, NODE_POPUP, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubnode") == 0 || strcmp(token[0], "!psssss") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE6, NODE_POPUP, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubnode*") == 0 || strcmp(token[0], "!psssss*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE6, NODE_POPUP, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubsubnode") == 0 || strcmp(token[0], "!pssssss") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE7, NODE_POPUP, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubsubnode*") == 0 || strcmp(token[0], "!pssssss*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE7, NODE_POPUP, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubsubsubnode") == 0 || strcmp(token[0], "!psssssss") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE8, NODE_POPUP, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubsubsubnode*") == 0 || strcmp(token[0], "!psssssss*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE8, NODE_POPUP, NODE_INVISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubsubsubsubnode") == 0 || strcmp(token[0], "!pssssssss") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE9, NODE_POPUP, NODE_VISIBLE);
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubsubsubsubsubnode*") == 0 || strcmp(token[0], "!pssssssss*") == 0)
+                  {
+                     add_node_to_toc(TOC_NODE9, NODE_POPUP, NODE_INVISIBLE);
                   }
                   else if (strcmp(token[0], "!begin_node") == 0 || strcmp(token[0], "!bn") == 0)
                   {
                      toc_begin_node(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!begin_node*") == 0 || strcmp(token[0], "!bn*") == 0)
                   {
                      toc_begin_node(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!begin_pnode") == 0 || strcmp(token[0], "!bp") == 0)
                   {
                      toc_begin_node(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!begin_pnode*") == 0 || strcmp(token[0], "!bp*") == 0)
                   {
                      toc_begin_node(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!end_node") == 0 || strcmp(token[0], "!en") == 0)
                   {
                      toc_end_node();
-                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!heading") == 0 || strcmp(token[0], "!h") == 0)
                   {
@@ -12344,7 +10912,7 @@ LOCAL _BOOL pass1(const char *datei)
                   else if (strcmp(token[0], "!alias") == 0 || strcmp(token[0], "!a") == 0)
                   {
                      tokcpy2(tmp, sizeof(tmp));
-                     add_alias(tmp, bInsidePopup, FALSE);
+                     add_alias(tmp, toc_inside_popup(), FALSE);
                   }
                   else if (strcmp(token[0], "!index") == 0 || strcmp(token[0], "!x") == 0)
                   {
@@ -12414,6 +10982,18 @@ LOCAL _BOOL pass1(const char *datei)
                   {
                      set_ignore_subtoc();
                   }
+                  else if (strcmp(token[0], "!ignore_subsubsubsubsubsubtoc") == 0)
+                  {
+                     set_ignore_subtoc();
+                  }
+                  else if (strcmp(token[0], "!ignore_subsubsubsubsubsubsubtoc") == 0)
+                  {
+                     set_ignore_subtoc();
+                  }
+                  else if (strcmp(token[0], "!ignore_subsubsubsubsubsubsubsubtoc") == 0)
+                  {
+                     set_ignore_subtoc();
+                  }
                   else if (strcmp(token[0], "!ignore_links") == 0)
                   {
                      set_ignore_links();
@@ -12457,6 +11037,7 @@ LOCAL _BOOL pass1(const char *datei)
                   else if (strcmp(token[0], "!begin_appendix") == 0)
                   {
                      pflag[PASS1].inside_apx = TRUE;
+                     toc_pass1_begin_appendix();
                   }
                   else if (strcmp(token[0], "!end_appendix") == 0)
                   {
@@ -12520,13 +11101,13 @@ LOCAL _BOOL pass1(const char *datei)
                   {
                      tokcpy2(tmp, sizeof(tmp));
                      replace_udo_quotes(tmp);
-                     add_label(tmp, FALSE, bInsidePopup, FALSE, FALSE);
+                     add_label(tmp, FALSE, toc_inside_popup(), FALSE, FALSE);
                   }
                   else if (strcmp(token[0], "!label*") == 0 || strcmp(token[0], "!l*") == 0)
                   {
                      tokcpy2(tmp, sizeof(tmp));
                      replace_udo_quotes(tmp);
-                     add_label(tmp, FALSE, bInsidePopup, TRUE, FALSE);
+                     add_label(tmp, FALSE, toc_inside_popup(), TRUE, FALSE);
                   }
                   else if (strcmp(token[0], "!include") == 0)
                   {
@@ -14225,20 +12806,18 @@ GLOBAL _BOOL udo(char *datei)
 
    init_lang();
 
-   bBreakInside           = FALSE;
-   bInsideDocument        = FALSE;
-   bInsidePopup           = FALSE;
-   b1stQuote              = FALSE;
-   b1stApost              = FALSE;
-   iCharset               = SYSTEM_CHARSET;
+   bBreakInside = FALSE;
+   bInsideDocument = FALSE;
+   b1stQuote = FALSE;
+   b1stApost = FALSE;
+   iCharset = SYSTEM_CHARSET;
    bDocUniversalCharsetOn = FALSE;
-   
 
    show_udo_intro();
 
    logln_warnings_errors();
 
-   show_status_pass(_("Pass 1:"));
+   show_status_pass(_("Pass 1..."));
 
    clear_if_stack();
 
@@ -14281,34 +12860,21 @@ GLOBAL _BOOL udo(char *datei)
          /* bei !no_umlaute wird kein 8bit-Zeichen mehr verwendet */
          init_env_itemchar();
 
-         bBreakInside    = FALSE;
+         bBreakInside = FALSE;
          bInsideDocument = FALSE;
-         bInsidePopup    = FALSE;
-         b1stQuote       = FALSE;
-         b1stApost       = FALSE;
-         iCharset        = SYSTEM_CHARSET;
+         b1stQuote = FALSE;
+         b1stApost = FALSE;
+         iCharset = SYSTEM_CHARSET;
+         bDocUniversalCharsetOn = FALSE;
 
          init_vars_spec();
          init_module_toc_pass2();
          init_module_tp_pass2();
          init_module_img_pass2();
          init_udosymbol_pass2();
-
+         
          sort_hyphens();
          
-                                          /* richtigen Einsatz von !if testen */
-                                          /*r6pl4: && !bBreakInside */
-         if (!bBreakHappened && !bBreakInside)
-         {
-            if (counter_if_stack > 0)
-            {
-               error_missing_endif(file_lookup(if_stack[counter_if_stack].loc.id), if_stack[counter_if_stack].loc.line);
-               bBreakHappened = TRUE;
-               ret = FALSE;
-            }
-         }
-
-                                          /*r6pl4: && !bBreakInside */
          if (!bBreakHappened && !bBreakInside)
          {
             if (desttype == TOUDO)
@@ -14321,7 +12887,7 @@ GLOBAL _BOOL udo(char *datei)
              * Kapitelnummern stimmen und die Unterinhalts-
              * verzeichnisse erzeugt werden
              *
-             * v6.3.15 [vj] Die if-Abfrage bleibt drin, fuer den Fall, 
+             * v6.3.15 [vj] Die if-Abfrage bleibt drin, fuer den Fall,
              * dass ein aehnlicher Fehler nochmal
              * auftritt, er wird dann vielleicht frueher erkannt
              */
@@ -14467,19 +13033,23 @@ GLOBAL _BOOL udo(char *datei)
       logln_information();
       vloglnf("source file: %s", infile.full);
       logln("");
-      vloglnf("Warnings:             %d", get_warning_counter());
-      vloglnf("Notes:                %d", get_note_counter());
-      vloglnf("Errors:               %d", get_error_counter());
+      vloglnf("Warnings:                      %d", get_warning_counter());
+      vloglnf("Notes:                         %d", get_note_counter());
+      vloglnf("Errors:                        %d", get_error_counter());
       logln("");
-      vloglnf("Nodes:                %d", all_nodes);
-      vloglnf("Subnodes:             %d", all_subnodes);
-      vloglnf("Subsubnodes:          %d", all_subsubnodes);
-      vloglnf("Subsubsubnodes:       %d", all_subsubsubnodes);
-      vloglnf("Subsubsubsubnodes:    %d", all_subsubsubsubnodes);
-      vloglnf("Subsubsubsubsubnodes: %d", all_subsubsubsubsubnodes);
-      vloglnf("Macros:               %u", macro_counter);
-      vloglnf("Defines:              %u", define_counter);
-      vloglnf("Hyphens:              %lu", (unsigned long)hyphen_counter);
+      vloglnf("Nodes:                         %u", all_nodes[TOC_NODE1]);
+      vloglnf("Subnodes:                      %u", all_nodes[TOC_NODE2]);
+      vloglnf("Subsubnodes:                   %u", all_nodes[TOC_NODE3]);
+      vloglnf("Subsubsubnodes:                %u", all_nodes[TOC_NODE4]);
+      vloglnf("Subsubsubsubnodes:             %u", all_nodes[TOC_NODE5]);
+      vloglnf("Subsubsubsubsubnodes:          %u", all_nodes[TOC_NODE6]);
+      vloglnf("Subsubsubsubsubsubnodes:       %u", all_nodes[TOC_NODE7]);
+      vloglnf("Subsubsubsubsubsubsubnodes:    %u", all_nodes[TOC_NODE8]);
+      vloglnf("Subsubsubsubsubsubsubsubnodes: %u", all_nodes[TOC_NODE9]);
+      vloglnf("Total nodes:                   %lu", (unsigned long) p1_toc_counter + 1);
+      vloglnf("Macros:                        %u", macro_counter);
+      vloglnf("Defines:                       %u", define_counter);
+      vloglnf("Hyphens:                       %lu", (unsigned long)hyphen_counter);
       logln("");
       vloglnf("started:  %s", timer_start);
       vloglnf("finished: %s", timer_stop);
@@ -14793,15 +13363,17 @@ char          *t)      /* ^ time string result, format "HH:MM:SS" */
 
 LOCAL void init_vars_texinfo(void)
 {
+   int i;
+   
    if (desttype == TOINF)
    {
       no_umlaute = TRUE;
       no_numbers = TRUE;
-      
-      use_auto_subtocs = TRUE;           subtocs1_depth = 1;
-      use_auto_subsubtocs = TRUE;        subtocs2_depth = 1;
-      use_auto_subsubsubtocs = TRUE;     subtocs3_depth = 1;
-      use_auto_subsubsubsubtocs = TRUE;  subtocs4_depth = 1;
+      for (i = TOC_NODE1; i < TOC_MAXDEPTH - 1; i++)
+      {
+         use_auto_subtocs[i] = TRUE;
+         subtocs_depth[i] = 1;
+      }
    }
 }
 
@@ -14844,19 +13416,19 @@ LOCAL void init_vars_nroff(void)
 
 LOCAL void init_vars_sourcecode(void)
 {
-   sSrcRemOn[0]  = EOS;
+   sSrcRemOn[0] = EOS;
    sSrcRemOff[0] = EOS;
-
+   
    switch (desttype)
    {
    case TOSRC:
       strcpy(sSrcRemOn, "/*");
       strcpy(sSrcRemOff, "*/");
       break;
-      
    case TOSRP:
       strcpy(sSrcRemOn, "(*");
       strcpy(sSrcRemOff, "*)");
+      break;
    }
 }
 
@@ -14876,12 +13448,16 @@ LOCAL void init_vars_sourcecode(void)
 
 LOCAL void init_vars_stg(void)
 {
-#if 0
    if (desttype == TOSTG)
    {
+#if 0
+	/* dont change here; !parwidth sets zDocParwidth
+	   only during pass1(), and this function gets
+	   called in pass2() too */
       zDocParwidth = 75;
-   }
 #endif
+      strcpy(sDocImgSuffix, ".img");
+   }
 }
 
 
@@ -15269,7 +13845,6 @@ GLOBAL void init_udo_vars(void)
 
    destlang = TOGER;
 
-   bInsidePopup    = FALSE;
    bInsideAppendix = FALSE;
    bInsideDocument = FALSE;
    
@@ -15312,6 +13887,7 @@ GLOBAL void init_udo_vars(void)
 
    for (i = 0; i < (int)MAXSWITCH; i++)
       *(udoswitch[i].flag) = FALSE;
+   no_auto_toptocs_icons = FALSE;
 
    bDocSortHyphenFile = FALSE;
    zDocParwidth = 70;
@@ -15319,10 +13895,10 @@ GLOBAL void init_udo_vars(void)
    iDocVerbatimSize = VERB_NORMAL;
    iDocLinedrawSize = VERB_NORMAL;
 
-   html_merge_node1          = FALSE;
-   html_merge_node2          = FALSE;
-   html_merge_node3          = FALSE;
-   html_merge_node4          = FALSE;
+   for (i = TOC_NODE1; i < TOC_MAXDEPTH; i++)
+      html_merge_node[i] = FALSE;
+   for (i = TOC_NODE1; i < TOC_MAXDEPTH - 1; i++)
+      use_auto_subtocs[i] = FALSE;
    html_no_xlist = FALSE;
    html_ignore_8bit = FALSE;
    html_navigation_line = FALSE;
@@ -15403,7 +13979,7 @@ GLOBAL void init_udo_vars(void)
    sDocPropfontSize[0] = EOS;
    sDocMonofontSize[0] = EOS;
 
-   set_mainlayout();
+   /* set_mainlayout(); gehoert nach init_module_tp() und wird jetzt auch dort erledigt */
 
    justify_from_right = FALSE;
 

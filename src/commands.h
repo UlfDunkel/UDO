@@ -195,11 +195,15 @@
 /* Kapitel und Ueberschriften                           */
 /* --------------------------------------------------   */
 
-#define CMD_HEADING              "!heading"
-#define CMD_SUBHEADING           "!subheading"
-#define CMD_SUBSUBHEADING        "!subsubheading"
-#define CMD_SUBSUBSUBHEADING     "!subsubsubheading"
-#define CMD_SUBSUBSUBSUBHEADING  "!subsubsubsubheading"
+#define CMD_HEADING                         "!heading"
+#define CMD_SUBHEADING                      "!subheading"
+#define CMD_SUBSUBHEADING                   "!subsubheading"
+#define CMD_SUBSUBSUBHEADING                "!subsubsubheading"
+#define CMD_SUBSUBSUBSUBHEADING             "!subsubsubsubheading"
+#define CMD_SUBSUBSUBSUBSUBHEADING          "!subsubsubsubsubheading"
+#define CMD_SUBSUBSUBSUBSUBSUBHEADING       "!subsubsubsubsubsubheading"
+#define CMD_SUBSUBSUBSUBSUBSUBSUBHEADING    "!subsubsubsubsubsubsubheading"
+#define CMD_SUBSUBSUBSUBSUBSUBSUBSUBHEADING "!subsubsubsubsubsubsubsubheading"
 
 
 
@@ -235,10 +239,8 @@
 /* --------------------------------------------------   */
 
 #define HTML_BR          "<br>"
-#define HTML_HR          "<hr>\n"
 
 #define XHTML_BR         "<br />"
-#define XHTML_HR         "<hr />\n"
 
 #if 0
 
@@ -292,18 +294,24 @@
 #define rtf_node2      "\\s5\\ql\\b\\f0\\li907\\fi-907"
 #define rtf_node3      "\\s6\\ql\\b\\f0\\li1134\\fi-1134"
 #define rtf_node4      "\\s7\\ql\\b\\f0\\li1248\\fi-1248"
-#define rtf_node5      "\\s7\\ql\\b\\f0\\li1248\\fi-1248" /* ToDo: ??? */
-#define rtf_node6      "\\s7\\ql\\b\\f0\\li1248\\fi-1248" /* ToDo: ??? */
+#define rtf_node5      "\\s8\\ql\\b\\f0\\li1248\\fi-1248"
+#define rtf_node6      "\\s9\\ql\\b\\f0\\li1248\\fi-1248"
+#define rtf_node7      "\\s10\\ql\\b\\f0\\li1248\\fi-1248"
+#define rtf_node8      "\\s11\\ql\\b\\f0\\li1248\\fi-1248"
+#define rtf_node9      "\\s12\\ql\\b\\f0\\li1248\\fi-1248"
 
-#define rtf_inv_chapt  "\\s8\\ql\\b\\f0"
-#define rtf_inv_node1  "\\s9\\ql\\b\\f0"
-#define rtf_inv_node2  "\\s10\\ql\\b\\f0"
-#define rtf_inv_node3  "\\s11\\ql\\b\\f0"
-#define rtf_inv_node4  "\\s12\\ql\\b\\f0"
-#define rtf_inv_node5  "\\s12\\ql\\b\\f0"                  /* ToDo: ??? */
-#define rtf_inv_node6  "\\s12\\ql\\b\\f0"                  /* ToDo: ??? */
+#define rtf_inv_chapt  "\\s13\\ql\\b\\f0"
+#define rtf_inv_node1  "\\s14\\ql\\b\\f0"
+#define rtf_inv_node2  "\\s15\\ql\\b\\f0"
+#define rtf_inv_node3  "\\s16\\ql\\b\\f0"
+#define rtf_inv_node4  "\\s17\\ql\\b\\f0"
+#define rtf_inv_node5  "\\s18\\ql\\b\\f0"
+#define rtf_inv_node6  "\\s19\\ql\\b\\f0"
+#define rtf_inv_node7  "\\s20\\ql\\b\\f0"
+#define rtf_inv_node8  "\\s21\\ql\\b\\f0"
+#define rtf_inv_node9  "\\s22\\ql\\b\\f0"
 
-#define rtf_linedraw   "\\s13\\ql\\f2"
+#define rtf_linedraw   "\\s23\\ql\\f2"
 
 
 

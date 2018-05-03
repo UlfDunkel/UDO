@@ -189,7 +189,7 @@ LOCAL void save_html_gifs(void)
          save_one_html_gif(sGifHmFull,   html_gif_hm_trans,   sizeof(html_gif_hm_trans),   &bGifHmSaved);
          save_one_html_gif(sGifNoHmFull, html_gif_nohm_trans, sizeof(html_gif_nohm_trans), &bGifNoHmSaved);
       
-         if (!html_merge_node1)
+         if (!html_merge_node[TOC_NODE1])
          {
             save_one_html_gif(sGifUpFull, html_gif_up_trans, sizeof(html_gif_up_trans), &bGifUpSaved);
             save_one_html_gif(sGifLfFull, html_gif_lf_trans, sizeof(html_gif_lf_trans), &bGifLfSaved);
@@ -216,7 +216,7 @@ LOCAL void save_html_gifs(void)
          save_one_html_gif(sGifHmFull,   html_gif_hm,   sizeof(html_gif_hm),   &bGifHmSaved);
          save_one_html_gif(sGifNoHmFull, html_gif_nohm, sizeof(html_gif_nohm), &bGifNoHmSaved);
       
-         if (!html_merge_node1)
+         if (!html_merge_node[TOC_NODE1])
          {
             save_one_html_gif(sGifUpFull, html_gif_up, sizeof(html_gif_up), &bGifUpSaved);
             save_one_html_gif(sGifLfFull, html_gif_lf, sizeof(html_gif_lf), &bGifLfSaved);
