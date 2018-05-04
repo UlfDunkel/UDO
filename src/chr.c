@@ -1632,28 +1632,6 @@ GLOBAL int calc_ttf_twip(const char *s, const int font, const int style)
 
 /*******************************************************************************
 *
-*  replace_udo_quotes():
-*     quote UDO commands in text environment
-*
-*  Example:
-*     !node -> !/node
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void replace_udo_quotes(char *s)
-{
-   qreplace_all(s, "!/", 2, "!", 1);
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  replace_all_copyright():
 *     adjust copyright links
 *

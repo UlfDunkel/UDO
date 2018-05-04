@@ -4805,6 +4805,60 @@ GLOBAL _BOOL add_define(void)
 
 /*******************************************************************************
 *
+*  replace_udo_quotes():
+*     quote UDO commands in text environment
+*
+*  Example:
+*     !node -> !/node
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void replace_udo_quotes(char *s)
+{
+   const char *found;
+   
+   found = strstr(s, "(!");
+   while (found != NULL)
+   {
+      if (found[2] != '/')
+      {
+      	char name[MACRO_NAME_LEN + 1];
+      	int i;
+      	
+      	for (i = 0; i < MACRO_NAME_LEN; i++)
+      	{
+      		if (found[2 + i] == '\\' && (desttype == TOTEX || desttype == TOPDL))
+      		   found++;
+      		if (found[2 + i] == EOS)
+      		   break;
+      		if (strchr(macro_allowed_name, found[2 + i]) == NULL)
+      		   break;
+      		name[i] = found[2 + i];
+      	}
+      	name[i] = EOS;
+      	/*
+      	 * FIXME: this checks for internal commands should not be here.
+      	 * internal commands should be handled *BEFORE* the quotes
+      	 * are removed. Apparently, this is not the case in a lot of
+      	 * places however.
+      	 */
+      	if (*name && !is_internal_name(name))
+      	   warning_message(_("possibly undefined macro: %s"), name);
+      }
+      found = strstr(found + 2, "(!");
+   }
+   qreplace_all(s, "!/", 2, "!", 1);
+}
+
+
+
+
+
+/*******************************************************************************
+*
 *  init_module_par():
 *     initialize all arrays used in this module
 *
