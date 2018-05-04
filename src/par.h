@@ -116,6 +116,8 @@ GLOBAL void add_hyphen(void);
    /* replace macro (!%s) with macro content in document */
 GLOBAL void replace_macros(char *s);
 
+GLOBAL _BOOL is_internal_name(const char *name);
+
    /* add macro to list of macros */
 GLOBAL _BOOL add_macro(void);
 

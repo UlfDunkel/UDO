@@ -4407,6 +4407,104 @@ GLOBAL void replace_macros(char *s)
 
 
 
+LOCAL _BOOL check_macro_name(const char *name)
+{
+	while (*name != EOS)
+	{
+		if (strchr(macro_allowed_name, *name) == NULL)
+		{
+			error_message(_("%x not allowed in macro name"), (unsigned char)(*name));
+			return FALSE;
+		}
+		name++;
+	}
+	if (is_internal_name(name))
+	    warning_message(_("redefining internal command (!%s)"), name);
+	return TRUE;
+}
+
+
+GLOBAL _BOOL is_internal_name(const char *name)
+{
+  	if (strcmp(name, "V") == 0 ||
+  	    strcmp(name, "v") == 0 ||
+  	    strcmp(name, "U") == 0 ||
+  	    strcmp(name, "u") == 0 ||
+  	    strcmp(name, "I") == 0 ||
+  	    strcmp(name, "i") == 0 ||
+  	    strcmp(name, "T") == 0 ||
+  	    strcmp(name, "t") == 0 ||
+  	    strcmp(name, "B") == 0 ||
+  	    strcmp(name, "b") == 0 ||
+  	    strcmp(name, "N") == 0 ||
+  	    strcmp(name, "n") == 0 ||
+  	    strcmp(name, "G") == 0 ||
+  	    strcmp(name, "g") == 0 ||
+  	    strcmp(name, "S") == 0 ||
+  	    strcmp(name, "s") == 0 ||
+  	    strcmp(name, "O") == 0 ||
+  	    strcmp(name, "o") == 0 ||
+  	    strcmp(name, "SUB") == 0 ||
+  	    strcmp(name, "sub") == 0 ||
+  	    strcmp(name, "SUP") == 0 ||
+  	    strcmp(name, "sup") == 0 ||
+  	    strcmp(name, "DEL") == 0 ||
+  	    strcmp(name, "del") == 0 ||
+  	    strcmp(name, "INS") == 0 ||
+  	    strcmp(name, "ins") == 0 ||
+  	    strcmp(name, "link") == 0 ||
+  	    strcmp(name, "url") == 0 ||
+  	    strcmp(name, "plink") == 0 ||
+  	    strcmp(name, "xlink") == 0 ||
+  	    strcmp(name, "ilink") == 0 ||
+  	    strcmp(name, "label") == 0 ||
+  	    strcmp(name, "nolink") == 0 ||
+  	    strcmp(name, "comment") == 0 ||
+  	    strcmp(name, "idx") == 0 ||
+  	    strcmp(name, "index") == 0 ||
+  	    strcmp(name, "time") == 0 ||
+  	    strcmp(name, "today") == 0 ||
+  	    strcmp(name, "short_today") == 0 ||
+  	    strcmp(name, "image") == 0 ||
+  	    strcmp(name, "img") == 0 ||
+  	    strcmp(name, "raw") == 0 ||
+  	    strcmp(name, "nl") == 0 ||
+  	    strcmp(name, "registered") == 0 ||
+  	    strcmp(name, "copyright") == 0 ||
+  	    strcmp(name, "tm") == 0 ||
+  	    strcmp(name, "reg") == 0 ||
+  	    strcmp(name, "deg") == 0 ||
+  	    strcmp(name, "pound") == 0 ||
+  	    strcmp(name, "alpha") == 0 ||
+  	    strcmp(name, "beta") == 0 ||
+  	    strcmp(name, "euro") == 0 ||
+  	    strcmp(name, "grin") == 0 ||
+  	    strcmp(name, "LaTeX") == 0 ||
+  	    strcmp(name, "LaTeXe") == 0 ||
+  	    strcmp(name, "TeX") == 0 ||
+  	    strcmp(name, "aqua") == 0 ||
+  	    strcmp(name, "black") == 0 ||
+  	    strcmp(name, "blue") == 0 ||
+  	    strcmp(name, "coloff") == 0 ||
+  	    strcmp(name, "fuchsia") == 0 ||
+  	    strcmp(name, "gray") == 0 ||
+  	    strcmp(name, "green") == 0 ||
+  	    strcmp(name, "lime") == 0 ||
+  	    strcmp(name, "maroon") == 0 ||
+  	    strcmp(name, "navy") == 0 ||
+  	    strcmp(name, "olive") == 0 ||
+  	    strcmp(name, "purple") == 0 ||
+  	    strcmp(name, "red") == 0 ||
+  	    strcmp(name, "silver") == 0 ||
+  	    strcmp(name, "teal") == 0 ||
+  	    strcmp(name, "white") == 0 ||
+  	    strcmp(name, "yellow") == 0 ||
+  	    strcmp(name, "laugh") == 0)
+  	    return TRUE;
+  	return FALSE;
+}
+
+
 /*******************************************************************************
 *
 *  add_macro():
@@ -4441,6 +4539,8 @@ GLOBAL _BOOL add_macro(void)
       error_message(_("macro name longer than %d characters"), MACRO_NAME_LEN);
       return FALSE;
    }
+   if (!check_macro_name(token[1]))
+      return FALSE;
 
    if (macro_counter >= macros_alloc)
    {
@@ -4609,6 +4709,8 @@ GLOBAL _BOOL add_define(void)
       error_message(_("definition name longer than %d characters"), DEFINE_NAME_LEN);
       return FALSE;
    }
+   if (!check_macro_name(token[1]))
+      return FALSE;
    
    if (define_counter >= defs_alloc)
    {
