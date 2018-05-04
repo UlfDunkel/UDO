@@ -734,6 +734,25 @@ GLOBAL void output_begin_verbatim(void)
       outln("\\begin{verbatim}");
       break;
 
+   case TOLYX:
+      outln("\\layout LyX-Code");
+      switch (iDocVerbatimSize)
+      {
+      case VERB_TINY:
+         outln("\\size tiny");
+         break;
+      case VERB_SMALL:
+         outln("\\size small");
+         break;
+      case VERB_LARGE:
+         outln("\\size large");
+         break;
+      case VERB_HUGE:
+         outln("\\size huge");
+         break;
+      }
+      break;
+   
    case TOINF:
       outln("@example");
       break;
@@ -895,6 +914,10 @@ GLOBAL void output_end_verbatim(void)
          outln("\\end{huge}");
          break;
       }
+      break;
+      
+   case TOLYX:
+      outln("\\layout Standard");
       break;
       
    case TOINF:

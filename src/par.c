@@ -2004,6 +2004,7 @@ LOCAL void c_plink(char *s, const _BOOL inside_b4_macro)
          break;
          
       case TOLYX:
+         label2lyx(Param[2]);
          s_entry = um_strdup_printf(
                "%s (%s %s \\begin_inset LatexCommand \\pageref{%s}\\end_inset)",
                Param[1], lang.see, lang.page, Param[2]);

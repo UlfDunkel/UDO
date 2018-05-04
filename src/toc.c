@@ -644,6 +644,8 @@ LOCAL void output_helpid(TOCIDX tocindex)
          voutlnf("\\label{%s}", s);
          break;
       case TOLYX:
+         voutlnf("\\begin_inset LatexCommand \\label{%s}", s);
+         voutlnf("\\end_inset");
          break;
       }
    }
@@ -755,14 +757,26 @@ LOCAL void output_aliasses(void)
             break;
             
          case TOTEX:
-         case TOPDL:
             strcpy(s, label_table[i]->name);
             convert_tilde(s);
             label2tex(s);
             voutlnf("\\label{%s}", s);
             break;
             
+         case TOPDL:
+            strcpy(s, label_table[i]->name);
+            convert_tilde(s);
+            label2tex(s);
+            voutlnf("\\label{%s}", s);
+            voutlnf("\\pdfdest num %u fitbh", label_table[i]->labindex);
+            break;
+            
          case TOLYX:
+            strcpy(s, label_table[i]->name);
+            convert_tilde(s);
+            label2lyx(s);
+            voutlnf("\\begin_inset LatexCommand \\label{%s}", s);
+            voutlnf("\\end_inset");
             break;
          }
       }
@@ -1201,9 +1215,6 @@ GLOBAL void string2reference(char *ref, const char *display, const LABIDX li, co
       break;
    }
 }
-
-
-
 
 
 /*******************************************************************************
@@ -8062,7 +8073,7 @@ GLOBAL void c_listoffigures(void)
       
    case TOLYX:
       outln("\\layout Standard");
-      outln("\\begin_inset LatexDel \\listoffigures");
+      outln("\\begin_inset LatexCommand \\listoffigures");
       outln("\\end_inset");
       break;
       
@@ -8105,7 +8116,7 @@ GLOBAL void c_listoftables(void)
       
    case TOLYX:
       outln("\\layout Standard");
-      outln("\\begin_inset LatexDel \\listoftables");
+      outln("\\begin_inset LatexCommand \\listoftables");
       outln("\\end_inset");
       break;
       
@@ -8626,14 +8637,16 @@ GLOBAL void c_label(void)
       break;
       
    case TOLYX:
+      label2lyx(sLabel);
+      c_divis(sLabel);
+      c_vars(sLabel);
       outln("");
       outln("\\layout Standard");
-      voutlnf("\\begin_inset Label %s", sLabel);
-      outln("");
-      voutlnf("\\end_inset");
+      voutlnf("\\begin_inset LatexCommand \\label{%s}", sLabel);
+      outln("\\end_inset");
       outln("");
       break;
-   
+      
    case TOSTG:
       node2stg(sLabel);
       c_divis(sLabel);
@@ -8641,6 +8654,12 @@ GLOBAL void c_label(void)
          voutlnf("@symbol ari \"%s\"", sLabel);
       else
          voutlnf("@symbol ar \"%s\"", sLabel);
+      break;
+      
+   case TOAMG:
+      node2stg(sLabel);
+      c_divis(sLabel);
+      voutlnf("@keywords \"%s\"", sLabel);
       break;
       
    case TOHAH:                            /* HTML Apple Help (since V6.5.17) */
