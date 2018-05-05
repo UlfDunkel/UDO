@@ -2765,33 +2765,28 @@ LOCAL void output_html_meta(_BOOL keywords)
                                           /* get right charset name */
    strcpy(s, chr_codepage_charset_name(iEncodingTarget));
    
-   if (html_doctype != HTML5)
-   {
-      voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, xhtml_closer);
-      voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, xhtml_closer);
-      voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", xhtml_closer);
-      voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", xhtml_closer);
-   }
-   else
-      voutlnf("<meta charset='%s'%s>", s, xhtml_closer);
+   voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, xhtml_closer);
 
+#if 0
+   if (html_doctype != HTML5)
+#endif
+   {
+     voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, xhtml_closer);
+     voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", xhtml_closer);
+     voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", xhtml_closer);
+   }
+   
    if (html_header_date)
    {
-      char zone[20] = "+00:00";  /* */
-      time_t   uhrzeit;              /* */
-      int      hour_local,           /* */
-               min_local,            /* */
-               mday_local,           /* */
-               min_utc,              /* */
-               hour_utc,             /* */
-               mday_utc;             /* */
-      int      hours,                /* */
-               minutes;              /* */
-
-
-      if (strcmp(html_header_date_zone, "") > 0)
-         um_strcpy(zone, html_header_date_zone, 9, "output_html_meta[1]1");
-      else
+      char zone[20] = "+00:00";
+      time_t uhrzeit;
+      int hour_local, min_local, mday_local, min_utc, hour_utc, mday_utc;
+      int hours, minutes;
+   
+      if (html_header_date_zone[0] != EOS)
+      {
+         strcpy(zone, html_header_date_zone);
+      } else
       {
          time(&uhrzeit);
          mday_local = localtime(&uhrzeit)->tm_mday;
@@ -2807,7 +2802,6 @@ LOCAL void output_html_meta(_BOOL keywords)
                hours = hour_local - hour_utc - 1 + 24;
             else
                hours = hour_local - hour_utc - 1;
-
             minutes = min_utc - min_local;
          }
          else
@@ -2816,14 +2810,12 @@ LOCAL void output_html_meta(_BOOL keywords)
                hours = hour_local - hour_utc + 24;
             else
                hours = hour_local - hour_utc;
-            
             minutes = min_local - min_utc;
          }
 
          sprintf(zone, "%+03d:%02d", hours, minutes);
       }
-   
-      voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\"%s>", 
+      voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\"%s>",
          iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone, xhtml_closer);
    }
 
@@ -2882,7 +2874,7 @@ LOCAL void output_html_meta(_BOOL keywords)
       sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
    }
 
-   if (html_header_links && strstr(html_header_links_kind, "chapter") != NULL)
+   if (html_header_links & HTML_HEADER_LINKS_CHAPTER)
    {
       TOCTYPE d;
       
@@ -2890,201 +2882,145 @@ LOCAL void output_html_meta(_BOOL keywords)
          toc_link_output(d);
    }
 
-   /* New feature #0000053 in V6.5.2 [NHz] */
-   if (html_header_links)
+   if (html_header_links & HTML_HEADER_LINKS_NAVIGATION)
    {
-      if (strstr(html_header_links_kind, "navigation"))
+      if (old_outfile.name[0] != EOS)
       {
-         if (old_outfile.name[0] != EOS)
-         {                                /* Changed in r6pl16 [NHz] */
-                                          /* Feststellen, ob die Referenz im gleichen File liegt */
-            if (strcmp(old_outfile.name, outfile.name) != 0)
-            {
-               voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\"%s>",
-                  old_outfile.name, outfile.suff, sTarget, lang.html_start, xhtml_closer);
-
-               /* Special for CAB */
-               voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  old_outfile.name, outfile.suff, sTarget, lang.html_start, xhtml_closer);
-               
-               if (uses_tableofcontents)
-               {
-                                          /* New in r6pl15 [NHz] */
-                  voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\"%s>",
-                     old_outfile.name, outfile.suff, sTarget, lang.contents, xhtml_closer);
-
-                  /* Special for CAB */
-                  voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\"%s>", 
-                     old_outfile.name, outfile.suff, sTarget, lang.contents, xhtml_closer);
-               }
-            }
-         }
-
-         /* Andere moegliche Angaben laut SelfHTML 6.0:
-          * <link rev="relation" href="http://www.autorshome.de/" title="Autoren-Homepage">
-          * <link rel="index" href="stichwrt.htm" title="Stichwortverzeichnis">
-          * <link rel="glossary" href="glossar.htm" title="Begriffs-Glossar">
-          * <link rel="copyright" href="rechte.htm" title="Copyright">
-          * <link rel="next" href="augsburg.htm" title="naechste Seite">
-          * <link rel="previous" href="aachen.htm" title="vorherige Seite">
-          * <link rel="help" href="hilfe.htm" title="Orientierungshilfe">
-          * <link rel="bookmark" href="hinweis.htm" title="Neuorientierung">
-          */
-
-          
-         /* New in r6pl16 [NHz] */
-         /* Output of Link-Rel 'up' */
-         /* is going to same place than !html_backpage */
-
-         if (sDocHtmlBackpage[0] != EOS)
+         /* Feststellen, ob die Referenz im gleichen File liegt */
+         if (strcmp(old_outfile.name, outfile.name) != 0)
          {
-            strcpy(backpage, sDocHtmlBackpage);
-            tok = strtok(backpage, "\'");
-            strcpy(href, tok);
-            del_right_spaces(href);
-            tok = strtok(NULL, "\'");
+            voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\"%s>", old_outfile.name, outfile.suff, sTarget, lang.html_start, xhtml_closer);
+
+            /* Special for CAB */
+            voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\"%s>", old_outfile.name, outfile.suff, sTarget, lang.html_start, xhtml_closer);
             
-            if (tok != NULL)
+            if (uses_tableofcontents)
             {
-               strcpy(alt, tok);
-               auto_quote_chars(alt, TRUE);
-            }
-            else
-               strcpy(alt, href);
+               voutlnf("<link rel=\"contents\" href=\"%s%s#%s\"%s title=\"%s\"%s>",
+                  old_outfile.name, outfile.suff, HTML_LABEL_CONTENTS, sTarget, lang.contents, xhtml_closer);
 
-            /* Special for CAB */
-            voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\"%s>", href, alt, xhtml_closer);
-         }
-
-         /* New in r6pl15 [NHz] */
-         /* Output of Link-Rel 'first' */
-
-         i = toc_table[ti]->prev_index;
-
-         if (i > 0)
-         {
-            li = toc_table[1]->labindex;        /* First Node -> No Link */
-
-            strcpy(s, label_table[li]->name);
-            get_html_filename(label_table[li]->tocindex, htmlname);
-
-            /* Special for CAB */
-            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-            if (strchr(htmlname, '.') != NULL)
-            {
-               voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
-            }
-            else
-            {
-               voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
-            }
-         }
-
-         
-         /* New in r6pl15 [NHz] */
-         /* Output of Link-Rel 'prev' */
-
-         if (i > 0)
-         {
-            li = toc_table[i]->labindex;
-            strcpy(s, label_table[li]->name);
-            get_html_filename(label_table[li]->tocindex, htmlname);
-
-            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-            if (strchr(htmlname, '.') != NULL)
-            {
-               voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
-               
                /* Special for CAB */
-               voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
-            }
-            else
-            {
-               voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\"%s>",
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
-               
-               /* Special for CAB */
-               voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
-            }
-         }
-
-         /* Output of Link-Rel 'next' */
-
-         i = toc_table[ti]->next_index;
-
-         if (i > 1)
-         {
-            li = toc_table[i]->labindex;
-            strcpy(s, label_table[li]->name);
-            get_html_filename(label_table[li]->tocindex, htmlname);
-
-            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
-            if (strchr(htmlname, '.') != NULL)
-            {
-               voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
-            }
-            else
-            {
-               voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
-            }
-         }
-         
-
-         /* New in r6pl15 [NHz] */
-         /* Output of Link-Rel 'last' */
-
-         if (i > 1)
-         {
-            if (use_about_udo)
-            {
-               li = toc_table[p1_toc_counter]->labindex;
-               li--;
-            }
-            else
-               li = toc_table[p1_toc_counter]->labindex;
-            
-            strcpy(s, label_table[li]->name);
-            get_html_filename(label_table[li]->tocindex, htmlname);
-
-            /* Special for CAB */
-            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-            if (strchr(htmlname, '.') != NULL)
-            {
-               voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\"%s>",
-                  html_name_prefix, htmlname, sTarget, s, xhtml_closer);
-            }
-            else
-            {
-               voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\"%s>",
-                  html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
+               voutlnf("<link rel=\"toc\" href=\"%s%s#%s\"%s title=\"%s\"%s>",
+                  old_outfile.name, outfile.suff, HTML_LABEL_CONTENTS, sTarget, lang.contents, xhtml_closer);
             }
          }
       }
+
+      /* Andere moegliche Angaben laut SelfHTML 6.0:
+       * <link rev="relation" href="http://www.autorshome.de/" title="Autoren-Homepage">
+       * <link rel="index" href="stichwrt.htm" title="Stichwortverzeichnis">
+       * <link rel="glossary" href="glossar.htm" title="Begriffs-Glossar">
+       * <link rel="copyright" href="rechte.htm" title="Copyright">
+       * <link rel="next" href="augsburg.htm" title="naechste Seite">
+       * <link rel="previous" href="aachen.htm" title="vorherige Seite">
+       * <link rel="help" href="hilfe.htm" title="Orientierungshilfe">
+       * <link rel="bookmark" href="hinweis.htm" title="Neuorientierung">
+       */
+
+      /* Output of Link-Rel 'up' */
+      /* is going to same place than !html_backpage */
+
+      if (sDocHtmlBackpage[0] != EOS)
+      {
+         strcpy(backpage, sDocHtmlBackpage);
+         tok = strtok(backpage, "\'");
+         strcpy(href, tok);
+         del_right_spaces(href);
+         tok = strtok(NULL, "\'");
+         if (tok != NULL)
+         {
+            strcpy(alt, tok);
+            auto_quote_chars(alt, TRUE);
+         }
+         else
+            strcpy(alt, href);
+         /* Special for CAB */
+         voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\"%s>", href, alt, xhtml_closer);
+      }
+
+      /* Output of Link-Rel 'first' */
+      i = toc_table[ti]->prev_index;
+      if (i > 0 && p1_toc_counter >= 1 && toc_table[1] != NULL)
+      {
+         /* First Node -> No Link */
+         li = toc_table[1]->labindex;
+
+         strcpy(s, label_table[li]->name);
+         get_html_filename(label_table[li]->tocindex, htmlname);
+
+         /* Special for CAB */
+         if (strchr(htmlname, '.') != NULL)
+            voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, sTarget, s, xhtml_closer);
+         else
+            voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
+      }
+      
+      /* Output of Link-Rel 'prev' */
+      if (i > 0)
+      {
+         li = toc_table[i]->labindex;
+         strcpy(s, label_table[li]->name);
+         get_html_filename(label_table[li]->tocindex, htmlname);
+
+         if (strchr(htmlname, '.') != NULL)
+         {
+            voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, sTarget, s, xhtml_closer);
+            /* Special for CAB */
+            voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, sTarget, s, xhtml_closer);
+         }
+         else
+         {
+            voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
+            /* Special for CAB */
+            voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
+         }
+      }
+      
+      /* Output of Link-Rel 'next' */
+      i = toc_table[ti]->next_index;
+      if (i > 1)
+      {
+         li = toc_table[i]->labindex;
+         strcpy(s, label_table[li]->name);
+         get_html_filename(label_table[li]->tocindex, htmlname);
+         if (strchr(htmlname, '.') != NULL)
+            voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, sTarget, s, xhtml_closer);
+         else
+            voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
+      }
+      
+      /* Output of Link-Rel 'last' */
+      if (i > 1)
+      {
+         if (use_about_udo)
+         {
+            li = toc_table[p1_toc_counter]->labindex;
+            li--;
+         }
+         else
+            li = toc_table[p1_toc_counter]->labindex;
+         
+         strcpy(s, label_table[li]->name);
+         get_html_filename(label_table[li]->tocindex, htmlname);
+         
+         /* Special for CAB */
+         if (strchr(htmlname, '.') != NULL)
+            voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, sTarget, s, xhtml_closer);
+         else
+            voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\"%s>", html_name_prefix, htmlname, outfile.suff, sTarget, s, xhtml_closer);
+      }
    }
 
-   /* New in r6pl15 [NHz] */
    /* Output of Link-Rel 'copyright' */
    /* Link shows to 'About UDO'; maybe changed in future times */
-
    if (use_about_udo)
    {
       li = toc_table[p1_toc_counter]->labindex;
       strcpy(s, label_table[li]->name);
       get_html_filename(label_table[li]->tocindex, htmlname);
 
-                                          /* Changed in r6pl16 [NHz] */
       if (strcmp(htmlname, outfile.name) != 0)
-      {
-         voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\"%s>",
-            htmlname, outfile.suff, sTarget, s, xhtml_closer);
-      }
+         voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\"%s>", htmlname, outfile.suff, sTarget, s, xhtml_closer);
    }
 
    /* Link for overall and file-related stylesheet-file */
@@ -3185,7 +3121,7 @@ LOCAL void output_html_doctype(void)
       break;
    }
    
-   if (html_header_date)
+   if (!html_header_date)
       voutlnf("<!-- last modified on %s -->", lang.short_today);
 }
 

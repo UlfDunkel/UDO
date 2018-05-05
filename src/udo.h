@@ -329,9 +329,10 @@ GLOBAL _BOOL     html_header_date;      /* Ausgabe des Datums im Element <meta> 
                                           /* date zone */
 GLOBAL char        html_header_date_zone[10];
 
-GLOBAL _BOOL     html_header_links;     /* Ausgabe der Daten im Element <link> */
+GLOBAL int         html_header_links;     /* Ausgabe der Daten im Element <link> */
                                           /* Welche Links sollen ausgegeben werden? */
-GLOBAL char        html_header_links_kind[50];
+#define HTML_HEADER_LINKS_CHAPTER    0x01
+#define HTML_HEADER_LINKS_NAVIGATION 0x02
 
 GLOBAL int         image_alignment;       /* Ausrichtung der Bilder */
 GLOBAL int         table_alignment;       /* Ausrichtung der Tabellen */

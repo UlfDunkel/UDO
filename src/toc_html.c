@@ -311,9 +311,6 @@ GLOBAL void set_html_header_date(void)
 *  set_html_header_links():
 *     sets html_header_links variable
 *
-*  Note:
-*     New feature #0000053 in V6.5.2 [NHz]
-*
 *  Return:
 *     -
 *
@@ -322,29 +319,29 @@ GLOBAL void set_html_header_date(void)
 GLOBAL void set_html_header_links(void)
 {
    char *kind;
-   char   possible[] = "navigation chapter";
+   char s[512];
 
+   tokcpy2(s, 512);
 
-   tokcpy2(html_header_links_kind, 40);
-
-   if (html_header_links_kind[0] == EOS)
+   if (s[0] == EOS)
    {
       error_message(_("empty !html_header_links"));
       return;
    }
 
-   kind = strtok(html_header_links_kind, " ");
-   
+   html_header_links = 0;
+   kind = strtok(s, " ");
    while (kind != NULL)
    {
-      if (strstr(possible, kind) == NULL)
-         error_message(_("unknown linktype (!html_header_links): %s"), kind);
-         
+      if (strcmp(kind, "chapter") == 0)
+          html_header_links |= HTML_HEADER_LINKS_CHAPTER;
+      else if (strcmp(kind, "navigation") == 0)
+          html_header_links |= HTML_HEADER_LINKS_NAVIGATION;
+      else
+          error_message(_("unknown linktype (!html_header_links): %s"), kind);
+
       kind = strtok(NULL, " ");
    }
-
-   tokcpy2(html_header_links_kind, 40);
-   html_header_links = TRUE;
 }
 
 
@@ -363,14 +360,13 @@ GLOBAL void set_html_header_links(void)
 
 GLOBAL void set_html_frames_layout(void)
 {
-   char   s[512];  /* string buffer */
-
+   char s[512];
 
    html_frames_layout = TRUE;
 
    tokcpy2(s, 512);
 
-   if (strstr(s, "noresize=\"noresize\"") != NULL)
+   if (strstr(s, "noresize") != NULL)
       html_frames_noresize = TRUE;
 
    if (strstr(s, "noborder") != NULL)
@@ -396,9 +392,8 @@ GLOBAL void set_html_frames_layout(void)
 
 GLOBAL void set_html_filename(void)
 {
-   char  *ptr;  /* */
-
-
+   char *ptr;
+   
    switch (desttype)                      /* !html_name is used in HTML and HTML-Help output */
    {
    case TOHTM:
@@ -417,7 +412,7 @@ GLOBAL void set_html_filename(void)
 
    ptr = toc_table[p1_toc_counter]->filename;
    ptr[0] = EOS;
-                                          /* Nur den Dateinamen benutzen, nicht den Pfad! */
+   /* Nur den Dateinamen benutzen, nicht den Pfad! */
    strncat(ptr, tmp_name, MAX_FILENAME_LEN);
 
    if (strcmp(tmp_suff, ""))
@@ -453,7 +448,7 @@ GLOBAL void set_html_filename_prefix(void)
    if (!check_toc_and_counters())
       return;
 
-   um_strcpy(html_name_prefix, token[1], 512, "set_html_filename_prefix[1]");
+   um_strcpy(html_name_prefix, token[1], sizeof(html_name_prefix), "set_html_filename_prefix[1]");
 }
 
 
@@ -530,8 +525,7 @@ GLOBAL void set_html_switch_language(void)
    if (strstr(token[1], "german"))
    {
       iDocHtmlSwitchLanguage = TOGER;
-   }
-   else if (strstr(token[1], "english"))
+   } else if (strstr(token[1], "english"))
    {
       iDocHtmlSwitchLanguage = TOENG;
    }
@@ -559,17 +553,17 @@ GLOBAL void set_html_switch_language(void)
 
 GLOBAL void set_html_keywords(void)
 {
-   char      k[MAX_TOKEN_LEN],     /* */
-            *ptr,                  /* */
-             oldk[MAX_TOKEN_LEN],  /* */
-            *oldptr;               /* */
-   size_t    newsize;              /* */
+   char      k[MAX_TOKEN_LEN],
+            *ptr,
+            *oldptr;
+   size_t    newsize;
 
-
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
-   tokcpy2(k, MAX_TOKEN_LEN);
+   tokcpy2(k, sizeof(k));
    c_vars(k);
    qdelete_all(k, "!-", 2);
 
@@ -577,36 +571,36 @@ GLOBAL void set_html_keywords(void)
    replace_udo_quotes(k);
 
    if (toc_table[p1_toc_counter]->keywords != NULL)
-   {                                      /* r6pl5: Keywords bereits vorhanden, neue anhaengen */
+   {
+   	size_t oldsize;
+   	
+      /* Keywords bereits vorhanden, neue anhaengen */
       oldptr = toc_table[p1_toc_counter]->keywords;
-      
-      um_strcpy(oldk, oldptr, MAX_TOKEN_LEN + 1, "\n!html_keywords too long in this line\nset_html_keywords [1]");
-      
-      newsize = strlen(oldk) + strlen(k) + 3;
+      oldsize = strlen(oldptr) + 1;
+      newsize = oldsize + strlen(k) + 2;
 
-      ptr = (char *)realloc(oldptr, newsize);
-      
-      if (!ptr)
+      ptr = (char *)realloc(oldptr, newsize * sizeof(char));
+      if (ptr == NULL)
       {
          bFatalErrorDetected = TRUE;
       }
       else
-      {       
-         sprintf(ptr, "%s, %s", oldk, k);
+      {
+         strcat(ptr, ", ");
+         strcat(ptr, k);
          toc_table[p1_toc_counter]->keywords = ptr;
       }
    }
    else
    {
-      ptr = (char *)malloc(1 + strlen(k) * sizeof(char));
-
-      if (!ptr)
+      ptr = strdup(k);
+      
+      if (ptr == NULL)
       {
          bFatalErrorDetected = TRUE;
       }
       else
       {
-         strcpy(ptr, k);
          toc_table[p1_toc_counter]->keywords = ptr;
       }
    }
@@ -628,8 +622,8 @@ GLOBAL void set_html_keywords(void)
 
 GLOBAL void set_html_description(void)
 {
-   char     d[1024],     /* */
-           *ptr,         /* */
+   char     d[1024],
+           *ptr,
             oldd[1024],  /* */
            *oldptr;      /* */
    size_t   newsize;     /* */

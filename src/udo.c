@@ -13875,7 +13875,6 @@ GLOBAL void init_udo_vars(void)
    html_header_date = FALSE;
    html_header_date_zone[0] = EOS;
    html_header_links = FALSE;
-   html_header_links_kind[0] = EOS;
    
    sDocHtmlBackpage[0] = EOS;
    sDocHtmlPropfontName[0] = EOS;
