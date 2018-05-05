@@ -3205,43 +3205,43 @@ LOCAL void output_html_doctype(void)
 
 LOCAL _BOOL html_new_file(void)
 {
-   char   t[512],        /* */
-          xml_lang[80],
-          xml_ns[40];    /* */
-          
+   char   t[512];
+   char   xml_lang[80];
+   const char *xml_ns;
    
    if (outfile.file == stdout && !bTestmode)
       return TRUE;
    
-   check_endnode();                       /* Bisherige Datei erst einmal schliessen */
-
+   /* Bisherige Datei erst einmal schliessen */
+   check_endnode();
+   
    voutf("%s", sHtmlPropfontEnd);
-   check_output_raw_footer(FALSE);        /*r6pl10*/
+   check_output_raw_footer(FALSE);
    outln("</body>");
    outln("</html>");
    
-                                          /* Dateinamen der neuen Datei ermitteln */
+   /* Dateinamen der neuen Datei ermitteln */
 #if 1
    sprintf(outfile.name, "%s%s", html_name_prefix, toc_table[p2_toc_counter]->filename);
 #else
    strcpy(outfile.name, toc_table[p2_toc_counter]->filename);
 #endif
    
-   if (!html_make_file())                 /* r6pl4 */
+   if (!html_make_file())
       return FALSE;
    
    output_html_doctype();
    
-                                          /* Header anlegen, Aktueller Node ist bekannt */
-   if (html_doctype >= XHTML_STRICT)      /* Bisherige Datei erst einmal schliessen */
+   /* Header anlegen, Aktueller Node ist bekannt */
+   if (html_doctype >= XHTML_STRICT)
    {
       sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
-      sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
+      xml_ns = " xmlns=\"http://www.w3.org/1999/xhtml\"";
    }
    else
    {
       xml_lang[0] = EOS;
-      xml_ns[0] = EOS;
+      xml_ns = "";
    }
    
    voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
@@ -3252,7 +3252,7 @@ LOCAL _BOOL html_new_file(void)
    {
       if (titdat.htmltitle != NULL && titdat.htmltitle[0] != EOS)
       {
-         strcpy(t, titdat.htmltitle);     /*r6pl5*/
+         strcpy(t, titdat.htmltitle);
       }
       else
       {
@@ -3270,10 +3270,8 @@ LOCAL _BOOL html_new_file(void)
       {
          strcat(t, ": ");
       }
-      
       strcat(t, toc_table[p2_toc_counter]->name);
    }
-   
    outln(t);
    
    outln("</title>");
@@ -3321,11 +3319,11 @@ LOCAL _BOOL html_new_file(void)
       outln("<body>");
    }
    
-   check_output_raw_header();             /*r6pl10*/
+   check_output_raw_header();
    
    outln(sHtmlPropfontStart);
    
-   output_aliasses();                     /* r5pl9 */
+   output_aliasses();
    
    if (desttype == TOHTM || desttype == TOHAH)
       html_headline();
@@ -3349,29 +3347,22 @@ LOCAL _BOOL html_new_file(void)
 *
 ******************************************|************************************/
 
-GLOBAL void output_html_header(
-
-const char  *t)                 /* */
+GLOBAL void output_html_header(const char *t)
 {
-   char      xml_lang[80],
-             xml_ns[40];        /* */
-   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
-
+   char xml_lang[80];
+   const char *xml_ns;
    
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
+   output_html_doctype();
    
-   output_html_doctype();                 /* r6pl2 */
-   
-   if (html_doctype >= XHTML_STRICT)      /* Changed in V6.5.9 [NHz] */
+   if (html_doctype >= XHTML_STRICT)
    {
       sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
-      sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
+      xml_ns = " xmlns=\"http://www.w3.org/1999/xhtml\"";
    }
    else
    {
       xml_lang[0] = EOS;
-      xml_ns[0] = EOS;
+      xml_ns = "";
    }
    
    voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
@@ -3380,21 +3371,16 @@ const char  *t)                 /* */
    outln(t);
    outln("</title>");
    
-   /* New in r6pl16 [NHz]
-   Fixed: added real title (from <title> Tag) [vj]
-   */
-   
-   /* V6.5.17 */
    if (desttype == TOHAH)
    {
       if (titdat.appletitle != NULL)
-         voutlnf("<meta name=\"AppleTitle\" content=\"%s\"%s>", titdat.appletitle, closer);
+         voutlnf("<meta name=\"AppleTitle\" content=\"%s\"%s>", titdat.appletitle, xhtml_closer);
          
       if (titdat.appleicon != NULL)
-         voutlnf("<meta name=\"AppleIcon\" content=\"%s\"%s>", titdat.appleicon, closer);
+         voutlnf("<meta name=\"AppleIcon\" content=\"%s\"%s>", titdat.appleicon, xhtml_closer);
    }
    
-   output_html_meta(TRUE);                /*r6pl5: auch Keywords auf der ersten Seite erlauben */
+   output_html_meta(TRUE);                /* auch Keywords auf der ersten Seite erlauben */
    outln("</head>");
    
    out("<body");
@@ -3530,7 +3516,6 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
    const char *sGifName;
    _UWORD    uiW, uiH;
    char      sIDName[32];       /* string buffer for anchor ID name */
-
    
    sTarget[0] = sGifSize[0] = EOS;
    
@@ -3555,8 +3540,8 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
 
       if (no_images)
       {
-         voutlnf("%s<a id=\"%s\" href=\"%s%s#%s\"%s>%s</a>",
-            sep, sIDName, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
+         voutlnf("%s<a id=\"%s\" href=\"%s#%s\"%s>%s</a>",
+            sep, sIDName, sFile, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
       }
       else
       {
@@ -3573,7 +3558,6 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         
          voutlnf("<a id=\"%s\" href=\"%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
             sIDName, sFile, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, border, sGifSize, xhtml_closer);
       }
@@ -3604,8 +3588,6 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
    }
    free(sFile);
 }
-
-
 
 
 
@@ -7710,7 +7692,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
    int d, level, start;
    char border[20];
 
-   if (!use_auto_toptocs)
+   if (!use_auto_toptocs || toc_table[p2_toc_counter]->ignore_toptoc)
       return;
    
    switch (desttype)
@@ -8248,6 +8230,7 @@ GLOBAL void c_tableofcontents(void)
    case TOSTG:
    case TOAMG:
       stg_out_endnode();
+      toc_table[p2_toc_counter]->ignore_toptoc = TRUE;
          if (toc_title[0] != EOS)
          	n = toc_title;
          else
@@ -9230,6 +9213,28 @@ GLOBAL void set_ignore_subtoc(void)
 
 /*******************************************************************************
 *
+*  set_ignore_toptoc():
+*     ???
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void set_ignore_toptoc(void)
+{
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+    
+   toc_table[p1_toc_counter]->ignore_toptoc = TRUE;
+}
+
+
+
+
+
+/*******************************************************************************
+*
 *  set_helpid():
 *     ???
 *
@@ -9620,6 +9625,7 @@ LOCAL TOCITEM *init_new_toc_entry(const TOCTYPE toctype, _BOOL invisible)
    tocptr->converted = FALSE;
    tocptr->appendix = FALSE;
    tocptr->ignore_subtoc = FALSE;
+   tocptr->ignore_toptoc = FALSE;
    tocptr->ignore_links = FALSE;
    tocptr->ignore_index = FALSE;
    tocptr->ignore_title = FALSE;

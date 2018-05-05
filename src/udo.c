@@ -711,7 +711,6 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!html_vlinkcolor",              "",         c_tunix,                   TRUE,  CMD_ALWAYS },
    { "!html_verbatim_backcolor",      "",         c_verbatim_backcolor,      TRUE,  CMD_ALWAYS },
    { "!html_counter_command",         "",         c_tunix,                   TRUE,  CMD_ALWAYS },
-   { "!html_javascript",              "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!hh_backimage",                 "",         c_tunix,                   TRUE,  CMD_ALWAYS },
    { "!hh_backcolor",                 "",         c_tunix,                   TRUE,  CMD_ALWAYS },
    { "!hh_textcolor",                 "",         c_tunix,                   TRUE,  CMD_ALWAYS },
@@ -807,6 +806,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!ignore_bottomline",            "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!ignore_raw_header",            "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!ignore_raw_footer",            "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_toptoc",                "",         c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
    { "!macro",                        "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!define",                       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!hyphen",                       "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
@@ -987,27 +987,26 @@ typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
 }  UDOLANGUAGE;
 
 
-#define MAXLANGUAGE 16
-
-LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
+LOCAL UDOLANGUAGE const udolanguage[] =
 {
-   {"czech",      TOCZE},
-   {"danish",     TODAN},
-   {"dutch",      TODUT},
-   {"english",    TOENG},
-   {"finnish",    TOFIN},
-   {"french",     TOFRA},
-   {"german",     TOGER},
-   {"italian",    TOITA},
-   {"japanese",   TOJAP},
-   {"latvian",    TOLVA},
-   {"norwegian",  TONOR},
-   {"polish",     TOPOL},
-   {"portuguese", TOPOR},
-   {"spanish",    TOSPA},
-   {"swedish",    TOSWE},
-   {"russian",    TORUS}
+   { "czech",      TOCZE },
+   { "danish",     TODAN },
+   { "dutch",      TODUT },
+   { "english",    TOENG },
+   { "finnish",    TOFIN },
+   { "french",     TOFRA },
+   { "german",     TOGER },
+   { "italian",    TOITA },
+   { "japanese",   TOJAP },
+   { "latvian",    TOLVA },
+   { "norwegian",  TONOR },
+   { "polish",     TOPOL },
+   { "portuguese", TOPOR },
+   { "spanish",    TOSPA },
+   { "swedish",    TOSWE },
+   { "russian",    TORUS }
 };
+#define  MAXLANGUAGE ArraySize(udolanguage)
 
 
 
@@ -1572,7 +1571,7 @@ LOCAL _BOOL str_for_destlang(const char *s)
    _BOOL        flag = FALSE;  /* return value */
    register int i;
 
-   for (i = 0; i < MAXLANGUAGE; i++)
+   for (i = 0; i < (int)MAXLANGUAGE; i++)
    {
       if (destlang == udolanguage[i].langval)
       {
@@ -10909,6 +10908,10 @@ LOCAL _BOOL pass1(const char *datei)
                   else if (strcmp(token[0], "!ignore_raw_footer") == 0)
                   {
                      set_ignore_raw_footer();
+                  }
+                  else if (strcmp(token[0], "!ignore_toptoc") == 0)
+                  {
+                     set_ignore_toptoc();
                   }
                   else if (strcmp(token[0], "!maketitle") == 0)
                   {

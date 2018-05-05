@@ -178,6 +178,7 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    TOCIDX    up_n_index[TOC_MAXDEPTH - 1];    /* toc_table[]-Positionen oberhalb */
    TOCIDX    num_children;                    /* Anzahl enthaltener Subnodes */
    _BOOL   ignore_subtoc;                   /* ignore !use_auto_subtoc */
+   _BOOL   ignore_toptoc;                   /* ignore !use_auto_toptoc */
    _BOOL   ignore_links;                    /* don't link to this page */
    _BOOL   ignore_index;                    /* don't add this to the index page */
    _BOOL   ignore_title;                    /* don't create title for this node */
@@ -389,6 +390,7 @@ GLOBAL void set_ignore_links(void);
 GLOBAL void set_ignore_index(void);
 GLOBAL void set_ignore_subtoc(void);
 GLOBAL void set_ignore_popup_title(void);
+GLOBAL void set_ignore_toptoc(void);
 GLOBAL void set_helpid(void);
 GLOBAL void win_set_button(void);
 GLOBAL void set_mapping(void);

@@ -1371,6 +1371,7 @@ GLOBAL void c_maketitle(void)
 
    case TOSTG:
       stg_out_endnode();
+      toc_table[p2_toc_counter]->ignore_toptoc = TRUE;
       voutlnf("@node \"%s\"", lang.title);
       stg_headline("", lang.title, FALSE);
       outln("");
@@ -2699,4 +2700,17 @@ GLOBAL void exit_module_tp(void)
    free_titdat(&(titdat.stg_database));
    free_titdat(&(titdat.translator));
    free_titdat(&(titdat.distributor));
+   free_titdat(&(titdat.robots));
+   free_titdat(&(titdat.appletitle));
+   free_titdat(&(titdat.appleicon));
+   
+   free_titdat(&(laydat.paper));
+   free_titdat(&(laydat.propfontname));
+   free_titdat(&(laydat.monofontname));
+   free_titdat(&(laydat.pagemode));
+   free_titdat(&(laydat.openpage));
+   free_titdat(&(laydat.hidetoolbar));
+   free_titdat(&(laydat.hidemenubar));
+   free_titdat(&(laydat.viewerpreferences));
+   free_titdat(&(laydat.fitwindow));
 }
