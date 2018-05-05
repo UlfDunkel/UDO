@@ -778,6 +778,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!html_img_suffix",              "",         c_html_img_suffix,         TRUE,  CMD_ALWAYS },
    { "!html_nodesize",                "",         c_html_nodesize,           TRUE,  CMD_ALWAYS },
    { "!htag_img_suffix",              "",         c_htag_img_suffix,         TRUE,  CMD_ALWAYS },
+   { "!hh_img_suffix",                "",         c_html_img_suffix,         TRUE,  CMD_ALWAYS },
    { "!tabwidth",                     "",         c_tabwidth,                TRUE,  CMD_ALWAYS },
    { "!verbatimsize",                 "",         c_verbatimsize,            TRUE,  CMD_ALWAYS },
    { "!linedrawsize",                 "",         c_linedrawsize,            TRUE,  CMD_ALWAYS },
@@ -833,6 +834,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!html_name_prefix",             "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_no_xlist",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_backpage",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_indexname",               "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_propfont_name",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_propfont_size",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_monofont_name",           "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
@@ -9785,6 +9787,12 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
          return TRUE;
       }
       
+      if (strcmp(token[0], "!html_indexname") == 0)
+      {
+         tokcpy2(sDocHtmlIndexudo, sizeof(sDocHtmlIndexudo));
+         return TRUE;
+      }
+      
       if (strcmp(token[0], "!html_backcolor") == 0)
       {
          set_html_color(HTML_COLOR_BACK);
@@ -13876,6 +13884,7 @@ GLOBAL void init_udo_vars(void)
    sDocHtmlPropfontSize[0] = EOS;
    sDocHtmlSwitchLanguage[0] = EOS;
    iDocHtmlSwitchLanguage = -1;
+   strcpy(sDocHtmlIndexudo, "indexudo");
 
    image_alignment = ALIGN_LEFT;
    table_alignment = ALIGN_CENT;

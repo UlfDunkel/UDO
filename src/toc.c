@@ -5309,7 +5309,7 @@ GLOBAL _BOOL save_html_index(void)
    fprintf(uif, "!newpage\n");            /* output index page stuff in UDO format */
    fprintf(uif, "!sloppy\n\n");
    fprintf(uif, "!node* %s\n", lang.index);
-   fprintf(uif, "!html_name indexudo\n");
+   fprintf(uif, "!html_name %s\n", sDocHtmlIndexudo);
    
    if (!bDocAutorefOff)                   /* don't auto-reference the index page! */
       fprintf(uif, "!autoref [off]\n");
@@ -7845,7 +7845,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
       {
          /* create link to Index page */
          if (!no_index && bCalledIndex && use_udo_index)
-             voutlnf("\n <span class=\"UDO_nav_index\"><a href=\"indexudo.htm\">%s</a></span>", lang.index);
+             voutlnf("\n <span class=\"UDO_nav_index\"><a href=\"%s%s\">%s</a></span>", sDocHtmlIndexudo, outfile.suff, lang.index);
                                           /* close CSS class div */
          outln("</div> <!-- UDO_nav_line -->\n");
       }
@@ -8452,7 +8452,7 @@ GLOBAL void c_tableofcontents(void)
 
       if (use_udo_index && !no_index && bCalledIndex && desttype != TOMHH)
       {
-         voutlnf("<h1><a href=\"indexudo%s\">%s</a></h1>\n", outfile.suff, lang.index);
+         voutlnf("<h1><a href=\"%s%s\">%s</a></h1>\n", sDocHtmlIndexudo, outfile.suff, lang.index);
          outln(xhtml_br);
       }
       outln(xhtml_br);

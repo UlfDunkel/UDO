@@ -292,6 +292,7 @@ GLOBAL char        sDocHtmlMonofontName[64];
                                           /* <font size="..."> */
 GLOBAL char        sDocHtmlMonofontSize[16];
 GLOBAL int         iDocHtmlMonofontSize;
+GLOBAL char        sDocHtmlIndexudo[512];
 GLOBAL char        html_modern_width[16]; /* Breite der linken Spalte */
 GLOBAL int         html_modern_alignment; /* Ausrichtung linke Spalte */
                                           /* background color of left column */
