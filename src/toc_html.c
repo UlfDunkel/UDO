@@ -93,46 +93,6 @@ LOCAL int p1_style_alloc;
 
 /*******************************************************************************
 *
-*     LOCAL PROCEDURES
-*
-******************************************|************************************/
-
-/*******************************************************************************
-*
-*  check_toc_and_counters():
-*     check if certain values are valid
-*
-*  Return:
-*     FALSE: any checked value was invalid
-*      TRUE: everything's fine
-*
-******************************************|************************************/
-
-LOCAL _BOOL check_toc_and_counters(void)
-{
-   if (p1_toc_counter < 0)
-      return FALSE;
-      
-   if (toc_table[p1_toc_counter] == NULL)
-      return FALSE;
-      
-   if (token[1][0] == EOS)
-      return FALSE;
-   
-   return TRUE;
-}
-
-
-
-
-
-
-
-
-
-
-/*******************************************************************************
-*
 *     GLOBAL PROCEDURES
 *
 ******************************************|************************************/
@@ -153,13 +113,12 @@ LOCAL _BOOL check_toc_and_counters(void)
 
 GLOBAL _BOOL set_html_navigation(void)
 {
-   char     s[512],       /* */
-           *cont,         /* */
-           *data,         /* */
-            inhalt[512];  /* */
-   size_t   contlen;      /* */
+   char     s[512],
+           *cont,
+           *data,
+            inhalt[512];
+   size_t   contlen;
    
-
    tokcpy2(s, 512);
 
    contlen = get_brackets_ptr(s, &cont, &data);
@@ -273,9 +232,6 @@ GLOBAL void c_set_html_doctype(void)
 *  set_html_header_date():
 *     sets HTML header date
 *
-*  Note:
-*     New feature #0000054 in V6.5.2 [NHz]
-*
 *  Return:
 *     -
 *
@@ -283,17 +239,14 @@ GLOBAL void c_set_html_doctype(void)
 
 GLOBAL void set_html_header_date(void)
 {
-   tokcpy2(html_header_date_zone, 9);
-
-   if (    (    (html_header_date_zone[0] != '+') 
-             && (html_header_date_zone[0] != '-')
-           )
-        || isdigit(html_header_date_zone[1] == 0) 
-        || isdigit(html_header_date_zone[2] == 0)
-        || html_header_date_zone[3] != ':'
-        || isdigit(html_header_date_zone[4] == 0) 
-        || isdigit(html_header_date_zone[5] == 0)
-      )
+   tokcpy2(html_header_date_zone, 10);
+   
+   if ((html_header_date_zone[0] != '+' && html_header_date_zone[0] != '-') ||
+       isdigit(html_header_date_zone[1] == 0) ||
+       isdigit(html_header_date_zone[2] == 0) ||
+       html_header_date_zone[3] != ':' ||
+       isdigit(html_header_date_zone[4] == 0) ||
+       isdigit(html_header_date_zone[5] == 0))
    {
       error_message(_("wrong argument for !html_header_date: %s, e.g. +01:00"), html_header_date_zone);
       return;
@@ -405,9 +358,17 @@ GLOBAL void set_html_filename(void)
       return;
    }
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
-
+   
+   if (html_merge_node[toc_table[p1_toc_counter]->toctype])
+   {
+   	   warning_message(_("node is merged, ignoring !html_name"));
+   	   return;
+   }
+   
    fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
 
    ptr = toc_table[p1_toc_counter]->filename;
@@ -445,9 +406,11 @@ GLOBAL void set_html_filename_prefix(void)
       return;
    }
 
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
-
+   
    um_strcpy(html_name_prefix, token[1], sizeof(html_name_prefix), "set_html_filename_prefix[1]");
 }
 
@@ -476,9 +439,11 @@ GLOBAL void set_html_dirname(void)
       return;
    }
 
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
-
+   
    fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
 
    if (tmp_path[0] == EOS && tmp_name[0] != EOS)
@@ -516,7 +481,9 @@ GLOBAL void set_html_switch_language(void)
       return;
    }
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    iDocHtmlSwitchLanguage = -1;
@@ -624,15 +591,15 @@ GLOBAL void set_html_description(void)
 {
    char     d[1024],
            *ptr,
-            oldd[1024],  /* */
-           *oldptr;      /* */
-   size_t   newsize;     /* */
+           *oldptr;
+   size_t   newsize;
    
-   
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
-   tokcpy2(d, 1024);
+   tokcpy2(d, sizeof(d));
    c_vars(d);
    qdelete_all(d, "!-", 2);
 
@@ -640,35 +607,36 @@ GLOBAL void set_html_description(void)
    replace_udo_quotes(d);
 
    if (toc_table[p1_toc_counter]->description != NULL)
-   { 
-                                          /* r6pl5: description bereits vorhanden, neue anhaengen */
+   {
+   	  size_t oldsize;
+   	  
+      /* description bereits vorhanden, neue anhaengen */
       oldptr = toc_table[p1_toc_counter]->description;
-      strcpy(oldd, oldptr);
-      newsize = strlen(oldd) + strlen(d) + 2;
+      oldsize = strlen(oldptr) + 1;
+      newsize = oldsize + strlen(d) + 1;
 
-      ptr = (char *)realloc(oldptr, newsize);
-
-      if (!ptr)
+      ptr = (char *)realloc(oldptr, newsize * sizeof(char));
+      if (ptr == NULL)
       {
          bFatalErrorDetected = TRUE;
       }
       else
-      {       
-         sprintf(ptr, "%s %s", oldd, d);
+      {
+         strcat(ptr, " ");
+         strcat(ptr, d);
          toc_table[p1_toc_counter]->description = ptr;
       }
    }
    else
-   { 
-      ptr = (char *)malloc(1 + strlen(d) * sizeof(char));
-
-      if (!ptr)
+   {
+      ptr = strdup(d);
+      
+      if (ptr == NULL)
       {
          bFatalErrorDetected = TRUE;
       }
       else
-      { 
-         strcpy(ptr, d);
+      {
          toc_table[p1_toc_counter]->description = ptr;
       }
    }
@@ -690,14 +658,15 @@ GLOBAL void set_html_description(void)
 
 GLOBAL void set_html_robots(void)
 {
-   char   d[1024],  /* */
-         *ptr;      /* */
+   char   d[1024],
+         *ptr;
    
-   
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
-   tokcpy2(d, 1024);
+   tokcpy2(d, sizeof(d));
    c_vars(d);
    qdelete_all(d, "!-", 2);
 
@@ -767,7 +736,9 @@ GLOBAL void set_html_bgsound(void)
    if (desttype != TOHTM)
       return;
 
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    if (token[1][0] == '\"')
@@ -825,7 +796,9 @@ GLOBAL void set_html_backimage(void)
    char filename[MYFILE_FULL_LEN + 1];
    char   sTemp[MYFILE_FULL_LEN + 3];
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    if (token[1][0] == '\"')
@@ -874,7 +847,9 @@ GLOBAL void set_html_color(const int which)
    struct rgb_and_color color;
    _BOOL   ret;
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    qdelete_once(token[1], "[", 1);
@@ -958,8 +933,8 @@ GLOBAL void set_html_style(void)
    size_t len;
    STYLE **new_style;
    
-   if (!check_toc_and_counters())
-      return;
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
 
    tokcpy2(sTemp, sizeof(sTemp));
 
@@ -1072,7 +1047,7 @@ GLOBAL void set_html_style(void)
 /*******************************************************************************
 *
 *  set_html_script():
-*     sets HTML script (usually a JavaScript file)
+*     sets HTML script name
 *
 *  Return:
 *     -
@@ -1085,7 +1060,9 @@ GLOBAL void set_html_script(void)
    char filename[MYFILE_FULL_LEN + 1];
    char *ptr;
       
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    if (token[1][0] == '\"')
@@ -1136,9 +1113,10 @@ GLOBAL void set_html_favicon(void)
    char sTemp[MYFILE_FULL_LEN + 3];
    char *ptr;
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
-
    if (token[1][0] == '\"')
    {
       tokcpy2(sTemp, sizeof(sTemp));
@@ -1186,7 +1164,9 @@ GLOBAL void set_html_special_color(struct rgb *rgb)
    struct rgb_and_color color;
    _BOOL   ret;
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    qdelete_once(token[1], "[", 1);
@@ -1218,7 +1198,9 @@ GLOBAL void set_html_counter_command(void)
 {
    char k[MYFILE_FULL_LEN];
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    tokcpy2(k, sizeof(k));
@@ -1248,11 +1230,10 @@ GLOBAL void set_html_counter_command(void)
 
 GLOBAL void set_html_frames_toc_title(void)
 {
-   char   d[1024],  /* */
-         *ptr;      /* */
+   char   d[1024],
+         *ptr;
    
-   
-   tokcpy2(d, 1024);
+   tokcpy2(d, sizeof(d));
    c_vars(d);
    qdelete_all(d, "!-", 2);
 
@@ -1262,15 +1243,14 @@ GLOBAL void set_html_frames_toc_title(void)
    if (html_frames_toc_title != NULL)
       free(html_frames_toc_title);
 
-   ptr = (char *)malloc(1 + strlen(d) * sizeof(char));
+   ptr = strdup(d);
 
-   if (!ptr)
+   if (ptr == NULL)
    { 
       bFatalErrorDetected = TRUE;
    }
    else
    {  
-      strcpy(ptr, d);
       html_frames_toc_title = ptr;
    }
 }
@@ -1291,11 +1271,10 @@ GLOBAL void set_html_frames_toc_title(void)
 
 GLOBAL void set_html_frames_con_title(void)
 {
-   char   d[1024],  /* */
-         *ptr;      /* */
+   char   d[1024],
+         *ptr;
    
-   
-   tokcpy2(d, 1024);
+   tokcpy2(d, sizeof(d));
    c_vars(d);
    qdelete_all(d, "!-", 2);
 
@@ -1305,15 +1284,14 @@ GLOBAL void set_html_frames_con_title(void)
    if (html_frames_con_title != NULL)
       free(html_frames_con_title);
 
-   ptr = (char *)malloc(1 + strlen(d) * sizeof(char));
+   ptr = strdup(d);
 
-   if (!ptr)
+   if (ptr == NULL)
    { 
       bFatalErrorDetected = TRUE;
    }
    else
    {  
-      strcpy(ptr, d);
       html_frames_con_title = ptr;
    }
 }
@@ -1334,24 +1312,23 @@ GLOBAL void set_html_frames_con_title(void)
 
 GLOBAL void set_html_modern_width(void)
 {
-   int   width;  /* */
+   int width;
    
-   
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
-                                          /*r6pl8: Falls z.B. 30%, dann komplett umkopieren */
-   if (strstr(token[1], "%") != NULL)
+   /* Falls z.B. 30%, dann komplett umkopieren */
+   if (strchr(token[1], '%') != NULL)
    {
-      um_strcpy(html_modern_width, token[1], 16, "set_html_modern_width[1]");
+      um_strcpy(html_modern_width, token[1], 16, "!html_modern_width");
    }
    else
    {
       width = atoi(token[1]);
-      
       if (width < 0)
          width = 128;
-         
       sprintf(html_modern_width, "%d", width);
    }
 }
@@ -1372,10 +1349,9 @@ GLOBAL void set_html_modern_width(void)
 
 GLOBAL void set_html_modern_alignment(void)
 {
-   char   s[256];  /* buffer for parameter string */
+   char s[256];
    
-   
-   tokcpy2(s, 256);
+   tokcpy2(s, sizeof(s));
 
    if (strstr(s, "center") != NULL)
    {
@@ -1390,7 +1366,7 @@ GLOBAL void set_html_modern_alignment(void)
    }
 
    if (strstr(s, "right") != NULL)
-   { 
+   {
       html_modern_alignment = ALIGN_RIGH;
       return;
    }
@@ -1416,7 +1392,9 @@ GLOBAL void set_html_modern_backimage(void)
    char   sTemp[MYFILE_FULL_LEN + 3];
    char filename[MYFILE_FULL_LEN + 1];
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    if (token[1][0] == '\"')
@@ -1459,23 +1437,22 @@ GLOBAL void set_html_modern_backimage(void)
 
 GLOBAL void set_html_frames_width(void)
 {
-   int   width;  /* */
+   int width;
 
-
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
-                                          /*r6pl8: Falls z.B. 30%, dann komplett umkopieren */
-   if (strstr(token[1], "%") != NULL)
+
+   if (strchr(token[1], '%') != NULL)
    {
-      um_strcpy(html_frames_width, token[1], 16, "set_html_frames_width");
+      um_strcpy(html_frames_width, token[1], 16, "!html_frames_width");
    }
    else
    {
       width = atoi(token[1]);
-      
       if (width < 0)
-      width = 128;
-      
+         width = 128;
       sprintf(html_frames_width, "%d", width);
    }
 }
@@ -1496,23 +1473,22 @@ GLOBAL void set_html_frames_width(void)
 
 GLOBAL void set_html_frames_height(void)
 {
-   int   height;  /* */
+   int height;
    
-   
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
-                                          /*r6pl8: Falls z.B. 30%, dann komplett umkopieren */
-   if (strstr(token[1], "%") != NULL)
+
+   if (strchr(token[1], '%') != NULL)
    {
-      um_strcpy(html_frames_height, token[1], 16, "set_html_frames_height[1]");
+      um_strcpy(html_frames_height, token[1], 16, "!html_frames_height");
    }
    else
    {
       height = atoi(token[1]);
-      
       if (height < 0)
          height = 64;
-         
       sprintf(html_frames_height, "%d", height);
    }
 }
@@ -1533,7 +1509,9 @@ GLOBAL void set_html_frames_height(void)
 
 GLOBAL void set_html_frames_position(void)
 {
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    if (strstr(token[1], "left") != NULL)
@@ -1549,7 +1527,7 @@ GLOBAL void set_html_frames_position(void)
    }
 
    if (strstr(token[1], "top") != NULL)
-   { 
+   {
       html_frames_position = POS_TOP;
       return;
    }
@@ -1577,9 +1555,8 @@ GLOBAL void set_html_frames_position(void)
 
 GLOBAL void set_html_frames_alignment(void)
 {
-   char   s[256];  /* buffer for parameter string */
-   
-   
+   char s[256];
+
    tokcpy2(s, 256);
 
    if (strstr(s, "center") != NULL)
@@ -1589,13 +1566,13 @@ GLOBAL void set_html_frames_alignment(void)
    }
 
    if (strstr(s, "left") != NULL)
-   { 
+   {
       html_frames_alignment = ALIGN_LEFT;
       return;
    }
 
    if (strstr(s, "right") != NULL)
-   { 
+   {
       html_frames_alignment = ALIGN_RIGH;
       return;
    }
@@ -1621,7 +1598,9 @@ GLOBAL void set_html_frames_backimage(void)
    char   sTemp[MYFILE_FULL_LEN + 3];
    char   filename[MYFILE_FULL_LEN + 1];
    
-   if (!check_toc_and_counters())
+   ASSERT(toc_table != NULL);
+   ASSERT(toc_table[p1_toc_counter] != NULL);
+   if (token[1][0] == EOS)
       return;
 
    if (token[1][0] == '\"')
@@ -1664,10 +1643,9 @@ GLOBAL void set_html_frames_backimage(void)
 
 GLOBAL void set_html_button_alignment(void)
 {
-   char   s[256];  /* buffer for parameter string */
+   char s[256];
    
-   
-   tokcpy2(s, 256);
+   tokcpy2(s, sizeof(s));
 
    if (strstr(s, "center") != NULL)
    {
@@ -1704,10 +1682,9 @@ GLOBAL void set_html_button_alignment(void)
 
 GLOBAL void set_html_quotes(void)
 {
-   char   s[256];  /* buffer for parameter string */
+   char s[256];
 
-   
-   tokcpy2(s, 256);                       /* get command parameters */
+   tokcpy2(s, sizeof(s));                       /* get command parameters */
    
    if (strstr(s, "classic") != NULL)
    {
