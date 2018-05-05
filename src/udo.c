@@ -12460,6 +12460,29 @@ LOCAL void show_udo_intro(void)
 
 
 
+/*******************************************************************************
+*
+*  get_timestr():
+*     Ermittelt die aktuelle Uhrzeit
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void get_timestr(char *t)
+{
+   time_t      timer;
+   struct tm  *zeit;
+
+   time(&timer);
+   zeit = localtime(&timer);
+
+   sprintf(t, "%02d:%02d:%02d", zeit->tm_hour, zeit->tm_min, zeit->tm_sec);
+}
+
+
+
 static NOINLINE void print_results(void)
 {
 	char sInfMsg[256];
@@ -13200,34 +13223,6 @@ LOCAL _BOOL passU(const char *datei)
    multitasking_interrupt();
 
    return !bFatalErrorDetected;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_timestr():
-*     Ermittelt die aktuelle Uhrzeit
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void get_timestr(
-
-char          *t)      /* ^ time string result, format "HH:MM:SS" */
-{
-   time_t      timer;  /* */
-   struct tm  *zeit;   /* */
-   
-
-   time(&timer);
-   zeit = localtime(&timer);
-
-   sprintf(t, "%02d:%02d:%02d", zeit->tm_hour, zeit->tm_min, zeit->tm_sec);
 }
 
 

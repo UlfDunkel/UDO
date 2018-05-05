@@ -198,9 +198,6 @@ LOCAL _BOOL pass2(const char *datei);
    /* more misc. */
 LOCAL _BOOL passU(const char *datei);
 
-   /* set strings for target language */
-LOCAL void get_timestr(char *t);
-
    /* init variables */
 LOCAL void init_vars_nroff(void);
 LOCAL void init_vars_stg(void);
