@@ -1784,7 +1784,6 @@ LOCAL _BOOL str_for_os(const char *s)
 *
 ******************************************|************************************/
 
-
 LOCAL int find_color(const char *name)
 {
    register int i;
@@ -13816,6 +13815,10 @@ GLOBAL void init_udo_vars(void)
    bHhkSaved = FALSE;
    bHypSaved = FALSE;
    bUPRSaved = FALSE;
+   bMapSavedC = FALSE;
+   bMapSavedPas = FALSE;
+   bMapSavedVB = FALSE;
+   bMapSavedGFA = FALSE;
 
    clear_file_stack();
 

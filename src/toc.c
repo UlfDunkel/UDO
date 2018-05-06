@@ -269,14 +269,14 @@ typedef struct   _hmtl_index              /* index output for HTML */
 
 typedef struct _tWinMapData
 {
-   char   remOn[16],                      /* */
-          remOff[16];                     /* */
+   char   remOn[16],                      /* start of comment */
+          remOff[16];                     /* end of comment */
    char   cmd[32];                        /* #define const */
    char   varOp[16];                      /*  = */
-   char   hexPre[16],                     /* */
-          hexSuf[16];                     /* 0x $ */
+   char   hexPre[16],                     /* 0x $ */
+          hexSuf[16];                     /* ; */
    char   compiler[32];                   /* C, Pascal, Visual-Basic, ... */
-   }  tWinMapData;
+} tWinMapData;
 
 typedef struct _hmtl_idx
 {
@@ -10104,8 +10104,9 @@ GLOBAL _BOOL save_htmlhelp_alias(void)
    _BOOL       flag;
    
    memset(&data, 0, sizeof(data));
-   strcpy(data.remOn,  "/*");
-   strcpy(data.remOff, "*/");
+   /* the alias file is not a C-File, and needs ";" as comment separator */
+   strcpy(data.remOn,  ";");
+   strcpy(data.remOff, "");
 
    flag = save_the_alias(sMapNoSuff, ".hha", &data);
 
@@ -10182,12 +10183,21 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
             Z.B. X("Formatierung","004006.html")
          */
 
+#if 0
+         /*
+           Bullshit.
+           Die Routine erzeugt auch fuer Header fuer WinHelp und WinHelp4,
+           und nicht nur HtmlHelp.
+           Und nicht nur fuer C, sondern auch Pascal und GFA.
+           Und wo bitte wird hier die map ID ausgegeben die man
+           muehselig ueberall mit win_helpid gesetzt hat???
+         */
          fprintf(file, "X(\"%s\",\"%s%s\")\n",
             toc_table[i]->name,
             toc_table[i]->filename,
             outfile.suff);
+#endif
 
-/* old:
          fprintf(file, "%s %-*s%s\t%s%04X%s\t%s %s %s\n",
             data->cmd,
             MAX_HELPID_LEN + 1,
@@ -10199,7 +10209,6 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
             data->remOn,
             toc_table[i]->name,
             data->remOff);
-*/
       }
    }
 
@@ -11542,9 +11551,6 @@ GLOBAL void node2pchelp(char *s)
 
 GLOBAL void node2postscript(char *s, int text)
 {
-   long   talen;  /* */
-
-
    switch (text)
    {
    case KPS_PS2DOCINFO:
@@ -11558,25 +11564,21 @@ GLOBAL void node2postscript(char *s, int text)
       break;
 
    case KPS_NODENAME:
-                                          /* v6.5.14 [vj]: titdat.author kann ein Null-Pointer sein
-                                           * => ich berechnet strlen(titdat.author) vor und nehme 0
-                                           *    an, wenn es leer ist.
-                                           */
-      if (titdat.author)
-         talen = strlen(titdat.author);
-      else
-         talen = 0;
-
-      if ((long)strlen(s) > 80L - talen)
       {
-         s[80L - talen] = EOS;
+         size_t tlen;
          
-         if (s[79L - talen] == '\\')
-            s[79L - talen] = EOS;
-
-         strcat(s, "...\0");
+         if (titdat.author == NULL)
+            tlen = 0;
+         else
+            tlen = strlen(titdat.author);
+         if ((strlen(s) + tlen) > 80)
+         {
+            s[80] = EOS;
+            if(s[79] == '\\')
+               s[79] = EOS;
+            strcat(s, "...\0");
+         }
       }
-      
       qreplace_all(s, "(", 1, "\\(", 2);
       qreplace_all(s, ")", 1, "\\)", 2);
       qreplace_all(s, "[", 1, "\\[", 2);
