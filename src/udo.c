@@ -1726,6 +1726,11 @@ GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd)
       {
          if ((flag = str_for_desttype(token[i])) == TRUE)
             break;
+         if (strstr(token[i], "none") != NULL)
+         {
+            *schalter = FALSE;
+            break;
+         }
       }
    }
 
@@ -1757,64 +1762,59 @@ GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd)
 LOCAL _BOOL str_for_os(const char *s)
 {
    _BOOL   flag;  /* return value */
-
+   _BOOL warn;
+   
    flag = FALSE;
-
+   warn = FALSE;
+   
 #ifdef __BEOS__
    flag |= (strstr(s, "beos") != NULL);
 #endif
 
-#ifdef __HPUX_ISO__
-   flag |= (strstr(s, "hpux") != NULL);
-#endif
+   warn |= (strstr(s, "hpux") != NULL);
+   warn |= (strstr(s, "linux") != NULL);
+   warn |= (strstr(s, "sinix") != NULL);
+   warn |= (strstr(s, "sunos") != NULL);
 
-#ifdef __HPUX_ROMAN8__
-   flag |= (strstr(s, "hpux") != NULL);
-#endif
-
-#ifdef __LINUX__
-   flag |= (strstr(s, "linux") != NULL);
-#endif
-
+    if (warn && iUdopass == PASS1)
+        warning_message(_("use \"unix\" to test for unix systems"));
+    
 #ifdef __MACOS__
-   flag |= (strstr(s, "macos") != NULL);
+   flag |= strstr(s, "macos") != NULL;
 #endif
 
 #ifdef __MACOSX__
-   flag |= (strstr(s, "macosx") != NULL);
+   flag |= strstr(s, "macosx") != NULL;
+   /* FIXME: haut so nicht hin: "macos" ist teilstring davon und wird auch gefunden */
 #endif
 
 #ifdef __MSDOS__
-   flag |= (strstr(s, "dos") != NULL);
+   flag |= strstr(s, "dos") != NULL;
 #endif
 
 #ifdef __WIN32__
-   flag |= (strstr(s, "dos") != NULL);
-   flag |= (strstr(s, "win") != NULL);
+   flag |= strstr(s, "dos") != NULL;
+   flag |= strstr(s, "win") != NULL;
 #endif
 
 #ifdef __NEXTSTEP__
-   flag |= (strstr(s, "nextstep") != NULL);
-#endif
-
-#ifdef __SINIX__
-   flag |= (strstr(s, "sinix") != NULL);
-#endif
-
-#ifdef __SUNOS__
-   flag |= (strstr(s, "sunos") != NULL);
+   flag |= strstr(s, "nextstep") != NULL;
 #endif
 
 #ifdef __TOS__
-   flag |= (strstr(s, "tos") != NULL);
+   flag |= strstr(s, "tos") != NULL;
+#endif
+
+#if defined(__UNIX__) || defined(__unix__) || defined(__unix) || defined(unix)
+   flag |= strstr(s, "unix") != NULL;
+   flag |= warn;
 #endif
 
    if (strstr(s, "all") != NULL)
       flag = TRUE;
-      
    if (strstr(s, "none") != NULL)
       flag = FALSE;
-
+   
    return flag;
 }
 
@@ -2364,24 +2364,17 @@ LOCAL IDXLIST *idxlist_merge(IDXLIST *p, IDXLIST *q)
 *
 ******************************************|************************************/
 
-LOCAL IDXLIST *idxlist_sort(
-
-IDXLIST     *p)  /* */
+LOCAL IDXLIST *idxlist_sort(IDXLIST *p)
 {
-   IDXLIST  *q,  /* */
-            *r;  /* */
-   
+   IDXLIST *q, *r;
    
    if (p)
    {
       q = p;
-
       for (r = q->next; r && (r = r->next) != NULL; r = r->next)
          q = q->next;
-         
       r = q->next;
       q->next = NULL;
-      
       if (r)
          p = idxlist_merge(idxlist_sort(r), idxlist_sort(p));
    }
@@ -2405,8 +2398,7 @@ IDXLIST     *p)  /* */
 
 LOCAL IDXLIST *new_idxlist_item(void)
 {
-   IDXLIST  *l;  /* */
-   
+   IDXLIST *l;
 
    l = (IDXLIST *)malloc(sizeof(IDXLIST));
 
@@ -2433,19 +2425,14 @@ LOCAL IDXLIST *new_idxlist_item(void)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL add_idxlist_item(
-
-const char  *x1,  /* */
-const char  *x2,  /* */
-const char  *x3)  /* */
+GLOBAL _BOOL add_idxlist_item(const char *x1, const char *x2, const char *x3)
 {
-   IDXLIST  *n;   /* */
-   char      c;   /* */
-   
+   IDXLIST *n;
+   char c;
 
    if (no_index)
       return TRUE;
-
+   
    if (!use_udo_index)
       return TRUE;
 
@@ -2462,9 +2449,8 @@ const char  *x3)  /* */
    strcpy(n->idx[0], x1);
    strcpy(n->idx[1], x2);
    strcpy(n->idx[2], x3);
-   
    n->chapter[0] = EOS;
-
+   
    del_internal_styles(n->idx[0]);
    del_internal_styles(n->idx[1]);
    del_internal_styles(n->idx[2]);
@@ -2474,11 +2460,10 @@ const char  *x3)  /* */
    /* <???> Achtung: Umlaute werden noch nicht beachtet! */
 
    c = (char)toupper(n->idx[0][0]);
-   
    if (c >= 'A' && c <= 'Z')
    {
       n->letter = c;
-   }   
+   }
    else
    {
       n->letter= '*';
@@ -2489,31 +2474,25 @@ const char  *x3)  /* */
    if (n->idx[1][0] != EOS)
    {
       n->depth++;
-      
       if (n->idx[2][0] != EOS)
-      {
          n->depth++;
-      }
    }
 
    switch (desttype)
    {
    case TOASC:
       if (no_numbers)
-      {
          strcpy(n->chapter, current_chapter_name);
-      }
       else
-      {
          strcpy(n->chapter, current_chapter_nr);
-      }
       break;
       
    case TOINF:
       strcpy(n->chapter, current_chapter_name);
       node2texinfo(n->chapter);
+      break;
    }
-
+   
    del_whitespaces(n->chapter);
 
    n->next = idxlist;
@@ -2540,7 +2519,7 @@ LOCAL void sort_idxlist(void)
 {
    if (!use_udo_index)
       return;
-
+   
    if (idxlist == NULL)
       return;
 
@@ -2567,23 +2546,17 @@ LOCAL void sort_idxlist(void)
 
 LOCAL void print_ascii_index(void)
 {
-   IDXLIST  *ptr,             /* */
-            *prev;            /* */
-   char      thisc,           /* */
-             lastc;           /* */
-   _BOOL   misslf = FALSE;  /* */
-   _BOOL   same1,           /* */
-             same2,           /* */
-             same3;           /* */
-             
+   IDXLIST *ptr, *prev;
+   char thisc, lastc;
+   _BOOL misslf = FALSE;
+   _BOOL same1, same2, same3;
 
    if (!use_udo_index)
       return;
    
-
-   ptr  = idxlist;
+   ptr = idxlist;
    prev = NULL;
-
+   
    if (ptr == NULL)
       return;
 
@@ -2595,7 +2568,7 @@ LOCAL void print_ascii_index(void)
       outln(lang.index);
       output_ascii_line("=", zDocParwidth);
    }
-   else   
+   else
    {
       outln(lang.index);
       output_ascii_line("*", strlen(lang.index));
@@ -2617,11 +2590,11 @@ LOCAL void print_ascii_index(void)
          
          outln("");
          lastc = thisc;
-         prev  = NULL;
+         prev = NULL;
       }
 
       same1 = same2 = same3 = FALSE;
-
+      
       if (prev != NULL)
       {
          if (strcmp(ptr->idx[0], prev->idx[0]) == 0)
@@ -2652,11 +2625,9 @@ LOCAL void print_ascii_index(void)
          {
             if (misslf)
                outln("");
-               
             voutf("%s, %s", ptr->idx[0], ptr->chapter);
             misslf = TRUE;
          }
-         
          break;
 
       case 1:                             /* Zwei Index-Eintraege */
@@ -2670,10 +2641,7 @@ LOCAL void print_ascii_index(void)
             else
             {
                if (misslf)
-               {
                   outln("");
-               }
-               
                voutf("     %s, %s", ptr->idx[1], ptr->chapter);
                misslf = TRUE;
             }
@@ -2681,10 +2649,7 @@ LOCAL void print_ascii_index(void)
          else
          {
             if (misslf)
-            {
                outln("");
-            }
-            
             outln(ptr->idx[0]);
             voutf("     %s, %s", ptr->idx[1], ptr->chapter);
             misslf = TRUE;
@@ -2704,10 +2669,7 @@ LOCAL void print_ascii_index(void)
                else
                {
                   if (misslf)
-                  {
                      outln("");
-                  }
-                  
                   voutf("        %s, %s", ptr->idx[2], ptr->chapter);
                   misslf = TRUE;
                }
@@ -2715,10 +2677,7 @@ LOCAL void print_ascii_index(void)
             else
             {
                if (misslf)
-               {
                   outln("");
-               }
-               
                voutf("     %s, %s", ptr->idx[1], ptr->chapter);
                misslf = TRUE;
             }
@@ -2726,28 +2685,22 @@ LOCAL void print_ascii_index(void)
          else
          {
             if (misslf)
-            {
                outln("");
-            }
-            
             outln(ptr->idx[0]);
             voutlnf("     %s", ptr->idx[1]);
             voutf("        %s, %s", ptr->idx[2], ptr->chapter);
             misslf = TRUE;
          }
-         
          break;
       }
 
-      prev = ptr;      
-      ptr  = ptr->next;      
+      prev = ptr;
+      ptr = ptr->next;      
 
-   } while(ptr != NULL);
+   } while (ptr != NULL);
 
    if (misslf)
-   {
       outln("");
-   }
 }
 
 
@@ -2778,12 +2731,11 @@ LOCAL void print_ascii_index(void)
 
 LOCAL void print_info_index(void)
 {
-   int       counter;        /* */
-   IDXLIST  *ptr;            /* */
-   char      left[512],      /* */
-             old_left[512],  /* */
-             val[32];        /* */
-   
+   int       counter;
+   IDXLIST  *ptr;
+   char      left[3 * (128 + 2) + 20];
+   char      old_left[3 * (128 + 2) + 20];
+   char      val[32];
    
    outln("");
    outln("@iftex");
@@ -2799,7 +2751,7 @@ LOCAL void print_info_index(void)
    left[0] = EOS;
    old_left[0] = EOS;
    counter = 0;
-
+   
    if (ptr == NULL)
       return;
 
@@ -2814,18 +2766,17 @@ LOCAL void print_info_index(void)
       switch (ptr->depth)
       {
       case 0:
-         um_strcpy(left, ptr->idx[0], 512, "print_info_index [1]");
+         strcpy(left, ptr->idx[0]);
          break;
-         
       case 1:
          sprintf(left, "%s, %s", ptr->idx[0], ptr->idx[1]);
          break;
-         
       case 2:
          sprintf(left, "%s, %s, %s", ptr->idx[0], ptr->idx[1], ptr->idx[2]);
+         break;
       }
 
-      qdelete_all(left, ":", 1);          /* ":" (colons) mag Info dort nicht */      
+      qdelete_all(left, ":", 1);          /* ":" (colons) mag Info dort nicht */
 
       if (strlen(left) > 34)
          left[34] = EOS;
@@ -2834,7 +2785,7 @@ LOCAL void print_info_index(void)
       {
          counter++;
          sprintf(val, " (%d)", counter + 1);
-         um_strcat(left, val, 512, "print_info_index [2]");
+         strcat(left, val);
       }
       else
       {
@@ -2857,7 +2808,7 @@ LOCAL void print_info_index(void)
 
 
 
-#define USE_RAW_INDEX  0
+#define USE_RAW_INDEX 0
 
 #if USE_RAW_INDEX
 /*******************************************************************************
@@ -2872,19 +2823,18 @@ LOCAL void print_info_index(void)
 
 LOCAL void print_raw_index(void)
 {
-   IDXLIST  *ptr;  /* */
-   
-   
+   IDXLIST *ptr;
+
    if (!use_udo_index)
       return;
-
+   
    ptr = idxlist;
-
+   
    if (ptr == NULL)
       return;
 
    outln("");
-
+   
    do
    {
       switch (ptr->depth)
@@ -2897,6 +2847,7 @@ LOCAL void print_raw_index(void)
          break;
       case 2:
          voutlnf("%s, %s, %s, %s", ptr->idx[0], ptr->idx[1], ptr->idx[2], ptr->chapter);
+         break;
       }
 
       ptr = ptr->next;      
@@ -2995,12 +2946,7 @@ GLOBAL void print_index(void)
 *
 ******************************************|************************************/
 
-GLOBAL void output_htmlhelp_index(
-
-const int    count,  /* */
-const char  *x0,     /* */
-const char  *x1,     /* */
-const char  *x2)     /* */
+GLOBAL void output_htmlhelp_index(const int count, const char *x0, const char *x1, const char *x2)
 {
    outln("<OBJECT type=\"application/x-oleobject\" classid=\"clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e\">");
 
@@ -3009,13 +2955,12 @@ const char  *x2)     /* */
    case 1:
       voutlnf("\t<param name=\"Keyword\" value=\"%s\">", x0);
       break;
-      
    case 2:
       voutlnf("\t<param name=\"Keyword\" value=\"%s, %s\">", x0, x1);
       break;
-      
    case 3:
       voutlnf("\t<param name=\"Keyword\" value=\"%s, %s, %s\">", x0, x1, x2);
+      break;
    }
 
    outln("</OBJECT>");
