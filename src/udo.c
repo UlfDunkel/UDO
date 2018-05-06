@@ -670,8 +670,10 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!begin_flushleft",              "!bfl",     c_begin_flushleft,         TRUE,  CMD_ONLY_MAINPART },
    { "!end_flushleft",                "!efl",     c_end_flushleft,           TRUE,  CMD_ONLY_MAINPART },
    { "!label",                        "!l",       c_label,                   TRUE,  CMD_ONLY_MAINPART },
-   { "!label*",                       "!l*",      c_label,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!label*",                       "!l*",      c_label_iv,                TRUE,  CMD_ONLY_MAINPART },
+   { "!label-",                       "",         c_label,                   TRUE,  CMD_ONLY_MAINPART },
    { "!alias",                        "!a",       c_alias,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!alias-",                       "!a-",      c_alias,                   TRUE,  CMD_ONLY_MAINPART },
    { "!index",                        "!x",       c_index,                   TRUE,  CMD_ONLY_MAINPART },
    { "!heading",                      "!h",       c_heading,                 TRUE,  CMD_ONLY_MAINPART },
    { "!subheading",                   "!sh",      c_subheading,              TRUE,  CMD_ONLY_MAINPART },
@@ -10739,26 +10741,15 @@ LOCAL _BOOL pass1(const char *datei)
                   {
                      toc_end_node();
                   }
-                  else if (strcmp(token[0], "!heading") == 0 || strcmp(token[0], "!h") == 0)
-                  {
-                     save_upr_entry_heading (1, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
-                  else if (strcmp(token[0], "!subheading") == 0 || strcmp(token[0], "!sh") == 0)
-                  {
-                     save_upr_entry_heading (2, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
-                  else if (strcmp(token[0], "!subsubheading") == 0 || strcmp(token[0], "!ssh") == 0)
-                  {
-                     save_upr_entry_heading (3, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
-                  else if (strcmp(token[0], "!subsubsubheading") == 0 || strcmp(token[0], "!sssh") == 0)
-                  {
-                     save_upr_entry_heading (4, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
                   else if (strcmp(token[0], "!alias") == 0 || strcmp(token[0], "!a") == 0)
                   {
                      tokcpy2(tmp, sizeof(tmp));
                      add_alias(tmp, toc_inside_popup(), FALSE);
+                  }
+                  else if (strcmp(token[0], "!alias-") == 0 || strcmp(token[0], "!a-") == 0)
+                  {
+                     tokcpy2(tmp, sizeof(tmp));
+                     add_alias(tmp, toc_inside_popup(), TRUE);
                   }
                   else if (strcmp(token[0], "!index") == 0 || strcmp(token[0], "!x") == 0)
                   {
@@ -10769,6 +10760,10 @@ LOCAL _BOOL pass1(const char *datei)
                      set_mapping();
                   }
                   else if (strcmp(token[0], "!win_helpid") == 0)
+                  {
+                     set_helpid();
+                  }
+                  else if (strcmp(token[0], "!wh4_helpid") == 0)
                   {
                      set_helpid();
                   }
@@ -10958,6 +10953,12 @@ LOCAL _BOOL pass1(const char *datei)
                      tokcpy2(tmp, sizeof(tmp));
                      replace_udo_quotes(tmp);
                      add_label(tmp, FALSE, toc_inside_popup(), TRUE, FALSE);
+                  }
+                  else if (strcmp(token[0], "!label-") == 0)
+                  {
+                     tokcpy2(tmp, sizeof(tmp));
+                     replace_udo_quotes(tmp);
+                     add_label(tmp, FALSE, toc_inside_popup(), FALSE, TRUE);
                   }
                   else if (strcmp(token[0], "!include") == 0)
                   {

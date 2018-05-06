@@ -8511,7 +8511,7 @@ GLOBAL void check_endnode(void)
 
 /*******************************************************************************
 *
-*  c_label():
+*  c_label/c_label_iv():
 *     output a label in 2nd pass
 *
 *  Return:
@@ -8519,10 +8519,11 @@ GLOBAL void check_endnode(void)
 *
 ******************************************|************************************/
 
-GLOBAL void c_label(void)
+LOCAL void c_intern_label(_BOOL ignore_index)
 {
    char   sLabel[512],
           sTemp[512];
+   int do_index = use_label_inside_index && !no_index && !ignore_index;
 
    /* Tokens umkopieren */
    tokcpy2(sLabel, 512);
@@ -8568,10 +8569,7 @@ GLOBAL void c_label(void)
    case TOSTG:
       node2stg(sLabel);
       c_divis(sLabel);
-      if (use_label_inside_index && !no_index)
-         voutlnf("@symbol ari \"%s\"", sLabel);
-      else
-         voutlnf("@symbol ar \"%s\"", sLabel);
+      voutlnf("@symbol %cr%c \"%s\"", label_table[p2_lab_counter]->ignore_links ? ' ' : 'a', do_index ? 'i' : ' ', sLabel);
       break;
       
    case TOAMG:
@@ -8583,50 +8581,22 @@ GLOBAL void c_label(void)
    case TOHAH:                            /* HTML Apple Help (since V6.5.17) */
    case TOHTM:                            /* HTML */
    case TOMHH:                            /* Microsoft HTML Help */
-      if (!no_index && use_label_inside_index)
+      label2html(sLabel);
       {
-         label2html(sLabel);              /* r6pl2 */
-
-                                          /* check if we're in description environment */
-         if ( (iEnvLevel > 0) && (iEnvType[iEnvLevel] == ENV_DESC) )
-         {
-            if (!bDescDDOpen)             /* DD hasn't been opened yet */
-            {
-               if (html_doctype == HTML5)
-               {
-                  voutlnf("<dd><a id=\"%s\"></a></dd>", sLabel);
-               }
-               else
-               {
-                  voutlnf("<dd><a name=\"%s\"></a></dd>", sLabel);
-               }
-            }
-            else
-            {
-               if (html_doctype == HTML5)
-               {
-                  voutlnf("<a id=\"%s\"></a>", sLabel);
-               }
-               else
-               {
-                  voutlnf("<a name=\"%s\"></a>", sLabel);
-               }
-            }
-         }
-         else
-         {
-            if (html_doctype == HTML5)
-            {
-               voutlnf("<a id=\"%s\"></a>", sLabel);
-            }
-            else
-            {
-               voutlnf("<a name=\"%s\"></a>", sLabel);
-            }
-         }
+         const char *a_name = "name";
+         
+#if 0
+         if (html_doctype == HTML5)
+            a_name = "id";
+#endif
+      /* check if we're in description environment */
+      if (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_DESC && !bDescDDOpen)
+         voutlnf("<dd><a %s=\"%s\"></a></dd>", a_name, sLabel);
+      else
+         voutlnf("<a %s=\"%s\"></a>", a_name, sLabel);
       }
       break;
-   
+      
    case TOLDS:
       voutlnf("<label id=\"%s\">", sLabel);
       break;
@@ -8634,11 +8604,10 @@ GLOBAL void c_label(void)
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      if (use_label_inside_index && !no_index)
-      {
-          voutf("K{\\footnote K %s}", sLabel);
-      }
-      
+      if (do_index)
+         voutf("K{\\footnote K %s}", sLabel);
+      else
+         voutf("A{\\footnote A %s}", sLabel);
       if (bDocWinOldKeywords)
       {
          strcpy(sTemp, sLabel);
@@ -8646,12 +8615,10 @@ GLOBAL void c_label(void)
          node2winhelp(sTemp);
          voutlnf("#{\\footnote # %s}", sTemp);
       }
-      
       label2NrWinhelp(sLabel, p2_lab_counter);
       voutf("#{\\footnote # %s}", sLabel);
       break;
       
-
    case TORTF:
       if (use_label_inside_index && !no_index)
       {
@@ -8659,13 +8626,24 @@ GLOBAL void c_label(void)
       }
       break;
 
-
    case TOKPS:
       node2postscript(sLabel, KPS_NAMEDEST);
       voutlnf("/%s NameDest", sLabel);
       /* Must be changed if (!label ...) is possible */
       break;
    }
+}
+
+
+GLOBAL void c_label(void)
+{
+    c_intern_label(FALSE);
+}
+
+
+GLOBAL void c_label_iv(void)
+{
+    c_intern_label(TRUE);
 }
 
 

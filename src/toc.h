@@ -364,6 +364,7 @@ GLOBAL _BOOL bookmarks_ps(void);
    /* --- output a label in pass 2 --- */
 
 GLOBAL void c_label(void);
+GLOBAL void c_label_iv(void);
 GLOBAL void c_alias(void);
 
 
