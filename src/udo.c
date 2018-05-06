@@ -1041,6 +1041,39 @@ GLOBAL char compile_time[9]  = "\0";
 
 /*******************************************************************************
 *
+*  count_manpage_lines():
+*     count number of lines written to current page
+*     and output bottom/headlines if needed
+*
+*  Notes:
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void count_manpage_lines(void)
+{
+   if (iManPageLines >= iManPageLength - MAN_BOTTOMLINES)
+   {
+      man_bottomline();
+      iManPagePages++;
+      iManPageLines = 0;
+      if (out_lf_needed)
+      {
+         if (!bTestmode)
+         {
+            fputs(NL, outfile.file);
+         }
+         outlines++;
+      }
+      man_headline();
+   }
+   iManPageLines++;
+}
+
+/*******************************************************************************
+*
 *  outln():
 *     outputs a line with the content <s>
 *
@@ -1054,37 +1087,50 @@ GLOBAL char compile_time[9]  = "\0";
 
 GLOBAL void outln(const char *s)
 {
-   if (desttype == TOMAN && iManPageLength > 0)
+   const char *start;
+   _BOOL need_nl;
+   
+   if (s == NULL)
+   	  return;
+   need_nl = TRUE;
+   while (*s != '\0')
    {
-      if (iManPageLines >= iManPageLength - MAN_BOTTOMLINES)
+      start = s;
+      while (*s != '\0' && *s != '\n')
+         s++;
+      
+      if (desttype == TOMAN && iManPageLength > 0)
+         count_manpage_lines();
+   
+      if (!bTestmode)
       {
-         man_bottomline();
-         iManPagePages++;
-         iManPageLines = 0;
-         
-         if (out_lf_needed)
-         {
-            if (!bTestmode)
-            {
-               fprintf(outfile.file, NL);
-            }
-            
-            outlines++;
-         }
-         
-         man_headline();
+         fwrite(start, 1, (size_t)(s - start), outfile.file);
+         /* fprintf(outfile.file, " %lu", outlines); */
+         fputs(NL, outfile.file);
       }
-
-      iManPageLines++;
-   }
    
-   if (!bTestmode)
+      outlines++;
+      out_lf_needed = FALSE;
+      need_nl = FALSE;
+      if (*s != '\0')
+      {
+         need_nl = TRUE;
+         s++;
+      }
+   }
+   if (need_nl)
    {
-      fprintf(outfile.file, "%s" NL, s);
+      if (desttype == TOMAN && iManPageLength > 0)
+         count_manpage_lines();
+      if (!bTestmode)
+      {
+         /* fprintf(outfile.file, " %lu", outlines); */
+         fputs(NL, outfile.file);
+      }
+      
+      outlines++;
+      out_lf_needed = FALSE;
    }
-   
-   outlines++;
-   out_lf_needed = FALSE;
 }
 
 
