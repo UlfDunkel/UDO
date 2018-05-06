@@ -70,7 +70,7 @@
 *
 ******************************************|************************************/
 
-#include "udoport.h"                       /* */
+#include "udoport.h"
 
 
 
@@ -164,12 +164,15 @@ typedef struct _lang                      /* language strings */
    char   update[64];                     /* Last updated on (HTML) */
    char   lcid[64];                       /* LCID fuer WinHelp4 & HtmlHelp */
    char   html_home[64];                  /* "Home" */
+   char   html_up[64];                    /* "Hoch" */
    char   html_prev[64];                  /* "Zurueck" */
    char   html_next[64];                  /* "Weiter" */
    char   html_lang[64];                  /* Sprachenkuerzel */
    char   html_start[64];                 /* "Start" */
    char   translator[64];                 /* "Translator" */
    char   distributor[64];                /* "Distributor" */
+   char   tex_stylename[64];
+   char   lyx_langname[64];
    char   degree[64];                     /* "degree" */
    char   copyright[64];                  /* "Copyright" */
 
@@ -177,7 +180,7 @@ typedef struct _lang                      /* language strings */
    
    char   today[64];                      /* 28. Februar 1995 */
    char   short_today[64];                /* 28.02.1995 */
-}  LANG;
+} LANG;
 
 
 typedef struct _myfile                    /* file information */
@@ -188,13 +191,12 @@ typedef struct _myfile                    /* file information */
    char   path[MYFILE_PATH_LEN + 1];      /* Pfad */
    char   name[MYFILE_NAME_LEN + 1];      /* Dateiname */
    char   suff[MYFILE_SUFF_LEN + 1];      /* Endung */
-}  MYFILE;
+} MYFILE;
 
-                                          /* New in V6.5.19 */
-typedef struct _show_variable             /* */
+typedef struct _show_variable
 {
    _BOOL source_filename;               /* Filename anzeigen */
-}  SHOW_VAR;
+} SHOW_VAR;
 
 
 #endif   /* UDO_TYPE_H */

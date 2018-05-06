@@ -8546,40 +8546,16 @@ LOCAL void output_preamble(void)
          outln(s);
          
          s[0] = EOS;
-         if (destlang == TOGER)
-         {
-            if (iTexVersion == TEX_MIKTEX)
-               strcat(s, "germanb");
-            else
-               strcat(s, "german,a4");
-         }
-         
+         strcat(s, lang.tex_stylename);
          if (!no_index && bCalledIndex)
+            strcat(s, ",makeidx");
+         if (!no_images && (iTexVersion == TEX_TETEX || iTexVersion == TEX_MIKTEX))
          {
-            if (s[0] != EOS)
-            {
-               strcat(s, ",");
-            }
-            
-            strcat(s, "makeidx");
+            strcat(s, ",graphicx");
          }
-         
-         if (!no_images && iTexVersion == TEX_TETEX)
-         {
-            if (s[0] != EOS)
-            {
-               strcat(s, ",");
-            }
-            
-            strcat(s, "graphicx");
-         }
-         
          if (s[0] != EOS)
-         {
             voutlnf("\\usepackage{%s}", s);
-         }
          
-                                        
          outln("\\usepackage{eurosym}");
          outln("\\usepackage{times}");
          
@@ -8601,29 +8577,15 @@ LOCAL void output_preamble(void)
       }
       else
       {
-         strcpy(s, "\\documentstyle[11pt");
-         
-         if (destlang == TOGER)
-         {
-            strcat(s, ",german");
-         }
-         
+         strcpy(s, "\\documentstyle[11pt,");
+         strcat(s, lang.tex_stylename);
          if (!no_index && bCalledIndex)
-         {
             strcat(s, ",makeidx");
-         }
-         
          strcat(s, "]");
-         
          if (use_style_book)
-         {
             strcat(s, "{book}");
-         }
          else
-         {
             strcat(s, "{article}");
-         }
-         
          outln(s);
       }
       
@@ -8699,19 +8661,17 @@ LOCAL void output_preamble(void)
       voutlnf("\\secnumdepth %d", toc_maxdepth - TOC_NODE1 + 1);
       voutlnf("\\tocdepth %d", toc_maxdepth - TOC_NODE1 + 1);
       outln("\\paragraph_separation indent");
+      voutlnf("\\language %s", lang.lyx_langname);
       
       switch (destlang)
       {
       case TOENG:
-         outln("\\language english");
          outln("\\quotes_language english");
          break;
       case TOFRA:
-         outln("\\language french");
          outln("\\quotes_language french");
          break;
       default:
-         outln("\\language german");
          outln("\\quotes_language german");
          break;
       }
