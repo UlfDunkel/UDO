@@ -136,6 +136,7 @@ LOCAL _BOOL   bHoldKey;
 LOCAL _BOOL   bShowArgs;
 LOCAL _BOOL   bShowHelp;
 LOCAL _BOOL   bShowVersion;
+LOCAL _BOOL   bDumpImages;
 LOCAL int       last_percent;
 
 
@@ -157,6 +158,7 @@ LOCAL const CLIOPT cliopt[] =
    { "--check",            "",      'b',  FALSE, &bCheckMisc,       TRUE  },
    { "--c",                "-c",    'b',  FALSE, &desttype,         TOSRC },
    { "--drc",              "",      'b',  FALSE, &desttype,         TODRC },
+   { "--dump-images",      "",      'b',  FALSE, &bDumpImages,      TRUE  },
    { "--force-long",       "",      'b',  FALSE, &bForceLong,       TRUE  },
    { "--force-short",      "",      'b',  FALSE, &bForceShort,      TRUE  },
 #if USE_KWSET
@@ -1087,6 +1089,7 @@ int main(int argc, const char **argv)
    bShowArgs        = FALSE;
    bShowVersion     = FALSE;
    bShowHelp        = FALSE;
+   bDumpImages      = FALSE;
    
    no_stderr_output = FALSE;
 
@@ -1126,6 +1129,10 @@ int main(int argc, const char **argv)
    else if (bShowVersion)
    {
       show_version();
+   }
+   else if (bDumpImages)
+   {
+      dump_all_images();
    }
    else
    {                                      /* Leere Kommandozeile uebergeben oder kein Infile */

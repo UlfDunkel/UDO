@@ -292,6 +292,8 @@ GLOBAL _BOOL bPngMwSaved;
 *
 ******************************************|************************************/
 
+GLOBAL void dump_all_images(void);
+
 GLOBAL _BOOL c_img_output(const char *name, const char *caption, _BOOL visible, _BOOL limage);
 GLOBAL void c_html_image_output(const char *name, const char *caption);
 GLOBAL void c_bmp_output(const char *name, const char *caption, _BOOL visible);

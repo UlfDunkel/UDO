@@ -2128,6 +2128,62 @@ LOCAL void init_gif_size(FILE_ID fileid, const _UBYTE *def, _UWORD *uiW, _UWORD 
 
 
 
+/*******************************************************************************
+*
+*  dump_all_images():
+*     dump out all internal images
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void dump_all_images(void)
+{
+   _BOOL saved;
+   
+   saved = FALSE;
+   save_one_html_gif(file_listadd(GIF_HM_NAME), html_gif_hm, sizeof(html_gif_hm), &saved);
+   save_one_html_gif(file_listadd(GIF_NOHM_NAME), html_gif_nohm, sizeof(html_gif_nohm), &saved);
+   save_one_html_gif(file_listadd(GIF_UP_NAME), html_gif_up, sizeof(html_gif_up), &saved);
+   save_one_html_gif(file_listadd(GIF_NOUP_NAME), html_gif_noup, sizeof(html_gif_noup), &saved);
+   save_one_html_gif(file_listadd(GIF_LF_NAME), html_gif_lf, sizeof(html_gif_lf), &saved);
+   save_one_html_gif(file_listadd(GIF_NOLF_NAME), html_gif_nolf, sizeof(html_gif_nolf), &saved);
+   save_one_html_gif(file_listadd(GIF_RG_NAME), html_gif_rg, sizeof(html_gif_rg), &saved);
+   save_one_html_gif(file_listadd(GIF_NORG_NAME), html_gif_norg, sizeof(html_gif_norg), &saved);
+   save_one_html_gif(file_listadd(GIF_GER_NAME), html_gif_ger, sizeof(html_gif_ger), &saved);
+   save_one_html_gif(file_listadd(GIF_ENG_NAME), html_gif_eng, sizeof(html_gif_eng), &saved);
+
+   save_one_html_gif(file_listadd("udo_hm_trans.gif"), html_gif_hm_trans, sizeof(html_gif_hm_trans), &saved);
+   save_one_html_gif(file_listadd("udo_nohm_trans.gif"), html_gif_nohm_trans, sizeof(html_gif_nohm_trans), &saved);
+   save_one_html_gif(file_listadd("udo_up_trans.gif"), html_gif_up_trans, sizeof(html_gif_up_trans), &saved);
+   save_one_html_gif(file_listadd("udo_noup_trans.gif"), html_gif_noup_trans, sizeof(html_gif_noup_trans), &saved);
+   save_one_html_gif(file_listadd("udo_lf_trans.gif"), html_gif_lf_trans, sizeof(html_gif_lf_trans), &saved);
+   save_one_html_gif(file_listadd("udo_nolf_trans.gif"), html_gif_nolf_trans, sizeof(html_gif_nolf_trans), &saved);
+   save_one_html_gif(file_listadd("udo_rg_trans.gif"), html_gif_rg_trans, sizeof(html_gif_rg_trans), &saved);
+   save_one_html_gif(file_listadd("udo_norg_trans.gif"), html_gif_norg_trans, sizeof(html_gif_norg_trans), &saved);
+   save_one_html_gif(file_listadd("udo_ger_trans.gif"), html_gif_ger_trans, sizeof(html_gif_ger_trans), &saved);
+   save_one_html_gif(file_listadd("udo_eng_trans.gif"), html_gif_eng_trans, sizeof(html_gif_eng_trans), &saved);
+
+   save_one_html_gif(file_listadd(GIF_MW_NAME), html_gif_mw, sizeof(html_gif_mw), &saved);
+   save_one_html_gif(file_listadd(GIF_TP_NAME), html_gif_tp, sizeof(html_gif_tp), &saved);
+   save_one_html_gif(file_listadd(GIF_FC_NAME), html_gif_fc, sizeof(html_gif_fc), &saved);
+   save_one_html_gif(file_listadd(GIF_FO_NAME), html_gif_fo, sizeof(html_gif_fo), &saved);
+   save_one_html_gif(file_listadd(GIF_FS_NAME), html_gif_fs, sizeof(html_gif_fs), &saved);
+   
+   save_one_win_bmp(file_listadd(BMP_MW_NAME), win_bmp_mw, sizeof(win_bmp_mw), &saved);
+   save_one_win_bmp(file_listadd(BMP_FC_NAME), win_bmp_fc, sizeof(win_bmp_fc), &saved);
+   save_one_win_bmp(file_listadd(BMP_FO_NAME), win_bmp_fo, sizeof(win_bmp_fo), &saved);
+
+   save_one_stg_img(file_listadd(IMG_MW_NAME), stg_img_mw, sizeof(stg_img_mw), &saved);
+   save_one_stg_img(file_listadd(IMG_FC_NAME), stg_img_fc, sizeof(stg_img_fc), &saved);
+   save_one_stg_img(file_listadd(IMG_FO_NAME), stg_img_fo, sizeof(stg_img_fo), &saved);
+   
+   save_one_eps(file_listadd(EPS_MW_NAME), tex_eps_mw, ArraySize(tex_eps_mw), &saved);
+   save_one_png(file_listadd(PNG_MW_NAME), pdf_png_mw, ArraySize(pdf_png_mw), &saved);
+}
+
+
 
 /*******************************************************************************
 *
