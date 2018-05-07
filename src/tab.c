@@ -1766,39 +1766,37 @@ LOCAL void table_output_ipf(void)
 
 LOCAL void table_output_general(void)
 {
-   int       y,              /* */
-             x,              /* */
-             i,              /* */
-             j,              /* */
-             offset,         /* */
-             indent = 0,     /* */
-             y_stg;          /* */
-   char      s[512],         /* */
-             f[512],         /* */
-             stg_vl[32];     /* */
-   char      hl[3][512],     /* */
-             space[50];      /* */
-   char      hl_l[3][2],     /* */
-             hl_c[3][2],     /* */
-             hl_v[3][2],     /* */
-             hl_r[3][2];     /* */
-   char      vc_l[2],        /* */
-             vc_m[2],        /* */
-             vc_r[2];        /* */
-   size_t    tl,             /* */
-             add,            /* */
-             twidth,         /* */
-             toffset = 1,    /* */
-             isl;            /* */
-   _BOOL   tortf,          /* */
-             tosrc,          /* */
-             ansichars,      /* */
-             align_caption;  /* */
-   _BOOL   inside_center,  /* */
-             inside_right,   /* */
-             inside_left;    /* */
-
-
+   int       y,
+             x,
+             i,
+             j,
+             offset,
+             indent = 0,
+             y_stg;
+   char      s[512],
+             f[512],
+             stg_vl[32];
+   char      hl[3][512],
+             space[50];
+   char      hl_l[3][2],
+             hl_c[3][2],
+             hl_v[3][2],
+             hl_r[3][2];
+   char      vc_l[2],
+             vc_m[2],
+             vc_r[2];
+   size_t    tl,
+             add,
+             twidth,
+             toffset,
+             isl;
+   _BOOL   tortf,
+             tosrc,
+             ansichars,
+             align_caption;
+   _BOOL   inside_center,
+             inside_right,
+             inside_left;
 
    inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
    inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
@@ -1882,24 +1880,21 @@ LOCAL void table_output_general(void)
    if (tosrc)
       outln(sSrcRemOn);
 
-   if ( (desttype == TOSTG || desttype == TOAMG) && !ansichars)
+   toffset = 1;
+   if ((desttype == TOSTG || desttype == TOAMG) && !ansichars)
    {
       /* Tabellenbreite fuer den ST-Guide berechnen und in <hl[1]> */
       /* den Befehl zum Zeichnen von horizontalen Linien einsetzen */
-      twidth  = 0;
-      toffset = 1;
-
+      twidth = 0;
       for (x = 0; x <= tab_w; x++)
-         twidth += ((int)tab_cell_w[x] + 2);
+         twidth += tab_cell_w[x] + 2;
 
       if (twidth <= zDocParwidth)
       {
          if (inside_center)
             toffset = (zDocParwidth - twidth) / 2 + 1;
-
          if (inside_right)
             toffset = zDocParwidth - twidth + 1;
-
          if (indent > 0)
             toffset = indent + 1;
       }
@@ -1938,16 +1933,14 @@ LOCAL void table_output_general(void)
          }
       }
       else
+      {
          sprintf(hl[1], "@line %d %d 0", (int) toffset, (int) twidth);
-
+      }
       strcpy(hl[0], hl[1]);
       strcpy(hl[2], hl[1]);
 
-
-      /* --- Befehle fuer vertikale Linien erzeugen --- */
-
+      /* Befehle fuer vertikale Linien erzeugen */
       offset = (int)toffset;
-
       for (x = 0; x <= tab_w; x++)
       {
          if (tab_vert[x] > 0)
@@ -1956,10 +1949,8 @@ LOCAL void table_output_general(void)
                sprintf(stg_vl, "@line %d 0 %d", offset, 254);
             else
                sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
-
             outln(stg_vl);
          }
-
          offset += (int)tab_cell_w[x];
          offset += 2;
       }
@@ -1970,7 +1961,6 @@ LOCAL void table_output_general(void)
             sprintf(stg_vl, "@line %d 0 %d", offset, 254);
          else
             sprintf(stg_vl, "@line %d 0 %d", offset, tab_h + 1);
-
          outln(stg_vl);
       }
 
@@ -1979,12 +1969,8 @@ LOCAL void table_output_general(void)
       strcpy(vc_r, "");
 
       if (tab_toplines > 0)
-      {
          outln(hl[1]);
-      }
-
-   }  /* if ( (desttype == TOSTG || desttype == TOAMG) && !ansichars) */
-
+   }
    else
    {
       /* Zeichen fuer die Trennlinie(n) setzen        */
@@ -1998,11 +1984,11 @@ LOCAL void table_output_general(void)
          strcpy(hl_c[0], "\315");         /*  =   */
          strcpy(hl_l[1], "\307");         /* ||-  */  /* Middle */
          strcpy(hl_r[1], "\266");         /* -||  */
-         strcpy(hl_v[1], "\305");         /*  -|- */
+         strcpy(hl_v[1], "\305");         /* -|-  */
          strcpy(hl_c[1], "\304");         /*  -   */
          strcpy(hl_l[2], "\310");         /* ||=  */  /* Bottom */
          strcpy(hl_r[2], "\274");         /* =||  */
-         strcpy(hl_v[2], "\317");         /*  =|= */
+         strcpy(hl_v[2], "\317");         /* =|= */
          strcpy(hl_c[2], "\315");         /*  =   */
 
          strcpy(vc_l, "\272");
@@ -2038,10 +2024,9 @@ LOCAL void table_output_general(void)
       {
          hl[y][0] = EOS;
 
-         strcat(hl[y], space);            /* New in r6pl15 [NHz] */
+         strcat(hl[y], space);
 
-                                          /* New in r6pl15 [NHz] */
-                                          /* Begin of a table-line in postscript */
+         /* Begin of a table-line in postscript */
          if (desttype == TOKPS)
             strcat(hl[y], "Von (");
 
@@ -2052,9 +2037,7 @@ LOCAL void table_output_general(void)
                if (x == 0)
                {
                   for (i = 1; i <= tab_vert[x]; i++)
-                  {
                      strcat(hl[y], hl_l[y]);
-                  }
                }
                else
                {
@@ -2089,61 +2072,54 @@ LOCAL void table_output_general(void)
                }
             }
          }
-
-                                          /* New in r6pl15 [NHz] */
-                                          /* Conclusion of a table-line in postscript */
+         
+         /* Conclusion of a table-line in postscript */
          if (desttype == TOKPS)
             strcat(hl[y], ") udoshow newline Voff");
 
-         if (inside_center)               /* Linie fuer den Rest zentrieren */
+         if (inside_center)
+         {
+            /* Linie fuer den Rest zentrieren */
             stringcenter(hl[y], zDocParwidth);
-
-         if (inside_right)                /* Linie fuer den Rest ausrichten */
+         }
+         if (inside_right)
+         {
+            /* Linie fuer den Rest ausrichten */
             strright(hl[y], zDocParwidth);
-
+         }
          if (tortf)
             strcat(hl[y], "\\par");
-
          if (tosrc)
             strinsert(hl[y], "    ");
+      }
 
-      }  /* for (y = 0; y < 3; y++) */
 
-
-      /* --- obere Tabellenlinien ausgeben --- */
-
+      /* obere Tabellenlinien ausgeben */
       if (tab_toplines > 0)
       {
          for (i = 1; i <= tab_toplines; i++)
          {
             if (i == 1)
-            {
                outln(hl[0]);
-            }
             else
-            {
                outln(hl[1]);
-            }
          }
       }
-
-   }  /* else */
-
+   }
+   
 
    for (y = 0, y_stg = 0; y <= tab_h; y++, y_stg++)
    {
       s[0] = EOS;
-
       if (y_stg > 253 && (desttype == TOSTG || desttype == TOAMG) && !ansichars)
       {
-                                          /* ST-Guide kann nur Linien mit einer Laenge von 254 Zeilen */
-                                          /* zeichen. Deshalb wird hier eine Anschlussline gezeichnet */
+         /* ST-Guide kann nur Linien mit einer Laenge von 254 Zeilen */
+         /* zeichen. Deshalb wird hier eine Anschlussline gezeichnet */
          offset = (int)toffset;
          y_stg = tab_h - y;
 
          if (y_stg > 253)
             y_stg = 253;
-
          for (x = 0; x <= tab_w; x++)
          {
             if (tab_vert[x] > 0)
@@ -2151,22 +2127,19 @@ LOCAL void table_output_general(void)
                sprintf(stg_vl, "@line %d 0 %d", offset, y_stg + 1);
                outln(stg_vl);
             }
-
             offset += (int)tab_cell_w[x];
             offset += 2;
          }
-
          if (tab_vert[tab_w + 1] > 0)
          {
             sprintf(stg_vl, "@line %d 0 %d", offset, y_stg + 1);
          }
-
          outln(stg_vl);
 
          y_stg = 0;
-      }  /* if (y_stg > 253 && (desttype == TOSTG || desttype == TOAMG) && !ansichars) */
-
-      strcat(s, space);                   /* New in r6pl15 [NHz] */
+      }
+      
+      strcat(s, space);
 
       if (desttype == TOKPS)              /* New in r6pl15 [NHz] */
          strcat(s, "Von (");              /* Begin of a table-line in postscript */
@@ -2184,14 +2157,12 @@ LOCAL void table_output_general(void)
          strcat(s, " ");
 
          f[0] = EOS;
-
          if (tab_cell[y][x] != NULL)
          {
             strcpy(f, tab_cell[y][x]);
          }
 
          add = 0;
-
                                           /* New in V6.5.11 [NHz] */
          if (desttype == TOKPS)
          {
@@ -2209,44 +2180,36 @@ LOCAL void table_output_general(void)
             stringcenter(f, ((int) tab_cell_w[x]));
             strcat(s, f);
             tl = toklen(f);
-
             if (tab_cell_w[x] > tl)
                add = tab_cell_w[x] - tl;
-
             if (add > 0)
                for (isl = 0; isl < add; isl++)
                   strcat(s, " ");
-
             break;
 
          case TAB_RIGHT:
             tl = toklen(f);
-
             if (tab_cell_w[x] > tl)
                add = tab_cell_w[x] - tl;
-
-            if (add>0)
+            if (add > 0)
                for (isl = 0; isl < add; isl++)
                   strcat(s, " ");
-
             strcat(s, f);
             break;
 
          default:                         /* TAB_LEFT */
             strcat(s, f);
             tl = toklen(f);
-
             if (tab_cell_w[x] > tl)
                add = tab_cell_w[x] - tl;
-
             if (add > 0)
                for (isl = 0; isl < add; isl++)
                   strcat(s, " ");
+            break;
          }
 
          strcat(s, " ");
-
-      }  /* for (x = 0; x <= tab_w; x++) */
+      }
 
       if (tab_vert[tab_w + 1] > 0)
       {
@@ -2256,9 +2219,8 @@ LOCAL void table_output_general(void)
          }
       }
 
-                                          /* Changed in r6pl16 [NHz] */
-                                          /* Displaced because of a bug */
-                                          /* Conclusion of a table-line in postscript */
+      /* Displaced because of a bug */
+      /* Conclusion of a table-line in postscript */
       if (desttype == TOKPS)
          strcat(s, ") udoshow newline Voff");
 
@@ -2268,8 +2230,7 @@ LOCAL void table_output_general(void)
       if (inside_right)
          strright(s, zDocParwidth);
 
-                                          /* Changed in r6pl15 [NHz] */
-                                          /* Parenthesis of table lines would be quoted \( */
+      /* Parenthesis of table lines would be quoted \( */
       if (desttype != TOKPS)
          auto_quote_chars(s, FALSE);
 
@@ -2349,9 +2310,7 @@ LOCAL void table_output_general(void)
             token_reset();
          }
       }
-
-   }  /* for (y = 0, y_stg = 0; y <= tab_h; y++, y_stg++) */
-
+   }
 
    if (tosrc)
       outln(sSrcRemOff);
@@ -2362,26 +2321,26 @@ LOCAL void table_output_general(void)
          outln(rtf_par);
       else
          outln("");
-
+      
       /* PL7: Caption wird wie bei LaTeX nur zentriert, wenn sie  */
       /* kuerzer als die Absatzbreite ist.                        */
-
       token_reset();
-
       align_caption = (strlen(tab_caption) < zDocParwidth);
 
       if (align_caption)
       {
          s[0] = EOS;
-
          if (inside_center)
             strcpy(s, CMD_BEGIN_CENTER);
-
          if (inside_right)
             strcpy(s, CMD_BEGIN_RIGHT);
-
          tokenize(s);
 
+         /*
+          * FIXME: will treat text as if it appeared in input file,
+          * but lang.table has already been converted to destination
+          * format, and tab_caption has already been tokenized
+          */
          if (tab_caption_visible)
             sprintf(s, "%s %d: %s", lang.table, tab_counter, tab_caption);
          else
@@ -2390,15 +2349,12 @@ LOCAL void table_output_general(void)
          tokenize(s);
 
          s[0] = EOS;
-
          if (inside_center)
             strcpy(s, CMD_END_CENTER);
-
          if (inside_right)
             strcpy(s, CMD_END_RIGHT);
-
          tokenize(s);
-         token_output(TRUE);
+         token_output(TRUE, TRUE);
       }
       else
       {
@@ -2406,9 +2362,13 @@ LOCAL void table_output_general(void)
             sprintf(s, "%s %d: %s", lang.table, tab_counter, tab_caption);
          else
             strcpy(s, tab_caption);
-
+         /*
+          * FIXME: will treat text as if it appeared in input file,
+          * but lang.table has already been converted to destination
+          * format, and tab_caption has already been tokenized
+          */
          tokenize(s);
-         token_output(TRUE);
+         token_output(TRUE, TRUE);
       }
    }
 
@@ -2417,8 +2377,7 @@ LOCAL void table_output_general(void)
 
    if (tortf || desttype == TOINF || desttype == TOLDS)
       output_end_verbatim();
-
-}  /* table_output_general() */
+}
 
 
 
@@ -2437,12 +2396,12 @@ LOCAL void table_output_general(void)
 GLOBAL void table_output(void)
 {
    tab_counter++;
-
+   
    switch (desttype)
    {
    case TOHTM:
    case TOMHH:
-   case TOHAH:                            /* V6.5.17 */
+   case TOHAH:
       table_output_html();
       break;
 
@@ -2462,7 +2421,6 @@ GLOBAL void table_output(void)
          table_output_general();
       else
          table_output_rtf();
-
       break;
 
    case TOLYX:
@@ -2475,13 +2433,12 @@ GLOBAL void table_output(void)
 
    default:
       table_output_general();
+      break;
    }
-
+   
    table_reset();
-
    tab_caption[0]      = EOS;
    tab_caption_visible = FALSE;
-
    token_reset();
    check_styleflags();
 }
@@ -2500,12 +2457,9 @@ GLOBAL void table_output(void)
 *
 ******************************************|************************************/
 
-GLOBAL void set_table_counter(
-
-const int   i)  /* */
+GLOBAL void set_table_counter(const int i)
 {
    tab_counter = i - 1;
-
    if (tab_counter < 0)
       tab_counter= 0;
 }
@@ -2526,8 +2480,7 @@ const int   i)  /* */
 
 GLOBAL void set_table_alignment(void)
 {
-   char   s[256];  /* */
-
+   char s[256];
 
    tokcpy2(s, 256);
 
@@ -2566,10 +2519,7 @@ GLOBAL void set_table_alignment(void)
 
 GLOBAL void init_module_tab(void)
 {
-   tab_counter         = 0;
-   tab_caption[0]      = EOS;
+   tab_counter = 0;
+   tab_caption[0] = EOS;
    tab_caption_visible = FALSE;
 }
-
-
-/* +++ EOF +++ */

@@ -5021,7 +5021,7 @@ LOCAL void c_check_raw(char *s)
    /* Letzten Absatz ausgeben */
    if (token_counter > 0)
    {
-      token_output(TRUE);                 /* r5pl11: TRUE statt FALSE */
+      token_output(TRUE, FALSE);
    }
 
    /* Schauen, ob diese Zeile fuer das aktuelle Format bestimmt ist */
@@ -6623,32 +6623,29 @@ LOCAL void to_check_quote_indent(size_t *u)
 *
 ******************************************|************************************/
 
-GLOBAL void token_output(
-
-_BOOL           reset_internals)        /* */
+GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para)
 {
-   register int   i,                      /* */
-                  j;                      /* */
-   int            silb;                   /* */
+   register int   i,
+                  j;
+   int            silb;
    char          *z = tobuffer;           /* buffer for paragraph content output */
-   char           sIndent[512];           /* */
+   char           sIndent[512];
    size_t         umbruch;                /* computes the line width for several formats */
    _BOOL        newline = FALSE;        /* TRUE: (!nl) detected, we have to output some linefeed */
                                           /*   or a line has become too long and must be wrapped */
-   _BOOL        just_linefeed = FALSE;  /* */
-   _BOOL        use_token;              /* */
+   _BOOL        just_linefeed = FALSE;
+   _BOOL        use_token;
    _BOOL        inside_center,          /* TRUE: we're inside an ENV_CENT */
                   inside_right,           /* TRUE: we're inside an ENV_RIGH */
                   inside_left,            /* TRUE: we're inside an ENV_LEFT */
                   inside_quote;           /* TRUE: we're inside an ENV_QUOT */
    _BOOL        inside_compressed,      /* TRUE: this environment should be output 'compressed' */
                   inside_env,             /* TRUE: we're inside ENV_ITEM | ENV_ENUM | ENV_DESC | ENV_LIST */
-                  inside_fussy;           /* */
-   size_t         sl,                     /* */
-                  len_zeile,              /* */
-                  len_silbe,              /* */
-                  len_token;              /* */
-
+                  inside_fussy;
+   size_t         sl,
+                  len_zeile,
+                  len_silbe,
+                  len_token;
    
    if (token_counter <= 0)                /* nothing to do here */
       return;
@@ -6660,7 +6657,7 @@ _BOOL           reset_internals)        /* */
 
    switch (desttype)
    {
-   case TOSTG:                            /* ST-Guide */  
+   case TOSTG:                            /* ST-Guide */
    case TOAMG:                            /* AmigaGuide */
       umbruch = zDocParwidth;
 
@@ -6683,9 +6680,10 @@ _BOOL           reset_internals)        /* */
       
       break;
 
-   case TOSRC:                            /* */
-   case TOSRP:                            /* */
+   case TOSRC:
+   case TOSRP:
       outln(sSrcRemOn);
+      break;
    }
 
    inside_center = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_CENT);
@@ -6694,7 +6692,7 @@ _BOOL           reset_internals)        /* */
    inside_quote  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_QUOT);
    inside_env    = (iItemLevel > 0 || iEnumLevel > 0 || iDescLevel > 0 || iListLevel > 0);
 
-   inside_fussy  = ( (!inside_center) && (!inside_right) && (!inside_left) && (!bDocSloppy) );
+   inside_fussy  = ((!inside_center) && (!inside_right) && (!inside_left) && (!bDocSloppy));
 
    inside_compressed  = (iEnvLevel  > 0 && bEnvCompressed[iEnvLevel]);
 
@@ -6704,11 +6702,8 @@ _BOOL           reset_internals)        /* */
    len_zeile = 0;
 
 
-   if ( (token[0][0] != ' ') && (token[0][0] != INDENT_C) )
+   if ((token[0][0] != ' ') && (token[0][0] != INDENT_C))
       strcat_indent(z);
-
-
-
 
 
    /* --- treat START of paragraph --- */
@@ -6736,87 +6731,70 @@ _BOOL           reset_internals)        /* */
    case TOHTM:                            /* HTML */
    case TOMHH:                            /* Microsoft HTML Help */
    
-      if (inside_center)                  /* centered text */
+      if (!inside_compressed)
       {
-         if (!inside_compressed)
+         if (inside_center)                  /* centered text */
          {
+#if 0
             if (html_doctype == HTML5)
             {
                strcat(z, "<div class=\"UDO_div_align_center\">\n");
             }
             else
+#endif
             {
                strcat(z, "<div align=\"center\">\n");
             }
          }
-      }
-      else if (inside_right)              /* right-justified text */
-      {
-         if (!inside_compressed)
+         else if (inside_right)              /* right-justified text */
          {
+#if 0
             if (html_doctype == HTML5)
             {
                strcat(z, "<div class=\"UDO_div_align_right\">\n");
             }
             else
+#endif
             {
                strcat(z, "<div align=\"right\">\n");
             }
          }
-      }
-      else if (!inside_env)               /* ordinary text in a <p>...</p> */
-      {
-         if (!inside_compressed)
-            strcat(z, "<p>");
-      }
-      else                                /* inside any ENV_... */
-      {
-         switch (iEnvType[iEnvLevel])
+         else if (!inside_env)               /* ordinary text in a <p>...</p> */
          {
-         case ENV_ITEM:
-         case ENV_ENUM:
-         case ENV_LIST:
-            if (!bEnv1stPara[iEnvLevel])  /* horizontal space BEFORE (!) 2nd and succeeding paragraphs */
-            {
-               if (inside_compressed)
-               {
-                  if (html_doctype < XHTML_STRICT)
-                     strcat(z, "<br>\n\n");
-                  else
-                     strcat(z, "<br />\n\n");
-               }
-               else
-               {
-                  if (html_doctype < XHTML_STRICT)
-                     strcat(z, "<br><br>\n\n");
-                  else
-                     strcat(z, "<br /><br />\n\n");
-               }
-            }
-            
-            break;
-            
-         case ENV_DESC:
-            if (!bParagraphOpen)
-               if (!inside_compressed)
-                  strcat(z, "<p>");
+            strcat(z, "<p>");
+            bParagraphOpen = TRUE;
          }
-         
-         bParagraphOpen = TRUE;           /* this paragraph is OPEN now */
+         else if (bEnv1stPara[iEnvLevel])
+         {
+             bEnv1stPara[iEnvLevel] = FALSE;
+         } else
+         {
+             strcat(z, xhtml_br);
+         }
       }
-
+      else
+      {
+         if (inside_env)
+         {
+            if (bEnv1stPara[iEnvLevel])
+            {
+               bEnv1stPara[iEnvLevel] = FALSE;
+            } else
+            {
+               strcat(z, xhtml_br);
+            }
+         }
+      }
       break;
 
-   case TOIPF:                            /* OS/2 IPF */
+   case TOIPF:
       if (!inside_env)
          strcat(z, ":p.");
-      
       break;
 
-   case TOLDS:                            /* Linuxdoc-SGML */
+   case TOLDS:
       if (inside_quote)
          outln("<quote>");
-      
       break;
 
    case TOLYX:
@@ -7189,6 +7167,18 @@ _BOOL           reset_internals)        /* */
             auto_references(z, FALSE, "", 0, 0);
             break;
 
+	      case TOSTG:
+	         /*
+	          * for ST-GUIDE, we usually let the help compiler
+	          * generate the automatic references. However, when
+	          * checking, we have to do that ourselfes so we notice
+	          * the referenced labels.
+	          */
+	         if (bCheckMisc)
+	            auto_references(z, FALSE, "", 0, 0);
+	         replace_1at_by_2at(z);
+	      	 break;
+	
          default:
             break;
          }
@@ -7311,11 +7301,6 @@ _BOOL           reset_internals)        /* */
          /* Endlich kann die Zeile ausgegeben werden */
          outln(z);
          
-                               
-         if (desttype == TOKPS)           /* strange hack to recognize begin of description item content */
-            if (strstr(z, "offDesc writeBeforeLeft Boff newline "))
-               out("(");
-
          /* Schonmal die naechste Zeile vorbereiten. */
          z[0] = EOS;
          len_zeile = 0;
@@ -7463,6 +7448,17 @@ _BOOL           reset_internals)        /* */
       case TOAMG:
          auto_references(z, FALSE, "", 0, 0);
          break;
+      case TOSTG:
+         /*
+          * for ST-GUIDE, we usually let the help compiler
+          * generate the automatic references. However, when
+          * checking, we have to do that ourselfes so we notice
+          * the referenced labels.
+          */
+         if (bCheckMisc)
+            auto_references(z, FALSE, "", 0, 0);
+         replace_1at_by_2at(z);
+      	 break;
       default:
          break;
       }
@@ -7527,86 +7523,42 @@ _BOOL           reset_internals)        /* */
    case TOWIN:
    case TOWH4:
    case TOAQV:
+      if (inside_compressed)
+         outln(rtf_parpard);
+      else if (with_para)
+         outln("\\par\\pard\\par");
+      break;
+
    case TORTF:
       if (inside_compressed)
          outln(rtf_parpard);
       else
          outln("\\par\\pard\\par");
-         
       break;
 
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      if (inside_center || inside_right)
+      if (!inside_compressed)
       {
-         outln("\n</div>\n");
-      }
-      else if (!inside_env)               /* close ordinary paragraph */
-      {
-         if (!inside_compressed)
-            outln("</p>\n");
-         else
-            outln("\n");
-      }
-      else                                /* we're inside any ENV_... */
-      {
-         switch (iEnvType[iEnvLevel])
+         if (inside_center || inside_right)
          {
-         case ENV_ITEM:
-         case ENV_ENUM:
-         case ENV_LIST:
-            bEnv1stPara[iEnvLevel] = FALSE;
-            break;
-            
-         case ENV_DESC:
+            outln("</div>");
+         } else if (inside_env)
+         {
+            out(xhtml_br);
+            outln("&nbsp;");
+         } else
+         {
             if (bParagraphOpen)
-            {
-               if (inside_compressed)
-               {
-                  if (html_doctype < XHTML_STRICT)
-                     outln("<br>\n");
-                  else
-                     outln("<br />\n");
-               }
-               else
-               {
-                  outln("</p>\n");
-               }
-            }
-            
-            bParagraphOpen = FALSE;       /* this paragraph inside an ENV_DESC is done */
-            break;
-
-#if 0
-         case ENV_LIST:
-            if (!bEnv1stPara[iEnvLevel])
-            {
-               if (inside_compressed)
-               {
-                  if (html_doctype < XHTML_STRICT)
-                     outln("<br>\n");
-                  else
-                     outln("<br />\n");
-               }
-               else
-               {
-                  if (html_doctype < XHTML_STRICT)
-                     outln("ENDLIST<br><br>\n");
-                  else
-                     outln("<br /><br />\n");
-               }
-            }
-            
-            bParagraphOpen = FALSE;
-            bEnv1stPara[iEnvLevel] = FALSE;
-#endif
+         	    outln("</p>");
+         	 bParagraphOpen = FALSE;
          }
       }
       break;
 
    case TONRO:
-      if (!inside_env && !inside_compressed)
+      if (!inside_compressed && !inside_env)
          outln("");
       break;
 
@@ -7635,6 +7587,13 @@ _BOOL           reset_internals)        /* */
       break;
 
    case TOIPF:
+      if (!inside_compressed)
+         outln("");
+      break;
+
+   case TOHPH:
+      if (!inside_compressed)
+          outln("");
       break;
 
    case TOKPS:
@@ -7645,6 +7604,11 @@ _BOOL           reset_internals)        /* */
    case TOTEX:
    case TOPDL:
       outln("");
+      break;
+
+   case TOSTG:
+      if (!inside_compressed && with_para)
+         outln("");
       break;
 
    default:
@@ -7695,7 +7659,7 @@ GLOBAL void tokenize(char *s)
    /* bevor das neue Kommando bearbeitet wird. */
    if (s[0] == META_C && s[1] >= 'a' && s[1] <= 'z')
    {
-      token_output(FALSE);
+      token_output(FALSE, strcmp(s, "!end_node") != 0);
       newtoken = TRUE;
    }
 
@@ -8939,7 +8903,7 @@ LOCAL void pass_check_free_line(char *zeile, int pnr)
 {
    if (pnr == PASS2 && token_counter > 0)
    {
-      token_output(TRUE);
+      token_output(TRUE, TRUE);
    }
    
    zeile[0] = EOS;
@@ -11358,7 +11322,7 @@ LOCAL void pass2_check_environments(char *zeile)
          pflag[iUdopass].env = ENV_VERBATIM;
          pflag[iUdopass].env1st = TRUE;
          if (token_counter > 0)
-            token_output(TRUE);
+            token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_verbatim();
          return;
@@ -11390,7 +11354,7 @@ LOCAL void pass2_check_environments(char *zeile)
          pflag[iUdopass].env = ENV_SOURCECODE;
          pflag[iUdopass].env1st = TRUE;
          if (token_counter > 0)
-            token_output(TRUE);
+            token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_sourcecode();
          return;
@@ -11421,7 +11385,7 @@ LOCAL void pass2_check_environments(char *zeile)
          pflag[iUdopass].env = ENV_RAW;
          pflag[iUdopass].env1st = TRUE;
          if (token_counter > 0)
-            token_output(TRUE);
+            token_output(TRUE, FALSE);
          zeile[0] = EOS;
          return;
       } else
@@ -11458,7 +11422,7 @@ LOCAL void pass2_check_environments(char *zeile)
          {
             pflag[iUdopass].env = ENV_TABLE;
             if (token_counter > 0)
-               token_output(TRUE);
+               token_output(TRUE, TRUE);
             table_reset();
             table_get_header(zeile);
             zeile[0] = EOS;
@@ -11492,7 +11456,7 @@ LOCAL void pass2_check_environments(char *zeile)
          pflag[iUdopass].env = ENV_COMMENT;
          pflag[iUdopass].env1st = TRUE;
          if (token_counter > 0)
-            token_output(TRUE);
+            token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_comment();
          return;
@@ -11523,7 +11487,7 @@ LOCAL void pass2_check_environments(char *zeile)
          pflag[iUdopass].env = ENV_LINEDRAW;
          pflag[iUdopass].env1st = TRUE;
          if (token_counter > 0)
-            token_output(TRUE);
+            token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_linedraw();
          return;
@@ -11554,7 +11518,7 @@ LOCAL void pass2_check_environments(char *zeile)
          pflag[iUdopass].env = ENV_PREFORMATTED;
          pflag[iUdopass].env1st = TRUE;
          if (token_counter > 0)
-            token_output(TRUE);
+            token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_preformatted();
          return;
@@ -11784,14 +11748,14 @@ LOCAL _BOOL pass2(const char *datei)
          else if (token_counter > 0)
          {
             /* Leerzeile */
-            token_output(TRUE);
+            token_output(TRUE, TRUE);
          }
       }
    }
 
    if (token_counter > 0)
    {
-      token_output(TRUE);
+      token_output(TRUE, TRUE);
    }
 
    check_quotes();
@@ -11825,16 +11789,16 @@ LOCAL void save_pchelp_commandfile(void)
       return;
    
    cmdfile = myFwopen(file_lookup(sCmdfull), TOASC);
-
-   if (!cmdfile)
+   
+   if (cmdfile == NULL)
       return;
-
+   
    save_upr_entry_outfile(file_lookup(sCmdfull));
 
    fprintf(cmdfile, "-V\n\n");
    fprintf(cmdfile, "%s.HLP\n\n", outfile.name);
    fprintf(cmdfile, "%s.SCR\n", outfile.name);
-
+   
    fclose(cmdfile);
    bCmdSaved = TRUE;
 }
@@ -12323,16 +12287,6 @@ LOCAL void set_format_flags(void)
       format_protect_commands = TRUE;
       break;
    }
-
-
-   /*   Wenn ein Format den Puffer benoetigt, muss das */
-   /*   toklen-Flag unbedingt FALSE sein, da toklen() */
-   /*   sonst Speicherbereiche ueberschreibt!!! */
-
-   if (format_uses_output_buffer)
-   {
-      format_needs_exact_toklen = FALSE;
-   }
 }
 
 
@@ -12349,12 +12303,12 @@ LOCAL void set_format_flags(void)
 *
 ******************************************|************************************/
 
-LOCAL void show_udo_intro(void)
+LOCAL NOINLINE void show_udo_intro(void)
 {
    char sInfMsg[256];
    
    show_status_info("");
-   sprintf(sInfMsg, "This is UDO Version %s.%s %s for %s", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
+   sprintf(sInfMsg, "This is UDO %s", UDO_VERSION_STRING_OS);
    show_status_loginfo(sInfMsg);
    show_status_loginfo(COPYRIGHT);
    sprintf(sInfMsg, "UDO is Open Source (see %s for further information).", UDO_URL);

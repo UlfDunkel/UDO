@@ -477,7 +477,7 @@ GLOBAL void tokcpy2(char *s, size_t maxlen);
    /* ? */
 GLOBAL void token_reset(void);
    /* ? */
-GLOBAL void token_output(_BOOL reset_internals);
+GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para);
    /* ? */
 GLOBAL void tokenize(char *s);
 
