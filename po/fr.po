@@ -6,7 +6,7 @@ msgid  ""
 msgstr ""
 "Project-Id-Version: udo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:14+0100\n"
+"POT-Creation-Date: 2015-04-24 14:58+0200\n"
 "PO-Revision-Date: 2011-05-30 02:03+0200\n"
 "Last-Translator: Thorsten Otto <admin@tho-otto.de>\n"
 "Language-Team: French <gnome-fr@gnome.org>\n"
@@ -21,232 +21,232 @@ msgstr ""
 msgid  "%x maybe not available in LaTeX"
 msgstr ""
 
-#: src/cli.c:692
+#: src/cli.c:695
 #, c-format
 msgid  "usage: %s [-acdDghHilmnpPqrstvwWxy@] [-o outfile] file\n"
 msgstr ""
 
-#: src/cli.c:710
+#: src/cli.c:713
 msgid  "formats:"
 msgstr ""
 
-#: src/cli.c:711
+#: src/cli.c:714
 msgid  "-a,    --asc           convert to ASCII"
 msgstr ""
 
-#: src/cli.c:712
+#: src/cli.c:715
 msgid  "       --amg           convert to AmigaGuide"
 msgstr ""
 
-#: src/cli.c:713
+#: src/cli.c:716
 msgid  "--aqv, --quickview     convert to Apple QuickView"
 msgstr ""
 
-#: src/cli.c:714
+#: src/cli.c:717
 msgid  "-c,    --c             generate C sourcecode"
 msgstr ""
 
-#: src/cli.c:715
+#: src/cli.c:718
 msgid  "       --drc           convert to David's Readme Compiler format"
 msgstr ""
 
-#: src/cli.c:716
+#: src/cli.c:719
 msgid  "-f     --pdflatex      generate PDFLaTeX sourcecode"
 msgstr ""
 
-#: src/cli.c:717
+#: src/cli.c:720
 msgid  "-g,    --helptag       convert to HP Helptag SGML"
 msgstr ""
 
-#: src/cli.c:718
+#: src/cli.c:721
 msgid  "-h,    --html          convert to HTML"
 msgstr ""
 
-#: src/cli.c:719
+#: src/cli.c:722
 msgid  "       --hah           convert to HTML Apple Help"
 msgstr ""
 
-#: src/cli.c:720
+#: src/cli.c:723
 msgid  "-hh,   --htmlhelp      convert to HTML-Help"
 msgstr ""
 
-#: src/cli.c:721
+#: src/cli.c:724
 msgid  "-i,    --info          convert to GNU Texinfo"
 msgstr ""
 
-#: src/cli.c:722
+#: src/cli.c:725
 msgid  "       --ipf           convert to OS/2 IPF format"
 msgstr ""
 
-#: src/cli.c:723
+#: src/cli.c:726
 msgid  "       --lyx           convert to LyX"
 msgstr ""
 
-#: src/cli.c:724
+#: src/cli.c:727
 msgid  "-m,    --man           convert to a manualpage"
 msgstr ""
 
-#: src/cli.c:725
+#: src/cli.c:728
 msgid  "-n,    --nroff         convert to nroff"
 msgstr ""
 
-#: src/cli.c:726
+#: src/cli.c:729
 msgid  "-p,    --pchelp        convert to Pure C Help"
 msgstr ""
 
-#: src/cli.c:727
+#: src/cli.c:730
 msgid  "-P,    --pascal        generate Pascal sourcecode"
 msgstr ""
 
-#: src/cli.c:728
+#: src/cli.c:731
 msgid  "       --ps            convert to PostScript"
 msgstr ""
 
-#: src/cli.c:729
+#: src/cli.c:732
 msgid  "-r,    --rtf           convert to RTF"
 msgstr ""
 
-#: src/cli.c:730
+#: src/cli.c:733
 msgid  "-s,    --stg           convert to ST-Guide"
 msgstr ""
 
-#: src/cli.c:731
+#: src/cli.c:734
 msgid  "-t,    --tex           convert to LaTeX"
 msgstr ""
 
-#: src/cli.c:732
+#: src/cli.c:735
 msgid  "-u,    --udo           collect all files and save in UDO format"
 msgstr ""
 
-#: src/cli.c:733
+#: src/cli.c:736
 msgid  "-v,    --vision        convert to Turbo Vision Help"
 msgstr ""
 
-#: src/cli.c:734
+#: src/cli.c:737
 msgid  "-w,    --win           convert to WinHelp"
 msgstr ""
 
-#: src/cli.c:735
+#: src/cli.c:738
 msgid  "-4,    --win4          convert to WinHelp4"
 msgstr ""
 
-#: src/cli.c:736
+#: src/cli.c:739
 msgid  "-x,    --linuxdoc      convert to Linuxdoc SGML"
 msgstr ""
 
-#: src/cli.c:737
+#: src/cli.c:740
 msgid  "output files:"
 msgstr ""
 
-#: src/cli.c:738
+#: src/cli.c:741
 msgid  "       --force-long    save always long filenames"
 msgstr ""
 
-#: src/cli.c:739
+#: src/cli.c:742
 msgid  "       --force-short   save always short filenames"
 msgstr ""
 
-#: src/cli.c:740
+#: src/cli.c:743
 msgid  "-d,    --no-idxfile    don't generate index file (.ux?)"
 msgstr ""
 
-#: src/cli.c:741
+#: src/cli.c:744
 msgid  "-y,    --no-hypfile    don't generate hyphen file (.uh?)"
 msgstr ""
 
-#: src/cli.c:742
+#: src/cli.c:745
 msgid  "-l,    --no-logfile    don't generate logfile (.ul?)"
 msgstr ""
 
-#: src/cli.c:743
+#: src/cli.c:746
 msgid  "       --map           generate C header file with jump id's for WinHelp"
 msgstr ""
 
-#: src/cli.c:744
+#: src/cli.c:747
 msgid  "       --map-pas       generate Pascal header file with jump id's for WinHelp"
 msgstr ""
 
-#: src/cli.c:745
+#: src/cli.c:748
 msgid  "       --map-vb        generate VB header file with jump id's for WinHelp"
 msgstr ""
 
-#: src/cli.c:746
+#: src/cli.c:749
 msgid  "       --map-gfa       generate GFA header file with jump id's for WinHelp"
 msgstr ""
 
-#: src/cli.c:747
+#: src/cli.c:750
 msgid  "-o F,  --outfile F     write to file F"
 msgstr ""
 
-#: src/cli.c:748
+#: src/cli.c:751
 msgid  "       --save-upr      create project file (.upr)"
 msgstr ""
 
-#: src/cli.c:749
+#: src/cli.c:752
 msgid  "       --tree          generate tree file (.ut?)"
 msgstr ""
 
-#: src/cli.c:750
+#: src/cli.c:753
 msgid  "others:"
 msgstr ""
 
-#: src/cli.c:751
+#: src/cli.c:754
 msgid  "       --check         activate checkings"
 msgstr ""
 
-#: src/cli.c:752
+#: src/cli.c:755
 msgid  "-D sym,--define sym    set symbol <sym>"
 msgstr ""
 
-#: src/cli.c:753
+#: src/cli.c:756
 msgid  "-H,    --hold          press key when udo finishes"
 msgstr ""
 
-#: src/cli.c:754
+#: src/cli.c:757
 msgid  "-q,    --quiet         suppress output to stdout and stderr"
 msgstr ""
 
-#: src/cli.c:755
+#: src/cli.c:758
 msgid  "       --test          use test mode (no outfile will be saved)"
 msgstr ""
 
-#: src/cli.c:756
+#: src/cli.c:759
 msgid  "       --verbose       verbose mode"
 msgstr ""
 
-#: src/cli.c:757
+#: src/cli.c:760
 msgid  "-W,    --no-warnings   suppress warnings"
 msgstr ""
 
-#: src/cli.c:758
+#: src/cli.c:761
 msgid  "-Wl,   --no-warningslines   suppress warnings for line lengths"
 msgstr ""
 
-#: src/cli.c:759
+#: src/cli.c:762
 msgid  "-@ F                   read options from file F"
 msgstr ""
 
-#: src/cli.c:760
+#: src/cli.c:763
 msgid  "       --help          show this helppage and exit"
 msgstr ""
 
-#: src/cli.c:761
+#: src/cli.c:764
 msgid  "       --version       show version of UDO and exit"
 msgstr ""
 
-#: src/cli.c:796
+#: src/cli.c:799
 #, c-format
 msgid  ""
 "\n"
 "Press <RETURN>...\n"
 msgstr ""
 
-#: src/cli.c:903
+#: src/cli.c:906
 #, c-format
 msgid  "%s: unknown option! %s\n"
 msgstr ""
 
-#: src/cli.c:1141
+#: src/cli.c:1144
 #, c-format
 msgid  "          use --help for more information\n"
 msgstr ""
@@ -263,260 +263,255 @@ msgstr ""
 msgid  "'!item' outside environment"
 msgstr ""
 
-#: src/msg.c:167
-#, c-format
-msgid  "Error #%d"
-msgstr ""
-
-#: src/msg.c:237
+#: src/msg.c:238
 msgid  "Warning"
 msgstr ""
 
-#: src/msg.c:262
+#: src/msg.c:263
 msgid  "Error"
 msgstr ""
 
-#: src/msg.c:350
+#: src/msg.c:354
 msgid  "Note"
 msgstr ""
 
-#: src/msg.c:375
+#: src/msg.c:379
 msgid  "Fatal Error"
 msgstr ""
 
-#: src/msg.c:397
+#: src/msg.c:403
 msgid  "######## errors, warnings and notes:"
 msgstr ""
 
-#: src/msg.c:418
+#: src/msg.c:424
 msgid  "######## information:"
 msgstr ""
 
-#: src/msg.c:438
+#: src/msg.c:444
 msgid  "interruption"
 msgstr ""
 
-#: src/msg.c:459
+#: src/msg.c:465
 #, c-format
 msgid  "%s written to %s%s"
 msgstr ""
 
-#: src/msg.c:480
+#: src/msg.c:486
 #, c-format
 msgid  "couldn't open logfile <%s>"
 msgstr ""
 
-#: src/msg.c:500
+#: src/msg.c:506
 #, c-format
 msgid  "couldn't open hypfile <%s>"
 msgstr ""
 
-#: src/msg.c:520
+#: src/msg.c:526
 #, c-format
 msgid  "couldn't open index file <%s>"
 msgstr ""
 
-#: src/msg.c:540
+#: src/msg.c:546
 #, c-format
 msgid  "couldn't open treefile <%s>"
 msgstr ""
 
-#: src/msg.c:560
+#: src/msg.c:566
 #, c-format
 msgid  "couldn't open project file <%s>"
 msgstr ""
 
-#: src/msg.c:580
+#: src/msg.c:586
 #, c-format
 msgid  "couldn't open destination file <%s>"
 msgstr ""
 
-#: src/msg.c:600
+#: src/msg.c:606
 #, c-format
 msgid  "couldn't open source file <%s>"
 msgstr ""
 
-#: src/msg.c:620
+#: src/msg.c:626
 #, c-format
 msgid  "couldn't write IMG header of <%s>"
 msgstr ""
 
-#: src/msg.c:640
+#: src/msg.c:646
 #, c-format
 msgid  "couldn't read IMG header of <%s>"
 msgstr ""
 
-#: src/msg.c:660
+#: src/msg.c:666
 #, c-format
 msgid  "couldn't read BMP header of <%s>"
 msgstr ""
 
-#: src/msg.c:680
+#: src/msg.c:686
 #, c-format
 msgid  "couldn't read PCX header of <%s>"
 msgstr ""
 
-#: src/msg.c:700
+#: src/msg.c:706
 #, c-format
 msgid  "couldn't read MSP header of <%s>"
 msgstr ""
 
-#: src/msg.c:720
+#: src/msg.c:726
 #, c-format
 msgid  "couldn't read GIF header of <%s>"
 msgstr ""
 
-#: src/msg.c:740
+#: src/msg.c:746
 #, c-format
 msgid  "couldn't read PNG header of <%s>"
 msgstr ""
 
-#: src/msg.c:760
+#: src/msg.c:766
 #, c-format
 msgid  "couldn't read JPEG header of <%s>"
 msgstr ""
 
-#: src/msg.c:783
-#: src/msg.c:805
+#: src/msg.c:789
+#: src/msg.c:811
 #, c-format
 msgid  "couldn't open <%s>: %s"
 msgstr ""
 
-#: src/msg.c:827
+#: src/msg.c:833
 #, c-format
 msgid  "couldn't make directory <%s>: %s"
 msgstr ""
 
-#: src/msg.c:846
+#: src/msg.c:852
 #, c-format
 msgid  "failed to allocate %lu bytes"
 msgstr ""
 
-#: src/msg.c:865
+#: src/msg.c:871
 msgid  "empty !docinfo"
 msgstr ""
 
-#: src/msg.c:884
+#: src/msg.c:890
 msgid  "syntax error"
 msgstr ""
 
-#: src/msg.c:903
+#: src/msg.c:909
 #, c-format
 msgid  "'%s' without '%s'"
 msgstr ""
 
-#: src/msg.c:922
+#: src/msg.c:928
 #, c-format
 msgid  "'%s' followed by '%s'"
 msgstr ""
 
-#: src/msg.c:941
+#: src/msg.c:947
 msgid  "too many items inside enumeration"
 msgstr ""
 
-#: src/msg.c:960
+#: src/msg.c:966
 #, c-format
 msgid  "'%s' expected"
 msgstr ""
 
-#: src/msg.c:979
+#: src/msg.c:985
 #, c-format
 msgid  "'%s' called twice"
 msgstr ""
 
-#: src/msg.c:998
+#: src/msg.c:1004
 #, c-format
 msgid  "%s not active"
 msgstr ""
 
-#: src/msg.c:1017
+#: src/msg.c:1023
 #, c-format
 msgid  "%s already active"
 msgstr ""
 
-#: src/msg.c:1036
+#: src/msg.c:1042
 #, c-format
 msgid  "%s still active"
 msgstr ""
 
-#: src/msg.c:1055
+#: src/msg.c:1061
 #, c-format
 msgid  "missing parameter(s) at %s"
 msgstr ""
 
-#: src/msg.c:1073
+#: src/msg.c:1079
 #, c-format
 msgid  "wrong number of parameters: %s"
 msgstr ""
 
-#: src/msg.c:1092
+#: src/msg.c:1098
 msgid  "unexpected end of line in command"
 msgstr ""
 
-#: src/msg.c:1111
+#: src/msg.c:1117
 msgid  "too many words used inside paragraph"
 msgstr ""
 
-#: src/msg.c:1130
+#: src/msg.c:1136
 #, c-format
 msgid  "couldn't replace (%s ...)"
 msgstr ""
 
-#: src/msg.c:1151
+#: src/msg.c:1157
 #, c-format
 msgid  "link destination undefined: '%s'"
 msgstr ""
 
-#: src/msg.c:1172
+#: src/msg.c:1178
 #, c-format
 msgid  "last '!if': <%s> line %lu"
 msgstr ""
 
-#: src/msg.c:1191
+#: src/msg.c:1197
 #, c-format
 msgid  "charset/encoding %s not supported"
 msgstr ""
 
-#: src/msg.c:1216
+#: src/msg.c:1222
 #, c-format
 msgid  "use !%snode first (structure gap)"
 msgstr ""
 
-#: src/msg.c:1239
+#: src/msg.c:1245
 #, c-format
 msgid  "Warning: %s %lu: overfull line: %d"
 msgstr ""
 
-#: src/msg.c:1264
+#: src/msg.c:1270
 #, c-format
 msgid  "check this paragraph: %s"
 msgstr ""
 
-#: src/msg.c:1289
+#: src/msg.c:1295
 #, c-format
 msgid  "Warning: %s %lu: too short line: %d: %s"
 msgstr ""
 
-#: src/msg.c:1315
+#: src/msg.c:1321
 #, c-format
 msgid  "cannot convert %c (%s #%u) to %s"
 msgstr ""
 
-#: src/msg.c:1337
+#: src/msg.c:1343
 #, c-format
 msgid  "can't convert UTF-8 (%s) to %s"
 msgstr ""
 
-#: src/msg.c:1357
+#: src/msg.c:1363
 #, c-format
 msgid  "%x not available in ISO Latin 1"
 msgstr ""
 
-#: src/msg.c:1376
+#: src/msg.c:1382
 msgid  "structure depth exceeded, using subsubsubsubnode"
 msgstr ""
 
-#: src/msg.c:1385
+#: src/msg.c:1391
 #, c-format
 msgid  "%s: buffer overrun prevented: %s: %u>%u"
 msgstr ""
@@ -526,58 +521,58 @@ msgstr ""
 msgid  "AmigaGuide cannot link to label '%s'"
 msgstr ""
 
-#: src/par.c:1762
+#: src/par.c:1763
 msgid  "xlink needs WinHelp destination topic"
 msgstr ""
 
-#: src/par.c:1768
+#: src/par.c:1769
 msgid  "xlink needs WinHelp destination file"
 msgstr ""
 
-#: src/par.c:1775
+#: src/par.c:1776
 msgid  "use (!xlink [text] [topic@foo.hlp])"
 msgstr ""
 
-#: src/par.c:3662
+#: src/par.c:3663
 msgid  "too many parameters used"
 msgstr ""
 
-#: src/par.c:3908
+#: src/par.c:3909
 #, c-format
 msgid  "not replaced %3lu:%3lu: %c%c%c %s %s\n"
 msgstr ""
 
-#: src/par.c:4414
+#: src/par.c:4415
 #, c-format
 msgid  "%x not allowed in macro name"
 msgstr ""
 
-#: src/par.c:4420
+#: src/par.c:4421
 #, c-format
 msgid  "redefining internal command (!%s)"
 msgstr ""
 
-#: src/par.c:4537
+#: src/par.c:4538
 #, c-format
 msgid  "macro name longer than %d characters"
 msgstr ""
 
-#: src/par.c:4566
+#: src/par.c:4567
 #, c-format
 msgid  "macro contents longer than %d characters"
 msgstr ""
 
-#: src/par.c:4707
+#: src/par.c:4708
 #, c-format
 msgid  "definition name longer than %d characters"
 msgstr ""
 
-#: src/par.c:4740
+#: src/par.c:4741
 #, c-format
 msgid  "definition contents longer than %d characters"
 msgstr ""
 
-#: src/par.c:4847
+#: src/par.c:4884
 #, c-format
 msgid  "possibly undefined macro: %s"
 msgstr ""
@@ -607,8 +602,13 @@ msgstr ""
 msgid  "too many columns used"
 msgstr ""
 
-#: src/toc.c:5709
-#: src/udo.c:2508
+#: src/tab.c:2180
+#, c-format
+msgid  "invalid table_alignment '%s'"
+msgstr ""
+
+#: src/toc.c:5708
+#: src/udo.c:2531
 msgid  "Sorting index..."
 msgstr ""
 
@@ -728,144 +728,144 @@ msgstr ""
 msgid  "no title data available"
 msgstr ""
 
-#: src/udo.c:1242
+#: src/udo.c:1245
 #, c-format
 msgid  "stringcenter(): length must not exceed %d!"
 msgstr ""
 
-#: src/udo.c:1281
+#: src/udo.c:1284
 #, c-format
 msgid  "strcenter(): length must not exceed %d!"
 msgstr ""
 
-#: src/udo.c:1349
+#: src/udo.c:1352
 #, c-format
 msgid  "outlncenterfill(): string must not be longer than %d characters"
 msgstr ""
 
-#: src/udo.c:1443
+#: src/udo.c:1446
 #, c-format
 msgid  "strjustify(): string must not be longer than %d characters"
 msgstr ""
 
-#: src/udo.c:1562
+#: src/udo.c:1565
 #, c-format
 msgid  "%s ignored outside preamble"
 msgstr ""
 
-#: src/udo.c:1584
+#: src/udo.c:1587
 #, c-format
 msgid  "%s ignored inside preamble"
 msgstr ""
 
-#: src/udo.c:1761
+#: src/udo.c:1769
 msgid  "use \"unix\" to test for unix systems"
 msgstr ""
 
-#: src/udo.c:1825
+#: src/udo.c:1833
 #, c-format
 msgid  "unknown color: %s"
 msgstr ""
 
-#: src/udo.c:5229
+#: src/udo.c:5252
 msgid  "odd number of \"\""
 msgstr ""
 
-#: src/udo.c:5234
+#: src/udo.c:5257
 msgid  "odd number of ''"
 msgstr ""
 
-#: src/udo.c:5677
+#: src/udo.c:5700
 msgid  "$UDOINPUTPATH not set!"
 msgstr ""
 
-#: src/udo.c:7719
+#: src/udo.c:7742
 #, c-format
 msgid  "unknown command: %s"
 msgstr ""
 
-#: src/udo.c:7929
+#: src/udo.c:7952
 msgid  "Reading hyphen file..."
 msgstr ""
 
-#: src/udo.c:7939
+#: src/udo.c:7962
 msgid  "Sorting hyphen file..."
 msgstr ""
 
-#: src/udo.c:7943
+#: src/udo.c:7966
 msgid  "Writing hyphen file..."
 msgstr ""
 
-#: src/udo.c:8608
+#: src/udo.c:8427
 msgid  "too many files opened"
 msgstr ""
 
-#: src/udo.c:8714
+#: src/udo.c:8533
 msgid  "too many !if"
 msgstr ""
 
-#: src/udo.c:9187
+#: src/udo.c:9006
 #, c-format
 msgid  "language %s not supported"
 msgstr ""
 
-#: src/udo.c:9225
+#: src/udo.c:9044
 #, c-format
 msgid  "more than %d buttons defined"
 msgstr ""
 
-#: src/udo.c:10240
+#: src/udo.c:10071
 msgid  "Recursive !include detected"
 msgstr ""
 
-#: src/udo.c:10829
+#: src/udo.c:10672
 msgid  "!code is deprecated, use !code_source instead"
 msgstr ""
 
-#: src/udo.c:10977
+#: src/udo.c:10820
 msgid  "check this paragraph"
 msgstr ""
 
 #. Es kann nur eine geben
-#: src/udo.c:11353
+#: src/udo.c:11196
 msgid  "UDO cannot handle nested tables"
 msgstr ""
 
-#: src/udo.c:12316
+#: src/udo.c:12165
 #, c-format
 msgid  "Output (%lu lines) written to %s"
 msgstr ""
 
-#: src/udo.c:12322
+#: src/udo.c:12169
 #, c-format
 msgid  "Output: %lu lines"
 msgstr ""
 
-#: src/udo.c:12331
+#: src/udo.c:12175
 #, c-format
 msgid  "Warnings: %d"
 msgstr ""
 
-#: src/udo.c:12337
+#: src/udo.c:12181
 #, c-format
 msgid  "Notes:    %d"
 msgstr ""
 
-#: src/udo.c:12343
+#: src/udo.c:12187
 #, c-format
 msgid  "Errors:   %d"
 msgstr ""
 
-#: src/udo.c:12498
+#: src/udo.c:12343
 #, c-format
 msgid  "source and destination file are equal: <%s>"
 msgstr ""
 
-#: src/udo.c:12539
+#: src/udo.c:12382
 msgid  "Pass 1..."
 msgstr ""
 
-#: src/udo.c:12605
+#: src/udo.c:12450
 msgid  "Pass 2..."
 msgstr ""
 

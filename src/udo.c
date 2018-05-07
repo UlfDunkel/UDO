@@ -823,7 +823,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!subsubsubsubsubsubsubtoc_offset","",       cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!subsubsubsubsubsubsubsubtoc_offset","",    cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!table_counter",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
-   { "!table_alignment",              "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!table_alignment",              "",         set_table_alignment,       TRUE,  CMD_ALWAYS },
    { "!image_counter",                "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!image_alignment",              "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
    { "!tex_lindner",                  "",         cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },

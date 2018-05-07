@@ -5,7 +5,7 @@ Ausrichtung für Tabellen bestimmen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
 !item [(!SYNTAX)] (!T)!/table_alignment [left|center|right](!t)
 

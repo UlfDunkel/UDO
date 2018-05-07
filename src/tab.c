@@ -2143,25 +2143,26 @@ GLOBAL void set_table_alignment(void)
 {
    char s[256];
 
-   tokcpy2(s, 256);
+   tokcpy2(s, sizeof(s));
 
-   if (strstr(s, "center") != NULL)
+   if (strcmp(s, "center") == 0)
    {
       table_alignment = ALIGN_CENT;
       return;
    }
 
-   if (strstr(s, "left") != NULL)
+   if (strcmp(s, "left") == 0)
    {
       table_alignment = ALIGN_LEFT;
       return;
    }
 
-   if (strstr(s, "right") != NULL)
+   if (strcmp(s, "right") == 0)
    {
       table_alignment = ALIGN_RIGH;
       return;
    }
+   error_message(_("invalid table_alignment '%s'"), s);
 }
 
 
