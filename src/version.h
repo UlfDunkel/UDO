@@ -107,7 +107,6 @@
    /* --- Einige Flags um Neuentwicklungen zu (de)aktivieren --- */
 
 #define USE_HTML_FOLDERS     0            /* Ordnerstruktur erzeugen?       */
-#define USE_OLD_BUILD_FILE   1            /* build_search_file() benutzen?  */
 #define USE_KWSET            1            /* schnellere Suchroutine fuer autoref */
 
 

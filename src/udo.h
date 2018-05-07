@@ -494,11 +494,7 @@ GLOBAL void dest_adjust(void);
 
    /* --- file name composition --- */
    /* ? */
-GLOBAL void build_search_file(char *d, const char *suff);
-   /* ? */
-GLOBAL void build_search_file_output(char *d, const char *suff);
-   /* ? */
-GLOBAL void build_include_filename(char *d, const char *suff);
+GLOBAL void build_include_filename(char *d, const char *relto, const char *suff);
    /* ? */
 GLOBAL void build_image_filename(char *d, const char *suff);
 

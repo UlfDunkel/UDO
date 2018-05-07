@@ -1477,7 +1477,7 @@ LOCAL _BOOL output_raw_file(const char *filename)
    um_strcpy(old_filename, filename, sizeof(old_filename), "output_raw_file[1]");
    um_strcpy(tmp_filename, filename, sizeof(tmp_filename), "output_raw_file[2]");
    
-   build_include_filename(tmp_filename, "");
+   build_include_filename(tmp_filename, infile.full, "");
    
    file = myTextOpen(tmp_filename);
    

@@ -8027,19 +8027,22 @@ LOCAL void sort_hypfile(const char *name)
 *
 ******************************************|************************************/
 
-GLOBAL void build_search_file(char *d, const char *suff)
+static void build_search_file(char *d, const char *relto, const char *suff)
 {
    char  tmp_path2[MYFILE_PATH_LEN + 1];
-
+   MYFILE rel;
+   
    fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
-
+   strcpy(rel.full, relto);
+   fsplit(rel.full, rel.driv, rel.path, rel.name, rel.suff);
+   
 #ifndef __MACOS__
    if (((tmp_driv[0] == EOS) || (tmp_driv[1] != ':')) &&
        ((tmp_path[0] != '\\') && (tmp_path[0] != '/'))
       )
    {
-      strcpy(tmp_driv, infile.driv);
-      strcpy(tmp_path2, infile.path);
+      strcpy(tmp_driv, rel.driv);
+      strcpy(tmp_path2, rel.path);
       strcat(tmp_path2, tmp_path);
       strcpy(tmp_path, tmp_path2);
    }
@@ -8049,20 +8052,20 @@ GLOBAL void build_search_file(char *d, const char *suff)
    /* Kein Laufwerk? Dann Laufwerk von <infile> */
    if (tmp_driv[0] == EOS)
    {
-      strcpy(tmp_driv, infile.driv);
+      strcpy(tmp_driv, rel.driv);
    }
    /* Relativer Pfad? Dann Pfad von <infile> davor */
-   if (infile.path[0])
+   if (rel.path[0])
    {
-      if ((tmp_path[ 0] == ':') && strcmp( tmp_path, infile.path))
+      if ((tmp_path[ 0] == ':') && strcmp( tmp_path, rel.path))
       {
-         strcpy(tmp_path2, infile.path);
+         strcpy(tmp_path2, rel.path);
          strcat(tmp_path2, &tmp_path[1]);
          strcpy(tmp_path, tmp_path2);
       }
       else if (tmp_path[ 0] == EOS)
       {
-         strcpy( tmp_path, infile.path);
+         strcpy( tmp_path, rel.path);
       }
    }
 #endif   /* __MACOS__ */
@@ -8080,72 +8083,6 @@ GLOBAL void build_search_file(char *d, const char *suff)
    path_adjust_separator(tmp_path);
 
    sprintf(d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  build_search_file_output():
-*     Dateinamen komplettieren, ausgehend vom Pfad der Ausgabedatei
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void build_search_file_output(char *d, const char *suff)
-{
-   char  tmp_path2[MYFILE_PATH_LEN + 1];
-
-   fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
-
-#ifndef __MACOS__
-   if (((tmp_driv[0] == EOS) || (tmp_driv[1] != ':')) &&
-       ((tmp_path[0] != '\\') && (tmp_path[0] != '/'))
-      )
-   {
-      strcpy(tmp_driv, outfile.driv);
-      strcpy(tmp_path2, outfile.path);
-      strcat(tmp_path2, tmp_path);
-      strcpy(tmp_path, tmp_path2);
-   }
-#else /* __MACOS__ */
-   /* MO: nochmal leicht ueberarbeitet */
-   /* Martin Osieka, 18.04.1996 */
-   /* Kein Laufwerk? Dann Laufwerk von <infile> */
-   if (tmp_driv[0] == EOS)
-      strcpy( tmp_driv, outfile.driv);
-   /* Relativer Pfad? Dann Pfad von <infile> davor */
-   if (infile.path[0])
-   {
-      if ((tmp_path[0] == ':') && strcmp( tmp_path, outfile.path))
-      {
-         strcpy(tmp_path2, outfile.path);
-         strcat(tmp_path2, &tmp_path[1]);
-         strcpy(tmp_path, tmp_path2);
-      } else if (tmp_path[0] == EOS)
-      {
-         strcpy( tmp_path, outfile.path);
-      }
-   }
-#endif /* __MACOS__ */
-
-#ifdef __TOS__
-   /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
-   /* Siehe E-Mail von Christian Huch @ BM */
-   if (tmp_driv[0] != EOS)
-      tmp_driv[0] = toupper(tmp_driv[0]);
-#endif
-
-   if (tmp_suff[0] == EOS)
-      strcpy(tmp_suff, suff);
-
-   path_adjust_separator(tmp_path);
-
-   sprintf( d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
 }
 
 
@@ -8181,81 +8118,9 @@ GLOBAL void build_search_file_output(char *d, const char *suff)
 *
 ******************************************|************************************/
 
-GLOBAL void build_include_filename(char *d, const char *suff)
+GLOBAL void build_include_filename(char *d, const char *relto, const char *suff)
 {
-#if USE_OLD_BUILD_FILE
-   build_search_file(d, suff);
-#else
-   char tmp_path2[MYFILE_PATH_LEN + 1];
-
-   fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
-
-# ifndef __MACOS__
-   if (tmp_driv[0] == EOS)
-   {
-      /* In Fall 1, 2 und 4 wird jeweils das Laufwerk des Infiles benutzt */
-      strcpy(tmp_driv, infile.driv);
-
-      if (tmp_path[0] == EOS)
-      {
-         /* Fall (1) */
-         strcpy(tmp_path, infile.path);
-      }
-      else
-      {
-         if (tmp_path[0] != '\\' && tmp_path[0] != '/')
-         {
-            /* Fall (4) */
-            strinsert(tmp_path, infile.path);
-         }
-      }
-   }
-
-   /* Die Endung wird in jedem Fall angepasst */
-   if (tmp_suff[0] == EOS)
-   {
-      strcpy(tmp_suff, suff);
-   }
-
-# else   /* __MACOS__ */
-   /* MO: nochmal leicht ueberarbeitet */
-   /* -dh-: Martin, ggf. noch anpassen!!! */
-   /* Martin Osieka, 18.04.1996 */
-   /* Kein Laufwerk? Dann Laufwerk von <infile> */
-   if (tmp_driv[0] == EOS)
-   {
-      strcpy(tmp_driv, infile.driv);
-   }
-   /* Relativer Pfad? Dann Pfad von <infile> davor */
-   if (infile.path[0])
-   {
-      if ((tmp_path[0] == ':') && strcmp(tmp_path, infile.path))
-      {
-         strcpy(tmp_path2, infile.path);
-         strcat(tmp_path2, &tmp_path[1]);
-         strcpy(tmp_path, tmp_path2);
-      } else if (tmp_path[0] == EOS)
-      {
-         strcpy(tmp_path, infile.path);
-      }
-   }
-
-   if (tmp_suff[0] == EOS)
-      strcpy(tmp_suff, suff);
-# endif  /* __MACOS__ */
-
-
-# ifdef __TOS__
-   /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
-   /* Siehe E-Mail von Christian Huch @ BM */
-   if (tmp_driv[0] != EOS)
-      tmp_driv[0] = toupper(tmp_driv[0]);
-# endif
-
-   path_adjust_separator(tmp_path);
-
-   sprintf(d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-#endif
+   build_search_file(d, relto, suff);
 }
 
 
@@ -8293,76 +8158,7 @@ GLOBAL void build_include_filename(char *d, const char *suff)
 
 GLOBAL void build_image_filename(char *d, const char *suff)
 {
-#if USE_OLD_BUILD_FILE
-   build_search_file(d, suff);
-#else
-   char tmp_path2[MYFILE_PATH_LEN + 1];
-
-   fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
-   
-# ifndef __MACOS__
-   if (tmp_driv[0] == EOS)
-   {
-      /* In Fall 1, 2 und 4 wird jeweils das Laufwerk des Infiles benutzt */
-      strcpy(tmp_driv, outfile.driv);
-
-      if (tmp_path[0] == EOS)
-      {
-         /* Fall (1) */
-         strcpy(tmp_path, outfile.path);
-      }
-      else
-      {
-         if (tmp_path[0] != '\\' && tmp_path[0] != '/')
-         {
-            /* Fall (4) */
-            strinsert(tmp_path, outfile.path);
-         }
-      }
-   }
-
-   /* Die Endung wird in jedem Fall angepasst */
-   if (tmp_suff[0] == EOS)
-      strcpy(tmp_suff, suff);
-# else   /* __MACOS__ */
-   /* MO: nochmal leicht ueberarbeitet */
-   /* -dh-: Martin, ggf. noch anpassen!!! */
-   /* Martin Osieka, 18.04.1996 */
-   /* Kein Laufwerk? Dann Laufwerk von <infile> */
-   if (tmp_driv[0] == EOS)
-   {
-      strcpy( tmp_driv, outfile.driv);
-   }
-   /* Relativer Pfad? Dann Pfad von <infile> davor */
-   if (infile.path[0])
-   {
-      if ((tmp_path[0] == ':') && strcmp(tmp_path, outfile.path))
-      {
-         strcpy(tmp_path2, outfile.path);
-         strcat(tmp_path2, &tmp_path[1]);
-         strcpy(tmp_path, tmp_path2);
-      } else if (tmp_path[0] == EOS)
-      {
-         strcpy(tmp_path, outfile.path);
-      }
-   }
-
-   if (tmp_suff[0] == EOS)
-      strcpy(tmp_suff, suff);
-# endif /* __MACOS__ */
-
-
-# ifdef __TOS__
-   /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
-   /* Siehe E-Mail von Christian Huch @ BM */
-   if (tmp_driv[0] != EOS)
-      tmp_driv[0] = toupper(tmp_driv[0]);
-# endif
-
-   path_adjust_separator(tmp_path);
-
-   sprintf( d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-#endif
+   build_search_file(d, infile.full, suff);
 }
 
 
@@ -8622,10 +8418,10 @@ LOCAL _BOOL push_file_stack(const char *filename, MYTEXTFILE *file)
       error_message(_("too many files opened"));
       return FALSE;
    }
-   iFilesOpened++;
    uiFiles[iFilesOpened].loc.line = 0;
    uiFiles[iFilesOpened].loc.id = file_listadd(filename);
    uiFiles[iFilesOpened].file = file;
+   iFilesOpened++;
    
    strcpy(sCurrFileName, filename);
    uiCurrFileLine = 0;
@@ -8644,8 +8440,8 @@ LOCAL _BOOL pop_file_stack(void)
 {
    if (iFilesOpened > 0)
    {
-      myTextClose(uiFiles[iFilesOpened].file);
       iFilesOpened--;
+      myTextClose(uiFiles[iFilesOpened].file);
       if (iFilesOpened == 0)
       {
          sCurrFileName[0] = EOS;
@@ -8721,7 +8517,7 @@ LOCAL void push_if_stack(int kind, _BOOL ignore)
       
       if_stack[counter_if_stack].kind = kind;
       if_stack[counter_if_stack].ignore = ignore;
-      if_stack[counter_if_stack].loc = uiFiles[iFilesOpened].loc;
+      if_stack[counter_if_stack].loc = uiFiles[iFilesOpened - 1].loc;
    }
    else
    {
@@ -10242,9 +10038,15 @@ LOCAL _BOOL pass1(const char *datei)
 
    file = myTextOpen(tmp_datei);
    
+   if (file == NULL && iFilesOpened > 0)
+   {
+      build_include_filename(tmp_datei, file_lookup(uiFiles[iFilesOpened - 1].loc.id), ".ui");
+      file = myTextOpen(tmp_datei);
+   }
+   
    if (file == NULL)
    {
-      build_include_filename(tmp_datei, ".ui");
+      build_include_filename(tmp_datei, infile.full, ".ui");
       file = myTextOpen(tmp_datei);
    }
    
@@ -10298,8 +10100,8 @@ LOCAL _BOOL pass1(const char *datei)
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
       /* Here we need to add possible splitted line numbers */
-      uiFiles[iFilesOpened].loc.line += 1 + uiMultiLines;
-      uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
+      uiFiles[iFilesOpened - 1].loc.line += 1 + uiMultiLines;
+      uiCurrFileLine = uiFiles[iFilesOpened - 1].loc.line;
       lPass1Lines++;
 
       if (break_action())
@@ -11607,19 +11409,25 @@ LOCAL _BOOL pass2(const char *datei)
 
    file = myTextOpen(tmp_datei);
    
+   if (file == NULL && iFilesOpened > 0)
+   {
+      build_include_filename(tmp_datei, file_lookup(uiFiles[iFilesOpened - 1].loc.id), ".ui");
+      file = myTextOpen(tmp_datei);
+   }
+   
    if (file == NULL)
    {
-      build_include_filename(tmp_datei, ".ui");
+      build_include_filename(tmp_datei, infile.full, ".ui");
       file = myTextOpen(tmp_datei);
-
-      if (file == NULL)
-      {
-         error_open_pass2(datei);
-         bErrorDetected = TRUE;
-         return FALSE;
-      }
    }
 
+   if (file == NULL)
+   {
+      error_open_pass2(datei);
+      bErrorDetected = TRUE;
+      return FALSE;
+   }
+   
    if (push_file_stack(tmp_datei, file) == FALSE)
    {
       myTextClose(file);
@@ -11634,8 +11442,8 @@ LOCAL _BOOL pass2(const char *datei)
 
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
-      uiFiles[iFilesOpened].loc.line += 1 + uiMultiLines;
-      uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
+      uiFiles[iFilesOpened - 1].loc.line += 1 + uiMultiLines;
+      uiCurrFileLine = uiFiles[iFilesOpened - 1].loc.line;
       lPass2Lines++;
       show_status_percent(lPass1Lines, lPass2Lines);
 
@@ -12396,7 +12204,7 @@ GLOBAL _BOOL udo(char *datei)
    _BOOL   ret = FALSE;
    int       i;
    FILE     *file;
-   char      tmp[512];
+   char      tmp_filename[MYFILE_FULL_LEN];
    
    get_timestr(timer_start);
 
@@ -12438,18 +12246,19 @@ GLOBAL _BOOL udo(char *datei)
    
    /* Erstmal testen, ob die Datei vorhanden ist, damit nicht unnoetig Dateien angelegt werden. */
 
-   strcpy(tmp, datei);
+   strcpy(tmp_filename, datei);
 
-   file = fopen(tmp, "r");
+   file = fopen(tmp_filename, "r");
    if (file == NULL)
    {
-      build_include_filename(tmp, ".u");
-      file = fopen(tmp, "r");
+      build_include_filename(tmp_filename, infile.full, ".u");
+      file = fopen(tmp_filename, "r");
       if (file == NULL)
       {
-         error_open_infile(tmp);
+         error_open_infile(datei);
          return udo_cleanup();
       }
+      datei = tmp_filename;
    }
    fclose(file);
    
@@ -12918,19 +12727,25 @@ LOCAL _BOOL passU(const char *datei)
 
    file = myTextOpen(tmp_datei);
    
+   if (file == NULL && iFilesOpened > 0)
+   {
+      build_include_filename(tmp_datei, file_lookup(uiFiles[iFilesOpened - 1].loc.id), ".ui");
+      file = myTextOpen(tmp_datei);
+   }
+   
    if (file == NULL)
    {
-      build_include_filename(tmp_datei, ".ui");
+      build_include_filename(tmp_datei, infile.full, ".ui");
       file = myTextOpen(tmp_datei);
-
-      if (file == NULL)
-      {
-         error_open_pass2(datei);
-         bErrorDetected = TRUE;
-         return FALSE;
-      }
    }
 
+   if (file == NULL)
+   {
+      error_open_pass2(datei);
+      bErrorDetected = TRUE;
+      return FALSE;
+   }
+   
    if (push_file_stack(tmp_datei, file) == FALSE)
    {
       myTextClose(file);
@@ -12944,8 +12759,8 @@ LOCAL _BOOL passU(const char *datei)
 
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
-      uiFiles[iFilesOpened].loc.line += 1 + uiMultiLines;
-      uiCurrFileLine = uiFiles[iFilesOpened].loc.line;
+      uiFiles[iFilesOpened - 1].loc.line += 1 + uiMultiLines;
+      uiCurrFileLine = uiFiles[iFilesOpened - 1].loc.line;
       lPass2Lines++;
 
       if (break_action())
