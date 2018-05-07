@@ -4608,13 +4608,9 @@ GLOBAL void c_begin_document(void)
       
       if (titdat.title != NULL)
          voutlnf("  /Title (%s)", titdat.title);
-      else
-         outln("  /Title (undefined)");
-            
+      
       if (titdat.author != NULL)
          voutlnf("  /Author (%s)", titdat.author);
-      else
-         outln("  /Author (undefined)");
          
       voutlnf("  /Creator (UDO %s)", UDO_VERSION_STRING_OS);
       voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
@@ -4622,16 +4618,18 @@ GLOBAL void c_begin_document(void)
       
       if (titdat.description != NULL)
          voutlnf("  /Subject (%s)", titdat.description);
-      else
-         outln("  /Subject (undefined)");
       
       if (titdat.keywords != NULL)
          voutlnf("  /Keywords (%s)", titdat.keywords);
-      else
-         outln("  /Keywords (undefined)");
       
       outln("}");
       
+      outln("");
+      outln("% \\realbackslash is an actual character `\\' with catcode other, and");
+      outln("% \\doublebackslash is two of them (for the pdf outlines).");
+      outln("{\\catcode`\\@=0 \\catcode`\\\\=12 @gdef@realbackslash{\\} @gdef@doublebackslash{\\\\}}");
+      outln("");
+
       output_tex_environments();
       break;
 
@@ -5096,12 +5094,12 @@ GLOBAL void c_begin_document(void)
       else if (titdat.program != NULL)
          voutlnf("/Titeltext (%s) def", titdat.program);
       else
-         outln("/Titeltext (not defined) def");
+         voutlnf("/Titeltext () def");
       
       if (titdat.author != NULL)
          voutlnf("/FootAuthor (\\251 %s) def", titdat.author);
       else
-         outln("/FootAuthor (not defined) def");
+         outln("/FootAuthor () def");
       
       /* Document info */
       if (titdat.title != NULL && titdat.program != NULL)
@@ -5110,18 +5108,12 @@ GLOBAL void c_begin_document(void)
          voutlnf("[ /Title (%s)", titdat.title);
       else if (titdat.program != NULL)
          voutlnf("[ /Title (%s)", titdat.program);
-      else
-         outln("[ /Title (not defined)");
 
       if (titdat.author != NULL)
          voutlnf("  /Author (%s)", titdat.author);
-      else
-         outln("  /Author (undefined)");
       
       if (titdat.description != NULL)
          voutlnf("  /Subject (%s)", titdat.description);
-      else
-         outln("  /Subject (udefined)");
       
       if (titdat.keywords != NULL)
          voutlnf("  /Keywords (%s)", titdat.keywords);
