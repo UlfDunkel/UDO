@@ -4130,20 +4130,23 @@ LOCAL void c_universal_charset(void)
    
    newon = check_on();
 
-   if (iUdopass < PASS2)                  /* don't react twice on the same switch! */
+#if 0
+   /* disabled because unnecessary,
+      and makes it almost impossible to explicitly
+      change setting when needed
+   */
+   if (newon && bDocUniversalCharsetOn)
    {
-      if (newon && bDocUniversalCharsetOn)
-      {
-         error_still_active(CMD_UNIVERSAL_CHARSET);
-         return;
-      }
-      
-      if (!newon && !bDocUniversalCharsetOn)
-      {
-         error_not_active(CMD_UNIVERSAL_CHARSET);
-         return;
-      }
+      error_already_active(CMD_UNIVERSAL_CHARSET);
+      return;
    }
+   
+   if (!newon && !bDocUniversalCharsetOn)
+   {
+      error_not_active(CMD_UNIVERSAL_CHARSET);
+      return;
+   }
+#endif
 
    bDocUniversalCharsetOn = newon;
 }
@@ -4168,12 +4171,12 @@ LOCAL void c_universal_charset(void)
 
 LOCAL void c_rtf_keep_tables(void)
 {
-   if (token_counter <= 1)                /* this command needs a parameter */
+   if (token_counter <= 1)
    {
       error_missing_parameter(CMD_RTF_KEEP_TABLES);
       return;
    }
-
+   
    bDocRtfKeepTablesOn = check_on();
 }
 
@@ -4222,27 +4225,20 @@ LOCAL void c_verbatim_backcolor(void)
 *
 ******************************************|************************************/
 
-LOCAL void output_empty_lines(
-
-const int count)                     /* # of empty lines */
+LOCAL void output_empty_lines(const int count)
 {
-   register int   i;                 /* counter */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
-
-
-   if (count <= 0)                        /* nothing to do here */
-      return;
+   register int i;
    
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
+   if (count <= 0)
+      return;
    
    if (desttype == TOINF)
    {
       voutlnf("@sp %d", count);
       return;                             /* done */
    }
-
-   for (i = 0; i < count; i++)            /* all other desttype */
+   
+   for (i = 0; i < count; i++)
    {
       switch (desttype)
       {
@@ -4252,19 +4248,17 @@ const int count)                     /* # of empty lines */
       case TOWH4:
          outln(rtf_par);
          break;
-         
-      case TOHAH:                         /* V6.5.17 */
+      case TOHAH:
       case TOHTM:
       case TOMHH:
-         voutlnf("<br%s>", closer);
+         outln(xhtml_br);
          break;
-         
       case TOKPS:
          outln("newline");
          break;
-         
       default:
          outln("");
+         break;
       }
    }
 }
