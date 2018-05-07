@@ -217,21 +217,6 @@ LOCAL _BOOL   last_aqc_verb;            /* */
 
 
 
-/*******************************************************************************
-*
-*    INITIALIZED VARIABLES
-*
-******************************************|************************************/
-
-LOCAL const char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
-{
-   "&hellip;",
-   "&mdash;",
-   "&ndash;",
-   "&shy;"
-};
-
-
 /* ############################################################
    #
    # Automatisches Quoten von kritischen Zeichen dort, wo kein
@@ -3210,37 +3195,6 @@ LOCAL void str2manunder(char *d, const char *s)
 
 /*******************************************************************************
 *
-*  check_html_specs():
-*     check if a quoted string is a HTML special character supported by UDO
-*  
-*  return:
-*     TRUE:  is special char, don't cast '&' to '&amp;'
-*     FALSE: no special char ...
-*
-******************************************|************************************/
-
-LOCAL _BOOL check_html_specs(
-
-char       *s)  /* ^ string */
-{
-   size_t   i;  /* counter */
-
-
-   for (i = 0; i < HTML_SPEC_MAX; i++)
-   {
-      if (strncmp(html_specs[i], s, strlen(html_specs[i])) == 0)
-         return TRUE;
-   }
-
-   return FALSE;
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  c_man_styles():
 *     convert Manualpages styles (bold + underlined)
 *
@@ -3854,17 +3808,13 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
       case TOHTM:                         /* HTML */
       case TOMHH:                         /* Microsoft HTML Help */
       
-         if (html_ignore_8bit)            /* skip if nothing has to be changed */
-            goto NO_QUOTE_NEEDED;
-         
-         if (!pUtrg)                      /* skip if target is Unicode */
-            goto NO_QUOTE_NEEDED;
-         
          found = FALSE;
 
          idx = (_UBYTE)*ptr;
 
-         if (idx > 127)                   /* char is higher than ASCII-7 */
+         if (idx > 127 &&
+         	pUtrg != NULL &&
+         	!html_ignore_8bit)
          {
             j = 0;                        /* search chrtab[] from first entry */
              
@@ -3894,21 +3844,9 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
             {
                if (ptr[0] == html7bit[i].c)
                {
-                  if (ptr[0] == '&')      /* insert check for HTML entities */
-                  {
-                     if (check_html_specs(ptr) == FALSE)
-                     {
-                        ptr_quoted = html7bit[i].quoted;
-                        found = TRUE;
-                        break;
-                     }
-                  }
-                  else
-                  {                  
-                     ptr_quoted = html7bit[i].quoted;
-                     found = TRUE;
-                     break;
-                  }
+                  ptr_quoted = html7bit[i].quoted;
+                  found = TRUE;
+                  break;
                }
             }
          }
