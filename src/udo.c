@@ -12576,8 +12576,12 @@ GLOBAL _BOOL udo(char *datei)
          add_pass1_about_udo();
          in_about_udo = FALSE;
       }
-
-      if (malloc_token_output_buffer())   /* Speicher anfordern */
+      
+      /* Speicher anfordern */
+      if (no_pass2)
+      {
+         ret = TRUE;
+      } else if (malloc_token_output_buffer())
       {
          init_lang_date();    /* Kann IMHO weg */
 

@@ -187,6 +187,7 @@ LOCAL const CLIOPT cliopt[] =
    { "--nroff",            "-n",    'b',  FALSE, &desttype,         TONRO },
    { "--outfile",          "-o",    'c',  TRUE,   outfile.full,     0     },
    { "--pascal",           "-P",    'b',  FALSE, &desttype,         TOSRP },
+   { "--pass1-only",       "",      'b',  FALSE, &no_pass2,         TRUE  },
    { "--pdflatex",         "-f",    'b',  FALSE, &desttype,         TOPDL },
    { "--ps",               "",      'b',  FALSE, &desttype,         TOKPS },
    { "--pchelp",           "-p",    'b',  FALSE, &desttype,         TOPCH },
@@ -1092,6 +1093,7 @@ int main(int argc, const char **argv)
    bDumpImages      = FALSE;
    
    no_stderr_output = FALSE;
+   no_pass2         = FALSE;
 
    last_percent = -1;
 
