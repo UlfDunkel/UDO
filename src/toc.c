@@ -4578,10 +4578,14 @@ GLOBAL void html_save_frameset(void)
       outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
       voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", lang.html_lang, lang.html_lang);
    }
-   else
+   else if (html_doctype >= HTML_STRICT)
    {
       outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\"");
       outln("        \"http://www.w3.org/TR/html4/frameset.dtd\">");
+      voutlnf("<html lang=\"%s\">", lang.html_lang);
+   } else
+   {
+      output_html_doctype();
       voutlnf("<html lang=\"%s\">", lang.html_lang);
    }
    
