@@ -57,6 +57,7 @@ EXTRA_DIST = \
 	Win32MSVC \
 	lcc \
 	images \
+	kwset_malloc.c \
 	makefile.inc
 
 install-exec-local::

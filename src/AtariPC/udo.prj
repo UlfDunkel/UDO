@@ -1,0 +1,65 @@
+udo.ttp
+
+; Compiler switches
+
+.C[ -A- ]                ; allow non-ansi keywords like cdecl
+.C[ -C- ]                ; Not allow nested comments
+.C[ -P ]                 ; Use absolute calls
+.C[ -M ]                 ; String merging
+.C[ -G ]                 ; Size Optimization
+.C[ -K ]                 ; Default char is unsigned
+.S[ -S-]                 ; No Standard stack frames
+.C[ -l99 ]               ; Maximum identifier length
+
+.C[ -2- ]
+.C[ -8- ]
+
+;.C[-D__STDC__=1]
+.C[-W-stv]
+
+;.C[-D_DEBUG=1]
+
+; Linker switches
+.L[ -S=64000 ]           ; Stacksize
+
+; Linking without debug information
+;.L[ -Y- -G- -L- ]
+
+; Linking with debug information
+;.L[ -Y -G -L ]
+
+=
+cstartv.o
+;
+..\abo.c
+..\cfg.c
+..\chr.c
+..\env.c
+..\file.c
+..\img.c
+..\lang.c
+..\msg.c
+..\par.c
+..\str.c
+..\sty.c
+..\tab.c
+..\toc.c
+..\toc_html.c
+..\tp.c
+..\udo.c
+..\upr.c
+..\udosym.c
+..\udomem.c
+..\debug.c
+..\kwset.c
+..\obstack.c
+..\cli.c
+
+malloc.c
+nf_ops.c
+cookie.c
+
+;
+pcfltlib.lib
+pcstdlib.lib
+pctoslib.lib
