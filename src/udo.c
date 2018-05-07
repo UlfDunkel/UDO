@@ -10896,6 +10896,40 @@ LOCAL _BOOL pass1(const char *datei)
 
 
 
+static void dump_node_structure(void)
+{
+	TOCTYPE d;
+	TOCIDX ti;
+	TOCITEM *tocptr;
+	_BOOL in_appendix = FALSE;
+	
+	fprintf(fTreefile, "\n");
+	for (ti = 1; ti <= p1_toc_counter; ti++)
+	{
+		tocptr = toc_table[ti];
+		if (tocptr->appendix)
+			in_appendix = TRUE;
+		for (d = TOC_NODE1; d <= tocptr->toctype; d++)
+		{
+		    if (d == TOC_NODE1 && tocptr->appendix)
+		    	fprintf(fTreefile, "  %c ", 'A' + tocptr->nr[d] - 1);
+		    else
+		    	fprintf(fTreefile, "%3d ", tocptr->nr[d]);
+		}
+		for (; d <= toc_maxdepth; d++)
+		    fprintf(fTreefile, "    ");
+		fprintf(fTreefile, "  %s; %s", tocptr->name, file_lookup(tocptr->source_location.id));
+		if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+			fprintf(fTreefile, "; %s", tocptr->filename);
+		fprintf(fTreefile, "\n");
+		UNUSED(in_appendix);
+	}
+}
+
+
+
+
+
 /*******************************************************************************
 *
 *  output_verbatim_line():
@@ -12519,6 +12553,9 @@ GLOBAL _BOOL udo(char *datei)
             add_pass1_index_udo();
          break;
       }
+      
+      if (bUseTreefile && bTreeopened)
+         dump_node_structure();
       
       if (use_about_udo && desttype != TOUDO)
       {
