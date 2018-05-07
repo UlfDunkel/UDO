@@ -1108,11 +1108,11 @@ LOCAL void table_output_html(void)
    
    if (tab_toplines > 0)
    {
-      outln("<table border=\"1\" frame=\"box\">");
+      outln("<table border=\"1\" frame=\"box\" class=\"UDO_env_table\">");
    }
    else
    {
-      outln("<table border=\"0\">");
+      outln("<table border=\"0\" class=\"UDO_env_table\">");
    }
 
    if (tab_caption != NULL)
@@ -1599,7 +1599,7 @@ LOCAL void table_output_general(void)
    
    if (tortf || desttype == TOINF || desttype == TOLDS)
    {
-      output_begin_verbatim();
+      output_begin_verbatim(NULL);
    }
 
    if (tosrc)

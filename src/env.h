@@ -113,7 +113,7 @@ GLOBAL _BOOL   bParagraphOpen;          /* TRUE: <p> has been output */
 
 GLOBAL void check_environments_node(void);
 
-GLOBAL void output_begin_verbatim(void);
+GLOBAL void output_begin_verbatim(const char *css_class);
 GLOBAL void output_end_verbatim(void);
 
 GLOBAL void output_begin_preformatted(void);

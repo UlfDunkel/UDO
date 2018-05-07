@@ -5366,12 +5366,12 @@ LOCAL void c_include_verbatim(void)
          pass1(name);
          break;
       case PASS2:
-         output_begin_verbatim();
+         output_begin_verbatim("UDO_env_verbatim");
          pass2(name);
          output_end_verbatim();
          break;
       case PASSU:
-         output_begin_verbatim();
+         output_begin_verbatim("UDO_env_verbatim");
          /*
           * FIXME: doesnt work when the include file contains a '!end_verbatim' command,
           * because that will already end the '!begin_verbatim' from above
@@ -11295,7 +11295,7 @@ LOCAL void pass2_check_environments(char *zeile)
          if (token_counter > 0)
             token_output(TRUE, TRUE);
          zeile[0] = EOS;
-         output_begin_verbatim();
+         output_begin_verbatim("UDO_env_verbatim");
          return;
       } else
       if (IS_KW(CMD_END_VERBATIM, CMD_ENV_IDX_END_VERBATIM))

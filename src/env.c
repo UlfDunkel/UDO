@@ -707,7 +707,7 @@ LOCAL char *itoenum(int level, int *count, char *string)
 *
 ******************************************|************************************/
 
-GLOBAL void output_begin_verbatim(void)
+GLOBAL void output_begin_verbatim(const char *css_class)
 {
    switch (desttype)
    {
@@ -822,7 +822,7 @@ GLOBAL void output_begin_verbatim(void)
    case TOMHH:
       if (sDocVerbatimBackColor.rgb.set)
       {
-         voutlnf("<table width=\"100%%\" bgcolor=\"%s\"><tr><td>%s", html_color_string(&sDocVerbatimBackColor.rgb), sHtmlMonofontStart);
+         voutlnf("<table width=\"100%%\" bgcolor=\"%s\" class=\"%s\"><tr><td>%s", html_color_string(&sDocVerbatimBackColor.rgb), css_class, sHtmlMonofontStart);
       }
       switch (iDocVerbatimSize)
       {
@@ -1021,7 +1021,7 @@ GLOBAL void output_begin_preformatted(void)
       outln("!begin_preformatted");
       break;
    default:
-      output_begin_verbatim();
+      output_begin_verbatim("UDO_env_preformatted");
       break;
    }
 }
@@ -1102,7 +1102,7 @@ GLOBAL void output_begin_linedraw(void)
    default:
       pre_linedraw_charset = iCharset;
       iCharset = CODE_437;
-      output_begin_verbatim();
+      output_begin_verbatim("UDO_env_linedraw");
       break;
    }
 }
@@ -1172,7 +1172,7 @@ GLOBAL void output_begin_sourcecode(void)
       if (!no_sourcecode)
       {
          c_begin_quote();
-         output_begin_verbatim();
+         output_begin_verbatim("UDO_env_sourcecode");
       }
       break;
    }
@@ -2417,7 +2417,7 @@ GLOBAL void c_begin_enumerate(void)
       
       bParagraphOpen = FALSE;
          
-      out("\n<ol");
+      out("\n<ol class=\"UDO_env_enumerate\"");
       
       switch (iEnumLevel)                 /* HTML 3.2 Moeglichkeiten nutzen */
       {
@@ -2544,7 +2544,7 @@ GLOBAL void c_begin_description(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      outln("<dl>");
+      outln("<dl class=\"UDO_env_description\">");
       bParagraphOpen = FALSE;             /* <p> not opened yet! */
       break;
       
@@ -2606,7 +2606,7 @@ GLOBAL void c_begin_description(void)
 *
 ******************************************|************************************/
 
-LOCAL void c_begin_list(int listkind)
+LOCAL void c_begin_list(int listkind, const char *css_class)
 {
    char   sWidth[256],       /* buffer for tokens */
           sCompressed[256],  /* buffer for compare strings */
@@ -2780,7 +2780,7 @@ LOCAL void c_begin_list(int listkind)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      outln("<table>");
+      voutlnf("<table class=\"%s\">", css_class);
       break;
       
    case TOSTG:
@@ -2908,7 +2908,7 @@ LOCAL void c_begin_list(int listkind)
 
 GLOBAL void c_begin_xlist(void)
 {
-   c_begin_list(LIST_NORMAL);
+   c_begin_list(LIST_NORMAL, "UDO_env_xlist");
 }
 
 
@@ -2927,7 +2927,7 @@ GLOBAL void c_begin_xlist(void)
 
 GLOBAL void c_begin_blist(void)
 {
-   c_begin_list(LIST_BOLD);
+   c_begin_list(LIST_BOLD, "UDO_env_blist");
 }
 
 
@@ -2946,7 +2946,7 @@ GLOBAL void c_begin_blist(void)
 
 GLOBAL void c_begin_ilist(void)
 {
-   c_begin_list(LIST_ITALIC);
+   c_begin_list(LIST_ITALIC, "UDO_env_ilist");
 }
 
 
@@ -2965,7 +2965,7 @@ GLOBAL void c_begin_ilist(void)
 
 GLOBAL void c_begin_tlist(void)
 {
-   c_begin_list(LIST_TYPEWRITER);
+   c_begin_list(LIST_TYPEWRITER, "UDO_env_tlist");
 }
 
 
