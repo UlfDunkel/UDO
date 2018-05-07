@@ -132,7 +132,7 @@ GLOBAL const char *unicode2char(_UWORD unicode, char *cbuf);
 GLOBAL void convert_sz(char *s);
 
    /* recode a line into another encoding */
-GLOBAL void recode(char *zeile, int char_set);
+GLOBAL void recode(char *zeile, int from_char_set, int to_char_set);
 
    /* convert (UDO's) universal characters into target encoding */
 GLOBAL void recode_udo(char *s);

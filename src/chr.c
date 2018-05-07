@@ -1135,7 +1135,7 @@ GLOBAL void recode_udo(char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void recode(char *zeile, int char_set)
+GLOBAL void recode(char *zeile, int from_char_set, int to_char_set)
 {
    char     *ptr;
    _UWORD     idx;
@@ -1147,37 +1147,14 @@ GLOBAL void recode(char *zeile, int char_set)
    _BOOL   found = FALSE;     /* TRUE: char found */
    
 
-   if (iEncodingSource < 0)
-      iEncodingSource = char_set;
-   
-   if (iEncodingTarget < 0)
-      iEncodingTarget = char_set;
-   
-
-   /* --- force format requirements --- */
-   
-   switch (desttype)
-   {
-   case TOSTG:                            /* ST-Guide */
-   case TOPCH:                            /* Pure C Help */
-      iEncodingTarget = CODE_TOS;
-      break;
-   
-   case TOAMG:                            /* AmigaGuide */
-   case TOWIN:                            /* Windows Help */
-      iEncodingTarget = CODE_CP1252;
-      break;
-   }
-      
-                                          /* nothing to do */   
-   if (iEncodingSource == iEncodingTarget)
+   if (from_char_set == to_char_set)
       return;
    
-   pUsrc = chr_codepage(iEncodingSource);
-   pUtrg = chr_codepage(iEncodingTarget);
+   pUsrc = chr_codepage(from_char_set);
+   pUtrg = chr_codepage(to_char_set);
    
-   strcpy(sSource, chr_codepage_name(iEncodingSource));
-   strcpy(sTarget, chr_codepage_name(iEncodingTarget));
+   strcpy(sSource, chr_codepage_name(from_char_set));
+   strcpy(sTarget, chr_codepage_name(to_char_set));
       
    
    ptr = get_8bit_ptr(zeile);             /* set ^ to first high-ASCII char */
@@ -1192,7 +1169,7 @@ GLOBAL void recode(char *zeile, int char_set)
    
    /* --- UTF-8 to 1-byte recoding --- */
    
-   if (iEncodingSource == CODE_UTF8)      /* convert UTF-8 to 1-byte format first */
+   if (from_char_set == CODE_UTF8)      /* convert UTF-8 to 1-byte format first */
    {
       char  sbuf[LINELEN];  /* line buffer */
       char  cbuf[9];        /* chars buffer */
@@ -1283,7 +1260,7 @@ GLOBAL void recode(char *zeile, int char_set)
    
    /* --- 1-byte to UTF-8 recoding --- */
    
-   if (iEncodingTarget == CODE_UTF8)      /* convert 1-byte format to UTF-8 first */
+   if (to_char_set == CODE_UTF8)      /* convert 1-byte format to UTF-8 first */
    {
       char  sbuf[LINELEN];  /* line buffer */
       char  cbuf[9];        /* chars buffer */
@@ -3084,8 +3061,8 @@ GLOBAL void c_vars(char *s)
    case TORTF:
       qreplace_all(s, "(!grin)",       7, "{\\f1 ;-)}", 9);
       qreplace_all(s, "(!laugh)",      8, "{\\f1 :-)}", 9);
-      qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
-      qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
+      qreplace_all(s, "(!alpha)",      8, "{\\f3 a}",   7);
+      qreplace_all(s, "(!beta)",       7, "{\\f3 b}",   7);
       qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
       qreplace_all(s, "(!registered)",13, "\\'AE",      4);
       qreplace_all(s, "(!euro)",       7, "\\'80",      4);
@@ -3101,8 +3078,8 @@ GLOBAL void c_vars(char *s)
    case TOAQV:
       qreplace_all(s, "(!grin)",       7, "{\\f1 ;-)}", 9);
       qreplace_all(s, "(!laugh)",      8, "{\\f1 :-)}", 9);
-      qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
-      qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
+      qreplace_all(s, "(!alpha)",      8, "{\\f3 a}",   7);
+      qreplace_all(s, "(!beta)",       7, "{\\f3 b}",   7);
       qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
       qreplace_all(s, "(!registered)",13, "\\'AE",      4);
       qreplace_all(s, "(!euro)",       7, "\\'80",      4);
@@ -3117,8 +3094,8 @@ GLOBAL void c_vars(char *s)
    case TOWH4:
       qreplace_all(s, "(!grin)",       7, "{\\f1 ;-)}", 9);
       qreplace_all(s, "(!laugh)",      8, "{\\f1 :-)}", 9);
-      qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
-      qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
+      qreplace_all(s, "(!alpha)",      8, "{\\f3 a}",   7);
+      qreplace_all(s, "(!beta)",       7, "{\\f3 b}",   7);
       qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
       qreplace_all(s, "(!registered)",13, "\\'AE",      4);
       qreplace_all(s, "(!euro)",       7, "\\'80",      4);

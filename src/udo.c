@@ -10298,10 +10298,11 @@ LOCAL _BOOL pass1(const char *datei)
          zeile[len - 1] = EOS;
          len--;
       }
-                                          /* don't recode twice! */
-      if (my_stricmp(tmp_datei,udofile.full)) 
+      
+      /* Kommentare nicht recoden */
+      if (zeile[0] != '#')
       {
-         recode(zeile, iCharset);
+         recode(zeile, iEncodingSource, iEncodingTarget);
       }
 
       if (zeile[0] != '#' && zeile[0] != EOS && pflag[PASS1].env == ENV_NONE)
@@ -10912,37 +10913,34 @@ LOCAL void output_verbatim_line(char *zeile)
    
    if (zeile[0] == '#')
    {
-      recode(zeile, iCharset);             /* r6pl2: sonst werden UDO-Kommentare in verbatim-Umgebungen */
-      convert_sz(zeile);                   /* r6pl2: ... nicht angepasst und falsch ausgegeben! */
+      recode(zeile, iEncodingSource, iEncodingTarget);
    }
 
    strcpy_indent(indent);
-   
    if (use_justification)
-   {
       indent2space(indent);
-   }
 
    if (no_verbatim_umlaute)
-      recode_chrtab(zeile,CHRTAB_ASCII);
-
-   if (strchr(zeile, '\t') != NULL)        /* TABs in Leerzeichen umwandeln */
-   {
+      recode_chrtab(zeile, CHRTAB_ASCII);
+   
+   /* TABs in Leerzeichen umwandeln */
+   if (strchr(zeile, '\t') != NULL)
       tabs2spaces(zeile, bDocTabwidth);
-   }
-
-   switch (desttype)                       /* Zeilen ggf. weiter einruecken */
+   
+   /* Zeilen ggf. weiter einruecken */
+   switch (desttype)
    {
    case TOMAN:
       strinsert(zeile, "     ");
       break;
-      
    case TOSRC:
    case TOSRP:
       strinsert(zeile, "    ");
+      break;
    }
 
-   switch (desttype)                       /* Zu lange Zeilen bemaengeln */
+   /* Zu lange Zeilen bemaengeln */
+   switch (desttype)
    {
    case TOASC:
    case TODRC:
@@ -10952,12 +10950,12 @@ LOCAL void output_verbatim_line(char *zeile)
    case TOAMG:
    case TOTVH:
       len = strlen(indent) + strlen(zeile);
-      
       if (len > zDocParwidth)
       {
          warning_long_destline(outfile.full, outlines + 1, (int) len);
          note_message(bNoWarningsLines ? NULL : _("check this paragraph"));
       }
+      break;
    }
 
    switch (desttype)
@@ -10988,10 +10986,7 @@ LOCAL void output_verbatim_line(char *zeile)
       
    case TOTVH:
       if (indent[0] == EOS)
-      {
          strcpy(indent, " ");
-      }
-      
       auto_quote_chars(zeile, TRUE);
       auto_references(zeile, FALSE, "", 0, 0);
       break;
@@ -10999,6 +10994,8 @@ LOCAL void output_verbatim_line(char *zeile)
    case TOSTG:
    case TOAMG:
       qreplace_all(zeile, "@", 1, "@@", 2);
+      if (bCheckMisc)
+         auto_references(zeile, FALSE, "", 0, 0);
       break;
       
    case TOTEX:
@@ -11599,10 +11596,9 @@ LOCAL _BOOL pass2(const char *datei)
          len--;
       }
 
-      /* don't recode twice! */
-      if (my_stricmp(tmp_datei,udofile.full))
+      if (zeile[0] != EOS && zeile[0] != '#')
       {
-         recode(zeile, iCharset);
+         recode(zeile, iEncodingSource, iEncodingTarget);
       }
 
       if (pflag[PASS2].env == ENV_NONE)
@@ -11643,8 +11639,8 @@ LOCAL _BOOL pass2(const char *datei)
             {
                del_whitespaces(zeile);
 
-               if (no_umlaute)
-                  recode_chrtab(zeile,CHRTAB_ASCII);
+               if (zeile[0] == META_C && zeile[1] != QUOTE_C)
+                  strcpy(current_node_name_sys, zeile);
                
                auto_quote_chars(zeile, FALSE);
 
@@ -12318,44 +12314,61 @@ GLOBAL _BOOL udo(char *datei)
    
    get_timestr(timer_start);
 
+   bFatalErrorDetected = FALSE;
+   bErrorDetected = FALSE;
+   bBreakHappened = FALSE;
+   bBreakInside = FALSE;
+   
+   fLogfile = stderr;
+   bLogopened = FALSE;
+   
+   destlang = TOGER;
+   iCharset = iEncodingSource = SYSTEM_CHARSET;
+   iEncodingTarget = CODE_CP1252;
+
    init_modules();
    init_udosymbol_pass1();
    set_format_flags();
 
-   bFatalErrorDetected = FALSE;
-   bErrorDetected      = FALSE;
-   bBreakHappened      = FALSE;
-   bBreakInside        = FALSE;
-
-   bOutOpened          = FALSE;
+   bOutOpened = FALSE;
    outlines = 0;
 
-   fLogfile  = stderr;  bLogopened  = FALSE;
-   fHypfile  = stderr;  bHypopened  = FALSE;  bHypSaved  = FALSE;  bHypfailed = FALSE;  hyplist = NULL;
-   fIdxfile  = stderr;  bIdxopened  = FALSE;  bIdxSaved  = FALSE;  bIdxfailed = FALSE;  idxlist = NULL;
-   fTreefile = stderr;  bTreeopened = FALSE;  bTreeSaved = FALSE;
-   fUPRfile  = stderr;  bUPRopened  = FALSE;  bUPRSaved  = FALSE;
-
-
+   fHypfile = stderr;
+   bHypopened = FALSE;
+   bHypSaved = FALSE;
+   bHypfailed = FALSE;
+   hyplist = NULL;
+   fIdxfile = stderr;
+   bIdxopened = FALSE;
+   bIdxSaved = FALSE;
+   bIdxfailed = FALSE;
+   idxlist = NULL;
+   fTreefile = stderr;
+   bTreeopened = FALSE;
+   bTreeSaved = FALSE;
+   fUPRfile = stderr;
+   bUPRopened = FALSE;
+   bUPRSaved = FALSE;
+   
    /* Erstmal testen, ob die Datei vorhanden ist, damit nicht unnoetig Dateien angelegt werden. */
 
    strcpy(tmp, datei);
 
-   build_include_filename(tmp, ".ui");
-
    file = fopen(tmp, "r");
-   
-   if (!file)
+   if (file == NULL)
    {
-      error_open_infile(tmp);
-      return FALSE;
+      build_include_filename(tmp, ".u");
+      file = fopen(tmp, "r");
+      if (file == NULL)
+      {
+         error_open_infile(tmp);
+         return FALSE;
+      }
    }
-   
    fclose(file);
-
-
+   
    if (!bNoLogfile)
-   {   
+   {
       if (outfile.full[0] != EOS)
       {
          if (sLogfull == 0)
@@ -12374,15 +12387,13 @@ GLOBAL _BOOL udo(char *datei)
       }
    }
 
-
    if (bUseTreefile)
    {
       if (outfile.full[0] != EOS)
       {
-         if (sTreefull != 0)         
+         if (sTreefull != 0)
          {
             fTreefile = myFwopen(file_lookup(sTreefull), TOASC);
-            
             if (fTreefile == NULL)
             {
                fTreefile = stderr;
@@ -12390,8 +12401,8 @@ GLOBAL _BOOL udo(char *datei)
                bErrorDetected = TRUE;
                return FALSE;
             }
-            
             bTreeopened = TRUE;
+            bTreeSaved = TRUE;
             save_upr_entry_outfile(file_lookup(sTreefull));
          }
       }
@@ -12404,7 +12415,6 @@ GLOBAL _BOOL udo(char *datei)
          if (sUPRfull != 0)
          {
             fUPRfile = myFwopen(file_lookup(sUPRfull), TOASC);
-            
             if (fUPRfile == NULL)
             {
                fUPRfile = stderr;
@@ -12412,8 +12422,8 @@ GLOBAL _BOOL udo(char *datei)
                bErrorDetected = TRUE;
                return FALSE;
             }
-            
             bUPRopened = TRUE;
+            bUPRSaved = TRUE;
             save_upr_entry_outfile(file_lookup(sUPRfull));
          }
       }
@@ -12421,16 +12431,16 @@ GLOBAL _BOOL udo(char *datei)
 
    if (outfile.full[0] != EOS)
    {
-      if ( (strcmp(outfile.full, "~") == 0) || (strcmp(outfile.full, "!") == 0) )
+      if (strcmp(outfile.full, "~") == 0 || strcmp(outfile.full, "!") == 0)
       {
          dest_adjust();
       }
-
+      
       if (!bTestmode)
       {
          if (strcmp(outfile.full, infile.full) == 0)
          {
-            error_message(_("source and destination file are equal: <%s>"), outfile.full);
+         	error_message(_("source and destination file are equal: <%s>"), outfile.full);
             bErrorDetected = TRUE;
             
             if (bLogopened)   fclose(fLogfile);
@@ -12443,7 +12453,6 @@ GLOBAL _BOOL udo(char *datei)
          }
 
          outfile.file = myFwopen(outfile.full, desttype);
-         
          if (outfile.file == NULL)
          {
             error_open_outfile(outfile.full);
@@ -12458,42 +12467,28 @@ GLOBAL _BOOL udo(char *datei)
             
             return FALSE;
          }
-         
          bOutOpened = TRUE;
          save_upr_entry_outfile(outfile.full);
       }
    }
 
 
-   for (i = 0; i < MAXENVLEVEL; iEnvIndent[i++] = 0)
-      ;
+   for (i = 0; i < MAXENVLEVEL; i++)
+      iEnvIndent[i] = 0;
 
-   switch (desttype)
-   {
-   case TOHTM:
-   case TOMHH:
-   case TOHAH:
-      strcpy(old_outfile.full, outfile.full);
-      strcpy(old_outfile.driv, outfile.driv);
-      strcpy(old_outfile.path, outfile.path);
-      strcpy(old_outfile.name, outfile.name);
-      strcpy(old_outfile.suff, outfile.suff);
-   }
-
+   strcpy(old_outfile.full, outfile.full);
+   strcpy(old_outfile.driv, outfile.driv);
+   strcpy(old_outfile.path, outfile.path);
+   strcpy(old_outfile.name, outfile.name);
+   strcpy(old_outfile.suff, outfile.suff);
+   
    init_vars_spec();
-
-   destlang = TOGER;
-
-   iEncodingSource        = -1;
-   iEncodingTarget        = -1;
-
    init_lang();
-
+   
    bBreakInside = FALSE;
    bInsideDocument = FALSE;
    b1stQuote = FALSE;
    b1stApost = FALSE;
-   iCharset = SYSTEM_CHARSET;
    bDocUniversalCharsetOn = FALSE;
 
    show_udo_intro();
@@ -12506,15 +12501,13 @@ GLOBAL _BOOL udo(char *datei)
 
    iUdopass = PASS1;
 
-
-                                          /* Erster Durchlauf aufgrund eines Fehlers gescheitert? */
-                                          /* Diverse Ueberpruefungen auf Wunsch durchfuehren */
-   if ( pass1(datei) && (!bCheckMisc || check_modules_pass1()) )
+   if (pass1(datei) &&                          /* Erster Durchlauf aufgrund eines Fehlers gescheitert? */
+      (/* !bCheckMisc || */ check_modules_pass1()))   /* Diverse Ueberpruefungen auf Wunsch durchfuehren */
    {
-                                          /* Unregistrierte Versionen erzeugen immer die Werbeseite */
+      /* Unregistrierte Versionen erzeugen immer die Werbeseite */
       if (!config.bRegistered)
       {
-/*       use_about_udo = TRUE; */         /* UDO is now Open Source */
+         /* use_about_udo = TRUE; */ /* UDO is now Open Source */
       }
       
       switch (desttype)
@@ -12536,8 +12529,7 @@ GLOBAL _BOOL udo(char *datei)
 
       if (malloc_token_output_buffer())   /* Speicher anfordern */
       {
-         check_parwidth();
-
+         init_lang_date();    /* Kann IMHO weg */
 
          /* itemchar wird erst nach pass1() gesetzt */
          /* bei !no_umlaute wird kein 8bit-Zeichen mehr verwendet */
@@ -12550,7 +12542,7 @@ GLOBAL _BOOL udo(char *datei)
          iCharset = SYSTEM_CHARSET;
          bDocUniversalCharsetOn = FALSE;
 
-         init_vars_spec();
+         /* init_vars_spec(); */
          init_module_toc_pass2();
          init_module_tp_pass2();
          init_module_img_pass2();
@@ -12574,12 +12566,13 @@ GLOBAL _BOOL udo(char *datei)
              * dass ein aehnlicher Fehler nochmal
              * auftritt, er wird dann vielleicht frueher erkannt
              */
-             
+#ifdef _DEBUG
             if (bInsideAppendix)
             {
                bInsideAppendix = FALSE;
-               printf("Warning: bInsideAppendix=TRUE - fixed it\n");
+               fprintf(stderr, "Warning: bInsideAppendix=TRUE - fixed it\n");
             }
+#endif
 
             clear_if_stack();
             output_preamble();
@@ -13512,9 +13505,7 @@ LOCAL _BOOL check_modules_pass2(void)
 *
 ******************************************|************************************/
 
-LOCAL int getMonth(
-
-const char  *date_string)  /* date in __DATE__ format */
+LOCAL int getMonth(const char *date_string)
 {
    if (my_strnicmp(date_string, "Jan", 3) == 0)
       return 1;
@@ -13540,7 +13531,6 @@ const char  *date_string)  /* date in __DATE__ format */
       return 11;
    if (my_strnicmp(date_string, "Dec", 3) == 0)
       return 12;
-      
    return 0;
 }
 

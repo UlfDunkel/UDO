@@ -75,17 +75,18 @@
 #include <time.h>
 #include "udoport.h"
 
-#include "version.h"					/* IMPORTANT macros! */
-#include "constant.h"					/* IMPORTANT macros! */
-#include "udo_type.h"					/* several type definitions */
-#include "chr.h"						/* character code maps */
-#include "toc.h"						/* !node, !alias, !label, !toc */
-#include "udo.h"						/* global prototypes */
+#include "version.h"                      /* IMPORTANT macros! */
+#include "constant.h"                     /* IMPORTANT macros! */
+#include "udo_type.h"                     /* several type definitions */
+#include "chr.h"                          /* character code maps */
+#include "toc.h"                          /* !node, !alias, !label, !toc */
+#include "udo.h"                          /* global prototypes */
 #include "udointl.h"
-#include "lang_utf.h"					/* localized strings */
+#include "lang_utf.h"                     /* localized strings */
 
 #include "export.h"
 #include "lang.h"
+
 
 
 
@@ -110,13 +111,12 @@
 *
 ******************************************|************************************/
 
-static void init_lang_date(void)
+GLOBAL void init_lang_date(void)
 {
    time_t      timer;                  /* */
    struct tm  *zeit;                   /* */
    char        month[MONTH_LEN] = "";  /* ^ month name in MONTHS[] */ 
    int         i = 0;                  /* counter for MONTHS[] */
-   int         iEncBuf;                /* buffer for iEncodingSource */
 
 
    time(&timer);
@@ -129,7 +129,7 @@ static void init_lang_date(void)
    iDateMin   = zeit->tm_min;
    iDateSec   = zeit->tm_sec;
    
-   while (MONTHS[i].lan != -1)           /* find localized month name */
+   while (MONTHS[i].lan >= 0)           /* find localized month name */
    {
       if (MONTHS[i].lan == destlang)      /* desired language found */
       {                                   /* remember month name */
@@ -140,29 +140,13 @@ static void init_lang_date(void)
       i++;                                /* next language */
    }
    
-   iEncBuf = iEncodingSource;
-   iEncodingSource = CODE_UTF8;
-      
-   if ( (iEncodingTarget > -1) && (iEncodingTarget != CODE_UTF8) )
-      recode(month,iEncodingTarget);
-   
-   iEncodingSource = iEncBuf;
+   recode(month, CODE_UTF8, iEncodingTarget);
    
    switch (destlang)
    {
-   case TOCZE:                            /* Czech */
+   case TOGER:                            /* German */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TODAN:                            /* Danish */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TODUT:                            /* Dutch */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
    case TOFRA:                            /* French */
@@ -170,12 +154,32 @@ static void init_lang_date(void)
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TOGER:                            /* German */
+   case TOITA:                            /* Italian */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TOITA:                            /* Italian */
+   case TOSWE:                            /* Swedish */
+      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%0d-%02d-%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
+      break;
+
+   case TOSPA:                            /* Spanish */
+      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TODUT:                            /* Dutch */
+      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TODAN:                            /* Danish */
+      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOCZE:                            /* Czech */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
@@ -195,21 +199,11 @@ static void init_lang_date(void)
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TOSPA:                            /* Spanish */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOSWE:                            /* Swedish */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%0d-%02d-%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
-      break;
-
-
    case TOENG:                            /* English */
    default:                               /* UDO v7: German is no longer default language! */
       sprintf(lang.today, "%s %d, %d", month, zeit->tm_mday, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%0d/%02d/%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
+      break;
    }
 }
 
@@ -234,20 +228,14 @@ static void init_lang_date(void)
 GLOBAL void init_lang(void)
 {
    int    i = 0;    /* counter for MONTHS[] */
-   const LANG  *plang;  /* ^ LANG structure in UDOSTRINGS[] */
-   int    iEncBuf;  /* buffer for iEncodingSource */
-
 
    memset(&lang, 0, sizeof(LANG));
 
-   while (UDOSTRINGS[i].lan != -1)       /* find localized month name */
+   while (UDOSTRINGS[i].lan >= 0)       /* find localized month name */
    {
       if (UDOSTRINGS[i].lan == destlang)  /* desired language found */
       {
-                                          /* get ^ to strings */
-         plang = &UDOSTRINGS[i].udostring;
-                                          /* copy these strings! */
-         memcpy(&lang, plang, sizeof(LANG));
+         lang = UDOSTRINGS[i].udostring;  /* copy these strings! */
          break;                           /* done! */
       }
       
@@ -256,42 +244,38 @@ GLOBAL void init_lang(void)
 
    init_lang_date();
 
-   iEncBuf = iEncodingSource;
-   iEncodingSource = CODE_UTF8;
-      
-   if ( (iEncodingTarget > -1) && (iEncodingTarget != CODE_UTF8) )
+   if (iEncodingTarget >= 0 && iEncodingTarget != CODE_UTF8)
    {
-      recode(lang.preface,     iEncodingTarget);
-      recode(lang.chapter,     iEncodingTarget);
-      recode(lang.title,       iEncodingTarget);
-      recode(lang.appendix,    iEncodingTarget);
-      recode(lang.contents,    iEncodingTarget);
-      recode(lang.listfigure,  iEncodingTarget);
-      recode(lang.listtable,   iEncodingTarget);
-      recode(lang.figure,      iEncodingTarget);
-      recode(lang.table,       iEncodingTarget);
-      recode(lang.index,       iEncodingTarget);
-      recode(lang.page,        iEncodingTarget);
-      recode(lang.see,         iEncodingTarget);
-      recode(lang.also,        iEncodingTarget);
-      recode(lang.by,          iEncodingTarget);
-      recode(lang.fur,         iEncodingTarget);
-      recode(lang.up,          iEncodingTarget);
-      recode(lang.exit,        iEncodingTarget);
-      recode(lang.unknown,     iEncodingTarget);
-      recode(lang.update,      iEncodingTarget);
-      recode(lang.html_home,   iEncodingTarget);
-      recode(lang.html_prev,   iEncodingTarget);
-      recode(lang.html_next,   iEncodingTarget);
-      recode(lang.html_lang,   iEncodingTarget);
-      recode(lang.html_start,  iEncodingTarget);
-      recode(lang.translator,  iEncodingTarget);
-      recode(lang.distributor, iEncodingTarget);
-      recode(lang.degree,      iEncodingTarget);
-      recode(lang.copyright,   iEncodingTarget);
+      recode(lang.preface,     CODE_UTF8, iEncodingTarget);
+      recode(lang.chapter,     CODE_UTF8, iEncodingTarget);
+      recode(lang.title,       CODE_UTF8, iEncodingTarget);
+      recode(lang.appendix,    CODE_UTF8, iEncodingTarget);
+      recode(lang.contents,    CODE_UTF8, iEncodingTarget);
+      recode(lang.listfigure,  CODE_UTF8, iEncodingTarget);
+      recode(lang.listtable,   CODE_UTF8, iEncodingTarget);
+      recode(lang.figure,      CODE_UTF8, iEncodingTarget);
+      recode(lang.table,       CODE_UTF8, iEncodingTarget);
+      recode(lang.index,       CODE_UTF8, iEncodingTarget);
+      recode(lang.page,        CODE_UTF8, iEncodingTarget);
+      recode(lang.see,         CODE_UTF8, iEncodingTarget);
+      recode(lang.also,        CODE_UTF8, iEncodingTarget);
+      recode(lang.by,          CODE_UTF8, iEncodingTarget);
+      recode(lang.fur,         CODE_UTF8, iEncodingTarget);
+      recode(lang.up,          CODE_UTF8, iEncodingTarget);
+      recode(lang.exit,        CODE_UTF8, iEncodingTarget);
+      recode(lang.unknown,     CODE_UTF8, iEncodingTarget);
+      recode(lang.update,      CODE_UTF8, iEncodingTarget);
+      recode(lang.html_home,   CODE_UTF8, iEncodingTarget);
+      recode(lang.html_up,     CODE_UTF8, iEncodingTarget);
+      recode(lang.html_prev,   CODE_UTF8, iEncodingTarget);
+      recode(lang.html_next,   CODE_UTF8, iEncodingTarget);
+      recode(lang.html_lang,   CODE_UTF8, iEncodingTarget);
+      recode(lang.html_start,  CODE_UTF8, iEncodingTarget);
+      recode(lang.translator,  CODE_UTF8, iEncodingTarget);
+      recode(lang.distributor, CODE_UTF8, iEncodingTarget);
+      recode(lang.degree,      CODE_UTF8, iEncodingTarget);
+      recode(lang.copyright,   CODE_UTF8, iEncodingTarget);
    }
 
-   iEncodingSource = iEncBuf;
-   
    toc_init_lang();
 }
