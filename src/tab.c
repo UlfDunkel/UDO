@@ -452,41 +452,23 @@ GLOBAL _BOOL table_add_line(char *s)
    /* FIXME: should actually be c_divis(), with appropiate str2silben() when writing the cell contents */
    qdelete_all(s, "!-", 2);
 
-   recode_udo(s);                         /* these have never ever been handled in UDO tables before! */
-
    if (no_umlaute)
       recode_chrtab(s, CHRTAB_ASCII);
 
+   auto_quote_chars(s, FALSE);
+
+   c_commands_inside(s, TRUE);
+
    replace_macros(s);
-
-   if (desttype!=TOTEX && desttype!=TOPDL)
-   {
-      c_styles(s);
-      check_styles(s);
-   }
-
-   switch (desttype)
-   {
-   case TOASC:
-   case TODRC:
-   case TOPCH:
-   case TOMAN:
-   case TOSTG:
-   case TOAMG:
-   case TOTVH:
-   case TOSRC:
-   case TOSRP:
-   case TOIPF:
-      c_commands_inside(s, FALSE);
-      c_vars(s);
-      replace_defines(s);
-#if 0
-      replace_udo_quotes(s);
-#endif
-   }
-
+   c_divis(s);
+   c_vars(s);
    c_tilde(s);
+   c_styles(s);
+   check_styles(s);
+   c_commands_inside(s, FALSE);
 
+   replace_defines(s);
+   
    ptr = s;
    cells_counter = 0;
    sl = 0;
@@ -515,17 +497,21 @@ GLOBAL _BOOL table_add_line(char *s)
    }
 
    for (i = 0; i <= cells_counter; i++)
+   {
+   	  replace_udo_quotes(cells[i]);
       del_whitespaces(cells[i]);
-
+   }
+   
    if (cells_counter > MAX_TAB_W)
    {
       error_message(_("too many columns used"));
    }
-
+   
    if (cells_counter > tab_w)
       tab_w = cells_counter;
 
-   tab_h++;                               /* Zeilenzaehler hochsetzen */
+   /* Zeilenzaehler hochsetzen */
+   tab_h++;
 
    for (x = 0; x < MAX_TAB_W; x++)
    {
@@ -533,30 +519,90 @@ GLOBAL _BOOL table_add_line(char *s)
       {
          tl = toklen(cells[x]);
          sl = strlen(cells[x]);
-
          if (tl > tab_cell_w[x])
             tab_cell_w[x] = tl;
-
-         ptr = (char *)(malloc(sl + 2));
-
+         
+         ptr = (char *)malloc(sl + 2);
          if (ptr == NULL)
          {
             return FALSE;
          }
-
          strcpy(ptr, cells[x]);
          tab_cell[tab_h][x] = ptr;
       }
       else
          break;
    }
-
+   
    cells_reset();
 
    return TRUE;
 }
 
 
+LOCAL void get_table_alignment(_BOOL *inside_left, _BOOL *inside_center, _BOOL *inside_right)
+{
+   int j;
+   
+   *inside_left = FALSE;
+   *inside_center = FALSE;
+   *inside_right = FALSE;
+   for (j = iEnvLevel; j > 0; j--)
+   {
+      if (iEnvType[iEnvLevel] == ENV_LEFT)
+      {
+         *inside_left = TRUE;
+         break;
+      }
+      if (iEnvType[iEnvLevel] == ENV_CENT)
+      {
+         *inside_center = TRUE;
+         break;
+      }
+      if (iEnvType[iEnvLevel] == ENV_RIGH)
+      {
+         *inside_right = TRUE;
+         break;
+      }
+   }
+   if (!(*inside_center) && !(*inside_right) && !(*inside_left))
+   {
+      switch (table_alignment)
+      {
+      case ALIGN_CENT:
+         *inside_center = TRUE;
+         break;
+      case ALIGN_RIGH:
+         *inside_right = TRUE;
+         break;
+      default:
+         *inside_left = TRUE;
+         break;
+      }
+   }
+}
+
+
+
+LOCAL void tab_label_output(int y)
+{
+   int i;
+   
+   if (tab_label[y] > 0)
+   {
+      for (i = 0; i < tab_label[y]; i++)
+      {
+         if (tab_label_cell[y][i] != NULL)
+         {
+            str2tok(tab_label_cell[y][i]);
+
+            if (token_counter > 0)
+               c_label();
+         }
+         token_reset();
+     }
+  }
+}
 
 
 
@@ -572,195 +618,112 @@ GLOBAL _BOOL table_add_line(char *s)
 
 LOCAL void table_output_lyx(void)
 {
-   int   y, x,              /* */
-             i;              /* */
-   _BOOL   bl,             /* Flags fuer Linien */
-             bt,             /* */
-             bb,             /* */
-             br;             /* */
-   char      f[512],         /* */
-             alignOn[64];    /* */
-_BOOL      inside_center,  /* */
-             inside_right,   /* */
-             inside_left;    /* */
+   int   y, x;
+   _BOOL bl, bt, bb, br;          /* Flags fuer Linien */
+   char      f[512],
+             alignOn[64];
+   _BOOL inside_center, inside_right, inside_left;
 
-
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
-
-   if (!inside_center && !inside_right && !inside_left)
-   {
-      switch (table_alignment)            /*r6pl9*/
-      {
-      case ALIGN_CENT:
-         inside_center = TRUE;
-         break;
-
-      case ALIGN_RIGH:
-         inside_right = TRUE;
-      }
-   }
+   get_table_alignment(&inside_left, &inside_center, &inside_right);
 
    alignOn[0] = EOS;
-
    if (inside_center)
       strcpy(alignOn, " center");
-
    if (inside_right)
       strcpy(alignOn, " right");
 
    outln("\\layout Standard");
-   voutlnf("\\added_space_top 0.30 \\added_space_bottom 0.30 \\align %s \\LyXTable", alignOn);
-   outln("multicol2");
-   voutlnf("%d %d", tab_h+1, tab_w+1);
+   voutlnf("\\added_space_top 0.30 \\added_space_bottom 0.30 \\align %s", alignOn);
+   outln("\\begin_inset  Tabular");
+   voutlnf("<lyxtabular version=\"3\" rows=\"%d\" columns=\"%d\">", tab_h + 1, tab_w + 1);
+   outln("<features>");
+   /* Fuer jede Tabellenspalte eine Zeile ausgeben, in der Flags stehen,   */
+   /* die angeben, ob dort linke und rechte Linien benutzt werden.      */
+   for (x = 0; x <= tab_w; x++)
+   {
+      bl = tab_vert[x] > 0;
 
-   /* Fuer jede Tabellenzeile eine Zeile ausgeben, in der Flags stehen,    */
-   /* die angeben, ob dort obere und untere Linien benutzt werden.                 */
+      if (x == tab_w)
+      {
+         br = tab_vert[x + 1] > 0;
+      }
+      else
+      {
+         br = FALSE;
+      }
+   
+      switch (tab_just[x])
+      {
+   	  case TAB_CENTER:
+   	     strcpy(alignOn, "center");
+   	     break;
+      case TAB_RIGHT:
+         strcpy(alignOn, "right");
+         break;
+      default:
+         strcpy(alignOn, "left");
+         break;
+      }
+      
+      voutlnf("<column alignment=\"%s\" valignment=\"top\" leftline=\"%s\" rightline=\"%s\" width=\"0\">",
+         alignOn,
+         bl ? "true" : "false",
+         br ? "true" : "false");
+   }
 
    for (y = 0; y <= tab_h; y++)
    {
       if (y == 0)
       {
-         bt = (tab_toplines > 0);
-         bb = (tab_hori[0]  > 0);
+         bt = tab_toplines > 0;
+         bb = tab_hori[0] > 0;
       }
       else
       {
-         bt = (tab_hori[y - 1] > 0);
-         bb = (tab_hori[y    ] > 0);
+         bt = tab_hori[y - 1] > 0;
+         bb = tab_hori[y] > 0;
       }
 
-      voutlnf("%d %d", bt, bb);
-   }
-
-
-   /*      Pro Spalte eine Zeile ausgeben. Beispiel:
-           8 1 1
-               +---- rechts eine Linie?
-             +------ links eine Linie?
-           +-------- Ausrichtung? (2=links, 8=zentriert, 4=rechts)
-    */
-
-   for (x = 0; x <= tab_w; x++)
-   {
-      bl = (tab_vert[x] > 0);
-
-      if (x == tab_w)
-         br = (tab_vert[x + 1] > 0);
-      else
-         br = FALSE;
-
-      switch (tab_just[x])
-      {
-      case TAB_CENTER:
-         i = 8;
-         break;
-
-      case TAB_RIGHT:
-         i = 4;
-         break;
-
-      default:
-         i = 2;
-      }
-
-      voutlnf("%d %d %d", i, bl, br);
-   }
-
-
-   /*      Pro Spalte eine Zeile ausgeben. Beispiel:
-           0 8 1 1
-                 +---- rechts eine Linie?
-               +------ links eine Linie?
-             +-------- Ausrichtung? (2=links, 8=zentriert, 4=rechts)
-           +---------- immer 0
-    */
-
-   for (x = 0; x <= tab_w; x++)
-   {
-      switch (tab_just[x])
-      {
-      case TAB_CENTER:
-         i = 8;
-         break;
-
-      case TAB_RIGHT:
-         i = 4;
-         break;
-
-      default:
-         i = 2;
-      }
-
-      voutlnf("0 %d 1 1", i);
-   }
-
-#if 0
-   /* Jetzt noch fuer jede Spalte 0 8 1 1 ausgeben, warum auch immer */
-   for (x = 0; x <= tab_w; x++)
-   {
-      outln("0 8 1 1");
-   }
-#endif
-
-   for (y = 0; y <= tab_h; y++)
-   {
+      voutlnf("<row topline=\"%s\" bottomline=\"%s\">", bt ? "true" : "false", bb ? "true" : "false");
       for (x = 0; x <= tab_w; x++)
       {
+         outln("<cell>");
+         outln("\\begin_inset Text");
+         outln("");
+         outln("\\layout Standard");
+         outln("");
          if (tab_cell[y][x] != NULL)
          {
             strcpy(f, tab_cell[y][x]);
-            auto_quote_chars(f, FALSE);
-            c_vars(f);
-            c_commands_inside(f, FALSE);
-            replace_defines(f);
-            replace_udo_quotes(f);
             replace_udo_tilde(f);
             replace_udo_nbsp(f);
             c_internal_styles(f);
             replace_placeholders(f);
             indent2space(f);
-            out(f);
+            outln(f);
          }
-
-         if (y != tab_h || x != tab_w)
-         {
-            outln("\\newline");
-         }
+         outln("\\end_inset");
+         outln("</cell>");
       }
-
-      if (tab_label[y] > 0)
-      {
-         for (i = 0; i < tab_label[y]; i++)
-         {
-            if (tab_label_cell[y][i] != NULL)
-            {
-               str2tok(tab_label_cell[y][i]);
-
-               if (token_counter > 0)
-                  c_label();
-            }
-
-            token_reset();
-         }
-      }
+      outln("</row>");
    }
-
+   outln("</lyxtabular>");
+   outln("");
+   outln("\\end_inset");
+   outln("");
    if (tab_caption != NULL)
    {
-      outln("\\layout Standard");
-      outln("\\align center");
-
-      if (tab_caption_visible)
-         sprintf(f, "%s %d: %s", lang.table, tab_counter, tab_caption);
-      else
-         sprintf(f, "%s", tab_caption);
-
-      outln(f);
-      outln("\\layout Standard");
+      outln("\\begin_inset Float table");
+      outln("wide false");
+      outln("collapsed false");
       outln("");
+      outln("\\layout Caption");
+      outln("");
+      outln(tab_caption);
+      outln("\\end_inset");
    }
+   outln("\\layout Standard");
+   outln("");
 }
 
 
@@ -779,15 +742,9 @@ _BOOL      inside_center,  /* */
 
 LOCAL void table_output_rtf(void)
 {
-   int    y,        /* */
-          x,        /* */
-          i,        /* */
-          cellx,    /* */
-          indent,   /* */
-          charw;    /* */
-   char   f[512],   /* */
-          cx[512];  /* */
-
+   int   y, x, i, cellx, indent, charw;
+   char  f[512],
+         cx[512];
 
    indent = strlen_indent();
 
@@ -802,7 +759,6 @@ LOCAL void table_output_rtf(void)
    {
       outln("\\trowd");
       cellx = 0;
-
       if (indent > 0)
       {
          cellx = indent;
@@ -812,27 +768,21 @@ LOCAL void table_output_rtf(void)
       for (i = 0; i <= tab_w; i++)
       {
          f[0] = EOS;
-
          if (tab_vert[i] > 0)
             strcat(f, "\\clbrdrl\\brdrs");
-
          if (tab_vert[i + 1] > 0)
             strcat(f, "\\clbrdrr\\brdrs");
-
          if (tab_hori[y] > 0)
             strcat(f, "\\clbrdrb\\brdrs");
-
-         if ( (y == 0 && tab_toplines > 0) || (y > 0 && tab_hori[y - 1] > 0) )
+         if ((y == 0 && tab_toplines > 0) || (y > 0 && tab_hori[y - 1] > 0))
             strcat(f, "\\clbrdrt\\brdrs");
-
+         
          cellx += ((int)tab_cell_w[i] * charw);
-
          sprintf(cx, "\\cellx%d", cellx);
          voutlnf("%s%s", f, cx);
       }
 
       out("\\intbl");
-
       if (indent > 0)
          out("\\ql \\cell");
 
@@ -843,23 +793,17 @@ LOCAL void table_output_rtf(void)
          case TAB_CENTER:
             out("\\qc ");
             break;
-
          case TAB_RIGHT:
             out("\\qr ");
             break;
-
          default:
             out("\\ql ");
+            break;
          }
 
          if (tab_cell[y][x] != NULL)
          {
             strcpy(f, tab_cell[y][x]);
-            auto_quote_chars(f, FALSE);
-            c_vars(f);
-            c_commands_inside(f, FALSE);
-            replace_defines(f);
-            replace_udo_quotes(f);
             replace_udo_tilde(f);
             replace_udo_nbsp(f);
             c_rtf_styles(f);
@@ -867,31 +811,13 @@ LOCAL void table_output_rtf(void)
             c_rtf_quotes(f);
             out(f);
          }
-
          out("\\cell");
       }
-
       outln("\\row");
 
-      if (tab_label[y] > 0)
-      {
-         for (i = 0; i < tab_label[y]; i++)
-         {
-            if (tab_label_cell[y][i] != NULL)
-            {
-               str2tok(tab_label_cell[y][i]);
-
-               if (token_counter > 0)
-                  c_label();
-            }
-
-            token_reset();
-         }
-      }
-
-   }  /* for (y = 0; y <= tab_h; y++) */
-
-
+      tab_label_output(y);
+   }
+   
    outln("\\trowd\\pard");
    outln("}\\par\\pard");
 
@@ -989,15 +915,10 @@ LOCAL void table_output_win(void)
          if (tab_cell[y][x] != NULL)
          {
             strcpy(f, tab_cell[y][x]);
-            auto_quote_chars(f, FALSE);
-            c_vars(f);
-            c_commands_inside(f, FALSE);
-            replace_defines(f);
-            replace_udo_quotes(f);
             replace_udo_tilde(f);
             replace_udo_nbsp(f);
-            c_win_styles(f);
             auto_references(f, FALSE, "", 0, 0);
+            c_win_styles(f);
             replace_placeholders(f);
             out(f);
          }
@@ -1009,23 +930,9 @@ LOCAL void table_output_win(void)
       else
          outln("\\row");
 
-      if (tab_label[y] > 0)
-      {
-         for (i = 0; i <tab_label[y]; i++)
-         {
-            if (tab_label_cell[y][i] != NULL)
-            {
-               str2tok(tab_label_cell[y][i]);
-
-               if (token_counter > 0)
-                  c_label();
-            }
-
-            token_reset();
-         }
-      }
+      tab_label_output(y);
    }
-
+   
    outln("\\trowd\\pard");
    outln("}\\par\\pard");
 
@@ -1147,43 +1054,23 @@ LOCAL void test_for_addition(char *cell)
 LOCAL void table_output_html(void)
 {
    int       y,
-             x,
-             i;
+             x;
    char      f[LINELEN],
-             css[LINELEN],                /* buffer for CSS information */
              alignOn[64];
-   char      token_buffer[LINELEN];       /* v6.5.3[vj]: New buffer needed for table extension */
+   char      token_buffer[LINELEN];
    _BOOL   inside_center,
              inside_right,
              inside_left;
    _BOOL   inside_env;
 
-
-   inside_center = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   inside_left   = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
-   inside_env    = (iItemLevel > 0 || iEnumLevel > 0 || iDescLevel > 0 || iListLevel > 0);
-
-   if (!inside_center && !inside_right && !inside_left)
-   {
-      switch (table_alignment)            /*r6pl9*/
-      {
-      case ALIGN_CENT:
-         inside_center = TRUE;
-         break;
-
-      case ALIGN_RIGH:
-         inside_right = TRUE;
-      }
-   }
+   get_table_alignment(&inside_left, &inside_center, &inside_right);
+   inside_env = (iItemLevel > 0 || iEnumLevel > 0 || iDescLevel > 0 || iListLevel > 0);
 
    strcpy(alignOn, "left");
-
    if (inside_center)
-      um_strcpy(alignOn, "center", 64, "table_output_html[1]");
-
+      strcpy(alignOn, "center");
    if (inside_right)
-      um_strcpy(alignOn, "right", 64, "table_output_html[2]");
+      strcpy(alignOn, "right");
 
    if (inside_env)                        /* we're inside another environment! */
    {
@@ -1194,35 +1081,31 @@ LOCAL void table_output_html(void)
       case ENV_LIST:
          if (bEnvCompressed[iEnvLevel])
          {
-            if (html_doctype < XHTML_STRICT)
-               outln("<br>\n");
-            else
-               outln("<br />\n");
+         	outln(xhtml_br);
          }
          else
          {
-            if (html_doctype < XHTML_STRICT)
-               outln("<br><br>\n");
-            else
-              outln("<br /><br />\n");
+         	out(xhtml_br);
+         	outln(xhtml_br);
          }
-
          break;
 
       case ENV_DESC:
-         ;                                /* we're fine in description environments (so far ;-)) */
+         break;                           /* we're fine in description environments (so far ;-)) */
       }
    }
 
+#if 0
    if (html_doctype == HTML5)
    {
       voutf("\n<div class=\"UDO_div_align_%s\">\n", alignOn);
    }
    else
+#endif
    {
-      voutf("\n<div align=\"%s\">\n", alignOn);
+      voutf("<div align=\"%s\">", alignOn);
    }
-
+   
    if (tab_toplines > 0)
    {
       outln("<table border=\"1\" frame=\"box\">");
@@ -1300,79 +1183,107 @@ LOCAL void table_output_html(void)
          }
 
          /* Everything not set in test_for_addition is now set here */
+         switch (tab_just[x])
+         {
+         case TAB_CENTER:
+            if (!addition_has_align)
+            {
+#if 0
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_align_center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
+               }
+               else
+#endif
+               {
+                  um_strcat(addition, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
+               }
+            }
+            if (!addition_has_valign)
+            {
+#if 0
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
+               }
+               else
+#endif
+               {
+                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
+               }
+            }
+            break;
 
-         strcpy(css, "");                 /* clear css */
-         
-         if (html_doctype == HTML5)
-         {
-            switch (tab_just[x])
+         case TAB_RIGHT:
+            if (!addition_has_align)
             {
-            case TAB_CENTER:
-               if (!addition_has_align)
-                  um_strcat(css, " class=\"UDO_td_align_center", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
-               break;
-               
-            case TAB_RIGHT:
-               if (!addition_has_align)
-                  um_strcat(css, " class=\"UDO_td_align_right", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
-               break;
-            default:
-               if (!addition_has_align)
-                  um_strcat(css, " class=\"UDO_td_align_left", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
+#if 0
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_align_right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
+               }
+               else
+#endif
+               {
+                  um_strcat(addition, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
+               }
             }
-            
             if (!addition_has_valign)
-               um_strcat(css, " UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
-            else
-               um_strcat(css, "\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
-            
-            if (css[0])
-               um_strcat(addition, css, TAB_ADDITION_LEN, "table_output_html[3-1-5]");
-         }
-         else
-         {
-            switch (tab_just[x])
             {
-            case TAB_CENTER:
-               if (!addition_has_align)
-                  um_strcat(css, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-2-0]");
-               break;
-               
-            case TAB_RIGHT:
-               if (!addition_has_align)
-                  um_strcat(css, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-2-1]");
-               break;
-            default:
-               if (!addition_has_align)
-                  um_strcat(css, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-2-2]");
+#if 0
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
+               }
+               else
+#endif
+               {
+                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
+               }
             }
-            
+            break;
+
+         default:
+            if (!addition_has_align)
+            {
+#if 0
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_align_left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
+               }
+               else
+#endif
+               {
+                  um_strcat(addition, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
+               }
+            }
             if (!addition_has_valign)
-               um_strcat(css, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-2-3]");
-            
-            if (css[0])
-               um_strcat(addition, css, TAB_ADDITION_LEN, "table_output_html[3-2-4]");
+            {
+#if 0
+               if (html_doctype == HTML5)
+               {
+                  um_strcat(addition, " class=\"UDO_td_valign_top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
+               }
+               else
+#endif
+               {
+                  um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
+               }
+            }
+            break;
          }
-         
+
          voutf("  <td%s>", addition);
 
          /* If there is a colspan, we need to supress empty cols */
-
          if (addition_col_offset > 0)
             x = x + addition_col_offset - 1;
 
          out(sHtmlPropfontStart);
-
          if (tab_cell[y][x] != NULL)
          {
             um_strcpy(f, tab_cell[y][x], LINELEN, "table_output_html[4]");
-            auto_quote_chars(f, FALSE);
-            replace_defines(f);
-            c_commands_inside(f, FALSE);
-            replace_udo_quotes(f);
-            c_vars(f);
             c_internal_styles(f);
-                                          /* PL7 <???> */
             auto_references(f, FALSE, "", 0, 0);
             replace_placeholders(f);
             replace_udo_tilde(f);
@@ -1381,32 +1292,16 @@ LOCAL void table_output_html(void)
          }
 
          out(sHtmlPropfontEnd);
-         outln("</td>");                  /* PL14: "</td>" statt " " */
+         outln("</td>");
       }
+      outln("</tr>");
 
-      outln("</tr>");                     /* PL14: "</tr>" statt "" */
+      tab_label_output(y);
+   }
 
-      if (tab_label[y] > 0)
-      {
-         for (i = 0; i < tab_label[y]; i++)
-         {
-            if (tab_label_cell[y][i] != NULL)
-            {
-               str2tok(tab_label_cell[y][i]);
-
-               if (token_counter > 0)
-                  c_label();
-            }
-
-            token_reset();
-         }
-      }
-
-   }  /* for (y = 0; y <= tab_h; y++) */
-
-   outln("</table>\n</div>");
-
-} /* table_output_html() */
+   outln("</table>");
+   outln("</div>");
+}
 
 
 
@@ -1424,42 +1319,24 @@ LOCAL void table_output_html(void)
 
 LOCAL void table_output_tex(void)
 {
-   int       y,              /* */
-             x,              /* */
-             i;              /* */
-   char      f[512],         /* */
-             alignOn[64],    /* */
-             alignOff[64];   /* */
-   _BOOL   inside_center,  /* */
-             inside_right,   /* */
-             inside_left;    /* */
+   int       y,
+             x,
+             i;
+   char      f[512],
+             alignOn[64],
+             alignOff[64];
+   _BOOL   inside_center,
+             inside_right,
+             inside_left;
 
+   get_table_alignment(&inside_left, &inside_center, &inside_right);
 
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
-
-   if (!inside_center && !inside_right && !inside_left)
-   {
-      switch (table_alignment)            /*r6pl9*/
-      {
-      case ALIGN_CENT:
-         inside_center = TRUE;
-         break;
-
-      case ALIGN_RIGH:
-         inside_right = TRUE;
-      }
-   }
-
-   alignOn[0] = alignOff[0] = EOS;        /* clear strings */
-
+   alignOn[0] = alignOff[0] = EOS;
    if (inside_center)
    {
       strcpy(alignOn, "\\begin{center}");
       strcpy(alignOff, "\\end{center}");
    }
-
    if (inside_right)
    {
       strcpy(alignOn, "\\begin{flushright}");
@@ -1514,13 +1391,6 @@ LOCAL void table_output_tex(void)
          if (tab_cell[y][x] != NULL)
          {
             strcpy(f, tab_cell[y][x]);
-            auto_quote_chars(f, FALSE);
-            c_styles(f);
-            check_styles(f);
-            replace_defines(f);
-            c_commands_inside(f, FALSE);
-            c_vars(f);
-            replace_udo_quotes(f);
             c_internal_styles(f);
             replace_placeholders(f);
             replace_udo_tilde(f);
@@ -1528,7 +1398,6 @@ LOCAL void table_output_tex(void)
             indent2space(f);
             out(f);
          }
-
          if (x != tab_w)
             out(" & ");
       }
@@ -1537,24 +1406,9 @@ LOCAL void table_output_tex(void)
 
       if (tab_hori[y] > 0)
          out(" \\hline");
-
       outln("");
 
-      if (tab_label[y] > 0)
-      {
-         for (i = 0; i < tab_label[y]; i++)
-         {
-            if (tab_label_cell[y][i] != NULL)
-            {
-               str2tok(tab_label_cell[y][i]);
-
-               if (token_counter > 0)
-                  c_label();
-            }
-
-            token_reset();
-         }
-      }
+      tab_label_output(y);
    }
 
    outln("\\end{tabular}");
@@ -1584,38 +1438,24 @@ LOCAL void table_output_tex(void)
 
 LOCAL void table_output_ipf(void)
 {
-   int    y,        /* */
-          x,        /* */
-          i;        /* */
-   char   f[512],   /* */
-          cx[512];  /* */
-/*
-   int    cellx,
-          indent,
-          charw;
-   char   ci[512];
-*/
+   int    y,
+          x,
+          i;
+   char   f[512],
+          cx[512];
 
-
-   f[0] = EOS;                            /* clear string */
-
+   f[0] = EOS;
    for (i = 0; i <= tab_w; i++)
    {
-#ifdef UM_PRINTF_USE_LD
-      sprintf(cx, "%u ", tab_cell_w[i]);
-#else
-      sprintf(cx, "%lu ", tab_cell_w[i]);
-#endif
+      sprintf(cx, "%lu ", (unsigned long) tab_cell_w[i]);
       strcat(f, cx);
    }
-
    del_whitespaces(f);
    voutlnf(":table cols='%s'.", f);
 
    for (y = 0; y <= tab_h; y++)
    {
       outln(":row.");
-
       for (x = 0; x <= tab_w; x++)
       {
 #if 0
@@ -1624,24 +1464,18 @@ LOCAL void table_output_ipf(void)
          case TAB_CENTER:
             out("\\qc ");
             break;
-
          case TAB_RIGHT:
             out("\\qr ");
             break;
-
          default:
             out("\\ql ");
+            break;
          }
 #endif
 
          if (tab_cell[y][x] != NULL)
          {
             strcpy(f, tab_cell[y][x]);
-            auto_quote_chars(f, FALSE);
-            replace_defines(f);
-            c_commands_inside(f, FALSE);
-            replace_udo_quotes(f);
-            c_vars(f);
             c_internal_styles(f);
             auto_references(f, FALSE, "", 0, 0);
             replace_placeholders(f);
@@ -1650,13 +1484,16 @@ LOCAL void table_output_ipf(void)
             voutlnf(":c.%s", f);
          }
          else
+         {
             outln(":c.");
+         }
       }
+
+      tab_label_output(y);
    }
 
    outln(":etable.");
-
-}  /* table_output_ipf */
+}
 
 
 
@@ -1665,7 +1502,24 @@ LOCAL void table_output_ipf(void)
 /*******************************************************************************
 *
 *  table_output_general():
-*     ??? (description missing)
+*     Output a table for formats which are not specially treated by
+*     one of the functions above (mostly ASCII based formats)
+*  These include:
+*     TOASC
+*     TOMAN
+*     TOSTG
+*     TORTF (when !rtf_no_tables was specified)
+*     TOPCH
+*     TOINF
+*     TOTVH
+*     TOLDS
+*     TONRO
+*     TOSRC
+*     TOSRP
+*     TODRC
+*     TOKPS
+*     TOAMG
+*
 *
 *  Return:
 *     -
@@ -1677,7 +1531,6 @@ LOCAL void table_output_general(void)
    int       y,
              x,
              i,
-             j,
              offset,
              indent = 0,
              y_stg;
@@ -1697,7 +1550,8 @@ LOCAL void table_output_general(void)
              add,
              twidth,
              toffset,
-             isl;
+             isl,
+             j;
    _BOOL   tortf,
              tosrc,
              ansichars,
@@ -1706,50 +1560,14 @@ LOCAL void table_output_general(void)
              inside_right,
              inside_left;
 
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
+   get_table_alignment(&inside_left, &inside_center, &inside_right);
 
-   for (j = 1; j <= iEnvLevel; j++)       /* New in r6pl15 [NHz] */
-   {
-      switch (iEnvType[j])
-      {
-      case ENV_CENT:
-         inside_center = TRUE;
-         break;
-
-      case ENV_RIGH:
-         inside_right = TRUE;
-         break;
-
-      case ENV_LEFT:
-         inside_left = TRUE;
-      }
-   }
-
-   if (!inside_center && !inside_right && !inside_left)
-   {
-      switch (table_alignment)            /*r6pl9*/
-      {
-      case ALIGN_CENT:
-         inside_center = TRUE;
-         break;
-
-      case ALIGN_RIGH:
-         inside_right = TRUE;
-         break;
-
-      default:
-         indent = strlen_indent();
-      }
-   }
-   else if (inside_left == TRUE)          /* New in r6pl15 [NHz] */
+   if (inside_left)
       indent = strlen_indent();
 
-                                          /* New in r6pl15 [NHz] */
-                                          /* If the table is inside an environment */
-   space[0] = EOS;
 
+   /* If the table is inside an environment */
+   space[0] = EOS;
    if (indent > 0)
    {
       for (i = 0; i < indent; i++)
@@ -1757,7 +1575,6 @@ LOCAL void table_output_general(void)
    }
 
    tortf = tosrc = FALSE;
-
    switch (desttype)
    {
    case TORTF:
@@ -1766,10 +1583,10 @@ LOCAL void table_output_general(void)
    case TOAQV:
       tortf = TRUE;
       break;
-
    case TOSRC:
    case TOSRP:
       tosrc = TRUE;
+      break;
    }
 
    ansichars = FALSE;
@@ -1779,7 +1596,7 @@ LOCAL void table_output_general(void)
       if (desttype != TOWIN && desttype != TOWH4 && desttype != TOAQV && desttype != TORTF && desttype != TOINF)
          ansichars = TRUE;
    }
-
+   
    if (tortf || desttype == TOINF || desttype == TOLDS)
    {
       output_begin_verbatim();
@@ -2049,9 +1866,6 @@ LOCAL void table_output_general(void)
       
       strcat(s, space);
 
-      if (desttype == TOKPS)              /* New in r6pl15 [NHz] */
-         strcat(s, "Von (");              /* Begin of a table-line in postscript */
-
       for (x = 0; x <= tab_w; x++)
       {
          if (tab_vert[x] > 0)
@@ -2071,17 +1885,6 @@ LOCAL void table_output_general(void)
          }
 
          add = 0;
-                                          /* New in V6.5.11 [NHz] */
-         if (desttype == TOKPS)
-         {
-            c_vars(f);
-            c_commands_inside(f, FALSE);
-            replace_all(s, "[", "\\[");
-            replace_all(s, "]", "\\]");
-            replace_all(s, "(", "\\(");
-            replace_all(s, ")", "\\)");
-         }
-
          switch (tab_just[x])
          {
          case TAB_CENTER:
@@ -2127,67 +1930,33 @@ LOCAL void table_output_general(void)
          }
       }
 
-      /* Displaced because of a bug */
-      /* Conclusion of a table-line in postscript */
-      if (desttype == TOKPS)
-         strcat(s, ") udoshow newline Voff");
-
       if (inside_center)
          stringcenter(s, zDocParwidth);
 
       if (inside_right)
          strright(s, zDocParwidth);
 
-      /* Parenthesis of table lines would be quoted \( */
-      if (desttype != TOKPS)
-         auto_quote_chars(s, FALSE);
-
-      switch (desttype)
-      {
-      case TOWIN:
-      case TOWH4:
-      case TOAQV:
-      case TORTF:
-      case TOLDS:                         /* PL8 */
-         c_vars(s);
-         c_commands_inside(s, FALSE);
-      }
-
-      replace_defines(s);
-      replace_udo_quotes(s);
-
-      switch (desttype)
-      {
-      case TOWIN:
-      case TOWH4:
-      case TOAQV:
-         c_win_styles(s);
-         break;
-
-      case TORTF:
-         c_rtf_styles(s);
-         break;
-
-      case TOLDS:                         /* PL15*/
-         del_internal_styles(s);
-         break;
-
-      default:
-         c_internal_styles(s);
-      }
-
+      c_internal_styles(s);
       replace_placeholders(s);
       replace_udo_tilde(s);
       replace_udo_nbsp(s);
 
       if (tortf)
          strcat(s, "\\par");
-
       if (tosrc)
-         strinsert(s, "    ");
+         strinsert(s, "   ");
 
-      outln(s);
-
+      /* Begin of a table-line in postscript */
+      if (desttype == TOKPS)
+      {
+         replace_all(s, "(", "\\(");
+         replace_all(s, ")", "\\)");
+         voutlnf(s, "Von (%s) udoshow newline Voff\n", s);
+      } else
+      {
+         outln(s);
+	  }
+	  
       if (tab_hori[y] > 0)
       {
          for (i = 1; i <= tab_hori[y]; i++)
@@ -2203,21 +1972,7 @@ LOCAL void table_output_general(void)
          }
       }
 
-      if (tab_label[y] > 0)
-      {
-         for (i = 0; i < tab_label[y]; i++)
-         {
-            if (tab_label_cell[y][i] != NULL)
-            {
-               str2tok(tab_label_cell[y][i]);
-
-               if (token_counter > 0)
-                  c_label();
-            }
-
-            token_reset();
-         }
-      }
+      tab_label_output(y);
    }
 
    if (tosrc)
