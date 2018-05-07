@@ -6231,21 +6231,18 @@ LOCAL void warning_short_line(const size_t len, const char *t)
               *ptr;
    size_t      i, sl;
    int         nr;
-   _BOOL     flag;       /* */
    
-
    /* Wenn im naechsten Token bereits ein Trennvorschlag steckt, */
    /* dann die Zeile nicht bemaengeln, da offensichtlich nicht */
    /* besser getrennt werden kann. */
-   
-   if (strstr(t, DIVIS_S) != NULL)
+   if (strchr(t, DIVIS_C) != NULL)
       return;
-
+   
    strcpy(next, t);
    replace_udo_quotes(next);
-   c_internal_styles(next);
+   del_internal_styles(next);
    replace_placeholders_text(next);
-
+   
    replace_all(next, NBSP_S, "~");
    replace_all(next, TILDE_S, "!~");
 
@@ -6259,55 +6256,62 @@ LOCAL void warning_short_line(const size_t len, const char *t)
       /* Nur den Teil des Wortes bis zum ersten Minus oder Leerzeichen ausgeben. */
 
       ptr = strchr(next, '-');
-      
       if (ptr != NULL)
          ptr[0] = EOS;
       
-
       ptr = strchr(next, ' ');
-      
       if (ptr != NULL)
          ptr[0] = EOS;
       
-
       /* Falls ein Wort nur einen Vokal enthaelt, dann hat es */
       /* keinen Sinn, dieses Wort in die Hyphendatei zu schreiben. */
-
       nr = 0;
-      
-      for (i = 0; i < strlen(next); i++)
+      sl = strlen(next);
+      for (i = 0; i < sl; i++)
       {
-         if (    next[i] == 'a'
-              || next[i] == 'e' 
-              || next[i] == 'i' 
-              || next[i] == 'o' 
-              || next[i] == 'u'
+         if (next[i] == 'a' ||
+             next[i] == 'e' ||
+             next[i] == 'i' ||
+             next[i] == 'o' ||
+             next[i] == 'u' ||
+             next[i] == 'A' ||
+             next[i] == 'E' ||
+             next[i] == 'I' ||
+             next[i] == 'O' ||
+             next[i] == 'U' ||
+             (iEncodingTarget == CODE_TOS && (
+              next[i] == '\204' ||
+              next[i] == '\224' ||
+              next[i] == '\201' ||
+              next[i] == '\216' ||
+              next[i] == '\231' ||
+              next[i] == '\232' ||
+              next[i] == '\236'))
             )
          {
             nr++;
-         
             if (nr > 1)
-            {
                break;
-            }
          }
       }
-
-      if (nr > 0)
+      
+      if (nr > 1)
       {
-         do                               /* Interpunktionszeichen entfernen */
+         /* Interpunktionszeichen entfernen */
+         while (sl > 0 && strchr(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~", next[0]) != NULL)
          {
-            sl = strlen(next);
-            
-            flag = (strchr(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~", next[sl - 1]) != NULL);
-
-            if (flag)
-               next[sl - 1] = EOS;
-            
-         } while (flag);
-
+            memmove(&next[0], &next[1], sl);
+            sl--;
+         }
+         while (sl > 0 && strchr(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~", next[sl - 1]) != NULL)
+         {
+         	--sl;
+         	next[sl] = '\0';
+         }
          if (next[0] != EOS)
+         {
             output_hyphen_line(next);
+         }
       }
    }
 }
