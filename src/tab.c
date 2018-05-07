@@ -113,8 +113,8 @@
 
 #define MAX_CELLS_LEN    4096             /* max. Zeichenanzahl einer Zelle */
 
-#define MAX_TAB_H         700             /* max. Hoehe einer Tabelle */
-#define MAX_TAB_ROWS       64             /* max. Spalten einer Tabelle */
+#define MAX_TAB_H        2048             /* max. Hoehe einer Tabelle */
+#define MAX_TAB_W          64             /* max. Spalten einer Tabelle */
 #define MAX_TAB_LABEL      10             /* max. Anzahl der hinter einanderfolgenden Labels */
 #define TAB_LEFT            0             /* Spalte linksbuendig */
 #define TAB_CENTER          1             /* Spalte zentriert */
@@ -130,18 +130,18 @@ LOCAL int       tab_w, tab_h;             /* Spalten und Zeilen           */
 LOCAL char      *tab_caption;
 LOCAL _BOOL   tab_caption_visible;      /* Im Tabellenverzeichnis?      */
                                           /* Zeiger auf Feldtext             */
-LOCAL char     *tab_cell[MAX_TAB_H+1][MAX_TAB_ROWS+1];
-LOCAL size_t    tab_cell_w[MAX_TAB_ROWS+1];  /* Breiten der Spalten          */
-LOCAL int       tab_vert[MAX_TAB_ROWS+1];    /* Vertikale Linien, wo?        */
+LOCAL char     *tab_cell[MAX_TAB_H+1][MAX_TAB_W+1];
+LOCAL size_t    tab_cell_w[MAX_TAB_W+1];  /* Breiten der Spalten          */
+LOCAL int       tab_vert[MAX_TAB_W+1];    /* Vertikale Linien, wo?        */
 LOCAL int       tab_hori[MAX_TAB_H+1];    /* Horiz. Linien, wo?           */
 LOCAL int       tab_just[MAX_TAB_H+1];    /* Spaltenausrichtung           */
-LOCAL int       tab_toplines;             /* Oben Linie(n)?                       */
-LOCAL int       tab_label[MAX_TAB_H+1];   /* Label, wo?                           */
+LOCAL int       tab_toplines;             /* Oben Linie(n)?               */
+LOCAL int       tab_label[MAX_TAB_H+1];   /* Label, wo?                   */
                                           /* Labeltext    */
 LOCAL char     *tab_label_cell[MAX_TAB_H+1][MAX_TAB_LABEL];
 
                                           /* Puffer fuer Zellen           */
-LOCAL char      cells[MAX_TAB_ROWS+1][MAX_CELLS_LEN];
+LOCAL char      cells[MAX_TAB_W+1][MAX_CELLS_LEN];
 LOCAL int       cells_counter;            /* Anzahl Zellen von Zeilen     */
 
 LOCAL char      addition[TAB_ADDITION_LEN] = "";
@@ -202,7 +202,7 @@ GLOBAL void table_reset(void)
 
    for (y = 0; y < MAX_TAB_H; y++)
    {
-      for (x = 0; x < MAX_TAB_ROWS; x++)
+      for (x = 0; x < MAX_TAB_W; x++)
       {
          if (tab_cell[y][x] != NULL)
          {
@@ -225,7 +225,7 @@ GLOBAL void table_reset(void)
       }
    }
 
-   for (x = 0; x < MAX_TAB_ROWS; x++)
+   for (x = 0; x < MAX_TAB_W; x++)
    {
       tab_cell_w[x] = 0;
       tab_vert[x] = 0;
@@ -488,15 +488,14 @@ GLOBAL _BOOL table_add_line(char *s)
    c_tilde(s);
 
    ptr = s;
-   cells_counter= 0;
+   cells_counter = 0;
    sl = 0;
-
    while (ptr[0] != EOS)
    {
       if (ptr[0] == '!' && ptr[1] == '!')
       {
          cells_counter++;
-         ptr++;                           /* PL14: +=1 statt += 2 */
+         ptr++;
          sl = 0;
       }
       else
@@ -512,13 +511,13 @@ GLOBAL _BOOL table_add_line(char *s)
             return FALSE;
          }
       }
-
       ptr++;
    }
 
-   for (i=0; i<=cells_counter; i++) del_whitespaces(cells[i]) ;
+   for (i = 0; i <= cells_counter; i++)
+      del_whitespaces(cells[i]);
 
-   if (cells_counter > MAX_TAB_ROWS)
+   if (cells_counter > MAX_TAB_W)
    {
       error_message(_("too many columns used"));
    }
@@ -528,7 +527,7 @@ GLOBAL _BOOL table_add_line(char *s)
 
    tab_h++;                               /* Zeilenzaehler hochsetzen */
 
-   for (x = 0; x < MAX_TAB_ROWS; x++)
+   for (x = 0; x < MAX_TAB_W; x++)
    {
       if (x <= cells_counter)
       {
