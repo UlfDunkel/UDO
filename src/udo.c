@@ -7798,7 +7798,15 @@ GLOBAL void change_sep_suffix(char *full, const char *suff)
 
 LOCAL int hyplist_compare(const HYPLIST *p, const HYPLIST *q)
 {
-   return my_stricmp(p->data, q->data);
+	size_t l1, l2;
+	
+	l1 = strlen(p->data);
+	l2 = strlen(q->data);
+	if (l1 < l2 && my_strnicmp(p->data, q->data, l1) == 0)
+		return 1;
+	if (l1 > l2 && my_strnicmp(p->data, q->data, l2) == 0)
+		return -1;
+	return my_stricmp(p->data, q->data);
 }
 
 
@@ -7873,35 +7881,6 @@ LOCAL HYPLIST *hyplist_sort(HYPLIST *p)
 
 /*******************************************************************************
 *
-*  new_hyplist_item():
-*     create new hyphenation list item entry
-*
-*  return:
-*     ???
-*
-******************************************|************************************/
-
-LOCAL HYPLIST *new_hyplist_item(void)
-{
-   HYPLIST  *l;  /* */
-
-
-   l= (HYPLIST *)malloc(sizeof(HYPLIST));
-
-   if (l != NULL)
-   {
-      memset(l, 0, sizeof(HYPLIST));
-   }
-   
-   return l;
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  add_hyplist_item():
 *     add entry to hyphenation list
 *
@@ -7911,22 +7890,16 @@ LOCAL HYPLIST *new_hyplist_item(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL add_hyplist_item(
-
-const char  *s)  /* */
+LOCAL _BOOL add_hyplist_item(const char *s)
 {
-   HYPLIST  *n;  /* */
+   HYPLIST *n;
 
-
-   n = new_hyplist_item();
-   
+   n = malloc(sizeof(HYPLIST));
    if (n != NULL)
    {
       strcpy(n->data, s);
-      
       n->next = hyplist;
       hyplist = n;
-      
       return TRUE;
    }
 
@@ -7947,35 +7920,37 @@ const char  *s)  /* */
 *
 ******************************************|************************************/
 
-LOCAL void sort_hypfile(
-
-const char  *name)    /* */
+LOCAL void sort_hypfile(const char *name)
 {
-   FILE     *file;    /* */
-   char      z[256];  /* */
-   HYPLIST  *ptr;     /* */
+   FILE  *file;
+   char  z[256];
+   HYPLIST  *ptr, *ptr_next;
    
-
    hyplist = NULL;
 
    if (name == NULL || *name == EOS)
       return;
-
+   
+   if (!bHypopened && !bHypfailed)
+   {
+      remove(name);
+      return;
+   }
+   
    file = fopen(name, "r");
 
-   if (!file)
+   if (file == NULL)
       return;
 
    show_status_info(_("Reading hyphen file..."));
 
-   while (fgets(z, 256,file))
+   while (fgets(z, (int)sizeof(z), file))
       add_hyplist_item(z);
 
    fclose(file);
-
+   
    if (hyplist == NULL)
       return;
-   
 
    show_status_info(_("Sorting hyphen file..."));
 
@@ -7984,12 +7959,11 @@ const char  *name)    /* */
    show_status_info(_("Writing hyphen file..."));
 
    file = myFwopen(name, TOASC);
-
-   if (!file)
+   
+   if (file == NULL)
       return;
 
    ptr = hyplist;
-
    while (ptr != NULL)
    {
       if (ptr->next != NULL)
@@ -8003,11 +7977,17 @@ const char  *name)    /* */
       {
          fprintf(file, "%s", ptr->data);
       }
-      
       ptr = ptr->next;
    }
 
    fclose(file);
+   
+   for (ptr = hyplist; ptr != NULL; ptr = ptr_next)
+   {
+      ptr_next = ptr->next;
+      free(ptr);
+   }
+   hyplist = NULL;
 }
 
 
@@ -8031,72 +8011,59 @@ const char  *name)    /* */
 *
 ******************************************|************************************/
 
-GLOBAL void build_search_file(
-
-char        *d,                               /* */
-const char  *suff)                            /* */
+GLOBAL void build_search_file(char *d, const char *suff)
 {
-   char      tmp_path2[MYFILE_PATH_LEN + 1];  /* */
-
+   char  tmp_path2[MYFILE_PATH_LEN + 1];
 
    fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
 
 #ifndef __MACOS__
-
-   if (    ( (tmp_driv[0] == EOS)  || (tmp_driv[1] != ':') ) 
-        && ( (tmp_path[0] != '\\') && (tmp_path[0] != '/') )
+   if (((tmp_driv[0] == EOS) || (tmp_driv[1] != ':')) &&
+       ((tmp_path[0] != '\\') && (tmp_path[0] != '/'))
       )
    {
-      strcpy(tmp_driv,  infile.driv);
+      strcpy(tmp_driv, infile.driv);
       strcpy(tmp_path2, infile.path);
       strcat(tmp_path2, tmp_path);
-      strcpy(tmp_path,  tmp_path2);
+      strcpy(tmp_path, tmp_path2);
    }
-   
-#else   /* __MACOS__ */                   /* MO: nochmal leicht ueberarbeitet */
-                                          /* Martin Osieka, 18.04.1996 */
-                                          /* Kein Laufwerk? Dann Laufwerk von <infile> */
+#else /* __MACOS__ */
+   /* MO: nochmal leicht ueberarbeitet */
+   /* Martin Osieka, 18.04.1996 */
+   /* Kein Laufwerk? Dann Laufwerk von <infile> */
    if (tmp_driv[0] == EOS)
    {
       strcpy(tmp_driv, infile.driv);
    }
-   
-                                          /* Relativer Pfad? Dann Pfad von <infile> davor */
-   if (infile.path[ 0])
+   /* Relativer Pfad? Dann Pfad von <infile> davor */
+   if (infile.path[0])
    {
-      if ( (tmp_path[ 0] == ':') && strcmp( tmp_path, infile.path) )
-      {                                   /* DOS: != '\\' */
+      if ((tmp_path[ 0] == ':') && strcmp( tmp_path, infile.path))
+      {
          strcpy(tmp_path2, infile.path);
          strcat(tmp_path2, &tmp_path[1]);
-         strcpy(tmp_path,  tmp_path2);
+         strcpy(tmp_path, tmp_path2);
       }
       else if (tmp_path[ 0] == EOS)
       {
          strcpy( tmp_path, infile.path);
       }
    }
-   
 #endif   /* __MACOS__ */
 
-
 #ifdef __TOS__
-                                          /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
-                                          /* Siehe E-Mail von Christian Huch @ BM */
-   if (tmp_driv[0] != EOS)                /*r6pl4*/
-   {
+   /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
+   /* Siehe E-Mail von Christian Huch @ BM */
+   if (tmp_driv[0] != EOS)
       tmp_driv[0] = toupper(tmp_driv[0]);
-   }
 #endif
 
-
    if (tmp_suff[0] == EOS)
-   {
-      strcpy( tmp_suff, suff);
-   }
+      strcpy(tmp_suff, suff);
 
    path_adjust_separator(tmp_path);
 
-   sprintf( d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+   sprintf(d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
 }
 
 
@@ -8113,67 +8080,52 @@ const char  *suff)                            /* */
 *
 ******************************************|************************************/
 
-GLOBAL void build_search_file_output(
-
-char        *d,                               /* */
-const char  *suff)                            /* */
+GLOBAL void build_search_file_output(char *d, const char *suff)
 {
-   char      tmp_path2[MYFILE_PATH_LEN + 1];  /* */
-
+   char  tmp_path2[MYFILE_PATH_LEN + 1];
 
    fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
 
 #ifndef __MACOS__
-
-   if (    ( (tmp_driv[0] == EOS)  || (tmp_driv[1] != ':') ) 
-        && ( (tmp_path[0] != '\\') && (tmp_path[0] != '/') )
+   if (((tmp_driv[0] == EOS) || (tmp_driv[1] != ':')) &&
+       ((tmp_path[0] != '\\') && (tmp_path[0] != '/'))
       )
    {
-      strcpy(tmp_driv,  outfile.driv);
+      strcpy(tmp_driv, outfile.driv);
       strcpy(tmp_path2, outfile.path);
       strcat(tmp_path2, tmp_path);
-      strcpy(tmp_path,  tmp_path2);
+      strcpy(tmp_path, tmp_path2);
    }
-   
-#else   /* __MACOS__ */                   /* MO: nochmal leicht ueberarbeitet */
-                                          /* Martin Osieka, 18.04.1996 */
-                                          /* Kein Laufwerk? Dann Laufwerk von <infile> */
+#else /* __MACOS__ */
+   /* MO: nochmal leicht ueberarbeitet */
+   /* Martin Osieka, 18.04.1996 */
+   /* Kein Laufwerk? Dann Laufwerk von <infile> */
    if (tmp_driv[0] == EOS)
-   {
       strcpy( tmp_driv, outfile.driv);
-   }
-   
-                                          /* Relativer Pfad? Dann Pfad von <infile> davor */
+   /* Relativer Pfad? Dann Pfad von <infile> davor */
    if (infile.path[0])
    {
       if ((tmp_path[0] == ':') && strcmp( tmp_path, outfile.path))
-      {                                   /* DOS: != '\\' */
+      {
          strcpy(tmp_path2, outfile.path);
          strcat(tmp_path2, &tmp_path[1]);
          strcpy(tmp_path, tmp_path2);
-      }
-      else if (tmp_path[0] == EOS)
+      } else if (tmp_path[0] == EOS)
       {
          strcpy( tmp_path, outfile.path);
       }
    }
-   
-#endif   /* __MACOS__ */
-
+#endif /* __MACOS__ */
 
 #ifdef __TOS__
-                                          /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
-                                          /* Siehe E-Mail von Christian Huch @ BM */
-   if (tmp_driv[0] != EOS)                /*r6pl4*/
-   {
+   /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
+   /* Siehe E-Mail von Christian Huch @ BM */
+   if (tmp_driv[0] != EOS)
       tmp_driv[0] = toupper(tmp_driv[0]);
-   }
 #endif
 
    if (tmp_suff[0] == EOS)
-   {
-      strcpy( tmp_suff, suff);
-   }
+      strcpy(tmp_suff, suff);
 
    path_adjust_separator(tmp_path);
 
@@ -8213,23 +8165,16 @@ const char  *suff)                            /* */
 *
 ******************************************|************************************/
 
-GLOBAL void build_include_filename(
-
-char        *d,                               /* */
-const char  *suff)                            /* */
+GLOBAL void build_include_filename(char *d, const char *suff)
 {
-
 #if USE_OLD_BUILD_FILE
    build_search_file(d, suff);
-   return;
 #else
-   char      tmp_path2[MYFILE_PATH_LEN + 1];  /* */
-   
+   char tmp_path2[MYFILE_PATH_LEN + 1];
 
    fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
 
 # ifndef __MACOS__
-
    if (tmp_driv[0] == EOS)
    {
       /* In Fall 1, 2 und 4 wird jeweils das Laufwerk des Infiles benutzt */
@@ -8256,54 +8201,45 @@ const char  *suff)                            /* */
       strcpy(tmp_suff, suff);
    }
 
-# else   /* __MACOS__ */                  /* MO: nochmal leicht ueberarbeitet */
-                                          /* -dh-: Martin, ggf. noch anpassen!!! */
-                                          /* Martin Osieka, 18.04.1996 */
-                                          /* Kein Laufwerk? Dann Laufwerk von <infile> */
+# else   /* __MACOS__ */
+   /* MO: nochmal leicht ueberarbeitet */
+   /* -dh-: Martin, ggf. noch anpassen!!! */
+   /* Martin Osieka, 18.04.1996 */
+   /* Kein Laufwerk? Dann Laufwerk von <infile> */
    if (tmp_driv[0] == EOS)
    {
-      strcpy( tmp_driv, infile.driv);
+      strcpy(tmp_driv, infile.driv);
    }
-   
-                                          /* Relativer Pfad? Dann Pfad von <infile> davor */
+   /* Relativer Pfad? Dann Pfad von <infile> davor */
    if (infile.path[0])
    {
-      if ( (tmp_path[0] == ':') && strcmp(tmp_path, infile.path) ) 
-      {                                   /* DOS: != '\\' */
+      if ((tmp_path[0] == ':') && strcmp(tmp_path, infile.path))
+      {
          strcpy(tmp_path2, infile.path);
          strcat(tmp_path2, &tmp_path[1]);
-         strcpy(tmp_path,  tmp_path2);
-      }
-      else if (tmp_path[0] == EOS)
+         strcpy(tmp_path, tmp_path2);
+      } else if (tmp_path[0] == EOS)
       {
-         strcpy( tmp_path, infile.path);
+         strcpy(tmp_path, infile.path);
       }
    }
 
    if (tmp_suff[0] == EOS)
-   {
-      strcpy( tmp_suff, suff);
-   }
-    
-# endif   /* __MACOS__ */
+      strcpy(tmp_suff, suff);
+# endif  /* __MACOS__ */
 
 
 # ifdef __TOS__
-                                          /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
-                                          /* Siehe E-Mail von Christian Huch @ BM */
-   if (tmp_driv[0] != EOS)                /*r6pl4*/
-   {
+   /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
+   /* Siehe E-Mail von Christian Huch @ BM */
+   if (tmp_driv[0] != EOS)
       tmp_driv[0] = toupper(tmp_driv[0]);
-   }
-   
 # endif
-
 
    path_adjust_separator(tmp_path);
 
-   sprintf( d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-
-#endif   /* else (#if USE_OLD_BUILD_FILE) */
+   sprintf(d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+#endif
 }
 
 
@@ -8339,23 +8275,16 @@ const char  *suff)                            /* */
 *
 ******************************************|************************************/
 
-GLOBAL void build_image_filename(
-
-char        *d,                              /* */
-const char  *suff)                           /* */
+GLOBAL void build_image_filename(char *d, const char *suff)
 {
-
 #if USE_OLD_BUILD_FILE
    build_search_file(d, suff);
-   return;
 #else
-   char     tmp_path2[MYFILE_PATH_LEN + 1];  /* */
-
+   char tmp_path2[MYFILE_PATH_LEN + 1];
 
    fsplit(d, tmp_driv, tmp_path, tmp_name, tmp_suff);
-
+   
 # ifndef __MACOS__
-
    if (tmp_driv[0] == EOS)
    {
       /* In Fall 1, 2 und 4 wird jeweils das Laufwerk des Infiles benutzt */
@@ -8378,58 +8307,46 @@ const char  *suff)                           /* */
 
    /* Die Endung wird in jedem Fall angepasst */
    if (tmp_suff[0] == EOS)
-   {
       strcpy(tmp_suff, suff);
-   }
-
-# else   /* __MACOS__ */                  /* MO: nochmal leicht ueberarbeitet */
-                                          /* -dh-: Martin, ggf. noch anpassen!!! */
-                                          /* Martin Osieka, 18.04.1996 */
-                                          /* Kein Laufwerk? Dann Laufwerk von <infile> */
+# else   /* __MACOS__ */
+   /* MO: nochmal leicht ueberarbeitet */
+   /* -dh-: Martin, ggf. noch anpassen!!! */
+   /* Martin Osieka, 18.04.1996 */
+   /* Kein Laufwerk? Dann Laufwerk von <infile> */
    if (tmp_driv[0] == EOS)
    {
       strcpy( tmp_driv, outfile.driv);
    }
-   
-                                          /* Relativer Pfad? Dann Pfad von <infile> davor */
+   /* Relativer Pfad? Dann Pfad von <infile> davor */
    if (infile.path[0])
    {
-      if ( (tmp_path[0] == ':') && strcmp(tmp_path, outfile.path) )
-      {                                   /* DOS: != '\\' */
+      if ((tmp_path[0] == ':') && strcmp(tmp_path, outfile.path))
+      {
          strcpy(tmp_path2, outfile.path);
          strcat(tmp_path2, &tmp_path[1]);
-         strcpy(tmp_path,  tmp_path2);
-      }
-      else if (tmp_path[0] == EOS)
+         strcpy(tmp_path, tmp_path2);
+      } else if (tmp_path[0] == EOS)
       {
          strcpy(tmp_path, outfile.path);
       }
    }
 
    if (tmp_suff[0] == EOS)
-   {
       strcpy(tmp_suff, suff);
-   }
-   
-# endif   /* __MACOS__ */
+# endif /* __MACOS__ */
 
 
 # ifdef __TOS__
-                                          /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
-                                          /* Siehe E-Mail von Christian Huch @ BM */
-   if (tmp_driv[0] != EOS)                /*r6pl4*/
-   {
+   /* Laufwerksbuchstabe sollte wegen Freedom gross sein */
+   /* Siehe E-Mail von Christian Huch @ BM */
+   if (tmp_driv[0] != EOS)
       tmp_driv[0] = toupper(tmp_driv[0]);
-   }
-   
 # endif
-
 
    path_adjust_separator(tmp_path);
 
    sprintf( d, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-
-#endif  /* else (#if USE_OLD_BUILD_FILE) */
+#endif
 }
 
 
