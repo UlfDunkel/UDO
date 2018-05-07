@@ -486,8 +486,6 @@ LOCAL UDOCHARSET const udocharset[] =                 /* list of encoding mnemon
    
    { "next",                CODE_NEXT     },
    { "nextstep",            CODE_NEXT     },
-   
-   {"", -1}                              /* list terminator */
 };
 
 
@@ -3912,20 +3910,20 @@ LOCAL void c_fussy(void)
 LOCAL void c_code_source(void)
 {
    char s[256];
-   int    i = 0;   /* counter for udocharset[] */
+   size_t i;
 
-   if (token[1][0] == EOS)                /* this command needs a parameter */
+   if (token[1][0] == EOS)
    {
       error_missing_parameter("!code_source");
       return;
    }
 
-   tokcpy2(s, 256);
+   tokcpy2(s, sizeof(s));
    
    delete_once(s, "[");
-   delete_once(s, "]");
+   delete_last(s, "]");
 
-   while (udocharset[i].magic[0] != EOS)
+   for (i = 0; i < ArraySize(udocharset); i++)
    {                                      /* compare whole string to avoid conflicts */
                                           /*  with e.g. "l1" and "l10" */
       if (my_stricmp(s, udocharset[i].magic) == 0)
@@ -3933,8 +3931,6 @@ LOCAL void c_code_source(void)
          iEncodingSource = udocharset[i].codepage;
          return;
       }
-      
-      i++;
    }
 
    error_no_charset(s);
@@ -3959,8 +3955,8 @@ LOCAL void c_code_source(void)
 
 LOCAL void c_code_target(void)
 {
-   char   s[256];  /* */
-   int    i = 0;   /* counter for udocharset[] */
+   char   s[256];
+   size_t i;
 
    if (token[1][0] == EOS)                /* this command needs a parameter */
    {
@@ -3968,12 +3964,12 @@ LOCAL void c_code_target(void)
       return;
    }
 
-   tokcpy2(s, 256);
+   tokcpy2(s, sizeof(s));
 
    delete_once(s, "[");
-   delete_once(s, "]");
+   delete_last(s, "]");
 
-   while (udocharset[i].magic[0] != EOS)
+   for (i = 0; i < ArraySize(udocharset); i++)
    {                                      /* compare whole string to avoid conflicts */
                                           /*  with e.g. "l1" and "l10" */
       if (my_stricmp(s, udocharset[i].magic) == 0)
@@ -3983,8 +3979,6 @@ LOCAL void c_code_target(void)
          init_lang();                     /* recode LANG */
          return;
       }
-      
-      i++;
    }
 
    error_no_charset(s);
