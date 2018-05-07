@@ -12264,6 +12264,33 @@ LOCAL NOINLINE void show_udo_intro(void)
 }
 
 
+static _BOOL udo_cleanup(void)
+{
+   if (bLogopened)
+      fclose(fLogfile);
+   if (bHypopened)
+      fclose(fHypfile);
+   if (bIdxopened)
+      fclose(fIdxfile);
+   if (bTreeopened)
+      fclose(fTreefile);
+   if (bUPRopened)
+      fclose(fUPRfile);
+   if (bOutOpened && outfile.file != NULL)
+   {
+      fclose(outfile.file);
+      outfile.file = NULL;
+      bOutOpened = FALSE;
+   }
+   while (pop_file_stack())
+      ;
+   exit_modules();
+   free_token_output_buffer();
+   exit_udo_vars();
+   return FALSE;
+}
+
+
 
 
 
@@ -12396,7 +12423,7 @@ GLOBAL _BOOL udo(char *datei)
       if (file == NULL)
       {
          error_open_infile(tmp);
-         return FALSE;
+         return udo_cleanup();
       }
    }
    fclose(file);
@@ -12414,7 +12441,7 @@ GLOBAL _BOOL udo(char *datei)
             fLogfile = stderr;
             warning_err_logfile();
             bErrorDetected = TRUE;
-            return FALSE;
+            return udo_cleanup();
          }
          bLogopened = TRUE;
          save_upr_entry_outfile(file_lookup(sLogfull));
@@ -12433,7 +12460,7 @@ GLOBAL _BOOL udo(char *datei)
                fTreefile = stderr;
                warning_err_treefile();
                bErrorDetected = TRUE;
-               return FALSE;
+               return udo_cleanup();
             }
             bTreeopened = TRUE;
             bTreeSaved = TRUE;
@@ -12454,7 +12481,7 @@ GLOBAL _BOOL udo(char *datei)
                fUPRfile = stderr;
                warning_err_uprfile();
                bErrorDetected = TRUE;
-               return FALSE;
+               return udo_cleanup();
             }
             bUPRopened = TRUE;
             bUPRSaved = TRUE;
@@ -12476,14 +12503,7 @@ GLOBAL _BOOL udo(char *datei)
          {
          	error_message(_("source and destination file are equal: <%s>"), outfile.full);
             bErrorDetected = TRUE;
-            
-            if (bLogopened)   fclose(fLogfile);
-            if (bHypopened)   fclose(fHypfile);
-            if (bIdxopened)   fclose(fIdxfile);
-            if (bTreeopened)  fclose(fTreefile);
-            if (bUPRopened)   fclose(fUPRfile);
-            
-            return FALSE;
+            return udo_cleanup();
          }
 
          outfile.file = myFwopen(outfile.full, desttype);
@@ -12492,14 +12512,7 @@ GLOBAL _BOOL udo(char *datei)
             error_open_outfile(outfile.full);
             warning_err_destination();
             bErrorDetected = TRUE;
-            
-            if (bLogopened)    fclose(fLogfile);
-            if (bHypopened)    fclose(fHypfile);
-            if (bIdxopened)    fclose(fIdxfile);
-            if (bTreeopened)   fclose(fTreefile);
-            if (bUPRopened)    fclose(fUPRfile);
-            
-            return FALSE;
+            return udo_cleanup();
          }
          bOutOpened = TRUE;
          save_upr_entry_outfile(outfile.full);
@@ -12825,30 +12838,16 @@ GLOBAL _BOOL udo(char *datei)
 
    }
 
-   if (bLogopened  && fLogfile     != NULL)   fclose(fLogfile);
-   if (bHypopened  && fHypfile     != NULL)   fclose(fHypfile);
-   if (bIdxopened  && fIdxfile     != NULL)   fclose(fIdxfile);
-   if (bTreeopened && fTreefile    != NULL)   fclose(fTreefile);
-   if (bUPRopened  && fUPRfile     != NULL)   fclose(fUPRfile);
-   if (bOutOpened  && outfile.file != NULL)
-   {
-      fclose(outfile.file);
-      outfile.file = NULL;
-      bOutOpened  = FALSE;
-   }
-
    print_results();
    
-   exit_modules();
-   free_token_output_buffer();
-
+   	
    /* Hyphenfile sortieren und Dupes entfernen */
    if (!bNoHypfile && bDocSortHyphenFile)
    {
       sort_hypfile(file_lookup(sHypfull));
    }
 
-   init_udo_vars();
+   udo_cleanup();
 
    return ret;
 }
@@ -13482,6 +13481,11 @@ LOCAL void exit_modules(void)
    exit_module_udo();
 }
 
+
+void exit_udo_vars(void)
+{
+   exit_module_files();
+}
 
 
 

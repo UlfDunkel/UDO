@@ -1165,6 +1165,8 @@ int main(int argc, const char **argv)
       }
    }
 
+   exit_udo_vars();
+	
 #ifdef ENABLE_NLS
    xs_locale_exit();
 #endif

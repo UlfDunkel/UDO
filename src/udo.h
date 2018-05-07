@@ -509,6 +509,7 @@ GLOBAL void build_image_filename(char *d, const char *suff);
 GLOBAL _BOOL udo (char *datei);
    /* ? */
 GLOBAL void init_udo_vars(void);
+void exit_udo_vars(void);
 
 
 #endif  /* __UDO_H__ */
