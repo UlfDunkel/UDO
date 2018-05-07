@@ -137,6 +137,18 @@ LOCAL void footnote2ascii(char *s)
 *
 ******************************************|************************************/
 
+/*
+ * FIXME: should be rewritten because of several bugs:
+ * - the routine limits the length of the footnote
+ * - the buffer for the footnote is not checked for overflow
+ * - end of footnote is searched for by looking
+ *   for the next style-magic, which is not necessarily
+ *   the end of the footnote (might as well be start of another style)
+ * - if a footnote does not end on the same line,
+ *   only the text on the first line will be replaced,
+ * - if UDO gets interrupted, the temporary footnote files
+ *   will not be deleted.
+ */
 LOCAL void footnote2array(char *s)
 {
    char *ptr = s;                         /* ^ to string */
@@ -157,12 +169,16 @@ LOCAL void footnote2array(char *s)
          here += STYLELEN;                /* skip footnote token */
          i = 0;
             
-         while (*here != C_STYLE_MAGIC)   /* copy footnote string */
-            buf[i++] = *here++;
-         
-         buf[--i] = 0;                    /* close C string! */
+         while (*here && *here != '\033')   /* copy footnote string */
+         {
+         	if (i < (int)sizeof(buf) - 1)
+         	   buf[i++] = *here;
+            here++;
+         }
+         buf[i] = 0;                      /* close C string! */
 
-         sprintf(fnote, "(%ld)", ++footnote_cnt);
+         ++footnote_cnt;
+         sprintf(fnote, "(%ld)", footnote_cnt);
          
                                           /* remove string from original line */
          replace_once(s, FOOT_ON, fnote);
@@ -627,9 +643,13 @@ GLOBAL void c_internal_styles(char *s)
 #if 0
       delete_all(s, VERB_ON);
       delete_all(s, VERB_OFF);
-      footnote2ascii(s);
 #endif
+#if 1
+      footnote2ascii(s);
+      (void) footnote2array;
+#else
       footnote2array(s);
+#endif
 
       del_internal_styles(s);
       break;
