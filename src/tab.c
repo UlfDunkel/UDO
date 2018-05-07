@@ -59,6 +59,8 @@
 *    ggs Apr 21: convert_table_caption(): Use MAXTABCAPTION for the string define
 *    fd  May 21: new: label* | l*  (#90)
 *  2013:
+*    tho Jun 21: dynamically allocate tab_caption
+*  2013:
 *    fd  Oct 23: HTML output now supports HTML5
 *  2014:
 *    fd  Jun 25: table_output_html() must not output multiple CSS class definitions in HTML5
@@ -109,7 +111,6 @@
 *
 ******************************************|************************************/
 
-#define MAXTABCAPTION    1024             /* max. Laenge einer Ueberschrift */
 #define MAX_CELLS_LEN    4096             /* max. Zeichenanzahl einer Zelle */
 
 #define MAX_TAB_H         700             /* max. Hoehe einer Tabelle */
@@ -126,7 +127,7 @@
 LOCAL int       tab_counter;              /* Tabellen-Zaehler                     */
 LOCAL int       tab_w, tab_h;             /* Spalten und Zeilen           */
                                           /* Tabellen-Ueberschrift        */
-LOCAL char      tab_caption[MAXTABCAPTION + 1];
+LOCAL char      *tab_caption;
 LOCAL _BOOL   tab_caption_visible;      /* Im Tabellenverzeichnis?      */
                                           /* Zeiger auf Feldtext             */
 LOCAL char     *tab_cell[MAX_TAB_H+1][MAX_TAB_ROWS+1];
@@ -154,31 +155,6 @@ LOCAL int       addition_col_offset;
 
 /*******************************************************************************
 *
-*     LOCAL PROTOTYPES
-*
-******************************************|************************************/
-
-LOCAL void   cells_reset(void);
-LOCAL void   convert_table_caption(const _BOOL visible);
-LOCAL void   table_output_lyx(void);
-LOCAL void   table_output_ipf(void);
-LOCAL void   table_output_win(void);
-LOCAL void   table_output_rtf(void);
-LOCAL void   table_output_html(void);
-LOCAL void   table_output_tex(void);
-LOCAL void   table_output_general(void);
-
-
-
-
-
-
-
-
-
-
-/*******************************************************************************
-*
 *     FUNCTIONS
 *
 ******************************************|************************************/
@@ -195,7 +171,7 @@ LOCAL void   table_output_general(void);
 
 LOCAL void cells_reset(void)
 {
-   register int   i;  /* counter */
+   register int   i;
 
    for (i = 0; i <= cells_counter; i++)
       cells[i][0] = EOS;
@@ -219,9 +195,7 @@ LOCAL void cells_reset(void)
 
 GLOBAL void table_reset(void)
 {
-   int   x,  /* */
-         y;  /* */
-
+   int   x, y;
 
    tab_w = -1;
    tab_h = -1;
@@ -254,10 +228,14 @@ GLOBAL void table_reset(void)
    for (x = 0; x < MAX_TAB_ROWS; x++)
    {
       tab_cell_w[x] = 0;
-      tab_vert[x]   = 0;
+      tab_vert[x] = 0;
    }
 
    tab_toplines = 0;
+
+   free(tab_caption);
+   tab_caption = NULL;
+   tab_caption_visible = FALSE;
 }
 
 
@@ -274,23 +252,19 @@ GLOBAL void table_reset(void)
 *
 ******************************************|************************************/
 
-LOCAL void convert_table_caption(
-
-const _BOOL   visible)  /* */
+LOCAL void convert_table_caption(const _BOOL visible)
 {
-   char         n[MAXTABCAPTION +1];   /* */
+   char n[LINELEN + 1];
 
+   tokcpy2(n, sizeof(n));
 
-   tokcpy2(n, MAXTABCAPTION);
+   convert_tilde(n);
+   delete_all_divis(n);
+   replace_udo_quotes(n);
+   replace_placeholders(n);
 
-   tab_caption[0]= EOS;
-   strncat(tab_caption, n, MAXTABCAPTION);
-
-   convert_tilde(tab_caption);
-   delete_all_divis(tab_caption);
-   replace_udo_quotes(tab_caption);
-   replace_placeholders(tab_caption);
-
+   free(tab_caption);
+   tab_caption = strdup(n);
    tab_caption_visible = visible;
 }
 
@@ -346,34 +320,25 @@ GLOBAL void c_table_caption_nonr(void)
 *
 ******************************************|************************************/
 
-GLOBAL void table_get_header(
-
-char       *s)        /* */
+GLOBAL void table_get_header(char *s)
 {
-   size_t   i;        /* */
-   int      column,   /* */
-            t;        /* */
+   size_t   i;
+   int      column, t;
    char     n[128];   /* contains [|l|l], etc. */
-
-
+   
    str2tok(s);
-
+   
    if (token_counter > 0)
-      um_strcpy(n, token[1], 128, "table_get_header[1]");
-
+      um_strcpy(n, token[1], 128, CMD_BEGIN_TABLE);
+   
    tab_toplines = 0;
-
    if (token_counter > 1 && !no_table_lines)
    {
       for (t = 2; t < token_counter; t++)
-      {
          if (strcmp(token[2], "!hline") == 0)
-         {
             tab_toplines++;
-         }
-      }
    }
-
+   
    token_reset();
 
    qdelete_all(n, "[", 1);
@@ -383,7 +348,6 @@ char       *s)        /* */
       return;
 
    column = 0;
-
    for (i = 0; i < strlen(n); i++)
    {
       if (n[i] == '|' && !no_table_lines)
@@ -422,20 +386,17 @@ char       *s)        /* */
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL table_add_line(
-
-char       *s)    /* */
+GLOBAL _BOOL table_add_line(char *s)
 {
-   char    *ptr;  /* */
-   int      i,    /* */
-            x;    /* */
+   char    *ptr;
+   int      i, x;
    size_t   sl,   /* strlen */
             tl;   /* toklen */
 
-
    del_whitespaces(s);
 
-   if (s[0] == EOS || s[0] == '#')        /* Leerzeilen und Kommentare nicht bearbeiten */
+   /* Leerzeilen und Kommentare nicht bearbeiten */
+   if (s[0] == EOS || s[0] == '#')
       return TRUE;
 
    if (tab_h >= MAX_TAB_H)
@@ -444,7 +405,7 @@ char       *s)    /* */
       s[0] = EOS;
       return FALSE;
    }
-
+   
    if (    (strncmp(s, "!label*", 7) == 0) 
         || (strncmp(s, "!label",  6) == 0)
         || (strncmp(s, "!l* ",    4) == 0) 
@@ -474,23 +435,27 @@ char       *s)    /* */
       return TRUE;
    }
 
-   cells_reset();                         /* Alte Zellen leeren */
+   /* Alte Zellen leeren */
+   cells_reset();
 
-   if (strcmp(s, "!hline") == 0)          /* Zeile enthaelt nur !hline */
+   /* Zeile enthaelt nur !hline */
+   if (strcmp(s, "!hline") == 0)
    {
       if (!no_table_lines)
          tab_hori[tab_h]++;
-
       return TRUE;
    }
 
-   replace_char(s, '\t', ' ');            /* Nun aus der Zeile die Felder auslesen */
+   /* Nun aus der Zeile die Felder auslesen */
+   replace_char(s, '\t', ' ');
+
+   /* FIXME: should actually be c_divis(), with appropiate str2silben() when writing the cell contents */
    qdelete_all(s, "!-", 2);
 
    recode_udo(s);                         /* these have never ever been handled in UDO tables before! */
 
    if (no_umlaute)
-      recode_chrtab(s,CHRTAB_ASCII);
+      recode_chrtab(s, CHRTAB_ASCII);
 
    replace_macros(s);
 
@@ -608,8 +573,7 @@ char       *s)    /* */
 
 LOCAL void table_output_lyx(void)
 {
-   int       y,              /* */
-             x,              /* */
+   int   y, x,              /* */
              i;              /* */
    _BOOL   bl,             /* Flags fuer Linien */
              bt,             /* */
@@ -784,7 +748,7 @@ _BOOL      inside_center,  /* */
       }
    }
 
-   if (tab_caption[0] != EOS)
+   if (tab_caption != NULL)
    {
       outln("\\layout Standard");
       outln("\\align center");
@@ -932,32 +896,27 @@ LOCAL void table_output_rtf(void)
    outln("\\trowd\\pard");
    outln("}\\par\\pard");
 
-   if (tab_caption[0] != EOS)
+   if (tab_caption != NULL)
    {
-      c_rtf_quotes(tab_caption);          /* r6pl7 */
+      c_rtf_quotes(tab_caption);
       out("{\\keep\\trowd");
-
       if (indent > 0)
          voutlnf("\\cellx%d", indent);
-
       outln(cx);                          /* Noch von oben definiert */
       out("\\intbl");
 
       if (indent > 0)
          out("\\ql \\cell");
 
-      if (tab_caption_visible)            /* Changed in r6.3pl3 [NHz] */
+      if (tab_caption_visible)
       {
          sprintf(f, "\\qc %s {\\field{\\*\\fldinst { SEQ Tabelle \\\\* ARABIC }}{\\fldrslt %d}}: %s\\cell\\row\\pard",
-            lang.table,
-            tab_counter,
-            tab_caption);
-      }                                   /* added closing bracket in order to get this compiled in MXVC++ r6.3.4 [vj] */
+            lang.table, tab_counter, tab_caption);
+      }
       else
       {
          sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
       }
-
       outln(f);
       outln("\\trowd\\pard");
       outln("}\\par\\pard");
@@ -980,20 +939,13 @@ LOCAL void table_output_rtf(void)
 
 LOCAL void table_output_win(void)
 {
-   int    y,        /* */
-          x,        /* */
-          i,        /* */
-          cellx,    /* */
-          indent,   /* */
-          charw;    /* */
-   char   f[512],   /* */
-          cx[512],  /* */
-          ci[512];  /* */
-
+   int   y, x, i, cellx, indent, charw;
+   char  f[512],
+         cx[512],
+         ci[512];
 
    indent = strlen_indent();
-   cellx  = 0;
-
+   cellx = 0;
    outln("{\\keep\\trowd");
 
    charw = iDocCharwidth;
@@ -1015,13 +967,11 @@ LOCAL void table_output_win(void)
    for (y = 0; y <= tab_h; y++)
    {
       out("\\intbl");
-
       if (indent > 0)
          out("\\ql \\cell");
-
       if (tab_toplines > 0)
          out("{\\box");
-
+      
       for (x = 0; x <= tab_w; x++)
       {
          switch (tab_just[x])
@@ -1029,13 +979,12 @@ LOCAL void table_output_win(void)
          case TAB_CENTER:
             out("\\qc ");
             break;
-
          case TAB_RIGHT:
             out("\\qr ");
             break;
-
          default:
             out("\\ql ");
+            break;
          }
 
          if (tab_cell[y][x] != NULL)
@@ -1053,7 +1002,6 @@ LOCAL void table_output_win(void)
             replace_placeholders(f);
             out(f);
          }
-
          out("\\cell");
       }
 
@@ -1082,31 +1030,25 @@ LOCAL void table_output_win(void)
    outln("\\trowd\\pard");
    outln("}\\par\\pard");
 
-   if (tab_caption[0] != EOS)
+   if (tab_caption != NULL)
    {
       out("{\\keep\\trowd");
-
       if (indent > 0)
          out(ci);                         /* Noch von oben definiert */
-
       outln(cx);                          /* Noch von oben definiert */
       out("\\intbl");
-
       if (indent > 0)
          out("\\ql \\cell");
 
       if (tab_caption_visible)
       {
          sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard",
-            lang.table,
-            tab_counter,
-            tab_caption);
+            lang.table, tab_counter, tab_caption);
       }
       else
       {
          sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
       }
-
       outln(f);
       outln("\\trowd\\pard");
       outln("}\\par\\pard");
@@ -1122,44 +1064,35 @@ LOCAL void table_output_win(void)
 *  test_for_addition():
 *     ??? (description missing)
 *
-*  Note:
-*     not adjusted for HTML5 output
-*
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void test_for_addition(
-
-char     *cell)           /* */
+LOCAL void test_for_addition(char *cell)
 {
-   char  *found2 = NULL,  /* */
-         *tok    = NULL;  /* */
-size_t    clen;           /* */
+   char  *found2,
+         *tok;
+   size_t clen;
 
-
-   if (cell[0] == '[')                    /* remove leading [ */
+   /* remove leading [ */
+   if (cell[0] == '[')
       cell = &cell[1];
-
-   clen = strlen(cell);                   /* get length of cell */
-
-   if (clen == 0)                         /* empty string? -> done */
+   clen = strlen(cell);
+   if (clen == 0)
       return;
 
-   if (cell[clen - 1] == ']')             /* remove tailing ] */
+   /* remove tailing ] */
+   if (cell[clen - 1] == ']')
       cell[clen - 1] = EOS;
-
-   if (cell[0] == 0)                      /* empty string? -> done */
+   if (cell[0] == 0)
       return;
 
    /* Now we have to see, if there are entries */
-   tok = strtok(cell, " ,\t");            /* whitespace, colon, or tab are seperators */
-
+   tok = strtok(cell, " ,\t");            /* whitespace, colon, or tab are separators */
    while (tok)
    {
       found2 = strstr(tok, "COLS=");
-
       if (found2 != NULL)
       {
          um_strcat(addition, " colspan=\"", TAB_ADDITION_LEN, "test_for_addition[1]");
@@ -1169,7 +1102,6 @@ size_t    clen;           /* */
       }
 
       found2 = strstr(tok, "BGC=");
-
       if (found2 != NULL)
       {
          um_strcat(addition, " bgcolor=\"", TAB_ADDITION_LEN, "test_for_addition[4]");
@@ -1178,7 +1110,6 @@ size_t    clen;           /* */
       }
 
       found2 = strstr(tok, "HA=");
-
       if (found2 != NULL)
       {
          um_strcat(addition, " align=\"", TAB_ADDITION_LEN, "test_for_addition[7]");
@@ -1188,7 +1119,6 @@ size_t    clen;           /* */
       }
 
       found2 = strstr(tok, "VA=");
-
       if (found2 != NULL)
       {
          um_strcat(addition, " valign=\"", TAB_ADDITION_LEN, "test_for_addition[10]");
@@ -1220,7 +1150,7 @@ LOCAL void table_output_html(void)
    int       y,
              x,
              i;
-   char      f[LINELEN],                  /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
+   char      f[LINELEN],
              css[LINELEN],                /* buffer for CSS information */
              alignOn[64];
    char      token_buffer[LINELEN];       /* v6.5.3[vj]: New buffer needed for table extension */
@@ -1303,26 +1233,30 @@ LOCAL void table_output_html(void)
       outln("<table border=\"0\">");
    }
 
-   if (tab_caption[0] != EOS)
+   if (tab_caption != NULL)
    {
       if (tab_caption_visible)
       {
+#if 0
          if (html_doctype == HTML5)
          {
             voutlnf("<caption class=\"UDO_caption_valign_bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
          }
          else
+#endif
          {
             voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
          }
       }
       else
       {
+#if 0
          if (html_doctype == HTML5)
          {
             voutlnf("<caption class=\"UDO_caption_valign_bottom\">%s</caption>", tab_caption);
          }
          else
+#endif
          {
             voutlnf("<caption align=\"bottom\">%s</caption>", tab_caption);
          }
@@ -1332,42 +1266,35 @@ LOCAL void table_output_html(void)
    for (y = 0; y <= tab_h; y++)
    {
       outln("<tr>");
-
       for (x = 0; x <= tab_w; x++)
-      {                                   /* New in r6pl16 [NHz] */
-         char    *found = NULL;  /* */
-         size_t   tokposition;   /* */
-
+      {
+         char *found = NULL;
+         size_t tokposition;
 
          /* addition takes the extra options per cell, so it needs to be cleaned */
-
          addition[0] = EOS;
-
-
+         
          /* This is the buffer where we keep the per cell format information */
-
          token_buffer[0] = EOS;
 
-
          /* This _BOOL flags are possibly set in test_for_addition */
-
-         addition_has_align  = FALSE;
+         addition_has_align = FALSE;
          addition_has_valign = FALSE;
          addition_col_offset = 0;
 
          /* some tables have empty cells, so always check befor using tab_cell entries */
-
          if (tab_cell[y][x] != NULL)
             found = strstr(tab_cell[y][x], "!?");
 
          if (found != NULL)
          {
             tokposition = strcspn(tab_cell[y][x], "!");
-            um_strncpy(token_buffer, tab_cell[y][x], tokposition, MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferueberlauf moeglich? Wie gross kann hier token wirklich sein? */
+            /* <???> Pufferueberlauf moeglich? Wie gross kann hier token wirklich sein? */
+            um_strncpy(token_buffer, tab_cell[y][x], tokposition, MAX_TOKEN_LEN+1, "table_output_html[3]");
             token_buffer[tokposition] = EOS;
 
-                                          /* Delete Whitespaces before checking for additions */
-            del_whitespaces (token_buffer);
+            /* Delete Whitespaces before checking for additions */
+            del_whitespaces(token_buffer);
             test_for_addition(token_buffer);
 
             tab_cell[y][x] = found + 2;
@@ -1540,19 +1467,12 @@ LOCAL void table_output_tex(void)
       strcpy(alignOff, "\\end{flushright}");
    }
 
-#if 1
-   if (tab_caption[0] != EOS)             /* PL7 */
-   {
+   if (tab_caption != NULL)
       outln("\\begin{table}[htb]");
-   }
-#else
-   outln("\\begin{table}[htb]");
-#endif
-
+   
    outln(alignOn);
 
    out("\\begin{tabular}{");
-
    for (x = 0; x <= tab_w; x++)
    {
       if (tab_vert[x] > 0)
@@ -1560,19 +1480,17 @@ LOCAL void table_output_tex(void)
          for (i = 1; i <= tab_vert[x]; i++)
             out("|");
       }
-
       switch(tab_just[x])
       {
       case TAB_CENTER:
          out("c");
          break;
-
       case TAB_RIGHT:
          out("r");
          break;
-
       default:
          out("l");
+         break;
       }
    }
 
@@ -1581,7 +1499,6 @@ LOCAL void table_output_tex(void)
       for (i = 1; i <= tab_vert[tab_w + 1]; i++)
          out("|");
    }
-
    out("}");
 
    if (tab_toplines > 0)
@@ -1589,7 +1506,6 @@ LOCAL void table_output_tex(void)
       for (y = 1; y <= tab_toplines; y++)
          out(" \\hline");
    }
-
    outln("");
 
    for (y = 0; y <= tab_h; y++)
@@ -1644,21 +1560,14 @@ LOCAL void table_output_tex(void)
 
    outln("\\end{tabular}");
 
-   if (tab_caption[0] != EOS)
+   if (tab_caption != NULL)
       voutlnf("\\caption{%s}", tab_caption);
 
    outln(alignOff);
 
-#if 1
-   if (tab_caption[0] != EOS)             /* PL7 */
-   {
+   if (tab_caption != NULL)
       outln("\\end{table}");
-   }
-#else
-   outln("\\end{table}");
-#endif
-
-}  /* table_output_tex */
+}
 
 
 
@@ -2315,7 +2224,7 @@ LOCAL void table_output_general(void)
    if (tosrc)
       outln(sSrcRemOff);
 
-   if (tab_caption[0] != EOS)
+   if (tab_caption != NULL)
    {
       if (tortf)
          outln(rtf_par);
@@ -2437,8 +2346,6 @@ GLOBAL void table_output(void)
    }
    
    table_reset();
-   tab_caption[0]      = EOS;
-   tab_caption_visible = FALSE;
    token_reset();
    check_styleflags();
 }
@@ -2520,6 +2427,6 @@ GLOBAL void set_table_alignment(void)
 GLOBAL void init_module_tab(void)
 {
    tab_counter = 0;
-   tab_caption[0] = EOS;
+   tab_caption = NULL;
    tab_caption_visible = FALSE;
 }
