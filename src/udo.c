@@ -5230,6 +5230,31 @@ LOCAL void c_image_nonr(void)
 }
 
 
+/*******************************************************************************
+*
+*  check_quotes():
+*     check wether any quotes are left open
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void check_quotes(void)
+{
+   if (b1stQuote)
+   {
+      error_message(_("odd number of \"\""));
+      b1stQuote = FALSE;
+   }
+   if (b1stApost)
+   {
+      error_message(_("odd number of ''"));
+      b1stApost = FALSE;
+   }
+}
+
+
 
 
 
@@ -5263,9 +5288,7 @@ GLOBAL void c_include(void)
          um_strcpy(name, token[1], sizeof(name), "c_include[1]");
       }
 
-      b1stQuote = FALSE;
-      b1stApost = FALSE;
-
+      check_quotes();
       token_reset();
       replace_macros(name);
       
@@ -5815,17 +5838,7 @@ LOCAL void check_parwidth(void)
 
    if (zDocParwidth < 20)
       zDocParwidth = MAXZEILE;
-
-   switch (desttype)
-   {
-   case TOTVH:
-      zDocParwidth = MAXZEILE;
-      break;
-
-   case TOMAN:
-      zDocParwidth = MAXZEILE;
-   }
-
+   
    if (zDocParwidth > tomaxlen)
       zDocParwidth = tomaxlen;
 }
@@ -5858,49 +5871,32 @@ LOCAL void check_parwidth(void)
 
 LOCAL _BOOL malloc_token_output_buffer(void)
 {
-   const size_t   bs[6] =  /* */
-      {
-      32768L, 
-      16384L, 
-      8192L, 
-      4096L, 
-      2048L
-      };
-   const int      ml[6] =  /* */
-      {
-      3200,   
-      1600,   
-      800,   
-      400,   
-      200
-      };
-   int            i;       /* counter */
+   static size_t const bs[6] = { 32768U, 16384U, 8192U, 4096U, 2048U };
+   static int const ml[6] =    {   3200,   1600,   800,   400,   200 };
+   int i;
    
-
    if (format_uses_output_buffer && use_output_buffer)
    {
       for (i = 0; i < 6; i++)
       {
          tobuffer = (char *)malloc(bs[i]);
-         
          if (tobuffer != NULL)
          {
             tomaxlen = ml[i];
             check_parwidth();
-            
             return TRUE;
          }
       }
    }
-
-   tobuffer = (char *)malloc(2048L);
+   
+   tobuffer = (char *)malloc(2048);
 
    if (tobuffer == NULL)
    {
       return FALSE;
    }
 
-   tomaxlen = 256;
+   tomaxlen = 200;
    check_parwidth();
 
    return TRUE;
@@ -5950,31 +5946,23 @@ LOCAL void free_token_output_buffer(void)
 
 LOCAL void insert_nl_token_buffer(void)
 {
-   char    *ptr,    /* */
-           *start;  /* */
-   size_t   pl;     /* */
+   char    *ptr,
+           *start;
+   size_t   pl;
    
-
    if (tobuffer[0] == EOS)
       return;
    
-
-   ptr   = tobuffer;
+   ptr = tobuffer;
    start = tobuffer;
-
    pl = strlen(ptr);
-
+   
    while (pl > zDocParwidth && ptr > start)
-   {   
+   {
       ptr += zDocParwidth;
-      
       while (ptr[0] != ' ' && ptr > start)
-      {
          ptr--;
-      }
-      
       ptr++;
-      
       strinsert(ptr, "\n");
       pl = strlen(ptr);
    }
@@ -6129,21 +6117,21 @@ GLOBAL void tokcat(char *s, size_t maxlen)
    register int   i;
    size_t         m = 0;        /* Laenge des bisherigen Strings mitzaehlen */
    
-   
    for (i = 1; i < token_counter; i++)
    {
-      m += strlen(token[i]);              /* add length of new token */
-      m += 2;                             /* add eventually included space + Nullbyte */
-
-      if (m < maxlen)                     /* new size is within buffer limit */
+      /* add length of new token, eventually included space + Nullbyte */
+      m += strlen(token[i]) + 2;
+      
+      /* new size is within buffer limit? */
+      if (m < maxlen)
       {
          strcat(s, token[i]);
-         
-         if (i < token_counter - 1)       /* add separating space character */
+         /* add separating space character */
+         if (i < token_counter - 1)
             strcat(s, " ");
       }
    }
-
+   
    /* buffer limit reached or exceeded? */
    if (m >= maxlen)
    {
@@ -6169,10 +6157,7 @@ GLOBAL void tokcat(char *s, size_t maxlen)
 *
 ******************************************|************************************/
 
-GLOBAL void tokcpy2(
-
-char    *s,       /* */
-size_t   maxlen)  /* maximum size of buffer in <s> */
+GLOBAL void tokcpy2(char *s, size_t maxlen)
 {
    s[0] = EOS;
    tokcat(s, maxlen);
@@ -6192,31 +6177,26 @@ size_t   maxlen)  /* maximum size of buffer in <s> */
 *
 ******************************************|************************************/
 
-LOCAL void output_hyphen_line(
-
-const char   *s)  /* ^ to the (too long) word */
+LOCAL void output_hyphen_line(const char *s)
 {
-                                          /* Erst oeffnen, wenn die Datei gebraucht wird */
+   /* Erst oeffnen, wenn die Datei gebraucht wird */
    if (!bNoHypfile && !bHypopened && !bHypfailed)
-   {   
+   {
       if (outfile.full[0] != EOS)
       {
-         if (sHypfull != 0)         
+         if (sHypfull != 0)
          {
             fHypfile = myFwopen(file_lookup(sHypfull), TOASC);
-            
             if (fHypfile == NULL)
             {
                fHypfile = stderr;
                bHypfailed = TRUE;
-               
                warning_err_hypfile();
-               
                bErrorDetected = TRUE;
             }
             
             bHypopened = TRUE;
-            
+            bHypSaved = TRUE;
             save_upr_entry_outfile(file_lookup(sHypfull));
          }
       }
@@ -6245,16 +6225,12 @@ const char   *s)  /* ^ to the (too long) word */
 *
 ******************************************|************************************/
 
-LOCAL void warning_short_line(
-
-const size_t   len,        /* */
-const char    *t)          /* the too long word */
+LOCAL void warning_short_line(const size_t len, const char *t)
 {
-   char        next[128],  /* */
-              *ptr;        /* */
-   size_t      i,          /* counter */
-               sl;         /* */
-   int         nr;         /* */
+   char        next[MAX_TOKEN_LEN + 1],
+              *ptr;
+   size_t      i, sl;
+   int         nr;
    _BOOL     flag;       /* */
    
 
@@ -11781,7 +11757,7 @@ LOCAL _BOOL pass2(const char *datei)
             if (zeile[0] != '#')
             {
                del_whitespaces(zeile);
-               
+
                if (no_umlaute)
                   recode_chrtab(zeile,CHRTAB_ASCII);
                
@@ -11814,21 +11790,8 @@ LOCAL _BOOL pass2(const char *datei)
       token_output(TRUE);
    }
 
-   if (!bNoLogfile)
-   {
-      if (b1stQuote)
-      {
-         error_message(_("odd number of \"\""));
-         b1stQuote = FALSE;
-      }
-      
-      if (b1stApost)
-      {
-         error_message(_("odd number of ''"));
-         b1stApost = FALSE;
-      }
-   }
-
+   check_quotes();
+   
    pop_file_stack();
 
    multitasking_interrupt();
