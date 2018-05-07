@@ -3728,6 +3728,7 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
 
             if (!found)
             {
+               warning_cannot_recode(idx, chr_codepage_name(iEncodingSource), chr_codepage_name(iEncodingTarget));
                sprintf(s_temp, "\\'%X", idx);
                ptr_quoted = s_temp;
             }
@@ -3742,6 +3743,12 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
                   found = TRUE;
                   break;
                }
+            }
+            if (!found && idx < 0x20)
+            {
+               warning_cannot_recode(idx, chr_codepage_name(iEncodingSource), chr_codepage_name(iEncodingTarget));
+               sprintf(s_temp, "\\'%X", idx);
+               ptr_quoted = s_temp;
             }
          }
          break;
@@ -3773,6 +3780,7 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
 
             if (!found)
             {
+               warning_cannot_recode(idx, chr_codepage_name(iEncodingSource), chr_codepage_name(iEncodingTarget));
                sprintf(s_temp, "\\%03o", idx);
                ptr_quoted = s_temp;
             }
@@ -3809,6 +3817,7 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
 
             if (!found)
             {
+               warning_cannot_recode(idx, chr_codepage_name(iEncodingSource), chr_codepage_name(iEncodingTarget));
                sprintf(s_temp, "\\'%X", idx);
                ptr_quoted = s_temp;
             }
@@ -3823,6 +3832,12 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
                   found = TRUE;
                   break;
                }
+            }
+            if (!found && idx < 0x20)
+            {
+               warning_cannot_recode(idx, chr_codepage_name(iEncodingSource), chr_codepage_name(iEncodingTarget));
+               sprintf(s_temp, "\\'%X", idx);
+               ptr_quoted = s_temp;
             }
          }
          break;
