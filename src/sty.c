@@ -94,6 +94,8 @@
 
 LOCAL char VERB_ON[8];
 LOCAL char VERB_OFF[8];
+LOCAL char html_time_insert[1024];
+LOCAL char html_time_delete[1024];
 
 
 
@@ -491,20 +493,13 @@ GLOBAL void c_win_styles(char *s)
 
 GLOBAL void c_internal_styles(char *s)
 {
-   char time_insert[1024];
-   char time_delete[1024];
-   char   this_time[40],      /* */
-          cite[1024],         /* */
-          change_date[26];    /* */
-   long   lang_insert,        /* */
-          lang_delete;        /* */
    char *ptr;
    char *tex_verb_on;
    char *tex_verb_off;
    
    if ((ptr = strstr(s, ESC_STYLE_MAGIC)) == NULL)
       return;
-
+   
    if (no_effects)
       del_internal_styles(s);
 
@@ -754,69 +749,9 @@ GLOBAL void c_internal_styles(char *s)
       
       footnote2ascii(s);
 
-      change_date[0] = EOS;               /* New in V6.5.9 [NHz] */
-
-      if (change_date[0] == EOS)
-      {
-         char     zone[20] = "+00:00";  /* */
-         time_t   uhrzeit;              /* */
-         int      hour_local,           /* */
-                  min_local,            /* */
-                  mday_local,           /* */
-                  min_utc,              /* */
-                  hour_utc,             /* */
-                  mday_utc;             /* */
-         int      hours,                /* */
-                  minutes;              /* */
-                  
-
-         if (strcmp(html_header_date_zone, "") > 0)
-            um_strcpy(zone, html_header_date_zone, 9, "output_html_meta1");
-         else
-         {
-            time(&uhrzeit);
-            
-            mday_local = localtime(&uhrzeit)->tm_mday;
-            mday_utc   = gmtime(&uhrzeit)->tm_mday;
-            hour_local = localtime(&uhrzeit)->tm_hour;
-            hour_utc   = gmtime(&uhrzeit)->tm_hour;
-            min_local  = localtime(&uhrzeit)->tm_min;
-            min_utc    = gmtime(&uhrzeit)->tm_min;
-
-            if (min_local < min_utc)      /* special for countries with "broken times" (e.g. Iran +03:30) */
-            {
-               if (mday_local != mday_utc)/* if different days over midnight */
-                  hours = hour_local - hour_utc - 1 + 24;
-               else
-                  hours = hour_local - hour_utc - 1;
-                  
-               minutes = min_utc - min_local;
-            }
-            else
-            {
-               if (mday_local != mday_utc)/* if different days over midnight */
-                  hours = hour_local - hour_utc + 24;
-               else
-                  hours = hour_local - hour_utc;
-                  
-               minutes = min_local - min_utc;
-            }
-
-            sprintf(zone, "%+03d:%02d", hours, minutes);
-         }
-         
-         sprintf(this_time, " datetime=\"%d-%02d-%02dT%02d:%02d:%02d%s\"", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
-      }
-
-      sprintf(cite, " cite=\"%s\"", "http://www.udo-open-source.org");
-
-      sprintf(time_insert, "<ins%s%s>", cite, this_time);
-      lang_insert = strlen(time_insert);
-      sprintf(time_delete, "<del%s%s>", cite, this_time);
-      lang_delete = strlen(time_delete);
-      qreplace_all(ptr, INSERT_ON, STYLELEN, time_insert, lang_insert);
+      qreplace_all(ptr, INSERT_ON, STYLELEN, html_time_insert, strlen(html_time_insert));
       qreplace_all(ptr, INSERT_OFF, STYLELEN, "</ins>", 6);
-      qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, lang_delete);
+      qreplace_all(ptr, DELETED_ON, STYLELEN, html_time_delete, strlen(html_time_delete));
       qreplace_all(ptr, DELETED_OFF, STYLELEN, "</del>", 6);
 
       if (html_doctype == HTML_OLD)
@@ -1441,6 +1376,19 @@ GLOBAL void check_styles_asc_next_line(void)
 
 GLOBAL void init_module_sty(void)
 {
+   char     zone[20] = "+00:00";  /* */
+   time_t   uhrzeit;              /* */
+   int      hour_local,           /* */
+            min_local,            /* */
+            mday_local,           /* */
+            min_utc,              /* */
+            hour_utc,             /* */
+            mday_utc;             /* */
+   int      hours,                /* */
+            minutes;
+   char this_time[40];
+   char cite[1024];
+                  
    sprintf(BOLD_ON,       "%s%c\033", ESC_STYLE_MAGIC, C_BOLD_ON);
    sprintf(BOLD_OFF,      "%s%c\033", ESC_STYLE_MAGIC, C_BOLD_OFF);
    sprintf(ITALIC_ON,     "%s%c\033", ESC_STYLE_MAGIC, C_ITALIC_ON);
@@ -1491,4 +1439,41 @@ GLOBAL void init_module_sty(void)
    strcpy(sDrcBcolor, "\003O");
    strcpy(sDrcIcolor, "\003O");
    strcpy(sDrcUcolor, "\003O");
+
+   if (strcmp(html_header_date_zone, "") > 0)
+   {
+      um_strcpy(zone, html_header_date_zone, 9, "output_html_meta1");
+   } else
+   {
+      time(&uhrzeit);
+      
+      mday_local = localtime(&uhrzeit)->tm_mday;
+      mday_utc   = gmtime(&uhrzeit)->tm_mday;
+      hour_local = localtime(&uhrzeit)->tm_hour;
+      hour_utc   = gmtime(&uhrzeit)->tm_hour;
+      min_local  = localtime(&uhrzeit)->tm_min;
+      min_utc    = gmtime(&uhrzeit)->tm_min;
+
+      if (min_local < min_utc)      /* special for countries with "broken times" (e.g. Iran +03:30) */
+      {
+         if (mday_local != mday_utc)/* if different days over midnight */
+            hours = hour_local - hour_utc - 1 + 24;
+         else
+            hours = hour_local - hour_utc - 1;
+         minutes = min_utc - min_local;
+      }
+      else
+      {
+         if (mday_local != mday_utc)/* if different days over midnight */
+            hours = hour_local - hour_utc + 24;
+         else
+            hours = hour_local - hour_utc;
+         minutes = min_local - min_utc;
+      }
+      sprintf(zone, "%+03d:%02d", hours, minutes);
+   }
+   sprintf(this_time, " datetime=\"%d-%02d-%02dT%02d:%02d:%02d%s\"", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
+   sprintf(cite, " cite=\"%s\"", UDO_URL);
+   sprintf(html_time_insert, "<ins%s%s>", cite, this_time);
+   sprintf(html_time_delete, "<del%s%s>", cite, this_time);
 }
