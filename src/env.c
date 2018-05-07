@@ -2545,7 +2545,6 @@ GLOBAL void c_begin_description(void)
    case TOHTM:
    case TOMHH:
       outln("<dl>");
-      bDescDDOpen = FALSE;                /* <dd> not opened yet! */
       bParagraphOpen = FALSE;             /* <p> not opened yet! */
       break;
       
@@ -3425,8 +3424,6 @@ GLOBAL void c_item(void)
                c_rtf_styles(sBig);
                c_rtf_quotes(sBig);
                replace_udo_quotes(sBig);
-                                          /* we want a line feed after the description title */
-               replace_once(sBig, "}", "\\par }");
             }
             else
             {
@@ -3556,7 +3553,7 @@ GLOBAL void c_item(void)
          break;
          
       case ENV_DESC:
-         if (bDescDDOpen)                 /* handle still open <dd> tag first: */
+         if (!bEnv1stItem[iEnvLevel])     /* handle still open <dd> tag first: */
          {
             if (bParagraphOpen)           /* paragraph still open? */
             {
@@ -3572,8 +3569,6 @@ GLOBAL void c_item(void)
             outln("</dd>");               /* close previous <dd> tag */
          }
 
-         bDescDDOpen = FALSE;             /* close DD flag anyway */
-         
          token[0][0] = EOS;
          sBig[0] = EOS;
          
@@ -3597,8 +3592,6 @@ GLOBAL void c_item(void)
             strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>\n");
          }
 
-         bDescDDOpen = TRUE;              /* open DD flag */
-         
          if (!bEnvCompressed[iEnvLevel])
             um_strcat(sBig, "<p>", sizeof(sBig), "c_item[22]");
 
@@ -4259,7 +4252,6 @@ GLOBAL void c_end_description(void)
       if (!bEnv1stItem[iEnvLevel + 1])
          outln("</dd>");
       outln("</dl>");
-      bDescDDOpen = FALSE;                /* close DD flag anyway */
       break;
       
    case TOHPH:
@@ -4652,6 +4644,7 @@ GLOBAL void c_begin_document(void)
       
    case TOINF:
       outln("\\input texinfo @c-*-texinfo-*-");
+      voutlnf("@documentlanguage %s", lang.html_lang);
       outln("@c %**start of header");
       voutlnf("@setfilename %s.info", outfile.name);
       strcpy(s, titleprogram);
