@@ -45,6 +45,8 @@
 #ifndef __IMPORT__
 #define __IMPORT__
 
+#include "windows_.h"
+
 #ifdef GLOBAL
 #undef GLOBAL
 #endif

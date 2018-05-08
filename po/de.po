@@ -601,7 +601,7 @@ msgstr "Zu viele Spalten in der Tabelle"
 #: ../src/tab.c:442
 #, c-format
 msgid  "invalid column alignment '%s'"
-msgstr ""
+msgstr "ungültige Spaltenausrichtung '%s'"
 
 #: ../src/tab.c:484
 msgid  "too many rows used"

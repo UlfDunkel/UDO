@@ -36,6 +36,17 @@ static char *localedir = NULL;
 
 const char *xs_dgettext(const char *domain, const char *msgid)
 {
+#if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__) || defined(__MSYS__)
+	const char *ret = rc_dgettext(domain, msgid);
+	const char *ctxt;
+	
+	if (ret == msgid)
+	{
+		ctxt = strchr(msgid, GETTEXT_CONTEXT_GLUE[0]);
+		if (ctxt != NULL)
+			ret = rc_dgettext(domain, ctxt + 1);
+	}
+#else
 	const char *ret = dgettext(domain, msgid);
 	const char *ctxt;
 	
@@ -45,6 +56,7 @@ const char *xs_dgettext(const char *domain, const char *msgid)
 		if (ctxt != NULL)
 			ret = dgettext(domain, ctxt + 1);
 	}
+#endif
 	return ret;
 }
 
@@ -52,6 +64,17 @@ const char *xs_dgettext(const char *domain, const char *msgid)
 
 const char *xs_dngettext(const char *domain, const char *msgid, const char *msgid_plural, unsigned long n)
 {
+#if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__) || defined(__MSYS__)
+	const char *ret = rc_dngettext(domain, msgid, msgid_plural, n);
+	const char *ctxt;
+	
+	if (ret == msgid || ret == msgid_plural)
+	{
+		ctxt = strchr(msgid, GETTEXT_CONTEXT_GLUE[0]);
+		if (ctxt != NULL)
+			ret = rc_dngettext(domain, ctxt + 1, msgid_plural, n);
+	}
+#else
 	const char *ret = dngettext(domain, msgid, msgid_plural, n);
 	const char *ctxt;
 	
@@ -61,6 +84,7 @@ const char *xs_dngettext(const char *domain, const char *msgid, const char *msgi
 		if (ctxt != NULL)
 			ret = dngettext(domain, ctxt + 1, msgid_plural, n);
 	}
+#endif
 	return ret;
 }
 

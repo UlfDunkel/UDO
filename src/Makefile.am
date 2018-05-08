@@ -4,6 +4,8 @@
 # @(#) Thorsten Otto, 04.07.2002
 ###########################################################
 
+include ../silent.am
+
 AM_CFLAGS=	$(LOCAL_CFLAGS) $(DEFS) $(XCFLAGS)
 AM_LDFLAGS=	$(LOCAL_LDFLAGS) $(LIBS) $(XLDFLAGS)
 AM_CPPFLAGS=	-DBINDIR="\"$(bindir)\""

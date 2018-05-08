@@ -32,11 +32,11 @@ if test "$ECHO_E" = ""; then
   ECHO_E="echo -e"
 fi
 AC_SUBST(ECHO_E)
-AC_SUBST(RC_TARGET)
 
 AC_CONFIG_HEADER(src/config.h:src/config_h.in)
 
 AM_INIT_AUTOMAKE
+AM_MAINTAINER_MODE([enable])
 
 m4_define([AC_ADD_CFLAG], [
 for flag in $2; do
@@ -300,6 +300,7 @@ AC_PROG_CC
 AC_EXEEXT
 AC_C_CONST
 AC_PROG_CC_C_O
+AX_PROG_CC_FOR_BUILD
 
 ###############################################################################
 #
@@ -382,6 +383,7 @@ case $host in
      CPPFLAGS="$CPPFLAGS -D__UNIX__"
      ;;
 esac
+AC_SUBST(RC_TARGET)
 
 if test "$cross_compiling" = no; then
   # do not consider this as a native build only because we can exec build programs;
@@ -940,14 +942,16 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
 AC_DEFINE_UNQUOTED(PACKAGE, "$GETTEXT_PACKAGE")
 AC_SUBST(GETTEXT_PACKAGE)
 
-ALL_LINGUAS="`grep -v '^#' "$srcdir/po/LINGUAS" | tr '\n' ' '`"
 AC_SUBST([CONFIG_STATUS_DEPENDENCIES],['$(top_srcdir)/po/LINGUAS'])
 AM_GLIB_GNU_GETTEXT
 XGETTEXT="$XGETTEXT --from-code=UTF-8"
 AM_GLIB_DEFINE_LOCALEDIR([LOCALEDIR])
 MKINSTALLDIRS="$INSTALL_DIRS"
 AC_SUBST(MKINSTALLDIRS)
-
+AM_CONDITIONAL(USE_NLS, test "$USE_NLS" = yes)
+if test "$USE_NLS" = yes -a "$TARGET_OS" = win32; then
+	INTLLIBS='$(top_builddir)/rcintl/librcintl.a'
+fi
 
 
 AC_SUBST(GTK_LIBS)
@@ -982,6 +986,8 @@ AC_CONFIG_COMMANDS([pofiles],[
 AC_OUTPUT([
 	Makefile
 	src/Makefile
+	rcintl/Makefile
+	potools/Makefile
 	doc/Makefile
 	doc/en/Makefile
 	doc/de/Makefile

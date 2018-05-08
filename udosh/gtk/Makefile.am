@@ -1,5 +1,7 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
+include ../../silent.am
+
 if WITH_GUI_GTK
 bin_PROGRAMS = udogtk
 endif
