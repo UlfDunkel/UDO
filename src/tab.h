@@ -49,7 +49,6 @@
 /* ############################################################
    # globale Funktionen
    ############################################################   */
-GLOBAL void table_reset(void);
 GLOBAL void c_table_caption(void);
 GLOBAL void c_table_caption_nonr(void);
 GLOBAL void table_get_header(char *s);
