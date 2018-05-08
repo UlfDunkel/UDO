@@ -7,6 +7,9 @@
 # Please note that the actual code is *not* freely available.
 #
 
+# config.status complains if "po/Makefile.in.in was not created by intltoolize".
+# INTLTOOL_MAKEFILE
+
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 PACKAGE = @PACKAGE@
 VERSION = @VERSION@
@@ -23,7 +26,8 @@ prefix = @prefix@
 exec_prefix = @exec_prefix@
 datadir = @datadir@
 datarootdir = @datarootdir@
-localedir = @localedir@
+localedir = $(datadir)/locale
+#localedir = $(prefix)/share/locale
 gnulocaledir = $(localedir)
 subdir = po
 # DESTDIR = $(install_prefix)
@@ -228,7 +232,7 @@ distclean: clean
 	if test "$(srcdir)" != "."; then \
 	dists="$(DISTFILES)"; \
 	for file in $$dists; do \
-	  $(RM) $$file; \
+	  $(RM) `basename $$file`; \
 	done; \
 	fi
 
@@ -313,7 +317,7 @@ update-po: Makefile
 # relative path to them
 POTFILES: $(srcdir)/POTFILES.in
 	( if test 'x$(srcdir)' != 'x.'; then \
-	    posrcprefix='$(top_srcdir)/'; \
+	    posrcprefix='$(srcdir)/../'; \
 	  else \
 	    posrcprefix="../"; \
 	  fi; \
@@ -330,6 +334,15 @@ Makefile: Makefile.in.in $(top_builddir)/config.status POTFILES
 	cd $(top_builddir) \
 	  && CONFIG_FILES=$(subdir)/$@.in CONFIG_HEADERS= \
 	       $(SHELL) ./config.status
+
+$(INTLTOOL_MERGE): $(top_srcdir)/intltool-merge.in
+	cd $(top_builddir) && $(SHELL) ./config.status intltool
+
+$(INTLTOOL_UPDATE): $(top_srcdir)/intltool-update.in
+	cd $(top_builddir) && $(SHELL) ./config.status intltool
+
+$(INTLTOOL_EXTRACT): $(top_srcdir)/intltool-extract.in
+	cd $(top_builddir) && $(SHELL) ./config.status intltool
 
 # Tell versions [3.59,3.63) of GNU make not to export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
