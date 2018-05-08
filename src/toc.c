@@ -337,7 +337,16 @@ LOCAL char       footer_buffer[512];     /* Puffer fuer den Footer */
 
 LOCAL char       html_target[64];
 
-LOCAL char encode_chars[64] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#=";
+LOCAL char encode_chars[64] = {
+	'0', '1', '2', '3', '4', '5', '6', '7',
+	'8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+	'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+	'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+	'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
+	'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+	'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+	'u', 'v', 'w', 'x', 'y', 'z', '#', '='
+};
 
 LOCAL const char *const tex_structure_names[TOC_MAXDEPTH + 1] = {
     "chapter",
@@ -377,13 +386,13 @@ LOCAL char info_structure_names[TOC_MAXDEPTH][2][2][18] = {
     { { "subsubsection", "subsubheading" }, { "appendixsubsubsec", "appendixsubsubsec" } }
 };
 
-GLOBAL char asc_structure_chars[TOC_MAXDEPTH] = "*=-\0\0\0\0\0\0";
+GLOBAL char asc_structure_chars[TOC_MAXDEPTH] = { '*', '=', '-', '\0', '\0', '\0', '\0', '\0', '\0' };
 
 GLOBAL int kps_structure_height[TOC_MAXDEPTH + 1] = { 14, 7, 3, 0, 0, 0, 0, 0, 0, 0 };
 
 LOCAL long drc_structure_numbers[TOC_MAXDEPTH] = { 0, 10, 100, 1000, 10000, 100000L, 1000000L, 10000000L, 100000000L };
 
-LOCAL char src_structure_chars[TOC_MAXDEPTH] = "#*=----";
+LOCAL char src_structure_chars[TOC_MAXDEPTH] = { '#', '*', '=', '-', '-', '-', '-', '-', '-' };
 
 GLOBAL int rtf_structure_height[TOC_MAXDEPTH + 1] = { 28, 14, 6, 0, 0, 0, 0, 0, 0, 0 };
 LOCAL char rtf_structure_names[TOC_MAXDEPTH + 1][2][32] = {

@@ -142,7 +142,7 @@ const char *xs_get_locale_dir(void)
 		char *root, *temp;
 		
 		root = g_get_package_installation_directory();
-		temp = malloc(strlen(root) + sizeof("/share/locale"));
+		temp = (char *)malloc(strlen(root) + sizeof("/share/locale"));
 #if USE_SLASH
 		strcat(strcpy(temp, root), "/share/locale");
 #else

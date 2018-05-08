@@ -49,7 +49,7 @@
 ******************************************|************************************/
 
    /* compose temp file specs */
-GLOBAL FILE *udofile_tmpname(const char *template);
+GLOBAL FILE *udofile_tmpname(const char *templatename);
 
 GLOBAL void output_about_udo(void);
 GLOBAL void add_pass1_about_udo(void);

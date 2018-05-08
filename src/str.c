@@ -245,7 +245,7 @@ GLOBAL char *um_physical_strcpy(const char *src, size_t morealloc, const char *p
    char     *dest;           /* pointer to the new string */
 
    slen = strlen(src);
-   dest = malloc(slen + morealloc + 1);
+   dest = (char *)malloc(slen + morealloc + 1);
 
    if (dest != NULL)
    {

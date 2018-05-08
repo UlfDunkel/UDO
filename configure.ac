@@ -417,7 +417,7 @@ AC_ARG_ENABLE(warnings,
 yes)
      for arg in -Wall -W -Wstrict-prototypes -Wmissing-prototypes \
            -Wmissing-declarations -Wwrite-strings \
-           -Wcast-qual -Wdeclaration-after-statement -Wundef
+           -Wcast-qual -Wdeclaration-after-statement -Wundef -Wc++-compat
      do
          AC_ADD_CFLAG(CFLAGS, $arg)
      done

@@ -186,7 +186,7 @@ char *um_strdup_vprintf(const char *format, va_list args)
 	va_list args2;
 
 	initsize = 1024;
-	res = malloc(initsize * sizeof(char));
+	res = (char *)malloc(initsize * sizeof(char));
 	if (res == NULL)
 	{
 		return NULL;
@@ -197,7 +197,7 @@ char *um_strdup_vprintf(const char *format, va_list args)
 	if (len >= initsize)
 	{
 		initsize = len + 1;
-		res = realloc(res, initsize * sizeof(char));
+		res = (char *)realloc(res, initsize * sizeof(char));
 		if (res != NULL)
 		{
 			len = vsnprintf(res, initsize, format, args2);
@@ -678,7 +678,7 @@ char *mem_str_dup(const char *str)
 	if (str == NULL)
 		return NULL;
 	size = strlen(str) + 1;
-	if ((p = mem_get(size)) != NULL)
+	if ((p = (char *)mem_get(size)) != NULL)
 		return strcpy(p, str);
 	return NULL;
 }

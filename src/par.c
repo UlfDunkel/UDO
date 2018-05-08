@@ -202,7 +202,16 @@ LOCAL SPECCMD  *speccmd;
 LOCAL size_t    speccmd_alloc;
 LOCAL size_t    speccmd_counter;
 
-LOCAL unsigned char const encode_chars[64] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#=";
+LOCAL unsigned char const encode_chars[64] = {
+	'0', '1', '2', '3', '4', '5', '6', '7',
+	'8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+	'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+	'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+	'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
+	'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+	'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+	'u', 'v', 'w', 'x', 'y', 'z', '#', '='
+};
 LOCAL int decode_chars[128];
 LOCAL char const macro_allowed_name[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
 
@@ -4598,7 +4607,7 @@ GLOBAL _BOOL add_macro(void)
    c_vars(entry);
 
    entry_len = strlen(entry);
-   entry = realloc(entry, (entry_len + 1) * sizeof(*entry));
+   entry = (char *)realloc(entry, (entry_len + 1) * sizeof(*entry));
    
    /* create space for a macro */
    p = (MACROS *)malloc(sizeof(MACROS));

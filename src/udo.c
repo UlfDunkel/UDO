@@ -7910,7 +7910,7 @@ LOCAL _BOOL add_hyplist_item(const char *s)
 {
    HYPLIST *n;
 
-   n = malloc(sizeof(HYPLIST));
+   n = (HYPLIST *)malloc(sizeof(HYPLIST));
    if (n != NULL)
    {
       strcpy(n->data, s);
@@ -13600,7 +13600,7 @@ GLOBAL void init_udo_vars(void)
    /* ---------------------------------------------------- */
    if (compile_date[0] == '\0')
    {
-      char date[11] = __DATE__;
+      char date[] = __DATE__;
 
       if (date[4] == ' ')
          date[4] = '0';

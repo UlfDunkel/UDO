@@ -112,7 +112,7 @@ LOCAL char      strUdoHtmlName[32];        /* */
 *
 ******************************************|************************************/
 
-GLOBAL FILE *udofile_tmpname(const char *template)
+GLOBAL FILE *udofile_tmpname(const char *templatename)
 {
 #if defined(HAVE_MKSTEMP) && defined(HAVE_FDOPEN)
 	{
@@ -135,7 +135,7 @@ GLOBAL FILE *udofile_tmpname(const char *template)
       if (tmpnam(t) != NULL)
          strcpy(udofile.full, t);
       else
-         strcat(strcpy(udofile.full, template), ".tmp");
+         strcat(strcpy(udofile.full, templatename), ".tmp");
       uif = myFwopen(udofile.full, TOASC);
       if (uif != NULL)
          return uif;
@@ -165,7 +165,7 @@ GLOBAL FILE *udofile_tmpname(const char *template)
       strcpy(udofile.path, outfile.path);
    }
 
-   strcpy(udofile.name, template);
+   strcpy(udofile.name, templatename);
    strcpy(udofile.suff, ".tmp");
    sprintf(udofile.full, "%s%s%s%s", udofile.driv, udofile.path, udofile.name, udofile.suff);
    }
