@@ -6,16 +6,16 @@
 !macro IMAGES ../images/
 !endif
 
-!docinfo [title]	Die Anleitung zur
-!docinfo [program]	UDO-Shell für Win32
-!docinfo [version]	1.06
-!docinfo [date]		10. Juni 2013
+!docinfo [title]        Die Anleitung zur
+!docinfo [program]      UDO-Shell für Win32
+!docinfo [version]      1.06
+!docinfo [date]         10. Juni 2013
 
-!docinfo [author]	Dirk Hagedorn
-!docinfo [address]	Asmecke 1
-!docinfo [address]	D-59846 Sundern
-!docinfo [address]	E-Mail: info@dirk-hagedorn.de
-!docinfo [address]	http://www.dirk-hagedorn.de
+!docinfo [author]       Dirk Hagedorn
+!docinfo [address]      Asmecke 1
+!docinfo [address]      D-59846 Sundern
+!docinfo [address]      E-Mail: info@dirk-hagedorn.de
+!docinfo [address]      http://www.dirk-hagedorn.de
 !docinfo [authorimage]  (!IMAGES)dh
 
 !use_about_udo [all]
@@ -96,7 +96,7 @@ hier ein Programm zur Umwandlung und eines zum Editieren.
 
 !begin_blist [Ergebnis:]
 
-!item [Quelle:]	Geben Sie hier den Namen der UDO-Quelldatei an. Durch
+!item [Quelle:] Geben Sie hier den Namen der UDO-Quelldatei an. Durch
 Auswahl der Schaltfläche (!V)[...](!v) öffnet sich der
 Dateiauswahldialog, in dem Sie die gewüschte Datei auswählen können.
 !item [Ziel:] Gleiches Prinzip wie oben, jedoch wird der Name der
@@ -364,10 +364,10 @@ Falls Sie den HTML-Ouptut von UDO mit weiteren Browsern überprüfen
 möchten, kein Problem:
 
 !begin_blist [Endung Parameterdatei:] !compressed
-!item [Endung Parameterdatei:]		(!V).html(!v)
-!item [Anwendung Parameterdatei:]	(!V)C:\Lynx\lynx.exe(!v)
-!item [Editor Parameterdatei:]		(!V)C:\Programme\Netscape\Navigator\Program\netscape.exe(!v)
-!item [Parameterdatei:]				[x] Dateiname kleingeschrieben
+!item [Endung Parameterdatei:]          (!V).html(!v)
+!item [Anwendung Parameterdatei:]       (!V)C:\Lynx\lynx.exe(!v)
+!item [Editor Parameterdatei:]          (!V)C:\Programme\Netscape\Navigator\Program\netscape.exe(!v)
+!item [Parameterdatei:]                 [x] Dateiname kleingeschrieben
 !end_blist
 
 (!B)Anmerkung:(!b) Sie sehen, man muß nicht unbedingt einen Editor
@@ -377,13 +377,13 @@ anmelden, sondern kann auch zwei Browser verwenden.
 !subsubnode Beispiel für RTF
 
 !begin_blist [Endung Parameterdatei:] !compressed
-!item [Anwendung Zieldatei:]	(!V)C:\Office\Winword\winword.exe(!v)
-!item [Editor Zieldatei:]		(!V)C:\Programme\Zubehör\wordpad.exe(!v)
+!item [Anwendung Zieldatei:]            (!V)C:\Office\Winword\winword.exe(!v)
+!item [Editor Zieldatei:]               (!V)C:\Programme\Zubehör\wordpad.exe(!v)
 !end_blist
 
 !begin_blist [Endung Parameterdatei:] !compressed
-!item [Endung Parameterdatei:]		(!V).rtf(!v)
-!item [Anwendung Parameterdatei:]	(!V)C:\Programme\Papyrus\papyrus.exe(!v)
+!item [Endung Parameterdatei:]          (!V).rtf(!v)
+!item [Anwendung Parameterdatei:]       (!V)C:\Programme\Papyrus\papyrus.exe(!v)
 !end_blist
 
 #......................................
