@@ -416,7 +416,7 @@ AC_ARG_ENABLE(warnings,
 [case $enableval in
 yes)
      for arg in -Wall -W -Wstrict-prototypes -Wmissing-prototypes \
-           -Wmissing-declarations -Wwrite-strings -Wbad-function-cast \
+           -Wmissing-declarations -Wwrite-strings \
            -Wcast-qual -Wdeclaration-after-statement -Wundef
      do
          AC_ADD_CFLAG(CFLAGS, $arg)
