@@ -903,6 +903,15 @@ AM_CONDITIONAL(WITH_GUI_WIN32, test "$with_gui" = win32)
 AM_CONDITIONAL(WITH_GUI_GEM, test "$with_gui" = gem)
 AM_CONDITIONAL(HAVE_GTKHTML, test x$have_gtkhtml != xno)
 AM_CONDITIONAL(HAVE_GTKHTML2, test x$have_gtkhtml2 != xno)
+if test "$with_gui" = gtk2 -o "$with_gui" = gtk3; then
+  AC_DEFINE([WITH_GUI_GTK], 1, [define if GTK GUI should be used])
+fi
+if test "$with_gui" = win32; then
+  AC_DEFINE([WITH_GUI_WIN32], 1, [define if Win32 GUI should be used])
+fi
+if test "$with_gui" = gem; then
+  AC_DEFINE([WITH_GUI_GEM], 1, [define if GEM GUI should be used])
+fi
 
 AC_DEFINE_UNQUOTED([ATK_VERSION_FROM_CONFIGURE], "$ac_atk_version", [The version of ATK])
 ac_bz2_version=`bzip2 --version 2>&1 </dev/null | sed -n 's/.*Version \([[0-9]]*\.[[0-9]]*\.[[0-9]]*\).*/\1/p'`
