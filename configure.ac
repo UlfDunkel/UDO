@@ -896,9 +896,11 @@ if test "$have_gtk3" = no -a "$with_gui" = gtk3; then
 	AC_MSG_ERROR([*** GTK3 was requested, but was not found ***])
 fi
 
-AM_CONDITIONAL(HAVE_GTK, test "$with_gui" = gtk2 -o "$with_gui" = gtk3)
-AM_CONDITIONAL(HAVE_GTK2, test "$with_gui" = gtk2)
-AM_CONDITIONAL(HAVE_GTK3, test "$with_gui" = gtk3)
+AM_CONDITIONAL(WITH_GUI_GTK, test "$with_gui" = gtk2 -o "$with_gui" = gtk3)
+AM_CONDITIONAL(WITH_GUI_GTK2, test "$with_gui" = gtk2)
+AM_CONDITIONAL(WITH_GUI_GTK3, test "$with_gui" = gtk3)
+AM_CONDITIONAL(WITH_GUI_WIN32, test "$with_gui" = win32)
+AM_CONDITIONAL(WITH_GUI_GEM, test "$with_gui" = gem)
 AM_CONDITIONAL(HAVE_GTKHTML, test x$have_gtkhtml != xno)
 AM_CONDITIONAL(HAVE_GTKHTML2, test x$have_gtkhtml2 != xno)
 

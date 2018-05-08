@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
-if HAVE_GTK
+if WITH_GUI_GTK
 bin_PROGRAMS = udogtk
 endif
 

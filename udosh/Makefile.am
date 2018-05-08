@@ -1,9 +1,9 @@
 SUBDIRS =
 
-if OS_WIN32
+if WITH_GUI_WIN32
 SUBDIRS += win32
 endif
-if HAVE_GTK
+if WITH_GUI_GTK
 SUBDIRS += gtk po
 endif
 
