@@ -2,6 +2,12 @@ autom4te.cache
 Makefile
 Makefile.in
 po/POTFILES
+udosh/po/POTFILES
+udosh/gtk/Manual/en
+udosh/gtk/Manual/de
+udosh/win32/Manual/winhelp4
+udosh/win32/Manual/htmlhelp
+udosh/win32/Manual/stguide
 stamp*
 aclocal.m4
 config.h

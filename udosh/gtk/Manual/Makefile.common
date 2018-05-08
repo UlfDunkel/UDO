@@ -1,0 +1,126 @@
+UDO=		$(top_builddir)/src/udo
+MKDIRHIER=	mkdir -p
+RMDIRHIER=	rm -rf
+CP=		cp
+MV=		mv
+
+# check for explicit .exe here, hcp.ttp might be the ST-Guide compiler
+HC31=		hcp.exe
+HCRTF=		hcrtf
+HHC=		hhc
+PCHELP=		hc
+LATEX=		latex
+PDFLATEX=	pdflatex
+MAKEINDEX=	makeindex
+MAKEINFO=	makeinfo
+
+
+DOC=	$(srcdir)/udosh$(OUTPUT_LANG).u
+
+IMAGES=		\
+		$(srcdir)/images/dh.png \
+		$(srcdir)/images/dh.bmp \
+		$(srcdir)/images/dh.gif \
+		$(srcdir)/images/dh.eps \
+		$(srcdir)/images/dialog.png \
+		$(srcdir)/images/dialog.bmp \
+		$(srcdir)/images/dialog.gif \
+		$(srcdir)/images/dialog.eps \
+		$(srcdir)/images/files.png \
+		$(srcdir)/images/files.bmp \
+		$(srcdir)/images/files.gif \
+		$(srcdir)/images/files.eps \
+		$(srcdir)/images/formatconfig.png \
+		$(srcdir)/images/formatconfig.bmp \
+		$(srcdir)/images/formatconfig.gif \
+		$(srcdir)/images/formatconfig.eps \
+		$(srcdir)/images/formats.png \
+		$(srcdir)/images/formats.bmp \
+		$(srcdir)/images/formats.gif \
+		$(srcdir)/images/formats.eps \
+		$(srcdir)/images/options.png \
+		$(srcdir)/images/options.bmp \
+		$(srcdir)/images/options.gif \
+		$(srcdir)/images/options.eps \
+		$(srcdir)/images/symbols.png \
+		$(srcdir)/images/symbols.bmp \
+		$(srcdir)/images/symbols.gif \
+		$(srcdir)/images/symbols.eps
+	
+EXTRA_DIST = $(DOC) $(IMAGES)
+
+all:   winhelp4 hh
+	@
+
+win winhelp:: .stamp.winhelp
+
+.stamp.winhelp: $(DOC)
+	$(MKDIRHIER) winhelp
+	$(UDO) --win -o winhelp/udosh$(OUTPUT_LANG).rtf $(srcdir)/udosh$(OUTPUT_LANG).u
+	 if test "`type $(HC31) 2>/dev/null`" = ""; then \
+	   echo "WinHelp Help Compiler ($(HC31)) not found" >& 2; \
+	 else \
+	  (cd "winhelp"; \
+	   $(HC31) udosh$(OUTPUT_LANG).hpj; \
+	   $(HC31) udosh$(OUTPUT_LANG).hpj \
+	  ); \
+	fi; \
+	touch $@
+
+win4 winhelp4:: .stamp.winhelp4
+
+.stamp.winhelp4: $(srcdir)/udosh$(OUTPUT_LANG).u
+	$(MKDIRHIER) winhelp4
+	$(UDO) --win4 -o winhelp4/udosh$(OUTPUT_LANG).rtf $(srcdir)/udosh$(OUTPUT_LANG).u
+	 if test "`type $(HCRTF) 2>/dev/null`" = ""; then \
+	   echo "WinHelp4 Help Compiler ($(HCRTF)) not found" >& 2; \
+	 else \
+	   ( \
+	   cd "winhelp4"; \
+	   $(RM) udosh$(OUTPUT_LANG).HLP udosh$(OUTPUT_LANG).hlp; \
+	   $(HCRTF) -x -NG udosh$(OUTPUT_LANG).hpj; \
+	   $(HCRTF) -x -NG udosh$(OUTPUT_LANG).hpj; \
+	   ); \
+	fi; \
+	touch $@
+
+hh htmlhelp:: .stamp.htmlhelp
+
+.stamp.htmlhelp: $(srcdir)/udosh$(OUTPUT_LANG).u
+	$(MKDIRHIER) htmlhelp
+	($(CP) $(srcdir)/images/*.gif htmlhelp; \
+	$(UDO) --htmlhelp -o htmlhelp/udosh$(OUTPUT_LANG).html $(srcdir)/udosh$(OUTPUT_LANG).u || exit 1; \
+	if test "`type $(HHC) 2>/dev/null`" = ""; then \
+	 echo "HTML Help Compiler ($(HHC)) not found" >& 2; \
+	 else \
+	(cd htmlhelp; \
+	 $(HHC) udosh$(OUTPUT_LANG).hhp; \
+	 test -f udosh$(OUTPUT_LANG).chm || exit 1 \
+	); \
+	fi); \
+	touch $@
+
+clean-local:
+	for i in amguide applehelp ascii html htmlhelp ipf lyx manpage nroff c pascal pdflatex ps quickvw stguide rtf texinfo tvhelp winhelp winhelp4; do \
+		$(RMDIRHIER) $$i; \
+		$(RM) .stamp.$$i; \
+	done
+
+
+images: $(IMAGES)
+	@for i in dh dialog files formatconfig formats options symbols; do \
+		echo generating images/$$i.bmp; \
+		pngtopnm $(srcdir)/images/$$i.png | pnmquant 256 | ppmtobmp > tmp$$$$ && mv tmp$$$$ images/$$i.bmp || ($(RM) tmp$$$$; exit 1); \
+		echo generating images/$$i.gif; \
+		pngtopnm $(srcdir)/images/$$i.png | pnmquant 256 | ppmtogif > tmp$$$$ && mv tmp$$$$ images/$$i.gif || ($(RM) tmp$$$$; exit 1); \
+		echo generating images/$$i.eps; \
+		pngtopnm $(srcdir)/images/$$i.png | pnmquant 256 | pnmtops -noturn > tmp$$$$ && mv tmp$$$$ images/$$i.eps || ($(RM) tmp$$$$; exit 1); \
+	done
+.PHONY: images
+
+#
+# There are several output formats that generate
+# the same log file names, and automatically generated
+# images may be the same for some, so we cant run anything
+# in parallel here:
+.NOTPARALLEL:

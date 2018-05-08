@@ -1,0 +1,188 @@
+#define MY_PROGRESS_CONTROL   "MyProgressControl"
+
+#define IDR_MAIN_MENU 1
+
+#define IDM_FILE_OPEN 100
+#define IDM_FILE_SAVE 101
+#define IDM_APP_EXIT 110
+
+#define IDM_EDIT_UNDO 200
+#define IDM_EDIT_CUT  201
+#define IDM_EDIT_COPY 202
+#define IDM_EDIT_PASTE 203
+
+#define IDM_OPT_CONFIGURATION 300
+#define IDM_OPT_SETTINGS      301
+
+#define IDM_HELP_CONTENTS  400
+#define IDM_HELP_INDEX     401
+#define IDM_HELP_UDO       402
+#define IDM_HELP_UDO_INDEX 403
+#define IDM_HELP_ABOUT     410
+
+#define IDR_MAINFRAME                   128
+#define IDR_DH                          129
+
+#define IDB_WEBLINK                     130
+#define IDB_EMAIL                       131
+
+#define IDR_ACCEL                       3000
+
+#define IDM_ABOUTBOX                    0x0010
+
+#define IDD_ABOUTBOX                    100
+#define IDD_MAIN_DIALOG                 101
+#define IDD_CONFIG_DIALOG               102
+#define IDD_SETTING_DIALOG              103
+#define IDD_STATUS_DIALOG		104
+
+#define IDC_EMAIL                       500
+#define IDC_EMAILLINK                   501
+#define IDC_URL                         502
+#define IDC_WEBLINK                     503
+#define IDC_UDO_ICON                    504
+
+#define IDC_FILE_SOURCE                 1000
+#define IDC_CHOOSE_SOURCE               1001
+#define IDC_FILE_DEST                   1002
+#define IDC_CHOOSE_DEST                 1003
+#define IDC_FILE_PARAM1                 1004
+#define IDC_FILE_PARAM2                 1005
+#define IDC_FILE_FINAL                  1006
+
+#define IDC_CHECK_SYM1                  1200
+#define IDC_CHECK_SYM2                  1201
+#define IDC_CHECK_SYM3                  1202
+#define IDC_CHECK_SYM4                  1203
+#define IDC_CHECK_SYM5                  1204
+#define IDC_CHECK_SYM6                  1205
+#define IDC_CHECK_SYM7                  1206
+#define IDC_CHECK_SYM8                  1207
+#define IDC_CHECK_SYM9                  1208
+#define IDC_CHECK_SYM10                 1209
+#define IDC_CHECK_SYM11                 1210
+#define IDC_CHECK_SYM12                 1211
+#define IDC_EDIT_SYM1                   1300
+#define IDC_EDIT_SYM2                   1301
+#define IDC_EDIT_SYM3                   1302
+#define IDC_EDIT_SYM4                   1303
+#define IDC_EDIT_SYM5                   1304
+#define IDC_EDIT_SYM6                   1305
+#define IDC_EDIT_SYM7                   1306
+#define IDC_EDIT_SYM8                   1307
+#define IDC_EDIT_SYM9                   1308
+#define IDC_EDIT_SYM10                  1309
+#define IDC_EDIT_SYM11                  1310
+#define IDC_EDIT_SYM12                  1311
+
+#define IDC_EXEC_SOURCE                 1400
+#define IDC_EDIT_SOURCE                 1401
+#define IDC_EXEC_DEST                   1402
+#define IDC_EDIT_DEST                   1403
+#define IDC_EXEC_PARAM1                 1404
+#define IDC_EDIT_PARAM1                 1405
+#define IDC_EXEC_PARAM2                 1406
+#define IDC_EDIT_PARAM2                 1407
+#define IDC_EXEC_FINAL                  1408
+#define IDC_EDIT_FINAL                  1409
+
+#define IDC_CHECK_TEST                  1500
+#define IDC_CHECK_VERB                  1501
+#define IDC_CHECK_KEY                   1502
+#define IDC_CHECK_WARN                  1503
+#define IDC_CHECK_CHECK                 1504
+#define IDC_CHECK_DIR                   1505
+#define IDC_CHECK_FORCE_LONG            1506
+#define IDC_CHECK_FORCE_SHORT           1507
+#define IDC_CHECK_FAST_AUTOREF          1508
+
+#define IDC_CHECK_LOG                   1600
+#define IDC_BUTTON_LOG                  1601
+#define IDC_CHECK_HYP                   1602
+#define IDC_BUTTON_HYP                  1603
+#define IDC_CHECK_TREE                  1604
+#define IDC_BUTTON_TREE                 1605
+#define IDC_CHECK_MAP_C                 1606
+#define IDC_BUTTON_MAP_C                1607
+#define IDC_CHECK_MAP_PAS               1608
+#define IDC_BUTTON_MAP_PAS              1609
+#define IDC_CHECK_MAP_VB                1610
+#define IDC_BUTTON_MAP_VB               1611
+#define IDC_CHECK_MAP_GFA               1612
+#define IDC_BUTTON_MAP_GFA              1613
+#define IDC_CHECK_UPR                   1614
+#define IDC_BUTTON_UPR                  1615
+
+#define IDC_FORMAT_COMBO                1701
+
+#define IDC_RADIO_DEST                  2000
+#define IDC_RADIO_PARAM1                2001
+#define IDC_RADIO_PARAM2                2002
+#define IDC_RADIO_FINAL                 2003
+#define IDC_EDIT_SUFFIX                 2004
+#define IDC_CHECK_LOWERCASE             2005
+#define IDC_CHECK_UNIXPATH              2006
+#define IDC_CHECK_WAIT                  2007
+#define IDC_FILE_APP                    2008
+#define IDC_CHOOSE_APP                  2009
+#define IDC_FILE_ARGS                   2010
+
+#define IDC_VERSION                     3000
+
+#define IDC_CHECK_AOT                   3500
+#define IDC_CREATE_DIRS                 3501
+#define IDC_USE_UDO                     3502
+#define IDC_INT_UDO_VERSION             3503
+#define IDC_UDO_HELPFILE                3504
+#define IDC_CHOOSE_UDO_HELPFILE         3505
+#define IDC_UDO_HELP_COMMANDS           3506
+
+#define IDC_STATUS_PASS                 4000
+#define IDC_STATUS_INFO                 4001
+#define IDC_STATUS_FILE                 4002
+#define IDC_STATUS_NODE                 4003
+#define IDC_STATUS_PROGRESS             4004
+
+#define IDS_WINDOW_TITLE                 9999
+#define IDS_ABOUTBOX                    10000
+#define IDS_CHOOSE_SOURCE               10001
+#define IDS_SELECT_SOURCE               10002
+#define IDS_CHOOSE_DEST                 10003
+#define IDS_SELECT_DEST                 10004
+#define IDS_CHOOSE_EDITOR               10005
+#define IDS_SELECT_PROGRAM              10006
+#define IDS_SOURCE_NOT_AVAILABLE        10007
+#define IDS_NO_SOURCE_SELECTED          10008
+#define IDS_WHICH_SOURCE                10009
+#define IDS_WHICH_DESTINATION           10010
+#define IDS_WHICH_PARAMETER             10011
+#define IDS_WHICH_RESULT                10012
+#define IDS_TYPE_SOURCE                 10013
+#define IDS_TYPE_DESTINATION            10014
+#define IDS_TYPE_PARAMETER              10015
+#define IDS_TYPE_RESULT                 10016
+#define IDS_FILE_NOT_AVAILABLE          10017
+#define IDS_CHOOSE_UDO                  10018
+#define IDS_NO_DEST_SELECTED            10019
+#define IDS_MAKEDIR                     10020
+#define IDS_ERR_MAKEDIR                 10021
+#define IDS_ERR_NODIR                   10022
+#define IDS_CHOOSE_APPLICATION          10023
+#define IDS_FILE_NOT_AVAILABLE2         10024
+#define IDS_NO_EDITOR                   10025
+#define IDS_TYPE_LOG                    10026
+#define IDS_TYPE_HYPHEN                 10027
+#define IDS_TYPE_TREE                   10028
+#define IDS_TYPE_MAP                    10029
+#define IDS_TYPE_PROJECT                10030
+#define IDS_UDO_HELPFILE                10031
+#define IDS_UDO_HELP_COMMANDS           10032
+#define IDS_ERR_CREATE_LOG              10033
+#define IDS_ERR_CREATE_TREE             10034
+#define IDS_ERR_CREATE_UPR              10035
+#define IDS_ERR_CREATE_HYPHEN           10036
+#define IDS_ERR_CREATE_OUTPUT           10037
+#define IDS_CANCEL                      10038
+#define IDS_OK                          10039
+#define IDS_CHOOSE_HELP                 10040
+#define IDS_SELECT_HELP                 10041

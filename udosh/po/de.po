@@ -1,0 +1,943 @@
+# German translation for udo.
+# Copyright (C) 2001-2013 by The UDO Community
+# Thorsten Otto, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: udo HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-12 15:46+0200\n"
+"PO-Revision-Date: 2011-05-30 02:03+0200\n"
+"Last-Translator: Thorsten Otto <halgara@yahoo.de>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: gtk/gtkconfig.c:122
+#, c-format
+msgid "Choose application for %s file..."
+msgstr "Anwendung für %s Dateien wählen..."
+
+#: gtk/gtkconfig.c:271
+msgid "Format Configuration"
+msgstr "Format Konfiguration"
+
+#: gtk/gtkconfig.c:289
+msgid "Destination"
+msgstr "Ziel"
+
+#: gtk/gtkconfig.c:296
+msgid "Parameter #1"
+msgstr "Parameter #1"
+
+#: gtk/gtkconfig.c:303
+msgid "Parameter #2"
+msgstr "Parameter #2"
+
+#: gtk/gtkconfig.c:310
+msgid "Result"
+msgstr "Ergebnis"
+
+#: gtk/gtkconfig.c:317
+msgid "File type"
+msgstr "Filetyp"
+
+#: gtk/gtkconfig.c:334
+msgid "Suffix:"
+msgstr "Endung:"
+
+#: gtk/gtkconfig.c:342
+msgid "lowercase file names"
+msgstr "Dateinamen klein schreiben"
+
+#: gtk/gtkconfig.c:346
+msgid "Unix path for application"
+msgstr "Unix-Pfad für Anwenung"
+
+#: gtk/gtkconfig.c:350
+msgid "Wait for completion"
+msgstr "Auf beende warten"
+
+#: gtk/gtkconfig.c:354 gtk/udogtk.c:3856
+msgid "Options"
+msgstr "Optionen"
+
+#: gtk/gtkconfig.c:372 gtk/gtkconfig.c:580 gtk/udogtk.c:3615 gtk/udogtk.c:3629
+msgid "..."
+msgstr "..."
+
+#: gtk/gtkconfig.c:377
+msgid "Args:"
+msgstr "Argumente:"
+
+#: gtk/gtkconfig.c:488
+msgid "Choose UDO Help file..."
+msgstr "UDO Hilfe-Datei auswählen..."
+
+#: gtk/gtkconfig.c:518
+msgid "Shell Options"
+msgstr "Shell Optionen"
+
+#: gtk/gtkconfig.c:530
+msgid "Shell always on top"
+msgstr "Shell-Fenster immer oben"
+
+#: gtk/gtkconfig.c:534
+msgid "Create directories"
+msgstr "Verzeichnisse erzeugen"
+
+#: gtk/gtkconfig.c:538
+#, c-format
+msgid "Use integrated UDO%s"
+msgstr "Eingebaute UDO-Version benutzen%s"
+
+#: gtk/gtkconfig.c:552
+msgid "UDO Helpfile:"
+msgstr "UDO Hilfe-Datei:"
+
+#: gtk/gtkconfig.c:558
+msgid "Topic:"
+msgstr "Überschrift:"
+
+#: gtk/guish.c:231
+msgid "UDO can't create log file"
+msgstr "UDO kann Log-Datei nicht anlegen"
+
+#: gtk/guish.c:239
+msgid "UDO can't create tree file"
+msgstr "UDO kann Tree-Datei nicht anlegen"
+
+#: gtk/guish.c:247
+msgid "UDO can't create project file"
+msgstr "UDO kann Projekt-Datei nicht anlegen"
+
+#: gtk/guish.c:255
+msgid "UDO can't create hyphen file"
+msgstr "UDO kann Trenn-Datei nicht anlegen"
+
+#: gtk/guish.c:262
+msgid "UDO can't create output file"
+msgstr "UDO kann Ausgabe-Datei nicht anlegen"
+
+#: gtk/help.c:269
+msgid "No help file found"
+msgstr "Hilfe-Datei nicht gefunden"
+
+#: gtk/misc.c:37
+#, c-format
+msgid "%s: too early for dialog?\n"
+msgstr "%s: zu früh für Dialoge?\n"
+
+#: gtk/udogtk.c:828
+msgid "convert to ASCII"
+msgstr "ins ASCII-Format konvertieren"
+
+#: gtk/udogtk.c:829
+msgid "convert to AmigaGuide"
+msgstr "ins AmigaGuide-Format konvertieren"
+
+#: gtk/udogtk.c:830 gtk/udogtk.c:831
+msgid "convert to Apple QuickView"
+msgstr "ins Apple-QuickView-Format konvertieren"
+
+#: gtk/udogtk.c:832
+msgid "generate C sourcecode"
+msgstr "C-Sourcecode erzeugen"
+
+#: gtk/udogtk.c:833
+msgid "convert to David's Readme Compiler format"
+msgstr "ins David's-Readme-Compiler-Format konvertieren"
+
+#: gtk/udogtk.c:834
+msgid "generate PDFLaTeX sourcecode"
+msgstr "ins PDFLaTeX-Format konvertieren"
+
+#: gtk/udogtk.c:835
+msgid "convert to HP Helptag SGML"
+msgstr "ins HP-Helptag-SGML-Format konvertieren"
+
+#: gtk/udogtk.c:836
+msgid "convert to HTML"
+msgstr "ins HTML-Format konvertieren"
+
+#: gtk/udogtk.c:837
+msgid "convert to HTML Apple Help"
+msgstr "ins HTML-Apple-Help-Format konvertieren"
+
+#: gtk/udogtk.c:838 gtk/udogtk.c:839
+msgid "convert to HTML-Help"
+msgstr "ins HTML-Help-Format konvertieren"
+
+#: gtk/udogtk.c:840
+msgid "convert to GNU Texinfo"
+msgstr "ins GNU-Texinfo-Format konvertieren"
+
+#: gtk/udogtk.c:841
+msgid "convert to OS/2 IPF format"
+msgstr "ins OS/2-IPF-Format konvertieren"
+
+#: gtk/udogtk.c:842
+msgid "convert to LyX"
+msgstr "ins LyX-Format konvertieren"
+
+#: gtk/udogtk.c:843
+msgid "convert to a manualpage"
+msgstr "in eine Manualpage konvertieren"
+
+#: gtk/udogtk.c:844
+msgid "convert to nroff"
+msgstr "ins nroff-Format konvertieren"
+
+#: gtk/udogtk.c:845
+msgid "convert to Pure C Help"
+msgstr "ins Pure-C-Help-Quelltextformat konvertieren"
+
+#: gtk/udogtk.c:846
+msgid "generate Pascal sourcecode"
+msgstr "Pascal-Sourcecode erzeugen"
+
+#: gtk/udogtk.c:847
+msgid "convert to PostScript"
+msgstr "ins PostScript-Format konvertieren"
+
+#: gtk/udogtk.c:848
+msgid "convert to RTF"
+msgstr "ins Rich Text Format konvertieren"
+
+#: gtk/udogtk.c:849
+msgid "convert to ST-Guide"
+msgstr "ins ST-Guide-Quelltextformat konvertieren"
+
+#: gtk/udogtk.c:850
+msgid "convert to LaTeX"
+msgstr "ins LaTeX-Format konvertieren"
+
+#: gtk/udogtk.c:851
+msgid "collect all files and save in UDO format"
+msgstr "Dateien sammeln und in einer UDO-Datei sichern"
+
+#: gtk/udogtk.c:852
+msgid "convert to Turbo Vision Help"
+msgstr "ins Turbo-Vision-Help-Format konvertieren"
+
+#: gtk/udogtk.c:853
+msgid "convert to WinHelp"
+msgstr "ins WinHelp-Quelltextformat konvertieren"
+
+#: gtk/udogtk.c:854
+msgid "convert to WinHelp4"
+msgstr "ins WinHelp4-Quelltextformat konvertieren"
+
+#: gtk/udogtk.c:855
+msgid "convert to Linuxdoc SGML"
+msgstr "ins Linuxdoc-SGML-Format konvertieren"
+
+#: gtk/udogtk.c:861
+msgid "save always long filenames"
+msgstr "immer lange Dateinamen erzeugen"
+
+#: gtk/udogtk.c:862
+msgid "save always short filenames"
+msgstr "immer kurze Dateinamen erzeugen"
+
+#: gtk/udogtk.c:863
+msgid "don't generate index file (.ux?)"
+msgstr "kein Indexfile (.ux?) anlegen"
+
+#: gtk/udogtk.c:864
+msgid "don't generate hyphen file (.uh?)"
+msgstr "kein Hyphenfile (.uh?) anlegen"
+
+#: gtk/udogtk.c:865
+msgid "don't generate logfile (.ul?)"
+msgstr "kein Logfile (.ul?) anlegen"
+
+#: gtk/udogtk.c:866
+msgid "generate C header file with jump id's for WinHelp"
+msgstr "C-Headerfile mit WinHelp-Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:867
+msgid "generate Pascal header file with jump id's for WinHelp"
+msgstr "Pascal-Headerfile mit WinHelp-Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:868
+msgid "generate Visual-Basic header file with jump id's for WinHelp"
+msgstr "VisualBasic-Headerfile mit WinHelp-Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:869
+msgid "generate GFA header file with jump id's for WinHelp"
+msgstr "GFA-Headerfile mit WinHelp-Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:870
+msgid "write to file FILE"
+msgstr "Ausgaben in die Datei DATEI schreiben"
+
+#: gtk/udogtk.c:871
+msgid "create project file (.upr)"
+msgstr "Projekt-Datei (.upr) ausgeben"
+
+#: gtk/udogtk.c:872
+msgid "generate tree file (.ut?)"
+msgstr "Include-Baum (.ut?) ausgeben"
+
+#: gtk/udogtk.c:878
+msgid "Sets the client geometry of the main window"
+msgstr "Legt die Geometrie des Hauptfensters fest"
+
+#: gtk/udogtk.c:878
+msgid "GEOMETRY"
+msgstr "GEOMETRIE"
+
+#: gtk/udogtk.c:879
+msgid "Show version information and exit"
+msgstr "Versionsinformationen anzeigen und beenden"
+
+#: gtk/udogtk.c:880
+msgid "Show help information and exit"
+msgstr "diese Informationen anzeigen und beenden"
+
+#: gtk/udogtk.c:881 gtk/udogtk.c:882
+msgid "activate checkings"
+msgstr "Überprüfungen aktivieren"
+
+#: gtk/udogtk.c:883
+msgid "press key when udo finishs"
+msgstr "am Ende auf Tastendruck warten"
+
+#: gtk/udogtk.c:884
+msgid "suppress output to stdout and stderr"
+msgstr "Ausgaben auf stdout und stderr unterdrücken"
+
+#: gtk/udogtk.c:885
+msgid "use test mode (no outfile will be saved)"
+msgstr "Testmodus (kein Outfile erzeugen)"
+
+#: gtk/udogtk.c:886
+msgid "verbose mode"
+msgstr "ausführliche Konvertierungs-Infos anzeigen"
+
+#: gtk/udogtk.c:887
+msgid "suppress warnings"
+msgstr "Warnungen unterdrücken"
+
+#: gtk/udogtk.c:888
+msgid "suppress warnings for line lengths"
+msgstr "Warnungen für Zeilenlänge unterdrücken"
+
+#: gtk/udogtk.c:1016
+msgid "About UDO Shell"
+msgstr "Über UDO Shell"
+
+#: gtk/udogtk.c:1030
+#, c-format
+msgid ""
+"UDO Shell for Gtk\n"
+"Version %s, June 2013\n"
+"\n"
+"Copyright © 1997-2013 by\n"
+"\n"
+"Thorsten Otto\n"
+"Katharinenstr. 14\n"
+"D-45131 Essen\n"
+"Germany\n"
+msgstr ""
+"UDO Shell für Gtk\n"
+"Version %s, Juni 2013\n"
+"\n"
+"Copyright © 1997-2013 by\n"
+"\n"
+"Thorsten Otto\n"
+"Katharinenstr. 14\n"
+"D-45131 Essen\n"
+"Germany\n"
+
+#: gtk/udogtk.c:1043
+msgid "Email:"
+msgstr "Email:"
+
+#: gtk/udogtk.c:2238
+#, c-format
+msgid ""
+"Can't write Settings:\n"
+"%s\n"
+"%s\n"
+"Quit anyway?"
+msgstr ""
+"Kann Einstellungen nicht sichern:\n"
+"%s\n"
+"%s\n"
+"Trotzdem beenden?"
+
+#: gtk/udogtk.c:2384
+msgid "Choose UDO source file..."
+msgstr "UDO Quell-Datei auswählen..."
+
+#: gtk/udogtk.c:2411
+msgid "Choose destination file..."
+msgstr "Ziel-Datei auswählen..."
+
+#: gtk/udogtk.c:2497
+#, c-format
+msgid "Choose editor for %s files..."
+msgstr "Editor für %s Dateien wählen..."
+
+#: gtk/udogtk.c:2514 gtk/udogtk.c:2779
+msgid "Please select a source file first!"
+msgstr "Bitte wählen sie zunächst eine Eingabedatei aus!"
+
+#: gtk/udogtk.c:2525
+#, c-format
+msgid ""
+"The %s file\n"
+"%s\n"
+"doesn't exist.\n"
+"Start the editor anyway?"
+msgstr ""
+"Die Datei %s\n"
+"%s\n"
+"existiert nicht.\n"
+"Editor trotzdem starten?"
+
+#: gtk/udogtk.c:2538
+msgid "UDO and log"
+msgstr "UDO und Log"
+
+#: gtk/udogtk.c:2545 gtk/udogtk.h:55
+msgid "destination"
+msgstr "Ziel"
+
+#: gtk/udogtk.c:2552 gtk/udogtk.c:2559 gtk/udogtk.h:57
+msgid "parameter"
+msgstr "Parameter"
+
+#: gtk/udogtk.c:2566 gtk/udogtk.h:56
+msgid "result"
+msgstr "Ergebnis"
+
+#: gtk/udogtk.c:2615
+msgid "Directory doesn't exist!?"
+msgstr "Verzeichnis existiert nicht!?"
+
+#: gtk/udogtk.c:2654
+#, c-format
+msgid "%d Errors"
+msgstr "%d Fehler"
+
+#: gtk/udogtk.c:2658
+#, c-format
+msgid "%d Warnings"
+msgstr "%d Warnungen"
+
+#: gtk/udogtk.c:2662
+#, c-format
+msgid "%d Notes"
+msgstr "%d Anmerkungen"
+
+#: gtk/udogtk.c:2749
+msgid "Couldn't make directory!"
+msgstr "Kann Verzeichnis nicht erzeugen!"
+
+#: gtk/udogtk.c:2768
+msgid "Choose UDO binary..."
+msgstr "UDO-Programm auswählen..."
+
+#: gtk/udogtk.c:2785
+msgid "No destination file available!"
+msgstr "Keine Ziel-Datei angegeben!"
+
+#: gtk/udogtk.c:2791
+#, c-format
+msgid ""
+"The source file\n"
+"%s\n"
+"doesn't exist!"
+msgstr ""
+"Die Quell-Datei\n"
+"%s\n"
+"existiert nicht!"
+
+#: gtk/udogtk.c:2805
+msgid ""
+"The destination directory doesn't exist.\n"
+"Make directory now to prevent UDO from\n"
+"displaying an error message?"
+msgstr ""
+"Das Ziel-Verzeichnis existiert nicht.\n"
+"Soll es jetzt angelegt werden um\n"
+"Fehlermeldungen zu vermeiden?"
+
+#: gtk/udogtk.c:2846 gtk/udogtk.c:2941
+#, c-format
+msgid ""
+"The %s file\n"
+"%s\n"
+"doesn't exist."
+msgstr ""
+"Die %s Datei\n"
+"%s\n"
+"existiert nicht."
+
+#: gtk/udogtk.c:2935
+msgid ""
+"You haven't defined an editor for UDO files!\n"
+"Click the upper right button while pressing\n"
+"the ctrl key to choose an editor."
+msgstr ""
+"Es ist kein Editor für UDO-Dateien definiert!\n"
+"Drücken Sie auf den oberen rechten Knopf und\n"
+"um einen Editor auszuwählen."
+
+#: gtk/udogtk.c:2962
+msgid "log"
+msgstr "Log"
+
+#: gtk/udogtk.c:2969
+msgid "hyphenation pattern"
+msgstr "Trennvorschläge"
+
+#: gtk/udogtk.c:2976
+msgid "tree"
+msgstr "Tree"
+
+#: gtk/udogtk.c:2983 gtk/udogtk.c:2990 gtk/udogtk.c:2997 gtk/udogtk.c:3004
+msgid "map"
+msgstr "Map"
+
+#: gtk/udogtk.c:3011
+msgid "project"
+msgstr "Projekt"
+
+#: gtk/udogtk.c:3082
+msgid "udoshen.chm"
+msgstr "udoshde.chm"
+
+#: gtk/udogtk.c:3083
+#, c-format
+msgid "udo%sen.chm"
+msgstr "udo%sde.chm"
+
+#: gtk/udogtk.c:3084
+msgid "Command Index"
+msgstr "Befehlsindex"
+
+#: gtk/udogtk.c:3439
+msgid "UDO Shell"
+msgstr "UDO Shell"
+
+#: gtk/udogtk.c:3453
+msgid "_File"
+msgstr "_Datei"
+
+#: gtk/udogtk.c:3459
+msgid "Select Source..."
+msgstr "Quelle auswählen..."
+
+#: gtk/udogtk.c:3468
+msgid "Select Destination..."
+msgstr "Ziel auswählen..."
+
+#: gtk/udogtk.c:3487
+msgid "_Options"
+msgstr "_Optionen"
+
+#: gtk/udogtk.c:3493
+msgid "_Format Configuration..."
+msgstr "Format Konfiguration..."
+
+#: gtk/udogtk.c:3499
+msgid "_Settings..."
+msgstr "_Einstellungen..."
+
+#: gtk/udogtk.c:3508
+msgid "_Help"
+msgstr "_Hilfe"
+
+#: gtk/udogtk.c:3514
+msgid "_Contents"
+msgstr "_Inhalt"
+
+#: gtk/udogtk.c:3522
+msgid "_Index"
+msgstr "Inde_x"
+
+#: gtk/udogtk.c:3535
+msgid "UDO Help"
+msgstr "UDO Hilfe"
+
+#: gtk/udogtk.c:3543
+msgid "UDO Command Index"
+msgstr "UDO Befehlsindex"
+
+#: gtk/udogtk.c:3556
+msgid "_About"
+msgstr "Über"
+
+#: gtk/udogtk.c:3573
+msgid "Source:"
+msgstr "Quelle:"
+
+#: gtk/udogtk.c:3579
+msgid "Dest:"
+msgstr "Ziel:"
+
+#: gtk/udogtk.c:3585
+msgid "Param #1:"
+msgstr "Parameter #1:"
+
+#: gtk/udogtk.c:3591
+msgid "Param #2:"
+msgstr "Paraneter #2:"
+
+#: gtk/udogtk.c:3597
+msgid "Result:"
+msgstr "Ergebnis"
+
+#: gtk/udogtk.c:3619
+msgid "Select source file"
+msgstr "Quell-Datei auswählen"
+
+#: gtk/udogtk.c:3633
+msgid "Select destination file"
+msgstr "Ziel-Datei auswählen"
+
+#: gtk/udogtk.c:3654 gtk/udogtk.c:3660 gtk/udogtk.c:3666 gtk/udogtk.c:3672 gtk/udogtk.c:3678
+#: gtk/udogtk.c:3688 gtk/udogtk.c:3694 gtk/udogtk.c:3700 gtk/udogtk.c:3706 gtk/udogtk.c:3712
+#: gtk/udogtk.c:3975 gtk/udogtk.c:3981 gtk/udogtk.c:3987 gtk/udogtk.c:3993 gtk/udogtk.c:3999
+#: gtk/udogtk.c:4005 gtk/udogtk.c:4011 gtk/udogtk.c:4017
+msgid "program"
+msgstr "Programm"
+
+#: gtk/udogtk.c:3658
+msgid "Run UDO"
+msgstr "UDO starten"
+
+#: gtk/udogtk.c:3664
+msgid "Run application for destination"
+msgstr "Anwendung für Ziel-Datei starten"
+
+#: gtk/udogtk.c:3670
+msgid "Run application for parameter file #1"
+msgstr "Anwendung für Parameter-Datei #1 starten"
+
+#: gtk/udogtk.c:3676
+msgid "Run application for parameter file #2"
+msgstr "Anwendung für Parameter-Datei #2 starten"
+
+#: gtk/udogtk.c:3682
+msgid "Run application for result"
+msgstr "Anwendung für Ergebnis starten"
+
+#: gtk/udogtk.c:3692
+msgid "Run editor with source file"
+msgstr "Editor mit Quell-Datei starten"
+
+#: gtk/udogtk.c:3698
+msgid "Run editor with destination"
+msgstr "Editor mit Ziel-Datei starten"
+
+#: gtk/udogtk.c:3704
+msgid "Run editor with paramater file #1"
+msgstr "Editor mit Parameter-Datei #1 starten"
+
+#: gtk/udogtk.c:3710
+msgid "Run editor with paramater file #2"
+msgstr "Editor mit Parameter-Datei #2 starten"
+
+#: gtk/udogtk.c:3716
+msgid "Run editor with result file"
+msgstr "Editor mit Ergebnis starten"
+
+#: gtk/udogtk.c:3730
+msgid "_Format:"
+msgstr "_Format:"
+
+#: gtk/udogtk.c:3744
+msgid "Symbols"
+msgstr "Symbole"
+
+#: gtk/udogtk.c:3752 gtk/udogtk.c:3756 gtk/udogtk.c:3760 gtk/udogtk.c:3764 gtk/udogtk.c:3768
+#: gtk/udogtk.c:3772 gtk/udogtk.c:3800 gtk/udogtk.c:3804 gtk/udogtk.c:3808 gtk/udogtk.c:3812
+#: gtk/udogtk.c:3816 gtk/udogtk.c:3820
+msgid "-D"
+msgstr "-D"
+
+#: gtk/udogtk.c:3850
+msgid "Set the symbol `symbol' which can be tested in the source file with !ifset"
+msgstr "Setzen des Symbols `symbol', welches sich im Quelltext mit dem Befehl !ifset abfragen läßt"
+
+#: gtk/udogtk.c:3869
+msgid "Test Mode"
+msgstr "Test Modus"
+
+#: gtk/udogtk.c:3872
+msgid "Test syntax only, don't generate output file"
+msgstr "Nur Syntax testen, Ausgabe-Datei wird nicht erzeugt"
+
+#: gtk/udogtk.c:3874
+msgid "Press key"
+msgstr "Auf Tastendruck warten"
+
+#: gtk/udogtk.c:3877
+msgid "Wait for keypress when UDO finishes"
+msgstr "Auf Tastendruck wenn UDO beendet ist"
+
+#: gtk/udogtk.c:3879
+msgid "Verbose"
+msgstr "Ausführlich"
+
+#: gtk/udogtk.c:3882
+msgid "Print some status information while converting the source file"
+msgstr ""
+"Bei der Konvertierung werden zusätzlich Informationen über die gerade bearbeitete Datei und das "
+"gerade bearbeitete Kapitel ausgegeben"
+
+#: gtk/udogtk.c:3884
+msgid "Warnings"
+msgstr "Warnungen"
+
+#: gtk/udogtk.c:3887
+msgid "Show warning messages"
+msgstr "Warnmeldungen ausgeben"
+
+#: gtk/udogtk.c:3889
+msgid "Line Warnings"
+msgstr "Warnungen für Zeilenlänge"
+
+#: gtk/udogtk.c:3892
+msgid "Show warning messages for lines that are too short or long"
+msgstr "Warnmeldungen für zu lange oder kurze Zeilen ausgeben"
+
+#: gtk/udogtk.c:3894
+msgid "Check"
+msgstr "Überprüfungen"
+
+#: gtk/udogtk.c:3897
+msgid "Activate some additional checks"
+msgstr "Überprüfungen aktivieren"
+
+#: gtk/udogtk.c:3899
+msgid "Into Folder"
+msgstr "In Verzeichnis"
+
+#: gtk/udogtk.c:3902
+msgid "Create output file(s) in subdirectory"
+msgstr "Ausgabedatei(en) in Unterverzeichnis erzeugen"
+
+#: gtk/udogtk.c:3904
+msgid "Force long"
+msgstr "Lange Dateinamen"
+
+#: gtk/udogtk.c:3907
+msgid "Try to use long filenames even on operating systems that normally do not support them"
+msgstr ""
+"Auch auf den Systemen, die standardmässig keine langen Dateinamen unterstützen (TOS, DOS), lange "
+"Dateinamen zu erzeugen (Endung .html anstatt .htm)"
+
+#: gtk/udogtk.c:3909
+msgid "Force short"
+msgstr "Kurze Dateinamen"
+
+#: gtk/udogtk.c:3912
+msgid "Force use of short filenames"
+msgstr ""
+"Erzwingt unter Betriebssystemen, die lange Dateinamen beherrschen, die Erzeugung von kurzen "
+"Dateinamen"
+
+#: gtk/udogtk.c:3914
+msgid "Fast autoref"
+msgstr "Fast autoref"
+
+#: gtk/udogtk.c:3917
+msgid "Use newer, faster algorithm for automatic searching of references"
+msgstr "Neueren, schnelleren Algorithmus für Auto-Referenzierung benutzen"
+
+#: gtk/udogtk.c:3923
+msgid "Log file"
+msgstr "Log Datei"
+
+#: gtk/udogtk.c:3926
+msgid "Create a log file"
+msgstr "Eine Log-Datei erzeugen"
+
+#: gtk/udogtk.c:3928
+msgid "Hyphen file"
+msgstr "Trenn Datei"
+
+#: gtk/udogtk.c:3931
+msgid "Create a hyphen file"
+msgstr "Eine Datei mit Trennvorschlägen erzeugen"
+
+#: gtk/udogtk.c:3933
+msgid "Tree file"
+msgstr "Tree Datei"
+
+#: gtk/udogtk.c:3936
+msgid "Create a tree file with the include structure"
+msgstr "Eine Tree-Datei mit der Include-Struktur erzeugen"
+
+#: gtk/udogtk.c:3938
+msgid "C Map"
+msgstr "C Map"
+
+#: gtk/udogtk.c:3941
+msgid "Create a header file for C with the WinHelp-Jump-IDs"
+msgstr "Eine Header-Datei für C mit allen Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:3943
+msgid "Pascal Map"
+msgstr "Pascal Map"
+
+#: gtk/udogtk.c:3946
+msgid "Create a map file with the WinHelp-Jump-IDs for Pascal/Delphi"
+msgstr "Eine Header-Datei für Pascal/Delphi mit allen Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:3948
+msgid "VB Map"
+msgstr "VB Map"
+
+#: gtk/udogtk.c:3951
+msgid "Create a map file with the WinHelp-Jump-IDs for Visual Basic"
+msgstr "Eine Header-Datei für VisualBasic mit allen Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:3953
+msgid "GFA Map"
+msgstr "GFA Map"
+
+#: gtk/udogtk.c:3956
+msgid "Create a map file with the WinHelp-Jump-IDs for GFA Basic"
+msgstr "Eine Header-Datei für GFA Basic mit allen Jump-IDs erzeugen"
+
+#: gtk/udogtk.c:3958
+msgid "UPR file"
+msgstr "UPR Datei"
+
+#: gtk/udogtk.c:3961
+msgid ""
+"Save a file with the suffix .upr with a list of all source files, include files and generated "
+"files"
+msgstr ""
+"Eine Projekt-Datei mit der Endung .upr mit einer Liste der benutzten und erzeugten Dateien anlegen"
+
+#: gtk/udogtk.c:3979
+msgid "Start the editor with the log file"
+msgstr "Editor mit der Log-Datei starten"
+
+#: gtk/udogtk.c:3985
+msgid "Start the editor with the hyphen file"
+msgstr "Editor mit der Hyphen-Datei starten"
+
+#: gtk/udogtk.c:3991
+msgid "Start the editor with the tree file"
+msgstr "Editor mit der Tree-Datei starten"
+
+#: gtk/udogtk.c:3997
+msgid "Start the editor with the C header file"
+msgstr "Editor mit der C-Header Datei starten"
+
+#: gtk/udogtk.c:4003
+msgid "Start the editor with the Pascal header file"
+msgstr "Editor mit der Pascal-Header Datei starten"
+
+#: gtk/udogtk.c:4009
+msgid "Start the editor with the VisualBasic header file"
+msgstr "Editor mit der VisualBasic-Header Datei starten"
+
+#: gtk/udogtk.c:4015
+msgid "Start the editor with the GFA header file"
+msgstr "Editor mit der GFA-Header Datei starten"
+
+#: gtk/udogtk.c:4021
+msgid "Start the editor with the project file"
+msgstr "Editor mit der Projekt-Datei starten"
+
+#: gtk/udogtk.c:4217
+msgid "Error"
+msgstr "Fehler"
+
+#: gtk/udogtk.c:4217
+msgid "Warning"
+msgstr "Warnung"
+
+#: gtk/udogtk.c:4242
+#, c-format
+msgid "%s: error initializing GTK (wrong display?)\n"
+msgstr "%s: Fehler bei initialisieren von GTK (falsches Display?)\n"
+
+#: gtk/udogtk.c:4279
+msgid "[FILE]"
+msgstr "[DATEI]"
+
+#: gtk/udogtk.c:4282
+msgid "GTK Shell for UDO"
+msgstr "GTK Shell für UDO"
+
+#: gtk/udogtk.c:4285
+msgid "Format options"
+msgstr "Format Optionen"
+
+#: gtk/udogtk.c:4285
+msgid "Show format options"
+msgstr "Format-Optionen anzeigen"
+
+#: gtk/udogtk.c:4289
+msgid "Output options"
+msgstr "Ausgabe Optionen"
+
+#: gtk/udogtk.c:4289
+msgid "Show output options"
+msgstr "Ausgabe-Optionen anzeigen"
+
+#: gtk/udogtk.c:4312
+msgid "error parsing command line"
+msgstr "Fehler in der Kommandozeile"
+
+#: gtk/udogtk.c:4401
+#, c-format
+msgid ""
+"\n"
+"Press <RETURN>...\n"
+msgstr ""
+"\n"
+"<RETURN> drücken...\n"
+
+#: gtk/udogtk.h:54
+msgid "source"
+msgstr "Quelle"
+
+#.
+#. * filters for file chooser.
+#. * Filters are separated by newlines.
+#. * In each filter, the display string is separated from the extension list by '|'.
+#. * If a display string is not defined, the extension list is used.
+#. * An extension list may specify several wildcard specifications separated by spaces.
+#.
+#: gtk/udogtk.h:66
+msgid ""
+"*.exe *.bat *.cmd|Program files (*.exe;*.bat;*.cmd)\n"
+"*.*|All files (*.*)\n"
+msgstr ""
+"*.exe *.bat *.cmd|Programm-Dateien (*.exe;*.bat;*.cmd)\n"
+"*.*|Alle Dateien (*.*)\n"
+
+#: gtk/udogtk.h:67
+msgid ""
+"*.u*|UDO files (*.u*)\n"
+"*.*|All files (*.*)\n"
+msgstr ""
+"*.u*|UDO Dateien (*.u*)\n"
+"*.*|Alle Dateien (*.*)\n"
+
+#: gtk/udogtk.h:68
+msgid "*.*|All files (*.*)\n"
+msgstr "*.*|All Dateien (*.*)\n"
+
+#: gtk/udogtk.h:69
+msgid ""
+"*.hlp *.chm|Help files (*.hlp;*.chm)\n"
+"*.*|All files (*.*)\n"
+msgstr ""
+"*.hlp *.chm|Hilfe-Dateien (*.hlp;*.chm)\n"
+"*.*|Alle Dateien (*.*)\n"

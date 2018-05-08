@@ -1,0 +1,7 @@
+# Auto-generated: Tue Aug 12 15:44:57 CEST 2014
+gtk/gtkconfig.c
+gtk/guish.c
+gtk/help.c
+gtk/misc.c
+gtk/udogtk.c
+gtk/udogtk.h

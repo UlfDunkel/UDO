@@ -1,0 +1,511 @@
+!code_source [win]
+
+!ifdest [hh]
+!macro IMAGES 
+!else
+!macro IMAGES ../images/
+!endif
+
+!docinfo [title]	Die Anleitung zur
+!docinfo [program]	UDO-Shell für Win32
+!docinfo [version]	1.06
+!docinfo [date]		10. Juni 2013
+
+!docinfo [author]	Dirk Hagedorn
+!docinfo [address]	Asmecke 1
+!docinfo [address]	D-59846 Sundern
+!docinfo [address]	E-Mail: info@dirk-hagedorn.de
+!docinfo [address]	http://www.dirk-hagedorn.de
+!docinfo [authorimage]  (!IMAGES)dh
+
+!use_about_udo [all]
+!use_auto_subtocs [all]
+!use_auto_subsubtocs [all]
+#!use_auto_toptocs [all]
+!use_nodes_inside_index [all]
+!use_label_inside_index [all]
+!use_alias_inside_index [all]
+!use_auto_helpids [win,wh4,hh,stg]
+
+!macro HCP Microsoft Helpcompiler
+
+!ifset [Compress]
+!win_medium_compression
+!endif
+
+!tex_tetex
+
+!begin_document
+!maketitle
+!tableofcontents
+!win_helpid HID_CONTENTS
+
+################################################################
+!node Vorwort
+
+In dieser Anleitung ist mindestens eine Behauptung falsch, es kann
+auch diese sein. Zudem enthält sie mindestens einen
+Rächtschreibfehler.
+
+Die UDO-Shell für Win32 (kurz:UDOSH) soll den tippfaulen und
+DOS-Box-hassenden UDO-Benutzern --- zu denen auch ich mich zähle --- 
+unter Windows eine effiziente Möglichkeit bieten, UDO-Quelltexte zu
+bearbeiten, konvertieren und auszugeben. Diese Anleitung soll Fragen
+rund um Bedienung und Konfiguration der UDOSH beantworten.
+
+!begin_ignore
+Die UDOSH benötigt die (!V)MFC40.DLL(!v), welche nicht mitgeliefert
+wird, da sie auf 90% aller Systeme bereits installiert ist und damit
+das Archiv nur unnötig aufblähen würde. Falls Sie die MFC-DLL noch
+nicht besitzen, so können Sie sich diese von meiner Homepage unter
+http://members.aol.com/DirkHage herunterladen.
+!end_ignore
+
+!subheading Copyright
+
+Die UDOSH ist Freeware, der Sourcecode für Microsoft Visual C++ 4.x
+ist erhältlich. Die Weitergabe bzw. das Hochladen auf FTP-Server oder
+Mailboxen ist erlaubt und erwünscht, solange das Archiv unverändert
+weitergegeben wird.
+
+################################################################
+!node Bedienung
+
+Wer die UDOSH zum ersten Mal startet, wird sehr wahrscheinlich ob des
+Anblicks dieses überladenen, ziemlich unübersichtlichen Dialogs
+kopfschüttelnd zurückschrecken. Doch die Überfrachtung mit
+Kontrollelementen hat System. (!grin)
+
+!begin_center
+!image (!IMAGES)dialog
+!end_center
+
+Das Fenster ist in vier Teile geteilt:
+
+#------------------------------------------------
+!subnode Quelle, Ziel, Parameter, Ergebnis
+
+Im oberen Teil geben Sie Quell- und Zieldatei an, die bearbeitet
+werden sollen. Zudem können Sie jeder Datei zwei Programme zuweisen,
+welche diese Dateien bearbeiten sollen. Typischerweise benutzt man
+hier ein Programm zur Umwandlung und eines zum Editieren.
+
+!begin_center
+!image (!IMAGES)files
+!end_center
+
+!begin_blist [Ergebnis:]
+
+!item [Quelle:]	Geben Sie hier den Namen der UDO-Quelldatei an. Durch
+Auswahl der Schaltfläche (!V)[...](!v) öffnet sich der
+Dateiauswahldialog, in dem Sie die gewüschte Datei auswählen können.
+!item [Ziel:] Gleiches Prinzip wie oben, jedoch wird der Name der
+Zieldatei von UDO automatisch bestimmt, sobald sich der Name der
+Quelldatei oder das Ausgabeformat ändert.
+
+!item [Param 1:] Hier erkennen Sie den Namen der ersten Parameterdatei
+(bspw. die Projektdatei für den (!HCP)), sofern Sie
+unter ""Format-Konfiguration"" für das aktuelle Format eine Endung für
+die Parameterdatei vergeben haben. Der Name ist nicht veränderbar und
+wird von der UDOSH automatisch erzeugt.
+
+!item [Param 2:] Hier erkennen Sie entsprechend den Namen der zweiten Parameterdatei
+(bspw. die Fehlerdatei des (!HCP)).
+
+!item [Ergebnis:] Hier erkennen Sie den Namen der Ergebnisdatei
+(bspw. die fertige Windows-Hilfedatei), sofern Sie
+unter ""Format-Konfiguration"" für das aktuelle Format eine Endung für
+die Ergebnisdatei vergeben haben. Der Name ist nicht veränderbar und
+wird von der UDOSH automatisch erzeugt.
+
+!end_blist
+
+!smallskip
+
+Rechts neben den Eingabefeldern für die Dateinamen erkennen Sie je ein
+Paar Schaltflächen. Über diese Schaltflächen können Programme
+aufgerufen werden, denen der jeweilige Dateiname übergeben wird. Mehr
+hierzu im Abschnitt ""Programm-Konfiguration"".
+
+#------------------------------------------------
+!subnode Formate
+
+Wählen Sie einfach durch Anklicken das gewünschte Format aus. Die
+UDOSH paßt danach alle Dateinamen an und schreibt die Namen der
+zugehörigen Anwendungen in die Programm-Schaltflächen.
+
+!begin_center
+!image (!IMAGES)formats
+!end_center
+
+Wenn Sie auf die Schaltfläche ""Konfiguration"" klicken, haben Sie die
+Möglichkeit, die jeweilige Format-Konfiguration anzupassen.
+
+#------------------------------------------------
+!subnode Optionen
+
+In diesem Teil bestimmen Sie die Optionen, die dem UDO-Binary in der
+Kommandozeile übergeben werden sollen.
+
+!begin_center
+!image (!IMAGES)options
+!end_center
+
+!begin_blist [Warnmeldungen:] !compressed
+
+!item [Logfile:] Klicken Sie auf die Schaltfläche, um die Datei mit
+den Editor, den Sie für UDO angemeldet haben, zu bearbeiten.
+(De)Selektieren Sie die Checkbox, um ein Logfile (nicht) von UDO
+erzeugen zu lassen.
+
+!item [Hypfile:] Siehe oben, jedoch dreht sich hier alles um die Datei
+mit Trennvorschlägen.
+
+!item [Treefile:] Siehe oben, jedoch dreht sich hier alles um die Datei
+mit dem Aufbau der Quelldatei bezüglich Include-Files.
+
+!item [Mapfile:] Siehe oben, jedoch dreht sich hier alles um die
+Mapdatei für den (!HCP). Die Mapdatei wird nur bei der
+Umwandlung nach WinHelp angelegt.
+
+!item [Testmodus:] UDO testet lediglich die Eingabedatei und erzeugt
+ein Logfile, falls diese Option aktiviert ist.
+
+!item [Statusinfo:] UDO gibt während der Umwandlung ausführliche
+Informationen über den Ablauf der Umwandlung aus, falls diese Option
+aktiviert ist.
+
+!item [Tastendruck:] UDO wartet am Ende der Umwandlung auf einen
+Tastendruck, falls diese Option aktiviert ist.
+
+!item [Warnmeldungen:] UDO erzeugt nicht nur Fehlermeldungen, sondern
+auch Warnmeldungen, falls diese Option aktiviert ist.
+
+!item [Verzeichnis:] Die UDOSH (nicht UDO!) erzeugt abhängig vom
+Ausgabeformat ein Verzeichnis, in dem die Ausgabedatei(en) ausgegeben
+werden, falls diese Option aktiviert ist.
+
+!end_blist
+
+#------------------------------------------------
+!subnode Symbole
+
+Hier können Symbole eingegeben und (de)aktiviert werden.
+
+!begin_center
+!image (!IMAGES)symbols
+!end_center
+
+Ob Symbole gesetzt sind, läßt sich innerhalb einer UDO-Quelldatei
+mittels (!I)!/ifset~[!..](!i) abfragen. Dadurch lassen sich ohne
+Änderung an der Quelldatei unterschiedliche Ergebnisse erzeugen, indem
+man verschiedene Symbole benutzt und diese im UDO-Quelltext
+entsprechend abfragt.
+
+(!B)Beispiel:(!b) Ich benutze zumeist für WinHelp-Quelltexte ein
+Symbol namens ""Compress"". Im UDO-Quelltext füge ich folgende Zeilen
+ein:
+
+!begin_quote
+!begin_verbatim
+!ifset [Compress]
+!win_medium_compression
+!endif
+!end_verbatim
+!end_quote
+
+Während der Entwicklung eines Quelltextes deaktiviere ich das Symbol,
+damit UDO keinen Komprimierungsbefehl in der Projektdatei für den
+(!HCP) erzeugt und dieser dann wesentlich schneller aus der von UDO
+erzeugten RTF-Datei eine Windows-Hilfedatei erzeugt. Bin ich mit der
+Erstellung des Quelltextes fertig, aktiviere ich das Symbol und die
+Windows-Hilfedatei wird vom (!HCP) komprimiert.
+
+################################################################
+!node Konfiguration
+
+Dieses Kapitel beschreibt die Konfigurationsmöglichkeiten der UDOSH.
+
+#------------------------------------------------
+!subnode Programm-Konfiguration
+
+Neben den Eingabefelder für die Dateinamen sehen Sie acht paarweise
+angeordnete Schaltflächen.
+
+!begin_center
+!image (!IMAGES)files
+!end_center
+
+Die UDOSH ermöglicht es Ihnen, neben dem Aufruf von UDO zwecks
+Konvertierung bzw. eines Editors zwecks Bearbeitung der Quelldatei
+jedem Format pro Dateityp (Zieldatei, Parameterdatei, Ergebnisdatei)
+zwei beliebige Anwendungen zuzuweisen.
+
+Dadurch ist es --- bei entsprechender Konfiguration --- mit nur
+wenigen Mausklicks aus einer UDO-Quelldatei eine Windows-Hilfedatei,
+eine Homepage oder irgendeine andere Datei mit Hilfe UDOs und anderer
+Kompiler zu erzeugen.
+
+Das obige Beispiel zeigt (m)eine Konfiguration für WinHelp:
+
+!begin_enumerate !compressed
+
+!item Quelltext auswählen
+
+!item Auf die Schaltfläche mit der Beschriftung ""(!V)udo32(!v)""
+klicken: UDO wandelt die Datei um und erzeugt dabei ein Logfile, eine
+RTF- und eine HPJ-Datei.
+
+!item Auf die Schaltfläche mit der Beschriftung ""(!V)hcp(!v)""
+klicken und der (!HCP) erzeugt aus der RTF-Datei eine
+Windows-Hilfedatei.
+
+!item Falls ein Fehler aufgetreten ist, so klicke ich rufe ich den
+Editor auf, um mir die Datei mit der Endung ""(!V).err(!v)""
+anzusehen.
+
+!item Tritt kein Fehler auf, so klicke ich auf die Schaltfläche mit
+der Beschriftung ""(!V)Winhlp32(!v)"" und schon sehe ich die fertige
+Hilfedatei.
+
+!item Auf ""(!V)Pfe32(!v)"" klicken, um mit dem sehr empfehlenswerten
+""Programmer's File Editor"" den UDO-Quelltext zu bearbeiten. Weiter
+bei Punkt 2, bis alles paßt.
+
+!end_enumerate
+
+#------------------------------------------------
+!subnode Format-Konfiguration
+!win_helpid HID_FORMCONF
+!label FormatConfiguration
+
+Für jedes Format können Sie hier festlegen, welche Endungen die
+jeweiligen Dateien haben und wie sie an die zugehörigen Programme
+übergeben werden sollen.
+
+!begin_center
+!image (!IMAGES)formatconfig
+!end_center
+
+Wählen Sie zunächst im Hauptfenster das Format aus und Klicken Sie
+dann auf die Schaltfläche ""Konfiguration"", um diesen Dialog zu
+öffnen.
+
+Wählen Sie dann den Dateityp aus, den Sie anpassen möchten und passen
+Sie ggf. die Übergabeparameter an:
+
+!begin_description
+
+!item [Endung:] Geben Sie hier die Endung des Dateityps (inkl.
+führendem Punkt) ein. Bleibt für die Zieldatei dieses Feld leer, so
+verwendet die UDOSH die Standardendungen von UDO.
+
+!item [Dateiname kleingeschrieben:] UDO benutzt normalerweise den
+Dateinamen der Quelldatei. Ist dieser nicht komplett kleingeschrieben,
+so kann es zu Problemen oder ungewünschten Effekten kommen.
+Horrorbeispiel: Die Quelldatei lautet (!V)Index.u(!v), UDO erzeugt
+(!V)Index.html(!v), niemand findet Ihre Homepage, da Sie dummerweise
+allen Bekannten als URL (!V)http://.../index.html(!v) genannt haben.
+Klicken Sie hingegen diese Schaltfläche an, so wird der ausgewählte
+Dateityp immer kleingeschrieben.
+
+!item [Unix-Pfad für Anwendung:] Selektieren Sie diese Schaltfläche,
+um einer Anwendung im Dateinamen statt Backslashes Slashes zu
+übergeben. em(!TeX) kommt beispielweise nicht mit einem Dateinamen wie
+(!V)C:\TeX\foo.tex(!v) klar, sondern benötigt (!V)C:/TeX/foo.tex(!v).
+
+!end_description
+
+Falls Sie nicht wissen, wie Sie jetzt die UDOSH konfigurieren sollen,
+so schauen Sie sich einfach mal die folgenden Konfigurations-Beispiele
+an.
+
+
+#------------------------------------------------
+!subnode Einstellungen
+!win_helpid HID_SETTINGS
+!label Settings
+
+#------------------------------------------------
+!subnode Konfigurations-Beispiele
+
+#......................................
+!subsubnode Beispiel für WinHelp
+
+!begin_blist [Endung Parameterdatei 2:] !compressed
+!item [Endung Parameterdatei:]          (!V).hpj(!v)
+!item [Endung Parameterdatei 2:]        (!V).err(!v)
+!item [Endung Ergebnisdatei:]           (!V).hlp(!v)
+!end_blist
+
+!begin_blist [Endung Parameterdatei 2:] !compressed
+!item [Anwendung Parameterdatei:]       (!V)hcp.exe(!v)
+!item [Editor Parameterdatei:]          irgendeiner
+!item [Anwendung Parameterdatei 2:]     leer
+!item [Editor Parameterdatei 2:]        irgendeiner
+!item [Anwendung Ergebnisdatei:]        (!V)C:\Windows\winhlp32.exe(!v)
+!end_blist
+
+(!B)Anmerkung:(!b) (!V)hcp.exe(!v) ist der (!HCP), der
+aus einer von UDO erzeugten RTF- und HPJ-Datei eine Windows-Hilfedatei
+compiliert. Der HCP kann von der Microsoft-Website heruntergeladen
+werden.
+
+#......................................
+!subsubnode Beispiel für HTML
+
+!begin_blist [Endung Parameterdatei:] !compressed
+!item [Anwendung Zieldatei:]    (!V)C:\Programme\Internet Explorer\iexplore.exe(!v)
+!item [Editor Zieldatei:]               (!V)C:\Programme\Netscape\Communicator\Program\netscape.exe(!v)
+!item [Zieldatei:]                              [x] Dateiname kleingeschrieben
+!end_blist
+
+Falls Sie den HTML-Ouptut von UDO mit weiteren Browsern überprüfen
+möchten, kein Problem:
+
+!begin_blist [Endung Parameterdatei:] !compressed
+!item [Endung Parameterdatei:]		(!V).html(!v)
+!item [Anwendung Parameterdatei:]	(!V)C:\Lynx\lynx.exe(!v)
+!item [Editor Parameterdatei:]		(!V)C:\Programme\Netscape\Navigator\Program\netscape.exe(!v)
+!item [Parameterdatei:]				[x] Dateiname kleingeschrieben
+!end_blist
+
+(!B)Anmerkung:(!b) Sie sehen, man muß nicht unbedingt einen Editor
+anmelden, sondern kann auch zwei Browser verwenden.
+
+#......................................
+!subsubnode Beispiel für RTF
+
+!begin_blist [Endung Parameterdatei:] !compressed
+!item [Anwendung Zieldatei:]	(!V)C:\Office\Winword\winword.exe(!v)
+!item [Editor Zieldatei:]		(!V)C:\Programme\Zubehör\wordpad.exe(!v)
+!end_blist
+
+!begin_blist [Endung Parameterdatei:] !compressed
+!item [Endung Parameterdatei:]		(!V).rtf(!v)
+!item [Anwendung Parameterdatei:]	(!V)C:\Programme\Papyrus\papyrus.exe(!v)
+!end_blist
+
+#......................................
+!subsubnode Beispiel für (!LaTeX)
+
+!begin_itemize
+
+!item em(!TeX):
+
+        !begin_blist [Endung Parameterdatei:] !compressed
+        !item [Endung Parameterdatei:]          (!V).idx(!v)
+        !item [Endung Ergebnisdatei:]           (!V).dvi(!v)
+        !end_blist
+
+        !begin_blist [Endung Parameterdatei:] !compressed
+        !item [Anwendung Zieldatei:]            (!V)C:\emtex\bin\gltx2e.bat(!v)
+        !item [Anwendung Zieldatei:]            (!V)C:\emtex\bin\makeindx.exe(!v)
+        !item [Anwendung Ergebnisdatei:]        (!V)C:\emtex\bin\v.bat(!v)
+        !end_blist
+
+!item Mik(!TeX):
+
+        !begin_blist [Endung Parameterdatei:] !compressed
+        !item [Endung Parameterdatei:]          (!V).idx(!v)
+        !item [Endung Ergebnisdatei:]           (!V).dvi(!v)
+        !end_blist
+
+        !begin_blist [Endung Parameterdatei:] !compressed
+        !item [Anwendung Zieldatei:]            (!V)C:\texmf\miktex\bin\latex.exe(!v)
+        !item [Anwendung Zieldatei:]            (!V)C:\texmf\miktex\bin\makeindex.exe(!v)
+        !item [Anwendung Ergebnisdatei:]        (!V)C:\texmf\miktex\bin\yap.exe(!v)
+        !end_blist
+
+!end_itemize
+
+#......................................
+!subsubnode Beispiel für PDF(!LaTeX)
+
+Hier fehlt noch etwas!..
+
+################################################################
+!node Die INI-Datei
+
+In der Datei (!V)UDOSH.INI(!v), die im gleichen Verzeichnis wie die
+EXE-Datei erzeugt wird, sichert die UDOSH alle Einstellungen.
+
+Direktes Bearbeiten der INI-Datei ist zwar möglich, dennoch sollte man
+Abstand davon nehmen.
+
+################################################################
+!node Historie
+
+#------------------------------------------------
+!subnode Version 1.06
+
+!begin_itemize
+
+!item Einige kleinere Bugfixes
+
+!item Unterstützung für Apple-Help
+
+!item Einige Parameter und Programme vorbelegt
+
+!end_itemize
+
+#------------------------------------------------
+!subnode Version 1.04
+
+!begin_itemize
+
+!item Einige kleinere Bugfixes
+
+!item Anpassungen an die aktuelle UDO-Version
+
+!end_itemize
+
+#------------------------------------------------
+!subnode Version 1.02
+
+!begin_itemize
+
+!item Die Shell besitzt nun eine englischsprachige Oberfläche.
+
+!item WinHelp4 als Format sowie Check-Buttons für diverse Map-Files für
+WinHelp sind hinzugekommen. Diese werden ab UDO6 PL11 unterstützt.
+
+!item Es ist nun möglich, die Shell ""always on top"" zu halten. Dazu
+selektiert man den Check-Button ""AOT"".
+
+!end_itemize
+
+#------------------------------------------------
+!subnode Version 0.96
+
+!begin_itemize
+!item Alle Radiobuttons wurden in ein Kombinationsfeld verfrachtet.
+!item Platz für eine zweite Parameterdatei geschaffen.
+!item Hauptdialog etwas umsortiert.
+!item PDF(!LaTeX) wird unterstützt (UDO6 beherrscht es bald).
+!item In der Format-Konfiguration muß nun nicht mehr unbedingt ein
+Punkt vor die Endung gesetzt werden; die Shell erledigt das von
+selbst.
+!item Diese Anleitung (!grin)
+!end_itemize
+
+#------------------------------------------------
+!subnode Version 0.95
+
+!begin_itemize
+
+!item Anführungszeichen um den Dateinamen, der der UDOSH übergeben wird,
+werden entfernt.
+
+!item Dateinamen mit Leerzeichen werden mit Anführungszeichen geklammmert.
+
+!item Die Zieldatei kann nun korrekt bestimmt werden (Wilfried Behne). Nach dem
+Ändern des Zielformates muß die Zieldatei jedoch neu bestimmt werden, da die
+UDO-Shell die Zieldatei wieder anpaßt.
+
+!end_itemize
+
+
+################################################################
+!end_document
+

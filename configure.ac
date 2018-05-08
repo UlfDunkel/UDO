@@ -11,6 +11,21 @@ AC_CONFIG_SRCDIR(src/udo.c)
 
 AC_CONFIG_MACRO_DIR([m4])
 
+###############################################################################
+#
+#       Autoheader stuff
+#
+###############################################################################
+
+AH_TOP([
+#ifndef __AUTOCONFIG_H__
+#define __AUTOCONFIG_H__
+])
+
+AH_BOTTOM([
+#endif /* __AUTOCONFIG_H__ */
+])
+
 AC_CANONICAL_HOST
 
 if test "$ECHO_E" = ""; then
@@ -459,30 +474,36 @@ AC_CHECK_FUNCS([getuid geteuid getgid getegid getpid getppid lstat mkdir])
 #
 ###############################################################################
 
-with_gtk_req=unspecified
-AC_ARG_WITH(gtk,[
+AC_ARG_WITH(gui,[
 
 User interface options:
 
-]AC_HELP_STRING(--with-gtk, [Use the Gtk toolkit for the user interface.]),
-  [with_gtk="$withval"; with_gtk_req="$withval"],[with_gtk=yes])
+]AC_HELP_STRING(--with-gui, [Select gui to use @<:@automatic@:>@])],
+  [with_gui="$withval"],[with_gui=auto])
+with_gui_req="$with_gui"
 
-# if --with-gtk=/directory/ was specified, remember that directory so that
-# we can also look for the `gtk-config' program in that directory.
-case "$with_gtk" in
-  /*)
-    gtk_dir="$with_gtk"
-    ;;
-  *)
-    gtk_dir=""
-    ;;
+case $with_gui in
+   auto)
+      ;;
+   win32)
+      if test $TARGET_OS != win32; then
+         AC_MSG_ERROR([win32 gui is only available for windows])
+      fi
+      ;;
+   gem)
+      if test $TARGET_OS != tos; then
+         AC_MSG_ERROR([GEM gui is only available for TOS])
+      fi
+      ;;
+   sdl|sdl2)
+      ;;
+   none)
+      ;;
+   gtk2|gtk3)
+      ;;
+   *) AC_MSG_ERROR([unsupported GUI $with_gui])
+      ;;
 esac
-
-HANDLE_X_PATH_ARG(with_gtk, --with-gtk, Gtk)
-
-if test "$with_gtk" != yes -a "$with_gtk" != no ; then
-  AC_MSG_ERROR([must be yes or no: --with-gtk=$with_gtk])
-fi
 
 
 parse_gtk_version_string() {
@@ -563,8 +584,7 @@ AH_TEMPLATE([HAVE_XML],[Define this if you have the XML library.])
 AH_TEMPLATE([HAVE_GTKHTML], [Define this if you have the GtkHtml library.])
 AH_TEMPLATE([HAVE_GTKHTML2], [Define this if you have the GtkHtml2 library.])
 AH_TEMPLATE([HAVE_GDK_PIXBUF],
-	    [Define this if you have the GDK_Pixbuf library installed.  Some
-	    of the demos can make use of this if it is available.])
+	    [Define this if you have the GDK_Pixbuf library installed.])
 AH_TEMPLATE([HAVE_SOUP], [Define this if you have the Soup library.])
 AH_TEMPLATE([HAVE_NEWSOUP], [Define this if you have the Soup library and it has cookies support.])
 
@@ -622,9 +642,9 @@ have_gtkhtml2=no
 ac_atk_version="unknown"
 
 
-if test "$with_gtk" = yes; then
+if test "$with_gui" = gtk2 -o "$with_gui" = gtk3 -o "$with_gui" = auto; then
   ok="yes"
-  gtk2_min_version="2.6.0"
+  gtk2_min_version="2.16.0"
   pkgs=''
   pkg_check_version         gmodule-2.0  2.0.0
   pkg_check_version         gthread-2.0  2.0.0
@@ -700,7 +720,7 @@ if test "$with_gtk" = yes; then
   if test "$have_gtk3" = no; then
     if test -n "$ac_gtk3_version_string" ; then
       if test "$req" = "gtk+-3.0"; then
-        if $pkg_config --exists gtk+-.0; then
+        if $pkg_config --exists gtk+-3.0; then
           jurassic_gtk=yes
         fi
       else
@@ -713,10 +733,26 @@ if test "$with_gtk" = yes; then
     jurassic_gtk=no
   fi
 
+  if test "$have_gtk2" = yes; then
+    if test "$with_gui" = auto -o "$with_gui" = gtk2; then
+      gtk_pkgs="$gtk2_pkgs"
+      glib_pkgs="$glib2_pkgs"
+      with_gui=gtk2
+      gtk_version=$ac_gtk2_version
+      gui_version=$ac_gtk2_version_string
+    fi
+  fi
   if test "$have_gtk3" = yes; then
-    # FIXME: have to make sure to find a version that was compiled for Gtk3
-    :
-  elif test "$have_gtk2" = yes; then
+    if test "$with_gui" = auto -o "$with_gui" = gtk3; then
+      gtk_pkgs="$gtk3_pkgs"
+      glib_pkgs="$glib3_pkgs"
+      with_gui=gtk3
+      gtk_version=$ac_gtk3_version
+      gui_version=$ac_gtk3_version_string
+    fi
+  fi
+
+  if test "$with_gui" = gtk2; then
   ok="yes"
   pkgs=''
   pkg_check_version      libgtkhtml-2.0  2.0.0
@@ -766,14 +802,6 @@ if test "$with_gtk" = yes; then
   fi
   fi
 
-  if test "$have_gtk3" = yes; then
-     gtk_pkgs="$gtk3_pkgs"
-     glib_pkgs="$glib3_pkgs"
-  elif test "$have_gtk2" = yes; then
-     gtk_pkgs="$gtk2_pkgs"
-     glib_pkgs="$glib2_pkgs"
-  fi
-
   if test "$have_gtk2" = yes -o "$have_gtk3" = yes; then
     AC_CACHE_CHECK([for Gtk includes], ac_cv_gtk_config_cflags,
                    [ac_cv_gtk_config_cflags=`$pkg_config --cflags $gtk_pkgs`])
@@ -797,15 +825,15 @@ if test "$with_gtk" = yes; then
   ac_atk_version=$ac_cv_atk_version
   
   GTK_DATADIR=""
-  if test "$have_gtk3" = yes; then
+  if test "$with_gui" = gtk3; then
     GTK_DATADIR=`$pkg_config --variable=prefix gtk+-3.0`
     GTK_DATADIR="$GTK_DATADIR/share"
-  elif test "$have_gtk2" = yes; then
+  elif test "$with_gui" = gtk2; then
     GTK_DATADIR=`$pkg_config --variable=prefix gtk+-2.0`
     GTK_DATADIR="$GTK_DATADIR/share"
   fi
 
-  if test "$have_gtk2" = yes -o "$have_gtk3" = yes; then
+  if test "$with_gui" = gtk3 -o "$with_gui" = gtk2; then
     INCLUDES="$INCLUDES $ac_gtk_config_cflags"
     GTK_CFLAGS="$GTK_CFLAGS $ac_gtk_config_cflags"
     GTK_LIBS="$GTK_LIBS $ac_gtk_config_libs"
@@ -861,10 +889,16 @@ if test "$with_gtk" = yes; then
   done
   GTKHTML_LIBS="$tmp_flags"
 fi
+if test "$have_gtk2" = no -a "$with_gui" = gtk2; then
+	AC_MSG_ERROR([*** GTK2 was requested, but was not found ***])
+fi
+if test "$have_gtk3" = no -a "$with_gui" = gtk3; then
+	AC_MSG_ERROR([*** GTK3 was requested, but was not found ***])
+fi
 
-AM_CONDITIONAL(HAVE_GTK, test x$have_gtk2 != xno -o x$have_gtk3 != xno)
-AM_CONDITIONAL(HAVE_GTK2, test x$have_gtk2 != xno)
-AM_CONDITIONAL(HAVE_GTK3, test x$have_gtk3 != xno)
+AM_CONDITIONAL(HAVE_GTK, test "$with_gui" = gtk2 -o "$with_gui" = gtk3)
+AM_CONDITIONAL(HAVE_GTK2, test "$with_gui" = gtk2)
+AM_CONDITIONAL(HAVE_GTK3, test "$with_gui" = gtk3)
 AM_CONDITIONAL(HAVE_GTKHTML, test x$have_gtkhtml != xno)
 AM_CONDITIONAL(HAVE_GTKHTML2, test x$have_gtkhtml2 != xno)
 
@@ -927,6 +961,7 @@ fi
 
 AC_CONFIG_COMMANDS([pofiles],[
 	sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile
+        sed -e "/POTFILES =/r udosh/po/POTFILES" udosh/po/Makefile.in > udosh/po/Makefile 
       ])
 
 AC_OUTPUT([
@@ -935,5 +970,15 @@ AC_OUTPUT([
 	doc/Makefile
 	doc/en/Makefile
 	doc/de/Makefile
+	udosh/Makefile
+	udosh/win32/Makefile
+	udosh/win32/res/Makefile
+	udosh/win32/Manual/Makefile
+	udosh/gtk/Makefile
+	udosh/gtk/icons/Makefile
+	udosh/gtk/Manual/Makefile
+	udosh/gtk/Manual/de/Makefile
+	udosh/gtk/Manual/en/Makefile
 	po/Makefile.in
+	udosh/po/Makefile.in
 ])
