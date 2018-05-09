@@ -1671,9 +1671,6 @@ LOCAL void c_xlink(char *s, _BOOL inside_b4_macro)
             convert_tilde(Param[1]);
             convert_tilde(Param[2]);
             
-            replace_2at_by_1at(Param[2]);
-            replace_2at_by_1at(Param[1]);
-            
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
             
@@ -4822,7 +4819,7 @@ GLOBAL _BOOL add_define(void)
 }
 
 
-static void free_def(_UWORD d)
+static void free_def(size_t d)
 {
 	if (defs[d] != NULL)
 	{

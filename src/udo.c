@@ -1792,7 +1792,6 @@ LOCAL _BOOL str_for_os(const char *s)
 #endif
 
 #ifdef __WIN32__
-   flag |= strstr(s, "dos") != NULL;
    flag |= strstr(s, "win") != NULL;
 #endif
 
@@ -11905,8 +11904,8 @@ LOCAL void save_htmlhelp_project(void)
    char hhkname[MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1];
    char aboname[MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1];
    const char *jump1text;
-   unsigned long properties = 0x63520;
-   unsigned long buttons = 0x304e;
+   unsigned long properties = 0x63520UL;
+   unsigned long buttons = 0x304eUL;
    
    if (bTestmode)
       return;
