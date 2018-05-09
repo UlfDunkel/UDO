@@ -5050,10 +5050,13 @@ GLOBAL void c_begin_document(void)
          if (laydat.nodesize[i] == 0)
             laydat.nodesize[i] = laydat.propfontsize + kps_structure_height[i];
       }
-         
+      
       outln(UDO2PS);                      /* in udo2ps.h definiert (c) by Christian Krueger und Norbert Hanz */
       outln(UDO2PDF);                     /* in udo2pdf.h definiert (c) by Norbert Hanz */
-
+#if 0 /* now uses default from abo.c */
+      outln(destlang == TOGER ? UDO2PDF_aboutudo_ger : UDO2PDF_aboutudo_eng);
+#endif
+      
       if (laydat.paper != NULL)
       {
          for (i = 0; i < MAXPAPERSIZE; i++)
@@ -5111,15 +5114,12 @@ GLOBAL void c_begin_document(void)
          voutlnf("[ /Title (%s)", titdat.title);
       else if (titdat.program != NULL)
          voutlnf("[ /Title (%s)", titdat.program);
+      else
+         outln("[ /Title ()");
 
-      if (titdat.author != NULL)
-         voutlnf("  /Author (%s)", titdat.author);
-      
-      if (titdat.description != NULL)
-         voutlnf("  /Subject (%s)", titdat.description);
-      
-      if (titdat.keywords != NULL)
-         voutlnf("  /Keywords (%s)", titdat.keywords);
+      voutlnf("  /Author (%s)", titdat.author ? titdat.author : "");
+      voutlnf("  /Subject (%s)", titdat.description ? titdat.description : "");
+      voutlnf("  /Keywords (%s)", titdat.keywords ? titdat.keywords : "");
       
       voutlnf("  /Creator (UDO %s)", UDO_VERSION_STRING_OS);
       voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
@@ -5310,6 +5310,7 @@ GLOBAL void c_end_document(void)
       
    case TOKPS:
       outln("newpage");
+#if 0 /* now uses default from abo.c */
       if (use_about_udo)
       {
          outln("/NodeName (About UDO) def");
@@ -5318,6 +5319,7 @@ GLOBAL void c_end_document(void)
          voutlnf("(%s) (%s) (%s) %s", UDO_VERSION_STRING, UDO_OS, UDO_URL, destlang == TOGER ? "aboutUDO_ger" : "aboutUDO_eng");
          outln("newpage");
       }
+#endif
       break;
    }
 

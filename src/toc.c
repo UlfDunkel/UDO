@@ -6585,8 +6585,6 @@ LOCAL void make_node(TOCTYPE currdepth, const _BOOL popup, _BOOL invisible)
       output_aliasses();
       break;
    }
-
-   about_unregistered();
 }
 
 

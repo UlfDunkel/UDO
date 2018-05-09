@@ -33,7 +33,6 @@
 *
 *-------------------------------------------------------------------------------
 *  Things to do : - output_about_udo(): check if TOKPS does still not support this
-*                 - remove about_unregistered()
 *
 *-------------------------------------------------------------------------------
 *  History:
@@ -75,6 +74,9 @@
 #include "sty.h"
 #include "toc.h"
 #include "udo.h"
+#include "udointl.h"
+#include "lang.h"
+
 #include "export.h"
 #include "abo.h"
 #include "str.h"
@@ -142,7 +144,7 @@ GLOBAL FILE *udofile_tmpname(const char *templatename)
    }
 #endif
    {
-   char  *tp;      /* ^ temp dir path */
+   char  *tp;      /* temp dir path */
 
    tp = NULL;
 
@@ -203,7 +205,7 @@ LOCAL void output_about_udo_ger(FILE *f)
    fprintf(f, "!udolink\n");
    fprintf(f, "\n");
    fprintf(f, "UDO ist ein Programm, mit dem Sie Textdateien, die im\n");
-   fprintf(f, "Universal-Document-Format erstellt wurden, in (!\"u)ber \n");
+   fprintf(f, "Universal-Document-Format erstellt wurden, in (!\"u)ber\n");
    fprintf(f, "25 Zielformate umwandeln k(!\"o)nnen.\n");
    fprintf(f, "\n");
    fprintf(f, "Weitere Informationen sowie die aktuellen Versionen finden Sie im Internet unter (!nl)\n");
@@ -228,22 +230,22 @@ LOCAL void output_about_udo_ger(FILE *f)
 LOCAL void output_about_udo_eng(FILE *f)
 {
    fprintf(f, "%s\n", CMD_BEGIN_CENTER);
-   fprintf(f, "This text was made with\n");
+   fprintf(f, _("This text was made with\n"));
    fprintf(f, "\n");
    fprintf(f, "(!B)UDO(!b) (!nl)\n");
    fprintf(f, "%s (!nl)\n", UDO_VERSION_STRING);
    fprintf(f, "%s\n", UDO_OS);
    fprintf(f, "\n");
    fprintf(f, UDO_COPYRIGHT_TEXT);
-   fprintf(f, "UDO is Open Source (!nl)\n");
+   fprintf(f, _("UDO is Open Source (!nl)\n"));
    fprintf(f, "\n");
    fprintf(f, "!udolink\n");
    fprintf(f, "\n");
-   fprintf(f, "UDO is an application that converts text files which you \n");
-   fprintf(f, "have written in Universal Document Format, into more than \n");
-   fprintf(f, "25 different target formats.\n");
+   fprintf(f, _("UDO is an application that converts text files which you\n"));
+   fprintf(f, _("have written in Universal Document Format, into more than\n"));
+   fprintf(f, _("25 different target formats.\n"));
    fprintf(f, "\n");
-   fprintf(f, "Get further information and the current versions on the Internet at (!nl)\n");
+   fprintf(f, _("Get further information and the current versions on the Internet at (!nl)\n"));
    fprintf(f, "\n");
    fprintf(f, "(!url [%s] [])\n", UDO_URL);
    fprintf(f, "%s\n\n", CMD_END_CENTER);
@@ -282,9 +284,12 @@ GLOBAL void output_about_udo(void)
    {
    case TOSRC:
    case TOSRP:
-   case TOKPS:
       /* nur eine kurze Info in c_end_document ausgeben */
       return;
+#if 0 /* now uses default from abo.c */
+   case TOKPS:
+      return;
+#endif
    }
 
    uif = udofile_tmpname("_udoinfo");
@@ -347,26 +352,6 @@ GLOBAL void add_pass1_about_udo(void)
 {
    output_about_udo();
    token_reset();
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  about_unregistered():
-*     output "About UDO" in unregistered UDO versions
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void about_unregistered(void)
-{
-   /* UDO is now Open Source */
-   /* this method is not needed anymore */
 }
 
 

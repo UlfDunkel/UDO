@@ -186,7 +186,7 @@
 #define PASSU                 2
 
 #define LINELEN            4092           /* max. Zeilenlaenge */
-#define MAX_TOKEN_LEN      2048           /* max. Tokenlaenge, v6.3.9: 199 (alt: 128) */
+#define MAX_TOKEN_LEN      2048           /* max. Tokenlaenge */
 #define MAX_TOKENS          800           /* max. Worte in einem Absatz */
 
 #define MAXZEILE             70           /* max. Laenge einer Ausgabezeile */
