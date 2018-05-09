@@ -304,7 +304,7 @@ static _UWORD const u_CODE_TOS[] =             /* CODE_TOS */
    U_GreekSmallLetterPi,                  /* 0xe3  U_GreekSmallLetterPi */
    U_GreekCapitalLetterSigma,             /* 0xe4  U_GreekCapitalLetterSigma */
    U_GreekSmallLetterSigma,               /* 0xe5  U_GreekSmallLetterSigma */
-   U_GreekSmallLetterMu,                  /* 0xe6  U_GreekSmallLetterMu */
+   U_MicroSign,                           /* 0xe6  U_MicroSign */
    U_GreekSmallLetterTau,                 /* 0xe7  U_GreekSmallLetterTau */
    U_GreekCapitalLetterPhi,               /* 0xe8  GREEK CAPITAL LETTER PHI */
    U_GreekCapitalLetterTheta,             /* 0xe9  GREEK CAPITAL LETTER THETA */
