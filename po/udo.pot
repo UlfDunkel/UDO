@@ -8,7 +8,7 @@ msgid  ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-28 03:54+0100\n"
+"POT-Creation-Date: 2016-04-10 11:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/chr.c:3662
+#: ../src/chr.c:3666
 #, c-format
 msgid  "%x maybe not available in LaTeX"
 msgstr ""
@@ -260,7 +260,7 @@ msgstr ""
 msgid  "too many environments used"
 msgstr ""
 
-#: ../src/env.c:3102
+#: ../src/env.c:3103
 msgid  "'!item' outside environment"
 msgstr ""
 
@@ -522,58 +522,58 @@ msgstr ""
 msgid  "AmigaGuide cannot link to label '%s'"
 msgstr ""
 
-#: ../src/par.c:1772
+#: ../src/par.c:1785
 msgid  "xlink needs WinHelp destination topic"
 msgstr ""
 
-#: ../src/par.c:1778
+#: ../src/par.c:1791
 msgid  "xlink needs WinHelp destination file"
 msgstr ""
 
-#: ../src/par.c:1785
+#: ../src/par.c:1798
 msgid  "use (!xlink [text] [topic@foo.hlp])"
 msgstr ""
 
-#: ../src/par.c:3672
+#: ../src/par.c:3685
 msgid  "too many parameters used"
 msgstr ""
 
-#: ../src/par.c:3918
+#: ../src/par.c:3931
 #, c-format
 msgid  "not replaced %3lu:%3lu: %c%c%c %s %s\n"
 msgstr ""
 
-#: ../src/par.c:4424
+#: ../src/par.c:4437
 #, c-format
 msgid  "%x not allowed in macro name"
 msgstr ""
 
-#: ../src/par.c:4430
+#: ../src/par.c:4443
 #, c-format
 msgid  "redefining internal command (!%s)"
 msgstr ""
 
-#: ../src/par.c:4547
+#: ../src/par.c:4560
 #, c-format
 msgid  "macro name longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4576
+#: ../src/par.c:4589
 #, c-format
 msgid  "macro contents longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4717
+#: ../src/par.c:4730
 #, c-format
 msgid  "definition name longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4750
+#: ../src/par.c:4763
 #, c-format
 msgid  "definition contents longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4893
+#: ../src/par.c:4906
 #, c-format
 msgid  "possibly undefined macro: %s"
 msgstr ""
@@ -618,63 +618,63 @@ msgstr ""
 msgid  "invalid table_alignment '%s'"
 msgstr ""
 
-#: ../src/toc.c:5717
+#: ../src/toc.c:5731
 #: ../src/udo.c:2531
 msgid  "Sorting index..."
 msgstr ""
 
-#: ../src/toc.c:9201
+#: ../src/toc.c:9231
 msgid  "mapping not numeric or not of type integer"
 msgstr ""
 
-#: ../src/toc.c:9410
+#: ../src/toc.c:9440
 msgid  "missing node name"
 msgstr ""
 
-#: ../src/toc.c:11158
+#: ../src/toc.c:11211
 msgid  "Checking nodes, labels and aliases..."
 msgstr ""
 
-#: ../src/toc.c:11165
+#: ../src/toc.c:11218
 #, c-format
 msgid  "label \"%s\" used twice"
 msgstr ""
 
-#: ../src/toc.c:11168
-#: ../src/toc.c:11178
+#: ../src/toc.c:11221
+#: ../src/toc.c:11231
 msgid  "as a label"
 msgstr ""
 
-#: ../src/toc.c:11170
-#: ../src/toc.c:11180
+#: ../src/toc.c:11223
+#: ../src/toc.c:11233
 msgid  "as a node"
 msgstr ""
 
-#: ../src/toc.c:11172
-#: ../src/toc.c:11182
+#: ../src/toc.c:11225
+#: ../src/toc.c:11235
 msgid  "as an alias"
 msgstr ""
 
-#: ../src/toc.c:11174
-#: ../src/toc.c:11184
+#: ../src/toc.c:11227
+#: ../src/toc.c:11237
 #, c-format
 msgid  " in node '%s'"
 msgstr ""
 
-#: ../src/toc.c:11208
+#: ../src/toc.c:11261
 msgid  "Checking HTML file names..."
 msgstr ""
 
-#: ../src/toc.c:11229
+#: ../src/toc.c:11282
 #, c-format
 msgid  "file name \"%s\" used in \"%s\" and \"%s\""
 msgstr ""
 
-#: ../src/toc.c:11264
+#: ../src/toc.c:11317
 msgid  "Checking usage of labels and aliases..."
 msgstr ""
 
-#: ../src/toc.c:11271
+#: ../src/toc.c:11324
 #, c-format
 msgid  "label/alias '%s' in node '%s' wasn't referenced"
 msgstr ""
@@ -811,72 +811,72 @@ msgstr ""
 msgid  "too many files opened"
 msgstr ""
 
-#: ../src/udo.c:8533
+#: ../src/udo.c:8534
 msgid  "too many !if"
 msgstr ""
 
-#: ../src/udo.c:9006
+#: ../src/udo.c:9007
 #, c-format
 msgid  "language %s not supported"
 msgstr ""
 
-#: ../src/udo.c:9044
+#: ../src/udo.c:9045
 #, c-format
 msgid  "more than %d buttons defined"
 msgstr ""
 
-#: ../src/udo.c:10071
+#: ../src/udo.c:10072
 msgid  "Recursive !include detected"
 msgstr ""
 
-#: ../src/udo.c:10672
+#: ../src/udo.c:10673
 msgid  "!code is deprecated, use !code_source instead"
 msgstr ""
 
-#: ../src/udo.c:10820
+#: ../src/udo.c:10821
 msgid  "check this paragraph"
 msgstr ""
 
 #. Es kann nur eine geben
-#: ../src/udo.c:11196
+#: ../src/udo.c:11197
 msgid  "UDO cannot handle nested tables"
 msgstr ""
 
-#: ../src/udo.c:12164
+#: ../src/udo.c:12193
 #, c-format
 msgid  "Output (%lu lines) written to %s"
 msgstr ""
 
-#: ../src/udo.c:12168
+#: ../src/udo.c:12197
 #, c-format
 msgid  "Output: %lu lines"
 msgstr ""
 
-#: ../src/udo.c:12174
+#: ../src/udo.c:12203
 #, c-format
 msgid  "Warnings: %d"
 msgstr ""
 
-#: ../src/udo.c:12180
+#: ../src/udo.c:12209
 #, c-format
 msgid  "Notes:    %d"
 msgstr ""
 
-#: ../src/udo.c:12186
+#: ../src/udo.c:12215
 #, c-format
 msgid  "Errors:   %d"
 msgstr ""
 
-#: ../src/udo.c:12342
+#: ../src/udo.c:12371
 #, c-format
 msgid  "source and destination file are equal: <%s>"
 msgstr ""
 
-#: ../src/udo.c:12381
+#: ../src/udo.c:12410
 msgid  "Pass 1..."
 msgstr ""
 
-#: ../src/udo.c:12449
+#: ../src/udo.c:12478
 msgid  "Pass 2..."
 msgstr ""
 
