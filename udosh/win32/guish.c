@@ -190,13 +190,6 @@ GLOBAL void multitasking_interrupt(void)
 
 /*** ---------------------------------------------------------------------- ***/
 
-GLOBAL void unregistered_copyright(void)
-{
-	/* Dummy-Funktion */
-}
-
-/*** ---------------------------------------------------------------------- ***/
-
 GLOBAL _BOOL break_action(void)
 {
 	if (!IsWindow(statusHwnd))

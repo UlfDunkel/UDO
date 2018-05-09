@@ -5218,7 +5218,6 @@ GLOBAL void c_end_document(void)
 
    print_index();
 
-   unregistered_copyright();
    bInsideDocument= FALSE;
 
    switch (desttype)

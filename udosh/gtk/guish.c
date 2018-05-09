@@ -272,13 +272,6 @@ void multitasking_interrupt(void)
 
 /*** ---------------------------------------------------------------------- ***/
 
-void unregistered_copyright(void)
-{
-	/* Dummy-Funktion */
-}
-
-/*** ---------------------------------------------------------------------- ***/
-
 _BOOL break_action(void)
 {
 	return cancel_pressed;

@@ -73,5 +73,4 @@ GLOBAL void warning_err_hypfile(void);
 GLOBAL void warning_err_idxfile(void);
 GLOBAL void warning_err_destination(void);
 GLOBAL void multitasking_interrupt(void);
-GLOBAL void unregistered_copyright(void);
 GLOBAL _BOOL break_action(void);
