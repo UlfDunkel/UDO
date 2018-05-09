@@ -11967,8 +11967,8 @@ LOCAL void save_htmlhelp_project(void)
       hhkname,
       old_outfile.name, outfile.suff, /* default file */
       old_outfile.name, outfile.suff, /* home button file */
-      jump1text,
       aboname,
+      jump1text,
       buttons
       );
 
