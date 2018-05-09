@@ -1380,9 +1380,20 @@ GLOBAL void warning_no_isochar(const char c)
 *
 ******************************************|************************************/
 
-GLOBAL void warning_node_too_deep(void)
+GLOBAL void warning_node_too_deep(_BOOL popup, _BOOL invisible)
 {
-   warning_message(_("structure depth exceeded, using subsubsubsubnode"));
+   char n[100 + TOC_MAXDEPTH * 3];
+   int i;
+   
+   strcpy(n, "!");
+   if (popup)
+      strcat(n, "p");
+   for (i = 0; i < TOC_MAXDEPTH - 1; i++)
+      strcat(n, "sub");
+   strcat(n, "node");
+   if (invisible)
+      strcat(n, "*");
+   warning_message(_("structure depth exceeded, using %s"), n);
 }
 
 

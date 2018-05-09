@@ -131,7 +131,7 @@ GLOBAL void warning_cannot_recode_utf8(const char *utf, const char *dcs);
 GLOBAL void warning_no_isochar(const char c);
 GLOBAL void warning_buffer_overrun(const char *func, const char *place, size_t n, size_t max);
 
-GLOBAL void warning_node_too_deep(void);
+GLOBAL void warning_node_too_deep(_BOOL popup, _BOOL invisible);
 
 
    /* --- inquiry functions --- */

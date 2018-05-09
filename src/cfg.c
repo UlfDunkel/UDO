@@ -669,7 +669,7 @@ const char  *prgos)      /* ^ program OS */
       }
    }
 
-/* PL14: Bei TOS und MS-DOS auch C:\udo.ini suchen, da einige Leute */
+/* Bei TOS und MS-DOS auch C:\udo.ini suchen, da einige Leute */
 /*       es einfach nicht gebacken bekommen, $HOME zu setzen.       */
 
 #if defined(__TOS__) || defined(__MSDOS__) || defined(__WIN32__)
