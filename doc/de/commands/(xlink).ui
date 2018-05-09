@@ -25,6 +25,7 @@ Kommt in einem Verweis eine Tilde vor, so braucht dieser bei Verwendung im (!KKW
 !end_xlist
 
 (!EXAMPLE)
+!ifdest [wh4]
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 (!xlink [Internet Explorer] [Inhaltsverzeichnis@iexplore.hlp]) 
@@ -32,5 +33,18 @@ Kommt in einem Verweis eine Tilde vor, so braucht dieser bei Verwendung im (!KKW
 (!EXAMPLE_AFTER)
 (!xlink [Internet Explorer] [Inhaltsverzeichnis@iexplore.hlp]) 
 (!EXAMPLE_END)
+!else
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!xlink [http://www.google.de/] [])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!xlink [http://www.google.de/] [])
+(!EXAMPLE_END)
+!endif
 
 !end_node

@@ -22,6 +22,7 @@ magazine in a HTML file. If (!LINK) is empty the contents of
 !end_xlist
 
 (!EXAMPLE)
+!ifdest [wh4]
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 (!xlink [Internet Explorer] [Contents@iexplore.hlp]) 
@@ -29,5 +30,18 @@ magazine in a HTML file. If (!LINK) is empty the contents of
 (!EXAMPLE_AFTER)
 (!xlink [Internet Explorer] [Contents@iexplore.hlp]) 
 (!EXAMPLE_END)
+!else
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!xlink [http://www.google.de/] [])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!xlink [http://www.google.de/] [])
+(!EXAMPLE_END)
+!endif
 
 !end_node
