@@ -506,7 +506,7 @@ GLOBAL void error_open_logfile(const char *s)
 
 GLOBAL void error_open_hypfile(const char *s)
 {
-   error_message(_("couldn't open hypfile <%s>"), s);
+   error_message(_("couldn't open hyphen file <%s>"), s);
    errno_logln(s);
 }
 
@@ -1317,11 +1317,11 @@ GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll,
 *
 ******************************************|************************************/
 
-GLOBAL void warning_cannot_recode(const char c, const char *se, const char *te)
+GLOBAL void warning_cannot_recode(unsigned int c, const char *se, const char *te)
 {
    if (iUdopass == PASS2)
    {
-      warning_message(_("cannot convert %c (%s #%u) to %s"), c, se, ((_UBYTE)c), te);
+      warning_message(_("cannot convert %s #0x%x to %s"), se, c, te);
    }
 }
 
