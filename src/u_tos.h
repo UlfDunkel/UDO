@@ -324,7 +324,7 @@ static _UWORD const u_CODE_TOS[] =             /* CODE_TOS */
    U_DivisionSign,                        /* 0xf6  U_DivisionSign */
    U_AlmostEqualTo,                       /* 0xf7  U_AlmostEqualTo */
    U_DegreeSign,                          /* 0xf8  U_DegreeSign */
-   U_Bullet,                              /* 0xf9  U_Bullet */
+   U_Bullet,         		              /* 0xf9  U_Bullet */ /* not quite right; should be 0x2219 = U_BulletOperator */
    U_MiddleDot,                           /* 0xfa  U_MiddleDot */
    U_SquareRoot,                          /* 0xfb  U_SquareRoot */
    U_SuperscriptLatinSmallLetterN,        /* 0xfc  U_SuperscriptLatinSmallLetterN */
