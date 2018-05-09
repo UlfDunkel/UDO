@@ -2411,6 +2411,7 @@ GLOBAL void c_begin_enumerate(void)
                
             default:
                out("</p>");               /* close previous paragraph first */
+               break;
             }
          }
       }
@@ -3593,10 +3594,12 @@ GLOBAL void c_item(void)
          }
 
          if (!bEnvCompressed[iEnvLevel])
+         {
             um_strcat(sBig, "<p>", sizeof(sBig), "c_item[22]");
 
-         bParagraphOpen = TRUE;
-         
+	        bParagraphOpen = TRUE;
+         }
+            
          bEnv1stPara[iEnvLevel] = TRUE;
          break;
 
@@ -3674,7 +3677,7 @@ GLOBAL void c_item(void)
             sprintf(sBig, "<tr><td>&nbsp;</td>\n<td>%s", sHtmlPropfontStart);
          }
          
-         bParagraphOpen = TRUE;
+         /* bParagraphOpen = TRUE; */
          break;
       }
       
