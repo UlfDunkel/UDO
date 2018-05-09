@@ -10027,7 +10027,7 @@ LOCAL _BOOL save_the_alias(const char *filename, const char *suffix, tWinMapData
    char           hid[256],
                   f[512];
    FILE          *file;
-   
+   _BOOL saved_any = FALSE;
    
    strcpy(f, filename);
    strcat(f, suffix);
@@ -10036,8 +10036,6 @@ LOCAL _BOOL save_the_alias(const char *filename, const char *suffix, tWinMapData
    
    if (file == NULL)
       return FALSE;
-
-   save_upr_entry_outfile(f);
 
    fprintf(file, "%s alias-file of %s, made with UDO%s %s\n\n",
       data->remOn, 
@@ -10070,8 +10068,12 @@ LOCAL _BOOL save_the_alias(const char *filename, const char *suffix, tWinMapData
             node2NrWinhelp(hid, toc_table[i]->labindex);
          }
 
-         strinsert(hid, sDocWinPrefixID);
-
+         if (strcmp(hid, WIN_UDO_NODE_NAME) != 0)
+         {
+         	strinsert(hid, sDocWinPrefixID);
+            saved_any = TRUE;
+         }
+         
          fprintf(file, "%-*s =%s%s ; %s\n",
             MAX_HELPID_LEN + 1,
             hid,
@@ -10083,7 +10085,15 @@ LOCAL _BOOL save_the_alias(const char *filename, const char *suffix, tWinMapData
 
    fclose(file);
 
-   return TRUE;    
+   if (saved_any)
+   {
+   	  save_upr_entry_outfile(f);
+   } else
+   {
+   	  remove(f);
+   }
+   
+   return saved_any;
 }
 
 
@@ -10135,6 +10145,7 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
    unsigned int map;
    char hid[256], f[512];
    FILE *file;
+   _BOOL saved_any = FALSE;
    
    strcpy(f, filename);
    strcat(f, suffix);
@@ -10173,8 +10184,12 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
             node2NrWinhelp(hid, toc_table[i]->labindex);
          }
 
-         strinsert(hid, sDocWinPrefixID);
-
+         if (strcmp(hid, WIN_UDO_NODE_NAME) != 0)
+         {
+             strinsert(hid, sDocWinPrefixID);
+             saved_any = TRUE;
+		 }
+		 
          if (map == 0)
             map = 0x1000 + i;
 
@@ -10188,7 +10203,7 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
 #if 0
          /*
            Bullshit.
-           Die Routine erzeugt auch fuer Header fuer WinHelp und WinHelp4,
+           Die Routine erzeugt auch Header fuer WinHelp und WinHelp4,
            und nicht nur HtmlHelp.
            Und nicht nur fuer C, sondern auch Pascal und GFA.
            Und wo bitte wird hier die map ID ausgegeben die man
@@ -10216,7 +10231,15 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
 
    fclose(file);
 
-   return TRUE;    
+   if (saved_any)
+   {
+   	  save_upr_entry_outfile(f);
+   } else
+   {
+   	  remove(f);
+   }
+   
+   return saved_any;
 }
 
 

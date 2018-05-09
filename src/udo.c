@@ -11871,7 +11871,7 @@ LOCAL void save_winhelp4_project(void)
    fprintf(hpjfile, "\n[FILES]\n");
    fprintf(hpjfile, "%s.rtf\n", outfile.name);
 
-   if (bUseIdMapFileC)
+   if (bMapSavedC)
    {
       fprintf(hpjfile, "\n[MAP]\n");
       fprintf(hpjfile, "#include \"%s.hpc\"\n", outfile.name);
@@ -11900,7 +11900,12 @@ LOCAL void save_htmlhelp_project(void)
 {
    FILE  *hhpfile;
    char   sTitle[1024];
-
+   char hhcname[MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1];
+   char hhkname[MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1];
+   char aboname[MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1];
+   const char *jump1text;
+   unsigned long buttons = 0x63520;
+   
    if (bTestmode)
       return;
 
@@ -11920,12 +11925,30 @@ LOCAL void save_htmlhelp_project(void)
    fprintf(hhpfile, "Compiled file=%s.chm\n", old_outfile.name);
    fprintf(hhpfile, "Error log file=%s.log\n", old_outfile.name);
    
+   *hhcname = '\0';
    if (bHhcSaved)
-      fprintf(hhpfile, "Contents file=%s.hhc\n", old_outfile.name);
+   {
+   	  strcat(strcpy(hhcname, old_outfile.name), ".hhc");
+      fprintf(hhpfile, "Contents file=%s\n", hhcname);
+   }
    
+   *hhkname = '\0';
    if (bHhkSaved)
-      fprintf(hhpfile, "Index file=%s.hhk\n", old_outfile.name);
-      
+   {
+   	  strcat(strcpy(hhkname, old_outfile.name), ".hhk");
+      fprintf(hhpfile, "Index file=%s\n", hhkname);
+   }
+   
+   if (use_about_udo)
+   {
+   	  strcat(strcpy(aboname, "aboutudo"), outfile.suff);
+   	  jump1text = "UDO" UDO_REL;
+   	  buttons |= 1l << 19; /* HHWIN_BUTTON_JUMP1 */
+   } else
+   {
+   	  *aboname = '\0';
+   	  jump1text = "";
+   }
    fprintf(hhpfile, "Default topic=%s%s\n", old_outfile.name, outfile.suff);
    fprintf(hhpfile, "Display compile progress=No\n");
    fprintf(hhpfile, "Flat=Yes\n");
@@ -11939,13 +11962,17 @@ LOCAL void save_htmlhelp_project(void)
    /* FIXME: have to output all style sheet filenames here */
    fprintf(hhpfile, "\n");
    fprintf(hhpfile, "[WINDOWS]\n");
-   fprintf(hhpfile, "main=,\"%s%s\",\"%s%s\",\"%s%s\",\"%s%s\",,,,,0x63520,,0x00304e,,,,,,,,0\n",
-      bHhcSaved ? old_outfile.name : "", bHhcSaved ? ".hhc" : "",
-      bHhkSaved ? old_outfile.name : "", bHhkSaved ? ".hhk" : "",
-      old_outfile.name, outfile.suff,
-      old_outfile.name, outfile.suff);
+   fprintf(hhpfile, "main=,\"%s\",\"%s\",\"%s%s\",\"%s%s\",\"%s\",\"%s\",,,0x%lx,,0x00304e,,,,,,,,0\n",
+      hhcname,
+      hhkname,
+      old_outfile.name, outfile.suff, /* default file */
+      old_outfile.name, outfile.suff, /* home button file */
+      jump1text,
+      aboname,
+      buttons
+      );
 
-   if (bUseIdMapFileC)
+   if (bMapSavedC)
    {
       fprintf(hhpfile, "\n[ALIAS]\n");
       fprintf(hhpfile, "#include <%s.hha>\n", old_outfile.name);
@@ -12510,12 +12537,7 @@ GLOBAL _BOOL udo(char *datei)
                      case TOWH4:
                         if (desttype == TOWH4)
                         {
-                           save_winhelp4_project();
                            bCntSaved = save_winhelp4_cnt();
-                        }
-                        else
-                        {
-                           save_winhelp_project();
                         }
                         if (bUseIdMapFileC)
                         {
@@ -12533,6 +12555,14 @@ GLOBAL _BOOL udo(char *datei)
                         {
                            bMapSavedGFA = save_winhelp_map_gfa();
                         }
+                        if (desttype == TOWH4)
+                        {
+                           save_winhelp4_project();
+                        }
+                        else
+                        {
+                           save_winhelp_project();
+                        }
                         break;
                         
                      case TORTF:
@@ -12545,13 +12575,13 @@ GLOBAL _BOOL udo(char *datei)
                      case TOMHH:
                         bHhcSaved = save_htmlhelp_contents(file_lookup(sHhcfull));
                         bHhkSaved = save_htmlhelp_index(file_lookup(sHhkfull));
-                        save_htmlhelp_project();
                         if (bUseIdMapFileC)
                         {
                            strcpy(outfile.full, old_outfile.full);
                            bMapSavedC = save_htmlhelp_map();
-                           save_htmlhelp_alias();
+                           bMapSavedC &= save_htmlhelp_alias();
                         }
+                        save_htmlhelp_project();
                         break;
                         
                      case TOSTG:
