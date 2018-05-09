@@ -1718,6 +1718,19 @@ LOCAL void c_xlink(char *s, _BOOL inside_b4_macro)
             free(s_entry);
             free(target);
             free(css_class);
+            /*
+             * alternative for htmlhelp:
+             *
+			<OBJECT id=hhctrl type="application/x-oleobject"
+			        classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"
+			        codebase="hhctrl.ocx"
+			>
+			    <PARAM name="Command" value="KLink">
+			    <PARAM name="Button" value="Text:buttontext">
+			    <PARAM name="Item1" value="reflink.chm">
+			    <PARAM name="Item2" value="keyword">
+			</OBJECT>
+			*/
             break;
             
          case TOLDS:

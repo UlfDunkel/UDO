@@ -11904,7 +11904,8 @@ LOCAL void save_htmlhelp_project(void)
    char hhkname[MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1];
    char aboname[MYFILE_NAME_LEN + MYFILE_SUFF_LEN + 1];
    const char *jump1text;
-   unsigned long buttons = 0x63520;
+   unsigned long properties = 0x63520;
+   unsigned long buttons = 0x304e;
    
    if (bTestmode)
       return;
@@ -11943,7 +11944,7 @@ LOCAL void save_htmlhelp_project(void)
    {
    	  strcat(strcpy(aboname, "aboutudo"), outfile.suff);
    	  jump1text = "UDO" UDO_REL;
-   	  buttons |= 1l << 19; /* HHWIN_BUTTON_JUMP1 */
+   	  buttons |= 1l << 18; /* HHWIN_BUTTON_JUMP1 */
    } else
    {
    	  *aboname = '\0';
@@ -11962,14 +11963,14 @@ LOCAL void save_htmlhelp_project(void)
    /* FIXME: have to output all style sheet filenames here */
    fprintf(hhpfile, "\n");
    fprintf(hhpfile, "[WINDOWS]\n");
-   fprintf(hhpfile, "main=,\"%s\",\"%s\",\"%s%s\",\"%s%s\",\"%s\",\"%s\",,,0x%lx,,0x00304e,,,,,,,,0\n",
+   fprintf(hhpfile, "main=,\"%s\",\"%s\",\"%s%s\",\"%s%s\",\"%s\",\"%s\",,,0x%lx,,0x%lx,,,,,,,,0\n",
       hhcname,
       hhkname,
       old_outfile.name, outfile.suff, /* default file */
       old_outfile.name, outfile.suff, /* home button file */
       aboname,
       jump1text,
-      buttons
+      properties, buttons
       );
 
    if (bMapSavedC)
