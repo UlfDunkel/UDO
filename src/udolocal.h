@@ -58,7 +58,7 @@
 typedef struct _udoswitch                 /* ---- table of functions ---- */
 {
    const char *magic;                     /* UDO command */
-   _BOOL  *flag;                        /* relevant switch */
+   _BOOL  *flag;                          /* relevant switch */
    char      partype;                     /* parameter type */
    const char *parcmd;                    /* parameter command */
    void     *parval;                      /* parameter variable */

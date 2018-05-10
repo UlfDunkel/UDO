@@ -15,11 +15,6 @@
 # include <locale.h>
 #endif
 
-/* The separator between msgctxt and msgid in a .mo file.  */
-#ifndef GETTEXT_CONTEXT_GLUE
-#  define GETTEXT_CONTEXT_GLUE "\004"
-#endif
-
 # define _(String) xs_dgettext(GETTEXT_PACKAGE, String)
 # define P_(String, Stringp, n) xs_dngettext(GETTEXT_PACKAGE, String, Stringp, n)
 # define C_(Context, String) xs_dgettext(GETTEXT_PACKAGE, Context GETTEXT_CONTEXT_GLUE String)
@@ -58,6 +53,11 @@
 # define bind_textdomain_codeset(Domain, codeset)
 
 #endif /* !ENABLE_NLS */
+
+/* The separator between msgctxt and msgid in a .mo file.  */
+#ifndef GETTEXT_CONTEXT_GLUE
+#  define GETTEXT_CONTEXT_GLUE "\004"
+#endif
 
 #ifndef RC_INVOKED
 

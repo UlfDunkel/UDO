@@ -88,7 +88,7 @@
 #include "lang.h"
 
 
-
+static LANG        lang;                  /* Spracheinstellungen */
 
 
 /*******************************************************************************
@@ -111,13 +111,12 @@
 *
 ******************************************|************************************/
 
-GLOBAL void init_lang_date(void)
+static void init_lang_date(int langidx)
 {
-   time_t      timer;                  /* */
-   struct tm  *zeit;                   /* */
-   char        month[MONTH_LEN] = "";  /* ^ month name in MONTHS[] */ 
-   int         i = 0;                  /* counter for MONTHS[] */
-
+   time_t      timer;
+   struct tm  *zeit;
+   char month[64];              /* localized month name */
+   _BOOL printf_works;
 
    time(&timer);
    zeit = localtime(&timer);
@@ -129,81 +128,130 @@ GLOBAL void init_lang_date(void)
    iDateMin   = zeit->tm_min;
    iDateSec   = zeit->tm_sec;
    
-   while (MONTHS[i].lan >= 0)           /* find localized month name */
+   *month = '\0';
+   if (sprintf(month, "%1$d\n", 100) <= 0 || *month == '\0' || strchr(month, '$') != NULL)
+      printf_works = FALSE;
+   else
+      printf_works = TRUE;
+
+   strcpy(month, UDOSTRINGS[langidx].month[zeit->tm_mon]);
+   
+   if (iEncodingTarget >= 0 && iEncodingTarget != CODE_UTF8)
+      recode(month, CODE_UTF8, iEncodingTarget);
+   
+   if (!printf_works)
    {
-      if (MONTHS[i].lan == destlang)      /* desired language found */
-      {                                   /* remember month name */
-         strcpy(month, MONTHS[i].month[zeit->tm_mon]);
-         break;                           /* done! */
+   	  /*
+   	   * printf does not support positional arguments; fallback to old method
+   	   */
+      switch (destlang)
+      {
+      case TOGER:                            /* German */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOFRA:                            /* French */
+         sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOITA:                            /* Italian */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOSWE:                            /* Swedish */
+         sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%0d-%02d-%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
+         break;
+   
+      case TOSPA:                            /* Spanish */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TODUT:                            /* Dutch */
+         sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TODAN:                            /* Danish */
+         sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOCZE:                            /* Czech */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOLVA:                            /* Latvian */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOPOL:                            /* Polish */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOFIN:                            /* Finnish */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TONOR:                            /* Norwegian */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOPOR:                            /* Portuguese */
+         sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+   
+      case TOJAP:                            /* Japanese */
+         sprintf(lang.today, "%d年 %s %02d日", 1900+zeit->tm_year, month, zeit->tm_mday);
+         sprintf(lang.short_today, "%d年%02d月%02d日", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
+         break;
+   
+      case TORUS:                            /* Russian */
+         sprintf(lang.today, "%d %s %d r.", zeit->tm_mday, month, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+         break;
+
+      case TOENG:                            /* English */
+      default:                               /* UDO v7: German is no longer default language! */
+         sprintf(lang.today, "%s %d, %d", month, zeit->tm_mday, 1900+zeit->tm_year);
+         sprintf(lang.short_today, "%0d/%02d/%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
+         break;
       }
-      
-      i++;                                /* next language */
-   }
-   
-   recode(month, CODE_UTF8, iEncodingTarget);
-   
-   switch (destlang)
+   } else
    {
-   case TOGER:                            /* German */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOFRA:                            /* French */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOITA:                            /* Italian */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOSWE:                            /* Swedish */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%0d-%02d-%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
-      break;
-
-   case TOSPA:                            /* Spanish */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TODUT:                            /* Dutch */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TODAN:                            /* Danish */
-      sprintf(lang.today, "%d %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOCZE:                            /* Czech */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOLVA:                            /* Latvian */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOPOL:                            /* Polish */
-      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TORUS:                            /* Russian */
-      sprintf(lang.today, "%d %s %d r.", zeit->tm_mday, month, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
-      break;
-
-   case TOENG:                            /* English */
-   default:                               /* UDO v7: German is no longer default language! */
-      sprintf(lang.today, "%s %d, %d", month, zeit->tm_mday, 1900+zeit->tm_year);
-      sprintf(lang.short_today, "%0d/%02d/%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
-      break;
+      const char *fmt;
+      const char *p;
+      fmt = _(UDOSTRINGS[0].udostring.today);
+      if ((p = strchr(fmt, GETTEXT_CONTEXT_GLUE[0])) != NULL)
+         p++;
+      else
+         p = fmt;
+      if (fmt == p)
+         fmt = UDOSTRINGS[langidx].udostring.today;
+      if ((p = strchr(fmt, GETTEXT_CONTEXT_GLUE[0])) != NULL)
+         fmt = p + 1;
+      sprintf(lang.today, fmt, 1900+zeit->tm_year, month, zeit->tm_mday);
+   
+      fmt = _(UDOSTRINGS[0].udostring.short_today);
+      if ((p = strchr(fmt, GETTEXT_CONTEXT_GLUE[0])) != NULL)
+         p++;
+      else
+         p = fmt;
+      if (fmt == p)
+         fmt = UDOSTRINGS[langidx].udostring.short_today;
+      if ((p = strchr(fmt, GETTEXT_CONTEXT_GLUE[0])) != NULL)
+         fmt = p + 1;
+      sprintf(lang.short_today, fmt, 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
    }
 }
 
@@ -227,9 +275,11 @@ GLOBAL void init_lang_date(void)
 
 GLOBAL void init_lang(void)
 {
+   int savepass = iUdopass;
    int    i = 0;    /* counter for MONTHS[] */
 
-   memset(&lang, 0, sizeof(LANG));
+   iUdopass = PASS2; /* ensure that we get the recoding error messages */
+   lang = UDOSTRINGS[0].udostring;
 
    while (UDOSTRINGS[i].lan >= 0)       /* find localized month name */
    {
@@ -241,8 +291,9 @@ GLOBAL void init_lang(void)
       
       i++;                                /* next language */
    }
-
-   init_lang_date();
+   if (UDOSTRINGS[i].lan < 0)
+      i = 0;
+   init_lang_date(i);
 
    if (iEncodingTarget >= 0 && iEncodingTarget != CODE_UTF8)
    {
@@ -269,13 +320,76 @@ GLOBAL void init_lang(void)
       recode(lang.html_up,     CODE_UTF8, iEncodingTarget);
       recode(lang.html_prev,   CODE_UTF8, iEncodingTarget);
       recode(lang.html_next,   CODE_UTF8, iEncodingTarget);
-      recode(lang.html_lang,   CODE_UTF8, iEncodingTarget);
+      /* recode(lang.html_lang,   CODE_UTF8, iEncodingTarget); nope; must be ascii */
       recode(lang.html_start,  CODE_UTF8, iEncodingTarget);
       recode(lang.translator,  CODE_UTF8, iEncodingTarget);
       recode(lang.distributor, CODE_UTF8, iEncodingTarget);
       recode(lang.degree,      CODE_UTF8, iEncodingTarget);
       recode(lang.copyright,   CODE_UTF8, iEncodingTarget);
+      
+      /*
+       * these are directly used in c_maketitle,
+       * and must already be quoted here:
+       */
+      auto_quote_chars(lang.fur, FALSE);
+      auto_quote_chars(lang.translator, FALSE);
+      auto_quote_chars(lang.distributor, FALSE);
+      switch (desttype)
+      {
+      case TOSTG:
+      case TOAMG:
+         replace_1at_by_2at(lang.fur);
+         replace_1at_by_2at(lang.translator);
+         replace_1at_by_2at(lang.distributor);
+         break;
+      }
    }
 
+   lang_changed = FALSE;
    toc_init_lang();
+   iUdopass = savepass;
 }
+
+
+/*
+ * used to delay (re-)initialization of language strings
+ * because we both destination language and output character
+ * set are needed for this.
+ */
+const LANG *get_lang(void)
+{
+	if (lang_changed)
+	{
+	   init_lang();
+	}
+	return &lang;
+}
+
+
+#undef destlang
+void (set_destlang)(int langcode, const char *file, int line)
+{
+	destlang = langcode;
+    lang_changed = TRUE;
+#if 0 /* for debugging */
+	fprintf(stderr, "set lang: %s %d %d\n", file, line, langcode);
+#else
+	UNUSED(file);
+	UNUSED(line);
+#endif
+}
+
+
+#if 0 /* for debugging */
+#undef destlang
+int get_destlang(const char *file, int line)
+{
+	static int been_here;
+	if (!been_here)
+	{
+		fprintf(stderr, "get lang: %s %d %d\n", file, line, destlang);
+		been_here = 1;
+	}
+	return destlang;
+}
+#endif

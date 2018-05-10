@@ -118,6 +118,7 @@
 #include "tp.h"
 #include "udo.h"
 #include "gui.h"
+#include "lang.h"
 
 #include "export.h"
 #include "env.h"
@@ -592,7 +593,7 @@ LOCAL void end_env_output_line(const int el)
       case TOHTM:
       case TOMHH:
          break;
-         
+      
       case TOIPF:
          /* Hier keine Leerzeile */
          break;
@@ -1768,7 +1769,7 @@ GLOBAL void c_end_quote(void)
    case TOINF:
       outln("@end quotation");
       break;
-      
+   
    case TONRO:
       outln(".RE");
       break;
@@ -2805,7 +2806,6 @@ LOCAL void c_begin_list(int listkind, const char *css_class)
          space[0] = EOS;
          for (i = 0; i < iEnvIndent[iEnvLevel]; i++)
             strcat(space, "0");
-
          switch (listkind)
          {
          case LIST_BOLD:
@@ -2820,8 +2820,6 @@ LOCAL void c_begin_list(int listkind, const char *css_class)
             outln("Von");
             break;
          }
-/*       voutlnf("/offList (%s00) addStrSpaceLeft", space);
-*/
          outln("/offCount offCount 1 add def");
          outln("/offCountS offCount 4 add def");
          voutlnf("offList offCount get (%s00) addStrSpaceLeft", space);
@@ -2885,7 +2883,6 @@ LOCAL void c_begin_list(int listkind, const char *css_class)
             ll = calc_ttf_twip(sWidth, TTF_TIMES, TTF_REGULAR);
             break;
          }
-         
          iEnvIndent[iEnvLevel] = ll;
 #endif
       }
@@ -2981,7 +2978,7 @@ GLOBAL void c_begin_tlist(void)
 *  Notes:
 *     Gesucht wird die erste eckige Klammer, die nicht durch ein ! gequotet wird.
 *
-*     PL10: fast komplett neu, wegen Quotefunktion
+*     fast komplett neu, wegen Quotefunktion
 *
 *  Return:
 *     -
@@ -3059,7 +3056,7 @@ LOCAL void add_description(void)
       }
    }
 
-   /* PL17: Warnung ausgeben, falls keine (nicht-quotierte) "]" gefunden wurde */      
+   /* Warnung ausgeben, falls keine (nicht-quotierte) "]" gefunden wurde */      
 
    if (no_bracket)
    {
@@ -3357,7 +3354,7 @@ GLOBAL void c_item(void)
             um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[13]");
             um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[14]");
          }
-
+         
          break;
       }
       
@@ -3596,10 +3593,9 @@ GLOBAL void c_item(void)
          if (!bEnvCompressed[iEnvLevel])
          {
             um_strcat(sBig, "<p>", sizeof(sBig), "c_item[22]");
-
 	        bParagraphOpen = TRUE;
          }
-            
+         
          bEnv1stPara[iEnvLevel] = TRUE;
          break;
 
@@ -3698,7 +3694,7 @@ GLOBAL void c_item(void)
       case ENV_ENUM:
          strcpy(token[0], "<item>");
          break;
-         
+      
       case ENV_DESC:
          token[0][0] = EOS;
          
@@ -3763,7 +3759,7 @@ GLOBAL void c_item(void)
             strcpy(token[0], "<item>");
          }
          break;
-         
+      
       case ENV_LIST:   /* Hier genau wie bei ASCII */
          strcpy(token[0], " ");
          
@@ -4081,7 +4077,6 @@ LOCAL void c_end_list(int listkind)
       if (bParagraphOpen)
          if (!bEnvCompressed[iEnvLevel])
             out("</p>");
-
       outln("</td></tr>\n</table>\n");
       bParagraphOpen = FALSE;
       break;
@@ -4486,7 +4481,7 @@ LOCAL void output_tex_environments(void)
 {
    outln("");
 
-   outln("\\def\\hidelink#1{}");          /* V6.5.20 [CS] */
+   outln("\\def\\hidelink#1{}");
    outln("");
    
    outln("\\begin{document}");
@@ -4608,10 +4603,8 @@ GLOBAL void c_begin_document(void)
    {
    case TOPDL:
       outln("\\pdfinfo {");
-      
       if (titdat.title != NULL)
          voutlnf("  /Title (%s)", titdat.title);
-      
       if (titdat.author != NULL)
          voutlnf("  /Author (%s)", titdat.author);
          
@@ -4645,15 +4638,14 @@ GLOBAL void c_begin_document(void)
       
    case TOINF:
       outln("\\input texinfo @c-*-texinfo-*-");
-      voutlnf("@documentlanguage %s", lang.html_lang);
+      voutlnf("@documentlanguage %s", get_lang()->html_lang);
       outln("@c %**start of header");
       voutlnf("@setfilename %s.info", outfile.name);
       strcpy(s, titleprogram);
       auto_quote_chars(s, TRUE);
       
       if (s[0] == EOS)
-         strcpy(s, lang.unknown);
-      
+         strcpy(s, get_lang()->unknown);
       voutlnf("@settitle %s", s);
       outln("@c %**end of header");
       break;
@@ -4668,7 +4660,7 @@ GLOBAL void c_begin_document(void)
       if (titdat.program != NULL)
          strcat(s, titdat.program);
       else
-         strcat(s, lang.unknown);
+         strcat(s, get_lang()->unknown);
       
       if (sDocNroffType[0] != EOS)
       {
@@ -4685,7 +4677,7 @@ GLOBAL void c_begin_document(void)
       if (titdat.date != NULL)
          strcat(s, titdat.date);
       else
-         strcat(s, lang.today);
+         strcat(s, get_lang()->today);
       
       strcat(s, "\"");
       
@@ -4711,14 +4703,14 @@ GLOBAL void c_begin_document(void)
       }
       else
       {
-         voutlnf("@database \"%s\"", lang.unknown);
+         voutlnf("@database \"%s\"", get_lang()->unknown);
       }
       
       if (titdat.author != NULL)
       {
          voutlnf("@author \"%s\"", titdat.author);
-	  }
-	  
+      }
+      
       if (titdat.version != NULL)
       {
          if (titdat.date != NULL)
@@ -4736,7 +4728,7 @@ GLOBAL void c_begin_document(void)
       
       if (uses_maketitle)
       {
-         voutlnf("@default \"%s\"", lang.title);
+         voutlnf("@default \"%s\"", get_lang()->title);
       }
       else
       {
@@ -4761,7 +4753,7 @@ GLOBAL void c_begin_document(void)
          }
          else
          {
-            output_html_header(lang.unknown);
+            output_html_header(get_lang()->unknown);
          }
       }
       html_headline();
@@ -4854,8 +4846,8 @@ GLOBAL void c_begin_document(void)
          {
             if (!no_headlines)
             {
-               voutlnf("{\\headerl\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s \\chpgn\\tab %s}\\par}", iDocPropfontSize, lang.page, titleprogram);
-               voutlnf("{\\headerr\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s\\tab %s \\chpgn}\\par}", iDocPropfontSize, titleprogram, lang.page);
+               voutlnf("{\\headerl\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s \\chpgn\\tab %s}\\par}", iDocPropfontSize, get_lang()->page, titleprogram);
+               voutlnf("{\\headerr\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s\\tab %s \\chpgn}\\par}", iDocPropfontSize, titleprogram, get_lang()->page);
             }
          }
       }
@@ -5040,7 +5032,7 @@ GLOBAL void c_begin_document(void)
       if (titleprogram[0] != EOS)
          voutlnf(":title.%s", titleprogram);
       else
-         voutlnf(":title.%s", lang.unknown);
+         voutlnf(":title.%s", get_lang()->unknown);
       break;
       
    case TOKPS:

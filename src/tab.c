@@ -96,6 +96,7 @@
 #include "toc.h"
 #include "udo.h"
 #include "gui.h"
+#include "lang.h"
 #include "udomem.h"
 
 #include "export.h"
@@ -112,11 +113,11 @@
 ******************************************|************************************/
 
 #define MAX_TAB_H        2048			/* max. Hoehe einer Tabelle */
-#define MAX_TAB_W          64			/* max. Spalten einer Tabelle */
-#define MAX_TAB_LABEL      10			/* max. Anzahl der hinter einanderfolgenden Labels */
-#define TAB_LEFT            0			/* Spalte linksbuendig */
-#define TAB_CENTER          1			/* Spalte zentriert */
-#define TAB_RIGHT           2			/* Spalte rechtsbuendig */
+#define MAX_TAB_W          64           /* max. Spalten einer Tabelle */
+#define MAX_TAB_LABEL      10           /* max. Anzahl der hinter einanderfolgenden Labels */
+#define TAB_LEFT            0           /* Spalte linksbuendig */
+#define TAB_CENTER          1           /* Spalte zentriert */
+#define TAB_RIGHT           2           /* Spalte rechtsbuendig */
 #define TAB_TOP             3
 #define TAB_BOTTOM          4
 
@@ -260,11 +261,11 @@ LOCAL void convert_table_caption(const _BOOL visible)
 
 /*******************************************************************************
 *
-*  c_table_caption():
-*     wrapper for convert_table_caption()
+*	c_table_caption():
+*		wrapper for convert_table_caption()
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -279,11 +280,11 @@ GLOBAL void c_table_caption(void)
 
 /*******************************************************************************
 *
-*  c_table_caption_nonr():
-*     wrapper for convert_table_caption()
+*	c_table_caption_nonr():
+*		wrapper for convert_table_caption()
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -298,11 +299,11 @@ GLOBAL void c_table_caption_nonr(void)
 
 /*******************************************************************************
 *
-*  table_get_header():
-*     ??? (description missing)
+*	table_get_header():
+*		??? (description missing)
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -374,11 +375,11 @@ GLOBAL void table_get_header(char *s)
 
 /*******************************************************************************
 *
-*  test_for_addition():
-*     ??? (description missing)
+*	test_for_addition():
+*		??? (description missing)
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -453,11 +454,11 @@ LOCAL void test_for_addition(char *cell, int y, int x)
 
 /*******************************************************************************
 *
-*  table_add_line():
-*     ??? (description missing)
+*	table_add_line():
+*		??? (description missing)
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -488,8 +489,10 @@ GLOBAL _BOOL table_add_line(char *s)
 	}
 	y = table.height;
 
-	if ((strncmp(s, "!label*", 7) == 0)
-		|| (strncmp(s, "!label", 6) == 0) || (strncmp(s, "!l* ", 4) == 0) || (strncmp(s, "!l ", 3) == 0))
+	if (strncmp(s, "!label*", 7) == 0 ||
+		strncmp(s, "!label", 6) == 0 ||
+		strncmp(s, "!l* ", 4) == 0 ||
+		strncmp(s, "!l ", 3) == 0)
 	{
 		if (table.row[y].num_labels >= MAX_TAB_LABEL)
 		{
@@ -693,18 +696,18 @@ LOCAL void tab_label_output(int y)
 
 /*******************************************************************************
 *
-*  table_output_lyx():
-*     ??? (description missing)
+*	table_output_lyx():
+*		??? (description missing)
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
 LOCAL void table_output_lyx(void)
 {
 	int y, x;
-	_BOOL bl, bt, bb, br;								/* Flags fuer Linien */
+	_BOOL bl, bt, bb, br;				/* Flags fuer Linien */
 	char f[512], alignOn[64];
 	_BOOL inside_center, inside_right, inside_left;
 
@@ -721,8 +724,8 @@ LOCAL void table_output_lyx(void)
 	outln("\\begin_inset  Tabular");
 	voutlnf("<lyxtabular version=\"3\" rows=\"%d\" columns=\"%d\">", table.height, table.width);
 	outln("<features>");
-	/* Fuer jede Tabellenspalte eine Zeile ausgeben, in der Flags stehen,   */
-	/* die angeben, ob dort linke und rechte Linien benutzt werden.      */
+	/* Fuer jede Tabellenspalte eine Zeile ausgeben, in der Flags stehen, */
+	/* die angeben, ob dort linke und rechte Linien benutzt werden. */
 	for (x = 0; x < table.width; x++)
 	{
 		bl = table.vertical_bar[x] > 0;
@@ -813,18 +816,18 @@ LOCAL void table_output_lyx(void)
 
 /*******************************************************************************
 *
-*  table_output_rtf():
-*     ??? (description missing)
+*	table_output_rtf():
+*		??? (description missing)
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
 LOCAL void table_output_rtf(void)
 {
 	int y, x, i, cellx, indent, charw;
-	char f[512], cx[512];
+	char f[LINELEN], cx[512];
 
 	indent = strlen_indent();
 
@@ -916,7 +919,7 @@ LOCAL void table_output_rtf(void)
 		{
 			sprintf(f,
 					"\\qc %s {\\field{\\*\\fldinst { SEQ Tabelle \\\\* ARABIC }}{\\fldrslt %d}}: %s\\cell\\row\\pard",
-					lang.table, tab_counter, table.caption);
+					get_lang()->table, tab_counter, table.caption);
 		} else
 		{
 			sprintf(f, "\\qc %s\\cell\\row\\pard", table.caption);
@@ -933,11 +936,11 @@ LOCAL void table_output_rtf(void)
 
 /*******************************************************************************
 *
-*  table_output_win():
-*     ??? (description missing)
+*	table_output_win():
+*		??? (description missing)
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -1025,7 +1028,7 @@ LOCAL void table_output_win(void)
 
 		if (table.caption_visible)
 		{
-			sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard", lang.table, tab_counter, table.caption);
+			sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard", get_lang()->table, tab_counter, table.caption);
 		} else
 		{
 			sprintf(f, "\\qc %s\\cell\\row\\pard", table.caption);
@@ -1042,11 +1045,11 @@ LOCAL void table_output_win(void)
 
 /*******************************************************************************
 *
-*  table_output_html():
-*     nomen est omen
+*	table_output_html():
+*		nomen est omen
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -1101,7 +1104,7 @@ LOCAL void table_output_html(void)
 	{
 		if (table.caption_visible)
 		{
-			voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", lang.table, tab_counter, table.caption);
+			voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", get_lang()->table, tab_counter, table.caption);
 		} else
 		{
 			voutlnf("<caption align=\"bottom\">%s</caption>", table.caption);
@@ -1190,11 +1193,11 @@ LOCAL void table_output_html(void)
 
 /*******************************************************************************
 *
-*  table_output_tex():
-*     ??? (description missing)
+*	table_output_tex():
+*		??? (description missing)
 *
-*  Return:
-*     -
+*	Return:
+*		-
 *
 ******************************************|************************************/
 
@@ -1821,7 +1824,7 @@ LOCAL void table_output_general(void)
 		else
 			outln("");
 
-		/* PL7: Caption wird wie bei LaTeX nur zentriert, wenn sie  */
+		/* Caption wird wie bei LaTeX nur zentriert, wenn sie  */
 		/* kuerzer als die Absatzbreite ist.                        */
 		token_reset();
 		align_caption = (strlen(table.caption) < zDocParwidth);
@@ -1841,7 +1844,7 @@ LOCAL void table_output_general(void)
 			 * format, and table.caption has already been tokenized
 			 */
 			if (table.caption_visible)
-				sprintf(s, "%s %d: %s", lang.table, tab_counter, table.caption);
+				sprintf(s, "%s %d: %s", get_lang()->table, tab_counter, table.caption);
 			else
 				strcpy(s, table.caption);
 
@@ -1857,7 +1860,7 @@ LOCAL void table_output_general(void)
 		} else
 		{
 			if (table.caption_visible)
-				sprintf(s, "%s %d: %s", lang.table, tab_counter, table.caption);
+				sprintf(s, "%s %d: %s", get_lang()->table, tab_counter, table.caption);
 			else
 				strcpy(s, table.caption);
 			/*

@@ -158,6 +158,7 @@
 #include "chr_all.h"
 #include "chr_ttf.h"
 #include "udomem.h"
+#include "lang.h"
 
 #include "export.h"
 #include "chr.h"
@@ -2718,7 +2719,7 @@ LOCAL void texvar2ascii(char *s)
    qreplace_all(s, "(!pound)",      8, "GBP",     3);
    qreplace_all(s, "(!reg)",        6, "(r)",     3);
    qreplace_all(s, "(!tm)",         5, "(tm)",    4);
-   replace_all(s, "(!deg)", lang.degree);
+   replace_all(s, "(!deg)", get_lang()->degree);
 }
 
 
@@ -2818,9 +2819,12 @@ GLOBAL void c_vars(char *s)
    char cbuf[8];
    const char *repl;
    
-   replace_all(s, "(!today)",  lang.today);
-   replace_all(s, "(!short_today)", lang.short_today);
-
+   if ((repl = strchr(s, '(')) != NULL && repl[1] == '!')
+   {
+      replace_all(s, "(!today)", get_lang()->today);
+      replace_all(s, "(!short_today)", get_lang()->short_today);
+   }
+   
    /* === quotation marks === */
    
    qreplace_all(s, "(\"\")", 4, TEMPO_S,  TEMPO_S_LEN);

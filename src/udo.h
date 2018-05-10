@@ -92,7 +92,6 @@ GLOBAL int         iUdopass;              /* PASS1 oder PASS2 */
 GLOBAL _BOOL     bNopDetected;          /* Fuer Debugging-Zwecke */
 
 GLOBAL int         desttype;              /* Ausgabeformat  (TOASC, ...) */
-GLOBAL int         destlang;              /* Ausgabesprache (TOENG, ...) */
 GLOBAL int         iCharset;              /* Eingabe-Zeichensatz */
 GLOBAL int         iEncodingSource;       /* encoding of UDO source documents */
 GLOBAL int         iEncodingTarget;       /* encoding of target document */
@@ -199,8 +198,6 @@ GLOBAL _BOOL     bBreakInside;          /* !break gelesen */
 
 GLOBAL _BOOL     uses_udolink;          /* Wird !udolink benutzt? */
 GLOBAL _BOOL     uses_toplink;          /* Wird !toplink benutzt? */
-
-GLOBAL LANG        lang;                  /* Spracheinstellungen */
 
 GLOBAL char        token[MAX_TOKENS][MAX_TOKEN_LEN + 1];
 GLOBAL int         token_counter;

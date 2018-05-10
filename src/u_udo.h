@@ -71,10 +71,10 @@ typedef struct _udo2utf
    const char *udo;                       /* UDO universal character string */
    _UWORD unicode;                        /* Unicode */
    _UWORD uni2ascii;                      /* 7-bit ASCII Unicode */
-   const char *win;                       /* */
-   const char *tex;                       /* */
-   const char *html;                      /* */
-   const char *lyx;                       /* */
+   const char *win;
+   const char *tex;
+   const char *html;
+   const char *lyx;
 } UDO2UTF;
 
 

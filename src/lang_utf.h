@@ -111,17 +111,11 @@
 *
 ******************************************|************************************/
 
-typedef struct _months
-{
-   int    lan;                            /* TOGER, etc. */
-   char   month[12][MONTH_LEN];           /* 12, of course ;-)) */
-}  _MONTHS;
-
-
 typedef struct _udostrings
 {
    int          lan;                      /* TOGER, etc. */
    const LANG   udostring;                /* localized UDO strings (UDO_TYPE.H) */
+   const char *month[12];                 /* 12, of course ;-)) */
 }  _UDOSTRINGS;
 
 
@@ -134,31 +128,7 @@ typedef struct _udostrings
 *
 ******************************************|************************************/
 
-LOCAL _MONTHS const MONTHS[] =                      /* localized months names */
-{
-   {TOCZE, {"ledna",    "února",     "března", "dubna",    "kvítna", "června",   "července", "srpna",    "září",       "října",       "listopadu", "prosince" }},
-   {TODAN, {"Januar",   "Februar",   "Marts",  "April",    "Maj",    "Juni",     "Juli",     "August",   "September",  "Oktober",     "November",  "December" }},
-   {TODUT, {"januari",  "februari",  "maart",  "april",    "mei",    "juni",     "juli",     "augustus", "september",  "oktober",     "november",  "december" }},
-   {TOENG, {"January",  "February",  "March",  "April",    "May",    "June",     "July",     "August",   "September",  "October",     "November",  "December" }},
-   {TOFIN, {"January",  "February",  "March",  "April",    "May",    "June",     "July",     "August",   "September",  "October",     "November",  "December" }},
-   {TOFRA, {"janvier",  "février",   "mars",   "avril",    "mai",    "juin",     "juillet",  "août",     "septembre",  "octobre",     "novembre",  "décembre" }},
-   {TOGER, {"Januar",   "Februar",   "März",   "April",    "Mai",    "Juni",     "Juli",     "August",   "September",  "Oktober",     "November",  "Dezember" }},
-   {TOITA, {"Gennaio",  "Febbraio",  "Marzo",  "Aprile",   "Maggio", "Giugno",   "Luglio",   "Agosto",   "Settembre",  "Ottobre",     "Novembre",  "Dicembre" }},
-   {TOJAP, {"1 月",     "2 月",      "3 月",   "4 月",     "5 月",   "6 月",     "7 月",     "8 月",     "9 月",       "10 月",       "11 月",     "12 月" }},
-   {TOLVA, {"Janvāris", "Februāris", "Marts",  "Aprīlis",  "Maijs",  "Jūnijs",   "Jūlijs",   "Augusts",  "Septembris", "Oktobris",    "Novembris", "Decembris" }},
-   {TONOR, {"January",  "February",  "March",  "April",    "May",    "June",     "July",     "August",   "September",  "October",     "November",  "December" }},
-   {TOPOL, {"styczeń",  "luty",      "marzec", "kwiecień", "maj",    "czerwiec", "lipiec",   "sierpień", "wrzesień",   "październik", "listopad",  "grudzień" }},
-   {TOPOR, {"Janeiro",  "Fevereiro", "Março",  "Abril",    "Maio",   "Junho",    "Julho",    "Agosto",   "Setembro",   "Outubro",     "Novembro",  "Dezembro" }},
-   {TOSPA, {"Enero",    "Febrero",   "Marzo",  "Abril",    "Mayo",   "Junio",    "Julio",    "Agosto",   "Septiembre", "Octubre",     "Noviembre", "Diciembre" }},
-   {TOSWE, {"januari",  "februari",  "mars",   "april",    "maj",    "juni",     "juli",     "augusti",  "september",  "oktober",     "november",  "december" }},
-   {TORUS, {"Январь",   "Февраль",   "Март",   "Апрель",   "Май",    "Июнь",     "Июль",     "Август",   "Сентябрь",   "Октябрь",     "Ноябрь",    "Декабрь" }},
-   
-   {  -1, {"", "", "", "", "", "", "", "", "", "", "", ""} }
-};
-
-
-
-
+/* for i in 01 02 03 04 05 06 07 08 09 10 11 12; do LANG=xx.utf8 date --date=2016-$i-01 +%B; done */
 
 LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
 {
@@ -168,6 +138,58 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
     *       which shows Unicode characters as various numbers of bytes
     */
     
+   {
+      TOENG,                              /* English; default; must be first entry */
+      {
+         /* preface     */    N_("Preface"),
+         /* chapter     */    N_("Chapter"),
+         /* title       */    N_("Title"),
+         /* appendix    */    N_("Appendix"),
+         /* contents    */    N_("Contents"),
+         /* listfigure  */    N_("List of Figures"),
+         /* listtable   */    N_("List of Tables"),
+         /* figure      */    N_("Figure"),
+         /* table       */    N_("Table"),
+         /* index       */    N_("Index"),
+         /* page        */    N_("page"),
+         /* see         */    N_("see"),
+         /* also        */    N_("see also"),
+         /* by          */    N_("by"),
+         /* fur         */    N_("for"),
+         /* up          */    N_("&Up"),
+         /* exit        */    N_("E&xit"),
+         /* unknown     */    N_("Unknown"),
+         /* update      */    N_("Last updated on"),
+         /* lcid        */    N_("0x409"),
+         /* html_home   */    N_("Home"),
+         /* html_up     */    N_("Up"),
+         /* html_prev   */    N_("Prev"),
+         /* html_next   */    N_("Next"),
+         /* html_lang   */    "en_US",
+         /* html_start  */    N_("Begin of the document"),
+         /* translator  */    N_("Translation:"),
+         /* distributor */    N_("Distributor:"),
+         /* tex_stylename */  NC_("tex_stylename", "english"),
+         /* lyx_langname */   NC_("lyx_langname", "english"),
+         /* degree      */    N_("degree"),
+         /* copyright   */    N_("Copyright"),
+         /*
+          * 1st arg: year
+          * 2nd arg: month name
+          * 3rd arg: day of month
+          */
+         /* today       */    NC_("today", "%2$s %3$d, %1$d"),
+         /*
+          * 1st arg: year
+          * 2nd arg: month
+          * 3rd arg: day of month
+          */
+         /* short_today */    NC_("short_today", "%1$0d/%2$02d/%3$02d")
+      },
+      {
+      	 N_("January"),  N_("February"),  N_("March"),  N_("April"),    N_("May"),    N_("June"),     N_("July"),     N_("August"),   N_("September"),  N_("October"),     N_("November"),  N_("December")
+      }
+   },
    {
       TOCZE,                              /* Czech */
       {
@@ -184,7 +206,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* page        */    "strana",
          /* see         */    "viz",
          /* also        */    "viz též",
-         /* by          */    "",
+         /* by          */    "o",
          /* fur         */    "pro",
          /* up          */    "Nahoru",
          /* exit        */    "Odchod",
@@ -195,7 +217,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Nahoru",
          /* html_prev   */    "Předchozí",
          /* html_next   */    "Následující",
-         /* html_lang   */    "cs",
+         /* html_lang   */    "cs_CZ",
          /* html_start  */    "Začátek dokumentu",
          /* translator  */    "Překládání:",
          /* distributor */    "Distributor:",
@@ -203,7 +225,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "czech",
          /* degree      */    "stupeň",
          /* copyright   */    "Autorská práva",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "leden",        "únor",         "březen",    "duben",        "květen",    "červen",      "červenec",    "srpen",        "září",        "říjen",         "listopad",      "prosinec"
       }
    },
    {
@@ -233,7 +259,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Op",
          /* html_prev   */    "Tidligere",
          /* html_next   */    "næste",
-         /* html_lang   */    "da",
+         /* html_lang   */    "da_DK",
          /* html_start  */    "start af dokument",
          /* translator  */    "Oversættelse:",
          /* distributor */    "Distributor:",
@@ -241,7 +267,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "danish",
          /* degree      */    "grad",
          /* copyright   */    "Ophavsret",
-         "",""
+         /* today       */    "%3$d %2$s %1$d",
+         /* short_today */    "%3$02d-%2$02d-%1$d"
+      },
+      {
+      	 "januar",       "februar",       "marts",      "april",        "maj",        "juni",         "juli",         "august",       "september",      "oktober",         "november",      "december"
       }
    },
    {
@@ -271,7 +301,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Omhoog",
          /* html_prev   */    "Vorige",
          /* html_next   */    "Volgende",
-         /* html_lang   */    "nl",
+         /* html_lang   */    "nl_NL",
          /* html_start  */    "Begin van het document",
          /* translator  */    "Vertaling:",
          /* distributor */    "Distributeur:",
@@ -279,45 +309,22 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "dutch",
          /* degree      */    "graad",
          /* copyright   */    "Auteursrechten",
-         "",""
-      }
-   },
-   {
-      TOENG,                              /* English */
+         /* today       */    "%3$d %2$s %1$d",
+         /* short_today */    "%3$02d-%2$02d-%1$d"
+      },
       {
-         /* preface     */    "Preface",
-         /* chapter     */    "Chapter",
-         /* title       */    "Title",
-         /* appendix    */    "Appendix",
-         /* contents    */    "Contents",
-         /* listfigure  */    "List of Figures",
-         /* listtable   */    "List of Tables",
-         /* figure      */    "Figure",
-         /* table       */    "Table",
-         /* index       */    "Index",
-         /* page        */    "page",
-         /* see         */    "see",
-         /* also        */    "see also",
-         /* by          */    "by",
-         /* fur         */    "for",
-         /* up          */    "&Up",
-         /* exit        */    "E&xit",
-         /* unknown     */    "Unknown",
-         /* update      */    "Last updated on",
-         /* lcid        */    "0x409",
-         /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "en",
-         /* html_start  */    "Begin of the document",
-         /* translator  */    "Translation:",
-         /* distributor */    "Distributor:",
-         /* tex_stylename */  "english",
-         /* lyx_langname */   "english",
-         /* degree      */    "degree",
-         /* copyright   */    "Copyright",
-         "",""
+      	 "januari",
+      	 "februari",
+      	 "maart",
+      	 "april",
+      	 "mei",
+      	 "juni",
+      	 "juli",
+      	 "augustus",
+      	 "september",
+      	 "oktober",
+      	 "november",
+      	 "december"
       }
    },
    {
@@ -338,24 +345,28 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* also        */    "katso myös",
          /* by          */    "by",
          /* fur         */    "for",
-         /* up          */    "&Up",
+         /* up          */    "&Ylös",
          /* exit        */    "E&xit",
-         /* unknown     */    "Unknown",
-         /* update      */    "Last updated on",
+         /* unknown     */    "tuntematon",
+         /* update      */    "viimeksi päivitetty",
          /* lcid        */    "0x40b",
          /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "fi",
-         /* html_start  */    "Begin of the document",
+         /* html_up     */    "Ylös",
+         /* html_prev   */    "Edellinen",
+         /* html_next   */    "Seuraava",
+         /* html_lang   */    "fi_FI",
+         /* html_start  */    "aloittaa asiakirjan",
          /* translator  */    "Kääntäminen:",
          /* distributor */    "Distributor:",
          /* tex_stylename */  "finnish",
          /* lyx_langname */   "finnish",
          /* degree      */    "aste",
          /* copyright   */    "Tekijänoikeus",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "tammikuu",     "helmikuu",      "maaliskuu",  "huhtikuu",     "toukokuu",   "kesäkuu",     "heinäkuu",    "elokuu",       "syyskuu",        "lokakuu",         "marraskuu",     "joulukuu"
       }
    },
    {
@@ -382,18 +393,22 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* update      */    "Dernière mise à jour le",
          /* lcid        */    "0x40c",
          /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "fr",
-         /* html_start  */    "Begin of the document",
+         /* html_up     */    "Haut",
+         /* html_prev   */    "Précédent",
+         /* html_next   */    "Suivant",
+         /* html_lang   */    "fr_FR",
+         /* html_start  */    "commencer du document",
          /* translator  */    "Traduction :",
          /* distributor */    "Distribution :",
          /* tex_stylename */  "french",
          /* lyx_langname */   "french",
          /* degree      */    "degré",
          /* copyright   */    "Droit d’auteur",
-         "",""
+         /* today       */    "%3$d %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "janvier",      "février",      "mars",       "avril",        "mai",        "juin",         "juillet",      "août",        "septembre",      "octobre",         "novembre",      "décembre"
       }
    },
    {
@@ -414,16 +429,16 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* also        */    "siehe auch",
          /* by          */    "von",
          /* fur         */    "für",
-         /* up          */    "Hoch",
-         /* exit        */    "Beenden",
+         /* up          */    "&Hoch",
+         /* exit        */    "Bee&nden",
          /* unknown     */    "Unbekannt",
          /* update      */    "Letzte Aktualisierung am",
          /* lcid        */    "0x407",
          /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "de",
+         /* html_up     */    "Hoch",
+         /* html_prev   */    "Vorige",
+         /* html_next   */    "Nächste",
+         /* html_lang   */    "de_DE",
          /* html_start  */    "Beginn des Dokumentes",
          /* translator  */    "Übersetzung:",
          /* distributor */    "Vertrieb:",
@@ -431,7 +446,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "german",
          /* degree      */    "Grad",
          /* copyright   */    "Copyright",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "Januar",       "Februar",       "März",      "April",        "Mai",        "Juni",         "Juli",         "August",       "September",      "Oktober",         "November",      "Dezember"
       }
    },
    {
@@ -459,17 +478,21 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lcid        */    "0x410",
          /* html_home   */    "Home",
          /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "it",
-         /* html_start  */    "Begin of the document",
+         /* html_prev   */    "Precedente",
+         /* html_next   */    "Seguente",
+         /* html_lang   */    "it_IT",
+         /* html_start  */    "Inizio del documento",
          /* translator  */    "Traduzione:",
          /* distributor */    "Distribuzione:",
          /* tex_stylename */  "italian",
          /* lyx_langname */   "italian",
          /* degree      */    "grado",
          /* copyright   */    "Diritto d'autore",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "Gennaio",      "Febbraio",      "Marzo",      "Aprile",       "Maggio",     "Giugno",       "Luglio",       "Agosto",       "Settembre",      "Ottobre",         "Novembre",      "Dicembre"
       }
    },
    {
@@ -499,7 +522,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "を",
          /* html_prev   */    "戻る",
          /* html_next   */    "進む",
-         /* html_lang   */    "ja",
+         /* html_lang   */    "ja_JP",
          /* html_start  */    "ドキュメントの開始",
          /* translator  */    "翻訳：",
          /* distributor */    "販売元：",
@@ -507,7 +530,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "japanese",
          /* degree      */    "度",
          /* copyright   */    "著作権",
-         "",""
+         /* today       */    "%1$d年 %2$s %3$02d日",
+         /* short_today */    "%1$d年%2$02d月%3$02d日"
+      },
+      {
+      	  "1 月",        "2 月",         "3 月",      "4 月",        "5 月",      "6 月",        "7 月",        "8 月",        "9 月",          "10 月",          "11 月",        "12 月"
       }
    },
    {
@@ -527,7 +554,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* see         */    "skatīt",
          /* also        */    "skatīt arī",
          /* by          */    "pēc",
-         /* fur         */    "",
+         /* fur         */    "ar",
          /* up          */    "Augšup",
          /* exit        */    "Iziet",
          /* unknown     */    "Nezināms",
@@ -537,7 +564,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Augšup",
          /* html_prev   */    "Iepriekšējais",
          /* html_next   */    "Nākamais",
-         /* html_lang   */    "lv",
+         /* html_lang   */    "lv_LV",
          /* html_start  */    "Dokumenta sākums",
          /* translator  */    "Translation:",
          /* distributor */    "Izplatītājs:",
@@ -545,7 +572,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "latvian",
          /* degree      */    "degree",
          /* copyright   */    "Autortiesības",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "Janvāris",    "Februāris",    "Marts",      "Aprīlis",     "Maijs",      "Jūnijs",      "Jūlijs",      "Augusts",      "Septembris",     "Oktobris",        "Novembris",     "Decembris"
       }
    },
    {
@@ -569,13 +600,13 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* up          */    "&Up",
          /* exit        */    "E&xit",
          /* unknown     */    "Unknown",
-         /* update      */    "Last updated on",
+         /* update      */    "Sist oppdatert på",
          /* lcid        */    "0x414",
          /* html_home   */    "Home",
          /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "no",
+         /* html_prev   */    "Tidligere",
+         /* html_next   */    "Neste",
+         /* html_lang   */    "nn_NO",
          /* html_start  */    "Begin of the document",
          /* translator  */    "Omsetjing:",
          /* distributor */    "Distributor:",
@@ -583,7 +614,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "norsk",
          /* degree      */    "grad",
          /* copyright   */    "Opphavsrett",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "januar",       "februar",       "mars",       "april",        "mai",        "juni",         "juli",         "august",       "september",      "oktober",         "november",      "desember"
       }
    },
    {
@@ -613,7 +648,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Up",
          /* html_prev   */    "Prev",
          /* html_next   */    "Next",
-         /* html_lang   */    "pl",
+         /* html_lang   */    "pl_PL",
          /* html_start  */    "Begin of the document",
          /* translator  */    "Tłumaczenie:",
          /* distributor */    "Distributor:",
@@ -621,7 +656,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "polish",
          /* degree      */    "stopień",
          /* copyright   */    "Prawo autorskie",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "styczeń",     "luty",          "marzec",     "kwiecień",    "maj",        "czerwiec",     "lipiec",       "sierpień",    "wrzesień",      "październik",    "listopad",      "grudzień"
       }
    },
    {
@@ -651,7 +690,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Para cima",
          /* html_prev   */    "Anterior",
          /* html_next   */    "Próximo",
-         /* html_lang   */    "pt",
+         /* html_lang   */    "pt_PT",
          /* html_start  */    "Início do documento",
          /* translator  */    "Tradução:",
          /* distributor */    "Distribuidor:",
@@ -659,7 +698,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "portuges",
          /* degree      */    "grau",
          /* copyright   */    "Direito autoral",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d-%2$02d-%1$d"
+      },
+      {
+      	 "Janeiro",      "Fevereiro",     "Março",     "Abril",        "Maio",       "Junho",        "Julho",        "Agosto",       "Setembro",       "Outubro",         "Novembro",      "Dezembro"
       }
    },
    {
@@ -697,7 +740,22 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "russian",
          /* degree      */    "степень",
          /* copyright   */    "Авторские права",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d r.",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+         "Январь",
+         "Февраль",
+         "Март",
+         "Апрель",
+         "Май",
+         "Июнь",
+         "Июль",
+         "Август",
+         "Сентябрь",
+         "Октябрь",
+         "Ноябрь",
+         "Декабрь"
       }
    },
    {
@@ -727,7 +785,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Arriba",
          /* html_prev   */    "Anterior",
          /* html_next   */    "Siguiente",
-         /* html_lang   */    "es",
+         /* html_lang   */    "es_ES",
          /* html_start  */    "Comienzo del documento",
          /* translator  */    "Traducción:",
          /* distributor */    "Distribuidor:",
@@ -735,7 +793,11 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "spanish",
          /* degree      */    "grado",
          /* copyright   */    "Derechos de autor",
-         "",""
+         /* today       */    "%3$d. %2$s %1$d",
+         /* short_today */    "%3$02d.%2$02d.%1$d"
+      },
+      {
+      	 "Enero",        "Febrero",       "Marzo",      "Abril",        "Mayo",       "Junio",        "Julio",        "Agosto",       "Septiembre",     "Octubre",         "Noviembre",     "Diciembre"
       }
    },
    {
@@ -765,7 +827,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* html_up     */    "Up",
          /* html_prev   */    "Prev",
          /* html_next   */    "Next",
-         /* html_lang   */    "sv",
+         /* html_lang   */    "sv_SE",
          /* html_start  */    "Dokumentets början",
          /* translator  */    "Översättning:",
          /* distributor */    "Distributör:",
@@ -773,9 +835,15 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* lyx_langname */   "swedish",
          /* degree      */    "grad",
          /* copyright   */    "Upphovsrätt",
-         "",""
+         /* today       */    "%3$d %2$s %1$d",
+         /* short_today */    "%1$0d-%2$02d-%3$02d"
+      },
+      {
+      	 "januari",      "februari",      "mars",       "april",        "maj",        "juni",         "juli",         "augusti",      "september",      "oktober",         "november",      "december"
       }
    },
    
-   {  -1, { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" }}
+   {  -1, { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" },
+     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+   }
 };

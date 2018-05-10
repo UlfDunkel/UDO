@@ -65,6 +65,8 @@
 #include "str.h"
 #include "chr.h"
 #include "udomem.h"
+#include "lang.h"
+
 #include "export.h"
 #include "upr.h"
 
@@ -165,8 +167,8 @@ LOCAL int convert_title(char *buf, const char *title)
       
       qdelete_all(buf, "!-", 2);
       
-      replace_all(buf, "(!today)", lang.today);
-      replace_all(buf, "(!short_today)", lang.short_today);
+      replace_all(buf, "(!today)", get_lang()->today);
+      replace_all(buf, "(!short_today)", get_lang()->short_today);
       
       qreplace_all(buf, "(\"\")", 4, TEMPO_S, TEMPO_S_LEN);
       qreplace_all(buf, "('')", 4, TEMPO_S2, TEMPO_S2_LEN);

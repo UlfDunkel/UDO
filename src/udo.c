@@ -2574,13 +2574,13 @@ LOCAL void print_ascii_index(void)
    if (use_style_book)
    {
       output_ascii_line("=", zDocParwidth);
-      outln(lang.index);
+      outln(get_lang()->index);
       output_ascii_line("=", zDocParwidth);
    }
    else
    {
-      outln(lang.index);
-      output_ascii_line("*", strlen(lang.index));
+      outln(get_lang()->index);
+      output_ascii_line("*", strlen(get_lang()->index));
    }
 
    lastc = EOS;
@@ -2764,8 +2764,8 @@ LOCAL void print_info_index(void)
       return;
 
    outln("@ifinfo");
-   voutlnf("@node %s, , , Top", lang.index);
-   voutlnf("@chapter %s", lang.index);
+   voutlnf("@node %s, , , Top", get_lang()->index);
+   voutlnf("@chapter %s", get_lang()->index);
    outln("");
    outln("@menu");
 
@@ -3987,7 +3987,7 @@ LOCAL void c_code_target(void)
       {
          set_encoding_target(udocharset[i].codepage);
          
-         init_lang();                     /* recode LANG */
+         lang_changed = TRUE;
          return;
       }
    }
@@ -8194,7 +8194,7 @@ LOCAL void output_preamble(void)
          }
          outln(s);
          s[0] = EOS;
-         strcat(s, lang.tex_stylename);
+         strcat(s, get_lang()->tex_stylename);
          if (!no_index && bCalledIndex)
             strcat(s, ",makeidx");
          if (!no_images && (iTexVersion == TEX_TETEX || iTexVersion == TEX_MIKTEX))
@@ -8226,7 +8226,7 @@ LOCAL void output_preamble(void)
       else
       {
          strcpy(s, "\\documentstyle[11pt,");
-         strcat(s, lang.tex_stylename);
+         strcat(s, get_lang()->tex_stylename);
          if (!no_index && bCalledIndex)
             strcat(s, ",makeidx");
          strcat(s, "]");
@@ -8309,7 +8309,7 @@ LOCAL void output_preamble(void)
       voutlnf("\\secnumdepth %d", toc_maxdepth - TOC_NODE1 + 1);
       voutlnf("\\tocdepth %d", toc_maxdepth - TOC_NODE1 + 1);
       outln("\\paragraph_separation indent");
-      voutlnf("\\language %s", lang.lyx_langname);
+      voutlnf("\\language %s", get_lang()->lyx_langname);
       
       switch (destlang)
       {
@@ -8343,7 +8343,7 @@ LOCAL void output_preamble(void)
       }
       else
       {
-         voutlnf("%%%%Title 0, %s", lang.unknown);
+         voutlnf("%%%%Title 0, %s", get_lang()->unknown);
       }
 
       outln("%%Status_line 3");
@@ -8983,8 +8983,8 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       {
          if (strstr(s, udolanguage[i].magic) != NULL)
          {
-            destlang = udolanguage[i].langval;
-            init_lang();
+            set_destlang(udolanguage[i].langval);
+            lang_changed = TRUE;
             return TRUE;
          }
       }
@@ -11696,7 +11696,7 @@ LOCAL void save_winhelp_project(void)
          {
             /* enable browse buttons "<<" and ">>" */
             fprintf(hpjfile, "BrowseButtons()\n");
-            fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")\n", lang.up, hlp_name, WIN_TITLE_NODE_NAME);
+            fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")\n", get_lang()->up, hlp_name, WIN_TITLE_NODE_NAME);
             /* create user defined buttons */
             for (i = 0; i < iNumWinButtons; i++)
             {
@@ -11708,7 +11708,7 @@ LOCAL void save_winhelp_project(void)
             }
 #if 0
             /* WinHelp: Knopf zum Beenden einbauen */
-            fprintf(hpjfile, "CreateButton(\"BTN_EXIT\", \"%s\", \"Exit()\")\n", lang.exit);
+            fprintf(hpjfile, "CreateButton(\"BTN_EXIT\", \"%s\", \"Exit()\")\n", get_lang()->exit);
 #endif
          }
 
@@ -11788,7 +11788,7 @@ LOCAL void save_winhelp4_project(void)
    fprintf(hpjfile, "HCW=0\n");
    fprintf(hpjfile, "HLP=%s.hlp\n", outfile.name);
    fprintf(hpjfile, "CNT=%s.cnt\n", outfile.name);
-   fprintf(hpjfile, "LCID=%s 0x0 0x0\n", lang.lcid);
+   fprintf(hpjfile, "LCID=%s 0x0 0x0\n", get_lang()->lcid);
    strcpy(n, titleprogram);
    del_right_spaces(n);
    recode_chrtab(n, CHRTAB_ANSI);
@@ -11834,7 +11834,7 @@ LOCAL void save_winhelp4_project(void)
       {
          /* << und >> anzeigen */
          fprintf(hpjfile, "BrowseButtons()\n");
-         fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(`', `%s')\")\n", lang.up, WIN_TITLE_NODE_NAME);
+         fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(`', `%s')\")\n", get_lang()->up, WIN_TITLE_NODE_NAME);
          
          /* create user defined buttons */
          for (i = 0; i < iNumWinButtons; i++)
@@ -11954,7 +11954,7 @@ LOCAL void save_htmlhelp_project(void)
    fprintf(hhpfile, "Flat=Yes\n");
    fprintf(hhpfile, "Full-text search=Yes\n");
    fprintf(hhpfile, "Auto Index=Yes\n");
-   fprintf(hhpfile, "Language=%s\n", lang.lcid);
+   fprintf(hhpfile, "Language=%s\n", get_lang()->lcid);
    fprintf(hhpfile, "Default Window=main\n");
    fprintf(hhpfile, "\n");
    fprintf(hhpfile, "[FILES]\n");
@@ -12226,7 +12226,7 @@ GLOBAL _BOOL udo(char *datei)
    fLogfile = stderr;
    bLogopened = FALSE;
    
-   destlang = TOGER;
+   set_destlang(TOENG);
    iCharset = iEncodingSource = SYSTEM_CHARSET;
    set_encoding_target(CODE_DEFAULT);
 
@@ -12425,8 +12425,6 @@ GLOBAL _BOOL udo(char *datei)
          ret = TRUE;
       } else if (malloc_token_output_buffer())
       {
-         init_lang_date();    /* Kann IMHO weg */
-
          /* itemchar wird erst nach pass1() gesetzt */
          /* bei !no_umlaute wird kein 8bit-Zeichen mehr verwendet */
          init_env_itemchar();
@@ -13463,8 +13461,6 @@ GLOBAL void init_udo_vars(void)
    lPass2Lines = 0;
    
    footnote_cnt = 0;
-
-   destlang = TOGER;
 
    bInsideAppendix = FALSE;
    bInsideDocument = FALSE;

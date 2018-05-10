@@ -86,6 +86,7 @@
 #include "toc.h"
 #include "udo.h"
 #include "udomem.h"
+#include "lang.h"
 
 #include "export.h"
 #include "tp.h"
@@ -122,7 +123,7 @@ LOCAL _BOOL init_docinfo_data(const char *data, char **var, int allow_empty)
 
    buffer = (char *)malloc(len);
 
-   if (buffer != NULL)                   /* Check if the buffer could be allocated */
+   if (buffer != NULL)                    /* Check if the buffer could be allocated */
    {
       /* First we copy the data to the buffer, this prevents bug #16 with modern compilers */
       strcpy(buffer, data);
@@ -803,6 +804,7 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- stgdatabase --- */
    
+   /* Spezialitaeten fuer ST-Guide */
    if (strcmp(inhalt, "stgdatabase") == 0)
    {
       free_titdat(&(titdat.stg_database));
@@ -813,6 +815,7 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- drcstatusline --- */
    
+   /* Spezialitaeten fuer DRC */
    if (strcmp(inhalt, "drcstatusline") == 0)
    {
       free_titdat(&(titdat.drc_statusline));
@@ -823,6 +826,7 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- htmltitle --- */
    
+   /* Spezialitaeten fuer HTML */
    if (strcmp(inhalt, "htmltitle") == 0)
    {
       free_titdat(&(titdat.htmltitle));
@@ -910,6 +914,7 @@ GLOBAL _BOOL set_docinfo(void)
 
    /* --- appletitle --- */
 
+   /* Spezialitaeten fuer HTML Apple Help */
    if (strcmp(inhalt,"appletitle") == 0)
    {
       free_titdat(&(titdat.appletitle));
@@ -982,7 +987,7 @@ GLOBAL void c_maketitle(void)
              has_company,       /* flag */
              has_translator,    /* flag */
              has_distributor;   /* flag */
-
+   
    if (called_maketitle)                  /* this function has been used already? */
    {
       error_called_twice("!maketitle");
@@ -1086,7 +1091,7 @@ GLOBAL void c_maketitle(void)
       if (has_author || has_authorimage)
       {
          outln("\\vfill");
-         voutlnf("%s\\\\", lang.by);
+         voutlnf("%s\\\\", get_lang()->by);
          outln("\\medskip");
       }
 
@@ -1130,7 +1135,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("\\vfill");
-         voutlnf("%s\\\\", lang.fur);
+         voutlnf("%s\\\\", get_lang()->fur);
          outln("\\medskip");
          voutlnf("%s \\\\", titdat.company);
       }
@@ -1149,7 +1154,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("\\vfill");
-         voutlnf("%s\\\\", lang.translator);
+         voutlnf("%s\\\\", get_lang()->translator);
          outln("\\medskip");
          voutlnf("%s \\\\", titdat.translator);
       }
@@ -1157,7 +1162,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("\\vfill");
-         voutlnf("%s\\\\", lang.distributor);
+         voutlnf("%s\\\\", get_lang()->distributor);
          outln("\\medskip");
          voutlnf("%s \\\\", titdat.distributor);
       }
@@ -1215,7 +1220,7 @@ GLOBAL void c_maketitle(void)
          outln("\\layout Subsubsection*");
          outln("\\align center");
          outln("");
-         voutlnf("%s", lang.by);
+         voutlnf("%s", get_lang()->by);
          outln("");
       }
       
@@ -1241,7 +1246,7 @@ GLOBAL void c_maketitle(void)
          outln("\\fill_bottom");
          outln("\\layout Subsubsection*");
          outln("\\align center");
-         voutlnf("%s", lang.fur);
+         voutlnf("%s", get_lang()->fur);
          outln("");
          outln("\\layout Subsection*");
          outln("\\align center");
@@ -1270,7 +1275,7 @@ GLOBAL void c_maketitle(void)
          outln("\\layout Subsubsection*");
          outln("\\align center");
          outln("");
-         voutlnf("%s", lang.translator);
+         voutlnf("%s", get_lang()->translator);
          outln("");
          outln("\\layout Subsection*");
          outln("\\align center");
@@ -1285,7 +1290,7 @@ GLOBAL void c_maketitle(void)
          outln("\\layout Subsubsection*");
          outln("\\align center");
          outln("");
-         voutlnf("%s", lang.distributor);
+         voutlnf("%s", get_lang()->distributor);
          outln("");
          outln("\\layout Subsection*");
          outln("\\align center");
@@ -1326,7 +1331,7 @@ GLOBAL void c_maketitle(void)
       if (has_author)
       {
          outln("@sp 10");
-         voutlnf("@center %s", lang.by);
+         voutlnf("@center %s", get_lang()->by);
          outln("@sp 1");
          voutlnf("@center %s", titdat.author);
       }
@@ -1334,7 +1339,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("@sp 10");
-         voutlnf("@center %s", lang.fur);
+         voutlnf("@center %s", get_lang()->fur);
          outln("@sp 1");
          voutlnf("@center %s", titdat.company);
       }
@@ -1353,7 +1358,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("@sp 10");
-         voutlnf("@center %s", lang.translator);
+         voutlnf("@center %s", get_lang()->translator);
          outln("@sp 1");
          voutlnf("@center %s", titdat.translator);
       }
@@ -1361,7 +1366,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("@sp 10");
-         voutlnf("@center %s", lang.distributor);
+         voutlnf("@center %s", get_lang()->distributor);
          outln("@sp 1");
          voutlnf("@center %s", titdat.distributor);
       }
@@ -1372,8 +1377,8 @@ GLOBAL void c_maketitle(void)
    case TOSTG:
       stg_out_endnode();
       toc_table[p2_toc_counter]->ignore_toptoc = TRUE;
-      voutlnf("@node \"%s\"", lang.title);
-      stg_headline("", lang.title, FALSE);
+      voutlnf("@node \"%s\"", get_lang()->title);
+      stg_headline("", get_lang()->title, FALSE);
       outln("");
       outln("@autorefoff");
       
@@ -1407,7 +1412,7 @@ GLOBAL void c_maketitle(void)
       if (has_author || has_authorimage)
       {
          outln("");
-         outlncenter(lang.by);
+         outlncenter(get_lang()->by);
       }
 
       if (has_authorimage)
@@ -1428,7 +1433,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("");
-         outlncenter(lang.fur);
+         outlncenter(get_lang()->fur);
          outln("");
          outlncenter(titdat.company);
       }
@@ -1447,7 +1452,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("");
-         outlncenter(lang.translator);
+         outlncenter(get_lang()->translator);
          outln("");
          outlncenter(titdat.translator);
       }
@@ -1455,7 +1460,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("");
-         outlncenter(lang.distributor);
+         outlncenter(get_lang()->distributor);
          outln("");
          outlncenter(titdat.distributor);
       }
@@ -1466,7 +1471,7 @@ GLOBAL void c_maketitle(void)
       if (uses_tableofcontents)
       {
          outln("");
-         outlncenter(lang.contents);
+         outlncenter(get_lang()->contents);
       }
       
 #if 0
@@ -1480,8 +1485,8 @@ GLOBAL void c_maketitle(void)
 
    case TOAMG:
       stg_out_endnode();
-      voutlnf("@node \"%s\" \"%s\"", lang.title, titleprogram);
-      stg_headline("", lang.title, FALSE);
+      voutlnf("@node \"%s\" \"%s\"", get_lang()->title, titleprogram);
+      stg_headline("", get_lang()->title, FALSE);
       outln("");
 
       if (has_title)
@@ -1505,7 +1510,7 @@ GLOBAL void c_maketitle(void)
       if (has_author)
       {
          outln("");
-         outlncenter(lang.by);
+         outlncenter(get_lang()->by);
          outln("");
          outlncenter(titdat.author);
       }
@@ -1513,7 +1518,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("");
-         outlncenter(lang.fur);
+         outlncenter(get_lang()->fur);
          outln("");
          outlncenter(titdat.company);
       }
@@ -1532,7 +1537,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("");
-         outlncenter(lang.translator);
+         outlncenter(get_lang()->translator);
          outln("");
          outlncenter(titdat.translator);
       }
@@ -1540,7 +1545,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("");
-         outlncenter(lang.distributor);
+         outlncenter(get_lang()->distributor);
          outln("");
          outlncenter(titdat.distributor);
       }
@@ -1550,7 +1555,7 @@ GLOBAL void c_maketitle(void)
       if (uses_tableofcontents)
       {
          outln("");
-         outlncenter(lang.contents);
+         outlncenter(get_lang()->contents);
       }
       
 #if 0
@@ -1563,7 +1568,7 @@ GLOBAL void c_maketitle(void)
       break;
 
    case TOPCH:
-      /* Titelseite erfolgt bei PC-HELP bei tableofcontents... */
+      /* written during c_tableofcontents; see pch_titlepage() */
       break;
 
    case TODRC:
@@ -1580,7 +1585,7 @@ GLOBAL void c_maketitle(void)
       del_whitespaces(n);
       if (n[0] == EOS)
       {
-         strcpy(n, lang.unknown);
+         strcpy(n, get_lang()->unknown);
       }
       voutlnf("%%%% 1, %s", n);
 
@@ -1606,7 +1611,7 @@ GLOBAL void c_maketitle(void)
       if (has_author)
       {
          outln("");
-         outlncenterfill(lang.by);
+         outlncenterfill(get_lang()->by);
          outln("");
          outlncenterfill(titdat.author);
       }
@@ -1614,7 +1619,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("");
-         outlncenterfill(lang.fur);
+         outlncenterfill(get_lang()->fur);
          outln("");
          outlncenterfill(titdat.company);
       }
@@ -1634,7 +1639,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("");
-         outlncenterfill(lang.translator);
+         outlncenterfill(get_lang()->translator);
          outln("");
          outlncenterfill(titdat.translator);
       }
@@ -1642,7 +1647,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("");
-         outlncenterfill(lang.distributor);
+         outlncenterfill(get_lang()->distributor);
          outln("");
          outlncenterfill(titdat.distributor);
       }
@@ -1673,7 +1678,7 @@ GLOBAL void c_maketitle(void)
       if (has_author)
       {
          outln("");
-         outlncenter(lang.by);
+         outlncenter(get_lang()->by);
          outln("");
          outlncenter(titdat.author);
       }
@@ -1681,7 +1686,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("");
-         outlncenter(lang.fur);
+         outlncenter(get_lang()->fur);
          outln("");
          outlncenter(titdat.company);
       }
@@ -1701,7 +1706,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("");
-         outlncenter(lang.translator);
+         outlncenter(get_lang()->translator);
          outln("");
          outlncenter(titdat.translator);
       }
@@ -1709,7 +1714,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("");
-         outlncenter(lang.distributor);
+         outlncenter(get_lang()->distributor);
          outln("");
          outlncenter(titdat.distributor);
       }
@@ -1775,7 +1780,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("    #");
-         strcpy(s1, lang.fur);
+         strcpy(s1, get_lang()->fur);
          stringcenter(s1, 60);
          voutlnf("    # %s", s1);
          outln("    #");
@@ -1801,7 +1806,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("    #");
-         strcpy(s1, lang.translator);
+         strcpy(s1, get_lang()->translator);
          stringcenter(s1, 60);
          voutlnf("    # %s", s1);
          outln("    #");
@@ -1813,7 +1818,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("    #");
-         strcpy(s1, lang.distributor);
+         strcpy(s1, get_lang()->distributor);
          stringcenter(s1, 60);
          voutlnf("    # %s", s1);
          outln("    #");
@@ -1865,7 +1870,7 @@ GLOBAL void c_maketitle(void)
       
       if (has_author || has_authorimage)
       {
-         voutlnf("\\qc{%s}%s%s", lang.by, rtf_par, rtf_parpard);
+         voutlnf("\\qc{%s}%s%s", get_lang()->by, rtf_par, rtf_parpard);
       }
       
       if (has_authorimage)
@@ -1883,7 +1888,7 @@ GLOBAL void c_maketitle(void)
       
       if (has_company)
       {
-         voutlnf("%s \\qc{%s}%s%s", rtf_par, lang.fur, rtf_par, rtf_parpard);
+         voutlnf("%s \\qc{%s}%s%s", rtf_par, get_lang()->fur, rtf_par, rtf_parpard);
          voutlnf("\\qc{%s}%s", titdat.company, rtf_parpard);
       }
       
@@ -1900,13 +1905,13 @@ GLOBAL void c_maketitle(void)
       
       if (has_translator)
       {
-         voutlnf("%s \\qc{%s}%s%s", rtf_par, lang.translator, rtf_par, rtf_par);
+         voutlnf("%s \\qc{%s}%s%s", rtf_par, get_lang()->translator, rtf_par, rtf_par);
          voutlnf("\\qc{%s}%s", titdat.translator, rtf_par);
       }
       
       if (has_distributor)
       {
-         voutlnf("%s \\qc{%s}%s%s", rtf_par, lang.distributor, rtf_par, rtf_par);
+         voutlnf("%s \\qc{%s}%s%s", rtf_par, get_lang()->distributor, rtf_par, rtf_par);
          voutlnf("\\qc{%s}%s", titdat.distributor, rtf_par);
       }
       
@@ -1921,8 +1926,8 @@ GLOBAL void c_maketitle(void)
       outln("");
       outln("{");
       voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
-      voutlnf("${\\footnote $ %s}", lang.title);
-      voutlnf("K{\\footnote K %s}", lang.title);
+      voutlnf("${\\footnote $ %s}", get_lang()->title);
+      voutlnf("K{\\footnote K %s}", get_lang()->title);
       
       if (!no_buttons)
       {
@@ -1958,7 +1963,7 @@ GLOBAL void c_maketitle(void)
       
       if (has_author || has_authorimage)
       {
-         voutlnf("\\par\\qc{%s}\\par\\pard", lang.by);
+         voutlnf("\\par\\qc{%s}\\par\\pard", get_lang()->by);
       }
 
       if (has_authorimage)
@@ -1976,7 +1981,7 @@ GLOBAL void c_maketitle(void)
 
       if (has_company)
       {
-         voutlnf("\\par\\qc{%s}\\par\\pard", lang.fur);
+         voutlnf("\\par\\qc{%s}\\par\\pard", get_lang()->fur);
          voutlnf("\\qc{%s}\\par\\pard", titdat.company);
       }
 
@@ -1986,7 +1991,8 @@ GLOBAL void c_maketitle(void)
          {
             if (titdat.address[i] != NULL)
             {
-               if (strncmp(titdat.address[i], "http://", 7) == 0)
+               if (strncmp(titdat.address[i], "http://", 7) == 0 ||
+                   strncmp(titdat.address[i], "https://", 8) == 0)
                {
                   voutlnf("\\qc{{\\uldb %s}{\\v !ShellExecuteA(0, \"open\", \"%s\", \"\", \"\", 1)}}\\par\\pard", titdat.address[i], titdat.address[i]);
                } else if (strchr(titdat.address[i], '@') != NULL)
@@ -2002,13 +2008,13 @@ GLOBAL void c_maketitle(void)
 
       if (has_translator)
       {
-         voutlnf("\\par\\qc{%s}\\par\\pard", lang.translator);
+         voutlnf("\\par\\qc{%s}\\par\\pard", get_lang()->translator);
          voutlnf("\\qc{%s}\\par\\pard", titdat.translator);
       }
 
       if (has_distributor)
       {
-         voutlnf("\\par\\qc{%s}\\par\\pard", lang.distributor);
+         voutlnf("\\par\\qc{%s}\\par\\pard", get_lang()->distributor);
          voutlnf("\\qc{%s}\\par\\pard", titdat.distributor);
       }
 
@@ -2017,7 +2023,7 @@ GLOBAL void c_maketitle(void)
       if (uses_tableofcontents)
       {
          node2NrWinhelp(n, 0);
-         voutlnf("\\qc{{\\uldb %s}{\\v %s}}\\par\\pard", lang.contents, n);
+         voutlnf("\\qc{{\\uldb %s}{\\v %s}}\\par\\pard", get_lang()->contents, n);
       }
       
       outln("}\\page");
@@ -2029,8 +2035,8 @@ GLOBAL void c_maketitle(void)
       outln("");
       outln("{");
       voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
-      voutlnf("${\\footnote $ %s}", lang.title);
-      voutlnf("K{\\footnote K %s}", lang.title);
+      voutlnf("${\\footnote $ %s}", get_lang()->title);
+      voutlnf("K{\\footnote K %s}", get_lang()->title);
 
       if (!no_buttons)
       {
@@ -2064,7 +2070,7 @@ GLOBAL void c_maketitle(void)
       
       if (has_author || has_authorimage)
       {
-         voutlnf("\\par\\qc %s\\par\\pard", lang.by);
+         voutlnf("\\par\\qc %s\\par\\pard", get_lang()->by);
       }
 
       if (has_authorimage)
@@ -2082,7 +2088,7 @@ GLOBAL void c_maketitle(void)
       
       if (has_company)
       {
-         voutlnf("\\par\\qc %s\\par\\pard", lang.fur);
+         voutlnf("\\par\\qc %s\\par\\pard", get_lang()->fur);
          voutlnf("\\qc %s\\par\\pard", titdat.company);
       }
       
@@ -2099,27 +2105,26 @@ GLOBAL void c_maketitle(void)
 
       if (has_translator)
       {
-         voutlnf("\\par\\qc %s\\par\\pard", lang.translator);
+         voutlnf("\\par\\qc %s\\par\\pard", get_lang()->translator);
          voutlnf("\\qc %s\\par\\pard", titdat.translator);
       }
       
       if (has_distributor)
       {
-         voutlnf("\\par\\qc %s\\par\\pard", lang.distributor);
+         voutlnf("\\par\\qc %s\\par\\pard", get_lang()->distributor);
          voutlnf("\\qc %s\\par\\pard", titdat.distributor);
       }
       
       outln("\\par\\par");
-      
       if (uses_tableofcontents)
       {
-         voutlnf("\\qc {\\uldb %s}{\\v %s}\\par\\pard", lang.contents, lang.contents);
+         voutlnf("\\qc {\\uldb %s}{\\v %s}\\par\\pard", get_lang()->contents, get_lang()->contents);
       }
       
       outln("}\\page");
       break;
       
-   case TOHAH:                            /* Apple-Help (HTML); New in V6.5.17 */
+   case TOHAH:
    case TOHTM:
    case TOMHH:
       outln("<div id=\"udo_titlepage\">");
@@ -2185,7 +2190,7 @@ GLOBAL void c_maketitle(void)
       
       if (has_author || has_authorimage)
       {
-         voutlnf("%s%s%s", xhtml_br, lang.by, xhtml_br);
+         voutlnf("%s%s%s", xhtml_br, get_lang()->by, xhtml_br);
       }
       
       if (has_authorimage)
@@ -2215,7 +2220,7 @@ GLOBAL void c_maketitle(void)
       
       if (has_company)
       {
-         voutlnf("%s%s%s", xhtml_br, lang.fur, xhtml_br);
+         voutlnf("%s%s%s", xhtml_br, get_lang()->fur, xhtml_br);
          voutlnf("%s%s", titdat.company, xhtml_br);
       }
       
@@ -2225,7 +2230,8 @@ GLOBAL void c_maketitle(void)
          {
             if (titdat.address[i] != NULL)
             {
-               if (strncmp(titdat.address[i], "http://", 7) == 0)
+               if (strncmp(titdat.address[i], "http://", 7) == 0 ||
+                   strncmp(titdat.address[i], "https://", 8) == 0)
                {
                   if (html_frames_layout)
                      voutlnf("<a href=\"%s\" target=\"_top\">%s</a>%s", titdat.address[i], titdat.address[i], xhtml_br);
@@ -2244,13 +2250,13 @@ GLOBAL void c_maketitle(void)
 
       if (has_translator)
       {
-         voutlnf("%s%s%s", xhtml_br, lang.translator, xhtml_br);
+         voutlnf("%s%s%s", xhtml_br, get_lang()->translator, xhtml_br);
          voutlnf("%s%s", titdat.translator, xhtml_br);
       }
 
       if (has_distributor)
       {
-         voutlnf("%s%s%s", xhtml_br, lang.distributor, xhtml_br);
+         voutlnf("%s%s%s", xhtml_br, get_lang()->distributor, xhtml_br);
          voutlnf("%s%s", titdat.distributor, xhtml_br);
       }
 
@@ -2270,7 +2276,7 @@ GLOBAL void c_maketitle(void)
 
    case TOTVH:
       outln("");
-      voutlnf(".topic %s=0", lang.title);
+      voutlnf(".topic %s=0", get_lang()->title);
       outln("");
       
       if (has_title)
@@ -2294,7 +2300,7 @@ GLOBAL void c_maketitle(void)
       if (has_author)
       {
          outln("");
-         outlncenter(lang.by);
+         outlncenter(get_lang()->by);
          outln("");
          outlncenter(titdat.author);
       }
@@ -2302,7 +2308,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("");
-         outlncenter(lang.fur);
+         outlncenter(get_lang()->fur);
          outln("");
          outlncenter(titdat.company);
       }
@@ -2321,7 +2327,7 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("");
-         outlncenter(lang.translator);
+         outlncenter(get_lang()->translator);
          outln("");
          outlncenter(titdat.translator);
       }
@@ -2329,7 +2335,7 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          outln("");
-         outlncenter(lang.distributor);
+         outlncenter(get_lang()->distributor);
          outln("");
          outlncenter(titdat.distributor);
       }
@@ -2339,9 +2345,9 @@ GLOBAL void c_maketitle(void)
 
       if (uses_tableofcontents)
       {
-         sprintf(s1, "%s", lang.contents);
-         sprintf(s2, "{%s:%s}", lang.contents, lang.contents);
-         strcpy(n, lang.contents);
+         sprintf(s1, "%s", get_lang()->contents);
+         sprintf(s2, "{%s:%s}", get_lang()->contents, get_lang()->contents);
+         strcpy(n, get_lang()->contents);
          strcenter(n, zDocParwidth);
          replace_once(n, s1, s2);
          outln(n);
@@ -2398,7 +2404,7 @@ GLOBAL void c_maketitle(void)
          outln("  /acty lowermargin 200 add def");
          outln("} ifelse");
          outln("newline");
-         voutlnf("(%s) Center setAlign newline", lang.by);
+         voutlnf("(%s) Center setAlign newline", get_lang()->by);
       }
       
       if (has_authorimage)
@@ -2416,7 +2422,7 @@ GLOBAL void c_maketitle(void)
       if (has_company)
       {
          outln("newline");
-         voutlnf("(%s) Center setAlign newline", lang.fur);
+         voutlnf("(%s) Center setAlign newline", get_lang()->fur);
          voutlnf("(%s) Center setAlign", titdat.company);
       }
       
@@ -2436,14 +2442,14 @@ GLOBAL void c_maketitle(void)
       if (has_translator)
       {
          outln("newline");
-         voutlnf("(%s) Center setAlign newline", lang.translator);
+         voutlnf("(%s) Center setAlign newline", get_lang()->translator);
          voutlnf("(%s) Center setAlign", titdat.translator);
       }
       
       if (has_distributor)
       {
          outln("newline");
-         voutlnf("(%s) Center setAlign newline", lang.distributor);
+         voutlnf("(%s) Center setAlign newline", get_lang()->distributor);
          voutlnf("(%s) Center setAlign", titdat.distributor);
       }
       
@@ -2496,7 +2502,7 @@ GLOBAL void pch_titlepage(void)
    if (titdat.author != NULL)
    {
       outln("");
-      outlncenter(lang.by);
+      outlncenter(get_lang()->by);
       outln("");
       outlncenter(titdat.author);
    }
@@ -2504,7 +2510,7 @@ GLOBAL void pch_titlepage(void)
    if (titdat.company != NULL)
    {
       outln("");
-      outlncenter(lang.fur);
+      outlncenter(get_lang()->fur);
       outln("");
       outlncenter(titdat.company);
    }
@@ -2523,7 +2529,7 @@ GLOBAL void pch_titlepage(void)
    if (titdat.translator != NULL)
    {
       outln("");
-      outlncenter(lang.translator);
+      outlncenter(get_lang()->translator);
       outln("");
       outlncenter(titdat.translator);
    }
@@ -2531,7 +2537,7 @@ GLOBAL void pch_titlepage(void)
    if (titdat.distributor != NULL)
    {
       outln("");
-      outlncenter(lang.distributor);
+      outlncenter(get_lang()->distributor);
       outln("");
       outlncenter(titdat.distributor);
    }

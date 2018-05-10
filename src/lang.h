@@ -48,6 +48,17 @@
 *
 ******************************************|************************************/
 
+GLOBAL _BOOL lang_changed;
+
+GLOBAL int         destlang;              /* Ausgabesprache (TOENG, ...) */
+#if 0 /* for debugging */
+#define destlang get_destlang(__FILE__, __LINE__)
+#endif
+#define set_destlang(lang) set_destlang(lang, __FILE__, __LINE__)
+
    /* Diverse Strings fuer die ausgewaehlte Sprache setzen (destlang) */
 GLOBAL void init_lang(void);
-GLOBAL void init_lang_date(void);
+const LANG *get_lang(void);
+
+int get_destlang(const char *file, int line);
+void (set_destlang)(int lang, const char *file, int line);
