@@ -189,11 +189,13 @@ GLOBAL void set_html_doctype(int type)
       xhtml_closer = " /";
       xhtml_br = "<br />";
       xhtml_hr = "<hr />";
+      xhtml_id_attr = "id";
    } else
    {
       xhtml_closer = "";
       xhtml_br = "<br>";
       xhtml_hr = "<hr>";
+      xhtml_id_attr = "name";
    }
 }
 
@@ -239,7 +241,7 @@ GLOBAL void c_set_html_doctype(void)
 
 GLOBAL void set_html_header_date(void)
 {
-   tokcpy2(html_header_date_zone, 10);
+   tokcpy2(html_header_date_zone, sizeof(html_header_date_zone));
    
    if ((html_header_date_zone[0] != '+' && html_header_date_zone[0] != '-') ||
        isdigit(html_header_date_zone[1] == 0) ||
@@ -351,7 +353,7 @@ GLOBAL void set_html_filename(void)
    {
    case TOHTM:
    case TOMHH:
-   case TOHAH:                            /* new: Apple Help; v6.5.17 */
+   case TOHAH:
       break;
    
    default:
@@ -539,8 +541,8 @@ GLOBAL void set_html_keywords(void)
 
    if (toc_table[p1_toc_counter]->keywords != NULL)
    {
-   	size_t oldsize;
-   	
+      size_t oldsize;
+      
       /* Keywords bereits vorhanden, neue anhaengen */
       oldptr = toc_table[p1_toc_counter]->keywords;
       oldsize = strlen(oldptr) + 1;
@@ -608,8 +610,8 @@ GLOBAL void set_html_description(void)
 
    if (toc_table[p1_toc_counter]->description != NULL)
    {
-   	  size_t oldsize;
-   	  
+      size_t oldsize;
+      
       /* description bereits vorhanden, neue anhaengen */
       oldptr = toc_table[p1_toc_counter]->description;
       oldsize = strlen(oldptr) + 1;
@@ -1557,7 +1559,7 @@ GLOBAL void set_html_frames_alignment(void)
 {
    char s[256];
 
-   tokcpy2(s, 256);
+   tokcpy2(s, sizeof(s));
 
    if (strstr(s, "center") != NULL)
    {
@@ -1620,7 +1622,7 @@ GLOBAL void set_html_frames_backimage(void)
    }
    else
    {
-      um_strcpy(filename, token[1], sizeof(filename), "set_html_frames_backimage[3]");
+      um_strcpy(filename, token[1], sizeof(filename), "!html_frames_backimage");
    }
 
    replace_char(filename, '\\', '/');

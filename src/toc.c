@@ -1063,11 +1063,11 @@ GLOBAL void string2reference(char *ref, const char *display, const LABIDX li, co
    case TOHTM:
    case TOMHH:
       if (!strcmp(pic, GIF_UP_NAME))
-         strcpy(sIDName, " id=\"UDO_nav_up");
+         sprintf(sIDName, " %s=\"UDO_nav_up", xhtml_id_attr);
       else if (!strcmp(pic, GIF_LF_NAME))
-         strcpy(sIDName, " id=\"UDO_nav_lf");
+         sprintf(sIDName, " %s=\"UDO_nav_lf", xhtml_id_attr);
       else if (!strcmp(pic, GIF_RG_NAME))
-         strcpy(sIDName, " id=\"UDO_nav_rg");
+         sprintf(sIDName, " %s=\"UDO_nav_rg", xhtml_id_attr);
       else
          sIDName[0] = 0;                     /* empty C string */
 
@@ -3488,8 +3488,8 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
 
       if (no_images)
       {
-         voutlnf("%s<a id=\"%s\" href=\"%s#%s\"%s>%s</a>",
-            sep, sIDName, sFile, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* get_lang()->contents */);
+         voutlnf("%s<a %s=\"%s\" href=\"%s#%s\"%s>%s</a>",
+            sep, xhtml_id_attr, sIDName, sFile, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* get_lang()->contents */);
       }
       else
       {
@@ -3506,8 +3506,8 @@ LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         voutlnf("<a id=\"%s\" href=\"%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
-            sIDName, sFile, HTML_LABEL_CONTENTS, sTarget, sGifName, get_lang()->contents, get_lang()->contents, border, sGifSize, xhtml_closer);
+         voutlnf("<a %s=\"%s\" href=\"%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
+            xhtml_id_attr, sIDName, sFile, HTML_LABEL_CONTENTS, sTarget, sGifName, get_lang()->contents, get_lang()->contents, border, sGifSize, xhtml_closer);
       }
    }
    else
@@ -3630,7 +3630,7 @@ LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const 
       
       if (no_images)
       {
-         voutlnf("%s<a id=\"%s\" href=\"%s\"%s>%s</a>", sep, sIDName, sFile, sTarget, get_lang()->html_home);
+         voutlnf("%s<a %s=\"%s\" href=\"%s\"%s>%s</a>", sep, xhtml_id_attr, sIDName, sFile, sTarget, get_lang()->html_home);
       }
       else
       {
@@ -3647,8 +3647,8 @@ LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const 
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         voutlnf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
-            sIDName, sFile, sTarget, sGifName, get_lang()->html_home, get_lang()->html_home, border, sGifSize, xhtml_closer);
+         voutlnf("<a %s=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
+            xhtml_id_attr, sIDName, sFile, sTarget, sGifName, get_lang()->html_home, get_lang()->html_home, border, sGifSize, xhtml_closer);
       }
       free(sFile);
    }
@@ -3730,7 +3730,7 @@ LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const 
       
       if (no_images)
       {
-         voutlnf("%s<a name=\"%s\" href=\"%s\"%s>%s</a>", sep, sIDName, href, target, alt);
+         voutlnf("%s<a %s=\"%s\" href=\"%s\"%s>%s</a>", sep, xhtml_id_attr, sIDName, href, target, alt);
       }
       else
       {
@@ -3747,8 +3747,8 @@ LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const 
          {
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
-         voutlnf("<a id=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
-            sIDName, href, target, sGifName, alt, alt, border, sGifSize, xhtml_closer);
+         voutlnf("<a %s=\"%s\" href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\"%s%s%s></a>",
+            xhtml_id_attr, sIDName, href, target, sGifName, alt, alt, border, sGifSize, xhtml_closer);
       }
    }
    else
@@ -4212,7 +4212,7 @@ LOCAL void html_node_bar_modern(void)
 #endif
 
 #if 1
-   voutlnf("<table id=\"UDO_menu\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", html_modern_width);
+   voutlnf("<table %s=\"UDO_menu\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", xhtml_id_attr, html_modern_width);
    
    switch (html_modern_alignment)
    {
@@ -5355,26 +5355,19 @@ GLOBAL _BOOL save_html_index(void)
       
       if (thisc != lastc)
       {
-      	 const char *name;
-      	 
          if (lastc != EOS)                /* close previous character group of index entries */
             fprintf(uif, "</p>\n");
          
                                           /* start index group */
          fprintf(uif, "\n<p class=\"UDO_index_group\">\n");
          
-         name = "name";
-#if 0
-         if (html_doctype == HTML5)
-            name = "id";
-#endif
          if (num_index > 100)             /* set jump entry for index A-Z list */
          {
             fprintf(uif, "<span class=\"UDO_index_name\"><a %s=\"%s\"></a>%s</span>%s\n",
-               name, thisc_label, thisc_char, xhtml_br);
+               xhtml_id_attr, thisc_label, thisc_char, xhtml_br);
          }
          else
-            fprintf(uif, "<a %s=\"%s\"></a>\n", name, thisc_label);
+            fprintf(uif, "<a %s=\"%s\"></a>\n", xhtml_id_attr, thisc_label);
          
          lastc = thisc;
       }
@@ -6550,16 +6543,11 @@ LOCAL void make_node(TOCTYPE currdepth, const _BOOL popup, _BOOL invisible)
       
       if (!flag && !toc_table[ti]->ignore_title)
       {
-         const char *a_name = "name";
-#if 0
-         if (html_doctype == HTML5)
-            a_name = "id";
-#endif
          strcpy(nameNoSty, name);
          del_html_styles(nameNoSty);
          label2html(nameNoSty);
          voutlnf("%s<a %s=\"%s\">%s%s</a>%s",
-              hx_start, a_name, nameNoSty, numbers, name, hx_end);
+              hx_start, xhtml_id_attr, nameNoSty, numbers, name, hx_end);
       }
       
       if (show_variable.source_filename)
@@ -8393,13 +8381,7 @@ GLOBAL void c_tableofcontents(void)
 
       if (toc_available)
       {
-         const char *a_name = "name";
-         
-#if 0
-         if (html_doctype == HTML5)
-            a_name = "id";
-#endif
-         voutlnf("<h1><a %s=\"%s\">%s</a></h1>", a_name, HTML_LABEL_CONTENTS, get_lang()->contents);
+         voutlnf("<h1><a %s=\"%s\">%s</a></h1>", xhtml_id_attr, HTML_LABEL_CONTENTS, get_lang()->contents);
          toc_output(TOC_NODE1, depth, FALSE);
          outln(xhtml_br);
       }
@@ -8625,19 +8607,11 @@ LOCAL void c_intern_label(_BOOL ignore_index)
    case TOHTM:
    case TOMHH:
       label2html(sLabel);
-      {
-         const char *a_name = "name";
-         
-#if 0
-         if (html_doctype == HTML5)
-            a_name = "id";
-#endif
       /* check if we're in description environment */
       if (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_DESC && !bDescDDOpen)
-         voutlnf("<dd><a %s=\"%s\"></a></dd>", a_name, sLabel);
+         voutlnf("<dd><a %s=\"%s\"></a></dd>", xhtml_id_attr, sLabel);
       else
-         voutlnf("<a %s=\"%s\"></a>", a_name, sLabel);
-      }
+         voutlnf("<a %s=\"%s\"></a>", xhtml_id_attr, sLabel);
       break;
    
    case TOLDS:

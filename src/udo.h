@@ -324,6 +324,7 @@ GLOBAL char        html_name_prefix[512]; /* Prefix fuer HTML-Dateinamen */
 GLOBAL _BOOL     html_use_hyphenation;  /* Lange Woerter sollen durch (!-) getrennt werden */
 GLOBAL int         html_doctype;          /* Welche DTD soll benutzt werden? */
 GLOBAL const char *xhtml_closer;
+GLOBAL const char *xhtml_id_attr;
 GLOBAL const char *xhtml_br;
 GLOBAL const char *xhtml_hr;
 
