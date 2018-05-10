@@ -115,6 +115,7 @@ typedef struct _label                     /* jump labels to be referenced */
    _BOOL   ignore_links;                /* don't link to this label */
    _BOOL   ignore_index;                /* don't index this label (node only!) */
    _BOOL   referenced;                  /* TRUE: label has been referenced */
+   FILE_LOCATION source_location;       /* where the label was defined */
 #if USE_NAME_HASH
     struct _label *next_hash;
 #endif

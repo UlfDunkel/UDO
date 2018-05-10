@@ -8,7 +8,7 @@ msgid  ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-28 03:50+0100\n"
+"POT-Creation-Date: 2016-04-17 19:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,23 +107,23 @@ msgstr ""
 msgid  "Topic:"
 msgstr ""
 
-#: ../gtk/guish.c:231
+#: ../gtk/guish.c:239
 msgid  "UDO can't create log file"
 msgstr ""
 
-#: ../gtk/guish.c:239
+#: ../gtk/guish.c:247
 msgid  "UDO can't create tree file"
 msgstr ""
 
-#: ../gtk/guish.c:247
+#: ../gtk/guish.c:255
 msgid  "UDO can't create project file"
 msgstr ""
 
-#: ../gtk/guish.c:255
+#: ../gtk/guish.c:263
 msgid  "UDO can't create hyphen file"
 msgstr ""
 
-#: ../gtk/guish.c:262
+#: ../gtk/guish.c:270
 msgid  "UDO can't create output file"
 msgstr ""
 

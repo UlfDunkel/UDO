@@ -6,7 +6,7 @@ msgid  ""
 msgstr ""
 "Project-Id-Version: udo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-28 03:50+0100\n"
+"POT-Creation-Date: 2016-04-17 19:52+0200\n"
 "PO-Revision-Date: 2011-05-30 02:03+0200\n"
 "Last-Translator: Thorsten Otto <halgara@yahoo.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -106,23 +106,23 @@ msgstr "UDO Hilfe-Datei:"
 msgid  "Topic:"
 msgstr "Überschrift:"
 
-#: ../gtk/guish.c:231
+#: ../gtk/guish.c:239
 msgid  "UDO can't create log file"
 msgstr "UDO kann Log-Datei nicht anlegen"
 
-#: ../gtk/guish.c:239
+#: ../gtk/guish.c:247
 msgid  "UDO can't create tree file"
 msgstr "UDO kann Tree-Datei nicht anlegen"
 
-#: ../gtk/guish.c:247
+#: ../gtk/guish.c:255
 msgid  "UDO can't create project file"
 msgstr "UDO kann Projekt-Datei nicht anlegen"
 
-#: ../gtk/guish.c:255
+#: ../gtk/guish.c:263
 msgid  "UDO can't create hyphen file"
 msgstr "UDO kann Trenn-Datei nicht anlegen"
 
-#: ../gtk/guish.c:262
+#: ../gtk/guish.c:270
 msgid  "UDO can't create output file"
 msgstr "UDO kann Ausgabe-Datei nicht anlegen"
 

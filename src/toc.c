@@ -8805,6 +8805,18 @@ LOCAL LABIDX make_label(const char *label, const _BOOL isn, const _BOOL isa, con
       labptr->appendix = FALSE;
    }
 
+   if (sCurrFileName[0] == EOS)
+   {
+   	  /* should only happen when called by add_toc_to_toc(),
+   	     because the input file has not yet been opened */
+   	  labptr->source_location.id = 0;
+   	  labptr->source_location.line = 0;
+   } else
+   {
+	   labptr->source_location.id = file_listadd(sCurrFileName);
+   	   labptr->source_location.line = uiCurrFileLine;
+   }
+   
    /* set label in project file */
    if (isa)
       save_upr_entry_alias(sCurrFileName, current_node_name_sys, uiCurrFileLine);
@@ -11392,9 +11404,13 @@ GLOBAL _BOOL check_module_toc_pass2(void)
       {
          if (!label_table[i]->is_node)
          {
-            note_message(_("label/alias '%s' in node '%s' wasn't referenced"),
-               label_table[i]->name,
-               toc_table[label_table[i]->tocindex]->name);
+         	LABEL *lab = label_table[i];
+            TOCITEM *toc = toc_table[lab->tocindex];
+            note_message(_("%s %lu: label/alias '%s' in node '%s' wasn't referenced"),
+               file_lookup(lab->source_location.id),
+               lab->source_location.line,
+               lab->name,
+               toc->name);
          }
       }
    }

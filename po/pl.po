@@ -973,7 +973,7 @@ msgstr ""
 
 #: ../src/toc.c:11395
 #, c-format
-msgid  "label/alias '%s' in node '%s' wasn't referenced"
+msgid  "%s %lu: label/alias '%s' in node '%s' wasn't referenced"
 msgstr ""
 
 #: ../src/toc_html.c:164

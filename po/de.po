@@ -975,8 +975,8 @@ msgstr "Prüfe Benutzung von Label und Alias"
 
 #: ../src/toc.c:11395
 #, c-format
-msgid  "label/alias '%s' in node '%s' wasn't referenced"
-msgstr "label/alias '%s' in Überschrift '%s' wurde nicht benutzt"
+msgid  "%s %lu: label/alias '%s' in node '%s' wasn't referenced"
+msgstr "%s %lu: label/alias '%s' in Überschrift '%s' wurde nicht benutzt"
 
 #: ../src/toc_html.c:164
 #, c-format
