@@ -98,8 +98,8 @@ GLOBAL void my_strlwr ( char *string );
 
 GLOBAL _UWORD str_flatten(char *zeile);
 GLOBAL int str_UTF_sort_cmp(char *s1, char *s2);
-GLOBAL int str_sort_flatten_cmp(char *s1, char *s2);   /* New V6.5.20 [gs] */
-GLOBAL int str_sort_cmp(char *s1, char *s2);   /* New V6.5.20 [gs] */
+GLOBAL int str_sort_flatten_cmp(char *s1, char *s2);
+GLOBAL int str_sort_cmp(char *s1, char *s2);
 
 GLOBAL int my_stricmp ( const char *s1, const char *s2 );
 GLOBAL int my_strnicmp ( const char *s1, const char *s2, size_t len );

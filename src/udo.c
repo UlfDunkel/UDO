@@ -173,14 +173,14 @@
 #include "env.h"                          /* Umgebungen verwalten */
 #include "file.h"                         /* Aufsplitten von Dateinamen */
 #include "img.h"                          /* Ausgabe/Einbindung von Grafiken */
-#include "lang.h"                         /* ausgewaehlte Sprache */   /* V6.5.18 */
+#include "lang.h"                         /* ausgewaehlte Sprache */
 #include "msg.h"                          /* Fehlermeldungen erzeugen */
 #include "par.h"                          /* (!...) Parameter bearbeiten */
 #include "str.h"                          /* Manipulation von Strings */
 #include "sty.h"                          /* Textstilumwandlungen */
 #include "tab.h"                          /* Tabellensatz */
 #include "toc.h"                          /* !node, !alias, !label, !toc */
-#include "toc_html.h"                     /* HTML parts for !node, !alias, !label, !toc */ /* V6.5.20 */
+#include "toc_html.h"                     /* HTML parts for !node, !alias, !label, !toc */
 #include "tp.h"                           /* Titelseite (!maketitle) */
 
 #include "gui.h"                          /* Funktionen GUI-/CLI-Version */
@@ -268,7 +268,7 @@ typedef struct _udocommand                /* ---- Funktionentabelle ---- */
    const char *macut;                     /* abbreviation, including leading "!" (optional) */
    CMDPROC     proc;                      /* function to be called in pass2() */
    _BOOL     reset;                       /* clear tokens after command? */
-   int         pos;                       /* possible postions (CMD_* above) */
+   int         pos;                       /* possible positions (CMD_* above) */
 } UDOCOMMAND;
 
 #define MAX_UDOCOLOR 17
@@ -485,7 +485,7 @@ LOCAL UDOCHARSET const udocharset[] =                 /* list of encoding mnemon
    { "cshproman8",          CODE_HP8      },
    
    { "next",                CODE_NEXT     },
-   { "nextstep",            CODE_NEXT     },
+   { "nextstep",            CODE_NEXT     }
 };
 
 
@@ -543,7 +543,7 @@ LOCAL _BOOL   format_uses_output_buffer;
 LOCAL _BOOL   format_protect_commands;
 
 LOCAL _BOOL   out_lf_needed;            /* Fehlt noch ein Linefeed? */
-FILE_LINENO outlines;                  /* Anzahl gesicherter Zeilen */
+FILE_LINENO outlines;                   /* Anzahl gesicherter Zeilen */
 
 LOCAL char     *tobuffer;                 /* Puffer fuer token_output() */
 LOCAL size_t    tomaxlen;                 /* spaeteste Umbruchstelle in t_o() */
@@ -618,9 +618,9 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!subsubsubnode*",               "!sssn*",   c_subsubsubnode_iv,        TRUE,  CMD_ONLY_MAINPART },
    { "!subsubsubsubnode*",            "!ssssn*",  c_subsubsubsubnode_iv,     TRUE,  CMD_ONLY_MAINPART },
    { "!subsubsubsubsubnode*",         "!sssssn*", c_subsubsubsubsubnode_iv,  TRUE,  CMD_ONLY_MAINPART },
-   { "!subsubsubsubsubsubsubnode*",   "!ssssssn*", c_subsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
-   { "!subsubsubsubsubsubsubsubnode*","!sssssssn*", c_subsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
-   { "!subsubsubsubsubsubsubsubsubnode*", "!ssssssssn*", c_subsubsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubnode*",      "!ssssssn*", c_subsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubnode*",   "!sssssssn*", c_subsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
+   { "!subsubsubsubsubsubsubsubnode*","!ssssssssn*", c_subsubsubsubsubsubsubsubnode_iv, TRUE, CMD_ONLY_MAINPART },
    { "!pnode",                        "!p",       c_pnode,                   TRUE,  CMD_ONLY_MAINPART },
    { "!psubnode",                     "!ps",      c_psubnode,                TRUE,  CMD_ONLY_MAINPART },
    { "!psubsubnode",                  "!pss",     c_psubsubnode,             TRUE,  CMD_ONLY_MAINPART },
@@ -1250,9 +1250,9 @@ GLOBAL void stringcenter(char *string, size_t length)
    size_t   sl,      /* string length */
             add;     /* number of spaces to add */
 
-   if (length >= sizeof(s))               /* avoid buffer overflow */
+   if (length >= ArraySize(s))               /* avoid buffer overflow */
    {
-      warning_message(_("stringcenter(): length must not exceed %d!"), (int)sizeof(s) - 1);
+      warning_message(_("stringcenter(): length must not exceed %d!"), (int)ArraySize(s) - 1);
       return;
    }
 
@@ -1289,9 +1289,9 @@ GLOBAL void strcenter(char *string, size_t length)
    size_t   sl,      /* string length */
             add;     /* number of spaces to add */
    
-   if (length >= sizeof(s))               /* avoid buffer overflow */
+   if (length >= ArraySize(s))               /* avoid buffer overflow */
    {
-      warning_message(_("strcenter(): length must not exceed %d!"), (int)sizeof(s) - 1);
+      warning_message(_("strcenter(): length must not exceed %d!"), (int)ArraySize(s) - 1);
       return;
    }
 
@@ -1357,9 +1357,9 @@ GLOBAL void outlncenterfill(const char *s)
    
    sl = strlen(s);                        /* get length of string */
    
-   if (sl >= sizeof(tmp))
+   if (sl >= ArraySize(tmp))
    {
-      warning_message(_("outlncenterfill(): string must not be longer than %d characters"), (int)sizeof(tmp) - 1);
+      warning_message(_("outlncenterfill(): string must not be longer than %d characters"), (int)ArraySize(tmp) - 1);
       return;
    }
 
@@ -1401,7 +1401,6 @@ GLOBAL void strright(char *string, size_t length)
             add;     /* number of spaces to add */
 
    sl = toklen(string);                   /* get length of string */
-
    if (sl == length)                      /* nothing to do */
       return;
 
@@ -1691,7 +1690,6 @@ GLOBAL _BOOL str_for_desttype(const char *s)
       flag = TRUE;
    if (strstr(s, "none") != NULL)
       flag = FALSE;
-   
    return flag;
 }
 
@@ -1739,7 +1737,6 @@ GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd)
 
    if (flag)
       *schalter = TRUE;
-   
    return flag;
 }
 
@@ -1766,11 +1763,8 @@ LOCAL _BOOL str_for_os(const char *s)
    flag = FALSE;
    warn = FALSE;
    
-#ifdef __BEOS__
-   flag |= (strstr(s, "beos") != NULL);
-#endif
-
    warn |= (strstr(s, "hpux") != NULL);
+   warn |= (strstr(s, "irix") != NULL);
    warn |= (strstr(s, "linux") != NULL);
    warn |= (strstr(s, "sinix") != NULL);
    warn |= (strstr(s, "sunos") != NULL);
@@ -1778,6 +1772,10 @@ LOCAL _BOOL str_for_os(const char *s)
     if (warn && iUdopass == PASS1)
         warning_message(_("use \"unix\" to test for unix systems"));
     
+#ifdef __BEOS__
+   flag |= strstr(s, "beos") != NULL;
+#endif
+
 #ifdef __MACOS__
    flag |= strstr(s, "macos") != NULL;
 #endif
@@ -1803,7 +1801,7 @@ LOCAL _BOOL str_for_os(const char *s)
    flag |= strstr(s, "tos") != NULL;
 #endif
 
-#if defined(__UNIX__) || defined(__unix__) || defined(__unix) || defined(unix)
+#if defined(__UNIX__)
    flag |= strstr(s, "unix") != NULL;
    flag |= warn;
 #endif
@@ -1849,7 +1847,7 @@ LOCAL int get_color(void)
 {
    char n[1024];
 
-   tokcpy2(n, sizeof(n));
+   tokcpy2(n, ArraySize(n));
    qdelete_once(n, "[", 1);
    qdelete_last(n, "]", 1);
 
@@ -2024,7 +2022,7 @@ LOCAL void c_drc_flags(void)
 {
    char s[256];
    
-   tokcpy2(s, sizeof(s));
+   tokcpy2(s, ArraySize(s));
    iDrcFlags = atoi(s);
 
    if (iDrcFlags < 0 || iDrcFlags > 64)
@@ -2108,7 +2106,7 @@ LOCAL _BOOL check_on(void)
 {
    char n[512];
    
-   tokcpy2(n, sizeof(n));
+   tokcpy2(n, ArraySize(n));
    return strstr(n, "on") != NULL;
 }
 
@@ -2118,7 +2116,7 @@ LOCAL _BOOL check_on(void)
 
 /*******************************************************************************
 *
-*  check_on():
+*  check_off():
 *     check if a command uses [off]
 *
 *  Return:
@@ -2131,7 +2129,7 @@ LOCAL _BOOL check_off(void)
 {
    char n[512];
    
-   tokcpy2(n, sizeof(n));
+   tokcpy2(n, ArraySize(n));
    return strstr(n, "off") != NULL;
 }
 
@@ -2154,7 +2152,7 @@ LOCAL void c_set(void)
 {
    char s[LINELEN];
    
-   tokcpy2(s, sizeof(s));
+   tokcpy2(s, ArraySize(s));
    add_udosymbol(s);
 }
 
@@ -2191,7 +2189,7 @@ LOCAL void c_unset(void)
 {
    char s[LINELEN];
    
-   tokcpy2(s, sizeof(s));
+   tokcpy2(s, ArraySize(s));
    del_udosymbol(s);
 }
 
@@ -2212,7 +2210,7 @@ LOCAL void c_unset(void)
 GLOBAL void c_hline(void)
 {
    int indent;
-   char  n[128];
+   char n[128];
    
    switch (desttype)
    {
@@ -2476,8 +2474,7 @@ GLOBAL _BOOL add_idxlist_item(const char *x1, const char *x2, const char *x3)
    if (c >= 'A' && c <= 'Z')
    {
       n->letter = c;
-   }
-   else
+   } else
    {
       n->letter= '*';
    }
@@ -2569,7 +2566,6 @@ LOCAL void print_ascii_index(void)
    
    ptr = idxlist;
    prev = NULL;
-   
    if (ptr == NULL)
       return;
 
@@ -2607,7 +2603,6 @@ LOCAL void print_ascii_index(void)
       }
 
       same1 = same2 = same3 = FALSE;
-      
       if (prev != NULL)
       {
          if (strcmp(ptr->idx[0], prev->idx[0]) == 0)
@@ -3005,7 +3000,7 @@ LOCAL void c_index(void)
       return;
 
    /* Tokens umkopieren */
-   tokcpy2(idx, sizeof(idx));
+   tokcpy2(idx, ArraySize(idx));
 
    if (idx[0] == EOS)
    {
@@ -3085,7 +3080,7 @@ LOCAL void c_index(void)
             break;
          }
       }
-      else                                /* TOINF */
+      else
       {
          switch (count)
          {
@@ -3322,7 +3317,7 @@ LOCAL void c_internal_heading(TOCTYPE level)
    char cmd[3 * TOC_MAXDEPTH + 20];
    TOCTYPE   i;
    
-   tokcpy2(name, sizeof(name));
+   tokcpy2(name, ArraySize(name));
    
    if (name[0] == EOS)
    {
@@ -3449,7 +3444,8 @@ LOCAL void c_internal_heading(TOCTYPE level)
       break;
       
    case TONRO:
-      my_strupr(name);
+      if (level == TOC_NODE1)
+         my_strupr(name);
       voutlnf(".SH %s", name);
       break;
       
@@ -3560,7 +3556,7 @@ LOCAL void c_internal_listheading(int offset)
    char      cmd[3 * TOC_MAXDEPTH + 20];
    int       i;
    
-   tokcpy2(name, sizeof(name));
+   tokcpy2(name, ArraySize(name));
    
    if (name[0] == EOS)
    {
@@ -3857,7 +3853,7 @@ LOCAL void c_error(void)
 {
    char e[512];
    
-   tokcpy2(e, sizeof(e));
+   tokcpy2(e, ArraySize(e));
    error_message("%s", e);
 
    bBreakInside = TRUE;
@@ -3933,7 +3929,7 @@ LOCAL void c_code_source(void)
       return;
    }
 
-   tokcpy2(s, sizeof(s));
+   tokcpy2(s, ArraySize(s));
    
    delete_once(s, "[");
    delete_last(s, "]");
@@ -3979,7 +3975,7 @@ LOCAL void c_code_target(void)
       return;
    }
 
-   tokcpy2(s, sizeof(s));
+   tokcpy2(s, ArraySize(s));
 
    delete_once(s, "[");
    delete_last(s, "]");
@@ -3989,7 +3985,7 @@ LOCAL void c_code_target(void)
                                           /*  with e.g. "l1" and "l10" */
       if (my_stricmp(s, udocharset[i].magic) == 0)
       {
-         iEncodingTarget = udocharset[i].codepage;
+         set_encoding_target(udocharset[i].codepage);
          
          init_lang();                     /* recode LANG */
          return;
@@ -4359,7 +4355,7 @@ LOCAL void c_medskip(void)
       outln("newline newline");
       outln("");
       break;
-      
+   
    case TOIPF:
    case TOHPH:
       break;
@@ -4451,7 +4447,7 @@ LOCAL void c_udolink(void)
 	   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
 	   inside_right = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
 	   
-	   tokcpy2(nodename, sizeof(nodename));
+	   tokcpy2(nodename, ArraySize(nodename));
 	   
 	   switch (desttype)
 	   {
@@ -4754,7 +4750,7 @@ LOCAL void c_rtf_charwidth(void)
 
 LOCAL void c_rtf_add_color(void)
 {
-   um_strncpy(sDocColour, token[1], 50, sizeof(sDocColour), "c_rtf_add_color[1]");
+   um_strncpy(sDocColour, token[1], 50, ArraySize(sDocColour), "c_rtf_add_color[1]");
 
    qreplace_all(sDocColour, ";", 1, ";\n", 2);
    qreplace_last(sDocColour, ";\n", 2, ";", 1);
@@ -4780,7 +4776,7 @@ LOCAL void c_rtf_add_color(void)
 LOCAL void c_html_img_suffix(void)
 {
    sDocImgSuffix[0] = EOS;
-   um_strcpy(sDocImgSuffix, token[1], sizeof(sDocImgSuffix) - 1, "!html_img_suffix");
+   um_strcpy(sDocImgSuffix, token[1], ArraySize(sDocImgSuffix) - 1, "!html_img_suffix");
 
    if (sDocImgSuffix[0] != EOS)
    {
@@ -4837,7 +4833,7 @@ LOCAL void c_html_nodesize(void)
 LOCAL void c_htag_img_suffix(void)
 {
    sDocImgSuffix[0] = EOS;
-   um_strcpy(sDocImgSuffix, token[1], sizeof(sDocImgSuffix) - 1, "!htag_img_suffix");
+   um_strcpy(sDocImgSuffix, token[1], ArraySize(sDocImgSuffix) - 1, "!htag_img_suffix");
 
    if (sDocImgSuffix[0] != EOS)
    {
@@ -5094,7 +5090,7 @@ LOCAL void convert_image(const _BOOL visible)
 
    if (token[1][0] == '\"')
    {
-      tokcpy2(sTemp, sizeof(sTemp));
+      tokcpy2(sTemp, ArraySize(sTemp));
       ptr = strchr(sTemp + 1, '\"');      /* zweites " suchen */
 
       if (ptr)
@@ -5112,9 +5108,9 @@ LOCAL void convert_image(const _BOOL visible)
    }
    else
    {
-      um_strcpy(filename, token[1], sizeof(filename), "convert_image[1]");
+      um_strcpy(filename, token[1], ArraySize(filename), "convert_image[1]");
       token[1][0] = EOS;
-      tokcpy2(caption, sizeof(caption));
+      tokcpy2(caption, ArraySize(caption));
       del_whitespaces(caption);
    }
 
@@ -5294,13 +5290,13 @@ GLOBAL void c_include(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "c_include[1]");
+         um_strcpy(name, token[1], ArraySize(name), "!include");
       }
 
       check_quotes();
@@ -5345,13 +5341,13 @@ LOCAL void c_include_verbatim(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "c_include_verbatim[1]");
+         um_strcpy(name, token[1], ArraySize(name), "!vinclude");
       }
       
       token_reset();
@@ -5407,13 +5403,13 @@ LOCAL void c_include_preformatted(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "c_include_preformatted[1]");
+         um_strcpy(name, token[1], ArraySize(name), "!pinclude");
       }
       
       token_reset();
@@ -5465,13 +5461,13 @@ LOCAL void c_include_linedraw(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "c_include_linedraw[1]");
+         um_strcpy(name, token[1], ArraySize(name), "!linclude");
       }
       
       token_reset();
@@ -5523,13 +5519,13 @@ LOCAL void c_include_raw(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "c_include_raw[1]");
+         um_strcpy(name, token[1], ArraySize(name), "!rinclude");
       }
 
       token_reset();
@@ -5546,9 +5542,9 @@ LOCAL void c_include_raw(void)
          pass2(name);
          break;
       case PASSU:
-         outln("!begin_raw");
+         outln(CMD_BEGIN_RAW);
          passU(name);
-         outln("!end_raw");
+         outln(CMD_END_RAW);
          break;
       }
       
@@ -5579,13 +5575,13 @@ LOCAL void c_include_src(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "c_include_src[1]");
+         um_strcpy(name, token[1], ArraySize(name), "!sinclude");
       }
 
       token_reset();
@@ -5637,13 +5633,13 @@ LOCAL void c_include_comment(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "c_include_comment[1]");
+         um_strcpy(name, token[1], ArraySize(name), "!cinclude");
       }
 
       token_reset();
@@ -5696,11 +5692,11 @@ LOCAL void c_input(void)
    tmp = getenv("UDOINPUTPATH");
    if (tmp != NULL)
    {
-      um_strcpy(path, tmp, sizeof(path) - 1, "!input");
+      um_strcpy(path, tmp, ArraySize(path) - 1, "!input");
       sl = strlen(path);
       if (sl > 0 && path[sl - 1] != '\\' && path[sl - 1] != '/')
       {
-         um_strcat(path, "/", sizeof(path), "!input");
+         um_strcat(path, "/", ArraySize(path), "!input");
       }
    }
    else
@@ -5716,13 +5712,13 @@ LOCAL void c_input(void)
    {
       if (token[1][0] == '\"')
       {
-         tokcpy2(name, sizeof(name));
+         tokcpy2(name, ArraySize(name));
          qdelete_once(name, "\"", 1);
          qdelete_last(name, "\"", 1);
       }
       else
       {
-         um_strcpy(name, token[1], sizeof(name), "!input");
+         um_strcpy(name, token[1], ArraySize(name), "!input");
       }
 
       token_reset();
@@ -5911,7 +5907,7 @@ LOCAL _BOOL malloc_token_output_buffer(void)
       return FALSE;
    }
 
-   tomaxlen = 200;
+   tomaxlen = 256;
    check_parwidth();
 
    return TRUE;
@@ -6245,7 +6241,7 @@ LOCAL void warning_short_line(const size_t len, const char *t)
    char        next[MAX_TOKEN_LEN + 1],
               *ptr;
    size_t      i, sl;
-   int         nr;
+   int nr;
    
    /* Wenn im naechsten Token bereits ein Trennvorschlag steckt, */
    /* dann die Zeile nicht bemaengeln, da offensichtlich nicht */
@@ -6672,8 +6668,8 @@ GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para)
 
    switch (desttype)
    {
-   case TOSTG:                            /* ST-Guide */
-   case TOAMG:                            /* AmigaGuide */
+   case TOSTG:
+   case TOAMG:
       umbruch = zDocParwidth;
 
       if (toc_inside_popup() && zDocParwidth > 60)
@@ -6681,13 +6677,13 @@ GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para)
       
       break;
 
-   case TOMAN:                            /* Manualpage */
+   case TOMAN:
       umbruch = zDocParwidth - 5;
       break;
 
-   case TOHAH:                            /* HTML Apple Help - V6.5.17 */
-   case TOHTM:                            /* HTML */
-   case TOMHH:                            /* Microsoft HTML Help */
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
       umbruch = zDocParwidth;
 
       if (iListLevel > 0 && umbruch > 70)
@@ -6725,10 +6721,10 @@ GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para)
 
    switch (desttype)
    {
-   case TORTF:                            /* RTF */
-   case TOWIN:                            /* WindowsHelp (RTF) */
-   case TOWH4:                            /* WinHelp4 */
-   case TOAQV:                            /* Apple QuickView */
+   case TORTF:
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
       to_check_rtf_quote_indent(z);
 
       if (inside_center)
@@ -6742,9 +6738,9 @@ GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para)
       
       break;
 
-   case TOHAH:                            /* HTML Apple Help V6.5.17 */
-   case TOHTM:                            /* HTML */
-   case TOMHH:                            /* Microsoft HTML Help */
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
    
       if (!inside_compressed)
       {
@@ -6962,7 +6958,7 @@ GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para)
                break;
 
             default:
-               token[i][0]= EOS;
+               token[i][0] = EOS;
                break;
             }
          }
@@ -7182,7 +7178,7 @@ GLOBAL void token_output(_BOOL reset_internals, _BOOL with_para)
             auto_references(z, FALSE, "", 0, 0);
             break;
 
-	      case TOSTG:
+	     case TOSTG:
 	         /*
 	          * for ST-GUIDE, we usually let the help compiler
 	          * generate the automatic references. However, when
@@ -7959,7 +7955,7 @@ LOCAL void sort_hypfile(const char *name)
 
    show_status_info(_("Reading hyphen file..."));
 
-   while (fgets(z, (int)sizeof(z), file))
+   while (fgets(z, (int)ArraySize(z), file))
       add_hyplist_item(z);
 
    fclose(file);
@@ -8197,7 +8193,6 @@ LOCAL void output_preamble(void)
             strcat(s, "{scrartcl}");
          }
          outln(s);
-         
          s[0] = EOS;
          strcat(s, lang.tex_stylename);
          if (!no_index && bCalledIndex)
@@ -8936,7 +8931,6 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
    }
 
    /* Allgemeine lokale Schalter */
-   
    for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
    {
       strcpy(subs, "!");
@@ -8984,7 +8978,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 
    if (strcmp(token[0], "!language") == 0)
    {
-      tokcpy2(s, sizeof(s));
+      tokcpy2(s, ArraySize(s));
       for (i = 0; i < (int)MAXLANGUAGE; i++)
       {
          if (strstr(s, udolanguage[i].magic) != NULL)
@@ -9127,7 +9121,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!man_type") == 0)
       {
-         tokcpy2(sDocManType, sizeof(sDocManType));
+         tokcpy2(sDocManType, ArraySize(sDocManType));
          return TRUE;
       }
       break;
@@ -9135,7 +9129,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
    case TONRO:
       if (strcmp(token[0], "!nroff_type") == 0)
       {
-         tokcpy2(sDocNroffType, sizeof(sDocNroffType));
+         tokcpy2(sDocNroffType, ArraySize(sDocNroffType));
          return TRUE;
       }
       break;
@@ -9193,25 +9187,25 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!win_propfont") == 0)
       {
-         tokcpy2(sDocPropfont, sizeof(sDocPropfont));
+         tokcpy2(sDocPropfont, ArraySize(sDocPropfont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!win_monofont") == 0)
       {
-         tokcpy2(sDocMonofont, sizeof(sDocMonofont));
+         tokcpy2(sDocMonofont, ArraySize(sDocMonofont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!win_propfont_size") == 0)
       {
-         tokcpy2(sDocPropfontSize, sizeof(sDocPropfontSize));
+         tokcpy2(sDocPropfontSize, ArraySize(sDocPropfontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!win_monofont_size") == 0)
       {
-         tokcpy2(sDocMonofontSize, sizeof(sDocMonofontSize));
+         tokcpy2(sDocMonofontSize, ArraySize(sDocMonofontSize));
          return TRUE;
       }
       
@@ -9223,7 +9217,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!win_prefix_helpids") == 0)
       {
-         tokcpy2(sDocWinPrefixID, sizeof(sDocWinPrefixID));
+         tokcpy2(sDocWinPrefixID, ArraySize(sDocWinPrefixID));
          return TRUE;
       }
       break;
@@ -9275,25 +9269,25 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!wh4_propfont") == 0)
       {
-         tokcpy2(sDocPropfont, sizeof(sDocPropfont));
+         tokcpy2(sDocPropfont, ArraySize(sDocPropfont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_monofont") == 0)
       {
-         tokcpy2(sDocMonofont, sizeof(sDocMonofont));
+         tokcpy2(sDocMonofont, ArraySize(sDocMonofont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_propfont_size") == 0)
       {
-         tokcpy2(sDocPropfontSize, sizeof(sDocPropfontSize));
+         tokcpy2(sDocPropfontSize, ArraySize(sDocPropfontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!wh4_monofont_size") == 0)
       {
-         tokcpy2(sDocMonofontSize, sizeof(sDocMonofontSize));
+         tokcpy2(sDocMonofontSize, ArraySize(sDocMonofontSize));
          return TRUE;
       }
       
@@ -9305,7 +9299,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!wh4_prefix_helpids") == 0)
       {
-         tokcpy2(sDocWinPrefixID, sizeof(sDocWinPrefixID));
+         tokcpy2(sDocWinPrefixID, ArraySize(sDocWinPrefixID));
          return TRUE;
       }
       break;
@@ -9319,25 +9313,25 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!rtf_monofont") == 0)
       {
-         tokcpy2(sDocMonofont, sizeof(sDocMonofont));
+         tokcpy2(sDocMonofont, ArraySize(sDocMonofont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!rtf_propfont") == 0)
       {
-         tokcpy2(sDocPropfont, sizeof(sDocPropfont));
+         tokcpy2(sDocPropfont, ArraySize(sDocPropfont));
          return TRUE;
       }
       
       if (strcmp(token[0], "!rtf_monofont_size") == 0)
       {
-         tokcpy2(sDocMonofontSize, sizeof(sDocMonofontSize));
+         tokcpy2(sDocMonofontSize, ArraySize(sDocMonofontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!rtf_propfont_size") == 0)
       {
-         tokcpy2(sDocPropfontSize, sizeof(sDocPropfontSize));
+         tokcpy2(sDocPropfontSize, ArraySize(sDocPropfontSize));
          return TRUE;
       }
       break;
@@ -9395,13 +9389,13 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!html_backpage") == 0)
       {
-         tokcpy2(sDocHtmlBackpage, sizeof(sDocHtmlBackpage));
+         tokcpy2(sDocHtmlBackpage, ArraySize(sDocHtmlBackpage));
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_indexname") == 0)
       {
-         tokcpy2(sDocHtmlIndexudo, sizeof(sDocHtmlIndexudo));
+         tokcpy2(sDocHtmlIndexudo, ArraySize(sDocHtmlIndexudo));
          return TRUE;
       }
       
@@ -9563,25 +9557,25 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
       
       if (strcmp(token[0], "!html_propfont_name") == 0)
       {
-         tokcpy2(sDocHtmlPropfontName, sizeof(sDocHtmlPropfontName));
+         tokcpy2(sDocHtmlPropfontName, ArraySize(sDocHtmlPropfontName));
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_propfont_size") == 0)
       {
-         tokcpy2(sDocHtmlPropfontSize, sizeof(sDocHtmlPropfontSize));
+         tokcpy2(sDocHtmlPropfontSize, ArraySize(sDocHtmlPropfontSize));
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_monofont_name") == 0)
       {
-         tokcpy2(sDocHtmlMonofontName, sizeof(sDocHtmlMonofontName));
+         tokcpy2(sDocHtmlMonofontName, ArraySize(sDocHtmlMonofontName));
          return TRUE;
       }
       
       if (strcmp(token[0], "!html_monofont_size") == 0)
       {
-         tokcpy2(sDocHtmlMonofontSize, sizeof(sDocHtmlMonofontSize));
+         tokcpy2(sDocHtmlMonofontSize, ArraySize(sDocHtmlMonofontSize));
          return TRUE;
       }
       
@@ -9830,6 +9824,11 @@ LOCAL _BOOL pass1_check_everywhere_commands(void)
          set_html_style();
          return TRUE;
       }
+      if (strcmp(token[0], "!html_script_name") == 0)
+      {
+         set_html_script();
+         return TRUE;
+      }
       break;
       
    case TODRC:
@@ -9868,7 +9867,7 @@ LOCAL _BOOL pass1_check_everywhere_commands(void)
 *
 ******************************************|************************************/
 
-LOCAL void pass1_check_environments(char *zeile)
+LOCAL _BOOL pass1_check_environments(char *zeile)
 {
 #if USE_KWSET
    struct kwsmatch kwsmatch;
@@ -9879,7 +9878,7 @@ LOCAL void pass1_check_environments(char *zeile)
       if (kwsexec(env_kwset, zeile, strlen(zeile), &kwsmatch) != (size_t)-1)
          cmd_idx = kwsmatch.index;
       else
-         return;
+         return FALSE;
    } else
    {
       cmd_idx = -1;
@@ -9896,12 +9895,12 @@ LOCAL void pass1_check_environments(char *zeile)
       {
          pflag[PASS1].env = ENV_VERBATIM;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else if (IS_KW(CMD_END_VERBATIM, CMD_ENV_IDX_END_VERBATIM))
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       }
    }
 
@@ -9912,12 +9911,12 @@ LOCAL void pass1_check_environments(char *zeile)
       {
          pflag[PASS1].env = ENV_SOURCECODE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else if (IS_KW(CMD_END_SOURCECODE, CMD_ENV_IDX_END_SOURCECODE))
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       }
    }
 
@@ -9928,12 +9927,12 @@ LOCAL void pass1_check_environments(char *zeile)
       {
          pflag[PASS1].env = ENV_RAW;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else if (IS_KW(CMD_END_RAW, CMD_ENV_IDX_END_RAW))
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       }
    }
 
@@ -9948,12 +9947,12 @@ LOCAL void pass1_check_environments(char *zeile)
          }
          pflag[PASS1].env = ENV_TABLE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else if (IS_KW(CMD_END_TABLE, CMD_ENV_IDX_END_TABLE))
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       }
    }
 
@@ -9964,12 +9963,12 @@ LOCAL void pass1_check_environments(char *zeile)
       {
          pflag[PASS1].env = ENV_COMMENT;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else if (IS_KW(CMD_END_COMMENT, CMD_ENV_IDX_END_COMMENT))
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       }
    }
 
@@ -9980,12 +9979,12 @@ LOCAL void pass1_check_environments(char *zeile)
       {
          pflag[PASS1].env = ENV_LINEDRAW;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else if (IS_KW(CMD_END_LINEDRAW, CMD_ENV_IDX_END_LINEDRAW))
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       }
    }
 
@@ -9996,15 +9995,16 @@ LOCAL void pass1_check_environments(char *zeile)
       {
          pflag[PASS1].env = ENV_PREFORMATTED;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else if (IS_KW(CMD_END_PREFORMATTED, CMD_ENV_IDX_END_PREFORMATTED))
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
-         return;
+         return TRUE;
       }
    }
 #undef IS_KW
+	return FALSE;
 }
 
 
@@ -10099,6 +10099,8 @@ LOCAL _BOOL pass1(const char *datei)
    
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
+   	  _BOOL ignore_comment_or_empty;
+   	  
       /* Here we need to add possible splitted line numbers */
       uiFiles[iFilesOpened - 1].loc.line += 1 + uiMultiLines;
       uiCurrFileLine = uiFiles[iFilesOpened - 1].loc.line;
@@ -10117,22 +10119,22 @@ LOCAL _BOOL pass1(const char *datei)
          len--;
       }
       
-      /* Kommentare nicht recoden */
-      if (zeile[0] != '#' && pflag[PASS1].ignore_line == 0 && pflag[PASS1].env != ENV_RAW)
+      /* dont recode commments */
+      ignore_comment_or_empty = zeile[0] == '#' || zeile[0] == EOS;
+      if (!ignore_comment_or_empty && pflag[PASS1].ignore_line == 0 && pflag[PASS1].env != ENV_RAW)
       {
          recode(zeile, iEncodingSource, iEncodingTarget);
       }
 
-      if (zeile[0] != '#' && zeile[0] != EOS && pflag[PASS1].env == ENV_NONE)
+      if (!ignore_comment_or_empty && pflag[PASS1].env == ENV_NONE)
       {
          pass_check_if(zeile, PASS1);
       }
 
-      if (zeile[0] != '#' && zeile[0] != EOS && pflag[PASS1].ignore_line == 0)
+      if (!ignore_comment_or_empty && pflag[PASS1].ignore_line == 0)
       {
-         pass1_check_environments(zeile);
+         ignore_comment_or_empty |= pass1_check_environments(zeile);
       }
-
 
       if (zeile[0] != EOS)
       {
@@ -10409,12 +10411,12 @@ LOCAL _BOOL pass1(const char *datei)
                   }
                   else if (strcmp(token[0], "!alias") == 0 || strcmp(token[0], "!a") == 0)
                   {
-                     tokcpy2(tmp, sizeof(tmp));
+                     tokcpy2(tmp, ArraySize(tmp));
                      add_alias(tmp, toc_inside_popup(), FALSE);
                   }
                   else if (strcmp(token[0], "!alias-") == 0 || strcmp(token[0], "!a-") == 0)
                   {
-                     tokcpy2(tmp, sizeof(tmp));
+                     tokcpy2(tmp, ArraySize(tmp));
                      add_alias(tmp, toc_inside_popup(), TRUE);
                   }
                   else if (strcmp(token[0], "!index") == 0 || strcmp(token[0], "!x") == 0)
@@ -10610,19 +10612,19 @@ LOCAL _BOOL pass1(const char *datei)
                   }
                   else if (strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0)
                   {
-                     tokcpy2(tmp, sizeof(tmp));
+                     tokcpy2(tmp, ArraySize(tmp));
                      replace_udo_quotes(tmp);
                      add_label(tmp, FALSE, toc_inside_popup(), FALSE, FALSE);
                   }
                   else if (strcmp(token[0], "!label*") == 0 || strcmp(token[0], "!l*") == 0)
                   {
-                     tokcpy2(tmp, sizeof(tmp));
+                     tokcpy2(tmp, ArraySize(tmp));
                      replace_udo_quotes(tmp);
                      add_label(tmp, FALSE, toc_inside_popup(), TRUE, FALSE);
                   }
                   else if (strcmp(token[0], "!label-") == 0)
                   {
-                     tokcpy2(tmp, sizeof(tmp));
+                     tokcpy2(tmp, ArraySize(tmp));
                      replace_udo_quotes(tmp);
                      add_label(tmp, FALSE, toc_inside_popup(), FALSE, TRUE);
                   }
@@ -10852,7 +10854,7 @@ LOCAL void output_verbatim_line(char *zeile)
       
    case TOSTG:
    case TOAMG:
-      qreplace_all(zeile, "@", 1, "@@", 2);
+      replace_1at_by_2at(zeile);
       if (bCheckMisc)
          auto_references(zeile, FALSE, "", 0, 0);
       break;
@@ -10909,7 +10911,7 @@ LOCAL void output_verbatim_line(char *zeile)
       break;
    }
    
-   if (indent != '\0')
+   if (indent[0] != '\0')
       out(indent);
    outln(zeile);
 }
@@ -11047,7 +11049,7 @@ LOCAL void c_comment(void)
 {
    char s[512];
 
-   tokcpy2(s, sizeof(s));
+   tokcpy2(s, ArraySize(s));
    output_comment_line(s);
 }
 
@@ -11441,6 +11443,8 @@ LOCAL _BOOL pass2(const char *datei)
 
    while (!bBreakHappened && !bBreakInside && !bFatalErrorDetected && myTextGetline(zeile, LINELEN, file))
    {
+   	  _BOOL ignore_comment_or_empty;
+   	  
       uiFiles[iFilesOpened - 1].loc.line += 1 + uiMultiLines;
       uiCurrFileLine = uiFiles[iFilesOpened - 1].loc.line;
       lPass2Lines++;
@@ -11460,7 +11464,9 @@ LOCAL _BOOL pass2(const char *datei)
          len--;
       }
 
-      if (zeile[0] != EOS && zeile[0] != '#' && pflag[PASS2].ignore_line == 0 && pflag[PASS2].env != ENV_RAW)
+      /* dont recode commments */
+      ignore_comment_or_empty = zeile[0] == '#' || zeile[0] == EOS;
+      if (!ignore_comment_or_empty && pflag[PASS2].ignore_line == 0 && pflag[PASS2].env != ENV_RAW)
       {
          recode(zeile, iEncodingSource, iEncodingTarget);
       }
@@ -11474,14 +11480,14 @@ LOCAL _BOOL pass2(const char *datei)
          }
       }
 
-      if (zeile[0] != '#' && zeile[0] != EOS && pflag[PASS2].env == ENV_NONE)
+      if (!ignore_comment_or_empty && pflag[PASS2].env == ENV_NONE)
       {
          pass_check_if(zeile, PASS2);
       }
 
       /* Spezielle Umgebungen (verbatim, raw, table, sourcecode) testen. */
       /* Gesucht wird nur nach !begin... bzw !end... */
-      if (zeile[0] != '#' && pflag[PASS2].ignore_line == 0)
+      if (!ignore_comment_or_empty && pflag[PASS2].ignore_line == 0)
       {
          pass2_check_environments(zeile);
       }
@@ -11598,7 +11604,7 @@ LOCAL void save_winhelp_project(void)
 {
    FILE  *hpjfile;
    char   n[512],
-          hlp_name[256],
+          hlp_name[MYFILE_NAME_LEN],
           bc[128];
    int i;
    
@@ -11683,20 +11689,13 @@ LOCAL void save_winhelp_project(void)
             fprintf(hpjfile, "Std20Menus()\n");
             /* show default buttons */
             fprintf(hpjfile, "Std20Buttons()\n");
-         }
-         else
-         {
-            /* enable browse buttons "<<" and ">>" */
-            fprintf(hpjfile, "BrowseButtons()\n");
-         }
-   
-         if (desttype == TOAQV)
-         {
             /* QuickView always needs "&Up" regardless of language */
             fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")\n", "&Up", hlp_name, WIN_TITLE_NODE_NAME);
          }
          else
          {
+            /* enable browse buttons "<<" and ">>" */
+            fprintf(hpjfile, "BrowseButtons()\n");
             fprintf(hpjfile, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")\n", lang.up, hlp_name, WIN_TITLE_NODE_NAME);
             /* create user defined buttons */
             for (i = 0; i < iNumWinButtons; i++)
@@ -12100,29 +12099,13 @@ LOCAL void set_format_flags(void)
 
 /*******************************************************************************
 *
-*  show_udo_intro():
-*     show UDO intro in console output
+*  udo_cleanup():
+*     release used resources
 *
 *  Return:
 *     -
 *
 ******************************************|************************************/
-
-#if 0
-LOCAL NOINLINE void show_udo_intro(void)
-{
-   char sInfMsg[256];
-   
-   show_status_info("");
-   sprintf(sInfMsg, "This is UDO %s", UDO_VERSION_STRING_OS);
-   show_status_loginfo(sInfMsg);
-   show_status_loginfo(COPYRIGHT);
-   sprintf(sInfMsg, "UDO is Open Source (see %s for further information).", UDO_URL);
-   show_status_loginfo(sInfMsg);
-   show_status_loginfo("");
-}
-#endif
-
 
 static _BOOL udo_cleanup(void)
 {
@@ -12179,7 +12162,7 @@ LOCAL void get_timestr(char *t)
 
 static NOINLINE void print_results(void)
 {
-	char sInfMsg[256];
+	char sInfMsg[MYFILE_FULL_LEN + 100];
 	int val;
 	
    if (!bTestmode && !bFatalErrorDetected)
@@ -12245,7 +12228,7 @@ GLOBAL _BOOL udo(char *datei)
    
    destlang = TOGER;
    iCharset = iEncodingSource = SYSTEM_CHARSET;
-   iEncodingTarget = CODE_CP1252;
+   set_encoding_target(CODE_DEFAULT);
 
    init_modules();
    init_udosymbol_pass1();
@@ -12476,7 +12459,7 @@ GLOBAL _BOOL udo(char *datei)
              * Kapitelnummern stimmen und die Unterinhalts-
              * verzeichnisse erzeugt werden
              *
-             * v6.3.15 [vj] Die if-Abfrage bleibt drin, fuer den Fall,
+             * Die if-Abfrage bleibt drin, fuer den Fall,
              * dass ein aehnlicher Fehler nochmal
              * auftritt, er wird dann vielleicht frueher erkannt
              */
@@ -12496,7 +12479,7 @@ GLOBAL _BOOL udo(char *datei)
                iUdopass = PASSU;
                if (passU(datei))
                {
-                  ret= TRUE;
+                  ret = TRUE;
                }
             } else
             {
@@ -13171,13 +13154,15 @@ LOCAL void init_module_udo(void)
    {
    case TOSTG:                            /* ST-Guide */
    case TOPCH:                            /* Pure C Help */
-      iEncodingTarget = CODE_TOS;
+   	  if (iEncodingTarget == CODE_DEFAULT)
+         set_encoding_target(CODE_TOS);
       break;
    
    case TOAMG:                            /* AmigaGuide */
    case TOWIN:                            /* Windows Help */
    default:
-      iEncodingTarget = CODE_CP1252;
+   	  if (iEncodingTarget == CODE_DEFAULT)
+         set_encoding_target(CODE_CP1252);
       break;
    }
       
@@ -13636,7 +13621,7 @@ GLOBAL void init_udo_vars(void)
       if (date[4] == ' ')
          date[4] = '0';
 
-      sprintf(compile_date, "%c%c%c%c-%02i-%c%c", date[7], date[8], date[9], date[10], getMonth(date), date[4], date[5]);
+      sprintf(compile_date, "%c%c%c%c-%02d-%c%c", date[7], date[8], date[9], date[10], getMonth(date), date[4], date[5]);
    }
    if (compile_time[0] == '\0')
    {

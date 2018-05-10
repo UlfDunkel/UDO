@@ -79,7 +79,16 @@
 #define UNUSED(x)  if (x) {;}             /* tell compiler that variable seems to be used */
 #endif
 
-#define ArraySize(a) (sizeof(a) / sizeof((a)[0]))
+#ifdef __GNUC__
+#define __build_bug(e) (__extension__ sizeof(struct { int:-!!(e); }))
+/* &a[0] degrades to a pointer: a different type from an array */
+#define __must_be_array(a) __build_bug(__builtin_types_compatible_p(typeof(a), typeof(&a[0])))
+#else
+#define __build_bug(e)
+#define __must_be_array(a) 0
+#endif
+
+#define ArraySize(a) (sizeof(a) / sizeof((a)[0]) + __must_be_array(a))
 
 
 

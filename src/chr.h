@@ -126,7 +126,7 @@ GLOBAL _UWORD utf8_to_uchar(const char *sz, int *length);
 GLOBAL char *bstr_to_utf8(_UWORD ucode, char *s);
 
    /* get char(s!) from Unicode value */
-GLOBAL const char *unicode2char(_UWORD unicode, char *cbuf);
+GLOBAL const char *unicode2char(_UWORD unicode, char *s);
 
 
 GLOBAL void convert_sz(char *s);
@@ -208,5 +208,8 @@ GLOBAL void node2winhelp(char *n);
 GLOBAL void node2WinAutoID(char *id, const char *n);
 GLOBAL void node2vision(char *n);
 GLOBAL void node2texinfo(char *s);
+
+int get_encoding_target(const char *file, int line);
+void (set_encoding_target)(int code, const char *file, int line);
 
 #endif   /* __UDOCHR__ */

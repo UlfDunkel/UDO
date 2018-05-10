@@ -97,6 +97,11 @@ GLOBAL int         iCharset;              /* Eingabe-Zeichensatz */
 GLOBAL int         iEncodingSource;       /* encoding of UDO source documents */
 GLOBAL int         iEncodingTarget;       /* encoding of target document */
 
+#if 0 /* for debugging */
+#define iEncodingTarget get_encoding_target(__FILE__, __LINE__)
+#endif
+#define set_encoding_target(code) set_encoding_target(code, __FILE__, __LINE__)
+
 GLOBAL int         iDateDay, 
                    iDateMonth, 
                    iDateYear;
@@ -125,7 +130,7 @@ GLOBAL _BOOL     bForceShort;           /* Immer kurze Dateinamen? */
 GLOBAL _BOOL     bNoFastAutoref;        /* use newer, faster version of autoreferencer? */
 #endif
 
-GLOBAL size_t      zDocParwidth;          /* PL6: max. Zeilenbreite */
+GLOBAL size_t      zDocParwidth;          /* max. Zeilenbreite */
 
 GLOBAL int         iTexVersion;           /* Lindner-, Strunk-, emTex? */
 GLOBAL int         iTexDPI;               /* Aufloesung fuer Images */
@@ -266,19 +271,19 @@ GLOBAL _BOOL     html_use_folders;      /* Ordnerstruktur erzeugen? */
                                           /* Transparente Buttons benutzen? */
 GLOBAL _BOOL     html_transparent_buttons;
 
-GLOBAL SHOW_VAR    show_variable;         /* New in V6.5.19 */
+GLOBAL SHOW_VAR    show_variable;
 
-GLOBAL _BOOL     html_navigation_line;  /* v6.5.19[fd] TRUE: show navigation levels in one line without folder symbols */
-                                          /* v6.5.19[fd] string which separates navigation levels (default: '&gt; ') */
+GLOBAL _BOOL     html_navigation_line;  /* TRUE: show navigation levels in one line without folder symbols */
+                                          /* string which separates navigation levels (default: '&gt; ') */
 GLOBAL char        html_navigation_separator[20];
-GLOBAL _BOOL     html_navigation_image; /* v6.5.19[fd] TRUE: show (folder) symbol */
-                                          /* v6.5.19[fd] fspec to userdef (folder equivalent) symbol */
+GLOBAL _BOOL     html_navigation_image; /* TRUE: show (folder) symbol */
+                                          /* fspec to userdef (folder equivalent) symbol */
 GLOBAL char        html_navigation_image_fspec[128];
 
                                           /* Links zum Wechseln? */
 GLOBAL char        sDocHtmlSwitchLanguage[256];
 GLOBAL int         iDocHtmlSwitchLanguage;/* ... und der Wert der Sprache */
-GLOBAL FILE_ID     sCounterCommand;       /* CounterCommand for all files V6.5.9 */
+GLOBAL FILE_ID     sCounterCommand;       /* CounterCommand for all files */
 
 GLOBAL int         html_nodesize;         /* Default: 1 -> <H1> */
 GLOBAL char        sDocHtmlBackpage[512]; /* Ruecksprung im Index */

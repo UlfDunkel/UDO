@@ -4756,3 +4756,31 @@ GLOBAL const char *chr_codepage_charset_name(int encoding)
    }
    return "ISO-8859-1";
 }
+
+
+#undef iEncodingTarget
+void (set_encoding_target)(int code, const char *file, int line)
+{
+	iEncodingTarget = code;
+#if 0 /* for debugging */
+	fprintf(stderr, "set enc: %s %d %s\n", file, line, chr_codepage_charset_name(iEncodingTarget));
+#else
+	UNUSED(file);
+	UNUSED(line);
+#endif
+}
+
+
+#if 0 /* for debugging */
+#undef iEncodingTarget
+int get_encoding_target(const char *file, int line)
+{
+	static int been_here;
+	if (!been_here)
+	{
+		fprintf(stderr, "get enc: %s %d %s\n", file, line, chr_codepage_charset_name(iEncodingTarget));
+		been_here = 1;
+	}
+	return iEncodingTarget;
+}
+#endif

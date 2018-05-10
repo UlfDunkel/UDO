@@ -201,10 +201,8 @@ GLOBAL char        COLOR_BLACK[8],
                    COLOR_TEAL[8],
                    COLOR_AQUA[8],
                    COLOR_OFF[8];
-GLOBAL char        SUP_ON[8],
-                   SUP_OFF[8];
-GLOBAL char        SUB_ON[8],
-                   SUB_OFF[8];
+GLOBAL char        SUP_ON[8], SUP_OFF[8];
+GLOBAL char        SUB_ON[8], SUB_OFF[8];
 
 
 

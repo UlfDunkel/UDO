@@ -510,7 +510,7 @@ LOCAL _UWORD hash_val(const char *name)
 GLOBAL _BOOL is_node_link(const char *link, char *node, TOCIDX *ti, _BOOL *isnode, _BOOL *isalias, _BOOL *ispopup, LABIDX *li)
 {
    _BOOL ret = FALSE;
-   
+
    node[0] = EOS;
    *isnode = FALSE;
    *isalias = FALSE;
@@ -5165,7 +5165,7 @@ LOCAL int comp_index_html(const void  *_p1, const void  *_p2)
    strcpy(p1_tocname, p1->sortname);      /* copy the entry names */
    strcpy(p2_tocname, p2->sortname);
 
-   if (!html_ignore_8bit)                 /* V6.5.20 [gs] */
+   if (!html_ignore_8bit)
    {
       recode_chrtab(p1_tocname, CHRTAB_HTML);
       recode_chrtab(p2_tocname, CHRTAB_HTML);
@@ -5185,7 +5185,6 @@ LOCAL int comp_index_html(const void  *_p1, const void  *_p2)
    }
 #endif
 
-                                          /* Instead of strcmp v6.5.20 [gs] */
    return str_sort_cmp(p1_tocname, p2_tocname);
 }
 
@@ -5740,8 +5739,8 @@ GLOBAL _BOOL save_htmlhelp_index(const char *filename)
    HTML_IDX  *html_index;
    char       htmlname[MYFILE_FULL_LEN];
    char      *tocname;
-   char         cLabel[512];      /* */
-   int          html_merge;       /* */
+   char         cLabel[512];
+   int          html_merge;
    TOCTYPE d;
    
    if (no_index)
@@ -6925,7 +6924,7 @@ GLOBAL void c_begin_node(void)
       make_node(TOC_NODE1, FALSE, FALSE);
    } else if (p2_toctype >= TOC_MAXDEPTH - 1)
    {
-      warning_node_too_deep();
+      warning_node_too_deep(FALSE, FALSE);
       make_node(TOC_MAXDEPTH - 1, FALSE, FALSE);
    } else
    {
@@ -6956,7 +6955,7 @@ GLOBAL void c_begin_node_iv(void)
       make_node(TOC_NODE1, FALSE, TRUE);
    } else if (p2_toctype >= TOC_MAXDEPTH - 1)
    {
-      warning_node_too_deep();
+      warning_node_too_deep(FALSE, TRUE);
       make_node(TOC_MAXDEPTH - 1, FALSE, TRUE);
    } else
    {
@@ -6987,7 +6986,7 @@ GLOBAL void c_begin_pnode(void)
       make_node(TOC_NODE1, TRUE, FALSE);
    } else if (p2_toctype >= TOC_MAXDEPTH - 1)
    {
-      warning_node_too_deep();
+      warning_node_too_deep(TRUE, FALSE);
       make_node(TOC_MAXDEPTH - 1, TRUE, FALSE);
    } else
    {
@@ -7018,7 +7017,7 @@ GLOBAL void c_begin_pnode_iv(void)
       make_node(TOC_NODE1, TRUE, TRUE);
    } else if (p2_toctype >= TOC_MAXDEPTH - 1)
    {
-      warning_node_too_deep();
+      warning_node_too_deep(TRUE, TRUE);
       make_node(TOC_MAXDEPTH - 1, TRUE, TRUE);
    } else
    {

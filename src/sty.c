@@ -77,6 +77,7 @@
 #include "udo.h"
 #include "file.h"
 #include "udomem.h"
+
 #include "export.h"
 #include "sty.h"
 
@@ -586,7 +587,6 @@ GLOBAL void c_internal_styles(char *s)
       delete_all(s, VERB_OFF);
 #endif
       footnote2ascii(s);
-
       del_internal_styles(s);
       break;
       
@@ -629,7 +629,6 @@ GLOBAL void c_internal_styles(char *s)
       delete_all(s, VERB_OFF);
 #endif
       footnote2ascii(s);
-
       del_internal_styles(s);
       break;
       
@@ -650,7 +649,6 @@ GLOBAL void c_internal_styles(char *s)
 #else
       footnote2array(s);
 #endif
-
       del_internal_styles(s);
       break;
       
