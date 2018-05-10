@@ -10005,6 +10005,7 @@ LOCAL _BOOL pass1(const char *datei)
 
 	if (file == NULL)
 	{
+		strcpy(tmp_datei, datei);
 		build_include_filename(tmp_datei, infile.full, ".ui");
 		file = myTextOpen(tmp_datei);
 	}
@@ -11292,6 +11293,7 @@ LOCAL _BOOL pass2(const char *datei)
 
 	if (file == NULL)
 	{
+		strcpy(tmp_datei, datei);
 		build_include_filename(tmp_datei, infile.full, ".ui");
 		file = myTextOpen(tmp_datei);
 	}
