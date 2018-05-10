@@ -1,21 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# IItalian translation for udo.
+# Copyright (C) 2001-2013 by The UDO Community
+# Thorsten Otto, 2011.
 #
-#, fuzzy
 msgid  ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: udo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-10 14:13+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2011-05-30 02:03+0200\n"
+"Last-Translator: Thorsten Otto <halgara@yahoo.de>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/abo.c:233
 #, c-format
@@ -307,155 +306,155 @@ msgstr ""
 #. preface
 #: ../src/lang_utf.h:144
 msgid  "Preface"
-msgstr ""
+msgstr "Prefazione"
 
 #. chapter
 #: ../src/lang_utf.h:145
 msgid  "Chapter"
-msgstr ""
+msgstr "Capitolo"
 
 #. title
 #: ../src/lang_utf.h:146
 msgid  "Title"
-msgstr ""
+msgstr "Titolo"
 
 #. appendix
 #: ../src/lang_utf.h:147
 msgid  "Appendix"
-msgstr ""
+msgstr "Appendice"
 
 #. contents
 #: ../src/lang_utf.h:148
 msgid  "Contents"
-msgstr ""
+msgstr "Contenuto"
 
 #. listfigure
 #: ../src/lang_utf.h:149
 msgid  "List of Figures"
-msgstr ""
+msgstr "Lista di Figure"
 
 #. listtable
 #: ../src/lang_utf.h:150
 msgid  "List of Tables"
-msgstr ""
+msgstr "Lista di Tabelle"
 
 #. figure
 #: ../src/lang_utf.h:151
 msgid  "Figure"
-msgstr ""
+msgstr "Figura"
 
 #. table
 #: ../src/lang_utf.h:152
 msgid  "Table"
-msgstr ""
+msgstr "Tabella"
 
 #. index
 #: ../src/lang_utf.h:153
 msgid  "Index"
-msgstr ""
+msgstr "Indice"
 
 #. page
 #: ../src/lang_utf.h:154
 msgid  "page"
-msgstr ""
+msgstr "pagina"
 
 #. see
 #: ../src/lang_utf.h:155
 msgid  "see"
-msgstr ""
+msgstr "vedere"
 
 #. also
 #: ../src/lang_utf.h:156
 msgid  "see also"
-msgstr ""
+msgstr "vedere anche"
 
 #. by
 #: ../src/lang_utf.h:157
 msgid  "by"
-msgstr ""
+msgstr "da"
 
 #. fur
 #: ../src/lang_utf.h:158
 msgid  "for"
-msgstr ""
+msgstr "pro"
 
 #. up
 #: ../src/lang_utf.h:159
 msgid  "&Up"
-msgstr ""
+msgstr "S&u"
 
 #. exit
 #: ../src/lang_utf.h:160
 msgid  "E&xit"
-msgstr ""
+msgstr "Uscita"
 
 #. unknown
 #: ../src/lang_utf.h:161
 msgid  "Unknown"
-msgstr ""
+msgstr "Ignoto"
 
 #. update
 #: ../src/lang_utf.h:162
 msgid  "Last updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento"
 
 #. lcid
 #: ../src/lang_utf.h:163
 msgid  "0x409"
-msgstr ""
+msgstr "0x410"
 
 #. html_home
 #: ../src/lang_utf.h:164
 msgid  "Home"
-msgstr ""
+msgstr "Home"
 
 #. html_up
 #: ../src/lang_utf.h:165
 msgid  "Up"
-msgstr ""
+msgstr "Up"
 
 #. html_prev
 #: ../src/lang_utf.h:166
 msgid  "Prev"
-msgstr ""
+msgstr "Precedente"
 
 #. html_next
 #: ../src/lang_utf.h:167
 msgid  "Next"
-msgstr ""
+msgstr "Seguente"
 
 #. html_lang
 #. html_start
 #: ../src/lang_utf.h:169
 msgid  "Begin of the document"
-msgstr ""
+msgstr "Inizio del documento"
 
 #. translator
 #: ../src/lang_utf.h:170
 msgid  "Translation:"
-msgstr ""
+msgstr "Traduzione:"
 
 #. distributor
 #: ../src/lang_utf.h:171
 msgid  "Distributor:"
-msgstr ""
+msgstr "Distribuzione:"
 
 #. tex_stylename
 #: ../src/lang_utf.h:172
 msgctxt "tex_stylename"
 msgid  "english"
-msgstr ""
+msgstr "italian"
 
 #. lyx_langname
 #: ../src/lang_utf.h:173
 msgctxt "lyx_langname"
 msgid  "english"
-msgstr ""
+msgstr "italian"
 
 #. degree
 #: ../src/lang_utf.h:174
 msgid  "degree"
-msgstr ""
+msgstr "grado"
 
 #. copyright
 #: ../src/lang_utf.h:175
@@ -472,7 +471,7 @@ msgstr ""
 #, c-format
 msgctxt "today"
 msgid  "%2$s %3$d, %1$d"
-msgstr ""
+msgstr "%3$d. %2$s %1$d"
 
 #.
 #. * 1st arg: year
@@ -484,55 +483,55 @@ msgstr ""
 #, c-format
 msgctxt "short_today"
 msgid  "%1$0d/%2$02d/%3$02d"
-msgstr ""
+msgstr "%3$02d.%2$02d.%1$d"
 
 #: ../src/lang_utf.h:190
 msgid  "January"
-msgstr ""
+msgstr "Gennaio"
 
 #: ../src/lang_utf.h:190
 msgid  "February"
-msgstr ""
+msgstr "Febbraio"
 
 #: ../src/lang_utf.h:190
 msgid  "March"
-msgstr ""
+msgstr "Marzo"
 
 #: ../src/lang_utf.h:190
 msgid  "April"
-msgstr ""
+msgstr "Aprile"
 
 #: ../src/lang_utf.h:190
 msgid  "May"
-msgstr ""
+msgstr "Maggio"
 
 #: ../src/lang_utf.h:190
 msgid  "June"
-msgstr ""
+msgstr "Giugno"
 
 #: ../src/lang_utf.h:190
 msgid  "July"
-msgstr ""
+msgstr "Luglio"
 
 #: ../src/lang_utf.h:190
 msgid  "August"
-msgstr ""
+msgstr "Agosto"
 
 #: ../src/lang_utf.h:190
 msgid  "September"
-msgstr ""
+msgstr "Settembre"
 
 #: ../src/lang_utf.h:190
 msgid  "October"
-msgstr ""
+msgstr "Ottobre"
 
 #: ../src/lang_utf.h:190
 msgid  "November"
-msgstr ""
+msgstr "Novembre"
 
 #: ../src/lang_utf.h:190
 msgid  "December"
-msgstr ""
+msgstr "Dicembre"
 
 #: ../src/msg.c:241
 msgid  "Warning"

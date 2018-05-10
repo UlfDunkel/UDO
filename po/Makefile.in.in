@@ -262,7 +262,8 @@ generate_potfiles_in:
 	 ( cd $(srcdir)/..;			\
 	   echo "# Auto-generated: `LANG=C date`" ;	\
 	   ( grep -l '[^a-zA-Z_]_("' src/*.[ch] ;	\
-	     ) | sort	\
+	     grep -l '[^a-zA-Z_]N_("' src/*.[ch] ;	\
+	     ) | sort -u \
 	  ) > $$tmp &&				\
 	 mv $$tmp $$file &&			\
 	 echo "created `pwd`/$$file" || $(RM) $tmp
