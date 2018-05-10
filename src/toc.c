@@ -5224,19 +5224,19 @@ LOCAL int comp_index_html(const void  *_p1, const void  *_p2)
 
 GLOBAL _BOOL save_html_index(void)
 {
-   FILE        *uif;              /* ^ to temporary index file */
-   size_t       i;                /* counter */
-   LABIDX       j;                /* counter */
-   int          html_merge;       /* */
+   FILE        *uif;              /* temporary index file */
+   size_t       i;
+   LABIDX       j;
+   int          html_merge;
    size_t       num_index;        /* # of entries in index file */
-   HTML_INDEX  *html_index;       /* ^ to HTML_INDEX array */
+   HTML_INDEX  *html_index;
    _UWORD        thisc,            /* single char for comparison */
                 lastc;            /* last char from comparison */
-   char         htmlname[512];    /* */
-   char         dummy[512];       /* */
-   char         suff[100];        /* */
-   char         cLabel[512];      /* */
-   char        *tocname;          /* */
+   char         htmlname[512];
+   char         dummy[512];
+   char         suff[100]; 
+   char         cLabel[512];
+   char        *tocname;
    char         jumplist[4096];   /* buffer string for A-Z navigation bar */
    char         thisc_char[42];   /* buffer string for converted thisc */
    char         thisc_label[42];  /* buffer string for HTML convenient converted thisc */
@@ -8751,7 +8751,7 @@ LOCAL void set_labelname(LABEL *label, const char *name)
 
 LOCAL LABIDX make_label(const char *label, const _BOOL isn, const _BOOL isa, const _BOOL isp, _BOOL ignore_index, _BOOL ignore_links, _BOOL referenced)
 {
-   LABEL   *labptr;  /* ^ to label structure in memory */
+   LABEL   *labptr;
    LABEL **new_label;
    
    if (label[0] == EOS)
@@ -10263,8 +10263,8 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
 
 GLOBAL _BOOL save_htmlhelp_map(void)
 {
-   tWinMapData   data;  /* */
-   _BOOL       flag;  /* */
+   tWinMapData   data;
+   _BOOL       flag;
    
    memset(&data, 0, sizeof(data));
    strcpy(data.cmd, "#define");

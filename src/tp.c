@@ -178,11 +178,11 @@ LOCAL _BOOL init_docinfo_data(const char *data, char **var, int allow_empty)
 
 GLOBAL _BOOL set_show_variable(void)
 {
-   char     s[512],       /* */
-           *cont,         /* */
-           *data,         /* */
-            inhalt[512];  /* */
-   size_t   contlen;      /* */
+   char     s[512],
+           *cont,
+           *data,
+            inhalt[512];
+   size_t   contlen;
    
    
    tokcpy2(s, sizeof(s));

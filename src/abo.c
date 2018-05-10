@@ -91,8 +91,8 @@
 *
 ******************************************|************************************/
 
-LOCAL char      strUdoNodeName[32];        /* */
-LOCAL char      strUdoHtmlName[32];        /* */
+LOCAL char      strUdoNodeName[32];
+LOCAL char      strUdoHtmlName[32];
 
 
 

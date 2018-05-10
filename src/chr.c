@@ -212,7 +212,7 @@ typedef struct _chartable
 *
 ******************************************|************************************/
 
-LOCAL _BOOL   last_aqc_verb;            /* */
+LOCAL _BOOL   last_aqc_verb;
 
 
 
@@ -747,8 +747,8 @@ LOCAL void recode_always(char *zeile, int char_set)
 
 GLOBAL const char *unicode2char(_UWORD unicode, char *cbuf)
 {
-   int      i = 0;    /* counter */
-   const _UWORD  *pumap;   /* ^ to u_CODE_xxx[] arrays */
+   int      i = 0;
+   const _UWORD  *pumap;   /* u_CODE_xxx[] arrays */
    
             
    if (unicode == U_NIL)                  /* nothing to do */
@@ -797,8 +797,8 @@ GLOBAL const char *unicode2char(_UWORD unicode, char *cbuf)
 
 GLOBAL _UWORD utf8_to_bstr(const char *sz, int len)
 {
-   int       i = 0;     /* */
-   _UWORD     temp = 0;  /* */
+   int       i = 0;
+   _UWORD     temp = 0;
    
    while (i < len)
    {
@@ -896,7 +896,7 @@ GLOBAL _UWORD utf8_to_bstr(const char *sz, int len)
 
 GLOBAL _UWORD utf8_to_uchar(const char *sz, int *length)
 {
-   int       i = 0;         /* ^ into string */
+   int       i = 0;
    _UWORD     temp = 0;      /* buffer for Unicode codepoint value */
    _BOOL   done = FALSE;  /* TRUE: 1st Unicode char found */
    
@@ -1126,8 +1126,8 @@ GLOBAL void convert_sz(char *s)
 
 GLOBAL void recode_udo(char *s)
 {
-   register int i = 0;    /* counter */
-   char cbuf[8];  /* char */
+   register int i = 0;
+   char cbuf[8];
    const char *repl;
 
    if (s[0] == EOS)                       /* empty string */
@@ -1180,11 +1180,11 @@ GLOBAL void recode(char *zeile, int from_char_set, int to_char_set)
 {
    char     *ptr;
    _UWORD     idx;
-   const _UWORD *pUsrc;          /* ^ encoding table for source encoding */
-   const _UWORD *pUtrg;          /* ^ encoding table for target encoding */
+   const _UWORD *pUsrc;          /* encoding table for source encoding */
+   const _UWORD *pUtrg;          /* encoding table for target encoding */
    char      sSource[42];        /* source encoding name, human-readable */
    char      sTarget[42];        /* target encoding name, human-readable */
-   _UWORD    i;                 /* counter */
+   _UWORD    i;
    _BOOL   found = FALSE;     /* TRUE: char found */
    
 
@@ -1214,7 +1214,7 @@ GLOBAL void recode(char *zeile, int from_char_set, int to_char_set)
    {
       char  sbuf[LINELEN];  /* line buffer */
       char  cbuf[9];        /* chars buffer */
-      int   j;              /* counter */
+      int   j;
       int   len = 0;        /* >1 = convert n-byte UTF value */
 
 
@@ -1306,7 +1306,7 @@ GLOBAL void recode(char *zeile, int from_char_set, int to_char_set)
    {
       char  sbuf[LINELEN];  /* line buffer */
       char  cbuf[9];        /* chars buffer */
-      int   j;              /* counter */
+      int   j;
       
       
       memset(sbuf, 0, sizeof(sbuf));
@@ -1428,7 +1428,7 @@ GLOBAL void recode_chrtab(char *s, int type)
 {
    register int   i = 0;          /* counter for string */
    register int   j = 0;          /* counter for chrtab[] */
-   const _UWORD   *pUtrg;         /* ^ encoding table for target encoding */
+   const _UWORD   *pUtrg;         /* encoding table for target encoding */
    _UWORD          idx;            /* Unicode index of char */
    char           sbuf[LINELEN];  /* buffer the whole string */
    char           cbuf[2];        /* buffer for one char */
@@ -3275,7 +3275,7 @@ LOCAL void str2manunder(char *d, const char *s)
 
 GLOBAL void c_man_styles(char *s)
 {
-   char     *ptr;             /* ^ to ESC_STYLE_MAGIC in string */
+   char     *ptr;             /* ESC_STYLE_MAGIC in string */
    char      alt[512],
              neu[512];
    char     *start;           /* buffer for start of style in string */
@@ -3375,8 +3375,8 @@ GLOBAL void auto_quote_chars(char *s, _BOOL all)
                   j;              /* counter for chrtab[] */
    int            len;            /* indicates length of found Unicode char */
    _UWORD          idx;
-   const _UWORD    *pUtrg;         /* ^ encoding table for target encoding */
-   char          *ptr,            /* ^ position in string s */
+   const _UWORD    *pUtrg;         /* encoding table for target encoding */
+   char          *ptr,            /* position in string s */
                  *oldptr;         /* buffer for ptr */
    const char    *ptr_quoted;
    char           s_temp[32];

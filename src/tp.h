@@ -90,10 +90,10 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
    char   *authoricon_active;             /* -> Modern/Frames */
    char   *appletitle;                    /* for HTML Apple Help */
    char   *appleicon;                     /* for HTML Apple Help */
-   _UWORD   authoriconWidth;               /* */
-   _UWORD   authoriconHeight;              /* */
-   _UWORD   authoriconActiveWidth;         /* */
-   _UWORD   authoriconActiveHeight;        /* */
+   _UWORD   authoriconWidth;
+   _UWORD   authoriconHeight;
+   _UWORD   authoriconActiveWidth;
+   _UWORD   authoriconActiveHeight;
    char   *keywords;
    char   *description;
    char   *robots;

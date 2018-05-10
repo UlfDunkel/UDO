@@ -260,7 +260,7 @@ LOCAL void del_param_quotes(char *s)
 LOCAL int get_nr_of_parameters(const char *cmd, const char *s)
 {
    int       count = 0;       /* # of found parameters */
-   char     *pos;             /* ^ to string s */
+   char     *pos;
    char      search[128];     /* buffer for search string */
    
    sprintf(search, "(!%s", cmd);          /* create search string, e.g. "(!raw" */
@@ -345,7 +345,7 @@ LOCAL void reset_parameters(void)
 LOCAL int extract_parameters(const char *s, const char *cmd, int count)
 {
    int      i;            /* # of found parameters */
-   char    *pos,          /* ^ into string */
+   char    *pos,
             search[128];  /* string buffer */
 
    sprintf(search, "(!%s", cmd);
@@ -3261,10 +3261,10 @@ LOCAL _BOOL c_quadruple_index(char *s, const _BOOL inside_b4_macro)
 
 LOCAL void c_internal_time(char *s, const _BOOL inside_b4_macro)
 {
-   char         str[1024];        /* */
-   _BOOL      flag;             /* */
-   time_t       uhrzeit;          /* */
-   struct tm   *timeptr;          /* */
+   char         str[1024];
+   _BOOL      flag;
+   time_t       uhrzeit;
+   struct tm   *timeptr;
 
    flag = FALSE;
 

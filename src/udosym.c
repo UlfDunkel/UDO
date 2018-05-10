@@ -105,11 +105,11 @@ LOCAL _UWORD    udosymbol_counter_cli;
 
 GLOBAL void del_udosymbol(
 
-const char       *s)              /* */
+const char       *s)
 {
-   _BOOL        found = FALSE;  /* */
-   register _UWORD i,              /* */
-                  j;              /* */
+   _BOOL        found = FALSE;
+   register _UWORD i,
+                  j;
    
    if (udosymbol_counter > 0 && s[0] != EOS)
    {
@@ -153,7 +153,7 @@ const char       *s)              /* */
 
 GLOBAL void add_udosymbol(
 
-const char  *s)  /* */
+const char  *s)
 {
    char *p;
    char **new_symbols;
@@ -203,7 +203,7 @@ const char  *s)  /* */
 
 GLOBAL _BOOL udosymbol_set(
 
-const char       *s)  /* */
+const char       *s)
 {
    register _UWORD i;
    

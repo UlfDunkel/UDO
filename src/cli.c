@@ -912,9 +912,9 @@ LOCAL NOINLINE _BOOL getcliopt(int *counter, const char *arg, const char *argnex
 LOCAL NOINLINE _BOOL read_cliopt_file(const char *name)
 {
    char     *fargv[MAX_FILE_ARGV + 1],  /* array of argument values */
-            *ptr,                       /* ^ into read string */
-            *mp;                        /* */
-   FILE     *file;                      /* ^ file */
+            *ptr,                       /* into read string */
+            *mp;
+   FILE     *file;
    char      opt[256];                  /* read buffer */
    size_t    sl;                        /* string length */
    int       counter = -1;

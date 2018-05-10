@@ -85,7 +85,7 @@ extern UDOCOLOR const udocolor[];
 *
 ******************************************|************************************/
 
-GLOBAL MYFILE      udofile;               /* */
+GLOBAL MYFILE      udofile;
 
 GLOBAL int         iUdopass;              /* PASS1 oder PASS2 */
 
@@ -505,9 +505,8 @@ GLOBAL void build_image_filename(char *d, const char *suff);
 
    /* --- main routines --- */
 
-   /* ? */
-GLOBAL _BOOL udo (char *datei);
-   /* ? */
+GLOBAL _BOOL udo (const char *datei);
+
 GLOBAL void init_udo_vars(void);
 void exit_udo_vars(void);
 

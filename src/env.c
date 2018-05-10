@@ -2612,7 +2612,7 @@ LOCAL void c_begin_list(int listkind, const char *css_class)
 {
    char   sWidth[256],       /* buffer for tokens */
           sCompressed[256],  /* buffer for compare strings */
-         *ptr;               /* ^ into sWidth */
+         *ptr;
    int    ll;
 
    if (!check_iEnvLevel())

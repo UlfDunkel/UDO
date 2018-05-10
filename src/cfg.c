@@ -296,11 +296,11 @@ LOCAL const PROFILE profile[] =
 *
 ******************************************|************************************/
 
-LOCAL char   profilename[256],            /* */
-             profilefull[256];            /* */
-LOCAL char   homepath[256];               /* */
-LOCAL char   programname[256];            /* */
-LOCAL char   programos[256];              /* */
+LOCAL char   profilename[256],
+             profilefull[256];
+LOCAL char   homepath[256];
+LOCAL char   programname[256];
+LOCAL char   programos[256];
 
 
 
@@ -330,14 +330,14 @@ LOCAL char   programos[256];              /* */
 
 GLOBAL int read_profile(void)
 {
-   FILE     *file;         /* */
-   char      s[256],       /* */
-            *ptr,          /* */
-             prokey[32],   /* */
-             proval[256];  /* */
-   size_t    sl;           /* */
-   int       i;            /* counter */
-   _BOOL   found;        /* */
+   FILE     *file;
+   char      s[256],
+            *ptr,
+             prokey[32],
+             proval[256];
+   size_t    sl;
+   int       i;
+   _BOOL   found;
    
 
    if (profilefull[0] == EOS)             /* no profile fspec available */
@@ -445,8 +445,8 @@ GLOBAL int read_profile(void)
 
 GLOBAL int write_profile(void)
 {
-   FILE  *file;  /* */
-   int    i;     /* */
+   FILE  *file;
+   int    i;
    
 
    if (profilefull[0] == EOS)             /* no profile fspec available */
@@ -513,15 +513,15 @@ GLOBAL int write_profile(void)
 
 GLOBAL void init_module_config(
 
-const char  *pfname,     /* ^ profile file name */
-const char  *prgname,    /* ^ program name */
-const char  *prgos)      /* ^ program OS */
+const char  *pfname,
+const char  *prgname,
+const char  *prgos)
 {
-   FILE     *file;       /* ^ file */
-   char     *tmp,        /* */
-             path[256];  /* */
-   char      sep[2];     /* */
-   size_t    sl;         /* */
+   FILE     *file;
+   char     *tmp,
+             path[256];
+   char      sep[2];
+   size_t    sl;
 
 
    /* --- save program name --- */

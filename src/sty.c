@@ -152,8 +152,8 @@ LOCAL void footnote2ascii(char *s)
  */
 LOCAL void footnote2array(char *s)
 {
-   char *ptr = s;                         /* ^ to string */
-   char *here;                            /* ^ to substring */
+   char *ptr = s;
+   char *here;
    char buf[513];                         /* footnote string buffer */
    char fnote[27];                        /* buffer for footnote number */
    int i;                                 /* counter for chars in buf[] */
@@ -1394,15 +1394,15 @@ GLOBAL void check_styles_asc_next_line(void)
 
 GLOBAL void init_module_sty(void)
 {
-   char     zone[20] = "+00:00";  /* */
-   time_t   uhrzeit;              /* */
-   int      hour_local,           /* */
-            min_local,            /* */
-            mday_local,           /* */
-            min_utc,              /* */
-            hour_utc,             /* */
-            mday_utc;             /* */
-   int      hours,                /* */
+   char     zone[20] = "+00:00";
+   time_t   uhrzeit;
+   int      hour_local,
+            min_local,
+            mday_local,
+            min_utc,
+            hour_utc,
+            mday_utc;
+   int      hours,
             minutes;
    char this_time[40];
    char cite[1024];

@@ -263,7 +263,7 @@ GLOBAL char *chrcat(char *dest, const char c)
 
 GLOBAL char *strinsert(char *string, const char *insert)
 {
-   char     *start;   /* ^ to start of string */
+   char     *start;
    size_t    sl,      /* length of string */
              il;      /* length of insert string */
    
@@ -427,11 +427,11 @@ GLOBAL int replace_last(char *string, const char *search, const char *replace)
 
 GLOBAL int replace_all(char *source, const char *search, const char *replace)
 {
-   char       *found;     /* ^ found character */
+   char       *found;     /* found character */
    size_t      slen,      /* length of search string */
                rlen,      /* length of replacement string */
                flen,      /* length of found string */
-               i;         /* counter */
+               i;
    
    if (source[0] == '\0')                 /* empty edit string? */
       return 0;                           /* not allowed! */
@@ -851,7 +851,7 @@ GLOBAL void del_right_spaces(char *s)
 GLOBAL void del_whitespaces(char *s)
 {
    size_t   sl;        /* length of string */
-   char    *p1st = s;  /* ^ start of string */
+   char    *p1st = s;
    
    /* find first space or tab */
    while (*p1st != EOS && (*p1st == ' ' || *p1st == '\t') )
@@ -1103,7 +1103,7 @@ GLOBAL char *get_1stchar_ptr(char *s)
 GLOBAL void tabs2spaces(char *s, const int tw)
 {
    char     n[1024];      /* buffer for converted string */
-   size_t   i,            /* counter */
+   size_t   i,
             nl;           /* length of buffer string */
 
    if (tw == 0)                           /* don't replace Null sized tabs! */
@@ -1163,7 +1163,7 @@ GLOBAL char *itoroman(int value, char *string)
          c,       /* hundreds */
          d,       /* tenths */
          o,       /* ones */
-         i;       /* counter */
+         i;
    
    static const char *ones[] = { "", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix" };
    static const char *cent[] = { "", "c", "cc", "ccc", "cd", "d", "dc", "dcc", "dccc", "cm" };
@@ -1371,19 +1371,19 @@ GLOBAL int my_strnicmp(const char *s1, const char *s2, size_t len)
 
 GLOBAL _UWORD str_flatten(
 
-char  *zeile)  /* ^ string */
+char  *zeile)
 {
    int       i = 0;               /* counter for table entries */
    int       j = 0;               /* counter for chars of <zeile> */
    int       len = 0;             /* indicator for byte length of UTF char */
-   const _UWORD (*plig)[3];            /* ^ to CODE_xxx_lig[][] arrays */
-   const _UWORD (*psort);              /* ^ to sort_CODE_xxx[] arrays */
-   const _UWORD (*pusort)[2];          /* ^ to sort_CODE_UTF[] array */
+   const _UWORD (*plig)[3];       /* CODE_xxx_lig[][] arrays */
+   const _UWORD (*psort);         /* sort_CODE_xxx[] arrays */
+   const _UWORD (*pusort)[2];     /* sort_CODE_UTF[] array */
    char      sbuf[LINELEN] = "";  /* line buffer */
    char      cbuf[9] = "";        /* chars buffer */
    char      lgc[2] = "";         /* ligature char buffer */
    char      lig[3] = "";         /* ligature string buffer */
-   char     *psbuf;               /* ^ string begin */
+   char     *psbuf;               /* string begin */
    _UWORD     idx;                 /* Unicode codepoint */
    _BOOL   found = FALSE;       /* TRUE: 1-byte Unicode found in relevant table */
    _BOOL   ligature = FALSE;    /* TRUE: ligature found */
@@ -1504,7 +1504,7 @@ char  *zeile)  /* ^ string */
       my_strupr(zeile);                   /* we want to compare UPPERCASE (if possible) */
 
       idx = utf8_to_uchar(zeile, &len);   /* get codepoint for 1st char  (len unused here!) */
-      return idx;                         /* */
+      return idx;
    }
 
    psort = chr_sort_codepage(iEncodingTarget);   
@@ -1563,17 +1563,17 @@ char  *zeile)  /* ^ string */
 
 GLOBAL int str_sort_flatten_cmp(
 
-char       *s1,           /* ^ 1st string for comparison */
-char       *s2)           /* ^ 2nd string for comparison */
+char       *s1,
+char       *s2)
 {
-   int      i = 0;        /* counter */
+   int      i = 0;
    size_t   c1,           /* Unicode char value (up to 4 bytes!) */
             c2;           /* Unicode char value (up to 4 bytes!) */
    char     lgc[2] = "";  /* ligature char buffer */
    char     lig[3] = "";  /* ligature string buffer */
-   const _UWORD *psort;       /* ^ to sort_CODE_xxx[] arrays */
-   const _UWORD (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
-   char    *psbuf;        /* ^ char begin */
+   const _UWORD *psort;       /* sort_CODE_xxx[] arrays */
+   const _UWORD (*plig)[3];     /* CODE_xxx_lig[][] arrays */
+   char    *psbuf;        /* char begin */
    size_t   len1,         /* length of original 1st string */
             len2;         /* length of original 2nd string */
    
@@ -1679,8 +1679,8 @@ char       *s2)           /* ^ 2nd string for comparison */
 
 GLOBAL int str_UTF_sort_cmp(
 
-char       *s1,             /* ^ 1st string for comparison */
-char       *s2)             /* ^ 2nd string for comparison */
+char       *s1,
+char       *s2)
 {
    int      i = 0;          /* counter for table entries */
    int      j = 0;          /* counter for chars of <zeile> */
@@ -1688,15 +1688,15 @@ char       *s2)             /* ^ 2nd string for comparison */
    int      len = 0;        /* indicator for byte length of UTF char */
    size_t   c1,             /* Unicode char value (up to 4 bytes!) */
             c2;             /* Unicode char value (up to 4 bytes!) */
-   const _UWORD  (*pusort)[2];     /* ^ to sort_CODE_xxx[] arrays */
-   const _UWORD  (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
+   const _UWORD  (*pusort)[2];     /* sort_CODE_xxx[] arrays */
+   const _UWORD  (*plig)[3];       /* CODE_xxx_lig[][] arrays */
    size_t   len1,           /* length of original 1st string */
             len2;           /* length of original 2nd string */
    char     sbuf[LINELEN];  /* line buffer */
    char     cbuf[9];        /* chars buffer */
    _UWORD    idx;            /* Unicode */
    int      found;          /* TRUE: Unicode found in relevant table */
-   char    *zeile;          /* ^ to s1 or s2 */
+   char    *zeile;
    
             
    if (!s1)                               /* s1 doesn't exist? */
@@ -1872,8 +1872,8 @@ char       *s2)             /* ^ 2nd string for comparison */
 
 GLOBAL int str_sort_cmp(
 
-char         *s1,           /* ^ 1st string for comparison */
-char         *s2)           /* ^ 2nd string for comparison */
+char         *s1,
+char         *s2)
 {
    size_t     c1,           /* char value (up to 4 bytes!) */
               c2;           /* char value (up to 4 bytes!) */

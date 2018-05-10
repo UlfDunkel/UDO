@@ -95,8 +95,8 @@ GLOBAL int       iEnumLevel;              /* Zaehler fuer enumerate-Umgeb. */
 GLOBAL int       iDescLevel;              /* Zaehler fuer description-Umgeb. */
 GLOBAL int       iListLevel;              /* Zaehler fuer xlist-Umgebungen */
 
-GLOBAL _BOOL   bCalledEndDocument;      /* */
-GLOBAL _BOOL   bCalledBeginDocument;    /* */
+GLOBAL _BOOL   bCalledEndDocument;
+GLOBAL _BOOL   bCalledBeginDocument;
 
 GLOBAL _BOOL   bDescDDOpen;             /* TRUE: description env.: <dd> open */
 GLOBAL _BOOL   bParagraphOpen;          /* TRUE: <p> has been output */
