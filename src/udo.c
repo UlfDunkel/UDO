@@ -8369,6 +8369,14 @@ LOCAL void output_preamble(void)
       }
       outln("%%Default_flags 7");
       break;
+   
+   case TOSTG:
+      outln("@if VERSION >= 6");
+      voutlnf("@inputenc \"%s\"", chr_codepage_charset_name(iEncodingTarget));
+      voutlnf("@charset \"%s\"", chr_codepage_charset_name(CODE_TOS));
+      voutlnf("@os \"%s\"", UDO_OS);
+      outln("@endif");
+      break;
    }
 }
 
