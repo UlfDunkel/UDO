@@ -12,7 +12,7 @@ Symbol entfernen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Symbole, die Sie mit (!KW [set])
 oder der Kommandozeilenoption (!code [-D]) gesetzt haben,
-wieder entfernen. Dieses Kommando darf überall im
+wieder entfernt werden. Dieses Kommando darf überall im
 Quelltext verwendet werden.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~11

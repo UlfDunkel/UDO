@@ -1,7 +1,7 @@
 !begin_node (!kw [toc_title])
 !html_name cmd_toc_title
 
-Output a section heading.
+Set title for table of contents.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,10 +10,13 @@ Output a section heading.
 !item [(!SYNTAX)] (!T)!/toc_title (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command prints out ""(!TEXT)"" as a headline using the section
-font and fontsize.
+This command sets the title that is used in the table
+of contents page.
 
 !item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents])
 
 !end_xlist
 

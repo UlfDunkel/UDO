@@ -21,7 +21,7 @@ Das Beispiel zeigt, wie Sie ein Inhaltsverzeichnis ausgeben,
 das nur die Nodes (1.~Ebene) enthält.
 
 !item [(!SEEALSO)]
-(!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth])
+(!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth]), (!KW [toc_title])
 
 !end_xlist
 

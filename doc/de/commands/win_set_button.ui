@@ -1,0 +1,22 @@
+!begin_node (!kw [win_set_button])
+!html_name win_set_button
+
+Text für Benutzer-definierten button setzen (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/win_set_button(!t) (!TEXT)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids]), (!KW [win_make_button])
+
+!end_xlist
+
+!end_node

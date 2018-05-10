@@ -819,14 +819,15 @@ msgstr ""
 msgid  "%x not allowed in macro name"
 msgstr ""
 
-#: ../src/par.c:4432
-#, c-format
-msgid  "redefining internal command (!%s)"
-msgstr ""
-
-#: ../src/par.c:4549
+#: ../src/par.c:4547
 #, c-format
 msgid  "macro name longer than %d characters"
+msgstr ""
+
+#: ../src/par.c:4553
+#: ../src/par.c:4725
+#, c-format
+msgid  "redefining internal command (!%s)"
 msgstr ""
 
 #: ../src/par.c:4578
@@ -839,12 +840,17 @@ msgstr ""
 msgid  "definition name longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4752
+#: ../src/par.c:4754
 #, c-format
 msgid  "definition contents longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4895
+#: ../src/par.c:4851
+#, c-format
+msgid  "internal command (!%s) cannot be undefined"
+msgstr ""
+
+#: ../src/par.c:4902
 #, c-format
 msgid  "possibly undefined macro: %s"
 msgstr ""

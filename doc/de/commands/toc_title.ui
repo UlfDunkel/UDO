@@ -1,20 +1,22 @@
 !begin_node (!kw [toc_title])
 !html_name cmd_toc_title
 
-Eine Abschnitts-Überschrift ausgeben.
+Überschrift für Inhaltsverzeichnis setzen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subheading (!TEXT)(!t)
+!item [(!SYNTAX)] (!T)!/toc_title (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
-der gleichen Schriftart und -größe wie eine
-Abschnitts-Überschrift ausgegeben wird.
+Dieser Befehl setzt den Titel, der im Inhaltsverzeichnis
+ausgegeben wird.
 
 !item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents])
 
 !end_xlist
 

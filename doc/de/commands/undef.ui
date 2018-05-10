@@ -1,0 +1,24 @@
+!begin_node (!kw [undef])
+!html_name cmd_undef
+
+Definition entfernen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/undef (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Definitionen, die Sie mit (!KW [define])
+gesetzt haben, wieder entfernt werden. Dieses Kommando darf überall im
+Quelltext verwendet werden.
+
+!item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [define]), (!KW [if])
+
+!end_xlist
+
+!end_node

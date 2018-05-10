@@ -1,0 +1,22 @@
+!begin_node (!kw [win_make_button])
+!html_name win_make_button
+
+Bunutzer-definierten button erzeugen (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_make_button(!t) (!TEXT)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids]), (!KW [win_set_button])
+
+!end_xlist
+
+!end_node

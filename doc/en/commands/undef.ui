@@ -1,0 +1,23 @@
+!begin_node (!kw [undef])
+!html_name cmd_undef
+
+Remove a definition.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/undef (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can delete a definition that was set with
+(!KW [define]).
+
+!item [(!EXISTSSINCE)] Version~7.11
+
+!item [(!SEEALSO)]
+(!KW [define]), (!KW [if])
+
+!end_xlist
+
+!end_node

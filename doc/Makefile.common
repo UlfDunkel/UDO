@@ -630,6 +630,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/town.ui \
 		$(srcdir)/commands/udoinfo.ui \
 		$(srcdir)/commands/udolink.ui \
+		$(srcdir)/commands/undef.ui \
 		$(srcdir)/commands/universal_charset.ui \
 		$(srcdir)/commands/unset.ui \
 		$(srcdir)/commands/use_about_udo.ui \
@@ -692,6 +693,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/win_html_look.ui \
 		$(srcdir)/commands/win_inline_bitmaps.ui \
 		$(srcdir)/commands/win_linkcolor.ui \
+		$(srcdir)/commands/win_make_button.ui \
 		$(srcdir)/commands/win_medium_compression.ui \
 		$(srcdir)/commands/win_monofont.ui \
 		$(srcdir)/commands/win_monofont_size.ui \
@@ -699,6 +701,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/win_prefix_helpids.ui \
 		$(srcdir)/commands/win_propfont.ui \
 		$(srcdir)/commands/win_propfont_size.ui \
+		$(srcdir)/commands/win_set_button.ui \
 		$(srcdir)/commands/win_textcolor.ui \
 		$(srcdir)/commands/x.ui \
 		\

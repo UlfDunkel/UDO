@@ -18,7 +18,7 @@ example shows how to print a table of contents that contains
 only the chapters.
 
 !item [(!SEEALSO)]
-(!link [Tables of contents] [Tables of contents]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth])
+(!link [Tables of contents] [Tables of contents]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth], (!KW [toc_title])
 
 !end_xlist
 

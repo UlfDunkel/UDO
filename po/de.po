@@ -462,7 +462,7 @@ msgstr "Grad"
 #. copyright
 #: ../src/lang_utf.h:175
 msgid  "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #.
 #. * 1st arg: year
@@ -821,15 +821,16 @@ msgstr "nicht ersetzt %3lu:%3lu: %c%c%c %s %s\n"
 msgid  "%x not allowed in macro name"
 msgstr "%x nicht erlaubt in Makronamen"
 
-#: ../src/par.c:4432
-#, c-format
-msgid  "redefining internal command (!%s)"
-msgstr "internes Kommando (!%s) neu definiert"
-
-#: ../src/par.c:4549
+#: ../src/par.c:4547
 #, c-format
 msgid  "macro name longer than %d characters"
 msgstr "Makroname länger als %d Zeichen"
+
+#: ../src/par.c:4553
+#: ../src/par.c:4725
+#, c-format
+msgid  "redefining internal command (!%s)"
+msgstr "internes Kommando (!%s) neu definiert"
 
 #: ../src/par.c:4578
 #, c-format
@@ -841,12 +842,17 @@ msgstr "Makroinhalt länger als %d Zeichen"
 msgid  "definition name longer than %d characters"
 msgstr "Definitionsname länger als %d Zeichen"
 
-#: ../src/par.c:4752
+#: ../src/par.c:4754
 #, c-format
 msgid  "definition contents longer than %d characters"
-msgstr "Definitions länger als %d Zeichen"
+msgstr "Definitionstext länger als %d Zeichen"
 
-#: ../src/par.c:4895
+#: ../src/par.c:4851
+#, c-format
+msgid  "internal command (!%s) cannot be undefined"
+msgstr "Internes Kommando (!%s) kann nicht gelöscht werden"
+
+#: ../src/par.c:4902
 #, c-format
 msgid  "possibly undefined macro: %s"
 msgstr "Makro möglicherweise nicht definiert: %s"
@@ -914,7 +920,7 @@ msgstr "Sortiere Index..."
 #: ../src/toc.c:9253
 #, c-format
 msgid  "windows button %s not defined"
-msgstr ""
+msgstr "Windows Button %s ist nicht definiert"
 
 #: ../src/toc.c:9306
 msgid  "mapping not numeric or not of type integer"
