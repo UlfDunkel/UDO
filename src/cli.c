@@ -89,16 +89,16 @@
 #endif
 
 #ifdef __TOS__
-   #ifdef USE_PCTOS
-      #include <tos.h>
-   #else
-      #include <mintbind.h>
-   #endif
+#ifdef USE_PCTOS
+#include <tos.h>
+#else
+#include <mintbind.h>
+#endif
 #endif
 
 #include "export.h"
 #include "gui.h"
-#include "str.h"                          /* my_str...() */
+#include "str.h"						/* my_str...() */
 
 
 
@@ -110,15 +110,15 @@
 *
 ******************************************|************************************/
 
-typedef struct _cliopt                    /* command line options */
+typedef struct _cliopt					/* command line options */
 {
-   const char *longname;                  /* lange Option */
-   const char  *shortname;                /* kurze Option */
-   char      type;                        /* Typ: b=Boolean, c=char[] */
-   _BOOL   needs2;                      /* folgt der Option ein Parameter? */
-   void     *var;                         /* Variable, die geaendert wird */
-   int       val;                         /* Wert, der bei Benutzung zugewiesen wird */
-}  CLIOPT;
+	const char *longname;				/* lange Option */
+	const char *shortname;				/* kurze Option */
+	char type;							/* Typ: b=Boolean, c=char[] */
+	_BOOL needs2;						/* folgt der Option ein Parameter? */
+	void *var;							/* Variable, die geaendert wird */
+	int val;							/* Wert, der bei Benutzung zugewiesen wird */
+} CLIOPT;
 
 
 
@@ -130,14 +130,14 @@ typedef struct _cliopt                    /* command line options */
 *
 ******************************************|************************************/
 
-static char const strPrgname[] = "udo";     /* der Name dieses Programms */
+static char const strPrgname[] = "udo";	/* der Name dieses Programms */
 
-LOCAL _BOOL   bHoldKey;
-LOCAL _BOOL   bShowArgs;
-LOCAL _BOOL   bShowHelp;
-LOCAL _BOOL   bShowVersion;
-LOCAL _BOOL   bDumpImages;
-LOCAL int       last_percent;
+LOCAL _BOOL bHoldKey;
+LOCAL _BOOL bShowArgs;
+LOCAL _BOOL bShowHelp;
+LOCAL _BOOL bShowVersion;
+LOCAL _BOOL bDumpImages;
+LOCAL int last_percent;
 
 
 
@@ -149,66 +149,66 @@ LOCAL int       last_percent;
 *
 ******************************************|************************************/
 
-LOCAL const CLIOPT cliopt[] =
-{  /* longname            shortname  type need2   var               val  */
-   /* ------------------------------------------------------------------ */
-   { "--asc",              "-a",    'b',  FALSE, &desttype,         TOASC },
-   { "--amg",              "",      'b',  FALSE, &desttype,         TOAMG },
-   { "--argv",             "",      'b',  FALSE, &bShowArgs,        TRUE  },
-   { "--check",            "",      'b',  FALSE, &bCheckMisc,       TRUE  },
-   { "--c",                "-c",    'b',  FALSE, &desttype,         TOSRC },
-   { "--drc",              "",      'b',  FALSE, &desttype,         TODRC },
-   { "--dump-images",      "",      'b',  FALSE, &bDumpImages,      TRUE  },
-   { "--force-long",       "",      'b',  FALSE, &bForceLong,       TRUE  },
-   { "--force-short",      "",      'b',  FALSE, &bForceShort,      TRUE  },
+LOCAL const CLIOPT cliopt[] = {
+	/* longname            shortname  type need2  var                val  */
+	/* ------------------------------------------------------------------ */
+	{ "--asc",             "-a",      'b', FALSE, &desttype,         TOASC },
+	{ "--amg",             "",        'b', FALSE, &desttype,         TOAMG },
+	{ "--argv",            "",        'b', FALSE, &bShowArgs,        TRUE },
+	{ "--check",           "",        'b', FALSE, &bCheckMisc,       TRUE },
+	{ "--c",               "-c",      'b', FALSE, &desttype,         TOSRC },
+	{ "--drc",             "",        'b', FALSE, &desttype,         TODRC },
+	{ "--dump-images",     "",        'b', FALSE, &bDumpImages,      TRUE },
+	{ "--force-long",      "",        'b', FALSE, &bForceLong,       TRUE },
+	{ "--force-short",     "",        'b', FALSE, &bForceShort,      TRUE },
 #if USE_KWSET
-   { "--no-fastautoref",   "",      'b',  FALSE, &bNoFastAutoref,   TRUE  },
+	{ "--no-fastautoref",  "",        'b', FALSE, &bNoFastAutoref,   TRUE },
 #endif
-   { "--hold",             "-H",    'b',  FALSE, &bHoldKey,         TRUE  },
-   { "--help",             "",      'b',  FALSE, &bShowHelp,        TRUE  },
-   { "--helptag",          "-g",    'b',  FALSE, &desttype,         TOHPH },
-   { "--html",             "-h",    'b',  FALSE, &desttype,         TOHTM },
-   { "--hah",              "",      'b',  FALSE, &desttype,         TOHAH },
-   { "--htmlhelp",         "-hh",   'b',  FALSE, &desttype,         TOMHH },
-   { "--info",             "-i",    'b',  FALSE, &desttype,         TOINF },
-   { "--ipf",              "",      'b',  FALSE, &desttype,         TOIPF },
-   { "--linuxdoc",         "-x",    'b',  FALSE, &desttype,         TOLDS },
-   { "--lyx",              "",      'b',  FALSE, &desttype,         TOLYX },
-   { "--man",              "-m",    'b',  FALSE, &desttype,         TOMAN },
-   { "--map",              "",      'b',  FALSE, &bUseIdMapFileC,   TRUE  },
-   { "--map-pas",          "",      'b',  FALSE, &bUseIdMapFilePas, TRUE  },
-   { "--map-vb",           "",      'b',  FALSE, &bUseIdMapFileVB,  TRUE  },
-   { "--map-gfa",          "",      'b',  FALSE, &bUseIdMapFileGFA, TRUE  },
-   { "--no-hypfile",       "-y",    'b',  FALSE, &bNoHypfile,       TRUE  },
-   { "--no-idxfile",       "-d",    'b',  FALSE, &bNoIdxfile,       TRUE  },
-   { "--no-logfile",       "-l",    'b',  FALSE, &bNoLogfile,       TRUE  },
-   { "--no-warnings",      "-W",    'b',  FALSE, &bNoWarnings,      TRUE  },
-   { "--no-warningslines", "-Wl",   'b',  FALSE, &bNoWarningsLines, TRUE  },
-   { "--nroff",            "-n",    'b',  FALSE, &desttype,         TONRO },
-   { "--outfile",          "-o",    'c',  TRUE,   outfile.full,     0     },
-   { "--pascal",           "-P",    'b',  FALSE, &desttype,         TOSRP },
-   { "--pass1-only",       "",      'b',  FALSE, &no_pass2,         TRUE  },
-   { "--pdflatex",         "-f",    'b',  FALSE, &desttype,         TOPDL },
-   { "--ps",               "",      'b',  FALSE, &desttype,         TOKPS },
-   { "--pchelp",           "-p",    'b',  FALSE, &desttype,         TOPCH },
-   { "--quiet",            "-q",    'b',  FALSE, &bBeQuiet,         TRUE  },
-   { "--quickview",        "--aqv", 'b',  FALSE, &desttype,         TOAQV },
-   { "--rtf",              "-r",    'b',  FALSE, &desttype,         TORTF },
-   { "--stg",              "-s",    'b',  FALSE, &desttype,         TOSTG },
-   { "--save-upr",         "",      'b',  FALSE, &bUseUPRfile,      TRUE  },
-   { "--test",             "",      'b',  FALSE, &bTestmode,        TRUE  },
-   { "--tex",              "-t",    'b',  FALSE, &desttype,         TOTEX },
-   { "--txt",              "-a",    'b',  FALSE, &desttype,         TOASC },
-   { "--tree",             "",      'b',  FALSE, &bUseTreefile,     TRUE  },
-   { "--udo",              "-u",    'b',  FALSE, &desttype,         TOUDO },
-   { "--verbose",          "",      'b',  FALSE, &bVerbose,         TRUE  },
-   { "--version",          "",      'b',  FALSE, &bShowVersion,     TRUE  },
-   { "--vision",           "-v",    'b',  FALSE, &desttype,         TOTVH },
-   { "--win",              "-w",    'b',  FALSE, &desttype,         TOWIN },
-   { "--win4",             "-4",    'b',  FALSE, &desttype,         TOWH4 },
+	{ "--hold",            "-H",      'b', FALSE, &bHoldKey,         TRUE },
+	{ "--help",            "",        'b', FALSE, &bShowHelp,        TRUE },
+	{ "--helptag",         "-g",      'b', FALSE, &desttype,         TOHPH },
+	{ "--html",            "-h",      'b', FALSE, &desttype,         TOHTM },
+	{ "--hah",             "",        'b', FALSE, &desttype,         TOHAH },
+	{ "--htmlhelp",        "-hh",     'b', FALSE, &desttype,         TOMHH },
+	{ "--info",            "-i",      'b', FALSE, &desttype,         TOINF },
+	{ "--ipf",             "",        'b', FALSE, &desttype,         TOIPF },
+	{ "--linuxdoc",        "-x",      'b', FALSE, &desttype,         TOLDS },
+	{ "--lyx",             "",        'b', FALSE, &desttype,         TOLYX },
+	{ "--man",             "-m",      'b', FALSE, &desttype,         TOMAN },
+	{ "--map",             "",        'b', FALSE, &bUseIdMapFileC,   TRUE },
+	{ "--map-pas",         "",        'b', FALSE, &bUseIdMapFilePas, TRUE },
+	{ "--map-vb",          "",        'b', FALSE, &bUseIdMapFileVB,  TRUE },
+	{ "--map-gfa",         "",        'b', FALSE, &bUseIdMapFileGFA, TRUE },
+	{ "--no-hypfile",      "-y",      'b', FALSE, &bNoHypfile,       TRUE },
+	{ "--no-idxfile",      "-d",      'b', FALSE, &bNoIdxfile,       TRUE },
+	{ "--no-logfile",      "-l",      'b', FALSE, &bNoLogfile,       TRUE },
+	{ "--no-warnings",     "-W",      'b', FALSE, &bNoWarnings,      TRUE },
+	{ "--no-warningslines","-Wl",     'b', FALSE, &bNoWarningsLines, TRUE },
+	{ "--nroff",           "-n",      'b', FALSE, &desttype,         TONRO },
+	{ "--outfile",         "-o",      'c', TRUE,  outfile.full,      0 },
+	{ "--pascal",          "-P",      'b', FALSE, &desttype,         TOSRP },
+	{ "--pass1-only",      "",        'b', FALSE, &no_pass2,         TRUE },
+	{ "--pdflatex",        "-f",      'b', FALSE, &desttype,         TOPDL },
+	{ "--ps",              "",        'b', FALSE, &desttype,         TOKPS },
+	{ "--pchelp",          "-p",      'b', FALSE, &desttype,         TOPCH },
+	{ "--quiet",           "-q",      'b', FALSE, &bBeQuiet,         TRUE },
+	{ "--quickview",       "--aqv",   'b', FALSE, &desttype,         TOAQV },
+	{ "--rtf",             "-r",      'b', FALSE, &desttype,         TORTF },
+	{ "--stg",             "-s",      'b', FALSE, &desttype,         TOSTG },
+	{ "--save-upr",        "",        'b', FALSE, &bUseUPRfile,      TRUE },
+	{ "--test",            "",        'b', FALSE, &bTestmode,        TRUE },
+	{ "--tex",             "-t",      'b', FALSE, &desttype,         TOTEX },
+	{ "--txt",             "-a",      'b', FALSE, &desttype,         TOASC },
+	{ "--tree",            "",        'b', FALSE, &bUseTreefile,     TRUE },
+	{ "--udo",             "-u",      'b', FALSE, &desttype,         TOUDO },
+	{ "--verbose",         "",        'b', FALSE, &bVerbose,         TRUE },
+	{ "--version",         "",        'b', FALSE, &bShowVersion,     TRUE },
+	{ "--vision",          "-v",      'b', FALSE, &desttype,         TOTVH },
+	{ "--win",             "-w",      'b', FALSE, &desttype,         TOWIN },
+	{ "--win4",            "-4",      'b', FALSE, &desttype,         TOWH4 },
 
-                                          /* list terminator */
-   { "",                   "",      'c',  FALSE,  NULL,             0     }
+	/* list terminator */
+	{ "", "", 'c', FALSE, NULL, 0 }
 };
 
 
@@ -235,8 +235,8 @@ LOCAL const CLIOPT cliopt[] =
 
 GLOBAL void show_status_info(const char *s)
 {
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-      fprintf(stdout, "%s\n", s);
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+		fprintf(stdout, "%s\n", s);
 }
 
 
@@ -259,16 +259,16 @@ GLOBAL void show_status_info(const char *s)
 
 GLOBAL void show_status_loginfo(const char *s)
 {
-   _BOOL   flag = FALSE;
-   
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-   {
-      fprintf(stdout, "%s\n", s);
-      flag = TRUE;
-   }
+	_BOOL flag = FALSE;
 
-   if (!flag || !bNoLogfile)
-      logln(s);
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+	{
+		fprintf(stdout, "%s\n", s);
+		flag = TRUE;
+	}
+
+	if (!flag || !bNoLogfile)
+		logln(s);
 }
 
 
@@ -291,8 +291,8 @@ GLOBAL void show_status_loginfo(const char *s)
 
 GLOBAL void show_status_pass(const char *s)
 {
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-      fprintf(stdout, "%s\n", s);
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+		fprintf(stdout, "%s\n", s);
 }
 
 
@@ -315,9 +315,9 @@ GLOBAL void show_status_pass(const char *s)
 
 GLOBAL void show_status_udo2udo(FILE_LINENO Pass2Lines, const char *s)
 {
-   UNUSED(Pass2Lines);
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-      fprintf(stdout, _("Reading %s\n"), s);
+	UNUSED(Pass2Lines);
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+		fprintf(stdout, _("Reading %s\n"), s);
 }
 
 
@@ -340,9 +340,9 @@ GLOBAL void show_status_udo2udo(FILE_LINENO Pass2Lines, const char *s)
 
 GLOBAL void show_status_node(const char *numbers, const char *name)
 {
-   UNUSED(name);
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-      fprintf(stdout, "%s", numbers);
+	UNUSED(name);
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+		fprintf(stdout, "%s", numbers);
 }
 
 
@@ -364,8 +364,8 @@ GLOBAL void show_status_node(const char *numbers, const char *name)
 
 GLOBAL void show_status_file_1(FILE_LINENO Pass1Lines, const char *s)
 {
-   UNUSED(Pass1Lines);
-   UNUSED(s);
+	UNUSED(Pass1Lines);
+	UNUSED(s);
 }
 
 
@@ -388,9 +388,9 @@ GLOBAL void show_status_file_1(FILE_LINENO Pass1Lines, const char *s)
 
 GLOBAL void show_status_file_2(FILE_LINENO Pass2Lines, const char *s)
 {
-   UNUSED(Pass2Lines);
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-      fprintf(stdout, "(%s) ", s);
+	UNUSED(Pass2Lines);
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+		fprintf(stdout, "(%s) ", s);
 }
 
 
@@ -413,23 +413,23 @@ GLOBAL void show_status_file_2(FILE_LINENO Pass2Lines, const char *s)
 
 GLOBAL void show_status_percent(FILE_LINENO Pass1Lines, FILE_LINENO Pass2Lines)
 {
-   int percent;
+	int percent;
 
-   percent = 0;
-   
-   if (Pass1Lines > 0)
-      percent = (int)( (100 * Pass2Lines) / Pass1Lines);
+	percent = 0;
 
-   if ((bOutOpened || bTestmode) && !bBeQuiet && percent != last_percent)
-   {
-      if (bVerbose)
-         fprintf(stdout, "\n%3d%% ", percent);
-      else
-         fprintf(stdout, "%3d%%\010\010\010\010", percent);
-      
-      fflush(stdout);
-      last_percent = percent;
-   }
+	if (Pass1Lines > 0)
+		percent = (int) ((100 * Pass2Lines) / Pass1Lines);
+
+	if ((bOutOpened || bTestmode) && !bBeQuiet && percent != last_percent)
+	{
+		if (bVerbose)
+			fprintf(stdout, "\n%3d%% ", percent);
+		else
+			fprintf(stdout, "%3d%%\010\010\010\010", percent);
+
+		fflush(stdout);
+		last_percent = percent;
+	}
 }
 
 
@@ -452,8 +452,8 @@ GLOBAL void show_status_percent(FILE_LINENO Pass1Lines, FILE_LINENO Pass2Lines)
 
 GLOBAL void show_status_errors(const char *s)
 {
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-      fprintf(stdout, "%s\n", s);
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+		fprintf(stdout, "%s\n", s);
 }
 
 
@@ -475,17 +475,17 @@ GLOBAL void show_status_errors(const char *s)
 
 GLOBAL void show_logln_message(const char *s)
 {
-   if ((bOutOpened || bTestmode) && !bBeQuiet)
-   {
-      /*
-       * suppress cases were output has already been written to stderr
-       */
-       if ((!bNoLogfile || !no_stderr_output) && fLogfile != stderr)
-       {
-          fprintf(stdout, "%s\n", s);
-          fflush(stdout);
-       }
-   }
+	if ((bOutOpened || bTestmode) && !bBeQuiet)
+	{
+		/*
+		 * suppress cases were output has already been written to stderr
+		 */
+		if ((!bNoLogfile || !no_stderr_output) && fLogfile != stderr)
+		{
+			fprintf(stdout, "%s\n", s);
+			fflush(stdout);
+		}
+	}
 }
 
 
@@ -504,7 +504,7 @@ GLOBAL void show_logln_message(const char *s)
 
 GLOBAL void warning_err_logfile(void)
 {
-   error_open_logfile(file_lookup(sLogfull));
+	error_open_logfile(file_lookup(sLogfull));
 }
 
 
@@ -523,7 +523,7 @@ GLOBAL void warning_err_logfile(void)
 
 GLOBAL void warning_err_treefile(void)
 {
-   error_open_treefile(file_lookup(sTreefull));
+	error_open_treefile(file_lookup(sTreefull));
 }
 
 
@@ -542,7 +542,7 @@ GLOBAL void warning_err_treefile(void)
 
 GLOBAL void warning_err_uprfile(void)
 {
-   error_open_uprfile(file_lookup(sUPRfull));
+	error_open_uprfile(file_lookup(sUPRfull));
 }
 
 
@@ -561,7 +561,7 @@ GLOBAL void warning_err_uprfile(void)
 
 GLOBAL void warning_err_hypfile(void)
 {
-   error_open_hypfile(file_lookup(sHypfull));
+	error_open_hypfile(file_lookup(sHypfull));
 }
 
 
@@ -580,7 +580,7 @@ GLOBAL void warning_err_hypfile(void)
 
 GLOBAL void warning_err_idxfile(void)
 {
-   error_open_idxfile(file_lookup(sIdxfull));
+	error_open_idxfile(file_lookup(sIdxfull));
 }
 
 
@@ -635,7 +635,7 @@ GLOBAL void multitasking_interrupt(void)
 
 GLOBAL _BOOL break_action(void)
 {
-   return FALSE;
+	return FALSE;
 }
 
 
@@ -654,9 +654,9 @@ GLOBAL _BOOL break_action(void)
 
 LOCAL NOINLINE void show_version(void)
 {
-   fprintf(stdout, "UDO %s, %s %s\n", UDO_VERSION_STRING_OS, compile_date, compile_time);
-   fprintf(stdout, "%s\n", COPYRIGHT);
-   fprintf(stdout, _("UDO is Open Source (see %s for further information).\n"), UDO_URL);
+	fprintf(stdout, "UDO %s, %s %s\n", UDO_VERSION_STRING_OS, compile_date, compile_time);
+	fprintf(stdout, "%s\n", COPYRIGHT);
+	fprintf(stdout, _("UDO is Open Source (see %s for further information).\n"), UDO_URL);
 }
 
 
@@ -675,7 +675,7 @@ LOCAL NOINLINE void show_version(void)
 
 LOCAL NOINLINE void show_usage(void)
 {
-   fprintf(stdout, _("usage: %s [-acdDghHilmnpPqrstvwWxy@] [-o outfile] file\n"), strPrgname);
+	fprintf(stdout, _("usage: %s [-acdDghHilmnpPqrstvwWxy@] [-o outfile] file\n"), strPrgname);
 }
 
 
@@ -745,18 +745,18 @@ LOCAL const char *const help_strings[] = {
 	N_("-@ F                   read options from file F"),
 	N_("       --help          show this helppage and exit"),
 	N_("       --version       show version of UDO and exit"),
-	
+
 };
 
 LOCAL void show_help(void)
 {
-   size_t i;
-   
-   show_version();
-   show_usage();
-   fprintf(stdout, "\n");
-   for (i = 0; i < ArraySize(help_strings); i++)
-   	  fprintf(stdout, "%s\n", _(help_strings[i]));
+	size_t i;
+
+	show_version();
+	show_usage();
+	fprintf(stdout, "\n");
+	for (i = 0; i < ArraySize(help_strings); i++)
+		fprintf(stdout, "%s\n", _(help_strings[i]));
 }
 
 
@@ -775,13 +775,13 @@ LOCAL void show_help(void)
 
 LOCAL NOINLINE void wait_on_keypress(void)
 {
-   char input[256];
+	char input[256];
 
-   if (bHoldKey)
-   {
-      fprintf(stdout, _("\nPress <RETURN>...\n"));
-      fgets(input, (int)sizeof(input), stdin);
-   }
+	if (bHoldKey)
+	{
+		fprintf(stdout, _("\nPress <RETURN>...\n"));
+		fgets(input, (int) sizeof(input), stdin);
+	}
 }
 
 
@@ -803,95 +803,86 @@ LOCAL NOINLINE _BOOL read_cliopt_file(const char *name);
 
 LOCAL NOINLINE _BOOL getcliopt(int *counter, const char *arg, const char *argnext, const _BOOL from_file)
 {
-   register int   i;
-   _BOOL        found = FALSE;
+	register int i;
+	_BOOL found = FALSE;
+	i = 0;
 
-   i = 0;
+	while ((cliopt[i].longname[0] != EOS) && (found == FALSE))
+	{
+		if (strcmp(arg, cliopt[i].longname) == 0 ||
+			(cliopt[i].shortname[0] != EOS && strcmp(arg, cliopt[i].shortname) == 0))
+		{
+			found = TRUE;
 
-   while ( (cliopt[i].longname[0] != EOS) && (found == FALSE) )
-   {
-      if (strcmp(arg, cliopt[i].longname) == 0 ||
-          (cliopt[i].shortname[0] != EOS && strcmp(arg, cliopt[i].shortname) == 0)
-         )
-      {
-         found = TRUE;
+			if (cliopt[i].var != NULL)
+			{
+				switch (cliopt[i].type)
+				{
+				case 'b':				/* _BOOL */
+					*(_BOOL *) cliopt[i].var = cliopt[i].val;
+					break;
 
-         if (cliopt[i].var != NULL)
-         {
-            switch (cliopt[i].type)
-            {
-            case 'b':                     /* _BOOL */
-               *(_BOOL *)cliopt[i].var = cliopt[i].val;
-               break;
-               
-            case 'c':                     /* char */
-               *(char *)cliopt[i].var = 0;
-               
-               if (cliopt[i].needs2)
-               {
-                  if (argnext != NULL)
-                  {
-                     *counter = *counter + 1;
-                     strcpy((char *)cliopt[i].var, argnext);
-                  }
-               }
-               else
-               {
-                  strcpy((char *)cliopt[i].var, "");
-               }
-               break;
-            }
-         }
-      }
+				case 'c':				/* char */
+					*(char *) cliopt[i].var = 0;
 
-      i++;
-   }
+					if (cliopt[i].needs2)
+					{
+						if (argnext != NULL)
+						{
+							*counter = *counter + 1;
+							strcpy((char *) cliopt[i].var, argnext);
+						}
+					} else
+					{
+						strcpy((char *) cliopt[i].var, "");
+					}
+					break;
+				}
+			}
+		}
 
-   if (!found)
-   {
-      if (arg[0] != '-')                  /* no option */ 
-      {
-         strcpy(infile.full, arg);
-         found = TRUE;
-      }
-      else
-      {
-                                          /* --- read options from file --- */
-         if ( (strcmp(arg, "-@") == 0) && !from_file)
-         {
-            if (argnext != NULL)
-            {
-               *counter = *counter + 1;
-               found = read_cliopt_file(argnext);
-            }
-            else                          /* <???> Fehlermeldung */
-            {
-               found = FALSE;
-            }
-         }
-         else if (strcmp(arg, "-D") == 0 ||
-           strcmp(arg, "--define") == 0)
-         {
-         	/* --- set symbol --- */
-            if (argnext != NULL)
-            {
-               *counter = *counter + 1;
-               add_udosymbol(argnext);
-               found = TRUE;
-            }
-            else                          /* <???> Fehlermeldung */
-            {
-               found = FALSE;
-            }
-         }
-         else
-         {
-            fprintf(stdout, _("%s: unknown option! %s\n"), strPrgname, arg);
-         }
-      }
-   }
+		i++;
+	}
 
-   return found;
+	if (!found)
+	{
+		if (arg[0] != '-')				/* no option */
+		{
+			strcpy(infile.full, arg);
+			found = TRUE;
+		} else
+		{
+			/* --- read options from file --- */
+			if ((strcmp(arg, "-@") == 0) && !from_file)
+			{
+				if (argnext != NULL)
+				{
+					*counter = *counter + 1;
+					found = read_cliopt_file(argnext);
+				} else					/* <???> Fehlermeldung */
+				{
+					found = FALSE;
+				}
+			} else if (strcmp(arg, "-D") == 0 || strcmp(arg, "--define") == 0)
+			{
+				/* --- set symbol --- */
+				if (argnext != NULL)
+				{
+					*counter = *counter + 1;
+					add_udosymbol(argnext);
+					found = TRUE;
+				} else					/* <???> Fehlermeldung */
+				{
+					found = FALSE;
+				}
+			} else
+			{
+				fprintf(stdout, _("%s: unknown option! %s\n"), strPrgname, arg);
+			}
+		}
+	}
+
+	return found;
 }
 
 
@@ -911,89 +902,89 @@ LOCAL NOINLINE _BOOL getcliopt(int *counter, const char *arg, const char *argnex
 
 LOCAL NOINLINE _BOOL read_cliopt_file(const char *name)
 {
-   char     *fargv[MAX_FILE_ARGV + 1],  /* array of argument values */
-            *ptr,                       /* into read string */
-            *mp;
-   FILE     *file;
-   char      opt[256];                  /* read buffer */
-   size_t    sl;                        /* string length */
-   int       counter = -1;
-   int i;
-   
-   file = fopen(name, "r");
-   
-   if (!file)
-      return FALSE;
+	char *fargv[MAX_FILE_ARGV + 1];		/* array of argument values */
+	char *ptr;							/* into read string */
+	char *mp;
+	FILE *file;
+	char opt[256];						/* read buffer */
+	size_t sl;							/* string length */
+	int counter = -1;
+	int i;
 
-   while (fgets(opt, 256, file))          /* read file in blocks of 256 */
-   {
-      sl = strlen(opt);
-      
-      while (sl > 0 && opt[sl - 1] < ' ') /* TRIM right */
-      {
-         opt[sl - 1] = EOS;
-         sl--;
-      }
-      
-      ptr = opt;
-                                          /* TRIM left */
-      while (*ptr != EOS && (*ptr == ' ' || *ptr == '\t') )
-         ptr++;
-         
-      sl = strlen(ptr);
-      
-      while (sl > 0)
-      {
-         if (counter + 1 < MAX_FILE_ARGV)
-         {
-            for (i = 0; i < (int)sl; i++)      /* find end of 'token' */
-            {
-               if (ptr[i] == ' ' || ptr[i] == '\t')
-                  break;
-            }
+	file = fopen(name, "r");
 
-            if (i > 0)                    /* token found */
-            {                             /* get space for it */
-               mp = (char *)malloc((i + 1) * sizeof(char));
-            
-               if (mp)                    /* malloc succeeded */
-               {
-                  counter++;              /* increase counter of recognized arguments */
-                  fargv[counter] = mp;    /* mp points into fargv[] array */
-                                          /* copy the found argument from string into array */
-                  strncpy(fargv[counter], ptr, i);
-                  fargv[counter][i] = EOS;/* close C string! */
-                  while (ptr[i] == ' ' || ptr[i] == '\t')
-                     i++;
-                  ptr += i;               /* shorten string */
-               }
-            }
-         }
-         
-         sl -= i;                         /* decrease string length counter */
-      }
-   }
+	if (!file)
+		return FALSE;
 
-   fclose(file);
+	while (fgets(opt, 256, file))		/* read file in blocks of 256 */
+	{
+		sl = strlen(opt);
 
-   i = 0;
-   
-   while (i <= counter)
-   {
-      getcliopt(&i, fargv[i], (i + 1 <= counter) ? fargv[i + 1] : NULL, TRUE);
-      i++;
-   }
+		while (sl > 0 && opt[sl - 1] < ' ')	/* TRIM right */
+		{
+			opt[sl - 1] = EOS;
+			sl--;
+		}
 
-   for (i = counter; i >= 0; i--)
-   {
-      if (fargv[i] != NULL)
-      {
-         free(fargv[i]);
-         fargv[i] = NULL;
-      }
-   }
+		ptr = opt;
+		/* TRIM left */
+		while (*ptr != EOS && (*ptr == ' ' || *ptr == '\t'))
+			ptr++;
 
-   return TRUE;
+		sl = strlen(ptr);
+
+		while (sl > 0)
+		{
+			if (counter + 1 < MAX_FILE_ARGV)
+			{
+				for (i = 0; i < (int) sl; i++)	/* find end of 'token' */
+				{
+					if (ptr[i] == ' ' || ptr[i] == '\t')
+						break;
+				}
+
+				if (i > 0)				/* token found */
+				{						/* get space for it */
+					mp = (char *) malloc((i + 1) * sizeof(char));
+
+					if (mp)				/* malloc succeeded */
+					{
+						counter++;		/* increase counter of recognized arguments */
+						fargv[counter] = mp;	/* mp points into fargv[] array */
+						/* copy the found argument from string into array */
+						strncpy(fargv[counter], ptr, i);
+						fargv[counter][i] = EOS;	/* close C string! */
+						while (ptr[i] == ' ' || ptr[i] == '\t')
+							i++;
+						ptr += i;		/* shorten string */
+					}
+				}
+			}
+
+			sl -= i;					/* decrease string length counter */
+		}
+	}
+
+	fclose(file);
+
+	i = 0;
+
+	while (i <= counter)
+	{
+		getcliopt(&i, fargv[i], (i + 1 <= counter) ? fargv[i + 1] : NULL, TRUE);
+		i++;
+	}
+
+	for (i = counter; i >= 0; i--)
+	{
+		if (fargv[i] != NULL)
+		{
+			free(fargv[i]);
+			fargv[i] = NULL;
+		}
+	}
+
+	return TRUE;
 }
 
 
@@ -1013,18 +1004,18 @@ LOCAL NOINLINE _BOOL read_cliopt_file(const char *name)
 
 int main(int argc, const char **argv)
 {
-   int       i;
-   char      nam[32];
-   _BOOL   cliok;
+	int i;
+	char nam[32];
+	_BOOL cliok;
 
 #ifdef __TOS__
-   Pdomain(1);
+	Pdomain(1);
 #endif
 
-   mem_test_start();
+	mem_test_start();
 
 #ifdef HAVE_SETLOCALE
-   setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
 #endif
 
 #ifdef ENABLE_NLS
@@ -1033,135 +1024,129 @@ int main(int argc, const char **argv)
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 #endif
 
-   mem_print_alloc_errors = error_malloc_failed;
-   
-   /* --- init global variables --- */
-   
-   init_udo_vars();
-   sprintf(nam, "UDO Version %s", UDO_REL);
-   
-   init_module_config("", nam, UDO_OS);
+	mem_print_alloc_errors = error_malloc_failed;
 
-   read_profile();
+	/* --- init global variables --- */
 
-   outfile.file = stdout;
-   infile.file  = stdin;
+	init_udo_vars();
+	sprintf(nam, "UDO Version %s", UDO_REL);
 
-   desttype         = TOASC;
-   bNoLogfile       = FALSE;
-   bNoHypfile       = FALSE;
-   bNoIdxfile       = FALSE;
-   bBeQuiet         = FALSE;
-   bVerbose         = FALSE;
-   bTestmode        = FALSE;
-   bUseTreefile     = FALSE;
-   bUseUPRfile      = FALSE;
-   bUseIdMapFileC   = FALSE;
-   bUseIdMapFilePas = FALSE;
-   bUseIdMapFileVB  = FALSE;
-   bUseIdMapFileGFA = FALSE;
-   bNoWarnings      = FALSE;
-   bNoWarningsLines = FALSE;
-   bForceLong       = FALSE;
-   bForceShort      = FALSE;
+	init_module_config("", nam, UDO_OS);
+
+	read_profile();
+
+	outfile.file = stdout;
+	infile.file = stdin;
+
+	desttype = TOASC;
+	bNoLogfile = FALSE;
+	bNoHypfile = FALSE;
+	bNoIdxfile = FALSE;
+	bBeQuiet = FALSE;
+	bVerbose = FALSE;
+	bTestmode = FALSE;
+	bUseTreefile = FALSE;
+	bUseUPRfile = FALSE;
+	bUseIdMapFileC = FALSE;
+	bUseIdMapFilePas = FALSE;
+	bUseIdMapFileVB = FALSE;
+	bUseIdMapFileGFA = FALSE;
+	bNoWarnings = FALSE;
+	bNoWarningsLines = FALSE;
+	bForceLong = FALSE;
+	bForceShort = FALSE;
 #if USE_KWSET
-   bNoFastAutoref   = FALSE;
+	bNoFastAutoref = FALSE;
 #endif
-   bCheckMisc       = FALSE;
-   bHoldKey         = FALSE;
-   bShowArgs        = FALSE;
-   bShowVersion     = FALSE;
-   bShowHelp        = FALSE;
-   bDumpImages      = FALSE;
-   
-   no_stderr_output = FALSE;
-   no_pass2         = FALSE;
+	bCheckMisc = FALSE;
+	bHoldKey = FALSE;
+	bShowArgs = FALSE;
+	bShowVersion = FALSE;
+	bShowHelp = FALSE;
+	bDumpImages = FALSE;
 
-   last_percent = -1;
+	no_stderr_output = FALSE;
+	no_pass2 = FALSE;
 
-   outfile.full[0] = EOS;
-   infile.full[0]  = EOS;
-   sLogfull = 0;
+	last_percent = -1;
 
-
-   /* --- now evaluate command line parameters --- */
-   
-   i = 1;
-   cliok = TRUE;
-
-   while ( (cliok) && (i < argc) && (argv[i] != NULL) )
-   {
-      cliok = getcliopt(&i, argv[i], (i < argc) ? argv[i + 1] : NULL, FALSE);
-      i++;
-   }
+	outfile.full[0] = EOS;
+	infile.full[0] = EOS;
+	sLogfull = 0;
 
 
-   if (bShowArgs)
-   {
-      i = 1;
-      
-      while (i < argc)
-      {
-         fprintf(stdout, "%2d: %s\n", i, argv[i]);
-         i++;
-      }
-   }
-   else if (bShowHelp)
-   {
-      show_help();
-   }
-   else if (bShowVersion)
-   {
-      show_version();
-   }
-   else if (bDumpImages)
-   {
-      dump_all_images();
-   }
-   else
-   {                                      /* Leere Kommandozeile uebergeben oder kein Infile */
-      if (i == 1 || infile.full[0] == EOS)
-      {
-         show_version();
-         show_usage();
-         fprintf(stdout, _("          use --help for more information\n"));
-      }
-      else
-      {
-         fsplit(infile.full, infile.driv, infile.path, infile.name, infile.suff);
+	/* --- now evaluate command line parameters --- */
 
-         if (outfile.full[0] != EOS)
-         {
-            fsplit(outfile.full, outfile.driv, outfile.path, outfile.name, outfile.suff);
-            
-            if (strcmp(outfile.name, "!") == 0)
-               dest_adjust();
-            else
-               dest_special_adjust();
-         }
-         else
-         {
-            bNoLogfile = TRUE;
-            bNoHypfile = TRUE;
-            dest_special_adjust();
-         }
+	i = 1;
+	cliok = TRUE;
 
-         udo(infile.full);                /* <???> informativeren Exitcode ermitteln */
-      }
-   }
+	while ((cliok) && (i < argc) && (argv[i] != NULL))
+	{
+		cliok = getcliopt(&i, argv[i], (i < argc) ? argv[i + 1] : NULL, FALSE);
+		i++;
+	}
 
-   exit_udo_vars();
-	
+
+	if (bShowArgs)
+	{
+		i = 1;
+
+		while (i < argc)
+		{
+			fprintf(stdout, "%2d: %s\n", i, argv[i]);
+			i++;
+		}
+	} else if (bShowHelp)
+	{
+		show_help();
+	} else if (bShowVersion)
+	{
+		show_version();
+	} else if (bDumpImages)
+	{
+		dump_all_images();
+	} else
+	{									/* Leere Kommandozeile uebergeben oder kein Infile */
+		if (i == 1 || infile.full[0] == EOS)
+		{
+			show_version();
+			show_usage();
+			fprintf(stdout, _("          use --help for more information\n"));
+		} else
+		{
+			fsplit(infile.full, infile.driv, infile.path, infile.name, infile.suff);
+
+			if (outfile.full[0] != EOS)
+			{
+				fsplit(outfile.full, outfile.driv, outfile.path, outfile.name, outfile.suff);
+
+				if (strcmp(outfile.name, "!") == 0)
+					dest_adjust();
+				else
+					dest_special_adjust();
+			} else
+			{
+				bNoLogfile = TRUE;
+				bNoHypfile = TRUE;
+				dest_special_adjust();
+			}
+
+			udo(infile.full);			/* <???> informativeren Exitcode ermitteln */
+		}
+	}
+
+	exit_udo_vars();
+
 #ifdef ENABLE_NLS
-   xs_locale_exit();
+	xs_locale_exit();
 #endif
 
-   mem_test_end();                        /* clean up allocated memory */
+	mem_test_end();						/* clean up allocated memory */
 
-   wait_on_keypress();
+	wait_on_keypress();
 
-   if (!cliok || bErrorDetected || get_error_counter() > 0)
-      return 1;
+	if (!cliok || bErrorDetected || get_error_counter() > 0)
+		return 1;
 
-   return 0;
+	return 0;
 }

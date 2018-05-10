@@ -91,8 +91,8 @@
 *
 ******************************************|************************************/
 
-LOCAL char      strUdoNodeName[32];
-LOCAL char      strUdoHtmlName[32];
+LOCAL char strUdoNodeName[32];
+LOCAL char strUdoHtmlName[32];
 
 
 
@@ -118,61 +118,59 @@ GLOBAL FILE *udofile_tmpname(const char *templatename)
 {
 #if defined(HAVE_MKSTEMP) && defined(HAVE_FDOPEN)
 	{
-	    char t[512];
-	    int fd;
-	    
-	    sprintf(t, "%s%s%s%s", outfile.driv, outfile.path, "udoXXXXXX", "");
-	    path_adjust_separator(t);
-	    if ((fd = mkstemp(t)) >= 0 )
-	    {   
-	        strcpy(udofile.full, t);
-	        return fdopen(fd, "w");
-	    }
-    }
+		char t[512];
+		int fd;
+
+		sprintf(t, "%s%s%s%s", outfile.driv, outfile.path, "udoXXXXXX", "");
+		path_adjust_separator(t);
+		if ((fd = mkstemp(t)) >= 0)
+		{
+			strcpy(udofile.full, t);
+			return fdopen(fd, "w");
+		}
+	}
 #elif defined(HAVE_TMPNAM)
-   {
-      char   t[512];  /* temp dir fspec */
-      FILE *uif;
-   
-      if (tmpnam(t) != NULL)
-         strcpy(udofile.full, t);
-      else
-         strcat(strcpy(udofile.full, templatename), ".tmp");
-      uif = myFwopen(udofile.full, TOASC);
-      if (uif != NULL)
-         return uif;
-   }
+	{
+		char t[512];					/* temp dir fspec */
+		FILE *uif;
+
+		if (tmpnam(t) != NULL)
+			strcpy(udofile.full, t);
+		else
+			strcat(strcpy(udofile.full, templatename), ".tmp");
+		uif = myFwopen(udofile.full, TOASC);
+		if (uif != NULL)
+			return uif;
+	}
 #endif
-   {
-   char  *tp;      /* temp dir path */
+	{
+		char *tp;						/* temp dir path */
+		tp = NULL;
 
-   tp = NULL;
+		if ((tp = getenv("TEMP")) == NULL)	/* try to find any temp dir */
+		{
+			if ((tp = getenv("TMP")) == NULL)
+				tp = getenv("TMPDIR");
+		}
 
-   if ( (tp = getenv("TEMP")) == NULL)    /* try to find any temp dir */
-   {
-      if ( (tp = getenv("TMP")) == NULL)
-         tp = getenv("TMPDIR");
-   }
+		if (tp != NULL)					/* got one! */
+		{
+			fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
 
-   if (tp != NULL)                        /* got one! */
-   {
-      fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
-      
-      strcpy(udofile.driv, tmp_driv);
-      strcpy(udofile.path, tmp_path);
-   }
-   else                                   /* use my own paths */
-   {
-      strcpy(udofile.driv, outfile.driv);
-      strcpy(udofile.path, outfile.path);
-   }
+			strcpy(udofile.driv, tmp_driv);
+			strcpy(udofile.path, tmp_path);
+		} else							/* use my own paths */
+		{
+			strcpy(udofile.driv, outfile.driv);
+			strcpy(udofile.path, outfile.path);
+		}
 
-   strcpy(udofile.name, templatename);
-   strcpy(udofile.suff, ".tmp");
-   sprintf(udofile.full, "%s%s%s%s", udofile.driv, udofile.path, udofile.name, udofile.suff);
-   }
-   path_adjust_separator(udofile.full);
-   return myFwopen(udofile.full, TOASC);
+		strcpy(udofile.name, templatename);
+		strcpy(udofile.suff, ".tmp");
+		sprintf(udofile.full, "%s%s%s%s", udofile.driv, udofile.path, udofile.name, udofile.suff);
+	}
+	path_adjust_separator(udofile.full);
+	return myFwopen(udofile.full, TOASC);
 }
 
 
@@ -189,28 +187,28 @@ GLOBAL FILE *udofile_tmpname(const char *templatename)
 *
 ******************************************|************************************/
 
-LOCAL void output_about_udo_ger(FILE *f)
+LOCAL void output_about_udo_ger(FILE * f)
 {
-   fprintf(f, "%s\n", CMD_BEGIN_CENTER);
-   fprintf(f, "!universal_charset [on]\n");
-   fprintf(f, "Dieser Text wurde erzeugt mit\n");
-   fprintf(f, "\n");
-   fprintf(f, "(!B)UDO(!b) (!nl)\n");
-   fprintf(f, "%s (!nl)\n", UDO_VERSION_STRING);
-   fprintf(f, "%s\n", UDO_OS);
-   fprintf(f, "\n");
-   fprintf(f, UDO_COPYRIGHT_TEXT);
-   fprintf(f, "UDO ist Open Source (!nl)\n");
-   fprintf(f, "\n");
-   fprintf(f, "!udolink\n");
-   fprintf(f, "\n");
-   fprintf(f, "UDO ist ein Programm, mit dem Sie Textdateien, die im\n");
-   fprintf(f, "Universal-Document-Format erstellt wurden, in (!\"u)ber\n");
-   fprintf(f, "25 Zielformate umwandeln k(!\"o)nnen.\n");
-   fprintf(f, "\n");
-   fprintf(f, "Weitere Informationen sowie die aktuellen Versionen finden Sie im Internet unter (!nl)\n");
-   fprintf(f, "(!url [%s][])\n", UDO_URL);
-   fprintf(f, "%s\n\n", CMD_END_CENTER);
+	fprintf(f, "%s\n", CMD_BEGIN_CENTER);
+	fprintf(f, "!universal_charset [on]\n");
+	fprintf(f, "Dieser Text wurde erzeugt mit\n");
+	fprintf(f, "\n");
+	fprintf(f, "(!B)UDO(!b) (!nl)\n");
+	fprintf(f, "%s (!nl)\n", UDO_VERSION_STRING);
+	fprintf(f, "%s\n", UDO_OS);
+	fprintf(f, "\n");
+	fprintf(f, UDO_COPYRIGHT_TEXT);
+	fprintf(f, "UDO ist Open Source (!nl)\n");
+	fprintf(f, "\n");
+	fprintf(f, "!udolink\n");
+	fprintf(f, "\n");
+	fprintf(f, "UDO ist ein Programm, mit dem Sie Textdateien, die im\n");
+	fprintf(f, "Universal-Document-Format erstellt wurden, in (!\"u)ber\n");
+	fprintf(f, "25 Zielformate umwandeln k(!\"o)nnen.\n");
+	fprintf(f, "\n");
+	fprintf(f, "Weitere Informationen sowie die aktuellen Versionen finden Sie im Internet unter (!nl)\n");
+	fprintf(f, "(!url [%s][])\n", UDO_URL);
+	fprintf(f, "%s\n\n", CMD_END_CENTER);
 }
 
 
@@ -227,28 +225,28 @@ LOCAL void output_about_udo_ger(FILE *f)
 *
 ******************************************|************************************/
 
-LOCAL void output_about_udo_eng(FILE *f)
+LOCAL void output_about_udo_eng(FILE * f)
 {
-   fprintf(f, "%s\n", CMD_BEGIN_CENTER);
-   fprintf(f, _("This text was made with\n"));
-   fprintf(f, "\n");
-   fprintf(f, "(!B)UDO(!b) (!nl)\n");
-   fprintf(f, "%s (!nl)\n", UDO_VERSION_STRING);
-   fprintf(f, "%s\n", UDO_OS);
-   fprintf(f, "\n");
-   fprintf(f, UDO_COPYRIGHT_TEXT);
-   fprintf(f, _("UDO is Open Source (!nl)\n"));
-   fprintf(f, "\n");
-   fprintf(f, "!udolink\n");
-   fprintf(f, "\n");
-   fprintf(f, _("UDO is an application that converts text files which you\n"));
-   fprintf(f, _("have written in Universal Document Format, into more than\n"));
-   fprintf(f, _("25 different target formats.\n"));
-   fprintf(f, "\n");
-   fprintf(f, _("Get further information and the current versions on the Internet at (!nl)\n"));
-   fprintf(f, "\n");
-   fprintf(f, "(!url [%s] [])\n", UDO_URL);
-   fprintf(f, "%s\n\n", CMD_END_CENTER);
+	fprintf(f, "%s\n", CMD_BEGIN_CENTER);
+	fprintf(f, _("This text was made with\n"));
+	fprintf(f, "\n");
+	fprintf(f, "(!B)UDO(!b) (!nl)\n");
+	fprintf(f, "%s (!nl)\n", UDO_VERSION_STRING);
+	fprintf(f, "%s\n", UDO_OS);
+	fprintf(f, "\n");
+	fprintf(f, UDO_COPYRIGHT_TEXT);
+	fprintf(f, _("UDO is Open Source (!nl)\n"));
+	fprintf(f, "\n");
+	fprintf(f, "!udolink\n");
+	fprintf(f, "\n");
+	fprintf(f, _("UDO is an application that converts text files which you\n"));
+	fprintf(f, _("have written in Universal Document Format, into more than\n"));
+	fprintf(f, _("25 different target formats.\n"));
+	fprintf(f, "\n");
+	fprintf(f, _("Get further information and the current versions on the Internet at (!nl)\n"));
+	fprintf(f, "\n");
+	fprintf(f, "(!url [%s] [])\n", UDO_URL);
+	fprintf(f, "%s\n\n", CMD_END_CENTER);
 }
 
 
@@ -278,60 +276,60 @@ LOCAL void output_about_udo_eng(FILE *f)
 
 GLOBAL void output_about_udo(void)
 {
-   FILE *uif;
-   
-   switch (desttype)
-   {
-   case TOSRC:
-   case TOSRP:
-      /* nur eine kurze Info in c_end_document ausgeben */
-      return;
-#if 0 /* now uses default from abo.c */
-   case TOKPS:
-      return;
+	FILE *uif;
+
+	switch (desttype)
+	{
+	case TOSRC:
+	case TOSRP:
+		/* nur eine kurze Info in c_end_document ausgeben */
+		return;
+#if 0									/* now uses default from abo.c */
+	case TOKPS:
+		return;
 #endif
-   }
+	}
 
-   uif = udofile_tmpname("_udoinfo");
+	uif = udofile_tmpname("_udoinfo");
 
-   if (!uif)
-      return;
-   
+	if (!uif)
+		return;
 
-   fprintf(uif, "!newpage\n");
-   fprintf(uif, "!code_source [sys]\n");
-   fprintf(uif, "!sloppy\n\n");
-   fprintf(uif, "!node* %s\n", strUdoNodeName);
-   fprintf(uif, "!html_name %s\n", strUdoHtmlName);
-   fprintf(uif, "!win_helpid %s\n\n", WIN_UDO_NODE_NAME);
-   
-   if (!bDocAutorefOff)                   /* don't auto-reference the 'About UDO' page */
-      fprintf(uif, "!autoref [off]\n");
-   
-   
-   switch (destlang)
-   {
-   case TOGER:
-      output_about_udo_ger(uif);
-      break;
-      
-   default:
-      output_about_udo_eng(uif);
-      break;
-   }
 
-   fclose(uif);
+	fprintf(uif, "!newpage\n");
+	fprintf(uif, "!code_source [sys]\n");
+	fprintf(uif, "!sloppy\n\n");
+	fprintf(uif, "!node* %s\n", strUdoNodeName);
+	fprintf(uif, "!html_name %s\n", strUdoHtmlName);
+	fprintf(uif, "!win_helpid %s\n\n", WIN_UDO_NODE_NAME);
 
-   token_reset();
-   strcpy(token[0], "!include");          /* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
-   
-   um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN + 1, "output_about_udo");
-   
-   token_counter = 2;
-   
-   c_include();
+	if (!bDocAutorefOff)				/* don't auto-reference the 'About UDO' page */
+		fprintf(uif, "!autoref [off]\n");
 
-   remove(udofile.full);
+
+	switch (destlang)
+	{
+	case TOGER:
+		output_about_udo_ger(uif);
+		break;
+
+	default:
+		output_about_udo_eng(uif);
+		break;
+	}
+
+	fclose(uif);
+
+	token_reset();
+	strcpy(token[0], "!include");		/* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
+
+	um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN + 1, "output_about_udo");
+
+	token_counter = 2;
+
+	c_include();
+
+	remove(udofile.full);
 }
 
 
@@ -350,8 +348,8 @@ GLOBAL void output_about_udo(void)
 
 GLOBAL void add_pass1_about_udo(void)
 {
-   output_about_udo();
-   token_reset();
+	output_about_udo();
+	token_reset();
 }
 
 
@@ -370,8 +368,8 @@ GLOBAL void add_pass1_about_udo(void)
 
 GLOBAL void init_module_about(void)
 {
-   use_about_udo = FALSE;
+	use_about_udo = FALSE;
 
-   sprintf(strUdoNodeName, "UDO%s", UDO_REL);
-   strcpy(strUdoHtmlName, "aboutudo");
+	sprintf(strUdoNodeName, "UDO%s", UDO_REL);
+	strcpy(strUdoHtmlName, "aboutudo");
 }
