@@ -1,0 +1,99 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.04
+# Language    : English
+# Initial Date: 2010-10-24
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2014:
+#   ggs May 02: introduced
+#   fd  May 02: translated
+# 2015:
+#   fd  Feb 06: history updated
+#
+################################################################################
+
+!begin_node Changes in version 7.04
+!html_name  history_0704
+
+# (!PUBLISHED [UDO~7.04][])
+UDO~7.04 has not yet been released!
+
+!begin_description !compressed
+# ----------------------------------------
+!item [Additional paragraph]
+# ----------------------------------------
+      
+# ----------------------------------------
+!item [Outline levels]
+      UDO now offers another, 6th outline level for chapter hierarchies.
+      Therefore, these following new commands are available:
+      
+      !begin_itemize
+      !item (!kw [html_merge_subsubsubsubsubnodes])
+      !item (!kw [ignore_subsubsubsubsubtoc])
+      !item (!kw [psssss*])
+      !item (!kw [psssss])
+      !item (!kw [psubsubsubsubsubnode*])
+      !item (!kw [psubsubsubsubsubnode])
+      !item (!kw [sssssh])
+      !item (!kw [sssssn*])
+      !item (!kw [sssssn])
+      !item (!kw [subsubsubsubsubheading])
+      !item (!kw [subsubsubsubsubnode*])
+      !item (!kw [subsubsubsubsubnode])
+      !item (!kw [subsubsubsubsubtoc])
+      !item (!kw [subsubsubsubsubtoc_offset])
+      !item (!kw [use_auto_subsubsubsubsubtocs])
+      !end_itemize
+      
+      They are used like the already known commands for creating hierarchies in HTML documents.
+# ----------------------------------------
+
+# ----------------------------------------
+!item [(!kw [html_script_name])]
+      This command now supports any number of files, similar to (!kw [html_style_name]).
+# ----------------------------------------
+
+# ----------------------------------------
+!item [Navigation buttons, CSS, and JavaScript]
+###   Copy the following description from the HTML FAQ section in format_html.XX:
+      Basically, the HTML output creates clickable navigation buttons in the headlines and footers of each page.
+      These buttons reflect the hierarchy of the document with a Home button and some arrow buttons.
+      
+      As of version 7.04, UDO adds IDs to the anchor tags of these buttons:
+      !begin_blist
+      !item [UDO_nav_hm_HEAD] Home: this one brings you back to the homepage of the HTML document.
+      !item [UDO_nav_lf_HEAD] Left: this button brings you to the previous document page in logical order.
+      !item [UDO_nav_up_HEAD] Up: this button brings you back one chapter hierarchy level.
+      !item [UDO_nav_rg_HEAD] Right: this button forwards you to the next document page in logical order.
+      !end_blist
+      
+      In order to be able and access these buttons using the keyboard, we recommend to use JavaScript.
+      The HTML attribute ""accesskey"" requires various additional function keys, depending on the browser, and doesn't access e.g. arrow keys.
+      Keep in mind to not switch off the navigation buttons using (!KW [no_headlines]) and (!KW [no_footers]) in the preamble.
+      Then include a JavaScript script which evaluates key presses, using (!KW [html_script_name]).
+# ----------------------------------------
+
+# ----------------------------------------
+!item [(!KW [language])]
+# ----------------------------------------
+      The Portuguese translation of all terms used by UDO has been completed. 
+
+# ----------------------------------------
+!item [Tiny bugfixes]
+      As usual, various tiny bugs have been fixed.
+      They were so small that they weren't even worth being listed.
+# ----------------------------------------
+!end_description
+
+!end_node
+
+# === EOF ===

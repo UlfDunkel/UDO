@@ -1,0 +1,96 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.04
+# Language    : German
+# Initial Date: 2010-10-24
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2014:
+#   ggs May 02: introduced
+#   fd  May 02: adjustments
+# 2015:
+#   fd  Feb 06: history updated
+#
+################################################################################
+
+!begin_node Änderungen in Version 7.04
+!html_name  history_0704
+
+# (!PUBLISHED [UDO~7.04][])
+UDO~7.04 wurde noch nicht veröffentlicht!
+
+!begin_description !not_compressed
+# ----------------------------------------
+!item [Gliederungsebenen]
+      UDO bietet ab sofort eine weitere, 6. Gliederungsebene für Kapitelhierarchien.
+      Diese nachfolgenden neuen Kommandos stehen dafür zur Verfügung:
+      
+      !begin_itemize
+      !item (!kw [html_merge_subsubsubsubsubnodes])
+      !item (!kw [ignore_subsubsubsubsubtoc])
+      !item (!kw [psssss*])
+      !item (!kw [psssss])
+      !item (!kw [psubsubsubsubsubnode*])
+      !item (!kw [psubsubsubsubsubnode])
+      !item (!kw [sssssh])
+      !item (!kw [sssssn*])
+      !item (!kw [sssssn])
+      !item (!kw [subsubsubsubsubheading])
+      !item (!kw [subsubsubsubsubnode*])
+      !item (!kw [subsubsubsubsubnode])
+      !item (!kw [subsubsubsubsubtoc])
+      !item (!kw [subsubsubsubsubtoc_offset])
+      !item (!kw [use_auto_subsubsubsubsubtocs])
+      !end_itemize
+      
+      Sie werden wie die bisher üblichen Kommandos zur Gliederung von HTML-Gliederungsebenen verwendet.
+# ----------------------------------------
+
+# ----------------------------------------
+!item [(!kw [html_script_name])]
+      Dieses Kommando unterstützt jetzt, ähnlich wie (!kw [html_style_name]), beliebig viele Dateien.
+# ----------------------------------------
+
+# ----------------------------------------
+!item [Navigationsbuttons, CSS und JavaScript]
+###   Copy the following description from the HTML FAQ section in format_html.XX:
+      Normalerweise werden bei der HTML-Ausgabe pro Seite in den Kopf- und Fußzeilen anklickbare Navigationsbuttons erzeugt.
+      Diese Buttons zeigen die Hierarchie des Dokuments mit einem Home-Button und einigen Pfeil-Buttons.
+      
+      Ab Version 7.04 schreibt UDO in die Anker-Tags dieser anklickbaren Buttons IDs:
+      !begin_blist
+      !item [UDO_nav_hm] Home-Button: Er führt zurück auf die Startseite des HTML-Dokuments.
+      !item [UDO_nav_lf] Nach links: Dieser Button führt zurück auf die logisch vorige Dokumentseite.
+      !item [UDO_nav_up] Nach oben: Dieser Button führt eine Kapitelhierarchiestufe zurück.
+      !item [UDO_nav_rg] Nach rechts: Dieser Button führt zurück auf die logisch folgende Dokumentseite.
+      !end_blist
+      
+      Um diese Navigationsbuttons per Tastatur ansprechen zu können, sollten Sie JavaScript einsetzen.
+      Das HTML-Attribut ""accesskey"" benötigt je nach Browser unterschiedliche Zusatztasten und spricht z.B. keine Pfeiltasten an.
+      Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!kw [no_headlines]) und (!kw [no_footers]) im Vorspann abgeschaltet haben.
+      Binden Sie dann mit (!kw [html_script_name]) ein JavaScript-Skript ein, das Tastendrücke auswertet.
+# ----------------------------------------
+
+# ----------------------------------------
+!item [(!KW [language])]
+# ----------------------------------------
+      Die portugiesische Übersetzung der von UDO verwendeten Begriffe wurde vervollständigt. 
+
+
+# ----------------------------------------
+!item [Kleinere Fehlerkorrekturen]
+      Wie immer wurden verschiedene kleine Fehler korrigiert.
+      Sie waren so klein, dass es nicht lohnt, sie aufzuzählen.
+# ----------------------------------------
+!end_description
+
+!end_node
+
+# === EOF ===

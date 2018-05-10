@@ -14,6 +14,8 @@ Es können beliebig viele Stylesheets für verschiedene
 Medien, getrennt durch ein Leerzeichen, übergeben werden. Stylesheets
 im Vorspann werden in jede Datei geschrieben, Stylesheets in Nodes nur
 in die Datei, die den Node enthält.
+
+Dieses Kommando kann auch mehrfach angegeben werden.
 (!FILESPACEQUOTE2)
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15

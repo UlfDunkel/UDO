@@ -11,7 +11,10 @@ JavaScript einbinden (nur HTML).
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann ein JavaScript eingebunden werden.
+Scripts im Vorspann werden in jede Datei geschrieben, Scripts in Nodes nur
+in die Datei, die den Node enthält.
 
+Dieses Kommando kann auch mehrfach angegeben werden.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
 !end_xlist

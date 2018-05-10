@@ -14,6 +14,8 @@ You can define an arbitrary number of stylesheets for different
 types of media, separated by spaces. Stylesheets defined in the
 preamble are written to every output file, while stylesheets
 defined in nodes are written only to the file containing the node.
+
+This command can be specified more than once.
 (!FILESPACEQUOTE2)
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
