@@ -5209,6 +5209,23 @@ LOCAL int comp_index_html(const void  *_p1, const void  *_p2)
 
 
 
+void toc_mark_index_referenced(void)
+{
+	/*
+	 * mark labels as referenced if they would go into the index,
+	 * even if we don't generate one for this format
+	 */
+	if (bCheckMisc)
+	{
+		LABIDX j;
+		
+		for (j = 1; j <= p1_lab_counter; j++)
+		{
+			if (label_table[j] != NULL && label_table[j]->ignore_index == FALSE)
+				label_table[j]->referenced = TRUE;
+		}
+	}
+}
 
 
 /*******************************************************************************
@@ -5241,12 +5258,13 @@ GLOBAL _BOOL save_html_index(void)
    char         thisc_char[42];   /* buffer string for converted thisc */
    char         thisc_label[42];  /* buffer string for HTML convenient converted thisc */
    TOCTYPE d;
+   LABEL *l;
    
    num_index = 0;                         /* first we count how much entries we need */
    
    for (j = 1; j <= p1_lab_counter; j++)  /* check all collected labels */
    {
-      if (label_table[j] != NULL && label_table[j]->ignore_index == FALSE)
+      if ((l = label_table[j]) != NULL && l->ignore_index == FALSE)
          num_index++;
    }
    
@@ -5283,14 +5301,15 @@ GLOBAL _BOOL save_html_index(void)
    
    for (j = 1; j <= p1_lab_counter; j++)
    {
-      if (label_table[j] != NULL  && label_table[j]->ignore_index == FALSE)
+      if ((l = label_table[j]) != NULL && l->ignore_index == FALSE)
       {
-         html_index[num_index].toc_index = label_table[j]->tocindex;
-         html_index[num_index].is_node   = label_table[j]->is_node;
+      	 l->referenced = TRUE;
+         html_index[num_index].toc_index = l->tocindex;
+         html_index[num_index].is_node   = l->is_node;
 
                                           /* set ^ to name field in structure */
          tocname = html_index[num_index].tocname;
-         strcpy(tocname, label_table[j]->name);   /* copy name to structure */
+         strcpy(tocname, l->name);   /* copy name to structure */
 
          replace_macros(tocname);
          c_internal_styles(tocname);
@@ -5755,6 +5774,7 @@ GLOBAL _BOOL save_htmlhelp_index(const char *filename)
    char         cLabel[512];
    int          html_merge;
    TOCTYPE d;
+   LABEL *l;
    
    if (no_index)
       return FALSE;  /* Index-File wird nicht gewuenscht */
@@ -5762,7 +5782,7 @@ GLOBAL _BOOL save_htmlhelp_index(const char *filename)
    /* erstmal zaehlen wieviel wir brauchen */
    num_index = 0;
    for (j = 1; j <= p1_lab_counter; j++)
-      if (label_table[j] != NULL && !label_table[j]->ignore_index)
+      if ((l = label_table[j]) != NULL && !l->ignore_index)
          num_index++;
    
    if (num_index == 0)
@@ -5798,10 +5818,9 @@ GLOBAL _BOOL save_htmlhelp_index(const char *filename)
    num_index = 0;
    for (j = 1; j <= p1_lab_counter; j++)
    {
-   	  LABEL *l;
-   	  
       if ((l = label_table[j]) != NULL && !l->ignore_index)
       {
+         l->referenced = TRUE;
          html_index[num_index].toc_index = l->tocindex;
          html_index[num_index].is_node = l->is_node;
          tocname = html_index[num_index].tocname;

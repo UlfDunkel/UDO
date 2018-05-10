@@ -5111,8 +5111,6 @@ GLOBAL void c_begin_document(void)
 
 GLOBAL void c_end_document(void)
 {
-	char n[128];
-
 	if (bCalledEndDocument)
 	{
 		error_called_twice(CMD_END_DOCUMENT);
@@ -5242,6 +5240,8 @@ GLOBAL void c_end_document(void)
 	case TOSRP:
 		if (use_about_udo)
 		{
+			char n[128];
+
 			memset(n, '#', 62);
 			n[62] = EOS;
 			outln("");

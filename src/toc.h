@@ -272,6 +272,7 @@ GLOBAL void html_bottomline(void);
 GLOBAL void html_footer(void);
 GLOBAL _BOOL save_html_index(void);
 GLOBAL void add_pass1_index_udo(void);
+void toc_mark_index_referenced(void);
 
 GLOBAL void hh_headline(void);
 GLOBAL void hh_bottomline(void);
