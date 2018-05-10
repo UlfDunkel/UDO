@@ -17,6 +17,7 @@ typedef struct {
 	long minVal;
 	long maxVal;
 	long pos;
+	double last_fraction;
 	
 	GtkWidget *pass_label;
 	GtkWidget *info_label;
@@ -64,6 +65,13 @@ static char *fix_udo_to_utf8(const char *s)
 /*** ---------------------------------------------------------------------- ***/
 /******************************************************************************/
 
+static void status_process_updates(void)
+{
+	/* gdk_window_process_updates(gtk_widget_get_window(status->hwnd), TRUE); */
+}
+
+/*** ---------------------------------------------------------------------- ***/
+
 void show_status_info_force(const char *s, gboolean force)
 {
 	char *msg;
@@ -76,8 +84,8 @@ void show_status_info_force(const char *s, gboolean force)
 			if (msg != NULL)
 			{
 				gtk_label_set_text(GTK_LABEL(status->info_label), msg);
-				gdk_window_process_updates(gtk_widget_get_window(status->hwnd), TRUE);
 				g_free(msg);
+				status_process_updates();
 			}
 		}
 	}
@@ -116,7 +124,7 @@ void show_status_pass(const char *s)
 		{
 			gtk_label_set_text(GTK_LABEL(status->pass_label), s);
 			gtk_label_set_text(GTK_LABEL(status->info_label), "");
-			gdk_window_process_updates(gtk_widget_get_window(status->hwnd), TRUE);
+			status_process_updates();
 		}
 	}
 }
@@ -143,8 +151,8 @@ void show_status_node(const char *numbers, const char *name)
 			if (msg != NULL)
 			{
 				gtk_label_set_text(GTK_LABEL(status->node_label), msg);
-				gdk_window_process_updates(gtk_widget_get_window(status->hwnd), TRUE);
 				g_free(msg);
+				status_process_updates();
 			}
 		}
 	}
@@ -165,8 +173,8 @@ void show_status_file_1(FILE_LINENO Pass1Lines, const char *s)
 			if (msg != NULL)
 			{
 				gtk_label_set_text(GTK_LABEL(status->file_label), msg);
-				gdk_window_process_updates(gtk_widget_get_window(status->hwnd), TRUE);
 				g_free(msg);
+				status_process_updates();
 			}
 		}
 	}
@@ -218,7 +226,7 @@ void show_logln_message(const char *s)
 			gtk_widget_show(status->msg_window);
 			gtk_text_view_scroll_mark_onscreen(GTK_TEXT_VIEW(status->msg_text), status->end_mark);
 			g_free(msg);
-			gdk_window_process_updates(gtk_widget_get_window(status->hwnd), TRUE);
+			status_process_updates();
 		}
 	}
 }
@@ -292,9 +300,13 @@ static void status_update(Status *status)
 	if (status->maxVal != status->minVal)
 	{
 		fraction = 1.0 * (double)(status->pos - status->minVal) / (double)(status->maxVal - status->minVal);
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(status->progress_bar), fraction);
-		gtk_widget_queue_draw(status->progress_bar);
-		gdk_window_process_updates(gtk_widget_get_window(status->hwnd), TRUE);
+		if (fraction != status->last_fraction)
+		{
+			status->last_fraction = fraction;
+			gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(status->progress_bar), fraction);
+			gtk_widget_queue_draw(status->progress_bar);
+			status_process_updates();
+		}
 	}
 }
 
@@ -358,6 +370,7 @@ void Status_Open(GtkWidget *parent)
 	g_object_set_data(G_OBJECT(status->hwnd), "udoshell_window_type", NO_CONST("status-dialog"));
 	status->minVal = 0;
 	status->maxVal = 1;
+	status->last_fraction = -1.0;
 	
 	vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	status->pass_label = label = gtk_label_new("");
