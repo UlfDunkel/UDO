@@ -81,8 +81,6 @@
 #define TOAMG                24           /* AmigaGuide */
 #define TOHAH                25           /* HTML Apple Help */
 
-#define MAXDESTTYPE          26           /* Anzahl Ausgabeformate */
-
 
 #define TOGER                 0           /* German */
 #define TOENG                 1           /* English */
@@ -100,8 +98,6 @@
 #define TOPOL                13           /* Polish */
 #define TOJAP                14           /* Japanese */
 #define TORUS                15           /* Russian */
-
-#define MAXDESTLANG          16           /* total # of supported languages */
 
 
 

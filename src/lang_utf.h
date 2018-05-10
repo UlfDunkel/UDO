@@ -130,6 +130,11 @@ typedef struct _udostrings
 
 /* for i in 01 02 03 04 05 06 07 08 09 10 11 12; do LANG=xx.utf8 date --date=2016-$i-01 +%B; done */
 
+/*
+ * English must be first the entry,
+ * because it contains the strings marked for translation.
+ * Everything else is looked up through the identifier field
+ */
 LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
 {
    /*
@@ -139,7 +144,7 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
     */
     
    {
-      TOENG,                              /* English; default; must be first entry */
+      TOENG,
       {
          /* preface     */    N_("Preface"),
          /* chapter     */    N_("Chapter"),
@@ -187,7 +192,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    NC_("short_today", "%1$0d/%2$02d/%3$02d")
       },
       {
-      	 N_("January"),  N_("February"),  N_("March"),  N_("April"),    N_("May"),    N_("June"),     N_("July"),     N_("August"),   N_("September"),  N_("October"),     N_("November"),  N_("December")
+      	 N_("January"),
+      	 N_("February"),
+      	 N_("March"),
+      	 N_("April"),
+      	 N_("May"),
+      	 N_("June"),
+      	 N_("July"),
+      	 N_("August"),
+      	 N_("September"),
+      	 N_("October"),
+      	 N_("November"),
+      	 N_("December")
       }
    },
    {
@@ -229,7 +245,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "leden",        "únor",         "březen",    "duben",        "květen",    "červen",      "červenec",    "srpen",        "září",        "říjen",         "listopad",      "prosinec"
+      	 "leden",
+      	 "únor",
+      	 "březen",
+      	 "duben",
+      	 "květen",
+      	 "červen",
+      	 "červenec",
+      	 "srpen",
+      	 "září",
+      	 "říjen",
+      	 "listopad",
+      	 "prosinec"
       }
    },
    {
@@ -271,7 +298,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d-%2$02d-%1$d"
       },
       {
-      	 "januar",       "februar",       "marts",      "april",        "maj",        "juni",         "juli",         "august",       "september",      "oktober",         "november",      "december"
+      	 "januar",
+      	 "februar",
+      	 "marts",
+      	 "april",
+      	 "maj",
+      	 "juni",
+      	 "juli",
+      	 "august",
+      	 "september",
+      	 "oktober",
+      	 "november",
+      	 "december"
       }
    },
    {
@@ -366,7 +404,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "tammikuu",     "helmikuu",      "maaliskuu",  "huhtikuu",     "toukokuu",   "kesäkuu",     "heinäkuu",    "elokuu",       "syyskuu",        "lokakuu",         "marraskuu",     "joulukuu"
+      	 "tammikuu",
+      	 "helmikuu",
+      	 "maaliskuu",
+      	 "huhtikuu",
+      	 "toukokuu",
+      	 "kesäkuu",
+      	 "heinäkuu",
+      	 "elokuu",
+      	 "syyskuu",
+      	 "lokakuu",
+      	 "marraskuu",
+      	 "joulukuu"
       }
    },
    {
@@ -408,7 +457,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "janvier",      "février",      "mars",       "avril",        "mai",        "juin",         "juillet",      "août",        "septembre",      "octobre",         "novembre",      "décembre"
+      	 "janvier",
+      	 "février",
+      	 "mars",
+      	 "avril",
+      	 "mai",
+      	 "juin",
+      	 "juillet",
+      	 "août",
+      	 "septembre",
+      	 "octobre",
+      	 "novembre",
+      	 "décembre"
       }
    },
    {
@@ -450,7 +510,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "Januar",       "Februar",       "März",      "April",        "Mai",        "Juni",         "Juli",         "August",       "September",      "Oktober",         "November",      "Dezember"
+      	 "Januar",
+      	 "Februar",
+      	 "März",
+      	 "April",
+      	 "Mai",
+      	 "Juni",
+      	 "Juli",
+      	 "August",
+      	 "September",
+      	 "Oktober",
+      	 "November",
+      	 "Dezember"
       }
    },
    {
@@ -492,7 +563,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "Gennaio",      "Febbraio",      "Marzo",      "Aprile",       "Maggio",     "Giugno",       "Luglio",       "Agosto",       "Settembre",      "Ottobre",         "Novembre",      "Dicembre"
+      	 "Gennaio",
+      	 "Febbraio",
+      	 "Marzo",
+      	 "Aprile",
+      	 "Maggio",
+      	 "Giugno",
+      	 "Luglio",
+      	 "Agosto",
+      	 "Settembre",
+      	 "Ottobre",
+      	 "Novembre",
+      	 "Dicembre"
       }
    },
    {
@@ -534,7 +616,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%1$d年%2$02d月%3$02d日"
       },
       {
-      	  "1 月",        "2 月",         "3 月",      "4 月",        "5 月",      "6 月",        "7 月",        "8 月",        "9 月",          "10 月",          "11 月",        "12 月"
+      	  "1 月",
+      	  "2 月",
+      	  "3 月",
+      	  "4 月",
+      	  "5 月",
+      	  "6 月",
+      	  "7 月",
+      	  "8 月",
+      	  "9 月",
+      	  "10 月",
+      	  "11 月",
+      	  "12 月"
       }
    },
    {
@@ -576,7 +669,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "Janvāris",    "Februāris",    "Marts",      "Aprīlis",     "Maijs",      "Jūnijs",      "Jūlijs",      "Augusts",      "Septembris",     "Oktobris",        "Novembris",     "Decembris"
+      	 "Janvāris",
+      	 "Februāris",
+      	 "Marts",
+      	 "Aprīlis",
+      	 "Maijs",
+      	 "Jūnijs",
+      	 "Jūlijs",
+      	 "Augusts",
+      	 "Septembris",
+      	 "Oktobris",
+      	 "Novembris",
+      	 "Decembris"
       }
    },
    {
@@ -618,7 +722,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "januar",       "februar",       "mars",       "april",        "mai",        "juni",         "juli",         "august",       "september",      "oktober",         "november",      "desember"
+      	 "januar",
+      	 "februar",
+      	 "mars",
+      	 "april",
+      	 "mai",
+      	 "juni",
+      	 "juli",
+      	 "august",
+      	 "september",
+      	 "oktober",
+      	 "november",
+      	 "desember"
       }
    },
    {
@@ -660,7 +775,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "styczeń",     "luty",          "marzec",     "kwiecień",    "maj",        "czerwiec",     "lipiec",       "sierpień",    "wrzesień",      "październik",    "listopad",      "grudzień"
+      	 "styczeń",
+      	 "luty",
+      	 "marzec",
+      	 "kwiecień",
+      	 "maj",
+      	 "czerwiec",
+      	 "lipiec",
+      	 "sierpień",
+      	 "wrzesień",
+      	 "październik",
+      	 "listopad",
+      	 "grudzień"
       }
    },
    {
@@ -702,7 +828,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d-%2$02d-%1$d"
       },
       {
-      	 "Janeiro",      "Fevereiro",     "Março",     "Abril",        "Maio",       "Junho",        "Julho",        "Agosto",       "Setembro",       "Outubro",         "Novembro",      "Dezembro"
+      	 "Janeiro",
+      	 "Fevereiro",
+      	 "Março",
+      	 "Abril",
+      	 "Maio",
+      	 "Junho",
+      	 "Julho",
+      	 "Agosto",
+      	 "Setembro",
+      	 "Outubro",
+      	 "Novembro",
+      	 "Dezembro"
       }
    },
    {
@@ -797,7 +934,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%3$02d.%2$02d.%1$d"
       },
       {
-      	 "Enero",        "Febrero",       "Marzo",      "Abril",        "Mayo",       "Junio",        "Julio",        "Agosto",       "Septiembre",     "Octubre",         "Noviembre",     "Diciembre"
+      	 "Enero",
+      	 "Febrero",
+      	 "Marzo",
+      	 "Abril",
+      	 "Mayo",
+      	 "Junio",
+      	 "Julio",
+      	 "Agosto",
+      	 "Septiembre",
+      	 "Octubre",
+      	 "Noviembre",
+      	 "Diciembre"
       }
    },
    {
@@ -839,7 +987,18 @@ LOCAL _UDOSTRINGS const UDOSTRINGS[] =              /* localized UDO strings */
          /* short_today */    "%1$0d-%2$02d-%3$02d"
       },
       {
-      	 "januari",      "februari",      "mars",       "april",        "maj",        "juni",         "juli",         "augusti",      "september",      "oktober",         "november",      "december"
+      	 "januari",
+      	 "februari",
+      	 "mars",
+      	 "april",
+      	 "maj",
+      	 "juni",
+      	 "juli",
+      	 "augusti",
+      	 "september",
+      	 "oktober",
+      	 "november",
+      	 "december"
       }
    },
    

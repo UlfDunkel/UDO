@@ -189,12 +189,6 @@
 #include "udomem.h"                       /* Memory-Management */
 #include "upr.h"
 
-#if USE_KWSET
-#include "kwset.h"
-LOCAL kwset_t if_kwset;
-LOCAL kwset_t env_kwset;
-#endif
-
 #include "export.h"
 #include "udo.h"                          /* globale Prototypen */
 
@@ -772,6 +766,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!win_charwidth",                "",         c_win_charwidth,           TRUE,  CMD_ALWAYS },
    { "!wh4_charwidth",                "",         c_wh4_charwidth,           TRUE,  CMD_ALWAYS },
    { "!rtf_charwidth",                "",         c_rtf_charwidth,           TRUE,  CMD_ALWAYS },
+   { "!rtf_add_colour",               "",         c_rtf_add_color,           TRUE,  CMD_ONLY_PREAMBLE },
    { "!rtf_add_color",                "",         c_rtf_add_color,           TRUE,  CMD_ONLY_PREAMBLE },
    { "!rtf_keep_tables",              "",         c_rtf_keep_tables,         TRUE,  CMD_ALWAYS },
    { "!html_img_suffix",              "",         c_html_img_suffix,         TRUE,  CMD_ALWAYS },
@@ -8643,38 +8638,6 @@ LOCAL void pass_check_free_line(char *zeile, int pnr)
 
 
 
-#define CMD_IDX_IFDEST       0
-#define CMD_IDX_IFNDEST      1
-#define CMD_IDX_IFLANG       2
-#define CMD_IDX_IFNLANG      3
-#define CMD_IDX_IFOS         4
-#define CMD_IDX_IFNOS        5
-#define CMD_IDX_IFSET        6
-#define CMD_IDX_IFNSET       7
-#define CMD_IDX_IF           8
-#define CMD_IDX_BEGIN_IGNORE 9
-#define CMD_IDX_END_IGNORE   10
-#define CMD_IDX_ELSE         11
-#define CMD_IDX_ENDIF        12
-#define CMD_IDX_ELIF         13 /* not yet implemented */
-
-#define CMD_ENV_IDX_BEGIN_VERBATIM     0
-#define CMD_ENV_IDX_END_VERBATIM       1
-#define CMD_ENV_IDX_BEGIN_SOURCECODE   2
-#define CMD_ENV_IDX_END_SOURCECODE     3
-#define CMD_ENV_IDX_BEGIN_RAW          4
-#define CMD_ENV_IDX_END_RAW            5
-#define CMD_ENV_IDX_BEGIN_TABLE        6
-#define CMD_ENV_IDX_END_TABLE          7
-#define CMD_ENV_IDX_BEGIN_COMMENT      8
-#define CMD_ENV_IDX_END_COMMENT        9
-#define CMD_ENV_IDX_BEGIN_LINEDRAW     10
-#define CMD_ENV_IDX_END_LINEDRAW       11
-#define CMD_ENV_IDX_BEGIN_PREFORMATTED 12
-#define CMD_ENV_IDX_END_PREFORMATTED   13
-
-
-
 /*******************************************************************************
 *
 *  pass_check_if():
@@ -8688,114 +8651,101 @@ LOCAL void pass_check_free_line(char *zeile, int pnr)
 *
 ******************************************|************************************/
 
-LOCAL void pass_check_if(char *zeile, int pnr)
+LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 {
+	char cmd[128];
+	char *p;
+	const char *pcmd;
    _BOOL   ignore, match;
    _BOOL   matches_lang, matches_dest, matches_symb, matches_os;
-   int cmd_idx;
    
-#if USE_KWSET
-   struct kwsmatch kwsmatch;
-   
-   if (if_kwset != NULL)
+	strncpy(cmd, zeile, ArraySize(cmd));
+	cmd[ArraySize(cmd) - 1] = EOS;
+	pcmd = cmd;
+	while (*pcmd == ' ' || *pcmd == '\t')
+		pcmd++;
+	if (pcmd[0] != META_C)
+		return FALSE;
+	p = strchr(pcmd, ' ');
+	if (p == NULL)
+		p = strchr(pcmd, '\t');
+	if (p != NULL)
+		*p = EOS;
+	
+   if (strcmp(pcmd, "!ifdest") == 0)
    {
-      if (kwsexec(if_kwset, zeile, strlen(zeile), &kwsmatch) == (size_t)-1)
-         return;
-      cmd_idx = kwsmatch.index;
-   } else
-#endif /* USE_KWSET */
-   {
-      if (strstr(zeile, "!ifdest")!=NULL)
-         cmd_idx = CMD_IDX_IFDEST;
-      else if (strstr(zeile, "!ifndest") != NULL)
-         cmd_idx = CMD_IDX_IFNDEST;
-      else if (strstr(zeile, "!iflang") != NULL)
-         cmd_idx = CMD_IDX_IFLANG;
-      else if (strstr(zeile, "!ifnlang") != NULL)
-         cmd_idx = CMD_IDX_IFNLANG;
-      else if (strstr(zeile, "!ifos") != NULL)
-         cmd_idx = CMD_IDX_IFOS;
-      else if (strstr(zeile, "!ifnos") != NULL)
-         cmd_idx = CMD_IDX_IFNOS;
-      else if (strstr(zeile, "!ifset") != NULL)
-         cmd_idx = CMD_IDX_IFSET;
-      else if (strstr(zeile, "!ifnset") != NULL)
-         cmd_idx = CMD_IDX_IFNSET;
-      else if (strstr(zeile, "!if") != NULL)
-         cmd_idx = CMD_IDX_IF;
-      else if (strstr(zeile, CMD_BEGIN_IGNORE) != NULL)
-         cmd_idx = CMD_IDX_BEGIN_IGNORE;
-      /* else if (strstr(zeile, "!elif") != NULL)
-         cmd_idx = CMD_IDX_ELIF; */
-      else if (strstr(zeile, "!else") != NULL)
-         cmd_idx = CMD_IDX_ELSE;
-      else if (strstr(zeile, "!endif") != NULL)
-         cmd_idx = CMD_IDX_ENDIF;
-      else if (strstr(zeile, CMD_END_IGNORE) != NULL)
-         cmd_idx = CMD_IDX_END_IGNORE;
-      else
-         return;
-   }
-
-   switch (cmd_idx)
-   {
-   case CMD_IDX_IFDEST:
       ignore = !str_for_desttype(zeile);
       push_if_stack(IF_DEST, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_IFNDEST:
+   if (strcmp(pcmd, "!ifndest") == 0)
+   {
       ignore = str_for_desttype(zeile);
       push_if_stack(IF_DEST, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
-
-   case CMD_IDX_IFLANG:
+	  return TRUE;
+   }
+   
+   if (strcmp(pcmd, "!iflang") == 0)
+   {
       ignore = !str_for_destlang(zeile);
       push_if_stack(IF_LANG, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_IFNLANG:
+   if (strcmp(pcmd, "!ifnlang") == 0)
+   {
       ignore = str_for_destlang(zeile);
       push_if_stack(IF_LANG, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_IFOS:
+   if (strcmp(pcmd, "!ifos") == 0)
+   {
       ignore = !str_for_os(zeile);
       push_if_stack(IF_OS, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_IFNOS:
+   if (strcmp(pcmd, "!ifnos") == 0)
+   {
       ignore = str_for_os(zeile);
       push_if_stack(IF_OS, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_IFSET:
+   if (strcmp(pcmd, "!ifset") == 0)
+   {
       ignore = !udosymbol_set(zeile);
       push_if_stack(IF_SET, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_IFNSET:
+   if (strcmp(pcmd, "!ifnset") == 0)
+   {
       ignore = udosymbol_set(zeile);
       push_if_stack(IF_SET, ignore);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_IF:
+   if (strcmp(pcmd, "!if") == 0)
+   {
       matches_dest = str_for_desttype(zeile);
       matches_lang = str_for_destlang(zeile);
       matches_os = str_for_os(zeile);
@@ -8804,16 +8754,20 @@ LOCAL void pass_check_if(char *zeile, int pnr)
       push_if_stack(IF_GENERAL, !match);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_BEGIN_IGNORE:
+   if (strcmp(pcmd, CMD_BEGIN_IGNORE) == 0)
+   {
       push_if_stack(IF_GENERAL, TRUE);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
 #if 0
-   case CMD_IDX_ELIF:
+   if (strcmp(pcmd, "!elif") == 0)
+   {
       pop_if_stack();
       pflag[pnr].ignore_line = is_if_stack_ignore();
       matches_dest = str_for_desttype(zeile);
@@ -8824,29 +8778,37 @@ LOCAL void pass_check_if(char *zeile, int pnr)
       push_if_stack(IF_GENERAL, !match);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 #endif
 
-   case CMD_IDX_ELSE:
+   if (strcmp(pcmd, "!else") == 0)
+   {
       toggle_if_stack();
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_ENDIF:
+   if (strcmp(pcmd, "!endif") == 0)
+   {
       if (!pop_if_stack())
          error_end_without_begin("!endif", "!if...");
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
+   }
 
-   case CMD_IDX_END_IGNORE:
+   if (strcmp(pcmd, CMD_END_IGNORE) == 0)
+   {
       if (!pop_if_stack())
          error_end_without_begin(CMD_END_IGNORE, CMD_BEGIN_IGNORE);
       pflag[pnr].ignore_line = is_if_stack_ignore();
       pass_check_free_line(zeile, pnr);
-      break;
+      return TRUE;
    }
+   
+   return FALSE;
 }
 
 
@@ -9877,34 +9839,32 @@ LOCAL _BOOL pass1_check_everywhere_commands(void)
 
 LOCAL _BOOL pass1_check_environments(char *zeile)
 {
-#if USE_KWSET
-   struct kwsmatch kwsmatch;
-   int cmd_idx;
-   
-   if (env_kwset != NULL)
-   {
-      if (kwsexec(env_kwset, zeile, strlen(zeile), &kwsmatch) != (size_t)-1)
-         cmd_idx = kwsmatch.index;
-      else
-         return FALSE;
-   } else
-   {
-      cmd_idx = -1;
-   }
-#define IS_KW(kw, idx) (cmd_idx < 0 ? strstr(zeile, kw) != NULL : cmd_idx == idx)
-#else
-#define IS_KW(kw, idx) (strstr(zeile, kw) != NULL)
-#endif
-
+	char cmd[128];
+	char *p;
+	const char *pcmd;
+	
+	strncpy(cmd, zeile, ArraySize(cmd));
+	cmd[ArraySize(cmd) - 1] = EOS;
+	pcmd = cmd;
+	while (*pcmd == ' ' || *pcmd == '\t')
+		pcmd++;
+	if (pcmd[0] != META_C)
+		return FALSE;
+	p = strchr(pcmd, ' ');
+	if (p == NULL)
+		p = strchr(pcmd, '\t');
+	if (p != NULL)
+		*p = EOS;
+	
    /* Verbatim-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_VERBATIM)
    {
-      if (IS_KW(CMD_BEGIN_VERBATIM, CMD_ENV_IDX_BEGIN_VERBATIM))
+      if (strcmp(pcmd, CMD_BEGIN_VERBATIM) == 0)
       {
          pflag[PASS1].env = ENV_VERBATIM;
          zeile[0] = EOS;
          return TRUE;
-      } else if (IS_KW(CMD_END_VERBATIM, CMD_ENV_IDX_END_VERBATIM))
+      } else if (strcmp(pcmd, CMD_END_VERBATIM) == 0)
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
@@ -9915,12 +9875,12 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
    /* Sourcecode-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_SOURCECODE)
    {
-      if (IS_KW(CMD_BEGIN_SOURCECODE, CMD_ENV_IDX_BEGIN_SOURCECODE))
+      if (strcmp(pcmd, CMD_BEGIN_SOURCECODE) == 0)
       {
          pflag[PASS1].env = ENV_SOURCECODE;
          zeile[0] = EOS;
          return TRUE;
-      } else if (IS_KW(CMD_END_SOURCECODE, CMD_ENV_IDX_END_SOURCECODE))
+      } else if (strcmp(pcmd, CMD_END_SOURCECODE) == 0)
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
@@ -9931,12 +9891,12 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
    /* Raw-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_RAW)
    {
-      if (IS_KW(CMD_BEGIN_RAW, CMD_ENV_IDX_BEGIN_RAW))
+      if (strcmp(pcmd, CMD_BEGIN_RAW) == 0)
       {
          pflag[PASS1].env = ENV_RAW;
          zeile[0] = EOS;
          return TRUE;
-      } else if (IS_KW(CMD_END_RAW, CMD_ENV_IDX_END_RAW))
+      } else if (strcmp(pcmd, CMD_END_RAW) == 0)
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
@@ -9947,7 +9907,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
    /* Table-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_TABLE)
    {
-      if (IS_KW(CMD_BEGIN_TABLE, CMD_ENV_IDX_BEGIN_TABLE))
+      if (strcmp(pcmd, CMD_BEGIN_TABLE) == 0)
       {
          if (pflag[PASS1].env == ENV_TABLE)
          {
@@ -9956,7 +9916,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
          pflag[PASS1].env = ENV_TABLE;
          zeile[0] = EOS;
          return TRUE;
-      } else if (IS_KW(CMD_END_TABLE, CMD_ENV_IDX_END_TABLE))
+      } else if (strcmp(pcmd, CMD_END_TABLE) == 0)
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
@@ -9967,12 +9927,12 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
    /* Comment-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_COMMENT)
    {
-      if (IS_KW(CMD_BEGIN_COMMENT, CMD_ENV_IDX_BEGIN_COMMENT))
+      if (strcmp(pcmd, CMD_BEGIN_COMMENT) == 0)
       {
          pflag[PASS1].env = ENV_COMMENT;
          zeile[0] = EOS;
          return TRUE;
-      } else if (IS_KW(CMD_END_COMMENT, CMD_ENV_IDX_END_COMMENT))
+      } else if (strcmp(pcmd, CMD_END_COMMENT) == 0)
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
@@ -9983,12 +9943,12 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
    /* Linedraw-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_LINEDRAW)
    {
-      if (IS_KW(CMD_BEGIN_LINEDRAW, CMD_ENV_IDX_BEGIN_LINEDRAW))
+      if (strcmp(pcmd, CMD_BEGIN_LINEDRAW) == 0)
       {
          pflag[PASS1].env = ENV_LINEDRAW;
          zeile[0] = EOS;
          return TRUE;
-      } else if (IS_KW(CMD_END_LINEDRAW, CMD_ENV_IDX_END_LINEDRAW))
+      } else if (strcmp(pcmd, CMD_END_LINEDRAW) == 0)
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
@@ -9999,19 +9959,19 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
    /* Preformatted-Umgebung */
    if (pflag[PASS1].env == ENV_NONE || pflag[PASS1].env == ENV_PREFORMATTED)
    {
-      if (IS_KW(CMD_BEGIN_PREFORMATTED, CMD_ENV_IDX_BEGIN_PREFORMATTED))
+      if (strcmp(pcmd, CMD_BEGIN_PREFORMATTED) == 0)
       {
          pflag[PASS1].env = ENV_PREFORMATTED;
          zeile[0] = EOS;
          return TRUE;
-      } else if (IS_KW(CMD_END_PREFORMATTED, CMD_ENV_IDX_END_PREFORMATTED))
+      } else if (strcmp(pcmd, CMD_END_PREFORMATTED) == 0)
       {
          pflag[PASS1].env = ENV_NONE;
          zeile[0] = EOS;
          return TRUE;
       }
    }
-#undef IS_KW
+
 	return FALSE;
 }
 
@@ -11076,31 +11036,29 @@ LOCAL void c_comment(void)
 *
 ******************************************|************************************/
 
-LOCAL void pass2_check_environments(char *zeile)
+LOCAL _BOOL pass2_check_environments(char *zeile)
 {
-#if USE_KWSET
-   struct kwsmatch kwsmatch;
-   int cmd_idx;
-   
-   if (env_kwset != NULL)
-   {
-      if (kwsexec(env_kwset, zeile, strlen(zeile), &kwsmatch) != (size_t)-1)
-         cmd_idx = kwsmatch.index;
-      else
-         return;
-   } else
-   {
-      cmd_idx = -1;
-   }
-#define IS_KW(kw, idx) (cmd_idx < 0 ? strstr(zeile, kw) != NULL : cmd_idx == idx)
-#else
-#define IS_KW(kw, idx) (strstr(zeile, kw) != NULL)
-#endif
-
+	char cmd[128];
+	char *p;
+	const char *pcmd;
+	
+	strncpy(cmd, zeile, ArraySize(cmd));
+	cmd[ArraySize(cmd) - 1] = EOS;
+	pcmd = cmd;
+	while (*pcmd == ' ' || *pcmd == '\t')
+		pcmd++;
+	if (pcmd[0] != META_C)
+		return FALSE;
+	p = strchr(pcmd, ' ');
+	if (p == NULL)
+		p = strchr(pcmd, '\t');
+	if (p != NULL)
+		*p = EOS;
+	
    /* ---Verbatim-Umgebung--- */
    if (pflag[iUdopass].env == ENV_NONE || pflag[iUdopass].env == ENV_VERBATIM)
    {
-      if (IS_KW(CMD_BEGIN_VERBATIM, CMD_ENV_IDX_BEGIN_VERBATIM))
+      if (strcmp(pcmd, CMD_BEGIN_VERBATIM) == 0)
       {
          pflag[iUdopass].env = ENV_VERBATIM;
          pflag[iUdopass].env1st = TRUE;
@@ -11108,22 +11066,22 @@ LOCAL void pass2_check_environments(char *zeile)
             token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_verbatim("UDO_env_verbatim");
-         return;
+         return TRUE;
       } else
-      if (IS_KW(CMD_END_VERBATIM, CMD_ENV_IDX_END_VERBATIM))
+      if (strcmp(pcmd, CMD_END_VERBATIM) == 0)
       {
          if (pflag[iUdopass].env == ENV_VERBATIM)
          {
             pflag[iUdopass].env = ENV_NONE;
             zeile[0] = EOS;
             output_end_verbatim();
-            return;
+            return TRUE;
          }
          else
          {
             error_end_without_begin(CMD_END_VERBATIM, CMD_BEGIN_VERBATIM);
             zeile[0] = EOS;
-            return;
+            return TRUE;
          }
       }
    }
@@ -11132,7 +11090,7 @@ LOCAL void pass2_check_environments(char *zeile)
    /* ---Sourcecode-Umgebung--- */
    if (pflag[iUdopass].env == ENV_NONE || pflag[iUdopass].env == ENV_SOURCECODE)
    {
-      if (IS_KW(CMD_BEGIN_SOURCECODE, CMD_ENV_IDX_BEGIN_SOURCECODE))
+      if (strcmp(pcmd, CMD_BEGIN_SOURCECODE) == 0)
       {
          pflag[iUdopass].env = ENV_SOURCECODE;
          pflag[iUdopass].env1st = TRUE;
@@ -11140,22 +11098,22 @@ LOCAL void pass2_check_environments(char *zeile)
             token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_sourcecode();
-         return;
+         return TRUE;
       } else
-      if (IS_KW(CMD_END_SOURCECODE, CMD_ENV_IDX_END_SOURCECODE))
+      if (strcmp(pcmd, CMD_END_SOURCECODE) == 0)
       {
          if (pflag[iUdopass].env == ENV_SOURCECODE)
          {
             pflag[iUdopass].env = ENV_NONE;
             zeile[0] = EOS;
             output_end_sourcecode();
-            return;
+            return TRUE;
          }
          else
          {
             error_end_without_begin(CMD_END_SOURCECODE, CMD_BEGIN_SOURCECODE);
             zeile[0] = EOS;
-            return;
+            return TRUE;
          }
       }
    }
@@ -11163,37 +11121,36 @@ LOCAL void pass2_check_environments(char *zeile)
    /* ---Raw-Umgebung--- */
    if (pflag[iUdopass].env == ENV_NONE || pflag[iUdopass].env == ENV_RAW)
    {
-      if (IS_KW(CMD_BEGIN_RAW, CMD_ENV_IDX_BEGIN_RAW))
+      if (strcmp(pcmd, CMD_BEGIN_RAW) == 0)
       {
          pflag[iUdopass].env = ENV_RAW;
          pflag[iUdopass].env1st = TRUE;
          if (token_counter > 0)
             token_output(TRUE, FALSE);
          zeile[0] = EOS;
-         return;
+         return TRUE;
       } else
-      if (IS_KW(CMD_END_RAW, CMD_ENV_IDX_END_RAW))
+      if (strcmp(pcmd, CMD_END_RAW) == 0)
       {
          if (pflag[iUdopass].env == ENV_RAW)
          {
             pflag[iUdopass].env = ENV_NONE;
             zeile[0] = EOS;
             outln("");
-            return;
          }
          else
          {
             error_end_without_begin(CMD_END_RAW, CMD_BEGIN_RAW);
             zeile[0] = EOS;
-            return;
          }
+         return TRUE;
       }
    }
 
    /* ---Table-Umgebung--- */
    if (pflag[iUdopass].env == ENV_NONE || pflag[iUdopass].env == ENV_TABLE)
    {
-      if (IS_KW(CMD_BEGIN_TABLE, CMD_ENV_IDX_BEGIN_TABLE))
+      if (strcmp(pcmd, CMD_BEGIN_TABLE) == 0)
       {
          if (pflag[iUdopass].env == ENV_TABLE)
          {
@@ -11209,9 +11166,9 @@ LOCAL void pass2_check_environments(char *zeile)
             table_get_header(zeile);
             zeile[0] = EOS;
          }
-         return;
+         return TRUE;
       } else
-      if (IS_KW(CMD_END_TABLE, CMD_ENV_IDX_END_TABLE))
+      if (strcmp(pcmd, CMD_END_TABLE) == 0)
       {
          if (pflag[iUdopass].env == ENV_TABLE)
          {
@@ -11219,21 +11176,20 @@ LOCAL void pass2_check_environments(char *zeile)
             zeile[0] = EOS;
             table_output();
             outln("");
-            return;
          }
          else
          {
             error_end_without_begin(CMD_END_TABLE, CMD_BEGIN_TABLE);
             zeile[0] = EOS;
-            return;
          }
+         return TRUE;
       }
    }
 
    /* ---Comment-Umgebung--- */
    if (pflag[iUdopass].env == ENV_NONE || pflag[iUdopass].env == ENV_COMMENT)
    {
-      if (IS_KW(CMD_BEGIN_COMMENT, CMD_ENV_IDX_BEGIN_COMMENT))
+      if (strcmp(pcmd, CMD_BEGIN_COMMENT) == 0)
       {
          pflag[iUdopass].env = ENV_COMMENT;
          pflag[iUdopass].env1st = TRUE;
@@ -11241,30 +11197,29 @@ LOCAL void pass2_check_environments(char *zeile)
             token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_comment();
-         return;
+         return TRUE;
       } else
-      if (IS_KW(CMD_END_COMMENT, CMD_ENV_IDX_END_COMMENT))
+      if (strcmp(pcmd, CMD_END_COMMENT) == 0)
       {
          if (pflag[iUdopass].env == ENV_COMMENT)
          {
             pflag[iUdopass].env = ENV_NONE;
             zeile[0] = EOS;
             output_end_comment();
-            return;
          }
          else
          {
             error_end_without_begin(CMD_END_COMMENT, CMD_BEGIN_COMMENT);
             zeile[0] = EOS;
-            return;
          }
+         return TRUE;
       }
    }
 
    /* ---Linedraw-Umgebung--- */
    if (pflag[iUdopass].env == ENV_NONE || pflag[iUdopass].env == ENV_LINEDRAW)
    {
-      if (IS_KW(CMD_BEGIN_LINEDRAW, CMD_ENV_IDX_BEGIN_LINEDRAW))
+      if (strcmp(pcmd, CMD_BEGIN_LINEDRAW) == 0)
       {
          pflag[iUdopass].env = ENV_LINEDRAW;
          pflag[iUdopass].env1st = TRUE;
@@ -11272,30 +11227,29 @@ LOCAL void pass2_check_environments(char *zeile)
             token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_linedraw();
-         return;
+         return TRUE;
       } else
-      if (IS_KW(CMD_END_LINEDRAW, CMD_ENV_IDX_END_LINEDRAW))
+      if (strcmp(pcmd, CMD_END_LINEDRAW) == 0)
       {
          if (pflag[iUdopass].env == ENV_LINEDRAW)
          {
             pflag[iUdopass].env = ENV_NONE;
             zeile[0] = EOS;
             output_end_linedraw();
-            return;
          }
          else
          {
             error_end_without_begin(CMD_END_LINEDRAW, CMD_BEGIN_LINEDRAW);
             zeile[0] = EOS;
-            return;
          }
+         return TRUE;
       }
    }
 
    /* ---Preformatted-Umgebung--- */
    if (pflag[iUdopass].env == ENV_NONE || pflag[iUdopass].env == ENV_PREFORMATTED)
    {
-      if (IS_KW(CMD_BEGIN_PREFORMATTED, CMD_ENV_IDX_BEGIN_PREFORMATTED))
+      if (strcmp(pcmd, CMD_BEGIN_PREFORMATTED) == 0)
       {
          pflag[iUdopass].env = ENV_PREFORMATTED;
          pflag[iUdopass].env1st = TRUE;
@@ -11303,26 +11257,25 @@ LOCAL void pass2_check_environments(char *zeile)
             token_output(TRUE, TRUE);
          zeile[0] = EOS;
          output_begin_preformatted();
-         return;
+         return TRUE;
       } else
-      if (IS_KW(CMD_END_PREFORMATTED, CMD_ENV_IDX_END_PREFORMATTED))
+      if (strcmp(pcmd, CMD_END_PREFORMATTED) == 0)
       {
          if (pflag[iUdopass].env == ENV_PREFORMATTED)
          {
             pflag[iUdopass].env = ENV_NONE;
             zeile[0] = EOS;
             output_end_preformatted();
-            return;
          }
          else
          {
             error_end_without_begin(CMD_END_PREFORMATTED, CMD_BEGIN_PREFORMATTED);
             zeile[0] = EOS;
-            return;
          }
+         return TRUE;
       }
    }
-#undef IS_KW
+   return FALSE;
 }
 
 
@@ -11497,7 +11450,7 @@ LOCAL _BOOL pass2(const char *datei)
       /* Gesucht wird nur nach !begin... bzw !end... */
       if (!ignore_comment_or_empty && pflag[PASS2].ignore_line == 0)
       {
-         pass2_check_environments(zeile);
+         ignore_comment_or_empty |= pass2_check_environments(zeile);
       }
 
       /* Ausgabe/Bearbeitung der aktuellen Zeile, falls eine */
@@ -13171,84 +13124,13 @@ LOCAL void init_module_udo(void)
          set_encoding_target(CODE_CP1252);
       break;
    }
-      
-#if USE_KWSET
-   if_kwset = kwsalloc(NULL);
-   if (if_kwset != NULL)
-   {
-      /*
-       * Schluesselwoerter muessen entsprechend der
-       * Reihenfolge der CMD_IDX_*-Konstanten
-       * eingetragen werden!!!
-       */
-      if (kwsincr(if_kwset, "!ifdest", 7, NULL) == FALSE ||
-         kwsincr(if_kwset, "!ifndest", 8, NULL) == FALSE ||
-         kwsincr(if_kwset, "!iflang", 7, NULL) == FALSE ||
-         kwsincr(if_kwset, "!ifnlang", 8, NULL) == FALSE ||
-         kwsincr(if_kwset, "!ifos", 5, NULL) == FALSE ||
-         kwsincr(if_kwset, "!ifnos", 6, NULL) == FALSE ||
-         kwsincr(if_kwset, "!ifset", 6, NULL) == FALSE ||
-         kwsincr(if_kwset, "!ifnset", 7, NULL) == FALSE ||
-         kwsincr(if_kwset, "!if", 3, NULL) == FALSE ||
-         kwsincr(if_kwset, CMD_BEGIN_IGNORE, sizeof(CMD_BEGIN_IGNORE)-1, NULL) == FALSE ||
-         kwsincr(if_kwset, CMD_END_IGNORE, sizeof(CMD_END_IGNORE)-1, NULL) == FALSE ||
-         kwsincr(if_kwset, "!else", 5, NULL) == FALSE ||
-         kwsincr(if_kwset, "!endif", 6, NULL) == FALSE ||
-         /* kwsincr(if_kwset, "!elif", 5, NULL) == FALSE || */
-         kwsprep(if_kwset) == FALSE)
-      {
-         kwsfree(if_kwset);
-         if_kwset = NULL;
-      }
-   }
-
-   env_kwset = kwsalloc(NULL);
-   if (env_kwset != NULL)
-   {
-      /*
-       * Schluesselwoerter muessen entsprechend der
-       * Reihenfolge der CMD_ENV_IDX_*-Konstanten
-       * eingetragen werden!!!
-       */
-      if (kwsincr(env_kwset, CMD_BEGIN_VERBATIM, sizeof(CMD_BEGIN_VERBATIM)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_END_VERBATIM, sizeof(CMD_END_VERBATIM)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_BEGIN_SOURCECODE, sizeof(CMD_BEGIN_SOURCECODE)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_END_SOURCECODE, sizeof(CMD_END_SOURCECODE)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_BEGIN_RAW, sizeof(CMD_BEGIN_RAW)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_END_RAW, sizeof(CMD_END_RAW)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_BEGIN_TABLE, sizeof(CMD_BEGIN_TABLE)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_END_TABLE, sizeof(CMD_END_TABLE)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_BEGIN_COMMENT, sizeof(CMD_BEGIN_COMMENT)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_END_COMMENT, sizeof(CMD_END_COMMENT)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_BEGIN_LINEDRAW, sizeof(CMD_BEGIN_LINEDRAW)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_END_LINEDRAW, sizeof(CMD_END_LINEDRAW)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_BEGIN_PREFORMATTED, sizeof(CMD_BEGIN_PREFORMATTED)-1, NULL) == FALSE ||
-         kwsincr(env_kwset, CMD_END_PREFORMATTED, sizeof(CMD_END_PREFORMATTED)-1, NULL) == FALSE ||
-         kwsprep(env_kwset) == FALSE)
-      {
-         kwsfree(env_kwset);
-         env_kwset = NULL;
-      }
-   }
-#endif /* USE_KWSET */
 }
+
 
 LOCAL void exit_module_udo(void)
 {
    IDXLIST *idx, *idx_next;
    
-#if USE_KWSET
-   if (if_kwset != NULL)
-   {
-      kwsfree(if_kwset);
-      if_kwset = NULL;
-   }
-   if (env_kwset != NULL)
-   {
-      kwsfree(env_kwset);
-      env_kwset = NULL;
-   }
-#endif
    for (idx = idxlist; idx != NULL; idx = idx_next)
    {
       idx_next = idx->next;

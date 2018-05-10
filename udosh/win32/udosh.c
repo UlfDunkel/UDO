@@ -51,8 +51,6 @@
 #define TOAMG                24           /* AmigaGuide */
 #define TOHAH                25           /* HTML Apple Help */
 
-#define MAXDESTTYPE          26           /* Anzahl Ausgabeformate */
-
 #endif /* UDO_INTEGRATED */
 
 
@@ -72,92 +70,6 @@ typedef struct _formatdata
 	FormatInfo Final;
 } FormatData;
 
-
-typedef struct _shell_dialog
-{
-	BOOL	m_use_test;
-	BOOL	m_use_verb;
-	BOOL	m_hold_key;
-	BOOL	m_warnings;
-	BOOL	m_use_check;
-	BOOL	m_use_dir;
-	BOOL	m_use_quiet;
-	
-	BOOL	m_use_log;
-	BOOL	m_use_hyp;
-	BOOL	m_use_tree;
-	BOOL	m_use_map_c;
-	BOOL	m_use_map_pas;
-	BOOL	m_use_map_vb;
-	BOOL	m_use_map_gfa;
-	BOOL	m_use_upr;
-	BOOL	m_use_idx;
-	
-	BOOL	m_force_long;
-	BOOL	m_force_short;
-	BOOL	m_fast_autoref;
-	
-#define MAX_SYM 12
-	char m_symbol[MAX_SYM][128];
-	BOOL m_use_sym[MAX_SYM];
-
-	char m_file_source[MAX_PATH];
-	char m_file_dest[MAX_PATH];
-	char m_file_param1[MAX_PATH];
-	char m_file_param2[MAX_PATH];
-	char m_file_final[MAX_PATH];
-
-	char **mru_list;
-	int n_mru;
-	int max_mru;
-	
-	/*
-	 * currently selected format.
-	 * this is an index into formatdata array,
-	 * and does NOT correspond to UDOs TOxxx constants.
-	 */
-	int m_format;
-
-	/* complete path to generated logfile */
-	char m_file_log[MAX_PATH];
-	/* complete path to final result file */
-	char m_file_hyp[MAX_PATH];
-	/* complete file to generated tree file */
-	char m_file_tree[MAX_PATH];
-	/* complete path to generated C header file */
-	char m_file_map_c[MAX_PATH];
-	/* complete path to generated Pascal header file */
-	char m_file_map_pas[MAX_PATH];
-	/* complete path to generated VB header file */
-	char m_file_map_vb[MAX_PATH];
-	/* complete path to generated GFA header file */
-	char m_file_map_gfa[MAX_PATH];
-	/* complete path to generated UPR project file */
-	char m_file_upr[MAX_PATH];
-
-	/* Path to UDO executable, when called externally */
-	char m_app_udo[MAX_PATH];
-	/* path to default text editor for logfiles etc. */
-	char m_edi_udo[MAX_PATH];
-	
-	/* path to our help file */
-	char udosh_helpfile[MAX_PATH];
-	/* path to UDO help file */
-	char udo_helpfile[MAX_PATH];
-	/* topic of command index */
-	char udo_help_commands[MAX_PATH];
-	int m_use_udo;
-	
-	BOOL	m_always_on_top;
-	BOOL	m_create_dirs;
-	
-	FormatData m_formatdata[MAXDESTTYPE];
-
-	char m_inifilename[MAX_PATH];
-	HWND hwnd;
-	HACCEL haccel;
-	HWND mainHwnd;
-} SHELL_DIALOG;
 
 typedef struct _formatconst {
 	int type;
@@ -186,7 +98,7 @@ typedef struct _formatconst {
 #define USE_UDO_EDITOR_EXEC_FINAL  0x0040
 #define USE_UDO_EDITOR_EDIT_FINAL  0x0080
 
-static FormatConst const formatconst[MAXDESTTYPE] =
+static FormatConst const formatconst[] =
 {
 	{
 		TOASC,
@@ -657,6 +569,93 @@ static FormatConst const formatconst[MAXDESTTYPE] =
 		USE_UDO_EDITOR_EDIT_DEST | USE_UDO_EDITOR_EDIT_PARAM1 | USE_UDO_EDITOR_EDIT_PARAM2 | USE_UDO_EDITOR_EDIT_FINAL,
 	},
 };
+#define MAXDESTTYPE ((int)ArraySize(formatconst))
+
+typedef struct _shell_dialog
+{
+	BOOL	m_use_test;
+	BOOL	m_use_verb;
+	BOOL	m_hold_key;
+	BOOL	m_warnings;
+	BOOL	m_use_check;
+	BOOL	m_use_dir;
+	BOOL	m_use_quiet;
+	
+	BOOL	m_use_log;
+	BOOL	m_use_hyp;
+	BOOL	m_use_tree;
+	BOOL	m_use_map_c;
+	BOOL	m_use_map_pas;
+	BOOL	m_use_map_vb;
+	BOOL	m_use_map_gfa;
+	BOOL	m_use_upr;
+	BOOL	m_use_idx;
+	
+	BOOL	m_force_long;
+	BOOL	m_force_short;
+	BOOL	m_fast_autoref;
+	
+#define MAX_SYM 12
+	char m_symbol[MAX_SYM][128];
+	BOOL m_use_sym[MAX_SYM];
+
+	char m_file_source[MAX_PATH];
+	char m_file_dest[MAX_PATH];
+	char m_file_param1[MAX_PATH];
+	char m_file_param2[MAX_PATH];
+	char m_file_final[MAX_PATH];
+
+	char **mru_list;
+	int n_mru;
+	int max_mru;
+	
+	/*
+	 * currently selected format.
+	 * this is an index into formatdata array,
+	 * and does NOT correspond to UDOs TOxxx constants.
+	 */
+	int m_format;
+
+	/* complete path to generated logfile */
+	char m_file_log[MAX_PATH];
+	/* complete path to final result file */
+	char m_file_hyp[MAX_PATH];
+	/* complete file to generated tree file */
+	char m_file_tree[MAX_PATH];
+	/* complete path to generated C header file */
+	char m_file_map_c[MAX_PATH];
+	/* complete path to generated Pascal header file */
+	char m_file_map_pas[MAX_PATH];
+	/* complete path to generated VB header file */
+	char m_file_map_vb[MAX_PATH];
+	/* complete path to generated GFA header file */
+	char m_file_map_gfa[MAX_PATH];
+	/* complete path to generated UPR project file */
+	char m_file_upr[MAX_PATH];
+
+	/* Path to UDO executable, when called externally */
+	char m_app_udo[MAX_PATH];
+	/* path to default text editor for logfiles etc. */
+	char m_edi_udo[MAX_PATH];
+	
+	/* path to our help file */
+	char udosh_helpfile[MAX_PATH];
+	/* path to UDO help file */
+	char udo_helpfile[MAX_PATH];
+	/* topic of command index */
+	char udo_help_commands[MAX_PATH];
+	int m_use_udo;
+	
+	BOOL	m_always_on_top;
+	BOOL	m_create_dirs;
+	
+	FormatData m_formatdata[MAXDESTTYPE];
+
+	char m_inifilename[MAX_PATH];
+	HWND hwnd;
+	HACCEL haccel;
+	HWND mainHwnd;
+} SHELL_DIALOG;
 
 /******************************************************************************/
 /*** ---------------------------------------------------------------------- ***/

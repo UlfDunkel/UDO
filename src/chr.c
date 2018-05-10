@@ -2819,7 +2819,7 @@ GLOBAL void c_vars(char *s)
    char cbuf[8];
    const char *repl;
    
-   if ((repl = strchr(s, '(')) != NULL && repl[1] == '!')
+   if ((repl = strstr(s, "(!")) != NULL)
    {
       replace_all(s, "(!today)", get_lang()->today);
       replace_all(s, "(!short_today)", get_lang()->short_today);

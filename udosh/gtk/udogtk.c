@@ -51,8 +51,6 @@
 #define TOAMG                24           /* AmigaGuide */
 #define TOHAH                25           /* HTML Apple Help */
 
-#define MAXDESTTYPE          26           /* Anzahl Ausgabeformate */
-
 #endif /* UDO_INTEGRATED */
 
 
@@ -85,148 +83,6 @@ typedef struct _formatdata
 	FormatInfo Param2;
 	FormatInfo Final;
 } FormatData;
-
-
-typedef struct _shell_dialog
-{
-	char *m_geometry;
-	
-	gboolean m_use_test;
-	gboolean m_use_verb;
-	gboolean m_hold_key;
-	gboolean m_warnings;
-	gboolean m_warnings_lines;
-	gboolean m_use_check;
-	gboolean m_use_dir;
-	gboolean m_use_quiet;
-	
-	gboolean m_use_log;
-	gboolean m_use_hyphen;
-	gboolean m_use_tree;
-	gboolean m_use_map_c;
-	gboolean m_use_map_pas;
-	gboolean m_use_map_vb;
-	gboolean m_use_map_gfa;
-	gboolean m_use_upr;
-	gboolean m_use_idx;
-	
-	gboolean m_force_long;
-	gboolean m_force_short;
-	gboolean m_fast_autoref;
-	
-#define MAX_SYM 12
-	char *m_symbol[MAX_SYM];
-	gboolean m_use_sym[MAX_SYM];
-
-	char *m_file_source;
-	char *m_file_dest;
-	char *m_file_param1;
-	char *m_file_param2;
-	char *m_file_final;
-
-	char **mru_list;
-	int n_mru;
-	int max_mru;
-	
-	/*
-	 * currently selected format.
-	 * this is an index into formatdata array,
-	 * and does NOT correspond to UDOs TOxxx constants.
-	 */
-	int m_format;
-
-	/* complete path to generated logfile */
-	char *m_file_log;
-	/* complete path to final result file */
-	char *m_file_hyphen;
-	/* complete file to generated tree file */
-	char *m_file_tree;
-	/* complete path to generated C header file */
-	char *m_file_map_c;
-	/* complete path to generated Pascal header file */
-	char *m_file_map_pas;
-	/* complete path to generated VB header file */
-	char *m_file_map_vb;
-	/* complete path to generated GFA header file */
-	char *m_file_map_gfa;
-	/* complete path to generated UPR project file */
-	char *m_file_upr;
-
-	/* Path to UDO executable, when called externally */
-	char *m_app_udo;
-	/* path to default text editor for logfiles etc. */
-	char *m_edi_udo;
-	
-	/* path to our help file */
-	char *udosh_helpfile;
-	/* path to UDO help file */
-	char *udo_helpfile;
-	/* topic of command index */
-	char *udo_help_commands;
-	int m_use_udo;
-	
-	gboolean m_always_on_top;
-	gboolean m_create_dirs;
-	
-	FormatData m_formatdata[MAXDESTTYPE];
-
-	char *m_inifilename;
-	GKeyFile *m_inifile;
-	
-	GtkWidget *hwnd;
-	
-	GtkWidget *format_combo;
-	GtkWidget *file_source_combo;
-	GtkWidget *select_source_button;
-	GtkWidget *file_dest_entry;
-	GtkWidget *select_dest_button;
-	GtkWidget *file_param1_entry;
-	GtkWidget *file_param2_entry;
-	GtkWidget *file_final_entry;
-	
-	GtkWidget *exec_source_button;
-	GtkWidget *edit_source_button;
-	GtkWidget *exec_dest_button;
-	GtkWidget *edit_dest_button;
-	GtkWidget *exec_param1_button;
-	GtkWidget *edit_param1_button;
-	GtkWidget *exec_param2_button;
-	GtkWidget *edit_param2_button;
-	GtkWidget *exec_final_button;
-	GtkWidget *edit_final_button;
-	
-	GtkWidget *use_test_button;
-	GtkWidget *use_verb_button;
-	GtkWidget *hold_key_button;
-	GtkWidget *warnings_button;
-	GtkWidget *warnings_lines_button;
-	GtkWidget *use_check_button;
-	GtkWidget *use_dir_button;
-	GtkWidget *force_long_button;
-	GtkWidget *force_short_button;
-	GtkWidget *fast_autoref_button;
-	GtkWidget *use_log_button;
-	GtkWidget *use_hyphen_button;
-	GtkWidget *use_tree_button;
-	GtkWidget *use_map_c_button;
-	GtkWidget *use_map_pas_button;
-	GtkWidget *use_map_vb_button;
-	GtkWidget *use_map_gfa_button;
-	GtkWidget *use_upr_button;
-	GtkWidget *use_sym_button[MAX_SYM];
-	GtkWidget *symbol_entry[MAX_SYM];
-	
-	GtkWidget *edit_log_button;
-	GtkWidget *edit_hyphen_button;
-	GtkWidget *edit_tree_button;
-	GtkWidget *edit_map_c_button;
-	GtkWidget *edit_map_pas_button;
-	GtkWidget *edit_map_vb_button;
-	GtkWidget *edit_map_gfa_button;
-	GtkWidget *edit_upr_button;
-
-	GtkTooltips *tooltips;
-} SHELL_DIALOG;
 
 
 typedef struct _formatconst {
@@ -263,7 +119,7 @@ typedef struct _formatconst {
  * format if none is specified and thus should be
  * ASCII to be consistent with the cli interface
  */
-static FormatConst const formatconst[MAXDESTTYPE] =
+static FormatConst const formatconst[] =
 {
 	{
 		TOASC,
@@ -760,6 +616,150 @@ static FormatConst const formatconst[MAXDESTTYPE] =
 		USE_UDO_EDITOR_EDIT_DEST | USE_UDO_EDITOR_EDIT_PARAM1 | USE_UDO_EDITOR_EDIT_PARAM2 | USE_UDO_EDITOR_EDIT_FINAL,
 	}
 };
+#define MAXDESTTYPE ((int)ArraySize(formatconst))
+
+
+typedef struct _shell_dialog
+{
+	char *m_geometry;
+	
+	gboolean m_use_test;
+	gboolean m_use_verb;
+	gboolean m_hold_key;
+	gboolean m_warnings;
+	gboolean m_warnings_lines;
+	gboolean m_use_check;
+	gboolean m_use_dir;
+	gboolean m_use_quiet;
+	
+	gboolean m_use_log;
+	gboolean m_use_hyphen;
+	gboolean m_use_tree;
+	gboolean m_use_map_c;
+	gboolean m_use_map_pas;
+	gboolean m_use_map_vb;
+	gboolean m_use_map_gfa;
+	gboolean m_use_upr;
+	gboolean m_use_idx;
+	
+	gboolean m_force_long;
+	gboolean m_force_short;
+	gboolean m_fast_autoref;
+	
+#define MAX_SYM 12
+	char *m_symbol[MAX_SYM];
+	gboolean m_use_sym[MAX_SYM];
+
+	char *m_file_source;
+	char *m_file_dest;
+	char *m_file_param1;
+	char *m_file_param2;
+	char *m_file_final;
+
+	char **mru_list;
+	int n_mru;
+	int max_mru;
+	
+	/*
+	 * currently selected format.
+	 * this is an index into formatdata array,
+	 * and does NOT correspond to UDOs TOxxx constants.
+	 */
+	int m_format;
+
+	/* complete path to generated logfile */
+	char *m_file_log;
+	/* complete path to final result file */
+	char *m_file_hyphen;
+	/* complete file to generated tree file */
+	char *m_file_tree;
+	/* complete path to generated C header file */
+	char *m_file_map_c;
+	/* complete path to generated Pascal header file */
+	char *m_file_map_pas;
+	/* complete path to generated VB header file */
+	char *m_file_map_vb;
+	/* complete path to generated GFA header file */
+	char *m_file_map_gfa;
+	/* complete path to generated UPR project file */
+	char *m_file_upr;
+
+	/* Path to UDO executable, when called externally */
+	char *m_app_udo;
+	/* path to default text editor for logfiles etc. */
+	char *m_edi_udo;
+	
+	/* path to our help file */
+	char *udosh_helpfile;
+	/* path to UDO help file */
+	char *udo_helpfile;
+	/* topic of command index */
+	char *udo_help_commands;
+	int m_use_udo;
+	
+	gboolean m_always_on_top;
+	gboolean m_create_dirs;
+	
+	FormatData m_formatdata[MAXDESTTYPE];
+
+	char *m_inifilename;
+	GKeyFile *m_inifile;
+	
+	GtkWidget *hwnd;
+	
+	GtkWidget *format_combo;
+	GtkWidget *file_source_combo;
+	GtkWidget *select_source_button;
+	GtkWidget *file_dest_entry;
+	GtkWidget *select_dest_button;
+	GtkWidget *file_param1_entry;
+	GtkWidget *file_param2_entry;
+	GtkWidget *file_final_entry;
+	
+	GtkWidget *exec_source_button;
+	GtkWidget *edit_source_button;
+	GtkWidget *exec_dest_button;
+	GtkWidget *edit_dest_button;
+	GtkWidget *exec_param1_button;
+	GtkWidget *edit_param1_button;
+	GtkWidget *exec_param2_button;
+	GtkWidget *edit_param2_button;
+	GtkWidget *exec_final_button;
+	GtkWidget *edit_final_button;
+	
+	GtkWidget *use_test_button;
+	GtkWidget *use_verb_button;
+	GtkWidget *hold_key_button;
+	GtkWidget *warnings_button;
+	GtkWidget *warnings_lines_button;
+	GtkWidget *use_check_button;
+	GtkWidget *use_dir_button;
+	GtkWidget *force_long_button;
+	GtkWidget *force_short_button;
+	GtkWidget *fast_autoref_button;
+	GtkWidget *use_log_button;
+	GtkWidget *use_hyphen_button;
+	GtkWidget *use_tree_button;
+	GtkWidget *use_map_c_button;
+	GtkWidget *use_map_pas_button;
+	GtkWidget *use_map_vb_button;
+	GtkWidget *use_map_gfa_button;
+	GtkWidget *use_upr_button;
+	GtkWidget *use_sym_button[MAX_SYM];
+	GtkWidget *symbol_entry[MAX_SYM];
+	
+	GtkWidget *edit_log_button;
+	GtkWidget *edit_hyphen_button;
+	GtkWidget *edit_tree_button;
+	GtkWidget *edit_map_c_button;
+	GtkWidget *edit_map_pas_button;
+	GtkWidget *edit_map_vb_button;
+	GtkWidget *edit_map_gfa_button;
+	GtkWidget *edit_upr_button;
+
+	GtkTooltips *tooltips;
+} SHELL_DIALOG;
+
 
 static gboolean set_desttype(const char *option_name, const char *value, gpointer data, GError *error)
 {

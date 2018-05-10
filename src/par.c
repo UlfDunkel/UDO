@@ -4428,8 +4428,6 @@ LOCAL _BOOL check_macro_name(const char *name)
 		}
 		name++;
 	}
-	if (is_internal_name(name))
-	    warning_message(_("redefining internal command (!%s)"), name);
 	return TRUE;
 }
 
@@ -4551,6 +4549,8 @@ GLOBAL _BOOL add_macro(void)
    }
    if (!check_macro_name(token[1]))
       return FALSE;
+   if (is_internal_name(token[1]))
+	    warning_message(_("redefining internal command (!%s)"), token[1]);
 
    if (macro_counter >= macros_alloc)
    {
@@ -4721,6 +4721,8 @@ GLOBAL _BOOL add_define(void)
    }
    if (!check_macro_name(token[1]))
       return FALSE;
+   if (is_internal_name(token[1]))
+	    warning_message(_("redefining internal command (!%s)"), token[1]);
    
    if (define_counter >= defs_alloc)
    {
@@ -4843,6 +4845,11 @@ GLOBAL _BOOL del_define(void)
    	  		return TRUE;
    	  	}
    	  }
+   }
+   if (is_internal_name(token[1]))
+   {
+	    error_message(_("internal command (!%s) cannot be undefined"), token[1]);
+	    return FALSE;
    }
    return FALSE;
 }
