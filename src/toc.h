@@ -102,17 +102,6 @@ typedef int TOCTYPE;
 *
 ******************************************|************************************/
 
-typedef struct _style                     /* style sheets */
-{
-   char  *href;                           /* Quelle eines Stylesheets */
-   char  *filename;                       /* filename only of stylsheet */
-   char   media[MAX_LABEL_LEN + 1];       /* fuer welches Medium */
-   char   title[MAX_LABEL_LEN + 1];       /* Titel eines Stylesheets */
-   int    alternate;                      /* Alternate Stylesheet? */
-   TOCIDX tocindex;                       /* Gehoert zum Node "toc_table[tocindex]" */
-} STYLE;
-
-
 typedef struct _label                     /* jump labels to be referenced */
 {
    char      name[MAX_LABEL_LEN + 1];     /* label name */
@@ -140,8 +129,7 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    TOCIDX    nr[TOC_MAXDEPTH];                /* Inhaltsverzeichnis-Nummern */
    _BOOL   appendix;                          /* TRUE = Steht im Anhang */
    TOCTYPE   toctype;                         /* !node, !subnode etc. */
-                                              /* Filename der Sourcecodedatei */
-   FILE_LOCATION source_location;
+   FILE_LOCATION source_location;             /* Filename der Sourcecodedatei */
    char      filename[MAX_FILENAME_LEN+1];    /* HTML-Filename (basename only, without suffix and html_name_prefix) */
    FILE_ID   dirname;                         /* HTML-Verzeichnisname */
    char     *keywords;                        /* HTML-Keywords */
@@ -154,7 +142,8 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    struct rgb alinkcolor;                     /* HTML <BODY ALINK=...> */
    struct rgb vlinkcolor;                     /* HTML <BODY VLINK=...> */
    FILE_ID   backimage;                       /* HTML <BODY BACKGROUND=...> */
-   FILE_ID   script_name;                     /* HTML <SCRIPT> */
+   STYLELIST styles;                          /* HTML <style> */
+   SCRIPTLIST scripts;                        /* HTML <SCRIPT> */
    FILE_ID   favicon_name;                    /* HTML <FAVICON> */
    FILE_ID   bgsound;                         /* HTML <bgsound> */
    char     *image;                           /* Grafik anstelle Kapitelnamen */
@@ -172,25 +161,25 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    char     *win_button[MAX_WIN_BUTTONS];
    _BOOL   invisible;                         /* TRUE = Nicht ins Inhaltsverzeichnis */
    _BOOL   converted;                         /* Bereits Makros etc. angepasst? */
-   LABIDX    labindex;                        /* lab[]-Position */
+   LABIDX    labindex;                        /* label_table[]-Position */
    TOCIDX    prev_index;                      /* toc_table[]-Position des Vorgaengers */
    TOCIDX    next_index;                      /* toc_table[]-Position des Nachfolgers */
    TOCIDX    up_n_index[TOC_MAXDEPTH - 1];    /* toc_table[]-Positionen oberhalb */
    TOCIDX    num_children;                    /* Anzahl enthaltener Subnodes */
-   _BOOL   ignore_subtoc;                   /* ignore !use_auto_subtoc */
-   _BOOL   ignore_toptoc;                   /* ignore !use_auto_toptoc */
-   _BOOL   ignore_links;                    /* don't link to this page */
-   _BOOL   ignore_index;                    /* don't add this to the index page */
-   _BOOL   ignore_title;                    /* don't create title for this node */
-   _BOOL   ignore_headline;                 /* don't create a header line */
-   _BOOL   ignore_bottomline;               /* don't create a bottom line */
-   _BOOL   ignore_footer;                   /* don't create a footer line */
+   _BOOL   ignore_subtoc;                     /* ignore !use_auto_subtoc */
+   _BOOL   ignore_toptoc;                     /* ignore !use_auto_toptoc */
+   _BOOL   ignore_links;                      /* don't link to this page */
+   _BOOL   ignore_index;                      /* don't add this to the index page */
+   _BOOL   ignore_title;                      /* don't create title for this node */
+   _BOOL   ignore_headline;                   /* don't create a header line */
+   _BOOL   ignore_bottomline;                 /* don't create a bottom line */
+   _BOOL   ignore_footer;                     /* don't create a footer line */
    FILE_ID   raw_header_filename;             /* file to include in header */
    FILE_ID   raw_footer_filename;             /* file to include in footer */
-   _BOOL   ignore_raw_header;               /* don't read user-defined header */
-   _BOOL   ignore_raw_footer;               /* don't read user-defined footer */
-   _BOOL   has_children;                    /* TRUE: this node has subnode(s) */
-   _BOOL   has_visible_children;            /* TRUE: this node has visible subnode(s) */
+   _BOOL   ignore_raw_header;                 /* don't read user-defined header */
+   _BOOL   ignore_raw_footer;                 /* don't read user-defined footer */
+   _BOOL   has_children;                      /* TRUE: this node has subnode(s) */
+   _BOOL   has_visible_children;              /* TRUE: this node has visible subnode(s) */
 } TOCITEM;
 
 
@@ -208,13 +197,13 @@ GLOBAL TOCIDX    toc_offset[TOC_MAXDEPTH];   /* Offsets fuer Kapitelnumerierung,
 
 GLOBAL TOCIDX    all_nodes[TOC_MAXDEPTH];
 
-GLOBAL _BOOL   bInsideAppendix,            /* Ist UDO im Anhang? */
+GLOBAL _BOOL   bInsideAppendix,              /* Ist UDO im Anhang? */
                  bInsideDocument;            /* Ist UDO im Dokument selber? */
 
-GLOBAL _BOOL   called_tableofcontents;     /* Wurde toc ausgegeben? (@toc) */
+GLOBAL _BOOL   called_tableofcontents;       /* Wurde toc ausgegeben? (@toc) */
 GLOBAL TOCTYPE   toc_maxdepth;
 
-GLOBAL _BOOL   uses_tableofcontents;       /* !tableofcontents wird benutzt */
+GLOBAL _BOOL   uses_tableofcontents;         /* !tableofcontents wird benutzt */
 GLOBAL char      toc_title[MAX_NODE_LEN + 1];
 
 GLOBAL _BOOL   in_about_udo;				 /* if TRUE dont make entry in log files (for files generated by UDO itself) */
@@ -236,9 +225,6 @@ GLOBAL _BOOL   html_merge_node[TOC_MAXDEPTH];         /* Nodes nicht splitten? *
 
 GLOBAL TOCIDX    p1_toc_counter;             /* counter for toc_table[]-array, pass1; contains last used lot # (1 less than number of entries) */
 GLOBAL TOCIDX    p2_toc_counter;             /* counter for toc_table[]-array, pass2; contains last used slot # (1 less than number of entries) */
-
-GLOBAL STYLE   **style;                   /* Array mit Zeigern auf Stylesheets */
-GLOBAL int       p1_style_counter;        /* Zaehler */
 
 GLOBAL char     *html_frames_toc_title;
 GLOBAL char     *html_frames_con_title;
@@ -375,6 +361,8 @@ GLOBAL LABIDX add_alias(const char *alias, const _BOOL isp, _BOOL referenced);
 
 GLOBAL void string2reference(char *ref, const char *display, const LABIDX li, const _BOOL for_toc,
                       const char *pic, const unsigned int uiW, const unsigned int uiH );
+void free_style_list(STYLELIST *list);
+void free_script_list(SCRIPTLIST *list);
 
 
    /* --- enhance TOC --- */

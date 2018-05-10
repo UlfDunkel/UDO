@@ -2763,9 +2763,10 @@ LOCAL void output_html_meta(_BOOL keywords)
 {
    TOCIDX  ti;
    TOCIDX  i;
-   int     j;
+   int     j, k;
    LABIDX  li;
    STYLE  *styleptr;
+   SCRIPT  *scriptptr;
    char    s[512];               /* buffer for charset and label name */
    char    htmlname[512],
            sTarget[512] = "\0";
@@ -3035,45 +3036,61 @@ LOCAL void output_html_meta(_BOOL keywords)
          voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\"%s>", htmlname, outfile.suff, sTarget, s, xhtml_closer);
    }
 
-   /* Link for overall and file-related stylesheet-file */
-   for (j = 0; j < p1_style_counter; j++)
+   /* Link for overall javascript files */
+   for (j = 0; j < sDocScript.count; j++)
    {
-      styleptr = style[j];
-      
-      if (styleptr->href != NULL && (styleptr->tocindex == 0 || styleptr->tocindex == p2_toc_counter))
-      {
-         char  this_style[512];
-         
-         strcpy(this_style, "<link rel=\"");
-
-         if (styleptr->alternate == TRUE)
-            strcat(this_style, "alternate ");
-         
-         strcat(this_style, "stylesheet\" type=\"text/css\" href=\"");
-         strcat(this_style, styleptr->href);
-         
-         if (styleptr->media[0] != EOS)
-         {
-            strcat(this_style, "\" media=\"");
-            strcat(this_style, styleptr->media);
-         }
-         
-         if (styleptr->title[0] != EOS)
-         {
-            strcat(this_style, "\" title=\"");
-            strcat(this_style, styleptr->title);
-         }
-         
-         strcat(this_style, "\">");
-         outln(this_style);
-      }
+      scriptptr = sDocScript.script[j];
+      voutlnf("<script language=\"JavaScript\" type=\"text/javascript\" src=\"%s\"></script>", file_lookup(scriptptr->filename));
    }
 
-   /* Link for overall javascript-file */
-   if (sDocScript != 0)
+   /* Link for file-related javascript files */
+   for (j = 0; j < toc_table[ti]->scripts.count; j++)
    {
-      voutlnf("<script language=\"JavaScript\" src=\"%s\" type=\"text/javascript\">", file_lookup(sDocScript));
-      outln("</script>");
+   	  _BOOL duplicate = FALSE;
+      scriptptr = toc_table[ti]->scripts.script[j];
+   	  
+   	  for (k = 0; !duplicate && k < sDocScript.count; k++)
+   	     if (sDocScript.script[k]->filename == scriptptr->filename)
+   	        duplicate = TRUE;
+      if (!duplicate)
+         voutlnf("<script language=\"JavaScript\" type=\"text/javascript\" src=\"%s\"></script>", file_lookup(scriptptr->filename));
+   }
+
+   /* Link for overall stylesheet-files */
+   for (j = 0; j < sDocStyle.count; j++)
+   {
+      styleptr = sDocStyle.style[j];
+      
+      voutlnf("<link rel=\"%sstylesheet\" type=\"text/css\" href=\"%s\"%s%s%s%s%s%s>",
+         	styleptr->alternate ? "alternate " : "",
+         	file_lookup(styleptr->filename),
+         	styleptr->media ? "media=\"" : "",
+         	styleptr->media ? styleptr->media : "",
+         	styleptr->media ? "\"" : "",
+         	styleptr->title ? "title=\"" : "",
+         	styleptr->title ? styleptr->title : "",
+         	styleptr->title ? "\"" : "");
+   }
+
+   /* Link for file-related stylesheet files */
+   for (j = 0; j < toc_table[ti]->styles.count; j++)
+   {
+   	  _BOOL duplicate = FALSE;
+      styleptr = toc_table[ti]->styles.style[j];
+   	  
+   	  for (k = 0; !duplicate && k < sDocStyle.count; k++)
+   	     if (sDocStyle.style[k]->filename == styleptr->filename)
+   	        duplicate = TRUE;
+      if (!duplicate)
+         voutlnf("<link rel=\"%sstylesheet\" type=\"text/css\" href=\"%s\"%s%s%s%s%s%s>",
+         	styleptr->alternate ? "alternate " : "",
+         	file_lookup(styleptr->filename),
+         	styleptr->media ? "media=\"" : "",
+         	styleptr->media ? styleptr->media : "",
+         	styleptr->media ? "\"" : "",
+         	styleptr->title ? "title=\"" : "",
+         	styleptr->title ? styleptr->title : "",
+         	styleptr->title ? "\"" : "");
    }
 
    /* Link for overall FavIcon */
@@ -9619,7 +9636,6 @@ LOCAL TOCITEM *init_new_toc_entry(const TOCTYPE toctype, _BOOL invisible)
    tocptr->alinkcolor = sDocAlinkColor.rgb;
    tocptr->vlinkcolor = sDocVlinkColor.rgb;
    
-   tocptr->script_name = sDocScript;
    tocptr->favicon_name = sDocFavIcon;
    
    /* Texinfo kennt keine versteckten Nodes, daher fuer */
@@ -11896,27 +11912,36 @@ GLOBAL void init_module_toc(void)
 
 
 
-/*******************************************************************************
-*
-*  free_toc_data():
-*     exit TOC module
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-LOCAL void free_toc_data(char **var)
+void free_style_list(STYLELIST *list)
 {
-   if (*var != NULL)
+   int i;
+   
+   for (i = 0; i < list->count; i++)
    {
-      free(*var);
-      *var = NULL;
+      free(list->style[i]->media);
+      free(list->style[i]->title);
+      free(list->style[i]);
    }
+   free(list->style);
+   list->alloc = 0;
+   list->count = 0;
+   list->style = NULL;
 }
 
 
-
+void free_script_list(SCRIPTLIST *list)
+{
+   int i;
+   
+   for (i = 0; i < list->count; i++)
+   {
+      free(list->script[i]);
+   }
+   free(list->script);
+   list->alloc = 0;
+   list->count = 0;
+   list->script = NULL;
+}
 
 
 /*******************************************************************************
@@ -11939,15 +11964,18 @@ GLOBAL void exit_module_toc(void)
    {
 	   for (i = 0; i <= p1_toc_counter; i++)
 	   {
-	      free_toc_data( &(toc_table[i]->keywords) );
-	      free_toc_data( &(toc_table[i]->description) );
-	      free_toc_data( &(toc_table[i]->helpid) );
+	   	  TOCITEM *item = toc_table[i];
+	      free(item->keywords);
+	      free(item->description);
+	      free(item->helpid);
 	      for (j = 0; j < MAX_WIN_BUTTONS; j++)
-	         free_toc_data( &(toc_table[i]->win_button[j]) );
-	      free_toc_data( &(toc_table[i]->image) );
-	      free_toc_data( &(toc_table[i]->icon) );
-	      free_toc_data( &(toc_table[i]->icon_active) );
-	      free_toc_data( &(toc_table[i]->icon_text) );
+	         free(item->win_button[j]);
+	      free(item->image);
+	      free(item->icon);
+	      free(item->icon_active);
+	      free(item->icon_text);
+	      free_style_list(&item->styles);
+	      free_script_list(&item->scripts);
 	      free(toc_table[i]);
 	   }
        free(toc_table);

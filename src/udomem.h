@@ -66,8 +66,10 @@ void *mem_realloc(void *block, size_t newsize);
 void mem_free(void *p);
 void *mem_0get(size_t size);
 char *mem_str_dup(const char *str);
+char *mem_str_ndup(const char *str, size_t len);
 
 #undef strdup
+#undef strndup
 
 #if DEBUG_ALLOC
 
@@ -75,11 +77,13 @@ void *mem_debug_get(size_t size, const char *from, long line);
 void mem_debug_free(void *block, const char *from, long line);
 void *mem_debug_0get(size_t size, const char *from, long line);
 char *mem_debug_str_dup(const char *str, const char *from, long line);
+char *mem_debug_str_ndup(const char *str, size_t len, const char *from, long line);
 void *mem_debug_realloc(void *block, size_t newsize, const char *from, long line);
 
 #define malloc(size) mem_debug_get(size, __FILE__, __LINE__)
 #define calloc(nitems, size) mem_debug_0get((size_t)(nitems) * (size_t)(size), __FILE__, __LINE__)
 #define strdup(str) mem_debug_str_dup(str, __FILE__, __LINE__)
+#define strndup(str, len) mem_debug_str_ndup(str, len, __FILE__, __LINE__)
 #define free(block) mem_debug_free(block, __FILE__, __LINE__)
 #define realloc(block, newsize) mem_debug_realloc(block, newsize, __FILE__, __LINE__)
 
@@ -88,6 +92,7 @@ void *mem_debug_realloc(void *block, size_t newsize, const char *from, long line
 #define malloc(size) mem_get(size)
 #define calloc(nitems, size) mem_0get((size_t)(nitems) * (size_t)(size))
 #define strdup(str) mem_str_dup(str)
+#define strndup(str, len) mem_str_ndup(str, len)
 #define realloc(block, newsize) mem_realloc(block, newsize)
 #define free(block) mem_free(block)
 

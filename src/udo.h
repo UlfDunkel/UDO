@@ -358,7 +358,8 @@ GLOBAL char        sDocNroffType[32];     /* dito fuer nroff */
 
 GLOBAL char        sDocImgSuffix[32];     /* gif, jpg, jpeg, ... */
 GLOBAL FILE_ID     sDocBackImage;
-GLOBAL FILE_ID     sDocScript;
+GLOBAL SCRIPTLIST  sDocScript;
+GLOBAL STYLELIST   sDocStyle;
 GLOBAL FILE_ID     sDocFavIcon;
 GLOBAL struct rgb_and_color sDocBackColor;
 GLOBAL struct rgb_and_color sDocTextColor;

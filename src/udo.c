@@ -13554,7 +13554,8 @@ GLOBAL void init_udo_vars(void)
    strcpy(sDocImgSuffix, ".gif");
    
    sDocBackImage = 0;
-   sDocScript = 0;
+   sDocScript.count = 0;
+   sDocStyle.count = 0;
    sDocFavIcon = 0;
    sDocBackColor.rgb.set = FALSE;
    sDocTextColor.rgb.set = FALSE;

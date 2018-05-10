@@ -88,7 +88,6 @@
 *
 ******************************************|************************************/
 
-LOCAL int p1_style_alloc;
 
 
 /*******************************************************************************
@@ -933,11 +932,16 @@ GLOBAL void set_html_style(void)
           *ptr;
    int     i;
    size_t len;
-   STYLE **new_style;
+   STYLELIST *list;
    
    ASSERT(toc_table != NULL);
    ASSERT(toc_table[p1_toc_counter] != NULL);
 
+   if (p1_toc_counter == 0)
+      list = &sDocStyle;
+   else
+      list = &toc_table[p1_toc_counter]->styles;
+   
    tokcpy2(sTemp, sizeof(sTemp));
 
    if (sTemp[0] == '\'')
@@ -952,35 +956,6 @@ GLOBAL void set_html_style(void)
 
    replace_char(sTemp, '\\', '/');
 
-   for (i = 0; i < p1_style_counter; i++)
-   {
-      if (strcmp(sTemp, style[i]->href) == 0)
-      {
-         /*
-          * FIXME: this prevents using the same style sheet on
-          * different pages; the conncection should be
-          * be the other way around (e.g. have have
-          * a style sheet idx in the toc entry rather than
-          * having a toc index in the style sheet)
-          */
-         warning_message(_("style sheet %s already used in node %s"), sTemp, toc_table[style[i]->tocindex]->name);
-         return;
-      }
-   }
-
-   if (p1_style_counter >= p1_style_alloc)
-   {
-      int new_alloc = p1_style_alloc + 1024;
-      
-      new_style = (STYLE **)realloc(style, new_alloc * sizeof(STYLE *));
-      if (new_style == NULL)
-      {
-         return;
-      }
-      style = new_style;
-      p1_style_alloc = new_alloc;
-   }
-
    styleptr = (STYLE *)malloc(sizeof(STYLE));
 
    if (styleptr == NULL)                  /* no memory? */
@@ -989,20 +964,13 @@ GLOBAL void set_html_style(void)
    }
    memset(styleptr, 0, sizeof(*styleptr));
    
-   style[p1_style_counter] = styleptr;
-   p1_style_counter++;
-   
-   styleptr->href = strdup(sTemp);
-   styleptr->media[0] = EOS;
-   styleptr->title[0] = EOS;
    styleptr->alternate = FALSE;
 
    ptr = strstr(sTemp, "media=");
    if (ptr != NULL)
    {
       len = strcspn(ptr + 6, " ");
-      strncpy(styleptr->media, ptr + 6, len);
-      styleptr->media[len] = EOS;
+      styleptr->media = strndup(ptr + 6, len);
       memmove(ptr, ptr + 6 + len, strlen(ptr + 6 + len) + 1);
    }
    
@@ -1012,17 +980,15 @@ GLOBAL void set_html_style(void)
       if (strchr(ptr + 6, '\''))
       {
          len = strcspn(ptr + 7, "'");
-         strncpy(styleptr->title, ptr + 7, len);
-         memmove(ptr, ptr + 7 + len, strlen(ptr + 6 + len) + 1);
+         styleptr->title = strndup(ptr + 7, len);
+         memmove(ptr, ptr + 7 + len, strlen(ptr + 7 + len) + 1);
       }
       else
       {
          len = strcspn(ptr + 6, " ");
-         strncpy(styleptr->title, ptr + 6, len);
+         styleptr->title = strndup(ptr + 6, len);
          memmove(ptr, ptr + 6 + len, strlen(ptr + 6 + len) + 1);
       }
-
-      styleptr->title[len] = EOS;
    }
 
    ptr = strstr(sTemp, "alternate");
@@ -1034,12 +1000,39 @@ GLOBAL void set_html_style(void)
    }
    
    del_whitespaces(sTemp);
-   styleptr->filename = strdup(sTemp);
+   styleptr->filename = file_listadd(sTemp);
    
-   /*
-    * FIXME: see comments above
-    */
-   styleptr->tocindex = p1_toc_counter;
+   for (i = 0; i < list->count; i++)
+   {
+      if (list->style[i]->filename == styleptr->filename)
+      {
+         if (p1_toc_counter == 0)
+            warning_message(_("global style sheet %s already used"), sTemp);
+         else
+            warning_message(_("style sheet %s already used in node %s"), sTemp, toc_table[p1_toc_counter]->name);
+         free(styleptr->media);
+         free(styleptr->title);
+         free(styleptr);
+         return;
+      }
+   }
+
+   if (list->count >= list->alloc)
+   {
+      STYLE **new_style;
+      int new_alloc = list->alloc + 10;
+      
+      new_style = (STYLE **)realloc(list->style, new_alloc * sizeof(STYLE *));
+      if (new_style == NULL)
+      {
+         return;
+      }
+      list->style = new_style;
+      list->alloc = new_alloc;
+   }
+
+   list->style[list->count] = styleptr;
+   list->count++;
 }
 
 
@@ -1049,7 +1042,7 @@ GLOBAL void set_html_style(void)
 /*******************************************************************************
 *
 *  set_html_script():
-*     sets HTML script name
+*     sets HTML script (usually a JavaScript file)
 *
 *  Return:
 *     -
@@ -1061,12 +1054,21 @@ GLOBAL void set_html_script(void)
    char sTemp[MYFILE_FULL_LEN + 3];
    char filename[MYFILE_FULL_LEN + 1];
    char *ptr;
-      
+   int     i;
+   SCRIPTLIST *list;
+   SCRIPT *scriptptr;
+   FILE_ID id;
+   
    ASSERT(toc_table != NULL);
    ASSERT(toc_table[p1_toc_counter] != NULL);
    if (token[1][0] == EOS)
       return;
 
+   if (p1_toc_counter == 0)
+      list = &sDocScript;
+   else
+      list = &toc_table[p1_toc_counter]->scripts;
+   
    if (token[1][0] == '\"')
    {
       tokcpy2(sTemp, sizeof(sTemp));
@@ -1087,12 +1089,43 @@ GLOBAL void set_html_script(void)
       strcpy(filename, token[1]);
    }
 
+   del_whitespaces(filename);
    replace_char(filename, '\\', '/');
 
-   if (p1_toc_counter == 0)
-      sDocScript = file_listadd(filename);
-   else
-      toc_table[p1_toc_counter]->script_name = file_listadd(filename);
+   id = file_listadd(filename);
+   for (i = 0; i < list->count; i++)
+   {
+      if (list->script[i]->filename == id)
+      {
+         if (p1_toc_counter == 0)
+            warning_message(_("global script %s already used"), filename);
+         else
+            warning_message(_("script %s already used in node %s"), filename, toc_table[p1_toc_counter]->name);
+         return;
+      }
+   }
+
+   scriptptr = (SCRIPT *)malloc(sizeof(*scriptptr));
+   if (scriptptr == NULL)
+      return;
+   scriptptr->filename = id;
+   
+   if (list->count >= list->alloc)
+   {
+      int new_alloc = list->alloc + 10;
+      SCRIPT **new_script;
+      
+      new_script = (SCRIPT **)realloc(list->script, new_alloc * sizeof(SCRIPT *));
+      if (new_script == NULL)
+      {
+         return;
+      }
+      list->script = new_script;
+      list->alloc = new_alloc;
+   }
+
+   list->script[list->count] = scriptptr;
+   list->count++;
 }
 
 
@@ -1705,26 +1738,18 @@ GLOBAL void set_html_quotes(void)
 
 GLOBAL void init_module_toc_html(void)
 {
-   p1_style_alloc = 0;
-   p1_style_counter = 0;
-   style = NULL;
+   sDocScript.count = 0;
+   sDocScript.alloc = 0;
+   sDocScript.script = NULL;
+   sDocStyle.count = 0;
+   sDocStyle.alloc = 0;
+   sDocStyle.style = NULL;
 }
 
 
 
 GLOBAL void exit_module_toc_html(void)
 {
-   int i;
-   
-   for (i = 0; i < p1_style_counter; i++)
-   {
-      free(style[i]->href);
-      free(style[i]->filename);
-      free(style[i]);
-   }
-   if (style != NULL)
-      free(style);
-   p1_style_alloc = 0;
-   p1_style_counter = 0;
-   style = NULL;
+   free_style_list(&sDocStyle);
+   free_script_list(&sDocScript);
 }

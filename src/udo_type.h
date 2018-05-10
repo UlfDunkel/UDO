@@ -199,4 +199,30 @@ typedef struct _show_variable
 } SHOW_VAR;
 
 
+typedef struct _style                     /* style sheets */
+{
+   FILE_ID filename;                      /* filename only of stylesheet */
+   char   *media;                         /* fuer welches Medium */
+   char   *title;                         /* Titel eines Stylesheets */
+   int    alternate;                      /* Alternate Stylesheet? */
+} STYLE;
+
+typedef struct _stylelist {
+	int count;
+	int alloc;
+	STYLE **style;                        /* array of stylesheet names */
+} STYLELIST;
+
+typedef struct _script                    /* javascript files */
+{
+	FILE_ID filename;                     /* javascript file reference */
+} SCRIPT;
+
+typedef struct _scriptlist {
+	int count;
+	int alloc;
+	SCRIPT **script;                      /* array of scripts */
+} SCRIPTLIST;
+
+
 #endif   /* UDO_TYPE_H */

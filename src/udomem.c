@@ -233,6 +233,7 @@ char *um_strdup_printf(const char *format, ...)
 #undef malloc
 #undef calloc
 #undef strdup
+#undef strndup
 #undef realloc
 #undef free
 
@@ -630,14 +631,31 @@ void *mem_debug_0get(size_t size, const char *who, long line)
 
 char *mem_debug_str_dup(const char *str, const char *from, long line)
 {
-	char *new;
+	char *p;
 
 	if (str == NULL)
 		return NULL;
-	new = mem_debug_getit(strlen(str) + 1, FALSE, from, line);
-	if (new != NULL)
-		strcpy(new, str);
-	return new;
+	p = mem_debug_getit(strlen(str) + 1, FALSE, from, line);
+	if (p != NULL)
+		strcpy(p, str);
+	return p;
+}
+
+/* ---------------------------------------------------------------------- */
+
+char *mem_debug_str_ndup(const char *str, size_t len, const char *from, long line)
+{
+	char *p;
+
+	if (str == NULL)
+		return NULL;
+	p = mem_debug_getit(len + 1, FALSE, from, line);
+	if (p != NULL)
+	{
+		memcpy(p, str, len);
+		p[len] = '\0';
+	}
+	return p;
 }
 
 #endif /* DEBUG_ALLOC */
@@ -681,6 +699,23 @@ char *mem_str_dup(const char *str)
 	if ((p = (char *)mem_get(size)) != NULL)
 		return strcpy(p, str);
 	return NULL;
+}
+
+/* ---------------------------------------------------------------------- */
+
+char *mem_str_ndup(const char *str, size_t len)
+{
+	char *p;
+
+	if (str == NULL)
+		return NULL;
+	p = (char *)mem_get(len + 1);
+	if (p != NULL)
+	{
+		memcpy(p, str, len);
+		p[len] = '\0';
+	}
+	return p;
 }
 
 /* ---------------------------------------------------------------------- */
