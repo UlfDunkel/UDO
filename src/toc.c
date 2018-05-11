@@ -11167,7 +11167,7 @@ GLOBAL _BOOL check_module_toc_pass1(void)
 		break;
 	}
 
-	/* Doppelt vergebene HTML-Dateinamen testen, dabei das Mergen non Nodes beachten */
+	/* Doppelt vergebene HTML-Dateinamen testen, dabei das Mergen von Nodes beachten */
 	/* Werden Nodes in einer Datei vereint, dann besitzen die unteren Ebenen den */
 	/* gleichen Dateinamen wie die obere Ebene! */
 
@@ -11186,7 +11186,7 @@ GLOBAL _BOOL check_module_toc_pass1(void)
 			{
 				for (j = i + 1; j <= p1_toc_counter; j++)
 				{
-					checkString = FALSE;
+					checkString = TRUE;
 
 					for (level = TOC_MAXDEPTH - 1; level >= TOC_NODE2; level--)
 						if (html_merge_node[level])
