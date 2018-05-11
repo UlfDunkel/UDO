@@ -736,6 +736,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] = {
 	{ "!maketitle",                      "",              c_maketitle,                     TRUE,  CMD_ONLY_MAINPART },
 	{ "!tableofcontents",                "",              c_tableofcontents,               TRUE,  CMD_ONLY_MAINPART },
 	{ "!toc_title",                      "",              c_tunix,                         TRUE,  CMD_ONLY_MAINPART },
+	{ "!top_title",                      "",              c_tunix,                         TRUE,  CMD_ONLY_MAINPART },
 	{ "!listoffigures",                  "",              c_listoffigures,                 TRUE,  CMD_ONLY_MAINPART },
 	{ "!listoftables",                   "",              c_listoftables,                  TRUE,  CMD_ONLY_MAINPART },
 	{ "!toc",                            "",              c_toc,                           TRUE,  CMD_ONLY_MAINPART },
@@ -10599,6 +10600,9 @@ LOCAL _BOOL pass1(const char *datei)
 						} else if (strcmp(token[0], "!toc_title") == 0)
 						{
 							tokcpy2(toc_title, MAX_NODE_LEN);
+						} else if (strcmp(token[0], "!top_title") == 0)
+						{
+							set_toptitle();
 						} else if (strcmp(token[0], "!begin_appendix") == 0)
 						{
 							pflag[PASS1].inside_apx = TRUE;

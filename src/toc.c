@@ -1650,8 +1650,11 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
 	size_t i, sooft;
 	size_t platz_links;
 	size_t sl;
-
-	do_toptoc(toc_table[p2_toc_counter]->toctype, popup);
+	GLOBAL TOCITEM *toc = toc_table[p2_toc_counter];
+	const char *toptitle;
+	TOCTYPE d;
+	
+	do_toptoc(toc->toctype, popup);
 
 	if (no_headlines)
 		return;
@@ -1669,8 +1672,23 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
 	replace_udo_quotes(s);
 	delete_all_divis(s);
 
-	if (titdat.program != NULL)
-		sl = strlen(titdat.program);
+	toptitle = titdat.program;
+	for (d = toc->toctype; d >= TOC_NODE1; d--)
+	{
+		if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+		{
+			toptitle = toc_table[last_n_index[d]]->toptitle;
+			/*
+			 * empty top_title suppresses header line completely
+			 */
+			if (*toptitle == '\0')
+				return;
+			break;
+		}
+	}
+	
+	if (toptitle != NULL)
+		sl = strlen(toptitle);
 	else
 		sl = 0;
 
@@ -1690,8 +1708,8 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
 			strcat(n, " ");
 	}
 
-	if (titdat.program != NULL)
-		strcat(n, titdat.program);
+	if (toptitle != NULL)
+		strcat(n, toptitle);
 
 	c_internal_styles(n);
 	replace_udo_tilde(n);
@@ -1763,13 +1781,26 @@ LOCAL void pch_headline(const char *s)
 {
 	char n[512];
 	size_t i, sooft, platz_links, pl;
+	GLOBAL TOCITEM *toc = toc_table[p2_toc_counter];
+	const char *toptitle;
+	TOCTYPE d;
 
 	if (no_headlines)
 		return;
 
+	toptitle = titdat.program;
+	for (d = toc->toctype; d >= TOC_NODE1; d--)
+	{
+		if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+		{
+			toptitle = toc_table[last_n_index[d]]->toptitle;
+			break;
+		}
+	}
+	
 	pl = 0;
-	if (titdat.program != NULL)
-		pl = strlen(titdat.program);
+	if (toptitle != NULL)
+		pl = strlen(toptitle);
 
 	platz_links = zDocParwidth - pl - 1;
 
@@ -1790,16 +1821,16 @@ LOCAL void pch_headline(const char *s)
 	}
 
 	/* program name specified? */
-	if (titdat.program != NULL)
+	if (toptitle != NULL)
 	{
-		if (uses_tableofcontents)
+		if (uses_tableofcontents && toptitle == titdat.program)
 		{
 			strcat(n, PCH_LINK);
-			strcat(n, titdat.program);
+			strcat(n, toptitle);
 			strcat(n, PCH_LINK);
 		} else
 		{
-			strcat(n, titdat.program);
+			strcat(n, toptitle);
 		}
 	}
 
@@ -8827,6 +8858,43 @@ GLOBAL void set_ignore_footer(void)
 	ASSERT(toc_table[p1_toc_counter] != NULL);
 
 	toc_table[p1_toc_counter]->ignore_footer = TRUE;
+}
+
+
+
+
+
+GLOBAL void set_toptitle(void)
+{
+	char k[MAX_NODE_LEN];
+	char *ptr;
+
+	ASSERT(toc_table != NULL);
+	ASSERT(toc_table[p1_toc_counter] != NULL);
+
+	tokcpy2(k, ArraySize(k));
+	c_vars(k);
+	qdelete_all(k, "!-", 2);
+
+	auto_quote_chars(k, TRUE);
+	replace_udo_quotes(k);
+
+	if (toc_table[p1_toc_counter]->toptitle != NULL)
+	{
+		error_called_twice(token[0]);
+	} else
+	{
+		/* might warn here if used inside popup, because the title is never used then */
+		ptr = strdup(k);
+
+		if (ptr == NULL)
+		{
+			bFatalErrorDetected = TRUE;
+		} else
+		{
+			toc_table[p1_toc_counter]->toptitle = ptr;
+		}
+	}
 }
 
 

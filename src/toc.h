@@ -181,6 +181,7 @@ typedef struct _tocitem                       /* entries for the Table Of Conten
    _BOOL   ignore_raw_footer;                 /* don't read user-defined footer */
    _BOOL   has_children;                      /* TRUE: this node has subnode(s) */
    _BOOL   has_visible_children;              /* TRUE: this node has visible subnode(s) */
+   char *toptitle;                            /* title used in header line */
 } TOCITEM;
 
 
@@ -385,6 +386,8 @@ GLOBAL void set_ignore_toptoc(void);
 GLOBAL void set_helpid(void);
 GLOBAL void win_set_button(void);
 GLOBAL void set_mapping(void);
+GLOBAL void set_toptitle(void);
+
 
 GLOBAL void set_chapter_image(void);
 GLOBAL void set_chapter_icon(void);

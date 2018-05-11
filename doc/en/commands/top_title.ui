@@ -1,0 +1,33 @@
+!begin_node (!kw [top_title])
+!html_name cmd_top_title
+
+Set title for header line (ST-Guide only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/top_title (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command set the title that is placed in the
+header line. Without this command, the program name
+is used instead.
+
+!item [(!EXISTSSINCE)] Version~7.12
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [docinfo] [[program!!]])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!top_title Chapter Name
+!end_verbatim
+(!EXAMPLE_AFTER)
+!top_title Chapter Name
+(!EXAMPLE_END)
+
+!end_node

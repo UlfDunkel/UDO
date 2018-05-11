@@ -549,6 +549,7 @@
 !include commands/toc.ui
 !include commands/toc_offset.ui
 !include commands/toc_title.ui
+!include commands/top_title.ui
 !include commands/(today).ui
 !include commands/toplink.ui
 !include commands/town.ui
