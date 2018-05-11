@@ -11024,7 +11024,7 @@ GLOBAL void init_module_toc_pass2(void)
 GLOBAL _BOOL check_module_toc_pass1(void)
 {
 	LABIDX i, j;
-	char sTyp[32];
+	char sTyp[1024];
 	char sNode[256];
 	_BOOL ret = TRUE;
 	_BOOL checkString;
@@ -11053,21 +11053,21 @@ GLOBAL _BOOL check_module_toc_pass1(void)
 					error_message(_("label \"%s\" used twice"), label_table[i]->name);
 
 					sNode[0] = EOS;
-					strcpy(sTyp, _("as a label"));
+					sprintf(sTyp, _("as a label in %s:%lu"), file_lookup(label_table[i]->source_location.id), label_table[i]->source_location.line);
 					if (label_table[i]->is_node)
-						strcpy(sTyp, _("as a node"));
+						sprintf(sTyp, _("as a node in %s:%lu"), file_lookup(label_table[i]->source_location.id), label_table[i]->source_location.line);
 					if (label_table[i]->is_alias)
-						strcpy(sTyp, _("as an alias"));
+						sprintf(sTyp, _("as an alias in %s:%lu"), file_lookup(label_table[i]->source_location.id), label_table[i]->source_location.line);
 					if (!label_table[i]->is_node)
 						sprintf(sNode, _(" in node '%s'"), toc_table[label_table[i]->tocindex]->name);
 					note_message("1. %s%s", sTyp, sNode);
 
 					sNode[0] = EOS;
-					strcpy(sTyp, _("as a label"));
+					sprintf(sTyp, _("as a label in %s:%lu"), file_lookup(label_table[j]->source_location.id), label_table[j]->source_location.line);
 					if (label_table[j]->is_node)
-						strcpy(sTyp, _("as a node"));
+						sprintf(sTyp, _("as a node in %s:%lu"), file_lookup(label_table[j]->source_location.id), label_table[j]->source_location.line);
 					if (label_table[j]->is_alias)
-						strcpy(sTyp, _("as an alias"));
+						sprintf(sTyp, _("as an alias in %s:%lu"), file_lookup(label_table[j]->source_location.id), label_table[j]->source_location.line);
 					if (!label_table[j]->is_node)
 						sprintf(sNode, _(" in node '%s'"), toc_table[label_table[j]->tocindex]->name);
 					note_message("2. %s%s", sTyp, sNode);
