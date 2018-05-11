@@ -994,7 +994,7 @@ LOCAL UDOLANGUAGE const udolanguage[] = {
 	{ "italian",    TOITA }, { "it", TOITA },
 	{ "japanese",   TOJAP }, { "ja", TOJAP },
 	{ "latvian",    TOLVA }, { "lv", TOLVA },
-	{ "norwegian",  TONOR }, { "nn", TONOR }, { "no", TONOR },
+	{ "norwegian",  TONOR }, { "nn", TONOR }, { "no-nyn", TONOR },
 	{ "polish",     TOPOL }, { "pl", TOPOL },
 	{ "portuguese", TOPOR }, { "pt", TOPOR },
 	{ "spanish",    TOSPA }, { "es", TOSPA },
