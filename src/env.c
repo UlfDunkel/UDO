@@ -1326,7 +1326,7 @@ LOCAL char *strcat_blanks(char *string, int count)
 *
 ******************************************|************************************/
 
-LOCAL int strlen_prev_indent(void)
+int strlen_prev_indent(void)
 {
 	int i, il;
 

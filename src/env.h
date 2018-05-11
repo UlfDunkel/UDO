@@ -128,6 +128,7 @@ GLOBAL void output_end_sourcecode(void);
 GLOBAL void output_begin_comment(void);
 GLOBAL void output_end_comment(void);
 
+int strlen_prev_indent(void);
 GLOBAL int strlen_indent(void);
 GLOBAL void strcat_indent(char *s);
 GLOBAL void strcpy_indent(char *s);
