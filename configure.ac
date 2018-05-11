@@ -334,7 +334,7 @@ case $host in
   *-apple-darwin* )
      test "$CC" = "" && CC=gcc
      test "$CXX" = "" && CXX="g++"
-     for arg in -fwritable-strings; do
+     for arg in -fno-writable-strings -mmacosx-version-min=10.4; do
         case $CC in
         *$arg*) ;;
         *) if $CC $arg -E - < /dev/null >/dev/null 2>&1; then
