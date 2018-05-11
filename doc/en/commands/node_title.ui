@@ -11,7 +11,7 @@ Set title for node.
 
 !item [(!DESCRIPTION)]
 This command sets the title that is used in the
-links to tis node and for some formats also
+links to this node and for some formats also
 displayed as window title.
 
 !item [(!EXISTSSINCE)] Version~7.12
