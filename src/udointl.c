@@ -2,14 +2,6 @@
 #include "config.h"
 #endif
 
-#if defined(__WIN32__) || defined(_WIN32)
-#define WIN32_LEAN_AND_MEAN
-#define STRICT
-#define WINVER 0x0500
-#define __SIMPLE_LOCALES__
-#include <windows.h>
-#endif
-
 #include "import.h"
 #include <stdio.h>
 #include <string.h>

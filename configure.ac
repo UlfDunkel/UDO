@@ -33,7 +33,7 @@ if test "$ECHO_E" = ""; then
 fi
 AC_SUBST(ECHO_E)
 
-AC_CONFIG_HEADER(src/config.h:src/config_h.in)
+AC_CONFIG_HEADER(src/config.h)
 
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE([enable])
@@ -463,12 +463,10 @@ AM_CONDITIONAL(CROSS_COMPILING, test "$cross_compiling" != no)
 
 AC_CHECK_HEADERS([argz.h limits.h locale.h nl_types.h malloc.h string.h strings.h unistd.h process.h sys/param.h endian.h io.h fcntl.h dlfcn.h pwd.h wchar.h])
 
-AC_CHECK_FUNCS([strcasecmp strncasecmp stricmp strnicmp strincmp strncmpi strlwr strupr tmpnam strerror sys_errlist mkstemp fdopen times])
-AC_CHECK_FUNCS([getcwd munmap putenv setenv setlocale strchr])
-AC_CHECK_FUNCS([sigaction syslog realpath setrlimit])
-AC_CHECK_FUNCS([getuid geteuid getgid getegid getpid getppid lstat mkdir])
-
-
+AC_CHECK_FUNCS([strcasecmp strncasecmp stricmp strnicmp strincmp strncmpi strlwr strupr tmpnam strerror sys_errlist fdopen times mempcpy \
+	getcwd munmap putenv setenv setlocale strchr \
+	sigaction syslog realpath setrlimit \
+	getuid geteuid getgid getegid getpid getppid lstat mkdir mktemp mkstemp mkstemps])
 
 ###############################################################################
 #
@@ -587,51 +585,6 @@ AH_TEMPLATE([HAVE_GTKHTML], [Define this if you have the GtkHtml library.])
 AH_TEMPLATE([HAVE_GTKHTML2], [Define this if you have the GtkHtml2 library.])
 AH_TEMPLATE([HAVE_GDK_PIXBUF],
 	    [Define this if you have the GDK_Pixbuf library installed.])
-AH_TEMPLATE([HAVE_SOUP], [Define this if you have the Soup library.])
-AH_TEMPLATE([HAVE_NEWSOUP], [Define this if you have the Soup library and it has cookies support.])
-
-
-  have_soup="no"
-  ok="yes"
-  pkgs=''
-  pkg_check_version      libsoup-2.4  2.26.0
-  have_newsoup="$ok"
-  have_soup="$ok"
-  if test "$have_soup" = "no"; then
-    ok="yes"
-    pkgs=''
-    pkg_check_version      libsoup-2.4  2.0.0
-  fi
-  soup_pkgs=$pkgs
-
-  if test "$have_soup" = yes; then
-    AC_CACHE_CHECK([for Soup includes], ac_cv_soup_config_cflags,
-                   [ac_cv_soup_config_cflags=`$pkg_config --cflags $soup_pkgs`])
-    AC_CACHE_CHECK([for Soup libs], ac_cv_soup_config_libs,
-                   [ac_cv_soup_config_libs=`$pkg_config --libs $soup_pkgs`])
-      ac_save_LDFLAGS="$LDFLAGS"
-      ac_save_CFLAGS="$CFLAGS"
-      CFLAGS="$CFLAGS  $ac_cv_soup_config_cflags"
-      LDFLAGS="$LDFLAGS $ac_cv_soup_config_libs"
-      AC_TRY_LINK([#include <libsoup/soup.h>],
-                  [soup_session_async_new();],
-                  ,
-                  [have_soup=no],
-                  [have_soup=no])
-      LDFLAGS=$ac_save_LDFLAGS
-      CFLAGS=$ac_save_CFLAGS
-  fi
-
-  if test "$have_soup" = yes; then
-    AC_DEFINE(HAVE_SOUP)
-    SOUP_CFLAGS="$SOUP_CFLAGS $ac_cv_soup_config_cflags"
-    SOUP_LIBS="$SOUP_LIBS $ac_cv_soup_config_libs"
-  fi
-  if test "$have_newsoup" = yes; then
-    AC_DEFINE(HAVE_NEWSOUP)
-  fi
-AM_CONDITIONAL(HAVE_SOUP, test x$have_soup != xno)
-AM_CONDITIONAL(HAVE_NEWSOUP, test x$have_newsoup != xno)
 
 
 have_gtk2=no
