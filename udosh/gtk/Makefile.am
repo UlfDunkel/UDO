@@ -1,5 +1,3 @@
-AUTOMAKE_OPTIONS = subdir-objects
-
 include ../../silent.am
 
 if WITH_GUI_GTK
@@ -19,7 +17,7 @@ udogtk_SOURCES = \
 	gtkconfig.c gtkconfig.h \
 	misc.c misc.h \
 	help.c help.h htmlhelp.h \
-	$(top_srcdir)/src/udointl.c \
+	udointl.c \
 	windows_.h
 if OS_WIN32
 udogtk_LDFLAGS = -mconsole
