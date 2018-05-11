@@ -9,8 +9,7 @@ To display DOS screenshots you can use the linedraw environment,
 which is started with (!KW [begin_linedraw]) and finished with
 (!KW [end_linedraw]).
 
-No UDO commands(!N)except
-(!KW [end_linedraw])(!n) or placeholders will be converted. Text
+No UDO commands(!N)except (!KW [end_linedraw])(!n) or placeholders will be converted. Text
 inside this environment will be indented like normal text.
 
 When converting into RTF, the font ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm] [] [elink])""

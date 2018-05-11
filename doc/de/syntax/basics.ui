@@ -187,10 +187,7 @@ einem Hauptteil.
 Im Vorspann werden grundsätzliche Informationen über den umzuwandelnden
 Text selbst deklariert. Desweiteren können im Vorspann spezielle
 Kommandos plaziert werden, die UDO mitteilen, wie er die Quelldatei
-umwandeln soll(!N)z.B. ob ein kurzes oder ausführliches
-Inhaltsverzeichnis ausgegeben werden soll, ob Begriffe und
-Datumsangaben in deutscher oder englischer Sprache erfolgen sollen
-usw.(!n). Zum Vorspann zählen alle Zeilen, die vor dem Kommando
+umwandeln soll(!N)z.B. ob ein kurzes oder ausführliches (!nl)Inhaltsverzeichnis ausgegeben werden soll, ob Begriffe und (!nl)Datumsangaben in deutscher oder englischer Sprache erfolgen sollen (!nl)usw.(!n). Zum Vorspann zählen alle Zeilen, die vor dem Kommando
 (!KW [begin_document]) stehen.
 
 !index (!kw [end_document])

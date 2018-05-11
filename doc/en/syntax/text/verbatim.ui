@@ -9,8 +9,7 @@ source code or something else.
 
 To display preformatted text you can use the verbatim environment that
 is started with (!KW [begin_verbatim]) and finished with
-(!KW [end_verbatim]). No UDO commands(!N)except
-(!KW [end_verbatim])(!n) or placeholders will be converted. Text
+(!KW [end_verbatim]). No UDO commands(!N)except (!KW [end_verbatim])(!n) or placeholders will be converted. Text
 inside this environment will be indented like normal text.
 
 When converting into (!LaTeX) the commands of UDO will be just

@@ -877,7 +877,7 @@ _BOOL c_footnotes(char *s)
 		case TOSTG:
 		case TOAMG:
 			text = um_strdup_printf("(%d)", f->number);
-			entry = um_strdup_printf("@{\"(%s)\" link \"%%udofootnote_%d\"}", text, f->global_number);
+			entry = um_strdup_printf("@{\"%s\" link \"%%udofootnote_%d\"}", text, f->global_number);
 			break;
 
 		case TOMAN:

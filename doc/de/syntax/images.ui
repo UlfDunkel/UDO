@@ -133,8 +133,7 @@ Bildes ermöglichen.
 
 (!HINT)
 
-Bei 100~dpi erscheinen Screenshots(!N)jedenfalls auf meinem HP DeskJet
-510(!n) im Ausdruck in der Originalgröße. (!KW [tex_dpi]) kann vor jedem
+Bei 100~dpi erscheinen Screenshots(!N)jedenfalls auf meinem HP DeskJet 510(!n) im Ausdruck in der Originalgröße. (!KW [tex_dpi]) kann vor jedem
 Bild neu gesetzt werden, jedoch sollten das selbe Bild immer in der
 gleichen Größe ausgedruckt werden, da der Image-Header jeweils passend
 verändert wird.
