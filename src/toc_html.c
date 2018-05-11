@@ -118,7 +118,7 @@ GLOBAL _BOOL set_html_navigation(void)
 	char inhalt[512];
 	size_t contlen;
 
-	tokcpy2(s, 512);
+	tokcpy2(s, ArraySize(s));
 
 	contlen = get_brackets_ptr(s, &cont, &data);
 
@@ -203,7 +203,7 @@ GLOBAL void c_set_html_doctype(void)
 {
 	char s[512];
 
-	tokcpy2(s, sizeof(s));
+	tokcpy2(s, ArraySize(s));
 
 	if (strcmp(s, "Old") == 0)
 		set_html_doctype(HTML_OLD);
@@ -240,7 +240,7 @@ GLOBAL void c_set_html_doctype(void)
 
 GLOBAL void set_html_header_date(void)
 {
-	tokcpy2(html_header_date_zone, sizeof(html_header_date_zone));
+	tokcpy2(html_header_date_zone, ArraySize(html_header_date_zone));
 
 	if ((html_header_date_zone[0] != '+' && html_header_date_zone[0] != '-') ||
 		isdigit(html_header_date_zone[1] == 0) ||
@@ -274,7 +274,7 @@ GLOBAL void set_html_header_links(void)
 	char *kind;
 	char s[512];
 
-	tokcpy2(s, 512);
+	tokcpy2(s, ArraySize(s));
 
 	if (s[0] == EOS)
 	{
@@ -317,7 +317,7 @@ GLOBAL void set_html_frames_layout(void)
 
 	html_frames_layout = TRUE;
 
-	tokcpy2(s, 512);
+	tokcpy2(s, ArraySize(s));
 
 	if (strstr(s, "noresize") != NULL)
 		html_frames_noresize = TRUE;
@@ -411,7 +411,7 @@ GLOBAL void set_html_filename_prefix(void)
 	if (token[1][0] == EOS)
 		return;
 
-	um_strcpy(html_name_prefix, token[1], sizeof(html_name_prefix), "set_html_filename_prefix[1]");
+	um_strcpy(html_name_prefix, token[1], ArraySize(html_name_prefix), "set_html_filename_prefix[1]");
 }
 
 
@@ -500,7 +500,7 @@ GLOBAL void set_html_switch_language(void)
 	if (iDocHtmlSwitchLanguage >= 0)
 	{
 		token[1][0] = EOS;
-		tokcpy2(sDocHtmlSwitchLanguage, 256);
+		tokcpy2(sDocHtmlSwitchLanguage, ArraySize(sDocHtmlSwitchLanguage));
 	}
 }
 
@@ -530,7 +530,7 @@ GLOBAL void set_html_keywords(void)
 	if (token[1][0] == EOS)
 		return;
 
-	tokcpy2(k, sizeof(k));
+	tokcpy2(k, ArraySize(k));
 	c_vars(k);
 	qdelete_all(k, "!-", 2);
 
@@ -596,7 +596,7 @@ GLOBAL void set_html_description(void)
 	if (token[1][0] == EOS)
 		return;
 
-	tokcpy2(d, sizeof(d));
+	tokcpy2(d, ArraySize(d));
 	c_vars(d);
 	qdelete_all(d, "!-", 2);
 
@@ -660,7 +660,7 @@ GLOBAL void set_html_robots(void)
 	if (token[1][0] == EOS)
 		return;
 
-	tokcpy2(d, sizeof(d));
+	tokcpy2(d, ArraySize(d));
 	c_vars(d);
 	qdelete_all(d, "!-", 2);
 
@@ -736,14 +736,14 @@ GLOBAL void set_html_bgsound(void)
 
 	if (token[1][0] == '\"')
 	{
-		tokcpy2(sTemp, sizeof(sTemp));
+		tokcpy2(sTemp, ArraySize(sTemp));
 		ptr = strchr(sTemp + 1, '\"');	/* find second quote character (") */
 
 		if (ptr)
 		{
 			ptr[0] = EOS;
 			strcpy(filename, sTemp + 1);
-			um_strcpy(loop, ptr + 1, sizeof(loop), "set_html_bgsound[1]");
+			um_strcpy(loop, ptr + 1, ArraySize(loop), "set_html_bgsound[1]");
 			del_whitespaces(loop);
 		} else
 		{
@@ -752,9 +752,9 @@ GLOBAL void set_html_bgsound(void)
 		}
 	} else
 	{
-		um_strcpy(filename, token[1], sizeof(filename), "set_html_bgsound[2]");
+		um_strcpy(filename, token[1], ArraySize(filename), "set_html_bgsound[2]");
 		token[1][0] = EOS;
-		tokcpy2(loop, sizeof(loop));
+		tokcpy2(loop, ArraySize(loop));
 		del_whitespaces(loop);
 	}
 
@@ -794,7 +794,7 @@ GLOBAL void set_html_backimage(void)
 
 	if (token[1][0] == '\"')
 	{
-		tokcpy2(sTemp, sizeof(sTemp));
+		tokcpy2(sTemp, ArraySize(sTemp));
 		ptr = strchr(sTemp + 1, '\"');	/* find second quote character (") */
 
 		if (ptr)
@@ -929,7 +929,7 @@ GLOBAL void set_html_style(void)
 	else
 		list = &toc_table[p1_toc_counter]->styles;
 
-	tokcpy2(sTemp, sizeof(sTemp));
+	tokcpy2(sTemp, ArraySize(sTemp));
 
 	if (sTemp[0] == '\'')
 	{
@@ -1058,7 +1058,7 @@ GLOBAL void set_html_script(void)
 
 	if (token[1][0] == '\"')
 	{
-		tokcpy2(sTemp, sizeof(sTemp));
+		tokcpy2(sTemp, ArraySize(sTemp));
 		ptr = strchr(sTemp + 1, '\"');	/* find second quote character (") */
 
 		if (ptr)
@@ -1140,7 +1140,7 @@ GLOBAL void set_html_favicon(void)
 		return;
 	if (token[1][0] == '\"')
 	{
-		tokcpy2(sTemp, sizeof(sTemp));
+		tokcpy2(sTemp, ArraySize(sTemp));
 		ptr = strchr(sTemp + 1, '\"');	/* find second quote character (") */
 
 		if (ptr)
@@ -1222,7 +1222,7 @@ GLOBAL void set_html_counter_command(void)
 	if (token[1][0] == EOS)
 		return;
 
-	tokcpy2(k, sizeof(k));
+	tokcpy2(k, ArraySize(k));
 
 	if (p1_toc_counter == 0)
 	{
@@ -1252,7 +1252,7 @@ GLOBAL void set_html_frames_toc_title(void)
 	char d[1024];
 	char *ptr;
 
-	tokcpy2(d, sizeof(d));
+	tokcpy2(d, ArraySize(d));
 	c_vars(d);
 	qdelete_all(d, "!-", 2);
 
@@ -1292,7 +1292,7 @@ GLOBAL void set_html_frames_con_title(void)
 	char d[1024];
 	char *ptr;
 
-	tokcpy2(d, sizeof(d));
+	tokcpy2(d, ArraySize(d));
 	c_vars(d);
 	qdelete_all(d, "!-", 2);
 
@@ -1367,7 +1367,7 @@ GLOBAL void set_html_modern_alignment(void)
 {
 	char s[256];
 
-	tokcpy2(s, sizeof(s));
+	tokcpy2(s, ArraySize(s));
 
 	if (strstr(s, "center") != NULL)
 	{
@@ -1415,7 +1415,7 @@ GLOBAL void set_html_modern_backimage(void)
 
 	if (token[1][0] == '\"')
 	{
-		tokcpy2(sTemp, sizeof(sTemp));
+		tokcpy2(sTemp, ArraySize(sTemp));
 		ptr = strchr(sTemp + 1, '\"');	/* find second quote character (") */
 
 		if (ptr)
@@ -1428,7 +1428,7 @@ GLOBAL void set_html_modern_backimage(void)
 		}
 	} else
 	{
-		um_strcpy(filename, token[1], sizeof(filename), "set_html_modern_backimage[3]");
+		um_strcpy(filename, token[1], ArraySize(filename), "set_html_modern_backimage[3]");
 	}
 
 	replace_char(filename, '\\', '/');
@@ -1569,7 +1569,7 @@ GLOBAL void set_html_frames_alignment(void)
 {
 	char s[256];
 
-	tokcpy2(s, sizeof(s));
+	tokcpy2(s, ArraySize(s));
 
 	if (strstr(s, "center") != NULL)
 	{
@@ -1617,7 +1617,7 @@ GLOBAL void set_html_frames_backimage(void)
 
 	if (token[1][0] == '\"')
 	{
-		tokcpy2(sTemp, sizeof(sTemp));
+		tokcpy2(sTemp, ArraySize(sTemp));
 		ptr = strchr(sTemp + 1, '\"');	/* find second quote character (") */
 
 		if (ptr)
@@ -1630,7 +1630,7 @@ GLOBAL void set_html_frames_backimage(void)
 		}
 	} else
 	{
-		um_strcpy(filename, token[1], sizeof(filename), "!html_frames_backimage");
+		um_strcpy(filename, token[1], ArraySize(filename), "!html_frames_backimage");
 	}
 
 	replace_char(filename, '\\', '/');
@@ -1655,7 +1655,7 @@ GLOBAL void set_html_button_alignment(void)
 {
 	char s[256];
 
-	tokcpy2(s, sizeof(s));
+	tokcpy2(s, ArraySize(s));
 
 	if (strstr(s, "center") != NULL)
 	{
@@ -1694,7 +1694,7 @@ GLOBAL void set_html_quotes(void)
 {
 	char s[256];
 
-	tokcpy2(s, sizeof(s));				/* get command parameters */
+	tokcpy2(s, ArraySize(s));				/* get command parameters */
 
 	if (strstr(s, "classic") != NULL)
 	{

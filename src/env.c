@@ -3387,7 +3387,7 @@ GLOBAL void c_item(void)
 				add_description();
 				replace_once(token[0], "[", BOLD_ON);
 				replace_last(token[0], "]", BOLD_OFF);
-				um_strcpy(sBig, token[0], sizeof(sBig), "c_item[17]");
+				um_strcpy(sBig, token[0], ArraySize(sBig), "c_item[17]");
 
 				if (desttype == TORTF)	/* RTF formatting: "{<descriptionTitle>\par }" */
 				{
@@ -3432,7 +3432,7 @@ GLOBAL void c_item(void)
 				add_description();
 				delete_once(token[0], "[");
 				delete_last(token[0], "]");
-				um_strcpy(sBig, token[0], sizeof(sBig), "c_item[18]");
+				um_strcpy(sBig, token[0], ArraySize(sBig), "c_item[18]");
 				if (desttype == TORTF)
 				{
 					c_rtf_styles(sBig);
@@ -3543,7 +3543,7 @@ GLOBAL void c_item(void)
 				add_description();
 				replace_once(token[0], "[", BOLD_ON);
 				replace_last(token[0], "]", BOLD_OFF);
-				um_strcpy(sBig, token[0], sizeof(sBig), "c_item[20]");
+				um_strcpy(sBig, token[0], ArraySize(sBig), "c_item[20]");
 				replace_udo_quotes(sBig);
 
 				if (!bDocAutorefItemsOff)
@@ -3551,7 +3551,7 @@ GLOBAL void c_item(void)
 
 				c_internal_styles(sBig);
 				strinsert(sBig, "<dt>");
-				um_strcat(sBig, "</dt>\n<dd>\n", sizeof(sBig), "c_item[21]");
+				um_strcat(sBig, "</dt>\n<dd>\n", ArraySize(sBig), "c_item[21]");
 			} else
 			{
 				strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>\n");
@@ -3559,7 +3559,7 @@ GLOBAL void c_item(void)
 
 			if (!bEnvCompressed[iEnvLevel])
 			{
-				um_strcat(sBig, "<p>", sizeof(sBig), "c_item[22]");
+				um_strcat(sBig, "<p>", ArraySize(sBig), "c_item[22]");
 				bParagraphOpen = TRUE;
 			}
 
@@ -3603,7 +3603,7 @@ GLOBAL void c_item(void)
 					break;
 				}
 
-				um_strcpy(sBig, token[0], sizeof(sBig), "c_item[23]");
+				um_strcpy(sBig, token[0], ArraySize(sBig), "c_item[23]");
 				replace_udo_quotes(sBig);
 
 				if (!bDocAutorefItemsOff)

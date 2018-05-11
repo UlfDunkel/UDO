@@ -1454,8 +1454,8 @@ LOCAL _BOOL output_raw_file(const char *filename)
 	char tmp_filename[MYFILE_FULL_LEN];
 	size_t len;
 
-	um_strcpy(old_filename, filename, sizeof(old_filename), "output_raw_file[1]");
-	um_strcpy(tmp_filename, filename, sizeof(tmp_filename), "output_raw_file[2]");
+	um_strcpy(old_filename, filename, ArraySize(old_filename), "output_raw_file[1]");
+	um_strcpy(tmp_filename, filename, ArraySize(tmp_filename), "output_raw_file[2]");
 
 	build_include_filename(tmp_filename, infile.full, "");
 
@@ -1665,12 +1665,12 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
 	strcpy(s, numbers);
 
 	if (s[0] != EOS)
-		um_strcat(s, " ", sizeof(s), "!stg_headline");
+		um_strcat(s, " ", ArraySize(s), "!stg_headline");
 
 	if (nodename[0] == EOS)
-		tokcat(s, sizeof(s));
+		tokcat(s, ArraySize(s));
 	else
-		um_strcat(s, nodename, sizeof(s), "!stg_headline");
+		um_strcat(s, nodename, ArraySize(s), "!stg_headline");
 
 	replace_udo_quotes(s);
 	delete_all_divis(s);
@@ -8865,7 +8865,7 @@ GLOBAL void set_raw_header_filename(void)
 	if (token[1][0] == EOS)
 		return;
 
-	um_strcpy(s, token[1], sizeof(s), "set_raw_header_filename[1]");
+	um_strcpy(s, token[1], ArraySize(s), "set_raw_header_filename[1]");
 
 	if (p1_toc_counter == 0)
 	{
@@ -9475,7 +9475,7 @@ GLOBAL void set_chapter_icon_text(void)
 	if (token[1][0] == EOS)
 		return;
 
-	tokcpy2(s, sizeof(s));
+	tokcpy2(s, ArraySize(s));
 	auto_quote_chars(s, TRUE);
 
 	ptr = strdup(s);
