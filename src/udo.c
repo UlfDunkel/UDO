@@ -1761,7 +1761,7 @@ GLOBAL int str_for_desttype(const char *s, _BOOL warn)
 			} else
 			{
 				i = desttype_from_name(p);
-				if (i < 0 && warn && iUdopass == PASS1)
+				if (i < 0 && warn)
 					warning_message(_("unknown output format: %s"), p);
 				if (desttype == i)
 				{
@@ -1791,7 +1791,7 @@ GLOBAL int str_for_desttype(const char *s, _BOOL warn)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd)
+GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd, _BOOL warn)
 {
 	register int i;
 	_BOOL flag = FALSE;					/* return value */
@@ -1807,7 +1807,7 @@ GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd)
 			/* stop checking for commands like !subtoc [all] !depth 1 */
 			if (token[i][0] == META_C)
 				break;
-			val = str_for_desttype(token[i], TRUE);
+			val = str_for_desttype(token[i], warn);
 			flag |= val > 0;
 			if (val < 0)
 				*schalter = FALSE;
@@ -9023,7 +9023,7 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 	{
 		if (strcmp(token[0], udoswitch[i].magic) == 0)
 		{
-			if (is_for_desttype(udoswitch[i].flag, udoswitch[i].magic))
+			if (is_for_desttype(udoswitch[i].flag, udoswitch[i].magic, TRUE))
 			{
 				get_switch_par(&(udoswitch[i]));
 			}

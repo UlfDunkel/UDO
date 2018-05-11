@@ -441,7 +441,7 @@ GLOBAL void output_ascii_line(const char *c, const size_t len);
    /* ? */
 GLOBAL int str_for_desttype(const char *s, _BOOL warn);
    /* ? */
-GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd);
+GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd, _BOOL WARN);
 
 
    /* --- colors --- */

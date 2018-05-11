@@ -326,7 +326,8 @@ LOCAL TOCIDX last_n_index[TOC_MAXDEPTH];	/* toc_table[]-Indizes fuer Titelzeilen
 
 LOCAL TOCTYPE active_nodetype;			/* Flag fuer check_endnode() */
 
-LOCAL const char *form_t_n[TOC_MAXDEPTH][TOC_MAXDEPTH];
+LOCAL const char *form_t_numbers[TOC_MAXDEPTH][TOC_MAXDEPTH];
+LOCAL const char *form_t_nonumbers[TOC_MAXDEPTH][TOC_MAXDEPTH];
 
 LOCAL const char *toc_list_top;
 LOCAL const char *toc_list_end;
@@ -7071,7 +7072,7 @@ LOCAL void print_tabs(int count)
 *
 ******************************************|************************************/
 
-LOCAL void toc_output(TOCTYPE currdepth, const int depth, _BOOL for_apx)
+LOCAL void toc_output(TOCTYPE currdepth, const int depth, _BOOL for_apx, _BOOL no_numbers)
 {
 	register TOCIDX i;
 	LABIDX li;
@@ -7253,10 +7254,10 @@ LOCAL void toc_output(TOCTYPE currdepth, const int depth, _BOOL for_apx)
 
 						if (no_numbers)
 						{
-							sprintf(n, form_t_n[currdepth][level], ref);
+							sprintf(n, form_t_nonumbers[currdepth][level], ref);
 						} else
 						{
-							strcpy(n, form_t_n[currdepth][level]);
+							strcpy(n, form_t_numbers[currdepth][level]);
 							if (for_apx)
 								sprintf(s, "%2c", toc_table[i]->nr[TOC_NODE1] + 'A' - 1);
 							else
@@ -7434,26 +7435,26 @@ LOCAL void output_appendix_line(void)
 *
 ******************************************|************************************/
 
-LOCAL void do_toc(int depth)
+LOCAL void do_toc(int depth, _BOOL no_numbers)
 {
 	if (desttype == TORTF)				/* no TOC in RTF as we have no page numbers! */
 		return;
 
-	toc_output(TOC_NODE1, depth, FALSE);
+	toc_output(TOC_NODE1, depth, FALSE, no_numbers);
 
 	if (apx_available)
 	{
 		output_appendix_line();
-		toc_output(TOC_NODE1, depth, TRUE);
+		toc_output(TOC_NODE1, depth, TRUE, no_numbers);
 	}
 }
 
 
-LOCAL void do_subtoc(TOCTYPE currdepth, int depth)
+LOCAL void do_subtoc(TOCTYPE currdepth, int depth, _BOOL no_numbers)
 {
 	if (desttype == TORTF)
 		return;
-	toc_output(currdepth, depth, bInsideAppendix);
+	toc_output(currdepth, depth, bInsideAppendix, no_numbers);
 }
 
 
@@ -7736,6 +7737,19 @@ LOCAL int get_toccmd_depth(void)
 }
 
 
+LOCAL _BOOL get_toccmd_nonumbers(void)
+{
+	register int i;
+
+	for (i = 1; i < token_counter; i++)
+	{
+		if (strcmp(token[i], "!no_numbers") == 0)
+			return TRUE;
+	}
+	return no_numbers;
+}
+
+
 
 
 
@@ -7753,8 +7767,9 @@ GLOBAL void c_toc(void)
 {
 	_BOOL flag = FALSE;
 	int d;
-
-	if (is_for_desttype(&flag, "!toc"))
+	_BOOL no_numbers;
+	
+	if (is_for_desttype(&flag, "!toc", TRUE))
 	{
 		d = get_toccmd_depth();
 		if (d == 0)
@@ -7764,10 +7779,11 @@ GLOBAL void c_toc(void)
 			else
 				d = TOC_MAXDEPTH;
 		}
-
+		no_numbers = get_toccmd_nonumbers();
+		
 		if (desttype == TOINF)
 			d = 1;
-		do_toc(d);
+		do_toc(d, no_numbers);
 	}
 }
 
@@ -7789,16 +7805,18 @@ GLOBAL void c_subtoc(void)
 {
 	_BOOL flag = FALSE;
 	int d;
+	_BOOL no_numbers;
 
 	/* token[0] enthaelt das !sub*toc-Kommando */
-	if (is_for_desttype(&flag, token[0]))
+	if (is_for_desttype(&flag, token[0], TRUE))
 	{
 		if (active_nodetype >= TOC_NODE1 && active_nodetype < TOC_MAXDEPTH - 2)
 		{
 			d = get_toccmd_depth();
 			if (d == 0)
 				d = subtocs_depth[active_nodetype];
-			do_subtoc(active_nodetype + 1, d);
+			no_numbers = get_toccmd_nonumbers();
+			do_subtoc(active_nodetype + 1, d, no_numbers);
 		}
 	}
 }
@@ -8005,7 +8023,7 @@ GLOBAL void c_tableofcontents(void)
 		outln(get_lang()->contents);
 		outln("");
 
-		do_toc(1);						/* always 1 */
+		do_toc(1, no_numbers);						/* always 1 */
 		outln("@end ifinfo");
 		break;
 
@@ -8040,7 +8058,7 @@ GLOBAL void c_tableofcontents(void)
 		output_helpid(0);
 		stg_headline("", get_lang()->contents, FALSE);
 
-		do_toc(depth);
+		do_toc(depth, no_numbers);
 #if 0
 		/* no @endnode here, so the user can add raw cmds to TOC page */
 		outln("@endnode");
@@ -8064,7 +8082,7 @@ GLOBAL void c_tableofcontents(void)
 		output_ascii_line("=", strlen(title));
 		outln("");
 
-		do_toc(depth);
+		do_toc(depth, no_numbers);
 		outln("");
 		break;
 
@@ -8086,13 +8104,13 @@ GLOBAL void c_tableofcontents(void)
 				output_ascii_line("=", strlen(title));
 			}
 			outln("");
-			toc_output(TOC_NODE1, depth, FALSE);
+			toc_output(TOC_NODE1, depth, FALSE, no_numbers);
 			outln("");
 		}
 		if (apx_available)
 		{
 			output_appendix_line();
-			toc_output(TOC_NODE1, depth, TRUE);
+			toc_output(TOC_NODE1, depth, TRUE, no_numbers);
 			outln("");
 		}
 		break;
@@ -8133,13 +8151,13 @@ GLOBAL void c_tableofcontents(void)
 			n = um_strdup_printf("\\fs%d", iDocPropfontSize + rtf_structure_height[TOC_NODE1 + 1]);
 			voutlnf("{%s\\b %s}\\par\\pard\\par", n, toc_title[0] != EOS ? toc_title : get_lang()->contents);
 			free(n);
-			toc_output(TOC_NODE1, depth, FALSE);
+			toc_output(TOC_NODE1, depth, FALSE, no_numbers);
 		}
 
 		if (apx_available)
 		{
 			output_appendix_line();
-			toc_output(TOC_NODE1, depth, TRUE);
+			toc_output(TOC_NODE1, depth, TRUE, no_numbers);
 		}
 
 		outln("}\\page");
@@ -8174,13 +8192,13 @@ GLOBAL void c_tableofcontents(void)
 			outln(get_lang()->contents);
 			output_ascii_line("=", strlen(get_lang()->contents));
 			outln("");
-			toc_output(TOC_NODE1, depth, FALSE);
+			toc_output(TOC_NODE1, depth, FALSE, no_numbers);
 		}
 
 		if (apx_available)
 		{
 			output_appendix_line();
-			toc_output(TOC_NODE1, depth, TRUE);
+			toc_output(TOC_NODE1, depth, TRUE, no_numbers);
 		}
 
 		outln("");
@@ -8196,14 +8214,14 @@ GLOBAL void c_tableofcontents(void)
 		if (toc_available)
 		{
 			voutlnf("<h1><a %s=\"%s\">%s</a></h1>", xhtml_id_attr, HTML_LABEL_CONTENTS, get_lang()->contents);
-			toc_output(TOC_NODE1, depth, FALSE);
+			toc_output(TOC_NODE1, depth, FALSE, no_numbers);
 			outln(xhtml_br);
 		}
 
 		if (apx_available)
 		{
 			output_appendix_line();
-			toc_output(TOC_NODE1, depth, TRUE);
+			toc_output(TOC_NODE1, depth, TRUE, no_numbers);
 			outln(xhtml_br);
 		}
 
@@ -8226,13 +8244,13 @@ GLOBAL void c_tableofcontents(void)
 			voutlnf("/NodeName (%s) def", get_lang()->contents);
 			voutlnf("20 changeFontSize (%s) udoshow newline %d changeFontSize", get_lang()->contents,
 					laydat.propfontsize);
-			toc_output(TOC_NODE1, depth, FALSE);
+			toc_output(TOC_NODE1, depth, FALSE, no_numbers);
 		}
 
 		if (apx_available)
 		{
 			output_appendix_line();
-			toc_output(TOC_NODE1, depth, TRUE);
+			toc_output(TOC_NODE1, depth, TRUE, no_numbers);
 		}
 		if (toc_available)
 			c_newpage();
@@ -8274,7 +8292,7 @@ GLOBAL void check_endnode(void)
 		if (active_nodetype >= TOC_NODE1 && active_nodetype < TOC_MAXDEPTH - 2)
 			if (use_auto_subtocs[active_nodetype])
 				if (!toc_table[p2_toc_counter]->ignore_subtoc)
-					do_subtoc(active_nodetype + 1, subtocs_depth[active_nodetype]);
+					do_subtoc(active_nodetype + 1, subtocs_depth[active_nodetype], no_numbers);
 
 		switch (desttype)
 		{
@@ -10466,294 +10484,294 @@ LOCAL void init_toc_forms_numbers(void)
 	case TOAQV:
 	case TOWIN:
 	case TORTF:
-		form_t_n[TOC_NODE1][TOC_NODE1] = "\\li320\\fi-320\\tx320 %d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "\\li880\\fi-560\\tx880 %d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "\\li1800\\fi-920\\tx1800 %d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "\\li4000\\fi-1200\\tx4000 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "\\li5400\\fi-1400\\tx5400 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "\\li7000\\fi-1600\\tx7000 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "\\li8600\\fi-1800\\tx8600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "\\li10200\\fi-2000\\tx10200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE2] = "\\li480\\fi-480\\tx480 %d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE3] = "\\li1400\\fi-920\\tx1400 %d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE4] = "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE5] = "\\li3600\\fi-1200\\tx3600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE6] = "\\li5000\\fi-1400\\tx5000 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE7] = "\\li6600\\fi-1600\\tx6600 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE8] = "\\li8200\\fi-1800\\tx8200 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE9] = "\\li9800\\fi-2000\\tx9800 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE3] = "\\li880\\fi-880\\tx880 %d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE4] = "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE5] = "\\li3000\\fi-1200\\tx3000 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE6] = "\\li4400\\fi-1400\\tx4400 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE7] = "\\li6000\\fi-1600\\tx6000 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE8] = "\\li7600\\fi-1800\\tx7600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE9] = "\\li9200\\fi-2000\\tx9200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE4] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE5] = "\\li2080\\fi-1200\\tx2080 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE6] = "\\li3480\\fi-1400\\tx3480 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE7] = "\\li5080\\fi-1600\\tx5080 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE8] = "\\li6480\\fi-1800\\tx6480 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE9] = "\\li7880\\fi-2000\\tx7880 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE5] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE6] = "\\li2280\\fi-1400\\tx2280 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE7] = "\\li3880\\fi-1600\\tx3880 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE8] = "\\li5280\\fi-1800\\tx5280 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE9] = "\\li6680\\fi-2000\\tx6680 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE6] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE7] = "\\li2480\\fi-1600\\tx2480 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE8] = "\\li3880\\fi-1800\\tx3880 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE9] = "\\li5280\\fi-2000\\tx5280 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE7] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE8] = "\\li2680\\fi-1800\\tx2680 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE9] = "\\li4080\\fi-2000\\tx4080 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE8][TOC_NODE8] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE8][TOC_NODE9] = "\\li2880\\fi-2000\\tx2880 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE9][TOC_NODE9] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE1] = "\\li320\\fi-320\\tx320 %d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE2] = "\\li880\\fi-560\\tx880 %d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE3] = "\\li1800\\fi-920\\tx1800 %d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE4] = "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE5] = "\\li4000\\fi-1200\\tx4000 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE6] = "\\li5400\\fi-1400\\tx5400 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE7] = "\\li7000\\fi-1600\\tx7000 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE8] = "\\li8600\\fi-1800\\tx8600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE9] = "\\li10200\\fi-2000\\tx10200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE2] = "\\li480\\fi-480\\tx480 %d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE3] = "\\li1400\\fi-920\\tx1400 %d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE4] = "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE5] = "\\li3600\\fi-1200\\tx3600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE6] = "\\li5000\\fi-1400\\tx5000 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE7] = "\\li6600\\fi-1600\\tx6600 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE8] = "\\li8200\\fi-1800\\tx8200 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE9] = "\\li9800\\fi-2000\\tx9800 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE3] = "\\li880\\fi-880\\tx880 %d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE4] = "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE5] = "\\li3000\\fi-1200\\tx3000 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE6] = "\\li4400\\fi-1400\\tx4400 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE7] = "\\li6000\\fi-1600\\tx6000 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE8] = "\\li7600\\fi-1800\\tx7600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE9] = "\\li9200\\fi-2000\\tx9200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE4] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE5] = "\\li2080\\fi-1200\\tx2080 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE6] = "\\li3480\\fi-1400\\tx3480 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE7] = "\\li5080\\fi-1600\\tx5080 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE8] = "\\li6480\\fi-1800\\tx6480 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE9] = "\\li7880\\fi-2000\\tx7880 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE5] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE6] = "\\li2280\\fi-1400\\tx2280 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE7] = "\\li3880\\fi-1600\\tx3880 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE8] = "\\li5280\\fi-1800\\tx5280 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE9] = "\\li6680\\fi-2000\\tx6680 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE6] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE7] = "\\li2480\\fi-1600\\tx2480 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE8] = "\\li3880\\fi-1800\\tx3880 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE9] = "\\li5280\\fi-2000\\tx5280 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE7][TOC_NODE7] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE7][TOC_NODE8] = "\\li2680\\fi-1800\\tx2680 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE7][TOC_NODE9] = "\\li4080\\fi-2000\\tx4080 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE8][TOC_NODE8] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE8][TOC_NODE9] = "\\li2880\\fi-2000\\tx2880 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE9][TOC_NODE9] = "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
 		break;
 
 	case TOWH4:
-		form_t_n[TOC_NODE1][TOC_NODE1] = "\\li300\\fi-300\\tx300 %d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "\\li800\\fi-500\\tx800 %d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "\\li1600\\fi-800\\tx1600 %d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "\\li3800\\fi-1200\\tx3800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "\\li5200\\fi-1400\\tx5200 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "\\li6800\\fi-1600\\tx6800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "\\li8400\\fi-1800\\tx8400 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "\\li10000\\fi-2000\\tx10000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE2] = "\\li400\\fi-400\\tx400 %d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE3] = "\\li1300\\fi-920\\tx1300 %d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE4] = "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE5] = "\\li3400\\fi-1200\\tx3400 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE6] = "\\li4800\\fi-1400\\tx4800 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE7] = "\\li6400\\fi-1600\\tx6400 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE8] = "\\li8000\\fi-1800\\tx8000 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE9] = "\\li9600\\fi-2000\\tx10000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE3] = "\\li800\\fi-800\\tx800 %d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE4] = "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE5] = "\\li2800\\fi-1200\\tx2800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE6] = "\\li4200\\fi-1400\\tx4200 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE7] = "\\li5800\\fi-1600\\tx5800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE8] = "\\li7400\\fi-1800\\tx7400 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE9] = "\\li9000\\fi-2000\\tx9000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE4] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE5] = "\\li2000\\fi-1200\\tx2000 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE6] = "\\li3400\\fi-1400\\tx3400 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE7] = "\\li5000\\fi-1600\\tx5000 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE8] = "\\li6600\\fi-1800\\tx6600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE9] = "\\li8200\\fi-2000\\tx8200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE5] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE6] = "\\li2200\\fi-1400\\tx2200 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE7] = "\\li3800\\fi-1600\\tx3800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE8] = "\\li5400\\fi-1800\\tx5400 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE9] = "\\li7000\\fi-2000\\tx7000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE6] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE7] = "\\li2400\\fi-1600\\tx2400 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE8] = "\\li4000\\fi-1800\\tx4000 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE9] = "\\li5600\\fi-2000\\tx5600 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE7] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE8] = "\\li2600\\fi-1800\\tx2600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE9] = "\\li4200\\fi-2000\\tx4200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE8][TOC_NODE8] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE8][TOC_NODE9] = "\\li2800\\fi-2000\\tx2800 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
-		form_t_n[TOC_NODE9][TOC_NODE9] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE1] = "\\li300\\fi-300\\tx300 %d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE2] = "\\li800\\fi-500\\tx800 %d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE3] = "\\li1600\\fi-800\\tx1600 %d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE4] = "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE5] = "\\li3800\\fi-1200\\tx3800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE6] = "\\li5200\\fi-1400\\tx5200 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE7] = "\\li6800\\fi-1600\\tx6800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE8] = "\\li8400\\fi-1800\\tx8400 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE1][TOC_NODE9] = "\\li10000\\fi-2000\\tx10000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE2] = "\\li400\\fi-400\\tx400 %d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE3] = "\\li1300\\fi-920\\tx1300 %d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE4] = "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE5] = "\\li3400\\fi-1200\\tx3400 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE6] = "\\li4800\\fi-1400\\tx4800 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE7] = "\\li6400\\fi-1600\\tx6400 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE8] = "\\li8000\\fi-1800\\tx8000 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE2][TOC_NODE9] = "\\li9600\\fi-2000\\tx10000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE3] = "\\li800\\fi-800\\tx800 %d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE4] = "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE5] = "\\li2800\\fi-1200\\tx2800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE6] = "\\li4200\\fi-1400\\tx4200 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE7] = "\\li5800\\fi-1600\\tx5800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE8] = "\\li7400\\fi-1800\\tx7400 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE3][TOC_NODE9] = "\\li9000\\fi-2000\\tx9000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE4] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE5] = "\\li2000\\fi-1200\\tx2000 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE6] = "\\li3400\\fi-1400\\tx3400 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE7] = "\\li5000\\fi-1600\\tx5000 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE8] = "\\li6600\\fi-1800\\tx6600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE4][TOC_NODE9] = "\\li8200\\fi-2000\\tx8200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE5] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE6] = "\\li2200\\fi-1400\\tx2200 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE7] = "\\li3800\\fi-1600\\tx3800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE8] = "\\li5400\\fi-1800\\tx5400 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE5][TOC_NODE9] = "\\li7000\\fi-2000\\tx7000 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE6] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE7] = "\\li2400\\fi-1600\\tx2400 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE8] = "\\li4000\\fi-1800\\tx4000 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE6][TOC_NODE9] = "\\li5600\\fi-2000\\tx5600 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE7][TOC_NODE7] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE7][TOC_NODE8] = "\\li2600\\fi-1800\\tx2600 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE7][TOC_NODE9] = "\\li4200\\fi-2000\\tx4200 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE8][TOC_NODE8] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE8][TOC_NODE9] = "\\li2800\\fi-2000\\tx2800 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
+		form_t_numbers[TOC_NODE9][TOC_NODE9] = "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d.%d.%d.%d.%d\\tab{%s}\\par\\pard";
 		break;
 
 	case TOHAH:
 	case TOHTM:
 	case TOMHH:
-		form_t_n[TOC_NODE1][TOC_NODE1] = "<li>%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "<li>%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "<li>%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "<li>%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "<li>%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "<li>%d.%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "<li>%d.%d.%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "<li>%d.%d.%d.%d.%d.%d.%d %d %s";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "<li>%d.%d.%d.%d.%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE2][TOC_NODE2] = form_t_n[TOC_NODE1][TOC_NODE2];
-		form_t_n[TOC_NODE2][TOC_NODE3] = form_t_n[TOC_NODE1][TOC_NODE3];
-		form_t_n[TOC_NODE2][TOC_NODE4] = form_t_n[TOC_NODE1][TOC_NODE4];
-		form_t_n[TOC_NODE2][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE2][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE2][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE2][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE2][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE3][TOC_NODE3] = form_t_n[TOC_NODE1][TOC_NODE3];
-		form_t_n[TOC_NODE3][TOC_NODE4] = form_t_n[TOC_NODE1][TOC_NODE4];
-		form_t_n[TOC_NODE3][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE3][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE3][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE3][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE3][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE4][TOC_NODE4] = form_t_n[TOC_NODE1][TOC_NODE4];
-		form_t_n[TOC_NODE4][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE4][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE4][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE4][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE4][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE5][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE5][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE5][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE5][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE5][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE6][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE6][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE6][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE6][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE7][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE7][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE7][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE8][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE8][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE9][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE1][TOC_NODE1] = "<li>%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE2] = "<li>%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE3] = "<li>%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE4] = "<li>%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE5] = "<li>%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE6] = "<li>%d.%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE7] = "<li>%d.%d.%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE8] = "<li>%d.%d.%d.%d.%d.%d.%d %d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE9] = "<li>%d.%d.%d.%d.%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE2] = form_t_numbers[TOC_NODE1][TOC_NODE2];
+		form_t_numbers[TOC_NODE2][TOC_NODE3] = form_t_numbers[TOC_NODE1][TOC_NODE3];
+		form_t_numbers[TOC_NODE2][TOC_NODE4] = form_t_numbers[TOC_NODE1][TOC_NODE4];
+		form_t_numbers[TOC_NODE2][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE2][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE2][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE2][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE2][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE3][TOC_NODE3] = form_t_numbers[TOC_NODE1][TOC_NODE3];
+		form_t_numbers[TOC_NODE3][TOC_NODE4] = form_t_numbers[TOC_NODE1][TOC_NODE4];
+		form_t_numbers[TOC_NODE3][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE3][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE3][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE3][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE3][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE4][TOC_NODE4] = form_t_numbers[TOC_NODE1][TOC_NODE4];
+		form_t_numbers[TOC_NODE4][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE4][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE4][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE4][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE4][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE5][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE5][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE5][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE5][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE5][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE6][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE6][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE6][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE6][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE7][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE7][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE7][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE8][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE8][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE9][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
 		break;
 
 	case TOTEX:
 	case TOPDL:
-		form_t_n[TOC_NODE1][TOC_NODE1] = "\\item %d %s";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "\\item %d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "\\item %d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "\\item %d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "\\item %d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "\\item %d.%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "\\item %d.%d.%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "\\item %d.%d.%d.%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "\\item %d.%d.%d.%d.%d.%d.%d.%d.%d %s";
-		form_t_n[TOC_NODE2][TOC_NODE2] = form_t_n[TOC_NODE1][TOC_NODE2];
-		form_t_n[TOC_NODE2][TOC_NODE3] = form_t_n[TOC_NODE1][TOC_NODE3];
-		form_t_n[TOC_NODE2][TOC_NODE4] = form_t_n[TOC_NODE1][TOC_NODE4];
-		form_t_n[TOC_NODE2][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE2][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE2][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE2][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE2][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE3][TOC_NODE3] = form_t_n[TOC_NODE1][TOC_NODE3];
-		form_t_n[TOC_NODE3][TOC_NODE4] = form_t_n[TOC_NODE1][TOC_NODE4];
-		form_t_n[TOC_NODE3][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE3][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE3][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE3][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE3][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE4][TOC_NODE4] = form_t_n[TOC_NODE1][TOC_NODE4];
-		form_t_n[TOC_NODE4][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE4][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE4][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE4][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE4][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE5][TOC_NODE5] = form_t_n[TOC_NODE1][TOC_NODE5];
-		form_t_n[TOC_NODE5][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE5][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE5][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE5][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE6][TOC_NODE6] = form_t_n[TOC_NODE1][TOC_NODE6];
-		form_t_n[TOC_NODE6][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE6][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE6][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE7][TOC_NODE7] = form_t_n[TOC_NODE1][TOC_NODE7];
-		form_t_n[TOC_NODE7][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE7][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE8][TOC_NODE8] = form_t_n[TOC_NODE1][TOC_NODE8];
-		form_t_n[TOC_NODE8][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
-		form_t_n[TOC_NODE9][TOC_NODE9] = form_t_n[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE1][TOC_NODE1] = "\\item %d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE2] = "\\item %d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE3] = "\\item %d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE4] = "\\item %d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE5] = "\\item %d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE6] = "\\item %d.%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE7] = "\\item %d.%d.%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE8] = "\\item %d.%d.%d.%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE9] = "\\item %d.%d.%d.%d.%d.%d.%d.%d.%d %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE2] = form_t_numbers[TOC_NODE1][TOC_NODE2];
+		form_t_numbers[TOC_NODE2][TOC_NODE3] = form_t_numbers[TOC_NODE1][TOC_NODE3];
+		form_t_numbers[TOC_NODE2][TOC_NODE4] = form_t_numbers[TOC_NODE1][TOC_NODE4];
+		form_t_numbers[TOC_NODE2][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE2][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE2][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE2][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE2][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE3][TOC_NODE3] = form_t_numbers[TOC_NODE1][TOC_NODE3];
+		form_t_numbers[TOC_NODE3][TOC_NODE4] = form_t_numbers[TOC_NODE1][TOC_NODE4];
+		form_t_numbers[TOC_NODE3][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE3][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE3][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE3][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE3][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE4][TOC_NODE4] = form_t_numbers[TOC_NODE1][TOC_NODE4];
+		form_t_numbers[TOC_NODE4][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE4][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE4][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE4][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE4][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE5][TOC_NODE5] = form_t_numbers[TOC_NODE1][TOC_NODE5];
+		form_t_numbers[TOC_NODE5][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE5][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE5][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE5][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE6][TOC_NODE6] = form_t_numbers[TOC_NODE1][TOC_NODE6];
+		form_t_numbers[TOC_NODE6][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE6][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE6][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE7][TOC_NODE7] = form_t_numbers[TOC_NODE1][TOC_NODE7];
+		form_t_numbers[TOC_NODE7][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE7][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE8][TOC_NODE8] = form_t_numbers[TOC_NODE1][TOC_NODE8];
+		form_t_numbers[TOC_NODE8][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
+		form_t_numbers[TOC_NODE9][TOC_NODE9] = form_t_numbers[TOC_NODE1][TOC_NODE9];
 		break;
 
 	case TOKPS:
-		form_t_n[TOC_NODE1][TOC_NODE1] = "(%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "(   %d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "(        %d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "(               %d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "(                        %d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "(                                   %d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "(                                                %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "(                                                               %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "(                                                                                %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE2] = "(%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE3] = "(     %d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE4] = "(            %d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE5] = "(                     %d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE6] = "(                                %d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE7] = "(                                             %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE8] = "(                                                            %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE2][TOC_NODE9] = "(                                                                             %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE3][TOC_NODE3] = "(%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE3][TOC_NODE4] = "(       %d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE3][TOC_NODE5] = "(                %d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE3][TOC_NODE6] = "(                           %d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE3][TOC_NODE7] = "(                                        %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE3][TOC_NODE8] = "(                                                       %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE3][TOC_NODE9] = "(                                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE4][TOC_NODE4] = "(%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE4][TOC_NODE5] = "(         %d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE4][TOC_NODE6] = "(                    %d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE4][TOC_NODE7] = "(                                 %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE4][TOC_NODE8] = "(                                                %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE4][TOC_NODE9] = "(                                                                 %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE5][TOC_NODE5] = "(%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE5][TOC_NODE6] = "(           %d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE5][TOC_NODE7] = "(                        %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE5][TOC_NODE8] = "(                                       %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE5][TOC_NODE9] = "(                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE6][TOC_NODE6] = "(%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE6][TOC_NODE7] = "(             %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE6][TOC_NODE8] = "(                            %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE6][TOC_NODE9] = "(                                             %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE7][TOC_NODE7] = "(%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE7][TOC_NODE8] = "(               %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE7][TOC_NODE9] = "(                                %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE8][TOC_NODE8] = "(%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE8][TOC_NODE9] = "(                 %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
-		form_t_n[TOC_NODE9][TOC_NODE9] = "(%d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE1] = "(%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE2] = "(   %d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE3] = "(        %d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE4] = "(               %d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE5] = "(                        %d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE6] = "(                                   %d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE7] = "(                                                %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE8] = "(                                                               %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE1][TOC_NODE9] = "(                                                                                %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE2] = "(%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE3] = "(     %d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE4] = "(            %d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE5] = "(                     %d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE6] = "(                                %d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE7] = "(                                             %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE8] = "(                                                            %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE2][TOC_NODE9] = "(                                                                             %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE3][TOC_NODE3] = "(%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE3][TOC_NODE4] = "(       %d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE3][TOC_NODE5] = "(                %d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE3][TOC_NODE6] = "(                           %d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE3][TOC_NODE7] = "(                                        %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE3][TOC_NODE8] = "(                                                       %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE3][TOC_NODE9] = "(                                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE4][TOC_NODE4] = "(%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE4][TOC_NODE5] = "(         %d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE4][TOC_NODE6] = "(                    %d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE4][TOC_NODE7] = "(                                 %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE4][TOC_NODE8] = "(                                                %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE4][TOC_NODE9] = "(                                                                 %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE5][TOC_NODE5] = "(%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE5][TOC_NODE6] = "(           %d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE5][TOC_NODE7] = "(                        %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE5][TOC_NODE8] = "(                                       %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE5][TOC_NODE9] = "(                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE6][TOC_NODE6] = "(%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE6][TOC_NODE7] = "(             %d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE6][TOC_NODE8] = "(                            %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE6][TOC_NODE9] = "(                                             %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE7][TOC_NODE7] = "(%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE7][TOC_NODE8] = "(               %d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE7][TOC_NODE9] = "(                                %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE8][TOC_NODE8] = "(%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE8][TOC_NODE9] = "(                 %d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
+		form_t_numbers[TOC_NODE9][TOC_NODE9] = "(%d.%d.%d.%d.%d.%d.%d.%d.%d ) %s udoshow newline";
 		break;
 
 	default:
-		form_t_n[TOC_NODE1][TOC_NODE1] = "%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "   %d.%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "        %d.%d.%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "               %d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "                        %d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "                                   %d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "                                                %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "                                                               %d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "                                                                                %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE2] = "%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE3] = "     %d.%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE4] = "            %d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE5] = "                     %d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE6] = "                                %d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE7] = "                                             %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE8] = "                                                            %d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE2][TOC_NODE9] = "                                                                             %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE3][TOC_NODE3] = "%d.%d.%d  %s";
-		form_t_n[TOC_NODE3][TOC_NODE4] = "       %d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE3][TOC_NODE5] = "                %d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE3][TOC_NODE6] = "                           %d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE3][TOC_NODE7] = "                                        %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE3][TOC_NODE8] = "                                                       %d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE3][TOC_NODE9] = "                                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE4][TOC_NODE4] = "%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE4][TOC_NODE5] = "         %d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE4][TOC_NODE6] = "                    %d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE4][TOC_NODE7] = "                                 %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE4][TOC_NODE8] = "                                                %d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE4][TOC_NODE9] = "                                                                 %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE5][TOC_NODE5] = "%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE5][TOC_NODE6] = "           %d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE5][TOC_NODE7] = "                        %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE5][TOC_NODE8] = "                                       %d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE5][TOC_NODE9] = "                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE6][TOC_NODE6] = "%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE6][TOC_NODE7] = "             %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE6][TOC_NODE8] = "                            %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE6][TOC_NODE9] = "                                             %d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE7][TOC_NODE7] = "%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE7][TOC_NODE8] = "               %d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE7][TOC_NODE9] = "                                %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE8][TOC_NODE8] = "%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE8][TOC_NODE9] = "                 %d.%d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
-		form_t_n[TOC_NODE9][TOC_NODE9] = "%d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE1] = "%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE2] = "   %d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE3] = "        %d.%d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE4] = "               %d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE5] = "                        %d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE6] = "                                   %d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE7] = "                                                %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE8] = "                                                               %d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE1][TOC_NODE9] = "                                                                                %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE2] = "%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE3] = "     %d.%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE4] = "            %d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE5] = "                     %d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE6] = "                                %d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE7] = "                                             %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE8] = "                                                            %d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE2][TOC_NODE9] = "                                                                             %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE3][TOC_NODE3] = "%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE3][TOC_NODE4] = "       %d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE3][TOC_NODE5] = "                %d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE3][TOC_NODE6] = "                           %d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE3][TOC_NODE7] = "                                        %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE3][TOC_NODE8] = "                                                       %d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE3][TOC_NODE9] = "                                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE4][TOC_NODE4] = "%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE4][TOC_NODE5] = "         %d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE4][TOC_NODE6] = "                    %d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE4][TOC_NODE7] = "                                 %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE4][TOC_NODE8] = "                                                %d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE4][TOC_NODE9] = "                                                                 %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE5][TOC_NODE5] = "%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE5][TOC_NODE6] = "           %d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE5][TOC_NODE7] = "                        %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE5][TOC_NODE8] = "                                       %d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE5][TOC_NODE9] = "                                                        %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE6][TOC_NODE6] = "%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE6][TOC_NODE7] = "             %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE6][TOC_NODE8] = "                            %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE6][TOC_NODE9] = "                                             %d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE7][TOC_NODE7] = "%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE7][TOC_NODE8] = "               %d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE7][TOC_NODE9] = "                                %d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE8][TOC_NODE8] = "%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE8][TOC_NODE9] = "                 %d.%d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
+		form_t_numbers[TOC_NODE9][TOC_NODE9] = "%d.%d.%d.%d.%d.%d.%d.%d.%d  %s";
 		break;
 	}
 }
@@ -10783,51 +10801,51 @@ LOCAL void init_toc_forms_no_numbers(void)
 	case TOWIN:
 	case TOWH4:
 	case TORTF:
-		form_t_n[TOC_NODE1][TOC_NODE1] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "\\li1120{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "\\li1680{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "\\li2240{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "\\li2800{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "\\li3360{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "\\li3920{%s}\\par\\pard";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "\\li4480{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE2] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE3] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE4] = "\\li1120{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE5] = "\\li1680{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE6] = "\\li2240{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE7] = "\\li2800{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE8] = "\\li3360{%s}\\par\\pard";
-		form_t_n[TOC_NODE2][TOC_NODE9] = "\\li3920{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE3] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE4] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE5] = "\\li1120{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE6] = "\\li1680{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE7] = "\\li2240{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE8] = "\\li2800{%s}\\par\\pard";
-		form_t_n[TOC_NODE3][TOC_NODE9] = "\\li3360{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE4] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE5] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE6] = "\\li1120{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE7] = "\\li1680{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE8] = "\\li2240{%s}\\par\\pard";
-		form_t_n[TOC_NODE4][TOC_NODE9] = "\\li2800{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE5] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE6] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE7] = "\\li1120{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE8] = "\\li1680{%s}\\par\\pard";
-		form_t_n[TOC_NODE5][TOC_NODE9] = "\\li2240{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE6] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE7] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE8] = "\\li1120{%s}\\par\\pard";
-		form_t_n[TOC_NODE6][TOC_NODE9] = "\\li1680{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE7] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE8] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE7][TOC_NODE9] = "\\li1120{%s}\\par\\pard";
-		form_t_n[TOC_NODE8][TOC_NODE8] = "{%s}\\par\\pard";
-		form_t_n[TOC_NODE8][TOC_NODE9] = "\\li560{%s}\\par\\pard";
-		form_t_n[TOC_NODE9][TOC_NODE9] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE1] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE2] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE3] = "\\li1120{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE4] = "\\li1680{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE5] = "\\li2240{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE6] = "\\li2800{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE7] = "\\li3360{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE8] = "\\li3920{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE9] = "\\li4480{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE2] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE3] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE4] = "\\li1120{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE5] = "\\li1680{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE6] = "\\li2240{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE7] = "\\li2800{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE8] = "\\li3360{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE9] = "\\li3920{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE3] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE4] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE5] = "\\li1120{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE6] = "\\li1680{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE7] = "\\li2240{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE8] = "\\li2800{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE9] = "\\li3360{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE4] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE5] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE6] = "\\li1120{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE7] = "\\li1680{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE8] = "\\li2240{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE9] = "\\li2800{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE5] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE6] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE7] = "\\li1120{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE8] = "\\li1680{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE9] = "\\li2240{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE6] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE7] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE8] = "\\li1120{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE9] = "\\li1680{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE7] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE8] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE9] = "\\li1120{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE8][TOC_NODE8] = "{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE8][TOC_NODE9] = "\\li560{%s}\\par\\pard";
+		form_t_nonumbers[TOC_NODE9][TOC_NODE9] = "{%s}\\par\\pard";
 		break;
 
 	case TOHAH:
@@ -10836,7 +10854,7 @@ LOCAL void init_toc_forms_no_numbers(void)
 		for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
 			for (d2 = d; d2 < TOC_MAXDEPTH; d2++)
 			{
-				form_t_n[d][d2] = "<li>%s";
+				form_t_nonumbers[d][d2] = "<li>%s";
 			}
 		break;
 
@@ -10845,7 +10863,7 @@ LOCAL void init_toc_forms_no_numbers(void)
 		for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
 			for (d2 = d; d2 < TOC_MAXDEPTH; d2++)
 			{
-				form_t_n[d][d2] = "\\item %s";
+				form_t_nonumbers[d][d2] = "\\item %s";
 			}
 		break;
 
@@ -10853,104 +10871,104 @@ LOCAL void init_toc_forms_no_numbers(void)
 		for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
 			for (d2 = d; d2 < TOC_MAXDEPTH; d2++)
 			{
-				form_t_n[d][d2] = "%s";
+				form_t_nonumbers[d][d2] = "%s";
 			}
 		break;
 
 	case TOKPS:
-		form_t_n[TOC_NODE1][TOC_NODE1] = " %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "    %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "       %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "          %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "             %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "                %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "                   %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "                      %s newline";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "                         %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE2] = " %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE3] = "    %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE4] = "       %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE5] = "          %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE6] = "             %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE7] = "               %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE8] = "                  %s newline";
-		form_t_n[TOC_NODE2][TOC_NODE9] = "                     %s newline";
-		form_t_n[TOC_NODE3][TOC_NODE3] = " %s newline";
-		form_t_n[TOC_NODE3][TOC_NODE4] = "    %s newline";
-		form_t_n[TOC_NODE3][TOC_NODE5] = "       %s newline";
-		form_t_n[TOC_NODE3][TOC_NODE6] = "          %s newline";
-		form_t_n[TOC_NODE3][TOC_NODE7] = "             %s newline";
-		form_t_n[TOC_NODE3][TOC_NODE8] = "                %s newline";
-		form_t_n[TOC_NODE3][TOC_NODE9] = "                   %s newline";
-		form_t_n[TOC_NODE4][TOC_NODE4] = " %s newline";
-		form_t_n[TOC_NODE4][TOC_NODE5] = "    %s newline";
-		form_t_n[TOC_NODE4][TOC_NODE6] = "      %s newline";
-		form_t_n[TOC_NODE4][TOC_NODE7] = "         %s newline";
-		form_t_n[TOC_NODE4][TOC_NODE8] = "           %s newline";
-		form_t_n[TOC_NODE4][TOC_NODE9] = "             %s newline";
-		form_t_n[TOC_NODE5][TOC_NODE5] = " %s newline";
-		form_t_n[TOC_NODE5][TOC_NODE6] = "    %s newline";
-		form_t_n[TOC_NODE5][TOC_NODE7] = "       %s newline";
-		form_t_n[TOC_NODE5][TOC_NODE8] = "          %s newline";
-		form_t_n[TOC_NODE5][TOC_NODE9] = "             %s newline";
-		form_t_n[TOC_NODE6][TOC_NODE6] = " %s newline";
-		form_t_n[TOC_NODE6][TOC_NODE7] = "    %s newline";
-		form_t_n[TOC_NODE6][TOC_NODE8] = "       %s newline";
-		form_t_n[TOC_NODE6][TOC_NODE9] = "          %s newline";
-		form_t_n[TOC_NODE7][TOC_NODE7] = " %s newline";
-		form_t_n[TOC_NODE7][TOC_NODE8] = "    %s newline";
-		form_t_n[TOC_NODE7][TOC_NODE9] = "       %s newline";
-		form_t_n[TOC_NODE8][TOC_NODE8] = " %s newline";
-		form_t_n[TOC_NODE8][TOC_NODE9] = "    %s newline";
-		form_t_n[TOC_NODE9][TOC_NODE9] = " %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE1] = " %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE2] = "    %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE3] = "       %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE4] = "          %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE5] = "             %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE6] = "                %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE7] = "                   %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE8] = "                      %s newline";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE9] = "                         %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE2] = " %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE3] = "    %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE4] = "       %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE5] = "          %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE6] = "             %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE7] = "               %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE8] = "                  %s newline";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE9] = "                     %s newline";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE3] = " %s newline";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE4] = "    %s newline";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE5] = "       %s newline";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE6] = "          %s newline";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE7] = "             %s newline";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE8] = "                %s newline";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE9] = "                   %s newline";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE4] = " %s newline";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE5] = "    %s newline";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE6] = "      %s newline";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE7] = "         %s newline";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE8] = "           %s newline";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE9] = "             %s newline";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE5] = " %s newline";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE6] = "    %s newline";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE7] = "       %s newline";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE8] = "          %s newline";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE9] = "             %s newline";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE6] = " %s newline";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE7] = "    %s newline";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE8] = "       %s newline";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE9] = "          %s newline";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE7] = " %s newline";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE8] = "    %s newline";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE9] = "       %s newline";
+		form_t_nonumbers[TOC_NODE8][TOC_NODE8] = " %s newline";
+		form_t_nonumbers[TOC_NODE8][TOC_NODE9] = "    %s newline";
+		form_t_nonumbers[TOC_NODE9][TOC_NODE9] = " %s newline";
 		break;
 
 	default:
-		form_t_n[TOC_NODE1][TOC_NODE1] = " %s";
-		form_t_n[TOC_NODE1][TOC_NODE2] = "    %s";
-		form_t_n[TOC_NODE1][TOC_NODE3] = "       %s";
-		form_t_n[TOC_NODE1][TOC_NODE4] = "          %s";
-		form_t_n[TOC_NODE1][TOC_NODE5] = "             %s";
-		form_t_n[TOC_NODE1][TOC_NODE6] = "                %s";
-		form_t_n[TOC_NODE1][TOC_NODE7] = "                   %s";
-		form_t_n[TOC_NODE1][TOC_NODE8] = "                      %s";
-		form_t_n[TOC_NODE1][TOC_NODE9] = "                         %s";
-		form_t_n[TOC_NODE2][TOC_NODE2] = " %s";
-		form_t_n[TOC_NODE2][TOC_NODE3] = "    %s";
-		form_t_n[TOC_NODE2][TOC_NODE4] = "       %s";
-		form_t_n[TOC_NODE2][TOC_NODE5] = "          %s";
-		form_t_n[TOC_NODE2][TOC_NODE6] = "             %s";
-		form_t_n[TOC_NODE2][TOC_NODE7] = "               %s";
-		form_t_n[TOC_NODE2][TOC_NODE8] = "                  %s";
-		form_t_n[TOC_NODE2][TOC_NODE9] = "                     %s";
-		form_t_n[TOC_NODE3][TOC_NODE3] = " %s";
-		form_t_n[TOC_NODE3][TOC_NODE4] = "    %s";
-		form_t_n[TOC_NODE3][TOC_NODE5] = "       %s";
-		form_t_n[TOC_NODE3][TOC_NODE6] = "          %s";
-		form_t_n[TOC_NODE3][TOC_NODE7] = "             %s";
-		form_t_n[TOC_NODE3][TOC_NODE8] = "                %s";
-		form_t_n[TOC_NODE3][TOC_NODE9] = "                   %s";
-		form_t_n[TOC_NODE4][TOC_NODE4] = " %s";
-		form_t_n[TOC_NODE4][TOC_NODE5] = "    %s";
-		form_t_n[TOC_NODE4][TOC_NODE6] = "      %s";
-		form_t_n[TOC_NODE4][TOC_NODE7] = "         %s";
-		form_t_n[TOC_NODE4][TOC_NODE8] = "           %s";
-		form_t_n[TOC_NODE4][TOC_NODE9] = "             %s";
-		form_t_n[TOC_NODE5][TOC_NODE5] = " %s";
-		form_t_n[TOC_NODE5][TOC_NODE6] = "    %s";
-		form_t_n[TOC_NODE5][TOC_NODE7] = "       %s";
-		form_t_n[TOC_NODE5][TOC_NODE8] = "          %s";
-		form_t_n[TOC_NODE5][TOC_NODE9] = "             %s";
-		form_t_n[TOC_NODE6][TOC_NODE6] = " %s";
-		form_t_n[TOC_NODE6][TOC_NODE7] = "    %s";
-		form_t_n[TOC_NODE6][TOC_NODE8] = "       %s";
-		form_t_n[TOC_NODE6][TOC_NODE9] = "          %s";
-		form_t_n[TOC_NODE7][TOC_NODE7] = " %s";
-		form_t_n[TOC_NODE7][TOC_NODE8] = "    %s";
-		form_t_n[TOC_NODE7][TOC_NODE9] = "       %s";
-		form_t_n[TOC_NODE8][TOC_NODE8] = " %s";
-		form_t_n[TOC_NODE8][TOC_NODE9] = "    %s";
-		form_t_n[TOC_NODE9][TOC_NODE9] = " %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE1] = " %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE2] = "    %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE3] = "       %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE4] = "          %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE5] = "             %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE6] = "                %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE7] = "                   %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE8] = "                      %s";
+		form_t_nonumbers[TOC_NODE1][TOC_NODE9] = "                         %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE2] = " %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE3] = "    %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE4] = "       %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE5] = "          %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE6] = "             %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE7] = "               %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE8] = "                  %s";
+		form_t_nonumbers[TOC_NODE2][TOC_NODE9] = "                     %s";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE3] = " %s";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE4] = "    %s";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE5] = "       %s";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE6] = "          %s";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE7] = "             %s";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE8] = "                %s";
+		form_t_nonumbers[TOC_NODE3][TOC_NODE9] = "                   %s";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE4] = " %s";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE5] = "    %s";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE6] = "      %s";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE7] = "         %s";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE8] = "           %s";
+		form_t_nonumbers[TOC_NODE4][TOC_NODE9] = "             %s";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE5] = " %s";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE6] = "    %s";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE7] = "       %s";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE8] = "          %s";
+		form_t_nonumbers[TOC_NODE5][TOC_NODE9] = "             %s";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE6] = " %s";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE7] = "    %s";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE8] = "       %s";
+		form_t_nonumbers[TOC_NODE6][TOC_NODE9] = "          %s";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE7] = " %s";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE8] = "    %s";
+		form_t_nonumbers[TOC_NODE7][TOC_NODE9] = "       %s";
+		form_t_nonumbers[TOC_NODE8][TOC_NODE8] = " %s";
+		form_t_nonumbers[TOC_NODE8][TOC_NODE9] = "    %s";
+		form_t_nonumbers[TOC_NODE9][TOC_NODE9] = " %s";
 		break;
 	}
 }
@@ -10975,10 +10993,8 @@ GLOBAL void init_module_toc_pass2(void)
 	char sS[128];
 	TOCTYPE d;
 
-	if (no_numbers)
-		init_toc_forms_no_numbers();
-	else
-		init_toc_forms_numbers();
+	init_toc_forms_no_numbers();
+	init_toc_forms_numbers();
 
 	if (use_compressed_tocs)
 	{
