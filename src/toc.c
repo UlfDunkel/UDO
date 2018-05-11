@@ -3095,10 +3095,10 @@ LOCAL void output_html_meta(_BOOL keywords)
 
 LOCAL void output_html_doctype(void)
 {
-	char s[512];
+	const char *s;
 
 	/* get right charset name */
-	strcpy(s, chr_codepage_charset_name(iEncodingTarget));
+	s = chr_codepage_charset_name(iEncodingTarget);
 
 	switch (html_doctype)
 	{
@@ -4538,21 +4538,22 @@ GLOBAL void html_save_frameset(void)
 	char s[512];
 	char f1[512];
 	char f2[512];
-
+	const char *html_lang = get_lang()->html_lang;
+	
 	if (html_doctype >= XHTML_STRICT)
 	{
 		outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
 		outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
-		voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", get_lang()->html_lang, get_lang()->html_lang);
+		voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", html_lang, html_lang);
 	} else if (html_doctype >= HTML_STRICT)
 	{
 		outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\"");
 		outln("        \"http://www.w3.org/TR/html4/frameset.dtd\">");
-		voutlnf("<html lang=\"%s\">", get_lang()->html_lang);
+		voutlnf("<html lang=\"%s\">", html_lang);
 	} else
 	{
 		output_html_doctype();
-		voutlnf("<html lang=\"%s\">", get_lang()->html_lang);
+		voutlnf("<html lang=\"%s\">", html_lang);
 	}
 
 	outln("<head>");
