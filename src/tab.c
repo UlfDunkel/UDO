@@ -619,7 +619,7 @@ GLOBAL _BOOL table_add_line(char *s)
 		}
 		tl = toklen(cells[x]);
 		sl = strlen(cells[x]);
-		if (tl > table.cell_width[x])
+		if (tl > table.cell_width[x] && table.row[y].cell[x].colspan < 2)
 			table.cell_width[x] = tl;
 
 		ptr = (char *) malloc(sl + 2);
@@ -1416,7 +1416,8 @@ LOCAL void table_output_general(void)
 	size_t tl, add, twidth, toffset, isl;
 	_BOOL tortf, tosrc, ansichars, align_caption;
 	_BOOL inside_center, inside_right, inside_left;
-
+	size_t cell_width;
+	
 	get_table_alignment(&inside_left, &inside_center, &inside_right);
 
 	if (inside_left)
@@ -1736,14 +1737,21 @@ LOCAL void table_output_general(void)
 			}
 
 			add = 0;
+			cell_width = table.cell_width[x];
+			if (table.row[y].cell[x].colspan > 0)
+			{
+				for (i = 1; i < (table.row[y].cell[x].colspan - 1); i++)
+					cell_width += table.cell_width[x + i];
+			}
+			
 			switch (table.col_justification[x])
 			{
 			case TAB_CENTER:
-				stringcenter(f, (int) table.cell_width[x]);
+				stringcenter(f, (int) cell_width);
 				strcat(s, f);
 				tl = toklen(f);
-				if (table.cell_width[x] > tl)
-					add = table.cell_width[x] - tl;
+				if (cell_width > tl)
+					add = cell_width - tl;
 				if (add > 0)
 					for (isl = 0; isl < add; isl++)
 						strcat(s, " ");
@@ -1751,8 +1759,8 @@ LOCAL void table_output_general(void)
 
 			case TAB_RIGHT:
 				tl = toklen(f);
-				if (table.cell_width[x] > tl)
-					add = table.cell_width[x] - tl;
+				if (cell_width > tl)
+					add = cell_width - tl;
 				if (add > 0)
 					for (isl = 0; isl < add; isl++)
 						strcat(s, " ");
@@ -1762,8 +1770,8 @@ LOCAL void table_output_general(void)
 			default:					/* TAB_LEFT */
 				strcat(s, f);
 				tl = toklen(f);
-				if (table.cell_width[x] > tl)
-					add = table.cell_width[x] - tl;
+				if (cell_width > tl)
+					add = cell_width - tl;
 				if (add > 0)
 					for (isl = 0; isl < add; isl++)
 						strcat(s, " ");
@@ -1771,6 +1779,8 @@ LOCAL void table_output_general(void)
 			}
 
 			strcat(s, " ");
+			if (table.row[y].cell[x].colspan > 0)
+				x += (table.row[y].cell[x].colspan - 1);
 		}
 
 		if (table.vertical_bar[table.width] > 0)
