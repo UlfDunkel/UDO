@@ -652,13 +652,74 @@ GLOBAL _BOOL break_action(void)
 *
 ******************************************|************************************/
 
-LOCAL NOINLINE void show_version(void)
+/* ------------------------------------------------------------------------- */
+
+static void compiler_version(char *buf)
 {
-	fprintf(stdout, "UDO %s, %s %s\n", UDO_VERSION_STRING_OS, compile_date, compile_time);
-	fprintf(stdout, "%s\n", COPYRIGHT);
-	fprintf(stdout, _("UDO is Open Source (see %s for further information).\n"), UDO_URL);
+#define bitvers (sizeof(int) < 4 ? "16-bit" : sizeof(void *) >= 16 ? "128-bit" : sizeof(void *) >= 8 ? "64-bit" : "32-bit")
+#define stringify1(x) #x
+#define stringify(x) stringify1(x)
+
+#if defined(_MSC_VER)
+#  if _MSC_VER >= 2000
+	sprintf(buf, "MS Visual Studio, Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1900
+	sprintf(buf, "Visual Studio 2015, Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1800
+	sprintf(buf, "Visual Studio 2013, Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1700
+	sprintf(buf, "Visual Studio 2012, Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1600
+	sprintf(buf, "Visual Studio 2010 Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1500
+	sprintf(buf, "Visual Studio 2008 Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1400
+	sprintf(buf, "Visual Studio 2005 Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1310
+	sprintf(buf, "Visual Studio 2003 Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1300
+	sprintf(buf, "Visual Studio 2002 Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1200
+	sprintf(buf, "Visual Studio 6.0 Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  elif _MSC_VER >= 1100
+	sprintf(buf, "Visual Studio 5.0 Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  else
+	sprintf(buf, "Ancient VC++ Compiler-Version %d.%d (%s)", _MSC_VER / 100, _MSC_VER % 100, bitvers);
+#  endif
+#elif defined(__INTEL_COMPILER)
+	sprintf(buf, "ICC version %d.%d.%d (%s)", __INTEL_COMPILER / 100, (__INTEL_COMPILER / 10) %10), __INTEL_COMPILER % 10, bitvers);
+#elif defined(__clang_version__)
+	sprintf(buf, "clang version %s (%s)", __clang_version__, bitvers);
+#elif defined(__clang__)
+	sprintf(buf, "clang version %s.%s.%s (%s)", stringify(__clang_major__), stringify(__clang_minor__), stringify(__clang_patchlevel__), bitvers);
+#elif defined(__GNUC__)
+	sprintf(buf, "GNU-C version %s.%s.%s (%s)", stringify(__GNUC__), stringify(__GNUC_MINOR__), stringify(__GNUC_PATCHLEVEL__), bitvers);
+#elif defined(__AHCC__)
+	sprintf(buf, "AHCC version %d.%02x (%s)", __AHCC__ >> 8, __AHCC__ & 0xff, bitvers);
+#elif defined(__PUREC__)
+	sprintf(buf, "Pure-C version %d.%02x (%s)", __PUREC__ >> 8, __PUREC__ & 0xff, bitvers);
+#elif defined(SOZOBON)
+	sprintf(buf, "SOZOBON-C V2.00x10 (%s)", bitvers);
+#else
+	sprintf(buf, "Unknown Compiler (%s)", bitvers);
+#endif
+
+#undef bitvers
+#undef stringify1
+#undef stringify
 }
 
+
+LOCAL NOINLINE void show_version(void)
+{
+	char buf[512];
+	
+	fprintf(stdout, "UDO %s, %s %s\n", UDO_VERSION_STRING_OS, compile_date, compile_time);
+	fprintf(stdout, "%s\n", COPYRIGHT);
+	compiler_version(buf);
+	fprintf(stdout, _("Using %s\n"), buf);
+	fprintf(stdout, _("UDO is Open Source (see %s for further information).\n"), UDO_URL);
+}
 
 
 
@@ -677,7 +738,6 @@ LOCAL NOINLINE void show_usage(void)
 {
 	fprintf(stdout, _("usage: %s [-acdDghHilmnpPqrstvwWxy@] [-o outfile] file\n"), strPrgname);
 }
-
 
 
 
