@@ -635,15 +635,7 @@ LOCAL void output_helpid(TOCIDX tocindex)
 		case TOHTM:
 		case TOMHH:
 			label2html(s);
-#if 0
-			if (html_doctype == HTML5)
-			{
-				voutlnf("<a id=\"%s\"></a>", s);
-			} else
-#endif
-			{
-				voutlnf("<a name=\"%s\"></a>", s);
-			}
+			voutlnf("<a %s=\"%s\"></a>", xhtml_id_attr, s);
 			break;
 		case TOLDS:
 			voutlnf("<label id=\"%s\">", s);
@@ -753,15 +745,7 @@ LOCAL void output_aliasses(void)
 				if (!l->is_node && l->is_alias)
 					recode_chrtab(s, CHRTAB_HTML);
 				label2html(s);
-#if 0
-				if (html_doctype == HTML5)
-				{
-					voutlnf("<a id=\"%s\"></a>", s);
-				} else
-#endif
-				{
-					voutlnf("<a name=\"%s\"></a>", s);
-				}
+				voutlnf("<a %s=\"%s\"></a>", xhtml_id_attr, s);
 				break;
 
 			case TOLDS:
@@ -4581,23 +4565,23 @@ GLOBAL void html_save_frameset(void)
 
 	if (html_frames_toc_title == NULL)
 	{
-		sprintf(f1, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s%s>",
-				html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2, xhtml_closer);
+		sprintf(f1, "<frame src=\"%s%s%s\" %s=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s%s>",
+				html_name_prefix, FRAME_FILE_TOC, outfile.suff, xhtml_id_attr, FRAME_NAME_TOC, add2, xhtml_closer);
 	} else
 	{
-		sprintf(f1, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s%s>",
-				html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, html_frames_toc_title, add2,
+		sprintf(f1, "<frame src=\"%s%s%s\" %s=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s%s>",
+				html_name_prefix, FRAME_FILE_TOC, outfile.suff, xhtml_id_attr, FRAME_NAME_TOC, html_frames_toc_title, add2,
 				xhtml_closer);
 	}
 
 	if (html_frames_con_title == NULL)
 	{
-		sprintf(f2, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s>",
-				html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, xhtml_closer);
+		sprintf(f2, "<frame src=\"%s%s%s\" %s=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s>",
+				html_name_prefix, FRAME_FILE_CON, outfile.suff, xhtml_id_attr, FRAME_NAME_CON, xhtml_closer);
 	} else
 	{
-		sprintf(f2, "<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s>",
-				html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, html_frames_con_title, xhtml_closer);
+		sprintf(f2, "<frame src=\"%s%s%s\" %s=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s>",
+				html_name_prefix, FRAME_FILE_CON, outfile.suff, xhtml_id_attr, FRAME_NAME_CON, html_frames_con_title, xhtml_closer);
 	}
 
 	switch (html_frames_position)

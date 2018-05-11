@@ -77,20 +77,11 @@ typedef struct _udoswitch                 /* ---- table of functions ---- */
    /* justified */
 LOCAL void strjustify(char *s, size_t len);
 
-   /* check if command is valid for desired language or format */
-LOCAL _BOOL str_for_destlang(const char *s);
-LOCAL _BOOL str_for_os(const char *s);
-
    /* color handling */
-LOCAL int get_color(void);
 LOCAL void c_drc_bcolor(void);
 LOCAL void c_drc_icolor(void);
 LOCAL void c_drc_ucolor(void);
 LOCAL void c_drc_flags(void);
-
-   /* check if a command uses [on] or [off] */
-LOCAL _BOOL check_on(void);
-LOCAL _BOOL check_off(void);
 
    /* manage symbols */
 LOCAL void c_set(void);
@@ -101,10 +92,6 @@ LOCAL void cmd_outside_preamble(void);
 LOCAL void cmd_inside_preamble(void);
 
    /* miscellaneous */
-LOCAL int idxlist_compare(IDXLIST *p, IDXLIST *q);
-LOCAL void sort_idxlist(void);
-LOCAL void print_ascii_index(void);
-LOCAL void print_info_index(void);
 LOCAL void c_index(void);
 LOCAL void c_toplink(void);
 LOCAL void c_udolink(void);
@@ -217,4 +204,5 @@ LOCAL _BOOL check_modules_pass1(void);
 LOCAL _BOOL check_modules_pass2(void);
 
    /* adjust file names and extensions */
-LOCAL void logfile_adjust(void);
+LOCAL void 
+logfile_adjust(void);

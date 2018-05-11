@@ -439,7 +439,7 @@ GLOBAL void output_ascii_line(const char *c, const size_t len);
    /* --- check if command is available for language/format --- */
 
    /* ? */
-GLOBAL _BOOL str_for_desttype(const char *s);
+GLOBAL int str_for_desttype(const char *s, _BOOL warn);
    /* ? */
 GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd);
 

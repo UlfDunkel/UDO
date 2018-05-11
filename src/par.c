@@ -3496,7 +3496,7 @@ LOCAL _BOOL c_double_raw(char *s, const _BOOL inside_b4_macro)
 	UNUSED(inside_b4_macro);
 	if (get_parameters(s, "raw", 2, 2))
 	{
-		if (str_for_desttype(Param[1]))
+		if (str_for_desttype(Param[1], TRUE) > 0)
 		{
 			flag = insert_placeholder(s, Param[0], Param[2], Param[2]);
 			if (!flag)

@@ -984,22 +984,22 @@ typedef struct _udolanguage				/* ---- Sprachentabelle ---- */
 
 
 LOCAL UDOLANGUAGE const udolanguage[] = {
-	{ "czech",      TOCZE },
-	{ "danish",     TODAN },
-	{ "dutch",      TODUT },
-	{ "english",    TOENG },
-	{ "finnish",    TOFIN },
-	{ "french",     TOFRA },
-	{ "german",     TOGER },
-	{ "italian",    TOITA },
-	{ "japanese",   TOJAP },
-	{ "latvian",    TOLVA },
-	{ "norwegian",  TONOR },
-	{ "polish",     TOPOL },
-	{ "portuguese", TOPOR },
-	{ "spanish",    TOSPA },
-	{ "swedish",    TOSWE },
-	{ "russian",    TORUS }
+	{ "czech",      TOCZE }, { "cz", TOCZE },
+	{ "danish",     TODAN }, { "da", TODAN },
+	{ "dutch",      TODUT }, { "nl", TODUT },
+	{ "english",    TOENG }, { "en", TOENG },
+	{ "finnish",    TOFIN }, { "fi", TOFIN },
+	{ "french",     TOFRA }, { "fr", TOFRA },
+	{ "german",     TOGER }, { "de", TOGER },
+	{ "italian",    TOITA }, { "it", TOITA },
+	{ "japanese",   TOJAP }, { "ja", TOJAP },
+	{ "latvian",    TOLVA }, { "lv", TOLVA },
+	{ "norwegian",  TONOR }, { "nn", TONOR }, { "no", TONOR },
+	{ "polish",     TOPOL }, { "pl", TOPOL },
+	{ "portuguese", TOPOR }, { "pt", TOPOR },
+	{ "spanish",    TOSPA }, { "es", TOSPA },
+	{ "swedish",    TOSWE }, { "sv", TOSWE },
+	{ "russian",    TORUS }, { "ru", TORUS }
 };
 
 #define  MAXLANGUAGE ArraySize(udolanguage)
@@ -1594,6 +1594,20 @@ LOCAL void cmd_inside_preamble(void)
 
 
 
+static int langid_from_name(const char *s)
+{
+	int i;
+	
+	for (i = 0; i < (int) MAXLANGUAGE; i++)
+	{
+		if (my_stricmp(s, udolanguage[i].magic) == 0)
+			return udolanguage[i].langval;
+		if (strlen(udolanguage[i].magic) == 2 && my_strnicmp(s, udolanguage[i].magic, 2) == 0)
+			return udolanguage[i].langval;
+	}
+	return -1;
+}
+
 /*******************************************************************************
 *
 *  str_for_destlang():
@@ -1605,28 +1619,43 @@ LOCAL void cmd_inside_preamble(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL str_for_destlang(const char *s)
+LOCAL _BOOL str_for_destlang(const char *s, _BOOL warn)
 {
 	_BOOL flag = FALSE;					/* return value */
-	register int i;
-
-	for (i = 0; i < (int) MAXLANGUAGE; i++)
+	int i;
+	char *test;
+	char *p;
+	const char *sep = " \t,[]";
+	
+	test = strdup(s);
+	if (test == NULL)
+		return FALSE;
+	p = strtok(test, sep);
+	while (p != NULL)
 	{
-		if (destlang == udolanguage[i].langval)
+		if (*p != '\0')
 		{
-			if (strstr(s, udolanguage[i].magic))
+			if (strcmp(p, "all") == 0)
 			{
 				flag = TRUE;
-				break;
+			} else if (strcmp(p, "none") == 0)
+			{
+				flag = FALSE;
+			} else
+			{
+				i = langid_from_name(p);
+				if (i < 0 && warn && iUdopass == PASS1)
+					warning_message(_("unknown !language: %s"), p);
+				if (destlang == i)
+				{
+					flag = TRUE;
+				}
 			}
 		}
+		p = strtok(NULL, sep);
 	}
-
-	if (strstr(s, "all") != NULL)
-		flag = TRUE;
-	if (strstr(s, "none") != NULL)
-		flag = FALSE;
-
+	free(test);
+		
 	return flag;
 }
 
@@ -1645,96 +1674,102 @@ LOCAL _BOOL str_for_destlang(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL str_for_desttype(const char *s)
+static int desttype_from_name(const char *s)
 {
-	_BOOL flag = FALSE;					/* return value */
+	if (strcmp(s, "amg") == 0)
+		return TOAMG;
+	if (strcmp(s, "aqv") == 0 || strcmp(s, "quickview") == 0)
+		return TOAQV;
+	if (strcmp(s, "asc") == 0)
+		return TOASC;
+	if (strcmp(s, "drc") == 0)
+		return TODRC;
+	if (strcmp(s, "hah") == 0)
+		return TODRC;
+	if (strcmp(s, "hh") == 0 || strcmp(s, "htmlhelp") == 0)
+		return TOMHH;
+	if (strcmp(s, "htag") == 0 || strcmp(s, "helptag") == 0)
+		return TOHPH;
+	if (strcmp(s, "html") == 0)
+		return TOHTM;
+	if (strcmp(s, "info") == 0)
+		return TOINF;
+	if (strcmp(s, "ipf") == 0)
+		return TOIPF;
+	if (strcmp(s, "ldoc") == 0)
+		return TOLDS;
+	if (strcmp(s, "lyx") == 0)
+		return TOLYX;
+	if (strcmp(s, "man") == 0)
+		return TOMAN;
+	if (strcmp(s, "nroff") == 0)
+		return TONRO;
+	if (strcmp(s, "pascal") == 0)
+		return TOSRP;
+	if (strcmp(s, "pch") == 0 || strcmp(s, "pchelp") == 0)
+		return TOPCH;
+	if (strcmp(s, "pdf") == 0 || strcmp(s, "pdflatex") == 0)
+		return TOPDL;
+	if (strcmp(s, "ps") == 0)
+		return TOKPS;
+	if (strcmp(s, "rtf") == 0)
+		return TORTF;
+	if (strcmp(s, "src") == 0 || strcmp(s, "c") == 0)
+		return TOSRC;
+	if (strcmp(s, "stg") == 0)
+		return TOSTG;
+	if (strcmp(s, "tex") == 0)
+		return TOTEX;
+	if (strcmp(s, "tvh") == 0 || strcmp(s, "vision") == 0)
+		return TOTVH;
+	if (strcmp(s, "udo") == 0)
+		return TOUDO;
+	if (strcmp(s, "wh4") == 0 || strcmp(s, "win4") == 0)
+		return TOWH4;
+	if (strcmp(s, "win") == 0)
+		return TOWIN;
+	return -1;
+}
 
-	switch (desttype)
+
+
+GLOBAL int str_for_desttype(const char *s, _BOOL warn)
+{
+	int flag = FALSE;					/* return value */
+	int i;
+	char *test;
+	char *p;
+	const char *sep = " \t,[]";
+	
+	test = strdup(s);
+	if (test == NULL)
+		return FALSE;
+	p = strtok(test, sep);
+	while (p != NULL)
 	{
-	case TOAMG:
-		flag = (strstr(s, "amg") != NULL);
-		break;
-	case TOAQV:
-		flag = (strstr(s, "aqv") != NULL);
-		break;
-	case TOASC:
-		flag = (strstr(s, "asc") != NULL);
-		break;
-	case TODRC:
-		flag = (strstr(s, "drc") != NULL);
-		break;
-	case TOHAH:
-		flag = (strstr(s, "hah") != NULL);
-		break;
-	case TOMHH:
-		flag = (strstr(s, "hh") != NULL);
-		break;
-	case TOHPH:
-		flag = (strstr(s, "htag") != NULL);
-		break;
-	case TOHTM:
-		flag = (strstr(s, "html") != NULL);
-		break;
-	case TOINF:
-		flag = (strstr(s, "info") != NULL);
-		break;
-	case TOIPF:
-		flag = (strstr(s, "ipf") != NULL);
-		break;
-	case TOLDS:
-		flag = (strstr(s, "ldoc") != NULL);
-		break;
-	case TOLYX:
-		flag = (strstr(s, "lyx") != NULL);
-		break;
-	case TOMAN:
-		flag = (strstr(s, "man") != NULL);
-		break;
-	case TONRO:
-		flag = (strstr(s, "nroff") != NULL);
-		break;
-	case TOSRP:
-		flag = (strstr(s, "pas") != NULL);
-		break;
-	case TOPCH:
-		flag = (strstr(s, "pch") != NULL);
-		break;
-	case TOPDL:
-		flag = (strstr(s, "pdf") != NULL);
-		break;
-	case TOKPS:
-		flag = (strstr(s, "ps") != NULL);
-		break;
-	case TORTF:
-		flag = (strstr(s, "rtf") != NULL);
-		break;
-	case TOSRC:
-		flag = (strstr(s, "src") != NULL);
-		break;
-	case TOSTG:
-		flag = (strstr(s, "stg") != NULL);
-		break;
-	case TOTEX:
-		flag = (strstr(s, "tex") != NULL);
-		break;
-	case TOTVH:
-		flag = (strstr(s, "tvh") != NULL);
-		break;
-	case TOUDO:
-		flag = (strstr(s, "udo") != NULL);
-		break;
-	case TOWH4:
-		flag = (strstr(s, "wh4") != NULL);
-		break;
-	case TOWIN:
-		flag = (strstr(s, "win") != NULL);
-		break;
+		if (*p != '\0')
+		{
+			if (strcmp(p, "all") == 0)
+			{
+				flag = TRUE;
+			} else if (strcmp(p, "none") == 0)
+			{
+				flag = -1;
+			} else
+			{
+				i = desttype_from_name(p);
+				if (i < 0 && warn && iUdopass == PASS1)
+					warning_message(_("unknown output format: %s"), p);
+				if (desttype == i)
+				{
+					flag = TRUE;
+				}
+			}
+		}
+		p = strtok(NULL, sep);
 	}
-
-	if (strstr(s, "all") != NULL)
-		flag = TRUE;
-	if (strstr(s, "none") != NULL)
-		flag = FALSE;
+	free(test);
+	
 	return flag;
 }
 
@@ -1753,25 +1788,26 @@ GLOBAL _BOOL str_for_desttype(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL is_for_desttype(_BOOL * schalter, const char *cmd)
+GLOBAL _BOOL is_for_desttype(_BOOL *schalter, const char *cmd)
 {
 	register int i;
 	_BOOL flag = FALSE;					/* return value */
-
+	int val;
+	
 	if (token_counter <= 1)
 	{
 		error_missing_parameter(cmd);
 	} else
 	{
-		for (i = 0; i < token_counter; i++)
+		for (i = 1; i < token_counter; i++)
 		{
-			if ((flag = str_for_desttype(token[i])) == TRUE)
+			/* stop checking for commands like !subtoc [all] !depth 1 */
+			if (token[i][0] == META_C)
 				break;
-			if (strstr(token[i], "none") != NULL)
-			{
+			val = str_for_desttype(token[i], TRUE);
+			flag |= val > 0;
+			if (val < 0)
 				*schalter = FALSE;
-				break;
-			}
 		}
 	}
 
@@ -1799,61 +1835,101 @@ GLOBAL _BOOL is_for_desttype(_BOOL * schalter, const char *cmd)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL str_for_os(const char *s)
+LOCAL _BOOL str_for_os(const char *s, _BOOL warn)
 {
 	_BOOL flag;							/* return value */
-	_BOOL warn;
+	_BOOL warn_unix;
+	char *test;
+	char *p;
+	const char *sep = " \t,[]";
 
 	flag = FALSE;
-	warn = FALSE;
+	warn_unix = FALSE;
 
-	warn |= (strstr(s, "hpux") != NULL);
-	warn |= (strstr(s, "irix") != NULL);
-	warn |= (strstr(s, "linux") != NULL);
-	warn |= (strstr(s, "sinix") != NULL);
-	warn |= (strstr(s, "sunos") != NULL);
-
-	if (warn && iUdopass == PASS1)
-		warning_message(_("use \"unix\" to test for unix systems"));
-
+	test = strdup(s);
+	if (test == NULL)
+		return FALSE;
+	p = strtok(test, sep);
+	while (p != NULL)
+	{
+		if (*p != '\0')
+		{
+			if (strcmp(p, "all") == 0)
+			{
+				flag = TRUE;
+			} else if (strcmp(p, "none") == 0)
+			{
+				flag = FALSE;
+			} else
+			{
+				if (strcmp(p, "hpux") == 0 || 
+					strcmp(p, "irix") == 0 ||
+					strcmp(p, "linux") == 0 ||
+					strcmp(p, "sinix") == 0 ||
+					strcmp(p, "sunos") == 0)
+				{
+					warn_unix = TRUE;
+#ifdef __UNIX__
+					flag = TRUE;
+#endif
+				} else if (strcmp(p, "beos") == 0)
+				{
 #ifdef __BEOS__
-	flag |= strstr(s, "beos") != NULL;
+					flag = TRUE;
 #endif
-
+				} else if (strcmp(p, "macos") == 0)
+				{
 #ifdef __MACOS__
-	flag |= strstr(s, "macos") != NULL;
+					flag = TRUE;
 #endif
-
+				} else if (strcmp(p, "macosx") == 0)
+				{
 #ifdef __MACOSX__
-	flag |= strstr(s, "macosx") != NULL;
-	/* FIXME: haut so nicht hin: "macos" ist teilstring davon und wird auch gefunden */
+					flag = TRUE;
 #endif
-
+				} else if (strcmp(p, "dos") == 0)
+				{
 #ifdef __MSDOS__
-	flag |= strstr(s, "dos") != NULL;
+					flag = TRUE;
 #endif
-
+				} else if (strcmp(p, "os2") == 0)
+				{
+#ifdef __OS2__
+					flag = TRUE;
+#endif
+				} else if (strncmp(p, "win", 3) == 0)
+				{
 #ifdef __WIN32__
-	flag |= strstr(s, "win") != NULL;
+					flag = TRUE;
 #endif
-
+				} else if (strcmp(p, "nextstep") == 0)
+				{
 #ifdef __NEXTSTEP__
-	flag |= strstr(s, "nextstep") != NULL;
+					flag = TRUE;
 #endif
-
+				} else if (strcmp(p, "tos") == 0)
+				{
 #ifdef __TOS__
-	flag |= strstr(s, "tos") != NULL;
+					flag = TRUE;
 #endif
-
-#if defined(__UNIX__)
-	flag |= strstr(s, "unix") != NULL;
-	flag |= warn;
+				} else if (strcmp(p, "unix") == 0)
+				{
+#ifdef __UNIX__
+					flag = TRUE;
 #endif
-
-	if (strstr(s, "all") != NULL)
-		flag = TRUE;
-	if (strstr(s, "none") != NULL)
-		flag = FALSE;
+				} else
+				{
+					if (warn && iUdopass == PASS1)
+						warning_message(_("unknown os: %s"), p);
+				}
+			}
+		}
+		p = strtok(NULL, sep);
+	}
+	free(test);
+		
+	if (warn_unix && iUdopass == PASS1)
+		warning_message(_("use \"unix\" to test for unix systems"));
 
 	return flag;
 }
@@ -1923,7 +1999,7 @@ const char *html_color_string(const struct rgb *color)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL get_html_color(const char *s, struct rgb_and_color * rgb)
+GLOBAL _BOOL get_html_color(const char *s, struct rgb_and_color *rgb)
 {
 	int color;
 
@@ -1945,7 +2021,7 @@ GLOBAL _BOOL get_html_color(const char *s, struct rgb_and_color * rgb)
 }
 
 
-GLOBAL _BOOL get_html_color_or_rgb(const char *s, struct rgb_and_color * rgb)
+GLOBAL _BOOL get_html_color_or_rgb(const char *s, struct rgb_and_color *rgb)
 {
 	int r, g, b;
 	_BOOL ret;
@@ -2342,7 +2418,7 @@ GLOBAL void c_hline(void)
 *
 ******************************************|************************************/
 
-LOCAL int idxlist_compare(IDXLIST * p, IDXLIST * q)
+LOCAL int idxlist_compare(IDXLIST *p, IDXLIST *q)
 {
 	char ps[3 * (128 + 2) + MAX_NODE_LEN + 1];
 	char qs[3 * (128 + 2) + MAX_NODE_LEN + 1];
@@ -2387,7 +2463,7 @@ LOCAL int idxlist_compare(IDXLIST * p, IDXLIST * q)
 *
 ******************************************|************************************/
 
-LOCAL IDXLIST *idxlist_merge(IDXLIST * p, IDXLIST * q)
+LOCAL IDXLIST *idxlist_merge(IDXLIST *p, IDXLIST *q)
 {
 	IDXLIST *r, head;
 
@@ -2422,7 +2498,7 @@ LOCAL IDXLIST *idxlist_merge(IDXLIST * p, IDXLIST * q)
 *
 ******************************************|************************************/
 
-LOCAL IDXLIST *idxlist_sort(IDXLIST * p)
+LOCAL IDXLIST *idxlist_sort(IDXLIST *p)
 {
 	IDXLIST *q, *r;
 
@@ -5085,7 +5161,7 @@ LOCAL void c_check_raw(char *s)
 	}
 
 	/* Schauen, ob diese Zeile fuer das aktuelle Format bestimmt ist */
-	if (str_for_desttype(inhalt))
+	if (str_for_desttype(inhalt, TRUE) > 0)
 	{
 		/* Rest der Zeile ausgeben */
 		outln(data + 1);
@@ -6499,7 +6575,7 @@ LOCAL void to_check_rtf_quote_indent(char *s)
 *
 ******************************************|************************************/
 
-LOCAL void to_check_quote_indent(size_t * u)
+LOCAL void to_check_quote_indent(size_t *u)
 {
 	int i, val;
 
@@ -7857,7 +7933,7 @@ LOCAL int hyplist_compare(const HYPLIST *p, const HYPLIST *q)
 *
 ******************************************|************************************/
 
-LOCAL HYPLIST *hyplist_merge(HYPLIST * p, HYPLIST * q)
+LOCAL HYPLIST *hyplist_merge(HYPLIST *p, HYPLIST *q)
 {
 	HYPLIST *r, head;
 
@@ -7891,7 +7967,7 @@ LOCAL HYPLIST *hyplist_merge(HYPLIST * p, HYPLIST * q)
 *
 ******************************************|************************************/
 
-LOCAL HYPLIST *hyplist_sort(HYPLIST * p)
+LOCAL HYPLIST *hyplist_sort(HYPLIST *p)
 {
 	HYPLIST *q, *r;
 
@@ -8426,7 +8502,7 @@ LOCAL void clear_file_stack(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL push_file_stack(const char *filename, MYTEXTFILE * file)
+LOCAL _BOOL push_file_stack(const char *filename, MYTEXTFILE *file)
 {
 	if (iFilesOpened >= MAXFILECOUNTER)
 	{
@@ -8672,8 +8748,7 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 	char cmd[128];
 	char *p;
 	const char *pcmd;
-	_BOOL ignore, match;
-	_BOOL matches_lang, matches_dest, matches_symb, matches_os;
+	_BOOL ignore = FALSE;
 
 	strncpy(cmd, zeile, ArraySize(cmd));
 	cmd[ArraySize(cmd) - 1] = EOS;
@@ -8686,11 +8761,14 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 	if (p == NULL)
 		p = strchr(pcmd, '\t');
 	if (p != NULL)
-		*p = EOS;
-
+		*p++ = EOS;
+	
 	if (strcmp(pcmd, "!ifdest") == 0)
 	{
-		ignore = !str_for_desttype(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = str_for_desttype(p, TRUE) <= 0;
 		push_if_stack(IF_DEST, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8699,7 +8777,10 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!ifndest") == 0)
 	{
-		ignore = str_for_desttype(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = str_for_desttype(p, TRUE) > 0;
 		push_if_stack(IF_DEST, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8708,7 +8789,10 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!iflang") == 0)
 	{
-		ignore = !str_for_destlang(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = !str_for_destlang(p, TRUE);
 		push_if_stack(IF_LANG, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8717,7 +8801,10 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!ifnlang") == 0)
 	{
-		ignore = str_for_destlang(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = str_for_destlang(p, TRUE);
 		push_if_stack(IF_LANG, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8726,7 +8813,10 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!ifos") == 0)
 	{
-		ignore = !str_for_os(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = !str_for_os(p, TRUE);
 		push_if_stack(IF_OS, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8735,7 +8825,10 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!ifnos") == 0)
 	{
-		ignore = str_for_os(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = str_for_os(p, TRUE);
 		push_if_stack(IF_OS, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8744,7 +8837,10 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!ifset") == 0)
 	{
-		ignore = !udosymbol_set(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = !udosymbol_set(p);
 		push_if_stack(IF_SET, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8753,7 +8849,10 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!ifnset") == 0)
 	{
-		ignore = udosymbol_set(zeile);
+		if (p == NULL)
+			error_missing_parameter(pcmd);
+		else
+			ignore = udosymbol_set(p);
 		push_if_stack(IF_SET, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
@@ -8762,12 +8861,18 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 
 	if (strcmp(pcmd, "!if") == 0)
 	{
-		matches_dest = str_for_desttype(zeile);
-		matches_lang = str_for_destlang(zeile);
-		matches_os = str_for_os(zeile);
-		matches_symb = udosymbol_set(zeile);
-		match = (matches_dest | matches_lang | matches_symb | matches_os);
-		push_if_stack(IF_GENERAL, !match);
+		if (p == NULL)
+		{
+			error_missing_parameter(pcmd);
+		} else
+		{
+			_BOOL matches_dest = str_for_desttype(p, FALSE) > 0;
+			_BOOL matches_lang = str_for_destlang(p, FALSE);
+			_BOOL matches_os = str_for_os(p, FALSE);
+			_BOOL matches_symb = udosymbol_set(p);
+			ignore = !(matches_dest | matches_lang | matches_symb | matches_os);
+		}
+		push_if_stack(IF_GENERAL, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
 		return TRUE;
@@ -8785,12 +8890,18 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 	{
 		pop_if_stack();
 		pflag[pnr].ignore_line = is_if_stack_ignore();
-		matches_dest = str_for_desttype(zeile);
-		matches_lang = str_for_destlang(zeile);
-		matches_os = str_for_os(zeile);
-		matches_symb = udosymbol_set(zeile);
-		match = (matches_dest | matches_lang | matches_symb);
-		push_if_stack(IF_GENERAL, !match);
+		if (p == NULL)
+		{
+			error_missing_parameter(pcmd);
+		} else
+		{
+			matches_dest = str_for_desttype(p, FALSE) > 0;
+			matches_lang = str_for_destlang(p, FALSE);
+			matches_os = str_for_os(p, FALSE);
+			matches_symb = udosymbol_set(p);
+			ignore = !(matches_dest | matches_lang | matches_symb | matches_os);
+		}
+		push_if_stack(IF_GENERAL, ignore);
 		pflag[pnr].ignore_line = is_if_stack_ignore();
 		pass_check_free_line(zeile, pnr);
 		return TRUE;
@@ -8845,7 +8956,7 @@ LOCAL _BOOL pass_check_if(char *zeile, int pnr)
 *
 ******************************************|************************************/
 
-LOCAL void get_switch_par(const UDOSWITCH * us)
+LOCAL void get_switch_par(const UDOSWITCH *us)
 {
 	register int i;
 	int val;
@@ -8897,8 +9008,6 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 {
 	register int i;
 	int c;
-	char s[256];
-	char subs[3 * TOC_MAXDEPTH + 1 + 80];
 	int d, d2;
 
 	/* Allgemeine globale Schalter (im Vorspann erlaubt) */
@@ -8918,6 +9027,8 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 	/* Allgemeine lokale Schalter */
 	for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
 	{
+		char subs[3 * TOC_MAXDEPTH + 1 + 80];
+		
 		strcpy(subs, "!");
 		for (d2 = TOC_NODE1; d2 < d; d2++)
 			strcat(subs, "sub");
@@ -8961,17 +9072,14 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 
 	if (strcmp(token[0], "!language") == 0)
 	{
-		tokcpy2(s, ArraySize(s));
-		for (i = 0; i < (int) MAXLANGUAGE; i++)
+		i = langid_from_name(token[1]);
+		if (i >= 0)
 		{
-			if (strstr(s, udolanguage[i].magic) != NULL)
-			{
-				set_destlang(udolanguage[i].langval);
-				lang_changed = TRUE;
-				return TRUE;
-			}
+			set_destlang(i);
+			lang_changed = TRUE;
+			return TRUE;
 		}
-		error_message(_("language %s not supported"), s);
+		error_message(_("language %s not supported"), token[1]);
 		return TRUE;
 	}
 
@@ -9316,6 +9424,8 @@ LOCAL _BOOL pass1_check_preamble_commands(void)
 		/* check !html_merge_nodes, html_merge_subnodes etc. */
 		for (d = TOC_NODE1; d < TOC_MAXDEPTH; d++)
 		{
+			char s[256];
+			
 			strcpy(s, "!html_merge_");
 			for (d2 = TOC_NODE1; d2 < d; d2++)
 				strcat(s, "sub");

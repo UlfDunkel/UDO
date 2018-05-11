@@ -335,7 +335,7 @@ GLOBAL _BOOL set_doclayout(void)
 
 	if (strcmp(content, "paper") == 0)
 	{
-		if (str_for_desttype(format))
+		if (str_for_desttype(format, TRUE) > 0)
 		{
 			/* Layout festlegen */
 			free_titdat(&(laydat.paper));
@@ -346,7 +346,7 @@ GLOBAL _BOOL set_doclayout(void)
 
 	if (strcmp(content, "propfontname") == 0)
 	{
-		if (str_for_desttype(format))
+		if (str_for_desttype(format, TRUE) > 0)
 		{
 			/* Set proportional font */
 			free_titdat(&(laydat.propfontname));
@@ -357,7 +357,7 @@ GLOBAL _BOOL set_doclayout(void)
 
 	if (strcmp(content, "propfontsize") == 0)
 	{
-		if (str_for_desttype(format))
+		if (str_for_desttype(format, TRUE) > 0)
 		{
 			/* Set size of proportional font */
 			laydat.propfontsize = atoi(data);
@@ -367,7 +367,7 @@ GLOBAL _BOOL set_doclayout(void)
 
 	if (strcmp(content, "monofontname") == 0)
 	{
-		if (str_for_desttype(format))
+		if (str_for_desttype(format, TRUE) > 0)
 		{
 			/* Set aquidistant font */
 			free_titdat(&(laydat.monofontname));
@@ -378,7 +378,7 @@ GLOBAL _BOOL set_doclayout(void)
 
 	if (strcmp(content, "monofontsize") == 0)
 	{
-		if (str_for_desttype(format))
+		if (str_for_desttype(format, TRUE) > 0)
 		{
 			/* Set size of the aquidistant font */
 			laydat.monofontsize = atoi(data);
@@ -391,7 +391,7 @@ GLOBAL _BOOL set_doclayout(void)
 		sprintf(node, "node%dsize", i + 1);
 		if (strcmp(content, node) == 0)
 		{
-			if (str_for_desttype(format))
+			if (str_for_desttype(format, TRUE) > 0)
 			{
 				/* Set size of node */
 				laydat.nodesize[i + 1] = atoi(data);
