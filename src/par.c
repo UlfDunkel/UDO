@@ -3949,6 +3949,7 @@ GLOBAL _BOOL add_placeholder(const char *entry, const char *rawtext)
 	unsigned char c1, c2, c3;
 	size_t counter;
 	PLACEHOLDER *new_phold;
+	PLACEHOLDER *p;
 
 	counter = phold_counter;
 	if (counter >= MAXPHOLDS)
@@ -3987,10 +3988,17 @@ GLOBAL _BOOL add_placeholder(const char *entry, const char *rawtext)
 		return FALSE;
 	}
 
-	sprintf(phold[counter].magic, "\033%c%c%c%c\033", C_PHOLD_MAGIC, c1, c2, c3);
+	p = &phold[counter];
+	p->magic[0] = '\033';
+	p->magic[1] = C_PHOLD_MAGIC;
+	p->magic[2] = c1;
+	p->magic[3] = c2;
+	p->magic[4] = c3;
+	p->magic[5] = '\033';
+	p->magic[6] = '\0';
 
-	phold[counter].entry = eptr;
-	phold[counter].text = tptr;
+	p->entry = eptr;
+	p->text = tptr;
 
 	phold_counter++;
 	return TRUE;
@@ -4003,7 +4011,12 @@ GLOBAL _BOOL add_placeholder(const char *entry, const char *rawtext)
 /*******************************************************************************
 *
 *  insert_placeholder():
-*     ??? (description missing)
+*     replace text for inline commands
+*
+*  @s: the string to replace in
+*  @rep: the complete to command to replace
+*  @entry: the format specific command to be inserted later
+*  @text: the visible text that results from the command
 *
 *  Return:
 *      TRUE: everything's fine
@@ -4202,9 +4215,6 @@ GLOBAL void c_internal_index(char *s, const _BOOL inside_b4_macro)
 }
 
 
-
-
-
 /*******************************************************************************
 *
 *  c_commands_inside():
@@ -4232,6 +4242,8 @@ GLOBAL void c_commands_inside(char *s, const _BOOL inside_b4_macro)
 	c_internal_time(s, inside_b4_macro);
 	c_internal_image(s, inside_b4_macro);
 	c_internal_raw(s, inside_b4_macro);
+	if (!inside_b4_macro && (s[0] != META_C || s[1] == QUOTE_C))
+		c_footnotes(s);
 }
 
 

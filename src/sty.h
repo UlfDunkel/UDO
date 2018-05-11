@@ -210,14 +210,15 @@ GLOBAL char        SUB_ON[8], SUB_OFF[8];
 *
 ******************************************|************************************/
 
-GLOBAL void del_html_styles(char *s);
-GLOBAL void del_internal_styles(char *s);
+void del_html_styles(char *s);
+void del_internal_styles(char *s);
 
-GLOBAL void c_pch_styles(char *s);
-GLOBAL void c_rtf_styles(char *s);
-GLOBAL void c_win_styles(char *s);
-GLOBAL void c_internal_styles(char *s);
-GLOBAL void c_styles(char *s);
+void c_pch_styles(char *s);
+void c_rtf_styles(char *s);
+void c_win_styles(char *s);
+void c_internal_styles(char *s);
+void c_styles(char *s);
+_BOOL c_footnotes(char *s);
 
 GLOBAL void check_styles(char *s);
 GLOBAL void check_styleflags(void);

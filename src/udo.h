@@ -397,7 +397,7 @@ struct footnote {
 	int global_number;
 	struct footnote *next;
 	size_t len;
-	char str[1];
+	char *str;
 };
 GLOBAL struct footnote *footnotes;
 

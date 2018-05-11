@@ -8323,8 +8323,6 @@ GLOBAL void check_endnode(void)
 
 				for (f = footnotes; f; f = f->next)
 				{
-					/* str well be thrown away below, so its ok to modify it */
-					qreplace_all(f->str, "(!nl)", 5, "\n", 1);
 					voutlnf("%d %s", f->number, f->str);
 				}
 			}
@@ -8337,11 +8335,14 @@ GLOBAL void check_endnode(void)
 			outln("");
 			if (footnote_cnt)
 			{
+				char sTemp[512];
+				
+				strcpy(sTemp, toc_table[p2_toc_counter]->name);;
+				node2stg(sTemp);
 				for (f = footnotes; f; f = f->next)
 				{
 					voutlnf("@pnode %%udofootnote_%d", f->global_number);
-					/* str well be thrown away below, so its ok to modify it */
-					qreplace_all(f->str, "(!nl)", 5, "\n", 1);
+					voutlnf("@toc \"%s\"", sTemp);
 					voutlnf("%s", f->str);
 					outln("@endnode");
 					outln("");
