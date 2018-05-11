@@ -522,7 +522,9 @@ GLOBAL _BOOL table_add_line(char *s)
 	{
 		if (!no_table_lines)
 		{
-			if (y != 0)
+			if (y == 0)
+				warning_message(_("!hline for the first table line has to be placed in the table header"));
+			else
 				table.row[y - 1].horizontal_bar++;
 		}
 		return TRUE;
