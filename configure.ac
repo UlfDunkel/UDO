@@ -851,7 +851,6 @@ if test "$with_gui" = gtk2 -o "$with_gui" = gtk3 -o "$with_gui" = auto; then
     if test "$have_gtk3" = yes; then
       AC_DEFINE(HAVE_GTK3)
     fi
-    AC_DEFINE(HAVE_XML)
     if test "$have_gdk_pixbuf" = yes; then
       AC_DEFINE(HAVE_GDK_PIXBUF)
     fi
@@ -900,6 +899,11 @@ fi
 if test "$have_gtk3" = no -a "$with_gui" = gtk3; then
 	AC_MSG_ERROR([*** GTK3 was requested, but was not found ***])
 fi
+
+if test "$XML_LIBS" != ""; then
+    AC_DEFINE(HAVE_XML)
+fi
+AM_CONDITIONAL(HAVE_XML, test "$XML_LIBS" != "")
 
 AM_CONDITIONAL(WITH_GUI_GTK, test "$with_gui" = gtk2 -o "$with_gui" = gtk3)
 AM_CONDITIONAL(WITH_GUI_GTK2, test "$with_gui" = gtk2)
