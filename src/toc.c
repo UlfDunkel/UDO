@@ -6710,6 +6710,7 @@ GLOBAL void c_endnode(void)
 {
 	check_endnode();
 	check_styleflags();
+	check_environments_node();
 }
 
 
@@ -6735,7 +6736,6 @@ GLOBAL void c_begin_node(void)
 		make_node(TOC_NODE1, FALSE, FALSE);
 	} else if (p2_toctype >= TOC_MAXDEPTH - 1)
 	{
-		warning_node_too_deep(FALSE, FALSE);
 		make_node(TOC_MAXDEPTH - 1, FALSE, FALSE);
 	} else
 	{
@@ -6766,7 +6766,6 @@ GLOBAL void c_begin_node_iv(void)
 		make_node(TOC_NODE1, FALSE, TRUE);
 	} else if (p2_toctype >= TOC_MAXDEPTH - 1)
 	{
-		warning_node_too_deep(FALSE, TRUE);
 		make_node(TOC_MAXDEPTH - 1, FALSE, TRUE);
 	} else
 	{
@@ -6797,7 +6796,6 @@ GLOBAL void c_begin_pnode(void)
 		make_node(TOC_NODE1, TRUE, FALSE);
 	} else if (p2_toctype >= TOC_MAXDEPTH - 1)
 	{
-		warning_node_too_deep(TRUE, FALSE);
 		make_node(TOC_MAXDEPTH - 1, TRUE, FALSE);
 	} else
 	{
@@ -6828,7 +6826,6 @@ GLOBAL void c_begin_pnode_iv(void)
 		make_node(TOC_NODE1, TRUE, TRUE);
 	} else if (p2_toctype >= TOC_MAXDEPTH - 1)
 	{
-		warning_node_too_deep(TRUE, TRUE);
 		make_node(TOC_MAXDEPTH - 1, TRUE, TRUE);
 	} else
 	{
@@ -6853,6 +6850,8 @@ GLOBAL void c_begin_pnode_iv(void)
 GLOBAL void c_end_node(void)
 {
 	check_endnode();
+	check_styleflags();
+	check_environments_node();
 
 	switch (p2_toctype)
 	{
@@ -9769,12 +9768,17 @@ GLOBAL _BOOL toc_begin_node(const _BOOL popup, const _BOOL invisible)
 	_BOOL ret;
 
 	if (p1_toctype == TOC_NONE)
+	{
 		ret = add_node_to_toc(TOC_NODE1, popup, invisible);
-	else if (p1_toctype >= TOC_MAXDEPTH - 1)
+	} else if (p1_toctype >= TOC_MAXDEPTH - 1)
+	{
+		warning_node_too_deep(popup, invisible);
 		ret = add_node_to_toc(TOC_MAXDEPTH - 1, popup, invisible);
-	else
+	} else
+	{
 		ret = add_node_to_toc(p1_toctype + 1, popup, invisible);
-
+	}
+	
 	return ret;
 }
 

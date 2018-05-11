@@ -204,12 +204,6 @@
 *
 ******************************************|************************************/
 
-#define NODE_NORMAL       FALSE
-#define NODE_POPUP         TRUE
-
-#define NODE_VISIBLE      FALSE
-#define NODE_INVISIBLE     TRUE
-
 #define VERB_NORMAL           0
 #define VERB_SMALL            1
 #define VERB_TINY             2

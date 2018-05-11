@@ -1369,7 +1369,6 @@ GLOBAL void warning_no_isochar(const char c)
 GLOBAL void warning_node_too_deep(_BOOL popup, _BOOL invisible)
 {
 	char n[100 + TOC_MAXDEPTH * 3];
-
 	int i;
 
 	strcpy(n, "!");
