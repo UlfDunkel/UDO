@@ -1223,14 +1223,17 @@ GLOBAL void warning_long_destline(const char *s, FILE_LINENO lnr, const int ll)
 {
 	char *m;
 
-	if (!bNoWarnings && !bNoWarningsLines)
+	if (!bNoWarningsLines)
 	{
-		m = um_strdup_printf(_("Warning: %s %lu: overfull line: %d"), s, lnr, ll);
-		logln(m);
-		show_logln_message(m);
-		free(m);
+		if (!bNoWarnings)
+		{
+			m = um_strdup_printf(_("Warning: %s %lu: overfull line: %d"), s, lnr, ll);
+			logln(m);
+			show_logln_message(m);
+			free(m);
+		}
+		warning_counter++;
 	}
-	warning_counter++;
 }
 
 
@@ -1273,14 +1276,17 @@ GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll,
 {
 	char *m;
 
-	if (!bNoWarnings && !bNoWarningsLines)
+	if (!bNoWarningsLines)
 	{
-		m = um_strdup_printf(_("Warning: %s %lu: too short line: %d: %s"), s, lnr, ll, w);
-		logln(m);
-		show_logln_message(m);
-		free(m);
+		if (!bNoWarnings)
+		{
+			m = um_strdup_printf(_("Warning: %s %lu: too short line: %d: %s"), s, lnr, ll, w);
+			logln(m);
+			show_logln_message(m);
+			free(m);
+		}
+		warning_counter++;
 	}
-	warning_counter++;
 }
 
 
