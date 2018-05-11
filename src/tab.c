@@ -544,9 +544,8 @@ GLOBAL _BOOL table_add_line(char *s)
 	c_tilde(s);
 	c_styles(s);
 	check_styles(s);
-	c_commands_inside(s, FALSE);
-
 	replace_defines(s);
+	c_commands_inside(s, FALSE);
 
 	ptr = s;
 	cells_counter = 0;
