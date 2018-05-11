@@ -6,7 +6,7 @@ msgid  ""
 msgstr ""
 "Project-Id-Version: udo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-10 14:13+0200\n"
+"POT-Creation-Date: 2018-05-11 12:03+0200\n"
 "PO-Revision-Date: 2011-05-30 02:03+0200\n"
 "Last-Translator: Thorsten Otto <halgara@yahoo.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -16,37 +16,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../src/abo.c:233
+#: ../src/abo.c:231
 #, c-format
 msgid  "This text was made with\n"
 msgstr ""
 
-#: ../src/abo.c:240
+#: ../src/abo.c:238
 #, c-format
 msgid  "UDO is Open Source (!nl)\n"
 msgstr ""
 
-#: ../src/abo.c:244
+#: ../src/abo.c:242
 #, c-format
 msgid  "UDO is an application that converts text files which you\n"
 msgstr ""
 
-#: ../src/abo.c:245
+#: ../src/abo.c:243
 #, c-format
 msgid  "have written in Universal Document Format, into more than\n"
 msgstr ""
 
-#: ../src/abo.c:246
+#: ../src/abo.c:244
 #, c-format
 msgid  "25 different target formats.\n"
 msgstr ""
 
-#: ../src/abo.c:248
+#: ../src/abo.c:246
 #, c-format
 msgid  "Get further information and the current versions on the Internet at (!nl)\n"
 msgstr ""
 
-#: ../src/chr.c:3667
+#: ../src/chr.c:3659
 #, c-format
 msgid  "%x maybe not available in LaTeX"
 msgstr ""
@@ -281,183 +281,183 @@ msgid  ""
 "Press <RETURN>...\n"
 msgstr ""
 
-#: ../src/cli.c:889
+#: ../src/cli.c:880
 #, c-format
 msgid  "%s: unknown option! %s\n"
 msgstr ""
 
-#: ../src/cli.c:1127
+#: ../src/cli.c:1114
 #, c-format
 msgid  "          use --help for more information\n"
 msgstr ""
 
-#: ../src/env.c:276
+#: ../src/env.c:272
 msgid  "'!short' is a deprecated attribute for environments. Please use '!compressed' instead."
 msgstr ""
 
-#: ../src/env.c:311
+#: ../src/env.c:306
 msgid  "too many environments used"
 msgstr ""
 
-#: ../src/env.c:3101
+#: ../src/env.c:3077
 msgid  "'!item' outside environment"
 msgstr ""
 
 #. preface
-#: ../src/lang_utf.h:144
+#: ../src/lang_utf.h:149
 msgid  "Preface"
 msgstr "Forord"
 
 #. chapter
-#: ../src/lang_utf.h:145
+#: ../src/lang_utf.h:150
 msgid  "Chapter"
 msgstr "Kapitel"
 
 #. title
-#: ../src/lang_utf.h:146
+#: ../src/lang_utf.h:151
 msgid  "Title"
 msgstr "Titel"
 
 #. appendix
-#: ../src/lang_utf.h:147
+#: ../src/lang_utf.h:152
 msgid  "Appendix"
 msgstr "Tillæg"
 
 #. contents
-#: ../src/lang_utf.h:148
+#: ../src/lang_utf.h:153
 msgid  "Contents"
 msgstr "Indhold"
 
 #. listfigure
-#: ../src/lang_utf.h:149
+#: ../src/lang_utf.h:154
 msgid  "List of Figures"
 msgstr "Figur liste"
 
 #. listtable
-#: ../src/lang_utf.h:150
+#: ../src/lang_utf.h:155
 msgid  "List of Tables"
 msgstr "Tabel liste"
 
 #. figure
-#: ../src/lang_utf.h:151
+#: ../src/lang_utf.h:156
 msgid  "Figure"
 msgstr "Figur"
 
 #. table
-#: ../src/lang_utf.h:152
+#: ../src/lang_utf.h:157
 msgid  "Table"
 msgstr "Tabel"
 
 #. index
-#: ../src/lang_utf.h:153
+#: ../src/lang_utf.h:158
 msgid  "Index"
 msgstr "Indeks"
 
 #. page
-#: ../src/lang_utf.h:154
+#: ../src/lang_utf.h:159
 msgid  "page"
 msgstr "Side"
 
 #. see
-#: ../src/lang_utf.h:155
+#: ../src/lang_utf.h:160
 msgid  "see"
 msgstr "se"
 
 #. also
-#: ../src/lang_utf.h:156
+#: ../src/lang_utf.h:161
 msgid  "see also"
 msgstr "se også"
 
 #. by
-#: ../src/lang_utf.h:157
+#: ../src/lang_utf.h:162
 msgid  "by"
 msgstr "af"
 
 #. fur
-#: ../src/lang_utf.h:158
+#: ../src/lang_utf.h:163
 msgid  "for"
 msgstr "for"
 
 #. up
-#: ../src/lang_utf.h:159
+#: ../src/lang_utf.h:164
 msgid  "&Up"
 msgstr "&Op"
 
 #. exit
-#: ../src/lang_utf.h:160
+#: ../src/lang_utf.h:165
 msgid  "E&xit"
 msgstr "&Udgang"
 
 #. unknown
-#: ../src/lang_utf.h:161
+#: ../src/lang_utf.h:166
 msgid  "Unknown"
 msgstr "ukendt"
 
 #. update
-#: ../src/lang_utf.h:162
+#: ../src/lang_utf.h:167
 msgid  "Last updated on"
 msgstr "sidst opdateret den"
 
 #. lcid
-#: ../src/lang_utf.h:163
+#: ../src/lang_utf.h:168
 msgid  "0x409"
 msgstr "0x406"
 
 #. html_home
-#: ../src/lang_utf.h:164
+#: ../src/lang_utf.h:169
 msgid  "Home"
 msgstr "Hjem"
 
 #. html_up
-#: ../src/lang_utf.h:165
+#: ../src/lang_utf.h:170
 msgid  "Up"
 msgstr "Op"
 
 #. html_prev
-#: ../src/lang_utf.h:166
+#: ../src/lang_utf.h:171
 msgid  "Prev"
 msgstr "Tidligere"
 
 #. html_next
-#: ../src/lang_utf.h:167
+#: ../src/lang_utf.h:172
 msgid  "Next"
 msgstr "næste"
 
 #. html_lang
 #. html_start
-#: ../src/lang_utf.h:169
+#: ../src/lang_utf.h:174
 msgid  "Begin of the document"
 msgstr "start af dokument"
 
 #. translator
-#: ../src/lang_utf.h:170
+#: ../src/lang_utf.h:175
 msgid  "Translation:"
 msgstr "Oversættelse:"
 
 #. distributor
-#: ../src/lang_utf.h:171
+#: ../src/lang_utf.h:176
 msgid  "Distributor:"
 msgstr "Distributor:"
 
 #. tex_stylename
-#: ../src/lang_utf.h:172
+#: ../src/lang_utf.h:177
 msgctxt "tex_stylename"
 msgid  "english"
 msgstr "danish"
 
 #. lyx_langname
-#: ../src/lang_utf.h:173
+#: ../src/lang_utf.h:178
 msgctxt "lyx_langname"
 msgid  "english"
 msgstr "danish"
 
 #. degree
-#: ../src/lang_utf.h:174
+#: ../src/lang_utf.h:179
 msgid  "degree"
 msgstr "grad"
 
 #. copyright
-#: ../src/lang_utf.h:175
+#: ../src/lang_utf.h:180
 msgid  "Copyright"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgstr ""
 #. * 3rd arg: day of month
 #.
 #. today
-#: ../src/lang_utf.h:181
+#: ../src/lang_utf.h:186
 #, c-format
 msgctxt "today"
 msgid  "%2$s %3$d, %1$d"
@@ -479,395 +479,390 @@ msgstr "%3$d %2$s %1$d"
 #. * 3rd arg: day of month
 #.
 #. short_today
-#: ../src/lang_utf.h:187
+#: ../src/lang_utf.h:192
 #, c-format
 msgctxt "short_today"
 msgid  "%1$0d/%2$02d/%3$02d"
 msgstr "%3$02d-%2$02d-%1$d"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:195
 msgid  "January"
 msgstr "januar"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:196
 msgid  "February"
 msgstr "februar"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:197
 msgid  "March"
 msgstr "marts"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:198
 msgid  "April"
 msgstr "april"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:199
 msgid  "May"
 msgstr "maj"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:200
 msgid  "June"
 msgstr "juni"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:201
 msgid  "July"
 msgstr "juli"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:202
 msgid  "August"
 msgstr "august"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:203
 msgid  "September"
 msgstr "september"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:204
 msgid  "October"
 msgstr "oktober"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:205
 msgid  "November"
 msgstr "november"
 
-#: ../src/lang_utf.h:190
+#: ../src/lang_utf.h:206
 msgid  "December"
 msgstr "december"
 
-#: ../src/msg.c:241
+#: ../src/msg.c:240
 msgid  "Warning"
 msgstr ""
 
-#: ../src/msg.c:266
+#: ../src/msg.c:265
 msgid  "Error"
 msgstr ""
 
-#: ../src/msg.c:357
+#: ../src/msg.c:356
 msgid  "Note"
 msgstr ""
 
-#: ../src/msg.c:382
+#: ../src/msg.c:381
 msgid  "Fatal Error"
 msgstr ""
 
-#: ../src/msg.c:406
+#: ../src/msg.c:405
 msgid  "######## errors, warnings and notes:"
 msgstr ""
 
-#: ../src/msg.c:427
+#: ../src/msg.c:426
 msgid  "######## information:"
 msgstr ""
 
-#: ../src/msg.c:447
+#: ../src/msg.c:446
 msgid  "interruption"
 msgstr ""
 
-#: ../src/msg.c:468
+#: ../src/msg.c:467
 #, c-format
 msgid  "%s written to %s%s"
 msgstr ""
 
-#: ../src/msg.c:489
+#: ../src/msg.c:488
 #, c-format
 msgid  "couldn't open logfile <%s>"
 msgstr ""
 
-#: ../src/msg.c:509
+#: ../src/msg.c:508
 #, c-format
 msgid  "couldn't open hyphen file <%s>"
 msgstr ""
 
-#: ../src/msg.c:529
+#: ../src/msg.c:528
 #, c-format
 msgid  "couldn't open index file <%s>"
 msgstr ""
 
-#: ../src/msg.c:549
+#: ../src/msg.c:548
 #, c-format
 msgid  "couldn't open treefile <%s>"
 msgstr ""
 
-#: ../src/msg.c:569
+#: ../src/msg.c:568
 #, c-format
 msgid  "couldn't open project file <%s>"
 msgstr ""
 
-#: ../src/msg.c:589
+#: ../src/msg.c:588
 #, c-format
 msgid  "couldn't open destination file <%s>"
 msgstr ""
 
-#: ../src/msg.c:609
+#: ../src/msg.c:608
 #, c-format
 msgid  "couldn't open source file <%s>"
 msgstr ""
 
-#: ../src/msg.c:629
+#: ../src/msg.c:628
 #, c-format
 msgid  "couldn't write IMG header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:649
+#: ../src/msg.c:648
 #, c-format
 msgid  "couldn't read IMG header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:669
+#: ../src/msg.c:668
 #, c-format
 msgid  "couldn't read BMP header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:689
+#: ../src/msg.c:688
 #, c-format
 msgid  "couldn't read PCX header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:709
+#: ../src/msg.c:708
 #, c-format
 msgid  "couldn't read MSP header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:729
+#: ../src/msg.c:728
 #, c-format
 msgid  "couldn't read GIF header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:749
+#: ../src/msg.c:748
 #, c-format
 msgid  "couldn't read PNG header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:769
+#: ../src/msg.c:768
 #, c-format
 msgid  "couldn't read JPEG header of <%s>"
 msgstr ""
 
-#: ../src/msg.c:792
-#: ../src/msg.c:814
+#: ../src/msg.c:791
+#: ../src/msg.c:813
 #, c-format
 msgid  "couldn't open <%s>: %s"
 msgstr ""
 
-#: ../src/msg.c:836
+#: ../src/msg.c:835
 #, c-format
 msgid  "couldn't make directory <%s>: %s"
 msgstr ""
 
-#: ../src/msg.c:855
+#: ../src/msg.c:854
 #, c-format
 msgid  "failed to allocate %lu bytes"
 msgstr ""
 
-#: ../src/msg.c:874
+#: ../src/msg.c:873
 msgid  "empty !docinfo"
 msgstr ""
 
-#: ../src/msg.c:893
+#: ../src/msg.c:892
 msgid  "syntax error"
 msgstr ""
 
-#: ../src/msg.c:912
+#: ../src/msg.c:911
 #, c-format
 msgid  "'%s' without '%s'"
 msgstr ""
 
-#: ../src/msg.c:931
-#, c-format
-msgid  "'%s' followed by '%s'"
-msgstr ""
-
-#: ../src/msg.c:950
+#: ../src/msg.c:930
 msgid  "too many items inside enumeration"
 msgstr ""
 
-#: ../src/msg.c:969
+#: ../src/msg.c:949
 #, c-format
 msgid  "'%s' expected"
 msgstr ""
 
-#: ../src/msg.c:988
+#: ../src/msg.c:968
 #, c-format
 msgid  "'%s' called twice"
 msgstr ""
 
-#: ../src/msg.c:1007
+#: ../src/msg.c:987
 #, c-format
 msgid  "%s not active"
 msgstr ""
 
-#: ../src/msg.c:1026
+#: ../src/msg.c:1006
 #, c-format
 msgid  "%s already active"
 msgstr ""
 
-#: ../src/msg.c:1045
+#: ../src/msg.c:1025
 #, c-format
 msgid  "%s still active"
 msgstr ""
 
-#: ../src/msg.c:1064
+#: ../src/msg.c:1044
 #, c-format
 msgid  "missing parameter(s) at %s"
 msgstr ""
 
-#: ../src/msg.c:1082
+#: ../src/msg.c:1062
 #, c-format
 msgid  "wrong number of parameters: %s"
 msgstr ""
 
-#: ../src/msg.c:1101
+#: ../src/msg.c:1081
 msgid  "unexpected end of line in command"
 msgstr ""
 
-#: ../src/msg.c:1120
+#: ../src/msg.c:1100
 msgid  "too many words used inside paragraph"
 msgstr ""
 
-#: ../src/msg.c:1139
+#: ../src/msg.c:1119
 #, c-format
 msgid  "couldn't replace (%s ...)"
 msgstr ""
 
-#: ../src/msg.c:1160
+#: ../src/msg.c:1140
 #, c-format
 msgid  "link destination undefined: '%s'"
 msgstr ""
 
-#: ../src/msg.c:1181
+#: ../src/msg.c:1161
 #, c-format
 msgid  "last '!if': <%s> line %lu"
 msgstr ""
 
-#: ../src/msg.c:1200
+#: ../src/msg.c:1180
 #, c-format
 msgid  "charset/encoding %s not supported"
 msgstr ""
 
-#: ../src/msg.c:1225
+#: ../src/msg.c:1205
 #, c-format
 msgid  "use !%snode first (structure gap)"
 msgstr ""
 
-#: ../src/msg.c:1248
+#: ../src/msg.c:1230
 #, c-format
 msgid  "Warning: %s %lu: overfull line: %d"
 msgstr ""
 
-#: ../src/msg.c:1273
+#: ../src/msg.c:1256
 #, c-format
 msgid  "check this paragraph: %s"
 msgstr ""
 
-#: ../src/msg.c:1298
+#: ../src/msg.c:1283
 #, c-format
 msgid  "Warning: %s %lu: too short line: %d: %s"
 msgstr ""
 
-#: ../src/msg.c:1324
+#: ../src/msg.c:1310
 #, c-format
 msgid  "cannot convert %s #0x%x to %s"
 msgstr ""
 
-#: ../src/msg.c:1346
+#: ../src/msg.c:1332
 #, c-format
 msgid  "can't convert UTF-8 (%s) to %s"
 msgstr ""
 
-#: ../src/msg.c:1366
+#: ../src/msg.c:1352
 #, c-format
 msgid  "%x not available in ISO Latin 1"
 msgstr ""
 
-#: ../src/msg.c:1396
+#: ../src/msg.c:1383
 #, c-format
 msgid  "structure depth exceeded, using %s"
 msgstr ""
 
-#: ../src/msg.c:1405
+#: ../src/msg.c:1392
 #, c-format
 msgid  "%s: buffer overrun prevented: %s: %u>%u"
 msgstr ""
 
-#: ../src/par.c:603
+#: ../src/par.c:602
 #, c-format
 msgid  "AmigaGuide cannot link to label '%s'"
 msgstr ""
 
-#: ../src/par.c:1783
+#: ../src/par.c:1776
 msgid  "xlink needs WinHelp destination topic"
 msgstr ""
 
-#: ../src/par.c:1789
+#: ../src/par.c:1782
 msgid  "xlink needs WinHelp destination file"
 msgstr ""
 
-#: ../src/par.c:1796
+#: ../src/par.c:1788
 msgid  "use (!xlink [text] [topic@foo.hlp])"
 msgstr ""
 
-#: ../src/par.c:3677
+#: ../src/par.c:3665
 msgid  "too many parameters used"
 msgstr ""
 
-#: ../src/par.c:3922
+#: ../src/par.c:3912
 #, c-format
 msgid  "not replaced %3lu:%3lu: %c%c%c %s %s\n"
 msgstr ""
 
-#: ../src/par.c:4426
+#: ../src/par.c:4416
 #, c-format
 msgid  "%x not allowed in macro name"
 msgstr ""
 
-#: ../src/par.c:4547
+#: ../src/par.c:4537
 #, c-format
 msgid  "macro name longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4553
-#: ../src/par.c:4725
+#: ../src/par.c:4543
+#: ../src/par.c:4715
 #, c-format
 msgid  "redefining internal command (!%s)"
 msgstr ""
 
-#: ../src/par.c:4578
+#: ../src/par.c:4569
 #, c-format
 msgid  "macro contents longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4719
+#: ../src/par.c:4709
 #, c-format
 msgid  "definition name longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4754
+#: ../src/par.c:4744
 #, c-format
 msgid  "definition contents longer than %d characters"
 msgstr ""
 
-#: ../src/par.c:4851
+#: ../src/par.c:4840
 #, c-format
 msgid  "internal command (!%s) cannot be undefined"
 msgstr ""
 
-#: ../src/par.c:4902
+#: ../src/par.c:4892
 #, c-format
 msgid  "possibly undefined macro: %s"
 msgstr ""
 
-#: ../src/sty.c:1174
-#: ../src/sty.c:1180
+#: ../src/sty.c:1172
+#: ../src/sty.c:1178
 msgid  "Color"
 msgstr ""
 
-#: ../src/sty.c:1294
+#: ../src/sty.c:1292
 msgid  "please use (!V) and (!v) in one paragraph"
 msgstr ""
 
 #: ../src/tab.c:342
 #: ../src/tab.c:352
 #: ../src/tab.c:362
-#: ../src/tab.c:566
-#: ../src/tab.c:587
+#: ../src/tab.c:570
+#: ../src/tab.c:591
 msgid  "too many columns used"
 msgstr ""
 
@@ -885,92 +880,100 @@ msgstr ""
 msgid  "too many labels used in table"
 msgstr ""
 
-#: ../src/tab.c:573
+#: ../src/tab.c:526
+msgid  "!hline for the first table line has to be placed in the table header"
+msgstr ""
+
+#: ../src/tab.c:577
 msgid  "table cell contains too many characters"
 msgstr ""
 
-#: ../src/tab.c:2003
+#: ../src/tab.c:1533
+msgid  "horizontal table lines will be truncated"
+msgstr ""
+
+#: ../src/tab.c:2014
 #, c-format
 msgid  "invalid table_alignment '%s'"
 msgstr ""
 
-#: ../src/toc.c:2532
+#: ../src/toc.c:2481
 #, c-format
 msgid  "! empty filename: %d,%d,%d,%d,%d,%d,%d,%d,%d (%d)\n"
 msgstr ""
 
-#: ../src/toc.c:2543
+#: ../src/toc.c:2492
 #, c-format
 msgid  "! using 'error' instead\n"
 msgstr ""
 
-#: ../src/toc.c:2544
+#: ../src/toc.c:2493
 #, c-format
 msgid  "! please inform the author (%s)!\n"
 msgstr ""
 
-#: ../src/toc.c:5830
-#: ../src/udo.c:2538
+#: ../src/toc.c:5699
+#: ../src/udo.c:2661
 msgid  "Sorting index..."
 msgstr ""
 
-#: ../src/toc.c:9253
+#: ../src/toc.c:9029
 #, c-format
 msgid  "windows button %s not defined"
 msgstr ""
 
-#: ../src/toc.c:9306
+#: ../src/toc.c:9080
 msgid  "mapping not numeric or not of type integer"
 msgstr ""
 
-#: ../src/toc.c:9515
+#: ../src/toc.c:9294
 msgid  "missing node name"
 msgstr ""
 
-#: ../src/toc.c:11282
+#: ../src/toc.c:11045
 msgid  "Checking nodes, labels and aliases..."
 msgstr ""
 
-#: ../src/toc.c:11289
+#: ../src/toc.c:11052
 #, c-format
 msgid  "label \"%s\" used twice"
 msgstr ""
 
-#: ../src/toc.c:11292
-#: ../src/toc.c:11302
+#: ../src/toc.c:11055
+#: ../src/toc.c:11065
 msgid  "as a label"
 msgstr ""
 
-#: ../src/toc.c:11294
-#: ../src/toc.c:11304
+#: ../src/toc.c:11057
+#: ../src/toc.c:11067
 msgid  "as a node"
 msgstr ""
 
-#: ../src/toc.c:11296
-#: ../src/toc.c:11306
+#: ../src/toc.c:11059
+#: ../src/toc.c:11069
 msgid  "as an alias"
 msgstr ""
 
-#: ../src/toc.c:11298
-#: ../src/toc.c:11308
+#: ../src/toc.c:11061
+#: ../src/toc.c:11071
 #, c-format
 msgid  " in node '%s'"
 msgstr ""
 
-#: ../src/toc.c:11332
+#: ../src/toc.c:11095
 msgid  "Checking HTML file names..."
 msgstr ""
 
-#: ../src/toc.c:11353
+#: ../src/toc.c:11116
 #, c-format
 msgid  "file name \"%s\" used in \"%s\" and \"%s\""
 msgstr ""
 
-#: ../src/toc.c:11388
+#: ../src/toc.c:11149
 msgid  "Checking usage of labels and aliases..."
 msgstr ""
 
-#: ../src/toc.c:11395
+#: ../src/toc.c:11160
 #, c-format
 msgid  "%s %lu: label/alias '%s' in node '%s' wasn't referenced"
 msgstr ""
@@ -980,207 +983,222 @@ msgstr ""
 msgid  "unknown html_navigation: %s"
 msgstr ""
 
-#: ../src/toc_html.c:252
+#: ../src/toc_html.c:251
 #, c-format
 msgid  "wrong argument for !html_header_date: %s, e.g. +01:00"
 msgstr ""
 
-#: ../src/toc_html.c:282
+#: ../src/toc_html.c:281
 msgid  "empty !html_header_links"
 msgstr ""
 
-#: ../src/toc_html.c:295
+#: ../src/toc_html.c:294
 #, c-format
 msgid  "unknown linktype (!html_header_links): %s"
 msgstr ""
 
-#: ../src/toc_html.c:369
+#: ../src/toc_html.c:368
 msgid  "node is merged, ignoring !html_name"
 msgstr ""
 
-#: ../src/toc_html.c:1010
+#: ../src/toc_html.c:996
 #, c-format
 msgid  "global style sheet %s already used"
 msgstr ""
 
-#: ../src/toc_html.c:1012
+#: ../src/toc_html.c:998
 #, c-format
 msgid  "style sheet %s already used in node %s"
 msgstr ""
 
-#: ../src/toc_html.c:1101
+#: ../src/toc_html.c:1086
 #, c-format
 msgid  "global script %s already used"
 msgstr ""
 
-#: ../src/toc_html.c:1103
+#: ../src/toc_html.c:1088
 #, c-format
 msgid  "script %s already used in node %s"
 msgstr ""
 
-#: ../src/tp.c:842
+#: ../src/tp.c:816
 msgid  "!docinfo [webmastername] is deprecated, use !docinfo [domain_name] instead"
 msgstr ""
 
-#: ../src/tp.c:857
+#: ../src/tp.c:830
 msgid  "!docinfo [webmasterurl] is deprecated, use !docinfo [domain_link] instead"
 msgstr ""
 
-#: ../src/tp.c:889
+#: ../src/tp.c:859
 msgid  "!docinfo [webmasteremail] is deprecated, use !docinfo [contact_name] instead"
 msgstr ""
 
-#: ../src/tp.c:904
+#: ../src/tp.c:873
 msgid  "!docinfo [webmastermailurl] is deprecated, use !docinfo [contact_link] instead"
 msgstr ""
 
-#: ../src/tp.c:954
+#: ../src/tp.c:920
 #, c-format
 msgid  "unknown !docinfo: %s"
 msgstr ""
 
-#: ../src/tp.c:1024
+#: ../src/tp.c:990
 msgid  "no title data available"
 msgstr ""
 
-#: ../src/udo.c:1255
+#: ../src/udo.c:1250
 #, c-format
 msgid  "stringcenter(): length must not exceed %d!"
 msgstr ""
 
-#: ../src/udo.c:1294
+#: ../src/udo.c:1289
 #, c-format
 msgid  "strcenter(): length must not exceed %d!"
 msgstr ""
 
-#: ../src/udo.c:1362
+#: ../src/udo.c:1357
 #, c-format
 msgid  "outlncenterfill(): string must not be longer than %d characters"
 msgstr ""
 
-#: ../src/udo.c:1455
+#: ../src/udo.c:1449
 #, c-format
 msgid  "strjustify(): string must not be longer than %d characters"
 msgstr ""
 
-#: ../src/udo.c:1574
+#: ../src/udo.c:1567
 #, c-format
 msgid  "%s ignored outside preamble"
 msgstr ""
 
-#: ../src/udo.c:1596
+#: ../src/udo.c:1589
 #, c-format
 msgid  "%s ignored inside preamble"
 msgstr ""
 
-#: ../src/udo.c:1773
+#: ../src/udo.c:1648
+#, c-format
+msgid  "unknown !language: %s"
+msgstr ""
+
+#: ../src/udo.c:1762
+#, c-format
+msgid  "unknown output format: %s"
+msgstr ""
+
+#: ../src/udo.c:1923
+#, c-format
+msgid  "unknown os: %s"
+msgstr ""
+
+#: ../src/udo.c:1932
 msgid  "use \"unix\" to test for unix systems"
 msgstr ""
 
-#: ../src/udo.c:1841
+#: ../src/udo.c:1961
 #, c-format
 msgid  "unknown color: %s"
 msgstr ""
 
-#: ../src/udo.c:5258
+#: ../src/udo.c:5381
 msgid  "odd number of \"\""
 msgstr ""
 
-#: ../src/udo.c:5263
+#: ../src/udo.c:5386
 msgid  "odd number of ''"
 msgstr ""
 
-#: ../src/udo.c:5706
+#: ../src/udo.c:5821
 msgid  "$UDOINPUTPATH not set!"
 msgstr ""
 
-#: ../src/udo.c:7746
+#: ../src/udo.c:7845
 #, c-format
 msgid  "unknown command: %s"
 msgstr ""
 
-#: ../src/udo.c:7956
+#: ../src/udo.c:8054
 msgid  "Reading hyphen file..."
 msgstr ""
 
-#: ../src/udo.c:7966
+#: ../src/udo.c:8064
 msgid  "Sorting hyphen file..."
 msgstr ""
 
-#: ../src/udo.c:7970
+#: ../src/udo.c:8068
 msgid  "Writing hyphen file..."
 msgstr ""
 
-#: ../src/udo.c:8420
+#: ../src/udo.c:8509
 msgid  "too many files opened"
 msgstr ""
 
-#: ../src/udo.c:8527
+#: ../src/udo.c:8615
 msgid  "too many !if"
 msgstr ""
 
-#: ../src/udo.c:8999
+#: ../src/udo.c:9082
 #, c-format
 msgid  "language %s not supported"
 msgstr ""
 
-#: ../src/udo.c:9037
+#: ../src/udo.c:9120
 #, c-format
 msgid  "more than %d buttons defined"
 msgstr ""
 
-#: ../src/udo.c:10073
+#: ../src/udo.c:10145
 msgid  "Recursive !include detected"
 msgstr ""
 
-#: ../src/udo.c:10677
+#: ../src/udo.c:10696
 msgid  "!code is deprecated, use !code_source instead"
 msgstr ""
 
-#: ../src/udo.c:10825
+#: ../src/udo.c:10837
 msgid  "check this paragraph"
 msgstr ""
 
 #. Es kann nur eine geben
-#: ../src/udo.c:11201
+#: ../src/udo.c:11202
 msgid  "UDO cannot handle nested tables"
 msgstr ""
 
-#: ../src/udo.c:12178
+#: ../src/udo.c:12164
 #, c-format
 msgid  "Output (%lu lines) written to %s"
 msgstr ""
 
-#: ../src/udo.c:12182
+#: ../src/udo.c:12168
 #, c-format
 msgid  "Output: %lu lines"
 msgstr ""
 
-#: ../src/udo.c:12188
+#: ../src/udo.c:12174
 #, c-format
 msgid  "Warnings: %d"
 msgstr ""
 
-#: ../src/udo.c:12194
+#: ../src/udo.c:12180
 #, c-format
 msgid  "Notes:    %d"
 msgstr ""
 
-#: ../src/udo.c:12200
+#: ../src/udo.c:12186
 #, c-format
 msgid  "Errors:   %d"
 msgstr ""
 
-#: ../src/udo.c:12356
+#: ../src/udo.c:12342
 #, c-format
 msgid  "source and destination file are equal: <%s>"
 msgstr ""
 
-#: ../src/udo.c:12395
+#: ../src/udo.c:12381
 msgid  "Pass 1..."
 msgstr ""
 
-#: ../src/udo.c:12461
+#: ../src/udo.c:12447
 msgid  "Pass 2..."
 msgstr ""
 

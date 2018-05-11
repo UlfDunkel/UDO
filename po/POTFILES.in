@@ -1,4 +1,4 @@
-# Auto-generated: Fr 15. Apr 09:42:10 CEST 2016
+# Auto-generated: Fr 11. Mai 12:02:14 CEST 2018
 src/abo.c
 src/chr.c
 src/cli.c
@@ -12,5 +12,4 @@ src/toc.c
 src/toc_html.c
 src/tp.c
 src/udo.c
-src/udo2pdf.h
 src/udosym.c
