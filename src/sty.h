@@ -96,8 +96,6 @@ typedef struct _styleflag                 /* various style control flags */
  */
 #define STYLELEN         4
 
-#define FNOTEFILE  "FOOTNOTE."
-
    /*
     *   The placeholders are formed as a 4 byte string like this:
     *   ---------------------------------------------------------
@@ -173,8 +171,6 @@ GLOBAL STYLEFLAG   styleflag;             /* flags of currently active styles */
 
 GLOBAL char        BOLD_ON[8],
                    BOLD_OFF[8];
-GLOBAL char        FOOT_ON[8],
-                   FOOT_OFF[8];
 GLOBAL char        ITALIC_ON[8],
                    ITALIC_OFF[8];
 GLOBAL char        TWRITER_ON[8], TWRITER_OFF[8];

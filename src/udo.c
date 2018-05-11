@@ -3438,7 +3438,7 @@ LOCAL void c_index(void)
 
 LOCAL void c_internal_heading(TOCTYPE level)
 {
-	char name[512], n[512], align[64];
+	char name[LINELEN], n[512], align[64];
 	_BOOL inside_center, inside_right;
 	char cmd[3 * TOC_MAXDEPTH + 20];
 	TOCTYPE i;
@@ -3683,7 +3683,7 @@ LOCAL void c_subsubsubsubsubsubsubsubheading(void)
 
 LOCAL void c_internal_listheading(int offset)
 {
-	char name[512];
+	char name[LINELEN];
 	char sFontBeg[512];
 	char sFontEnd[32];
 	char align[64];
@@ -3984,7 +3984,7 @@ LOCAL void c_break(void)
 
 LOCAL void c_error(void)
 {
-	char e[512];
+	char e[LINELEN];
 
 	tokcpy2(e, ArraySize(e));
 	error_message("%s", e);
@@ -5322,7 +5322,7 @@ LOCAL void convert_image(const _BOOL visible)
 	case TORTF:
 		qreplace_all(filename, "\\\\", 2, "\\", 1);
 		c_rtf_quotes(caption);
-		c_win_styles(caption);
+		c_rtf_styles(caption);
 		c_bmp_output(filename, caption, visible);
 		break;
 
@@ -6153,8 +6153,49 @@ GLOBAL size_t toklen(const char *s)
 				case TOAQV:
 				case TOHPH:
 				case TOIPF:
+					/* skip ESC sequences */
+					ptr++;
 					break;
 
+				case TOHTM:
+				case TOMHH:
+				case TOHAH:
+					switch (*ptr)
+					{
+					case C_FOOT_ON:
+						/* footnotes only displayed as title */
+						/* skip text until FOOT_OFF */
+						ptr += 2;
+						while (*ptr != EOS && *ptr != ESC_C)
+							ptr++;
+						ptr--; /* will be incremented again below */
+						break;
+					default:
+						/* skip to end of ESC sequences */
+						ptr++;
+						break;
+					}
+					break;
+					
+				case TOSTG:
+				case TOAMG:
+					switch (*ptr)
+					{
+					case C_FOOT_ON:
+						len += 3;		/* "(1)"; FIXME: need to get length of number */
+						/* skip text until FOOT_OFF */
+						ptr += 2;
+						while (*ptr != EOS && *ptr != ESC_C)
+							ptr++;
+						ptr--; /* will be incremented again below */
+						break;
+					default:
+						/* skip to end of ESC sequences */
+						ptr++;
+						break;
+					}
+					break;
+					
 				default:
 					switch (*ptr)
 					{
@@ -6167,12 +6208,10 @@ GLOBAL size_t toklen(const char *s)
 						ptr++;
 						break;
 					}
+					/* skip to end of ESC sequences */
+					ptr++;
 					break;
 				}
-
-				/* skip ESC sequences */
-				while (*ptr != EOS && *ptr != ESC_C)
-					ptr++;
 				break;
 
 			default:
@@ -13514,6 +13553,8 @@ GLOBAL void init_udo_vars(void)
 	lPass2Lines = 0;
 
 	footnote_cnt = 0;
+	global_footnote_cnt = 0;
+	footnotes = NULL;
 
 	bInsideAppendix = FALSE;
 	bInsideDocument = FALSE;

@@ -712,7 +712,7 @@ LOCAL void table_output_lyx(void)
 {
 	int y, x;
 	_BOOL bl, bt, bb, br;				/* Flags fuer Linien */
-	char f[512], alignOn[64];
+	char f[LINELEN], alignOn[64];
 	_BOOL inside_center, inside_right, inside_left;
 
 	get_table_alignment(&inside_left, &inside_center, &inside_right);
@@ -1407,7 +1407,7 @@ LOCAL void table_output_ipf(void)
 LOCAL void table_output_general(void)
 {
 	int y, x, i, offset, indent = 0, y_stg;
-	char s[512];
+	char s[LINELEN];
 	char f[LINELEN];
 	char hl[3][512];
 	char hl_l[3][2], hl_c[3][2], hl_v[3][2], hl_r[3][2];

@@ -1578,8 +1578,8 @@ GLOBAL _BOOL check_output_raw_footer(_BOOL lastNode)
 
 GLOBAL void man_headline(void)
 {
-	char n[256];
-	char s1[256];
+	char n[512];
+	char s1[512];
 	size_t spaces, s1l;
 
 	if (no_headlines)
@@ -8305,6 +8305,8 @@ GLOBAL void c_tableofcontents(void)
 
 GLOBAL void check_endnode(void)
 {
+	struct footnote *f, *next;
+
 	if (active_nodetype != TOC_NONE)
 	{
 		if (active_nodetype >= TOC_NODE1 && active_nodetype < TOC_MAXDEPTH - 2)
@@ -8317,34 +8319,14 @@ GLOBAL void check_endnode(void)
 		case TOASC:
 			if (footnote_cnt)
 			{
-				_ULONG i;
-				MYTEXTFILE *tf;
-				char fnotefile[32] = "";
-				char buf[4];
-				char footnote[LINELEN + 1];
-
 				outln("-----");
 
-				for (i = 0; i < footnote_cnt; i++)
+				for (f = footnotes; f; f = f->next)
 				{
-					sprintf(buf, "%03ld", i);
-					strcpy(fnotefile, FNOTEFILE);
-					strcat(fnotefile, buf);
-
-					tf = myTextOpen(fnotefile);
-					if (tf != NULL)
-					{
-						myTextGetline(footnote, LINELEN, tf);
-						voutlnf("%ld %s", i + 1, footnote);
-						myTextClose(tf);
-					} else
-					{
-						error_open_pass2(fnotefile);
-					}
-					remove(fnotefile);
+					/* str well be thrown away below, so its ok to modify it */
+					qreplace_all(f->str, "(!nl)", 5, "\n", 1);
+					voutlnf("%d %s", f->number, f->str);
 				}
-
-				footnote_cnt = 0;
 			}
 			break;
 
@@ -8353,6 +8335,19 @@ GLOBAL void check_endnode(void)
 			outln("@endnode");
 			outln("");
 			outln("");
+			if (footnote_cnt)
+			{
+				for (f = footnotes; f; f = f->next)
+				{
+					voutlnf("@pnode %%udofootnote_%d", f->global_number);
+					/* str well be thrown away below, so its ok to modify it */
+					qreplace_all(f->str, "(!nl)", 5, "\n", 1);
+					voutlnf("%s", f->str);
+					outln("@endnode");
+					outln("");
+					outln("");
+				}
+			}
 			break;
 
 		case TOPCH:
@@ -8375,6 +8370,15 @@ GLOBAL void check_endnode(void)
 		case TOMHH:
 			break;
 		}
+
+		for (f = footnotes; f; f = next)
+		{
+			next = f->next;
+			free(f);
+		}
+
+		footnote_cnt = 0;
+		footnotes = NULL;
 
 		active_nodetype = TOC_NONE;
 	}

@@ -390,7 +390,16 @@ GLOBAL _BOOL     bDocNoTables;          /* Keine echten RTF-Tabellen anlegen? */
 
 GLOBAL _BOOL     bCalledIndex;          /* !index ignorieren und keinen Index? */
 
-GLOBAL _ULONG      footnote_cnt;          /* footnote counter */
+GLOBAL int footnote_cnt;  		        /* footnote counter for current node */
+GLOBAL int global_footnote_cnt;  		/* footnote counter for document */
+struct footnote {
+	int number;
+	int global_number;
+	struct footnote *next;
+	size_t len;
+	char str[1];
+};
+GLOBAL struct footnote *footnotes;
 
 extern FILE_LINENO outlines;
 

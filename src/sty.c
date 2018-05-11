@@ -95,6 +95,8 @@
 
 LOCAL char VERB_ON[8];
 LOCAL char VERB_OFF[8];
+LOCAL char FOOT_ON[8];
+LOCAL char FOOT_OFF[8];
 LOCAL char html_time_insert[1024];
 LOCAL char html_time_delete[1024];
 
@@ -108,28 +110,6 @@ LOCAL char html_time_delete[1024];
 
 /*******************************************************************************
 *
-*  footnote2ascii():
-*     convert a footnote entry into simple (ASCII) text
-*
-*  Format:  " (<footnote>)"
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void footnote2ascii(char *s)
-{
-	qreplace_all(s, FOOT_ON, STYLELEN, " (", 2);
-	qreplace_all(s, FOOT_OFF, STYLELEN, ")", 1);
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  footnote2array():
 *     collect footnote entries in an array and output footnote number instead
 *
@@ -140,74 +120,175 @@ LOCAL void footnote2ascii(char *s)
 
 /*
  * FIXME: should be rewritten because of several bugs:
- * - the routine limits the length of the footnote
- * - the buffer for the footnote is not checked for overflow
  * - end of footnote is searched for by looking
  *   for the next style-magic, which is not necessarily
  *   the end of the footnote (might as well be start of another style)
  * - if a footnote does not end on the same line,
  *   only the text on the first line will be replaced,
- * - if UDO gets interrupted, the temporary footnote files
- *   will not be deleted.
  */
 LOCAL void footnote2array(char *s)
 {
 	char *ptr = s;
-	char *here;
-	char buf[513];						/* footnote string buffer */
-	char fnote[27];						/* buffer for footnote number */
-	int i;								/* counter for chars in buf[] */
-	FILE *file;
-	char fnotefile[32] = "FOOTNOTE.";
-
+	char *here, *start;
+	size_t len;						/* length of str */
+	struct footnote *f;
+	size_t rlen;
+	char *fnote;
+	char *str;
+	
 	while (*ptr)
 	{
 		here = strstr(ptr, FOOT_ON);	/* find footnote token */
 
-		if (here != NULL)				/* found */
+		if (here == NULL)
+			return;
+		here += STYLELEN;			/* skip footnote token */
+		
+		start = here;
+		while (*here && *here != '\033')	/* copy footnote string */
 		{
-			here += STYLELEN;			/* skip footnote token */
-			i = 0;
-
-			while (*here && *here != '\033')	/* copy footnote string */
-			{
-				if (i < (int) sizeof(buf) - 1)
-					buf[i++] = *here;
-				here++;
-			}
-			buf[i] = 0;					/* close C string! */
-
-			++footnote_cnt;
-			sprintf(fnote, "(%ld)", footnote_cnt);
-
-			/* remove string from original line */
-			replace_once(s, FOOT_ON, fnote);
-			qreplace_once(s, FOOT_OFF, STYLELEN, "", 0);
-			replace_once(s, buf, "");
-
-
-			sprintf(fnote, "%03ld", footnote_cnt - 1);
-			strcpy(fnotefile, FNOTEFILE);
-			strcat(fnotefile, fnote);
-
-			file = myFwopen(fnotefile, TOASC);
-
-			if (!file)
+			here++;
+		}
+		if (*here == '\0' || memcmp(here, FOOT_OFF, STYLELEN) != 0)
+		{
+			error_still_active(CMD_FOOT_ON);
+			return;
+		}
+		len = here - start;
+		for (f = footnotes; f != NULL; f = f->next)
+			if (f->len == len && memcmp(start, f->str, len) == 0)
 				break;
-
-			fprintf(file, "%s", buf);
-
-			fclose(file);
-
-		} else
+		if (f == NULL)
+		{
+			struct footnote **last;
+			
+			f = (struct footnote *)malloc(sizeof(*f) + len);
+			if (f == NULL)
+				return;
+			++footnote_cnt;
+			++global_footnote_cnt;
+			f->number = footnote_cnt;
+			f->global_number = global_footnote_cnt;
+			f->len = len;
+			memcpy(f->str, start, len);
+			f->str[len] = '\0';
+			f->next = NULL;
+			last = &footnotes;
+			while (*last)
+				last = &(*last)->next;
+			*last = f;
+		}
+		
+		start -= STYLELEN;
+		switch (desttype)
+		{
+		case TOASC:
+			/* remove string from original line */
+			here += STYLELEN;
+			len = strlen(here) + 1;
+			memmove(start, here, len);
+	
+			/* and insert footnote marker */
+			fnote = um_strdup_printf("(%d)", f->number);
+			rlen = strlen(fnote);
+			memmove(start + rlen, start, len);
+			memcpy(start, fnote, rlen);
+			free(fnote);
 			break;
+
+		case TOHTM:
+		case TOMHH:
+		case TOHAH:
+			/* remove string from original line */
+			here += STYLELEN;
+			len = strlen(here) + 1;
+			memmove(start, here, len);
+	
+			/* and insert footnote marker */
+			str = strdup(f->str);
+			qreplace_all(str, "(!nl)", 5, "\n", 1);
+			fnote = um_strdup_printf("<a class=\"UDO_footnote\" title=\"%s\">(%d)</a>", str, f->number);
+			free(str);
+			rlen = strlen(fnote);
+			memmove(start + rlen, start, len);
+			memcpy(start, fnote, rlen);
+			free(fnote);
+			break;
+
+		case TORTF:
+			replace_once(here, FOOT_OFF, "}\\par }}}");
+			replace_once(start, FOOT_ON, "{{\\chftn{\\*\\footnote \\chftn\\pard\\plain {\\fs14  ");
+			qreplace_all(start, "(!nl)", 5, "\n", 1);
+			break;
+
+		case TOINF:
+			qreplace_once(here, FOOT_OFF, STYLELEN, "};", 2);
+			qreplace_once(start, FOOT_ON, STYLELEN, " @footnote{", 11);
+			qreplace_all(start, "(!nl)", 5, "\n", 1);
+			break;
+
+		case TOLDS:
+			qreplace_once(here, FOOT_OFF, STYLELEN, "</footnote>", 11);
+			qreplace_once(start, FOOT_ON, STYLELEN, "<footnote>", 10);
+			qreplace_all(start, "(!nl)", 5, "\n", 1);
+			break;
+		
+		case TOLYX:
+			replace_once(here, FOOT_OFF, "\n\\end_inset\n\\layout" INDENT_S "Standard\n");
+			replace_once(start, FOOT_ON,
+						"\n\\begin_inset" INDENT_S "Foot\ncollapsed" INDENT_S "true\n\n\\layout" INDENT_S "Standard\n\n");
+			qreplace_all(start, "(!nl)", 5, "\n", 1);
+			break;
+
+		case TOTEX:
+		case TOPDL:
+			replace_once(here, FOOT_OFF, "}");
+			replace_once(start, FOOT_ON, "\\footnote{");
+			qreplace_all(start, "(!nl)", 5, "\n", 1);
+			break;
+
+		case TOKPS:
+			qreplace_once(here, FOOT_OFF, STYLELEN, ") footnote (", 12);
+			qreplace_once(start, FOOT_ON, STYLELEN, ") udoshow (", 11);
+			qreplace_all(start, "(!nl)", 5, "\n", 1);
+			break;
+			
+		case TOSTG:
+		case TOAMG:
+			/* remove string from original line */
+			here += STYLELEN;
+			len = strlen(here) + 1;
+			memmove(start, here, len);
+	
+			/* and insert footnote marker */
+			fnote = um_strdup_printf("@{\"(%d)\" link \"%%udofootnote_%d\"}", f->number, f->global_number);
+			rlen = strlen(fnote);
+			memmove(start + rlen, start, len);
+			memcpy(start, fnote, rlen);
+			free(fnote);
+			break;
+
+		case TOMAN:
+		case TOPCH:
+		case TOWIN:
+		case TOTVH:
+		case TOAQV:
+		case TOHPH:
+		case TONRO:
+		case TOSRC:
+		case TOSRP:
+		case TOIPF:
+		case TODRC:
+		case TOWH4:
+		case TOUDO:
+		default:
+			qreplace_once(here, FOOT_OFF, STYLELEN, ")", 1);
+			qreplace_once(start, FOOT_ON, STYLELEN, " (", 2);
+			qreplace_all(start, "(!nl)", 5, " ", 1);
+			break;
+		}
 	}
 }
-
-
-
-
-
 
 
 
@@ -336,12 +417,7 @@ GLOBAL void c_pch_styles(char *s)
 	if (strstr(s, ESC_STYLE_MAGIC) == NULL)
 		return;
 
-	footnote2ascii(s);
-
-#if 0
-	delete_all(s, VERB_ON);
-	delete_all(s, VERB_OFF);
-#endif
+	footnote2array(s);
 
 	del_internal_styles(s);
 }
@@ -387,8 +463,7 @@ GLOBAL void c_rtf_styles(char *s)
 	qreplace_all(ptr, TWRITER_ON, STYLELEN, fs, l);
 	qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
 
-	replace_all(ptr, FOOT_ON, "{{\\chftn{\\*\\footnote \\chftn\\pard\\plain {\\fs14  ");
-	replace_all(ptr, FOOT_OFF, "}\\par }}}");
+	footnote2array(ptr);
 
 	time = (long) (iDateMin + (iDateHour << 6) + (iDateDay << 11) + ((long) iDateMonth << 16) + ((long) (iDateYear - 1900) << 20));
 
@@ -464,7 +539,7 @@ GLOBAL void c_win_styles(char *s)
 	qreplace_all(ptr, TWRITER_ON, STYLELEN, fs, l);
 	qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
 
-	footnote2ascii(s);
+	footnote2array(s);
 
 	qreplace_all(ptr, INSERT_ON, STYLELEN, "{\\cf6 ", 6);
 	qreplace_all(ptr, INSERT_OFF, STYLELEN, "}", 1);
@@ -536,8 +611,7 @@ GLOBAL void c_internal_styles(char *s)
 		replace_all(ptr, VERB_OFF, tex_verb_off);
 		free(tex_verb_off);
 		free(tex_verb_on);
-		replace_all(ptr, FOOT_ON, "\\footnote{");
-		replace_all(ptr, FOOT_OFF, "}");
+		footnote2array(ptr);
 		qreplace_all(ptr, DELETED_ON, STYLELEN, "\\[", 2);
 		qreplace_all(ptr, DELETED_OFF, STYLELEN, "\\]", 2);
 
@@ -560,9 +634,7 @@ GLOBAL void c_internal_styles(char *s)
 		replace_all(ptr, UNDER_OFF, "\\bar" INDENT_S "default" INDENT_S);
 		replace_all(ptr, VERB_ON, "\\family" INDENT_S "typewriter" INDENT_S);
 		replace_all(ptr, VERB_OFF, "\\family" INDENT_S "default" INDENT_S);
-		replace_all(ptr, FOOT_ON,
-					"\n\\begin_inset" INDENT_S "Foot\ncollapsed" INDENT_S "true\n\n\\layout" INDENT_S "Standard\n\n");
-		replace_all(ptr, FOOT_OFF, "\n\\end_inset\n\\layout" INDENT_S "Standard\n");
+		footnote2array(ptr);
 
 		del_internal_styles(s);
 		break;
@@ -572,22 +644,17 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, BOLD_OFF, STYLELEN, "}", 1);
 		qreplace_all(ptr, ITALIC_ON, STYLELEN, "@emph{", 6);
 		qreplace_all(ptr, ITALIC_OFF, STYLELEN, "}", 1);
-		qreplace_all(ptr, FOOT_ON, STYLELEN, " @footnote{", 11);
-		qreplace_all(ptr, FOOT_OFF, STYLELEN, "};", 2);
 		qreplace_all(ptr, TWRITER_ON, STYLELEN, "@code{", 6);
 		qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
 		qreplace_all(ptr, VERB_ON, STYLELEN, "@code{", 6);
 		qreplace_all(ptr, VERB_OFF, STYLELEN, "}", 1);
 
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
 	case TOTVH:
-#if 0
-		delete_all(s, VERB_ON);
-		delete_all(s, VERB_OFF);
-#endif
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
@@ -604,16 +671,7 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, SHADOW_OFF, STYLELEN, "@{s}", 4);
 		qreplace_all(ptr, OUTLINE_ON, STYLELEN, "@{O}", 4);
 		qreplace_all(ptr, OUTLINE_OFF, STYLELEN, "@{o}", 4);
-#if 0
-		delete_all(s, VERB_ON);
-		delete_all(s, VERB_OFF);
-#endif
-		/*
-		 * FIXME: would be nice to generate @pnodes from
-		 * footnotes, but since styles are only parsed during
-		 * pass 2, that would change the TOC after pass 1
-		 */
-		footnote2ascii(s);
+		footnote2array(s);
 
 		del_internal_styles(s);
 		break;
@@ -625,11 +683,7 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, ITALIC_OFF, STYLELEN, "@{UI}", 5);
 		qreplace_all(ptr, UNDER_ON, STYLELEN, "@{U}", 4);
 		qreplace_all(ptr, UNDER_OFF, STYLELEN, "@{UU}", 5);
-#if 0
-		delete_all(s, VERB_ON);
-		delete_all(s, VERB_OFF);
-#endif
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
@@ -640,16 +694,7 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, ITALIC_OFF, STYLELEN, "/", 1);
 		qreplace_all(ptr, UNDER_ON, STYLELEN, "_", 1);
 		qreplace_all(ptr, UNDER_OFF, STYLELEN, "_", 1);
-#if 0
-		delete_all(s, VERB_ON);
-		delete_all(s, VERB_OFF);
-#endif
-#if 1
-		footnote2ascii(s);
-		(void) footnote2array;
-#else
 		footnote2array(s);
-#endif
 		del_internal_styles(s);
 		break;
 
@@ -660,7 +705,7 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, ITALIC_OFF, STYLELEN, "\003@", 2);
 		qreplace_all(ptr, UNDER_ON, STYLELEN, sDrcUcolor, 2);
 		qreplace_all(ptr, UNDER_OFF, STYLELEN, "\003@", 2);
-		footnote2ascii(s);
+		footnote2array(s);
 
 		qreplace_all(ptr, COLOR_BLACK, STYLELEN, "\003@", 2);
 		qreplace_all(ptr, COLOR_SILVER, STYLELEN, "\003G", 2);
@@ -685,17 +730,13 @@ GLOBAL void c_internal_styles(char *s)
 
 	case TOSRC:
 	case TOSRP:
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
 	case TOMAN:
 		c_man_styles(s);
-#if 0
-		delete_all(s, VERB_ON);
-		delete_all(s, VERB_OFF);
-#endif
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
@@ -704,17 +745,13 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, BOLD_OFF, STYLELEN, "\n", 1);
 		qreplace_all(ptr, ITALIC_ON, STYLELEN, "\n.I ", 4);
 		qreplace_all(ptr, ITALIC_OFF, STYLELEN, "\n", 1);
-		footnote2ascii(s);
+		footnote2array(s);
 
 		del_internal_styles(s);
 		break;
 
 	case TOPCH:
-#if 0
-		delete_all(s, VERB_ON);
-		delete_all(s, VERB_OFF);
-#endif
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
@@ -764,7 +801,7 @@ GLOBAL void c_internal_styles(char *s)
 			}
 		}
 
-		footnote2ascii(s);
+		footnote2array(s);
 
 		qreplace_all(ptr, INSERT_ON, STYLELEN, html_time_insert, strlen(html_time_insert));
 		qreplace_all(ptr, INSERT_OFF, STYLELEN, "</ins>", 6);
@@ -826,7 +863,7 @@ GLOBAL void c_internal_styles(char *s)
 		replace_all(s, VERB_OFF, "<\\ex>");
 		replace_all(s, TWRITER_ON, "<ex>");
 		replace_all(s, TWRITER_OFF, "<\\ex>");
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
@@ -839,9 +876,7 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, VERB_OFF, STYLELEN, "</tt>", 5);
 		qreplace_all(ptr, TWRITER_ON, STYLELEN, "<tt>", 4);
 		qreplace_all(ptr, TWRITER_OFF, STYLELEN, "</tt>", 5);
-		qreplace_all(ptr, FOOT_ON, STYLELEN, "<footnote>", 10);
-		qreplace_all(ptr, FOOT_OFF, STYLELEN, "</footnote>", 11);
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
@@ -854,7 +889,7 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, TWRITER_OFF, STYLELEN, "", 0);	/* <???> */
 		qreplace_all(ptr, UNDER_ON, STYLELEN, ":hp5.", 5);
 		qreplace_all(ptr, UNDER_OFF, STYLELEN, ":ehp5.", 6);
-		footnote2ascii(s);
+		footnote2array(s);
 		del_internal_styles(s);
 		break;
 
@@ -869,9 +904,6 @@ GLOBAL void c_internal_styles(char *s)
 		qreplace_all(ptr, VERB_OFF, STYLELEN, ") udoshow Voff (", 16);
 		qreplace_all(ptr, TWRITER_ON, STYLELEN, ") udoshow Von (", 15);
 		qreplace_all(ptr, TWRITER_OFF, STYLELEN, ") udoshow Voff (", 16);
-		qreplace_all(ptr, FOOT_ON, STYLELEN, ") udoshow (", 11);
-		qreplace_all(ptr, FOOT_OFF, STYLELEN, ") footnote (", 12);
-/*    footnote2ascii(s); */
 
 		qreplace_all(ptr, INSERT_ON, STYLELEN, ") udoshow currentrgbcolor 1 0 0 setrgbcolor (", 45);
 		qreplace_all(ptr, INSERT_OFF, STYLELEN, ") udoshow setrgbcolor (", 23);
