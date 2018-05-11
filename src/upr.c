@@ -82,10 +82,10 @@
 
 GLOBAL void save_upr_entry_infile(const char *filename, int level)
 {
-   if (bUseUPRfile && bUPRopened)
-   {
-      fprintf(fUPRfile, "infile\t%d\t%s\n", level, filename);
-   }
+	if (bUseUPRfile && bUPRopened)
+	{
+		fprintf(fUPRfile, "infile\t%d\t%s\n", level, filename);
+	}
 }
 
 
@@ -104,10 +104,10 @@ GLOBAL void save_upr_entry_infile(const char *filename, int level)
 
 GLOBAL void save_upr_entry_outfile(const char *filename)
 {
-   if (bUseUPRfile && bUPRopened)
-   {
-      fprintf(fUPRfile, "outfile\t%s\n", filename);
-   }
+	if (bUseUPRfile && bUPRopened)
+	{
+		fprintf(fUPRfile, "outfile\t%s\n", filename);
+	}
 }
 
 
@@ -126,10 +126,10 @@ GLOBAL void save_upr_entry_outfile(const char *filename)
 
 GLOBAL void save_upr_entry_image(const char *filename)
 {
-   if (bUseUPRfile && bUPRopened)
-   {
-      fprintf(fUPRfile, "image\t%s\n", filename);
-   }
+	if (bUseUPRfile && bUPRopened)
+	{
+		fprintf(fUPRfile, "image\t%s\n", filename);
+	}
 }
 
 
@@ -151,92 +151,92 @@ GLOBAL void save_upr_entry_image(const char *filename)
 
 LOCAL int convert_title(char *buf, const char *title)
 {
-   const char *s;
-   int flag;
-   char cbuf[8];
-   const char *repl;
-   
-   s = strchr(title, ' ');
-   if (s != NULL)
-   {
-      while (*s == ' ' || *s == '\t')
-         s++;
-      strcpy(buf, s);
-      replace_macros(buf);
-      replace_defines(buf);
-      
-      qdelete_all(buf, "!-", 2);
-      
-      replace_all(buf, "(!today)", get_lang()->today);
-      replace_all(buf, "(!short_today)", get_lang()->short_today);
-      
-      qreplace_all(buf, "(\"\")", 4, TEMPO_S, TEMPO_S_LEN);
-      qreplace_all(buf, "('')", 4, TEMPO_S2, TEMPO_S2_LEN);
-      if (no_quotes)
-      {
-         qreplace_all(buf, "\"\"", 2, "\"", 1);
-         qreplace_all(buf, "''", 2, "'", 1);
-      } else
-      {
-         flag = FALSE;
-         while (strstr(buf, "''") != NULL)
-         {
-            flag = !flag;
-            replace_once(buf, "''", flag ? "`" : "'");
-         }
-         
-         flag = FALSE;
-         while (strstr(buf, "\"\"") != NULL)
-         {
-            flag = !flag;
-            replace_once(buf, "\"\"", flag ? "\"" : "\"");
-         }
-      }
-      qreplace_all(buf, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
-      qreplace_all(buf, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-      
-      qreplace_all(buf, "!..", 3, "...", 3);
-      repl = unicode2char(U_CopyrightSign, cbuf);
-      replace_all(buf, "(!copyright)",  repl);
-      repl = unicode2char(U_RegisteredSign, cbuf);
-      replace_all(buf, "(!registered)", repl);
-      replace_all(buf, "(!reg)", repl);
-      qreplace_all(buf, "(!grin)", 7, ";-)", 3);
-      qreplace_all(buf, "(!laugh)", 8, ":-)", 3);
-      repl = unicode2char(U_GreekSmallLetterAlpha, cbuf);
-      if (*repl == '\0')
-         repl = "alpha";
-      replace_all(buf, "(!alpha)", repl);
-      repl = unicode2char(U_GreekSmallLetterBeta, cbuf);
-      if (*repl == '\0')
-         repl = unicode2char(U_LatinSmallLetterSharpS, cbuf);
-      if (*repl == '\0')
-         repl = "beta";
-      replace_all(buf, "(!beta)", repl);
-      qreplace_all(buf, "(!tm)", 5, "(tm)", 4);
-      qreplace_all(buf, "(!TeX)", 6, "TeX", 3);
-      qreplace_all(buf, "(!LaTeX)", 8, "LaTeX", 5);
-      qreplace_all(buf, "(!LaTeXe)", 9, "LaTeX2e", 7);
-      qreplace_all(buf, "(!euro)", 7, "EUR", 3);
-      qreplace_all(buf, "(!pound)", 8, "GBP", 3);
-      qreplace_all(buf, "(!deg)", 6, " Grad", 5);
-      
-      qreplace_all(buf, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
-      qreplace_all(buf, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
-      qreplace_all(buf, "---", 3, "-", 1);
-      qreplace_all(buf, "--", 2, "-", 1);
-      qreplace_all(buf, TEMPO_S, TEMPO_S_LEN, "---", 3);
-      qreplace_all(buf, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
-      
-      qreplace_all(buf, "!~", 2, TEMPO_S, TEMPO_S_LEN);
-      qreplace_all(buf, "~", 1, " ", 1);
-      qreplace_all(buf, TEMPO_S, TEMPO_S_LEN, "~", 1);
-      
-      replace_udo_quotes(buf);
-      
-      return TRUE;
-   }
-   return FALSE;
+	const char *s;
+	int flag;
+	char cbuf[8];
+	const char *repl;
+
+	s = strchr(title, ' ');
+	if (s != NULL)
+	{
+		while (*s == ' ' || *s == '\t')
+			s++;
+		strcpy(buf, s);
+		replace_macros(buf);
+		replace_defines(buf);
+
+		qdelete_all(buf, "!-", 2);
+
+		replace_all(buf, "(!today)", get_lang()->today);
+		replace_all(buf, "(!short_today)", get_lang()->short_today);
+
+		qreplace_all(buf, "(\"\")", 4, TEMPO_S, TEMPO_S_LEN);
+		qreplace_all(buf, "('')", 4, TEMPO_S2, TEMPO_S2_LEN);
+		if (no_quotes)
+		{
+			qreplace_all(buf, "\"\"", 2, "\"", 1);
+			qreplace_all(buf, "''", 2, "'", 1);
+		} else
+		{
+			flag = FALSE;
+			while (strstr(buf, "''") != NULL)
+			{
+				flag = !flag;
+				replace_once(buf, "''", flag ? "`" : "'");
+			}
+
+			flag = FALSE;
+			while (strstr(buf, "\"\"") != NULL)
+			{
+				flag = !flag;
+				replace_once(buf, "\"\"", flag ? "\"" : "\"");
+			}
+		}
+		qreplace_all(buf, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
+		qreplace_all(buf, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
+
+		qreplace_all(buf, "!..", 3, "...", 3);
+		repl = unicode2char(U_CopyrightSign, cbuf);
+		replace_all(buf, "(!copyright)", repl);
+		repl = unicode2char(U_RegisteredSign, cbuf);
+		replace_all(buf, "(!registered)", repl);
+		replace_all(buf, "(!reg)", repl);
+		qreplace_all(buf, "(!grin)", 7, ";-)", 3);
+		qreplace_all(buf, "(!laugh)", 8, ":-)", 3);
+		repl = unicode2char(U_GreekSmallLetterAlpha, cbuf);
+		if (*repl == '\0')
+			repl = "alpha";
+		replace_all(buf, "(!alpha)", repl);
+		repl = unicode2char(U_GreekSmallLetterBeta, cbuf);
+		if (*repl == '\0')
+			repl = unicode2char(U_LatinSmallLetterSharpS, cbuf);
+		if (*repl == '\0')
+			repl = "beta";
+		replace_all(buf, "(!beta)", repl);
+		qreplace_all(buf, "(!tm)", 5, "(tm)", 4);
+		qreplace_all(buf, "(!TeX)", 6, "TeX", 3);
+		qreplace_all(buf, "(!LaTeX)", 8, "LaTeX", 5);
+		qreplace_all(buf, "(!LaTeXe)", 9, "LaTeX2e", 7);
+		qreplace_all(buf, "(!euro)", 7, "EUR", 3);
+		qreplace_all(buf, "(!pound)", 8, "GBP", 3);
+		qreplace_all(buf, "(!deg)", 6, " Grad", 5);
+
+		qreplace_all(buf, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
+		qreplace_all(buf, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
+		qreplace_all(buf, "---", 3, "-", 1);
+		qreplace_all(buf, "--", 2, "-", 1);
+		qreplace_all(buf, TEMPO_S, TEMPO_S_LEN, "---", 3);
+		qreplace_all(buf, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
+
+		qreplace_all(buf, "!~", 2, TEMPO_S, TEMPO_S_LEN);
+		qreplace_all(buf, "~", 1, " ", 1);
+		qreplace_all(buf, TEMPO_S, TEMPO_S_LEN, "~", 1);
+
+		replace_udo_quotes(buf);
+
+		return TRUE;
+	}
+	return FALSE;
 }
 
 
@@ -252,13 +252,13 @@ LOCAL int convert_title(char *buf, const char *title)
 
 GLOBAL void save_upr_entry_node(const int level, const char *filename, const char *title, FILE_LINENO line)
 {
-   char buf[LINELEN];
-   
-   if (bUseUPRfile && bUPRopened)
-   {
-      if (convert_title(buf, title))
-         fprintf(fUPRfile, "node\t%d\t%s\t%lu\t%s\n", level, filename, line, buf);
-   }
+	char buf[LINELEN];
+
+	if (bUseUPRfile && bUPRopened)
+	{
+		if (convert_title(buf, title))
+			fprintf(fUPRfile, "node\t%d\t%s\t%lu\t%s\n", level, filename, line, buf);
+	}
 }
 
 
@@ -277,13 +277,13 @@ GLOBAL void save_upr_entry_node(const int level, const char *filename, const cha
 
 GLOBAL void save_upr_entry_heading(const int level, const char *filename, const char *title, FILE_LINENO line)
 {
-   char buf[LINELEN];
-   
-   if (bUseUPRfile && bUPRopened)
-   {
-      if (convert_title(buf, title))
-         fprintf(fUPRfile, "heading\t%d\t%s\t%lu\t%s\n", level, filename, line, buf);
-   }
+	char buf[LINELEN];
+
+	if (bUseUPRfile && bUPRopened)
+	{
+		if (convert_title(buf, title))
+			fprintf(fUPRfile, "heading\t%d\t%s\t%lu\t%s\n", level, filename, line, buf);
+	}
 }
 
 
@@ -302,13 +302,13 @@ GLOBAL void save_upr_entry_heading(const int level, const char *filename, const 
 
 GLOBAL void save_upr_entry_alias(const char *filename, const char *title, FILE_LINENO line)
 {
-   char buf[LINELEN];
-   
-   if (bUseUPRfile && bUPRopened)
-   {
-      if (convert_title(buf, title))
-         fprintf(fUPRfile, "alias\t%s\t%lu\t%s\n", filename, line, buf);
-   }
+	char buf[LINELEN];
+
+	if (bUseUPRfile && bUPRopened)
+	{
+		if (convert_title(buf, title))
+			fprintf(fUPRfile, "alias\t%s\t%lu\t%s\n", filename, line, buf);
+	}
 }
 
 
@@ -327,13 +327,13 @@ GLOBAL void save_upr_entry_alias(const char *filename, const char *title, FILE_L
 
 GLOBAL void save_upr_entry_label(const char *filename, const char *title, FILE_LINENO line)
 {
-   char buf[LINELEN];
-   
-   if (bUseUPRfile && bUPRopened)
-   {
-      if (convert_title(buf, title))
-         fprintf(fUPRfile, "label\t%s\t%lu\t%s\n", filename, line, buf);
-   }
+	char buf[LINELEN];
+
+	if (bUseUPRfile && bUPRopened)
+	{
+		if (convert_title(buf, title))
+			fprintf(fUPRfile, "label\t%s\t%lu\t%s\n", filename, line, buf);
+	}
 }
 
 
@@ -352,16 +352,16 @@ GLOBAL void save_upr_entry_label(const char *filename, const char *title, FILE_L
 
 GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, FILE_LINENO line)
 {
-   char *buf;
-   
-   if (bUseUPRfile && bUPRopened)
-   {
-      buf = strdup(title);
-      replace_char(buf, TILDE_C, '~');
-      replace_char(buf, NBSP_C, '~');
-      replace_char(buf, INDENT_C, ' ');
-      replace_char(buf, DIVIS_C, '-');
-      fprintf(fUPRfile, "index\t%d\t%s\t%lu\t%s\n", level, filename, line, buf);
-      free(buf);
-   }
+	char *buf;
+
+	if (bUseUPRfile && bUPRopened)
+	{
+		buf = strdup(title);
+		replace_char(buf, TILDE_C, '~');
+		replace_char(buf, NBSP_C, '~');
+		replace_char(buf, INDENT_C, ' ');
+		replace_char(buf, DIVIS_C, '-');
+		fprintf(fUPRfile, "index\t%d\t%s\t%lu\t%s\n", level, filename, line, buf);
+		free(buf);
+	}
 }

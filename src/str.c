@@ -92,8 +92,8 @@
 #include "udo_type.h"
 #include "msg.h"
 #include "udomem.h"
-#include "constant.h"                     /* LINELEN */
-#include "chr.h"                          /* utf8_to_bstr() */
+#include "constant.h"					/* LINELEN */
+#include "chr.h"						/* utf8_to_bstr() */
 #include "file.h"
 #include "udo.h"
 
@@ -118,19 +118,18 @@
 
 GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *place)
 {
-   size_t slen;         /* temp buffer for the length of src */
-   
-   slen = strlen(src);
-   if ((slen + 1) < max)
-   {
-      return strcpy(dest, src);
-   }
-   else
-   {
-      dest[0] = EOS;
-      warning_buffer_overrun("um_strcpy", place, slen, max);
-      return dest;
-   }
+	size_t slen;						/* temp buffer for the length of src */
+
+	slen = strlen(src);
+	if ((slen + 1) < max)
+	{
+		return strcpy(dest, src);
+	} else
+	{
+		dest[0] = EOS;
+		warning_buffer_overrun("um_strcpy", place, slen, max);
+		return dest;
+	}
 }
 
 
@@ -149,16 +148,15 @@ GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *plac
 
 GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place)
 {
-   if ((n + 1) < max)
-   {
-      return strncpy(dest, src, n);
-   }
-   else
-   {
-      dest[0] = EOS;
-      warning_buffer_overrun("um_strncpy", place, n, max);
-      return dest;
-   }
+	if ((n + 1) < max)
+	{
+		return strncpy(dest, src, n);
+	} else
+	{
+		dest[0] = EOS;
+		warning_buffer_overrun("um_strncpy", place, n, max);
+		return dest;
+	}
 }
 
 
@@ -177,21 +175,20 @@ GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const
 
 GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *place)
 {
-   size_t dlen, slen;
+	size_t dlen, slen;
 
-   dlen = strlen(dest);
-   slen = strlen(src);
-   
-   if ((dlen + slen + 1) < max)
-   {
-      return strcat(dest, src);
-   }
-   else
-   {
-      dest[0] = EOS;
-      warning_buffer_overrun("um_strcat", place, dlen + slen, max);
-      return dest;
-   }
+	dlen = strlen(dest);
+	slen = strlen(src);
+
+	if ((dlen + slen + 1) < max)
+	{
+		return strcat(dest, src);
+	} else
+	{
+		dest[0] = EOS;
+		warning_buffer_overrun("um_strcat", place, dlen + slen, max);
+		return dest;
+	}
 }
 
 
@@ -210,19 +207,18 @@ GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *plac
 
 GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place)
 {
-   size_t dlen;
+	size_t dlen;
 
-   dlen = strlen(dest);
-   if ((dlen + n + 1) < max)
-   {
-      return strncat(dest, src, n);
-   }
-   else
-   {
-      dest[0] = EOS;
-      warning_buffer_overrun("um_strncat", place, dlen + n, max);
-      return dest;
-   }
+	dlen = strlen(dest);
+	if ((dlen + n + 1) < max)
+	{
+		return strncat(dest, src, n);
+	} else
+	{
+		dest[0] = EOS;
+		warning_buffer_overrun("um_strncat", place, dlen + n, max);
+		return dest;
+	}
 }
 
 
@@ -241,10 +237,10 @@ GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const
 
 GLOBAL char *chrcat(char *dest, const char c)
 {
-   char one[2] = { 0,0 };
+	char one[2] = { 0, 0 };
 
-   one[0] = c;
-   return strcat(dest, one);
+	one[0] = c;
+	return strcat(dest, one);
 }
 
 
@@ -263,21 +259,21 @@ GLOBAL char *chrcat(char *dest, const char c)
 
 GLOBAL char *strinsert(char *string, const char *insert)
 {
-   char     *start;
-   size_t    sl,      /* length of string */
-             il;      /* length of insert string */
-   
-   if (insert[0] == '\0')
-      return string;
-   
-   sl = strlen(string);
-   il = strlen(insert);
+	char *start;
+	size_t sl;							/* length of string */
+	size_t il;							/* length of insert string */
 
-   start = string;                        /* set ^ to start of string */
-   memmove(string + il, string, sl + 1);  /* make space for insert string */
-   memcpy(start, insert, il);
-   
-   return string;
+	if (insert[0] == '\0')
+		return string;
+
+	sl = strlen(string);
+	il = strlen(insert);
+
+	start = string;						/* set ^ to start of string */
+	memmove(string + il, string, sl + 1);	/* make space for insert string */
+	memcpy(start, insert, il);
+
+	return string;
 }
 
 
@@ -302,16 +298,16 @@ GLOBAL char *strinsert(char *string, const char *insert)
 
 GLOBAL void replace_char(char *string, const char search, const char replace)
 {
-   char *ptr;
-   
-   ptr = string;                          /* set ^ to begin of edit string */
+	char *ptr;
 
-   while (*ptr != EOS)                    /* check whole edit string */
-   {
-      if (*ptr == search)                 /* character found! */
-        *ptr = replace;                   /* replace it */
-      ptr++;
-   }
+	ptr = string;						/* set ^ to begin of edit string */
+
+	while (*ptr != EOS)					/* check whole edit string */
+	{
+		if (*ptr == search)				/* character found! */
+			*ptr = replace;				/* replace it */
+		ptr++;
+	}
 }
 
 
@@ -331,34 +327,32 @@ GLOBAL void replace_char(char *string, const char search, const char replace)
 
 GLOBAL int replace_once(char *string, const char *search, const char *replace)
 {
-   char     *found;
-   size_t    slen,
-             rlen,
-             flen;
-   
-   if (string[0] == '\0')
-      return 0;
-   if (search[0] == '\0')
-      return 0;
+	char *found;
+	size_t slen, rlen, flen;
 
-   if ((found = strstr(string, search)) == NULL)
-      return 0;
+	if (string[0] == '\0')
+		return 0;
+	if (search[0] == '\0')
+		return 0;
 
-   slen = strlen(search);
-   flen = strlen(found);
+	if ((found = strstr(string, search)) == NULL)
+		return 0;
 
-   /* remove <search> */
-   memmove(found, found + slen, flen - slen + 1);
+	slen = strlen(search);
+	flen = strlen(found);
 
-   if (replace[0] != EOS)                 /* <replace> may even be empty! */
-   {
-      rlen = strlen(replace);
-      flen -= slen;
-      memmove(found + rlen, found, flen + 1);
-      memcpy(found, replace, rlen);
-   }
-   
-   return 1;
+	/* remove <search> */
+	memmove(found, found + slen, flen - slen + 1);
+
+	if (replace[0] != EOS)				/* <replace> may even be empty! */
+	{
+		rlen = strlen(replace);
+		flen -= slen;
+		memmove(found + rlen, found, flen + 1);
+		memcpy(found, replace, rlen);
+	}
+
+	return 1;
 }
 
 
@@ -378,30 +372,28 @@ GLOBAL int replace_once(char *string, const char *search, const char *replace)
 
 GLOBAL int replace_last(char *string, const char *search, const char *replace)
 {
-   char     *found,
-            *look,
-            *last;
+	char *found, *look, *last;
 
-   if (string[0] == '\0')
-      return 0;
-   if (search[0] == '\0')
-      return 0;
-   
-   look = string;
-   last = NULL;
+	if (string[0] == '\0')
+		return 0;
+	if (search[0] == '\0')
+		return 0;
 
-   while ((found = strstr(look, search)) != NULL)
-   {
-      look = found + 1;
-      last = found;
-   }
+	look = string;
+	last = NULL;
 
-   if (last != NULL)                      /* last position of <search> found */
-   {
-      return replace_once(last, search, replace);
-   }
-   
-   return 0;
+	while ((found = strstr(look, search)) != NULL)
+	{
+		look = found + 1;
+		last = found;
+	}
+
+	if (last != NULL)					/* last position of <search> found */
+	{
+		return replace_once(last, search, replace);
+	}
+
+	return 0;
 }
 
 
@@ -427,63 +419,63 @@ GLOBAL int replace_last(char *string, const char *search, const char *replace)
 
 GLOBAL int replace_all(char *source, const char *search, const char *replace)
 {
-   char       *found;     /* found character */
-   size_t      slen,      /* length of search string */
-               rlen,      /* length of replacement string */
-               flen,      /* length of found string */
-               i;
-   
-   if (source[0] == '\0')                 /* empty edit string? */
-      return 0;                           /* not allowed! */
-   if (search[0] == '\0')                 /* empty search string? */
-      return 0;                           /* not allowed! */
+	char *found;						/* found character */
 
-   if ((found = strstr(source, search)) == NULL)
-      return 0;
+	size_t slen;						/* length of search string */
+	size_t rlen;						/* length of replacement string */
+	size_t flen;						/* length of found string */
+	size_t i;
 
-   slen = strlen(search);
-   rlen = strlen(replace);
+	if (source[0] == '\0')				/* empty edit string? */
+		return 0;						/* not allowed! */
+	if (search[0] == '\0')				/* empty search string? */
+		return 0;						/* not allowed! */
 
-   /* --- simple method: --- */
-   
-   if (slen == rlen)                      /* search + replace string lengths are equal */
-   {
-      while (found != NULL)               /* still something found! */
-      {
-         for (i = 0; i < rlen; i++)       /* replace characters in edit string */
-            found[i] = replace[i];
-                                          /* find next position of replacement string */
-         found = strstr(found + rlen, search);
-      }
-      return 1;                           /* done! */
-   }
+	if ((found = strstr(source, search)) == NULL)
+		return 0;
 
-   /* --- complex method: --- */
-   /* search + replace string lengths are different */
+	slen = strlen(search);
+	rlen = strlen(replace);
 
-   while (found != NULL)                  /* still something found: */
-   {
-      flen = strlen(found);               /* get length of remaining edit string */
+	/* --- simple method: --- */
 
-      /* remove <search> */
-      memmove(found, found + slen, flen - slen + 1);
-   
-      if (replace[0] != EOS)              /* replacement string can be empty */
-      {
-         flen = strlen(found);            /* get new length of remaining edit string */
-                                          /* Platz schaffen fuer neues und dorthin kopieren */
-         memmove(found + rlen, found, flen + 1);
-         memcpy(found, replace, rlen);    /* insert replacement string */
-                                          /* find next position of replacement string */
-         found = strstr(found + rlen, search);
-      }
-      else
-      {
-         found = strstr(found, search);
-      }
-   }
-   
-   return 1;
+	if (slen == rlen)					/* search + replace string lengths are equal */
+	{
+		while (found != NULL)			/* still something found! */
+		{
+			for (i = 0; i < rlen; i++)	/* replace characters in edit string */
+				found[i] = replace[i];
+			/* find next position of replacement string */
+			found = strstr(found + rlen, search);
+		}
+		return 1;						/* done! */
+	}
+
+	/* --- complex method: --- */
+	/* search + replace string lengths are different */
+
+	while (found != NULL)				/* still something found: */
+	{
+		flen = strlen(found);			/* get length of remaining edit string */
+
+		/* remove <search> */
+		memmove(found, found + slen, flen - slen + 1);
+
+		if (replace[0] != EOS)			/* replacement string can be empty */
+		{
+			flen = strlen(found);		/* get new length of remaining edit string */
+			/* Platz schaffen fuer neues und dorthin kopieren */
+			memmove(found + rlen, found, flen + 1);
+			memcpy(found, replace, rlen);	/* insert replacement string */
+			/* find next position of replacement string */
+			found = strstr(found + rlen, search);
+		} else
+		{
+			found = strstr(found, search);
+		}
+	}
+
+	return 1;
 }
 
 
@@ -507,45 +499,45 @@ GLOBAL int replace_all(char *source, const char *search, const char *replace)
 
 GLOBAL int qreplace_once(char *string, const char *search, const size_t slen, const char *replace, const size_t rlen)
 {
-   char  *found;
-   size_t   flen;
+	char *found;
+	size_t flen;
 
 #if CHECK_REPLACE_LEN
-   if (slen != strlen(search))
-   {
-      fprintf(stdout, "Fehler in qreplace_once:\n");
-      fprintf(stdout, "slen= %d\n", slen);
-      fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
-   }
-   if (rlen != strlen(replace))
-   {
-      fprintf(stdout, "Fehler in qreplace_once:\n");
-      fprintf(stdout, "rlen= %d\n", rlen);
-      fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
-   }
+	if (slen != strlen(search))
+	{
+		fprintf(stdout, "Fehler in qreplace_once:\n");
+		fprintf(stdout, "slen= %d\n", slen);
+		fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
+	}
+	if (rlen != strlen(replace))
+	{
+		fprintf(stdout, "Fehler in qreplace_once:\n");
+		fprintf(stdout, "rlen= %d\n", rlen);
+		fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
+	}
 #endif
-   
-   if (string[0] == '\0')
-      return 0;
-   if (search[0] == '\0')
-      return 0;
 
-   if ((found = strstr(string, search)) == NULL)
-      return 0;
+	if (string[0] == '\0')
+		return 0;
+	if (search[0] == '\0')
+		return 0;
 
-   flen = strlen(found);                  /* get length of remaining edit string */
+	if ((found = strstr(string, search)) == NULL)
+		return 0;
 
-   /* remove <search> */
-   memmove(found, found + slen, flen - slen + 1);
+	flen = strlen(found);				/* get length of remaining edit string */
 
-   if (replace[0] != EOS)                 /* replacement string can be empty */
-   {
-      flen -= slen;
-      memmove(found + rlen, found, flen + 1);
-      memcpy(found, replace, rlen);       /* insert replacement string */
-   }
-   
-   return 1;
+	/* remove <search> */
+	memmove(found, found + slen, flen - slen + 1);
+
+	if (replace[0] != EOS)				/* replacement string can be empty */
+	{
+		flen -= slen;
+		memmove(found + rlen, found, flen + 1);
+		memcpy(found, replace, rlen);	/* insert replacement string */
+	}
+
+	return 1;
 }
 
 
@@ -569,43 +561,43 @@ GLOBAL int qreplace_once(char *string, const char *search, const size_t slen, co
 
 GLOBAL int qreplace_last(char *string, const char *search, const size_t slen, const char *replace, const size_t rlen)
 {
-   char *found, *look, *last;
+	char *found, *look, *last;
 
 #if CHECK_REPLACE_LEN
-   if (slen != strlen(search))
-   {
-      fprintf(stdout, "Fehler in qreplace_last:\n");
-      fprintf(stdout, "slen = %d\n", slen);
-      fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
-   }
-   if (rlen != strlen(replace))
-   {
-      fprintf(stdout, "Fehler in qreplace_last:\n");
-      fprintf(stdout, "rlen = %d\n", rlen);
-      fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
-   }
+	if (slen != strlen(search))
+	{
+		fprintf(stdout, "Fehler in qreplace_last:\n");
+		fprintf(stdout, "slen = %d\n", slen);
+		fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
+	}
+	if (rlen != strlen(replace))
+	{
+		fprintf(stdout, "Fehler in qreplace_last:\n");
+		fprintf(stdout, "rlen = %d\n", rlen);
+		fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
+	}
 #endif
 
-   if (string[0] == '\0')
-      return 0;
-   if (search[0] == '\0')
-      return 0;
-   
-   look = string;
-   last = NULL;
+	if (string[0] == '\0')
+		return 0;
+	if (search[0] == '\0')
+		return 0;
 
-   while ((found = strstr(look, search)) != NULL)
-   {
-      look = found + 1;
-      last = found;
-   }
+	look = string;
+	last = NULL;
 
-   if (last != NULL)                      /* last position of <search> found */
-   {
-      return qreplace_once(last, search, slen, replace, rlen);
-   }
-   
-   return 0;
+	while ((found = strstr(look, search)) != NULL)
+	{
+		look = found + 1;
+		last = found;
+	}
+
+	if (last != NULL)					/* last position of <search> found */
+	{
+		return qreplace_once(last, search, slen, replace, rlen);
+	}
+
+	return 0;
 }
 
 
@@ -625,66 +617,65 @@ GLOBAL int qreplace_last(char *string, const char *search, const size_t slen, co
 
 GLOBAL int qreplace_all(char *string, const char *search, const size_t slen, const char *replace, const size_t rlen)
 {
-   char  *found;
-   size_t   flen, i;
+	char *found;
+	size_t flen, i;
 
 #if CHECK_REPLACE_LEN
-   if (slen != strlen(search))
-   {
-      fprintf(stdout, "Fehler in qreplace_all:\n");
-      fprintf(stdout, "slen= %d\n", slen);
-      fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
-   }
-   if (rlen != strlen(replace))
-   {
-      fprintf(stdout, "Fehler in qreplace_all:\n");
-      fprintf(stdout, "rlen= %d\n", rlen);
-      fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
-   }
+	if (slen != strlen(search))
+	{
+		fprintf(stdout, "Fehler in qreplace_all:\n");
+		fprintf(stdout, "slen= %d\n", slen);
+		fprintf(stdout, "strlen(%s)= %d\n", search, strlen(search));
+	}
+	if (rlen != strlen(replace))
+	{
+		fprintf(stdout, "Fehler in qreplace_all:\n");
+		fprintf(stdout, "rlen= %d\n", rlen);
+		fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
+	}
 #endif
-   
-   if (string[0] == '\0')
-      return 0;
-   if (search[0] == '\0')
-      return 0;
 
-   if ((found = strstr(string, search)) == NULL)
-      return 0;
+	if (string[0] == '\0')
+		return 0;
+	if (search[0] == '\0')
+		return 0;
 
-   if (slen == rlen)
-   {
-      while (found != NULL)
-      {
-         for (i = 0; i < rlen; i++)
-            found[i] = replace[i];
-         found = strstr(found + rlen, search);
-      }
-      return 1;
-   }
+	if ((found = strstr(string, search)) == NULL)
+		return 0;
 
-   while (found != NULL)
-   {
-      flen = strlen(found);
+	if (slen == rlen)
+	{
+		while (found != NULL)
+		{
+			for (i = 0; i < rlen; i++)
+				found[i] = replace[i];
+			found = strstr(found + rlen, search);
+		}
+		return 1;
+	}
 
-      /* Zu Ersetzendes entfernen */
-      memmove(found, found + slen, flen - slen + 1);
-   
-      /* Platz schaffen fuer neues und dorthin kopieren */
-      if (replace[0] != EOS)
-      {
-         flen = strlen(found);
-         memmove(found + rlen, found, flen + 1);
-         memcpy(found, replace, rlen);
-         found = strstr(found + rlen, search);
-      }
-      else
-      {
-         found = strstr(found, search);
-      }
-      
-   }
+	while (found != NULL)
+	{
+		flen = strlen(found);
 
-   return 1;
+		/* Zu Ersetzendes entfernen */
+		memmove(found, found + slen, flen - slen + 1);
+
+		/* Platz schaffen fuer neues und dorthin kopieren */
+		if (replace[0] != EOS)
+		{
+			flen = strlen(found);
+			memmove(found + rlen, found, flen + 1);
+			memcpy(found, replace, rlen);
+			found = strstr(found + rlen, search);
+		} else
+		{
+			found = strstr(found, search);
+		}
+
+	}
+
+	return 1;
 }
 
 
@@ -704,7 +695,7 @@ GLOBAL int qreplace_all(char *string, const char *search, const size_t slen, con
 
 GLOBAL int delete_once(char *string, const char *to_delete)
 {
-   return replace_once(string, to_delete, "");
+	return replace_once(string, to_delete, "");
 }
 
 
@@ -724,7 +715,7 @@ GLOBAL int delete_once(char *string, const char *to_delete)
 
 GLOBAL int delete_last(char *string, const char *to_delete)
 {
-   return replace_last(string, to_delete, "");
+	return replace_last(string, to_delete, "");
 }
 
 
@@ -744,7 +735,7 @@ GLOBAL int delete_last(char *string, const char *to_delete)
 
 GLOBAL int delete_all(char *string, const char *to_delete)
 {
-   return replace_all(string, to_delete, "");
+	return replace_all(string, to_delete, "");
 }
 
 
@@ -764,7 +755,7 @@ GLOBAL int delete_all(char *string, const char *to_delete)
 
 GLOBAL int qdelete_once(char *string, const char *to_delete, const size_t dlen)
 {
-   return qreplace_once(string, to_delete, dlen, "", 0);
+	return qreplace_once(string, to_delete, dlen, "", 0);
 }
 
 
@@ -784,7 +775,7 @@ GLOBAL int qdelete_once(char *string, const char *to_delete, const size_t dlen)
 
 GLOBAL int qdelete_last(char *string, const char *to_delete, const size_t dlen)
 {
-   return qreplace_last(string, to_delete, dlen, "", 0);
+	return qreplace_last(string, to_delete, dlen, "", 0);
 }
 
 
@@ -804,7 +795,7 @@ GLOBAL int qdelete_last(char *string, const char *to_delete, const size_t dlen)
 
 GLOBAL int qdelete_all(char *string, const char *to_delete, const size_t dlen)
 {
-   return qreplace_all(string, to_delete, dlen, "", 0);
+	return qreplace_all(string, to_delete, dlen, "", 0);
 }
 
 
@@ -823,15 +814,15 @@ GLOBAL int qdelete_all(char *string, const char *to_delete, const size_t dlen)
 
 GLOBAL void del_right_spaces(char *s)
 {
-   size_t   sl;
-   
-   sl = strlen(s);
+	size_t sl;
 
-   while ( (sl > 0) && (s[sl - 1] == ' ') )
-   {
-      s[sl - 1] = EOS;
-      sl--;
-   }
+	sl = strlen(s);
+
+	while ((sl > 0) && (s[sl - 1] == ' '))
+	{
+		s[sl - 1] = EOS;
+		sl--;
+	}
 }
 
 
@@ -850,31 +841,31 @@ GLOBAL void del_right_spaces(char *s)
 
 GLOBAL void del_whitespaces(char *s)
 {
-   size_t   sl;        /* length of string */
-   char    *p1st = s;
-   
-   /* find first space or tab */
-   while (*p1st != EOS && (*p1st == ' ' || *p1st == '\t') )
-   {
-      ++p1st;
-   }
+	size_t sl;							/* length of string */
+	char *p1st = s;
 
-   sl = strlen(p1st);                     /* get length of remaining string */
-   
-   if ( (*p1st != EOS) && (s != p1st) )
-   {  
-      memmove(s, p1st, sl + 1);
-   }
-   
-   if (sl > 0)                            /* remove right spaces and tabs */
-   {
-      p1st = s + sl - 1;                  /* set ^ to end of string */
-      
-      while (*p1st == ' ' || *p1st == '\t')
-         --p1st;
-         
-      p1st[1] = EOS;
-   }
+	/* find first space or tab */
+	while (*p1st != EOS && (*p1st == ' ' || *p1st == '\t'))
+	{
+		++p1st;
+	}
+
+	sl = strlen(p1st);					/* get length of remaining string */
+
+	if ((*p1st != EOS) && (s != p1st))
+	{
+		memmove(s, p1st, sl + 1);
+	}
+
+	if (sl > 0)							/* remove right spaces and tabs */
+	{
+		p1st = s + sl - 1;				/* set ^ to end of string */
+
+		while (*p1st == ' ' || *p1st == '\t')
+			--p1st;
+
+		p1st[1] = EOS;
+	}
 }
 
 
@@ -902,36 +893,36 @@ GLOBAL void del_whitespaces(char *s)
 
 GLOBAL size_t get_brackets_ptr(char *s, char **cont, char **data)
 {
-   char *ptr;
-   size_t len;   /* computed length */
-   
-   ptr = s;                               /* copy pointer as we will change it local */
-   *cont = NULL;                          /* nothing found yet */
-   *data = NULL;
+	char *ptr;
+	size_t len;							/* computed length */
 
-   len = 0;                               /* nothing to report yet */
-   
-   while (*ptr != EOS)
-   {
-      if (*ptr == '[')                    /* first opening bracket [ found */
-      {
-         *cont = ptr + 1;                 /* remind start of content */
-      }
-      
-      if (*ptr == ']')                    /* first closing bracket ] found */ 
-      {
-         if (*cont != NULL)               /* we have found content already */
-         {
-            *data = ptr + 1;              /* set ^ data behind this bracket */
-            len = ptr - *cont;            /* compute length of content string */
-         }
-         return len;                      /* we're done */
-      }
-      
-      ptr++;                              /* next char */
-   }
+	ptr = s;							/* copy pointer as we will change it local */
+	*cont = NULL;						/* nothing found yet */
+	*data = NULL;
 
-   return 0;
+	len = 0;							/* nothing to report yet */
+
+	while (*ptr != EOS)
+	{
+		if (*ptr == '[')				/* first opening bracket [ found */
+		{
+			*cont = ptr + 1;			/* remind start of content */
+		}
+
+		if (*ptr == ']')				/* first closing bracket ] found */
+		{
+			if (*cont != NULL)			/* we have found content already */
+			{
+				*data = ptr + 1;		/* set ^ data behind this bracket */
+				len = ptr - *cont;		/* compute length of content string */
+			}
+			return len;					/* we're done */
+		}
+
+		ptr++;							/* next char */
+	}
+
+	return 0;
 }
 
 
@@ -959,46 +950,46 @@ GLOBAL size_t get_brackets_ptr(char *s, char **cont, char **data)
 
 GLOBAL struct size_brackets get_two_brackets_ptr(char *s, char **cont_format, char **cont_content, char **data)
 {
-   char *ptr;
-   struct size_brackets len;
-   _BOOL firstend;                      /* flag: TRUE = first ] found in string */
-   
-   ptr = s;
-   *cont_format  = NULL;                  /* nothing found yet */
-   *cont_content = NULL;
-   *data         = NULL;
+	char *ptr;
+	struct size_brackets len;
+	_BOOL firstend;						/* flag: TRUE = first ] found in string */
 
-   len.format  = 0;                       /* nothing to report yet */
-   len.content = 0;
-   
-   firstend = FALSE;                      /* no closing bracket ] found yet */
+	ptr = s;
+	*cont_format = NULL;				/* nothing found yet */
+	*cont_content = NULL;
+	*data = NULL;
 
-   while (*ptr != EOS)
-   {
-      if ((*ptr=='[') && (!firstend))     /* 1st opening bracket [ found */
-      {
-         *cont_format = ptr + 1;          /* remind start of format string */
-      } else if ((*ptr == ']') && !firstend)
-      {
-         firstend = TRUE;
-         len.format = ptr - *cont_format;
-      } else if ((*ptr == '[') && firstend)
-      {
-         *cont_content = ptr + 1;
-      } else if (*ptr == ']' && firstend)
-      {
-         if (*cont_content != NULL)
-         {
-            *data = ptr + 1;
-            len.content = ptr - *cont_content;
-         }
-         return len;                     /* we're done */
-      }
-      
-      ptr++;                             /* next char */
-   }
+	len.format = 0;						/* nothing to report yet */
+	len.content = 0;
 
-   return len;                           /* in case of errors still return len */
+	firstend = FALSE;					/* no closing bracket ] found yet */
+
+	while (*ptr != EOS)
+	{
+		if ((*ptr == '[') && (!firstend))	/* 1st opening bracket [ found */
+		{
+			*cont_format = ptr + 1;		/* remind start of format string */
+		} else if ((*ptr == ']') && !firstend)
+		{
+			firstend = TRUE;
+			len.format = ptr - *cont_format;
+		} else if ((*ptr == '[') && firstend)
+		{
+			*cont_content = ptr + 1;
+		} else if (*ptr == ']' && firstend)
+		{
+			if (*cont_content != NULL)
+			{
+				*data = ptr + 1;
+				len.content = ptr - *cont_content;
+			}
+			return len;					/* we're done */
+		}
+
+		ptr++;							/* next char */
+	}
+
+	return len;							/* in case of errors still return len */
 }
 
 
@@ -1018,72 +1009,18 @@ GLOBAL struct size_brackets get_two_brackets_ptr(char *s, char **cont_format, ch
 
 GLOBAL char *get_8bit_ptr(char *s)
 {
-   char *ptr;
-   
-   ptr = s;
-   
-   while (*ptr != EOS)
-   {
-      if ((_UBYTE)*ptr > 127)
-         return ptr;
-      ptr++;
-   }
-   
-   return NULL;                           /* nothing found */
-}
+	char *ptr;
 
+	ptr = s;
 
+	while (*ptr != EOS)
+	{
+		if ((_UBYTE) * ptr > 127)
+			return ptr;
+		ptr++;
+	}
 
-
-
-/*******************************************************************************
-*
-*  get_section_ptr():
-*     get first position of DOS or OS/2 section character in a string
-*
-*  Notes:
-*     DOS an OS/2 use \025 for the section character (paragraph sign)
-*
-*  Return:
-*     position of char in string
-*     NULL, if char has not been found
-*
-******************************************|************************************/
-
-GLOBAL char *get_section_ptr(char *s)
-{
-   return strchr(s, '\025');
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_1stchar_ptr():
-*     get first position of a character other than space and tab in a string
-*
-*  Return:
-*     position of char in string
-*     NULL, if char has not been found
-*
-******************************************|************************************/
-
-GLOBAL char *get_1stchar_ptr(char *s)
-{
-   char *ptr;
-   
-   ptr = s;
-   
-   while (*ptr != EOS)
-   {
-      if (*ptr != ' ' && *ptr != '\t')
-         return ptr;
-      ptr++;                              /* next char */
-   }
-   
-   return NULL;                           /* nothing found */
+	return NULL;						/* nothing found */
 }
 
 
@@ -1102,36 +1039,35 @@ GLOBAL char *get_1stchar_ptr(char *s)
 
 GLOBAL void tabs2spaces(char *s, const int tw)
 {
-   char     n[1024];      /* buffer for converted string */
-   size_t   i,
-            nl;           /* length of buffer string */
+	char n[1024];						/* buffer for converted string */
+	size_t i;
+	size_t nl;							/* length of buffer string */
 
-   if (tw == 0)                           /* don't replace Null sized tabs! */
-      return;
+	if (tw == 0)						/* don't replace Null sized tabs! */
+		return;
 
-   n[0] = EOS;                            /* clear buffer */
-   nl = 0;
-   
-   for (i = 0; i < strlen(s); i++)
-   {
-      if (s[i] == '\t')                   /* tab found! */
-      {
-         do
-         {
-            n[nl] = ' ';                 /* add as many spaces as required */
-            nl++;
-         } while ((nl % tw) != 0);       /* by tab width */
-      }
-      else
-      {
-         n[nl] = s[i];
-         nl++;
-      }
-   }
+	n[0] = EOS;							/* clear buffer */
+	nl = 0;
 
-   n[nl] = EOS;
-   
-   strcpy(s, n);                          /* return converted string */
+	for (i = 0; i < strlen(s); i++)
+	{
+		if (s[i] == '\t')				/* tab found! */
+		{
+			do
+			{
+				n[nl] = ' ';			/* add as many spaces as required */
+				nl++;
+			} while ((nl % tw) != 0);	/* by tab width */
+		} else
+		{
+			n[nl] = s[i];
+			nl++;
+		}
+	}
+
+	n[nl] = EOS;
+
+	strcpy(s, n);						/* return converted string */
 }
 
 
@@ -1159,34 +1095,34 @@ GLOBAL void tabs2spaces(char *s, const int tw)
 
 GLOBAL char *itoroman(int value, char *string)
 {
-   int   m,       /* thousands */
-         c,       /* hundreds */
-         d,       /* tenths */
-         o,       /* ones */
-         i;
-   
-   static const char *ones[] = { "", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix" };
-   static const char *cent[] = { "", "c", "cc", "ccc", "cd", "d", "dc", "dcc", "dccc", "cm" };
-   static const char *deci[] = { "", "x", "xx", "xxx", "xl", "l", "lx", "lxx", "lxxx", "xc" };
+	int m;								/* thousands */
+	int c;								/* hundreds */
+	int d;								/* tenths */
+	int o;								/* ones */
+	int i;
 
-   string[0] = '\0';                      /* clear result string */
+	static const char *ones[] = { "", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix" };
+	static const char *cent[] = { "", "c", "cc", "ccc", "cd", "d", "dc", "dcc", "dccc", "cm" };
+	static const char *deci[] = { "", "x", "xx", "xxx", "xl", "l", "lx", "lxx", "lxxx", "xc" };
 
-   if (value <= 0)                        /* no negative or zero values! */
-      return string;
-   
-   m = value / 1000;                      /* decompose value */
-   c = (value - m * 1000) / 100;
-   d = (value - m * 1000 - c * 100) / 10;
-   o = (value - m * 1000 - c * 100 - d * 10);
-   
-   for (i = 0; i < m; i++)                /* add thousands first */
-      strcat(string, "m") ;
+	string[0] = '\0';					/* clear result string */
 
-   strcat(string, cent[c]);               /* add hundreds */
-   strcat(string, deci[d]);               /* add tenths */
-   strcat(string, ones[o]);               /* add ones */
-   
-   return string;
+	if (value <= 0)						/* no negative or zero values! */
+		return string;
+
+	m = value / 1000;					/* decompose value */
+	c = (value - m * 1000) / 100;
+	d = (value - m * 1000 - c * 100) / 10;
+	o = (value - m * 1000 - c * 100 - d * 10);
+
+	for (i = 0; i < m; i++)				/* add thousands first */
+		strcat(string, "m");
+
+	strcat(string, cent[c]);			/* add hundreds */
+	strcat(string, deci[d]);			/* add tenths */
+	strcat(string, ones[o]);			/* add ones */
+
+	return string;
 }
 
 
@@ -1209,16 +1145,16 @@ GLOBAL char *itoroman(int value, char *string)
 GLOBAL void my_strupr(char *string)
 {
 #ifdef HAVE_STRUPR
-   strupr(string);
+	strupr(string);
 #else
-   while (*string != EOS)
-   {
-      if (*string >= 'a' && *string <= 'z')
-      {
-         *string = toupper(*string);
-      }
-      string++;
-   }
+	while (*string != EOS)
+	{
+		if (*string >= 'a' && *string <= 'z')
+		{
+			*string = toupper(*string);
+		}
+		string++;
+	}
 #endif
 }
 
@@ -1242,16 +1178,16 @@ GLOBAL void my_strupr(char *string)
 GLOBAL void my_strlwr(char *string)
 {
 #ifdef HAVE_STRLWR
-   strlwr(string);
+	strlwr(string);
 #else
-   while (*string != EOS)
-   {
-      if (*string >= 'A' && *string <= 'Z')
-      {
-         *string = tolower(*string);
-      }
-      string++;
-   }
+	while (*string != EOS)
+	{
+		if (*string >= 'A' && *string <= 'Z')
+		{
+			*string = tolower(*string);
+		}
+		string++;
+	}
 #endif
 }
 
@@ -1277,23 +1213,24 @@ GLOBAL void my_strlwr(char *string)
 GLOBAL int my_stricmp(const char *s1, const char *s2)
 {
 #if defined(HAVE_STRICMP)
-   return stricmp(s1, s2);
+	return stricmp(s1, s2);
 #elif defined(HAVE_STRCASECMP)
-   return strcasecmp(s1, s2);
+	return strcasecmp(s1, s2);
 #else
-   unsigned char c1, c2;
-      
-   do {
-      c1 = *s1++;
-      c2 = *s2++;
-      c1 = toupper(c1);
-      c2 = toupper(c2);
-   } while (c1 != '\0' && c1 == c2);
-   if (c1 == c2)
-      return 0;
-   if (c2 == '\0')
-      return 1;
-   return c1 < c2 ? -1 : 1;
+	unsigned char c1, c2;
+
+	do
+	{
+		c1 = *s1++;
+		c2 = *s2++;
+		c1 = toupper(c1);
+		c2 = toupper(c2);
+	} while (c1 != '\0' && c1 == c2);
+	if (c1 == c2)
+		return 0;
+	if (c2 == '\0')
+		return 1;
+	return c1 < c2 ? -1 : 1;
 #endif
 }
 
@@ -1319,33 +1256,34 @@ GLOBAL int my_stricmp(const char *s1, const char *s2)
 GLOBAL int my_strnicmp(const char *s1, const char *s2, size_t len)
 {
 #if defined(HAVE_STRNICMP)
-   return strnicmp(s1, s2, len);
+	return strnicmp(s1, s2, len);
 #elif defined(HAVE_STRINCMP)
-   return strincmp(s1, s2, len);
+	return strincmp(s1, s2, len);
 #elif defined(HAVE_STRNCMPI)
-   return strncmpi(s1, s2, len);
+	return strncmpi(s1, s2, len);
 #elif defined(HAVE_STRNCASECMP)
-   return strncasecmp(s1, s2, len);
+	return strncasecmp(s1, s2, len);
 #else
-   long count;
-   unsigned char c1, c2;
-   
-   count = len;
-   do {
-      c1 = *s1++;
-      c2 = *s2++;
-      c1 = toupper(c1);
-      c2 = toupper(c2);
-   } while (--count >= 0 && c1 != '\0' && c1 == c2);
-   if (count < 0)
-      return 0;
-   if (c1 == c2)
-      return 0;
-   if (c1 == '\0')
-      return -1;
-   if (c2 == '\0')
-      return 1;
-   return c1 < c2 ? -1 : 1;
+	long count;
+	unsigned char c1, c2;
+
+	count = len;
+	do
+	{
+		c1 = *s1++;
+		c2 = *s2++;
+		c1 = toupper(c1);
+		c2 = toupper(c2);
+	} while (--count >= 0 && c1 != '\0' && c1 == c2);
+	if (count < 0)
+		return 0;
+	if (c1 == c2)
+		return 0;
+	if (c1 == '\0')
+		return -1;
+	if (c2 == '\0')
+		return 1;
+	return c1 < c2 ? -1 : 1;
 #endif
 }
 
@@ -1369,180 +1307,173 @@ GLOBAL int my_strnicmp(const char *s1, const char *s2, size_t len)
 *
 ******************************************|************************************/
 
-GLOBAL _UWORD str_flatten(
-
-char  *zeile)
+GLOBAL _UWORD str_flatten(char *zeile)
 {
-   int       i = 0;               /* counter for table entries */
-   int       j = 0;               /* counter for chars of <zeile> */
-   int       len = 0;             /* indicator for byte length of UTF char */
-   const _UWORD (*plig)[3];       /* CODE_xxx_lig[][] arrays */
-   const _UWORD (*psort);         /* sort_CODE_xxx[] arrays */
-   const _UWORD (*pusort)[2];     /* sort_CODE_UTF[] array */
-   char      sbuf[LINELEN] = "";  /* line buffer */
-   char      cbuf[9] = "";        /* chars buffer */
-   char      lgc[2] = "";         /* ligature char buffer */
-   char      lig[3] = "";         /* ligature string buffer */
-   char     *psbuf;               /* string begin */
-   _UWORD     idx;                 /* Unicode codepoint */
-   _BOOL   found = FALSE;       /* TRUE: 1-byte Unicode found in relevant table */
-   _BOOL   ligature = FALSE;    /* TRUE: ligature found */
-   _BOOL   flattened = FALSE;   /* TRUE: char has been flattened */
+	int i = 0;							/* counter for table entries */
+	int j = 0;							/* counter for chars of <zeile> */
+	int len = 0;						/* indicator for byte length of UTF char */
+	const _UWORD(*plig)[3];				/* CODE_xxx_lig[][] arrays */
+	const _UWORD(*psort);				/* sort_CODE_xxx[] arrays */
+	const _UWORD(*pusort)[2];			/* sort_CODE_UTF[] array */
+	char sbuf[LINELEN] = "";			/* line buffer */
+	char cbuf[9] = "";					/* chars buffer */
+	char lgc[2] = "";					/* ligature char buffer */
+	char lig[3] = "";					/* ligature string buffer */
+	char *psbuf;						/* string begin */
+	_UWORD idx;							/* Unicode codepoint */
+	_BOOL found = FALSE;				/* TRUE: 1-byte Unicode found in relevant table */
+	_BOOL ligature = FALSE;				/* TRUE: ligature found */
+	_BOOL flattened = FALSE;			/* TRUE: char has been flattened */
+
+	if (!zeile)							/* empty string? */
+		return EOS;
+
+	if (iEncodingTarget == CODE_UTF8)	/* Unicode first */
+	{
+		plig = chr_ligatures(iEncodingTarget);
+		pusort = chr_usort_codepage(iEncodingTarget);
+
+		memset(sbuf, 0, LINELEN);
+		memset(cbuf, 0, 9);
+
+		for (j = 0; zeile[j] != EOS; j++)
+		{
+			idx = (_UBYTE) zeile[j];	/* get Unicode codepoint */
+			found = FALSE;
+
+			if (idx < 128)				/* 0000 0000-0000 007F 0xxxxxxx */
+			{
+				cbuf[0] = idx;
+				cbuf[1] = EOS;
+				len = 1;
+				found = TRUE;
+			} else if ((idx & 0xE0) == 0xC0)	/* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
+			{
+				cbuf[0] = idx;
+				j++;
+				cbuf[1] = (_UBYTE) zeile[j];
+				cbuf[2] = EOS;
+				len = 2;
+			} else if ((idx & 0xF0) == 0xE0)	/* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
+			{
+				cbuf[0] = idx;
+				j++;
+				cbuf[1] = (_UBYTE) zeile[j];
+				j++;
+				cbuf[2] = (_UBYTE) zeile[j];
+				cbuf[3] = EOS;
+				len = 3;
+			} else if ((idx & 0xF8) == 0xF0)	/* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+			{
+				cbuf[0] = idx;
+				j++;
+				cbuf[1] = (_UBYTE) zeile[j];
+				j++;
+				cbuf[2] = (_UBYTE) zeile[j];
+				j++;
+				cbuf[3] = (_UBYTE) zeile[j];
+				cbuf[4] = EOS;
+				len = 4;
+			}
+
+			if (len > 1)				/* get Unicode codepoint for composed chars */
+			{
+				idx = utf8_to_bstr(cbuf, len);	/* Unicode codepoint found */
+				i = 0;
+				ligature = FALSE;
+
+				while (plig[i][0] != 0x00)	/* is it a ligature? */
+				{
+					if (idx == plig[i][0])	/* ligature character found */
+					{
+						unicode2char(plig[i][1], cbuf);
+						strcat(sbuf, cbuf);
+						unicode2char(plig[i][2], cbuf);
+						strcat(sbuf, cbuf);
+						ligature = TRUE;
+						break;
+					}
+
+					if (ligature)		/* was a ligature */
+						break;
+
+					i++;				/* check next ligature */
+				}
+
+				if (!ligature)			/* was a ligature */
+				{
+					i = 0;
+					flattened = FALSE;
+					/* is it a Unicode which we should replace? */
+					while (pusort[i][0] != 0x00)
+					{
+						/* Unicode found */
+						if (idx == pusort[i][0])
+						{				/* use flattened Unicode */
+							unicode2char(pusort[i][1], cbuf);
+							strcat(sbuf, cbuf);
+							flattened = TRUE;
+						}
+
+						if (flattened)
+							break;
+
+						i++;
+					}
+
+					if (!flattened)		/* no flattened Unicode found */
+						found = TRUE;	/* use original Unicode */
+				}
+			}
+
+			if (found)					/* use original Unicode char */
+				strcat(sbuf, cbuf);		/* we assume it is still in the buffer! */
+
+		}								/* for (j ...) */
 
 
-   if (!zeile)                            /* empty string? */
-      return EOS;
-   
-   if (iEncodingTarget == CODE_UTF8)      /* Unicode first */
-   {
-      plig   = chr_ligatures(iEncodingTarget);
-      pusort = chr_usort_codepage(iEncodingTarget);
+		strcpy(zeile, sbuf);			/* restore line */
+		my_strupr(zeile);				/* we want to compare UPPERCASE (if possible) */
 
-      memset(sbuf,0,LINELEN);
-      memset(cbuf,0,9);
-      
-      for (j = 0; zeile[j] != EOS; j++)
-      {
-         idx = (_UBYTE)zeile[j];           /* get Unicode codepoint */
-         found = FALSE;
-         
-         if (idx < 128)                   /* 0000 0000-0000 007F 0xxxxxxx */
-         {
-            cbuf[0] = idx;
-            cbuf[1] = EOS;
-            len = 1;
-            found = TRUE;
-         }
-         else if ((idx & 0xE0) == 0xC0)   /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
-         {
-            cbuf[0] = idx;
-            j++;
-            cbuf[1] = (_UBYTE)zeile[j];
-            cbuf[2] = EOS;
-            len = 2;
-         }
-         else if ((idx & 0xF0) == 0xE0)   /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
-         {
-            cbuf[0] = idx;
-            j++;
-            cbuf[1] = (_UBYTE)zeile[j];
-            j++;
-            cbuf[2] = (_UBYTE)zeile[j];
-            cbuf[3] = EOS;
-            len = 3;
-         }
-         else if ((idx & 0xF8) == 0xF0)   /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
-         {
-            cbuf[0] = idx;
-            j++;
-            cbuf[1] = (_UBYTE)zeile[j];
-            j++;
-            cbuf[2] = (_UBYTE)zeile[j];
-            j++;
-            cbuf[3] = (_UBYTE)zeile[j];
-            cbuf[4] = EOS;
-            len = 4;
-         }
-       
-         if (len > 1)                     /* get Unicode codepoint for composed chars */
-         {
-            idx = utf8_to_bstr(cbuf,len); /* Unicode codepoint found */
-            i = 0;
-            ligature = FALSE;
-         
-            while (plig[i][0] != 0x00)    /* is it a ligature? */
-            {
-               if (idx == plig[i][0])     /* ligature character found */
-               {
-                  unicode2char(plig[i][1],cbuf);
-                  strcat(sbuf,cbuf);
-                  unicode2char(plig[i][2],cbuf);
-                  strcat(sbuf,cbuf);
-                  ligature = TRUE;
-                  break;
-               }
+		idx = utf8_to_uchar(zeile, &len);	/* get codepoint for 1st char  (len unused here!) */
+		return idx;
+	}
 
-               if (ligature)              /* was a ligature */
-                  break;
-                  
-               i++;                       /* check next ligature */
-            }
-             
-            if (!ligature)                /* was a ligature */
-            {
-               i = 0;
-               flattened = FALSE;
-                                          /* is it a Unicode which we should replace? */
-               while (pusort[i][0] != 0x00)
-               {
-                                          /* Unicode found */
-                  if (idx == pusort[i][0])
-                  {                       /* use flattened Unicode */
-                     unicode2char(pusort[i][1],cbuf);
-                     strcat(sbuf,cbuf);
-                     flattened = TRUE;
-                  }
-            
-                  if (flattened)
-                     break;
-             
-                  i++;
-               }
-               
-               if (!flattened)            /* no flattened Unicode found */
-                  found = TRUE;           /* use original Unicode */
-            }
-         }
-         
-         if (found)                       /* use original Unicode char */
-            strcat(sbuf,cbuf);            /* we assume it is still in the buffer! */
-         
-      }  /* for (j ...) */
-
-     
-      strcpy(zeile,sbuf);                 /* restore line */
-      my_strupr(zeile);                   /* we want to compare UPPERCASE (if possible) */
-
-      idx = utf8_to_uchar(zeile, &len);   /* get codepoint for 1st char  (len unused here!) */
-      return idx;
-   }
-
-   psort = chr_sort_codepage(iEncodingTarget);   
-   plig  = chr_ligatures(iEncodingTarget);
+	psort = chr_sort_codepage(iEncodingTarget);
+	plig = chr_ligatures(iEncodingTarget);
 
 
-   /* --- resolve ligature characters with more than one character --- */
-   
-   while (plig[i][0] != 0x00)             /* EOL not reached */
-   {
-      lgc[0] = plig[i][0];                /* get ligature character */
-                                          /* lgc[1] must always be 0 (C string!) */
-      
-      lig[0] = plig[i][1];                /* compose ligature replacement string */
-      lig[1] = plig[i][2];                /* lig[2] must always be 0 (C string!) */
+	/* --- resolve ligature characters with more than one character --- */
 
-      replace_all(zeile, lgc, lig);
+	while (plig[i][0] != 0x00)			/* EOL not reached */
+	{
+		lgc[0] = plig[i][0];			/* get ligature character */
+		/* lgc[1] must always be 0 (C string!) */
 
-      i++;                                /* next ligature */
-   }
+		lig[0] = plig[i][1];			/* compose ligature replacement string */
+		lig[1] = plig[i][2];			/* lig[2] must always be 0 (C string!) */
 
-   psbuf = zeile;                         /* remember begin of string */
-   
-   do                                     /* flatten extended characters */
-   {
-      idx = psort[*zeile & 0x00FF];       /* get Unicode codepoint */
-      
-      unicode2char(idx,cbuf);             /* get 1-byte codepage char */
-      strcat(sbuf, cbuf);
-      zeile++;      
-   }
-   while (idx != EOS);
+		replace_all(zeile, lgc, lig);
 
-   my_strupr(psbuf);                      /* restore ^ to begin of string */
-   strcpy(zeile, psbuf);
-   
-   idx = psort[*zeile & 0x00FF];          /* get Unicode codepoint of first (maybe flattened) char */
-   return idx;                            /* used for Index page */
+		i++;							/* next ligature */
+	}
+
+	psbuf = zeile;						/* remember begin of string */
+
+	do									/* flatten extended characters */
+	{
+		idx = psort[*zeile & 0x00FF];	/* get Unicode codepoint */
+
+		unicode2char(idx, cbuf);		/* get 1-byte codepage char */
+		strcat(sbuf, cbuf);
+		zeile++;
+	} while (idx != EOS);
+
+	my_strupr(psbuf);					/* restore ^ to begin of string */
+	strcpy(zeile, psbuf);
+
+	idx = psort[*zeile & 0x00FF];		/* get Unicode codepoint of first (maybe flattened) char */
+	return idx;							/* used for Index page */
 }
 
 
@@ -1561,104 +1492,96 @@ char  *zeile)
 *
 ******************************************|************************************/
 
-GLOBAL int str_sort_flatten_cmp(
-
-char       *s1,
-char       *s2)
+GLOBAL int str_sort_flatten_cmp(char *s1, char *s2)
 {
-   int      i = 0;
-   size_t   c1,           /* Unicode char value (up to 4 bytes!) */
-            c2;           /* Unicode char value (up to 4 bytes!) */
-   char     lgc[2] = "";  /* ligature char buffer */
-   char     lig[3] = "";  /* ligature string buffer */
-   const _UWORD *psort;       /* sort_CODE_xxx[] arrays */
-   const _UWORD (*plig)[3];     /* CODE_xxx_lig[][] arrays */
-   char    *psbuf;        /* char begin */
-   size_t   len1,         /* length of original 1st string */
-            len2;         /* length of original 2nd string */
-   
-            
-   if (!s1)                               /* s1 doesn't exist? */
-      return (s2) ? -1 : 0;               /* return s2 > s1 or both don't exist */
-   
-   if (!s2)                               /* s2 doesn't exist? */
-      return 1;                           /* so s1 is greater */
+	int i = 0;
+	_UWORD c1;							/* Unicode char value (up to 4 bytes!) */
+	_UWORD c2;							/* Unicode char value (up to 4 bytes!) */
+	char lgc[2] = "";					/* ligature char buffer */
+	char lig[3] = "";					/* ligature string buffer */
+	const _UWORD *psort;				/* sort_CODE_xxx[] arrays */
+	const _UWORD(*plig)[3];				/* CODE_xxx_lig[][] arrays */
+	char *psbuf;						/* char begin */
+
+	size_t len1;						/* length of original 1st string */
+	size_t len2;						/* length of original 2nd string */
+
+	if (!s1)							/* s1 doesn't exist? */
+		return (s2) ? -1 : 0;			/* return s2 > s1 or both don't exist */
+
+	if (!s2)							/* s2 doesn't exist? */
+		return 1;						/* so s1 is greater */
+
+	psort = chr_sort_codepage(iEncodingTarget);
+	plig = chr_ligatures(iEncodingTarget);
+
+	len1 = strlen(s1);
+	len2 = strlen(s2);
+
+	/* --- resolve ligature characters with more than one character --- */
+
+	while (plig[i][0] != 0x00)			/* EOL not reached */
+	{
+		lgc[0] = plig[i][0];			/* get ligature character */
+		/* lgc[1] must always be 0 (C string!) */
+
+		lig[0] = plig[i][1];			/* compose ligature replacement string */
+		lig[1] = plig[i][2];			/* lig[2] must always be 0 (C string!) */
+
+		replace_all(s1, lgc, lig);
+		replace_all(s2, lgc, lig);
+
+		i++;							/* next ligature */
+	}
 
 
-   psort = chr_sort_codepage(iEncodingTarget);
-   plig  = chr_ligatures(iEncodingTarget);
+	/* --- 'flatten' extended characters --- */
 
-   len1 = strlen(s1);
-   len2 = strlen(s2);
-   
-   
-   /* --- resolve ligature characters with more than one character --- */
-   
-   while (plig[i][0] != 0x00)             /* EOL not reached */
-   {
-      lgc[0] = plig[i][0];                /* get ligature character */
-                                          /* lgc[1] must always be 0 (C string!) */
-      
-      lig[0] = plig[i][1];                /* compose ligature replacement string */
-      lig[1] = plig[i][2];                /* lig[2] must always be 0 (C string!) */
+	psbuf = s1;							/* remember begin of 1st string */
 
-      replace_all(s1, lgc, lig);
-      replace_all(s2, lgc, lig);
+	do
+	{
+		c1 = psort[*s1 & 0x00FF];
+		*s1++ = c1;
+	} while (c1 != EOS);
 
-      i++;                                /* next ligature */
-   }
+	s1 = psbuf;							/* restore ^ 1st string */
+
+	psbuf = s2;							/* remember begin of 2nd string */
+
+	do
+	{
+		c2 = psort[*s2 & 0x00FF];
+		*s2++ = c2;
+	} while (c2 != EOS);
+
+	s2 = psbuf;							/* restore ^ 2nd string */
+
+	my_strupr(s1);						/* we compare UPPERCASE */
+	my_strupr(s2);
+
+	do									/* --- compare characters --- */
+	{
+		c1 = *s1;
+		c2 = *s2;
+
+		s1++;
+		s2++;
+	} while (c1 != '\0' && c1 == c2);
 
 
-   /* --- 'flatten' extended characters --- */
-   
-   psbuf = s1;                            /* remember begin of 1st string */
-   
-   do
-   {
-      c1 = psort[*s1 & 0x00FF];
-      *s1++ = c1;
-   }
-   while (c1 != EOS);
-   
-   s1 = psbuf;                            /* restore ^ 1st string */
-   
-   psbuf = s2;                            /* remember begin of 2nd string */
-   
-   do
-   {
-      c2 = psort[*s2 & 0x00FF];
-      *s2++ = c2;
-   }
-   while (c2 != EOS);
-   
-   s2 = psbuf;                            /* restore ^ 2nd string */
-   
-   my_strupr(s1);                         /* we compare UPPERCASE */
-   my_strupr(s2);
-   
-   do                                     /* --- compare characters --- */
-   {
-      c1 = *s1;
-      c2 = *s2;
-      
-      s1++;
-      s2++;
-   }
-   while (c1 != '\0' && c1 == c2);
-   
-   
-   /* --- result --- */
-   
-   if (c1 == c2)                          /* strings seem to be identical */
-   {
-      if (len1 == len2)                   /* even string lengths are identical */
-         return 0;                        /* THEY ARE IDENTICAL! */
-      
-      return (len1 < len2) ? 1 : -1;      /* compare string lengths of originals */
-                                          /* e.g. 'ae' is lower than '"a' */
-   }
+	/* --- result --- */
 
-   return (c1 < c2) ? -1 : 1;
+	if (c1 == c2)						/* strings seem to be identical */
+	{
+		if (len1 == len2)				/* even string lengths are identical */
+			return 0;					/* THEY ARE IDENTICAL! */
+
+		return (len1 < len2) ? 1 : -1;	/* compare string lengths of originals */
+		/* e.g. 'ae' is lower than '"a' */
+	}
+
+	return (c1 < c2) ? -1 : 1;
 }
 
 
@@ -1677,181 +1600,183 @@ char       *s2)
 *
 ******************************************|************************************/
 
-GLOBAL int str_UTF_sort_cmp(
-
-char       *s1,
-char       *s2)
+GLOBAL int str_UTF_sort_cmp(char *s1, char *s2)
 {
-   int      i = 0;          /* counter for table entries */
-   int      j = 0;          /* counter for chars of <zeile> */
-   int      k = 0;          /* counter for s1 + s2 */
-   int      len = 0;        /* indicator for byte length of UTF char */
-   size_t   c1,             /* Unicode char value (up to 4 bytes!) */
-            c2;             /* Unicode char value (up to 4 bytes!) */
-   const _UWORD  (*pusort)[2];     /* sort_CODE_xxx[] arrays */
-   const _UWORD  (*plig)[3];       /* CODE_xxx_lig[][] arrays */
-   size_t   len1,           /* length of original 1st string */
-            len2;           /* length of original 2nd string */
-   char     sbuf[LINELEN];  /* line buffer */
-   char     cbuf[9];        /* chars buffer */
-   _UWORD    idx;            /* Unicode */
-   int      found;          /* TRUE: Unicode found in relevant table */
-   char    *zeile;
-   
-            
-   if (!s1)                               /* s1 doesn't exist? */
-      return (s2) ? -1 : 0;               /* return s2 > s1 or both don't exist */
-   
-   if (!s2)                               /* s2 doesn't exist? */
-      return 1;                           /* so s1 is greater */
+	int i = 0;							/* counter for table entries */
+	int j = 0;							/* counter for chars of <zeile> */
+	int k = 0;							/* counter for s1 + s2 */
+	int len = 0;						/* indicator for byte length of UTF char */
+
+	_UWORD c1;							/* Unicode char value (up to 4 bytes!) */
+	_UWORD c2;							/* Unicode char value (up to 4 bytes!) */
+
+	const _UWORD(*pusort)[2];			/* sort_CODE_xxx[] arrays */
+
+	const _UWORD(*plig)[3];				/* CODE_xxx_lig[][] arrays */
+
+	size_t len1;						/* length of original 1st string */
+	size_t len2;						/* length of original 2nd string */
+
+	char sbuf[LINELEN];					/* line buffer */
+
+	char cbuf[9];						/* chars buffer */
+
+	_UWORD idx;							/* Unicode */
+
+	int found;							/* TRUE: Unicode found in relevant table */
+
+	char *zeile;
 
 
-   if (iEncodingTarget != CODE_UTF8)      /* should never happen! */
-      return 0;
+	if (!s1)							/* s1 doesn't exist? */
+		return (s2) ? -1 : 0;			/* return s2 > s1 or both don't exist */
 
-   
-   if (iEncodingTarget == CODE_UTF8)      /* convert UTF-8 to 1-byte format first */
-   {
-      plig   = chr_ligatures(iEncodingTarget);
-      pusort = chr_usort_codepage(iEncodingTarget);
-      
-      for (k = 0; k < 2; k++)
-      {
-         if (k == 0)
-            zeile = s1;
-         else
-            zeile = s2;         
-      
-         memset(sbuf,0,LINELEN);
-         memset(cbuf,0,9);
-      
-         for (j = 0; zeile[j] != EOS; j++)
-         {
-            idx = (_UBYTE)zeile[j];
-         
-            if (idx < 128)                /* 0000 0000-0000 007F 0xxxxxxx */
-            {
-               cbuf[0] = idx;
-               cbuf[1] = EOS;
-               strcat(sbuf,cbuf);
-               len = 0;
-            }
-            else if ((idx & 0xE0) == 0xC0)/* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
-            {
-               cbuf[0] = idx;
-               j++;
-               cbuf[1] = (_UBYTE)zeile[j];
-               cbuf[2] = EOS;
-               len = 2;
-            }
-            else if ((idx & 0xF0) == 0xE0)/* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
-            {
-               cbuf[0] = idx;
-               j++;
-               cbuf[1] = (_UBYTE)zeile[j];
-               j++;
-               cbuf[2] = (_UBYTE)zeile[j];
-               cbuf[3] = EOS;
-               len = 3;
-            }
-            else if ((idx & 0xF8) == 0xF0)/* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
-            {
-               cbuf[0] = idx;
-               j++;
-               cbuf[1] = (_UBYTE)zeile[j];
-               j++;
-               cbuf[2] = (_UBYTE)zeile[j];
-               j++;
-               cbuf[3] = (_UBYTE)zeile[j];
-               cbuf[4] = EOS;
-               len = 4;
-            }
-         
-            if (len > 0)
-            {
-               idx = utf8_to_bstr(cbuf,len);
-               found = FALSE;
-               i = 0;
-            
-               while (plig[i][0] != 0x00) /* is it a ligature? */
-               {
-                  if (idx == plig[i][0])  /* ligature character found */
-                  {
-                     cbuf[0] = plig[i][1];/* compose ligature replacement string */
-                     cbuf[1] = plig[i][2];/* lig[2] must always be 0 (C string!) */
-                     cbuf[2] = EOS;
-                     strcat(sbuf,cbuf);
-                     found = TRUE;        /* this character is done! */
-                  }
+	if (!s2)							/* s2 doesn't exist? */
+		return 1;						/* so s1 is greater */
 
-                  if (found)              /* was a ligature */
-                     break;
-               
-                  i++;                    /* check next ligature */
-               }
-             
-               if (!found)                /* was a ligature */
-               {
-                  i = 0;
-            
-                                          /* is it a Unicode which we should replace? */
-                  while (pusort[i][0] != 0x00)
-                  {
-                                          /* Unicode found */
-                     if (idx == pusort[i][0])
-                     {
-                        cbuf[0] = pusort[i][1];
-                        cbuf[1] = EOS;
-                        strcat(sbuf,cbuf);
-                        found = TRUE;
-                     }
-               
-                     if (found)
-                        break;
-               
-                     i++;
-                  }
-               }
-            }
-            
-         }  /* for (j ...) */
-         
-         strcpy(zeile,sbuf);              /* restore line */
-         
-      }  /* for (k ...) */
-      
-   }
 
-   my_strupr(s1);                         /* we compare UPPERCASE */
-   my_strupr(s2);
-   
-   len1 = strlen(s1);
-   len2 = strlen(s2);
+	if (iEncodingTarget != CODE_UTF8)	/* should never happen! */
+		return 0;
 
-   
-   do                                     /* --- compare characters --- */
-   {
-      c1 = *s1;
-      c2 = *s2;
-      
-      s1++;
-      s2++;
-   }
-   while (c1 != '\0' && c1 == c2);
-   
-   
-   /* --- result --- */
-   
-   if (c1 == c2)                          /* strings seem to be identical */
-   {
-      if (len1 == len2)                   /* even string lengths are identical */
-         return 0;                        /* THEY ARE IDENTICAL! */
-      
-      return (len1 < len2) ? 1 : -1;      /* compare string lengths of originals */
-                                          /* e.g. 'ae' is lower than '"a' */
-   }
 
-   return (c1 < c2) ? -1 : 1;
+	if (iEncodingTarget == CODE_UTF8)	/* convert UTF-8 to 1-byte format first */
+	{
+		plig = chr_ligatures(iEncodingTarget);
+		pusort = chr_usort_codepage(iEncodingTarget);
+
+		for (k = 0; k < 2; k++)
+		{
+			if (k == 0)
+				zeile = s1;
+			else
+				zeile = s2;
+
+			memset(sbuf, 0, LINELEN);
+			memset(cbuf, 0, 9);
+
+			for (j = 0; zeile[j] != EOS; j++)
+			{
+				idx = (_UBYTE) zeile[j];
+
+				if (idx < 128)			/* 0000 0000-0000 007F 0xxxxxxx */
+				{
+					cbuf[0] = idx;
+					cbuf[1] = EOS;
+					strcat(sbuf, cbuf);
+					len = 0;
+				} else if ((idx & 0xE0) == 0xC0)	/* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
+				{
+					cbuf[0] = idx;
+					j++;
+					cbuf[1] = (_UBYTE) zeile[j];
+					cbuf[2] = EOS;
+					len = 2;
+				} else if ((idx & 0xF0) == 0xE0)	/* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
+				{
+					cbuf[0] = idx;
+					j++;
+					cbuf[1] = (_UBYTE) zeile[j];
+					j++;
+					cbuf[2] = (_UBYTE) zeile[j];
+					cbuf[3] = EOS;
+					len = 3;
+				} else if ((idx & 0xF8) == 0xF0)	/* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+				{
+					cbuf[0] = idx;
+					j++;
+					cbuf[1] = (_UBYTE) zeile[j];
+					j++;
+					cbuf[2] = (_UBYTE) zeile[j];
+					j++;
+					cbuf[3] = (_UBYTE) zeile[j];
+					cbuf[4] = EOS;
+					len = 4;
+				}
+
+				if (len > 0)
+				{
+					idx = utf8_to_bstr(cbuf, len);
+					found = FALSE;
+					i = 0;
+
+					while (plig[i][0] != 0x00)	/* is it a ligature? */
+					{
+						if (idx == plig[i][0])	/* ligature character found */
+						{
+							cbuf[0] = plig[i][1];	/* compose ligature replacement string */
+							cbuf[1] = plig[i][2];	/* lig[2] must always be 0 (C string!) */
+							cbuf[2] = EOS;
+							strcat(sbuf, cbuf);
+							found = TRUE;	/* this character is done! */
+						}
+
+						if (found)		/* was a ligature */
+							break;
+
+						i++;			/* check next ligature */
+					}
+
+					if (!found)			/* was a ligature */
+					{
+						i = 0;
+
+						/* is it a Unicode which we should replace? */
+						while (pusort[i][0] != 0x00)
+						{
+							/* Unicode found */
+							if (idx == pusort[i][0])
+							{
+								cbuf[0] = pusort[i][1];
+								cbuf[1] = EOS;
+								strcat(sbuf, cbuf);
+								found = TRUE;
+							}
+
+							if (found)
+								break;
+
+							i++;
+						}
+					}
+				}
+
+			}							/* for (j ...) */
+
+			strcpy(zeile, sbuf);		/* restore line */
+
+		}								/* for (k ...) */
+
+	}
+
+	my_strupr(s1);						/* we compare UPPERCASE */
+	my_strupr(s2);
+
+	len1 = strlen(s1);
+	len2 = strlen(s2);
+
+
+	do									/* --- compare characters --- */
+	{
+		c1 = *s1;
+		c2 = *s2;
+
+		s1++;
+		s2++;
+	} while (c1 != '\0' && c1 == c2);
+
+
+	/* --- result --- */
+
+	if (c1 == c2)						/* strings seem to be identical */
+	{
+		if (len1 == len2)				/* even string lengths are identical */
+			return 0;					/* THEY ARE IDENTICAL! */
+
+		return (len1 < len2) ? 1 : -1;	/* compare string lengths of originals */
+		/* e.g. 'ae' is lower than '"a' */
+	}
+
+	return (c1 < c2) ? -1 : 1;
 }
 
 
@@ -1870,41 +1795,33 @@ char       *s2)
 *
 ******************************************|************************************/
 
-GLOBAL int str_sort_cmp(
-
-char         *s1,
-char         *s2)
+GLOBAL int str_sort_cmp(char *s1, char *s2)
 {
-   size_t     c1,           /* char value (up to 4 bytes!) */
-              c2;           /* char value (up to 4 bytes!) */
-   
-            
-   if (!s1)                               /* s1 doesn't exist? */
-      return (s2) ? -1 : 0;               /* return s2 > s1 or both don't exist */
-   
-   if (!s2)                               /* s2 doesn't exist? */
-      return 1;                           /* so s1 is greater */
+	_UWORD c1;							/* char value (up to 4 bytes!) */
+	_UWORD c2;							/* char value (up to 4 bytes!) */
 
+	if (!s1)							/* s1 doesn't exist? */
+		return (s2) ? -1 : 0;			/* return s2 > s1 or both don't exist */
 
-   my_strupr(s1);                         /* we compare UPPERCASE */
-   my_strupr(s2);
+	if (!s2)							/* s2 doesn't exist? */
+		return 1;						/* so s1 is greater */
 
-   
-   do                                     /* --- compare characters --- */
-   {
-      c1 = *s1;
-      c2 = *s2;
-      
-      s1++;
-      s2++;
-   }
-   while (c1 != '\0' && c1 == c2);
-   
-   
-   /* --- result --- */
-   
-   if (c1 == c2)                          /* strings seem to be identical */
-      return 0;
+	my_strupr(s1);						/* we compare UPPERCASE */
+	my_strupr(s2);
 
-   return (c1 < c2) ? -1 : 1;
+	do									/* --- compare characters --- */
+	{
+		c1 = *s1;
+		c2 = *s2;
+
+		s1++;
+		s2++;
+	} while (c1 != '\0' && c1 == c2);
+
+	/* --- result --- */
+
+	if (c1 == c2)						/* strings seem to be identical */
+		return 0;
+
+	return (c1 < c2) ? -1 : 1;
 }

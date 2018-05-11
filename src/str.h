@@ -88,8 +88,6 @@ GLOBAL void del_whitespaces ( char *s);
 GLOBAL size_t get_brackets_ptr ( char *s, char **cont, char **data );
 GLOBAL struct size_brackets get_two_brackets_ptr ( char *s, char **cont_format, char **cont_content, char **data );
 GLOBAL char *get_8bit_ptr(char *s);
-GLOBAL char *get_section_ptr(char *s);
-GLOBAL char *get_1stchar_ptr(char *s);
 
 GLOBAL void tabs2spaces (char *s, const int tw);
 GLOBAL char *itoroman ( int value, char *string );

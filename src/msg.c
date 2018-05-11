@@ -113,33 +113,32 @@ LOCAL int note_counter;
 
 LOCAL void loglnpos(const char *we, const char *format, va_list args)
 {
-   char *txt, *msg;
-   char lineinfo[100];
-   FILE_LINENO realstart;
+	char *txt,*msg;
+	char lineinfo[100];
+	FILE_LINENO realstart;
 
-   if (uiCurrFileLine > 0)
-   {
+	if (uiCurrFileLine > 0)
+	{
 		if (uiMultiLines > 0)
 		{
-		   realstart = uiCurrFileLine - uiMultiLines;
-		   sprintf(lineinfo, "%lu-%lu: ", realstart, uiCurrFileLine);
-		}
-		else
+			realstart = uiCurrFileLine - uiMultiLines;
+			sprintf(lineinfo, "%lu-%lu: ", realstart, uiCurrFileLine);
+		} else
 		{
-		   sprintf(lineinfo, "%lu: ", uiCurrFileLine);
+			sprintf(lineinfo, "%lu: ", uiCurrFileLine);
 		}
 	} else
 	{
 		lineinfo[0] = EOS;
 	}
 
-   msg = um_strdup_vprintf(format, args);
-   txt = um_strdup_printf("%s: %s %s%s", we, sCurrFileName, lineinfo, msg);
-   logln(txt);
+	msg = um_strdup_vprintf(format, args);
+	txt = um_strdup_printf("%s: %s %s%s", we, sCurrFileName, lineinfo, msg);
+	logln(txt);
 
-   show_logln_message(txt);               /* Ausgabe ans GUI weiterreichen */
-   free(txt);
-   free(msg);
+	show_logln_message(txt);			/* Ausgabe ans GUI weiterreichen */
+	free(txt);
+	free(msg);
 }
 
 
@@ -163,14 +162,15 @@ LOCAL void loglnpos(const char *we, const char *format, va_list args)
 LOCAL const char *my_strerror(int err_no)
 {
 #if defined(HAVE_STRERROR)
-   return strerror(err_no);
+	return strerror(err_no);
 #elif defined(HAVE_SYS_ERRLIST)
-   return sys_errlist[err_no];
+	return sys_errlist[err_no];
 #else
-   static char s[20];
-   sprintf(s, "Error #%d", err_no);
+	static char s[20];
 
-   return s;
+	sprintf(s, "Error #%d", err_no);
+
+	return s;
 #endif
 }
 
@@ -190,22 +190,21 @@ LOCAL const char *my_strerror(int err_no)
 
 LOCAL void errno_logln(const char *s)
 {
-   const char *p;
-   char *buf;
+	const char *p;
+	char *buf;
 
-   p = my_strerror(errno);
-   
-   if (s[0] != EOS)
-   {
-      buf = um_strdup_printf("%s: %s", s, p);
-   }
-   else
-   {
-      buf = strdup(p);
-   }
-   logln(buf);
-   show_logln_message(buf);
-   free(buf);
+	p = my_strerror(errno);
+
+	if (s[0] != EOS)
+	{
+		buf = um_strdup_printf("%s: %s", s, p);
+	} else
+	{
+		buf = strdup(p);
+	}
+	logln(buf);
+	show_logln_message(buf);
+	free(buf);
 }
 
 
@@ -233,15 +232,15 @@ LOCAL void errno_logln(const char *s)
 
 GLOBAL void warning_message(const char *msg, ...)
 {
-   va_list args;
-   
-   if (!bNoWarnings)
-   {
-      va_start(args, msg);
-      loglnpos(_("Warning"), msg, args);
-      va_end(args);
-   }
-   warning_counter++;
+	va_list args;
+
+	if (!bNoWarnings)
+	{
+		va_start(args, msg);
+		loglnpos(_("Warning"), msg, args);
+		va_end(args);
+	}
+	warning_counter++;
 }
 
 
@@ -260,12 +259,12 @@ GLOBAL void warning_message(const char *msg, ...)
 
 GLOBAL void error_message(const char *msg, ...)
 {
-   va_list args;
-   
-   va_start(args, msg);
-   loglnpos(_("Error"), msg, args);
-   va_end(args);
-   error_counter++;
+	va_list args;
+
+	va_start(args, msg);
+	loglnpos(_("Error"), msg, args);
+	va_end(args);
+	error_counter++;
 }
 
 
@@ -284,27 +283,27 @@ GLOBAL void error_message(const char *msg, ...)
 
 GLOBAL void logln(const char *s)
 {
-   /*
-    * if no logfile, output wil go to screen;
-    * suppress if requested by quiet option
-    */
-   if (bBeQuiet && bNoLogfile)
-      return;
-   
-   /*
-    * if no logfile, fLogfile will be stderr;
-    * suppress if using GUI and output should not go there
-    */
-   if (bNoLogfile && no_stderr_output)
-      return;
-   
-   if (fLogfile == NULL)
-      return;
-   if (*s == '\0' && fLogfile == stderr)
-   	  return;
-   
-   fprintf(fLogfile, "%s\n", s);
-   fflush(fLogfile);
+	/*
+	 * if no logfile, output wil go to screen;
+	 * suppress if requested by quiet option
+	 */
+	if (bBeQuiet && bNoLogfile)
+		return;
+
+	/*
+	 * if no logfile, fLogfile will be stderr;
+	 * suppress if using GUI and output should not go there
+	 */
+	if (bNoLogfile && no_stderr_output)
+		return;
+
+	if (fLogfile == NULL)
+		return;
+	if (*s == '\0' && fLogfile == stderr)
+		return;
+
+	fprintf(fLogfile, "%s\n", s);
+	fflush(fLogfile);
 }
 
 
@@ -323,14 +322,14 @@ GLOBAL void logln(const char *s)
 
 GLOBAL void vloglnf(const char *fmt, ...)
 {
-   va_list ap;
-   char *s;
+	va_list ap;
+	char *s;
 
-   va_start(ap, fmt);
-   s = um_strdup_vprintf(fmt, ap);
-   va_end(ap);
-   logln(s);
-   free(s);
+	va_start(ap, fmt);
+	s = um_strdup_vprintf(fmt, ap);
+	va_end(ap);
+	logln(s);
+	free(s);
 }
 
 
@@ -349,15 +348,15 @@ GLOBAL void vloglnf(const char *fmt, ...)
 
 GLOBAL void note_message(const char *msg, ...)
 {
-   va_list args;
-   
-   if (!bNoWarnings && msg != NULL)
-   {
-      va_start(args, msg);
-      loglnpos(_("Note"), msg, args);
-      va_end(args);
-   }
-   note_counter++;
+	va_list args;
+
+	if (!bNoWarnings && msg != NULL)
+	{
+		va_start(args, msg);
+		loglnpos(_("Note"), msg, args);
+		va_end(args);
+	}
+	note_counter++;
 }
 
 
@@ -376,13 +375,13 @@ GLOBAL void note_message(const char *msg, ...)
 
 GLOBAL void fatal_message(const char *msg, ...)
 {
-   va_list args;
-   
-   va_start(args, msg);
-   loglnpos(_("Fatal Error"), msg, args);
-   va_end(args);
-   error_counter++;
-   bFatalErrorDetected = TRUE;
+	va_list args;
+
+	va_start(args, msg);
+	loglnpos(_("Fatal Error"), msg, args);
+	va_end(args);
+	error_counter++;
+	bFatalErrorDetected = TRUE;
 }
 
 
@@ -401,10 +400,10 @@ GLOBAL void fatal_message(const char *msg, ...)
 
 GLOBAL void logln_warnings_errors(void)
 {
-   if (fLogfile == stderr)
-      return;
-   logln(_("######## errors, warnings and notes:"));
-   logln("");
+	if (fLogfile == stderr)
+		return;
+	logln(_("######## errors, warnings and notes:"));
+	logln("");
 }
 
 
@@ -423,9 +422,9 @@ GLOBAL void logln_warnings_errors(void)
 
 GLOBAL void logln_information(void)
 {
-   logln("");
-   logln(_("######## information:"));
-   logln("");
+	logln("");
+	logln(_("######## information:"));
+	logln("");
 }
 
 
@@ -444,7 +443,7 @@ GLOBAL void logln_information(void)
 
 GLOBAL void logln_interrupted(void)
 {
-   logln(_("interruption"));
+	logln(_("interruption"));
 }
 
 
@@ -463,11 +462,11 @@ GLOBAL void logln_interrupted(void)
 
 GLOBAL void logln_file_generated(const char *kind, const char *filename, const char *suff)
 {
-   char *m;
+	char *m;
 
-   m = um_strdup_printf(_("%s written to %s%s"), kind, filename, suff);
-   logln(m);
-   free(m);
+	m = um_strdup_printf(_("%s written to %s%s"), kind, filename, suff);
+	logln(m);
+	free(m);
 }
 
 
@@ -486,8 +485,8 @@ GLOBAL void logln_file_generated(const char *kind, const char *filename, const c
 
 GLOBAL void error_open_logfile(const char *s)
 {
-   error_message(_("couldn't open logfile <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't open logfile <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -506,8 +505,8 @@ GLOBAL void error_open_logfile(const char *s)
 
 GLOBAL void error_open_hypfile(const char *s)
 {
-   error_message(_("couldn't open hyphen file <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't open hyphen file <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -526,8 +525,8 @@ GLOBAL void error_open_hypfile(const char *s)
 
 GLOBAL void error_open_idxfile(const char *s)
 {
-   error_message(_("couldn't open index file <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't open index file <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -546,8 +545,8 @@ GLOBAL void error_open_idxfile(const char *s)
 
 GLOBAL void error_open_treefile(const char *s)
 {
-   error_message(_("couldn't open treefile <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't open treefile <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -566,8 +565,8 @@ GLOBAL void error_open_treefile(const char *s)
 
 GLOBAL void error_open_uprfile(const char *s)
 {
-   error_message(_("couldn't open project file <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't open project file <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -586,8 +585,8 @@ GLOBAL void error_open_uprfile(const char *s)
 
 GLOBAL void error_open_outfile(const char *s)
 {
-   error_message(_("couldn't open destination file <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't open destination file <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -606,8 +605,8 @@ GLOBAL void error_open_outfile(const char *s)
 
 GLOBAL void error_open_infile(const char *s)
 {
-   error_message(_("couldn't open source file <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't open source file <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -626,8 +625,8 @@ GLOBAL void error_open_infile(const char *s)
 
 GLOBAL void error_write_img(const char *s)
 {
-   error_message(_("couldn't write IMG header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't write IMG header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -646,8 +645,8 @@ GLOBAL void error_write_img(const char *s)
 
 GLOBAL void error_read_img(const char *s)
 {
-   error_message(_("couldn't read IMG header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't read IMG header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -666,8 +665,8 @@ GLOBAL void error_read_img(const char *s)
 
 GLOBAL void error_read_bmp(const char *s)
 {
-   error_message(_("couldn't read BMP header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't read BMP header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -686,8 +685,8 @@ GLOBAL void error_read_bmp(const char *s)
 
 GLOBAL void error_read_pcx(const char *s)
 {
-   error_message(_("couldn't read PCX header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't read PCX header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -706,8 +705,8 @@ GLOBAL void error_read_pcx(const char *s)
 
 GLOBAL void error_read_msp(const char *s)
 {
-   error_message(_("couldn't read MSP header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't read MSP header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -726,8 +725,8 @@ GLOBAL void error_read_msp(const char *s)
 
 GLOBAL void error_read_gif(const char *s)
 {
-   error_message(_("couldn't read GIF header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't read GIF header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -746,8 +745,8 @@ GLOBAL void error_read_gif(const char *s)
 
 GLOBAL void error_read_png(const char *s)
 {
-   error_message(_("couldn't read PNG header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't read PNG header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -766,8 +765,8 @@ GLOBAL void error_read_png(const char *s)
 
 GLOBAL void error_read_jpeg(const char *s)
 {
-   error_message(_("couldn't read JPEG header of <%s>"), s);
-   errno_logln(s);
+	error_message(_("couldn't read JPEG header of <%s>"), s);
+	errno_logln(s);
 }
 
 
@@ -786,10 +785,10 @@ GLOBAL void error_read_jpeg(const char *s)
 
 GLOBAL void error_open_pass1(const char *s)
 {
-   const char *e;
+	const char *e;
 
-   e = my_strerror(errno);
-   error_message(_("couldn't open <%s>: %s"), s, e);
+	e = my_strerror(errno);
+	error_message(_("couldn't open <%s>: %s"), s, e);
 }
 
 
@@ -808,10 +807,10 @@ GLOBAL void error_open_pass1(const char *s)
 
 GLOBAL void error_open_pass2(const char *s)
 {
-   const char *e;
+	const char *e;
 
-   e = my_strerror(errno);
-   error_message(_("couldn't open <%s>: %s"), s, e);
+	e = my_strerror(errno);
+	error_message(_("couldn't open <%s>: %s"), s, e);
 }
 
 
@@ -830,10 +829,10 @@ GLOBAL void error_open_pass2(const char *s)
 
 GLOBAL void error_mkdir(const char *s)
 {
-   const char *e;
-   
-   e = my_strerror(errno);
-   error_message(_("couldn't make directory <%s>: %s"), s, e);
+	const char *e;
+
+	e = my_strerror(errno);
+	error_message(_("couldn't make directory <%s>: %s"), s, e);
 }
 
 
@@ -852,7 +851,7 @@ GLOBAL void error_mkdir(const char *s)
 
 GLOBAL void error_malloc_failed(size_t size)
 {
-   fatal_message(_("failed to allocate %lu bytes"), (unsigned long) size);
+	fatal_message(_("failed to allocate %lu bytes"), (unsigned long) size);
 }
 
 
@@ -871,7 +870,7 @@ GLOBAL void error_malloc_failed(size_t size)
 
 GLOBAL void error_empty_docinfo(void)
 {
-   error_message(_("empty !docinfo"));
+	error_message(_("empty !docinfo"));
 }
 
 
@@ -890,7 +889,7 @@ GLOBAL void error_empty_docinfo(void)
 
 GLOBAL void error_syntax_error(void)
 {
-   error_message(_("syntax error"));
+	error_message(_("syntax error"));
 }
 
 
@@ -909,7 +908,7 @@ GLOBAL void error_syntax_error(void)
 
 GLOBAL void error_end_without_begin(const char *se, const char *sb)
 {
-   error_message(_("'%s' without '%s'"), se, sb);
+	error_message(_("'%s' without '%s'"), se, sb);
 }
 
 
@@ -928,7 +927,7 @@ GLOBAL void error_end_without_begin(const char *se, const char *sb)
 
 GLOBAL void error_wrong_end(const char *sb, const char *se)
 {
-   error_message(_("'%s' followed by '%s'"), sb, se);
+	error_message(_("'%s' followed by '%s'"), sb, se);
 }
 
 
@@ -947,7 +946,7 @@ GLOBAL void error_wrong_end(const char *sb, const char *se)
 
 GLOBAL void error_item_many_enum(void)
 {
-   error_message(_("too many items inside enumeration"));
+	error_message(_("too many items inside enumeration"));
 }
 
 
@@ -966,7 +965,7 @@ GLOBAL void error_item_many_enum(void)
 
 GLOBAL void error_missing_end(const char *s)
 {
-   error_message(_("'%s' expected"), s);
+	error_message(_("'%s' expected"), s);
 }
 
 
@@ -985,7 +984,7 @@ GLOBAL void error_missing_end(const char *s)
 
 GLOBAL void error_called_twice(const char *s)
 {
-   error_message(_("'%s' called twice"), s);
+	error_message(_("'%s' called twice"), s);
 }
 
 
@@ -1004,7 +1003,7 @@ GLOBAL void error_called_twice(const char *s)
 
 GLOBAL void error_not_active(const char *s)
 {
-   error_message(_("%s not active"), s);
+	error_message(_("%s not active"), s);
 }
 
 
@@ -1023,7 +1022,7 @@ GLOBAL void error_not_active(const char *s)
 
 GLOBAL void error_already_active(const char *s)
 {
-   error_message(_("%s already active"), s);
+	error_message(_("%s already active"), s);
 }
 
 
@@ -1042,7 +1041,7 @@ GLOBAL void error_already_active(const char *s)
 
 GLOBAL void error_still_active(const char *s)
 {
-   error_message(_("%s still active"), s);
+	error_message(_("%s still active"), s);
 }
 
 
@@ -1061,7 +1060,7 @@ GLOBAL void error_still_active(const char *s)
 
 GLOBAL void error_missing_parameter(const char *s)
 {
-   error_message(_("missing parameter(s) at %s"), s);
+	error_message(_("missing parameter(s) at %s"), s);
 }
 
 
@@ -1079,7 +1078,7 @@ GLOBAL void error_missing_parameter(const char *s)
 
 GLOBAL void error_wrong_nr_parameters(const char *s)
 {
-   error_message(_("wrong number of parameters: %s"), s);
+	error_message(_("wrong number of parameters: %s"), s);
 }
 
 
@@ -1098,7 +1097,7 @@ GLOBAL void error_wrong_nr_parameters(const char *s)
 
 GLOBAL void error_unexpected_eol(void)
 {
-   error_message(_("unexpected end of line in command"));
+	error_message(_("unexpected end of line in command"));
 }
 
 
@@ -1117,7 +1116,7 @@ GLOBAL void error_unexpected_eol(void)
 
 GLOBAL void error_too_many_tokens(void)
 {
-   error_message(_("too many words used inside paragraph"));
+	error_message(_("too many words used inside paragraph"));
 }
 
 
@@ -1136,7 +1135,7 @@ GLOBAL void error_too_many_tokens(void)
 
 GLOBAL void error_replace_param(const char *s)
 {
-   error_message(_("couldn't replace (%s ...)"), s);
+	error_message(_("couldn't replace (%s ...)"), s);
 }
 
 
@@ -1155,10 +1154,10 @@ GLOBAL void error_replace_param(const char *s)
 
 GLOBAL void error_undefined_link(const char *l)
 {
-   if (bInsideDocument)
-   {
-      error_message(_("link destination undefined: '%s'"), l);
-   }
+	if (bInsideDocument)
+	{
+		error_message(_("link destination undefined: '%s'"), l);
+	}
 }
 
 
@@ -1177,8 +1176,8 @@ GLOBAL void error_undefined_link(const char *l)
 
 GLOBAL void error_missing_endif(const char *s, FILE_LINENO l)
 {
-   error_missing_end("!endif");
-   note_message(_("last '!if': <%s> line %lu"), s, l);
+	error_missing_end("!endif");
+	note_message(_("last '!if': <%s> line %lu"), s, l);
 }
 
 
@@ -1197,7 +1196,7 @@ GLOBAL void error_missing_endif(const char *s, FILE_LINENO l)
 
 GLOBAL void error_no_charset(const char *s)
 {
-   error_message(_("charset/encoding %s not supported"), s);
+	error_message(_("charset/encoding %s not supported"), s);
 }
 
 
@@ -1216,13 +1215,13 @@ GLOBAL void error_no_charset(const char *s)
 
 GLOBAL void error_node_not_allowed(int level)
 {
-   char sub[TOC_MAXDEPTH * 3 + 1];
-   int i;
-   
-   *sub = '\0';
-   for (i = 0; i < level; i++)
-      strcat(sub, "sub");
-   fatal_message(_("use !%snode first (structure gap)"), sub);
+	char sub[TOC_MAXDEPTH * 3 + 1];
+	int i;
+
+	*sub = '\0';
+	for (i = 0; i < level; i++)
+		strcat(sub, "sub");
+	fatal_message(_("use !%snode first (structure gap)"), sub);
 }
 
 
@@ -1241,16 +1240,16 @@ GLOBAL void error_node_not_allowed(int level)
 
 GLOBAL void warning_long_destline(const char *s, FILE_LINENO lnr, const int ll)
 {
-   char *m;
+	char *m;
 
-   if (!bNoWarnings && !bNoWarningsLines)
-   {
-      m = um_strdup_printf(_("Warning: %s %lu: overfull line: %d"), s, lnr, ll);
-      logln(m);
-      show_logln_message(m);
-      free(m);
-   }
-   warning_counter++;
+	if (!bNoWarnings && !bNoWarningsLines)
+	{
+		m = um_strdup_printf(_("Warning: %s %lu: overfull line: %d"), s, lnr, ll);
+		logln(m);
+		show_logln_message(m);
+		free(m);
+	}
+	warning_counter++;
 }
 
 
@@ -1269,10 +1268,10 @@ GLOBAL void warning_long_destline(const char *s, FILE_LINENO lnr, const int ll)
 
 GLOBAL void note_short_sourceline(const char *s)
 {
-   if (!bNoWarnings && !bNoWarningsLines)
-      note_message(_("check this paragraph: %s"), s);
-   else
-      note_counter++;
+	if (!bNoWarnings && !bNoWarningsLines)
+		note_message(_("check this paragraph: %s"), s);
+	else
+		note_counter++;
 }
 
 
@@ -1291,16 +1290,16 @@ GLOBAL void note_short_sourceline(const char *s)
 
 GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll, const char *w)
 {
-   char *m;
+	char *m;
 
-   if (!bNoWarnings && !bNoWarningsLines)
-   {
-      m = um_strdup_printf(_("Warning: %s %lu: too short line: %d: %s"), s, lnr, ll, w);
-      logln(m);
-      show_logln_message(m);
-      free(m);
-   }
-   warning_counter++;
+	if (!bNoWarnings && !bNoWarningsLines)
+	{
+		m = um_strdup_printf(_("Warning: %s %lu: too short line: %d: %s"), s, lnr, ll, w);
+		logln(m);
+		show_logln_message(m);
+		free(m);
+	}
+	warning_counter++;
 }
 
 
@@ -1319,10 +1318,10 @@ GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll,
 
 GLOBAL void warning_cannot_recode(unsigned int c, const char *se, const char *te)
 {
-   if (iUdopass == PASS2)
-   {
-      warning_message(_("cannot convert %s #0x%x to %s"), se, c, te);
-   }
+	if (iUdopass == PASS2)
+	{
+		warning_message(_("cannot convert %s #0x%x to %s"), se, c, te);
+	}
 }
 
 
@@ -1341,10 +1340,10 @@ GLOBAL void warning_cannot_recode(unsigned int c, const char *se, const char *te
 
 GLOBAL void warning_cannot_recode_utf8(const char *utf, const char *te)
 {
-   if (iUdopass == PASS2)
-   {
-      warning_message(_("can't convert UTF-8 (%s) to %s"), utf, te);
-   }
+	if (iUdopass == PASS2)
+	{
+		warning_message(_("can't convert UTF-8 (%s) to %s"), utf, te);
+	}
 }
 
 
@@ -1363,7 +1362,7 @@ GLOBAL void warning_cannot_recode_utf8(const char *utf, const char *te)
 
 GLOBAL void warning_no_isochar(const char c)
 {
-   warning_message(_("%x not available in ISO Latin 1"), (_UBYTE) c);
+	warning_message(_("%x not available in ISO Latin 1"), (_UBYTE) c);
 }
 
 
@@ -1382,27 +1381,29 @@ GLOBAL void warning_no_isochar(const char c)
 
 GLOBAL void warning_node_too_deep(_BOOL popup, _BOOL invisible)
 {
-   char n[100 + TOC_MAXDEPTH * 3];
-   int i;
-   
-   strcpy(n, "!");
-   if (popup)
-      strcat(n, "p");
-   for (i = 0; i < TOC_MAXDEPTH - 1; i++)
-      strcat(n, "sub");
-   strcat(n, "node");
-   if (invisible)
-      strcat(n, "*");
-   warning_message(_("structure depth exceeded, using %s"), n);
+	char n[100 + TOC_MAXDEPTH * 3];
+
+	int i;
+
+	strcpy(n, "!");
+	if (popup)
+		strcat(n, "p");
+	for (i = 0; i < TOC_MAXDEPTH - 1; i++)
+		strcat(n, "sub");
+	strcat(n, "node");
+	if (invisible)
+		strcat(n, "*");
+	warning_message(_("structure depth exceeded, using %s"), n);
 }
 
 
 
 
 
-GLOBAL void warning_buffer_overrun( const char *func, const char *place, size_t n, size_t maxlen)
+GLOBAL void warning_buffer_overrun(const char *func, const char *place, size_t n, size_t maxlen)
 {
-   warning_message(_("%s: buffer overrun prevented: %s: %u>%u"), func, place, (unsigned int)(n + 1), (unsigned int)(maxlen));
+	warning_message(_("%s: buffer overrun prevented: %s: %u>%u"), func, place, (unsigned int) (n + 1),
+					(unsigned int) (maxlen));
 }
 
 /*******************************************************************************
@@ -1417,7 +1418,7 @@ GLOBAL void warning_buffer_overrun( const char *func, const char *place, size_t 
 
 GLOBAL int get_warning_counter(void)
 {
-   return warning_counter;
+	return warning_counter;
 }
 
 
@@ -1436,7 +1437,7 @@ GLOBAL int get_warning_counter(void)
 
 GLOBAL int get_note_counter(void)
 {
-   return note_counter;
+	return note_counter;
 }
 
 
@@ -1455,7 +1456,7 @@ GLOBAL int get_note_counter(void)
 
 GLOBAL int get_error_counter(void)
 {
-   return error_counter;
+	return error_counter;
 }
 
 
@@ -1474,7 +1475,7 @@ GLOBAL int get_error_counter(void)
 
 GLOBAL void init_module_msg(void)
 {
-   error_counter   = 0;
-   warning_counter = 0;
-   note_counter    = 0;
+	error_counter = 0;
+	warning_counter = 0;
+	note_counter = 0;
 }

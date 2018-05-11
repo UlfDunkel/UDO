@@ -81,6 +81,7 @@
 
 
 static FILELIST *filelist;
+
 static FILE_ID last_fileid;
 
 
@@ -104,7 +105,7 @@ GLOBAL MYTEXTFILE *myTextOpen(const char *filename)
 {
 	MYTEXTFILE *tf;
 
-	tf = (MYTEXTFILE *)malloc(sizeof(*tf));
+	tf = (MYTEXTFILE *) malloc(sizeof(*tf));
 
 	if (tf == NULL)
 		return NULL;
@@ -137,12 +138,12 @@ GLOBAL MYTEXTFILE *myTextOpen(const char *filename)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL myTextGetline(char *string, size_t n, MYTEXTFILE *tf)
+GLOBAL _BOOL myTextGetline(char *string, size_t n, MYTEXTFILE * tf)
 {
 	size_t sl;
 	_BOOL cont;
 	int c;
-	
+
 	/* This indicates how many lines have been added with \! to the current line */
 	/* 0 = Es wurden keine Zeilen zusammengefuegt, */
 	/* 1 = Es wurde eine Zeile angehaengt */
@@ -153,7 +154,7 @@ GLOBAL _BOOL myTextGetline(char *string, size_t n, MYTEXTFILE *tf)
 	 * this used to call fgets(), but that doesnt work if
 	 * we try i.e. to read a file with CR endings only on Unix,
 	 * the fgets would read to the limit because there is no '\n'
-	 */	
+	 */
 	n--;
 	do
 	{
@@ -187,8 +188,8 @@ GLOBAL _BOOL myTextGetline(char *string, size_t n, MYTEXTFILE *tf)
 		/* Is there a continue line mark before linebreak? */
 		if (sl >= 2 && string[sl - 2] == '!' && string[sl - 1] == '\\')
 		{
-			sl = sl - 2; /* String got shorter */
-			string[sl] = '\0'; /* Cut continue line! */
+			sl = sl - 2;				/* String got shorter */
+			string[sl] = '\0';			/* Cut continue line! */
 			/* Above n is used to indicate how much space is left and string is the buffer start */
 			/* The new buffer is n minus the string we currently have */
 			n = n - sl;
@@ -215,7 +216,7 @@ GLOBAL _BOOL myTextGetline(char *string, size_t n, MYTEXTFILE *tf)
 *
 ******************************************|************************************/
 
-GLOBAL _BOOL myTextClose(MYTEXTFILE *tf)
+GLOBAL _BOOL myTextClose(MYTEXTFILE * tf)
 {
 	if (tf == NULL)
 		return FALSE;
@@ -245,10 +246,9 @@ GLOBAL _BOOL myTextClose(MYTEXTFILE *tf)
 
 LOCAL char *strmir(char *s)
 {
-	size_t	sl,
-				i;
-	char		swap;
-	
+	size_t sl, i;
+	char swap;
+
 	if ((sl = strlen(s)) > 0)
 	{
 		for (i = 0; i < sl / 2; i++)
@@ -282,19 +282,17 @@ LOCAL char *strmir(char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void fsplit(char *s, char *drive, char *path, char *filename, char*suffix)
+GLOBAL void fsplit(char *s, char *drive, char *path, char *filename, char *suffix)
 {
-	char		wrk[512];
-	char	  *found;
-	size_t	wl,
-				fl,
-				l;
-	
+	char wrk[MYFILE_FULL_LEN + 1];
+	char *found;
+	size_t wl, fl, l;
+
 	strcpy(drive, "");
 	strcpy(path, "");
 	strcpy(filename, "");
 	strcpy(suffix, "");
-	
+
 	strcpy(wrk, s);
 	wl = strlen(wrk);
 
@@ -303,7 +301,7 @@ GLOBAL void fsplit(char *s, char *drive, char *path, char *filename, char*suffix
 
 	strcpy(wrk, s);
 	strmir(wrk);
-	
+
 	/* Drive ermitteln und abschneiden */
 	if (wrk[wl - 2] == ':')
 	{
@@ -370,10 +368,10 @@ GLOBAL void fsplit(char *s, char *drive, char *path, char *filename, char*suffix
 GLOBAL void fsplit(const char *sour, char *destDrive, char *destFolders, char *destName, char *destSuffix)
 {
 	char *s;
-	
+
 	*destDrive = 0;
 	*destFolders = 0;
-	
+
 	s = strrchr(sour, ':');
 	if (s && (s != sour + 1))
 	{
@@ -382,8 +380,7 @@ GLOBAL void fsplit(const char *sour, char *destDrive, char *destFolders, char *d
 		strncpy(destFolders, sour, s - sour);
 		destFolders[s - sour] = 0;
 		sour = s;
-	}
-	else
+	} else
 	{
 		/* DOS- oder Unix-Dateipfad */
 		if (s)
@@ -392,25 +389,24 @@ GLOBAL void fsplit(const char *sour, char *destDrive, char *destFolders, char *d
 			destDrive[2] = 0;
 			sour += 2;
 		}
-		
+
 		s = strrchr(sour, '/');
 		if (s)
 		{
-			if (sour[ 0] != '/')
+			if (sour[0] != '/')
 			{
 				*destFolders++ = ':';
 			}
 			s += 1;
-			strncpy( destFolders, sour, s - sour);
-			destFolders[ s - sour] = 0;
+			strncpy(destFolders, sour, s - sour);
+			destFolders[s - sour] = 0;
 			sour = s;
 			s = destFolders;
-			while ((s = strchr( s, '/')) != NULL)
+			while ((s = strchr(s, '/')) != NULL)
 			{
 				*s++ = ':';
 			}
-		}
-		else
+		} else
 		{
 			s = strrchr(sour, '\\');
 			if (s)
@@ -420,29 +416,28 @@ GLOBAL void fsplit(const char *sour, char *destDrive, char *destFolders, char *d
 					*destFolders++ = ':';
 				}
 				s += 1;
-				strncpy( destFolders, sour, s - sour);
-				destFolders[ s - sour] = 0;
+				strncpy(destFolders, sour, s - sour);
+				destFolders[s - sour] = 0;
 				sour = s;
 				s = destFolders;
-				while ((s = strchr( s, '\\')) != NULL)
+				while ((s = strchr(s, '\\')) != NULL)
 				{
 					*s++ = ':';
 				}
 			}
 		}
 	}
-	
+
 	/* Dateinamen und -suffix aufspalten */
-	s = strrchr( sour, '.');
+	s = strrchr(sour, '.');
 	if (s)
 	{
-		strncpy( destName, sour, s - sour);
-		destName[ s - sour] = 0;
-		strcpy( destSuffix, s);
-	}
-	else
+		strncpy(destName, sour, s - sour);
+		destName[s - sour] = 0;
+		strcpy(destSuffix, s);
+	} else
 	{
-		strcpy( destName, sour);
+		strcpy(destName, sour);
 		*destSuffix = 0;
 	}
 }
@@ -590,7 +585,7 @@ LOCAL _BOOL my_getcwd(char *s, size_t maxlen)
 
 LOCAL _BOOL myDirExists(const char *s)
 {
-	char old[512];
+	char old[MYFILE_FULL_LEN + 1];
 	_BOOL ret = TRUE;
 
 	my_getcwd(old, sizeof(old));
@@ -639,20 +634,21 @@ GLOBAL _BOOL my_mkdir(const char *s)
 FILE_ID file_listadd(const char *name)
 {
 	FILELIST *f;
+
 	size_t len;
-	
+
 	if (name == NULL || *name == '\0')
 	{
 		return 0;
 	}
-	
+
 	for (f = filelist; f != NULL; f = f->next)
 		if (strcmp(f->name, name) == 0)
 		{
 			return f->id;
 		}
 	len = strlen(name);
-	f = (FILELIST *)malloc(sizeof(*f) + len);
+	f = (FILELIST *) malloc(sizeof(*f) + len);
 	if (f == NULL)
 		return 0;
 	++last_fileid;
@@ -690,7 +686,7 @@ void init_module_files(void)
 void exit_module_files(void)
 {
 	FILELIST *f, *next;
-	
+
 	for (f = filelist; f != NULL; f = next)
 	{
 		next = f->next;
