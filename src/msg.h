@@ -100,7 +100,6 @@ GLOBAL void error_empty_docinfo(void);
 
 GLOBAL void error_syntax_error(void);
 GLOBAL void error_end_without_begin(const char *se, const char *sb);
-GLOBAL void error_wrong_end(const char *sb, const char *se);
 GLOBAL void error_item_many_enum(void);
 GLOBAL void error_missing_end(const char *s);
 GLOBAL void error_called_twice(const char *s);

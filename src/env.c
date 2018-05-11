@@ -336,44 +336,41 @@ LOCAL _BOOL check_iEnvLevel(void)
 *
 ******************************************|************************************/
 
-LOCAL _BOOL check_env_end(const int etype, const int ekind, const char *ecomm)
+LOCAL _BOOL check_env_end(int etype, int ekind)
 {
-	if (iEnvLevel <= 0)
-		return TRUE;
-
-	if ((iEnvType[iEnvLevel] != etype) || (iEnvType[iEnvLevel] == etype && env_kind[iEnvLevel] != ekind))
+	if (iEnvLevel <= 0 || iEnvType[iEnvLevel] != etype || (etype == ENV_LIST && env_kind[iEnvLevel] != ekind))
 	{
-		switch (iEnvType[iEnvLevel])
+		switch (etype)
 		{
 		case ENV_ITEM:
-			error_wrong_end(CMD_BEGIN_ITEMIZE, ecomm);
+			error_end_without_begin(CMD_END_ITEMIZE, CMD_BEGIN_ITEMIZE);
 			break;
 
 		case ENV_ENUM:
-			error_wrong_end(CMD_BEGIN_ENUMERATE, ecomm);
+			error_end_without_begin(CMD_END_ENUMERATE, CMD_BEGIN_ENUMERATE);
 			break;
 
 		case ENV_DESC:
-			error_wrong_end(CMD_BEGIN_DESCRIPTION, ecomm);
+			error_end_without_begin(CMD_END_DESCRIPTION, CMD_BEGIN_DESCRIPTION);
 			break;
 
 		case ENV_LIST:
-			switch (env_kind[iEnvLevel])
+			switch (ekind)
 			{
 			case LIST_BOLD:
-				error_wrong_end(CMD_BEGIN_BLIST, ecomm);
+				error_end_without_begin(CMD_END_BLIST, CMD_BEGIN_BLIST);
 				break;
 
 			case LIST_ITALIC:
-				error_wrong_end(CMD_BEGIN_ILIST, ecomm);
+				error_end_without_begin(CMD_END_ILIST, CMD_BEGIN_ILIST);
 				break;
 
 			case LIST_TYPEWRITER:
-				error_wrong_end(CMD_BEGIN_TLIST, ecomm);
+				error_end_without_begin(CMD_END_TLIST, CMD_BEGIN_TLIST);
 				break;
 
 			default:
-				error_wrong_end(CMD_BEGIN_XLIST, ecomm);
+				error_end_without_begin(CMD_END_XLIST, CMD_BEGIN_XLIST);
 				break;
 			}
 			break;
@@ -1588,7 +1585,7 @@ GLOBAL void c_begin_quote(void)
 	case TOHAH:
 	case TOHTM:
 	case TOMHH:
-		um_strcpy(quote, "<blockquote", 1020, "c_begin_quote[1]");
+		um_strcpy(quote, "<blockquote", ArraySize(quote), "!c_begin_quote");
 
 		if (token[1][0] == '[')
 		{
@@ -1600,55 +1597,60 @@ GLOBAL void c_begin_quote(void)
 
 				if (ptr != NULL)
 				{
+					ptr += 3;
 					len = strcspn(ptr, " ");
 
-					um_strcat(quote, " id=\"", 1020, "c_begin_quote[2]");
-					um_strncat(quote, ptr + 3, len, 1020, "c_begin_quote[3]");
-					um_strcat(quote, "\"", 1020, "c_begin_quote[4]");
+					um_strcat(quote, " id=\"", ArraySize(quote), "!c_begin_quote");
+					um_strncat(quote, ptr, len, ArraySize(quote), "!c_begin_quote");
+					um_strcat(quote, "\"", ArraySize(quote), "c_begin_quote");
 				}
 
 				ptr = strstr(token[j], "class=");
 
 				if (ptr != NULL)
 				{
+					ptr += 6;
 					len = strcspn(ptr, " ");
 
-					um_strcat(quote, " class=\"", 1020, "c_begin_quote[5]");
-					um_strncat(quote, ptr + 6, len, 1020, "c_begin_quote[6]");
-					um_strcat(quote, "\"", 1020, "c_begin_quote[7]");
+					um_strcat(quote, " class=\"", ArraySize(quote), "!c_begin_quote");
+					um_strncat(quote, ptr, len, ArraySize(quote), "!c_begin_quote");
+					um_strcat(quote, "\"", ArraySize(quote), "!c_begin_quote");
 				}
 
 				ptr = strstr(token[j], "cite=");
 
 				if (ptr != NULL)
 				{
+					ptr += 5;
 					len = strcspn(ptr, " ");
 
-					um_strcat(quote, " cite=\"", 1020, "c_begin_quote[8]");
-					um_strncat(quote, ptr + 5, len, 1020, "c_begin_quote[9]");
-					um_strcat(quote, "\"", 1020, "c_begin_quote[10]");
+					um_strcat(quote, " cite=\"", ArraySize(quote), "!c_begin_quote");
+					um_strncat(quote, ptr, len, ArraySize(quote), "!c_begin_quote");
+					um_strcat(quote, "\"", ArraySize(quote), "!c_begin_quote");
 				}
 
 				ptr = strstr(token[j], "lang=");
 
 				if (ptr != NULL)
 				{
+					ptr += 5;
 					len = strcspn(ptr, " ");
 
-					um_strcat(quote, " lang=\"", 1020, "c_begin_quote[11]");
-					um_strncat(quote, ptr + 5, len, 1020, "c_begin_quote[12]");
-					um_strcat(quote, "\"", 1020, "c_begin_quote[13]");
+					um_strcat(quote, " lang=\"", ArraySize(quote), "!c_begin_quote");
+					um_strncat(quote, ptr, len, ArraySize(quote), "!c_begin_quote");
+					um_strcat(quote, "\"", ArraySize(quote), "!c_begin_quote");
 				}
 
 				ptr = strstr(token[j], "title=");
 
 				if (ptr != NULL)
 				{
-					um_strcat(quote, " title=\"", 1020, "c_begin_quote[14]");
+					um_strcat(quote, " title=\"", ArraySize(quote), "!c_begin_quote");
 
-					if (ptr[6] == '\'')
+					ptr += 6;
+					if (ptr[0] == '\'')
 					{
-						um_strcpy(title, ptr + 7, 512, "c_begin_quote[15]");
+						um_strcpy(title, ptr + 1, ArraySize(title), "!c_begin_quote");
 
 						len = strlen(title);
 
@@ -1660,8 +1662,8 @@ GLOBAL void c_begin_quote(void)
 						do
 						{
 							k++;
-							um_strcat(title, " ", 512, "c_begin_quote[16]");
-							um_strcat(title, token[k], 512, "c_begin_quote[17]");
+							um_strcat(title, " ", ArraySize(title), "!c_begin_quote");
+							um_strcat(title, token[k], ArraySize(title), "!c_begin_quote");
 						} while (strrchr(token[k], '\'') == NULL);
 
 						len = strlen(title);
@@ -1669,19 +1671,19 @@ GLOBAL void c_begin_quote(void)
 					  no_blanks:
 						title[len - 1] = EOS;
 
-						um_strncat(quote, title, len, 1020, "c_begin_quote[18]");
+						um_strncat(quote, title, len, ArraySize(quote), "!c_begin_quote");
 					} else
 					{
-						len = strcspn(ptr + 6, " ");
-						um_strncat(quote, ptr + 6, len, 1020, "c_begin_quote[19]");
+						len = strcspn(ptr, " ");
+						um_strncat(quote, ptr, len, ArraySize(quote), "!c_begin_quote");
 					}
 
-					um_strcat(quote, "\"", 1020, "c_begin_quote[20]");
+					um_strcat(quote, "\"", ArraySize(quote), "!c_begin_quote");
 				}
 			}
 		}
 
-		um_strcat(quote, ">", 1020, "c_begin_quote[21]");
+		um_strcat(quote, ">", ArraySize(quote), "!c_begin_quote");
 		outln(quote);
 /*    outln("<blockquote>");
 */
@@ -1730,10 +1732,8 @@ GLOBAL void c_begin_quote(void)
 
 GLOBAL void c_end_quote(void)
 {
-	if (quot_level == 0)
-	{
+	if (iEnvLevel == 0 || iEnvType[iEnvLevel] != ENV_QUOT)
 		error_end_without_begin(CMD_END_QUOTE, CMD_BEGIN_QUOTE);
-	}
 
 	if (iEnvLevel > 0)
 	{
@@ -1879,7 +1879,7 @@ GLOBAL void c_begin_center(void)
 
 GLOBAL void c_end_center(void)
 {
-	if (cent_level == 0)
+	if (iEnvLevel == 0 || iEnvType[iEnvLevel] != ENV_CENT)
 		error_end_without_begin(CMD_END_CENTER, CMD_BEGIN_CENTER);
 
 	if (iEnvLevel > 0)
@@ -2008,7 +2008,7 @@ GLOBAL void c_begin_flushright(void)
 
 GLOBAL void c_end_flushright(void)
 {
-	if (flushright_level == 0)
+	if (iEnvLevel == 0 || iEnvType[iEnvLevel] != ENV_RIGH)
 		error_end_without_begin(CMD_END_RIGHT, CMD_BEGIN_RIGHT);
 
 	if (iEnvLevel > 0)
@@ -2142,7 +2142,7 @@ GLOBAL void c_begin_flushleft(void)
 
 GLOBAL void c_end_flushleft(void)
 {
-	if (flushleft_level == 0)
+	if (iEnvLevel == 0 || iEnvType[iEnvLevel] != ENV_LEFT)
 		error_end_without_begin(CMD_END_LEFT, CMD_BEGIN_LEFT);
 
 	if (iEnvLevel > 0)
@@ -3073,7 +3073,7 @@ GLOBAL void c_item(void)
 	size_t tl, sl, i;
 	int ll, lp;
 
-	if (iItemLevel == 0 && iEnumLevel == 0 && iDescLevel == 0 && iListLevel == 0)
+	if (iEnvLevel == 0 || (iEnvType[iEnvLevel] != ENV_ITEM && iEnvType[iEnvLevel] != ENV_ENUM && iEnvType[iEnvLevel] != ENV_DESC && iEnvType[iEnvLevel] != ENV_LIST))
 		error_message(_("'!item' outside environment"));
 
 	bEnv1stPara[iEnvLevel] = TRUE;
@@ -3955,19 +3955,19 @@ LOCAL void c_end_list(int listkind)
 	switch (listkind)
 	{
 	case LIST_BOLD:
-		check_env_end(ENV_LIST, listkind, CMD_END_BLIST);
+		check_env_end(ENV_LIST, listkind);
 		break;
 
 	case LIST_ITALIC:
-		check_env_end(ENV_LIST, listkind, CMD_END_ILIST);
+		check_env_end(ENV_LIST, listkind);
 		break;
 
 	case LIST_TYPEWRITER:
-		check_env_end(ENV_LIST, listkind, CMD_END_TLIST);
+		check_env_end(ENV_LIST, listkind);
 		break;
 
 	default:
-		check_env_end(ENV_LIST, listkind, CMD_END_XLIST);
+		check_env_end(ENV_LIST, listkind);
 		break;
 	}
 
@@ -4166,12 +4166,7 @@ GLOBAL void c_end_tlist(void)
 
 GLOBAL void c_end_description(void)
 {
-	if (iDescLevel == 0)
-	{
-		error_end_without_begin(CMD_END_DESCRIPTION, CMD_BEGIN_DESCRIPTION);
-	}
-
-	check_env_end(ENV_DESC, 0, CMD_END_DESCRIPTION);
+	check_env_end(ENV_DESC, 0);
 
 	if (iEnvLevel > 0)
 	{
@@ -4266,12 +4261,7 @@ GLOBAL void c_end_description(void)
 
 GLOBAL void c_end_enumerate(void)
 {
-	if (iEnumLevel == 0)
-	{
-		error_end_without_begin(CMD_END_ENUMERATE, CMD_BEGIN_ENUMERATE);
-	}
-
-	check_env_end(ENV_ENUM, 0, CMD_END_ENUMERATE);
+	check_env_end(ENV_ENUM, 0);
 
 	if (iEnvLevel > 0)
 	{
@@ -4357,12 +4347,7 @@ GLOBAL void c_end_enumerate(void)
 
 GLOBAL void c_end_itemize(void)
 {
-	if (iItemLevel == 0)
-	{
-		error_end_without_begin(CMD_END_ITEMIZE, CMD_BEGIN_ITEMIZE);
-	}
-
-	check_env_end(ENV_ITEM, 0, CMD_END_ITEMIZE);
+	check_env_end(ENV_ITEM, 0);
 
 	if (iEnvLevel > 0)
 	{
@@ -5371,11 +5356,13 @@ GLOBAL void init_module_env(void)
 {
 	int i;
 
-	for (i = 0; i < MAXENVLEVEL; i++)
+	for (i = 0; i <= MAXENVLEVEL; i++)
 	{
 		bEnvCompressed[i] = FALSE;
 		bEnv1stItem[i] = TRUE;
 		bEnv1stPara[i] = TRUE;
+		iEnvType[i] = 0;
+		env_kind[i] = 0;
 	}
 
 	iEnvLevel = 0;

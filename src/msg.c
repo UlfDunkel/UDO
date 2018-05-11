@@ -917,25 +917,6 @@ GLOBAL void error_end_without_begin(const char *se, const char *sb)
 
 /*******************************************************************************
 *
-*  error_wrong_end():
-*     ??? (description missing)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void error_wrong_end(const char *sb, const char *se)
-{
-	error_message(_("'%s' followed by '%s'"), sb, se);
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  error_item_many_enum():
 *     error message: too many items inside enumeration
 *
