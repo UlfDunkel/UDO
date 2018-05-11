@@ -735,6 +735,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] = {
 	{ "!maketitle",                      "",              c_maketitle,                     TRUE,  CMD_ONLY_MAINPART },
 	{ "!tableofcontents",                "",              c_tableofcontents,               TRUE,  CMD_ONLY_MAINPART },
 	{ "!toc_title",                      "",              c_tunix,                         TRUE,  CMD_ONLY_MAINPART },
+	{ "!node_title",                     "",              c_tunix,                         TRUE,  CMD_ONLY_MAINPART },
 	{ "!top_title",                      "",              c_tunix,                         TRUE,  CMD_ONLY_MAINPART },
 	{ "!listoffigures",                  "",              c_listoffigures,                 TRUE,  CMD_ONLY_MAINPART },
 	{ "!listoftables",                   "",              c_listoftables,                  TRUE,  CMD_ONLY_MAINPART },
@@ -10575,7 +10576,10 @@ LOCAL _BOOL pass1(const char *datei)
 							uses_tableofcontents = TRUE;
 						} else if (strcmp(token[0], "!toc_title") == 0)
 						{
-							tokcpy2(toc_title, MAX_NODE_LEN);
+							set_nodetitle(0);
+						} else if (strcmp(token[0], "!node_title") == 0)
+						{
+							set_nodetitle(p1_toc_counter);
 						} else if (strcmp(token[0], "!top_title") == 0)
 						{
 							set_toptitle();
@@ -10750,7 +10754,7 @@ static void dump_node_structure(void)
 		}
 		for (; d <= toc_maxdepth; d++)
 			fprintf(fTreefile, "    ");
-		fprintf(fTreefile, "  %s; %s", tocptr->name, file_lookup(tocptr->source_location.id));
+		fprintf(fTreefile, "  %s; %s", tocptr->nodename, file_lookup(tocptr->source_location.id));
 		if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
 			fprintf(fTreefile, "; %s", tocptr->filename);
 		fprintf(fTreefile, "\n");

@@ -1307,7 +1307,15 @@ LOCAL void c_link(char *s, _BOOL inside_b4_macro)
 	int pnr = 0;
 	_BOOL linkerror;
 	char link[1024];
-
+	char nodename[256];
+	TOCIDX ti;
+	LABIDX li;
+	_BOOL isnode;
+	_BOOL isalias;
+	_BOOL ispopup;
+	_BOOL flag;
+	_BOOL uses_default;
+	
 	linkerror = FALSE;
 	while (!linkerror && (pnr = get_parameters(s, "link", 2, 2)) == 2)
 	{
@@ -1316,9 +1324,11 @@ LOCAL void c_link(char *s, _BOOL inside_b4_macro)
 
 		/* Wird ein leerer Parameter benutzt, den */
 		/* den ersten auch als zweiten verwenden. */
+		uses_default = FALSE;
 		if (Param[2][0] == EOS)
 		{
 			strcpy(Param[2], Param[1]);
+			uses_default = TRUE;
 		}
 		strcpy(link, Param[2]);
 
@@ -1333,7 +1343,22 @@ LOCAL void c_link(char *s, _BOOL inside_b4_macro)
 			adjust_params_inside(Param[1]);
 			adjust_params_inside(Param[2]);
 		}
-
+		
+		if (uses_default)
+		{
+			flag = is_node_link(Param[2], nodename, &ti, &isnode, &isalias, &ispopup, &li);
+			if (flag && isnode && toc_table[ti]->nodetitle != toc_table[ti]->nodename)
+			{
+				strcpy(Param[1], toc_table[ti]->nodetitle);
+				if (inside_b4_macro)
+				{
+					if (desttype != TOSTG)
+						auto_quote_chars(Param[1], TRUE);
+					adjust_params_inside(Param[1]);
+				}
+			}
+		}
+		
 		switch (desttype)
 		{
 		case TOHAH:
@@ -1849,15 +1874,28 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
 	char *ptr;
 	_BOOL flag;
 	_BOOL linkerror;
+	TOCIDX ti;
+	LABIDX li;
+	_BOOL isnode;
+	_BOOL isalias;
+	_BOOL ispopup;
+	_BOOL uses_default;
+	char nodename[256];
 
 	linkerror = FALSE;
 	while (!linkerror && (pnr = get_parameters(s, "ilink", 3, 3)) == 3)
 	{
-		strcpy(link, Param[3]);
 		del_whitespaces(Param[1]);
 		del_whitespaces(Param[2]);
 		del_whitespaces(Param[3]);
 
+		uses_default = FALSE;
+		if (Param[3][0] == EOS)
+		{
+			strcpy(Param[3], Param[2]);
+			uses_default = TRUE;
+		}
+		strcpy(link, Param[3]);
 		if (inside_b4_macro)
 		{
 			if (desttype != TOSTG)
@@ -1876,6 +1914,22 @@ LOCAL void c_ilink(char *s, const _BOOL inside_b4_macro)
 		replace_udo_quotes(Param[2]);
 		replace_udo_quotes(Param[3]);
 
+		if (uses_default)
+		{
+			flag = is_node_link(Param[3], nodename, &ti, &isnode, &isalias, &ispopup, &li);
+			if (flag && isnode && toc_table[ti]->nodetitle != toc_table[ti]->nodename)
+			{
+				strcpy(Param[1], toc_table[ti]->nodetitle);
+				if (inside_b4_macro)
+				{
+					if (desttype != TOSTG)
+						auto_quote_chars(Param[1], TRUE);
+					adjust_params_inside(Param[1]);
+					replace_udo_quotes(Param[1]);
+				}
+			}
+		}
+		
 		switch (desttype)
 		{
 		case TOHAH:

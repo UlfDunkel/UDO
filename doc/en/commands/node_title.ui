@@ -1,0 +1,32 @@
+!begin_node (!kw [node_title])
+!html_name cmd_node_title
+
+Set title for node.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/node_title (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command sets the title that is used in the
+links to tis node and for some formats also
+displayed as window title.
+
+!item [(!EXISTSSINCE)] Version~7.12
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!node Chapter
+!node_title Chaptertitle
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

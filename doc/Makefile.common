@@ -183,6 +183,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/appendix/limits.ui \
 		$(srcdir)/appendix/development.ui \
 		$(srcdir)/appendix/history/00_index.ui \
+		$(srcdir)/appendix/history/ver712.ui \
 		$(srcdir)/appendix/history/ver711.ui \
 		$(srcdir)/appendix/history/ver703.ui \
 		$(srcdir)/appendix/history/ver702.ui \

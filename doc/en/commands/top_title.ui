@@ -10,7 +10,7 @@ Set title for header line (ST-Guide only).
 !item [(!SYNTAX)] (!T)!/top_title (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command set the title that is placed in the
+This command sets the title that is placed in the
 header line. Without this command, the program name
 is used instead.
 

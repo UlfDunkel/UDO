@@ -4,6 +4,8 @@
 !begin_description !compressed
 !item [(!KW [top_title])]
       new command
+!item [(!KW [node_title])]
+      new command
 
 (!PUBLISHED [UDO~7.12][May 22, 2016])
 

@@ -995,7 +995,7 @@ GLOBAL void set_html_style(void)
 			if (p1_toc_counter == 0)
 				warning_message(_("global style sheet %s already used"), sTemp);
 			else
-				warning_message(_("style sheet %s already used in node %s"), sTemp, toc_table[p1_toc_counter]->name);
+				warning_message(_("style sheet %s already used in node %s"), sTemp, toc_table[p1_toc_counter]->nodename);
 			free(styleptr->media);
 			free(styleptr->title);
 			free(styleptr);
@@ -1085,7 +1085,7 @@ GLOBAL void set_html_script(void)
 			if (p1_toc_counter == 0)
 				warning_message(_("global script %s already used"), filename);
 			else
-				warning_message(_("script %s already used in node %s"), filename, toc_table[p1_toc_counter]->name);
+				warning_message(_("script %s already used in node %s"), filename, toc_table[p1_toc_counter]->nodename);
 			return;
 		}
 	}

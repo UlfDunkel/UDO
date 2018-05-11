@@ -1,0 +1,32 @@
+!begin_node (!kw [node_title])
+!html_name cmd_node_title
+
+Überschrift für Kapitel setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/node_title (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl setzt den Titel, der als Text in Links auf diese Seite
+und bei einigen Formaten als Fenstertitel benutzt wird. Ohne
+dieses Kommando wird dort der Kapitelname genommen.
+
+!item [(!EXISTSSINCE)] Version~7.12
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!node Kapitel
+!node_title Kapitelüberschrift
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

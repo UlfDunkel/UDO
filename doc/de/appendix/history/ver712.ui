@@ -5,6 +5,9 @@
 !item [(!KW [top_title])]
       Neues Kommando
 
+!item [(!KW [node_title])]
+      Neues Kommando
+
 (!PUBLISHED [UDO~7.12][22. Mai 2016])
 
 !end_description

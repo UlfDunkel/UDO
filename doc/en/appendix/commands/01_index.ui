@@ -391,6 +391,7 @@
 !include commands/no_xlinks.ui
 !include commands/node.ui
 !include commands/node+.ui
+!include commands/node_title.ui
 !include commands/(nolink).ui
 !include commands/nop.ui
 !include commands/not_compressed.ui
