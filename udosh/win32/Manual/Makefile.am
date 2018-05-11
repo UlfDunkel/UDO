@@ -14,6 +14,7 @@ MV=		mv
 HC31=		hcp.exe
 HCRTF=		hcrtf
 HHC=		hhc
+CHMC=		chmc
 
 
 EXTRA_DIST = udosh.u images
@@ -57,11 +58,15 @@ htmlhelp/udosh.chm: $(srcdir)/udosh.u
 	$(MKDIRHIER) htmlhelp
 	($(CP) $(srcdir)/images/*.gif htmlhelp; \
 	$(UDO) --htmlhelp -o htmlhelp/udosh.html $(srcdir)/udosh.u || exit 1; \
-	if test "`type $(HHC) 2>/dev/null`" = ""; then \
+	hhc="`type -p $(CHMC) 2>/dev/null`"; \
+	if test "$$hhc" = ""; then \
+	 hhc="`type -p $(HHC) 2>/dev/null`"; \
+	fi; \
+	if test "$$hhc" = ""; then \
 	 echo "HTML Help Compiler ($(HHC)) not found" >& 2; \
 	 else \
 	(cd htmlhelp; \
-	 $(HHC) udosh.hhp; \
+	 "$$hhc" udosh.hhp; \
 	 test -f udosh.chm || exit 1 \
 	); \
 	fi)
