@@ -171,3 +171,5 @@ GLOBAL void c_end_appendix(void);
 
 GLOBAL void init_module_env(void);
 GLOBAL void init_env_itemchar(void);
+
+_BOOL has_flag_compressed(void);

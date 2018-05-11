@@ -176,6 +176,19 @@ LOCAL const PAPERFORMAT paperSize[MAXPAPERSIZE] = {
 *
 ******************************************|************************************/
 
+_BOOL has_flag_compressed(void)
+{
+	int i;
+
+	for (i = 1; i < token_counter; i++)
+	{
+		if (strcmp(token[i], "!compressed") == 0 ||
+			strcmp(token[i], "!short") == 0)
+			return TRUE;
+	}
+	return FALSE;
+}
+
 /*******************************************************************************
 *
 *  set_env_compressed():

@@ -6209,7 +6209,7 @@ GLOBAL size_t toklen(const char *s)
 
 GLOBAL void tokcat(char *s, size_t maxlen)
 {
-	register int i;
+	int i;
 	size_t m = 0;						/* Laenge des bisherigen Strings mitzaehlen */
 
 	for (i = 1; i < token_counter; i++)
