@@ -7,7 +7,7 @@
 #include "icons/mail.h"
 #include "icons/weblink.h"
 
-#define EMAIL_ADR "halgara@yahoo.de"
+#define EMAIL_ADR "admin@tho-otto.de"
 
 #if UDO_INTEGRATED
 
