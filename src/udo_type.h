@@ -139,6 +139,7 @@ typedef struct _passflags                 /* several flags for pass1() and pass2
    int       env;                         /* ENV_NONE, ENV_RAW etc. */
    _BOOL   env1st;
    _BOOL doinside;
+   FILE_LOCATION loc;
 }  PASSFLAGS;
 
 

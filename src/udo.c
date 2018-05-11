@@ -9980,6 +9980,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_VERBATIM) == 0)
 		{
 			pflag[PASS1].env = ENV_VERBATIM;
+			pflag[PASS1].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			return TRUE;
 		} else if (strcmp(pcmd, CMD_END_VERBATIM) == 0)
@@ -9996,6 +9997,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_SOURCECODE) == 0)
 		{
 			pflag[PASS1].env = ENV_SOURCECODE;
+			pflag[PASS1].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			return TRUE;
 		} else if (strcmp(pcmd, CMD_END_SOURCECODE) == 0)
@@ -10012,6 +10014,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_RAW) == 0)
 		{
 			pflag[PASS1].env = ENV_RAW;
+			pflag[PASS1].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			return TRUE;
 		} else if (strcmp(pcmd, CMD_END_RAW) == 0)
@@ -10032,6 +10035,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 				/* unnecessary check here, error message will be issued during pass2() */
 			}
 			pflag[PASS1].env = ENV_TABLE;
+			pflag[PASS1].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			return TRUE;
 		} else if (strcmp(pcmd, CMD_END_TABLE) == 0)
@@ -10048,6 +10052,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_COMMENT) == 0)
 		{
 			pflag[PASS1].env = ENV_COMMENT;
+			pflag[PASS1].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			return TRUE;
 		} else if (strcmp(pcmd, CMD_END_COMMENT) == 0)
@@ -10064,6 +10069,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_LINEDRAW) == 0)
 		{
 			pflag[PASS1].env = ENV_LINEDRAW;
+			pflag[PASS1].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			return TRUE;
 		} else if (strcmp(pcmd, CMD_END_LINEDRAW) == 0)
@@ -10080,6 +10086,7 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_PREFORMATTED) == 0)
 		{
 			pflag[PASS1].env = ENV_PREFORMATTED;
+			pflag[PASS1].loc = uiFiles[iFilesOpened - 1].loc;
 			pflag[PASS1].doinside = strstr(zeile, "!inside") != NULL;
 			zeile[0] = EOS;
 			return TRUE;
@@ -11174,6 +11181,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_VERBATIM) == 0)
 		{
 			pflag[iUdopass].env = ENV_VERBATIM;
+			pflag[iUdopass].loc = uiFiles[iFilesOpened - 1].loc;
 			pflag[iUdopass].env1st = TRUE;
 			if (token_counter > 0)
 				token_output(TRUE, TRUE);
@@ -11203,6 +11211,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_SOURCECODE) == 0)
 		{
 			pflag[iUdopass].env = ENV_SOURCECODE;
+			pflag[iUdopass].loc = uiFiles[iFilesOpened - 1].loc;
 			pflag[iUdopass].env1st = TRUE;
 			if (token_counter > 0)
 				token_output(TRUE, TRUE);
@@ -11231,6 +11240,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_RAW) == 0)
 		{
 			pflag[iUdopass].env = ENV_RAW;
+			pflag[iUdopass].loc = uiFiles[iFilesOpened - 1].loc;
 			pflag[iUdopass].env1st = TRUE;
 			if (token_counter > 0)
 				token_output(TRUE, FALSE);
@@ -11267,6 +11277,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 				pflag[iUdopass].env = ENV_TABLE;
 				if (token_counter > 0)
 					token_output(TRUE, TRUE);
+				pflag[iUdopass].loc = uiFiles[iFilesOpened - 1].loc;
 				table_get_header(zeile);
 				zeile[0] = EOS;
 			}
@@ -11306,6 +11317,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 			pflag[iUdopass].env1st = TRUE;
 			if (token_counter > 0)
 				token_output(TRUE, TRUE);
+			pflag[iUdopass].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			output_begin_comment();
 			return TRUE;
@@ -11334,6 +11346,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 			pflag[iUdopass].env1st = TRUE;
 			if (token_counter > 0)
 				token_output(TRUE, TRUE);
+			pflag[iUdopass].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			output_begin_linedraw();
 			return TRUE;
@@ -11363,6 +11376,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 			pflag[iUdopass].doinside = strstr(zeile, "!inside") != NULL;
 			if (token_counter > 0)
 				token_output(TRUE, TRUE);
+			pflag[iUdopass].loc = uiFiles[iFilesOpened - 1].loc;
 			zeile[0] = EOS;
 			output_begin_preformatted();
 			return TRUE;
@@ -12563,6 +12577,10 @@ GLOBAL _BOOL udo(const char *datei)
 						if (bCalledBeginDocument && !bCalledEndDocument)
 						{
 							error_missing_end(CMD_END_DOCUMENT);
+							if (pflag[iUdopass].env != ENV_NONE)
+							{
+								note_message(_("last environment: %s line %lu"), file_lookup(pflag[iUdopass].loc.id), pflag[iUdopass].loc.line);
+							}
 							c_end_document();
 						}
 
