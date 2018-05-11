@@ -4174,8 +4174,8 @@ GLOBAL void replace_placeholders_text(char *s)
 
 GLOBAL size_t pholdlen(const char *ptr)
 {
-	_UWORD c1, c2, c3;
-	_UWORD i;
+	size_t c1, c2, c3;
+	size_t i;
 
 	c1 = decode_chars[(unsigned char) ptr[0]];
 	c2 = decode_chars[(unsigned char) ptr[1]];

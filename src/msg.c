@@ -1219,21 +1219,23 @@ GLOBAL void error_node_not_allowed(int level)
 *
 ******************************************|************************************/
 
-GLOBAL void warning_long_destline(const char *s, FILE_LINENO lnr, const int ll)
+GLOBAL _BOOL warning_long_destline(const char *s, FILE_LINENO lnr, const int ll)
 {
 	char *m;
 
 	if (!bNoWarningsLines)
 	{
+		warning_counter++;
 		if (!bNoWarnings)
 		{
 			m = um_strdup_printf(_("Warning: %s %lu: overfull line: %d"), s, lnr, ll);
 			logln(m);
 			show_logln_message(m);
 			free(m);
+			return TRUE;
 		}
-		warning_counter++;
 	}
+	return FALSE;
 }
 
 
@@ -1272,21 +1274,23 @@ GLOBAL void note_short_sourceline(const char *s)
 *
 ******************************************|************************************/
 
-GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll, const char *w)
+GLOBAL _BOOL warning_short_destline(const char *s, FILE_LINENO lnr, const int ll, const char *w)
 {
 	char *m;
 
 	if (!bNoWarningsLines)
 	{
+		warning_counter++;
 		if (!bNoWarnings)
 		{
 			m = um_strdup_printf(_("Warning: %s %lu: too short line: %d: %s"), s, lnr, ll, w);
 			logln(m);
 			show_logln_message(m);
 			free(m);
+			return TRUE;
 		}
-		warning_counter++;
 	}
+	return FALSE;
 }
 
 

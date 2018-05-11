@@ -120,10 +120,10 @@ GLOBAL void error_node_not_allowed(int level);
    /* --- warnings (tiny syntax errors) --- */
 
 GLOBAL void note_long_sourceline(void);
-GLOBAL void warning_long_destline(const char *s, FILE_LINENO lnr, const int ll);
+GLOBAL _BOOL warning_long_destline(const char *s, FILE_LINENO lnr, const int ll);
 
 GLOBAL void note_short_sourceline(const char *s);
-GLOBAL void warning_short_destline(const char *s, FILE_LINENO lnr, const int ll, const char *w);
+GLOBAL _BOOL warning_short_destline(const char *s, FILE_LINENO lnr, const int ll, const char *w);
 
 GLOBAL void warning_cannot_recode(unsigned int c, const char *scs, const char *dcs);
 GLOBAL void warning_cannot_recode_utf8(const char *utf, const char *dcs);
