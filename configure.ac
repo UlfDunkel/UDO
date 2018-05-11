@@ -6,7 +6,7 @@ dnl TODO: check for Roman-8 system charset on HPUX systems
 dnl
 AC_PREREQ(2.52)
 
-AC_INIT(udo, 7.11, [http://bugs.udo-open-source.org/],,[http://www.udo-open-source.org/])
+AC_INIT(udo, 7.12, [http://bugs.udo-open-source.org/],,[http://www.udo-open-source.org/])
 AC_CONFIG_SRCDIR(src/udo.c)
 
 AC_CONFIG_MACRO_DIR([m4])

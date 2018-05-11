@@ -41,6 +41,7 @@
 
 In this chapter you will find a short summary of all the changes in the past.
 
+!include appendix/history/ver712.ui
 !include appendix/history/ver711.ui
 !include appendix/history/ver704.ui
 !include appendix/history/ver703.ui

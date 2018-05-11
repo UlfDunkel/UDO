@@ -5,14 +5,17 @@
 
 !begin_description !compressed
 !item [(!KW [toc_title])]
+      Neues Kommando
 
 !item [(!KW [stg_limage])]
+      Neues Kommando
 
 !item [(!KW [ignore_toptoc])]
+      Neues Kommando
 
 !item [(!KW [use_auto_toptocs])]
       erzeugt keine Verweise mehr auf Inhaltsverzeichnis
-      wenn keines generiert wurde
+      wenn keines generiert wurde.
 
 !item [(!KKW [link])]
       Explizite links auf die Index-Seite werden jetzt erlaubt
@@ -33,9 +36,9 @@
       Neue Textattribute.
 
 !item [(!KKW [xlink])]
-      wertet nun einen evtl. 3. Paramater für ST-Guide aus,
+      wertet nun einen evtl. 3. Parameter für ST-Guide aus,
       und erzeugt bei "_new" ein ALINK statt LINK Kommando
-      (öffnet Ziel in neuem Fenster; wird von ST-Guide ignoiert
+      (öffnet Ziel in neuem Fenster; wird von ST-Guide ignoriert
       aber HypView wertet es aus)
 
 !item [(!KKW [url])]
