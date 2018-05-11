@@ -58,6 +58,7 @@ m4/runlog.m4
 *.o
 *.a
 src/udo
+src/*-udo
 *.gmo
 *.ttp
 *.exe

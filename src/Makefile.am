@@ -11,6 +11,9 @@ AM_LDFLAGS=	$(LOCAL_LDFLAGS) $(LIBS) $(XLDFLAGS)
 AM_CPPFLAGS=	-DBINDIR="\"$(bindir)\""
 
 bin_PROGRAMS = udo
+if !CROSS_COMPILING
+noinst_SCRIPTS = $(build_triplet)-udo$(EXEEXT)
+endif
 
 udo_SOURCES = \
 	abo.c abo.h \
@@ -50,6 +53,9 @@ udo_SOURCES = \
 	cli.c
 
 udo_LDADD = $(INTLLIBS)
+
+$(build_triplet)-udo$(EXEEXT): udo$(EXEEXT)
+	cp -a $? $@
 
 EXTRA_DIST = \
 	AtariPC \

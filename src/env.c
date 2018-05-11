@@ -2776,7 +2776,7 @@ LOCAL void c_begin_list(int listkind, const char *css_class)
 	case TOPCH:
 	case TOTVH:
 		ll = (int) strlen(sWidth);
-		iEnvIndent[iEnvLevel] = ll + 3;
+		iEnvIndent[iEnvLevel] = ll + (iListLevel == 1 ? 3 : 2);
 		break;
 
 	case TOKPS:
@@ -3259,7 +3259,7 @@ GLOBAL void c_item(void)
 			}
 
 			ri[0] = EOS;
-			ll = iEnvIndent[iEnvLevel] - 2;
+			ll = iEnvIndent[iEnvLevel] - (iListLevel == 1 ? 2 : 1);
 
 			tl = toklen(token[0]);
 
@@ -3299,7 +3299,6 @@ GLOBAL void c_item(void)
 				{
 					strcat(sBig, ri);
 					strinsert(sBig, li);
-					strinsert(sBig, " ");
 					strcat(sBig, sAdd);
 				} else
 				{
@@ -3312,21 +3311,23 @@ GLOBAL void c_item(void)
 				switch (env_kind[iEnvLevel])
 				{
 				case LIST_BOLD:
-					sprintf(s, " %s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);
+					sprintf(s, "%s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);
 					break;
 
 				case LIST_ITALIC:
-					sprintf(s, " %s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);
+					sprintf(s, "%s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);
 					break;
 
 				default:
-					sprintf(s, " %s%s%s", li, token[0], ri);
+					sprintf(s, "%s%s%s", li, token[0], ri);
 					break;
 				}
 
 				um_strcpy(token[0], s, MAX_TOKEN_LEN + 1, "c_item[13]");
 				um_strcat(token[0], sAdd, MAX_TOKEN_LEN + 1, "c_item[14]");
 			}
+			if (token[0][0] != EOS && iListLevel == 1)
+				strinsert(token[0], " ");
 
 			break;
 		}
