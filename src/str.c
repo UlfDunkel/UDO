@@ -852,7 +852,7 @@ GLOBAL void del_whitespaces(char *s)
 
 	sl = strlen(p1st);					/* get length of remaining string */
 
-	if ((*p1st != EOS) && (s != p1st))
+	if (s != p1st)
 	{
 		memmove(s, p1st, sl + 1);
 	}
