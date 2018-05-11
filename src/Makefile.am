@@ -15,6 +15,9 @@ if !CROSS_COMPILING
 noinst_SCRIPTS = $(build_triplet)-udo$(EXEEXT)
 endif
 
+LIBRCINTL_DEP = $(top_builddir)/rcintl/librcintl.a
+LIBRCINTL = $(LIBRCINTL_DEP)
+
 udo_SOURCES = \
 	abo.c abo.h \
 	cfg.c cfg.h \
@@ -53,6 +56,10 @@ udo_SOURCES = \
 	cli.c
 
 udo_LDADD = $(INTLLIBS)
+udo_DEPENDENCIES =
+if OS_WIN32
+udo_DEPENDENCIES += $(LIBRCINTL_DEP)
+endif
 
 $(build_triplet)-udo$(EXEEXT): udo$(EXEEXT)
 	cp -a $? $@
