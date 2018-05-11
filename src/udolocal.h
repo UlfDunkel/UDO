@@ -188,13 +188,6 @@ LOCAL _BOOL pass2(const char *datei);
 LOCAL _BOOL passU(const char *datei);
 
    /* init variables */
-LOCAL void init_vars_nroff(void);
-LOCAL void init_vars_stg(void);
-LOCAL void init_vars_texinfo(void);
-LOCAL void init_vars_sourcecode(void);
-LOCAL void init_vars_htmlhelp(void);
-LOCAL void init_vars_pdf(void);
-LOCAL void init_vars_win(void);
 LOCAL void init_vars_spec(void);
 
 LOCAL void init_modules(void);
@@ -204,5 +197,4 @@ LOCAL _BOOL check_modules_pass1(void);
 LOCAL _BOOL check_modules_pass2(void);
 
    /* adjust file names and extensions */
-LOCAL void 
-logfile_adjust(void);
+LOCAL void logfile_adjust(void);

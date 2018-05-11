@@ -259,7 +259,7 @@ typedef void (*CMDPROC) (void);
 typedef struct _udocommand				/* ---- Funktionentabelle ---- */
 {
 	const char *magic;					/* command name, including leading "!" */
-	const char *macut;					/* abbreviation, including leaing "!" (optional) */
+	const char *macut;					/* abbreviation, including leading "!" (optional) */
 	CMDPROC proc;						/* function to be called in pass2() */
 	_BOOL reset;						/* clear tokens after command? */
 	int pos;							/* possible positions (CMD_* above) */

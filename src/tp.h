@@ -156,7 +156,7 @@ typedef struct                            /* ---- Layoutinfos ---- */
    _UWORD   propfontsize;
    char   *monofontname;
    _UWORD   monofontsize;
-   _UWORD   nodesize[9 /* TOC_MAXDEPTH */ + 1]; /* +1 for use_style_book */
+   _UWORD   nodesize[TOC_MAXDEPTH + 1]; /* +1 for use_style_book */
 } LAYOUTDATA;
 
 
