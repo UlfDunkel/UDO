@@ -272,8 +272,12 @@ LOCAL void set_env_compressed(const int el, const char *s)
 		warning_message(_("'!short' is a deprecated attribute for environments. Please use '!compressed' instead."));
 		bEnvCompressed[el] = TRUE;
 	} else if (strstr(s, "!compressed") != NULL)
+	{
 		bEnvCompressed[el] = TRUE;
-
+	} else if (strchr(s, '!') != NULL)
+	{
+		warning_message(_("unrecognized option '%s'"), s);
+	}
 
 	if (!bEnvCompressed[el])			/* inherit compressed attribute by default */
 	{
@@ -1961,6 +1965,7 @@ GLOBAL void c_begin_flushright(void)
 
 	default:
 		set_env_compressed(iEnvLevel, token[1]);
+		break;
 	}
 
 	flushright_level++;
@@ -2095,6 +2100,7 @@ GLOBAL void c_begin_flushleft(void)
 
 	default:
 		set_env_compressed(iEnvLevel, token[1]);
+		break;
 	}
 
 	flushleft_level++;
@@ -2639,14 +2645,12 @@ LOCAL void c_begin_list(int listkind, const char *css_class)
 
 	sCompressed[0] = EOS;				/* clear buffer string */
 	token[0][0] = EOS;					/* skip first token */
-	tokcpy2(sWidth, 256);				/* get second token */
+	tokcpy2(sWidth, ArraySize(sWidth));	/* get second token */
 
 	delete_once(sWidth, "[");			/* remove brackets (if any) */
 	delete_last(sWidth, "]");
 
-	ptr = strstr(sWidth, "!short");		/* deprecated command "!short" used? */
-
-	if (ptr != NULL)					/* yes */
+	if ((ptr = strstr(sWidth, "!short")) != NULL)
 	{
 		/* --- check if user used !short at the beginning by mistake --- */
 
@@ -2663,54 +2667,47 @@ LOCAL void c_begin_list(int listkind, const char *css_class)
 		{
 			delete_last(sWidth, " !short");	/* remove from the end */
 		}
-	} else								/* "!short" was not used */
+	} else if ((ptr = strstr(sWidth, "!compressed")) != NULL)
 	{
-		ptr = strstr(sWidth, "!compressed");	/* has "!compressed" been used? */
+		/* --- check if user used !compressed at the beginning by mistake --- */
 
-		if (ptr != NULL)				/* yes */
+		/* for set_env_compressed() */
+		strcpy(sCompressed, "!compressed");
+
+		if (ptr == sWidth)			/* identical? */
 		{
-			/* --- check if user used !compressed at the beginning by mistake --- */
+			/* "!compressed" found at the beginning - which is wrong! */
 
-			/* for set_env_compressed() */
-			strcpy(sCompressed, "!compressed");
-
-			if (ptr == sWidth)			/* identical? */
-			{
-				/* "!compressed" found at the beginning - which is wrong! */
-
-				/* also remove the additional space, added by tokcpy2() */
-				if (!delete_once(sWidth, "!compressed "))
-					delete_once(sWidth, "!compressed");
-			} else						/* not found at the beginning */
-			{
-				/* remove from the end */
-				delete_last(sWidth, " !compressed");
-			}
-		} else							/* "!compressed" not used */
+			/* also remove the additional space, added by tokcpy2() */
+			if (!delete_once(sWidth, "!compressed "))
+				delete_once(sWidth, "!compressed");
+		} else						/* not found at the beginning */
 		{
-			ptr = strstr(sWidth, "!not_compressed");
-
-			if (ptr != NULL)			/* has "!not_compressed" been used? */
-			{
-				/* --- check if user used !not_compressed at the beginning by mistake --- */
-
-				/* for set_env_compressed() */
-				strcpy(sCompressed, "!not_compressed");
-
-				if (ptr == sWidth)		/* identical? */
-				{
-					/* "!not_compressed" found at the beginning - which is wrong! */
-
-					/* also remove the additional space, added by tokcpy2() */
-					if (!delete_once(sWidth, "!not_compressed "))
-						delete_once(sWidth, "!not_compressed");
-				} else					/* not found at the beginning */
-				{
-					/* remove from the end */
-					delete_last(sWidth, " !not_compressed");
-				}
-			}
+			/* remove from the end */
+			delete_last(sWidth, " !compressed");
 		}
+	} else if ((ptr = strstr(sWidth, "!not_compressed")) != NULL)
+	{
+		/* --- check if user used !not_compressed at the beginning by mistake --- */
+
+		/* for set_env_compressed() */
+		strcpy(sCompressed, "!not_compressed");
+
+		if (ptr == sWidth)		/* identical? */
+		{
+			/* "!not_compressed" found at the beginning - which is wrong! */
+
+			/* also remove the additional space, added by tokcpy2() */
+			if (!delete_once(sWidth, "!not_compressed "))
+				delete_once(sWidth, "!not_compressed");
+		} else					/* not found at the beginning */
+		{
+			/* remove from the end */
+			delete_last(sWidth, " !not_compressed");
+		}
+	} else if ((ptr = strchr(sWidth, '!')) != NULL)
+	{
+		warning_message(_("unrecognized option '%s'"), ptr);
 	}
 
 	del_internal_styles(sWidth);
