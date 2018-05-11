@@ -290,11 +290,22 @@ AC_PROG_INSTALL_DIRS
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_RANLIB
+AC_CHECK_TOOL(STRIP, strip, :)
 
 # Support silent build rules, requires at least automake-1.11. Disable
 # by either passing --disable-silent-rules to configure or passing V=1
 # to make
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+
+AH_TOP([
+#ifndef __CONFIG_H__
+#define __CONFIG_H__ 1
+
+#include "libcwrap.h"
+
+])
+dnl append that also to confdefs.h
+echo "#include \"${srcdir}/src/libcwrap.h\"" >> confdefs.h
 
 AC_PROG_CC
 AC_EXEEXT
@@ -846,6 +857,13 @@ if test "$with_gui" = gtk2 -o "$with_gui" = gtk3 -o "$with_gui" = auto; then
   done
   GTKHTML_LIBS="$tmp_flags"
 fi
+
+if test "$with_gui" = "auto" -a "$TARGET_OS" = win32; then
+	with_gui=win32
+fi
+if test "$with_gui" = "auto" -a "$TARGET_OS" = tos; then
+	with_gui=gem
+fi
 if test "$have_gtk2" = no -a "$with_gui" = gtk2; then
 	AC_MSG_ERROR([*** GTK2 was requested, but was not found ***])
 fi
@@ -926,6 +944,16 @@ AC_SUBST(JPEG_LIBS)
 AC_SUBST(PNG_CFLAGS)
 AC_SUBST(PNG_LIBS)
 AC_SUBST(XPM_LIBS)
+
+AH_BOTTOM([
+#endif /* __CONFIG_H__ */
+])
+
+###############################################################################
+#
+#       spit out Makefiles
+#
+###############################################################################
 
 AC_CONFIG_COMMANDS_PRE([
 if test "$GCC" = "yes" -a "$enable_fatal_warnings" = "yes"; then

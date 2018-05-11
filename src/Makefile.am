@@ -8,7 +8,7 @@ include ../silent.am
 
 AM_CFLAGS=	$(LOCAL_CFLAGS) $(DEFS) $(XCFLAGS)
 AM_LDFLAGS=	$(LOCAL_LDFLAGS) $(LIBS) $(XLDFLAGS)
-AM_CPPFLAGS=	-DBINDIR="\"$(bindir)\""
+AM_CPPFLAGS=	-I$(srcdir) -DBINDIR="\"$(bindir)\""
 
 bin_PROGRAMS = udo
 if !CROSS_COMPILING

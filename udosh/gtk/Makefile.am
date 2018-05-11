@@ -10,9 +10,7 @@ docdir = $(datarootdir)/doc/udosh
 	
 SUBDIRS = icons Manual
 
-UDO_SOURCE=$(top_srcdir)/src
-
-AM_CPPFLAGS =	-I$(UDO_SOURCE) $(GTK_CFLAGS) \
+AM_CPPFLAGS =	-I$(top_srcdir)/src $(GTK_CFLAGS) \
 		-DBINDIR="\"$(bindir)\""
 	
 udogtk_SOURCES = \
@@ -21,7 +19,7 @@ udogtk_SOURCES = \
 	gtkconfig.c gtkconfig.h \
 	misc.c misc.h \
 	help.c help.h htmlhelp.h \
-	$(UDO_SOURCE)/udointl.c \
+	$(top_srcdir)/src/udointl.c \
 	windows_.h
 if OS_WIN32
 udogtk_LDFLAGS = -mconsole
