@@ -1672,7 +1672,7 @@ LOCAL void c_xlink(char *s, _BOOL inside_b4_macro)
 				{
 					const char *cmd;
 
-					if (strcmp(Param[3], "_new") == 0)
+					if (strcmp(Param[3], "_new") == 0 || strcmp(Param[3], "_blank") == 0)
 						cmd = "ALINK";
 					else
 						cmd = "LINK";
