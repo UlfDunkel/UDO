@@ -10076,11 +10076,13 @@ LOCAL _BOOL pass1_check_environments(char *zeile)
 		if (strcmp(pcmd, CMD_BEGIN_PREFORMATTED) == 0)
 		{
 			pflag[PASS1].env = ENV_PREFORMATTED;
+			pflag[PASS1].doinside = strstr(zeile, "!inside") != NULL;
 			zeile[0] = EOS;
 			return TRUE;
 		} else if (strcmp(pcmd, CMD_END_PREFORMATTED) == 0)
 		{
 			pflag[PASS1].env = ENV_NONE;
+			pflag[PASS1].doinside = FALSE;
 			zeile[0] = EOS;
 			return TRUE;
 		}
@@ -10793,7 +10795,6 @@ static void dump_node_structure(void)
 LOCAL void output_verbatim_line(char *zeile)
 {
 	char indent[128];
-	size_t len;
 
 	if (zeile[0] == '#')
 	{
@@ -10833,11 +10834,14 @@ LOCAL void output_verbatim_line(char *zeile)
 	case TOSTG:
 	case TOAMG:
 	case TOTVH:
-		len = strlen(indent) + strlen(zeile);
-		if (len > zDocParwidth)
+		if (!(pflag[PASS2].env == ENV_PREFORMATTED && pflag[PASS2].doinside))
 		{
-			warning_long_destline(outfile.full, outlines + 1, (int) len);
-			note_message(bNoWarningsLines ? NULL : _("check this paragraph"));
+			size_t len = strlen(indent) + strlen(zeile);
+			if (len > zDocParwidth)
+			{
+				warning_long_destline(outfile.full, outlines + 1, (int) len);
+				note_message(bNoWarningsLines ? NULL : _("check this paragraph"));
+			}
 		}
 		break;
 	}
@@ -10878,8 +10882,33 @@ LOCAL void output_verbatim_line(char *zeile)
 	case TOSTG:
 	case TOAMG:
 		replace_1at_by_2at(zeile);
-		if (bCheckMisc)
-			auto_references(zeile, FALSE, "", 0, 0);
+		if (pflag[PASS2].env == ENV_PREFORMATTED && pflag[PASS2].doinside)
+		{
+			c_commands_inside(zeile, TRUE);
+
+			replace_macros(zeile);
+			c_divis(zeile);
+			c_vars(zeile);
+			c_tilde(zeile);
+			c_styles(zeile);
+			c_commands_inside(zeile, FALSE);
+
+			replace_defines(zeile);
+			if (bCheckMisc)
+				auto_references(zeile, FALSE, "", 0, 0);
+			replace_placeholders(zeile);
+			replace_speccmds(zeile);
+			c_internal_styles(zeile);
+
+			replace_udo_tilde(zeile);
+			replace_udo_nbsp(zeile);
+			reset_placeholders();
+			reset_refs();
+		} else
+		{
+			if (bCheckMisc)
+				auto_references(zeile, FALSE, "", 0, 0);
+		}
 		break;
 
 	case TOTEX:
@@ -10909,7 +10938,29 @@ LOCAL void output_verbatim_line(char *zeile)
 	case TOMHH:
 		indent[0] = EOS;
 		auto_quote_chars(zeile, TRUE);
-		auto_references(zeile, FALSE, "", 0, 0);
+		if (pflag[PASS2].env == ENV_PREFORMATTED && pflag[PASS2].doinside)
+		{
+			c_commands_inside(zeile, TRUE);
+
+			replace_macros(zeile);
+			c_divis(zeile);
+			c_vars(zeile);
+			c_tilde(zeile);
+			c_styles(zeile);
+			c_commands_inside(zeile, FALSE);
+
+			replace_defines(zeile);
+			auto_references(zeile, FALSE, "", 0, 0);
+			replace_placeholders(zeile);
+			replace_speccmds(zeile);
+			c_internal_styles(zeile);
+
+			replace_udo_tilde(zeile);
+			replace_udo_nbsp(zeile);
+		} else
+		{
+			auto_references(zeile, FALSE, "", 0, 0);
+		}
 		break;
 
 	case TOLDS:
@@ -11293,6 +11344,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 		{
 			pflag[iUdopass].env = ENV_PREFORMATTED;
 			pflag[iUdopass].env1st = TRUE;
+			pflag[iUdopass].doinside = strstr(zeile, "!inside") != NULL;
 			if (token_counter > 0)
 				token_output(TRUE, TRUE);
 			zeile[0] = EOS;
@@ -11303,6 +11355,7 @@ LOCAL _BOOL pass2_check_environments(char *zeile)
 			if (pflag[iUdopass].env == ENV_PREFORMATTED)
 			{
 				pflag[iUdopass].env = ENV_NONE;
+				pflag[iUdopass].doinside = FALSE;
 				zeile[0] = EOS;
 				output_end_preformatted();
 			} else
@@ -11335,6 +11388,10 @@ LOCAL void pass2_check_env_output(char *zeile)
 	switch (pflag[PASS2].env)
 	{
 	case ENV_VERBATIM:					/* ---- Verbatim-Ausgabe ---- */
+		if (!pflag[PASS2].env1st)
+			output_verbatim_line(zeile);
+		break;
+
 	case ENV_PREFORMATTED:				/* ---- Preformatted-Ausgabe ---- */
 		if (!pflag[PASS2].env1st)
 			output_verbatim_line(zeile);
