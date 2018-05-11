@@ -1604,6 +1604,8 @@ static int langid_from_name(const char *s)
 			return udolanguage[i].langval;
 		if (strlen(udolanguage[i].magic) == 2 && my_strnicmp(s, udolanguage[i].magic, 2) == 0)
 			return udolanguage[i].langval;
+		if (strlen(udolanguage[i].magic) == 3 && my_strnicmp(s, udolanguage[i].magic, 3) == 0)
+			return udolanguage[i].langval;
 	}
 	return -1;
 }
