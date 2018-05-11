@@ -5996,13 +5996,13 @@ LOCAL void check_parwidth(size_t tomaxlen)
 
 LOCAL _BOOL malloc_token_output_buffer(void)
 {
-	static size_t const bs[6] = { 32768U, 16384U, 8192U, 4096U, 2048U };
-	static int const ml[6] = { 3200, 1600, 800, 400, 200 };
+	static size_t const bs[5] = { 32768U, 16384U, 8192U, 4096U, 2048U };
+	static int const ml[5] = { 3200, 1600, 800, 400, 200 };
 	int i;
 
 	if (format_uses_output_buffer && use_output_buffer)
 	{
-		for (i = 0; i < 6; i++)
+		for (i = 0; i < 5; i++)
 		{
 			tobuffer = (char *) malloc(bs[i]);
 			if (tobuffer != NULL)

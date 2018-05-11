@@ -1676,20 +1676,24 @@ GLOBAL void stg_headline(const char *numbers, const char *nodename, _BOOL popup)
 	delete_all_divis(s);
 
 	toptitle = titdat.program;
-	for (d = toc->toctype; d >= TOC_NODE1; d--)
+	d = toc->toctype;
+	if (d != TOC_TOC)
 	{
-		if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+		for (; d >= TOC_NODE1; d--)
 		{
-			toptitle = toc_table[last_n_index[d]]->toptitle;
-			/*
-			 * empty top_title suppresses header line completely
-			 */
-			if (*toptitle == '\0')
-				return;
-			break;
+			if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+			{
+				toptitle = toc_table[last_n_index[d]]->toptitle;
+				/*
+				 * empty top_title suppresses header line completely
+				 */
+				if (*toptitle == '\0')
+					return;
+				break;
+			}
 		}
 	}
-	
+		
 	if (toptitle != NULL)
 		sl = strlen(toptitle);
 	else
@@ -1792,15 +1796,19 @@ LOCAL void pch_headline(const char *s)
 		return;
 
 	toptitle = titdat.program;
-	for (d = toc->toctype; d >= TOC_NODE1; d--)
+	d = toc->toctype;
+	if (d != TOC_TOC)
 	{
-		if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+		for (; d >= TOC_NODE1; d--)
 		{
-			toptitle = toc_table[last_n_index[d]]->toptitle;
-			break;
+			if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+			{
+				toptitle = toc_table[last_n_index[d]]->toptitle;
+				break;
+			}
 		}
 	}
-	
+		
 	pl = 0;
 	if (toptitle != NULL)
 		pl = strlen(toptitle);
@@ -6475,12 +6483,16 @@ LOCAL void make_node(TOCTYPE currdepth, const _BOOL popup, _BOOL invisible)
 			{
 				sprintf(hx_start, "<h%d>", hsize);
 				sprintf(hx_end, "</h%d>", hsize);
-				for (d = toc->toctype; d >= TOC_NODE1; d--)
+				d = toc->toctype;
+				if (d != TOC_TOC)
 				{
-					if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+					for (; d >= TOC_NODE1; d--)
 					{
-						toptitle = toc_table[last_n_index[d]]->toptitle;
-						break;
+						if (last_n_index[d] != 0 && toc_table[last_n_index[d]]->toptitle)
+						{
+							toptitle = toc_table[last_n_index[d]]->toptitle;
+							break;
+						}
 					}
 				}
 			}
@@ -7559,7 +7571,7 @@ LOCAL void do_toptoc(const TOCTYPE currdepth, _BOOL popup)
 	
 	char border[20];
 
-	if (!use_auto_toptocs || toc_table[p2_toc_counter]->ignore_toptoc)
+	if (currdepth == TOC_TOC || !use_auto_toptocs || toc_table[p2_toc_counter]->ignore_toptoc)
 		return;
 
 	switch (desttype)
