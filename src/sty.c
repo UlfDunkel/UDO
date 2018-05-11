@@ -243,8 +243,8 @@ GLOBAL void c_pch_styles(char *s)
 GLOBAL void c_rtf_styles(char *s)
 {
 	char *ptr;
-	char time_insert[52];
-	char time_delete[52];
+	char time_insert[60];
+	char time_delete[60];
 	char fs[20];
 	size_t l;
 	long time;
