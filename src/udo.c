@@ -8463,9 +8463,10 @@ LOCAL void output_preamble(void)
 
 	case TOSTG:
 		outln("@if VERSION >= 6");
-		voutlnf("@inputenc \"%s\"", chr_codepage_charset_name(iEncodingTarget));
 		voutlnf("@os \"%s\"", UDO_OS);
 		voutlnf("@charset \"%s\"", chr_codepage_charset_name(CODE_TOS));
+		voutlnf("@inputenc \"%s\"", chr_codepage_charset_name(iEncodingTarget));
+		voutlnf("@lang \"%s\"", get_lang()->html_lang);
 		outln("@endif");
 		break;
 	}
