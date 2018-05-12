@@ -26,6 +26,8 @@
 #   fd  Mar 03: macro INCOMPLETE, deprecated macros removed
 #   fd  May 25: macro NOTE + TIP
 #   fd  May 26: macro CLASS + TARGET
+# 2014:
+#   fd  May 19: macro PUBLISHED no longer uses 'on ' for more general usage
 #
 ################################################################################
 
@@ -97,7 +99,7 @@
 !macro CHANGES Changes
 !macro GENERAL General
 !macro NEWS News
-!macro PUBLISHED (!1) was published on (!2).
+!macro PUBLISHED (!1) was published (!2).
 
 # language-dependent text parts for the command index (in alphabetical order)
 !macro ABBREV This is an abbreviation of the command

@@ -26,6 +26,8 @@
 #   fd  Mar 03: macro INCOMPLETE, deprecated macros removed
 #   fd  May 25: macro NOTE + TIP
 #   fd  May 26: macro CLASS + TARGET
+# 2014:
+#   fd  May 19: macro PUBLISHED no longer uses 'am ' for more general usage
 #
 ################################################################################
 
@@ -97,7 +99,7 @@
 !macro CHANGES Änderungen
 !macro GENERAL Allgemeines
 !macro NEWS Neuheiten
-!macro PUBLISHED (!1) wurde am (!2) veröffentlicht.
+!macro PUBLISHED (!1) wurde (!2) veröffentlicht.
 
 # Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
 !macro ABBREV Dies ist eine Abkürzung für das Kommando
