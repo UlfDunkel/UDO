@@ -539,6 +539,8 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/psss+.ui \
 		$(srcdir)/commands/pssss.ui \
 		$(srcdir)/commands/pssss+.ui \
+		$(srcdir)/commands/psssss.ui \
+		$(srcdir)/commands/psssss+.ui \
 		$(srcdir)/commands/psubnode.ui \
 		$(srcdir)/commands/psubnode+.ui \
 		$(srcdir)/commands/psubsubnode.ui \
@@ -547,6 +549,8 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/psubsubsubnode+.ui \
 		$(srcdir)/commands/psubsubsubsubnode.ui \
 		$(srcdir)/commands/psubsubsubsubnode+.ui \
+		$(srcdir)/commands/psubsubsubsubsubnode.ui \
+		$(srcdir)/commands/psubsubsubsubsubnode+.ui \
 		$(srcdir)/commands/rinclude.ui \
 		$(srcdir)/commands/raw.ui \
 		$(srcdir)/commands/=rtf.ui \
@@ -578,6 +582,8 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/sssn+.ui \
 		$(srcdir)/commands/ssssn.ui \
 		$(srcdir)/commands/ssssn+.ui \
+		$(srcdir)/commands/sssssn.ui \
+		$(srcdir)/commands/sssssn+.ui \
 		$(srcdir)/commands/=stg.ui \
 		$(srcdir)/commands/stg.ui \
 		$(srcdir)/commands/stg_limage.ui \
@@ -596,6 +602,8 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/subsubsubsubheading.ui \
 		$(srcdir)/commands/subsubsubsubnode.ui \
 		$(srcdir)/commands/subsubsubsubnode+.ui \
+		$(srcdir)/commands/subsubsubsubsubnode.ui \
+		$(srcdir)/commands/subsubsubsubsubnode+.ui \
 		$(srcdir)/commands/subsubsubsubtoc.ui \
 		$(srcdir)/commands/subsubsubsubtoc_offset.ui \
 		$(srcdir)/commands/subsubsubtoc.ui \

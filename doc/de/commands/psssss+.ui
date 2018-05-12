@@ -1,5 +1,5 @@
-!begin_node (!kw [pssss*])
-!html_name cmd_pssss_asterisk
+!begin_node (!kw [psssss*])
+!html_name cmd_psssss_asterisk
 
 Versteckten Popup-Paragraph einleiten.
 
@@ -7,13 +7,13 @@ Versteckten Popup-Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pssss* [(!TEXT)](!t)
+!item [(!SYNTAX)] (!T)!/psssss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubsubsubnode*]).
+(!ABBREV) (!KW [psubsubsubsubsubnode*]).
 
 !item [(!SEEALSO)]
-(!KW [psubsubsubsubnode*])
+(!KW [psubsubsubsubsubnode*])
 
 !end_xlist
 

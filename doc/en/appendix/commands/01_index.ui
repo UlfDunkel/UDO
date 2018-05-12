@@ -431,6 +431,8 @@
 !include commands/psss+.ui
 !include commands/pssss.ui
 !include commands/pssss+.ui
+!include commands/psssss.ui
+!include commands/psssss+.ui
 !include commands/psubnode.ui
 !include commands/psubnode+.ui
 !include commands/psubsubnode.ui
@@ -439,6 +441,8 @@
 !include commands/psubsubsubnode+.ui
 !include commands/psubsubsubsubnode.ui
 !include commands/psubsubsubsubnode+.ui
+!include commands/psubsubsubsubsubnode.ui
+!include commands/psubsubsubsubsubnode+.ui
 !include commands/(purple).ui
 !end_node
 
@@ -493,6 +497,8 @@
 !include commands/sssn+.ui
 !include commands/ssssn.ui
 !include commands/ssssn+.ui
+!include commands/sssssn.ui
+!include commands/sssssn+.ui
 !include commands/stg.ui
 !include commands/stg_limage.ui
 !include commands/stg_no_database.ui
@@ -510,6 +516,8 @@
 !include commands/subsubsubsubheading.ui
 !include commands/subsubsubsubnode.ui
 !include commands/subsubsubsubnode+.ui
+!include commands/subsubsubsubsubnode.ui
+!include commands/subsubsubsubsubnode+.ui
 !include commands/subsubsubsubtoc.ui
 !include commands/subsubsubsubtoc_offset.ui
 !include commands/subsubsubtoc.ui

@@ -1,0 +1,22 @@
+!begin_node (!kw [sssssn])
+!html_name cmd_sssssn
+
+Start a subparagraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubnode]).
+
+!item [(!EXISTSSINCE)] Version~7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubnode])
+
+!end_xlist
+
+!end_node
