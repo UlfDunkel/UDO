@@ -130,7 +130,7 @@ LOCAL int image_counter;
 *
 ******************************************|************************************/
 
-LOCAL void save_one_html_gif(FILE_ID fileid, const _UBYTE * buffer, size_t length, _BOOL * ret)
+LOCAL void save_one_html_gif(FILE_ID fileid, const _UBYTE *buffer, size_t length, _BOOL *ret)
 {
 	FILE *giffile;
 

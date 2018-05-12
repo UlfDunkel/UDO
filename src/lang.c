@@ -217,8 +217,8 @@ static void init_lang_date(int langidx)
 			break;
 
 		case TORUS:					/* Russian */
-			sprintf(lang.today, "%d %s %d r.", zeit->tm_mday, month, 1900+zeit->tm_year);
-			sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+			sprintf(lang.today, "%d %s %d r.", zeit->tm_mday, month, 1900 + zeit->tm_year);
+			sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon + 1, 1900 + zeit->tm_year);
 			break;
 
 		case TOENG:					/* English */
@@ -354,7 +354,7 @@ GLOBAL void init_lang(void)
 
 /*
  * used to delay (re-)initialization of language strings
- * because we both destination language and output character
+ * because both destination language and output character
  * set are needed for this.
  */
 const LANG *get_lang(void)
