@@ -16,13 +16,15 @@
 #   fd  Mar 01: introduced (from history_06_PL15.de)
 #   fd  Mar 03: translation adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Changes from Release 6 Patchlevel 14 to 15
 !html_name history_release_6_PL14_to_15
 
-(!PUBLISHED [UDO~6 Patchlevel~15] [June 10, 2003])
+(!PUBLISHED [UDO~6 Patchlevel~15] [on Jun 10, 2003])
 
 !subheading General
 !begin_itemize !compressed

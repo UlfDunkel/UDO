@@ -16,13 +16,15 @@
 #   fd  Jun 06: introduced (extracted from history.de)
 # 2010:
 #   fd  Mar 03: using PUBLISHED
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Änderungen von Release 3 nach 4
 !html_name history_release_3_to_4
 
-(!PUBLISHED [UDO~4] [12.11.1995])
+(!PUBLISHED [UDO~4] [am 12.11.1995])
 
 Gegenüber Release 3 hat sich soviel getan, daß ich jedem nur empfehlen
 kann, diese Dokumentation einmal zu überfliegen. Würde ich alle

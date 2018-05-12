@@ -18,13 +18,15 @@
 #   fd  Mar 01: typo in node title fixed
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Änderungen bis Release 6 Patchlevel 14
 !html_name history_release_6_until_PL14
 
-(!PUBLISHED [UDO~6 Patchlevel~14] [11.07.1999])
+(!PUBLISHED [UDO~6 Patchlevel~14] [am 11.07.1999])
 
 Hier eine kleine Übersicht der wichtigsten Änderungen zum letzten Release.
 

@@ -17,13 +17,15 @@
 #   fd  May 26: #89
 # 2013:
 #   fd  May 02: completed for release
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Changes in version 7.02
 !html_name history_0702
 
-(!PUBLISHED [UDO~7.02][May 02, 2013])
+(!PUBLISHED [UDO~7.02][on May 2, 2013])
 
 In general, this update version brings many tiny adjustments, fixes and enhancements, esp. for HTML output. 
 But we also added some new and adjusted stuff for some UDO commands.

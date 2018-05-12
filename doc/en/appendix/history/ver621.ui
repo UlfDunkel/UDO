@@ -17,13 +17,15 @@
 #   fd  Mar 03: translation adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 09: using macro BUG
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Changes from version 6.2.0 to 6.2.1
 !html_name history_6_2_0_to_6_2_1
 
-(!PUBLISHED [UDO~6.2.1] [Dec 9, 2003])
+(!PUBLISHED [UDO~6.2.1] [on Dec 9, 2003])
 
 !heading PDF-(!LaTeX)
 !begin_description

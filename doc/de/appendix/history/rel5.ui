@@ -18,13 +18,15 @@
 #   fd  Mar 03: old stuff ignored, using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Änderungen von Release 4 nach 5
 !html_name history_release_4_to_5
 
-(!PUBLISHED [UDO~5] [18.04.1996])
+(!PUBLISHED [UDO~5] [am 18.04.1996])
 
 !begin_description !compressed
 

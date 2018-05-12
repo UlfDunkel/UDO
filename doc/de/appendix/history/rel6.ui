@@ -20,13 +20,15 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 19: link adjustments for old commands
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Änderungen von Release 5 nach 6
 !html_name history_release_5_to_6
 
-(!PUBLISHED [UDO~6] [2. Januar 1997])
+(!PUBLISHED [UDO~6] [am 02.01.1997])
 
 Hier eine kleine Übersicht der wichtigsten Änderungen zur letzten
 öffentlichen Version. In den acht Monaten wurden einige neue Formate,

@@ -14,13 +14,15 @@
 # -------
 # 2013:
 #   fd  Oct 24: introduced
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Changes in version 7.03
 !html_name  history_0703
 
-(!PUBLISHED [UDO~7.03][October 24, 2013])
+(!PUBLISHED [UDO~7.03][on Oct 24, 2013])
 
 !begin_description !compressed
 # ----------------------------------------

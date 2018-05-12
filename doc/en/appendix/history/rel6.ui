@@ -17,13 +17,15 @@
 #   fd  Mar 03: old translation adjusted, using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 19: link adjustments for old commands
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Changes from Release 5 to 6
 !html_name history_release_5_to_6
 
-(!PUBLISHED [UDO~6] [January 3, 1997])
+(!PUBLISHED [UDO~6] [on Jan 3, 1997])
 
 You will find here a very compressed list of the major changes of the
 last eight months. UDO supports now more destination formats, it

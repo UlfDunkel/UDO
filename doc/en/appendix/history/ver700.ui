@@ -20,6 +20,8 @@
 #   fd  Mar 08: macro usages adjusted
 #   fd  Apr 08: typo
 #   fd  May 19: link adjustments for old commands
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
@@ -30,7 +32,7 @@ UDO~7 is a big upgrade since the last released version. Especially the
 full Unicode support and many HTML output enhancements make this
 version more powerful than ever.
 
-(!PUBLISHED [UDO~7.00] [March 1, 2010])
+(!PUBLISHED [UDO~7.00] [on Mar 1, 2010])
 
 !begin_description !compressed
 # ----------------------------------------

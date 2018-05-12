@@ -17,13 +17,15 @@
 #   fd  Mar 03: translation adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 21: xref links fixed
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Changes until Release 6 Patchlevel 14
 !html_name history_release_6_until_PL14
 
-(!PUBLISHED [UDO~6 Patchlevel~14] [July 11, 1999])
+(!PUBLISHED [UDO~6 Patchlevel~14] [on Jul 11, 1999])
 
 Here you will find a very compressed list of the major changes 
 compared to the last release. UDO supports now more destination formats, it

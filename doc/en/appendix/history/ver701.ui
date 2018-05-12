@@ -31,13 +31,15 @@
 #   fd  May 25: - description items better formatted in RTF + PS 
 #               - new: !label*
 #   ggs May 25: some !hline moved, and !hlist changed to !hline
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Changes in version 7.01
 !html_name history_0701
 
-(!PUBLISHED [UDO~7.01][May 25, 2010])
+(!PUBLISHED [UDO~7.01][on May 25, 2010])
 
 !begin_description !compressed
 # ----------------------------------------

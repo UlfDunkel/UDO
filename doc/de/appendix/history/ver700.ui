@@ -23,6 +23,8 @@
 #   fd  Apr 08: typo
 #   fd  May 19: link adjustments for old commands
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
@@ -33,7 +35,7 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version.
 Vor allem die volle Unicode-Unterstützung und viele Verbesserungen in
 der HTML-Ausgabe machen diese Version sehr wertvoll.
 
-(!PUBLISHED [UDO~7.00] [01.03.2010])
+(!PUBLISHED [UDO~7.00] [am 01.03.2010])
 
 !begin_description !compressed
 # ----------------------------------------

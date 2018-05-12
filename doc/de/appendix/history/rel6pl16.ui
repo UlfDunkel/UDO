@@ -17,13 +17,15 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  May 19: macro PUBLISHED content adjusted
 #
 ################################################################################
 
 !begin_node Änderungen von Release 6 Patchlevel 15 nach 16
 !html_name history_release_6_PL15_to_16
 
-(!PUBLISHED [UDO~6 Patchlevel~16] [28.09.2003])
+(!PUBLISHED [UDO~6 Patchlevel~16] [am 28.09.2003])
 
 !begin_description
 !item [Neue Befehle:]
