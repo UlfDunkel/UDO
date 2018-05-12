@@ -21,10 +21,12 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+# 2013:
+#   fd  Oct 25: subchapter 'HTML markup with CSS' added
 #
 ################################################################################
 
-!begin_node Hypertext Markup Language (HTML)
+!begin_node HTML (Hypertext Markup Language)
 !html_name format_html
 !label HTML
 
@@ -37,7 +39,7 @@ collection:
 
 ##################################################
 
-!item   [How can I tell UDO not make files for each chapter?]
+!item [How can I tell UDO to not make files for each chapter?]
 In contrast to the other formats UDO saves a separate HTML file for each
 chapter by default. UDO names these files by using the chapter numbers. The
 title page and the table of contents will be saved in the file you passed in
@@ -83,10 +85,10 @@ a filename like "01020304.html".
 
 ##################################################
 
-!index  udo_rg.gif
-!index  udo_lf.gif
-!index  udo_up.gif
-!index  HTML !! Headlines
+!index udo_rg.gif
+!index udo_lf.gif
+!index udo_up.gif
+!index HTML !! Headlines
 !item [How can I suppress these ugly headlines?]
 UDO will print on every HTML page a headline that contains the title of the
 documentation and hypertext links to the previous, next and upper page.
@@ -132,7 +134,7 @@ appear when using (!code [(!/HEAD!)]) or (!code [(!/FOOT!)]).
 
 ##################################################
 
-!index  HTML !! Table frames
+!index HTML !! Table frames
 !item [Sometimes a table has a frame, sometimes it hasn't!?]
 Unfortunately HTML only allows to use tables with or without frames. You
 cannot use table lines where you want to.
@@ -143,13 +145,13 @@ that contains (!KW [begin_table]). If you don't want a frame don't use
 
 ##################################################
 
-!index  HTML !! Suffixes
+!index HTML !! Suffixes
 !item [Which suffixes does UDO use for HTML files?]
 By default UDO uses the suffix of the (!code [(--!)outfile]) you used in the
 command line:
 
 !begin_tlist [-o INDEX.HTML] !compressed
-!item [-o index.htm]  (!file [.htm])
+!item [-o index.htm] (!file [.htm])
 !item [-o index.html] (!file [.html])
 !item [-o INDEX.HTML] (!file [.HTML])
 !end_tlist
@@ -166,15 +168,15 @@ but you have used ""(!code [(--!)outfile index.html])"" and you copy the saved
 ''(!file [.htm])'' files to a web server, remember this:
 
 !begin_enumerate
-!item   UDO will try to save ''(!file [index.html])'' but TOS and DOS will
+!item UDO will try to save ''(!file [index.html])'' but TOS and DOS will
 name it ''(!file [index.htm])''.
 
-!item   UDO will use for all hypertext links the suffix ''(!file [.html])''
+!item UDO will use for all hypertext links the suffix ''(!file [.html])''
 because of the suffix of the ""outfile"". If you use a HTML browser for TOS
 or DOS this browser will open ''(!file [index.html])'' without any problems
 even if there's only a file named ''(!file [index.htm])''.
 
-!item   When copying the files to a web server you have to change the
+!item When copying the files to a web server you have to change the
 suffixes from ''(!file [.htm])'' to ''(!file [.html])''. If you will forget this
 all links will be wrong.
 !end_enumerate
@@ -189,5 +191,178 @@ Use the command (!KW [html_bgsound]).
 ##################################################
 
 !end_description
+
+# = = =
+
+!begin_node HTML markup with CSS
+!html_name format_html_css
+
+Since UDO~7 more attributes are written in the HTML output, which can be formatted via CSS.
+
+!label CSS classes for HTML in general
+!begin_description
+!item [CSS classes for HTML in general]
+!label UDO_index_list
+!begin_blist
+!item [UDO_index_list]
+This class name is used in a <div> environment which formats the jump marks bar (A-Z) in the (!B)indexudo(!b) page.
+
+!label UDO_index_group
+!item [UDO_index_group]
+This class name is used in a <p> environment which contains all index entries for a jump mark, which stands for a letter or character.
+This way you can e.g. separate a letter's group in a long index page to the next section, or you can mark up the groups with color.
+
+!label UDO_index_name
+!item [UDO_index_name]
+This class name is used in a <span> environment in which the jump mark (i.e. a letter or character from the jump marks bar) can be formatted.
+This way you can e.g. enlarge a letter in front of a letter's group or add a colored background.
+
+!label UDO_nav_index
+!item [UDO_nav_index]
+The navigation bar now always has a link to the index page.
+The link is output in a <span> environment with the class name ""UDO_nav_index"" and therefore can be easily right-adjusted on the page via CSS.
+
+!label UDO_nav_line
+!item [UDO_nav_line]
+When you use a navigation bar with (!KW [html_navigation]) [line], it will be output in a <div> environment with this class name.
+!end_blist
+!end_description
+
+!label CSS IDs for HTML in general
+!begin_description !not_compressed
+!item [CSS IDs for HTML in general]
+!label UDO_menu
+!begin_blist
+!item [UDO_menu]
+The table which shows the menu in the left column of ""Modern Layout"", now has an ID named ""UDO_menu"". 
+You might e.g. want to hide it via CSS for print output, etc.
+
+!item [UDOTOC]
+This name is used as jump mark to the start of the table of contents .
+When output into HTML~5, it will be used as an ID.
+!end_blist
+!end_description
+
+Since UDO~7.03, HTML~5 is supported, which no longer supports some formerly usual HTML formattings and expects to rebuild these in CSS.
+The CSS attributes which are currently supported by UDO, are listed below:
+
+!label CSS classes for HTML~5
+!begin_description !not_compressed
+!item [CSS classes for HTML~5]
+The following attributes are always used as class names and should be self-explanatory.
+All classes start with ""UDO_"" in order to avoid name conflicts with eventually already existing CSS class names in your documents.
+Then follows the tag name, the attribute and the property, each of them separated by an underscore.
+
+!label UDO_caption_valign_bottom
+!begin_blist
+!item [UDO_caption_valign_bottom]
+!label UDO_div_align_center
+!item [UDO_div_align_center]
+!label UDO_div_align_left
+!item [UDO_div_align_left]
+!label UDO_div_align_right
+!item [UDO_div_align_right]
+!label UDO_h1_align_center
+!item [UDO_h1_align_center]
+!label UDO_h2_align_center
+!item [UDO_h2_align_center]
+!label UDO_p_align_center
+!item [UDO_p_align_center]
+!label UDO_p_align_right
+!item [UDO_p_align_right]
+!label UDO_span_tt
+!item [UDO_span_tt]
+Because HTML~5 no longer supports the <tt> tag, we rebuild it with a <span> environment. 
+Formatting is done via CSS.
+!label UDO_td_align_center
+!item [UDO_td_align_center]
+!label UDO_td_align_right
+!item [UDO_td_align_right]
+!label UDO_td_nowrap
+!item [UDO_td_nowrap]
+!label UDO_td_valign_top
+!item [UDO_td_valign_top]
+!end_blist
+
+!label CSS-IDs
+!item [CSS-IDs]
+HTML~5 no longer supports the ""name"" attribute for anchors.
+Therefore all jump marks in HTML~5 are realized with IDs.
+Please control that your own IDs in your CSS file do not cause any conflict with those which are automatically generated by UDO.
+      
+      (!EXAMPLE)
+      (!EXAMPLE_BEFORE) (!nl)
+      <a name="aName">
+      (!EXAMPLE_AFTER) (!nl)
+      <a id="aName">
+      (!EXAMPLE_END)
+
+!label CSS example for HTML~5
+!item [CSS example for HTML~5]
+!begin_quote
+!begin_verbatim
+/* UDO HTML5 classes */
+.UDO_caption_valign_bottom {
+   /* <http://www.w3.org/wiki/CSS/Properties/vertical-align>
+    * baseline, sub, super, top, text-top, middle,
+    * bottom, text-bottom, length, or a value in percentage
+    */
+    vertical-align:text-bottom;
+}
+
+.UDO_div_align_left {}
+
+.UDO_div_align_center {
+   margin-left:auto;
+   margin-right:auto;
+   text-align:center;
+}
+
+.UDO_div_align_right {
+   text-align:right;
+}
+
+.UDO_span_tt {
+   font-size: 16px;
+   font-family: Courier, monospace;
+   color: #2E4793;
+}
+
+.UDO_h1_align_center,
+.UDO_h2_align_center,
+.UDO_p_align_center,
+.UDO_td_align_center {
+   /* <http://www.w3.org/wiki/CSS/Properties/text-align>
+    * left, right, center, justify, inherit
+    */
+   text-align:center;
+}
+
+.UDO_p_align_right,
+.UDO_td_align_right {
+   /* <http://www.w3.org/wiki/CSS/Properties/text-align>
+    * left, right, center, justify, inherit
+    */
+   text-align:right;
+}
+
+.UDO_td_nowrap {
+   white-space:nowrap;
+}
+
+.UDO_td_valign_top {
+   /* <http://www.w3.org/wiki/CSS/Properties/vertical-align>
+    * baseline, sub, super, top, text-top, middle,
+    * bottom, text-bottom, length, or a value in percentage
+    */
+    vertical-align: top;
+}
+!end_verbatim
+!end_quote
+!end_description
+
+!end_node # HTML markup with CSS
+
+# = = =
 
 !end_node

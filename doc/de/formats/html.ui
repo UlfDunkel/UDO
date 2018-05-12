@@ -27,10 +27,12 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2013:
+#   fd  Oct 25: subchapter 'HTML markup with CSS' added
 #
 ################################################################################
 
-!begin_node Hypertext Markup Language (HTML)
+!begin_node HTML (Hypertext Markup Language)
 !html_name format_html
 !label HTML
 
@@ -59,13 +61,14 @@ die Datei, die Sie UDO per Kommandozeile als (!code [(--!)outfile]) übergeben.
 !index !html_merge_subnodes
 !index !html_merge_subsubnodes
 !index !html_merge_subsubsubnodes
+!index !html_merge_subsubsubsubnodes
 Mit den Schaltern (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]),
-(!KW [html_merge_subsubnodes]) oder (!KW [html_merge_subsubsubnodes]) können
+(!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes]) oder (!KW [html_merge_subsubsubsubnodes]) können
 Sie die Aufteilung in mehrere Dateien unterbinden.
 
 Wird im Vorspann (!KW [html_merge_nodes]) benutzt, wird das gesamte
 Dokument in einer Datei gesichert. Dies empfiehlt sich lediglich
-bei kleinen Dokumenten, die kleiner als 16 KB sind.
+bei kleinen Dokumenten, die kleiner als 16~KB sind.
 
 (!KW [html_merge_subnodes]) sorgt dafür, daß alle Abschnitte eines
 Kapitels in der Datei angegeben werden, in dem sich auch das
@@ -78,6 +81,10 @@ untergebracht werden.
 Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür,
 daß alle Paragraphen in der gleichen Datei wie der übergeordnete
 Unterabschnitt untergebracht werden.
+
+Der Schalter (!KW [html_merge_subsubsubsubnodes]) schließlich sorgt dafür,
+daß alle Unterparagraphen in der gleichen Datei wie der übergeordnete
+Paragraph untergebracht werden.
 
 ##################################################
 
@@ -180,7 +187,7 @@ lange Namen erlauben, hingegen immer die Endung (!file [.html]).
 
 !item [Die Dateinamen bei den Querverweisen stimmen nicht!?]
 Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, das
-keine langen Namen zuläßt, Sie als Endung (!file [.html]) vorgegeben haben
+keine langen Namen zulässt, Sie als Endung (!file [.html]) vorgegeben haben
 und Sie diese Dateien dann auf einem Web-Server ablegen, so
 müssen Sie folgendes beachten:
 
@@ -208,5 +215,180 @@ Hierfür steht das Kommando (!KW [html_bgsound]) zur Verfügung.
 ##################################################
 
 !end_description
+
+# = = =
+
+!begin_node HTML-Auszeichnung mit CSS
+!html_name  format_html_css
+
+Seit UDO~7 werden bei der HTML-Ausgabe mehr Attribute ausgegeben, die über CSS formatierbar sind.
+
+!label CSS-Klassen für HTML allgemein
+!begin_description
+!item [CSS-Klassen für HTML allgemein]
+!label UDO_index_list
+!begin_blist
+!item [UDO_index_list]
+Dieser Klassenname wird für eine <div>-Umgebung verwendet, mit
+der die Sprungmarkenleiste (A-Z) in der (!B)indexudo(!b)-Seite
+formatiert wird.
+
+!label UDO_index_group
+!item [UDO_index_group]
+Dieser Klassenname wird für eine <p>-Umgebung verwendet, die alle Index-Einträge für eine Sprungmarke, also für einen Buchstaben enthält.
+So können Sie z.B. einen Buchstaben-Gruppe in einem langen Index mit einem größeren Abstand zum nächsten Abschnitt versehen oder die Gruppen farbig hervorheben.
+
+!label UDO_index_name
+!item [UDO_index_name]
+Dieser Klassenname wird für eine <span>-Umgebung verwendet, in der eine Sprungmarke (also ein Buchstabe aus der Sprungmarkenleiste) formatiert werden kann.
+So können Sie z.B. einen Buchstaben-Abschnitt in einem langen Index größer oder farbig unterlegt hervorheben.
+
+!label UDO_nav_index
+!item [UDO_nav_index]
+Die Navigationsleiste hat jetzt immer einen Link zur Index-Seite.
+Der Link wird in einem Span namens ""UDO_nav_index"" ausgegeben und kann bequem per CSS z.B. rechtsbündig auf der Seite platziert werden.
+
+!label UDO_nav_line
+!item [UDO_nav_line]
+Wenn Sie mit (!KW [html_navigation]) [line] eine Navigationszeile nutzen, wird sie in einer <div>-Umgebung mit diesem Klassennamen ausgegeben.
+!end_blist
+!end_description
+
+!label CSS-IDs für HTML allgemein
+!begin_description !not_compressed
+!item [CSS-IDs für HTML allgemein]
+!label UDO_menu
+!begin_blist
+!item [UDO_menu]
+Beim ""Modern Layout"" wird die Tabelle in der linken Spalte, die das Menü zeigt, mit einer ID namens ""UDO_menu"" versehen, 
+so dass das Menü beim Drucken mittels CSS ausgeblendet werden kann.
+
+!item [UDOTOC]
+Dieser Name wird als Sprungmarke zum Anfang des Inhaltsverzeichnisses verwendet.
+Bei Ausgabe in HTML~5 wird er als ID verwendet.
+!end_blist
+!end_description
+
+Seit UDO~7.03 wird HTML~5 unterstützt, das auf viele früher übliche HTML-Formatierungsangaben verzichtet und erwartet, dass diese über CSS gelöst werden.
+Die von UDO zur Zeit unterstützten CSS-Attribute werden nachfolgend aufgeführt:
+
+!label CSS-Klassen für HTML~5
+!begin_description !not_compressed
+!item [CSS-Klassen für HTML~5]
+Die nachfolgend aufgeführten Attribute werden immer als entsprechende Klassennamen verwendet und sollten selbsterklärend sein.
+Alle Klassen beginnen mit ""UDO_"", um Namenskonflikte mit evtl. schon bestehenden CSS-Klassennamen in Ihren Dokumenten zu vermeiden.
+Anschließend kommen der Tag-Name, das Attribut und die Eigenschaft, jeweils durch Unterstrich getrennt.
+
+!label UDO_caption_valign_bottom
+!begin_blist
+!item [UDO_caption_valign_bottom]
+!label UDO_div_align_center
+!item [UDO_div_align_center]
+!label UDO_div_align_left
+!item [UDO_div_align_left]
+!label UDO_div_align_right
+!item [UDO_div_align_right]
+!label UDO_h1_align_center
+!item [UDO_h1_align_center]
+!label UDO_h2_align_center
+!item [UDO_h2_align_center]
+!label UDO_p_align_center
+!item [UDO_p_align_center]
+!label UDO_p_align_right
+!item [UDO_p_align_right]
+# !label UDO_span_tt
+!item [UDO_span_tt]
+Da HTML~5 das <tt>-Tag nicht mehr unterstützt, wird es mit einer <span>-Umgebung nachgebildet. 
+Die Formatierung geschieht über CSS.
+!label UDO_td_align_center
+!item [UDO_td_align_center]
+!label UDO_td_align_right
+!item [UDO_td_align_right]
+!label UDO_td_nowrap
+!item [UDO_td_nowrap]
+!label UDO_td_valign_top
+!item [UDO_td_valign_top]
+!end_blist
+
+!label CSS-IDs
+!item [CSS-IDs]
+HTML~5 unterstützt bei Ankern nicht mehr das ""name""-Attribut.
+Daher werden alle Sprungmarken in HTML~5 über IDs erzeugt.
+Achten Sie darauf, dass Sie eigene IDs in Ihrer CSS-Datei mit den von UDO automatisch vergebenen abgleichen, damit es keine ID-Namenskonflikte gibt.
+      
+      (!EXAMPLE)
+      (!EXAMPLE_BEFORE) (!nl)
+      <a name="einName">
+      (!EXAMPLE_AFTER) (!nl)
+      <a id="einName">
+      (!EXAMPLE_END)
+
+!label CSS-Beispiel für HTML~5
+!item [CSS-Beispiel für HTML~5]
+!begin_quote
+!begin_verbatim
+/* UDO HTML5 classes */
+.UDO_caption_valign_bottom {
+   /* <http://www.w3.org/wiki/CSS/Properties/vertical-align>
+    * baseline, sub, super, top, text-top, middle,
+    * bottom, text-bottom, length, or a value in percentage
+    */
+    vertical-align:text-bottom;
+}
+
+.UDO_div_align_left {}
+
+.UDO_div_align_center {
+   margin-left:auto;
+   margin-right:auto;
+   text-align:center;
+}
+
+.UDO_div_align_right {
+   text-align:right;
+}
+
+.UDO_span_tt {
+   font-size: 16px;
+   font-family: Courier, monospace;
+   color: #2E4793;
+}
+
+.UDO_h1_align_center,
+.UDO_h2_align_center,
+.UDO_p_align_center,
+.UDO_td_align_center {
+   /* <http://www.w3.org/wiki/CSS/Properties/text-align>
+    * left, right, center, justify, inherit
+    */
+   text-align:center;
+}
+
+.UDO_p_align_right,
+.UDO_td_align_right {
+   /* <http://www.w3.org/wiki/CSS/Properties/text-align>
+    * left, right, center, justify, inherit
+    */
+   text-align:right;
+}
+
+.UDO_td_nowrap {
+   white-space:nowrap;
+}
+
+.UDO_td_valign_top {
+   /* <http://www.w3.org/wiki/CSS/Properties/vertical-align>
+    * baseline, sub, super, top, text-top, middle,
+    * bottom, text-bottom, length, or a value in percentage
+    */
+    vertical-align: top;
+}
+!end_verbatim
+!end_quote
+!end_description
+
+!end_node # HTML-Auszeichnung mit CSS
+
+# = = =
 
 !end_node
