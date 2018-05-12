@@ -14,11 +14,16 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_03.de)
+# 2014:
+#   fd  May 19: release date added after a hint by Dirk Hagedorn, see
+#               http://cd.textfiles.com/atarilibrary/atari_cd09/DOCUMENT/HYPERTXT/UDO3017/DOKU/UDO.TXT 
 #
 ################################################################################
 
 !begin_node Changes from Release 2 to 3
 !html_name history_release_2_to_3
+
+(!PUBLISHED [UDO~3][on Apr 17, 1995])
 
 We think that nobody is interested in those things that changed some years ago.
 

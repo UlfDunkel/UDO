@@ -14,13 +14,16 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_01.de)
+# 2014:
+#   fd  May 19: release date added after a hint by Dirk Hagedorn, see
+#               http://cd.textfiles.com/atarilibrary/atari_cd09/DOCUMENT/HYPERTXT/UDO3017/DOKU/UDO.TXT 
 #
 ################################################################################
 
 !begin_node Release 1
 !html_name history_1
 
-Does anybody still know when UDO v1 has been released?
+(!PUBLISHED [UDO~1][in January 1995])
 
 !end_node
 
