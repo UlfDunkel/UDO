@@ -10165,8 +10165,6 @@ LOCAL _BOOL save_the_map(const char *filename, const char *suffix, tWinMapData *
 	if (file == NULL)
 		return FALSE;
 
-	save_upr_entry_outfile(f);
-
 	fprintf(file, "%s mapping of %s for %s, made with UDO%s %s\n\n",
 			data->remOn, outfile.name, data->compiler, UDO_REL, data->remOff);
 
