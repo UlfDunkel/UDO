@@ -1,0 +1,30 @@
+!begin_node (!kw [use_auto_subsubsubsubsubtocs])
+!html_name cmd_use_auto_subsubsubsubsubtocs
+
+Automatische Auflistung aller untergeordneten Kapitel 6. Ordnung.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubsubsubsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet den automatischen internen Aufruf des (!KW [subsubsubsubsubtoc])-Kommandos ein. 
+Am Ende eines jeden Kapitels 5. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 6. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!EXISTSSINCE)] Version~7.04
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubtoc]), (!KW [ignore_subsubsubsubsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubsubsubsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

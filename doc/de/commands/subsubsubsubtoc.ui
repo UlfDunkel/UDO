@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubsubtoc])
 !html_name cmd_subsubsubsubtoc
 
-Unterparagraphen auflisten.
+Listet in Inhaltsverzeichnissen aller Kapitel 4. Ordnung die untergeordneten Kapitel 5. Ordnung auf.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,13 +10,10 @@ Unterparagraphen auflisten.
 !item [(!SYNTAX)] (!T)!/subsubsubsubtoc [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Listet in Form eines Inhaltsverzeichnisses alle Unterparagraphen des
-aktuellen Paragraphen auf und sorgt dafür, daß Sie in Hypertexten
-zu den Unterparagraphen weiterverzweigen können. UDO gibt dieses
-Unterinhaltsverzeichnis nicht aus, wenn in dem Paragraph der Schalter
-(!KW [ignore_subsubsubsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse lässt sich durch
-(!KW [use_auto_subsubsubsubtocs]) auch automatisieren.
+Am Ende von Kapiteln 4. Ordnung werden alle untergeordneten Kapitel 5. Ordnung als Inhaltsverzeichnis aufgelistet.
+So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 4. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subsubsubsubtoc]) dort verwendet wurde. 
+Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubsubsubtocs]) auch automatisieren.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~16
 

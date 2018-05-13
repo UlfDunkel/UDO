@@ -1,7 +1,7 @@
 !begin_node (!kw [use_auto_subtocs])
 !html_name cmd_use_auto_subtocs
 
-Automatische Auflistung aller Abschnitte.
+Automatische Auflistung aller untergeordneten Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,11 +10,10 @@ Automatische Auflistung aller Abschnitte.
 !item [(!SYNTAX)] (!T)!/use_auto_subtocs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Schaltet den automatischen internen Aufruf des
-(!KW [subtoc])-Kommandos ein. Am Ende eines jeden Kapitels
-werden dann automatisch alle dem Kapitel zugehörigen
-Abschnitte in Form eines Inhaltsverzeichnisses
-ausgegeben.
+Schaltet den automatischen internen Aufruf des (!KW [subtoc])-Kommandos ein. 
+Am Ende eines jeden Kapitels 1. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 2. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [subtoc]), (!KW [ignore_subtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])

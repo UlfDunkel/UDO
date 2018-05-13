@@ -10,7 +10,8 @@ Start a section.
 !item [(!SYNTAX)] (!T)!/subnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Starts a new section named ""(!TEXT)"". Sections will appear in table of contents.
+Starts a new section named ""(!TEXT)"". Sections are numbered
+with #.# and will appear in table of contents.
 
 !item [(!SEEALSO)]
 (!KW [psubnode]), (!KW [node]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])

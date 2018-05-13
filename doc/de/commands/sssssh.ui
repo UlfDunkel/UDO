@@ -1,0 +1,20 @@
+!begin_node (!kw [sssssh])
+!html_name cmd_sssssh
+
+Eine Überschrift in der Schriftgröße eines Kapitels 6. Ordnung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssssh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubsubheading]).
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubsubheading])
+
+!end_xlist
+
+!end_node

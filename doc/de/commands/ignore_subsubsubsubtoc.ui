@@ -1,7 +1,7 @@
 !begin_node (!kw [ignore_subsubsubsubtoc])
 !html_name cmd_ignore_subsubsubsubtoc
 
-In dem zugehörigen Subsubsubnode kein ""subsubsubsubtoc"" ausgeben.
+Im aktuellen Kapitel 4. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 5. Ordnung (""subsubsubsubtoc"") ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,9 +10,9 @@ In dem zugehörigen Subsubsubnode kein ""subsubsubsubtoc"" ausgeben.
 !item [(!SYNTAX)] (!T)!/ignore_subsubsubsubtoc(!t)
 
 !item [(!DESCRIPTION)]
-Wenn innerhalb eines Subsubsubnodes dieser Schalter
-gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem die Unterparagraphen
-des Subsubsubnodes aufgelistet werden.
+Wenn innerhalb eines Kapitels 4. Ordnung dieser Schalter gesetzt wird,
+wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten
+Kapiteln 5. Ordnung am Ende aufgelistet.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
 

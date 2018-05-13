@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubsubnode])
 !html_name cmd_subsubsubsubnode
 
-Unterparagraph einleiten.
+Beginnt ein Kapitel 5. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,9 +10,8 @@ Unterparagraph einleiten.
 !item [(!SYNTAX)] (!T)!/subsubsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Unterparagraph mit der Bezeichnung ""(!TEXT)""
-ein. Ein Unterparagraph ist die fünfte Gliederungsebene
-und wird mit #.#.#.#.# nummeriert.
+Leitet ein Kapitel 5. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+Es wird mit #.#.#.#.# nummeriert.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~16
 
@@ -24,10 +23,10 @@ und wird mit #.#.#.#.# nummeriert.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubsubsubnode Titel des Unterparagraphs
+!subsubsubsubnode Titel des Kapitels 5. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubheading Titel des Unterparagraphs
+!subsubsubsubheading Titel des Kapitels 5. Ordnung
 (!EXAMPLE_END)
 
 !end_node

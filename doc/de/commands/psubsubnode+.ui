@@ -1,7 +1,7 @@
 !begin_node (!kw [psubsubnode*])
 !html_name cmd_psubsubnode_asterisk
 
-Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
+Beginnt ein Popup-Kapitel 3. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -24,10 +24,10 @@ Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubnode* Ein versteckter Popup-Unterabschnitt
+!psubsubnode* Ein verstecktes Popup-Kapitel 3. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubheading Ein versteckter Popup-Unterabschnitt
+!subsubheading Ein verstecktes Popup-Kapitel 3. Ordnung
 (!EXAMPLE_END)
 
 !end_node

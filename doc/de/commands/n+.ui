@@ -1,7 +1,7 @@
 !begin_node (!kw [n*])
 !html_name cmd_n_asterisk
 
-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 1. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 

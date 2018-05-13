@@ -1,7 +1,7 @@
 !begin_node (!kw [use_auto_subsubsubtocs])
 !html_name cmd_use_auto_subsubsubtocs
 
-Automatische Auflistung aller Paragraphen.
+Automatische Auflistung aller untergeordneten Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,11 +10,8 @@ Automatische Auflistung aller Paragraphen.
 !item [(!SYNTAX)] (!T)!/use_auto_subsubsubtocs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Schaltet den automatischen internen Aufruf des
-(!KW [subsubsubtoc])-Kommandos ein. Am Ende eines jeden
-Abschnitts werden dann automatisch alle dem
-Unterabschnitt zugehörigen Paragraphen in Form eines
-Inhaltsverzeichnisses ausgegeben.
+Schaltet den automatischen internen Aufruf des (!KW [subsubsubtoc])-Kommandos ein. 
+Am Ende eines jeden Kapitels 3. Ordnung werden dann automatisch alle dem Kapitel zugehörigen Kapitel 4. Ordnung in Form eines Inhaltsverzeichnisses ausgegeben.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 

@@ -1,7 +1,7 @@
 !begin_node (!kw [use_auto_toptocs])
 !html_name cmd_use_auto_toptocs
 
-Automatically list sections.
+Automatically list all superior chapters.
 
 !begin_xlist [(!TYPEPOSITION)]
 

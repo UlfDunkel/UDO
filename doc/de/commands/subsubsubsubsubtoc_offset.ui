@@ -1,0 +1,32 @@
+!begin_node (!kw [subsubsubsubsubtoc_offset])
+!html_name cmd_subsubsubsubsubtoc_offset
+
+Offset für die fortlaufende Nummerierung von Kapiteln 6. Ordnung festlegen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 6. Ordnung zu der aktuellen Nummer hinzugezählt. 
+Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+Es können auch negative Werte benutzt werden. 
+Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Version~7.04
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

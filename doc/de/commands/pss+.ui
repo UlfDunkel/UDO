@@ -1,7 +1,7 @@
 !begin_node (!kw [pss*])
 !html_name cmd_pss_asterisk
 
-Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
+Beginnt ein Popup-Kapitel 3. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 

@@ -1,7 +1,7 @@
 !begin_node (!kw [use_auto_subsubsubsubtocs])
 !html_name cmd_use_auto_subsubsubsubtocs
 
-Automatically create tables of contents in paragraphs.
+Automatically create tables of contents of the level 5 chapters.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -11,7 +11,7 @@ Automatically create tables of contents in paragraphs.
 
 !item [(!DESCRIPTION)]
 Tells UDO to use the (!KW [subsubsubsubtoc]) command automatically in every
-paragraph. The example shows how to use them inside the hypertext
+chapter of level 4. The example shows how to use them inside the hypertext
 formats.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16

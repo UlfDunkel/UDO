@@ -1,7 +1,7 @@
 !begin_node (!kw [bp])
 !html_name cmd_bp
 
-Start new popup-chapter/section/subsection/paragraph/subparagraph.
+Starts a new popup-chapter of any depth in the current structure hierarchy.
 
 !begin_xlist [(!TYPEPOSITION)]
 

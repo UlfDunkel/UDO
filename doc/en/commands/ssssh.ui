@@ -1,0 +1,20 @@
+!begin_node (!kw [ssssh])
+!html_name cmd_ssssh
+
+Output a paragraph heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssssh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubheading]).
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubheading])
+
+!end_xlist
+
+!end_node

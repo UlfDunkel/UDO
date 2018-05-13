@@ -1,0 +1,33 @@
+!begin_node (!kw [subsubsubsubsubtoc])
+!html_name cmd_subsubsubsubsubtoc
+
+List subparagraphs.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubtoc [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Lists all subparagraphs of a paragraph as a table of contents
+to enable the reader of a hypertext to switch to the subparapraphs.
+UDO does not list this table of contents if the
+switch (!KW [ignore_subsubsubsubsubtoc]) has been used inside the paragraph.
+This table can be generated automatically with the switch (!KW [use_auto_subsubsubsubsubtocs]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubsubsubsubtocs]), (!link [Tables of contents] [Tables of contents])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

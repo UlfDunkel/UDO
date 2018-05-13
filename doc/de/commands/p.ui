@@ -1,7 +1,7 @@
 !begin_node (!kw [p])
 !html_name cmd_p
 
-Popup-Kapitel einleiten.
+Beginnt ein Popup-Kapitel 1. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 

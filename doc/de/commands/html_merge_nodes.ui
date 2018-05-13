@@ -1,7 +1,8 @@
 !begin_node (!kw [html_merge_nodes])
 !html_name cmd_html_merge_nodes
 
-Nur eine HTML-Datei erzeugen (nur HTML).
+Alle Kapitelhierarchien ab der 1. Gliederungsstufe zusammenfassen (nur HTML).
+Es wird nur eine einzige HTML-Datei erzeugt.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,14 +11,14 @@ Nur eine HTML-Datei erzeugen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_merge_nodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, werden
-alle Kapitel, Abschnitte, Unterabschnitte und
-Paragraphen bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+Wird dieser Schalter im Vorspann angegeben, werden alle
+Kapitelhierarchien ab der 1. Gliederungsebene bei der
+Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
 !item [(!SEEALSO)]
-(!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+(!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes]), (!KW [html_merge_subsubsubsubnodes]), (!KW [html_merge_subsubsubsubsubnodes])
 
 !end_xlist
 

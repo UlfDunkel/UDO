@@ -1,7 +1,7 @@
 !begin_node (!kw [psss*])
 !html_name cmd_psss_asterisk
 
-Versteckten Popup-Paragraph einleiten.
+Beginnt ein Popup-Kapitel 4. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 

@@ -1,7 +1,7 @@
 !begin_node (!kw [pnode*])
 !html_name cmd_pnode_asterisk
 
-Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Popup-Kapitel 1. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -23,10 +23,10 @@ mit der Ausnahme, daﬂ ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!pnode* Titel des versteckten Popups
+!pnode* Titel des versteckten Popup-Kapitel 1. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des versteckten Popups
+!heading Titel des versteckten Popup-Kapitel 1. Ordnung
 (!EXAMPLE_END)
 
 !end_node

@@ -1,7 +1,7 @@
 !begin_node (!kw [toc_offset])
 !html_name cmd_toc_offset
 
-Offset für die Kapitelnummerierung setzen.
+Offset für die fortlaufende Nummerierung von Kapiteln 1. Ordnung festlegen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,11 +10,10 @@ Offset für die Kapitelnummerierung setzen.
 !item [(!SYNTAX)] (!T)!/toc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern zu
-der aktuellen Nummer hinzugezählt. Im Beispiel würde
-das erste Kapitel mit der Nummer 10 ausgegeben. Es
-können auch negative Werte benutzt werden. Dieser
-Schalter hat keine Wirkung auf Kapitel des Anhangs.
+""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 1. Ordnung zu der aktuellen Nummer hinzugezählt. 
+Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+Es können auch negative Werte benutzt werden. 
+Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 !item [(!SEEALSO)]
 (!KW [node]), (!KW [tableofcontents]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])

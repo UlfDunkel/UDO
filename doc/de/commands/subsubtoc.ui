@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubtoc])
 !html_name cmd_subsubtoc
 
-Unterabschnitte auflisten.
+Listet in Inhaltsverzeichnissen aller Kapitel 2. Ordnung die untergeordneten Kapitel 3. Ordnung auf.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,13 +10,10 @@ Unterabschnitte auflisten.
 !item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Listet in Form eines Inhaltsverzeichnisses alle Unterabschnitte des
-aktuellen Abschnitts auf und sorgt dafür, daß Sie in Hypertexten zu den
-Unterabschnitten weiterverzweigen können. UDO gibt dieses
-Unterinhaltsverzeichnis nicht aus, wenn in dem Abschnitt der Schalter
-(!KW [ignore_subsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs])
-auch automatisieren.
+Am Ende von Kapiteln 2. Ordnung werden alle untergeordneten Kapitel 3. Ordnung als Inhaltsverzeichnis aufgelistet.
+So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 2. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subsubtoc]) dort verwendet wurde. 
+Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs]) auch automatisieren.
 
 !item [(!SEEALSO)]
 (!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])

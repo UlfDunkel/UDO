@@ -1,7 +1,7 @@
 !begin_node (!kw [heading])
 !html_name cmd_heading
 
-Eine Kapitel-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 1. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 

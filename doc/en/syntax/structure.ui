@@ -19,6 +19,8 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 25: index adjustments
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  Jun 20: chapter structure_layers rewritten
 #
 ################################################################################
 
@@ -206,30 +208,28 @@ are called chapters, sections, subsections, paragraphs and sub-paragraphs.
 !index (!kw [subsubnode])
 !index (!kw [subsubsubnode])
 !index (!kw [subsubsubsubnode])
+!index (!kw [subsubsubsubsubnode])
 !index (!kw [begin_node])
 
 Using the command (!KW [node]) you tell UDO that a new chapter begins and
-you tell it how the chapter is named. The commands (!KW [subnode]),
-(!KW [subsubnode]), (!KW [subsubsubnode]) and (!KW [subsubsubsubnode]) do the same for a section,
-subsection, paragraph and subparagraph.
+you tell it how the chapter is named.
+The commands (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [subsubsubsubnode]) etc. do
+the same thing for subordinate chapters.
 
 (!NOTE) You can also use the commands (!KW [begin_node])
 and (!KW [end_node]) to structure your documentation.
-
-(!NTY)
-Da Bilder oft mehr sagen als tausend Worte, hier ein kleines
-Beispiel. Die (hier inhaltsleere) Befehlsfolge...
 
 Watch this example (without text) to understand what I want to say:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!node             A chapter
-!subnode          A section
-!subsubnode       A subsection
-!subsubsubnode    A paragraph
-!subsubsubsubnode A subparagraph
-!node             And a different chapter
+!node                A chapter level 1
+!subnode             A chapter level 2
+!subsubnode          A chapter level 3
+!subsubsubnode       A chapter level 4
+!subsubsubsubnode    A chapter level 5
+!subsubsubsubsubnode A chapter level 6
+!node                A new chapter level 1
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -237,13 +237,14 @@ The table of contents should look like this:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-1  A chapter
-   1.1  A section
-        1.1.1  A subsection
-               1.1.1.1  A Paragraph
-                        1.1.1.1.1 A Subparagraph
+1  A chapter level 1
+   1.1  A chapter level 2
+        1.1.1  A chapter level 3
+               1.1.1.1  A chapter level 4
+                        1.1.1.1.1 A chapter level 5
+                                  1.1.1.1.1 A chapter level 6
 
-2  And a different chapter
+2  A new chapter level 1
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -255,52 +256,56 @@ called popup nodes can be used with the following commands:
 !index (!kw [psubsubnode])
 !index (!kw [psubsubsubnode])
 !index (!kw [psubsubsubsubnode])
+!index (!kw [psubsubsubsubsubnode])
 !begin_itemize !compressed
-!item (!KW [pnode]) for popup chapters,
-!item (!KW [psubnode]) for popup sections,
-!item (!KW [psubsubnode]) for popup subsections,
-!item (!KW [psubsubsubnode]) for popup paragraphs and
-!item (!KW [psubsubsubsubnode]) for popup subparagraphs
+!item (!KW [pnode])                 for level 1 popup chapters,
+!item (!KW [psubnode])              for level 2 popup chapters,
+!item (!KW [psubsubnode])           for level 3 popup chapters,
+!item (!KW [psubsubsubnode])        for level 4 popup chapters,
+!item (!KW [psubsubsubsubnode])     for level 5 popup chapters, and
+!item (!KW [psubsubsubsubsubnode])  for level 6 popup chapters.
 !end_itemize
 
 Furthermore you can create chapters that don't appear in the table of
 contents. Use these commands!..
 
 !index (!kw [node*])
+!index (!kw [subnode*])
+!index (!kw [subsubnode*])
+!index (!kw [subsubsubnode*])
+!index (!kw [subsubsubsubnode*])
+!index (!kw [subsubsubsubsubnode*])
 !index (!kw [pnode*])
 !index (!kw [psubnode*])
 !index (!kw [psubsubnode*])
 !index (!kw [psubsubsubnode*])
 !index (!kw [psubsubsubsubnode*])
-!index (!kw [subnode*])
-!index (!kw [subsubnode*])
-!index (!kw [subsubsubnode*])
-!index (!kw [subsubsubsubnode*])
+!index (!kw [psubsubsubsubsubnode*])
 !begin_itemize !compressed
-!item (!KW [node*]) for chapters,
-!item (!KW [subnode*]) for sections,
-!item (!KW [subsubnode*]) for subsections,
-!item (!KW [subsubsubnode*]) for paragraphs,
-!item (!KW [subsubsubsubnode*]) for subparagraphs,
-!item (!KW [pnode*]) for popup chapters,
-!item (!KW [psubnode*]) for popup sections,
-!item (!KW [psubsubnode*]) for popup subsections,
-!item (!KW [psubsubsubnode*]) for popup paragraphs and
-!item (!KW [psubsubsubsubnode*]) for popup subparagraphs.
+!item (!KW [node*])                 for level 1 chapters,
+!item (!KW [subnode*])              for level 2 chapters,
+!item (!KW [subsubnode*])           for level 3 chapters,
+!item (!KW [subsubsubnode*])        for level 4 chapters,
+!item (!KW [subsubsubsubnode*])     for level 5 chapters,
+!item (!KW [subsubsubsubsubnode*])  for level 6 chapters,
+
+!item (!KW [pnode*])                for level 1 popup chapters,
+!item (!KW [psubnode*])             for level 2 popup chapters,
+!item (!KW [psubsubnode*])          for level 3 popup chapters,
+!item (!KW [psubsubsubnode*])       for level 4 popup chapters,
+!item (!KW [psubsubsubsubnode*])    for level 5 popup chapters, and
+!item (!KW [psubsubsubsubsubnode*]) for level 6 popup chapters.
 !end_itemize
 
 (!HINTS)
-
-!begin_enumerate
-
+!begin_enumerate !compressed
 !item Chapters that aren't listed in the table of contents aren't numbered,
 too. UDO will create hypertext links to them as it does for all other
 chapters.
 
 !index (!kw [no_numbers])
-!item UDO enumerates the chapters automatically. If you want to display the
-chapter names without numbers you can use the switch (!KW [no_numbers])
-inside the preamble.
+!item UDO enumerates the chapters automatically. (!nl)
+If you want to display the chapter names without numbers you can use the switch (!KW [no_numbers]) inside the preamble.
 
 !end_enumerate
 

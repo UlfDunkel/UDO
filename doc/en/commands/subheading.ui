@@ -1,7 +1,7 @@
 !begin_node (!kw [subheading])
 !html_name cmd_subheading
 
-Output a section heading.
+Output a chapter headline for the 2nd most important heading.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,7 +10,7 @@ Output a section heading.
 !item [(!SYNTAX)] (!T)!/subheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command prints out ""(!TEXT)"" as a headline using the section
+This command prints out ""(!TEXT)"" as a headline using the subnode
 font and fontsize.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.47

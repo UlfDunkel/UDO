@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubsubsubnode*])
 !html_name cmd_subsubsubsubsubnode_asterisk
 
-Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 6. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,7 +10,7 @@ Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 !item [(!SYNTAX)] (!T)!/subsubsubsubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, daﬂ ""(!TEXT)"" nicht
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubsubnode]), mit der Ausnahme, daﬂ ""(!TEXT)"" nicht
 in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXISTSSINCE)] Version~7.04
@@ -23,10 +23,10 @@ in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubsubsubsubnode* Titel des versteckten Unterparagraphs
+!subsubsubsubsubnode* Titel des versteckten Kapitels 6. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubsubheading Titel des versteckten Unterparagraphs
+!subsubsubsubsubheading Titel des versteckten Kapitels 6. Ordnung
 (!EXAMPLE_END)
 
 !end_node

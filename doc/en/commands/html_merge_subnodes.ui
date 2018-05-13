@@ -1,7 +1,7 @@
 !begin_node (!kw [html_merge_subnodes])
 !html_name cmd_html_merge_subnodes
 
-Merge sections, subsections and paragraphs (HTML only).
+Merge all nodes from the 2nd hierarchical level and beyond (HTML only).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -17,7 +17,7 @@ sections, subsections and paragraphs, too.
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
 !item [(!SEEALSO)]
-(!KW [html_merge_nodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+(!KW [html_merge_nodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes]), (!KW [html_merge_subsubsubsubnodes]), (!KW [html_merge_subsubsubsubsubnodes])
 
 !end_xlist
 

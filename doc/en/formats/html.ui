@@ -23,6 +23,8 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 # 2013:
 #   fd  Oct 25: subchapter 'HTML markup with CSS' added
+# 2014:
+#   fd  Jun 20: FAQ item added: 'How to navigate in HTML pages using the keyboard'
 #
 ################################################################################
 
@@ -39,6 +41,25 @@ collection:
 
 ##################################################
 
+!item [How to navigate in HTML pages using the keyboard?]
+Basically, the HTML output creates clickable navigation buttons in the headlines and footers of each page.
+These buttons reflect the hierarchy of the document with a Home button and some arrow buttons.
+      
+As of version 7.04, UDO adds IDs to the anchor tags of these buttons:
+!begin_blist !compressed
+!item [UDO_nav_hm_HEAD] Home: this one brings you back to the homepage of the HTML document.
+!item [UDO_nav_lf_HEAD] Left: this button brings you to the previous document page in logical order.
+!item [UDO_nav_up_HEAD] Up: this button brings you back one chapter hierarchy level.
+!item [UDO_nav_rg_HEAD] Right: this button forwards you to the next document page in logical order.
+!end_blist
+      
+In order to be able and access these buttons using the keyboard, we recommend to use JavaScript.
+The HTML attribute ""accesskey"" requires various additional function keys, depending on the browser, and doesn't access e.g. arrow keys.
+Keep in mind to not switch off the navigation buttons using (!KW [no_headlines]) and (!KW [no_footers]) in the preamble.
+Then include a JavaScript file which evaluates key presses, using (!KW [html_script_name]).
+
+##################################################
+
 !item [How can I tell UDO to not make files for each chapter?]
 In contrast to the other formats UDO saves a separate HTML file for each
 chapter by default. UDO names these files by using the chapter numbers. The
@@ -49,12 +70,14 @@ the command line.
 !index !/html_merge_subnodes
 !index !/html_merge_subsubnodes
 !index !/html_merge_subsubsubnodes
+!index !/html_merge_subsubsubsubnodes
 
 Using the switches
 (!KW [html_merge_nodes]),
 (!KW [html_merge_subnodes]),
-(!KW [html_merge_subsubnodes]) or
-(!KW [html_merge_subsubsubnodes])
+(!KW [html_merge_subsubnodes]),
+(!KW [html_merge_subsubsubnodes]) or
+(!KW [html_merge_subsubsubsubnodes])
 you can tell UDO not to save a file for each chapter.
 
 If you use (!KW [html_merge_nodes]) inside the preamble UDO will save only
@@ -67,7 +90,7 @@ saved inside this file, too.
 
 If you use (!KW [html_merge_subsubnodes]) UDO will save separate files for
 chapters and sections. The subsections and paragraphs of a section will be
-saved in the file that contains the text of the upper section.
+saved in the file that contains the text of the superior section.
 
 Finally if you use (!KW [html_merge_subsubsubnodes]) the paragraphs of a
 subsection will be saved in the file that contains the text of the

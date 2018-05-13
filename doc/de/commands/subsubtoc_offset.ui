@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubtoc_offset])
 !html_name cmd_subsubtoc_offset
 
-Offset für die Unterabschnittnummerierung setzen.
+Offset für die fortlaufende Nummerierung von Kapiteln 3. Ordnung festlegen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,11 +10,10 @@ Offset für die Unterabschnittnummerierung setzen.
 !item [(!SYNTAX)] (!T)!/subsubtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""(!VALUE)"" wird bei der Ausgabe der Unterabschnittnummern zu
-der aktuellen Nummer hinzugezählt. Im Beispiel würde
-der erste Unterabschnitt mit der Nummer 10 ausgegeben. Es
-können auch negative Werte benutzt werden. Dieser
-Schalter hat keine Wirkung auf Kapitel des Anhangs.
+""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern bei Kapiteln 3. Ordnung zu der aktuellen Nummer hinzugezählt. 
+Im Beispiel würde der erste Abschnitt mit der Nummer~10 ausgegeben. 
+Es können auch negative Werte benutzt werden. 
+Dieser Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 

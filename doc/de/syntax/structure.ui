@@ -23,6 +23,8 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
+# 2014:
+#   fd  Jun 20: chapter structure_layers rewritten
 #
 ################################################################################
 
@@ -216,36 +218,39 @@ weiterbearbeiten, erzeugen.
 !begin_node Gliederungsebenen
 !html_name structure_layers
 
-UDO bietet neun Gliederungsebenen an, die im Folgenden als Kapitel,
-Abschnitte, Unterabschnitte, Paragraphen und Unterparagraphen bezeichnet werden.
+UDO bietet neun Gliederungsebenen an, die im Folgenden als Kapitel 1. bis 9. Ordnung bezeichnet werden.
 
 !index (!kw [node])
 !index (!kw [subnode])
 !index (!kw [subsubnode])
 !index (!kw [subsubsubnode])
 !index (!kw [subsubsubsubnode])
+!index (!kw [subsubsubsubsubnode])
 !index (!kw [begin_node])
 
-Durch das Kommando (!KW [node]) setzen Sie den Anfang für ein neues
-Kapitel und übergeben zugleich die Kapitelüberschrift. Genauso
-funktionieren die Kommandos (!KW [subnode]) für einen Abschnitt,
-(!KW [subsubnode]) für einen Unterabschnitt, (!KW [subsubsubnode]) für
-einen Paragraph und (!KW [subsubsubsubnode]) für einen Unterparagraph.
+Durch das Kommando (!KW [node]) setzen Sie den Anfang für ein neues Kapitel und übergeben zugleich die Kapitelüberschrift. 
+Genauso funktionieren die Kommandos (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [subsubsubsubnode]) etc.
 
-(!NOTE) Optional können Sie die einzelnen Gliederungsebenen
-auch mit (!KW [begin_node]) und (!KW [end_node]) schachteln.
+Diese Kommandos beginnen ein neues Kapitel und kümmern sich automatisch darum, die Kapitelhierarchie abzubilden.
+Es ist hierbei sogar möglich, eine Ordnungsstufe der Kapitelhierarchie auszulassen, obwohl wir dies nicht empfehlen.
+Denken Sie daran, Ihre Leserschaft nicht zu verwirren.
+
+(!NOTE) Optional können Sie die einzelnen Gliederungsebenen auch mit (!KW [begin_node]) und (!KW [end_node]) schachteln.
+Der Vorteil dieser beiden Kommandos: Sie müssen sich nicht merken, in welcher Gliederungsebene Sie sich befinden.
+Der Nachteil: Hierbei muss peinlich genau für jedes verwendete (!KW [begin_node]) auch ein (!KW [end_node]) verwendet werden.
 
 Da Bilder oft mehr sagen als tausend Worte, hier ein kleines
 Beispiel. Die (hier inhaltsleere) Befehlsfolge~!..
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!node             Ein Kapitel
-!subnode          Ein Abschnitt
-!subsubnode       Ein Unterabschnitt
-!subsubsubnode    Ein Paragraph
-!subsubsubsubnode Ein Unterparagraph
-!node             Ein neues Kapitel
+!node                Ein Kapitel 1. Ordnung
+!subnode             Ein Kapitel 2. Ordnung
+!subsubnode          Ein Kapitel 3. Ordnung
+!subsubsubnode       Ein Kapitel 4. Ordnung
+!subsubsubsubnode    Ein Kapitel 5. Ordnung
+!subsubsubsubsubnode Ein Kapitel 6. Ordnung
+!node                Ein neues Kapitel 1. Ordnung
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -253,70 +258,74 @@ Beispiel. Die (hier inhaltsleere) Befehlsfolge~!..
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-1  Ein Kapitel
-   1.1  Ein Abschnitt
-        1.1.1  Ein Unterabschnitt
-               1.1.1.1  Ein Paragraph
-                        1.1.1.1.1 Ein Unterparagraph
+1  Ein Kapitel 1. Ordnung
+   1.1  Ein Kapitel 2. Ordnung
+        1.1.1  Ein Kapitel 3. Ordnung
+               1.1.1.1  Ein Kapitel 4. Ordnung
+                        1.1.1.1.1 Ein Kapitel 5. Ordnung
+                                  1.1.1.1.1.1 Ein Kapitel 6. Ordnung
 
-2  Ein neues Kapitel
+2  Ein neues Kapitel 1. Ordnung
 !end_verbatim
 (!EXAMPLE_END)
 
-WinHelp und ST-Guide bieten die Möglichkeit, Texte auch in kleinen
-Dialogen, sogenannten Popups darzustellen. Möchten Sie, daß ein
-Kapitel, Abschnitt, Unterabschnitt, Paragraph oder Unterparagraph in einem Popup dargestellt
-wird, benutzen Sie hierfür die Befehle
+WinHelp und ST-Guide bieten die Möglichkeit, Texte auch in kleinen Dialogen, sogenannten Popups darzustellen. 
+Möchten Sie, daß ein Kapitel, Abschnitt, Unterabschnitt, Paragraph oder Unterparagraph in einem Popup dargestellt
+wird, benutzen Sie hierfür die nachfolgenden Befehle:
 
 !index (!kw [pnode])
 !index (!kw [psubnode])
 !index (!kw [psubsubnode])
 !index (!kw [psubsubsubnode])
 !index (!kw [psubsubsubsubnode])
+!index (!kw [psubsubsubsubsubnode])
 !begin_itemize !compressed
-!item (!KW [pnode]) für Popup-Kapitel,
-!item (!KW [psubnode]) für Popup-Abschnitte,
-!item (!KW [psubsubnode]) für Popup-Unterabschnitte,
-!item (!KW [psubsubsubnode]) für Popup-Paragraphen und
-!item (!KW [psubsubsubsubnode]) für Popup-Unterparagraph
+!item (!KW [pnode])                 für Popup-Kapitel 1. Ordnung, 
+!item (!KW [psubnode])              für Popup-Kapitel 2. Ordnung, 
+!item (!KW [psubsubnode])           für Popup-Kapitel 3. Ordnung, 
+!item (!KW [psubsubsubnode])        für Popup-Kapitel 4. Ordnung, 
+!item (!KW [psubsubsubsubnode])     für Popup-Kapitel 5. Ordnung, 
+!item (!KW [psubsubsubsubsubnode])  für Popup-Kapitel 6. Ordnung. 
 !end_itemize
 
 Sie können auch Kapitel erstellen, die nicht in Inhaltsverzeichnissen
-aufgeführt werden. Dazu benutzen Sie die Befehle
+aufgeführt werden. Dazu benutzen Sie diese Befehle:
 
 !index (!kw [node*])
+!index (!kw [subnode*])
+!index (!kw [subsubnode*])
+!index (!kw [subsubsubnode*])
+!index (!kw [subsubsubsubnode*])
+!index (!kw [subsubsubsubsubnode*])
 !index (!kw [pnode*])
 !index (!kw [psubnode*])
 !index (!kw [psubsubnode*])
 !index (!kw [psubsubsubnode*])
 !index (!kw [psubsubsubsubnode*])
-!index (!kw [subnode*])
-!index (!kw [subsubnode*])
-!index (!kw [subsubsubnode*])
-!index (!kw [subsubsubsubnode*])
+!index (!kw [psubsubsubsubsubnode*])
 !begin_itemize !compressed
-!item (!KW [node*]) für Kapitel,
-!item (!KW [subnode*]) für Abschnitte,
-!item (!KW [subsubnode*]) für Unterabschnitte,
-!item (!KW [subsubsubnode*]) für Paragraphen,
-!item (!KW [subsubsubsubnode*]) für Unterparagraphen, 
-!item (!KW [pnode*]) für Popup-Kapitel,
-!item (!KW [psubnode*]) für Popup-Abschnitte,
-!item (!KW [psubsubnode*]) für Popup-Unterabschnitte,
-!item (!KW [psubsubsubnode*]) für Popup-Paragraphen und
-!item (!KW [psubsubsubsubnode*]) für Popup-Unterparagraphen.
+!item (!KW [node*])                 für Kapitel 1. Ordnung,
+!item (!KW [subnode*])              für Kapitel 2. Ordnung,
+!item (!KW [subsubnode*])           für Kapitel 3. Ordnung,
+!item (!KW [subsubsubnode*])        für Kapitel 4. Ordnung,
+!item (!KW [subsubsubsubnode*])     für Kapitel 5. Ordnung,
+!item (!KW [subsubsubsubsubnode*])  für Kapitel 6. Ordnung,
+ 
+!item (!KW [pnode*])                für Popup-Kapitel 1. Ordnung,
+!item (!KW [psubnode*])             für Popup-Kapitel 2. Ordnung,
+!item (!KW [psubsubnode*])          für Popup-Kapitel 3. Ordnung,
+!item (!KW [psubsubsubnode*])       für Popup-Kapitel 4. Ordnung,
+!item (!KW [psubsubsubsubnode*])    für Popup-Kapitel 5. Ordnung,
+!item (!KW [psubsubsubsubsubnode*]) für Popup-Kapitel 6. Ordnung.
 !end_itemize
 
 (!HINTS)
-
 !begin_enumerate !compressed
-!item Kapitel, die nicht in Inhaltsverzeichnissen erscheinen, werden
-auch referenziert, werden aber nicht nummeriert.
+!item Kapitel, die nicht in Inhaltsverzeichnissen erscheinen, werden auch referenziert, werden aber nicht nummeriert.
 
 !index (!kw [no_numbers])
-!item UDO nummeriert Kapitel automatisch. Falls Sie auf die Angabe
-dieser Nummern verzichten möchten, sollten Sie den Schalter
-(!KW [no_numbers]) im Vorspann setzen.
+!item UDO nummeriert Kapitel automatisch. (!nl)
+      Falls Sie auf die Angabe dieser Nummern verzichten möchten, sollten Sie den Schalter (!KW [no_numbers]) im Vorspann setzen.
 !end_enumerate
 
 !end_node

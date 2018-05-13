@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubnode])
 !html_name cmd_subsubsubnode
 
-Paragraph einleiten.
+Beginnt ein Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,9 +10,8 @@ Paragraph einleiten.
 !item [(!SYNTAX)] (!T)!/subsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Paragraph mit der Bezeichnung ""(!TEXT)""
-ein. Ein Paragraph ist die vierte Gliederungsebene
-und wird mit #.#.#.# nummeriert.
+Leitet ein Kapitel 4. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+Es wird mit #.#.#.# nummeriert.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -24,10 +23,10 @@ und wird mit #.#.#.# nummeriert.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubsubnode Titel des Paragraphs
+!subsubsubnode Titel des Kapitels 4. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubheading Titel des Paragraphs
+!subsubsubheading Titel des Kapitels 4. Ordnung
 (!EXAMPLE_END)
 
 !end_node

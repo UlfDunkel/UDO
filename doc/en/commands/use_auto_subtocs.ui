@@ -1,7 +1,7 @@
 !begin_node (!kw [use_auto_subtocs])
 !html_name cmd_use_auto_subtocs
 
-Automatically create tables of contents in chapters.
+Automatically create tables of contents of the level 2 chapters.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,8 +10,11 @@ Automatically create tables of contents in chapters.
 !item [(!SYNTAX)] (!T)!/use_auto_subtocs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Tells UDO to use the (!KW [subtoc]) command automatically in every chapter.
-The example shows how to use them inside the hypertext formats.
+Tells UDO to use the (!KW [subtoc]) command automatically in every
+chapter of level 1. The example shows how to use them inside the hypertext
+formats.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [subtoc]), (!KW [ignore_subtoc]), (!link [Tables of contents] [Tables of contents])

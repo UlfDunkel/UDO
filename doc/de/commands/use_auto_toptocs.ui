@@ -1,7 +1,7 @@
 !begin_node (!kw [use_auto_toptocs])
 !html_name cmd_use_auto_toptocs
 
-Automatische Auflistung aller Abschnitte.
+Automatische Auflistung aller übergeordneten Kapitel.
 
 !begin_xlist [(!TYPEPOSITION)]
 

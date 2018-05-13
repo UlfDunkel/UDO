@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubnode])
 !html_name cmd_subsubnode
 
-Unterabschnitt einleiten.
+Beginnt ein Kapitel 3. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,8 +10,8 @@ Unterabschnitt einleiten.
 !item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Unterabschnitt mit der Bezeichnung
-""(!TEXT)"" ein. Unterabschnitte erscheinen in Inhaltsverzeichnissen.
+Leitet ein Kapitel 3. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+Es wird mit #.#.# nummeriert.
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
@@ -21,10 +21,10 @@ Leitet einen Unterabschnitt mit der Bezeichnung
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubnode Titel des Unterabschnitts
+!subsubnode Titel des Kapitels 3. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubheading Titel des Unterabschnitts
+!subsubheading Titel des Kapitels 3. Ordnung
 (!EXAMPLE_END)
 
 !end_node

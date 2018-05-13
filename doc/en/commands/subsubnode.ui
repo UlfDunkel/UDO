@@ -10,8 +10,8 @@ Start a subsection.
 !item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Starts a new subsection named ""(!TEXT)"".
-Subsections will appear in table of contents.
+Starts a new subsection named ""(!TEXT)"". Subsections are numbered
+with #.#.# and will appear in table of contents.
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])

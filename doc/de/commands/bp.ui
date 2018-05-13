@@ -1,7 +1,7 @@
 !begin_node (!kw [bp])
 !html_name cmd_bp
 
-Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph einleiten.
+Beginnt ein Popup-Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 

@@ -1,7 +1,7 @@
 !begin_node (!kw [pnode])
 !html_name cmd_pnode
 
-Popup-Kapitel einleiten.
+Beginnt ein Popup-Kapitel 1. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -21,10 +21,10 @@ ST-Guide und bei WinHelp als Popup dargestellt.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!pnode Titel des Popups
+!pnode Titel des Popup-Kapitel 1. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des Popups
+!heading Titel des Popup-Kapitel 1. Ordnung
 (!EXAMPLE_END)
 
 !end_node

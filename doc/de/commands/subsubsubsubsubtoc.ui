@@ -1,0 +1,32 @@
+!begin_node (!kw [subsubsubsubsubtoc])
+!html_name cmd_subsubsubsubsubtoc
+
+Listet in Inhaltsverzeichnissen aller Kapitel 5. Ordnung die untergeordneten Kapitel 6. Ordnung auf.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubtoc [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Am Ende von Kapiteln 5. Ordnung werden alle untergeordneten Kapitel 6. Ordnung als Inhaltsverzeichnis aufgelistet.
+So können Sie in Hypertexten zu den untergeordneten Kapiteln weiterverzweigen. 
+UDO gibt dieses Inhaltsverzeichnis in einem Kapitel 5. Ordnung nicht aus, wenn der Schalter (!KW [ignore_subsubsubsubsubtoc]) dort verwendet wurde. 
+Die Ausgabe dieser Inhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubsubsubsubtocs]) auch automatisieren.
+
+!item [(!EXISTSSINCE)] Version~7.04
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node

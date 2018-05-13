@@ -1,7 +1,7 @@
 !begin_node (!kw [psubsubsubsubnode*])
 !html_name cmd_psubsubsubsubnode_asterisk
 
-Versteckten Popup-Unterparagraph einleiten.
+Beginnt ein Popup-Kapitel 5. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -24,10 +24,10 @@ in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubsubnode* Ein versteckter Popup-Unterparagraph
+!psubsubsubsubnode* Ein verstecktes Popup-Kapitel 5. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubheading Ein versteckter Popup-Unterparagraph
+!subsubsubsubheading Ein verstecktes Popup-Kapitel 5. Ordnung
 (!EXAMPLE_END)
 
 !end_node

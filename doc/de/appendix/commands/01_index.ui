@@ -223,6 +223,7 @@
 !include commands/html_merge_subsubnodes.ui
 !include commands/html_merge_subsubsubnodes.ui
 !include commands/html_merge_subsubsubsubnodes.ui
+!include commands/html_merge_subsubsubsubsubnodes.ui
 !include commands/html_modern_alignment.ui
 !include commands/html_modern_backcolor.ui
 !include commands/html_modern_backimage.ui
@@ -278,6 +279,7 @@
 !include commands/ignore_links.ui
 !include commands/ignore_raw_footer.ui
 !include commands/ignore_raw_header.ui
+!include commands/ignore_subsubsubsubsubtoc.ui
 !include commands/ignore_subsubsubsubtoc.ui
 !include commands/ignore_subsubsubtoc.ui
 !include commands/ignore_subsubtoc.ui
@@ -495,8 +497,10 @@
 !include commands/sssh.ui
 !include commands/sssn.ui
 !include commands/sssn+.ui
+!include commands/ssssh.ui
 !include commands/ssssn.ui
 !include commands/ssssn+.ui
+!include commands/sssssh.ui
 !include commands/sssssn.ui
 !include commands/sssssn+.ui
 !include commands/stg.ui
@@ -516,8 +520,11 @@
 !include commands/subsubsubsubheading.ui
 !include commands/subsubsubsubnode.ui
 !include commands/subsubsubsubnode+.ui
+!include commands/subsubsubsubsubheading.ui
 !include commands/subsubsubsubsubnode.ui
 !include commands/subsubsubsubsubnode+.ui
+!include commands/subsubsubsubsubtoc.ui
+!include commands/subsubsubsubsubtoc_offset.ui
 !include commands/subsubsubsubtoc.ui
 !include commands/subsubsubsubtoc_offset.ui
 !include commands/subsubsubtoc.ui
@@ -577,6 +584,7 @@
 !include commands/use_alias_inside_index.ui
 !include commands/use_ansi_tables.ui
 !include commands/use_auto_helpids.ui
+!include commands/use_auto_subsubsubsubsubtocs.ui
 !include commands/use_auto_subsubsubsubtocs.ui
 !include commands/use_auto_subsubsubtocs.ui
 !include commands/use_auto_subsubtocs.ui

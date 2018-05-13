@@ -1,7 +1,7 @@
 !begin_node (!kw [sn])
 !html_name cmd_sn
 
-Abschnitt einleiten.
+Beginnt ein Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 

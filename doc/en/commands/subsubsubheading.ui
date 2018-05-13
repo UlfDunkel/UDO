@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubheading])
 !html_name cmd_subsubsubheading
 
-Output a paragraph heading.
+Output a chapter headline for the 4th most important heading.
 
 !begin_xlist [(!TYPEPOSITION)]
 

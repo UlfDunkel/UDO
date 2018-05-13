@@ -1,7 +1,7 @@
 !begin_node (!kw [begin_node])
 !html_name cmd_begin_node
 
-Start new chapter/section/subsection/paragraph/subparagraph.
+Starts a new chapter of any depth in the current structure hierarchy.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -11,7 +11,7 @@ Start new chapter/section/subsection/paragraph/subparagraph.
 
 !item [(!DESCRIPTION)]
 Depending on the current level of your document structure,
-starts a new chapter, section, subsection or paragraph.
+starts a new chapter with the name ""(!TEXT)"".
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 

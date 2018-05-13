@@ -1,7 +1,8 @@
 !begin_node (!kw [begin_node*])
 !html_name cmd_begin_node_asterisk
 
-Start new chapter/section/subsection/paragraph/subparagraph without entry in table of contents.
+Starts a new chapter of any depth in the current structure hierarchy,
+without entry in table of contents.
 
 !begin_xlist [(!TYPEPOSITION)]
 

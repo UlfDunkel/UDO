@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubsubheading])
 !html_name cmd_subsubsubsubheading
 
-Eine Unterparagraphen-Überschrift ausgeben.
+Eine Überschrift in der Schriftgröße eines Kapitels 5. Ordnung ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -14,14 +14,20 @@ Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
 der gleichen Schriftart und -größe wie eine
 Unterparagraphen-Überschrift ausgegeben wird.
 
-!item [(!EXAMPLE)]
-(!T)!/subsubsubsubheading Eine Überschrift(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~16
 
 !item [(!SEEALSO)]
 (!KW [heading]), (!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubheading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Eine Überschrift
+(!EXAMPLE_END)
 
 !end_node

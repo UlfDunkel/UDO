@@ -10,11 +10,9 @@ Inhaltsverzeichnis ""alleine"" ausgeben.
 !item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Gibt ein komplettes Inhaltsverzeichnis aus. Im
-Gegensatz zu (!KW [tableofcontents]) wird dabei bei
-Hypertextformaten keine eigene Seite erzeugt. Im
-Beispiel würde das Inhaltsverzeichnis bei der
-Umwandlung ins ST-Guide-Format ausgegeben.
+Gibt ein komplettes Inhaltsverzeichnis aus. 
+Im Gegensatz zu (!KW [tableofcontents]) wird dabei bei Hypertextformaten keine eigene Seite erzeugt. 
+Im Beispiel würde das Inhaltsverzeichnis bei der Umwandlung ins ST-Guide-Format ausgegeben.
 
 !item [(!SEEALSO)]
 (!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_compressed_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])

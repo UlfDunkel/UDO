@@ -1,7 +1,7 @@
 !begin_node (!kw [begin_pnode*])
 !html_name cmd_begin_pnode_asterisk
 
-Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Popup-Kapitel beliebiger Ordnung in der Gliederungshierarchie ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 

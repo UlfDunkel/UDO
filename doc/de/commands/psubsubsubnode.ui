@@ -1,7 +1,7 @@
 !begin_node (!kw [psubsubsubnode])
 !html_name cmd_psubsubsubnode
 
-Popup-Paragraph einleiten.
+Beginnt ein Popup-Kapitel 4. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -23,10 +23,10 @@ beim ST-Guide und bei WinHelp als Popup dargestellt.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubsubsubnode Ein Popup-Paragraph
+!psubsubsubnode Ein Popup-Kapitel 4. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubheading Ein Popup-Paragraph
+!subsubsubheading Ein Popup-Kapitel 4. Ordnung
 (!EXAMPLE_END)
 
 !end_node

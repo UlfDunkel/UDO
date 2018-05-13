@@ -1,7 +1,7 @@
 !begin_node (!kw [begin_node])
 !html_name cmd_begin_node
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph einleiten.
+Beginnt ein Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,10 +10,7 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph einleiten.
 !item [(!SYNTAX)] (!T)!/begin_node (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet, abhängig von der momentanen Gliederungsebene,
-ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
-mit der Bezeichnung ""(!TEXT)"" ein.
-Kapitel erscheinen in Inhaltsverzeichnissen.
+Leitet ein Kapitel beliebiger Ordnung mit der Bezeichnung ""(!TEXT)"" ein.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
@@ -25,18 +22,18 @@ Kapitel erscheinen in Inhaltsverzeichnissen.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!begin_node Titel des Kapitels
+!begin_node Titel des Kapitel 1. Ordnung
 ...
-    !begin_node Titel des Abschnitts
+    !begin_node Titel des Kapitel 2. Ordnung
     ...
     !end_node
 ...
 !end_node
 !end_verbatim
 (!EXAMPLE_AFTER)
-!heading Titel des Kapitels
+!heading Titel des Kapitel 1. Ordnung
 !.. 
-!subheading Titel des Abschnitts
+!subheading Titel des Kapitel 2. Ordnung
 !..
 (!EXAMPLE_END)
 

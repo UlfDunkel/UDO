@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubnode*])
 !html_name cmd_subsubsubnode_asterisk
 
-Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 4. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -24,10 +24,10 @@ in Inhaltsverzeichnissen erscheint.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubsubnode* Titel des versteckten Paragraphs
+!subsubsubnode* Titel des versteckten Kapitels 4. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubheading Titel des versteckten Paragraphs
+!subsubsubheading Titel des versteckten Kapitels 4. Ordnung
 (!EXAMPLE_END)
 
 !end_node

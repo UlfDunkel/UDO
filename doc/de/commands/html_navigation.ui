@@ -16,13 +16,13 @@ werden. Dabei sind für [(!NAME)] momentan folgende Parameter möglich:
 !begin_description
 
 !item [line]
-Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben 
+Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben
 am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
 standardmäßig ohne Ordnersymbole, mit ""(!code [~>~])"" getrennt.
 
 Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben
-werden.  Dieser wird automatisch vorn und hinten mit einem Leerzeichen
-ergänzt, damit der Separator  nicht an den Kapitelnamen klebt.
+werden. Dieser wird automatisch vorn und hinten mit einem Leerzeichen
+ergänzt, damit der Separator nicht an den Kapitelnamen klebt.
 
 Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der
 CSS-Klasse (!code [UDO_nav_line]) eingebettet. So kann ihr Inhalt über

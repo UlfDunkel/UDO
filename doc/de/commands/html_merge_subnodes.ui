@@ -1,7 +1,7 @@
 !begin_node (!kw [html_merge_subnodes])
 !html_name cmd_html_merge_subnodes
 
-Abschnitte, Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
+Alle Kapitelhierarchien ab der 2. Gliederungsstufe zusammenfassen (nur HTML).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,15 +10,14 @@ Abschnitte, Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_merge_subnodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann eingesetzt, wird
-ein Kapitel samt allen zugehörigen Abschnitten,
-Unterabschnitten und Paragraphen in einer Datei
-zusammengefasst.
+Wird dieser Schalter im Vorspann angegeben, werden alle
+Kapitelhierarchien ab der 2. Gliederungsebene bei der
+Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
 !item [(!SEEALSO)]
-(!KW [html_merge_nodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+(!KW [html_merge_nodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes]), (!KW [html_merge_subsubsubsubnodes]), (!KW [html_merge_subsubsubsubsubnodes])
 
 !end_xlist
 

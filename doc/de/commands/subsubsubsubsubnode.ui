@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubsubsubnode])
 !html_name cmd_subsubsubsubsubnode
 
-Unterparagraph einleiten.
+Beginnt ein Kapitel 6. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,8 +10,8 @@ Unterparagraph einleiten.
 !item [(!SYNTAX)] (!T)!/subsubsubsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Unterparagraph mit der Bezeichnung ""(!TEXT)"" ein. Ein Unterparagraph ist die sechste Gliederungsebene
-und wird mit #.#.#.#.#.# nummeriert.
+Leitet ein Kapitel 6. Ordnung mit der Bezeichnung ""(!TEXT)"" ein. 
+Es wird mit #.#.#.#.#.# nummeriert.
 
 !item [(!EXISTSSINCE)] Version~7.04
 
@@ -23,10 +23,10 @@ und wird mit #.#.#.#.#.# nummeriert.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subsubsubsubsubnode Titel des Unterparagraphs
+!subsubsubsubsubnode Titel des Kapitels 6. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subsubsubsubsubheading Titel des Unterparagraphs
+!subsubsubsubsubheading Titel des Kapitels 6. Ordnung
 (!EXAMPLE_END)
 
 !end_node

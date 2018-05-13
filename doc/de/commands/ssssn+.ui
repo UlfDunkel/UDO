@@ -1,7 +1,7 @@
 !begin_node (!kw [ssssn*])
 !html_name cmd_ssssn_asterisk
 
-Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel 5. Ordnung ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 

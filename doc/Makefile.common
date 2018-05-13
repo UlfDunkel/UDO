@@ -185,6 +185,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/appendix/history/00_index.ui \
 		$(srcdir)/appendix/history/ver712.ui \
 		$(srcdir)/appendix/history/ver711.ui \
+		$(srcdir)/appendix/history/ver704.ui \
 		$(srcdir)/appendix/history/ver703.ui \
 		$(srcdir)/appendix/history/ver702.ui \
 		$(srcdir)/appendix/history/ver701.ui \
@@ -392,6 +393,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/html_merge_subsubnodes.ui \
 		$(srcdir)/commands/html_merge_subsubsubnodes.ui \
 		$(srcdir)/commands/html_merge_subsubsubsubnodes.ui \
+		$(srcdir)/commands/html_merge_subsubsubsubsubnodes.ui \
 		$(srcdir)/commands/html_modern_alignment.ui \
 		$(srcdir)/commands/html_modern_backcolor.ui \
 		$(srcdir)/commands/html_modern_backimage.ui \
@@ -435,6 +437,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/ignore_links.ui \
 		$(srcdir)/commands/ignore_raw_footer.ui \
 		$(srcdir)/commands/ignore_raw_header.ui \
+		$(srcdir)/commands/ignore_subsubsubsubsubtoc.ui \
 		$(srcdir)/commands/ignore_subsubsubsubtoc.ui \
 		$(srcdir)/commands/ignore_subsubsubtoc.ui \
 		$(srcdir)/commands/ignore_subsubtoc.ui \
@@ -580,8 +583,10 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/sssh.ui \
 		$(srcdir)/commands/sssn.ui \
 		$(srcdir)/commands/sssn+.ui \
+		$(srcdir)/commands/ssssh.ui \
 		$(srcdir)/commands/ssssn.ui \
 		$(srcdir)/commands/ssssn+.ui \
+		$(srcdir)/commands/sssssh.ui \
 		$(srcdir)/commands/sssssn.ui \
 		$(srcdir)/commands/sssssn+.ui \
 		$(srcdir)/commands/=stg.ui \
@@ -602,8 +607,11 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/subsubsubsubheading.ui \
 		$(srcdir)/commands/subsubsubsubnode.ui \
 		$(srcdir)/commands/subsubsubsubnode+.ui \
+		$(srcdir)/commands/subsubsubsubsubheading.ui \
 		$(srcdir)/commands/subsubsubsubsubnode.ui \
 		$(srcdir)/commands/subsubsubsubsubnode+.ui \
+		$(srcdir)/commands/subsubsubsubsubtoc.ui \
+		$(srcdir)/commands/subsubsubsubsubtoc_offset.ui \
 		$(srcdir)/commands/subsubsubsubtoc.ui \
 		$(srcdir)/commands/subsubsubsubtoc_offset.ui \
 		$(srcdir)/commands/subsubsubtoc.ui \
@@ -646,6 +654,7 @@ UDO_DOC=	$(srcdir)/udo.u \
 		$(srcdir)/commands/use_alias_inside_index.ui \
 		$(srcdir)/commands/use_ansi_tables.ui \
 		$(srcdir)/commands/use_auto_helpids.ui \
+		$(srcdir)/commands/use_auto_subsubsubsubsubtocs.ui \
 		$(srcdir)/commands/use_auto_subsubsubsubtocs.ui \
 		$(srcdir)/commands/use_auto_subsubsubtocs.ui \
 		$(srcdir)/commands/use_auto_subsubtocs.ui \

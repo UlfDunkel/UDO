@@ -1,7 +1,7 @@
 !begin_node (!kw [bn])
 !html_name cmd_bn
 
-Start new chapter/section/subsection/paragraph/subparagraph.
+Starts a new chapter of any depth in the current structure hierarchy.
 
 !begin_xlist [(!TYPEPOSITION)]
 

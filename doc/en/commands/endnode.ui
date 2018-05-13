@@ -1,7 +1,7 @@
 !begin_node (!kw [endnode])
 !html_name cmd_endnode
 
-Finish a chapter/section/subsection/paragraph.
+Finish a new chapter of any depth in the current structure hierarchy.
 
 !begin_xlist [(!TYPEPOSITION)]
 

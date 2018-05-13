@@ -1,7 +1,7 @@
 !begin_node (!kw [html_merge_subsubsubsubnodes])
 !html_name cmd_html_merge_subsubsubsubnodes
 
-Merge subparagraphs (HTML only).
+Merge all nodes from the 5th hierarchical level and beyond (HTML only).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -17,7 +17,7 @@ the subparagraphs, too.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
 
 !item [(!SEEALSO)]
-(!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes])
+(!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes]), (!KW [html_merge_subsubsubnodes]), (!KW [html_merge_subsubsubsubsubnodes])
 
 !end_xlist
 

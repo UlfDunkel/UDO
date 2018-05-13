@@ -29,6 +29,8 @@
 #   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 # 2013:
 #   fd  Oct 25: subchapter 'HTML markup with CSS' added
+# 2014:
+#   fd  Jun 20: FAQ item added: 'How to navigate in HTML pages using the keyboard'
 #
 ################################################################################
 
@@ -36,13 +38,32 @@
 !html_name format_html
 !label HTML
 
-HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt
-werden. Es ist zudem eines der meistgenutzten Formate für
-Online-Dokumentationen. Logischerweise gibt es zum HTML-Ausgabeformat
-auch die meisten Fragen. Hier sind die häufigsten als FAQ
-zusammengefasst.
+HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. 
+Es ist zudem eines der meistgenutzten Formate für Online-Dokumentationen. 
+Logischerweise gibt es zum HTML-Ausgabeformat auch die meisten Fragen. 
+Hier sind die häufigsten als FAQ zusammengefasst.
 
 !begin_description !not_compressed
+
+##################################################
+
+!index Kann ich per Tastatur in den HTML-Seiten blättern?
+!item [Kann ich per Tastatur in den HTML-Seiten blättern?]
+Normalerweise werden bei der HTML-Ausgabe pro Seite in den Kopf- und Fußzeilen anklickbare Navigationsbuttons erzeugt.
+Diese Buttons zeigen die Hierarchie des Dokuments mit einem Home-Button und einigen Pfeil-Buttons.
+
+Ab Version 7.04 schreibt UDO in die Anker-Tags dieser anklickbaren Buttons IDs:
+!begin_blist !compressed
+!item [UDO_nav_hm_HEAD] Home-Button: Er führt zurück auf die Startseite des HTML-Dokuments.
+!item [UDO_nav_lf_HEAD] Nach links: Dieser Button führt zurück auf die logisch vorige Dokumentseite.
+!item [UDO_nav_up_HEAD] Nach oben: Dieser Button führt eine Kapitelhierarchiestufe zurück.
+!item [UDO_nav_rg_HEAD] Nach rechts: Dieser Button führt zurück auf die logisch folgende Dokumentseite.
+!end_blist
+
+Um diese Navigationsbuttons per Tastatur ansprechen zu können, sollten Sie JavaScript einsetzen.
+Das HTML-Attribut ""accesskey"" benötigt je nach Browser unterschiedliche Zusatztasten und spricht z.B. keine Pfeiltasten an.
+Achten Sie darauf, daß Sie die Navigationsbuttons nicht mittels (!KW [no_headlines]) und (!KW [no_footers]) im Vorspann abgeschaltet haben.
+Binden Sie dann mit (!KW [html_script_name]) ein JavaScript-Skript ein, das Tastendrücke auswertet.
 
 ##################################################
 

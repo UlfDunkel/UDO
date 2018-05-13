@@ -1,7 +1,7 @@
 !begin_node (!kw [heading])
 !html_name cmd_heading
 
-Output a chapter headline.
+Output a chapter headline for the most important heading.
 
 !begin_xlist [(!TYPEPOSITION)]
 

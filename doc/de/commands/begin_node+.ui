@@ -1,7 +1,7 @@
 !begin_node (!kw [begin_node*])
 !html_name cmd_begin_node_asterisk
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph/Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+Beginnt ein Kapitel beliebiger Ordnung in der Gliederungshierarchie ohne Eintrag im Inhaltsverzeichnis.
 
 !begin_xlist [(!TYPEPOSITION)]
 

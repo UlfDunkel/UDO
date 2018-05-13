@@ -1,0 +1,32 @@
+!begin_node (!kw [subsubsubsubsubheading])
+!html_name cmd_subsubsubsubsubheading
+
+Output a chapter headline for the 6th most important heading.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command prints out ""(!TEXT)"" as a headline using the
+subsubsubsubsubnode font and fontsize.
+
+!item [(!EXISTSSINCE)] Version~7.04
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading]), (!KW [subsubsubsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubsubheading A headline
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubsubheading A headline
+(!EXAMPLE_END)
+
+!end_node

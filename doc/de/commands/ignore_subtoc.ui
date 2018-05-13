@@ -1,7 +1,7 @@
 !begin_node (!kw [ignore_subtoc])
 !html_name cmd_ignore_subtoc
 
-In dem zugehörigen Node kein ""subtoc"" ausgeben.
+Im aktuellen Kapitel 1. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 2. Ordnung (""subtoc"") ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,8 +10,9 @@ In dem zugehörigen Node kein ""subtoc"" ausgeben.
 !item [(!SYNTAX)] (!T)!/ignore_subtoc(!t)
 
 !item [(!DESCRIPTION)]
-Wenn innerhalb eines Nodes dieser Schalter gesetzt
-wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+Wenn innerhalb eines Kapitels 1. Ordnung dieser Schalter gesetzt wird,
+wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten
+Kapiteln 2. Ordnung am Ende aufgelistet.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 

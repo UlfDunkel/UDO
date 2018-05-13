@@ -1,7 +1,7 @@
 !begin_node (!kw [subnode])
 !html_name cmd_subnode
 
-Abschnitt einleiten.
+Beginnt ein Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,8 +10,8 @@ Abschnitt einleiten.
 !item [(!SYNTAX)] (!T)!/subnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet einen Abschnitt mit der Bezeichnung ""(!TEXT)""
-ein. Abschnitte erscheinen in Inhaltsverzeichnissen.
+Leitet ein Kapitel 2. Ordnung mit der Bezeichnung ""(!TEXT)"" ein.
+Es wird mit #.# nummeriert.
 
 !item [(!SEEALSO)]
 (!KW [psubnode]), (!KW [node]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
@@ -21,10 +21,10 @@ ein. Abschnitte erscheinen in Inhaltsverzeichnissen.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!subnode Titel des Abschnitts
+!subnode Titel des Kapitels 2. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subheading Titel des Abschnitts
+!subheading Titel des Kapitels 2. Ordnung
 (!EXAMPLE_END)
 
 !end_node

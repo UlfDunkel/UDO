@@ -1,7 +1,7 @@
 !begin_node (!kw [psubnode])
 !html_name cmd_psubnode
 
-Popup-Abschnitt einleiten.
+Beginnt ein Popup-Kapitel 2. Ordnung.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -21,10 +21,10 @@ ST-Guide und bei WinHelp als Popup dargestellt.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!psubnode Ein Popup-Abschnitt
+!psubnode Popup-Kapitel 2. Ordnung
 !end_verbatim
 (!EXAMPLE_AFTER)
-!subheading Ein Popup-Abschnitt
+!subheading Popup-Kapitel 2. Ordnung
 (!EXAMPLE_END)
 
 !end_node

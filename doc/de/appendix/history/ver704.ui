@@ -31,7 +31,7 @@
       UDO bietet ab sofort eine weitere, 6. Gliederungsebene für Kapitelhierarchien.
       Diese nachfolgenden neuen Kommandos stehen dafür zur Verfügung:
       
-      !begin_itemize
+      !begin_itemize !compressed
       !item (!kw [html_merge_subsubsubsubsubnodes])
       !item (!kw [ignore_subsubsubsubsubtoc])
       !item (!kw [psssss*])
@@ -59,22 +59,22 @@
 
 # ----------------------------------------
 !item [Navigationsbuttons, CSS und JavaScript]
-###   Copy the following description from the HTML FAQ section in format_html.XX:
+###   Copy the following description from the HTML FAQ section in xx/formats/html.ui:
       Normalerweise werden bei der HTML-Ausgabe pro Seite in den Kopf- und Fußzeilen anklickbare Navigationsbuttons erzeugt.
       Diese Buttons zeigen die Hierarchie des Dokuments mit einem Home-Button und einigen Pfeil-Buttons.
       
       Ab Version 7.04 schreibt UDO in die Anker-Tags dieser anklickbaren Buttons IDs:
-      !begin_blist
-      !item [UDO_nav_hm] Home-Button: Er führt zurück auf die Startseite des HTML-Dokuments.
-      !item [UDO_nav_lf] Nach links: Dieser Button führt zurück auf die logisch vorige Dokumentseite.
-      !item [UDO_nav_up] Nach oben: Dieser Button führt eine Kapitelhierarchiestufe zurück.
-      !item [UDO_nav_rg] Nach rechts: Dieser Button führt zurück auf die logisch folgende Dokumentseite.
+      !begin_blist !compressed
+      !item [UDO_nav_hm_HEAD] Home-Button: Er führt zurück auf die Startseite des HTML-Dokuments.
+      !item [UDO_nav_lf_HEAD] Nach links: Dieser Button führt zurück auf die logisch vorige Dokumentseite.
+      !item [UDO_nav_up_HEAD] Nach oben: Dieser Button führt eine Kapitelhierarchiestufe zurück.
+      !item [UDO_nav_rg_HEAD] Nach rechts: Dieser Button führt zurück auf die logisch folgende Dokumentseite.
       !end_blist
       
       Um diese Navigationsbuttons per Tastatur ansprechen zu können, sollten Sie JavaScript einsetzen.
       Das HTML-Attribut ""accesskey"" benötigt je nach Browser unterschiedliche Zusatztasten und spricht z.B. keine Pfeiltasten an.
-      Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!kw [no_headlines]) und (!kw [no_footers]) im Vorspann abgeschaltet haben.
-      Binden Sie dann mit (!kw [html_script_name]) ein JavaScript-Skript ein, das Tastendrücke auswertet.
+      Achten Sie darauf, dass Sie die Navigationsbuttons nicht mittels (!KW [no_headlines]) und (!KW [no_footers]) im Vorspann abgeschaltet haben.
+      Binden Sie dann mit (!KW [html_script_name]) ein JavaScript-Skript ein, das Tastendrücke auswertet.
 # ----------------------------------------
 
 # ----------------------------------------

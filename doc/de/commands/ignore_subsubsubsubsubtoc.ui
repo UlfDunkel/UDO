@@ -1,0 +1,24 @@
+!begin_node (!kw [ignore_subsubsubsubsubtoc])
+!html_name cmd_ignore_subsubsubsubsubtoc
+
+Im aktuellen Kapitel 5. Ordnung kein Inhaltsverzeichnis für die untergeordneten Kapitel 6. Ordnung (""subsubsubsubsubtoc"") ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubsubsubsubtoc(!t)
+
+!item [(!DESCRIPTION)]
+Wenn innerhalb eines Kapitels 5. Ordnung dieser Schalter gesetzt wird,
+wird kein (automatisches) Inhaltsverzeichnis mit den untergeordneten
+Kapiteln 6. Ordnung am Ende aufgelistet.
+
+!item [(!EXISTSSINCE)] Version~7.04
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubsubsubsubtocs]), (!KW [subsubsubsubsubtoc])
+
+!end_xlist
+
+!end_node

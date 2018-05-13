@@ -1,7 +1,7 @@
 !begin_node (!kw [en])
 !html_name cmd_en
 
-Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
+Beendet ein Kapitel beliebiger Ordnung in der Gliederungshierarchie.
 
 !begin_xlist [(!TYPEPOSITION)]
 
