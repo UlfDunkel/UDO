@@ -7348,7 +7348,8 @@ LOCAL void toc_output(TOCTYPE currdepth, const int depth, _BOOL for_apx, _BOOL n
 						
 						if (no_numbers)
 						{
-							sprintf(n, form_t_nonumbers[currdepth][level], ref);
+							strcpy(n, form_t_nonumbers[currdepth][level]);
+							replace_once(n, "%s", ref);
 						} else
 						{
 							strcpy(n, form_t_numbers[currdepth][level]);
