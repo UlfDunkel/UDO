@@ -1,8 +1,8 @@
 !begin_node (!kw [html_merge_nodes])
 !html_name cmd_html_merge_nodes
 
-Merge all nodes from the first hierarchical level and beyond.
-A single HTML file will be generated (HTML only).
+Merge all chapter hierarchies from the 1st outline level (HTML only).
+Only one HTML file will be created.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -11,8 +11,7 @@ A single HTML file will be generated (HTML only).
 !item [(!SYNTAX)] (!T)!/html_merge_nodes(!t)
 
 !item [(!DESCRIPTION)]
-If you use this switch inside the preamble of your UDO source file
-UDO will save only one HTML file that will contain the whole text.
+If you use this switch inside the UDO source preamble, all chapter hierarchies from the 1st outline level will be combined into one single HTML file.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 

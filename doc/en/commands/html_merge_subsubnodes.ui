@@ -1,7 +1,7 @@
 !begin_node (!kw [html_merge_subsubnodes])
 !html_name cmd_html_merge_subsubnodes
 
-Merge all nodes from the 3rd hierarchical level and beyond (HTML only).
+Merge all chapter hierarchies from the 3rd outline level (HTML only).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -10,9 +10,7 @@ Merge all nodes from the 3rd hierarchical level and beyond (HTML only).
 !item [(!SYNTAX)] (!T)!/html_merge_subsubnodes(!t)
 
 !item [(!DESCRIPTION)]
-If you use this switch inside the preamble of your source file UDO
-will save an HTML file for each section. These files will contain the
-subsections and paragraphs, too.
+If you use this switch inside the UDO source preamble, all chapter hierarchies from the 3rd outline level will be combined into one single HTML file.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
