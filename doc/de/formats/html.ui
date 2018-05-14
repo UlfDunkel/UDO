@@ -317,7 +317,7 @@ Anschließend kommen der Tag-Name, das Attribut und die Eigenschaft, jeweils durc
 !item [UDO_p_align_center]
 !label UDO_p_align_right
 !item [UDO_p_align_right]
-# !label UDO_span_tt
+!label UDO_span_tt
 !item [UDO_span_tt]
 Da HTML~5 das <tt>-Tag nicht mehr unterstützt, wird es mit einer <span>-Umgebung nachgebildet. 
 Die Formatierung geschieht über CSS.
