@@ -7,9 +7,9 @@ UDO_DEP=
 HCP_DEP=
 else
 UDO=		$(top_builddir)/src/udo
-HCP=		$(top_builddir)/tools/hypview/hyp/hcp
+HCP=		hcp
 UDO_DEP=	$(UDO)
-HCP_DEP=	$(HCP)
+HCP_DEP=	
 endif
 MKDIRHIER=	mkdir -p
 RMDIRHIER=	rm -rf
@@ -997,13 +997,14 @@ ascii txt: .stamp.ascii
 stg: .stamp.stguide
 
 .stamp.stguide:	$(UDO_DOC_DEP)
-		$(AM_V_at)($(CP) $(srcdir)/images/*.img .; \
-		 $(MKDIRHIER) $(STGUIDE_DIR) || exit 1; \
+		$(AM_V_at)($(MKDIRHIER) $(STGUIDE_DIR) || exit 1; \
+		 $(CP) $(srcdir)/images/*.img $(STGUIDE_DIR); \
 		 echo "generating ST-Guide documentation"; \
-		 $(UDO) --stg -o udo.stg -l $(srcdir)/udo.u || exit 1; \
-		 cat udo.stg | tr '\344\366\374\304\326\334\337\341\275' '\204\224\201\216\231\232\236\236\275' > $(STGUIDE_DIR)udo$(VER).stg; \
-		 $(RM) udo.stg; \
-		 $(MV) *.img $(STGUIDE_DIR); \
+		 $(UDO) --stg -o $(STGUIDE_DIR)udo$(VER).stg -l $(srcdir)/udo.u || exit 1; \
+		 hcp=`which $(HCP) 2>/dev/null`; \
+		 if test "$$hcp" != ""; then \
+		    "$$hcp" -o $(STGUIDE_DIR)udo$(VER).hyp $(STGUIDE_DIR)udo$(VER).stg; \
+		 fi; \
 		)
 		$(AM_V_at)touch $@
 
