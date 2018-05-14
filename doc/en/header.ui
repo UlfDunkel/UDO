@@ -26,6 +26,8 @@
 #   fd  May 21: using short environments again by default (as we have !not_compressed now)
 #                (existing switches must not be removed, as they are overwritten)
 #   fd  Aug 04: docinfo [contact_name] localized in localizable files -> _header.de/en
+# 2014:
+#   fd  Jun 20: we're on HTML 5, using keypress.js for HTML
 #
 ################################################################################
 
@@ -103,6 +105,7 @@
 #!html_merge_nodes
 #!html_use_xlist
 #!no_images [html]
+!html_doctype         5
 
 # ----------------------------------------------------------------
 # ST Guide commands
@@ -138,9 +141,11 @@
 #!use_compressed_tocs    [stg,amg,win,wh4,html,pch,ipf,hh,hah]
 #!no_toc_subsubnodes     [stg,amg,win,wh4,html,pch,ipf,hh,hah]
 
-!use_auto_subtocs       [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
-!use_auto_subsubtocs    [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
-!use_auto_subsubsubtocs [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+!use_auto_subtocs             [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+!use_auto_subsubtocs          [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+!use_auto_subsubsubtocs       [stg,amg,win,wh4,html,pch,ipf,hh,info,hah]
+!use_auto_subsubsubsubtocs    [html]
+!use_auto_subsubsubsubsubtocs [html]
 !sloppy
 
 #!no_toc_subsubnodes     [stg,amg,win,wh4,pch,info,asc,ipf,hh,html,hah]
@@ -177,10 +182,8 @@
 #!docinfo [webmastername] Dirk Hagedorn
 #!docinfo [webmasteremail] webmaster@udo-open-source.org
 #!docinfo [authorimage] (!IMAGES)dh
-!docinfo [domain_name] www.udo-open-source.org
-!docinfo [domain_link] http://www.udo-open-source.org/
+!docinfo [domain_name]  www.udo-open-source.org
+!docinfo [domain_link]  http://www.udo-open-source.org/
 !docinfo [contact_link] http://www.udo-open-source.org/contact/
-!ifset [UseForWeb]
 !docinfo [contact_name] Contact
-!endif
 !docinfo [programimage] (!IMAGES)udo

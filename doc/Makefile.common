@@ -1073,11 +1073,14 @@ pch pchelp: .stamp.pchelp
 
 html: .stamp.html
 
-.stamp.html:	$(UDO_DOC_DEP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css
+.stamp.html:	$(UDO_DOC_DEP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(srcdir)/../keypress.js
 		$(AM_V_at)$(MKDIRHIER) $(HTML_DIR) || exit 1; \
 		echo "generating Html documentation"; \
 		( cd $(HTML_DIR) && $(RM) `ls .`) ; \
-		$(CP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(HTML_DIR); \
+                test -d $(HTML_DIR)/css || mkdir -p $(HTML_DIR)/css; \
+                test -d $(HTML_DIR)/js || mkdir -p $(HTML_DIR)/js; \
+		$(CP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(HTML_DIR)/css; \
+		$(CP) $(srcdir)/../keypress.js $(HTML_DIR)/js; \
 		$(CP) $(srcdir)/images/*.gif $(HTML_DIR); \
 		$(CP) $(srcdir)/images/favicon.ico $(HTML_DIR); \
 		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(HTML_DIR)"; \
@@ -1237,14 +1240,17 @@ drc: .stamp.drc
 
 htmlhelp: .stamp.htmlhelp
 
-.stamp.htmlhelp:	$(UDO_DOC_DEP) $(srcdir)/udo$(OUTPUT_LANG).hhp
+.stamp.htmlhelp:	$(UDO_DOC_DEP) $(srcdir)/udo$(OUTPUT_LANG).hhp $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(srcdir)/../keypress.js
 		$(AM_V_at)$(MKDIRHIER) "$(HTMLHELP_DIR)" || exit 1; \
 		echo "generating HtmlHelp documentation"; \
 		$(CP) $(srcdir)/images/*.gif "$(HTMLHELP_DIR)"; \
 		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}.gif "$(HTMLHELP_DIR)"; \
 		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(HTMLHELP_DIR)"; \
 		$(CP) $(srcdir)/images/favicon.ico $(HTMLHELP_DIR); \
-		$(CP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(HTMLHELP_DIR); \
+                test -d $(HTMLHELP_DIR)/css || mkdir -p $(HTMLHELP_DIR)/css; \
+                test -d $(HTMLHELP_DIR)/js || mkdir -p $(HTMLHELP_DIR)/js; \
+		$(CP) $(srcdir)/../udo.css $(srcdir)/../udo_web.css $(HTMLHELP_DIR)/css; \
+		$(CP) $(srcdir)/../keypress.js $(HTMLHELP_DIR)/js; \
 		$(UDO) --htmlhelp --check --force-short -o "$(HTMLHELP_DIR)udo.html" -l $(srcdir)/udo.u || exit 1; \
 		$(RM) "$(HTMLHELP_DIR)udo.hhp"; \
 		$(CP) $(srcdir)/udo$(OUTPUT_LANG).hhp "$(HTMLHELP_DIR)"; \
@@ -1359,7 +1365,9 @@ hah applehelp: .stamp.applehelp
 		$(AM_V_at)$(MKDIRHIER) $(APPLEHELP_DIR) || exit 1; \
 		echo "generating AppleHelp documentation"; \
 		( cd $(APPLEHELP_DIR) && $(RM) `ls .`) ; \
-		$(CP) $(srcdir)/../udo.css $(APPLEHELP_DIR); \
+                test -d $(APPLEHELP_DIR)/css || mkdir -p $(APPLEHELP_DIR)/css; \
+                test -d $(APPLEHELP_DIR)/js || mkdir -p $(APPLEHELP_DIR)/js; \
+		$(CP) $(srcdir)/../udo.css $(APPLEHELP_DIR)/css; \
 		$(CP) $(srcdir)/images/*.gif $(APPLEHELP_DIR); \
 		$(CP) $(top_srcdir)/src/images/udo_{hm,up,lf,rg}_trans.gif "$(APPLEHELP_DIR)"; \
 		$(CP) $(srcdir)/images/valid-html401.png $(APPLEHELP_DIR); \

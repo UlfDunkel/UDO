@@ -19,7 +19,7 @@ EXTRA_DIST = \
 	macros.ui \
 	commands.txt \
 	Makefile.common \
-	udo.css udo_web.css
+	udo.css udo_web.css keypress.js
 
 # create manual in specific format
 # pdf, info, html are not included here

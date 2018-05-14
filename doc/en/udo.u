@@ -70,6 +70,8 @@
 #   fd  Feb 26: using the new encoding commands !code_source + !code_target
 #   fd  Mar 01: !code removed
 #   fd  Mar 03: please define all !code_target in _header.ui
+# 2014:
+#   fd  Jun 20: we're on HTML 5, using keypress.js for HTML
 #
 ################################################################################
 
@@ -122,13 +124,16 @@
 # ------------------------------------------------------------------------------
 !ifset [UseForWeb]
 # Documentation for website publishing:
-!html_style_name udo_web.css
+!html_style_name  css/udo_web.css
 !ifdest [html]
 !html_backpage http://www.udo-open-source.org/ 'Back to UDO Website'
 !endif
 !else
 # Documentation for "normal" users...
-!html_style_name udo.css
+!html_style_name  css/udo.css
+!endif
+!ifdest [html,hh]
+!html_script_name js/keypress.js
 !endif
 
 !ifdest [html,hh,hah]
