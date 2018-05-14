@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubnode])
 !html_name cmd_subsubnode
 
-Start a subsection.
+Starts a chapter on the 3rd outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -12,6 +12,8 @@ Start a subsection.
 !item [(!DESCRIPTION)]
 Starts a new subsection named ""(!TEXT)"". Subsections are numbered
 with #.#.# and will appear in table of contents.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])

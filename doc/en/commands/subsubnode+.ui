@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubnode*])
 !html_name cmd_subsubnode_asterisk
 
-Start a hidden subsection.
+Starts a chapter on the 3rd outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 

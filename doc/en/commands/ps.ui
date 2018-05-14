@@ -1,7 +1,7 @@
 !begin_node (!kw [ps])
 !html_name cmd_ps
 
-Start a popup section.
+Starts a 2nd outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 

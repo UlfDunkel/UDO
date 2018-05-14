@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubsubsubnode])
 !html_name cmd_subsubsubsubsubnode
 
-Start a subparagraph.
+Starts a chapter on the 6th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -12,9 +12,6 @@ Start a subparagraph.
 !item [(!DESCRIPTION)]
 Starts a new subparagraph named ""(!TEXT)"". Subparagraphs are numbered
 with #.#.#.#.#.# and are displayed inside the table of contents.
-
-!item [(!EXAMPLE)]
-(!T)!/subsubsubsubsubnode Subparagraph title(!t)
 
 !item [(!EXISTSSINCE)] Version~7.04
 

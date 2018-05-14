@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubnode])
 !html_name cmd_subsubsubnode
 
-Start a paragraph.
+Starts a chapter on the 4th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 

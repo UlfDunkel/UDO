@@ -1,7 +1,7 @@
 !begin_node (!kw [sssn])
 !html_name cmd_sssn
 
-Start a paragraph.
+Starts a chapter on the 4th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 

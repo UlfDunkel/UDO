@@ -1,7 +1,7 @@
 !begin_node (!kw [n])
 !html_name cmd_n
 
-Start a chapter.
+Starts a chapter on the 1st outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 

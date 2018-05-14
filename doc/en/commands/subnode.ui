@@ -1,7 +1,7 @@
 !begin_node (!kw [subnode])
 !html_name cmd_subnode
 
-Start a section.
+Starts a chapter on the 2nd outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -12,6 +12,8 @@ Start a section.
 !item [(!DESCRIPTION)]
 Starts a new section named ""(!TEXT)"". Sections are numbered
 with #.# and will appear in table of contents.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [psubnode]), (!KW [node]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])

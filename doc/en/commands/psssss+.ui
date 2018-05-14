@@ -1,7 +1,7 @@
 !begin_node (!kw [psssss*])
 !html_name cmd_psssss_asterisk
 
-Start a hidden popup paragraph.
+Starts a 6th outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 

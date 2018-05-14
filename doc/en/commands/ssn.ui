@@ -1,7 +1,7 @@
 !begin_node (!kw [ssn])
 !html_name cmd_ssn
 
-Start a subsection.
+Starts a chapter on the 3rd outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 

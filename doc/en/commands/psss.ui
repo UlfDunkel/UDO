@@ -1,7 +1,7 @@
 !begin_node (!kw [psss])
 !html_name cmd_psss
 
-Start a popup paragraph.
+Starts a 4th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 

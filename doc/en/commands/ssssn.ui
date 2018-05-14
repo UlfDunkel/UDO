@@ -1,7 +1,7 @@
 !begin_node (!kw [ssssn])
 !html_name cmd_ssssn
 
-Start a subparagraph.
+Starts a chapter on the 5th outline level.
 
 !begin_xlist [(!TYPEPOSITION)]
 

@@ -1,7 +1,7 @@
 !begin_node (!kw [psubsubnode])
 !html_name cmd_psubsubnode
 
-Start a popup subsection.
+Starts a 3rd outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 

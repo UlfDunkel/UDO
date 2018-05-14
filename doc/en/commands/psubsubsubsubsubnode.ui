@@ -1,7 +1,7 @@
 !begin_node (!kw [psubsubsubsubsubnode])
 !html_name cmd_psubsubsubsubsubnode
 
-Start a popup subparagraph.
+Starts a 6th outline level popup chapter.
 
 !begin_xlist [(!TYPEPOSITION)]
 

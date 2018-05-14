@@ -1,7 +1,7 @@
 !begin_node (!kw [sssssn*])
 !html_name cmd_sssssn_asterisk
 
-Start a hidden subparagraph.
+Starts a chapter on the 6th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 

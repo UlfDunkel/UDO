@@ -1,7 +1,7 @@
 !begin_node (!kw [subsubsubsubsubnode*])
 !html_name cmd_subsubsubsubsubnode_asterisk
 
-Start a hidden subparagraph.
+Starts a chapter on the 6th outline level without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -12,9 +12,6 @@ Start a hidden subparagraph.
 !item [(!DESCRIPTION)]
 This command does the same as (!KW [subsubsubsubnode]), but here ""(!TEXT)""
 will not appear in the table of contents.
-
-!item [(!EXAMPLE)]
-(!T)!/subsubsubsubsubnode* Hidden subparagraph title(!t)
 
 !item [(!EXISTSSINCE)] Version~7.04
 

@@ -1,7 +1,7 @@
 !begin_node (!kw [psubsubnode*])
 !html_name cmd_psubsubnode_asterisk
 
-Start a hidden popup subsection.
+Starts a 3rd outline level popup chapter without reference to the TOC.
 
 !begin_xlist [(!TYPEPOSITION)]
 
