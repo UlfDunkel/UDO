@@ -540,7 +540,14 @@ GLOBAL _BOOL table_add_line(char *s)
 		recode_chrtab(s, CHRTAB_ASCII);
 
 	auto_quote_chars(s, FALSE);
-
+	switch (desttype)
+	{
+	case TOSTG:
+	case TOAMG:
+		replace_1at_by_2at(s);
+		break;
+	}
+	
 	c_commands_inside(s, TRUE);
 
 	replace_macros(s);
