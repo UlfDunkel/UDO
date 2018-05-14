@@ -32,29 +32,29 @@
       Diese nachfolgenden neuen Kommandos stehen dafür zur Verfügung:
       
       !begin_itemize !compressed
-      !item (!kw [html_merge_subsubsubsubsubnodes])
-      !item (!kw [ignore_subsubsubsubsubtoc])
-      !item (!kw [psssss*])
-      !item (!kw [psssss])
-      !item (!kw [psubsubsubsubsubnode*])
-      !item (!kw [psubsubsubsubsubnode])
-      !item (!kw [sssssh])
-      !item (!kw [sssssn*])
-      !item (!kw [sssssn])
-      !item (!kw [subsubsubsubsubheading])
-      !item (!kw [subsubsubsubsubnode*])
-      !item (!kw [subsubsubsubsubnode])
-      !item (!kw [subsubsubsubsubtoc])
-      !item (!kw [subsubsubsubsubtoc_offset])
-      !item (!kw [use_auto_subsubsubsubsubtocs])
+      !item (!KW [html_merge_subsubsubsubsubnodes])
+      !item (!KW [ignore_subsubsubsubsubtoc])
+      !item (!KW [psssss*])
+      !item (!KW [psssss])
+      !item (!KW [psubsubsubsubsubnode*])
+      !item (!KW [psubsubsubsubsubnode])
+      !item (!KW [sssssh])
+      !item (!KW [sssssn*])
+      !item (!KW [sssssn])
+      !item (!KW [subsubsubsubsubheading])
+      !item (!KW [subsubsubsubsubnode*])
+      !item (!KW [subsubsubsubsubnode])
+      !item (!KW [subsubsubsubsubtoc])
+      !item (!KW [subsubsubsubsubtoc_offset])
+      !item (!KW [use_auto_subsubsubsubsubtocs])
       !end_itemize
       
       Sie werden wie die bisher üblichen Kommandos zur Gliederung von HTML-Gliederungsebenen verwendet.
 # ----------------------------------------
 
 # ----------------------------------------
-!item [(!kw [html_script_name])]
-      Dieses Kommando unterstützt jetzt, ähnlich wie (!kw [html_style_name]), beliebig viele Dateien.
+!item [(!KW [html_script_name])]
+      Dieses Kommando unterstützt jetzt, ähnlich wie (!KW [html_style_name]), beliebig viele Dateien.
 # ----------------------------------------
 
 # ----------------------------------------
