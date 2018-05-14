@@ -60,7 +60,7 @@ Then include a JavaScript file which evaluates key presses, using (!KW [html_scr
 
 ##################################################
 
-!item [How can I tell UDO to not make files for each chapter?]
+!item [How can I tell UDO not to make files for each chapter?]
 In contrast to the other formats UDO saves a separate HTML file for each
 chapter by default. UDO names these files by using the chapter numbers. The
 title page and the table of contents will be saved in the file you passed in
