@@ -10193,7 +10193,7 @@ LOCAL _BOOL pass1(const char *datei)
 			recode(zeile, iEncodingSource, iEncodingTarget);
 		}
 
-		if (!ignore_comment_or_empty && pflag[PASS1].env == ENV_NONE)
+		if (!ignore_comment_or_empty && pflag[PASS1].env != ENV_RAW && pflag[PASS1].env != ENV_VERBATIM)
 		{
 			pass_check_if(zeile, PASS1);
 		}
@@ -11540,7 +11540,7 @@ LOCAL _BOOL pass2(const char *datei)
 			}
 		}
 
-		if (!ignore_comment_or_empty && pflag[PASS2].env == ENV_NONE)
+		if (!ignore_comment_or_empty && pflag[PASS2].env != ENV_RAW && pflag[PASS2].env != ENV_VERBATIM)
 		{
 			pass_check_if(zeile, PASS2);
 		}
