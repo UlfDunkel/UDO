@@ -17,8 +17,7 @@ udogtk_SOURCES = \
 	gtkconfig.c gtkconfig.h \
 	misc.c misc.h \
 	help.c help.h htmlhelp.h \
-	udointl.c \
-	windows_.h
+	udointl.c
 if OS_WIN32
 udogtk_LDFLAGS = -mconsole
 endif
